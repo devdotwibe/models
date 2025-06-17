@@ -31,470 +31,1397 @@ if(!empty($userDetails['profile_pic'])){
 }
 
 ?>
-
 <html>
-
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model Profile - Million Dollar Page</title>
+<meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/stylesheet.css" />
 
-<title>Bookging | The Live Model</title>
-
-<?php  include('../../includes/head.php'); ?>
-
-<link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
-<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/stylesheet.css?v=<?=time()?>' type='text/css' media='all' />
 
 </head>
 
-<body class="socialwall-page">
+<body class="enhanced5 min-h-screen bg-animated text-white">
+<!-- Premium Particle System -->
+<div class="particles" id="particles"></div>
 
-  <?php  include('../../includes/user-side-bar.php'); ?>
+<!-- Mobile Navigation Overlay -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 
- <?php  include('../../includes/header.php'); ?>
+<!-- Mobile Navigation -->
+<div class="mobile-nav" id="mobileNav">
+    <div class="flex justify-between items-center mb-8">
+        <a href="#" class="text-2xl font-bold flex items-center">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-jXeBRuA3MHFzdzWLPiwsY7t7uYmioN.png" alt="The Live Models" class="h-10 mr-2">
+        </a>
+        <button id="closeMobileNav" class="text-white/70 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+    <nav class="mb-8">
+        <ul class="space-y-4">
+            <li><a href="#" class="block py-3 px-2 text-white/90 hover:text-white hover:bg-white/5 rounded-lg transition duration-300">Home</a></li>
+            <li><a href="#" class="block py-3 px-2 text-white/90 hover:text-white hover:bg-white/5 rounded-lg transition duration-300">Models</a></li>
+            <li><a href="#" class="block py-3 px-2 text-white/90 hover:text-white hover:bg-white/5 rounded-lg transition duration-300">Services</a></li>
+            <li><a href="#" class="block py-3 px-2 text-white/90 hover:text-white hover:bg-white/5 rounded-lg transition duration-300">Gallery</a></li>
+            <li><a href="#" class="block py-3 px-2 text-white/90 hover:text-white hover:bg-white/5 rounded-lg transition duration-300">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="flex items-center space-x-3 text-sm text-white/80 mb-6">
+        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+        <span class="font-medium">50K+ Online</span>
+    </div>
+    <button class="btn-primary w-full px-6 py-3 rounded-full font-semibold shadow-lg mb-4">
+        Sign In
+    </button>
+    <button class="btn-secondary w-full px-6 py-3 rounded-full font-semibold shadow-lg">
+        Sign Up
+    </button>
+</div>
 
-
-<?php
-
-    $user_id = $userDetails['unique_id']; 
-    $posts = [];
-
-    if ($con->connect_error) {
-        die("Connection failed: " . $con->connect_error);
-    }
-
-    $followQuery = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = ? AND status = 'Follow'";
-    $stmt = $con->prepare($followQuery);
-
-    if (!$stmt) {
-        die("Prepare failed: " . $con->error);
-    }
-
-    $stmt->bind_param("s", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if (!$result) {
-        die("Query failed: " . $stmt->error);
-    }
-
-    $followed_model_unique_ids = [];
-    while ($row = $result->fetch_assoc()) {
-        $followed_model_unique_ids[] = $row['unique_model_id'];
-    }
-
-    $followed_user_ids = [];
-
-    if (!empty($followed_model_unique_ids)) {
-        $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
-        $types = str_repeat('s', count($followed_model_unique_ids));
-        $query = "SELECT id FROM model_user WHERE unique_id IN ($placeholders)";
-        $stmt = $con->prepare($query);
-
-        if (!$stmt) {
-            die("Prepare failed (fetching numeric ids): " . $con->error);
-        }
-
-        $stmt->bind_param($types, ...$followed_model_unique_ids);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        while ($row = $result->fetch_assoc()) {
-            $followed_user_ids[] = (int)$row['id']; 
-        }
-    }
-
-    if (!empty($followed_user_ids)) {
-
-        $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
-        $types = str_repeat('i', count($followed_user_ids));
-
-        // $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY post_date DESC";
-
-        //       $sql = "
-        //     SELECT 
-        //         live_posts.*, 
-        //         model_user.name AS author_name, 
-        //         model_user.country AS country,
-        //         model_user.country AS country
-        //     FROM live_posts
-        //     JOIN model_user ON live_posts.post_author = model_user.id
-        //     WHERE post_author IN ($placeholders)
-        //     ORDER BY post_date DESC
-        // ";
-
-        $sql = "
-            SELECT 
-                live_posts.*, 
-                model_user.name AS author_name, 
-                model_user.country,
-                model_user.profile_pic
-            FROM live_posts
-            JOIN model_user ON live_posts.post_author = model_user.id
-            WHERE post_author IN ($placeholders)
-            ORDER BY post_date DESC
-        ";
-
-        $stmt = $con->prepare($sql);
-
-        if (!$stmt) {
-            die("Prepare failed (fetching posts): " . $con->error);
-        }
-
-        $stmt->bind_param($types, ...$followed_user_ids);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        while ($row = $result->fetch_assoc()) {
-            $posts[] = $row;
-        }
-
-    }
-?>
-
-
-
-  <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-4 main-content">
-
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 py-6">
-
-      <div class="sidebar lg:col-span-1">
-
-        <div class="model-card text-center">
-          <div class="relative inline-block mb-4">
-            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-20 h-20 rounded-full mx-auto border-3 border-purple-500">
-            <div class="online-dot"></div>
-          </div>
-          <h3 class="font-bold text-lg gradient-text">Sophie, 24 test <?php
-       
-            ?></h3>
-          <p class="text-white/60 text-sm mb-2">San Francisco, CA</p>
-          <div class="flex justify-center mb-4">
-            <span class="verified-badge">✓ Verified</span>
-          </div>
-          <div class="space-y-2">
-            <button class="btn-primary w-full" onclick="editProfile()">Edit Profile</button>
-            <button class="btn-secondary w-full" onclick="viewProfile()">View Profile</button>
-          </div>
+<!-- Ultra Premium Header -->
+<header class="ultra-glass sticky-header top-0 z-50 border-b border-white/10">
+    <div class="container mx-auto py-4 px-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold flex items-center group">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-jXeBRuA3MHFzdzWLPiwsY7t7uYmioN.png" alt="The Live Models" class="h-8 sm:h-10 md:h-12 mr-2 md:mr-3 group-hover:scale-110 transition duration-500">
+        </a>
+        <div class="hidden md:flex items-center space-x-4 lg:space-x-8">
+            <a href="#" class="text-white/80 hover:text-white transition duration-300">Home</a>
+            <a href="#" class="text-white/80 hover:text-white transition duration-300">Models</a>
+            <a href="#" class="text-white/80 hover:text-white transition duration-300">Services</a>
+            <a href="#" class="text-white/80 hover:text-white transition duration-300">Gallery</a>
+            <a href="#" class="text-white/80 hover:text-white transition duration-300">Contact</a>
         </div>
-
-        <!-- Online Users -->
-        <div class="model-card">
-          <h3 class="font-bold mb-4 gradient-text">Online Now</h3>
-          <div class="space-y-3">
-            <div class="flex items-center">
-              <div class="relative">
-                <img src="https://randomuser.me/api/portraits/women/25.jpg" alt="User" class="w-12 h-12 rounded-full">
-                <div class="online-dot"></div>
-              </div>
-              <div class="ml-3">
-                <p class="font-medium">Sarah, 26</p>
-                <p class="text-xs text-white/60">2 miles away</p>
-              </div>
+        <div class="flex items-center space-x-2 sm:space-x-4">
+            <div class="hidden lg:flex items-center space-x-3 text-sm text-white/80">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span class="font-medium">50K+ Online</span>
             </div>
-            <div class="flex items-center">
-              <div class="relative">
-                <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="User" class="w-12 h-12 rounded-full">
-                <div class="online-dot"></div>
-              </div>
-              <div class="ml-3">
-                <p class="font-medium">Emma, 23</p>
-                <p class="text-xs text-white/60">1 mile away</p>
-              </div>
-            </div>
-          </div>
+            <button class="btn-primary px-4 sm:px-6 py-2 rounded-full font-semibold shadow-lg text-sm sm:text-base">
+                Sign In
+            </button>
+            <button class="md:hidden" id="openMobileNav">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
         </div>
+    </div>
+</header>
 
-        <!-- Quick Stats -->
-        <div class="model-card">
-          <h3 class="font-bold mb-4 gradient-text">Your Stats</h3>
-          <div class="space-y-3">
-            <div class="flex justify-between">
-              <span class="text-white/70">Profile Views</span>
-              <span class="font-bold text-purple-400">1,247</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-white/70">Connections</span>
-              <span class="font-bold text-purple-400">89</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-white/70">Messages</span>
-              <span class="font-bold text-purple-400">156</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main Feed -->
-
-
-      <div class="main-feed lg:col-span-3">
-
-        <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">Your Feed</h2>
-
-        <!-- Post 1 -->
-
-        <?php foreach ($posts as $post) { ?>
-
-            <div class="model-card">
-            <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center">
-                <div class="relative">
-                    <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $post['profile_pic']; ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                    <div class="online-dot"></div>
-                </div>
-                <div class="ml-3 md:ml-4">
-                    <div class="flex items-center flex-wrap">
-                    <h4 class="font-bold text-base md:text-lg"><?php echo $post['author_name']?></h4>
-                    <span class="verified-badge ml-2">✓</span>
+<main>
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="container mx-auto relative z-10">
+            <div class="profile-info pt-32 sm:pt-40 md:pt-48 pb-6 px-4 md:px-0">
+                <div class="flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
+                    <div class="profile-avatar-container">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=faces" alt="Urdevilicifer" class="profile-avatar">
                     </div>
-                    <p class="text-xs md:text-sm text-white/60">2 hours ago • 3 miles away</p>
+                    <div class="flex-1">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div>
+                                <h1 class="text-3xl sm:text-4xl font-bold heading-font gradient-text mb-1">Urdevilicifer</h1>
+                                <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                    <span class="text-white/70">@devil</span>
+                                    <span class="status-badge status-online">
+                                        <span class="w-2 h-2 bg-white rounded-full mr-2"></span>
+                                        Online
+                                    </span>
+                                </div>
+                                <div class="flex items-center gap-2 text-white/70 mb-2 sm:mb-3 text-sm sm:text-base">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    Los Angeles, CA
+                                </div>
+                                <div class="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-xs sm:text-sm inline-flex items-center mb-2 sm:mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                    Fashion Model
+                                </div>
+                                <div class="flex items-center gap-2 text-white/80 text-sm sm:text-base">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                    <span class="font-medium">Chat, Watch & Meet</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-2 sm:gap-3 mt-2 md:mt-0">
+                                <button class="btn-primary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base" id="openServicesBtn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                    Message
+                                </button>
+                                <button class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                    Follow
+                                </button>
+
+
+                                
+
+                                <div class="action-dropdown" id="moreActions">
+
+                                    <button class="btn-secondary px-3 py-2 rounded-full text-white" id="moreActionsBtn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                    </button>
+
+
+                                    <div class="action-menu" bis_skin_checked="1">
+
+                               <div class="action-item" id="aboutBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                About
+                            </div>
+                            <div class="action-item" id="servicesBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                                Services
+                            </div>
+                            <div class="action-item" id="wishlistBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                                Wishlist
+                            </div>
+                            <div class="action-item" id="liveBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                </svg>
+                                On Live
+                            </div>
+                            <div class="action-item" id="tipBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                Send Tip
+                            </div>
+
+
+                            <div class="action-item" id="giftBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                                    <path d="M12 8v13"></path>
+                                    <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                                    <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+                                </svg>
+                                Send Gift
+                            </div>
+
+                            
+
+                            <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
+
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    
+                                    <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                                    <path d="M12 8v13"></path>
+                                    <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                                    <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+                                </svg> -->
+
+                                <div class="all-link-btn">
+                                    <img src="./assets/images/all-links.svg" />
+                                </div>
+
+                                All my links
+                            </div>
+
+
+
+                                   </div>
+                                    
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                </div>
-                <span class="status-online">Connected</span>
             </div>
-
-                <?php echo $post['post_content']; ?>
-
-
-            <!-- <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p> -->
-
-            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
-
-            <div class="flex justify-between items-center">
-                <div class="flex space-x-4 md:space-x-6">
-                <button class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
-                    <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                    <span class="text-sm md:text-base">47</span>
-                </button>
-                <button class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
-                    <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                    </svg>
-                    <span class="text-sm md:text-base">12</span>
-                </button>
-                </div>
-                <button class="btn-secondary text-sm md:text-base">Message</button>
-            </div>
-
-            <!-- Comments -->
-            <div class="mt-6 pt-4 border-t border-white/10">
-                <div class="flex items-start mb-4">
-                <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
-                <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
-                    <p class="font-medium text-xs md:text-sm">Alex M.</p>
-                    <p class="text-xs md:text-sm text-white/80">Count me in for the hike! I know some great trails 🥾</p>
-                </div>
-                </div>
-                <div class="flex items-center">
-                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
-                <input type="text" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
-                </div>
-            </div>
-            </div>
-
-        <?php }  ?>
-
-       
-
-        <!-- Divider -->
-        <div class="text-center my-8">
-          <div class="inline-flex items-center px-6 py-3 glass-effect rounded-full">
-            <span class="gradient-text font-semibold">Discover New People</span>
-          </div>
         </div>
-
-        <!-- Suggested Users -->
-        <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">People You May Like</h2>
-
-        <!-- Suggestion 1 -->
-        <div class="model-card">
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center">
-              <div class="relative">
-                <img src="https://randomuser.me/api/portraits/women/71.jpg" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                <div class="online-dot"></div>
-              </div>
-              <div class="ml-3 md:ml-4">
-                <div class="flex items-center flex-wrap">
-                  <h4 class="font-bold text-base md:text-lg">Maya, 26</h4>
-                  <span class="verified-badge ml-2">✓</span>
-                </div>
-                <p class="text-xs md:text-sm text-white/60">Active now • 3 miles away</p>
-              </div>
-            </div>
-            <button class="btn-primary text-sm md:text-base" onclick="toggleConnect(this)">Connect</button>
-          </div>
-
-          <p class="mb-4 text-sm md:text-base text-white/90">Love dancing and traveling! Looking for adventure buddies 💃✈️</p>
-
-          <div class="grid grid-cols-3 gap-2 mb-4">
-            <img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=200&h=150&fit=crop" alt="Dancing" class="w-full h-20 md:h-24 object-cover rounded-lg">
-            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=200&h=150&fit=crop" alt="Travel" class="w-full h-20 md:h-24 object-cover rounded-lg">
-            <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200&h=150&fit=crop" alt="Beach" class="w-full h-20 md:h-24 object-cover rounded-lg">
-          </div>
-
-          <div class="flex justify-between text-xs md:text-sm text-white/60">
-            <span>🎯 95% match</span>
-            <span>📍 3 miles</span>
-            <span>⭐ 4.9 rating</span>
-          </div>
-        </div>
-
-        <!-- Suggestion 2 -->
-        <div class="model-card">
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center">
-              <div class="relative">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                <span class="absolute bottom-0 right-0 w-4 h-4 bg-yellow-400 border-2 border-white rounded-full"></span>
-              </div>
-              <div class="ml-3 md:ml-4">
-                <div class="flex items-center flex-wrap">
-                  <h4 class="font-bold text-base md:text-lg">Zoe, 24</h4>
-                  <span class="premium-badge ml-2">★ Premium</span>
-                </div>
-                <p class="text-xs md:text-sm text-white/60">Online 1h ago • 5 miles away</p>
-              </div>
-            </div>
-            <button class="btn-primary text-sm md:text-base" onclick="toggleConnect(this)">Connect</button>
-          </div>
-
-          <p class="mb-4 text-sm md:text-base text-white/90">Artist and coffee lover ☕🎨 Let's create something beautiful together!</p>
-
-          <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=300&fit=crop" alt="Art" class="w-full h-40 md:h-48 object-cover rounded-lg mb-4">
-
-          <div class="flex justify-between text-xs md:text-sm text-white/60">
-            <span>🎯 87% match</span>
-            <span>📍 5 miles</span>
-            <span>⭐ 4.7 rating</span>
-          </div>
-        </div>
-      </div>
     </div>
-  </main>
 
-  <!-- Mobile Navigation -->
-  <nav class="mobile-nav md:hidden">
-    <div class="flex justify-around">
-      <div class="mobile-nav-item active">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v3H8V5z"></path>
-        </svg>
-        <span>Feed</span>
-      </div>
-      <div class="mobile-nav-item">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-        </svg>
-        <span>Search</span>
-      </div>
-      <div class="mobile-nav-item">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-        </svg>
-        <span>Messages</span>
-      </div>
-      <div class="mobile-nav-item">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-        </svg>
-        <span>Profile</span>
-      </div>
+    <!-- Profile Bio & Stats -->
+    <div class="container mx-auto py-6 sm:py-8 px-4 md:px-0">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div class="md:col-span-2">
+                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                    <h2 class="text-xl font-bold mb-4 premium-text">About Me</h2>
+                    <p class="text-white/80 mb-4">Professional fashion model with 5+ years of experience. Available for photoshoots, runway shows, and brand collaborations. Let's create something beautiful together!</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm">#fashion</span>
+                        <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm">#model</span>
+                        <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm">#photoshoot</span>
+                        <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm">#runway</span>
+                        <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm">#losangeles</span>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="border-b border-white/10 mb-6 sm:mb-8">
+                    <div class="tabs-container flex">
+                        <button class="px-4 sm:px-6 py-3 font-medium tab-active whitespace-nowrap">All Content</button>
+                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Photos</button>
+                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Videos</button>
+                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Exclusive</button>
+                    </div>
+                </div>
+
+                <!-- Media Grid -->
+                <div class="media-grid">
+                    <!-- Media Item 1 -->
+                    <div class="media-item">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=600&fit=crop" alt="Fashion model in yellow outfit">
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">Hello guys!</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">48</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Item 2 (Video) -->
+                    <div class="media-item">
+                        <div class="w-full h-full bg-gray-800 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/50 sm:w-48 sm:h-48"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                        </div>
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">Play this!!</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">88</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Item 3 (Video) -->
+                    <div class="media-item">
+                        <div class="w-full h-full bg-gray-800 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/50 sm:w-48 sm:h-48"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                        </div>
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">My first video</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">84</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Item 4 -->
+                    <div class="media-item">
+                        <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&h=600&fit=crop" alt="Fashion model">
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">My first paid image. Hope you enjoy it!</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">92</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Item 5 -->
+                    <div class="media-item">
+                        <img src="https://images.unsplash.com/photo-1550928431-ee0ec6db30d3?w=600&h=600&fit=crop" alt="Fashion model in winter coat">
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">Morning sunshine ☀️</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">36</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Item 6 -->
+                    <div class="media-item">
+                        <div class="w-full h-full bg-gradient-to-br from-red-500/30 to-purple-500/30 flex items-center justify-center">
+                            <span class="text-lg font-bold">Red Hot Chili</span>
+                        </div>
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">Red Hot Chili</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">78</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="mt-6 sm:mt-8 text-center">
+                    <button class="btn-secondary px-6 sm:px-8 py-2 sm:py-3 rounded-xl text-white font-semibold">
+                        Load More
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="md:col-span-1">
+                <!-- Stats Card -->
+                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                    <h2 class="text-xl font-bold mb-4 premium-text">Stats</h2>
+
+                    <div class="post-div flex flex-wrap gap-8 text-center">
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text">128</div>
+                            <div class="text-xs sm:text-sm text-white/60">Total Posts</div>
+                        </div>
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text">42</div>
+                            <div class="text-xs sm:text-sm text-white/60">Photos</div>
+                        </div>
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text">86</div>
+                            <div class="text-xs sm:text-sm text-white/60">Videos</div>
+                        </div>
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text">15.4k</div>
+                            <div class="text-xs sm:text-sm text-white/60">Followers</div>
+                        </div>
+                    </div>
+
+
+                    
+
+
+                </div>
+
+                <!-- Create Post Card -->
+                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                    <h2 class="text-xl font-bold mb-4 premium-text">Create New Post</h2>
+                    <textarea class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" rows="3" placeholder="What's on your mind?"></textarea>
+                    <div class="flex justify-between items-center">
+                        <button class="flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                            Upload
+                        </button>
+                        <button class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
+                            Post
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Services Card -->
+                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                    <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-sm sm:text-base">Chat</div>
+                                <div class="text-xs sm:text-sm text-white/60">Private messaging</div>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-sm sm:text-base">Watch</div>
+                                <div class="text-xs sm:text-sm text-white/60">Live streams & content</div>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-sm sm:text-base">Meet</div>
+                                <div class="text-xs sm:text-sm text-white/60">In-person experiences</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <button class="w-full btn-primary text-white font-semibold py-2 sm:py-3 rounded-xl mt-4 text-sm sm:text-base" id="viewServicesBtn">
+                        View All Services
+                    </button>
+                </div>
+
+                <!-- Similar Models Card -->
+                <div class="ultra-glass rounded-2xl p-4 sm:p-6">
+                    <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&h=100&fit=crop&crop=faces" alt="Aria" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                            <div class="flex-1">
+                                <div class="font-semibold text-sm sm:text-base">Aria M.</div>
+                                <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
+                            </div>
+                            <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                Follow
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=faces" alt="Phoenix" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                            <div class="flex-1">
+                                <div class="font-semibold text-sm sm:text-base">Phoenix R.</div>
+                                <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
+                            </div>
+                            <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                Follow
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?w=100&h=100&fit=crop&crop=faces" alt="Zara" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                            <div class="flex-1">
+                                <div class="font-semibold text-sm sm:text-base">Zara C.</div>
+                                <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
+                            </div>
+                            <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                Follow
+                            </button>
+                        </div>
+                    </div>
+                    <button class="w-full btn-secondary text-white font-semibold py-2 rounded-xl mt-4 text-sm sm:text-base">
+                        View More
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </nav>
+</main>
 
-  <!-- JavaScript -->
-  <script>
-    // Hamburger menu functionality
-    const hamburger = document.getElementById('hamburgerMenu');
-    const sidebar = document.getElementById('sidebarMenu');
-    const overlay = document.getElementById('sidebarOverlay');
 
-    hamburger.addEventListener('click', toggleSidebar);
-    overlay.addEventListener('click', toggleSidebar);
 
-    function toggleSidebar() {
-      hamburger.classList.toggle('open');
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('open');
+    <!-- ======================== -->
 
-      // Prevent body scrolling when sidebar is open
-      if (sidebar.classList.contains('open')) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
-    }
 
-    // Simple like function
-    function toggleLike(button) {
-      const span = button.querySelector('span');
-      const currentCount = parseInt(span.textContent);
+    <!-- About Modal -->
+<div class="modal-overlay" id="aboutModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">About Urdevilicifer</h2>
+            <button class="close-modal" id="closeAboutModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="about-section">
+                <h3 class="about-section-title">Bio</h3>
+                <p>Professional fashion model with 5+ years of experience in the industry. I've worked with top brands and photographers across the country. My passion is creating art through modeling and connecting with my audience. Available for photoshoots, runway shows, and brand collaborations. Let's create something beautiful together!</p>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Model Type</h3>
+                <p>Fashion Model | Commercial Model | Content Creator</p>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Physical Attributes</h3>
+                <div class="attributes-grid">
+                    <div class="attribute">
+                        <div class="attribute-label">Height</div>
+                        <div class="attribute-value">5'9" (175 cm)</div>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Weight</div>
+                        <div class="attribute-value">125 lbs (57 kg)</div>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Hair Color</div>
+                        <div class="attribute-value">Blonde</div>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Eye Color</div>
+                        <div class="attribute-value">Blue</div>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Dress Size</div>
+                        <div class="attribute-value">4 US</div>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Shoe Size</div>
+                        <div class="attribute-value">8 US</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Experience</h3>
+                <p>5+ years professional modeling experience with top agencies in Los Angeles and New York. Featured in Vogue, Elle, and Cosmopolitan. Runway experience with major fashion brands during Fashion Week events.</p>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Location</h3>
+                <p>Based in Los Angeles, CA. Available for travel worldwide.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-      if (button.classList.contains('liked')) {
-        button.classList.remove('liked');
-        span.textContent = currentCount - 1;
-      } else {
-        button.classList.add('liked');
-        span.textContent = currentCount + 1;
-      }
-    }
+<!-- Services Modal -->
+<div class="modal-overlay" id="servicesModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Premium Services</h2>
+            <button class="close-modal" id="closeServicesModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="about-section">
+                <h3 class="about-section-title">Chat Services</h3>
+                <div class="attributes-grid">
+                    <div class="attribute">
+                        <div class="attribute-label">1-on-1 Chat Session</div>
+                        <div class="attribute-value">$50/hr</div>
+                        <p>Exclusive private chat sessions where we can discuss anything you'd like.</p>
+                        <button class="btn btn-primary">Book Now</button>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Private Messaging</div>
+                        <div class="attribute-value">$25/day</div>
+                        <p>Priority responses to your messages throughout the day.</p>
+                        <button class="btn btn-primary">Book Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Watch/Stream Services</h3>
+                <div class="attributes-grid">
+                    <div class="attribute">
+                        <div class="attribute-label">Live Video Stream</div>
+                        <div class="attribute-value">$100</div>
+                        <p>Private live stream just for you.</p>
+                        <button class="btn btn-primary">Watch Now</button>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Group Interactive Stream</div>
+                        <div class="attribute-value">$30</div>
+                        <p>Join my exclusive group streams with interactive features.</p>
+                        <button class="btn btn-primary">Join Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Meet Services</h3>
+                <div class="attributes-grid">
+                    <div class="attribute">
+                        <div class="attribute-label">Dating Experiences</div>
+                        <div class="attribute-value">Custom</div>
+                        <p>Enjoy a personalized date experience.</p>
+                        <button class="btn btn-primary">Book Now</button>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Travel & Tours Together</div>
+                        <div class="attribute-value">Custom</div>
+                        <p>Travel with me to exciting destinations.</p>
+                        <button class="btn btn-primary">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    // Simple connect function
-    function toggleConnect(button) {
-      if (button.textContent === 'Connect') {
-        button.textContent = 'Connected';
-        button.style.background = 'linear-gradient(45deg, #10b981, #34d399)';
-      } else {
-        button.textContent = 'Connect';
-        button.style.background = 'var(--primary-gradient)';
-      }
-    }
+<!-- Subscription Modal -->
+<div class="modal-overlay" id="subscriptionModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Subscription Plans</h2>
+            <button class="close-modal" id="closeSubscriptionModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="about-section">
 
-    // Navigation functions
-    function navigateTo(page) {
-      alert(`Navigating to ${page} page...`);
-      toggleSidebar(); // Close sidebar after navigation
-    }
 
-    // Profile functions
-    function viewProfile() {
-      alert('Opening your profile...');
-    }
 
-    function editProfile() {
-      alert('Opening profile editor...');
-    }
+                <div class="attribute mod-rel1">
+                    <div class="attribute-label">Basic</div>
 
-    function logout() {
-      if (confirm('Are you sure you want to logout?')) {
-        alert('Logging out...');
-      }
-    }
+                    <div class="attribute-value">$9.99/mo</div>
 
-    // Message button functionality
-    document.querySelectorAll('button').forEach(button => {
-      if (button.textContent === 'Message') {
-        button.addEventListener('click', function() {
-          alert('Opening chat...');
+                    <ul>
+
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Access to all free content</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Direct messaging</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>100 tokens monthly</span>
+                        </li>
+
+                    </ul>
+                    <button class="btn btn-primary">Subscribe</button>
+                </div>
+
+
+
+                
+                <div class="attribute mod-rel2">
+                    
+                    <div class="mod-inner-rel">POPULAR</div>
+                    <div class="attribute-label">Premium</div>
+                    <div class="attribute-value">$24.99/mo</div>
+
+
+                    <ul>
+
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>All Basic features</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Access to exclusive content</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>300 tokens monthly</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Weekly exclusive live streams</span>
+                        </li>
+                    </ul>
+
+
+                    <button class="">Subscribe</button>
+                </div>
+                
+                <div class="attribute mod-rel3">
+                    <div class="attribute-label">VIP</div>
+                    <div class="attribute-value">$49.99/mo</div>
+
+
+                    <ul>
+
+
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>All Premium features</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>1-on-1 video calls (30 min monthly)</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>750 tokens monthly</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Early access to all new content</span>
+                        </li>
+
+                        
+                    </ul>
+
+
+                    <button class="btn btn-primary">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gift Modal -->
+<div class="modal-overlay" id="giftModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Send a Gift</h2>
+            <button class="close-modal" id="closeGiftModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="gift-grid">
+                <div class="gift-item">
+                    <div class="gift-emoji">🌹</div>
+                    <div class="gift-name">Rose</div>
+                    <div class="gift-price">$5</div>
+                </div>
+                <div class="gift-item">
+                    <div class="gift-emoji">❤️</div>
+                    <div class="gift-name">Heart</div>
+                    <div class="gift-price">$10</div>
+                </div>
+                <div class="gift-item">
+                    <div class="gift-emoji">👑</div>
+                    <div class="gift-name">Crown</div>
+                    <div class="gift-price">$25</div>
+                </div>
+                <div class="gift-item">
+                    <div class="gift-emoji">💎</div>
+                    <div class="gift-name">Diamond</div>
+                    <div class="gift-price">$50</div>
+                </div>
+                <div class="gift-item">
+                    <div class="gift-emoji">🚀</div>
+                    <div class="gift-name">Rocket</div>
+                    <div class="gift-price">$75</div>
+                </div>
+                <div class="gift-item">
+                    <div class="gift-emoji">🔥</div>
+                    <div class="gift-name">Fire</div>
+                    <div class="gift-price">$15</div>
+                </div>
+            </div>
+            
+            <textarea class="gift-message" placeholder="Add a personal message (optional)"></textarea>
+            
+            <button class="btn btn-primary">Send Gift</button>
+        </div>
+    </div>
+</div>
+
+<!-- Tip Modal -->
+<div class="modal-overlay" id="tipModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Send a Tip</h2>
+            <button class="close-modal" id="closeTipModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="tip-options">
+                <div class="tip-option">
+                    <div class="tip-amount">$10</div>
+                    <div class="tip-label">Coffee</div>
+                </div>
+                <div class="tip-option">
+                    <div class="tip-amount">$25</div>
+                    <div class="tip-label">Lunch</div>
+                </div>
+                <div class="tip-option">
+                    <div class="tip-amount">$50</div>
+                    <div class="tip-label">Dinner</div>
+                </div>
+                <div class="tip-option">
+                    <div class="tip-amount">$100</div>
+                    <div class="tip-label">VIP</div>
+                </div>
+            </div>
+            
+            <div class="custom-tip">
+                <span>$</span>
+                <input type="number" class="custom-tip-input" placeholder="Custom amount" min="1">
+            </div>
+            
+            <textarea class="gift-message" placeholder="Add a personal message (optional)"></textarea>
+            
+            <button class="btn btn-primary">Send Tip</button>
+        </div>
+    </div>
+</div>
+
+<!-- Wishlist Modal -->
+<div class="modal-overlay" id="wishlistModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">My Wishlist</h2>
+            <button class="close-modal" id="closeWishlistModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="wishlist-item">
+                <img src="https://images.unsplash.com/photo-1575695342320-d2d2d2f9b73f?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Luxury Handbag" class="wishlist-image">
+                <div class="wishlist-info">
+                    <div class="wishlist-name">Luxury Designer Handbag</div>
+                    <div class="wishlist-price">$1,200</div>
+                    <div class="wishlist-progress">
+                        <div class="wishlist-progress-bar w-[65%]"></div>
+                    </div>
+                    <div class="wishlist-progress-text">
+                        <span>$780 raised</span>
+                        <span>65%</span>
+                    </div>
+                    <button class="btn btn-primary">Contribute</button>
+                </div>
+            </div>
+            
+            <div class="wishlist-item">
+                <img src="https://images.unsplash.com/photo-1581338834647-b0fb40704e21?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Vacation" class="wishlist-image">
+                <div class="wishlist-info">
+                    <div class="wishlist-name">Weekend Getaway to Malibu</div>
+                    <div class="wishlist-price">$800</div>
+                    <div class="wishlist-progress">
+                        <div class="wishlist-progress-bar w-[40%]"></div>
+                    </div>
+                    <div class="wishlist-progress-text">
+                        <span>$320 raised</span>
+                        <span>40%</span>
+                    </div>
+                    <button class="btn btn-primary">Contribute</button>
+                </div>
+            </div>
+            
+            <div class="wishlist-item">
+                <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Camera" class="wishlist-image">
+                <div class="wishlist-info">
+                    <div class="wishlist-name">Professional Camera Setup</div>
+                    <div class="wishlist-price">$2,500</div>
+                    <div class="wishlist-progress">
+                        <div class="wishlist-progress-bar w-[25%]"></div>
+                    </div>
+                    <div class="wishlist-progress-text">
+                        <span>$625 raised</span>
+                        <span>25%</span>
+                    </div>
+                    <button class="btn btn-primary">Contribute</button>
+                </div>
+            </div>
+            
+            <button class="btn btn-secondary mb-[20px]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add New Wishlist Item
+            </button>
+        </div>
+    </div>
+</div>
+
+
+ <div class="modal-overlay" id="allLinkModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">All My Links</h2>
+            <button class="close-modal" id="closeAllLinkModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+           
+          
+            
+            <div class="wishlist-item">
+
+
+                <div class="all-linkdiv">
+
+                    <div class="ss-icons">
+                        <img src="./assets/images/ss-facebook.svg" alt="social-icon" />
+                    </div>
+                    <div class="ss-icons">
+                        <img src="./assets/images/ss-instagram.svg" alt="social-icon" />
+                    </div>
+                    <div class="ss-icons">
+                        <img src="./assets/images/ss-whatsapp.svg" alt="social-icon" />
+                    </div>
+
+                </div>
+               
+                
+            </div>
+            
+           
+
+        </div>
+    </div>
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Services Popup -->
+
+
+ <div id="servicesPopup" class="service-popup">
+
+    <div class="service-content">
+
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl sm:text-2xl font-bold premium-text">Services</h3>
+            <button id="closeServicesBtn" class="text-white/70 hover:text-white transition duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+
+        <div class="space-y-6">
+         
+            <div>
+                <h4 class="text-lg sm:text-xl font-bold gradient-text mb-4">💬 Chat</h4>
+                <div class="space-y-4">
+                    <div class="service-item">
+                        <div class="flex justify-between items-start mb-2">
+
+                            <h5 class="text-base sm:text-lg font-semibold">1-on-1 Chat Session</h5>
+                            <span class="bg-indigo-600/20 text-indigo-300 px"></span>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div> 
+
+
+
+
+    <script>
+        // Initialize Modal Functions
+   document.addEventListener('DOMContentLoaded', function() {
+    // More Actions Dropdown
+    const moreActionsBtn = document.getElementById('moreActionsBtn');
+    const moreActions = document.getElementById('moreActions');
+    
+    if (moreActionsBtn && moreActions) {
+        moreActionsBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            moreActions.classList.toggle('active');
         });
-      }
+        
+        document.addEventListener('click', function(e) {
+            if (!moreActions.contains(e.target)) {
+                moreActions.classList.remove('active');
+            }
+        });
+    }
+    
+    // Modal Functions
+    function openModal(modalId) {
+        const modalOverlay = document.getElementById(modalId);
+        if (modalOverlay) {
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    
+    function closeModal(modalId) {
+        const modalOverlay = document.getElementById(modalId);
+        if (modalOverlay) {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // About Modal
+    const aboutBtn = document.getElementById('aboutBtn');
+    const closeAboutModal = document.getElementById('closeAboutModal');
+    
+    if (aboutBtn) {
+        aboutBtn.addEventListener('click', function() {
+            openModal('aboutModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeAboutModal) {
+        closeAboutModal.addEventListener('click', function() {
+            closeModal('aboutModalOverlay');
+        });
+    }
+    
+    // Services Modal
+    const servicesBtn = document.getElementById('servicesBtn');
+    const closeServicesModal = document.getElementById('closeServicesModal');
+    
+    if (servicesBtn) {
+        servicesBtn.addEventListener('click', function() {
+            openModal('servicesModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeServicesModal) {
+        closeServicesModal.addEventListener('click', function() {
+            closeModal('servicesModalOverlay');
+        });
+    }
+    
+    // Subscription Modal
+    const subscribeBtn = document.getElementById('subscribeBtn');
+    const closeSubscriptionModal = document.getElementById('closeSubscriptionModal');
+    
+    if (subscribeBtn) {
+        subscribeBtn.addEventListener('click', function() {
+            openModal('subscriptionModalOverlay');
+        });
+    }
+    
+    if (closeSubscriptionModal) {
+        closeSubscriptionModal.addEventListener('click', function() {
+            closeModal('subscriptionModalOverlay');
+        });
+    }
+    
+    // Gift Modal
+    const giftBtn = document.getElementById('giftBtn');
+    const closeGiftModal = document.getElementById('closeGiftModal');
+    
+    if (giftBtn) {
+        giftBtn.addEventListener('click', function() {
+            openModal('giftModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeGiftModal) {
+        closeGiftModal.addEventListener('click', function() {
+            closeModal('giftModalOverlay');
+        });
+    }
+    
+    // Tip Modal
+    const tipBtn = document.getElementById('tipBtn');
+    const closeTipModal = document.getElementById('closeTipModal');
+    
+    if (tipBtn) {
+        tipBtn.addEventListener('click', function() {
+            openModal('tipModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeTipModal) {
+        closeTipModal.addEventListener('click', function() {
+            closeModal('tipModalOverlay');
+        });
+    }
+    
+    // Wishlist Modal
+    const wishlistBtn = document.getElementById('wishlistBtn');
+    const closeWishlistModal = document.getElementById('closeWishlistModal');
+    
+    if (wishlistBtn) {
+        wishlistBtn.addEventListener('click', function() {
+            openModal('wishlistModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeWishlistModal) {
+        closeWishlistModal.addEventListener('click', function() {
+            closeModal('wishlistModalOverlay');
+        });
+    }
+
+
+   
+
+
+    // Wishlist Modal
+    const allLinkBtn = document.getElementById('allLinkBtn');
+    const closeAllLinkModal = document.getElementById('closeAllLinkModal');
+    
+    if (allLinkBtn) {
+        allLinkBtn.addEventListener('click', function() {
+            openModal('allLinkModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeAllLinkModal) {
+        closeAllLinkModal.addEventListener('click', function() {
+            closeModal('allLinkModalOverlay');
+        });
+    }
+
+
+
+
+
+
+
+
+    
+    // Close modals when clicking outside
+    const modalOverlays = document.querySelectorAll('.modal-overlay');
+    modalOverlays.forEach(overlay => {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+  
     });
 
-    // Mobile navigation
-    document.querySelectorAll('.mobile-nav-item').forEach(item => {
-      item.addEventListener('click', function() {
-        document.querySelectorAll('.mobile-nav-item').forEach(i => i.classList.remove('active'));
-        this.classList.add('active');
-      });
+
+
+
+
+
+
+
+    
+    // Initialize Tabs
+    const tabs = document.querySelectorAll('.tab');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            tabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Here you would typically show/hide content based on the selected tab
+            const tabType = this.getAttribute('data-tab');
+            console.log(`Selected tab: ${tabType}`);
+        });
     });
-  </script>
+
+
+
+
+
+
+
+
+    
+    
+    // Initialize Gift Items
+    const giftItems = document.querySelectorAll('.gift-item');
+    
+    giftItems.forEach(item => {
+        item.addEventListener('click', function() {
+            giftItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+    
+    // Initialize Tip Options
+    const tipOptions = document.querySelectorAll('.tip-option');
+    
+    tipOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            tipOptions.forEach(o => o.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+
+
+
+
+    
+    // Initialize Follow Button
+    const followBtn = document.getElementById('followBtn');
+    let isFollowing = false;
+    
+    if (followBtn) {
+        followBtn.addEventListener('click', function() {
+            if (isFollowing) {
+                followBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    Follow
+                `;
+            } else {
+                followBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    Unfollow
+                `;
+            }
+            
+            isFollowing = !isFollowing;
+        });
+    }
+    
+    // Initialize Unlock Buttons
+    const unlockBtns = document.querySelectorAll('.unlock-btn');
+    
+    unlockBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const contentItem = this.closest('.content-item');
+            const tokenOverlay = contentItem.querySelector('.token-overlay');
+            const tokens = tokenOverlay.textContent.split(' ')[0];
+            
+            const confirmed = confirm(`Do you want to unlock this content for ${tokens} tokens?`);
+            if (confirmed) {
+                alert(`Content unlocked successfully! ${tokens} tokens have been deducted from your account.`);
+                
+                // Remove blur and unlock button
+                contentItem.classList.remove('paid-content');
+                this.style.display = 'none';
+                tokenOverlay.style.display = 'none';
+            }
+        });
+    });
+    
+    // Initialize Post Type Radio Buttons
+    const postTypeRadios = document.querySelectorAll('input[name="post-type"]');
+    const tokenInput = document.getElementById('tokenInput');
+    
+    if (tokenInput) {
+        tokenInput.disabled = true;
+    }
+    
+    postTypeRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'paid' && tokenInput) {
+                tokenInput.disabled = false;
+                tokenInput.focus();
+            } else if (tokenInput) {
+                tokenInput.disabled = true;
+            }
+        });
+    });
+});
+    </script>
+
 
 </body>
-
-
-</html> 
