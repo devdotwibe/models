@@ -101,7 +101,7 @@ if (!empty($followed_ids)) {
 
     $followed_unique_ids = [];
     while ($row = $result->fetch_assoc()) {
-        $followed_unique_ids[] = $row['unique_id'];
+        $followed_unique_ids[] = $row['id'];
     }
 
     // Step 3: Get posts from followed users
