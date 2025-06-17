@@ -100,7 +100,7 @@ if(!empty($userDetails['profile_pic'])){
         }
     }
 
-    echo json_encode($posts);
+    // echo json_encode($posts);
 
 ?>
 
