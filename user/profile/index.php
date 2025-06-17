@@ -52,6 +52,49 @@ if(!empty($userDetails['profile_pic'])){
 
  <?php  include('../../includes/header.php'); ?>
 
+
+<?php
+
+    $user_id = $userDetails['id'];
+    $posts = [];
+
+    if ($con->connect_error) {
+        die("Connection failed: " . $con->connect_error);
+    }
+
+    $followQuery = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = ?";
+    $stmt = $con->prepare($followQuery);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $followed_ids = [];
+    while ($row = $result->fetch_assoc()) {
+        $followed_ids[] = $row['unique_model_id'];
+    }
+
+    if (!empty($followed_ids)) {
+
+        $placeholders = implode(',', array_fill(0, count($followed_ids), '?'));
+        $types = str_repeat('i', count($followed_ids));
+
+        $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) NULL ORDER BY created_at DESC";
+        $stmt = $con->prepare($sql);
+
+        $stmt->bind_param($types, ...$followed_ids);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $posts[] = $row;
+        }
+    }
+
+    echo json_encode($posts);
+
+?>
+
+
   <!-- Main Content -->
   <main class="max-w-7xl mx-auto px-4 main-content">
 
@@ -64,7 +107,11 @@ if(!empty($userDetails['profile_pic'])){
             <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-20 h-20 rounded-full mx-auto border-3 border-purple-500">
             <div class="online-dot"></div>
           </div>
-          <h3 class="font-bold text-lg gradient-text">Sophie, 24 <?php  echo $userDetails['id'] ?></h3>
+          <h3 class="font-bold text-lg gradient-text">Sophie, 24 test <?php
+            echo "<pre>";
+            print_r($posts);
+            echo "</pre>";
+            ?></h3>
           <p class="text-white/60 text-sm mb-2">San Francisco, CA</p>
           <div class="flex justify-center mb-4">
             <span class="verified-badge">✓ Verified</span>
