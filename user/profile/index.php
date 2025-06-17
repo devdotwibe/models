@@ -52,7 +52,7 @@ if(!empty($userDetails['profile_pic'])){
   <div class="sidebar-menu" id="sidebarMenu">
     <div class="p-6 flex flex-col items-center">
       <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Profile" class="w-20 h-20 rounded-full">
-      <h3 class="text-xl font-bold mt-3">Sophie</h3>
+      <h3 class="text-xl font-bold mt-3">Sophie <?php  echo $usern ?></h3>
       <div class="flex items-center mt-2">
         <div class="flex items-center mr-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
