@@ -62,7 +62,7 @@ if(!empty($userDetails['profile_pic'])){
         die("Connection failed: " . $con->connect_error);
     }
 
-    $followQuery = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = ?";
+    $followQuery = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = ? AND status = 'Follow'";
     $stmt = $con->prepare($followQuery);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
