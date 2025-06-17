@@ -1728,11 +1728,15 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
             grid-template-columns: 1fr 1.5fr;
             gap: 3rem; */
             margin-bottom: 3rem;
+            display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
         }
 
         /* Image Gallery */
        .advpage-3 .ad-gallery {
             position: relative;
+            width: 47%;
             
         }
 
@@ -1807,6 +1811,7 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
        .advpage-3 .ad-content {
             display: flex;
             flex-direction: column;
+            width: 47%;
         }
 
        .advpage-3 .ad-header {
