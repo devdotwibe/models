@@ -118,7 +118,7 @@ echo print_r('test ttttttttttttttttttttttt');
     $stmt = $con->prepare($sql);
 
 
-echo print_r($stmt);
+echo print_r($types);
 
     if (!$stmt) {
         die("Prepare failed (fetching posts): " . $con->error);
