@@ -12,8 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $post_content = trim($_POST['post_content']);
 
-    echo $post_content;
-
     $image_path = null;
 
     if (isset($_FILES['post_image']) && $_FILES['post_image']['error'] === 0) {
@@ -25,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $image_path = 'uploads/post_image' . $filename;
         }
     }
+
+    echo "image uploaded";
 
     $stmt = $con->prepare("INSERT INTO live_posts (post_author, post_content, post_image, post_date) VALUES (?, ?, ?, NOW())");
     $stmt->bind_param("iss", $user_id, $post_content, $image_path);
