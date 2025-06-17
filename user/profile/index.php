@@ -126,6 +126,8 @@ if (!empty($followed_user_ids)) {
     }
 }
 
+
+echo print_r($posts);
 echo json_encode($posts);
 ?>
 
