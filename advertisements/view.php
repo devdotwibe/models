@@ -124,7 +124,8 @@ body .owl-carousel .owl-nav.disabled {
       nav: true,        // Show next/prev arrows
       dots: true,       // Show pagination dots
       autoplay: true,
-      autoplayTimeout: 3000
+	  autoplayTimeout: 5000,        // Time in ms before next slide (3 seconds)
+    smartSpeed: 500,
     });
   });
 </script>
