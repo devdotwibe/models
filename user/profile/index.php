@@ -64,7 +64,7 @@ if(!empty($userDetails['profile_pic'])){
 
     $followQuery = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = ? AND status = 'Follow'";
     $stmt = $con->prepare($followQuery);
-    $stmt->bind_param("i", $user_id);
+    $stmt->bind_param("s", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
