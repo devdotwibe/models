@@ -39,7 +39,6 @@ if(!empty($userDetails['profile_pic'])){
 <meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./assets/css/stylesheet.css" />
 
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/stylesheet.css?v=<?=time()?>' type='text/css' media='all' />
 
