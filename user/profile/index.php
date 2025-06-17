@@ -128,7 +128,7 @@ if (!empty($followed_user_ids)) {
     }
 
 
-    echo print_r($posts);
+    echo print_r($result);
 }
 
 
