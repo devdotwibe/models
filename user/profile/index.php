@@ -240,7 +240,7 @@ if(!empty($userDetails['profile_pic'])){
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
                 <div class="relative">
-                    <img src="<?=SITEURL?><?php echo $post['profile_pic']; ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+                    <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $post['profile_pic']; ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
                     <div class="online-dot"></div>
                 </div>
                 <div class="ml-3 md:ml-4">
