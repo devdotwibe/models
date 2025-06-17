@@ -10,10 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $user_id = $_POST['user_id'];
 
-
-    echo $user_id;
-
     $post_content = trim($_POST['post_content']);
+
+    echo $post_content;
 
     $image_path = null;
 
