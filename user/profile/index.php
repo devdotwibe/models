@@ -80,7 +80,7 @@ if(!empty($userDetails['profile_pic'])){
 
     $followed_ids = [];
     while ($row = $result->fetch_assoc()) {
-        $followed_ids[] = $row['unique_model_id'];
+        $followed_ids[] = 'test';
     }
 
     echo "<pre>Followed IDs:\n";
