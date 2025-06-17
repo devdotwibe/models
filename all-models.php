@@ -90,6 +90,10 @@
 			$offset = $_GET['offset'];
 			}else $offset = 0;
 			
+			$sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes'";
+            $result_count = mysqli_query($con, $sqls_count);
+			$row_cnt = mysqli_fetch_assoc($result_count);
+			
 			$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes'  Order by id DESC LIMIT $limit OFFSET $offset";
 
               $resultd = mysqli_query($con, $sqls);
@@ -188,13 +192,13 @@ offset = offset+limit;
 	jQuery.ajax({
 				type: 'GET',
 				url : "<?=SITEURL.'load_more_model.php'?>",
-				data:{offset:offset},
+				data:{offset:offset,total:"<?php echo $row_cnt['total']; ?>"},
 				dataType:'json',
 				success: function(response){ console.log(response.html);
 					jQuery('#profileGrid').append(response.html);
 					
 
-					if (jQuery.trim(response) === '') {
+					if (response.loadmore == 'no') {
 						jQuery('#loadMoreBtn').hide(); // Hide button if no more data
 					}
 				}

@@ -11,6 +11,7 @@
   
   $limit = 8;
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
+$total = isset($_GET['total']) ? intval($_GET['total']) : 0;
 $html = '';
 $sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes'  Order by id DESC LIMIT $limit OFFSET $offset";
 $resultd = mysqli_query($con, $sqls);
@@ -70,7 +71,8 @@ $resultd = mysqli_query($con, $sqls);
                 </div>';
     }
 }
-$output['sql'] = $sqls;
+if($total <= $offset) $output['loadmore'] = 'no';
+else $output['loadmore'] = 'yes';
 $output['html'] = $html;
 echo json_encode($output);
 ?>
