@@ -113,7 +113,7 @@ if (!empty($followed_user_ids)) {
     $types = str_repeat('i', count($followed_user_ids));
 
 
-echo print_r($types);
+echo print_r($placeholders);
 
     $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY created_at DESC";
     $stmt = $con->prepare($sql);
