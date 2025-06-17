@@ -6870,3 +6870,14 @@ left: 83%;
 .advpage-3 .ad-gallery .owl-stage-outer {
   overflow: hidden;
 }
+
+
+
+.ad-gallery .owl-stage {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ad-gallery .owl-item > div {
+    height: 100%;
+}
