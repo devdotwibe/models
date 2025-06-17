@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    $stmt = $con->prepare("INSERT INTO live_posts (post_author,post_title ,post_content, post_image, post_date) VALUES (?, ?, ?, NOW())");
-    $stmt->bind_param("iss", $user_id, $post_title,$post_content, $image_path);
+    $stmt = $con->prepare("INSERT INTO live_posts (post_author,post_title ,post_content, post_image, post_date,post_date_gmt) VALUES (?, ?, ?, ?, NOW(), NOW())");
+    $stmt->bind_param("isss", $user_id, $post_title,$post_content, $image_path);
     
     if ($stmt->execute()) {
         echo "success";
