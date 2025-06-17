@@ -185,11 +185,11 @@ if(!empty($userDetails['profile_pic'])){
 
   <!-- Main Content -->
   <main class="max-w-7xl mx-auto px-4 main-content">
+
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 py-6">
 
-      <!-- Left Sidebar - Hidden on Mobile -->
       <div class="sidebar lg:col-span-1">
-        <!-- User Profile Card -->
+
         <div class="model-card text-center">
           <div class="relative inline-block mb-4">
             <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-20 h-20 rounded-full mx-auto border-3 border-purple-500">
@@ -254,8 +254,10 @@ if(!empty($userDetails['profile_pic'])){
       </div>
 
       <!-- Main Feed -->
+
+
       <div class="main-feed lg:col-span-3">
-        <!-- Your Connections -->
+
         <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">Your Feed</h2>
 
         <!-- Post 1 -->
@@ -315,47 +317,7 @@ if(!empty($userDetails['profile_pic'])){
           </div>
         </div>
 
-        <!-- Post 2 -->
-        <div class="model-card">
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center">
-              <div class="relative">
-                <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                <div class="online-dot"></div>
-              </div>
-              <div class="ml-3 md:ml-4">
-                <div class="flex items-center flex-wrap">
-                  <h4 class="font-bold text-base md:text-lg">Isabella, 27</h4>
-                  <span class="premium-badge ml-2">★ Premium</span>
-                </div>
-                <p class="text-xs md:text-sm text-white/60">4 hours ago • 2 miles away</p>
-              </div>
-            </div>
-            <span class="status-online">Connected</span>
-          </div>
-
-          <p class="mb-4 text-sm md:text-base text-white/90">Cooking is my love language! What's your favorite cuisine? 👩‍🍳💕</p>
-
-          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop" alt="Cooking" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
-
-          <div class="flex justify-between items-center">
-            <div class="flex space-x-4 md:space-x-6">
-              <button class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
-                <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                </svg>
-                <span class="text-sm md:text-base">89</span>
-              </button>
-              <button class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
-                <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                </svg>
-                <span class="text-sm md:text-base">23</span>
-              </button>
-            </div>
-            <button class="btn-secondary text-sm md:text-base">Message</button>
-          </div>
-        </div>
+       
 
         <!-- Divider -->
         <div class="text-center my-8">
