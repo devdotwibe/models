@@ -9,6 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $user_id = $_POST['user_id'];
 
+
+    return reposne()->json($user_id);
+
     $post_content = trim($_POST['post_content']);
 
     $image_path = null;
