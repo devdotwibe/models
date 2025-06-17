@@ -110,7 +110,7 @@ if (!empty($followed_model_unique_ids)) {
 if (!empty($followed_user_ids)) {
 
 
-echo print_r('test');
+echo print_r('test ttttttttttttttttttttttt');
 
     $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
     $types = str_repeat('i', count($followed_user_ids));
