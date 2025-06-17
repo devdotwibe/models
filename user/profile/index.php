@@ -253,7 +253,9 @@ if(!empty($userDetails['profile_pic'])){
                 <span class="status-online">Connected</span>
             </div>
 
-            <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p>
+            <?php echo htmlspecialchars_decode($post['post_content']) ?>
+
+            <!-- <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p> -->
 
             <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
 
