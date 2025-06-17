@@ -1915,6 +1915,12 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
             gap: 1rem;
             margin-top: auto;
             flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .advpage-3 .ad-actions a,
+        .advpage-3 .ad-actions button{
+            width: 32%;
         }
 
        .advpage-3 .action-btn {
