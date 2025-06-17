@@ -382,7 +382,7 @@ if(!empty($userDetails['profile_pic'])){
                 </div>
 
 
-                <form id="createPostForm">
+                <form id="createPostForm"  enctype="multipart/form-data" method="post">
 
                     <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
 
