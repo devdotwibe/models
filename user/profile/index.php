@@ -127,12 +127,7 @@ if (!empty($followed_user_ids)) {
         $posts[] = $row;
     }
 
-
-    echo print_r($result);
 }
-
-
-echo print_r($posts);
 echo json_encode($posts);
 ?>
 
