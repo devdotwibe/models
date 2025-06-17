@@ -1,0 +1,3 @@
+[25-Sep-2020 04:35:39 America/Boise] PHP Parse error:  syntax error, unexpected '$to' (T_VARIABLE) in /home3/academia/public_html/admin/downloads/report-all-college.php on line 29
+[25-Sep-2020 04:36:06 America/Boise] PHP Parse error:  syntax error, unexpected '$to' (T_VARIABLE) in /home3/academia/public_html/admin/downloads/report-all-college.php on line 29
+[28-Sep-2020 00:59:40 America/Boise] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, bool given in /home3/academia/public_html/admin/downloads/report-purchase-course.php on line 69
