@@ -5,7 +5,7 @@ session_start();
 include('../../includes/config.php');
 include('../../includes/helper.php');
 
-    return "test";
+    echo "test";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
