@@ -84,6 +84,8 @@ if(!empty($userDetails['profile_pic'])){
 
     $followed_user_ids = [];
 
+    $followed_user_ids[] = $userDetails['unique_id'];
+
     if (!empty($followed_model_unique_ids)) {
         $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
         $types = str_repeat('s', count($followed_model_unique_ids));
@@ -259,7 +261,7 @@ if(!empty($userDetails['profile_pic'])){
 
             <!-- <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p> -->
 
-            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+            <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $post['post_image']; ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
 
             <div class="flex justify-between items-center">
                 <div class="flex space-x-4 md:space-x-6">
