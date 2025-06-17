@@ -55,7 +55,7 @@ if(!empty($userDetails['profile_pic'])){
 
 <?php
 
-    $user_id = $userDetails['id'];
+    $user_id = $userDetails['unique_id'];
     $posts = [];
 
     if ($con->connect_error) {
@@ -82,8 +82,6 @@ if(!empty($userDetails['profile_pic'])){
     while ($row = $result->fetch_assoc()) {
         $followed_ids[] = 'test';
     }
-
-     $followed_ids[] = 'test';
 
     echo "<pre>Followed IDs:\n";
     print_r($followed_ids);
