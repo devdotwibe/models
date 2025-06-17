@@ -55,7 +55,7 @@ if(!empty($userDetails['profile_pic'])){
 
 <?php
 
-    $user_id = $userDetails['unique_id'];
+    $user_id = $userDetails['id'];
     $posts = [];
 
     if ($con->connect_error) {
