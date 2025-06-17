@@ -24,8 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    echo "image uploaded";
-
     $stmt = $con->prepare("INSERT INTO live_posts (post_author, post_content, post_image, post_date) VALUES (?, ?, ?, NOW())");
     $stmt->bind_param("iss", $user_id, $post_content, $image_path);
     
