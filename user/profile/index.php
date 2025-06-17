@@ -240,7 +240,7 @@ if(!empty($userDetails['profile_pic'])){
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
                 <div class="relative">
-                    <img src="" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+                    <img src="<?=SITEURL?><?php echo $post['profile_pic']; ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
                     <div class="online-dot"></div>
                 </div>
                 <div class="ml-3 md:ml-4">
@@ -259,7 +259,7 @@ if(!empty($userDetails['profile_pic'])){
 
             <!-- <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p> -->
 
-            <img src="<?=SITEURL?><?php echo $post['profile_pic']; ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
 
             <div class="flex justify-between items-center">
                 <div class="flex space-x-4 md:space-x-6">
