@@ -108,7 +108,31 @@ if(!empty($userDetails['profile_pic'])){
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
 
-        $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY post_date DESC";
+        // $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY post_date DESC";
+
+        //       $sql = "
+        //     SELECT 
+        //         live_posts.*, 
+        //         model_user.name AS author_name, 
+        //         model_user.country AS country,
+        //         model_user.country AS country
+        //     FROM live_posts
+        //     JOIN model_user ON live_posts.post_author = model_user.id
+        //     WHERE post_author IN ($placeholders)
+        //     ORDER BY post_date DESC
+        // ";
+
+        $sql = "
+            SELECT 
+                live_posts.*, 
+                model_user.name AS author_name, 
+                model_user.country
+            FROM live_posts
+            JOIN model_user ON live_posts.post_author = model_user.id
+            WHERE post_author IN ($placeholders)
+            ORDER BY post_date DESC
+        ";
+
         $stmt = $con->prepare($sql);
 
         if (!$stmt) {
