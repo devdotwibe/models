@@ -244,7 +244,7 @@ if(!empty($userDetails['profile_pic'])){
                 </div>
                 <div class="ml-3 md:ml-4">
                     <div class="flex items-center flex-wrap">
-                    <h4 class="font-bold text-base md:text-lg">Sophia, 25</h4>
+                    <h4 class="font-bold text-base md:text-lg"><?php echo $psot['author_name']?></h4>
                     <span class="verified-badge ml-2">✓</span>
                     </div>
                     <p class="text-xs md:text-sm text-white/60">2 hours ago • 3 miles away</p>
