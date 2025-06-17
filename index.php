@@ -5,7 +5,7 @@ include('includes/helper.php');
 <!doctype html>
 <html lang="en-US" class="no-js">
   <head>
-    <title>Chat, Watch & Meet top Models | The Live Models</title>
+    <title>Chat, Watch & Meet top Models | The Live Models transparent</title>
     <meta name="description" content="The live model is one of the world's leading professional networks for models and escorts. Chat watch and meet with your favorite models from the comfort of your home.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 <?php include('includes/head.php'); ?>
