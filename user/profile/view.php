@@ -1081,7 +1081,7 @@ if(!empty($userDetails['profile_pic'])){
                 var formData = new FormData(this); 
 
                 $.ajax({
-                    url: 'ajax/save_post.php', 
+                    url: 'user/profile/savepost.php', 
                     type: 'POST',
                     data: formData,
                     contentType: false, 
