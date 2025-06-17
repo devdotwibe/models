@@ -86,7 +86,7 @@ if(!empty($userDetails['profile_pic'])){
     if (!empty($followed_ids)) {
 
         $placeholders = implode(',', array_fill(0, count($followed_ids), '?'));
-        $types = str_repeat('i', count($followed_ids));
+        $types = str_repeat('s', count($followed_ids));
 
         $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) NULL ORDER BY created_at DESC";
         $stmt = $con->prepare($sql);
