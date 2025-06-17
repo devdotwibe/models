@@ -77,7 +77,6 @@ if(!empty($userDetails['profile_pic'])){
         die("Query failed: " . $stmt->error);
     }
 
-
     $followed_ids = [];
     while ($row = $result->fetch_assoc()) {
 
