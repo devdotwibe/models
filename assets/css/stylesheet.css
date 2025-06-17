@@ -6888,9 +6888,13 @@ left: 83%;
 }
 
 .ad-content .video-count {
-    display: flex;
+   display: flex
+;
     justify-content: center;
     align-items: center;
+    padding-inline: 13px;
+    background: #000000;
+    border-radius: 10px;
    
 }
 
@@ -6904,6 +6908,9 @@ left: 83%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-inline: 13px;
+    background: #000000;
+    border-radius: 10px;
  
 }
 
