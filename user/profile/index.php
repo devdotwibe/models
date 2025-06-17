@@ -242,7 +242,15 @@ if(!empty($userDetails['profile_pic'])){
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
                 <div class="relative">
-                    <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $post['profile_pic']; ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+
+                    <?php if (empty($post['profile_pic'])): ?>
+                        
+                        <img src="<?= SITEURL . 'ajax/noimage.php?image=' ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+                    <?php else: ?>
+
+                        <img src="<?= SITEURL . $post['profile_pic']; ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+                    <?php endif; ?>
+
                     <div class="online-dot"></div>
                 </div>
                 <div class="ml-3 md:ml-4">
@@ -261,7 +269,14 @@ if(!empty($userDetails['profile_pic'])){
 
             <!-- <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p> -->
 
-            <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $post['post_image']; ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+        <?php if (empty($post['post_image'])): ?>
+
+            <img src="<?= SITEURL . 'ajax/noimage.php?image=' ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+        <?php else: ?>
+
+            <img src="<?= SITEURL . $post['post_image']; ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+        <?php endif; ?>
+
 
             <div class="flex justify-between items-center">
                 <div class="flex space-x-4 md:space-x-6">
