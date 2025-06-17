@@ -83,6 +83,8 @@ if(!empty($userDetails['profile_pic'])){
         $followed_ids[] = 'test';
     }
 
+     $followed_ids[] = 'test';
+
     echo "<pre>Followed IDs:\n";
     print_r($followed_ids);
     echo "</pre>";
