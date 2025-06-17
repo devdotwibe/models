@@ -185,22 +185,21 @@ const limit = 8;
 jQuery('#loadMoreBtn').on('click', function($) { alert(1);
    
 	
-	$.ajax({
-                type: 'GET',
-                url: "<?php echo SITEURL; ?>load_more_model.php",
-                data: offset,
-				dataType: 'json',
-                success: function(response) {
-                    $('#modelContainer').append(response);
+	 
+	jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'load_more_model.php'?>",
+				data:{offset:offset},
+				dataType:'json',
+				success: function(response){
+					$('#modelContainer').append(response);
 					offset += limit;
 
-					if ($.trim(data) === '') {
+					if (jQuery.trim(data) === '') {
 						$('#loadMoreBtn').hide(); // Hide button if no more data
 					}
-                }
-            }); 
-	 
-	
+				}
+			});
 	
 	
 });
