@@ -8,6 +8,7 @@
   
   $output = array();
   
+  
   $limit = 8;
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
 
@@ -16,11 +17,11 @@ $result = mysqli_query($conn, $sqls);
 
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
-        echo '<div class="model-profile">';
-        echo '<h4>' . htmlspecialchars($row['name']) . '</h4>';
-        echo '<p>' . htmlspecialchars($row['bio']) . '</p>';
-        echo '</div>';
+        $output['html'] .= '<div class="model-profile">';
+        $output['html'] .= '<h4>' . htmlspecialchars($row['name']) . '</h4>';
+        $output['html'] .= '<p>' . htmlspecialchars($row['bio']) . '</p>';
+        $output['html'] .= '</div>';
     }
 }
-
+echo json_encode($output);
 ?>
