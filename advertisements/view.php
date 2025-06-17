@@ -390,7 +390,6 @@ else{
                         </button>
 						
 						
-						<div class="bottom-icons-count">
 						
 							<div class="video-count">
 							<img src="<?php echo SITEURL.'uploads/banners/icon_video_prev.svg'; ?>" >
@@ -409,7 +408,6 @@ else{
 							</div>
 							
 							
-						</div>
 						
 						
                     </div>
