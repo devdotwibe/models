@@ -108,17 +108,7 @@ if(!empty($userDetails['profile_pic'])){
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
 
-         $sql = "
-            SELECT 
-                live_posts.*, 
-                model_user.name AS author_name, 
-                model_user.country AS country,
-                model_user.profile_pic AS profile_pic,
-            FROM live_posts
-            JOIN model_user ON live_posts.post_author = model_user.id
-            WHERE post_author IN ($placeholders)
-            ORDER BY post_date DESC
-        ";
+        $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY post_date DESC";
         $stmt = $con->prepare($sql);
 
         if (!$stmt) {
@@ -150,7 +140,9 @@ if(!empty($userDetails['profile_pic'])){
             <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-20 h-20 rounded-full mx-auto border-3 border-purple-500">
             <div class="online-dot"></div>
           </div>
-       <h3 class="font-bold text-lg gradient-text">Sophie, 24 </h3>
+          <h3 class="font-bold text-lg gradient-text">Sophie, 24 test <?php
+       
+            ?></h3>
           <p class="text-white/60 text-sm mb-2">San Francisco, CA</p>
           <div class="flex justify-center mb-4">
             <span class="verified-badge">✓ Verified</span>
@@ -228,7 +220,7 @@ if(!empty($userDetails['profile_pic'])){
                 </div>
                 <div class="ml-3 md:ml-4">
                     <div class="flex items-center flex-wrap">
-                    <h4 class="font-bold text-base md:text-lg"><?php echo $post['author_name'] ?></h4>
+                    <h4 class="font-bold text-base md:text-lg">Sophia, 25</h4>
                     <span class="verified-badge ml-2">✓</span>
                     </div>
                     <p class="text-xs md:text-sm text-white/60">2 hours ago • 3 miles away</p>
