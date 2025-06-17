@@ -1,0 +1,123 @@
+<?php
+session_start();
+include('includes/config.php');
+include('includes/helper.php');
+$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+if($userDetails){}
+else{
+	echo '<script>window.location.href="login.php"</script>';
+	die;
+}
+
+if ($_POST['submit_name']){
+	$arr = array('name','country','city','gender','user_bio','services','user_current_status');
+	$post_data = array_from_post($arr);
+	
+	$post_data['dob'] = h_dateFormat($_POST['dob'],'Y-m-d');
+	$post_data['age'] = h_get_age($dob);
+
+	$error = '';
+	$form_data = DB::queryFirstRow("select id from model_user where id!='".$userDetails['id']."' and lower(username)='".strtolower($_POST['username'])."' ");
+	if($form_data){
+		$error = 'Username already exist.';
+	}
+	else{
+		$post_data['username'] = $_POST['username'];
+	}
+	$form_data = DB::queryFirstRow("select id from model_user where id!='".$userDetails['id']."' and lower(email)='".strtolower($_POST['email'])."' ");
+	if($form_data){
+		$error .= ' Email already exist.';
+	}
+	else{
+		$post_data['email'] = $_POST['email'];
+	}
+	//$post_data = array_from_get($arr);
+	//$post_data['user_id'] = $user_id;
+	//$post_data['created_at'] = date('Y-m-d H:i:s');
+	
+	DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
+	if($error){
+		echo '<script>alert("'.$error.'");</script>';
+	}
+	echo '<script>alert("Your Profile Successfully Updated");
+	window.location="edit-profile.php"
+	</script>';
+	die;
+    }else if(isset($_POST['submit_pass'])){
+
+      $user_id = $_POST['use_id'];
+      $name = $_POST['name'];
+      $country = $_POST['country'];
+      $current_pass = $_POST['current_pass'];
+      $new_password = $_POST['new_password'];
+      $confirm_pass = $_POST['confirm_pass'];
+
+
+        $select = "SELECT * FROM model_user WHERE id = '".$user_id."'";
+        $result = mysqli_query($con, $select);
+        if(mysqli_num_rows($result) > 0){
+          $row1 = mysqli_fetch_array($result);
+             $password = $row1['password']; 
+        }
+
+        if($password == $current_pass){
+              
+        if($confirm_pass == $new_password){
+
+          $sql = "UPDATE model_user SET password = '".$new_password."' WHERE id = '".$user_id."'";
+        
+          if(mysqli_query($con, $sql)){
+            echo '<script>alert("Your Password Successfully Updated");
+             window.location="edit-profile.php"
+            </script>';
+          }else{
+            echo '<script>alert("Your Password Not Updated");
+             window.location="edit-profile.php"
+            </script>';
+          }  
+        
+        }else{
+
+            echo '<script>alert("Password and confirm password Doesnt match");
+              window.location="edit-profile.php"
+            </script>'; 
+        }
+            
+        }else{
+            echo '<script>alert("This Password is not in our Records");
+                window.location="edit-profile.php"
+              </script>';
+        }
+    }else if(isset($_POST['submit_image'])){
+
+     // $user_id = $_POST['pic_img'];
+      $use_id = $_POST['use_id'];
+
+      $target_dir_profile = "uploads/profile_pic/";
+      $target_file1 = $target_dir_profile . basename($_FILES["pic_img"]["name"]);
+      $target_profile = "uploads/profile_pic/" . basename($_FILES["pic_img"]["name"]);
+
+      if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
+
+          echo '<script>alert("Your Profile Picture Successfully Uploaded");</script>';
+
+          $sql = "UPDATE model_user SET profile_pic = '".$target_profile."' WHERE id = '".$use_id."'";
+        
+          if(mysqli_query($con, $sql)){
+            echo '<script>alert("Your Profile Picture Successfully Updated");
+             window.location="edit-profile.php"</script>';
+          }else{
+            echo '<script>alert("Profile Picture Not Updated.\nPlease try again later.");
+             window.location="edit-profile.php"</script>';
+          }  
+
+      }else{
+          echo '<script>alert("Error in Image uploading");
+             window.location="edit-profile.php"
+            </script>';
+      }
+        
+        
+    }
+ 
+?>

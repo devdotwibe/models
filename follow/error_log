@@ -1,0 +1,30 @@
+[10-Nov-2020 05:29:39 UTC] PHP Notice:  Undefined index: email in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/login.php on line 90
+[10-Nov-2020 05:29:39 UTC] PHP Notice:  Undefined variable: error in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/login.php on line 107
+[10-Nov-2020 05:29:41 UTC] PHP Notice:  Undefined index: firstname in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 95
+[10-Nov-2020 05:29:41 UTC] PHP Notice:  Undefined index: lastname in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 99
+[10-Nov-2020 05:29:41 UTC] PHP Notice:  Undefined index: email in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 103
+[10-Nov-2020 05:29:41 UTC] PHP Notice:  Undefined variable: error in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 120
+[10-Nov-2020 05:29:53 UTC] PHP Warning:  mysqli_real_escape_string() expects exactly 2 parameters, 1 given in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 26
+[10-Nov-2020 05:29:53 UTC] PHP Warning:  mysqli_query() expects at least 2 parameters, 1 given in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 26
+[10-Nov-2020 05:29:53 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php:33
+Stack trace:
+#0 {main}
+  thrown in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 33
+[10-Nov-2020 05:36:52 UTC] PHP Notice:  Undefined index: firstname in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 96
+[10-Nov-2020 05:36:52 UTC] PHP Notice:  Undefined index: lastname in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 100
+[10-Nov-2020 05:36:52 UTC] PHP Notice:  Undefined index: email in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 104
+[10-Nov-2020 05:36:52 UTC] PHP Notice:  Undefined variable: error in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 121
+[10-Nov-2020 05:37:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function eregi() in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 34
+[10-Nov-2020 05:47:31 UTC] PHP Notice:  Undefined index: firstname in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 96
+[10-Nov-2020 05:47:31 UTC] PHP Notice:  Undefined index: lastname in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 100
+[10-Nov-2020 05:47:31 UTC] PHP Notice:  Undefined index: email in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 104
+[10-Nov-2020 05:47:31 UTC] PHP Notice:  Undefined variable: error in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/signup.php on line 121
+[10-Nov-2020 05:47:34 UTC] PHP Notice:  Undefined index: email in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/login.php on line 90
+[10-Nov-2020 05:47:34 UTC] PHP Notice:  Undefined variable: error in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/login.php on line 107
+[10-Nov-2020 05:47:40 UTC] PHP Warning:  mysqli_real_escape_string() expects exactly 2 parameters, 1 given in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/login.php on line 24
+[10-Nov-2020 05:47:40 UTC] PHP Warning:  mysqli_real_escape_string() expects exactly 2 parameters, 1 given in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/login.php on line 24
+[10-Nov-2020 05:47:40 UTC] PHP Warning:  mysqli_query() expects at least 2 parameters, 1 given in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/login.php on line 24
+[10-Nov-2020 05:47:40 UTC] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/wgyebwfa4jtc/public_html/newmodels.systostechnology.com/follow/login.php on line 31

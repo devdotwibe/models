@@ -1,0 +1,536 @@
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+<script src="<?='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'?>"></script>
+<!-- <script src="<?='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'?>"></script> -->
+<link rel="stylesheet" type="text/css" href="<?=SITEURL?>includes/foot-style.css">
+
+<style type="text/css">
+  @media screen and (max-width: 600px) {
+    .mobile_foot {
+      display: block !important;
+      height: 50px;
+      background: #d83b1b;
+      width: 100%;
+      margin: auto;
+      position: fixed;
+      bottom: 0;
+      z-index: 999;
+    }
+    .icon_form{
+      height: 25px;
+      width: 25px;
+    }
+    .main_f_div{
+      text-align: center;
+      padding: 10px;
+    }
+  }
+  .col-half-offset{
+      margin-left:4.166666667%;
+  }
+  .prof_text{
+    margin-bottom: unset;
+    color: #4a4a4a;
+    padding-left: 65px;
+  }
+  .prof_elink{
+    padding-left: 16px;
+    text-decoration-line: underline;
+  }
+  hr{
+    margin: unset;
+  }
+</style>
+<style type="text/css">
+  .dark-mode-for-tag {
+    color: white !important;
+  }
+  .dark-mode-for-model {
+    border: 1px solid white !important;
+    color: white !important;
+    background-color: black !important;
+  }
+  /*.dark-mode {
+    background-color: black !important;
+    color: white !important;
+  }*/
+</style>
+
+
+<!-- <script>
+$(document).ready(function(){
+  $("#darkmode").click(function(){
+     //alert("ok");
+  	$("#darkmode_text").text("Normal Mode");
+    $("body").toggleClass("dark-mode");
+    $("p").toggleClass("dark-mode-for-tag");
+    $("h1").toggleClass("dark-mode-for-tag");
+    $("h2").toggleClass("dark-mode-for-tag");
+    $("h3").toggleClass("dark-mode-for-tag");
+    $("h4").toggleClass("dark-mode-for-tag");
+    $("h5").toggleClass("dark-mode-for-tag");
+    $("h6").toggleClass("dark-mode-for-tag");
+    $("span").toggleClass("dark-mode-for-tag");
+    $("button").toggleClass("dark-mode-for-tag");
+    $(".foot_menu_ul").toggleClass("dark-mode");
+    $("#menu").toggleClass("dark-mode");
+    $("#footer li").toggleClass("dark-mode");
+    $("#menuToggle input:checked ~ span").toggleClass("dark-mode-for-tag");
+    $(".btn-success").toggleClass("dark-mode-for-tag");
+    $(".btn-info").toggleClass("dark-mode-for-tag");
+    $("select").toggleClass("dark-mode");
+    $("#sub-floor").toggleClass("dark-mode");
+    $(".footer-tint").toggleClass("dark-mode");
+    $(".navbar-inverse").toggleClass("dark-mode");
+    $(".sml_tst").toggleClass("dark-mode");
+    $("header").toggleClass("dark-mode");
+    $("footer").toggleClass("dark-mode");
+    $(".modal-content").toggleClass("dark-mode-for-model");
+  });
+});
+</script>
+ --><div class="container-fluid" style="padding:0px">
+      <footer id="footer" class="clearfix">
+        <div class="footer-tint">
+          <div id="sub-floor">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-12 col-md-4 copyright">
+                  &copy; 2020 All rights Reserved. The Live Model.
+                </div>
+                <div class="col-sm-12 col-md-4 col-md-offset-4 crlink">
+                 <a target="_blank" href="#">Terms & Condition</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a target="_blank" href="#">Privacy Policy</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a target="_blank" href="<?=SITEURL?>contact-us.php">Reach us</a>
+                </div>
+              </div>
+                <div class="row" style="border:0px solid red;">
+                    <div class="alert alert-info">
+                      <strong>Desclaimer!</strong> 
+                            we are independent content sharing website. we are not taking any assurance of data rights that upload on our website by users. if you have find anything copyrighted then contact us on abuse@thelivemodels.com
+                    </div>
+                    
+                
+                </div>
+            </div>
+          </div>
+          
+            <div class="row mobile_foot" style="display: none;">
+
+              <?php if($_SESSION["log_user"]){ ?>
+
+              <div class="col-sm-2 col-md-2 col-xs-2 main_f_div">
+                <a href="<?=SITEURL?>">
+                  <img class="icon_form" src="<?=SITEURL?>assets/images/icons/home1.png">
+                </a>
+              </div>
+              <div class="col-sm-2 col-md-2 col-xs-2 main_f_div col-half-offset" >
+                <a href="<?=SITEURL?>notifications.php">
+                  <img class="icon_form" src="<?=SITEURL?>assets/images/icons/bell1.png" style="width: 30px;height: 30px;">
+                </a>
+              </div>
+              <?php
+	              $log_user_id = $_SESSION["log_user_unique_id"];
+	              $sql1 = "SELECT * FROM model_user WHERE unique_id = '".$log_user_id."'";
+	              $result1 = mysqli_query($con,$sql1);
+
+	              if (mysqli_num_rows($result1) > 0) {
+
+	                $row1 = mysqli_fetch_assoc($result1);
+	                 
+	                 $status = $row1['as_a_model'];
+	                 if($status == 'Yes'){
+	          ?>
+              <div class="col-sm-2 col-md-2 col-xs-2 main_f_div col-half-offset">
+                <a href="<?=SITEURL?>single-profile.php?m_unique_id=<?php echo  $_SESSION["log_user_unique_id"]; ?>">
+                  <img class="icon_form" src="<?=SITEURL?>assets/images/icons/add1.png">
+                </a>
+              </div>
+
+              <div class="col-sm-2 col-md-2 col-xs-2 main_f_div col-half-offset">
+                <a href="<?=SITEURL?>my-purchase.php">
+                  <img class="icon_form" src="<?=SITEURL?>assets/images/icons/shopping-bag.png">
+                </a>
+              </div>
+
+              <div class="col-sm-2 col-md-2 col-xs-2 main_f_div col-half-offset">
+                <!-- <a href="<?=SITEURL?>single-profile.php?m_unique_id=<?php echo  $_SESSION["log_user_unique_id"]; ?>">
+                  <img class="icon_form" src="<?=SITEURL?>assets/images/icons/user1.png">
+                </a> -->
+
+                <nav role='navigation'>
+                  <div id="menuToggle">
+                    
+                    <input type="checkbox" />
+                    
+                    
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+
+                    <?php   
+                      $sqls = "SELECT * FROM model_user WHERE unique_id = '".$_SESSION["log_user_unique_id"]."' ";
+                      $resultd = mysqli_query($con, $sqls);
+                      if (mysqli_num_rows($resultd) > 0) {
+                        $rowesdw = mysqli_fetch_assoc($resultd);
+                        $pro_path = $rowesdw['profile_pic'];
+                      }
+                    ?>
+                  
+                    <ul id="menu" class="foot_menu_ul">
+                      
+                        <img style="height: 50px;border-radius: 50%;float: left;" src="<?=SITEURL?><?php echo $pro_path; ?>">
+                        
+                        <div style="margin-bottom: 20px;">
+                          <p class="prof_text"><?php echo $_SESSION["log_user"]; ?></p>
+                          <small class="prof_elink"><a href="<?=SITEURL?>edit-profile.php">Edit Details</a></small>
+                        </div>
+                      <hr>
+                      <?php
+                        $sql_flow = "SELECT COUNT(status) FROM model_follow WHERE unique_model_id = '".$_SESSION["log_user_unique_id"]."' AND status = 'Follow' Order by id DESC";
+                         $result_flow = mysqli_query($con, $sql_flow);
+                         if (mysqli_num_rows($result_flow) > 0) {
+                           $row_flow = mysqli_fetch_assoc($result_flow);
+                           $num3 = $row_flow['COUNT(status)'];
+                         }
+                         $sql_flow1 = "SELECT COUNT(status) FROM model_follow WHERE unique_user_id = '".$_SESSION["log_user_unique_id"]."' AND status = 'Follow' Order by id DESC";
+                         $result_flow1 = mysqli_query($con, $sql_flow1);
+                         if (mysqli_num_rows($result_flow1) > 0) {
+                           $row_flow1 = mysqli_fetch_assoc($result_flow1);
+                           $num2 = $row_flow1['COUNT(status)'];
+                         }
+                      ?>
+                      <div style="float: left;text-align: center;">
+                        <h5 style="color: #4b4b4b;">Followers</h5>
+                        <p style="cursor: pointer;" data-toggle="modal" data-target="#exampleModall"><?php echo $num3; ?></p>
+                      </div>
+                      <div style="text-align: center;">
+                        <h5 style="color: #4b4b4b;">Following</h5>
+                        <p style="cursor: pointer;" data-toggle="modal" data-target="#myModal"><?php echo $num2; ?></p>
+                      </div>
+
+                      <hr>
+                      <?php if($_SESSION["user_type"] == 'Model'){ ?>
+                      <a href="<?=SITEURL?>model-panel/edit-extra-details.php"><li>Edit profile detail</li></a>
+                      <?php } ?>
+                      <!-- <hr>
+                      <a href="<?=SITEURL?>model-panel/insta-snap.php"><li>Add Insta and Snap coins</li></a>
+                      <hr>
+                      <a href="<?=SITEURL?>model-panel/social-media.php"><li>Add Social Links</li></a> -->
+                      <hr>
+                      <a href="<?=SITEURL?>wallet.php"><li>Wallet </li></a>
+                      <hr>
+                      <a href="<?=SITEURL?>model-panel/amount-withdrawal.php"><li>Withdraw ( Connect you bank details)</li></a>
+                      <hr>
+                      <a href="<?=SITEURL?>services-requested.php"><li>Services Requested</li></a>
+                      <hr>
+                      <a href="<?=SITEURL?>single-profile.php?m_unique_id=<?php echo $_SESSION["log_user_unique_id"]; ?>"><li>My Profile</li></a>
+                      <hr>
+
+                      <a href="<?=SITEURL?>advertisement/list.php"><li>Advertisement</li></a>
+                      <hr>
+                      
+                      <!-- <hr>
+                      <a id="darkmode"><li id="darkmode_text">Dark Mode</li></a>
+                      <hr> -->
+                      <a href="<?=SITEURL?>notifications.php"><li>Notifications</li></a>
+                      <hr>
+                        <a href="<?=SITEURL?>supports.php"><li>Support</li></a>
+                        <hr>
+
+                      <a href="<?=SITEURL?>logout.php"><li>Logout</li></a>
+                      <hr>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+
+              <?php }else if($status == 'No'){ ?>
+
+              	<?php
+              		$sql1 = "SELECT * FROM model_extra_details WHERE unique_model_id = '".$log_user_id."'";
+	              $result1 = mysqli_query($con,$sql1);
+
+	              if (mysqli_num_rows($result1) > 0) {
+
+              	?>
+
+              	<div class="col-sm-2 col-md-2 col-xs-2 main_f_div col-half-offset">
+                	<a data-toggle="modal" data-target="#myModalfoot1">
+                  		<img class="icon_form" src="<?=SITEURL?>assets/images/icons/add1.png">
+                	</a>
+              	</div>
+
+          		<?php }else{  ?>
+
+          		<div class="col-sm-2 col-md-2 col-xs-2 main_f_div col-half-offset">
+                	<a data-toggle="modal" data-target="#myModalfoot">
+                  		<img class="icon_form" src="<?=SITEURL?>assets/images/icons/add1.png">
+                	</a>
+              	</div>
+
+              	<?php } ?>
+              <div class="col-sm-2 col-md-2 col-xs-2 main_f_div col-half-offset">
+                <a href="<?=SITEURL?>my-purchase.php">
+                  <img class="icon_form" src="<?=SITEURL?>assets/images/icons/shopping-bag.png">
+                </a>
+              </div>
+
+              <div class="col-sm-2 col-md-2 col-xs-2 main_f_div col-half-offset">
+                <!-- <a href="#">
+                  <img class="icon_form" src="<?=SITEURL?>assets/images/icons/user1.png">
+                </a> -->
+                <nav role='navigation'>
+                  <div id="menuToggle">
+                    
+                     <input type="checkbox" />
+                    
+                    
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <!-- <img class="icon_form" src="<?=SITEURL?>assets/images/icons/user1.png"> -->
+
+
+                    <?php   
+                      $sqls = "SELECT * FROM model_user WHERE unique_id = '".$_SESSION["log_user_unique_id"]."' ";
+                      $resultd = mysqli_query($con, $sqls);
+                      if (mysqli_num_rows($resultd) > 0) {
+                        $rowesdw = mysqli_fetch_assoc($resultd);
+                        $pro_path = $rowesdw['profile_pic'];
+                      }
+                    ?>
+                  
+                    <ul id="menu">
+                      
+                        <img style="height: 50px;border-radius: 50%;float: left;" src="<?=SITEURL?><?php echo $pro_path; ?>">
+                        
+                        <div style="margin-bottom: 20px;">
+                          <p class="prof_text"><?php echo $_SESSION["log_user"]; ?></p>
+                          <small class="prof_elink"><a href="<?=SITEURL?>edit-profile.php">Edit Details</a></small>
+                        </div>
+                      <hr>
+                      <?php
+                        $sql_flow = "SELECT COUNT(status) FROM model_follow WHERE unique_model_id = '".$_SESSION["log_user_unique_id"]."' AND status = 'Follow' Order by id DESC";
+                         $result_flow = mysqli_query($con, $sql_flow);
+                         if (mysqli_num_rows($result_flow) > 0) {
+                           $row_flow = mysqli_fetch_assoc($result_flow);
+                           $num3 = $row_flow['COUNT(status)'];
+                         }
+                         $sql_flow1 = "SELECT COUNT(status) FROM model_follow WHERE unique_user_id = '".$_SESSION["log_user_unique_id"]."' AND status = 'Follow' Order by id DESC";
+                         $result_flow1 = mysqli_query($con, $sql_flow1);
+                         if (mysqli_num_rows($result_flow1) > 0) {
+                           $row_flow1 = mysqli_fetch_assoc($result_flow1);
+                           $num2 = $row_flow1['COUNT(status)'];
+                         }
+                      ?>
+                      <!-- <div style="float: left;text-align: center;">
+                        <h5>Followers</h5>
+                        <p><?php //echo $num3; ?></p>
+                      </div> -->
+                      <div style="text-align: center;">
+                        <h5>Following</h5>
+                        <p><?php echo $num2; ?></p>
+                      </div>
+
+                      <hr>
+                      <!-- <a href="<?=SITEURL?>model-panel/extra-details.php"><li>Edit profile detail</li></a> -->
+                      <hr>
+                      <a href="<?=SITEURL?>model-panel/social-media.php"><li>Add Social Links</li></a>
+                      <hr>
+                      <a href="<?=SITEURL?>wallet.php"><li>Wallet</li></a>
+                      <hr>
+                      <!-- <a href="<?=SITEURL?>model-panel/amount-withdrawal.php"><li>Withdraw ( Connect you bank details)</li></a> -->
+                      <!-- <hr> -->
+                      <!-- <a href="<?=SITEURL?>single-profile.php?m_unique_id=<?php/// echo $_SESSION["log_user_unique_id"]; ?>"><li>View All Images/Videos</li></a> -->
+                      <!-- <hr>
+                      <a id="darkmode"><li id="darkmode_text">Dark Mode</li></a>
+                      <hr> -->
+                      <a href="<?=SITEURL?>advertent/list.php"><li>Advertent</li></a>
+                      <hr>
+                      
+                      <a href="<?=SITEURL?>notifications.php"><li>Notifications</li></a>
+                      <hr>
+                      <a href="<?=SITEURL?>logout.php"><li>Logout</li></a>
+                      <hr>
+                    </ul>
+                  </div>
+                </nav>
+
+              </div>
+            
+          	  <?php } 
+
+              	}
+              ?>
+              
+              
+              <?php }else{ ?>
+              <div class="col-sm-4 col-md-4 col-xs-4 main_f_div">
+                <a href="<?=SITEURL?>">
+                  <img class="icon_form" src="<?=SITEURL?>assets/images/icons/home1.png">
+                </a>
+              </div>
+              <div class="col-sm-4 col-md-4 col-xs-4 main_f_div">
+                <a href="<?=SITEURL?>all-models.php">
+                  <img class="icon_form" src="<?=SITEURL?>assets/images/icons/list1.png">
+                </a>
+              </div>
+              <div class="col-sm-4 col-md-4 col-xs-4 main_f_div">
+                <a href="<?=SITEURL?>login.php">
+                  <img class="icon_form" src="<?=SITEURL?>assets/images/icons/login1.png">
+                </a>
+              </div>
+              <?php } ?>
+            </div>
+          
+        </div>
+      </footer>
+      
+      <!-- end footer -->
+    </div>
+    <!-- Modal -->
+	  <div class="modal fade" id="myModalfoot" role="dialog">
+	    <div class="modal-dialog">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Message alert!</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>You are not a model with us. Apply now to start earning money from your fans.</p>
+	        </div>
+	        <div class="modal-footer">
+	          <button  data-dismiss="modal">Close</button>
+	          <a type="button" class="btn btn-default" href="<?=SITEURL?>new-broadcaster.php">APPLY NOW</a>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+
+	  <div class="modal fade" id="myModalfoot1" role="dialog">
+	    <div class="modal-dialog">
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">Message alert!</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>Your application is being reviewed. Thanks for your patience</p>
+	        </div>
+	        <div class="modal-footer">
+	          <button  data-dismiss="modal">Close</button>
+	          <!-- <a type="button" class="btn btn-default" href="<?=SITEURL?>new-broadcaster.php">APPLY NOW</a> -->
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+
+    <div class="modal fade" id="myModalcratepost" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">New Post</h4>
+          </div>
+          <form method="post" action="post-up.php" enctype="multipart/form-data" style="padding: 20px;">
+          <div class="modal-body">
+              <div class="form-group row">
+                <input type="hidden" name="m_uni_id" value="<?php echo $_SESSION["log_user_unique_id"]; ?>">
+                <label for="staticEmail" class="col-sm-2 col-form-label">File Type</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="file_type" required="required">
+                    <option value="Image">Image</option>
+                    <option value="Video">Video</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">File</label>
+                <div class="col-sm-10">
+                  <input type="file"  id="inputPassword" name="filess" >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control-plain text" id="Description" name="img_text" >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">File type (Price)</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="file_type_price" required="required" id="my_id">
+                    <option value="Free">Free</option>
+                    <option value="Paid">Paid</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row" id="coin_field">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Coins</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control-plain text" name="coins" >
+                </div>
+              </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button  data-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-primary fancy_button" name="upload_image" value="Add New Post">
+            <!-- <a type="button" class="btn btn-default" href="<?=SITEURL?>new-broadcaster.php">APPLY NOW</a> -->
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <script>
+    // $(document).ready(function(){
+    //   $("#coin_field").hide();
+    //   $("#my_id").change(function(){
+    //     if(this.value == 'Paid'){
+    //       $("#coin_field").show();
+    //     }else{
+    //       $("#coin_field").hide();
+    //     }
+    //   });
+    //   $("#div2").hide();
+    //   $("#btn222").click(function(){
+    //     $("#div1").hide();
+    //     $("#div2").show();
+    //   });
+    // });
+  </script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/themes/theagency3/library/js/libs/FitVids.js-master/jquery.fitvids.js' id='fitvids-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/themes/theagency3/library/js/fitvid.js' id='fitvids-xtra-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-includes/js/imagesloaded.min.js' id='imagesloaded-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-includes/js/masonry.min.js' id='masonry-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-includes/js/jquery/jquery.masonry.min.js' id='jquery-masonry-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/themes/theagency3/library/js/scripts.js' id='bones-js-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/themes/theagency3/library/js/libs/bootstrap.min.js' id='bones-bootstrap-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-includes/js/wp-embed.min.js' id='wp-embed-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/flexslider/jquery.flexslider-min.js' id='wpgt-gallery-flexslider-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/js/imagesloaded.pkgd.min.js' id='wordpresscanvas-imagesloaded-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/js/gallery.js' id='wpgt-gallery-js'></script>
+<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/owlcarousel/owl.carousel.min.js' id='wpgt-gallery-owlcarousel-js'></script>
+<script>
+/** TO DISABLE SCREEN CAPTURE **/
+document.addEventListener('keyup', (e) => {
+    if (e.key == 'PrintScreen') {
+        navigator.clipboard.writeText('');
+        //alert('Screenshots disabled!');
+    }
+});
+
+/** TO DISABLE PRINTS WHIT CTRL+P **/
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key == 'p') {
+       // alert('This section is not allowed to print or export to PDF');
+        e.cancelBubble = true;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+    }
+});
+</script>
+<?php
+if(isset($_SESSION['log_user_id'])){
+	DB::update('model_user', array('logged_update' => date('Y-m-d H:i:s')), "id=%s", $_SESSION['log_user_id']);
+}
+?>

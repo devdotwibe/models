@@ -1,0 +1,41 @@
+ul.profile {
+    list-style: none outside none;
+    max-width: 60em;
+    overflow-x: hidden;
+    padding: 0;
+}
+ul.profile li:before {
+    content: ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . ";
+    float: left;
+    white-space: nowrap;
+    width: 0;
+	color:#555555;
+}
+ul.profile span:first-child {
+    background: none repeat scroll 0 0 #141414;
+    
+}
+ul.profile span + span {
+    background: none repeat scroll 0 0 #141414;
+    float: right;
+    
+}
+ul.profile {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.profile p {
+    margin-bottom: 10px !important;
+    margin-top: 0 !important;
+}
+.profile > li {
+    border-bottom: 1px solid #333333;
+    margin-bottom: 0;
+	line-height:2em;
+}
+.profile > li:last-child {
+    border-bottom: 0 none;
+}
+.sidebar_content.widget ul li:last-child {
+    border-bottom: 0 none;
+}
