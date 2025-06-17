@@ -107,7 +107,7 @@ if (!empty($followed_ids)) {
     // Step 3: Get posts from followed users
     if (!empty($followed_unique_ids)) {
         $placeholders = implode(',', array_fill(0, count($followed_unique_ids), '?'));
-        $types = str_repeat('s', count($followed_unique_ids));
+        $types = str_repeat('i', count($followed_unique_ids));
         $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY created_at DESC";
         $stmt = $con->prepare($sql);
 
