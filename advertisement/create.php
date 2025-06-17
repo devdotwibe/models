@@ -40,7 +40,7 @@ if (isset($_SESSION['log_user_id'])) {
 			}
 		}
 		
-		if (isset($_FILES["additionalimages"])) {
+		/*if (isset($_FILES["additionalimages"])) {
 			$totalFiles = count($_FILES['additionalimages']['name']);
 			$additional_img = '';
 			$target_dir_profile = "../uploads/banners/";
@@ -54,7 +54,7 @@ if (isset($_SESSION['log_user_id'])) {
 			if(!empty($additional_img)){ 
 				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
 			}
-		}
+		}*/
 
 		if ($error) {
 			echo '<script>alert("' . $error . '");</script>';
