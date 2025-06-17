@@ -126,7 +126,7 @@ if(!empty($userDetails['profile_pic'])){
             SELECT 
                 live_posts.*, 
                 model_user.name AS author_name, 
-                model_user.country
+                model_user.country,
                 model_user.profile_pic
             FROM live_posts
             JOIN model_user ON live_posts.post_author = model_user.id
