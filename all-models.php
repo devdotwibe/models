@@ -117,7 +117,7 @@
                 <!-- Profile Card 1 -->
                 <div class="profile-card">
                     <div class="profile-image-container">
-                        <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php echo $modalname,', '.$rowesdw['age']; ?>" class="profile-image">
+                        <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php echo $modalname.', '.$rowesdw['age']; ?>" class="profile-image">
                         <div class="profile-badges">
                             <span class="profile-badge badge-live">Live</span>
                             <span class="profile-badge badge-verified">Verified</span>
@@ -155,7 +155,6 @@
 					echo '<p class="not-found-model">No models found.</p>';
 				} ?>
 
-				<div id="modelContainer"></div>
                 
             </div>
 
@@ -182,21 +181,21 @@
 let offset = 0;
 const limit = 8;
 
-jQuery('#loadMoreBtn').on('click', function($) { alert(1);
+jQuery('#loadMoreBtn').on('click', function($) { 
    
-	
+offset = offset+limit;	
 	 
 	jQuery.ajax({
 				type: 'GET',
 				url : "<?=SITEURL.'load_more_model.php'?>",
 				data:{offset:offset},
 				dataType:'json',
-				success: function(response){
-					$('#modelContainer').append(response);
-					offset += limit;
+				success: function(response){ console.log(response.html);
+					jQuery('#profileGrid').append(response.html);
+					
 
-					if (jQuery.trim(data) === '') {
-						$('#loadMoreBtn').hide(); // Hide button if no more data
+					if (jQuery.trim(response) === '') {
+						jQuery('#loadMoreBtn').hide(); // Hide button if no more data
 					}
 				}
 			});
