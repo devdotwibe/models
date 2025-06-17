@@ -186,9 +186,8 @@ jQuery('#loadMoreBtn').on('click', function($) { alert(1);
 	
 	$.ajax({
                 type: 'GET',
-                url: "<?php echo SITEURL . 'load_more_model.php' ?>",
+                url: "load_more_model.php",
                 data: offset,
-                dataType: 'json',
                 success: function(response) {
                     $('#modelContainer').append(data);
 					offset += limit;
@@ -247,6 +246,41 @@ function handleProfileAction($button, action) {
 
     console.log(`${action} action for ${profileName}`);
 }
+function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : 'var(--primary)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: var(--radius);
+                box-shadow: var(--shadow-lg);
+                z-index: 10000;
+                font-weight: 600;
+                transform: translateX(100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Hide notification
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
 </script>
 
        
