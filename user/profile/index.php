@@ -73,6 +73,10 @@ if(!empty($userDetails['profile_pic'])){
         $followed_ids[] = $row['unique_model_id'];
     }
 
+    echo "<pre>Followed IDs:\n";
+    print_r($followed_ids);
+    echo "</pre>";
+
     if (!empty($followed_ids)) {
 
         $placeholders = implode(',', array_fill(0, count($followed_ids), '?'));
