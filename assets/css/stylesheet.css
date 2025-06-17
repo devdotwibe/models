@@ -6881,3 +6881,15 @@ left: 83%;
 .ad-gallery .owl-item > div {
     height: 100%;
 }
+
+.ad-content .video-count {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.ad-content .video-count img {
+    width: 32px;
+}
