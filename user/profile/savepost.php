@@ -10,8 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $post_content = trim($_POST['post_content']);
 
-    die($_POST);
-
     $image_path = null;
 
     if (isset($_FILES['post_image']) && $_FILES['post_image']['error'] === 0) {
