@@ -64,7 +64,7 @@ if(!empty($userDetails['profile_pic'])){
             <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-20 h-20 rounded-full mx-auto border-3 border-purple-500">
             <div class="online-dot"></div>
           </div>
-          <h3 class="font-bold text-lg gradient-text">Sophie, 24 <?php  echo $usern ?></h3>
+          <h3 class="font-bold text-lg gradient-text">Sophie, 24 <?php  echo $userDetails ?></h3>
           <p class="text-white/60 text-sm mb-2">San Francisco, CA</p>
           <div class="flex justify-center mb-4">
             <span class="verified-badge">✓ Verified</span>
