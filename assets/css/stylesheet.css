@@ -6914,7 +6914,7 @@ left: 83%;
  
 }
 
-.ad-content .image-count{
+.ad-content .image-count img{
       width: 32px;
-  
+   margin-right: 6px;
 }
