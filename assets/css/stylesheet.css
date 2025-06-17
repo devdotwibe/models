@@ -1917,13 +1917,13 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
             justify-content: space-between;
         }
 
-        .advpage-3 .ad-actions a,
+        /* .advpage-3 .ad-actions a,
         .advpage-3 .ad-actions button{
             width: 32%;
-        }
+        } */
 
        .advpage-3 .action-btn {
-            padding: 1rem 2rem;
+            padding: 1rem 1rem;
             border-radius: 12px;
             font-size: 1rem;
             display: flex;
@@ -1932,6 +1932,11 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
             /* flex: 1; */
             justify-content: center;
             /* min-width: 200px; */
+        }
+
+      .ad-actions .bottom-icons-count {
+    display: flex;
+    gap: 10px;
         }
 
         /* Additional Info Section */
@@ -6891,6 +6896,7 @@ left: 83%;
 
 .ad-content .video-count img {
     width: 32px;
+    margin-right: 6px;
 }
 
 
