@@ -1724,15 +1724,16 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
 
         /* Ad Detail Section */
         .advpage-3 .ad-detail {
-            display: grid;
+            /* display: grid;
             grid-template-columns: 1fr 1.5fr;
-            gap: 3rem;
+            gap: 3rem; */
             margin-bottom: 3rem;
         }
 
         /* Image Gallery */
        .advpage-3 .ad-gallery {
             position: relative;
+            
         }
 
         .advpage-3 .main-image {
@@ -6837,4 +6838,25 @@ left: 83%; height: 50%; width: 24px;
 
 left: 83%;
 
+}
+
+
+
+
+
+.advpage-3 .ad-gallery .owl-carousel .owl-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover; 
+}
+
+.advpage-3 .ad-gallery .owl-carousel {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.advpage-3 .ad-gallery .owl-stage-outer {
+  overflow: hidden;
 }
