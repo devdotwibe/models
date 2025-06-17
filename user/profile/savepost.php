@@ -5,9 +5,8 @@ session_start();
 include('../../includes/config.php');
 include('../../includes/helper.php');
 
+    return "test";
 
-    return response()->json($user_id);
-    
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $user_id = $_POST['user_id'];
