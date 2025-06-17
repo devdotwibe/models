@@ -40,25 +40,12 @@ if (isset($_SESSION['log_user_id'])) {
 			}
 		}
 		
-		if (isset($_FILES["additionalimages"])) {
-			$totalFiles = count($_FILES['additionalimages']['name']);
-			$additional_img = '';
-			$target_dir_profile = "../uploads/banners/";
-			for ($i = 0; $i < $totalFiles; $i++) {
-				$target_file1 = $target_dir_profile . basename($_FILES["additionalimages"]["name"][$i]);
-				$target_profile = basename($_FILES["additionalimages"]["name"][$i]);
-				if (move_uploaded_file($_FILES["additionalimages"]["tmp_name"][$i], $target_file1)) {
-					$additional_img .= $target_profile.'|';
-				}
-			}
-			if(!empty($additional_img)){ 
-				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
-			}
-		}
+	
 
 		if ($error) {
 			echo '<script>alert("' . $error . '");</script>';
 		}
+		
 		echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
 		/*  if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
 	
