@@ -109,7 +109,7 @@ if(!empty($userDetails['profile_pic'])){
           </div>
           <h3 class="font-bold text-lg gradient-text">Sophie, 24 test <?php
             echo "<pre>";
-            print_r($posts);
+            print_r($followed_ids);
             echo "</pre>";
             ?></h3>
           <p class="text-white/60 text-sm mb-2">San Francisco, CA</p>
