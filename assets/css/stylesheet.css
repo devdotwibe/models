@@ -1509,6 +1509,7 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
 
 .advpage-3 .ad-gallery .main-image img{
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+    width: 100%;
 }
 
 .advpage-3 .ad-gallery .thumbnail-grid .thumbnail:first-child img{
