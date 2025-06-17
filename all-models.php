@@ -85,7 +85,6 @@
             <div class="profile-grid" id="profileGrid">
 			
 			<?php 
-			echo 'test';
 			$limit = 8; 
 			if(isset($_GET['offset'])){
 			$offset = $_GET['offset'];
