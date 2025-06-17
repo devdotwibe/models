@@ -184,7 +184,7 @@ const limit = 8;
 jQuery('#loadMoreBtn').on('click', function($) { alert(1);
    
 	
-	$.ajax({
+	/*$.ajax({
                 type: 'GET',
                 url: "load_more_model.php",
                 data: offset,
@@ -196,8 +196,15 @@ jQuery('#loadMoreBtn').on('click', function($) { alert(1);
 						$('#loadMoreBtn').hide(); // Hide button if no more data
 					}
                 }
-            });
-	
+            }); */
+	 $.post('load_more_model.php', { offset: offset }, function(data) {
+        $('#modelContainer').append(data);
+        offset += limit;
+
+        if ($.trim(data) === '') {
+            $('#loadMoreBtn').hide(); // Hide button if no more data
+        }
+    });
 	
 	
 	
