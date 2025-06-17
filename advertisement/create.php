@@ -2,7 +2,9 @@
 session_start();
 include('../includes/config.php');
 include('../includes/helper.php');
+// Report all errors
 
+error_reporting(E_ALL);
 if (isset($_SESSION['log_user_id'])) {
 	//create post data
 	if ($_POST) {
