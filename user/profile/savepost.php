@@ -24,9 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    if (!$con->connect_error) {
-        die("Connection failed: " . $con->connect_error);
-    }
 
     $stmt = $con->prepare("INSERT INTO live_posts (post_author, post_content, post_image, post_date) VALUES (?, ?, ?, NOW())");
     $stmt->bind_param("iss", $user_id, $post_content, $image_path);

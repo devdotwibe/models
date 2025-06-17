@@ -401,7 +401,7 @@ if(!empty($userDetails['profile_pic'])){
 
                             </label>
 
-                            <input type="file" name="post_image" id="post_image" accept="/*images">
+                            <input style="display:none;" type="file" name="post_image" id="post_image" accept="/*images">
 
                             <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
                                 Post
