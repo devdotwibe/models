@@ -22,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $target_path = $upload_dir . $filename;
 
         if (move_uploaded_file($_FILES['post_image']['tmp_name'], $target_path)) {
-            $image_path = 'uploads/post_image' . $filename;
+            
+            $image_path = $upload_dir . $filename; 
         }
     }
 
