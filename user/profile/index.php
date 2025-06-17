@@ -52,16 +52,17 @@ if(!empty($userDetails['profile_pic'])){
 
  <?php  include('../../includes/header.php'); ?>
 
+
 <?php
 
-$user_id = $userDetails['unique_id'];
+$user_id = $userDetails['unique_id']; // this is a VARCHAR
 $posts = [];
 
 if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
 
-// Step 1: Get followed model IDs
+// Step 1: Get followed model IDs (which are VARCHAR)
 $followQuery = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = ? AND status = 'Follow'";
 $stmt = $con->prepare($followQuery);
 
@@ -77,57 +78,55 @@ if (!$result) {
     die("Query failed: " . $stmt->error);
 }
 
-$followed_ids = [];
+$followed_model_unique_ids = [];
 while ($row = $result->fetch_assoc()) {
-    $followed_ids[] = $row['unique_model_id'];
+    $followed_model_unique_ids[] = $row['unique_model_id'];
 }
 
-// Skip if no followed users
-if (!empty($followed_ids)) {
+// Step 2: Convert unique_model_ids to numeric `id`s from `model_user`
+$followed_user_ids = [];
 
-    // Step 2: Validate those IDs exist in model_user table
-    $placeholders = implode(',', array_fill(0, count($followed_ids), '?'));
-    $types = str_repeat('s', count($followed_ids));
-    $query = "SELECT unique_id FROM model_user WHERE unique_id IN ($placeholders)";
+if (!empty($followed_model_unique_ids)) {
+    $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
+    $types = str_repeat('s', count($followed_model_unique_ids));
+    $query = "SELECT id FROM model_user WHERE unique_id IN ($placeholders)";
     $stmt = $con->prepare($query);
 
     if (!$stmt) {
-        die("Prepare failed (unique_id check): " . $con->error);
+        die("Prepare failed (fetching numeric ids): " . $con->error);
     }
 
-    $stmt->bind_param($types, ...$followed_ids);
+    $stmt->bind_param($types, ...$followed_model_unique_ids);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $followed_unique_ids = [];
     while ($row = $result->fetch_assoc()) {
-        $followed_unique_ids[] = $row['id'];
+        $followed_user_ids[] = (int)$row['id']; // ensure it's an integer
+    }
+}
+
+// Step 3: Fetch posts
+if (!empty($followed_user_ids)) {
+    $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
+    $types = str_repeat('i', count($followed_user_ids));
+    $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY created_at DESC";
+    $stmt = $con->prepare($sql);
+
+    if (!$stmt) {
+        die("Prepare failed (fetching posts): " . $con->error);
     }
 
-    // Step 3: Get posts from followed users
-    if (!empty($followed_unique_ids)) {
-        $placeholders = implode(',', array_fill(0, count($followed_unique_ids), '?'));
-        $types = str_repeat('i', count($followed_unique_ids));
-        $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY created_at DESC";
-        $stmt = $con->prepare($sql);
+    $stmt->bind_param($types, ...$followed_user_ids);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        if (!$stmt) {
-            die("Prepare failed (posts): " . $con->error);
-        }
-
-        $stmt->bind_param($types, ...$followed_unique_ids);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        while ($row = $result->fetch_assoc()) {
-            $posts[] = $row;
-        }
+    while ($row = $result->fetch_assoc()) {
+        $posts[] = $row;
     }
 }
 
 echo json_encode($posts);
 ?>
-
 
 
 
