@@ -55,80 +55,85 @@ if(!empty($userDetails['profile_pic'])){
 
 <?php
 
-$user_id = $userDetails['unique_id']; // this is a VARCHAR
-$posts = [];
+    $user_id = $userDetails['unique_id']; 
+    $posts = [];
 
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-}
-
-// Step 1: Get followed model IDs (which are VARCHAR)
-$followQuery = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = ? AND status = 'Follow'";
-$stmt = $con->prepare($followQuery);
-
-if (!$stmt) {
-    die("Prepare failed: " . $con->error);
-}
-
-$stmt->bind_param("s", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if (!$result) {
-    die("Query failed: " . $stmt->error);
-}
-
-$followed_model_unique_ids = [];
-while ($row = $result->fetch_assoc()) {
-    $followed_model_unique_ids[] = $row['unique_model_id'];
-}
-
-// Step 2: Convert unique_model_ids to numeric `id`s from `model_user`
-$followed_user_ids = [];
-
-if (!empty($followed_model_unique_ids)) {
-    $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
-    $types = str_repeat('s', count($followed_model_unique_ids));
-    $query = "SELECT id FROM model_user WHERE unique_id IN ($placeholders)";
-    $stmt = $con->prepare($query);
-
-    if (!$stmt) {
-        die("Prepare failed (fetching numeric ids): " . $con->error);
+    if ($con->connect_error) {
+        die("Connection failed: " . $con->connect_error);
     }
 
-    $stmt->bind_param($types, ...$followed_model_unique_ids);
+    $followQuery = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = ? AND status = 'Follow'";
+    $stmt = $con->prepare($followQuery);
+
+    if (!$stmt) {
+        die("Prepare failed: " . $con->error);
+    }
+
+    $stmt->bind_param("s", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
+    if (!$result) {
+        die("Query failed: " . $stmt->error);
+    }
+
+    $followed_model_unique_ids = [];
     while ($row = $result->fetch_assoc()) {
-        $followed_user_ids[] = (int)$row['id']; // ensure it's an integer
-    }
-}
-
-// echo print_r($followed_user_ids);
-// Step 3: Fetch posts
-if (!empty($followed_user_ids)) {
-
-    $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
-    $types = str_repeat('i', count($followed_user_ids));
-
-    $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY post_date DESC";
-    $stmt = $con->prepare($sql);
-
-    if (!$stmt) {
-        die("Prepare failed (fetching posts): " . $con->error);
+        $followed_model_unique_ids[] = $row['unique_model_id'];
     }
 
-    $stmt->bind_param($types, ...$followed_user_ids);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $followed_user_ids = [];
 
-    while ($row = $result->fetch_assoc()) {
-        $posts[] = $row;
+    if (!empty($followed_model_unique_ids)) {
+        $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
+        $types = str_repeat('s', count($followed_model_unique_ids));
+        $query = "SELECT id FROM model_user WHERE unique_id IN ($placeholders)";
+        $stmt = $con->prepare($query);
+
+        if (!$stmt) {
+            die("Prepare failed (fetching numeric ids): " . $con->error);
+        }
+
+        $stmt->bind_param($types, ...$followed_model_unique_ids);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $followed_user_ids[] = (int)$row['id']; 
+        }
     }
 
-}
-echo json_encode($posts);
+    if (!empty($followed_user_ids)) {
+
+        $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
+        $types = str_repeat('i', count($followed_user_ids));
+
+         $sql = "
+            SELECT 
+                live_posts.*, 
+                model_user.name AS author_name, 
+                model_user.country AS country,
+                model_user.profile_pic AS profile_pic,
+            FROM live_posts
+            JOIN model_user ON live_posts.post_author = model_user.id
+            WHERE post_author IN ($placeholders)
+            ORDER BY post_date DESC
+        ";
+        $stmt = $con->prepare($sql);
+
+        if (!$stmt) {
+            die("Prepare failed (fetching posts): " . $con->error);
+        }
+
+        $stmt->bind_param($types, ...$followed_user_ids);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $posts[] = $row;
+        }
+
+    }
 ?>
 
 
@@ -145,9 +150,7 @@ echo json_encode($posts);
             <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-20 h-20 rounded-full mx-auto border-3 border-purple-500">
             <div class="online-dot"></div>
           </div>
-          <h3 class="font-bold text-lg gradient-text">Sophie, 24 test <?php
-       
-            ?></h3>
+       <h3 class="font-bold text-lg gradient-text">Sophie, 24 </h3>
           <p class="text-white/60 text-sm mb-2">San Francisco, CA</p>
           <div class="flex justify-center mb-4">
             <span class="verified-badge">✓ Verified</span>
@@ -213,61 +216,66 @@ echo json_encode($posts);
         <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">Your Feed</h2>
 
         <!-- Post 1 -->
-        <div class="model-card">
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center">
-              <div class="relative">
-                <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                <div class="online-dot"></div>
-              </div>
-              <div class="ml-3 md:ml-4">
-                <div class="flex items-center flex-wrap">
-                  <h4 class="font-bold text-base md:text-lg">Sophia, 25</h4>
-                  <span class="verified-badge ml-2">✓</span>
+
+        <?php foreach ($posts as $post) { ?>
+
+            <div class="model-card">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                <div class="relative">
+                    <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+                    <div class="online-dot"></div>
                 </div>
-                <p class="text-xs md:text-sm text-white/60">2 hours ago • 3 miles away</p>
-              </div>
+                <div class="ml-3 md:ml-4">
+                    <div class="flex items-center flex-wrap">
+                    <h4 class="font-bold text-base md:text-lg"><?php echo $post['author_name'] ?></h4>
+                    <span class="verified-badge ml-2">✓</span>
+                    </div>
+                    <p class="text-xs md:text-sm text-white/60">2 hours ago • 3 miles away</p>
+                </div>
+                </div>
+                <span class="status-online">Connected</span>
             </div>
-            <span class="status-online">Connected</span>
-          </div>
 
-          <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p>
+            <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p>
 
-          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
 
-          <div class="flex justify-between items-center">
-            <div class="flex space-x-4 md:space-x-6">
-              <button class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
-                <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                </svg>
-                <span class="text-sm md:text-base">47</span>
-              </button>
-              <button class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
-                <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                </svg>
-                <span class="text-sm md:text-base">12</span>
-              </button>
+            <div class="flex justify-between items-center">
+                <div class="flex space-x-4 md:space-x-6">
+                <button class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
+                    <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                    <span class="text-sm md:text-base">47</span>
+                </button>
+                <button class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
+                    <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    <span class="text-sm md:text-base">12</span>
+                </button>
+                </div>
+                <button class="btn-secondary text-sm md:text-base">Message</button>
             </div>
-            <button class="btn-secondary text-sm md:text-base">Message</button>
-          </div>
 
-          <!-- Comments -->
-          <div class="mt-6 pt-4 border-t border-white/10">
-            <div class="flex items-start mb-4">
-              <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
-              <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
-                <p class="font-medium text-xs md:text-sm">Alex M.</p>
-                <p class="text-xs md:text-sm text-white/80">Count me in for the hike! I know some great trails 🥾</p>
-              </div>
+            <!-- Comments -->
+            <div class="mt-6 pt-4 border-t border-white/10">
+                <div class="flex items-start mb-4">
+                <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+                <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
+                    <p class="font-medium text-xs md:text-sm">Alex M.</p>
+                    <p class="text-xs md:text-sm text-white/80">Count me in for the hike! I know some great trails 🥾</p>
+                </div>
+                </div>
+                <div class="flex items-center">
+                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+                <input type="text" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
+                </div>
             </div>
-            <div class="flex items-center">
-              <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
-              <input type="text" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
             </div>
-          </div>
-        </div>
+
+        <?php }  ?>
 
        
 
