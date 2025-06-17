@@ -271,20 +271,7 @@ else{
 						
 						</div>
 						
-						<div class="bottom-icons-count">
 						
-						
-						<div class="image-count">
-						<img src="<?php echo SITEURL.'uploads/banners/icon_image_prev.svg'; ?>" >
-						<span>
-						<?php if(!empty($form_data['image'])){ $img_cnt = 1; }else $img_cnt = 0; 
-						echo $img_cnt = $img_cnt+$add_cnt;
-						?>
-						</span>
-						</div>
-						
-						
-                    </div>
 
 
                     <?php /*?><div class="thumbnail-grid">
@@ -401,16 +388,34 @@ else{
                             </svg>
                             Save Ad
                         </button>
+						
+						
+						<div class="bottom-icons-count">
+						
+							<div class="video-count">
+							<img src="<?php echo SITEURL.'uploads/banners/icon_video_prev.svg'; ?>" >
+							<span>
+							<?php if(!empty($form_data['video'])){ echo '1'; } else echo '0'; ?>
+							</span>
+							</div>
+						
+							<div class="image-count">
+							<img src="<?php echo SITEURL.'uploads/banners/icon_image_prev.svg'; ?>" >
+							<span>
+							<?php if(!empty($form_data['image'])){ $img_cnt = 1; }else $img_cnt = 0; 
+							echo $img_cnt = $img_cnt+$add_cnt;
+							?>
+							</span>
+							</div>
+							
+							
+						</div>
+						
+						
                     </div>
 					
 					
 					
-						<div class="video-count">
-						<img src="<?php echo SITEURL.'uploads/banners/icon_video_prev.svg'; ?>" >
-						<span>
-						<?php if(!empty($form_data['video'])){ echo '1'; } else echo '0'; ?>
-						</span>
-						</div>
 					
                 </div>
             </div>
