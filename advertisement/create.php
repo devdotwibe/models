@@ -5,7 +5,7 @@ include('../includes/helper.php');
 
 if (isset($_SESSION['log_user_id'])) {
 	//create post data
-	if ($_POST) { echo 'test'; exit;
+	if ($_POST) { print_r($_POST); exit;
 
 		$user_id = $_SESSION['log_user_id'];
 		$arr = array('name', 'subtitle', 'description', 'category','service', 'country', 'state', 'city','terms_conditions');
