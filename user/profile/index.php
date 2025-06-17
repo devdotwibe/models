@@ -108,17 +108,32 @@ if(!empty($userDetails['profile_pic'])){
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
 
-         $sql = "
+        // $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY post_date DESC";
+
+        //       $sql = "
+        //     SELECT 
+        //         live_posts.*, 
+        //         model_user.name AS author_name, 
+        //         model_user.country AS country,
+        //         model_user.country AS country
+        //     FROM live_posts
+        //     JOIN model_user ON live_posts.post_author = model_user.id
+        //     WHERE post_author IN ($placeholders)
+        //     ORDER BY post_date DESC
+        // ";
+
+        $sql = "
             SELECT 
                 live_posts.*, 
                 model_user.name AS author_name, 
-                model_user.country AS country,
-                model_user.profile_pic AS profile_pic,
+                model_user.country,
+                model_user.profile_pic
             FROM live_posts
             JOIN model_user ON live_posts.post_author = model_user.id
             WHERE post_author IN ($placeholders)
             ORDER BY post_date DESC
         ";
+
         $stmt = $con->prepare($sql);
 
         if (!$stmt) {
@@ -150,7 +165,9 @@ if(!empty($userDetails['profile_pic'])){
             <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-20 h-20 rounded-full mx-auto border-3 border-purple-500">
             <div class="online-dot"></div>
           </div>
-       <h3 class="font-bold text-lg gradient-text">Sophie, 24 </h3>
+          <h3 class="font-bold text-lg gradient-text">Sophie, 24 test <?php
+       
+            ?></h3>
           <p class="text-white/60 text-sm mb-2">San Francisco, CA</p>
           <div class="flex justify-center mb-4">
             <span class="verified-badge">✓ Verified</span>
@@ -223,12 +240,12 @@ if(!empty($userDetails['profile_pic'])){
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
                 <div class="relative">
-                    <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+                    <img src="<?=SITEURL?><?php echo $post['profile_pic']; ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
                     <div class="online-dot"></div>
                 </div>
                 <div class="ml-3 md:ml-4">
                     <div class="flex items-center flex-wrap">
-                    <h4 class="font-bold text-base md:text-lg"><?php echo $post['author_name'] ?></h4>
+                    <h4 class="font-bold text-base md:text-lg"><?php echo $post['author_name']?></h4>
                     <span class="verified-badge ml-2">✓</span>
                     </div>
                     <p class="text-xs md:text-sm text-white/60">2 hours ago • 3 miles away</p>
@@ -237,7 +254,10 @@ if(!empty($userDetails['profile_pic'])){
                 <span class="status-online">Connected</span>
             </div>
 
-            <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p>
+                <?php echo $post['post_content']; ?>
+
+
+            <!-- <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p> -->
 
             <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
 
