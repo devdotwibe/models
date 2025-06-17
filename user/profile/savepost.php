@@ -12,27 +12,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post_content = trim($_POST['post_content'] ?? '');
     $image_path   = null;
 
-    // File upload path setup
     $target_dir_post = "uploads/post_image/";
     $filename        = basename($_FILES["post_image"]["name"]);
     $target_file     = $target_dir_post . $filename;
 
-    // Create directory if it doesn't exist
     if (!is_dir($target_dir_post)) {
         mkdir($target_dir_post, 0755, true);
     }
 
-    // Move uploaded file
     if (isset($_FILES["post_image"]) && $_FILES["post_image"]["error"] === 0) {
         if (move_uploaded_file($_FILES["post_image"]["tmp_name"], $target_file)) {
-            $image_path = $target_file; // Save path to DB
+            $image_path = $target_file;
         } else {
             echo "Image upload failed.";
             exit;
         }
     }
 
-    // SQL Insert with image
     $stmt = $con->prepare("INSERT INTO live_posts (post_author, post_title, post_content, post_image, post_date, post_date_gmt) VALUES (?, ?, ?, ?, NOW(), NOW())");
 
     if (!$stmt) {
