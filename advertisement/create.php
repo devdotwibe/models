@@ -8,7 +8,7 @@ if (isset($_SESSION['log_user_id'])) {
 	if ($_POST) {
 
 		$user_id = $_SESSION['log_user_id'];
-		$arr = array('name', 'description', 'category','service', 'country', 'state', 'city');
+		$arr = array('name', 'subtitle', 'description', 'category','service', 'country', 'state', 'city','terms_conditions');
 		$post_data = array_from_post($arr);
 		//$post_data = array_from_get($arr);
 		$post_data['user_id'] = $user_id;
@@ -37,6 +37,22 @@ if (isset($_SESSION['log_user_id'])) {
 				$joe_id = DB::update('banners', array('video' => $target_profile), "id=%s", $created_id);
 			} else {
 				$error .= '. Video Not Updated';
+			}
+		}
+		
+		if (isset($_FILES["additionalimages"])) {
+			$totalFiles = count($_FILES['additionalimages']['name']);
+			$additional_img = '';
+			$target_dir_profile = "../uploads/banners/";
+			for ($i = 0; $i < $totalFiles; $i++) {
+				$target_file1 = $target_dir_profile . basename($_FILES["additionalimages"]["name"][$i]);
+				$target_profile = basename($_FILES["additionalimages"]["name"][$i]);
+				if (move_uploaded_file($_FILES["additionalimages"]["tmp_name"][$i], $target_file1)) {
+					$additional_img .= $target_profile.'|';
+				}
+			}
+			if(!empty($additional_img)){ 
+				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
 			}
 		}
 
@@ -85,12 +101,21 @@ $serviceArr = array('Providing services', 'Looking for services');
 			background: #FFF;
 		}
 	</style>
+	
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
+	
 </head>
 
-<body class="page-template-default page page-id-319 custom-background  advt-page">
+<body class="page-template-default page page-id-319 custom-background advt-page">
+
 	<?php include('../includes/header.php'); ?>
-<!-- Main Content -->
+	
+	<!-- Main Content -->
     <main class="main">
+
 	<div class="container">
 
 		<div id="content" class="clearfix row">
@@ -137,6 +162,13 @@ $serviceArr = array('Providing services', 'Looking for services');
 										<label class="col-md-3 control-label">Title *</label>
 										<div class="col-md-9">
 											<input type="text" name="name" value="" class="form-control" required />
+										</div>
+									</div>
+									
+									<div class="form-group row">
+										<label class="col-md-3 control-label">Subtitle </label>
+										<div class="col-md-9">
+											<input type="text" name="subtitle" value="" class="form-control" />
 										</div>
 									</div>
 
@@ -209,6 +241,41 @@ $serviceArr = array('Providing services', 'Looking for services');
 											<span>Upload only MP4 file</span>
 										</div>
 									</div>
+									
+									<div class="form-group row">
+										<label class="col-md-3 control-label">Additional Images</label>
+										<div class="col-md-9">
+										
+										<?php /*?><div class="dropzone" id="mydropzone">
+											<div class="dropzone-previews"></div>
+										</div><?php */ ?>
+										
+										<input type="file" name="additionalimages[]" id="imageInput_addt" multiple  accept=".jpg,.jpeg,.png" />
+										<div id="preview_addt">
+										
+										
+										
+										<?php 
+										if(!empty($form_data['additionalimages'])){
+											$additionalimages = explode('|',$form_data['additionalimages']);
+											foreach($additionalimages as $add_img){
+												echo '<img src="'.SITEURL . 'uploads/banners/' . $add_img.'" alt="' . $add_img.'" >';  
+											}
+										} ?>
+										
+										
+										</div>
+										
+										</div>
+										
+									</div>
+									
+									<div class="form-group row">
+										<label class="col-md-3 control-label">Terms and Conditions</label>
+										<div class="col-md-9">
+											<textarea name="terms_conditions" class="form-control" ></textarea>
+										</div>
+									</div>
 
 
 
@@ -218,7 +285,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 								<div class="form-actions">
 									<div class="row">
 										<div class="col-md-9 offset-md-3">
-											<button type="submit" class="btn btn-info submitBtn">Save</button>
+											<button type="submit" class="btn btn-info submitBtn btn-primary">Save</button>
 											<a href="<?= SITEURL . 'advertisement/list.php' ?>" class="btn btn-default">Back</a>
 										</div>
 									</div>
@@ -235,8 +302,86 @@ $serviceArr = array('Providing services', 'Looking for services');
 		</div>
 
 	</div>
-</main>
+	
+	</main>
+
 	<?php include('../includes/footer.php'); ?>
+	<style>
+        #imageInput_addt img {
+            max-width: 150px;
+            margin: 10px;
+        }
+    </style>
+	<script>
+        /*const imageInput_addt = document.getElementById('imageInput_addt');
+        const preview_addt = document.getElementById('preview_addt');
+
+        imageInput_addt.addEventListener('change', function () {
+            preview_addt.innerHTML = ''; // clear previous previews
+            const files = this.files;
+
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        preview_addt.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }); */
+		
+		
+		const imageInput_addt = document.getElementById('imageInput_addt');
+  const preview_addt = document.getElementById('preview_addt');
+  let selectedFiles = [];
+
+  imageInput_addt.addEventListener('change', function () {
+    // Add new selected files to existing array
+    const newFiles = Array.from(this.files);
+    selectedFiles = selectedFiles.concat(newFiles);
+    renderPreviews();
+    updateInputFiles();
+  });
+
+  function renderPreviews() {
+    preview_addt.innerHTML = '';
+
+    selectedFiles.forEach((file, index) => {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const container = document.createElement('div');
+        container.className = 'image-container';
+
+        const img = document.createElement('img');
+        img.src = e.target.result;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.textContent = '×';
+        removeBtn.onclick = () => {
+          selectedFiles.splice(index, 1);
+          renderPreviews();
+          updateInputFiles();
+        };
+
+        container.appendChild(img);
+        container.appendChild(removeBtn);
+        preview_addt.appendChild(container);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function updateInputFiles() {
+    const dataTransfer = new DataTransfer();
+    selectedFiles.forEach(file => dataTransfer.items.add(file));
+    imageInput_addt.files = dataTransfer.files;
+  }
+		
+    </script>
 	<script src="<?= SITEURL ?>assets/plugins/jquery.validate.js"></script>
 	<script type="text/javascript">
 		$(".edit-form").validate({
@@ -297,6 +442,18 @@ $serviceArr = array('Providing services', 'Looking for services');
 
 	<link href="<?= SITEURL ?>assets/plugins/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="<?= SITEURL ?>assets/plugins/jasny-bootstrap/js/jasny-bootstrap.min.js" type="text/javascript" language="javascript"></script>
+
+	<script type="text/javascript">
+
+        Dropzone.options.imageUpload = {
+
+        maxFilesize:1,
+
+        acceptedFiles: ".jpeg,.jpg,.png,.gif"
+
+    };
+
+</script>
 
 </body>
 
