@@ -174,7 +174,7 @@
 
 <?php include('includes/footer.php'); ?>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <script>
 
@@ -185,27 +185,21 @@ const limit = 8;
 jQuery('#loadMoreBtn').on('click', function($) { alert(1);
    
 	
-	/*$.ajax({
+	$.ajax({
                 type: 'GET',
-                url: "load_more_model.php",
+                url: "<?php echo SITEURL; ?>load_more_model.php",
                 data: offset,
+				dataType: 'json',
                 success: function(response) {
-                    $('#modelContainer').append(data);
+                    $('#modelContainer').append(response);
 					offset += limit;
 
 					if ($.trim(data) === '') {
 						$('#loadMoreBtn').hide(); // Hide button if no more data
 					}
                 }
-            }); */
-	 $.post('load_more_model.php', { offset: offset }, function(data) {
-        $('#modelContainer').append(data);
-        offset += limit;
-
-        if ($.trim(data) === '') {
-            $('#loadMoreBtn').hide(); // Hide button if no more data
-        }
-    });
+            }); 
+	 
 	
 	
 	

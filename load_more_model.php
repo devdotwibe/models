@@ -6,6 +6,7 @@
 
   include('includes/helper.php');
   
+  $output = array();
   
   $limit = 8;
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;

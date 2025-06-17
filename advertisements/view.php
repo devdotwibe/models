@@ -409,6 +409,8 @@ else{
                     </div>
                 </div>
             </div>
+			
+			</div>
 
             <!-- Additional Info Section -->
             <div class="additional-info ultra-glass">
