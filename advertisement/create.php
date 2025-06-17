@@ -2,9 +2,7 @@
 session_start();
 include('../includes/config.php');
 include('../includes/helper.php');
-// Report all errors
 
-error_reporting(E_ALL);
 if (isset($_SESSION['log_user_id'])) {
 	//create post data
 	if ($_POST) {
@@ -42,7 +40,7 @@ if (isset($_SESSION['log_user_id'])) {
 			}
 		}
 		
-		/*if (isset($_FILES["additionalimages"])) {
+		if (isset($_FILES["additionalimages"])) {
 			$totalFiles = count($_FILES['additionalimages']['name']);
 			$additional_img = '';
 			$target_dir_profile = "../uploads/banners/";
@@ -56,15 +54,14 @@ if (isset($_SESSION['log_user_id'])) {
 			if(!empty($additional_img)){ 
 				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
 			}
-		}*/
+		}
 
 		if ($error) {
 			echo '<script>alert("' . $error . '");</script>';
-		}else{
+		}
 		
 		echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
 		
-		}
 		/*  if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
 	
 		  echo '<script>alert("Your Profile Picture Successfully Uploaded");</script>';
@@ -257,17 +254,6 @@ $serviceArr = array('Providing services', 'Looking for services');
 										
 										<input type="file" name="additionalimages[]" id="imageInput_addt" multiple  accept=".jpg,.jpeg,.png" />
 										<div id="preview_addt">
-										
-										
-										
-										<?php 
-										if(!empty($form_data['additionalimages'])){
-											$additionalimages = explode('|',$form_data['additionalimages']);
-											foreach($additionalimages as $add_img){
-												echo '<img src="'.SITEURL . 'uploads/banners/' . $add_img.'" alt="' . $add_img.'" >';  
-											}
-										} ?>
-										
 										
 										</div>
 										
