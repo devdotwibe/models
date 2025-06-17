@@ -1724,15 +1724,20 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
 
         /* Ad Detail Section */
         .advpage-3 .ad-detail {
-            display: grid;
+            /* display: grid;
             grid-template-columns: 1fr 1.5fr;
-            gap: 3rem;
+            gap: 3rem; */
             margin-bottom: 3rem;
+            display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
         }
 
         /* Image Gallery */
        .advpage-3 .ad-gallery {
             position: relative;
+            width: 47%;
+            
         }
 
         .advpage-3 .main-image {
@@ -1806,6 +1811,7 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
        .advpage-3 .ad-content {
             display: flex;
             flex-direction: column;
+            width: 47%;
         }
 
        .advpage-3 .ad-header {
@@ -6837,4 +6843,25 @@ left: 83%; height: 50%; width: 24px;
 
 left: 83%;
 
+}
+
+
+
+
+
+.advpage-3 .ad-gallery .owl-carousel .owl-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover; 
+}
+
+.advpage-3 .ad-gallery .owl-carousel {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.advpage-3 .ad-gallery .owl-stage-outer {
+  overflow: hidden;
 }
