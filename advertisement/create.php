@@ -58,9 +58,11 @@ if (isset($_SESSION['log_user_id'])) {
 
 		if ($error) {
 			echo '<script>alert("' . $error . '");</script>';
-		}
+		}else{
 		
 		echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
+		
+		}
 		/*  if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
 	
 		  echo '<script>alert("Your Profile Picture Successfully Uploaded");</script>';
