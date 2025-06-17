@@ -1912,7 +1912,7 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
         /* Action Buttons */
        .advpage-3 .ad-actions {
             display: flex;
-            gap: 1rem;
+            gap: 0rem;
             margin-top: auto;
             flex-wrap: wrap;
             justify-content: space-between;
