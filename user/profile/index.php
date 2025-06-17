@@ -174,7 +174,7 @@ if(!empty($userDetails['profile_pic'])){
           </div>
           <div class="space-y-2">
             <button class="btn-primary w-full" onclick="editProfile()">Edit Profile</button>
-            <a class="btn-secondary w-full" href="<?= SITEURL ?>/profile/view.php">View Profile</a>
+            <a class="btn-secondary w-full" href="<?= SITEURL ?>profile/view.php">View Profile</a>
           </div>
         </div>
 
