@@ -1,5 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php 
+session_start(); 
+include('../../includes/config.php');
+include('../../includes/helper.php');
+
+$activeTab = 'group-show';
+$m_link= SITEURL.'user/group-show/';
+
+if(isset($_SESSION["log_user_id"])){
+
+	$usern = $_SESSION["log_user"];
+
+	$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+	if($userDetails){}
+	else{
+		echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
+		die;
+	}
+}
+else{
+	echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
+	die;
+}
+
+$mDefaultImage =SITEURL."/assets/images/girl.png";
+if($userDetails['gender']=='Male'){
+	$mDefaultImage =SITEURL."/assets/images/profile.png";
+}
+if(!empty($userDetails['profile_pic'])){
+	$mDefaultImage = SITEURL.$userDetails['profile_pic'];
+}
+
+?>
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
