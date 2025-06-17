@@ -109,9 +109,6 @@ if (!empty($followed_model_unique_ids)) {
 // Step 3: Fetch posts
 if (!empty($followed_user_ids)) {
 
-
-echo print_r('test ttttttttttttttttttttttt');
-
     $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
     $types = str_repeat('i', count($followed_user_ids));
     $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY created_at DESC";
