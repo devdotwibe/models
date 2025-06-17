@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    if ($con->connect_error) {
+    if (!$con->connect_error) {
         die("Connection failed: " . $con->connect_error);
     }
 
