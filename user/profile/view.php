@@ -388,6 +388,11 @@ if(!empty($userDetails['profile_pic'])){
 
                         <h2 class="text-xl font-bold mb-4 premium-text">Create New Post</h2>
 
+                        
+                        <input type="text" name="post_title" 
+                            class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" 
+                            placeholder="Post title">
+
                         <textarea name="post_content"  class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" rows="3" placeholder="What's on your mind?"></textarea>
 
                         <input type="hidden" name="user_id" id="user_id" value="<?php echo $userDetails['id'] ?>">

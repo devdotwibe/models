@@ -12,6 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $post_content = trim($_POST['post_content']);
 
+    $post_title = trim($_POST['post_title']);
+
     $image_path = null;
 
     if (isset($_FILES['post_image']) && $_FILES['post_image']['error'] === 0) {
@@ -25,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    $stmt = $con->prepare("INSERT INTO live_posts (post_author, post_content, post_image, post_date) VALUES (?, ?, ?, NOW())");
-    $stmt->bind_param("iss", $user_id, $post_content, $image_path);
+    $stmt = $con->prepare("INSERT INTO live_posts (post_author,post_title ,post_content, post_image, post_date) VALUES (?, ?, ?, NOW())");
+    $stmt->bind_param("iss", $user_id, $post_title,$post_content, $image_path);
     
     if ($stmt->execute()) {
         echo "success";
