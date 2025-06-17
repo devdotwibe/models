@@ -87,15 +87,16 @@ $serviceArr = array('Providing services', 'Looking for services');
 	</style>
 </head>
 
-<body class="page-template-default page page-id-319 custom-background">
+<body class="page-template-default page page-id-319 custom-background  advt-page">
 	<?php include('../includes/header.php'); ?>
-
+<!-- Main Content -->
+    <main class="main">
 	<div class="container">
 
 		<div id="content" class="clearfix row">
 
 			<div id="main" class="col-md-12 clearfix">
-				<div class="panel bg-white">
+				<div class="panel bg-blue">
 					<div class="panel-body">
 						<div>
 							<form action="" method="post" class="form-horizontal edit-form" role="form" enctype="multipart/form-data">
@@ -234,7 +235,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 		</div>
 
 	</div>
-
+</main>
 	<?php include('../includes/footer.php'); ?>
 	<script src="<?= SITEURL ?>assets/plugins/jquery.validate.js"></script>
 	<script type="text/javascript">
