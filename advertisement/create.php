@@ -18,7 +18,7 @@ if (isset($_SESSION['log_user_id'])) {
 		$created_id = DB::insertId();
 
 		$error = '';
-		if ($_FILES["files"]["name"]) {
+		/*if ($_FILES["files"]["name"]) {
 			$target_dir_profile = "../uploads/banners/";
 			$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"]);
 			$target_profile = basename($_FILES["files"]["name"]);
@@ -54,7 +54,7 @@ if (isset($_SESSION['log_user_id'])) {
 			if(!empty($additional_img)){ 
 				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
 			}
-		}
+		}*/
 
 		if ($error) {
 			echo '<script>alert("' . $error . '");</script>';
@@ -252,7 +252,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 											<div class="dropzone-previews"></div>
 										</div><?php */ ?>
 										
-										<input type="file" name="additionalimages[]" id="imageInput_addt" multiple  accept=".jpg,.jpeg,.png" />
+										<input type="file" name="additionalimages[]" id="imageInput_addt" value="" multiple  accept=".jpg,.jpeg,.png" />
 										<div id="preview_addt">
 										
 										</div>
@@ -264,7 +264,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 									<div class="form-group row">
 										<label class="col-md-3 control-label">Terms and Conditions</label>
 										<div class="col-md-9">
-											<textarea name="terms_conditions" class="form-control" ></textarea>
+											<textarea name="terms_conditions"  class="form-control" ></textarea>
 										</div>
 									</div>
 
