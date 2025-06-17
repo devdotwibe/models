@@ -5,12 +5,14 @@ session_start();
 include('../../includes/config.php');
 include('../../includes/helper.php');
 
+
+    return response()->json($user_id);
+    
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $user_id = $_POST['user_id'];
 
 
-    return response()->json($user_id);
 
     $post_content = trim($_POST['post_content']);
 
