@@ -1,49 +1,13 @@
-<?php 
-session_start(); 
-include('../../includes/config.php');
-include('../../includes/helper.php');
-
-$activeTab = 'group-show';
-$m_link= SITEURL.'user/group-show/';
-
-if(isset($_SESSION["log_user_id"])){
-
-	$usern = $_SESSION["log_user"];
-
-	$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
-	if($userDetails){}
-	else{
-		echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
-		die;
-	}
-}
-else{
-	echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
-	die;
-}
-
-$mDefaultImage =SITEURL."/assets/images/girl.png";
-if($userDetails['gender']=='Male'){
-	$mDefaultImage =SITEURL."/assets/images/profile.png";
-}
-if(!empty($userDetails['profile_pic'])){
-	$mDefaultImage = SITEURL.$userDetails['profile_pic'];
-}
-
-?>
-
-<html>
-
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-<title>Bookging | The Live Model</title>
-
-<?php  include('../../includes/head.php'); ?>
-
-<link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
-<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
-<link rel='stylesheet' href='<?=SITEURL?>assets/css/stylesheet.css?v=<?=time()?>' type='text/css' media='all' />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model Profile - Million Dollar Page</title>
+<meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/stylesheet.css" />
 
 </head>
 
