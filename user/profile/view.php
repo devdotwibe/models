@@ -382,27 +382,34 @@ if(!empty($userDetails['profile_pic'])){
                 </div>
 
 
-                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                <form id="createPostForm">
 
-                    <h2 class="text-xl font-bold mb-4 premium-text">Create New Post</h2>
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
 
-                    <textarea class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" rows="3" placeholder="What's on your mind?"></textarea>
+                        <h2 class="text-xl font-bold mb-4 premium-text">Create New Post</h2>
+
+                        <textarea name="post_content"  class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" rows="3" placeholder="What's on your mind?"></textarea>
+
+                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $userDetails['id'] ?>">
+
+                        <div class="flex justify-between items-center">
 
 
-                    <div class="flex justify-between items-center">
+                             <label for="post_image" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                                Upload
 
+                            </label>
 
-                        <button class="flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                            Upload
-                        </button>
+                            <input type="file" name="post_image" id="post_image" accept="/*images">
 
-                        <button class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
-                            Post
-                        </button>
+                            <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
+                                Post
+                            </button>
+                        </div>
+
                     </div>
-                    
-                </div>
+                </form>
 
 
                 <!-- Services Card -->
@@ -1064,6 +1071,33 @@ if(!empty($userDetails['profile_pic'])){
 
 
     <script>
+
+        $(document).ready(function () {
+
+            $('#createPostForm').on('submit', function (e) {
+                e.preventDefault();
+
+                var formData = new FormData(this); 
+
+                $.ajax({
+                    url: 'ajax/save_post.php', 
+                    type: 'POST',
+                    data: formData,
+                    contentType: false, 
+                    processData: false, 
+                    success: function (response) {
+                        alert("Post submitted successfully!");
+                        console.log(response);
+                        $('#createPostForm')[0].reset();
+                    },
+                    error: function (xhr) {
+                        alert("An error occurred while submitting the post.");
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+
         // Initialize Modal Functions
    document.addEventListener('DOMContentLoaded', function() {
     // More Actions Dropdown
