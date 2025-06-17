@@ -324,6 +324,7 @@ else{
 							<?php $j++; } } ?>
                     </div> <?php */ ?>
                 </div>
+				</div>
 
                 <!-- Ad Content -->
                 <div class="ad-content">
@@ -410,7 +411,6 @@ else{
                 </div>
             </div>
 			
-			</div>
 
             <!-- Additional Info Section -->
             <div class="additional-info ultra-glass">
