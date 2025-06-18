@@ -333,44 +333,42 @@ if(!empty($userDetails['profile_pic'])){
 
             </div>
 
-              <div class="mt-6 pt-4 border-t border-white/10 comnt_user_<?php echo $k ?>" id="comment_<?php echo $k ?>" style="display:none;">
+              <div class="mt-6 pt-4 border-t border-white/10" id="comment_<?php echo $k ?>" style="display:none;">
 
                   <?php if($comment_count > 0) { ?>
 
-                    <div class="flex items-start mb-4">
+                    <?php if (!empty($post['comments'])) { ?>
+
+                      <?php foreach ($post['comments']  as $index => $comment) { ?>
+
+                          <div class="flex items-start mb-4 comnt_user_<?php echo $k ?>">
 
 
-                     <?php
-                          $profile_pic = $post['profile_pic'] ?? '';
+                          <?php
+                                $profile_pic = $post['profile_pic'] ?? '';
 
-                          if (checkImageExists($profile_pic)) {
+                                if (checkImageExists($profile_pic)) {
 
-                            $imageUrl = SITEURL . $profile_pic;
-                        ?>
-                               
-                          <img src="<?php echo $imageUrl ?>" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+                                  $imageUrl = SITEURL . $profile_pic;
+                              ?>
+                                    
+                                <img src="<?php echo $imageUrl ?>" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
 
-                      <?php } ?>
+                            <?php } ?>
 
+                                  <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
 
+                                    <p class="font-medium text-xs md:text-sm"> <?php echo $comment['comment_author'] ?></p>
 
-                        <?php if (!empty($post['comments'])) { ?>
+                                    <p class="text-xs md:text-sm text-white/80"> <?php echo $comment['comment_content'] ?></p>
 
-                          <?php foreach ($post['comments']  as $index => $comment) { ?>
-
-                                <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
-
-                                  <p class="font-medium text-xs md:text-sm"> <?php echo $comment['comment_author'] ?></p>
-
-                                  <p class="text-xs md:text-sm text-white/80"> <?php echo $comment['comment_content'] ?></p>
-
-                                </div>
-
-                          <?php } ?>
+                                  </div>
+                          </div>
 
                         <?php } ?>
 
-                    </div>
+                      <?php } ?>
+
 
                   <?php } else { ?>
 
