@@ -84,7 +84,7 @@ include('../../includes/helper.php');
         $stmt = $con->prepare("
             INSERT INTO postlike 
             (uid, pid, status, date, time) 
-            VALUES (?, ?, ?, NOW(), TIME())
+            VALUES (?, ?, ?, NOW(), NOW())
         ");
 
         if (!$stmt) {
