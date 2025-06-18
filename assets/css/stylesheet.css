@@ -6875,6 +6875,7 @@ left: 83%;
 
 .advpage-3 .ad-gallery .owl-stage-outer {
   overflow: hidden;
+  border-radius: 20px;
 }
 
 
