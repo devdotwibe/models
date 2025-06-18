@@ -1,6 +1,8 @@
 <?php
 
 session_start(); 
+
+
 include('../../includes/config.php');
 include('../../includes/helper.php');
 
@@ -55,6 +57,9 @@ include('../../includes/helper.php');
     } 
     elseif($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] =='like') {
 
+
+        header('Content-Type: application/json');
+
         $user_id      = $_POST['user_id'] ?? null;
 
         $post_id      = $_POST['post_id'] ?? null;
@@ -62,7 +67,18 @@ include('../../includes/helper.php');
         $status      = 'active';
 
         if (empty($post_id) || empty($user_id)) {
-            echo "Required fields are missing.";
+
+            echo json_encode(['error' => 'Required fields are missing.']);
+            exit;
+        }
+
+        $check_stmt = $con->prepare("SELECT id FROM postlike WHERE uid = ? AND pid = ?");
+        $check_stmt->bind_param("ii", $user_id, $post_id);
+        $check_stmt->execute();
+        $check_stmt->store_result();
+
+        if ($check_stmt->num_rows > 0) {
+            echo json_encode(['message' => 'User already liked this post.']);
             exit;
         }
 
@@ -80,8 +96,11 @@ include('../../includes/helper.php');
         $stmt->bind_param("iis", $user_id, $post_id, $status);
 
         if ($stmt->execute()) {
-            echo "success";
+
+             echo json_encode(['success' => 'Liked post successfully.']);
+
         } else {
+
             echo "Database error: " . $stmt->error;
         }
 
