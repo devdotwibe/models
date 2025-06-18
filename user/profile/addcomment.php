@@ -66,7 +66,7 @@ include('../../includes/helper.php');
 
         if (empty($post_id) || empty($user_id)) {
 
-            echo json_encode(['error' => 'Required fields are missing.']);
+           echo "Required fields are missing.";
             exit;
         }
 
@@ -76,7 +76,8 @@ include('../../includes/helper.php');
         $check_stmt->store_result();
 
         if ($check_stmt->num_rows > 0) {
-            echo json_encode(['message' => 'User already liked this post.']);
+
+            echo "User already liked this post";
             exit;
         }
 
@@ -95,8 +96,8 @@ include('../../includes/helper.php');
 
         if ($stmt->execute()) {
 
-             echo json_encode(['success' => 'Liked post successfully.']);
-
+             echo "Liked post successfully.";
+             
         } else {
 
             echo "Database error: " . $stmt->error;
