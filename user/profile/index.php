@@ -333,7 +333,7 @@ if(!empty($userDetails['profile_pic'])){
 
             </div>
 
-              <div class="mt-6 pt-4 border-t border-white/10 comnt_user_<?php echo $k ?>" id="comment_<?php echo $k ?>" style="display:none;">
+              <div class="mt-6 pt-4 border-t border-white/10 " id="comment_<?php echo $k ?>" style="display:none;">
 
                   <?php if($comment_count > 0) { ?>
 
@@ -381,7 +381,7 @@ if(!empty($userDetails['profile_pic'])){
                   <?php } ?>
 
 
-                    <div class="flex items-center">
+                    <div class="flex items-center comnt_user_<?php echo $k ?>">
 
                      <?php
 
@@ -578,7 +578,7 @@ if(!empty($userDetails['profile_pic'])){
                 image_html += `<img src="${image_url}" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">`;
               }
 
-               $(`#comment_content_${comment_id}`).before(`
+               $(`.comnt_user_${comment_id}`).before(`
                     <div class="flex items-start mb-4">
                         ${image_html}
                         <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
