@@ -61,7 +61,6 @@ include('../../includes/helper.php');
 
         echo "Liked post successfull rarey.";
 
-         exit;
 
         $user_id      = $_POST['user_id'] ?? null;
 
