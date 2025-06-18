@@ -36,16 +36,18 @@ $resultd = mysqli_query($con, $sqls);
 					 
 				$html .= '<div class="profile-card">
                     <div class="profile-image-container">
+					<a href="'.SITEURL.'single-profile.php?m_unique_id='.$rowesdw['unique_id'].'">
                         <img src="'.SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic'].'" alt="'.$modalname.', '.$rowesdw['age'].'" class="profile-image">
                         <div class="profile-badges">
                             <span class="profile-badge badge-live">Live</span>
                             <span class="profile-badge badge-verified">Verified</span>
                         </div>
+					</a>
                     </div>
                     <div class="profile-info">
-                        <h3 class="profile-name">'.ucfirst($modalname); 
+                        <h3 class="profile-name"><a href="'.SITEURL.'single-profile.php?m_unique_id='.$rowesdw['unique_id'].'">'.ucfirst($modalname); 
 						if(!empty($rowesdw['age'])){ $html .= ', '.$rowesdw['age']; } 
-						$html .= '</h3>';
+						$html .= '</a></h3>';
 						 if(!empty($rowesdw['city']) || !empty($rowesdw['country'])){ 
                         $html .= '<p class="profile-location">
                             <i class="fas fa-map-marker-alt"></i>'. $rowesdw['city'];

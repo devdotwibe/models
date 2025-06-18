@@ -121,14 +121,19 @@
                 <!-- Profile Card 1 -->
                 <div class="profile-card">
                     <div class="profile-image-container">
+					<a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
                         <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php echo $modalname.', '.$rowesdw['age']; ?>" class="profile-image">
                         <div class="profile-badges">
                             <span class="profile-badge badge-live">Live</span>
                             <span class="profile-badge badge-verified">Verified</span>
                         </div>
+					</a>
                     </div>
                     <div class="profile-info">
-                        <h3 class="profile-name"><?php echo ucfirst($modalname); if(!empty($rowesdw['age'])){ echo ', '.$rowesdw['age']; } ?></h3>
+                        <h3 class="profile-name">
+						<a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
+						<?php echo ucfirst($modalname); if(!empty($rowesdw['age'])){ echo ', '.$rowesdw['age']; } ?>
+						</a></h3>
 						<?php if(!empty($rowesdw['city']) || !empty($rowesdw['country'])){ ?>
                         <p class="profile-location">
                             <i class="fas fa-map-marker-alt"></i>
