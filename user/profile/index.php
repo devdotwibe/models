@@ -151,9 +151,23 @@ if(!empty($userDetails['profile_pic'])){
 
             $post_id = $row['ID'];
 
-              $comment_query = $con->prepare("SELECT * FROM live_comments WHERE comment_post_ID = ?");
+              // $comment_query = $con->prepare("SELECT * FROM live_comments WHERE comment_post_ID = ?");
+
+              $comment_query = $con->prepare("
+                  SELECT 
+                      live_comments.*, 
+                      model_user.name AS author_name, 
+                      model_user.email AS author_email, 
+                      model_user.profile_pic AS author_profile_pic 
+                  FROM live_comments 
+                  LEFT JOIN model_user ON live_comments.user_id = model_user.id 
+                  WHERE live_comments.comment_post_ID = ?
+              ");
+
               $comment_query->bind_param("i", $post_id);
+
               $comment_query->execute();
+
               $comment_result = $comment_query->get_result();
 
               $comments = [];
@@ -345,7 +359,18 @@ if(!empty($userDetails['profile_pic'])){
 
 
                           <?php
-                                $profile_pic = $post['profile_pic'] ?? '';
+
+                              $auther_pic_url ="";
+
+                              $profile_pic = $post['profile_pic'] ?? '';
+
+                              if (checkImageExists($profile_pic)) {
+
+                                $auther_pic_url = SITEURL . $profile_pic;
+                            ?>
+
+                          <?php
+                                $profile_pic = $comment['author_profile_pic'] ?? '';
 
                                 if (checkImageExists($profile_pic)) {
 
@@ -385,16 +410,16 @@ if(!empty($userDetails['profile_pic'])){
 
                      <?php
 
-                          $$imageUrl ="";
+                          $auther_pic_url ="";
 
                           $profile_pic = $post['profile_pic'] ?? '';
 
                           if (checkImageExists($profile_pic)) {
 
-                            $imageUrl = SITEURL . $profile_pic;
+                            $auther_pic_url = SITEURL . $profile_pic;
                         ?>
                               
-                          <img src="<?php echo $imageUrl ?>" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+                          <img src="<?php echo $auther_pic_url ?>" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
 
                       <?php } ?>
 
@@ -409,7 +434,7 @@ if(!empty($userDetails['profile_pic'])){
 
                     <input type="hidden" name="author_email" id="author_email_<?php echo $k ?>" value="<?php echo $post['author_email'] ?>">
 
-                    <input type="hidden" name="image_url" id="image_url<?php echo $k ?>" value="<?php echo $imageUrl ?>">
+                    <input type="hidden" name="image_url" id="image_url<?php echo $k ?>" value="<?php echo $auther_pic_url ?>">
                       
                     
                   </div>
