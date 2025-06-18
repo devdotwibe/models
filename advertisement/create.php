@@ -52,7 +52,7 @@ if (isset($_SESSION['log_user_id'])) {
 				}
 			}
 			if(!empty($additional_img)){ 
-				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
+				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
 			}
 		}
 
