@@ -66,7 +66,7 @@ include('../../includes/helper.php');
 
         $time = date("h:i A");
 
-        $date = date("Y-m-d");
+        $date = date("Y-m-d"); 
 
         if (empty($post_id) || empty($user_id)) {
 
@@ -88,7 +88,7 @@ include('../../includes/helper.php');
         $stmt = $con->prepare("
             INSERT INTO postlike 
             (uid, pid, status, date, time) 
-            VALUES (?, ?, ?,?,?)
+            VALUES (?, ?, ?, ?, ?)
         ");
 
         if (!$stmt) {
@@ -96,8 +96,7 @@ include('../../includes/helper.php');
             exit;
         }
 
-
-        $stmt->bind_param("iis", $user_id, $post_id, $status,$date,$time);
+       $stmt->bind_param("iisss", $user_id, $post_id, $status, $date, $time);
 
         if ($stmt->execute()) {
 
