@@ -6917,7 +6917,7 @@ left: 83%;
 }
 
 .ad-content .video-count:hover,
-.ad-content .image-count:hover {
+.ad-content .image-count:hover{
     background: rgba(255, 255, 255, 0.12);
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2);
