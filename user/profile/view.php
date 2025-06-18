@@ -66,7 +66,7 @@ if(!empty($userDetails['profile_pic'])){
                                   $imageUrl = SITEURL . $profile_pic;
                                   
                               ?>
-                              
+
                                 <img src="<?php echo $imageUrl ?>" alt="Urdevilicifer" class="profile-avatar">
 
                             <?php } ?>
@@ -1086,6 +1086,7 @@ if(!empty($userDetails['profile_pic'])){
 </div> 
 
 
+<?php include('../../includes/footer.php'); ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
