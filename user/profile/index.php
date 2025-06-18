@@ -338,29 +338,32 @@ if(!empty($userDetails['profile_pic'])){
 
                     $liked_comment ="";
 
-                    $like_count = $post['like_count'];
+                    $like_count = $post['like_count'] ?? 0;
 
-                   if($like_count > 0) {
-
-                      if (!empty($post['like'])) {
+                   if ($like_count > 0 && !empty($post['like'])) {
 
                          foreach ($post['like']  as $index => $like) { 
 
                             if($userDetails['id'] == $like['user_id'])
                             {
                                 $liked_comment ="liked_comment";
+                                break; 
                             }
                         }
-                      }
                    }
                   
                   ?>
 
-                  <button type="button" onclick="AddLike('<?php echo $k ?>')"  class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
+                  <button type="button" onclick="AddLike('<?php echo $k ?>')"  class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors <?php echo $liked_comment ?>" onclick="toggleLike(this)">
+
                       <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+
                       </svg>
+
                       <span class="text-sm md:text-base" id="post_like_<?php echo $k ?>"> <?php echo $like_count ?></span>
+                      
                   </button>
 
                   <button onclick="AddComment('comment_<?php echo $k ?>')" class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
