@@ -66,6 +66,8 @@ include('../../includes/helper.php');
 
         $time = date("h:i A");
 
+        $date = date("Y-m-d");
+
         if (empty($post_id) || empty($user_id)) {
 
            echo "Required fields are missing.";
@@ -86,7 +88,7 @@ include('../../includes/helper.php');
         $stmt = $con->prepare("
             INSERT INTO postlike 
             (uid, pid, status, date, time) 
-            VALUES (?, ?, ?, NOW(),?)
+            VALUES (?, ?, ?,?,?)
         ");
 
         if (!$stmt) {
@@ -95,7 +97,7 @@ include('../../includes/helper.php');
         }
 
 
-        $stmt->bind_param("iis", $user_id, $post_id, $status,$time);
+        $stmt->bind_param("iis", $user_id, $post_id, $status,$date,$time);
 
         if ($stmt->execute()) {
 
