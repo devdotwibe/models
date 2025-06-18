@@ -49,6 +49,9 @@ if(!empty($userDetails['profile_pic'])){
 <body class="socialwall-page">
 
 
+
+ <?php  include('../../includes/side-bar.php'); ?>
+
  <?php  include('../../includes/profile_header_index.php'); ?>
 
 <?php
