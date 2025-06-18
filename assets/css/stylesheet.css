@@ -347,7 +347,7 @@
     }
        .home-page .revealed .vip-section .btn-primary{
         position: relative;
-        
+
        }
 
      .home-page .btn-primary::before {
@@ -1724,19 +1724,19 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
 
         /* Ad Detail Section */
         .advpage-3 .ad-detail {
-        
+
             margin-bottom: 3rem;
             display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
         }
 
-    
+
        .advpage-3 .ad-gallery {
             position: relative;
             width: 39%;
 
-          
+
         }
 
         .advpage-3 .main-image {
@@ -2746,7 +2746,7 @@ background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
 .advt-page .featured-sec .ad-expanded-actions .btn-primary {
     padding: 1rem 2rem; border-radius: 12px;
 
-    
+
 }
 .advt-page .adult-content-bg{
     background: linear-gradient(45deg, #dc2626, #ef4444); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 6rem; color: white;
@@ -2797,7 +2797,7 @@ body.premimum-model1 {
 
             height: 100%;
 
-            background: 
+            background:
 
                 radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
 
@@ -3441,7 +3441,7 @@ body.premimum-model1 {
 
 
 
-        .premimum-model1 .filter-input:focus, 
+        .premimum-model1 .filter-input:focus,
 
         .premimum-model1 .filter-select:focus {
 
@@ -4449,7 +4449,7 @@ body.premimum-model1 {
 
             }
 
-            
+
 
            .premimum-model1 .profile-grid {
 
@@ -4471,7 +4471,7 @@ body.premimum-model1 {
 
             }
 
-            
+
 
            .premimum-model1 .premium-btn {
 
@@ -4479,7 +4479,7 @@ body.premimum-model1 {
 
             }
 
-            
+
 
            .premimum-model1 .profile-grid {
 
@@ -4489,7 +4489,7 @@ body.premimum-model1 {
 
             }
 
-            
+
 
            .premimum-model1 .footer-grid {
 
@@ -4499,7 +4499,7 @@ body.premimum-model1 {
 
             }
 
-            
+
 
            .premimum-model1 .footer-bottom {
 
@@ -4523,7 +4523,7 @@ body.premimum-model1 {
 
             }
 
-            
+
 
            .premimum-model1 .container {
 
@@ -6635,7 +6635,7 @@ body.edit-profilepage {
 
     }
 
-    
+
 
    .edit-profilepage .radio-group {
 
@@ -6643,7 +6643,7 @@ body.edit-profilepage {
 
     }
 
-    
+
 
    .edit-profilepage .step-indicator {
 
@@ -6653,7 +6653,7 @@ body.edit-profilepage {
 
     }
 
-    
+
 
    .edit-profilepage .step {
 
@@ -6733,15 +6733,15 @@ background: #1da1f2;
 
     background: #00aeef;
 
-} 
+}
 
 .edit-profilepage .form-section .social-link-item.snapchat .social-icon{
 
-background: #fffc00; 
+background: #fffc00;
 
 color: #000;
 
-} 
+}
 
 
 
@@ -6863,7 +6863,7 @@ left: 83%;
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 .advpage-3 .ad-gallery .owl-carousel {
@@ -6887,34 +6887,39 @@ left: 83%;
     height: 100%;
 }
 
-.ad-content .video-count {
-   display: flex
-;
+.ad-content .video-count,
+.ad-content .image-count
+ {
+   display: flex;
     justify-content: center;
     align-items: center;
     padding-inline: 13px;
-    background: #000000;
     border-radius: 10px;
-   
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    color: white;
+    text-decoration: none;
+
+    text-align: center;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+
 }
 
-.ad-content .video-count img {
-    width: 32px;
+.ad-content .video-count img,
+.ad-content .image-count img
+ {
+    width: 20px;
     margin-right: 6px;
 }
 
-
-.ad-content .image-count{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-inline: 13px;
-    background: #000000;
-    border-radius: 10px;
- 
-}
-
-.ad-content .image-count img{
-      width: 32px;
-   margin-right: 6px;
+.ad-content .video-count:hover,
+.ad-content .image-count:hover{
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
 }
