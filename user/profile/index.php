@@ -583,7 +583,16 @@ if(!empty($userDetails['profile_pic'])){
             },
             success: function (response) {
 
-              
+              if(response =='Liked')
+              {
+                 $(`#user_id_${comment_id}`)
+
+                   var like_count = parseInt($(`#post_like_${comment_id}`).text()) || 0;
+
+                    like_count++;
+
+                  $(`#post_like_${comment_id}`).text(like_count);
+              }
               
             },
 

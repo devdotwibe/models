@@ -100,7 +100,7 @@ include('../../includes/helper.php');
 
         if ($stmt->execute()) {
 
-             echo "Liked post successfully.";
+             echo "Liked";
              
         } else {
 
