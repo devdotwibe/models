@@ -278,7 +278,7 @@ if(!empty($userDetails['profile_pic'])){
            <?php
                   $post_image = $post['post_image'] ?? '';
 
-                  $imagePath = __DIR__ . '/../' . ltrim($post_image, '/'); 
+                  $imagePath = '../../'. ltrim($post_image, '/');
 
                   if (!empty($post_image) && file_exists($imagePath)) {
                       $imageUrl = SITEURL . $post_image;
