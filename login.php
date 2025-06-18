@@ -87,7 +87,7 @@ if($_SESSION["log_user"]){
                         </div>
 
                         <!-- Login Form -->
-                        <form id="loginForm" class="space-y-6" onsubmit="handleLogin(event)">
+                        <form id="loginForm" class="space-y-6" method="post" enctype="multipart/form-data" action="act-login.php">
                             <div>
                                 <label for="username" class="block text-sm font-semibold text-white/80 mb-2">Username or Email <span class="text-red-400">*</span></label>
                                 <input type="text" id="username" name="username" placeholder="Enter your username or email" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
@@ -97,6 +97,8 @@ if($_SESSION["log_user"]){
                                 <label for="password" class="block text-sm font-semibold text-white/80 mb-2">Password <span class="text-red-400">*</span></label>
                                 <div class="relative">
                                     <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
+
+
                                     <button type="button" id="togglePassword" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white transition duration-300" onclick="togglePasswordVisibility()">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                     </button>
@@ -112,10 +114,11 @@ if($_SESSION["log_user"]){
                                 <a href="#" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium text-sm premium-link" onclick="forgotPassword()">Forgot Password?</a>
                             </div>
                             
-                            <button type="submit" class="w-full btn-primary text-white font-bold py-4 rounded-xl transition duration-300 relative overflow-hidden text-lg">
+                            <button type="submit" name="vfb-submit" value="Submit" class="w-full btn-primary text-white font-bold py-4 rounded-xl transition duration-300 relative overflow-hidden text-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
                                 SIGN IN TO YOUR ACCOUNT
                             </button>
+
                         </form>
                         
                         <!-- Sign Up Link -->
