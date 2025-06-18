@@ -335,7 +335,19 @@ if(!empty($userDetails['profile_pic'])){
 
                     <div class="flex items-start mb-4">
 
-                        <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+
+                     <?php
+                          $post_image = $post['post_image'] ?? '';
+
+                          if (checkImageExists($post_image)) {
+
+                            $imageUrl = SITEURL . $post_image;
+                        ?>
+                               
+                          <img src="<?php echo $imageUrl ?>" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+
+                      <?php } ?>
+
                         <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
                             <p class="font-medium text-xs md:text-sm">Alex M.</p>
                             <p class="text-xs md:text-sm text-white/80">Count me in for the hike! I know some great trails 🥾</p>
@@ -354,7 +366,20 @@ if(!empty($userDetails['profile_pic'])){
 
 
                     <div class="flex items-center">
-                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+
+                     <?php
+                     
+                          $post_image = $post['post_image'] ?? '';
+
+                          if (checkImageExists($post_image)) {
+
+                            $imageUrl = SITEURL . $post_image;
+                        ?>
+                              
+                          <img src="<?php echo $imageUrl ?>" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+
+                      <?php } ?>
+                      
                     <input type="text" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
                     
                   </div>
