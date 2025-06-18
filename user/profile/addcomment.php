@@ -58,8 +58,6 @@ include('../../includes/helper.php');
     elseif($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] =='like') {
 
 
-        header('Content-Type: application/json');
-
         $user_id      = $_POST['user_id'] ?? null;
 
         $post_id      = $_POST['post_id'] ?? null;
