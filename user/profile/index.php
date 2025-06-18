@@ -149,7 +149,7 @@ if(!empty($userDetails['profile_pic'])){
 
             $post_id = $row['ID'];
 
-              $comment_query = $conn->prepare("SELECT * FROM live_comments WHERE comment_post_ID = ?");
+              $comment_query = $con->prepare("SELECT * FROM live_comments WHERE comment_post_ID = ?");
               $comment_query->bind_param("i", $post_id);
               $comment_query->execute();
               $comment_result = $comment_query->get_result();
@@ -319,7 +319,7 @@ if(!empty($userDetails['profile_pic'])){
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                       </svg>
 
-                      <?php $comment_count =0; ?>
+                      <?php $comment_count = count($post['comments']) ?>
 
                       <span class="text-sm md:text-base"> <?php echo $comment_count ?></span>
 
