@@ -6886,6 +6886,7 @@ left: 83%;
 
 .ad-gallery .owl-item > div {
     height: 100%;
+    border-radius: 20px;
 }
 
 .ad-content .video-count,
