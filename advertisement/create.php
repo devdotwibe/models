@@ -14,7 +14,7 @@ if (isset($_SESSION['log_user_id'])) {
 		$post_data['user_id'] = $user_id;
 		$post_data['created_at'] = date('Y-m-d H:i:s');
 
-		DB::insert('banners', $post_data); print_r($_POST);
+		DB::insert('banners', $post_data); 
 		$created_id = DB::insertId();
 
 		$error = '';
