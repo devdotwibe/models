@@ -234,7 +234,7 @@ if(!empty($userDetails['profile_pic'])){
 
         <!-- Post 1 -->
 
-        <?php foreach ($posts as $post) { ?>
+        <?php foreach ($posts as $k=> $post) { ?>
 
             <div class="model-card">
             <div class="flex items-center justify-between mb-4">
@@ -285,37 +285,47 @@ if(!empty($userDetails['profile_pic'])){
 
 
             <div class="flex justify-between items-center">
+
                 <div class="flex space-x-4 md:space-x-6">
-                <button class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
-                    <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                    <span class="text-sm md:text-base">47</span>
-                </button>
-                <button class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
-                    <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                    </svg>
-                    <span class="text-sm md:text-base">12</span>
-                </button>
+
+                  <button class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
+                      <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                      </svg>
+                      <span class="text-sm md:text-base">47</span>
+                  </button>
+
+                  <button onclick="AddComment('comment_<?php echo $K ?>')" class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
+
+                      <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                      </svg>
+                      <span class="text-sm md:text-base">12</span>
+
+                  </button>
+
                 </div>
                 <button class="btn-secondary text-sm md:text-base">Message</button>
             </div>
 
-            <!-- Comments -->
-            <div class="mt-6 pt-4 border-t border-white/10">
-                <div class="flex items-start mb-4">
-                <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
-                <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
-                    <p class="font-medium text-xs md:text-sm">Alex M.</p>
-                    <p class="text-xs md:text-sm text-white/80">Count me in for the hike! I know some great trails 🥾</p>
-                </div>
-                </div>
-                <div class="flex items-center">
-                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
-                <input type="text" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
-                </div>
-            </div>
+              <div class="mt-6 pt-4 border-t border-white/10" id="comment_<?php echo $K ?>" style="display:none;">
+
+                  <div class="flex items-start mb-4">
+
+                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+                    <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
+                        <p class="font-medium text-xs md:text-sm">Alex M.</p>
+                        <p class="text-xs md:text-sm text-white/80">Count me in for the hike! I know some great trails 🥾</p>
+                    </div>
+                    </div>
+                    <div class="flex items-center">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+                    <input type="text" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
+                    
+                  </div>
+
+              </div>
+
             </div>
 
         <?php }  ?>
@@ -430,9 +440,17 @@ if(!empty($userDetails['profile_pic'])){
     </div>
   </nav>
 
-  <!-- JavaScript -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+
   <script>
-    // Hamburger menu functionality
+
+    function AddComment(element)
+    { 
+        $(`#${element}`).slideToggle();
+    }
+
     const hamburger = document.getElementById('hamburgerMenu');
     const sidebar = document.getElementById('sidebarMenu');
     const overlay = document.getElementById('sidebarOverlay');
