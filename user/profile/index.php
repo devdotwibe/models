@@ -319,11 +319,11 @@ if(!empty($userDetails['profile_pic'])){
 
                 <div class="flex space-x-4 md:space-x-6">
 
-                  <button class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
+                  <button type="button" onclick="AddLike('<?php echo $k ?>')"  class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
                       <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                       </svg>
-                      <span class="text-sm md:text-base"> <?php echo $post['like'] ?></span>
+                      <span class="text-sm md:text-base" id="post_like_<?php echo $k ?>"> <?php echo $post['like'] ?></span>
                   </button>
 
                   <button onclick="AddComment('comment_<?php echo $k ?>')" class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
@@ -566,6 +566,33 @@ if(!empty($userDetails['profile_pic'])){
         $(`#${element}`).slideToggle();
     }
 
+    function AddLike(comment_id)
+    {
+        var post_id = $(`#post_id_${comment_id}`).val();
+
+        var user_id = $(`#user_id_${comment_id}`).val();
+
+        $.ajax({
+
+            url: 'addcomment.php', 
+            type: 'POST',
+            data:{
+              post_id:post_id,
+              user_id:user_id,
+              action:"like",
+            },
+            success: function (response) {
+
+              
+              
+            },
+
+            error: function (xhr) {
+               
+            }
+        });
+    }
+
     function AddMessage(comment_id)
     {
         var post_id = $(`#post_id_${comment_id}`).val();
@@ -590,7 +617,8 @@ if(!empty($userDetails['profile_pic'])){
               user_id:user_id,
               comment:comment,
               author_name:author_name,
-              author_email:author_email
+              author_email:author_email,
+              action:"comment",
             },
             success: function (response) {
 
