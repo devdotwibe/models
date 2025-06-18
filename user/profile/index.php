@@ -352,10 +352,24 @@ if(!empty($userDetails['profile_pic'])){
 
                       <?php } ?>
 
-                        <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
-                            <p class="font-medium text-xs md:text-sm">Alex M.</p>
-                            <p class="text-xs md:text-sm text-white/80">Count me in for the hike! I know some great trails 🥾</p>
-                        </div>
+
+
+                        <?php if (!empty($post['comments'])) { ?>
+
+                          <?php foreach ($post['comments']  as $index => $comment) { ?>
+
+                                <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
+
+                                  <p class="font-medium text-xs md:text-sm"> <?php echo $comment['comment_author'] ?></p>
+
+                                  <p class="text-xs md:text-sm text-white/80"> <?php echo $comment['comment_content'] ?></p>
+
+                                </div>
+
+                          <?php } ?>
+
+                        <?php } ?>
+
                     </div>
 
                   <?php } else { ?>
