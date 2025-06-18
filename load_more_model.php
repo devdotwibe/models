@@ -43,7 +43,7 @@ $resultd = mysqli_query($con, $sqls);
                         </div>
                     </div>
                     <div class="profile-info">
-                        <h3 class="profile-name">'.$modalname; 
+                        <h3 class="profile-name">'.ucfirst($modalname); 
 						if(!empty($rowesdw['age'])){ $html .= ', '.$rowesdw['age']; } 
 						$html .= '</h3>';
 						 if(!empty($rowesdw['city']) || !empty($rowesdw['country'])){ 

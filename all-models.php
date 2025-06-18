@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     <div class="profile-info">
-                        <h3 class="profile-name"><?php echo $modalname; if(!empty($rowesdw['age'])){ echo ', '.$rowesdw['age']; } ?></h3>
+                        <h3 class="profile-name"><?php echo ucfirst($modalname); if(!empty($rowesdw['age'])){ echo ', '.$rowesdw['age']; } ?></h3>
 						<?php if(!empty($rowesdw['city']) || !empty($rowesdw['country'])){ ?>
                         <p class="profile-location">
                             <i class="fas fa-map-marker-alt"></i>
