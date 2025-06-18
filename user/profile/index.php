@@ -337,11 +337,11 @@ if(!empty($userDetails['profile_pic'])){
 
 
                      <?php
-                          $post_image = $post['post_image'] ?? '';
+                          $profile_pic = $post['profile_pic'] ?? '';
 
-                          if (checkImageExists($post_image)) {
+                          if (checkImageExists($profile_pic)) {
 
-                            $imageUrl = SITEURL . $post_image;
+                            $imageUrl = SITEURL . $profile_pic;
                         ?>
                                
                           <img src="<?php echo $imageUrl ?>" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
@@ -368,12 +368,12 @@ if(!empty($userDetails['profile_pic'])){
                     <div class="flex items-center">
 
                      <?php
-                     
-                          $post_image = $post['post_image'] ?? '';
 
-                          if (checkImageExists($post_image)) {
+                          $profile_pic = $post['profile_pic'] ?? '';
 
-                            $imageUrl = SITEURL . $post_image;
+                          if (checkImageExists($profile_pic)) {
+
+                            $imageUrl = SITEURL . $profile_pic;
                         ?>
                               
                           <img src="<?php echo $imageUrl ?>" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
