@@ -527,7 +527,7 @@ if(!empty($userDetails['profile_pic'])){
     {
         var post_id = $(`#post_id_${comment_id}`).val();
 
-        var user_id = $(`#user_id${comment_id}`).val();
+        var user_id = $(`#user_id_${comment_id}`).val();
 
         var comment = $(`#comment_content_${comment_id}`).val();
 
