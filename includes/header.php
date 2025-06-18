@@ -175,9 +175,9 @@ $(document).ready(function(){
                 </a>
 
                 <?php } else { ?>
-                <button class="btn-primary px-8 py-3 rounded-full font-semibold shadow-lg" onclick="handleSignIn()">
+                <a class="btn-primary px-8 py-3 rounded-full font-semibold shadow-lg" href="<?= SITEURL ?>login.php">
                 Sign In
-				</button>
+                </a>
               <?php } ?>
 			
 			
