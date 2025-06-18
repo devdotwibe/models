@@ -398,6 +398,9 @@ if(!empty($userDetails['profile_pic'])){
 
                       <?php } ?>
 
+
+                    <input type="text" name="comment" id="comment_content_<?php echo $k ?>" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
+
                     <input type="hidden" name="post_id" id="post_id_<?php echo $k ?>" value="<?php echo $post['ID'] ?>">
 
                     <input type="hidden" name="user_id" id="user_id_<?php echo $k ?>" value="<?php echo $post['user_id'] ?>">
@@ -408,7 +411,6 @@ if(!empty($userDetails['profile_pic'])){
 
                     <input type="hidden" name="image_url" id="image_url<?php echo $k ?>" value="<?php echo $imageUrl ?>">
                       
-                    <input type="text" name="comment" id="comment_content_<?php echo $k ?>" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
                     
                   </div>
 
@@ -576,7 +578,7 @@ if(!empty($userDetails['profile_pic'])){
                 image_html += `<img src="${image_url}" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">`;
               }
 
-              $(`.comnt_user_${comment_id}`).before(`
+               $(`#comment_content_${comment_id}`).before(`
                     <div class="flex items-start mb-4">
                         ${image_html}
                         <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
