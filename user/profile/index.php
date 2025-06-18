@@ -323,7 +323,7 @@ if(!empty($userDetails['profile_pic'])){
 
                       <?php $comment_count = count($post['comments']) ?>
 
-                      <span class="text-sm md:text-base"> <?php echo $comment_count ?></span>
+                      <span class="text-sm md:text-base"> <span id="count_comment_<?php echo $k ?>" > <?php echo $comment_count ?> </span> </span>
 
                   </button>
 
@@ -570,6 +570,13 @@ if(!empty($userDetails['profile_pic'])){
             success: function (response) {
 
               $(`.no_comment_${comment_id}`).remove();
+
+              var count_comment = parseInt($(`#count_comment_${comment_id}`).text()) || 0;
+
+              count_comment++;
+
+              $(`#count_comment_${comment_id}`).text(count_comment);
+
 
               var image_html = "";
 
