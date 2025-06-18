@@ -18,7 +18,8 @@ function h_my_ip_address(){
 
 
 function checkImageExists($relativePath) {
-    $imagePath = __DIR__ . '/../../' . ltrim($relativePath, '/');
+	
+	$imagePath = '../../'. ltrim($relativePath, '/');
     return !empty($relativePath) && file_exists($imagePath);
 }
 
