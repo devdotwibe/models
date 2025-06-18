@@ -576,19 +576,15 @@ if(!empty($userDetails['profile_pic'])){
                 image_html += `<img src="${image_url}" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">`;
               }
 
-              $(`.comnt_user_${comment_id}`).append(`
-
-                <div class="flex items-start mb-4>
-
-                    ${image_html}
-
-                    <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
-                        <p class="font-medium text-xs md:text-sm">${author_name}</p>
-                        <p class="text-xs md:text-sm text-white/80">${comment}</p>
+              $(`.comnt_user_${comment_id}`).before(`
+                    <div class="flex items-start mb-4">
+                        ${image_html}
+                        <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
+                            <p class="font-medium text-xs md:text-sm">${author_name}</p>
+                            <p class="text-xs md:text-sm text-white/80">${comment}</p>
+                        </div>
                     </div>
-
-                </div>
-              `);
+                `);
 
               $(`#comment_content_${comment_id}`).val('');
               
