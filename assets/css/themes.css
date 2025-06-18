@@ -647,6 +647,11 @@
 
 }
 
+.liked_comment {
+
+    color: rgb(244 114 182 / var(--tw-text-opacity, 1)) !important
+}
+
 @media (max-width: 768px) {
     .new-tabs {
         display: flex;

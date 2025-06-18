@@ -81,8 +81,18 @@ include('../../includes/helper.php');
 
         if ($check_stmt->num_rows > 0) {
 
-            echo "User already liked this post";
-            exit;
+                $delete_stmt = $con->prepare("DELETE FROM postlike WHERE uid = ? AND pid = ?");
+
+                $delete_stmt->bind_param("ii", $user_id, $post_id);
+                if ($delete_stmt->execute()) {
+
+                    echo "Unliked";
+                } else {
+
+                    echo "Error while unliking: " . $delete_stmt->error;
+                }
+                
+                exit;
         }
 
         $stmt = $con->prepare("
