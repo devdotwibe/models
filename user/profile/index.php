@@ -565,12 +565,14 @@ if(!empty($userDetails['profile_pic'])){
 
               $(`.no_comment_${comment_id}`).remove();
 
-              $(`.comnt_user_${comment_id}`).append(`
+              $(`.comnt_user_${comment_id}`).before(`
                   <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
                       <p class="font-medium text-xs md:text-sm">${author_name}</p>
                       <p class="text-xs md:text-sm text-white/80">${comment}</p>
                   </div>
               `);
+
+              $(`#comment_content_${comment_id}`).val('');
               
             },
 
