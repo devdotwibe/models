@@ -547,9 +547,6 @@ if(!empty($userDetails['profile_pic'])){
               author_name:author_name,
               author_email:author_email
             },
-            contentType: false, 
-            processData: false, 
-
             success: function (response) {
 
                 alert("Post submitted successfully!");
