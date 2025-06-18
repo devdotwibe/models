@@ -6866,6 +6866,9 @@ left: 83%;
   object-fit: cover;
   border-radius: 20px;
 }
+.advpage-3 .ad-gallery .owl-carousel.owl-drag .owl-item.active{
+    margin-right: 15px;
+}
 
 .advpage-3 .ad-gallery .owl-carousel {
   width: 100%;
