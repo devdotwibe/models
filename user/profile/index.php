@@ -583,7 +583,7 @@ if(!empty($userDetails['profile_pic'])){
             },
             success: function (response) {
 
-              if(response =='Liked')
+               if (response.trim() === 'Liked')
               {
                  $(`#user_id_${comment_id}`)
 
