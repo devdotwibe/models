@@ -127,6 +127,7 @@ if(!empty($userDetails['profile_pic'])){
             SELECT 
                 live_posts.*, 
                 model_user.name AS author_name, 
+                model_user.email AS author_email,
                 model_user.country,
                 model_user.profile_pic,
                 model_user.id AS user_id
@@ -327,7 +328,9 @@ if(!empty($userDetails['profile_pic'])){
                   </button>
 
                 </div>
-                <button class="btn-secondary text-sm md:text-base">Message</button>
+
+                <button type="button" onclick="AddMessage('<?php echo $k ?>')" class="btn-secondary text-sm md:text-base">Message</button>
+
             </div>
 
               <div class="mt-6 pt-4 border-t border-white/10" id="comment_<?php echo $k ?>" style="display:none;">
@@ -384,8 +387,12 @@ if(!empty($userDetails['profile_pic'])){
                     <input type="hidden" name="post_id" id="post_id_<?php echo $k ?>" value="<?php echo $post['ID'] ?>">
 
                     <input type="hidden" name="user_id" id="user_id_<?php echo $k ?>" value="<?php echo $post['user_id'] ?>">
+
+                    <input type="hidden" name="author_name" id="author_name_<?php echo $k ?>" value="<?php echo $post['author_name'] ?>">
+
+                    <input type="hidden" name="author_email" id="author_email_<?php echo $k ?>" value="<?php echo $post['author_email'] ?>">
                       
-                    <input type="text" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
+                    <input type="text" name="comment" id="comment_content_<?php echo $k ?>" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
                     
                   </div>
 
@@ -514,6 +521,45 @@ if(!empty($userDetails['profile_pic'])){
     function AddComment(element)
     { 
         $(`#${element}`).slideToggle();
+    }
+
+    function AddMessage(comment_id)
+    {
+        var post_id = $(`#post_id_${comment_id}`).val();
+
+        var user_id = $(`#user_id${comment_id}`).val();
+
+        var comment = $(`#comment_content_${comment_id}`).val();
+
+        var author_name = $(`#author_name_${comment_id}`).val();
+
+        var author_email = $(`#author_email_${comment_id}`).val();
+
+        $.ajax({
+
+            url: 'addcomment.php', 
+            type: 'POST',
+            data:{
+
+              post_id:post_id,
+              user_id:user_id,
+              comment:comment,
+              author_name:author_name,
+              author_email:author_email
+            },
+            contentType: false, 
+            processData: false, 
+
+            success: function (response) {
+
+                alert("Post submitted successfully!");
+              
+            },
+
+            error: function (xhr) {
+               
+            }
+        });
     }
 
     const hamburger = document.getElementById('hamburgerMenu');
