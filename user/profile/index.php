@@ -354,7 +354,7 @@ if(!empty($userDetails['profile_pic'])){
                   
                   ?>
 
-                  <button type="button" onclick="AddLike('<?php echo $k ?>')"  class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors <?php echo $liked_comment ?>" onclick="toggleLike(this)">
+                  <button type="button" onclick="AddLike('<?php echo $k ?>')" id="add_like_<?php echo $k ?>" class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors <?php echo $liked_comment ?>" onclick="toggleLike(this)">
 
                       <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
@@ -363,7 +363,7 @@ if(!empty($userDetails['profile_pic'])){
                       </svg>
 
                       <span class="text-sm md:text-base" id="post_like_<?php echo $k ?>"> <?php echo $like_count ?></span>
-                      
+
                   </button>
 
                   <button onclick="AddComment('comment_<?php echo $k ?>')" class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
@@ -632,6 +632,8 @@ if(!empty($userDetails['profile_pic'])){
                     like_count++;
 
                   $(`#post_like_${comment_id}`).text(like_count);
+
+                  $(`#add_like_${comment_id}`).addClass('liked_comment');
               }
 
               if (response.trim() === 'Unliked')
@@ -643,6 +645,9 @@ if(!empty($userDetails['profile_pic'])){
                     like_count--;
 
                   $(`#post_like_${comment_id}`).text(like_count);
+
+                  $(`#add_like_${comment_id}`).removeClass('liked_comment');
+
               }
               
             },
