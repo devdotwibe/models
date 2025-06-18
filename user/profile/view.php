@@ -47,7 +47,7 @@ if(!empty($userDetails['profile_pic'])){
 <body class="enhanced5 min-h-screen bg-animated text-white">
 
 
- <?php  include('../../includes/profile_header.php'); ?>
+ <?php  include('../../includes/header.php'); ?>
 
 
 <main>
