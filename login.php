@@ -1,3 +1,15 @@
+<?php 
+session_start();
+include('includes/config.php');
+include('includes/helper.php');
+if($_SESSION["log_user"]){
+	$userDetails = get_data('model_user',array('id'=>$_SESSION['log_user_id']),true);
+	if($userDetails){
+		header("Location: ".SITEURL."single-profile.php?m_unique_id=".$userDetails['unique_id']);
+	}
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +20,7 @@
 <meta name="description" content="Sign in to your The Live Models account to connect with amazing models for chat, watch and meet experiences.">
 
     <?php include('includes/head.php'); ?>
+
 </head>
 
 
