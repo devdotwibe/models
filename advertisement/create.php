@@ -16,7 +16,7 @@ if (isset($_SESSION['log_user_id'])) {
 
 		DB::insert('banners', $post_data);
 		$created_id = DB::insertId();
-
+print_r($_POST);
 		$error = '';
 		if ($_FILES["files"]["name"]) {
 			$target_dir_profile = "../uploads/banners/";
@@ -39,7 +39,7 @@ if (isset($_SESSION['log_user_id'])) {
 				$error .= '. Video Not Updated';
 			}
 		}
-		print_r($_POST);
+		
 		if (isset($_FILES["additionalimages"])) {
 			$totalFiles = count($_FILES['additionalimages']['name']);
 			$additional_img = '';
