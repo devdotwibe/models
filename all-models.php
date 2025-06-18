@@ -251,7 +251,7 @@ $(document).on('click', function(e) {
                        $btn.hasClass('like') ? 'like' : 'pass';
 		var modelid = $btn.attr('modelid'); 
 		var model_uniq_id = $btn.attr('model_uniq_id'); 
-		var model_like = $btn.attr('model_like'); alert(modelid);
+		var model_like = $btn.attr('model_like'); 
 		if(modelid != ''){
 			handleProfileAction($btn, action, modelid);
 		}
