@@ -81,10 +81,6 @@ include('../../includes/helper.php');
             exit;
         }
 
-
-            echo "User already liked this post";
-            exit;
-
         $stmt = $con->prepare("
             INSERT INTO postlike 
             (uid, pid, status, date, time) 
@@ -95,6 +91,8 @@ include('../../includes/helper.php');
             echo "Prepare failed: " . $con->error;
             exit;
         }
+
+        echo "Prepare failed: ";
 
         $stmt->bind_param("iis", $user_id, $post_id, $status);
 
