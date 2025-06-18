@@ -645,8 +645,9 @@ if(!empty($userDetails['profile_pic'])){
 
     // Navigation functions
     function navigateTo(page) {
+
       alert(`Navigating to ${page} page...`);
-      toggleSidebar(); // Close sidebar after navigation
+      toggleSidebar(); 
     }
 
     // Profile functions
@@ -664,16 +665,6 @@ if(!empty($userDetails['profile_pic'])){
       }
     }
 
-    // Message button functionality
-    document.querySelectorAll('button').forEach(button => {
-      if (button.textContent === 'Message') {
-        button.addEventListener('click', function() {
-          alert('Opening chat...');
-        });
-      }
-    });
-
-    // Mobile navigation
     document.querySelectorAll('.mobile-nav-item').forEach(item => {
       item.addEventListener('click', function() {
         document.querySelectorAll('.mobile-nav-item').forEach(i => i.classList.remove('active'));
