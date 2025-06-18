@@ -164,7 +164,15 @@ if(!empty($userDetails['profile_pic'])){
 
               $row['comments'] = $comments;
 
-              $post_like = $con->prepare("SELECT * FROM postlike WHERE pid = ?");
+               $post_like = $con->prepare("
+                  SELECT 
+                      postlike.*, 
+                      model_user.name AS author_name,
+                      model_user.id AS user_id
+                  FROM postlike 
+                  LEFT JOIN model_user ON postlike.uid = model_user.id 
+                  WHERE postlike.pid = ?
+              ");
 
               $post_like->bind_param("i", $post_id);
 
@@ -172,10 +180,17 @@ if(!empty($userDetails['profile_pic'])){
 
               $like_result = $post_like->get_result();
 
-             $row['like'] = $like_result->num_rows;
+              $likes = [];
 
-            $posts[] = $row;
+              while ($like = $like_result->fetch_assoc()) {
+                  $likes[] = $like;
+              }
 
+              $row['like'] = $likes;
+
+              $row['like_count'] = $like_result->num_rows;
+
+              $posts[] = $row;
 
         }
 
@@ -319,11 +334,33 @@ if(!empty($userDetails['profile_pic'])){
 
                 <div class="flex space-x-4 md:space-x-6">
 
+                  <?php 
+
+                    $liked_comment ="";
+
+                    $like_count = $post['like_count'];
+
+                   if($like_count > 0) {
+
+                      if (!empty($post['like'])) {
+
+                         foreach ($post['like']  as $index => $like) { 
+
+                            if($userDetails['id'] == $like['user_id'])
+                            {
+                                $liked_comment ="liked_comment";
+                            }
+                        }
+                      }
+                   }
+                  
+                  ?>
+
                   <button type="button" onclick="AddLike('<?php echo $k ?>')"  class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
                       <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                       </svg>
-                      <span class="text-sm md:text-base" id="post_like_<?php echo $k ?>"> <?php echo $post['like'] ?></span>
+                      <span class="text-sm md:text-base" id="post_like_<?php echo $k ?>"> <?php echo $like_count ?></span>
                   </button>
 
                   <button onclick="AddComment('comment_<?php echo $k ?>')" class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
