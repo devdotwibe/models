@@ -141,13 +141,13 @@
 						<?php } ?>
                     </div>
                     <div class="profile-actions">
-                        <button class="action-btn connect" title="Connect">
+                        <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>" model_uniq_id="<?php echo $rowesdw['unique_id']; ?>" >
                             <i class="fas fa-user-plus"></i>
                         </button>
-                        <button class="action-btn like" title="Like">
+                        <button class="action-btn like" title="Like" modelid="<?php echo $rowesdw['id']; ?>"  model_uniq_id="<?php echo $rowesdw['unique_id']; ?>" >
                             <i class="fas fa-heart"></i>
                         </button>
-                        <button class="action-btn pass" title="Pass">
+                        <button class="action-btn pass" title="Pass" modelid="<?php echo $rowesdw['id']; ?>"  model_uniq_id="<?php echo $rowesdw['unique_id']; ?>" >
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -162,6 +162,7 @@
                 
             </div>
 
+			<?php if($row_cnt['total'] > 8){ ?>
             <!-- Load More -->
             <div class="load-more">
                 <button class="load-more-btn" id="loadMoreBtn">
@@ -170,6 +171,9 @@
                 </button>
                 <div class="loading-spinner hidden" id="loadingSpinner"></div>
             </div>
+			
+			<?php } ?>
+			
         </div>
     </main>
 
@@ -216,12 +220,15 @@ $(document).on('click', function(e) {
     if ($btn.length) {
         const action = $btn.hasClass('connect') ? 'connect' :
                        $btn.hasClass('like') ? 'like' : 'pass';
-        handleProfileAction($btn, action);
+		var modelid = $btn.attr('modelid'); 
+		var model_uniq_id = $btn.attr('model_uniq_id'); 
+		var model_like = $btn.attr('model_like');
+        handleProfileAction($btn, action, modelid, model_uniq_id, model_like);
     }
 });
 
 // Handle Profile Actions
-function handleProfileAction($button, action) {
+function handleProfileAction($button, action, modelid, model_uniq_id, model_like) {
     // Add visual feedback
     $button.css('transform', 'scale(1.2)');
     setTimeout(() => {
@@ -237,7 +244,17 @@ function handleProfileAction($button, action) {
             break;
         case 'like':
             $button.css('color', 'var(--secondary)');
-            showNotification(`You liked ${profileName}!`, 'success');
+            //ajax for increase like count
+			jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'/ajax/model_like.php'?>",
+				data:{modelid:modelid},
+				dataType:'json',
+				success: function(response){ 
+					showNotification(`You liked ${profileName}!`, 'success');
+				}
+			});
+			
             break;
         case 'pass':
             $card.css('opacity', '0.5');
