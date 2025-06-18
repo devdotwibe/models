@@ -57,12 +57,12 @@ if(!empty($userDetails['profile_pic'])){
             <div class="profile-info pt-32 sm:pt-40 md:pt-48 pb-6 px-4 md:px-0">
                 <div class="flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
                     <div class="profile-avatar-container">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=faces" alt="Urdevilicifer" class="profile-avatar">
+                        <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $userDetails['profile_pic']; ?>" alt="Urdevilicifer" class="profile-avatar">
                     </div>
                     <div class="flex-1">
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div>
-                                <h1 class="text-3xl sm:text-4xl font-bold heading-font gradient-text mb-1">Urdevilicifer</h1>
+                                <h1 class="text-3xl sm:text-4xl font-bold heading-font gradient-text mb-1"><?php echo $userDetails['name'] ?></h1>
                                 <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                                     <span class="text-white/70">@devil</span>
                                     <span class="status-badge status-online">
@@ -72,7 +72,7 @@ if(!empty($userDetails['profile_pic'])){
                                 </div>
                                 <div class="flex items-center gap-2 text-white/70 mb-2 sm:mb-3 text-sm sm:text-base">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                    Los Angeles, CA
+                                    <?php echo $userDetails['country'] ?> <?php echo $userDetails['name'] ?>
                                 </div>
                                 <div class="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-xs sm:text-sm inline-flex items-center mb-2 sm:mb-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
@@ -381,20 +381,41 @@ if(!empty($userDetails['profile_pic'])){
 
                 </div>
 
-                <!-- Create Post Card -->
-                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
-                    <h2 class="text-xl font-bold mb-4 premium-text">Create New Post</h2>
-                    <textarea class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" rows="3" placeholder="What's on your mind?"></textarea>
-                    <div class="flex justify-between items-center">
-                        <button class="flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                            Upload
-                        </button>
-                        <button class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
-                            Post
-                        </button>
+
+                <form id="createPostForm"  enctype="multipart/form-data" method="post">
+
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+
+                        <h2 class="text-xl font-bold mb-4 premium-text">Create New Post</h2>
+
+                        
+                        <input type="text" name="post_title" 
+                            class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" 
+                            placeholder="Post title">
+
+                        <textarea name="post_content"  class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" rows="3" placeholder="What's on your mind?"></textarea>
+
+                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $userDetails['id'] ?>">
+
+                        <div class="flex justify-between items-center">
+
+
+                             <label for="post_image" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                                Upload
+
+                            </label>
+
+                            <input style="display:none;" type="file" name="post_image" id="post_image" accept="/*images">
+
+                            <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
+                                Post
+                            </button>
+                        </div>
+
                     </div>
-                </div>
+                </form>
+
 
                 <!-- Services Card -->
                 <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
@@ -1053,8 +1074,36 @@ if(!empty($userDetails['profile_pic'])){
 
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script>
+
+        $(document).ready(function () {
+
+            $('#createPostForm').on('submit', function (e) {
+                e.preventDefault();
+
+                var formData = new FormData(this); 
+
+                $.ajax({
+                    url: 'savepost.php', 
+                    type: 'POST',
+                    data: formData,
+                    contentType: false, 
+                    processData: false, 
+                    success: function (response) {
+                        alert("Post submitted successfully!");
+                        console.log(response);
+                        $('#createPostForm')[0].reset();
+                    },
+                    error: function (xhr) {
+                        alert("An error occurred while submitting the post.");
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+
         // Initialize Modal Functions
    document.addEventListener('DOMContentLoaded', function() {
     // More Actions Dropdown
