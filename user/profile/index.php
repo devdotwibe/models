@@ -333,7 +333,7 @@ if(!empty($userDetails['profile_pic'])){
 
             </div>
 
-              <div class="mt-6 pt-4 border-t border-white/10" id="comment_<?php echo $k ?>" style="display:none;">
+              <div class="mt-6 pt-4 border-t border-white/10 comnt_user_<?php echo $k ?>" id="comment_<?php echo $k ?>" style="display:none;">
 
                   <?php if($comment_count > 0) { ?>
 
@@ -374,9 +374,9 @@ if(!empty($userDetails['profile_pic'])){
 
                   <?php } else { ?>
 
-                    <div class="flex items-start mb-4">
+                    <div class="flex items-start mb-4 comnt_user_<?php echo $k ?>">
 
-                        <p class="text-xs md:text-sm text-white/80">No Comments Posted.</p>
+                        <p class="text-xs md:text-sm text-white/80 no_comment_<?php echo $k ?> ">No Comments Posted.</p>
 
                     </div>
 
@@ -563,7 +563,18 @@ if(!empty($userDetails['profile_pic'])){
             },
             success: function (response) {
 
-                alert("Post submitted successfully!");
+              $(`.no_comment_${comment_id}`).remove();
+
+              $(`.comnt_user_`).append(
+                `
+                 <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
+
+                  <p class="font-medium text-xs md:text-sm">${author_name}</p>
+
+                  <p class="text-xs md:text-sm text-white/80">${comment}</p>
+
+                </div>`;
+              );
               
             },
 
