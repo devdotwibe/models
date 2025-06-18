@@ -92,7 +92,6 @@ include('../../includes/helper.php');
             exit;
         }
 
-        echo "Prepare failed: ";
 
         $stmt->bind_param("iis", $user_id, $post_id, $status);
 
