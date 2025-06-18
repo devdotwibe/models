@@ -58,10 +58,6 @@ include('../../includes/helper.php');
     elseif($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] =='like') {
 
 
-
-        echo "Liked post successfull rarey.";
-
-
         $user_id      = $_POST['user_id'] ?? null;
 
         $post_id      = $_POST['post_id'] ?? null;
@@ -84,6 +80,10 @@ include('../../includes/helper.php');
             echo "User already liked this post";
             exit;
         }
+
+
+            echo "User already liked this post";
+            exit;
 
         $stmt = $con->prepare("
             INSERT INTO postlike 
