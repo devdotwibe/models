@@ -595,6 +595,8 @@ if(!empty($userDetails['profile_pic'])){
     </div>
   </nav>
 
+  <?php include('includes/footer.php'); ?>
+
 
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
