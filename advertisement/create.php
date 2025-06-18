@@ -13,8 +13,8 @@ if (isset($_SESSION['log_user_id'])) {
 		//$post_data = array_from_get($arr);
 		$post_data['user_id'] = $user_id;
 		$post_data['created_at'] = date('Y-m-d H:i:s');
-print_r($_POST);
-		DB::insert('banners', $post_data);
+
+		DB::insert('banners', $post_data); print_r($_POST);
 		$created_id = DB::insertId();
 
 		$error = '';
