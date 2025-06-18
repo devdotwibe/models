@@ -243,17 +243,15 @@ if(!empty($userDetails['profile_pic'])){
                 <div class="flex items-center">
                 <div class="relative">
 
-            <?php
-                  $profilePic = $post['profile_pic'] ?? '';
+              <?php
+                $profile_pic = $post['profile_pic'] ?? '';
 
-                  $imagePath = __DIR__ . '/../' . ltrim($profilePic, '/'); 
-
-                  if (!empty($profilePic) && file_exists($imagePath)) {
-                      $imageUrl = SITEURL . $profilePic;
-                  ?>
-                      <img src="<?= $imageUrl ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                  <?php
-                  }
+                  if (checkImageExists($profile_pic)) {
+                        $imageUrl = SITEURL . $profile_pic;
+                ?>
+                        <img src="<?= $imageUrl ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+                <?php
+                    }
               ?>
 
 
@@ -275,13 +273,17 @@ if(!empty($userDetails['profile_pic'])){
 
             <!-- <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p> -->
 
-        <?php if (empty($post['post_image'])): ?>
+            <?php
+                $post_image = $post['post_image'] ?? '';
 
-            <img src="<?= SITEURL . 'ajax/noimage.php?image=' ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
-        <?php else: ?>
+                  if (checkImageExists($post_image)) {
+                      $imageUrl = SITEURL . $post_image;
+              ?>
+                      <img src="<?= $imageUrl ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+              <?php
+                  }
+            ?>
 
-            <img src="<?= SITEURL . $post['post_image']; ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
-        <?php endif; ?>
 
 
             <div class="flex justify-between items-center">
