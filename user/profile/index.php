@@ -385,6 +385,8 @@ if(!empty($userDetails['profile_pic'])){
 
                      <?php
 
+                          $$imageUrl ="";
+
                           $profile_pic = $post['profile_pic'] ?? '';
 
                           if (checkImageExists($profile_pic)) {
@@ -403,6 +405,8 @@ if(!empty($userDetails['profile_pic'])){
                     <input type="hidden" name="author_name" id="author_name_<?php echo $k ?>" value="<?php echo $post['author_name'] ?>">
 
                     <input type="hidden" name="author_email" id="author_email_<?php echo $k ?>" value="<?php echo $post['author_email'] ?>">
+
+                    <input type="hidden" name="image_url" id="image_url<?php echo $k ?>" value="<?php echo $imageUrl ?>">
                       
                     <input type="text" name="comment" id="comment_content_<?php echo $k ?>" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
                     
@@ -547,6 +551,8 @@ if(!empty($userDetails['profile_pic'])){
 
         var author_email = $(`#author_email_${comment_id}`).val();
 
+        var image_url = $(`#image_url${comment_id}`).val();
+
         $.ajax({
 
             url: 'addcomment.php', 
@@ -563,11 +569,25 @@ if(!empty($userDetails['profile_pic'])){
 
               $(`.no_comment_${comment_id}`).remove();
 
+              var image_html = "";
+
+              if(image_url != "")
+              {
+                image_html = ` <img src="${image_url}" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">`;
+              }
+
               $(`.comnt_user_${comment_id}`).before(`
-                  <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
-                      <p class="font-medium text-xs md:text-sm">${author_name}</p>
-                      <p class="text-xs md:text-sm text-white/80">${comment}</p>
-                  </div>
+
+                <div class="flex items-start mb-4>
+
+                    ${image_html}
+                    
+                    <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
+                        <p class="font-medium text-xs md:text-sm">${author_name}</p>
+                        <p class="text-xs md:text-sm text-white/80">${comment}</p>
+                    </div>
+
+                </div>
               `);
 
               $(`#comment_content_${comment_id}`).val('');
