@@ -26,9 +26,7 @@ if($_SESSION["log_user"]){
 
 <body class="login-page min-h-screen bg-animated text-white">
 
-<div class="particles" id="particles"></div>
-
-<?php include('includes/header.php'); ?>
+<?php include('includes/login-header.php'); ?>
 
 <main>
 
