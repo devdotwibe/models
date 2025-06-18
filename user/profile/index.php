@@ -275,13 +275,18 @@ if(!empty($userDetails['profile_pic'])){
 
             <!-- <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p> -->
 
-        <?php if (empty($post['post_image'])): ?>
+           <?php
+                  $post_image = $post['post_image'] ?? '';
 
-            <img src="<?= SITEURL . 'ajax/noimage.php?image=' ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
-        <?php else: ?>
+                  $imagePath = __DIR__ . '/../' . ltrim($post_image, '/'); 
 
-            <img src="<?= SITEURL . $post['post_image']; ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
-        <?php endif; ?>
+                  if (!empty($post_image) && file_exists($imagePath)) {
+                      $imageUrl = SITEURL . $post_image;
+                  ?>
+                          <img src="<?= SITEURL . $post['post_image']; ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+                  <?php
+                  }
+              ?>
 
 
             <div class="flex justify-between items-center">
