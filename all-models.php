@@ -141,13 +141,20 @@
 						<?php } ?>
                     </div>
                     <div class="profile-actions">
-                        <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>" model_uniq_id="<?php echo $rowesdw['unique_id']; ?>" >
+					<?php if (isset($_SESSION['log_user_id'])) { ?>
+                        <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>" >
                             <i class="fas fa-user-plus"></i>
                         </button>
-                        <button class="action-btn like" title="Like" modelid="<?php echo $rowesdw['id']; ?>"  model_uniq_id="<?php echo $rowesdw['unique_id']; ?>" >
+					<?php } else{ ?>
+						<!-- Button to open modal -->
+						<button type="button" class="action-btn connect" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						  <i class="fas fa-user-plus"></i>
+						</button>
+					<?php } ?>
+                        <button class="action-btn like" title="Like" modelid="<?php echo $rowesdw['id']; ?>" >
                             <i class="fas fa-heart"></i>
                         </button>
-                        <button class="action-btn pass" title="Pass" modelid="<?php echo $rowesdw['id']; ?>"  model_uniq_id="<?php echo $rowesdw['unique_id']; ?>" >
+                        <button class="action-btn pass" title="Pass" modelid="<?php echo $rowesdw['id']; ?>" >
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -180,8 +187,30 @@
 
 
 <?php include('includes/footer.php'); ?>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap 5 JS Bundle (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
+<!-- Modal structure -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Follow Request</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        Please login <a href="<?php echo SITEURL.'login.php'; ?>">here</a>.
+       </div>
+      
+
+    </div>
+  </div>
+</div>
 
 <script>
 
@@ -223,12 +252,14 @@ $(document).on('click', function(e) {
 		var modelid = $btn.attr('modelid'); 
 		var model_uniq_id = $btn.attr('model_uniq_id'); 
 		var model_like = $btn.attr('model_like');
-        handleProfileAction($btn, action, modelid, model_uniq_id, model_like);
+		if(modelid != ''){
+			handleProfileAction($btn, action, modelid);
+		}
     }
 });
 
 // Handle Profile Actions
-function handleProfileAction($button, action, modelid, model_uniq_id, model_like) {
+function handleProfileAction($button, action, modelid) {
     // Add visual feedback
     $button.css('transform', 'scale(1.2)');
     setTimeout(() => {
@@ -240,7 +271,18 @@ function handleProfileAction($button, action, modelid, model_uniq_id, model_like
 
     switch (action) {
         case 'connect':
-            showNotification(`Connection request sent to ${profileName}!`, 'success');
+            
+			//ajax for follow request
+			jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'/ajax/model_followrequest.php'?>",
+				data:{modelid:modelid,notification_type:'follow'},
+				dataType:'json',
+				success: function(response){ 
+					showNotification(`Connection request sent to ${profileName}!`, 'success');
+				}
+			});
+			
             break;
         case 'like':
             $button.css('color', 'var(--secondary)');
