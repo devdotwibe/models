@@ -6901,17 +6901,25 @@ left: 83%;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     color: white;
     text-decoration: none;
-    display: inline-block;
+
     text-align: center;
     cursor: pointer;
     font-weight: 500;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 
 }
 
 .ad-content .video-count img,
 .ad-content .image-count img
  {
-    width: 32px;
+    width: 20px;
     margin-right: 6px;
 }
 
+.ad-content .video-count:hover,
+.ad-content .image-count:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
