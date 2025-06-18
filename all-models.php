@@ -147,7 +147,7 @@
                         </button>
 					<?php } else{ ?>
 						<!-- Button to open modal -->
-						<button type="button" class="action-btn connect" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						<button type="button" class="action-btn connect" modelid="" data-bs-toggle="modal" data-bs-target="#exampleModal">
 						  <i class="fas fa-user-plus"></i>
 						</button>
 					<?php } ?>
