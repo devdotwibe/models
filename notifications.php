@@ -524,17 +524,19 @@ if (isset($_SESSION['log_user_id'])) {
 				
 				<?php while($rowesdw = mysqli_fetch_assoc($resultd)) {
 					
-					$get_modal = DB::query('select name,username,profile_pic from model_user where id='.$rowesdw['sender_id']);
-					if(!empty($get_modal)){
+					$get_modal = DB::query('select name,username,profile_pic,unique_id from model_user where id='.$rowesdw['sender_id']);
+					if(!empty($get_modal)){ 
 						$profilepic = $get_modal[0]['profile_pic'];
 						if(!empty($get_modal[0]['username'])){
 							 $modalname = $get_modal[0]['username'];
 						 }else{
 							 $modalname = $get_modal[0]['name'];
 						 }
+						 $unique_id = $get_modal[0]['unique_id'];
 					}else{
 						$profilepic = 'assets/images/model-gal-no-img.jpg';
 						$modalname = '';
+						$unique_id = '';
 					}
 		
 		?>
@@ -573,6 +575,7 @@ if (isset($_SESSION['log_user_id'])) {
 						<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong>	
 						<?php } ?>
 						</p>
+						<?php if(!empty($unique_id)){ ?>
                         <div class="flex space-x-3">
                             <button class="btn-success px-6 py-2 rounded-lg text-white font-semibold" onclick="acceptFollow('emma')">
                                 ✓ Accept
@@ -580,10 +583,11 @@ if (isset($_SESSION['log_user_id'])) {
                             <button class="btn-danger px-6 py-2 rounded-lg text-white font-semibold" onclick="declineFollow('emma')">
                                 ✗ Decline
                             </button>
-                            <button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('emma')">
+                            <button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
                                 View Profile
                             </button>
                         </div>
+						<?php } ?>
                     </div>
                 </div>
             </div>
@@ -739,8 +743,8 @@ offset = offset+limit;
         alert(`💕 Thank you message sent to ${userId}!`);
     }
 
-    function viewProfile(userId) {
-        alert(`👤 Opening ${userId}'s profile...`);
+    function viewProfile(userId) { 
+        window.location.href = '<?= SITEURL ?>single-profile.php?m_unique_id='+userId;
     }
 
     function uploadContent() {

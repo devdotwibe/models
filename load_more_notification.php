@@ -20,7 +20,7 @@ $resultd = mysqli_query($con, $sqls);
 				
 				while($rowesdw = mysqli_fetch_assoc($resultd)) {
 					
-					$get_modal = DB::query('select name,username,profile_pic from model_user where id='.$rowesdw['sender_id']);
+					$get_modal = DB::query('select name,username,profile_pic,unique_id from model_user where id='.$rowesdw['sender_id']);
 					if(!empty($get_modal)){
 						$profilepic = $get_modal[0]['profile_pic'];
 						if(!empty($get_modal[0]['username'])){
@@ -28,9 +28,11 @@ $resultd = mysqli_query($con, $sqls);
 						 }else{
 							 $modalname = $get_modal[0]['name'];
 						 }
+						 $unique_id = $get_modal[0]['unique_id'];
 					}else{
 						$profilepic = 'assets/images/model-gal-no-img.jpg';
 						$modalname = '';
+						$unique_id = '';
 					}
 					 
 				$html .= '<div class="notification-card ultra-glass p-6 rounded-2xl border border-white/10 all '.$rowesdw['notification_type'] .' ">
@@ -65,18 +67,20 @@ $resultd = mysqli_query($con, $sqls);
 						}else{ 
 						$html .= '<strong class="text-indigo-400">'.$modalname.'.</strong>	';
 						 } 
-						$html .= '</p>
-                        <div class="flex space-x-3">
+						$html .= '</p>';
+						if(!empty($unique_id)){
+                        $html .= '<div class="flex space-x-3">
                             <button class="btn-success px-6 py-2 rounded-lg text-white font-semibold" onclick="acceptFollow()">
                                 ✓ Accept
                             </button>
                             <button class="btn-danger px-6 py-2 rounded-lg text-white font-semibold" onclick="declineFollow()">
                                 ✗ Decline
                             </button>
-                            <button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile()">
+                            <button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile("'.$unique_id.'")">
                                 View Profile
                             </button>
-                        </div>
+                        </div>';
+						}
                     </div>
                 </div>
             </div>';
