@@ -109,19 +109,6 @@ if(!empty($userDetails['profile_pic'])){
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
 
-        // $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY post_date DESC";
-
-        //       $sql = "
-        //     SELECT 
-        //         live_posts.*, 
-        //         model_user.name AS author_name, 
-        //         model_user.country AS country,
-        //         model_user.country AS country
-        //     FROM live_posts
-        //     JOIN model_user ON live_posts.post_author = model_user.id
-        //     WHERE post_author IN ($placeholders)
-        //     ORDER BY post_date DESC
-        // ";
 
         $sql = "
             SELECT 
@@ -151,9 +138,23 @@ if(!empty($userDetails['profile_pic'])){
 
             $post_id = $row['ID'];
 
-              $comment_query = $con->prepare("SELECT * FROM live_comments WHERE comment_post_ID = ?");
+              // $comment_query = $con->prepare("SELECT * FROM live_comments WHERE comment_post_ID = ?");
+
+              $comment_query = $con->prepare("
+                  SELECT 
+                      live_comments.*, 
+                      model_user.name AS author_name, 
+                      model_user.email AS author_email, 
+                      model_user.profile_pic AS author_profile_pic 
+                  FROM live_comments 
+                  LEFT JOIN model_user ON live_comments.user_id = model_user.id 
+                  WHERE live_comments.comment_post_ID = ?
+              ");
+
               $comment_query->bind_param("i", $post_id);
+
               $comment_query->execute();
+
               $comment_result = $comment_query->get_result();
 
               $comments = [];
@@ -161,7 +162,17 @@ if(!empty($userDetails['profile_pic'])){
                   $comments[] = $comment;
               }
 
-            $row['comments'] = $comments;
+              $row['comments'] = $comments;
+
+              $post_like = $con->prepare("SELECT * FROM postlike WHERE pid = ?");
+
+              $post_like->bind_param("i", $post_id);
+
+              $post_like->execute();
+
+              $like_result = $post_like->get_result();
+
+             $row['like'] = $like_result->num_rows;
 
             $posts[] = $row;
 
@@ -308,11 +319,11 @@ if(!empty($userDetails['profile_pic'])){
 
                 <div class="flex space-x-4 md:space-x-6">
 
-                  <button class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
+                  <button type="button" onclick="AddLike('<?php echo $k ?>')"  class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
                       <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                       </svg>
-                      <span class="text-sm md:text-base">47</span>
+                      <span class="text-sm md:text-base" id="post_like_<?php echo $k ?>"> <?php echo $post['like'] ?></span>
                   </button>
 
                   <button onclick="AddComment('comment_<?php echo $k ?>')" class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
@@ -323,7 +334,7 @@ if(!empty($userDetails['profile_pic'])){
 
                       <?php $comment_count = count($post['comments']) ?>
 
-                      <span class="text-sm md:text-base"> <?php echo $comment_count ?></span>
+                      <span class="text-sm md:text-base"> <span id="count_comment_<?php echo $k ?>" > <?php echo $comment_count ?> </span> </span>
 
                   </button>
 
@@ -345,11 +356,25 @@ if(!empty($userDetails['profile_pic'])){
 
 
                           <?php
-                                $profile_pic = $post['profile_pic'] ?? '';
+
+                              $auther_pic_url ="";
+
+                              $profile_pic = $post['profile_pic'] ?? '';
+
+                              if (checkImageExists($profile_pic)) {
+
+                                $auther_pic_url = SITEURL . $profile_pic;
+
+                              }
+                            ?>
+
+                          <?php
+                                $profile_pic = $comment['author_profile_pic'] ?? '';
 
                                 if (checkImageExists($profile_pic)) {
 
                                   $imageUrl = SITEURL . $profile_pic;
+                                  
                               ?>
                                     
                                 <img src="<?php echo $imageUrl ?>" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
@@ -385,16 +410,16 @@ if(!empty($userDetails['profile_pic'])){
 
                      <?php
 
-                          $$imageUrl ="";
+                          $auther_pic_url ="";
 
                           $profile_pic = $post['profile_pic'] ?? '';
 
                           if (checkImageExists($profile_pic)) {
 
-                            $imageUrl = SITEURL . $profile_pic;
+                            $auther_pic_url = SITEURL . $profile_pic;
                         ?>
                               
-                          <img src="<?php echo $imageUrl ?>" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+                          <img src="<?php echo $auther_pic_url ?>" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
 
                       <?php } ?>
 
@@ -409,7 +434,7 @@ if(!empty($userDetails['profile_pic'])){
 
                     <input type="hidden" name="author_email" id="author_email_<?php echo $k ?>" value="<?php echo $post['author_email'] ?>">
 
-                    <input type="hidden" name="image_url" id="image_url<?php echo $k ?>" value="<?php echo $imageUrl ?>">
+                    <input type="hidden" name="image_url" id="image_url<?php echo $k ?>" value="<?php echo $auther_pic_url ?>">
                       
                     
                   </div>
@@ -541,6 +566,42 @@ if(!empty($userDetails['profile_pic'])){
         $(`#${element}`).slideToggle();
     }
 
+    function AddLike(comment_id)
+    {
+        var post_id = $(`#post_id_${comment_id}`).val();
+
+        var user_id = $(`#user_id_${comment_id}`).val();
+
+        $.ajax({
+
+            url: 'addcomment.php', 
+            type: 'POST',
+            data:{
+              post_id:post_id,
+              user_id:user_id,
+              action:"like",
+            },
+            success: function (response) {
+
+              if(response =='Liked')
+              {
+                 $(`#user_id_${comment_id}`)
+
+                   var like_count = parseInt($(`#post_like_${comment_id}`).text()) || 0;
+
+                    like_count++;
+
+                  $(`#post_like_${comment_id}`).text(like_count);
+              }
+              
+            },
+
+            error: function (xhr) {
+               
+            }
+        });
+    }
+
     function AddMessage(comment_id)
     {
         var post_id = $(`#post_id_${comment_id}`).val();
@@ -565,11 +626,19 @@ if(!empty($userDetails['profile_pic'])){
               user_id:user_id,
               comment:comment,
               author_name:author_name,
-              author_email:author_email
+              author_email:author_email,
+              action:"comment",
             },
             success: function (response) {
 
               $(`.no_comment_${comment_id}`).remove();
+
+              var count_comment = parseInt($(`#count_comment_${comment_id}`).text()) || 0;
+
+              count_comment++;
+
+              $(`#count_comment_${comment_id}`).text(count_comment);
+
 
               var image_html = "";
 
