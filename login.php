@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,60 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login - The Live Models</title>
 <meta name="description" content="Sign in to your The Live Models account to connect with amazing models for chat, watch and meet experiences.">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="./assets/css/stylesheet.css" />
 
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        --premium-gold: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-        --glass-bg: rgba(255, 255, 255, 0.05);
-        --glass-border: rgba(255, 255, 255, 0.1);
-        --neon-purple: #8b5cf6;
-        --neon-pink: #ec4899;
-        --neon-blue: #06b6d4;
-    }
-</style>
+    <?php include('includes/head.php'); ?>
 </head>
+
+
 <body class="login-page min-h-screen bg-animated text-white">
-<!-- Premium Particle System -->
+
 <div class="particles" id="particles"></div>
 
-<!-- Ultra Premium Header (Same as Homepage) -->
-<header class="ultra-glass sticky top-0 z-50 border-b border-white/10">
-    <div class="container mx-auto py-4 flex justify-between items-center">
-        <a href="index.html" class="text-2xl font-bold flex items-center group">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-jXeBRuA3MHFzdzWLPiwsY7t7uYmioN.png" alt="The Live Models" class="h-12 mr-3 group-hover:scale-110 transition duration-500">
-        </a>
-        <div class="flex items-center space-x-8">
-            <div class="hidden lg:flex items-center space-x-8">
-                <div class="flex items-center space-x-3 text-sm text-white/80 hover-lift">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="stats-counter" data-target="50000">0</span>
-                    <span class="font-medium">+ Online Now</span>
-                </div>
-                <div class="flex items-center space-x-3 text-sm text-white/80 hover-lift">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                    <span class="font-medium">24/7 Support</span>
-                </div>
-                <div class="flex items-center space-x-3 text-sm text-white/80 hover-lift">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    <span class="font-medium">100% Secure</span>
-                </div>
-            </div>
-            <a href="index.html" class="btn-secondary px-6 py-2 rounded-full font-semibold shadow-lg text-sm">
-                Back to Home
-            </a>
-        </div>
-    </div>
-</header>
+<?php include('includes/header.php'); ?>
 
 <main>
-    <!-- Premium Login Section - FIXED AND STABLE -->
+
     <section class="login-container relative overflow-hidden">
         <!-- Fixed Background Decorations -->
         <div class="bg-decoration bg-decoration-1"></div>
