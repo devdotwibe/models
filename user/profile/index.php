@@ -243,13 +243,19 @@ if(!empty($userDetails['profile_pic'])){
                 <div class="flex items-center">
                 <div class="relative">
 
-                    <?php if (empty($post['profile_pic'])): ?>
-                        
-                        <img src="<?= SITEURL . 'ajax/noimage.php?image=' ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                    <?php else: ?>
+            <?php
+                  $profilePic = $post['profile_pic'] ?? '';
 
-                        <img src="<?= SITEURL . $post['profile_pic']; ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                    <?php endif; ?>
+                  $imagePath = __DIR__ . '/../' . ltrim($profilePic, '/'); 
+
+                  if (!empty($profilePic) && file_exists($imagePath)) {
+                      $imageUrl = SITEURL . $profilePic;
+                  ?>
+                      <img src="<?= $imageUrl ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+                  <?php
+                  }
+              ?>
+
 
                     <div class="online-dot"></div>
                 </div>
