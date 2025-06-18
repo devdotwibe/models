@@ -49,10 +49,7 @@ if(!empty($userDetails['profile_pic'])){
 <body class="socialwall-page">
 
 
- <?php  include('../../includes/header.php'); ?>
-
- <?php  include('../../includes/user-side-bar.php'); ?>
-
+ <?php  include('../../includes/profile_header_index.php'); ?>
 
 <?php
 
@@ -106,6 +103,7 @@ if(!empty($userDetails['profile_pic'])){
         }
     }
 
+
     if (!empty($followed_user_ids)) {
 
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
@@ -129,8 +127,10 @@ if(!empty($userDetails['profile_pic'])){
             SELECT 
                 live_posts.*, 
                 model_user.name AS author_name, 
+                model_user.email AS author_email,
                 model_user.country,
-                model_user.profile_pic
+                model_user.profile_pic,
+                model_user.id AS user_id
             FROM live_posts
             JOIN model_user ON live_posts.post_author = model_user.id
             WHERE post_author IN ($placeholders)
@@ -148,7 +148,24 @@ if(!empty($userDetails['profile_pic'])){
         $result = $stmt->get_result();
 
         while ($row = $result->fetch_assoc()) {
+
+            $post_id = $row['ID'];
+
+              $comment_query = $con->prepare("SELECT * FROM live_comments WHERE comment_post_ID = ?");
+              $comment_query->bind_param("i", $post_id);
+              $comment_query->execute();
+              $comment_result = $comment_query->get_result();
+
+              $comments = [];
+              while ($comment = $comment_result->fetch_assoc()) {
+                  $comments[] = $comment;
+              }
+
+            $row['comments'] = $comments;
+
             $posts[] = $row;
+
+
         }
 
     }
@@ -237,7 +254,7 @@ if(!empty($userDetails['profile_pic'])){
 
         <!-- Post 1 -->
 
-        <?php foreach ($posts as $post) { ?>
+        <?php foreach ($posts as $k => $post) { ?>
 
             <div class="model-card">
             <div class="flex items-center justify-between mb-4">
@@ -288,37 +305,117 @@ if(!empty($userDetails['profile_pic'])){
 
 
             <div class="flex justify-between items-center">
+
                 <div class="flex space-x-4 md:space-x-6">
-                <button class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
-                    <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                    <span class="text-sm md:text-base">47</span>
-                </button>
-                <button class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
-                    <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-                    </svg>
-                    <span class="text-sm md:text-base">12</span>
-                </button>
+
+                  <button class="like-btn flex items-center text-white/70 hover:text-pink-400 transition-colors" onclick="toggleLike(this)">
+                      <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                      </svg>
+                      <span class="text-sm md:text-base">47</span>
+                  </button>
+
+                  <button onclick="AddComment('comment_<?php echo $k ?>')" class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
+
+                      <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                      </svg>
+
+                      <?php $comment_count = count($post['comments']) ?>
+
+                      <span class="text-sm md:text-base"> <?php echo $comment_count ?></span>
+
+                  </button>
+
                 </div>
-                <button class="btn-secondary text-sm md:text-base">Message</button>
+
+                <button type="button" onclick="AddMessage('<?php echo $k ?>')" class="btn-secondary text-sm md:text-base">Message</button>
+
             </div>
 
-            <!-- Comments -->
-            <div class="mt-6 pt-4 border-t border-white/10">
-                <div class="flex items-start mb-4">
-                <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
-                <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
-                    <p class="font-medium text-xs md:text-sm">Alex M.</p>
-                    <p class="text-xs md:text-sm text-white/80">Count me in for the hike! I know some great trails 🥾</p>
-                </div>
-                </div>
-                <div class="flex items-center">
-                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
-                <input type="text" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
-                </div>
-            </div>
+              <div class="mt-6 pt-4 border-t border-white/10 " id="comment_<?php echo $k ?>" style="display:none;">
+
+                  <?php if($comment_count > 0) { ?>
+
+                    <?php if (!empty($post['comments'])) { ?>
+
+                      <?php foreach ($post['comments']  as $index => $comment) { ?>
+
+                          <div class="flex items-start mb-4">
+
+
+                          <?php
+                                $profile_pic = $post['profile_pic'] ?? '';
+
+                                if (checkImageExists($profile_pic)) {
+
+                                  $imageUrl = SITEURL . $profile_pic;
+                              ?>
+                                    
+                                <img src="<?php echo $imageUrl ?>" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+
+                            <?php } ?>
+
+                                  <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
+
+                                    <p class="font-medium text-xs md:text-sm"> <?php echo $comment['comment_author'] ?></p>
+
+                                    <p class="text-xs md:text-sm text-white/80"> <?php echo $comment['comment_content'] ?></p>
+
+                                  </div>
+                          </div>
+
+                        <?php } ?>
+
+                      <?php } ?>
+
+
+                  <?php } else { ?>
+
+                    <div class="flex items-start mb-4 no_comment_<?php echo $k ?>">
+
+                        <p class="text-xs md:text-sm text-white/80  ">No Comments Posted.</p>
+
+                    </div>
+
+                  <?php } ?>
+
+
+                    <div class="flex items-center comnt_user_<?php echo $k ?>">
+
+                     <?php
+
+                          $$imageUrl ="";
+
+                          $profile_pic = $post['profile_pic'] ?? '';
+
+                          if (checkImageExists($profile_pic)) {
+
+                            $imageUrl = SITEURL . $profile_pic;
+                        ?>
+                              
+                          <img src="<?php echo $imageUrl ?>" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
+
+                      <?php } ?>
+
+
+                    <input type="text" name="comment" id="comment_content_<?php echo $k ?>" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
+
+                    <input type="hidden" name="post_id" id="post_id_<?php echo $k ?>" value="<?php echo $post['ID'] ?>">
+
+                    <input type="hidden" name="user_id" id="user_id_<?php echo $k ?>" value="<?php echo $post['user_id'] ?>">
+
+                    <input type="hidden" name="author_name" id="author_name_<?php echo $k ?>" value="<?php echo $post['author_name'] ?>">
+
+                    <input type="hidden" name="author_email" id="author_email_<?php echo $k ?>" value="<?php echo $post['author_email'] ?>">
+
+                    <input type="hidden" name="image_url" id="image_url<?php echo $k ?>" value="<?php echo $imageUrl ?>">
+                      
+                    
+                  </div>
+
+              </div>
+
             </div>
 
         <?php }  ?>
@@ -433,9 +530,74 @@ if(!empty($userDetails['profile_pic'])){
     </div>
   </nav>
 
-  <!-- JavaScript -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+
   <script>
-    // Hamburger menu functionality
+
+    function AddComment(element)
+    { 
+        $(`#${element}`).slideToggle();
+    }
+
+    function AddMessage(comment_id)
+    {
+        var post_id = $(`#post_id_${comment_id}`).val();
+
+        var user_id = $(`#user_id_${comment_id}`).val();
+
+        var comment = $(`#comment_content_${comment_id}`).val();
+
+        var author_name = $(`#author_name_${comment_id}`).val();
+
+        var author_email = $(`#author_email_${comment_id}`).val();
+
+        var image_url = $(`#image_url${comment_id}`).val();
+
+        $.ajax({
+
+            url: 'addcomment.php', 
+            type: 'POST',
+            data:{
+
+              post_id:post_id,
+              user_id:user_id,
+              comment:comment,
+              author_name:author_name,
+              author_email:author_email
+            },
+            success: function (response) {
+
+              $(`.no_comment_${comment_id}`).remove();
+
+              var image_html = "";
+
+              if(image_url !== "")
+              {
+                image_html += `<img src="${image_url}" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">`;
+              }
+
+               $(`.comnt_user_${comment_id}`).before(`
+                    <div class="flex items-start mb-4">
+                        ${image_html}
+                        <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
+                            <p class="font-medium text-xs md:text-sm">${author_name}</p>
+                            <p class="text-xs md:text-sm text-white/80">${comment}</p>
+                        </div>
+                    </div>
+                `);
+
+              $(`#comment_content_${comment_id}`).val('');
+              
+            },
+
+            error: function (xhr) {
+               
+            }
+        });
+    }
+
     const hamburger = document.getElementById('hamburgerMenu');
     const sidebar = document.getElementById('sidebarMenu');
     const overlay = document.getElementById('sidebarOverlay');
@@ -483,8 +645,9 @@ if(!empty($userDetails['profile_pic'])){
 
     // Navigation functions
     function navigateTo(page) {
+
       alert(`Navigating to ${page} page...`);
-      toggleSidebar(); // Close sidebar after navigation
+      toggleSidebar(); 
     }
 
     // Profile functions
@@ -502,16 +665,6 @@ if(!empty($userDetails['profile_pic'])){
       }
     }
 
-    // Message button functionality
-    document.querySelectorAll('button').forEach(button => {
-      if (button.textContent === 'Message') {
-        button.addEventListener('click', function() {
-          alert('Opening chat...');
-        });
-      }
-    });
-
-    // Mobile navigation
     document.querySelectorAll('.mobile-nav-item').forEach(item => {
       item.addEventListener('click', function() {
         document.querySelectorAll('.mobile-nav-item').forEach(i => i.classList.remove('active'));
