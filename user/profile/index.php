@@ -109,19 +109,6 @@ if(!empty($userDetails['profile_pic'])){
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
 
-        // $sql = "SELECT * FROM live_posts WHERE post_author IN ($placeholders) ORDER BY post_date DESC";
-
-        //       $sql = "
-        //     SELECT 
-        //         live_posts.*, 
-        //         model_user.name AS author_name, 
-        //         model_user.country AS country,
-        //         model_user.country AS country
-        //     FROM live_posts
-        //     JOIN model_user ON live_posts.post_author = model_user.id
-        //     WHERE post_author IN ($placeholders)
-        //     ORDER BY post_date DESC
-        // ";
 
         $sql = "
             SELECT 
@@ -175,7 +162,17 @@ if(!empty($userDetails['profile_pic'])){
                   $comments[] = $comment;
               }
 
-            $row['comments'] = $comments;
+              $row['comments'] = $comments;
+
+              $post_like = $con->prepare("SELECT * FROM postlike WHERE pid = ?");
+
+              $post_like->bind_param("i", $post_id);
+
+              $post_like->execute();
+
+              $like_result = $post_like->get_result();
+
+             $row['like'] = $like_result->num_rows;
 
             $posts[] = $row;
 
@@ -326,7 +323,7 @@ if(!empty($userDetails['profile_pic'])){
                       <svg class="w-5 md:w-6 h-5 md:h-6 mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                       </svg>
-                      <span class="text-sm md:text-base">47</span>
+                      <span class="text-sm md:text-base"> <?php echo $post['like'] ?></span>
                   </button>
 
                   <button onclick="AddComment('comment_<?php echo $k ?>')" class="flex items-center text-white/70 hover:text-blue-400 transition-colors">
@@ -367,7 +364,7 @@ if(!empty($userDetails['profile_pic'])){
                               if (checkImageExists($profile_pic)) {
 
                                 $auther_pic_url = SITEURL . $profile_pic;
-                                
+
                               }
                             ?>
 
