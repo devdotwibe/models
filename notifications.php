@@ -505,7 +505,7 @@ if (isset($_SESSION['log_user_id'])) {
 		
 		<?php
 		
-		$limit = 1; 
+		$limit = 10; 
 			if(isset($_GET['offset'])){
 			$offset = $_GET['offset'];
 			}else $offset = 0;
@@ -518,9 +518,11 @@ if (isset($_SESSION['log_user_id'])) {
 
               $resultd = mysqli_query($con, $sqls);
 
-                if (mysqli_num_rows($resultd) > 0) { 
+                if (mysqli_num_rows($resultd) > 0) { ?>
 				
-				while($rowesdw = mysqli_fetch_assoc($resultd)) {
+				<div class="notf_grid">
+				
+				<?php while($rowesdw = mysqli_fetch_assoc($resultd)) {
 					
 					$get_modal = DB::query('select name,username,profile_pic from model_user where id='.$rowesdw['sender_id']);
 					if(!empty($get_modal)){
@@ -589,11 +591,13 @@ if (isset($_SESSION['log_user_id'])) {
             
 			<?php } ?>
 			
-			<?php if($row_cnt['total'] > 1){ ?>
+			</div>
+			
+			<?php if($row_cnt['total'] > 10){ ?>
 			
 			<!-- Load More Button -->
 			<div class="allonly text-center mt-12">
-				<button class="btn-secondary px-8 py-4 text-white rounded-xl hover:bg-white/20 transition duration-300 text-lg font-semibold" onclick="loadMoreNotifications()">
+				<button class="btn-secondary px-8 py-4 text-white rounded-xl hover:bg-white/20 transition duration-300 text-lg font-semibold" id="loadMoreNotifications">
 					Load More Notifications
 				</button>
 			</div>
@@ -614,6 +618,35 @@ if (isset($_SESSION['log_user_id'])) {
 	  
 
  <?php include('includes/footer.php'); ?>
+ 
+ <script>
+
+
+let offset = 0;
+const limit = 10;
+
+jQuery('#loadMoreNotifications').on('click', function($) { 
+   
+offset = offset+limit;	
+	 
+	jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'load_more_notification.php'?>",
+				data:{offset:offset,total:"<?php echo $row_cnt['total']; ?>"},
+				dataType:'json',
+				success: function(response){ console.log(response.html);
+					jQuery('.notf_grid').append(response.html);
+					
+
+					if (response.loadmore == 'no') {
+						jQuery('#loadMoreNotifications').hide(); // Hide button if no more data
+					}
+				}
+			});
+	
+	
+});
+</script>
  
  
  <script>
@@ -768,9 +801,7 @@ if (isset($_SESSION['log_user_id'])) {
 		}
     }
 
-    function loadMoreNotifications() {
-        alert(`📥 Loading more notifications...`);
-    }
+    
 </script>
  
  
