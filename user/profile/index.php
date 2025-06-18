@@ -367,6 +367,8 @@ if(!empty($userDetails['profile_pic'])){
                               if (checkImageExists($profile_pic)) {
 
                                 $auther_pic_url = SITEURL . $profile_pic;
+                                
+                              }
                             ?>
 
                           <?php
@@ -375,6 +377,7 @@ if(!empty($userDetails['profile_pic'])){
                                 if (checkImageExists($profile_pic)) {
 
                                   $imageUrl = SITEURL . $profile_pic;
+                                  
                               ?>
                                     
                                 <img src="<?php echo $imageUrl ?>" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
