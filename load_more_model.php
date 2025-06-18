@@ -58,13 +58,13 @@ $resultd = mysqli_query($con, $sqls);
 						 } 
                     $html .= '</div>
                     <div class="profile-actions">
-                        <button class="action-btn connect" title="Connect">
+                        <button class="action-btn connect" title="Connect" modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
                             <i class="fas fa-user-plus"></i>
                         </button>
-                        <button class="action-btn like" title="Like">
+                        <button class="action-btn like" title="Like" modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
                             <i class="fas fa-heart"></i>
                         </button>
-                        <button class="action-btn pass" title="Pass">
+                        <button class="action-btn pass" title="Pass" modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
