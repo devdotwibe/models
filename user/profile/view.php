@@ -57,7 +57,20 @@ if(!empty($userDetails['profile_pic'])){
             <div class="profile-info pt-32 sm:pt-40 md:pt-48 pb-6 px-4 md:px-0">
                 <div class="flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
                     <div class="profile-avatar-container">
-                        <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $userDetails['profile_pic']; ?>" alt="Urdevilicifer" class="profile-avatar">
+
+                            <?php
+                                $profile_pic = $userDetails['profile_pic'] ?? '';
+
+                                if (checkImageExists($profile_pic)) {
+
+                                  $imageUrl = SITEURL . $profile_pic;
+                                  
+                              ?>
+                              
+                                <img src="<?php echo $imageUrl ?>" alt="Urdevilicifer" class="profile-avatar">
+
+                            <?php } ?>
+
                     </div>
                     <div class="flex-1">
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
