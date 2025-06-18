@@ -563,18 +563,14 @@ if(!empty($userDetails['profile_pic'])){
             },
             success: function (response) {
 
-              // $(`.no_comment_${comment_id}`).remove();
+              $(`.no_comment_${comment_id}`).remove();
 
-              // $(`.comnt_user_`).append(
-              //   `
-              //    <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
-
-              //     <p class="font-medium text-xs md:text-sm">${author_name}</p>
-
-              //     <p class="text-xs md:text-sm text-white/80">${comment}</p>
-
-              //   </div>`;
-              // );
+              $(`.comnt_user_${comment_id}`).append(`
+                  <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
+                      <p class="font-medium text-xs md:text-sm">${author_name}</p>
+                      <p class="text-xs md:text-sm text-white/80">${comment}</p>
+                  </div>
+              `);
               
             },
 
