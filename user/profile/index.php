@@ -128,7 +128,8 @@ if(!empty($userDetails['profile_pic'])){
                 live_posts.*, 
                 model_user.name AS author_name, 
                 model_user.country,
-                model_user.profile_pic
+                model_user.profile_pic,
+                model_user.id AS user_id
             FROM live_posts
             JOIN model_user ON live_posts.post_author = model_user.id
             WHERE post_author IN ($placeholders)
@@ -379,6 +380,10 @@ if(!empty($userDetails['profile_pic'])){
                           <img src="<?php echo $imageUrl ?>" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
 
                       <?php } ?>
+
+                    <input type="hidden" name="post_id" id="post_id_<?php echo $k ?>" value="<?php echo $post['ID'] ?>">
+
+                    <input type="hidden" name="user_id" id="user_id_<?php echo $k ?>" value="<?php echo $post['user_id'] ?>">
                       
                     <input type="text" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
                     
