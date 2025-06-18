@@ -243,17 +243,15 @@ if(!empty($userDetails['profile_pic'])){
                 <div class="flex items-center">
                 <div class="relative">
 
-            <?php
-                  $profilePic = $post['profile_pic'] ?? '';
+              <?php
+                $profile_pic = $post['profile_pic'] ?? '';
 
-                  $imagePath = __DIR__ . '/../' . ltrim($profilePic, '/'); 
-
-                  if (!empty($profilePic) && file_exists($imagePath)) {
-                      $imageUrl = SITEURL . $profilePic;
-                  ?>
-                      <img src="<?= $imageUrl ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                  <?php
-                  }
+                  if (checkImageExists($profile_pic)) {
+                        $imageUrl = SITEURL . $profile_pic;
+                ?>
+                        <img src="<?= $imageUrl ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+                <?php
+                    }
               ?>
 
 
