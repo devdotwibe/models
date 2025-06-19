@@ -26,7 +26,7 @@ $serviceArr = array('Providing services', 'Looking for services');
     <?php include('../includes/head.php'); ?>
 </head>
 
-<body class="advt-page">
+<body class="advt-page  socialwall-page">
 <!-- Premium Particle System -->  <div class="particles" id="particles"></div>
 
 

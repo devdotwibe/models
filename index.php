@@ -76,7 +76,7 @@ include('includes/helper.php');
       }
     </style>
   </head>
-  <body class="min-h-screen bg-animated text-white home-page">    
+  <body class="min-h-screen bg-animated text-white home-page socialwall-page">    
   <!-- Premium Particle System -->  
   <div class="particles" id="particles"></div>
     <!-- Ultra Premium Header -->
