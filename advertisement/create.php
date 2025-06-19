@@ -96,7 +96,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-	<title>Notification | The Live Model</title>
+	<title>Create Advertisement - The Live Models</title>
 	<?php include('../includes/head.php'); ?>
 	<style>
 		.thumbnail {
@@ -111,29 +111,53 @@ $serviceArr = array('Providing services', 'Looking for services');
 	
 </head>
 
-<body class="page-template-default page page-id-319 custom-background advt-page">
+<body class="creare-ad min-h-screen text-white socialwall-page">
 
-	<?php include('../includes/header.php'); ?>
+<!-- Premium Particle System -->
+<div class="particles" id="particles"></div>
+
+	<?php //include('../includes/header.php'); ?>
+	<?php  include('../includes/side-bar.php'); ?>
+	<?php  include('../includes/profile_header_index.php'); ?>
 	
-	<!-- Main Content -->
-    <main class="main">
+	<main class="py-12">
+    <div class="container mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold heading-font gradient-text mb-4">Create New Advertisement</h1>
+            <p class="text-lg text-white/70 max-w-2xl mx-auto">Showcase your services and attract more clients with a premium advertisement</p>
+        </div>
 
-	<div class="container">
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step active" id="step1">1</div>
+            <div class="step" id="step2">2</div>
+            <div class="step" id="step3">3</div>
+        </div>
 
-		<div id="content" class="clearfix row">
+        <!-- Form Container -->
+        <div class="max-w-4xl mx-auto">
+            <?php /*?><form class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" onsubmit="submitForm(event)"><?php */ ?>
+			<form action="" method="post" class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" role="form" enctype="multipart/form-data">
 
-			<div id="main" class="col-md-12 clearfix">
-				<div class="panel bg-blue">
-					<div class="panel-body">
-						<div>
-							<form action="" method="post" class="form-horizontal edit-form" role="form" enctype="multipart/form-data">
-								<div class="form-body">
+                <!-- Step 1: Basic Information -->
+                <div id="formStep1" class="form-step">
+                    <h2 class="text-2xl font-bold premium-text mb-8 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-indigo-400">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        Basic Information
+                    </h2>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Category *</label>
-										<div class="col-md-9">
-											<select name="category" class="form-control" required>
-												<option value="">Select</option>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block text-white font-semibold mb-3">Category *</label>
+							<select name="category" class="form-input w-full px-6 py-4 rounded-xl" required>
+												<option value="">Select Category</option>
 												<?php
 												foreach ($category_list as $val) {
 												?>
@@ -142,13 +166,12 @@ $serviceArr = array('Providing services', 'Looking for services');
 												}
 												?>
 											</select>
-										</div>
-									</div>
+                            
+                        </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">I Am *</label>
-										<div class="col-md-9">
-											<select name="service" class="form-control" required>
+                        <div>
+                            <label class="block text-white font-semibold mb-3">I Am *</label>
+							<select name="service" class="form-input w-full px-6 py-4 rounded-xl" required>
 												<?php
 												foreach ($serviceArr as $val) {
 												?>
@@ -157,36 +180,57 @@ $serviceArr = array('Providing services', 'Looking for services');
 												}
 												?>
 											</select>
-										</div>
-									</div>
+                            
+                        </div>
+                    </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Title *</label>
-										<div class="col-md-9">
-											<input type="text" name="name" value="" class="form-control" required />
-										</div>
-									</div>
-									
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Subtitle </label>
-										<div class="col-md-9">
-											<input type="text" name="subtitle" value="" class="form-control" />
-										</div>
-									</div>
+                    <div class="mt-8">
+                        <label class="block text-white font-semibold mb-3">Advertisement Title *</label>
+                        <input type="text" name="name" value="" class="form-input w-full px-6 py-4 rounded-xl" placeholder="Enter a catchy title for your advertisement..." required />
+						<p class="text-white/50 text-sm mt-2">💡 Tip: Use engaging words that describe your unique services</p>
+                    </div>
+					
+					<div class="mt-8">
+                        <label class="block text-white font-semibold mb-3">Advertisement Subtitle *</label>
+                        <input type="text" name="subtitle" value="" class="form-input w-full px-6 py-4 rounded-xl" placeholder="Enter a catchy title for your advertisement..." required />
+						<p class="text-white/50 text-sm mt-2">💡 Tip: Subtitle of advertisement</p>
+                    </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Description</label>
-										<div class="col-md-9">
-											<textarea name="description" class="form-control" required></textarea>
-										</div>
-									</div>
+                    <div class="mt-8">
+                        <label class="block text-white font-semibold mb-3">Description *</label>
+                        <textarea name="description" class="form-input w-full px-6 py-4 rounded-xl h-40 resize-none" placeholder="Describe your services in detail. What makes you special? What can clients expect?" required></textarea>
+						<div class="flex justify-between items-center mt-2">
+                            <p class="text-white/50 text-sm">💡 Be specific about your services, rates, and availability</p>
+                            <span class="text-white/50 text-sm" id="charCount">0/500</span>
+                        </div>
+                    </div>
+					
+					<div class="mt-8">
+                        <label class="block text-white font-semibold mb-3">Terms and Conditions</label>
+                        <textarea name="terms_conditions" class="form-input w-full px-6 py-4 rounded-xl h-40 resize-none" placeholder="Describe your terms and conditions related to this advertisement." ></textarea>
+						<div class="flex justify-between items-center mt-2">
+                            <p class="text-white/50 text-sm">💡 Be specific about your services, rates, and availability</p>
+                            <span class="text-white/50 text-sm" id="charCount">0/500</span>
+                        </div>
+                    </div>
+					
+                </div>
 
+                <!-- Step 2: Location & Pricing -->
+                <div id="formStep2" class="form-step hidden">
+                    <h2 class="text-2xl font-bold premium-text mb-8 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-indigo-400">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Location & Pricing
+                    </h2>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Country *</label>
-										<div class="col-md-9">
-											<select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-control" required>
-												<option value="" data-id="">Select</option>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-white font-semibold mb-3">Country *</label>
+							<select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-input w-full px-6 py-4 rounded-xl" required>
+												<option value="" data-id="">Select Country</option>
 												<?php
 												if ($f_country_list) {
 													foreach ($f_country_list as $val) {
@@ -198,114 +242,133 @@ $serviceArr = array('Providing services', 'Looking for services');
 
 												?>
 											</select>
-										</div>
-									</div>
+                            
+                        </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">State *</label>
-										<div class="col-md-9">
-											<select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-control"></select>
-										</div>
-									</div>
+                        <div>
+                            <label class="block text-white font-semibold mb-3">State/Province *</label>
+							<select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-input w-full px-6 py-4 rounded-xl" required ></select>
+                            
+                        </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">City *</label>
-										<div class="col-md-9">
-											<select name="city" id="i-hs-city" class="form-control"></select>
+                        <div>
+                            <label class="block text-white font-semibold mb-3">City *</label>
+							<select name="city" id="i-hs-city" class="form-input w-full px-6 py-4 rounded-xl" required ></select>
+                            
+                        </div>
+                    </div>
 
-										</div>
-									</div>
+                    
+                </div>
 
+                <!-- Step 3: Media Upload -->
+                <div id="formStep3" class="form-step hidden">
+                    <h2 class="text-2xl font-bold premium-text mb-8 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-indigo-400">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="9" cy="9" r="2"></circle>
+                            <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                        </svg>
+                        Photos & Videos
+                    </h2>
 
+                    <!-- Photo Upload Section -->
+                    <div class="mb-12">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-semibold premium-text">Photos</h3>
+                            <span class="text-white/60 text-sm">Maximum 10 photos • JPG, PNG, GIF up to 10MB each</span>
+                        </div>
 
+                        <div class="upload-area rounded-2xl p-8 text-center mb-6" id="photoUploadArea">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 text-white/50">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="9" cy="9" r="2"></circle>
+                                <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                            </svg>
+                            <h4 class="text-xl font-semibold text-white mb-2">Upload Your Photos</h4>
+                            <p class="text-white/70 mb-4">Drag and drop your photos here, or click to browse</p>
+                            <button type="button" class="btn-primary px-8 py-3 rounded-xl font-semibold" onclick="document.getElementById('photoInput').click()">
+                                Choose Photos
+                            </button>
+                            <input type="file" name="files" id="photoInput" class="hidden" multiple accept="image/*" onchange="handlePhotoUpload(event)" required>
+							
+                        </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Image *</label>
-										<div class="col-md-9">
-											<div class="fileinput fileinput-new" data-provides="fileinput">
-												<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
-													<img src="<?= '../assets/images/no-image.gif' ?>" />
-												</div>
-												<div>
-													<span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
-														<input type="file" name="files" value="" class="form-control" required /></span>
-													<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-												</div>
-											</div>
+                        <!-- Photo Preview Grid -->
+                        <div id="photoPreviewGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 hidden">
+                            <!-- Photo previews will be inserted here -->
+                        </div>
+                    </div>
 
-										</div>
-									</div>
+                    <!-- Video Upload Section -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-semibold premium-text">Videos</h3>
+                            <span class="text-white/60 text-sm">Maximum 5 videos • MP4, MOV, AVI up to 100MB each</span>
+                        </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Video</label>
-										<div class="col-md-9">
-											<input type="file" name="video_file" value="" class="form-control" />
-											<span>Upload only MP4 file</span>
-										</div>
-									</div>
-									
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Additional Images</label>
-										<div class="col-md-9">
-										
-										<?php /*?><div class="dropzone" id="mydropzone">
-											<div class="dropzone-previews"></div>
-										</div><?php */ ?>
-										
-										<input type="file" name="additionalimages[]" id="imageInput_addt" multiple  accept=".jpg,.jpeg,.png" />
-										<div id="preview_addt">
-										
-										
-										
-										<?php 
-										if(!empty($form_data['additionalimages'])){
-											$additionalimages = explode('|',$form_data['additionalimages']);
-											foreach($additionalimages as $add_img){
-												echo '<img src="'.SITEURL . 'uploads/banners/' . $add_img.'" alt="' . $add_img.'" >';  
-											}
-										} ?>
-										
-										
-										</div>
-										
-										</div>
-										
-									</div>
-									
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Terms and Conditions</label>
-										<div class="col-md-9">
-											<textarea name="terms_conditions" class="form-control" ></textarea>
-										</div>
-									</div>
-
-
-
-
-
-								</div>
-								<div class="form-actions">
-									<div class="row">
-										<div class="col-md-9 offset-md-3">
-											<button type="submit" class="btn btn-info submitBtn btn-primary">Save</button>
-											<a href="<?= SITEURL . 'advertisement/list.php' ?>" class="btn btn-default">Back</a>
-										</div>
-									</div>
-								</div>
-							</form>
-							<div style="clear:both"></div>
-
+                        <div class="upload-area rounded-2xl p-8 text-center mb-6" id="videoUploadArea">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 text-white/50">
+                                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg>
+                            <h4 class="text-xl font-semibold text-white mb-2">Upload Your Videos</h4>
+                            <p class="text-white/70 mb-4">Drag and drop your videos here, or click to browse</p>
+                            <button type="button" class="btn-primary px-8 py-3 rounded-xl font-semibold" onclick="document.getElementById('videoInput').click()">
+                                Choose Videos
+                            </button>
+                            <input type="file" name="video_file" id="videoInput" class="hidden" multiple accept="video/*" onchange="handleVideoUpload(event)">
 						</div>
-					</div>
-				</div>
 
-			</div>
+                        <!-- Video Preview Grid -->
+                        <div id="videoPreviewGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+                            <!-- Video previews will be inserted here -->
+                        </div>
+                    </div>
 
-		</div>
+                    <!-- Upload Progress -->
+                    <div id="uploadProgress" class="hidden mb-8">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-white font-semibold">Uploading...</span>
+                            <span class="text-white/70" id="progressText">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill w-[0%]" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
 
-	</div>
-	
-	</main>
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between items-center mt-12 pt-8 border-t border-white/10">
+                    <button type="button" id="backBtn" class="btn-danger px-8 py-4 rounded-xl font-semibold hidden" onclick="previousStep()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                        Back
+                    </button>
+
+                    <div class="flex space-x-4 ml-auto">
+                        <!-- <button type="button" class="btn-secondary px-8 py-4 rounded-xl font-semibold" onclick="saveDraft()">
+                            Save Draft
+                        </button> -->
+                        <button type="button" id="nextBtn" class="btn-primary px-8 py-4 rounded-xl font-semibold" onclick="nextStep()">
+                            Next Step
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 inline">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                        <button type="submit" id="submitBtn" class="btn-primary px-8 py-4 rounded-xl font-semibold hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline">
+                                <path d="M5 12l5 5l10-10"></path>
+                            </svg>
+                            Create Advertisement
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
 
 	<?php include('../includes/footer.php'); ?>
 	<style>
@@ -441,6 +504,334 @@ $serviceArr = array('Providing services', 'Looking for services');
 			color: #F00;
 		}
 	</style>
+	
+	
+	<script>
+    // Premium JavaScript Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        initializePremiumFeatures();
+        initializeFormFeatures();
+    });
+
+    let currentStep = 1;
+    let uploadedPhotos = [];
+    let uploadedVideos = [];
+
+    function initializePremiumFeatures() {
+        // Premium Particle System
+        function createPremiumParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 12 + 's';
+            particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+            particle.style.opacity = Math.random() * 0.8 + 0.2;
+
+            const colors = [
+                'rgba(139, 92, 246, 0.8)',
+                'rgba(236, 72, 153, 0.6)',
+                'rgba(6, 182, 212, 0.7)'
+            ];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
+
+            document.getElementById('particles').appendChild(particle);
+
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.remove();
+                }
+            }, 12000);
+        }
+
+        setInterval(createPremiumParticle, 150);
+    }
+
+    function initializeFormFeatures() {
+        // Character counter for description
+        const descriptionTextarea = document.querySelector('textarea');
+        const charCount = document.getElementById('charCount');
+
+        descriptionTextarea.addEventListener('input', function() {
+            const count = this.value.length;
+            charCount.textContent = `${count}/500`;
+            if (count > 500) {
+                charCount.style.color = '#ef4444';
+            } else {
+                charCount.style.color = 'rgba(255, 255, 255, 0.5)';
+            }
+        });
+
+        // Drag and drop functionality
+        setupDragAndDrop();
+    }
+
+    function setupDragAndDrop() {
+        const photoUploadArea = document.getElementById('photoUploadArea');
+        const videoUploadArea = document.getElementById('videoUploadArea');
+
+        // Photo upload area
+        photoUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        photoUploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+
+        photoUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith('image/'));
+            handlePhotoFiles(files);
+        });
+
+        // Video upload area
+        videoUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        videoUploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+
+        videoUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith('video/'));
+            handleVideoFiles(files);
+        });
+    }
+
+    function nextStep() {
+        if (currentStep < 3) {
+            // Hide current step
+            document.getElementById(`formStep${currentStep}`).classList.add('hidden');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${currentStep}`).classList.add('completed');
+
+            // Show next step
+            currentStep++;
+            document.getElementById(`formStep${currentStep}`).classList.remove('hidden');
+            document.getElementById(`step${currentStep}`).classList.add('active');
+
+            // Update buttons
+            document.getElementById('backBtn').classList.remove('hidden');
+
+            if (currentStep === 3) {
+                document.getElementById('nextBtn').classList.add('hidden');
+                document.getElementById('submitBtn').classList.remove('hidden');
+            }
+        }
+    }
+
+    function previousStep() {
+        if (currentStep > 1) {
+            // Hide current step
+            document.getElementById(`formStep${currentStep}`).classList.add('hidden');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+
+            // Show previous step
+            currentStep--;
+            document.getElementById(`formStep${currentStep}`).classList.remove('hidden');
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.getElementById(`step${currentStep}`).classList.remove('completed');
+
+            // Update buttons
+            if (currentStep === 1) {
+                document.getElementById('backBtn').classList.add('hidden');
+            }
+
+            if (currentStep < 3) {
+                document.getElementById('nextBtn').classList.remove('hidden');
+                document.getElementById('submitBtn').classList.add('hidden');
+            }
+        }
+    }
+
+    function handlePhotoUpload(event) {
+        const files = Array.from(event.target.files);
+        handlePhotoFiles(files);
+    }
+
+    function handlePhotoFiles(files) {
+        if (uploadedPhotos.length + files.length > 10) {
+            alert('Maximum 10 photos allowed');
+            return;
+        }
+
+        files.forEach(file => {
+            if (file.size > 10 * 1024 * 1024) {
+                alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photoData = {
+                    file: file,
+                    url: e.target.result,
+                    id: Date.now() + Math.random()
+                };
+
+                uploadedPhotos.push(photoData);
+                displayPhotoPreview(photoData);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function displayPhotoPreview(photoData) {
+        const grid = document.getElementById('photoPreviewGrid');
+        grid.classList.remove('hidden');
+
+        const previewDiv = document.createElement('div');
+        previewDiv.className = 'media-preview relative';
+        previewDiv.innerHTML = `
+            <img src="${photoData.url}" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
+            <button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        `;
+
+        grid.appendChild(previewDiv);
+    }
+
+    function handleVideoUpload(event) {
+        const files = Array.from(event.target.files);
+        handleVideoFiles(files);
+    }
+
+    function handleVideoFiles(files) {
+        if (uploadedVideos.length + files.length > 5) {
+            alert('Maximum 5 videos allowed');
+            return;
+        }
+
+        files.forEach(file => {
+            if (file.size > 100 * 1024 * 1024) {
+                alert(`File ${file.name} is too large. Maximum size is 100MB.`);
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const videoData = {
+                    file: file,
+                    url: e.target.result,
+                    id: Date.now() + Math.random()
+                };
+
+                uploadedVideos.push(videoData);
+                displayVideoPreview(videoData);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function displayVideoPreview(videoData) {
+        const grid = document.getElementById('videoPreviewGrid');
+        grid.classList.remove('hidden');
+
+        const previewDiv = document.createElement('div');
+        previewDiv.className = 'media-preview relative';
+        previewDiv.innerHTML = `
+            <video src="${videoData.url}" class="w-full h-48 object-cover rounded-xl" controls></video>
+            <button type="button" class="remove-btn" onclick="removeVideo('${videoData.id}')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                ${formatFileSize(videoData.file.size)}
+            </div>
+        `;
+
+        grid.appendChild(previewDiv);
+    }
+
+    function removePhoto(id) {
+        uploadedPhotos = uploadedPhotos.filter(photo => photo.id !== id);
+        refreshPhotoGrid();
+    }
+
+    function removeVideo(id) {
+        uploadedVideos = uploadedVideos.filter(video => video.id !== id);
+        refreshVideoGrid();
+    }
+
+    function refreshPhotoGrid() {
+        const grid = document.getElementById('photoPreviewGrid');
+        grid.innerHTML = '';
+
+        if (uploadedPhotos.length === 0) {
+            grid.classList.add('hidden');
+        } else {
+            uploadedPhotos.forEach(photo => displayPhotoPreview(photo));
+        }
+    }
+
+    function refreshVideoGrid() {
+        const grid = document.getElementById('videoPreviewGrid');
+        grid.innerHTML = '';
+
+        if (uploadedVideos.length === 0) {
+            grid.classList.add('hidden');
+        } else {
+            uploadedVideos.forEach(video => displayVideoPreview(video));
+        }
+    }
+
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function saveDraft() {
+        alert('💾 Draft saved successfully! You can continue editing later.');
+    }
+
+    function submitForm(event) {
+        event.preventDefault();
+
+        // Show upload progress
+        const progressDiv = document.getElementById('uploadProgress');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+
+        progressDiv.classList.remove('hidden');
+
+        // Simulate upload progress
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 15;
+            if (progress > 100) progress = 100;
+
+            progressFill.style.width = progress + '%';
+            progressText.textContent = Math.round(progress) + '%';
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    alert('🎉 Advertisement created successfully! It will be reviewed within 24 hours.');
+                    // Redirect or reset form
+                }, 500);
+            }
+        }, 200);
+    }
+</script>
+	
 
 	<link href="<?= SITEURL ?>assets/plugins/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="<?= SITEURL ?>assets/plugins/jasny-bootstrap/js/jasny-bootstrap.min.js" type="text/javascript" language="javascript"></script>

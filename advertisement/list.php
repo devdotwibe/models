@@ -1,18 +1,30 @@
 <?php 
 session_start(); 
 include('../includes/config.php');
+if (isset($_SESSION['log_user_id'])) {
+	$log_user_id = $_SESSION['log_user_id'];
+	$get_modal_user = DB::query('select as_a_model from model_user where id='.$log_user_id); 
+	$as_a_model = $get_modal_user[0]['as_a_model'];
+}else{ 
+	$as_a_model = '';
+}
+if($as_a_model != 'Yes'){
+	header("Location: login.php");
+}
 ?>
 
 <html>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-<title>Notification | The Live Model</title>
+<title>Advertisment List | The Live Model</title>
 <?php  include('../includes/head.php'); ?>
 
 	</head>
 
-<body class="page-template-default page page-id-319 custom-background advt-page">
-   <?php include('../includes/header.php'); ?>
+<body class="page-template-default page page-id-319 custom-background advt-page  socialwall-page">
+   <?php //include('../includes/header.php'); ?>
+   <?php  include('../includes/side-bar.php'); ?>
+	<?php  include('../includes/profile_header_index.php'); ?>
    
    <!-- Main Content -->
     <main class="main">

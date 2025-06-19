@@ -110,7 +110,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-	<title>Notification | The Live Model</title>
+	<title>Edit Advertisement - The Live Models</title>
 	<?php include('../includes/head.php'); ?>
 	<style>
 		.thumbnail {
@@ -119,8 +119,14 @@ $serviceArr = array('Providing services', 'Looking for services');
 	</style>
 </head>
 
-<body class="page-template-default page page-id-319 custom-background  advt-page">
-	<?php include('../includes/header.php'); ?>
+<body class="creare-ad min-h-screen text-white socialwall-page">
+
+<!-- Premium Particle System -->
+<div class="particles" id="particles"></div>
+
+	<?php //include('../includes/header.php'); ?>
+	<?php  include('../includes/side-bar.php'); ?>
+	<?php  include('../includes/profile_header_index.php'); ?>
 	
 	<!-- Main Content -->
     <main class="main">
