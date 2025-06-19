@@ -76,11 +76,17 @@ include('includes/helper.php');
       }
     </style>
   </head>
-  <body class="min-h-screen bg-animated text-white home-page">    <!-- Premium Particle System -->  <div class="particles" id="particles"></div>
+  <body class="min-h-screen bg-animated text-white home-page">    
+  <!-- Premium Particle System -->  
+  <div class="particles" id="particles"></div>
     <!-- Ultra Premium Header -->
+    <?php if (isset($_SESSION["log_user_id"])) { ?>
+	<?php  include('includes/side-bar.php'); ?>
+	<?php  include('includes/profile_header_index.php'); ?>
+	<?php } else{ ?>
     <?php include('includes/header.php'); ?>
+	<?php } ?>
 <main class="home-page">    <!-- Ultra Premium Hero Section with Side-by-Side Layout -->    
-<main class="home-page">
     <!-- Ultra Premium Hero Section with Side-by-Side Layout -->
     <section class="py-24 md:py-32 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-purple-900/20 to-pink-900/30"></div>

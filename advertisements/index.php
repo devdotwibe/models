@@ -27,8 +27,16 @@ $serviceArr = array('Providing services', 'Looking for services');
 </head>
 
 <body class="advt-page">
+<!-- Premium Particle System -->  <div class="particles" id="particles"></div>
 
-    <?php include('include/adv_header.php'); ?>
+
+    <?php if (isset($_SESSION["log_user_id"])) { ?>
+	<?php  include('../includes/side-bar.php'); ?>
+	<?php  include('../includes/profile_header_index.php'); ?>
+	<?php } else{ ?>
+    <?php //include('include/adv_header.php'); ?>
+	<?php include('../includes/header.php'); ?>
+	<?php } ?>
 
     <?php /*?><div class="container">
         <div class="login-signup" style="padding-top:10px;">
@@ -244,8 +252,232 @@ foreach ($f_country_list as $val) {
 	
 	
 	
-	<?php include('include/adv_footer.php'); ?>
-	
+	<?php //include('include/adv_footer.php'); ?>
+	<?php include('../includes/footer.php'); ?>
+	 <script>
+        // Enhanced JavaScript functionality
+        let currentView = 'grid';
+        let currentFilter = 'all';
+
+        // Switch between grid and expanded views
+        function switchView(view) {
+            const gridView = document.getElementById('gridView');
+            const expandedView = document.getElementById('expandedView');
+            const viewButtons = document.querySelectorAll('.view-btn');
+
+            // Update button states
+            viewButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (view === 'grid') {
+                gridView.style.display = 'grid';
+                expandedView.classList.remove('active');
+                currentView = 'grid';
+            } else {
+                gridView.style.display = 'none';
+                expandedView.classList.add('active');
+                currentView = 'expanded';
+            }
+        }
+
+        // Filter content by type
+        function filterContent(type) {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('[data-category], [data-type]');
+
+            // Update button states
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Age verification for adult content
+            if (type === 'adult') {
+                const confirmed = confirm('You must be 18 years or older to view adult content. Do you confirm you are of legal age?');
+                if (!confirmed) {
+                    // Reset to general content
+                    filterContent('general');
+                    return;
+                }
+            }
+
+            // Filter cards
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const cardType = card.getAttribute('data-type');
+
+                let shouldShow = false;
+
+                switch(type) {
+                    case 'all':
+                        shouldShow = true;
+                        break;
+                    case 'general':
+                        shouldShow = category === 'general';
+                        break;
+                    case 'adult':
+                        shouldShow = category === 'adult';
+                        break;
+                    case 'premium':
+                        shouldShow = cardType === 'premium';
+                        break;
+                }
+
+                card.style.display = shouldShow ? 'block' : 'none';
+                if (card.classList.contains('ad-expanded')) {
+                    card.style.display = shouldShow ? 'flex' : 'none';
+                }
+            });
+
+            currentFilter = type;
+        }
+
+        // Search functionality
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const locationFilter = document.getElementById('locationFilter');
+
+            const searchTerm = searchInput.value.toLowerCase();
+            const category = categoryFilter.value;
+            const location = locationFilter.value;
+
+            console.log('Searching for:', {
+                term: searchTerm,
+                category: category,
+                location: location
+            });
+
+            // Show loading state
+            const gridView = document.getElementById('gridView');
+            const expandedView = document.getElementById('expandedView');
+
+            // Add loading animation
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'loading';
+            loadingDiv.innerHTML = '🔍 Searching for models...';
+
+            if (currentView === 'grid') {
+                gridView.appendChild(loadingDiv);
+            } else {
+                expandedView.appendChild(loadingDiv);
+            }
+
+            // Simulate search delay
+            setTimeout(() => {
+                loadingDiv.remove();
+                alert(`Search completed for: "${searchTerm || 'all models'}"${category ? ` in ${category}` : ''}${location ? ` from ${location}` : ''}`);
+            }, 1500);
+        }
+
+        // Model interaction functions
+        function viewProfile(modelId) {
+            //alert(`Opening profile for model: ${modelId}`);
+			window.location.href = '<?=SITEURL?>advertisements/view.php?id='+modelId;
+        }
+
+        function contactModel(modelId) {
+            alert(`Opening contact form for model: ${modelId}`);
+        }
+
+        function viewPortfolio(modelId) {
+            alert(`Opening portfolio for model: ${modelId}`);
+        }
+
+        function viewSocials(modelId) {
+            alert(`Opening social media links for model: ${modelId}`);
+        }
+
+        function viewServices(modelId) {
+            alert(`Opening services page for model: ${modelId}`);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default filter to general content
+            filterContent('general');
+
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add fade-in animation to cards
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all cards
+            document.querySelectorAll('.ad-card, .ad-expanded').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Add search on Enter key
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+
+        // Responsive navigation toggle
+        function toggleMobileNav() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('mobile-open');
+        }
+
+        // Add mobile navigation styles
+        const mobileStyles = `
+            @media (max-width: 768px) {
+                .nav-links {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background: rgba(0, 0, 0, 0.95);
+                    backdrop-filter: blur(20px);
+                    flex-direction: column;
+                    padding: 2rem;
+                    transform: translateY(-100%);
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all 0.3s ease;
+                }
+
+                .nav-links.mobile-open {
+                    transform: translateY(0);
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        `;
+
+        // Add mobile styles to head
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = mobileStyles;
+        document.head.appendChild(styleSheet);
+    </script>
+
 	
 
     <link href="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
