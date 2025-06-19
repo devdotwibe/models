@@ -1,8 +1,22 @@
+<?php 
+if (isset($_SESSION['log_user_id'])) {
+	$log_user_id = $_SESSION['log_user_id'];
+	$get_modal_user = DB::query('select * from model_user where id='.$log_user_id); 
+	if(!empty($get_modal_user[0]['username'])){
+		$modalname = ucfirst($get_modal_user[0]['username']);
+	}else{
+		$modalname = ucfirst($get_modal_user[0]['name']);
+	}
+}else{ 
+	$log_user_id = 0; 
+	$get_modal_user = array(); 
+}
+?>
  <div class="sidebar-overlay" id="sidebarOverlay"></div>
   <div class="sidebar-menu" id="sidebarMenu">
     <div class="p-6 flex flex-col items-center">
-      <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Profile" class="w-20 h-20 rounded-full">
-      <h3 class="text-xl font-bold mt-3">Sophie</h3>
+      <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $get_modal_user[0]['profile_pic']; ?>" alt="Profile" class="w-20 h-20 rounded-full">
+      <h3 class="text-xl font-bold mt-3"><?php echo $modalname; ?></h3>
       <div class="flex items-center mt-2">
         <div class="flex items-center mr-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -30,56 +44,56 @@
       </div>
     </div>
 
-    <div class="menu-item" onclick="navigateTo('edit-profile')">
+    <div class="menu-item" onclick="navigateTo('edit-profile.php')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
       </svg>
       Edit Profile Detail
     </div>
 
-    <div class="menu-item" onclick="navigateTo('my-profile')">
+    <div class="menu-item" onclick="navigateTo('user/profile/view.php')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
       </svg>
       My Profile
     </div>
 
-    <div class="menu-item" onclick="navigateTo('social-links')">
+    <div class="menu-item" onclick="navigateTo('#')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
       </svg>
       Add Social Links
     </div>
 
-    <div class="menu-item" onclick="navigateTo('wallet')">
+    <div class="menu-item" onclick="navigateTo('#')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
       </svg>
       Wallet
     </div>
 
-    <div class="menu-item" onclick="navigateTo('services')">
+    <div class="menu-item" onclick="navigateTo('#')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
       Services
     </div>
 
-    <div class="menu-item" onclick="navigateTo('advertisement')">
+    <div class="menu-item" onclick="navigateTo('advertisements')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
       </svg>
       Advertisement
     </div>
 
-    <div class="menu-item" onclick="navigateTo('chat')">
+    <div class="menu-item" onclick="navigateTo('#')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
       </svg>
       Chat
     </div>
 
-    <div class="menu-item" onclick="navigateTo('support')">
+    <div class="menu-item" onclick="navigateTo('supports.php')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
       </svg>

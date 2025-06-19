@@ -20,76 +20,30 @@ $activeTab = 'basic';
     
 
 ?>
-<html lang="en-US" class="no-js">
+<html>
 
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Edit Profile | Your Agency Name</title>
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-<link rel="apple-touch-icon" href="assets/wp-content/themes/theagency3/library/images/apple-icon-touch.png">
-<link rel="icon" href="assets/wp-content/themes/theagency3/favicon5e1f.png?v=2">
-<link href='<?='https://fonts.googleapis.com/css?family=EB+Garamond|Great+Vibes|Petit+Formal+Script'?>' rel='stylesheet' type='text/css'>
+<title>Edit Profile | The Live Model</title>
 
-<meta name="msapplication-TileColor" content="#f01d4f">
-<meta name="msapplication-TileImage" content="assets/wp-content/themes/theagency3/library/images/win8-tile-icon.png">
-<link rel="pingback" href="../xmlrpc.php">
+<?php  include('includes/head.php'); ?>
+
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
 
 
-<style type="text/css">
-label
-{
-  color: #ffffff !important;
-}
 
-</style>
-	<link rel='stylesheet' id='wp-block-library-css'  href='<?='assets/wp-includes/css/dist/block-library/style.min.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='spiffycal-styles-css'  href='<?='assets/wp-content/plugins/spiffy-calendar/styles/default.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='dashicons-css'  href='<?='assets/wp-includes/css/dashicons.min.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='visual-form-builder-css-css'  href='<?='assets/wp-content/plugins/visual-form-builder/public/assets/css/visual-form-builder.min.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='vfb-jqueryui-css-css'  href='<?='assets/wp-content/plugins/visual-form-builder/public/assets/css/smoothness/jquery-ui-1.10.3.min.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-style-css'  href='<?='assets/wp-content/plugins/wpgt-gallery/includes/css/style.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-popup-style-css'  href='<?='assets/wp-content/plugins/wpgt-gallery/includes/css/magnific-popup.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-flexslider-style-css'  href='<?='assets/wp-content/plugins/wpgt-gallery/includes/vendors/flexslider/flexslider.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-owlcarousel-style-css'  href='<?='assets/wp-content/plugins/wpgt-gallery/includes/vendors/owlcarousel/assets/owl.carousel.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-owlcarousel-theme-style-css'  href='<?='assets/wp-content/plugins/wpgt-gallery/includes/vendors/owlcarousel/assets/owl.theme.default.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='options_typography_Rokkitt-css'  href='<?='https://fonts.googleapis.com/css?family=Rokkitt'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='rich-reviews-css'  href='<?='assets/wp-content/plugins/rich-reviews/css/rich-reviews.css'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='bones-stylesheet-css'  href='<?='assets/wp-content/themes/theagency3/library/css/style.css'?>' type='text/css' media='all' />
+</head>
 
-<script type='text/javascript' src='<?='assets/wp-includes/js/jquery/jquery.js'?>' id='jquery-core-js'></script>
+<body class="socialwall-page">
 
-<script type='text/javascript' src='<?='assets/wp-content/plugins/rich-reviews/js/rich-reviews.js'?>' id='rich-reviews-js'></script>
-<script type='text/javascript' src='<?='assets/wp-content/themes/theagency3/library/js/libs/modernizr.custom.min.js'?>' id='bones-modernizr-js'></script>
-<?php include('includes/head_css.php'); ?>
 
-<!-- <style>
-body, .visual-form-builder label, label.vfb-desc { color:#999999; font-family:georgia, serif; font-weight:Normal; font-size:17px; }
-h1,h2,h3,h4,h5,h6, #footer h4 { color:#ffffff; font-family:"Georgia", Helvetica, serif; font-weight:normal; font-size:36px; }
-a {color:#BDB392}.navbar.navbar-default.navbar-inverse.navbar-right, .dropdown-menu {background:#222222}.td-vam-inner.border-top-bottom, .td-vam-inner.border-bottom {border-color:#ffffff}.navbar-inverse .navbar-nav > li > a, .dropdown-menu > li > a {color:#999999}.navbar-inverse .navbar-nav > li > a:hover, .dropdown-menu > li > a:hover {color:#ffffff}a:hover, .btn.btn-facebook:hover {color:#ffffff}#content, #footer, #sub-floor, .protable-outer, ul.profile span:first-child, ul.profile span + span {background:#181818}.google-mixed { color:#ffffff; font-family:Georgia, serif; font-weight:Normal; font-size:38px; }
-.google-mixed-2 { color:#999999; font-family:Georgia, serif; font-weight:Normal; font-size:20px; }
-</style>
-<style type="text/css" id="custom-background-css">
-body.custom-background { background-image: url("assets/wp-content/themes/theagency3/images/default-bg.jpg"); background-position: center top; background-size: auto; background-repeat: no-repeat; background-attachment: fixed; }
-</style> -->
 
-<style>
-.vfb-section{
-	list-style:none;
-	padding:0;
-}
-.vfb-section li{
-	margin-bottom:20px;
-}
-</style>
-	</head>
+ <?php  include('includes/side-bar.php'); ?>
 
-<body class="page-template page-template-page-custom-sidebar page-template-page-custom-sidebar-php page page-id-865 custom-background">
-   <?php include('includes/header.php'); ?>
+ <?php  include('includes/profile_header_index.php'); ?>
+ <main class="max-w-7xl mx-auto px-4 main-content">
       <div class="container">
 
 <?php
@@ -264,6 +218,8 @@ include('user_tab/edit_profile_menu_tab.php');
         </div> <!-- end #content -->
 
       </div> <!-- end .container -->
+	  
+	  </main>
 
     <?php include('includes/footer.php'); ?>
 <link href="<?=SITEURL?>assets/plugins/bootstrap-datepicker/css/datepicker.css"  rel='stylesheet' type='text/css' >

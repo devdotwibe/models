@@ -1109,7 +1109,9 @@ if(isset($_SESSION['log_user_id'])){
     }
 
     function navigateTo(page) {
-        alert(`🔗 Navigation - Going to ${page} page...`);
+        //alert(`🔗 Navigation - Going to ${page} page...`);
+		window.location.href = '<?= SITEURL ?>'+page;
+		toggleSidebar(); 
     }
 
     function openSupport() {
@@ -1132,3 +1134,197 @@ if(isset($_SESSION['log_user_id'])){
         alert('🛡️ Verification Policy - Opening verification guidelines...');
     }
 </script>
+
+<script>
+
+    function AddComment(element)
+    { 
+        $(`#${element}`).slideToggle();
+    }
+
+    function AddLike(comment_id)
+    {
+        var post_id = $(`#post_id_${comment_id}`).val();
+
+        var user_id = $(`#user_id_${comment_id}`).val();
+
+        $.ajax({
+
+            url: 'addcomment.php', 
+            type: 'POST',
+            data:{
+              post_id:post_id,
+              user_id:user_id,
+              action:"like",
+            },
+            success: function (response) {
+
+               if (response.trim() === 'Liked')
+              {
+                 $(`#user_id_${comment_id}`)
+
+                   var like_count = parseInt($(`#post_like_${comment_id}`).text()) || 0;
+
+                    like_count++;
+
+                  $(`#post_like_${comment_id}`).text(like_count);
+
+                  $(`#add_like_${comment_id}`).addClass('liked_comment');
+              }
+
+              if (response.trim() === 'Unliked')
+              {
+                 $(`#user_id_${comment_id}`)
+
+                   var like_count = parseInt($(`#post_like_${comment_id}`).text()) || 0;
+
+                    like_count--;
+
+                  $(`#post_like_${comment_id}`).text(like_count);
+
+                  $(`#add_like_${comment_id}`).removeClass('liked_comment');
+
+              }
+              
+            },
+
+            error: function (xhr) {
+               
+            }
+        });
+    }
+
+    function AddMessage(comment_id)
+    {
+        var post_id = $(`#post_id_${comment_id}`).val();
+
+        var user_id = $(`#user_id_${comment_id}`).val();
+
+        var comment = $(`#comment_content_${comment_id}`).val();
+
+        var author_name = $(`#author_name_${comment_id}`).val();
+
+        var author_email = $(`#author_email_${comment_id}`).val();
+
+        var image_url = $(`#image_url${comment_id}`).val();
+
+        $.ajax({
+
+            url: 'addcomment.php', 
+            type: 'POST',
+            data:{
+
+              post_id:post_id,
+              user_id:user_id,
+              comment:comment,
+              author_name:author_name,
+              author_email:author_email,
+              action:"comment",
+            },
+            success: function (response) {
+
+              $(`.no_comment_${comment_id}`).remove();
+
+              var count_comment = parseInt($(`#count_comment_${comment_id}`).text()) || 0;
+
+              count_comment++;
+
+              $(`#count_comment_${comment_id}`).text(count_comment);
+
+
+              var image_html = "";
+
+              if(image_url !== "")
+              {
+                image_html += `<img src="${image_url}" alt="User" class="w-8 md:w-10 h-8 md:h-10 rounded-full">`;
+              }
+
+               $(`.comnt_user_${comment_id}`).before(`
+                    <div class="flex items-start mb-4">
+                        ${image_html}
+                        <div class="ml-3 glass-effect rounded-lg p-3 flex-1">
+                            <p class="font-medium text-xs md:text-sm">${author_name}</p>
+                            <p class="text-xs md:text-sm text-white/80">${comment}</p>
+                        </div>
+                    </div>
+                `);
+
+              $(`#comment_content_${comment_id}`).val('');
+              
+            },
+
+            error: function (xhr) {
+               
+            }
+        });
+    }
+
+    const hamburger = document.getElementById('hamburgerMenu');
+    const sidebar = document.getElementById('sidebarMenu');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    hamburger.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
+
+    function toggleSidebar() {
+      hamburger.classList.toggle('open');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+
+      // Prevent body scrolling when sidebar is open
+      if (sidebar.classList.contains('open')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Simple like function
+    function toggleLike(button) {
+      const span = button.querySelector('span');
+      const currentCount = parseInt(span.textContent);
+
+      if (button.classList.contains('liked')) {
+        button.classList.remove('liked');
+        span.textContent = currentCount - 1;
+      } else {
+        button.classList.add('liked');
+        span.textContent = currentCount + 1;
+      }
+    }
+
+    // Simple connect function
+    function toggleConnect(button) {
+      if (button.textContent === 'Connect') {
+        button.textContent = 'Connected';
+        button.style.background = 'linear-gradient(45deg, #10b981, #34d399)';
+      } else {
+        button.textContent = 'Connect';
+        button.style.background = 'var(--primary-gradient)';
+      }
+    }
+
+   
+
+    // Profile functions
+    function viewProfile() {
+      alert('Opening your profile...');
+    }
+
+    function editProfile() {
+      alert('Opening profile editor...');
+    }
+
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        alert('Logging out...');
+      }
+    }
+
+    document.querySelectorAll('.mobile-nav-item').forEach(item => {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('.mobile-nav-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
