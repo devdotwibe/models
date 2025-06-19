@@ -447,7 +447,7 @@ if (isset($_SESSION['log_user_id'])) {
             <div class="notification-card ultra-glass p-6 rounded-2xl border border-white/10 all <?php echo $rowesdw['notification_type'];  ?>">
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0">
-                        <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $profilepic; ?>?w=60&h=60&fit=crop&crop=faces" alt="Emma L." class="w-12 h-12 rounded-full object-cover border-2 border-purple-500">
+                        <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $profilepic; ?>?w=60&h=60&fit=crop&crop=faces" alt="<?php echo $modalname; ?>." class="w-12 h-12 rounded-full object-cover border-2 border-purple-500">
                         <div class="absolute top-4 left-4 status-unread w-3 h-3 rounded-full"></div>
                     </div>
                     <div class="flex-1">

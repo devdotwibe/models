@@ -20,19 +20,28 @@ $resultd = mysqli_query($con, $sqls);
 				
 				while($rowesdw = mysqli_fetch_assoc($resultd)) {
 					
-					$get_modal = DB::query('select name,username,profile_pic,unique_id from model_user where id='.$rowesdw['sender_id']);
-					if(!empty($get_modal)){
-						$profilepic = $get_modal[0]['profile_pic'];
-						if(!empty($get_modal[0]['username'])){
-							 $modalname = $get_modal[0]['username'];
-						 }else{
-							 $modalname = $get_modal[0]['name'];
-						 }
-						 $unique_id = $get_modal[0]['unique_id'];
+					$get_modal = DB::query('select id,name,username,profile_pic,unique_id from model_user where id IN ('.$rowesdw['sender_id'].', '.$rowesdw['receiver_id'].')');
+					if(!empty($get_modal)){  
+						foreach($get_modal as $md){
+							if($md['id'] == $rowesdw['sender_id']){
+								$profilepic = $md['profile_pic'];
+								if(!empty($md['username'])){
+									 $modalname = $md['username'];
+								 }else{
+									 $modalname = $md['name'];
+								 }
+								 $unique_id = $md['unique_id'];
+								 $modal_senderid = $md['id'];
+							}else if($md['id'] == $rowesdw['receiver_id']){
+								 $unique_rec_id = $md['unique_id'];
+								 $modal_senderid = $md['id'];
+							}
+						}
+						
 					}else{
 						$profilepic = 'assets/images/model-gal-no-img.jpg';
 						$modalname = '';
-						$unique_id = '';
+						$unique_id = ''; $modalid = '';
 					}
 					 
 				$html .= '<div class="notification-card ultra-glass p-6 rounded-2xl border border-white/10 all '.$rowesdw['notification_type'] .' ">
@@ -43,9 +52,22 @@ $resultd = mysqli_query($con, $sqls);
                     </div>
                     <div class="flex-1">
                         <div class="flex items-center justify-between mb-2">
-                            <h3 class="text-lg font-semibold premium-text">'.ucfirst($rowesdw['notification_type']).' Request</h3>
-                            <span class="text-sm text-white/50">15 minutes ago</span>
-                        </div>
+                            <h3 class="text-lg font-semibold premium-text">'.ucfirst($rowesdw['notification_type']).' Request</h3>';
+                        $date1 = new DateTime($rowesdw['notification_date']);
+							$now = new DateTime(); 
+							$diff = $now->diff($date1);
+							$notf_diff = '';
+							if($diff->format('%R%a') != 0){
+								$notf_diff = $diff->format('%R%a days');
+							}else if($diff->format('%H') != 0){
+								$notf_diff = $diff->format('%H hours');
+							}else{
+								$notf_diff = $diff->format('%I minutes');
+							}
+							if(!empty($notf_diff)){
+								$html .= '<span class="text-sm text-white/50">'.$notf_diff.' ago</span>';
+							}
+                        $html .= '</div>
                         <p class="text-white/80 mb-4">';
 						 if($rowesdw['notification_type'] == 'follow'){ 
                             $html .= '<strong class="text-indigo-400">'.$modalname.'.</strong> wants to follow you and get updates about your content and availability.';
@@ -69,19 +91,31 @@ $resultd = mysqli_query($con, $sqls);
 						 } 
 						$html .= '</p>';
 						if(!empty($unique_id)){
+							$get_modal_notif = DB::query('select status,follow_date from model_follow where unique_model_id = "'.$unique_rec_id.'" AND unique_user_id = "'.$unique_id.'"');
+							$followstatus = ''; $followdate = '';
+							if(!empty($get_modal_notif)){
+								$followstatus = $get_modal_notif[0]['status'];
+								$followdate = $get_modal_notif[0]['follow_date'];
+							}
                         $html .= '<div class="flex space-x-3">
-                            <button class="btn-success px-6 py-2 rounded-lg text-white font-semibold" onclick="acceptFollow()">
-                                ✓ Accept
-                            </button>
-                            <button class="btn-danger px-6 py-2 rounded-lg text-white font-semibold" onclick="declineFollow()">
-                                ✗ Decline
-                            </button>
-                            <button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile("'.$unique_id.'")">
+                            <button id="acc_'.$unique_id.'"  class="btn-success px-6 py-2 rounded-lg text-white font-semibold"';
+							if($followstatus == 'Follow') $html .= ' disabled ';
+							$html .=' onclick="acceptFollow(\''.$unique_id.'\',\''.$unique_rec_id.'\',\''.$modalname.'\')">';
+							if($followstatus == 'Follow'){ $html .= 'Accepted on '.date('d/m/Y',strtotime($followdate)); 
+							}else{ $html .= '✓ Accept'; }	
+                            $html .='</button>
+                            <button id="dec_'.$unique_id.'" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold" ';
+							if($followstatus == 'Unfollow') $html .= ' disabled ';
+							$html .= ' onclick="declineFollow(\''.$unique_id.'\',\''.$unique_rec_id.'\',\''.$modalname.'\')">';
+							if($followstatus == 'Unfollow'){ $html .= 'Declined on '.date('d/m/Y',strtotime($followdate)); 
+							}else{ $html .= '✗ Decline'; }
+                            $html .= '</button>
+                            <button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile(\''.$unique_id.'\')">
                                 View Profile
                             </button>
                         </div>';
 						}
-                    </div>
+                    $html .= '</div>
                 </div>
             </div>';
     }
