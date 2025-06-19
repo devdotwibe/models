@@ -132,7 +132,7 @@ if (isset($_SESSION["log_user_id"])) {
                     <span class="font-medium">100% Secure</span>
                 </div>
             </div>
-            <a href="index.html" class="btn-secondary px-6 py-2 rounded-full font-semibold shadow-lg text-sm">
+            <a href="<?= SITEURL ?>" class="btn-secondary px-6 py-2 rounded-full font-semibold shadow-lg text-sm">
                 Back to Home
             </a>
         </div>

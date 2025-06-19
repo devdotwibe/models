@@ -170,14 +170,14 @@ $(document).ready(function(){
 			
 				<?php if ($_SESSION["log_user"]) { ?>
 			
-				<a class="btn-primary px-8 py-3 rounded-full font-semibold shadow-lg" href="<?= SITEURL ?>logout.php">
-				 Logout
-				</a>
+                <a class="btn-primary px-8 py-3 rounded-full font-semibold shadow-lg" href="<?= SITEURL ?>logout.php">
+                Logout
+                </a>
 
                 <?php } else { ?>
-                <button class="btn-primary px-8 py-3 rounded-full font-semibold shadow-lg" onclick="handleSignIn()">
+                <a class="btn-primary px-8 py-3 rounded-full font-semibold shadow-lg" href="<?= SITEURL ?>login.php">
                 Sign In
-				</button>
+                </a>
               <?php } ?>
 			
 			
