@@ -365,113 +365,6 @@ if (isset($_SESSION['log_user_id'])) {
 <div class="particles" id="particles"></div>
 
    <?php include('includes/header.php'); ?>
-
-     <?php /*?> <div class="container-fluid">
-
-        <div id="content" class="clearfix row">
-        
-          <div id="main" class="col-md-12 clearfix" role="main">
-            <ul class="notify">
-            <?php 
-              
-              $sql = "SELECT * FROM `tlm_notification` WHERE `user_model_id`='".$_SESSION['log_user_id']."' ";
-              $result = $con->query($sql);
-              if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                  $data = unserialize($row['meta']);
-                  echo '<li class="notifikasion van" style="">' .$data['msg'].' date : '.$row['r_date'].'</li>';
-                }
-              }
-            ?>
-            <?php
-              $log_user_id = $_SESSION["log_user_unique_id"];
-
-              $sql1 = "SELECT * FROM model_user WHERE unique_id = '".$log_user_id."'";
-              $result1 = mysqli_query($con,$sql1);
-                
-                $srno=1;
-                
-              if (mysqli_num_rows($result1) > 0) {
-
-                echo '<li class="notifikasion van" style="">Welcome <?php echo $_SESSION["log_user"]; ?>You can now become a model and start earning. Create a fanbase and interact with audiences around the world. 
-                 <a href="https://thelivemodels.com/new-broadcaster.php"><b>CLICK HERE.</b></a></li>';  
-                  
-                  $srno++;
-              }
-
-
-              $sql2 = "SELECT * FROM model_extra_details WHERE unique_model_id = '".$log_user_id."' AND status = 'Pending'";
-              $result2 = mysqli_query($con,$sql2);
-              if (mysqli_num_rows($result2) > 0) {
-                echo '<script>$( ".van" ).addClass( "not-active" );</script>';
-                echo '<li class="notifikasion too" style="" >Your request has been successfully sent for approval. It will take us 2-5 days to review. Thanks for your patience.</li>';
-              }
-
-              $sql3 = "SELECT * FROM model_extra_details WHERE unique_model_id = '".$log_user_id."' AND status = 'Published'";
-              $result3 = mysqli_query($con,$sql3);
-              if (mysqli_num_rows($result3) > 0) {
-              echo '<script>$( ".van" ).addClass( "not-active" );</script>';
-              // echo '<script>$( ".too" ).addClass( "not-active" );</script>';
-                echo '<li class="notifikasion thrii" style="">Your request has been successfully sent for approval. It will take us 2-5 days to review. Thanks for your patience.</li>';
-                  
-                  echo '
-                <li class="notifikasion too not-active" style="">Congratulations!!
-                  Your request had been approved. You are now a live model. Start building your fanbase to earn more.  <a href="https://thelivemodels.com/single-profile.php?m_unique_id='.$_SESSION["log_user_unique_id"].'">Upload your Video/ images now.</a></li>';
-                
-                
-              }
-
-              $sql4 = "SELECT * FROM insta_snap_call WHERE unique_model_id = '".$log_user_id."' ";
-              $result4 = mysqli_query($con,$sql4);
-              
-              if (mysqli_num_rows($result4) > 0) {
-                $row_fwa = mysqli_fetch_assoc($result4);
-                echo '<script>$( ".van" ).addClass( "not-active" );</script>';
-                echo '<script>$( ".too" ).addClass( "not-active" );</script>';
-                echo '<script>$( ".thrii" ).addClass( "not-active" );</script>';
-
-                echo '<li class="notifikasion thrii not-active" style="" >Congratulations!!
-                  Your request had been approved. You are now a live model. Start building your fanbase to earn more.  <a href="https://thelivemodels.com/single-profile.php?m_unique_id='.$_SESSION["log_user_unique_id"].'">Upload your Video/ images now.</a></li>';
-
-                echo '<li class="notifikasion too ">Someone has book a call on "'.$row_fwa['call_on'].'" with you. want to know <a href="accept-call.php">Click here</a></li>';
-              }
-
-              $sql4 = "SELECT * FROM insta_snap_call WHERE unique_user_id = '".$log_user_id."' AND status = 'Approved'";
-              $result4 = mysqli_query($con,$sql4);
-              
-              if (mysqli_num_rows($result4) > 0) {
-                $row_fwa = mysqli_fetch_assoc($result4);
-
-                echo '<script>$( ".van" ).addClass( "not-active" );</script>';
-                echo '<script>$( ".too" ).addClass( "not-active" );</script>';
-                echo '<script>$( ".thrii" ).addClass( "not-active" );</script>';
-
-                echo '<li class="notifikasion ">Your "'.$row_fwa['call_on'].'" Call request has been successfully Accepted by the model. She will call you on "'.$row_fwa['call_on'].'". Be ready for fun.</li>';
-              }
-
-            ?>
-            
-
-            
-            <?php
-                $sql5 = "SELECT * FROM notification WHERE reciver_user = '".$log_user_id."' order by notification_id DESC";
-                $result5 = mysqli_query($con,$sql5);
-              
-              if (mysqli_num_rows($result5) > 0) {
-                $row_fw5 = mysqli_fetch_assoc($result5);
-
-                echo '<li class="notifikasion ">'.$row_fw5['notification_text'].'</li>';
-              }
-
-            ?>
-            </ul>
-    
-          </div>
-      
-        </div>
-
-      </div> <?php */ ?>
-	  
 	  
 <main class="py-12">
     <div class="container mx-auto">
@@ -524,19 +417,28 @@ if (isset($_SESSION['log_user_id'])) {
 				
 				<?php while($rowesdw = mysqli_fetch_assoc($resultd)) {
 					
-					$get_modal = DB::query('select name,username,profile_pic,unique_id from model_user where id='.$rowesdw['sender_id']);
-					if(!empty($get_modal)){ 
-						$profilepic = $get_modal[0]['profile_pic'];
-						if(!empty($get_modal[0]['username'])){
-							 $modalname = $get_modal[0]['username'];
-						 }else{
-							 $modalname = $get_modal[0]['name'];
-						 }
-						 $unique_id = $get_modal[0]['unique_id'];
+					$get_modal = DB::query('select id,name,username,profile_pic,unique_id from model_user where id IN ('.$rowesdw['sender_id'].', '.$rowesdw['receiver_id'].')');
+					if(!empty($get_modal)){  
+						foreach($get_modal as $md){
+							if($md['id'] == $rowesdw['sender_id']){
+								$profilepic = $md['profile_pic'];
+								if(!empty($md['username'])){
+									 $modalname = $md['username'];
+								 }else{
+									 $modalname = $md['name'];
+								 }
+								 $unique_id = $md['unique_id'];
+								 $modal_senderid = $md['id'];
+							}else if($md['id'] == $rowesdw['receiver_id']){
+								 $unique_rec_id = $md['unique_id'];
+								 $modal_senderid = $md['id'];
+							}
+						}
+						
 					}else{
 						$profilepic = 'assets/images/model-gal-no-img.jpg';
 						$modalname = '';
-						$unique_id = '';
+						$unique_id = ''; $modalid = '';
 					}
 		
 		?>
@@ -551,7 +453,29 @@ if (isset($_SESSION['log_user_id'])) {
                     <div class="flex-1">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-semibold premium-text"><?php echo ucfirst($rowesdw['notification_type']); ?> Request</h3>
-                            <span class="text-sm text-white/50">15 minutes ago</span>
+                            
+							<?php $date1 = new DateTime($rowesdw['notification_date']);
+							
+							$now = new DateTime(); 
+
+							$diff = $now->diff($date1);
+							
+							$notf_diff = '';
+							
+							if($diff->format('%R%a') != 0){
+								$notf_diff = $diff->format('%R%a days');
+							}else if($diff->format('%H') != 0){
+								$notf_diff = $diff->format('%H hours');
+							}else{
+								$notf_diff = $diff->format('%I minutes');
+							}
+
+							//echo "Difference: " . $diff->format('%R%a days, %H hours, %I minutes') . "\n";
+							if(!empty($notf_diff)){
+								echo '<span class="text-sm text-white/50">'.$notf_diff.' ago</span>';
+							}
+							?>
+							
                         </div>
                         <p class="text-white/80 mb-4">
 						<?php if($rowesdw['notification_type'] == 'follow'){ ?>
@@ -575,13 +499,22 @@ if (isset($_SESSION['log_user_id'])) {
 						<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong>	
 						<?php } ?>
 						</p>
-						<?php if(!empty($unique_id)){ ?>
+						<?php if(!empty($unique_id)){ 
+						
+						$get_modal_notif = DB::query('select status,follow_date from model_follow where unique_model_id = "'.$unique_rec_id.'" AND unique_user_id = "'.$unique_id.'"');
+						$followstatus = ''; $followdate = '';
+						if(!empty($get_modal_notif)){
+							$followstatus = $get_modal_notif[0]['status'];
+							$followdate = $get_modal_notif[0]['follow_date'];
+						}
+						?>
                         <div class="flex space-x-3">
-                            <button class="btn-success px-6 py-2 rounded-lg text-white font-semibold" onclick="acceptFollow('emma')">
-                                ✓ Accept
+                            <button id="acc_<?php echo $unique_id; ?>" class="btn-success px-6 py-2 rounded-lg text-white font-semibold" <?php if($followstatus == 'Follow') echo 'disabled'; ?> onclick="acceptFollow('<?php echo $unique_id; ?>','<?php echo $unique_rec_id; ?>','<?php echo $modalname; ?>')">
+                                <?php if($followstatus == 'Follow'){ echo 'Accepted on '.date('d/m/Y',strtotime($followdate)); }else{ ?>✓ Accept <?php } ?>
                             </button>
-                            <button class="btn-danger px-6 py-2 rounded-lg text-white font-semibold" onclick="declineFollow('emma')">
-                                ✗ Decline
+						
+                            <button id="dec_<?php echo $unique_id; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($followstatus == 'Unfollow') echo 'disabled'; ?> onclick="declineFollow('<?php echo $unique_id; ?>','<?php echo $unique_rec_id; ?>','<?php echo $modalname; ?>')">
+                                <?php if($followstatus == 'Unfollow'){ echo 'Declined on '.date('d/m/Y',strtotime($followdate)); }else{ ?>✗ Decline <?php } ?>
                             </button>
                             <button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
                                 View Profile
@@ -701,13 +634,56 @@ offset = offset+limit;
         event.target.closest('.notification-card').style.opacity = '0.5';
     }
 
-    function acceptFollow(userId) {
-        alert(`✅ Follow request from ${userId} accepted! They can now see your updates.`);
+    function acceptFollow(sender,reciever,name) {
+        //alert(`✅ Follow request from ${sender} accepted! They can now see your updates.`);
+		
+		//ajax for follow request Accept
+			jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'/ajax/model_followaccept.php'?>",
+				data:{sender:sender,reciever:reciever},
+				dataType:'json',
+				success: function(response){ 
+					showNotification(`✅ Follow request from ${name} accepted! They can now see your updates.`, 'success');
+					jQuery('#acc_'+sender).attr('disabled',true);
+					let today = new Date();
+					// Format the date as d/m/Y
+					let day = ('0' + today.getDate()).slice(-2);    // Day
+					let month = ('0' + (today.getMonth() + 1)).slice(-2);  // Month (0-11 so add 1)
+					let year = today.getFullYear();                 // Year
+				    // Combine into d/m/Y format
+				    let formattedDate = day + '/' + month + '/' + year;
+					jQuery('#acc_'+sender).text('Accepted on '+formattedDate);
+					jQuery('#dec_'+sender).attr('disabled',false);
+					jQuery('#dec_'+sender).text('✗ Decline');
+				}
+			});
+		
         event.target.closest('.notification-card').style.opacity = '0.5';
     }
 
-    function declineFollow(userId) {
-        alert(`❌ Follow request from ${userId} declined.`);
+    function declineFollow(sender,reciever,name) {
+		//ajax for follow request Accept
+			jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'/ajax/model_followdecline.php'?>",
+				data:{sender:sender,reciever:reciever},
+				dataType:'json',
+				success: function(response){ 
+					showNotification(`❌ Follow request from ${name} declined.`, 'success');
+					jQuery('#dec_'+sender).attr('disabled',true);
+					let today = new Date();
+					// Format the date as d/m/Y
+					let day = ('0' + today.getDate()).slice(-2);    // Day
+					let month = ('0' + (today.getMonth() + 1)).slice(-2);  // Month (0-11 so add 1)
+					let year = today.getFullYear();                 // Year
+				  // Combine into d/m/Y format
+				  let formattedDate = day + '/' + month + '/' + year;
+					jQuery('#dec_'+sender).text('Declined on '+formattedDate);
+					jQuery('#acc_'+sender).attr('disabled',false);
+					jQuery('#acc_'+sender).text('✓ Accept');
+				}
+			});
         event.target.closest('.notification-card').style.opacity = '0.5';
     }
 
@@ -804,7 +780,41 @@ offset = offset+limit;
 			});
 		}
     }
-
+function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : 'var(--primary)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: var(--radius);
+                box-shadow: var(--shadow-lg);
+                z-index: 10000;
+                font-weight: 600;
+                transform: translateX(100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Hide notification
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
     
 </script>
  
