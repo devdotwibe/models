@@ -43,9 +43,9 @@ if (isset($_SESSION['log_user_id'])) {
 				for ($i = 1; $i < $totalFiles; $i++) {
 					$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][$i]);
 					$target_profile = basename($_FILES["files"]["name"][$i]);
-					/*if (move_uploaded_file($_FILES["files"]["tmp_name"][$i], $target_file1)) {
+					if (move_uploaded_file($_FILES["files"]["tmp_name"][$i], $target_file1)) {
 						$additional_img .= $target_profile.'|';
-					}*/
+					}
 				}
 				if(!empty($additional_img)){ 
 					$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
