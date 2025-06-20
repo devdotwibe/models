@@ -108,6 +108,13 @@
  header .ultra-glass {
     position: sticky;
 }
+
+ body header .hidden{
+    display: flex;
+}
+
+
+
      .home-page .gradient-text {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
         -webkit-background-clip: text;
