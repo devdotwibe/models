@@ -14,6 +14,8 @@
         --menu-bg: #f5f5f5;
         --menu-text: #333333;
         --menu-border: #e0e0e0;
+        --bg-secondary: #111118;
+        --bg-primary: #0a0a0f;
     }
 
     * {
