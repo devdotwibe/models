@@ -14,9 +14,62 @@
         --menu-bg: #f5f5f5;
         --menu-text: #333333;
         --menu-border: #e0e0e0;
-        --bg-secondary: #111118;
-        --bg-primary: #0a0a0f;
+           --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --primary-dark: #7c3aed;
+            --secondary: #ec4899;
+            --secondary-light: #f472b6;
+            --accent: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --pending: #f97316; 
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --bg-tertiary: #1a1a2e;
+            --bg-card: rgba(26, 26, 46, 0.8);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --bg-glass-strong: rgba(255, 255, 255, 0.08);
+            --op-primary: #6366f1;
+            --op-primary-dark: #4f46e5;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --dark-bg: #0f0f23;
+            --op-border: rgba(255, 255, 255, 0.08);
+            --op-text-secondary: rgba(255, 255, 255, 0.7);
+
+            --op-text-muted: rgba(255, 255, 255, 0.5);
+
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --text-tertiary: #94a3b8;
+            --text-muted: #64748b;
+
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.15);
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            --gradient-premium: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            --gradient-success: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            --gradient-danger: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+
+            --blur: 20px;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
+           --radius-full: 9999px;
+            --glass-border: rgba(255, 255, 255, 0.1);
     }
+
 
     * {
         box-sizing: border-box;
@@ -4013,7 +4066,7 @@ body.premimum-model1 {
 
 
 
-        .premimum-model1 .profile-name {
+        .premimum-model1 .profile-name a {
 
             font-size: 1.375rem;
 
