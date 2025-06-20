@@ -233,7 +233,9 @@ body header .container {
     margin: 0 auto;
     padding: 0 2rem;
 }
-
+body header.ultra-glass {
+    position: sticky;
+}
 
 body header.ultra-glass {
     background: rgba(255, 255, 255, 0.02);
