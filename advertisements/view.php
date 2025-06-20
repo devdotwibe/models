@@ -243,13 +243,17 @@ else{
 						
 						<div class="owl-carousel" >
 						
-						<?php if(!empty($form_data['video'])){ ?>
+						<?php if(!empty($form_data['video'])){ 
+						$video = explode('|',$form_data['video']);
+						$video_count = count($video);
+						foreach($video as $add_vd){
+						?>
 						<div>
 						<video class="video-ci" controls  >
-						<source src="<?php echo SITEURL.'uploads/banners/'.$form_data['video']; ?>" type="video/mp4">
+						<source src="<?php echo SITEURL.'uploads/banners/'.$add_vd; ?>" type="video/mp4">
 						</video>
 						</div>
-						<?php } ?>
+						<?php } }else $video_count = 0; ?>
 						
 						<div>
 							<img src="<?php echo SITEURL.'uploads/banners/'.$form_data['image']; ?>" >
@@ -395,7 +399,7 @@ else{
 							<div class="video-count">
 							<img src="<?php echo SITEURL.'uploads/banners/icon_video_prev.svg'; ?>" >
 							<span>
-							<?php if(!empty($form_data['video'])){ echo '1'; } else echo '0'; ?>
+							<?php if(!empty($form_data['video'])){ echo $video_count; } else echo '0'; ?>
 							</span>
 							</div>
 						

@@ -29,19 +29,52 @@ if (isset($_SESSION['log_user_id'])) {
 		//		$created_id = DB::insertId();
 
 		$error = '';
-		if ($_FILES["files"]["name"]) {
+		if (isset($_FILES["files"])) {
+			$totalFiles = count($_FILES['files']['name']);
+			$additional_img = '';
 			$target_dir_profile = "../uploads/banners/";
-			$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"]);
-			$target_profile = basename($_FILES["files"]["name"]);
-			if (move_uploaded_file($_FILES["files"]["tmp_name"], $target_file1)) {
-				$joe_id = DB::update('banners', array('image' => $target_profile), "id=%s", $id);
-			} else {
-				$error .= 'Image Not Updated. ';
+			
+				$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][0]);
+				$target_profile = basename($_FILES["files"]["name"][0]);
+				if (move_uploaded_file($_FILES["files"]["tmp_name"][0], $target_file1)) {
+					$joe_id = DB::update('banners', array('image' => $target_profile), "id=%s", $id);
+				} else {
+					$error .= 'Image Not Updated';
+				}
+			if($totalFiles > 1){
+				for ($i = 1; $i < $totalFiles; $i++) {
+					$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][$i]);
+					$target_profile = basename($_FILES["files"]["name"][$i]);
+					if (move_uploaded_file($_FILES["files"]["tmp_name"][$i], $target_file1)) {
+						$additional_img .= $target_profile.'|';
+					}
+				}
+				if(!empty($additional_img)){ 
+					$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
+				}
 			}
+			
+			
+		}
+		
+		if (isset($_FILES["video_file"])) {
+			$totalFiles_v = count($_FILES['video_file']['name']);
+			$additional_vd = '';
+			$target_dir_profile = "../uploads/banners/";
+				for ($i = 0; $i < $totalFiles_v; $i++) {
+					$target_file1 = $target_dir_profile . basename($_FILES["video_file"]["name"][$i]);
+					$target_profile = basename($_FILES["video_file"]["name"][$i]);
+					if (move_uploaded_file($_FILES["video_file"]["tmp_name"][$i], $target_file1)) {
+						$additional_vd .= $target_profile.'|';
+					}
+				}
+				if(!empty($additional_vd)){ 
+					$joe_id = DB::update('banners', array('video' => rtrim($additional_vd, "|")), "id=%s", $id);
+				}
 		}
 		
 		
-		if (isset($_FILES["additionalimages"])) {
+		/*if (isset($_FILES["additionalimages"])) {
 			$totalFiles = count($_FILES['additionalimages']['name']);
 			$additional_img = '';
 			$target_dir_profile = "../uploads/banners/";
@@ -67,7 +100,7 @@ if (isset($_SESSION['log_user_id'])) {
 			} else {
 				$error .= ' Video Not Updated';
 			}
-		}
+		}*/
 
 		if ($error) {
 			echo '<script>alert("' . $error . '");</script>';
@@ -75,26 +108,6 @@ if (isset($_SESSION['log_user_id'])) {
 		echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
 		
 		
-		/*  if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
-	
-		  echo '<script>alert("Your Profile Picture Successfully Uploaded");</script>';
-	
-		  $sql = "UPDATE model_user SET profile_pic = '".$target_profile."' WHERE id = '".$use_id."'";
-		
-		  if(mysqli_query($con, $sql)){
-			echo '<script>alert("Your Profile Picture Successfully Updated");
-			 window.location="edit-profile.php"</script>';
-		  }else{
-			echo '<script>alert("Profile Picture Not Updated.\nPlease try again later.");
-			 window.location="edit-profile.php"</script>';
-		  }  
-	
-	  }
-	  else{
-		  echo '<script>alert("Error in Image uploading");
-			 window.location="edit-profile.php"
-			</script>';
-	  }*/
 	}
 
 	$f_country_list = DB::query('select id,name,sortname from countries order by name asc');
@@ -110,13 +123,17 @@ $serviceArr = array('Providing services', 'Looking for services');
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-	<title>Edit Advertisement - The Live Models</title>
+	<title>Create Advertisement - The Live Models</title>
 	<?php include('../includes/head.php'); ?>
 	<style>
 		.thumbnail {
 			background: #FFF;
 		}
+		.invalid {
+			border: 3px solid red;
+		}
 	</style>
+		
 </head>
 
 <body class="creare-ad min-h-screen text-white socialwall-page">
@@ -128,25 +145,44 @@ $serviceArr = array('Providing services', 'Looking for services');
 	<?php  include('../includes/side-bar.php'); ?>
 	<?php  include('../includes/profile_header_index.php'); ?>
 	
-	<!-- Main Content -->
-    <main class="main">
-	
-	<div class="container">
+	<main class="py-12">
+    <div class="container mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold heading-font gradient-text mb-4">Create New Advertisement</h1>
+            <p class="text-lg text-white/70 max-w-2xl mx-auto">Showcase your services and attract more clients with a premium advertisement</p>
+        </div>
 
-		<div id="content" class="clearfix row">
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step active" id="step1">1</div>
+            <div class="step" id="step2">2</div>
+            <div class="step" id="step3">3</div>
+        </div>
 
-			<div id="main" class="col-md-12 clearfix">
-				<div class="panel bg-blue">
-					<div class="panel-body">
-						<div>
-							<form action="" method="post" class="form-horizontal edit-form" role="form" enctype="multipart/form-data">
-								<div class="form-body">
+        <!-- Form Container -->
+        <div class="max-w-4xl mx-auto">
+            <?php /*?><form class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" onsubmit="submitForm(event)"><?php */ ?>
+			<form action="" method="post" class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" role="form" enctype="multipart/form-data" >
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Category *</label>
-										<div class="col-md-9">
-											<select name="category" class="form-control">
-												<option value="">Select</option>
+                <!-- Step 1: Basic Information -->
+                <div id="formStep1" class="form-step">
+                    <h2 class="text-2xl font-bold premium-text mb-8 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-indigo-400">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        Basic Information
+                    </h2>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block text-white font-semibold mb-3">Category *</label>
+							<select name="category" class="form-input w-full px-6 py-4 rounded-xl adv_category" id="adv_category"  required>
+												<option value="">Select Category</option>
 												<?php
 												foreach ($category_list as $val) {
 												?>
@@ -155,13 +191,12 @@ $serviceArr = array('Providing services', 'Looking for services');
 												}
 												?>
 											</select>
-										</div>
-									</div>
+                            <span class="err_adv_category" style="color:red;"></span>
+                        </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">I Am *</label>
-										<div class="col-md-9">
-											<select name="service" class="form-control" required>
+                        <div>
+                            <label class="block text-white font-semibold mb-3">I Am *</label>
+							<select name="service" class="form-input w-full px-6 py-4 rounded-xl adv_am" id="adv_am" required>
 												<?php
 												foreach ($serviceArr as $val) {
 												?>
@@ -170,36 +205,60 @@ $serviceArr = array('Providing services', 'Looking for services');
 												}
 												?>
 											</select>
-										</div>
-									</div>									
+                            <span class="err_adv_am" style="color:red;"></span>
+                        </div>
+                    </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Title *</label>
-										<div class="col-md-9">
-											<input type="text" name="name" value="<?= $form_data['name'] ?>" class="form-control" required />
-										</div>
-									</div>
-									
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Subtitle </label>
-										<div class="col-md-9">
-											<input type="text" name="subtitle" value="<?= $form_data['subtitle'] ?>" class="form-control" />
-										</div>
-									</div>
+                    <div class="mt-8">
+                        <label class="block text-white font-semibold mb-3">Advertisement Title *</label>
+                        <input type="text" name="name" value="<?= $form_data['name'] ?>" class="form-input w-full px-6 py-4 rounded-xl adm_title" id="adm_title" placeholder="Enter a catchy title for your advertisement..." required />
+						<p class="text-white/50 text-sm mt-2">💡 Tip: Use engaging words that describe your unique services</p>
+						<span class="err_adv_title" style="color:red;"></span>
+					</div>
+					
+					<div class="mt-8">
+                        <label class="block text-white font-semibold mb-3">Advertisement Subtitle</label>
+                        <input type="text" name="subtitle" value="<?= $form_data['subtitle'] ?>" class="form-input w-full px-6 py-4 rounded-xl adm_subtitle" id="adm_subtitle" placeholder="Enter a catchy title for your advertisement..."  />
+						<p class="text-white/50 text-sm mt-2">💡 Tip: Subtitle of advertisement</p>
+						<span class="err_adv_subtitle" style="color:red;"></span>
+                    </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Description</label>
-										<div class="col-md-9">
-											<textarea name="description" class="form-control" required><?= $form_data['description'] ?></textarea>
-										</div>
-									</div>
+                    <div class="mt-8">
+                        <label class="block text-white font-semibold mb-3">Description *</label>
+                        <textarea name="description" class="form-input w-full px-6 py-4 rounded-xl h-40 resize-none adv_desc" id="adv_desc" placeholder="Describe your services in detail. What makes you special? What can clients expect?" required><?= $form_data['description'] ?></textarea>
+						<div class="flex justify-between items-center mt-2">
+                            <p class="text-white/50 text-sm">💡 Be specific about your services, rates, and availability</p>
+                            <span class="text-white/50 text-sm" id="charCount">0/500</span>
+                        </div>
+						<span class="err_adv_desc" style="color:red;"></span>
+                    </div>
+					
+					<div class="mt-8">
+                        <label class="block text-white font-semibold mb-3">Terms and Conditions</label>
+                        <textarea name="terms_conditions" class="form-input w-full px-6 py-4 rounded-xl h-40 resize-none adv_terms" id="adv_terms" placeholder="Describe your terms and conditions related to this advertisement." ><?= $form_data['terms_conditions'] ?></textarea>
+						<div class="flex justify-between items-center mt-2">
+                            <p class="text-white/50 text-sm">💡 Be specific about your services, rates, and availability</p>
+                            <span class="text-white/50 text-sm" id="charCount">0/500</span>
+                        </div>
+                    </div>
+					
+                </div>
 
+                <!-- Step 2: Location & Pricing -->
+                <div id="formStep2" class="form-step hidden">
+                    <h2 class="text-2xl font-bold premium-text mb-8 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-indigo-400">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Location & Pricing
+                    </h2>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Country *</label>
-										<div class="col-md-9">
-											<select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-control" required>
-												<option value="" data-id="">Select</option>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-white font-semibold mb-3">Country *</label>
+							<select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-input w-full px-6 py-4 rounded-xl adv_country" id="adv_country" required>
+												<option value="" data-id="">Select Country</option>
 												<?php
 												if ($f_country_list) {
 													foreach ($f_country_list as $val) {
@@ -211,111 +270,180 @@ $serviceArr = array('Providing services', 'Looking for services');
 
 												?>
 											</select>
-										</div>
-									</div>
+                            <span class="err_adv_country" style="color:red;"></span>
+                        </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">State *</label>
-										<div class="col-md-9">
-											<select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-control"></select>
-										</div>
-									</div>
+                        <div>
+                            <label class="block text-white font-semibold mb-3">State/Province *</label>
+							<select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-input w-full px-6 py-4 rounded-xl adv_state" id="adv_state" required ></select>
+                            <span class="err_adv_state" style="color:red;"></span>
+                        </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">City *</label>
-										<div class="col-md-9">
-											<select name="city" id="i-hs-city" class="form-control"></select>
+                        <div>
+                            <label class="block text-white font-semibold mb-3">City *</label>
+							<select name="city" id="i-hs-city" class="form-input w-full px-6 py-4 rounded-xl adv_city" id="adv_city" required ></select>
+                            <span class="err_adv_city" style="color:red;"></span>
+                        </div>
+                    </div>
 
-										</div>
-									</div>
+                    
+                </div>
 
+                <!-- Step 3: Media Upload -->
+                <div id="formStep3" class="form-step hidden">
+                    <h2 class="text-2xl font-bold premium-text mb-8 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-indigo-400">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="9" cy="9" r="2"></circle>
+                            <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                        </svg>
+                        Photos & Videos
+                    </h2>
 
+                    <!-- Photo Upload Section -->
+                    <div class="mb-12">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-semibold premium-text">Photos</h3>
+                            <span class="text-white/60 text-sm">Maximum 10 photos • JPG, PNG, GIF up to 10MB each</span>
+                        </div>
 
+                        <div class="upload-area rounded-2xl p-8 text-center mb-6" id="photoUploadArea">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 text-white/50">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="9" cy="9" r="2"></circle>
+                                <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                            </svg>
+                            <h4 class="text-xl font-semibold text-white mb-2">Upload Your Photos</h4>
+                            <p class="text-white/70 mb-4">Drag and drop your photos here, or click to browse</p>
+                            <button type="button" class="btn-primary px-8 py-3 rounded-xl font-semibold" onclick="document.getElementById('photoInput').click()">
+                                Choose Photos
+                            </button>
+                            <input type="file" name="files[]" id="photoInput" class="hidden" multiple accept=".jpg,.jpeg,.png,.gif" onchange="handlePhotoUpload(event)" >
+							
+							<?php /*?><input type="file" name="additionalimages[]" id="imageInput_addt" multiple  accept=".jpg,.jpeg,.png" />
+										<div id="preview_addt" style="display:none;"></div><?php */ ?>
+							
+                        </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Image *</label>
-										<div class="col-md-9">
-											<div class="fileinput fileinput-new" data-provides="fileinput">
-												<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
-													<img src="<?= !empty($form_data['image']) ? SITEURL . 'uploads/banners/' . $form_data['image'] : '../assets/images/no-image.gif' ?>" />
-												</div>
-												<div>
-													<span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
-														<input type="file" name="files" value="" class="form-control" <?= !empty($form_data['image']) ? '' : 'required' ?> /></span>
-													<a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-												</div>
-											</div>
-										</div>
-									</div>
+                        <!-- Photo Preview Grid -->
+                        <div id="photoPreviewGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 ">
+                            <!-- Photo previews will be inserted here -->
+							<?php if(!empty($form_data['image']) ){ ?>
+							<div class="media-preview relative">
+								<img src="<?php echo SITEURL . 'uploads/banners/' . $form_data['image']; ?>" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
+								<?php /*?><button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+										<line x1="18" y1="6" x2="6" y2="18"></line>
+										<line x1="6" y1="6" x2="18" y2="18"></line>
+									</svg>
+								</button><?php */ ?>
+							</div>
+							<?php } if(!empty($form_data['additionalimages']) ){ 
+								$additionalimages = explode('|',$form_data['additionalimages']);
+								foreach($additionalimages as $add_img){	?>
+							<div class="media-preview relative">
+								<img src="<?php echo SITEURL . 'uploads/banners/' . $add_img; ?>" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
+								<?php /*?><button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+										<line x1="18" y1="6" x2="6" y2="18"></line>
+										<line x1="6" y1="6" x2="18" y2="18"></line>
+									</svg>
+								</button><?php */ ?>
+							</div>
+							<?php 
+								}
+							 } ?>
+							
+                        </div>
+                    </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Video</label>
-										<div class="col-md-9">
-											<input type="file" name="video_file" value="" class="form-control" />
-											<span>Upload only MP4 file</span>
-										</div>
-									</div>
-									
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Additional Images</label>
-										<div class="col-md-9">
-										
-										<?php /*?><div class="dropzone" id="mydropzone">
-											<div class="dropzone-previews"></div>
-										</div><?php */ ?>
-										
-										<input type="file" name="additionalimages[]" id="imageInput_addt" multiple  accept=".jpg,.jpeg,.png" />
-										<div id="preview_addt">
-										
-										
-										
-										<?php 
-										if(!empty($form_data['additionalimages'])){
-											$additionalimages = explode('|',$form_data['additionalimages']);
-											foreach($additionalimages as $add_img){
-												echo '<img src="'.SITEURL . 'uploads/banners/' . $add_img.'" alt="' . $add_img.'" >';  
-											}
-										} ?>
-										
-										
-										</div>
-										
-										</div>
-										
-									</div>
+                    <!-- Video Upload Section -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-semibold premium-text">Videos</h3>
+                            <span class="text-white/60 text-sm">Maximum 5 videos • MP4, MOV, AVI up to 100MB each</span>
+                        </div>
 
-									<div class="form-group row">
-										<label class="col-md-3 control-label">Terms and Conditions</label>
-										<div class="col-md-9">
-											<textarea name="terms_conditions" class="form-control" ><?= $form_data['terms_conditions'] ?></textarea>
-										</div>
-									</div>
-
-
-
-								</div>
-								<div class="form-actions">
-									<div class="row">
-										<div class="col-md-9 offset-md-3">
-											<button type="submit" class="btn btn-info submitBtn">Save</button>
-											<a href="<?= SITEURL . 'advertisement/list.php' ?>" class="btn btn-default">Back</a>
-										</div>
-									</div>
-								</div>
-							</form>
-							<div style="clear:both"></div>
-
+                        <div class="upload-area rounded-2xl p-8 text-center mb-6" id="videoUploadArea">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 text-white/50">
+                                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg>
+                            <h4 class="text-xl font-semibold text-white mb-2">Upload Your Videos</h4>
+                            <p class="text-white/70 mb-4">Drag and drop your videos here, or click to browse</p>
+                            <button type="button" class="btn-primary px-8 py-3 rounded-xl font-semibold" onclick="document.getElementById('videoInput').click()">
+                                Choose Videos
+                            </button>
+                            <input type="file" name="video_file[]" id="videoInput" class="hidden" multiple accept=".mp4,.mov,.avi" onchange="handleVideoUpload(event)">
 						</div>
-					</div>
-				</div>
 
-			</div>
+                        <!-- Video Preview Grid -->
+                        <div id="videoPreviewGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden1">
+                            <!-- Video previews will be inserted here -->
+							<?php if(!empty($form_data['video']) ){ 
+								$video = explode('|',$form_data['video']);
+								foreach($video as $add_vd){	?>
+							<div class="media-preview relative">
+							
+								<video src="<?php echo SITEURL . 'uploads/banners/' . $add_vd; ?>" class="w-full h-48 object-cover rounded-xl" controls></video>
+								<?php /*?><button type="button" class="remove-btn" onclick="removeVideo('${videoData.id}')">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+										<line x1="18" y1="6" x2="6" y2="18"></line>
+										<line x1="6" y1="6" x2="18" y2="18"></line>
+									</svg>
+								</button><?php */ ?>
+							
+							</div>
+							<?php 
+								}
+							 } ?>
+                        </div>
+                    </div>
 
-		</div>
+                    <!-- Upload Progress -->
+                    <div id="uploadProgress" class="hidden mb-8">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-white font-semibold">Uploading...</span>
+                            <span class="text-white/70" id="progressText">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill w-[0%]" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
 
-	</div>
-	
-	</main>
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between items-center mt-12 pt-8 border-t border-white/10">
+                    <button type="button" id="backBtn" class="btn-danger px-8 py-4 rounded-xl font-semibold hidden" onclick="previousStep()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                        Back
+                    </button>
+
+                    <div class="flex space-x-4 ml-auto">
+                        <!-- <button type="button" class="btn-secondary px-8 py-4 rounded-xl font-semibold" onclick="saveDraft()">
+                            Save Draft
+                        </button> -->
+                        <button type="button" id="nextBtn" class="btn-primary px-8 py-4 rounded-xl font-semibold" onclick="nextStep()">
+                            Next Step
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 inline">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                        <button type="submit" id="submitBtn" class="btn-primary px-8 py-4 rounded-xl font-semibold hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline">
+                                <path d="M5 12l5 5l10-10"></path>
+                            </svg>
+                            Edit Advertisement
+                        </button>
+						<a class="btn-primary px-8 py-4 rounded-xl font-semibold hidden adv-back-btn" href="<?= SITEURL . 'advertisement/list.php' ?>" class="btn btn-default">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
 
 	<?php include('../includes/footer.php'); ?>
 	<style>
@@ -325,28 +453,8 @@ $serviceArr = array('Providing services', 'Looking for services');
         }
     </style>
 	<script>
-        /*const imageInput_addt = document.getElementById('imageInput_addt');
-        const preview_addt = document.getElementById('preview_addt');
-
-        imageInput_addt.addEventListener('change', function () {
-            preview_addt.innerHTML = ''; // clear previous previews
-            const files = this.files;
-
-            Array.from(files).forEach(file => {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        preview_addt.appendChild(img);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        }); */
 		
-		
-		const imageInput_addt = document.getElementById('imageInput_addt');
+  const imageInput_addt = document.getElementById('imageInput_addt');
   const preview_addt = document.getElementById('preview_addt');
   let selectedFiles = [];
 
@@ -394,45 +502,6 @@ $serviceArr = array('Providing services', 'Looking for services');
   }
 		
     </script>
-	
-	<?php /*?><link rel="stylesheet" href="<?= SITEURL ?>assets/css/dropzone.css">
-    <script src="<?= SITEURL ?>assets/js/dropzone.js"></script>
-	<script>
-	var fileList = new Array;
-	 var i = 0;
-	 Dropzone.autoDiscover = false;
-	 var myDropzone = new Dropzone("div#mydropzone", { 
-		 url:"<?php echo SITEURL.'advertisement/dropzone_upload.php'?>",
-		 uploadMultiple: true,
-		 maxFilesize: 99,
-		 maxFiles : 3,
-		 autoDiscover:false,
-		 acceptedFiles: ".png,.jpg,.jpeg",
-		 previewsContainer: '.dropzone-previews',
-		 autoProcessQueue : false,
-		 parallelUploads: 100,
-		 addRemoveLinks: true,       
-		 init:function(){ 
-			this.on("success", function (index, response) {
-				var res = JSON.parse(response);
-				console.log(res);
-				fileList = res.images;
-				for (i = 0; i < fileList.length; i++) {
-				  var imgname = fileList[i];
-				  $(".dz-remove").eq(index).attr('data-url',imgname);
-			   }
-			$('.dz-success-mark').show();
-			});
-			
-            this.on("error", function (file, errorMessage) {
-                console.error("Upload error:", errorMessage);
-            });
-		 }
-	 });
-
-	
-	</script><?php */ ?>
-	
 	<script src="<?= SITEURL ?>assets/plugins/jquery.validate.js"></script>
 	<script type="text/javascript">
 		$(".edit-form").validate({
@@ -491,6 +560,391 @@ $serviceArr = array('Providing services', 'Looking for services');
 			color: #F00;
 		}
 	</style>
+	
+	<script>
+    // Premium JavaScript Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        initializePremiumFeatures();
+        initializeFormFeatures();
+    });
+
+    let currentStep = 1;
+    let uploadedPhotos = [];
+    let uploadedVideos = [];
+
+    function initializePremiumFeatures() {
+        // Premium Particle System
+        function createPremiumParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 12 + 's';
+            particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+            particle.style.opacity = Math.random() * 0.8 + 0.2;
+
+            const colors = [
+                'rgba(139, 92, 246, 0.8)',
+                'rgba(236, 72, 153, 0.6)',
+                'rgba(6, 182, 212, 0.7)'
+            ];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
+
+            document.getElementById('particles').appendChild(particle);
+
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.remove();
+                }
+            }, 12000);
+        }
+
+        setInterval(createPremiumParticle, 150);
+    }
+
+    function initializeFormFeatures() {
+        // Character counter for description
+        const descriptionTextarea = document.querySelector('textarea');
+        const charCount = document.getElementById('charCount');
+
+        descriptionTextarea.addEventListener('input', function() {
+            const count = this.value.length;
+            charCount.textContent = `${count}/500`;
+            if (count > 500) {
+                charCount.style.color = '#ef4444';
+            } else {
+                charCount.style.color = 'rgba(255, 255, 255, 0.5)';
+            }
+        });
+
+        // Drag and drop functionality
+        setupDragAndDrop();
+    }
+
+    function setupDragAndDrop() {
+        const photoUploadArea = document.getElementById('photoUploadArea');
+        const videoUploadArea = document.getElementById('videoUploadArea');
+
+        // Photo upload area
+        photoUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        photoUploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+
+        photoUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith('image/'));
+            handlePhotoFiles(files);
+        });
+
+        // Video upload area
+        videoUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        videoUploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+
+        videoUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith('video/'));
+            handleVideoFiles(files);
+        });
+    }
+
+    function nextStep() {
+        if (currentStep < 3) { 
+			var allow_next = true;
+			if(currentStep == 1){
+				if(jQuery('.adv_category').val() == ''){
+					jQuery('.adv_category').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_category').removeClass('invalid');
+				
+				if(jQuery('.adv_am').val() == ''){
+					jQuery('.adv_am').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_am').removeClass('invalid');
+				
+				if(jQuery('.adm_title').val() == ''){
+					jQuery('.adm_title').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adm_title').removeClass('invalid');
+				
+				if(jQuery('.adv_desc').val() == ''){
+					jQuery('.adv_desc').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_desc').removeClass('invalid');
+			}
+			
+			if(currentStep == 2){
+				if(jQuery('.adv_country').val() == ''){
+					jQuery('.adv_country').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_country').removeClass('invalid');
+				
+				if(jQuery('.adv_state').val() == ''){
+					jQuery('.adv_state').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_state').removeClass('invalid');
+				
+				if(jQuery('.adv_city').val() == ''){
+					jQuery('.adv_city').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_city').removeClass('invalid');
+			}
+			
+			if(allow_next){
+            // Hide current step
+            document.getElementById(`formStep${currentStep}`).classList.add('hidden');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${currentStep}`).classList.add('completed');
+
+            // Show next step
+            currentStep++;
+            document.getElementById(`formStep${currentStep}`).classList.remove('hidden');
+            document.getElementById(`step${currentStep}`).classList.add('active');
+
+            // Update buttons
+            document.getElementById('backBtn').classList.remove('hidden');
+
+            if (currentStep === 3) {
+                document.getElementById('nextBtn').classList.add('hidden');
+                document.getElementById('submitBtn').classList.remove('hidden');
+            }
+			
+			}
+			
+        }
+    }
+
+    function previousStep() {
+        if (currentStep > 1) {
+            // Hide current step
+            document.getElementById(`formStep${currentStep}`).classList.add('hidden');
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+
+            // Show previous step
+            currentStep--;
+            document.getElementById(`formStep${currentStep}`).classList.remove('hidden');
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.getElementById(`step${currentStep}`).classList.remove('completed');
+
+            // Update buttons
+            if (currentStep === 1) {
+                document.getElementById('backBtn').classList.add('hidden');
+            }
+
+            if (currentStep < 3) {
+                document.getElementById('nextBtn').classList.remove('hidden');
+                document.getElementById('submitBtn').classList.add('hidden');
+            }
+        }
+    }
+
+  let selectedFiles_img = [];
+    function handlePhotoUpload(event) {
+        const files = Array.from(event.target.files);
+		
+		selectedFiles_img = selectedFiles_img.concat(files);
+		
+        handlePhotoFiles(files);
+    }
+    function handlePhotoFiles(files) {
+        if (uploadedPhotos.length + files.length > 10) {
+            alert('Maximum 10 photos allowed');
+            return;
+        }
+
+        files.forEach(file => {
+            if (file.size > 10 * 1024 * 1024) {
+                alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photoData = {
+                    file: file,
+                    url: e.target.result,
+                    id: Date.now() + Math.random()
+                };
+
+                uploadedPhotos.push(photoData);
+                displayPhotoPreview(photoData);
+            };
+            reader.readAsDataURL(file);
+        });
+		
+		
+		const dataTransfer = new DataTransfer();
+		selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
+		document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
+		
+    }
+
+    function displayPhotoPreview(photoData) {
+        const grid = document.getElementById('photoPreviewGrid');
+        grid.classList.remove('hidden');
+
+        const previewDiv = document.createElement('div');
+        previewDiv.className = 'media-preview relative';
+        previewDiv.innerHTML = `
+            <img src="${photoData.url}" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
+            <button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        `;
+
+        grid.appendChild(previewDiv);
+    }
+let selectedFiles_video = [];
+    function handleVideoUpload(event) {
+        const files = Array.from(event.target.files);
+		selectedFiles_video = selectedFiles_video.concat(files);
+        handleVideoFiles(files);
+    }
+
+    function handleVideoFiles(files) {
+        if (uploadedVideos.length + files.length > 5) {
+            alert('Maximum 5 videos allowed');
+            return;
+        }
+
+        files.forEach(file => {
+            if (file.size > 100 * 1024 * 1024) {
+                alert(`File ${file.name} is too large. Maximum size is 100MB.`);
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const videoData = {
+                    file: file,
+                    url: e.target.result,
+                    id: Date.now() + Math.random()
+                };
+
+                uploadedVideos.push(videoData);
+                displayVideoPreview(videoData);
+            };
+            reader.readAsDataURL(file);
+        });
+		
+		const dataTransfer = new DataTransfer();
+		selectedFiles_video.forEach(file => dataTransfer.items.add(file)); 
+		document.getElementById('videoInput').files = dataTransfer.files; //console.log(dataTransfer.files);
+		
+    }
+
+    function displayVideoPreview(videoData) {
+        const grid = document.getElementById('videoPreviewGrid');
+        grid.classList.remove('hidden');
+
+        const previewDiv = document.createElement('div');
+        previewDiv.className = 'media-preview relative';
+        previewDiv.innerHTML = `
+            <video src="${videoData.url}" class="w-full h-48 object-cover rounded-xl" controls></video>
+            <button type="button" class="remove-btn" onclick="removeVideo('${videoData.id}')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                ${formatFileSize(videoData.file.size)}
+            </div>
+        `;
+
+        grid.appendChild(previewDiv);
+    }
+
+    function removePhoto(id) {
+        uploadedPhotos = uploadedPhotos.filter(photo => photo.id !== id);
+        refreshPhotoGrid();
+    }
+
+    function removeVideo(id) {
+        uploadedVideos = uploadedVideos.filter(video => video.id !== id);
+        refreshVideoGrid();
+    }
+
+    function refreshPhotoGrid() {
+        const grid = document.getElementById('photoPreviewGrid');
+        grid.innerHTML = '';
+
+        if (uploadedPhotos.length === 0) {
+            grid.classList.add('hidden');
+        } else {
+            uploadedPhotos.forEach(photo => displayPhotoPreview(photo));
+        }
+    }
+
+    function refreshVideoGrid() {
+        const grid = document.getElementById('videoPreviewGrid');
+        grid.innerHTML = '';
+
+        if (uploadedVideos.length === 0) {
+            grid.classList.add('hidden');
+        } else {
+            uploadedVideos.forEach(video => displayVideoPreview(video));
+        }
+    }
+
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function saveDraft() {
+        alert('💾 Draft saved successfully! You can continue editing later.');
+    }
+
+    function submitForm(event) {
+        event.preventDefault();
+
+        // Show upload progress
+        const progressDiv = document.getElementById('uploadProgress');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+
+        progressDiv.classList.remove('hidden');
+
+        // Simulate upload progress
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 15;
+            if (progress > 100) progress = 100;
+
+            progressFill.style.width = progress + '%';
+            progressText.textContent = Math.round(progress) + '%';
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    alert('🎉 Advertisement created successfully! It will be reviewed within 24 hours.');
+                    // Redirect or reset form
+                }, 500);
+            }
+        }, 200);
+    }
+</script>
 
 	<link href="<?= SITEURL ?>assets/plugins/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="<?= SITEURL ?>assets/plugins/jasny-bootstrap/js/jasny-bootstrap.min.js" type="text/javascript" language="javascript"></script>
