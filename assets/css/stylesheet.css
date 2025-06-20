@@ -109,8 +109,8 @@
     position: sticky;
 }
 
- body header .hidden{
-    display: flex;
+ body header .container .hidden{
+    display: flex !important;
 }
 
 
