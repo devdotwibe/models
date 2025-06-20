@@ -234,7 +234,7 @@ body header .container {
     padding: 0 2rem;
 }
 body header.ultra-glass {
-    position: sticky;
+    position: sticky !important;
 }
 
 body header.ultra-glass {
