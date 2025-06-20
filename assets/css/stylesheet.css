@@ -96,6 +96,8 @@
         cursor: pointer;
         font-weight: 500;
         position: relative;
+        text-decoration: none;
+        color: rgb(255 255 255 / 0.6);
     }
 
 
