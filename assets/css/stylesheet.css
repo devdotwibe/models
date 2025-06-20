@@ -7588,3 +7588,7 @@ left: 83%;
             padding: 0.75rem 1rem;
         }
     }
+
+    div#formStep1 select {
+    color: #9ca3c0 !important;
+}
