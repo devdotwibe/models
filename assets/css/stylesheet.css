@@ -223,6 +223,17 @@ header .btn-primary::before {
         height: 300px;
     }
 
+body header .container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+body header .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
       header .btn-primary:hover {
         background: linear-gradient(135deg, #5a67d8, #6b46c1);
         transform: translateY(-3px) scale(1.02);
