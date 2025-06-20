@@ -7592,3 +7592,6 @@ left: 83%;
     div#formStep1 select {
     color: #9ca3c0 !important;
 }
+ div#formStep1 input {
+    color: red;
+}
