@@ -27,9 +27,7 @@ if (isset($_SESSION['log_user_id'])) {
 				$target_profile = basename($_FILES["files"]["name"][0]);
 				if (move_uploaded_file($_FILES["files"]["tmp_name"][0], $target_file1)) {
 					$joe_id = DB::update('banners', array('image' => $target_profile), "id=%s", $created_id);
-				} else {
-					$error .= 'Image Not Updated';
-				}
+				} 
 			if($totalFiles > 1){
 				for ($i = 1; $i < $totalFiles; $i++) {
 					$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][$i]);
@@ -729,7 +727,7 @@ $serviceArr = array('Providing services', 'Looking for services');
             reader.readAsDataURL(file);
         });
 		
-		
+		console.log(uploadedPhotos);
 		const dataTransfer = new DataTransfer();
 		selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
 		document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
@@ -825,7 +823,7 @@ let selectedFiles_video = [];
         refreshVideoGrid();
     }
 
-    function refreshPhotoGrid() {
+    function refreshPhotoGrid() { alert(uploadedPhotos.length)
         const grid = document.getElementById('photoPreviewGrid');
         grid.innerHTML = '';
 

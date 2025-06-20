@@ -38,9 +38,7 @@ if (isset($_SESSION['log_user_id'])) {
 				$target_profile = basename($_FILES["files"]["name"][0]);
 				if (move_uploaded_file($_FILES["files"]["tmp_name"][0], $target_file1)) {
 					$joe_id = DB::update('banners', array('image' => $target_profile), "id=%s", $id);
-				} else {
-					$error .= 'Image Not Updated';
-				}
+				} 
 			if($totalFiles > 1){
 				for ($i = 1; $i < $totalFiles; $i++) {
 					$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][$i]);
