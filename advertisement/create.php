@@ -5,7 +5,7 @@ include('../includes/helper.php');
 
 if (isset($_SESSION['log_user_id'])) {
 	//create post data
-	if ($_POST) {
+	if ($_POST) {  
 
 		$user_id = $_SESSION['log_user_id'];
 		$arr = array('name', 'subtitle', 'description', 'category','service', 'country', 'state', 'city','terms_conditions');
@@ -18,18 +18,51 @@ if (isset($_SESSION['log_user_id'])) {
 		$created_id = DB::insertId();
 
 		$error = '';
-		if ($_FILES["files"]["name"]) {
+		if (isset($_FILES["files"])) {
+			$totalFiles = count($_FILES['files']['name']);
+			$additional_img = '';
 			$target_dir_profile = "../uploads/banners/";
-			$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"]);
-			$target_profile = basename($_FILES["files"]["name"]);
-			if (move_uploaded_file($_FILES["files"]["tmp_name"], $target_file1)) {
-				$joe_id = DB::update('banners', array('image' => $target_profile), "id=%s", $created_id);
-			} else {
-				$error .= 'Image Not Updated';
+			
+				$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][0]);
+				$target_profile = basename($_FILES["files"]["name"][0]);
+				if (move_uploaded_file($_FILES["files"]["tmp_name"][0], $target_file1)) {
+					$joe_id = DB::update('banners', array('image' => $target_profile), "id=%s", $created_id);
+				} else {
+					$error .= 'Image Not Updated';
+				}
+			if($totalFiles > 1){
+				for ($i = 1; $i < $totalFiles; $i++) {
+					$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][$i]);
+					$target_profile = basename($_FILES["files"]["name"][$i]);
+					if (move_uploaded_file($_FILES["files"]["tmp_name"][$i], $target_file1)) {
+						$additional_img .= $target_profile.'|';
+					}
+				}
+				if(!empty($additional_img)){ 
+					$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
+				}
 			}
+			
+			
+		}
+		
+		if (isset($_FILES["video_file"])) {
+			$totalFiles_v = count($_FILES['video_file']['name']);
+			$additional_vd = '';
+			$target_dir_profile = "../uploads/banners/";
+				for ($i = 0; $i < $totalFiles_v; $i++) {
+					$target_file1 = $target_dir_profile . basename($_FILES["video_file"]["name"][$i]);
+					$target_profile = basename($_FILES["video_file"]["name"][$i]);
+					if (move_uploaded_file($_FILES["video_file"]["tmp_name"][$i], $target_file1)) {
+						$additional_vd .= $target_profile.'|';
+					}
+				}
+				if(!empty($additional_vd)){ 
+					$joe_id = DB::update('banners', array('video' => rtrim($additional_vd, "|")), "id=%s", $created_id);
+				}
 		}
 
-		if ($_FILES["video_file"]["name"]) {
+		/*if ($_FILES["video_file"]["name"]) {
 			$target_dir_profile = "../uploads/banners/";
 			$target_file1 = $target_dir_profile . basename($_FILES["video_file"]["name"]);
 			$target_profile = basename($_FILES["video_file"]["name"]);
@@ -54,7 +87,7 @@ if (isset($_SESSION['log_user_id'])) {
 			if(!empty($additional_img)){ 
 				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
 			}
-		}
+		}*/
 
 		if ($error) {
 			echo '<script>alert("' . $error . '");</script>';
@@ -62,26 +95,7 @@ if (isset($_SESSION['log_user_id'])) {
 		
 		echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
 		
-		/*  if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
-	
-		  echo '<script>alert("Your Profile Picture Successfully Uploaded");</script>';
-	
-		  $sql = "UPDATE model_user SET profile_pic = '".$target_profile."' WHERE id = '".$use_id."'";
 		
-		  if(mysqli_query($con, $sql)){
-			echo '<script>alert("Your Profile Picture Successfully Updated");
-			 window.location="edit-profile.php"</script>';
-		  }else{
-			echo '<script>alert("Profile Picture Not Updated.\nPlease try again later.");
-			 window.location="edit-profile.php"</script>';
-		  }  
-	
-	  }
-	  else{
-		  echo '<script>alert("Error in Image uploading");
-			 window.location="edit-profile.php"
-			</script>';
-	  }*/
 	}
 
 	$f_country_list = DB::query('select id,name,sortname from countries order by name asc');
@@ -102,13 +116,11 @@ $serviceArr = array('Providing services', 'Looking for services');
 		.thumbnail {
 			background: #FFF;
 		}
+		.invalid {
+			border: 3px solid red;
+		}
 	</style>
-	
-
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
-	
+		
 </head>
 
 <body class="creare-ad min-h-screen text-white socialwall-page">
@@ -138,7 +150,7 @@ $serviceArr = array('Providing services', 'Looking for services');
         <!-- Form Container -->
         <div class="max-w-4xl mx-auto">
             <?php /*?><form class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" onsubmit="submitForm(event)"><?php */ ?>
-			<form action="" method="post" class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" role="form" enctype="multipart/form-data">
+			<form action="" method="post" class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" role="form" enctype="multipart/form-data" >
 
                 <!-- Step 1: Basic Information -->
                 <div id="formStep1" class="form-step">
@@ -156,7 +168,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                     <div class="grid md:grid-cols-2 gap-8">
                         <div>
                             <label class="block text-white font-semibold mb-3">Category *</label>
-							<select name="category" class="form-input w-full px-6 py-4 rounded-xl" required>
+							<select name="category" class="form-input w-full px-6 py-4 rounded-xl adv_category" id="adv_category"  required>
 												<option value="">Select Category</option>
 												<?php
 												foreach ($category_list as $val) {
@@ -166,12 +178,12 @@ $serviceArr = array('Providing services', 'Looking for services');
 												}
 												?>
 											</select>
-                            
+                            <span class="err_adv_category" style="color:red;"></span>
                         </div>
 
                         <div>
                             <label class="block text-white font-semibold mb-3">I Am *</label>
-							<select name="service" class="form-input w-full px-6 py-4 rounded-xl" required>
+							<select name="service" class="form-input w-full px-6 py-4 rounded-xl adv_am" id="adv_am" required>
 												<?php
 												foreach ($serviceArr as $val) {
 												?>
@@ -180,34 +192,37 @@ $serviceArr = array('Providing services', 'Looking for services');
 												}
 												?>
 											</select>
-                            
+                            <span class="err_adv_am" style="color:red;"></span>
                         </div>
                     </div>
 
                     <div class="mt-8">
                         <label class="block text-white font-semibold mb-3">Advertisement Title *</label>
-                        <input type="text" name="name" value="" class="form-input w-full px-6 py-4 rounded-xl" placeholder="Enter a catchy title for your advertisement..." required />
+                        <input type="text" name="name" value="" class="form-input w-full px-6 py-4 rounded-xl adm_title" id="adm_title" placeholder="Enter a catchy title for your advertisement..." required />
 						<p class="text-white/50 text-sm mt-2">💡 Tip: Use engaging words that describe your unique services</p>
-                    </div>
+						<span class="err_adv_title" style="color:red;"></span>
+					</div>
 					
 					<div class="mt-8">
-                        <label class="block text-white font-semibold mb-3">Advertisement Subtitle *</label>
-                        <input type="text" name="subtitle" value="" class="form-input w-full px-6 py-4 rounded-xl" placeholder="Enter a catchy title for your advertisement..." required />
+                        <label class="block text-white font-semibold mb-3">Advertisement Subtitle</label>
+                        <input type="text" name="subtitle" value="" class="form-input w-full px-6 py-4 rounded-xl adm_subtitle" id="adm_subtitle" placeholder="Enter a catchy title for your advertisement..."  />
 						<p class="text-white/50 text-sm mt-2">💡 Tip: Subtitle of advertisement</p>
+						<span class="err_adv_subtitle" style="color:red;"></span>
                     </div>
 
                     <div class="mt-8">
                         <label class="block text-white font-semibold mb-3">Description *</label>
-                        <textarea name="description" class="form-input w-full px-6 py-4 rounded-xl h-40 resize-none" placeholder="Describe your services in detail. What makes you special? What can clients expect?" required></textarea>
+                        <textarea name="description" class="form-input w-full px-6 py-4 rounded-xl h-40 resize-none adv_desc" id="adv_desc" placeholder="Describe your services in detail. What makes you special? What can clients expect?" required></textarea>
 						<div class="flex justify-between items-center mt-2">
                             <p class="text-white/50 text-sm">💡 Be specific about your services, rates, and availability</p>
                             <span class="text-white/50 text-sm" id="charCount">0/500</span>
                         </div>
+						<span class="err_adv_desc" style="color:red;"></span>
                     </div>
 					
 					<div class="mt-8">
                         <label class="block text-white font-semibold mb-3">Terms and Conditions</label>
-                        <textarea name="terms_conditions" class="form-input w-full px-6 py-4 rounded-xl h-40 resize-none" placeholder="Describe your terms and conditions related to this advertisement." ></textarea>
+                        <textarea name="terms_conditions" class="form-input w-full px-6 py-4 rounded-xl h-40 resize-none adv_terms" id="adv_terms" placeholder="Describe your terms and conditions related to this advertisement." ></textarea>
 						<div class="flex justify-between items-center mt-2">
                             <p class="text-white/50 text-sm">💡 Be specific about your services, rates, and availability</p>
                             <span class="text-white/50 text-sm" id="charCount">0/500</span>
@@ -229,7 +244,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                     <div class="grid md:grid-cols-3 gap-6">
                         <div>
                             <label class="block text-white font-semibold mb-3">Country *</label>
-							<select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-input w-full px-6 py-4 rounded-xl" required>
+							<select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-input w-full px-6 py-4 rounded-xl adv_country" id="adv_country" required>
 												<option value="" data-id="">Select Country</option>
 												<?php
 												if ($f_country_list) {
@@ -242,19 +257,19 @@ $serviceArr = array('Providing services', 'Looking for services');
 
 												?>
 											</select>
-                            
+                            <span class="err_adv_country" style="color:red;"></span>
                         </div>
 
                         <div>
                             <label class="block text-white font-semibold mb-3">State/Province *</label>
-							<select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-input w-full px-6 py-4 rounded-xl" required ></select>
-                            
+							<select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-input w-full px-6 py-4 rounded-xl adv_state" id="adv_state" required ></select>
+                            <span class="err_adv_state" style="color:red;"></span>
                         </div>
 
                         <div>
                             <label class="block text-white font-semibold mb-3">City *</label>
-							<select name="city" id="i-hs-city" class="form-input w-full px-6 py-4 rounded-xl" required ></select>
-                            
+							<select name="city" id="i-hs-city" class="form-input w-full px-6 py-4 rounded-xl adv_city" id="adv_city" required ></select>
+                            <span class="err_adv_city" style="color:red;"></span>
                         </div>
                     </div>
 
@@ -290,7 +305,10 @@ $serviceArr = array('Providing services', 'Looking for services');
                             <button type="button" class="btn-primary px-8 py-3 rounded-xl font-semibold" onclick="document.getElementById('photoInput').click()">
                                 Choose Photos
                             </button>
-                            <input type="file" name="files" id="photoInput" class="hidden" multiple accept="image/*" onchange="handlePhotoUpload(event)" required>
+                            <input type="file" name="files[]" id="photoInput" class="hidden" multiple accept=".jpg,.jpeg,.png,.gif" onchange="handlePhotoUpload(event)" >
+							
+							<?php /*?><input type="file" name="additionalimages[]" id="imageInput_addt" multiple  accept=".jpg,.jpeg,.png" />
+										<div id="preview_addt" style="display:none;"></div><?php */ ?>
 							
                         </div>
 
@@ -317,7 +335,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                             <button type="button" class="btn-primary px-8 py-3 rounded-xl font-semibold" onclick="document.getElementById('videoInput').click()">
                                 Choose Videos
                             </button>
-                            <input type="file" name="video_file" id="videoInput" class="hidden" multiple accept="video/*" onchange="handleVideoUpload(event)">
+                            <input type="file" name="video_file[]" id="videoInput" class="hidden" multiple accept=".mp4,.mov,.avi" onchange="handleVideoUpload(event)">
 						</div>
 
                         <!-- Video Preview Grid -->
@@ -377,29 +395,9 @@ $serviceArr = array('Providing services', 'Looking for services');
             margin: 10px;
         }
     </style>
-	<script>
-        /*const imageInput_addt = document.getElementById('imageInput_addt');
-        const preview_addt = document.getElementById('preview_addt');
-
-        imageInput_addt.addEventListener('change', function () {
-            preview_addt.innerHTML = ''; // clear previous previews
-            const files = this.files;
-
-            Array.from(files).forEach(file => {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        preview_addt.appendChild(img);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        }); */
-		
-		
-		const imageInput_addt = document.getElementById('imageInput_addt');
+	<script>  
+	
+  const imageInput_addt = document.getElementById('imageInput_addt');
   const preview_addt = document.getElementById('preview_addt');
   let selectedFiles = [];
 
@@ -443,7 +441,7 @@ $serviceArr = array('Providing services', 'Looking for services');
   function updateInputFiles() {
     const dataTransfer = new DataTransfer();
     selectedFiles.forEach(file => dataTransfer.items.add(file));
-    imageInput_addt.files = dataTransfer.files;
+    imageInput_addt.files = dataTransfer.files; //console.log(dataTransfer.files);
   }
 		
     </script>
@@ -608,7 +606,48 @@ $serviceArr = array('Providing services', 'Looking for services');
     }
 
     function nextStep() {
-        if (currentStep < 3) {
+        if (currentStep < 3) { 
+			var allow_next = true;
+			if(currentStep == 1){
+				if(jQuery('.adv_category').val() == ''){
+					jQuery('.adv_category').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_category').removeClass('invalid');
+				
+				if(jQuery('.adv_am').val() == ''){
+					jQuery('.adv_am').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_am').removeClass('invalid');
+				
+				if(jQuery('.adm_title').val() == ''){
+					jQuery('.adm_title').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adm_title').removeClass('invalid');
+				
+				if(jQuery('.adv_desc').val() == ''){
+					jQuery('.adv_desc').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_desc').removeClass('invalid');
+			}
+			
+			if(currentStep == 2){
+				if(jQuery('.adv_country').val() == ''){
+					jQuery('.adv_country').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_country').removeClass('invalid');
+				
+				if(jQuery('.adv_state').val() == ''){
+					jQuery('.adv_state').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_state').removeClass('invalid');
+				
+				if(jQuery('.adv_city').val() == ''){
+					jQuery('.adv_city').addClass('invalid');
+					allow_next = false;
+				}else jQuery('.adv_city').removeClass('invalid');
+			}
+			
+			if(allow_next){
             // Hide current step
             document.getElementById(`formStep${currentStep}`).classList.add('hidden');
             document.getElementById(`step${currentStep}`).classList.remove('active');
@@ -626,6 +665,9 @@ $serviceArr = array('Providing services', 'Looking for services');
                 document.getElementById('nextBtn').classList.add('hidden');
                 document.getElementById('submitBtn').classList.remove('hidden');
             }
+			
+			}
+			
         }
     }
 
@@ -653,11 +695,14 @@ $serviceArr = array('Providing services', 'Looking for services');
         }
     }
 
+  let selectedFiles_img = [];
     function handlePhotoUpload(event) {
         const files = Array.from(event.target.files);
+		
+		selectedFiles_img = selectedFiles_img.concat(files);
+		
         handlePhotoFiles(files);
     }
-
     function handlePhotoFiles(files) {
         if (uploadedPhotos.length + files.length > 10) {
             alert('Maximum 10 photos allowed');
@@ -683,6 +728,12 @@ $serviceArr = array('Providing services', 'Looking for services');
             };
             reader.readAsDataURL(file);
         });
+		
+		
+		const dataTransfer = new DataTransfer();
+		selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
+		document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
+		
     }
 
     function displayPhotoPreview(photoData) {
@@ -703,9 +754,10 @@ $serviceArr = array('Providing services', 'Looking for services');
 
         grid.appendChild(previewDiv);
     }
-
+let selectedFiles_video = [];
     function handleVideoUpload(event) {
         const files = Array.from(event.target.files);
+		selectedFiles_video = selectedFiles_video.concat(files);
         handleVideoFiles(files);
     }
 
@@ -734,6 +786,11 @@ $serviceArr = array('Providing services', 'Looking for services');
             };
             reader.readAsDataURL(file);
         });
+		
+		const dataTransfer = new DataTransfer();
+		selectedFiles_video.forEach(file => dataTransfer.items.add(file)); 
+		document.getElementById('videoInput').files = dataTransfer.files; //console.log(dataTransfer.files);
+		
     }
 
     function displayVideoPreview(videoData) {
@@ -836,17 +893,8 @@ $serviceArr = array('Providing services', 'Looking for services');
 	<link href="<?= SITEURL ?>assets/plugins/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="<?= SITEURL ?>assets/plugins/jasny-bootstrap/js/jasny-bootstrap.min.js" type="text/javascript" language="javascript"></script>
 
-	<script type="text/javascript">
-
-        Dropzone.options.imageUpload = {
-
-        maxFilesize:1,
-
-        acceptedFiles: ".jpeg,.jpg,.png,.gif"
-
-    };
-
-</script>
+	
+	
 
 </body>
 
