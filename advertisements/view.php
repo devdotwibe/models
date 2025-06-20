@@ -573,10 +573,10 @@ else{
 			
 			<?php 
 			
-			$similar_adv_query = "select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id where tb.category='".$form_data['category']."' ORDER BY RAND() LIMIT 3";
+			$similar_adv_query = "select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id where tb.id!=".$id." AND tb.category='".$form_data['category']."' ORDER BY RAND() LIMIT 3";
 			
 			if(DB::numRows($similar_adv_query) < 3){
-				$similar_adv = DB::query("select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id ORDER BY RAND() LIMIT 3");
+				$similar_adv = DB::query("select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id where tb.id!=".$id." ORDER BY RAND() LIMIT 3");
 			}else{
 				$similar_adv = DB::query($similar_adv_query);
 			}
