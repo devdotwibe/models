@@ -165,7 +165,7 @@
         z-index: -1;
     }
 
- header .ultra-glass::before {
+ header.ultra-glass::before {
         content: '';
         position: absolute;
         top: 0;
