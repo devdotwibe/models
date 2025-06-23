@@ -4,7 +4,7 @@
     $userid = $_POST['username'];
     $password = $_POST['password'];
 
-   // echo '<script>alert("'.$userid.'");</script>';
+   echo '<script>alert("'.$userid.'");</script>';
     //echo '<script>alert("'.$password.'");</script>';
 
       
