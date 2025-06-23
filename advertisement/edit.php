@@ -949,9 +949,9 @@ let selectedFiles_video = [];
 		if (files_img.length > 0) {
 			// Create a new FormData object
 			var formData = new FormData();
-
+			var uploaded_file = [];
 			for (var i = 0; i < files_img.length; i++) {
-				formData.append('video[]', files_img[i]);  // Use 'video[]' as the name
+				formData.append('uploaded_file[]', files_img[i]);  
 			}
 			console.log(files_img.length);
 			progressFill.style.width = '25%';
@@ -992,9 +992,9 @@ let selectedFiles_video = [];
 		if (files_vd.length > 0) {
 			// Create a new FormData object
 			var formData = new FormData();
-
+			var uploaded_file = [];
 			for (var i = 0; i < files_vd.length; i++) {
-				formData.append('video[]', files_vd[i]);  
+				formData.append('uploaded_file[]', files_vd[i]);  
 			}
 			console.log(files_vd.length);
 			if (files_img.length > 0) {
