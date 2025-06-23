@@ -956,7 +956,6 @@ let selectedFiles_video = [];
 				formData.append('uploaded_file[]', files_img[i]);  
 			}
 			
-			console.log(files_img);
 			progressFill.style.width = '25%';
             progressText.textContent = '25%';
 			progress = 25;
@@ -967,7 +966,7 @@ let selectedFiles_video = [];
 				body: formData
 			})
 			.then(response => response.text())
-			.then(data => { console.log(data);
+			.then(data => { 
 				if(data == 'No files were uploaded.'){
 					alert(data);
 				}else if(data == 'Error'){
@@ -1007,7 +1006,7 @@ let selectedFiles_video = [];
 			for (var i = 0; i < files_vd.length; i++) {
 				formDataV.append('uploaded_file[]', files_vd[i]);  
 			}
-			console.log(files_vd);
+			
 			if (files_img.length > 0) {
 			progressFill.style.width = '75%';
             progressText.textContent = '75%';	
@@ -1023,7 +1022,7 @@ let selectedFiles_video = [];
 				body: formDataV
 			})
 			.then(response => response.text())
-			.then(data => { console.log(data);
+			.then(data => { 
 				if(data == 'No files were uploaded.'){
 					alert(data);
 				}else if(data == 'Error'){
@@ -1036,7 +1035,7 @@ let selectedFiles_video = [];
 				progress = 100;
 				if(progress >= 100){
 				setTimeout(() => {
-                   // event.target.submit();
+                    event.target.submit();
                 }, 1000);
 			} 
 				
