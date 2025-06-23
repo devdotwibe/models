@@ -25,7 +25,7 @@ if (isset($_SESSION['log_user_id'])) {
 		DB::update('banners', $post_data, "id=%s", $id);
 
 		$error = '';
-		print_r($_POST['save_image_file']); exit;
+		
 		if(isset($_POST['save_image_file'])){
 			$additional_img = '';
 			$exp_file_img = explode('|',$_POST['save_image_file']);
@@ -982,7 +982,6 @@ let selectedFiles_video = [];
 				progress = 100;
 				}
 				
-				alert(progress);
 				if(progress >= 100){
 				setTimeout(() => {
                     event.target.submit();
@@ -1032,7 +1031,6 @@ let selectedFiles_video = [];
 				progressFill.style.width = '100%';
 				progressText.textContent = '100%';
 				progress = 100;
-				alert(progress);
 				if(progress >= 100){
 				setTimeout(() => {
                     event.target.submit();
