@@ -979,6 +979,8 @@ let selectedFiles_video = [];
 				progressFill.style.width = '100%';
 				progressText.textContent = '100%';
 				}
+				
+				alert(progress);
 			})
 			.catch(error => {
 				console.error('Upload failed:', error);
@@ -1022,6 +1024,8 @@ let selectedFiles_video = [];
 				}
 				progressFill.style.width = '100%';
 				progressText.textContent = '100%';
+				
+				alert(progress);
 				
 			})
 			.catch(error => {
