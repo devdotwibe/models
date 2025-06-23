@@ -991,10 +991,10 @@ let selectedFiles_video = [];
 
 		if (files_vd.length > 0) {
 			// Create a new FormData object
-			var formData = new FormData();
+			var formDataV = new FormData();
 			var uploaded_file = [];
 			for (var i = 0; i < files_vd.length; i++) {
-				formData.append('uploaded_file[]', files_vd[i]);  
+				formDataV.append('uploaded_file[]', files_vd[i]);  
 			}
 			console.log(files_vd.length);
 			if (files_img.length > 0) {
@@ -1009,7 +1009,7 @@ let selectedFiles_video = [];
 			// Send the FormData object using Fetch API
 			fetch('<?=SITEURL.'/ajax/adv_upload.php'?>', {
 				method: 'POST',
-				body: formData
+				body: formDataV
 			})
 			.then(response => response.text())
 			.then(data => {
