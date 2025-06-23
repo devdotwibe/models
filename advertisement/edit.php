@@ -328,7 +328,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                                 Choose Photos
                             </button>
                             <input type="file" name="files[]" id="photoInput" class="hidden" multiple accept=".jpg,.jpeg,.png,.gif" onchange="handlePhotoUpload(event)" >
-							<input type="text" name="save_image_file" value="" id="save_image_file">
+							<input type="hidden" name="save_image_file" value="" id="save_image_file">
 							
 							
                         </div>
@@ -383,7 +383,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                                 Choose Videos
                             </button>
                             <input type="file" name="video_file[]" id="videoInput" class="hidden" multiple accept=".mp4,.mov,.avi" onchange="handleVideoUpload(event)">
-							<input type="text" name="save_video_file" value="" id="save_video_file">
+							<input type="hidden" name="save_video_file" value="" id="save_video_file">
 						</div>
 
                         <!-- Video Preview Grid -->
@@ -953,7 +953,7 @@ let selectedFiles_video = [];
 			for (var i = 0; i < files_img.length; i++) {
 				formData.append('video[]', files_img[i]);  // Use 'video[]' as the name
 			}
-			
+			console.log(formData);
 			progressFill.style.width = '25%';
             progressText.textContent = '25%';
 			progress = 25;
@@ -996,6 +996,7 @@ let selectedFiles_video = [];
 			for (var i = 0; i < files_vd.length; i++) {
 				formData.append('video[]', files_vd[i]);  
 			}
+			console.log(formData);
 			if (files_img.length > 0) {
 			progressFill.style.width = '75%';
             progressText.textContent = '75%';	
