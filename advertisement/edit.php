@@ -25,7 +25,7 @@ if (isset($_SESSION['log_user_id'])) {
 		DB::update('banners', $post_data, "id=%s", $id);
 
 		$error = '';
-		
+		print_r($_POST['save_image_file']); exit;
 		if(isset($_POST['save_image_file'])){
 			$additional_img = '';
 			$exp_file_img = explode('|',$_POST['save_image_file']);
