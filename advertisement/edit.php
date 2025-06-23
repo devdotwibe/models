@@ -307,7 +307,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                             <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
                         </svg>
                         Photos & Videos
-                    </h2> <?php print_r($form_data);  ?>
+                    </h2> 
 
                     <!-- Photo Upload Section -->
                     <div class="mb-12">
@@ -339,24 +339,24 @@ $serviceArr = array('Providing services', 'Looking for services');
 							<?php if(!empty($form_data['image']) ){ ?>
 							<div class="media-preview relative">
 								<img src="<?php echo SITEURL . 'uploads/banners/' . $form_data['image']; ?>" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
-								<?php /*?><button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
+								<button type="button" class="remove-btn" onclick="removePhoto()">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 										<line x1="18" y1="6" x2="6" y2="18"></line>
 										<line x1="6" y1="6" x2="18" y2="18"></line>
 									</svg>
-								</button><?php */ ?>
+								</button>
 							</div>
 							<?php } if(!empty($form_data['additionalimages']) ){ 
 								$additionalimages = explode('|',$form_data['additionalimages']);
 								foreach($additionalimages as $add_img){	?>
 							<div class="media-preview relative">
 								<img src="<?php echo SITEURL . 'uploads/banners/' . $add_img; ?>" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
-								<?php /*?><button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
+								<button type="button" class="remove-btn" onclick="removePhoto()">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 										<line x1="18" y1="6" x2="6" y2="18"></line>
 										<line x1="6" y1="6" x2="18" y2="18"></line>
 									</svg>
-								</button><?php */ ?>
+								</button>
 							</div>
 							<?php 
 								}

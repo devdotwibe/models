@@ -483,7 +483,8 @@ $serviceArr = array('Providing services', 'Looking for services');
 				type: 'get',
 				data: {
 					country: country,
-					selected: state
+					selected: state,
+					option:''
 				},
 				dataType: 'json',
 				success: function(res) {
@@ -500,7 +501,8 @@ $serviceArr = array('Providing services', 'Looking for services');
 				type: 'get',
 				data: {
 					selected: city,
-					state: state
+					state: state,
+					option:''
 				},
 				dataType: 'json',
 				success: function(res) {
@@ -902,7 +904,7 @@ let selectedFiles_video = [];
 			for (var i = 0; i < files_img.length; i++) {
 				formData.append('uploaded_file[]', files_img[i]);  
 			}
-			console.log(files_img.length);
+			
 			progressFill.style.width = '25%';
             progressText.textContent = '25%';
 			progress = 25;
@@ -913,7 +915,7 @@ let selectedFiles_video = [];
 				body: formData
 			})
 			.then(response => response.text())
-			.then(data => {
+			.then(data => { 
 				if(data == 'No files were uploaded.'){
 					alert(data);
 				}else if(data == 'Error'){
@@ -953,7 +955,7 @@ let selectedFiles_video = [];
 			for (var i = 0; i < files_vd.length; i++) {
 				formDataV.append('uploaded_file[]', files_vd[i]);  
 			}
-			console.log(files_vd.length);
+			
 			if (files_img.length > 0) {
 			progressFill.style.width = '75%';
             progressText.textContent = '75%';	
@@ -969,7 +971,7 @@ let selectedFiles_video = [];
 				body: formDataV
 			})
 			.then(response => response.text())
-			.then(data => {
+			.then(data => { 
 				if(data == 'No files were uploaded.'){
 					alert(data);
 				}else if(data == 'Error'){
