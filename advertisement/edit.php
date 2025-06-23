@@ -328,7 +328,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                                 Choose Photos
                             </button>
                             <input type="file" name="files[]" id="photoInput" class="hidden" multiple accept=".jpg,.jpeg,.png,.gif" onchange="handlePhotoUpload(event)" >
-							<input type="text" name="save_image_file" value="1" id="save_image_file">
+							<input type="text" name="save_image_file" value="" id="save_image_file">
 							
 							
                         </div>
@@ -383,7 +383,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                                 Choose Videos
                             </button>
                             <input type="file" name="video_file[]" id="videoInput" class="hidden" multiple accept=".mp4,.mov,.avi" onchange="handleVideoUpload(event)">
-							<input type="hidden" name="save_video_file" value="1" id="save_video_file">
+							<input type="hidden" name="save_video_file" value="" id="save_video_file">
 						</div>
 
                         <!-- Video Preview Grid -->
@@ -1053,7 +1053,7 @@ let selectedFiles_video = [];
 			if(progress >= 100){
 				setTimeout(() => {
                     event.target.submit();
-                }, 500);
+                }, 1000);
 			}
 		}
     }
