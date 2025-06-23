@@ -842,7 +842,7 @@ let selectedFiles_video = [];
         refreshVideoGrid();
     }
 
-    function refreshPhotoGrid() { alert(uploadedPhotos.length)
+    function refreshPhotoGrid() { 
         const grid = document.getElementById('photoPreviewGrid');
         grid.innerHTML = '';
 
