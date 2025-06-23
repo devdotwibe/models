@@ -37,12 +37,14 @@ else{
                       $sql1 = "SELECT count(*) FROM model_images WHERE unique_model_id = '".$unique_id."' AND file_type = 'Image'";
 
                       $result1 = mysqli_query($con, $sql1);
-
+						
+					  $vdo_c = 0;
+					  
                       if (mysqli_num_rows($result1) > 0) {
 
                         while($rowe1 = mysqli_fetch_assoc($result1)) {
 
-                           $vdo_c = $rowe["count(*)"];
+                          if(isset($rowe["count(*)"])) $vdo_c = $rowe["count(*)"];
 
                         }
 
