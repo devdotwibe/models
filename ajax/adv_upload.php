@@ -1,4 +1,8 @@
-<?php var_dump($_FILES); exit;
+<?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+var_dump($_FILES); exit;
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['uploaded_file'])) {
 	
 			$totalFiles_v = count($_FILES['uploaded_file']['name']);
