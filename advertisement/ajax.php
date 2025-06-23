@@ -23,8 +23,8 @@ if(isset($_SESSION['log_user_id'])){
 	}
 	$list_data = $perPage;
 	
-
-	$name = $_GET['q'];
+	$name = '';
+	if(isset($_GET['q'])){ $name = $_GET['q']; }
 	if($name){
 		$url .= 'q='.$name.'&';
 		$where_clause .= " (lower(name) like '%".strtolower($name)."%' ) and";
