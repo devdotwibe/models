@@ -6,8 +6,6 @@ include('../../includes/helper.php');
 $activeTab = 'group-show';
 $m_link= SITEURL.'user/group-show/';
 
-dd( $_SESSION["log_user_id"]);
-
 if(isset($_SESSION["log_user_id"])){
 
 	$usern = $_SESSION["log_user"];
