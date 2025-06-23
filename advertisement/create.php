@@ -18,7 +18,23 @@ if (isset($_SESSION['log_user_id'])) {
 		$created_id = DB::insertId();
 
 		$error = '';
-		if (isset($_FILES["files"])) {
+		
+		if(isset($_POST['save_image_file'])){
+			$additional_img = '';
+			$exp_file_img = explode('|',$_POST['save_image_file']);
+			$joe_id = DB::update('banners', array('image' => $exp_file_img[0]), "id=%s", $created_id);
+			if(count($exp_file_img) > 1){
+				for ($i = 1; $i < count($exp_file_img); $i++) {
+					$additional_img .= $exp_file_img[$i].'|';
+				}
+				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
+			}
+		}
+		if(isset($_POST['save_video_file'])){
+			$joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $created_id);
+		}
+		
+		/*if (isset($_FILES["files"])) {
 			$totalFiles = count($_FILES['files']['name']);
 			$additional_img = '';
 			$target_dir_profile = "../uploads/banners/";
@@ -60,7 +76,7 @@ if (isset($_SESSION['log_user_id'])) {
 				}
 		}
 
-		/*if ($_FILES["video_file"]["name"]) {
+		if ($_FILES["video_file"]["name"]) {
 			$target_dir_profile = "../uploads/banners/";
 			$target_file1 = $target_dir_profile . basename($_FILES["video_file"]["name"]);
 			$target_profile = basename($_FILES["video_file"]["name"]);
@@ -148,7 +164,7 @@ $serviceArr = array('Providing services', 'Looking for services');
         <!-- Form Container -->
         <div class="max-w-4xl mx-auto">
             <?php /*?><form class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" onsubmit="submitForm(event)"><?php */ ?>
-			<form action="" method="post" class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" role="form" enctype="multipart/form-data" >
+			<form action="" method="post" class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" onsubmit="submitForm(event)" role="form" enctype="multipart/form-data" >
 
                 <!-- Step 1: Basic Information -->
                 <div id="formStep1" class="form-step">
@@ -304,7 +320,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                                 Choose Photos
                             </button>
                             <input type="file" name="files[]" id="photoInput" class="hidden" multiple accept=".jpg,.jpeg,.png,.gif" onchange="handlePhotoUpload(event)" >
-							
+							<input type="hidden" name="save_image_file" value="" id="save_image_file">
 							<?php /*?><input type="file" name="additionalimages[]" id="imageInput_addt" multiple  accept=".jpg,.jpeg,.png" />
 										<div id="preview_addt" style="display:none;"></div><?php */ ?>
 							
@@ -334,6 +350,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                                 Choose Videos
                             </button>
                             <input type="file" name="video_file[]" id="videoInput" class="hidden" multiple accept=".mp4,.mov,.avi" onchange="handleVideoUpload(event)">
+							<input type="hidden" name="save_video_file" value="" id="save_video_file">
 						</div>
 
                         <!-- Video Preview Grid -->
@@ -866,9 +883,106 @@ let selectedFiles_video = [];
         const progressText = document.getElementById('progressText');
 
         progressDiv.classList.remove('hidden');
-
-        // Simulate upload progress
+		
+		// Simulate upload progress
         let progress = 0;
+		
+		var photoInput = document.getElementById('photoInput');
+		var files_img = photoInput.files;  // Get all selected images
+		
+		var videoInput = document.getElementById('videoInput');
+		var files = videoInput.files;  // Get all selected videos
+		
+		//uploading Image files
+
+		if (files_img.length > 0) {
+			// Create a new FormData object
+			var formData = new FormData();
+
+			for (var i = 0; i < files_img.length; i++) {
+				formData.append('video[]', files_img[i]);  // Use 'video[]' as the name
+			}
+			
+			progressFill.style.width = '25%';
+            progressText.textContent = '25%';
+			progress = 25;
+			
+			// Send the FormData object using Fetch API
+			fetch('<?=SITEURL.'/ajax/adv_upload.php'?>', {
+				method: 'POST',
+				body: formData
+			})
+			.then(response => response.text())
+			.then(data => {
+				if(data == 'No files were uploaded.'){
+					alert(data);
+				}else if(data == 'Error'){
+					alert('Sorry, there was an error uploading the images.')
+				}else{
+					jQuery('#save_image_file').val(data);
+				}
+				if (files.length > 0) {
+				progressFill.style.width = '50%';
+				progressText.textContent = '50%';
+				}else{
+				progressFill.style.width = '100%';
+				progressText.textContent = '100%';
+				}
+			})
+			.catch(error => {
+				console.error('Upload failed:', error);
+			});
+				if (files.length > 0) progress = 50;
+				else progress = 100;
+			
+		}
+		//uploading video files
+
+		if (files.length > 0) {
+			// Create a new FormData object
+			var formData = new FormData();
+
+			for (var i = 0; i < files.length; i++) {
+				formData.append('video[]', files[i]);  // Use 'video[]' as the name
+			}
+			if (files_img.length > 0) {
+			progressFill.style.width = '75%';
+            progressText.textContent = '75%';	
+			progress = 75;
+			}else{
+			progressFill.style.width = '25%';
+            progressText.textContent = '25%';
+			progress = 25;			
+			}
+			// Send the FormData object using Fetch API
+			fetch('<?=SITEURL.'/ajax/adv_upload.php'?>', {
+				method: 'POST',
+				body: formData
+			})
+			.then(response => response.text())
+			.then(data => {
+				if(data == 'No files were uploaded.'){
+					alert(data);
+				}else if(data == 'Error'){
+					alert('Sorry, there was an error uploading the video.')
+				}else{
+					jQuery('#save_video_file').val(data);
+				}
+				progressFill.style.width = '100%';
+				progressText.textContent = '100%';
+				
+			})
+			.catch(error => {
+				console.error('Upload failed:', error);
+			});
+			progress = 100;
+		}
+		
+		//uploading complete
+		
+		if (files.length <= 0  && files_img.length <= 0) {
+        // Simulate upload progress
+        
         const interval = setInterval(() => {
             progress += Math.random() * 15;
             if (progress > 100) progress = 100;
@@ -879,11 +993,17 @@ let selectedFiles_video = [];
             if (progress >= 100) {
                 clearInterval(interval);
                 setTimeout(() => {
-                    alert('🎉 Advertisement created successfully! It will be reviewed within 24 hours.');
-                    // Redirect or reset form
+                    event.target.submit();
                 }, 500);
             }
-        }, 200);
+        }, 200); 
+		}else{ 
+			if(progress >= 100){
+				setTimeout(() => {
+                    event.target.submit();
+                }, 500);
+			}
+		}
     }
 </script>
 	
