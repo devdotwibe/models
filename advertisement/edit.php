@@ -114,7 +114,7 @@ if (isset($_SESSION['log_user_id'])) {
 		if ($error) {
 			echo '<script>alert("' . $error . '");</script>';
 		}
-		echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
+		//echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
 		
 		
 	}
