@@ -953,7 +953,7 @@ let selectedFiles_video = [];
 			for (var i = 0; i < files_img.length; i++) {
 				formData.append('video[]', files_img[i]);  // Use 'video[]' as the name
 			}
-			console.log(formData);
+			console.log(files_img.length);
 			progressFill.style.width = '25%';
             progressText.textContent = '25%';
 			progress = 25;
@@ -996,7 +996,7 @@ let selectedFiles_video = [];
 			for (var i = 0; i < files_vd.length; i++) {
 				formData.append('video[]', files_vd[i]);  
 			}
-			console.log(formData);
+			console.log(files_vd.length);
 			if (files_img.length > 0) {
 			progressFill.style.width = '75%';
             progressText.textContent = '75%';	
