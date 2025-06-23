@@ -328,7 +328,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                                 Choose Photos
                             </button>
                             <input type="file" name="files[]" id="photoInput" class="hidden" multiple accept=".jpg,.jpeg,.png,.gif" onchange="handlePhotoUpload(event)" >
-							<input type="hidden" name="save_image_file" value="" id="save_image_file">
+							<input type="text" name="save_image_file" value="" id="save_image_file">
 							
 							
                         </div>
@@ -383,7 +383,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                                 Choose Videos
                             </button>
                             <input type="file" name="video_file[]" id="videoInput" class="hidden" multiple accept=".mp4,.mov,.avi" onchange="handleVideoUpload(event)">
-							<input type="hidden" name="save_video_file" value="" id="save_video_file">
+							<input type="text" name="save_video_file" value="" id="save_video_file">
 						</div>
 
                         <!-- Video Preview Grid -->
@@ -942,7 +942,7 @@ let selectedFiles_video = [];
 		var files_img = photoInput.files;  // Get all selected images
 		
 		var videoInput = document.getElementById('videoInput');
-		var files = videoInput.files;  // Get all selected videos
+		var files_vd = videoInput.files;  // Get all selected videos
 		
 		//uploading Image files
 
@@ -972,7 +972,7 @@ let selectedFiles_video = [];
 				}else{
 					jQuery('#save_image_file').val(data);
 				}
-				if (files.length > 0) {
+				if (files_vd.length > 0) {
 				progressFill.style.width = '50%';
 				progressText.textContent = '50%';
 				}else{
@@ -983,18 +983,18 @@ let selectedFiles_video = [];
 			.catch(error => {
 				console.error('Upload failed:', error);
 			});
-				if (files.length > 0) progress = 50;
+				if (files_vd.length > 0) progress = 50;
 				else progress = 100;
 			
 		}
 		//uploading video files
 
-		if (files.length > 0) {
+		if (files_vd.length > 0) {
 			// Create a new FormData object
 			var formData = new FormData();
 
-			for (var i = 0; i < files.length; i++) {
-				formData.append('video[]', files[i]);  // Use 'video[]' as the name
+			for (var i = 0; i < files_vd.length; i++) {
+				formData.append('video[]', files_vd[i]);  
 			}
 			if (files_img.length > 0) {
 			progressFill.style.width = '75%';
@@ -1031,7 +1031,7 @@ let selectedFiles_video = [];
 		
 		//uploading complete
 		
-		if (files.length <= 0  && files_img.length <= 0) {
+		if (files_vd.length <= 0  && files_img.length <= 0) {
         // Simulate upload progress
         
         const interval = setInterval(() => {
