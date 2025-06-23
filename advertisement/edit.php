@@ -307,7 +307,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                             <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
                         </svg>
                         Photos & Videos
-                    </h2>
+                    </h2> <?php print_r($form_data);  ?>
 
                     <!-- Photo Upload Section -->
                     <div class="mb-12">
