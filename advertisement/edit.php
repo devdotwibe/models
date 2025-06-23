@@ -1056,11 +1056,11 @@ let selectedFiles_video = [];
             }
         }, 200); 
 		}else{ 
-			/*if(progress >= 100){
+			if(progress >= 100){
 				setTimeout(() => {
-                    event.target.submit();
+                  //  event.target.submit();
                 }, 1000);
-			} */
+			} 
 		}
     }
 </script>
