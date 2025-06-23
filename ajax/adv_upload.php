@@ -1,4 +1,4 @@
-<?php echo '<pre>'; print_r($_POST); exit;
+<?php echo '<pre>'; print_r($_FILES['uploaded_file']); exit;
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['uploaded_file'])) {
 	
 			$totalFiles_v = count($_FILES['uploaded_file']['name']);
