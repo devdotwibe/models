@@ -328,7 +328,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                                 Choose Photos
                             </button>
                             <input type="file" name="files[]" id="photoInput" class="hidden" multiple accept=".jpg,.jpeg,.png,.gif" onchange="handlePhotoUpload(event)" >
-							<input type="text" name="save_image_file" value="" id="save_image_file">
+							<input type="text" name="save_image_file" value="test" id="save_image_file">
 							
 							
                         </div>
