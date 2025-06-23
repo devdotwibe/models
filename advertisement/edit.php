@@ -975,9 +975,11 @@ let selectedFiles_video = [];
 				if (files_vd.length > 0) {
 				progressFill.style.width = '50%';
 				progressText.textContent = '50%';
+				progress = 50;
 				}else{
 				progressFill.style.width = '100%';
 				progressText.textContent = '100%';
+				progress = 100;
 				}
 				
 				alert(progress);
@@ -1024,7 +1026,7 @@ let selectedFiles_video = [];
 				}
 				progressFill.style.width = '100%';
 				progressText.textContent = '100%';
-				
+				progress = 100;
 				alert(progress);
 				
 			})
@@ -1054,11 +1056,11 @@ let selectedFiles_video = [];
             }
         }, 200); 
 		}else{ 
-			if(progress >= 100){
+			/*if(progress >= 100){
 				setTimeout(() => {
                     event.target.submit();
                 }, 1000);
-			}
+			} */
 		}
     }
 </script>
