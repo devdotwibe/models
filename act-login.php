@@ -49,9 +49,6 @@
          $_SESSION["city"] = $city;
 
 
-
-       echo '<script>alert("'.$user_name1.'");</script>';
-
          echo "<script> window.location.href = 'user/profile/index.php'; </script>";
       }else{
         echo "<script>alert('Incorrect Login Detail');
