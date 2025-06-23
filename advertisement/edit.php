@@ -60,6 +60,8 @@ if (isset($_SESSION['log_user_id'])) {
 		if(isset($_POST['save_video_file'])){
 			$joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $id);
 		}
+		echo $additional_img;
+		exit;
 		/*if (isset($_FILES["files"])) {
 			$totalFiles = count($_FILES['files']['name']);
 			$additional_img = '';
