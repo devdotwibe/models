@@ -1020,7 +1020,7 @@ let selectedFiles_video = [];
 				body: formDataV
 			})
 			.then(response => response.text())
-			.then(data => {
+			.then(data => { alert(data);
 				if(data == 'No files were uploaded.'){
 					alert(data);
 				}else if(data == 'Error'){
@@ -1033,7 +1033,7 @@ let selectedFiles_video = [];
 				progress = 100;
 				if(progress >= 100){
 				setTimeout(() => {
-                    event.target.submit();
+                   // event.target.submit();
                 }, 1000);
 			} 
 				
