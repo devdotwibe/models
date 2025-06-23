@@ -42,6 +42,8 @@ if (isset($_SESSION['log_user_id'])) {
 			}
 			$result_array = array_diff($existing_image_array, $removed_image_array);
 			
+			print_r($result_array); exit;
+			
 			$additional_img = '';
 			$exp_file_img = explode('|',$_POST['save_image_file']);
 			$joe_id = DB::update('banners', array('image' => $exp_file_img[0]), "id=%s", $id);
@@ -60,8 +62,7 @@ if (isset($_SESSION['log_user_id'])) {
 		if(isset($_POST['save_video_file'])){
 			$joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $id);
 		}
-		echo $additional_img;
-		exit;
+		
 		/*if (isset($_FILES["files"])) {
 			$totalFiles = count($_FILES['files']['name']);
 			$additional_img = '';
