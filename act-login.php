@@ -1,4 +1,7 @@
 <?php
+
+session_start(); 
+
   include('includes/config.php');
   if(isset($_POST['vfb-submit'])){
     $userid = $_POST['username'];
@@ -39,7 +42,7 @@
       $count1 = mysqli_num_rows($result1);
       
       if($count1 == 1) {
-        session_start();
+
          $_SESSION["log_user_id"] = $user_id1;
          $_SESSION["log_user"] = $user_name1;
          $_SESSION["log_user_unique_id"] = $unique_id;
