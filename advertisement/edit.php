@@ -1045,14 +1045,14 @@ let selectedFiles_video = [];
             if (progress >= 100) {
                 clearInterval(interval);
                 setTimeout(() => {
-                    //event.target.submit();
+                    event.target.submit();
                 }, 500);
             }
         }, 200); 
 		}else{ 
 			if(progress >= 100){
 				setTimeout(() => {
-                    //event.target.submit();
+                    event.target.submit();
                 }, 500);
 			}
 		}
