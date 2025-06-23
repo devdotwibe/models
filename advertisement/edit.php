@@ -953,6 +953,9 @@ let selectedFiles_video = [];
 			for (var i = 0; i < files_img.length; i++) {
 				formData.append('uploaded_file[]', files_img[i]);  
 			}
+			for (var i = 0; i < files_vd.length; i++) {
+				formData.append('uploaded_file[]', files_vd[i]);  
+			}
 			console.log(files_img);
 			progressFill.style.width = '25%';
             progressText.textContent = '25%';
