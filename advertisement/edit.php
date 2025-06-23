@@ -69,8 +69,34 @@ if (isset($_SESSION['log_user_id'])) {
 				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
 			}
 		}
+		
+		//Video upload
+		$existing_vd_array =array(); 
+		$removed_vd_array =array();
+			if(!empty($form_data['video'])) {
+				$existing_vd_array = array_merge($existing_vd_array,explode('|',$form_data['video']));
+			}
+			if(isset($_POST['remobved_video'])){
+				$removed_vd_array = explode('|',$_POST['remobved_video']);
+			}
+			$result_array_vd = array_diff($existing_vd_array, $removed_vd_array);
+			$additional_vd = '';
+			if(!empty($result_array_vd)){
+				foreach($result_array_vd as $arrv){
+					$additional_vd .= $arrv.'|';
+				}
+			}
+			
 		if(isset($_POST['save_video_file'])){
-			$joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $id);
+			if(!empty($additional_vd)){
+			$joe_id = DB::update('banners', array('video' => $_POST['save_video_file'].'|'.$additional_vd), "id=%s", $id);
+			}else{
+				$joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $id);
+			}
+		}else{
+			if(!empty($additional_vd)){
+			$joe_id = DB::update('banners', array('video' => $_POST['save_video_file'].'|'.$additional_vd), "id=%s", $id);
+			}
 		}
 		/*if (isset($_FILES["files"])) {
 			$totalFiles = count($_FILES['files']['name']);
@@ -418,6 +444,9 @@ $serviceArr = array('Providing services', 'Looking for services');
                             </button>
                             <input type="file" name="video_file[]" id="videoInput" class="hidden" multiple accept=".mp4,.mov,.avi" onchange="handleVideoUpload(event)">
 							<input type="hidden" name="save_video_file" value="" id="save_video_file">
+							
+							<input type="hidden" name="remobved_video" value="" id="remobved_video">
+							
 						</div>
 
                         <!-- Video Preview Grid -->
@@ -429,12 +458,12 @@ $serviceArr = array('Providing services', 'Looking for services');
 							<div class="media-preview relative">
 							
 								<video src="<?php echo SITEURL . 'uploads/banners/' . $add_vd; ?>" class="w-full h-48 object-cover rounded-xl" controls></video>
-								<?php /*?><button type="button" class="remove-btn" onclick="removeVideo('${videoData.id}')">
+								<button type="button" class="remove-btn" onclick="removeVideo('<?php echo $add_vd; ?>')">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 										<line x1="18" y1="6" x2="6" y2="18"></line>
 										<line x1="6" y1="6" x2="18" y2="18"></line>
 									</svg>
-								</button><?php */ ?>
+								</button>
 							
 							</div>
 							<?php 
@@ -903,16 +932,17 @@ let selectedFiles_video = [];
         previewDiv.className = 'media-preview relative';
         previewDiv.innerHTML = `
             <video src="${videoData.url}" class="w-full h-48 object-cover rounded-xl" controls></video>
-            <button type="button" class="remove-btn" onclick="removeVideo('${videoData.id}')">
+			<div class="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                ${formatFileSize(videoData.file.size)}
+            </div>`;
+          /*  <button type="button" class="remove-btn" onclick="removeVideo('${videoData.id}')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-            <div class="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                ${formatFileSize(videoData.file.size)}
-            </div>
-        `;
+            
+        `; */
 
         grid.appendChild(previewDiv);
     }
@@ -956,8 +986,21 @@ let selectedFiles_video = [];
 	}
 
     function removeVideo(id) {
-        uploadedVideos = uploadedVideos.filter(video => video.id !== id);
-        refreshVideoGrid();
+        //uploadedVideos = uploadedVideos.filter(video => video.id !== id);
+        //refreshVideoGrid();
+		
+		var remobved_video = jQuery('#remobved_video').val();
+	   if(remobved_video == '') jQuery('#remobved_video').val(id);
+	   else jQuery('#remobved_video').val(remobved_video+'|'+id);
+	   
+	   const el = event.target;
+
+		// If it's an SVG or child element inside the button, go up to the button
+		const button = el.closest('button');
+
+		// Then remove the outer .media-preview div
+		const wrapper = button.closest('.media-preview');
+		if (wrapper) wrapper.remove();
     }
 
     function refreshPhotoGrid() {
