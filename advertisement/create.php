@@ -874,7 +874,7 @@ let selectedFiles_video = [];
         alert('💾 Draft saved successfully! You can continue editing later.');
     }
 
-    function submitForm(event) {
+     function submitForm(event) {
         event.preventDefault();
 
         // Show upload progress
@@ -891,18 +891,18 @@ let selectedFiles_video = [];
 		var files_img = photoInput.files;  // Get all selected images
 		
 		var videoInput = document.getElementById('videoInput');
-		var files = videoInput.files;  // Get all selected videos
+		var files_vd = videoInput.files;  // Get all selected videos
 		
 		//uploading Image files
 
 		if (files_img.length > 0) {
 			// Create a new FormData object
 			var formData = new FormData();
-
+			var uploaded_file = [];
 			for (var i = 0; i < files_img.length; i++) {
-				formData.append('video[]', files_img[i]);  // Use 'video[]' as the name
+				formData.append('uploaded_file[]', files_img[i]);  
 			}
-			
+			console.log(files_img.length);
 			progressFill.style.width = '25%';
             progressText.textContent = '25%';
 			progress = 25;
@@ -921,30 +921,39 @@ let selectedFiles_video = [];
 				}else{
 					jQuery('#save_image_file').val(data);
 				}
-				if (files.length > 0) {
+				if (files_vd.length > 0) {
 				progressFill.style.width = '50%';
 				progressText.textContent = '50%';
+				progress = 50;
 				}else{
 				progressFill.style.width = '100%';
 				progressText.textContent = '100%';
+				progress = 100;
 				}
+				
+				if(progress >= 100){
+				setTimeout(() => {
+                    event.target.submit();
+                }, 1000);
+			} 
 			})
 			.catch(error => {
 				console.error('Upload failed:', error);
 			});
-				if (files.length > 0) progress = 50;
+				if (files_vd.length > 0) progress = 50;
 				else progress = 100;
 			
 		}
 		//uploading video files
 
-		if (files.length > 0) {
+		if (files_vd.length > 0) {
 			// Create a new FormData object
-			var formData = new FormData();
-
-			for (var i = 0; i < files.length; i++) {
-				formData.append('video[]', files[i]);  // Use 'video[]' as the name
+			var formDataV = new FormData();
+			var uploaded_file = [];
+			for (var i = 0; i < files_vd.length; i++) {
+				formDataV.append('uploaded_file[]', files_vd[i]);  
 			}
+			console.log(files_vd.length);
 			if (files_img.length > 0) {
 			progressFill.style.width = '75%';
             progressText.textContent = '75%';	
@@ -957,7 +966,7 @@ let selectedFiles_video = [];
 			// Send the FormData object using Fetch API
 			fetch('<?=SITEURL.'/ajax/adv_upload.php'?>', {
 				method: 'POST',
-				body: formData
+				body: formDataV
 			})
 			.then(response => response.text())
 			.then(data => {
@@ -970,17 +979,24 @@ let selectedFiles_video = [];
 				}
 				progressFill.style.width = '100%';
 				progressText.textContent = '100%';
+				progress = 100;
+				if(progress >= 100){
+				setTimeout(() => {
+                    event.target.submit();
+                }, 1000);
+			} 
 				
 			})
 			.catch(error => {
 				console.error('Upload failed:', error);
 			});
 			progress = 100;
+			
 		}
 		
 		//uploading complete
 		
-		if (files.length <= 0  && files_img.length <= 0) {
+		if (files_vd.length <= 0  && files_img.length <= 0) {
         // Simulate upload progress
         
         const interval = setInterval(() => {
@@ -1000,9 +1016,9 @@ let selectedFiles_video = [];
 		}else{ 
 			if(progress >= 100){
 				setTimeout(() => {
-                    event.target.submit();
-                }, 500);
-			}
+                  //  event.target.submit();
+                }, 1000);
+			} 
 		}
     }
 </script>
