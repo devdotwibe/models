@@ -534,7 +534,8 @@ $serviceArr = array('Providing services', 'Looking for services');
 				type: 'get',
 				data: {
 					country: country,
-					selected: state
+					selected: state,
+					option:''
 				},
 				dataType: 'json',
 				success: function(res) {
