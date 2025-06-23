@@ -36,9 +36,6 @@
       }
 
 
-       echo '<script>alert("tert");</script>';
-
-
       $count1 = mysqli_num_rows($result1);
       
       if($count1 == 1) {
@@ -50,6 +47,10 @@
          $_SESSION["log_user_pro_pic"] = $model_profile_pic;
          $_SESSION["user_type"] = $user_type;
          $_SESSION["city"] = $city;
+
+
+
+       echo '<script>alert("'.$user_name1.'");</script>';
 
          echo "<script> window.location.href = 'user/profile/index.php'; </script>";
       }else{
