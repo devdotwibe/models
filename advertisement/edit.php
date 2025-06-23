@@ -16,6 +16,7 @@ if (isset($_SESSION['log_user_id'])) {
 	} else {
 		header("Location: " . SITEURL . "advertisement/list.php");
 	}
+		
 	if ($_POST) {
 
 		$user_id = $_SESSION['log_user_id'];
@@ -26,7 +27,21 @@ if (isset($_SESSION['log_user_id'])) {
 
 		$error = '';
 		
+		//Image upload
+		
 		if(isset($_POST['save_image_file'])){
+			$existing_image_array =array(); $removed_image_array =array();
+			if(!empty($form_data['image'])){ 
+				$existing_image_array[0] = $form_data['image']; 
+			} 
+			if(!empty($form_data['additionalimages'])) {
+				$existing_image_array = array_merge($existing_image_array,explode('|',$form_data['additionalimages']));
+			}
+			if(isset($_POST['remobved_image'])){
+				$removed_image_array = explode('|',$_POST['remobved_image']);
+			}
+			$result_array = array_diff($existing_image_array, $removed_image_array);
+			
 			$additional_img = '';
 			$exp_file_img = explode('|',$_POST['save_image_file']);
 			$joe_id = DB::update('banners', array('image' => $exp_file_img[0]), "id=%s", $id);
@@ -34,8 +49,13 @@ if (isset($_SESSION['log_user_id'])) {
 				for ($i = 1; $i < count($exp_file_img); $i++) {
 					$additional_img .= $exp_file_img[$i].'|';
 				}
-				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
 			}
+			if(!empty($result_array)){
+				foreach($result_array as $arr){
+					$additional_img .= $arr.'|';
+				}
+			}
+			$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
 		}
 		if(isset($_POST['save_video_file'])){
 			$joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $id);
@@ -330,6 +350,8 @@ $serviceArr = array('Providing services', 'Looking for services');
                             <input type="file" name="files[]" id="photoInput" class="hidden" multiple accept=".jpg,.jpeg,.png,.gif" onchange="handlePhotoUpload(event)" >
 							<input type="hidden" name="save_image_file" value="" id="save_image_file">
 							
+							<input type="hidden" name="remobved_image" value="" id="remobved_image">
+							
 							
                         </div>
 
@@ -339,7 +361,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 							<?php if(!empty($form_data['image']) ){ ?>
 							<div class="media-preview relative">
 								<img src="<?php echo SITEURL . 'uploads/banners/' . $form_data['image']; ?>" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
-								<button type="button" class="remove-btn" onclick="removePhoto()">
+								<button type="button" class="remove-btn" onclick="removePhoto_saved('<?php echo $form_data['image']; ?>')">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 										<line x1="18" y1="6" x2="6" y2="18"></line>
 										<line x1="6" y1="6" x2="18" y2="18"></line>
@@ -351,7 +373,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 								foreach($additionalimages as $add_img){	?>
 							<div class="media-preview relative">
 								<img src="<?php echo SITEURL . 'uploads/banners/' . $add_img; ?>" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
-								<button type="button" class="remove-btn" onclick="removePhoto()">
+								<button type="button" class="remove-btn" onclick="removePhoto_saved('<?php echo $add_img; ?>')">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 										<line x1="18" y1="6" x2="6" y2="18"></line>
 										<line x1="6" y1="6" x2="18" y2="18"></line>
@@ -887,6 +909,39 @@ let selectedFiles_video = [];
         uploadedPhotos = uploadedPhotos.filter(photo => photo.id !== id);
         refreshPhotoGrid();
     }
+	
+	function removePhoto_saved(id) { 
+       var remobved_image = jQuery('#remobved_image').val();
+	   if(remobved_image == '') jQuery('#remobved_image').val(id);
+	   else jQuery('#remobved_image').val(remobved_image+'|'+id);
+	   
+	   const el = event.target;
+
+		// If it's an SVG or child element inside the button, go up to the button
+		const button = el.closest('button');
+
+		// Then remove the outer .media-preview div
+		const wrapper = button.closest('.media-preview');
+		if (wrapper) wrapper.remove();
+    }
+	function removePhoto_saved1(el, imageName) { 
+		/*
+		// Optional: Send AJAX request to delete the file from server
+		fetch('<?=SITEURL?>/ajax/delete_saved_image.php', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body: 'image=' + encodeURIComponent(imageName)
+		})
+		.then(response => response.text())
+		.then(result => {
+			console.log('Server says:', result);
+		})
+		.catch(error => {
+			console.error('Error deleting image:', error);
+		}); */
+	}
 
     function removeVideo(id) {
         uploadedVideos = uploadedVideos.filter(video => video.id !== id);
