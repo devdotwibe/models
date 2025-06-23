@@ -964,7 +964,7 @@ let selectedFiles_video = [];
 				body: formData
 			})
 			.then(response => response.text())
-			.then(data => {
+			.then(data => { console.log(data);
 				if(data == 'No files were uploaded.'){
 					alert(data);
 				}else if(data == 'Error'){
