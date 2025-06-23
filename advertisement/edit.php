@@ -983,6 +983,11 @@ let selectedFiles_video = [];
 				}
 				
 				alert(progress);
+				if(progress >= 100){
+				setTimeout(() => {
+                    event.target.submit();
+                }, 1000);
+			} 
 			})
 			.catch(error => {
 				console.error('Upload failed:', error);
@@ -1028,12 +1033,18 @@ let selectedFiles_video = [];
 				progressText.textContent = '100%';
 				progress = 100;
 				alert(progress);
+				if(progress >= 100){
+				setTimeout(() => {
+                    event.target.submit();
+                }, 1000);
+			} 
 				
 			})
 			.catch(error => {
 				console.error('Upload failed:', error);
 			});
 			progress = 100;
+			
 		}
 		
 		//uploading complete
