@@ -9,12 +9,28 @@ else{
 	die;
 }
 
-if ($_POST['submit_name']){
-	$arr = array('name','country','city','gender','user_bio','services','user_current_status');
+if ($_POST['submit_name']){ 
+	$arr = array('name','country','state','city','gender','user_bio','services','relationship','travel_preference'); //,'user_current_status'
 	$post_data = array_from_post($arr);
 	
 	$post_data['dob'] = h_dateFormat($_POST['dob'],'Y-m-d');
 	$post_data['age'] = h_get_age($dob);
+	
+	$post_data['hobbies'] = json_encode($_POST['hobbies']);
+	
+	$lang_array = array();
+	$modal_lang = $_POST['modal_lang'];
+	$proficiency = $_POST['proficiency'];
+	
+	if(!empty($modal_lang)){
+		$i = 0;
+		foreach($modal_lang as $lng){
+			$lang_array[$i]['lan'] = $lng;
+			$lang_array[$i]['prof'] = $proficiency[$i];
+			$i++;
+		}
+	}
+	$post_data['languages'] = json_encode($lang_array);
 
 	$error = '';
 	$form_data = DB::queryFirstRow("select id from model_user where id!='".$userDetails['id']."' and lower(username)='".strtolower($_POST['username'])."' ");
@@ -39,11 +55,67 @@ if ($_POST['submit_name']){
 	if($error){
 		echo '<script>alert("'.$error.'");</script>';
 	}
+	
+	//Profile upload
+		$use_id = $_SESSION["log_user_id"];
+
+      $target_dir_profile = "uploads/profile_pic/"; 
+	  if (isset($_FILES["pic_img"]) && !empty($_FILES["pic_img"]['name'])) {
+      $target_file1 = $target_dir_profile . basename($_FILES["pic_img"]["name"]);
+      $target_profile = "uploads/profile_pic/" . basename($_FILES["pic_img"]["name"]);
+
+      if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
+
+         // echo '<script>alert("Your Profile Picture Successfully Uploaded");</script>';
+
+          $sql = "UPDATE model_user SET profile_pic = '".$target_profile."' WHERE id = '".$use_id."'";
+        
+          if(mysqli_query($con, $sql)){
+           // echo '<script>alert("Your Profile Picture Successfully Updated");
+            // window.location="edit-profile.php"</script>';
+          }else{
+            echo '<script>alert("Profile Picture Not Updated.\nPlease try again later.");
+             window.location="edit-profile.php"</script>';
+          }  
+
+      }else{
+          echo '<script>alert("Error in Image uploading");
+             window.location="edit-profile.php"
+            </script>';
+      }
+	  }
+	  //Gallery 1
+	  if (isset($_FILES["gallery_photo_1"]) && !empty($_FILES["gallery_photo_1"]['name'])) {
+		  $target_file2 = $target_dir_profile . basename($_FILES["gallery_photo_1"]["name"]);
+		  $target_profile = "uploads/profile_pic/" . basename($_FILES["gallery_photo_1"]["name"]);
+
+		  if (move_uploaded_file($_FILES["gallery_photo_1"]["tmp_name"], $target_file2)){ 
+			$sql = "UPDATE model_user SET gallery_photo_1 = '".$target_profile."' WHERE id = '".$use_id."'";
+			if(mysqli_query($con, $sql)){
+				
+			}
+		  }
+	  }
+	  //Gallery 2
+	  if (isset($_FILES["gallery_photo_2"]) && !empty($_FILES["gallery_photo_2"]['name'])) {
+		  $target_file3 = $target_dir_profile . basename($_FILES["gallery_photo_2"]["name"]);
+		  $target_profile = "uploads/profile_pic/" . basename($_FILES["gallery_photo_2"]["name"]);
+
+		  if (move_uploaded_file($_FILES["gallery_photo_2"]["tmp_name"], $target_file3)){
+			$sql = "UPDATE model_user SET gallery_photo_2 = '".$target_profile."' WHERE id = '".$use_id."'";
+			if(mysqli_query($con, $sql)){
+				
+			}
+		  }
+	  }
+	//End
+	
+	
 	echo '<script>alert("Your Profile Successfully Updated");
 	window.location="edit-profile.php"
 	</script>';
 	die;
-    }else if(isset($_POST['submit_pass'])){
+    }/*else if(isset($_POST['submit_pass'])){
 
       $user_id = $_POST['use_id'];
       $name = $_POST['name'];
@@ -88,36 +160,6 @@ if ($_POST['submit_name']){
                 window.location="edit-profile.php"
               </script>';
         }
-    }else if(isset($_POST['submit_image'])){
-
-     // $user_id = $_POST['pic_img'];
-      $use_id = $_POST['use_id'];
-
-      $target_dir_profile = "uploads/profile_pic/";
-      $target_file1 = $target_dir_profile . basename($_FILES["pic_img"]["name"]);
-      $target_profile = "uploads/profile_pic/" . basename($_FILES["pic_img"]["name"]);
-
-      if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
-
-          echo '<script>alert("Your Profile Picture Successfully Uploaded");</script>';
-
-          $sql = "UPDATE model_user SET profile_pic = '".$target_profile."' WHERE id = '".$use_id."'";
-        
-          if(mysqli_query($con, $sql)){
-            echo '<script>alert("Your Profile Picture Successfully Updated");
-             window.location="edit-profile.php"</script>';
-          }else{
-            echo '<script>alert("Profile Picture Not Updated.\nPlease try again later.");
-             window.location="edit-profile.php"</script>';
-          }  
-
-      }else{
-          echo '<script>alert("Error in Image uploading");
-             window.location="edit-profile.php"
-            </script>';
-      }
-        
-        
-    }
+    }*/
  
 ?>

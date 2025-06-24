@@ -19,6 +19,24 @@ function adv_category_list(){
 	return $arr;
 }
 
+function modal_language_list(){
+	$arr = array(
+	'English',
+	'Spanish',
+	'French',
+	'German',
+	'Italian',
+	'Portuguese',
+	'Russian',
+	'Chinese (Mandarin)',
+	'Japanese',
+	'Korean',
+	'Arabic',
+	'Hindi');
+	return $arr;
+	
+}
+
 function h_checkMessageShowBtn($modal_id,$user_id){
 	$output = 0;
 	$string ="select id from model_follow where 
