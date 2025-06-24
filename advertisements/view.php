@@ -263,6 +263,7 @@ else{
 						<?php $add_cnt = 0; if(!empty($form_data['additionalimages'])){ 
 							$additionalimages = explode('|',$form_data['additionalimages']);
 							foreach($additionalimages as $add_img){
+								if(!empty($add_img)){
 						?>
 						
 						<div>
@@ -271,7 +272,7 @@ else{
 						  </div>
 						
 						
-						<?php $add_cnt++; } } ?>
+								<?php $add_cnt++; } } } ?>
 						
 						
 						</div>
