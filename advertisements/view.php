@@ -254,13 +254,13 @@ else{
 						</video>
 						</div>
 						<?php } }else $video_count = 0; ?>
-						
+						<?php if(!empty($form_data['image'])){ ?>
 						<div>
 							<img src="<?php echo SITEURL.'uploads/banners/'.$form_data['image']; ?>" >
 					
 						  </div>
 						  
-						<?php $add_cnt = 0; if(!empty($form_data['additionalimages'])){ 
+						<?php } $add_cnt = 0; if(!empty($form_data['additionalimages'])){ 
 							$additionalimages = explode('|',$form_data['additionalimages']);
 							foreach($additionalimages as $add_img){
 								if(!empty($add_img)){
