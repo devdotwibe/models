@@ -23,12 +23,11 @@ else{
 $getemojiList = get_data('emoji', array('status' => 1), false);
 $ChatLink  = SITEURL . 'live-chat/';
 
+die('tetsttett1');
 if($_GET['unique_model_id']==''){
   echo "<script>window.location='" . SITEURL ."';</script>";
   die;
 }
-
-die('tetsttett1');
 
 // die();
 if (isset($_GET['pra']) && $_GET['user'] == 'viewer' && $_GET['private_id'] !='') {
