@@ -1,4 +1,8 @@
-
+<?php if(!empty($get_modal_user[0]['profile_pic'])){
+				$prof_img = SITEURL.$get_modal_user[0]['profile_pic'];
+			} else{
+				$prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
+			} ?>
 
   <!-- Header -->
   <header class="glass-effect sticky top-0 z-50 border-b border-white/10">
@@ -33,7 +37,7 @@
 
         <!-- Profile Image -->
         <div class="relative">
-          <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Profile" class="w-10 h-10 rounded-full border-2 border-purple-500">
+          <img src="<?php echo $prof_img; ?>" alt="Profile" class="w-10 h-10 rounded-full border-2 border-purple-500">
           <div class="online-dot"></div>
         </div>
       </div>
