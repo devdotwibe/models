@@ -211,19 +211,31 @@ if(!empty($userDetails['profile_pic'])){
 
         <div class="model-card text-center">
           <div class="relative inline-block mb-4">
-            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Your profile" class="w-20 h-20 rounded-full mx-auto border-3 border-purple-500">
+		  
+		  <?php if(!empty($userDetails['profile_pic'])){
+				$prof_img = SITEURL.$userDetails['profile_pic'];
+			} else{
+				$prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
+			} ?>
+		  
+            <img src="<?php echo $prof_img; ?>" alt="Your profile" class="w-20 h-20 rounded-full mx-auto border-3 border-purple-500">
             <div class="online-dot"></div>
           </div>
-          <h3 class="font-bold text-lg gradient-text">Sophie, 24 test <?php
-       
-            ?></h3>
-          <p class="text-white/60 text-sm mb-2">San Francisco, CA</p>
+          <h3 class="font-bold text-lg gradient-text">
+			<?php echo $userDetails['name']; if(!empty($userDetails['age'])){ echo ', '.$userDetails['age']; } ?>
+		  </h3>
+		  <?php $country_list = DB::query('select name from countries where id="'.$userDetails['country'].'"');
+				$state_list = DB::query('select name from states where id="'.$userDetails['state'].'"');
+				$city_list = DB::query('select name from cities where id="'.$userDetails['city'].'"');
+			if(!empty($country_list) && !empty($country_list[0]['name'])){
+			echo '<p class="text-white/60 text-sm mb-2">'.$city_list[0]['name'].', '.$state_list[0]['name'].', '.$country_list[0]['name'].'</p>';
+			 } ?>
           <div class="flex justify-center mb-4">
             <span class="verified-badge">✓ Verified</span>
           </div>
           <div class="space-y-2">
-            <button class="btn-primary w-full" onclick="editProfile()">Edit Profile</button>
-            <a class="btn-secondary w-full" href="<?= SITEURL ?>user/profile/view.php">View Profile</a>
+            <button class="btn-primary w-full" onclick="navigateTo('edit-profile.php')">Edit Profile</button>
+            <a class="btn-secondary w-full" href="<?= SITEURL ?>single-profile.php?m_unique_id=<?php echo $userDetails['unique_id']; ?>">View Profile</a>
           </div>
         </div>
 
