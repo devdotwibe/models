@@ -600,38 +600,44 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <div class="ultra-glass rounded-2xl p-4 sm:p-6">
                     <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
                     <div class="space-y-4">
+					
+					<?php $sqls_m = "SELECT * FROM model_user WHERE as_a_model = 'Yes' AND unique_id != '" . $_GET['m_unique_id'] . "'  Order by RAND() DESC LIMIT 3";
+
+					  $resulmd = mysqli_query($con, $sqls_m);
+					  
+					  if (mysqli_num_rows($resulmd) > 0) { 
+				
+					 while($rows_md = mysqli_fetch_assoc($resulmd)) {
+					
+					if(!empty($rows_md['profile_pic'])){
+						 $profile_pic = SITEURL.$rows_md['profile_pic'];
+					 }else{
+						 $profile_pic = SITEURL.'assets/images/model-gal-no-img.jpg';
+					 }
+					 
+					 if(!empty($rows_md['username'])){
+						 $modalname = $rows_md['username'];
+					 }else{
+						 $modalname = $rows_md['name'];
+					 }
+					  
+					  ?>
                         <div class="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&h=100&fit=crop&crop=faces" alt="Aria" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                            <img src="<?php echo $profile_pic; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
                             <div class="flex-1">
-                                <div class="font-semibold text-sm sm:text-base">Aria M.</div>
+                                <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
                                 <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
                             </div>
                             <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
                                 Follow
                             </button>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=faces" alt="Phoenix" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
-                            <div class="flex-1">
-                                <div class="font-semibold text-sm sm:text-base">Phoenix R.</div>
-                                <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
-                            </div>
-                            <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
-                                Follow
-                            </button>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?w=100&h=100&fit=crop&crop=faces" alt="Zara" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
-                            <div class="flex-1">
-                                <div class="font-semibold text-sm sm:text-base">Zara C.</div>
-                                <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
-                            </div>
-                            <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
-                                Follow
-                            </button>
-                        </div>
+                        
+					  <?php } } ?>
+						
+						
                     </div>
-                    <button class="w-full btn-secondary text-white font-semibold py-2 rounded-xl mt-4 text-sm sm:text-base">
+                    <button onclick="navigateTo('all-models.php')" class="w-full btn-secondary text-white font-semibold py-2 rounded-xl mt-4 text-sm sm:text-base">
                         View More
                     </button>
                 </div>
