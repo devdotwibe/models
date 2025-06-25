@@ -25,8 +25,6 @@ $ChatLink  = SITEURL . 'live-chat/';
 
 if($_GET['unique_model_id']==''){
 
-  die('tetsttett1 tap');
-
   echo "<script>window.location='" . SITEURL ."';</script>";
   die;
 }
