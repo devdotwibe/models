@@ -708,23 +708,23 @@ var userpage = '<?=$user_page?>';
 
   <?php include('../includes/header.php'); ?>
   <script>
-    // Check if getUserMedia is available
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    // Check camera and microphone permissions
-    navigator.mediaDevices.getUserMedia({ audio: true, video: true })
-        .then(function(stream) {
-            // Permissions are enabled
-            alert('Camera and microphone permissions granted.');
-            // Here you can further process the stream if needed
-            stream.getTracks().forEach(track => track.stop());
-        })
-        .catch(function(err) {
-            // Permissions are not granted or an error occurred
-            alert('Error accessing media devices:', err);
-        });
-} else {
-    alert('getUserMedia is not supported on this browser.');
-}
+//     // Check if getUserMedia is available
+// if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+//     // Check camera and microphone permissions
+//     navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+//         .then(function(stream) {
+//             // Permissions are enabled
+//             alert('Camera and microphone permissions granted.');
+//             // Here you can further process the stream if needed
+//             stream.getTracks().forEach(track => track.stop());
+//         })
+//         .catch(function(err) {
+//             // Permissions are not granted or an error occurred
+//             alert('Error accessing media devices:', err);
+//         });
+// } else {
+//     alert('getUserMedia is not supported on this browser.');
+// }
 
   </script>
 </head>
