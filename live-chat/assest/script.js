@@ -47,8 +47,8 @@
 
     connection.socketURL = '/';
 
-     connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
-    // connection.socketURL = 'http://muazkhan.com:9001/';
+    //  connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+    connection.socketURL = 'http://muazkhan.com:9001/';
 
     connection.socketMessageEvent = 'video-broadcast-demo';
     var user_id = document.getElementById('join-room').value
