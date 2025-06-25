@@ -501,6 +501,9 @@
         // });
         
         $(document).on('click', '.tlm_chat_top_tab', function(){
+
+            console.log('test chat');
+            
             $('.tlm_chat_top_tab').removeClass('active');
             $('.tlm_display_chat').attr('style','display:none;');
             // $('.tlm_chat_top_tab').attr('style','border-bottom: none;');
