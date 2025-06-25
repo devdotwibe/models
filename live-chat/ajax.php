@@ -304,6 +304,9 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
     if (isset($_POST['action']) && !empty($_POST['action']) && $_POST['action'] == 'tlm_check_url_action' && isset($_POST['user'])) {
         $output = array('status' => $_SESSION['log_user_unique_id']);
         if ($_POST["key"] == $_SESSION['log_user_unique_id']) {
+
+                $output = array('status' => 'test 1');
+
             $string = "select tb.*,ms.username,ms.profile_pic,ms.id as userid 
 from tlm_private_live_chat_url tb 
 join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=0 and model_id='" . $_POST["key"] . "' and r_date> '" . date("Y-m-d H:i:s", strtotime('-2 minute', time())) . "'";
