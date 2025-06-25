@@ -306,7 +306,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
         if ($_POST["key"] == $_SESSION['log_user_unique_id']) {
             $string = "select tb.*,ms.username,ms.profile_pic,ms.id as userid 
 from tlm_private_live_chat_url tb 
-join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=0 and model_id='" . $_POST["key"] . "";
+join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=0 and model_id='" . $_POST["key"] . "'";
             $checPrivate = DB::query($string);
             if ($checPrivate) {
                 ob_start();
