@@ -302,7 +302,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
         echo json_encode($bool);
     }
     if (isset($_POST['action']) && !empty($_POST['action']) && $_POST['action'] == 'tlm_check_url_action' && isset($_POST['user'])) {
-        $output = array('status' => $_SESSION['log_user_unique_id']);
+        $output = array('status' => $_SESSION['log_user_unique_id'] ,'test'=>$_POST["key"]);
         if ($_POST["key"] == $_SESSION['log_user_unique_id']) {
 
                 $output = array('status' => 'test 1');
