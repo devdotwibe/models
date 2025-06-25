@@ -23,8 +23,10 @@ else{
 $getemojiList = get_data('emoji', array('status' => 1), false);
 $ChatLink  = SITEURL . 'live-chat/';
 
-die('tetsttett1');
 if($_GET['unique_model_id']==''){
+
+  die('tetsttett1 tap');
+
   echo "<script>window.location='" . SITEURL ."';</script>";
   die;
 }
