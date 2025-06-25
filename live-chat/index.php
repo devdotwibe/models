@@ -1139,7 +1139,7 @@ Please wait...
 
   <!-- <script src="<?= 'assest/script.js?v=' . time() ?>"></script> -->
 
-   <script src="assest/script.js"></script>
+   <script src="script.js"></script>
   <script>
     $('#open_emoji_btn').click(function() {
       $('#open_emoji_modal').toggle();
