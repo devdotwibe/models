@@ -1139,7 +1139,7 @@ Please wait...
 
   <!-- <script src="<?= 'assest/script.js?v=' . time() ?>"></script> -->
 
-  <script src="<?= 'script.js?v=' . time() ?>"></script>
+  <!-- <script src="<?= 'script.js?v=' . time() ?>"></script> -->
 
    <!-- <script src="script.js"></script> -->
   <script>
