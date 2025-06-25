@@ -302,7 +302,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
         echo json_encode($bool);
     }
     if (isset($_POST['action']) && !empty($_POST['action']) && $_POST['action'] == 'tlm_check_url_action' && isset($_POST['user'])) {
-        $output = array('status' => 'error');
+        $output = array('status' => 'error test');
         if ($_POST["key"] == $_SESSION['log_user_unique_id']) {
             $string = "select tb.*,ms.username,ms.profile_pic,ms.id as userid 
 from tlm_private_live_chat_url tb 
