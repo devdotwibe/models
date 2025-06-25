@@ -2,6 +2,9 @@
 session_start();
 include('../includes/config.php');
 include('../includes/helper.php');
+
+die('test');
+
 if ($_SESSION["log_user"]) {
   $userDetails = get_data('model_user', array('id' => $_SESSION['log_user_id']), true);
   if (!$userDetails) {
