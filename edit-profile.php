@@ -29,6 +29,16 @@ $lang_list = modal_language_list();
 
 <?php  include('includes/head.php'); ?>
 
+<link rel="stylesheet" href="<?=SITEURL?>assets/css/dropzone.min.css" />
+<style>
+.dropzone {
+    border: none !important;
+    background-color: transparent !important;
+}
+.dropzone .dz-preview .dz-remove{
+	color:#000;
+}
+</style>
 </head>
 <body class="edit-profilepage advt-page  socialwall-page">
 
@@ -303,27 +313,66 @@ $lang_list = modal_language_list();
             <p class="text-white/80 text-sm mt-2 font-medium">Main Profile</p>
             <p class="text-white/60 text-xs">Hover to upload</p>
 			<input type="hidden" name="use_id" value="<?php echo $_SESSION["log_user_id"]; ?>">
+			<input type="hidden" name="unique_id" value="<?php echo $userDetails['unique_id']; ?>">
           </div>
 
           <!-- Additional Photos -->
           <div class="text-center">
             <div class="gallery1 w-32 h-32 mx-auto border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center cursor-pointer hover:border-purple-500 transition-colors">
-              <?php if(!empty($userDetails['gallery_photo_1'])){ ?>
-			  <img src="<?php echo SITEURL.$userDetails['gallery_photo_1']; ?>" id="" alt="Profile" class="w-32 h-32 square-full border-4 border-purple-500">
-			  <?php }else{ ?>
-			  <div class="text-center">
-                <svg class="w-8 h-8 mx-auto text-white/50 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                </svg>
-                <p class="text-xs text-white/60">Add Photo</p>
-              </div>
-			  <?php } ?>
+			  
+			  <div id="modalimage_gallery" class="text-center dropzone"></div>
+			  <ul class="visualizacao sortable dropzone-previews" style="border:1px solid #000">
+			  
+			  <?php $modal_img_list = DB::query('select * from model_images where unique_model_id="'.$userDetails['unique_id'].'" AND file_type = "Image" AND category = "Profile" Order by id DESC');
+			  if(!empty($modal_img_list)){
+				  $i = 1;
+				  foreach($modal_img_list as $imgs){ 
+				  if(!empty($imgs['file'])){ 
+				  ?>
+					  <li id="galblock<?php echo $i;?>" >
+                                <div>
+                                    <div class="dz-preview dz-file-preview">
+                                        <img src="<?php echo SITEURL.'uploads/profile_pic/'.$imgs['file']; ?>" data-dz-thumbnail />
+                                        <input type='hidden' name='hiddenmedia[]' class='hiddenmedia' value="<?php echo $imgs['file']; ?>" id="<?php echo $i;?>">
+                                        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                                        <!-- <div class="dz-success-mark"><span>✔</span></div> -->
+                                        <!-- <div class="dz-error-mark"><span>✘</span></div> -->
+                                        <div class="dz-error-mark"><a  data-id="<?php echo $i;?>" img_name="<?php echo $imgs['file']; ?>" class="removeinserted">Remove</a></div>
+                                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                                    </div>
+                                </div>
+                            </li>
+				  <?php } $i++; }
+				  
+			  }
+			  
+			  ?>
+			  
+			  </ul>
+			  <div class="preview" style="display:none;">
+                            <li>
+                                <div>
+                                    <div class="dz-preview dz-file-preview">
+                                        <img data-dz-thumbnail />
+                                        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                                        <!-- <div class="dz-success-mark"><span>✔</span></div> -->
+                                        <!-- <div class="dz-error-mark"><span>✘</span></div> -->
+                                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                                    </div>
+                                </div>
+                            </li>  
+                        </div>
+			  
             </div>
-			 <input type="file" name="gallery_photo_1" id="gallery_photo_1" class="gallery_photo"  accept=".jpg,.jpeg,.png" />
-            <p class="text-white/80 text-sm mt-2 font-medium">Gallery Photo 1</p>
+			<!-- Custom Preview Container -->
+			<div id="image-preview-container">
+			  <!-- Previews will be moved here -->
+			</div>
+			 <?php /*<input type="file" name="gallery_photo_1" id="gallery_photo_1" class="gallery_photo"  accept=".jpg,.jpeg,.png" /> */ ?>
+            <p class="text-white/80 text-sm mt-2 font-medium">Gallery Photo</p>
           </div>
 
-          <div class="text-center">
+          <?php /*?><div class="text-center">
             <div class="gallery2 w-32 h-32 mx-auto border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center cursor-pointer hover:border-purple-500 transition-colors">
               <?php if(!empty($userDetails['gallery_photo_2'])){ ?>
 			  <img src="<?php echo SITEURL.$userDetails['gallery_photo_2']; ?>" id="" alt="Profile" class="w-32 h-32 square-full border-4 border-purple-500">
@@ -338,7 +387,7 @@ $lang_list = modal_language_list();
             </div>
 			<input type="file" name="gallery_photo_2" id="gallery_photo_2" class="gallery_photo"  accept=".jpg,.jpeg,.png" />
             <p class="text-white/80 text-sm mt-2 font-medium">Gallery Photo 2</p>
-          </div>
+          </div><?php */ ?>
         </div>
         <p class="text-white/60 text-sm mt-4 text-center">Upload high-quality photos to showcase your personality and style</p>
       </div>
@@ -2714,7 +2763,133 @@ $(document).ready(function(){
 
 
 });
-</script>   
+</script>  
+
+
+<script src="<?=SITEURL?>assets/js/dropzone.min.js"></script>
+
+<script>
+  // Disable Dropzone auto-discovery
+  Dropzone.autoDiscover = false;
+
+  // Manual initialization
+  const myDropzone = new Dropzone("#modalimage_gallery", {
+    url: "dropzone_upload.php",
+    paramName: "file", // The name that will be used in $_FILES["file"]
+    maxFilesize: 5, // in MB
+    maxFiles: 10,
+    acceptedFiles: ".jpg,.png,.jpeg,.JPG,.JPEG,.PNG",
+    addRemoveLinks: true,
+    parallelUploads: 5,
+	previewsContainer: '.visualizacao',
+    previewTemplate: jQuery('.preview').html(),
+	dictDefaultMessage: '<svg class="w-8 h-8 mx-auto text-white/50 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg><p class="text-xs text-white/60">Add Photo</p>',
+    init: function () {
+      this.on("success", function (file, response) {
+		  // Check if response is a valid object
+		  if (typeof response === 'string') {
+			// If it's a string, parse it manually
+			response = JSON.parse(response);
+		  }
+        console.log("Upload success:", response); 
+		// Create hidden input element
+		  var hiddenmedia = document.createElement("input");
+		  hiddenmedia.setAttribute("type", "hidden");
+		  hiddenmedia.setAttribute("name", "hiddenmedia[]");
+		  hiddenmedia.setAttribute("class", "hiddenmedia");
+		  hiddenmedia.setAttribute("value", response.file);
+
+		  // Append the hidden input to the file preview element
+		  file.previewElement.appendChild(hiddenmedia);
+		// Assuming response contains the file name or path on the server
+		file.serverFileName = response.file;  // Store the server file name for later use		
+      });
+      this.on("error", function (file, errorMessage) {
+        console.error("Upload error:", errorMessage);
+      });
+	  this.on("removedfile", function(file) {
+        // You can remove hidden input when the file is removed
+        var input = file.previewElement.querySelector("input[name='hiddenmedia[]']");
+        if (input) {
+          input.remove();
+        }
+		
+		// If the file has a server-side name stored (this was set on successful upload)
+      if (file.serverFileName) {
+        // Make an AJAX request to delete the file on the server
+        fetch('dropzone_delete.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fileName: file.serverFileName  // Send the file name to the server to delete
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            console.log('File deleted from server');
+          } else {
+            console.error('Failed to delete the file from server');
+          }
+        })
+        .catch(error => {
+          console.error('Error deleting file from server:', error);
+        });
+      }
+		
+		
+      });
+    }
+  });
+  
+  
+  jQuery('.removeinserted').click(function(){ 
+    var selectedid = jQuery(this).attr('data-id'); 
+	var img_name = jQuery(this).attr('img_name'); 
+    jQuery('#galblock'+selectedid).remove();
+        fetch('dropzone_delete.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fileName: img_name  // Send the file name to the server to delete
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            console.log('File deleted from server');
+			
+			//Remove from DB 
+			$.ajax({
+				url: '<?= SITEURL . 'ajax/delete_modal_uploads.php' ?>',
+				type: 'get',
+				data: {
+					upl_name: img_name,
+					unique_id: '<?php echo $userDetails['unique_id']; ?>',
+				},
+				dataType: 'json',
+				success: function(res) {
+					
+				}
+			});
+			
+			
+          } else {
+            console.error('Failed to delete the file from server');
+          }
+        })
+        .catch(error => {
+          console.error('Error deleting file from server:', error);
+        });
+
+});
+  
+</script>
+ 
   </body>
 </html> 
 

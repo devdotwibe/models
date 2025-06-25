@@ -16,6 +16,8 @@ if ($_POST['submit_name']){
 	$post_data['dob'] = h_dateFormat($_POST['dob'],'Y-m-d');
 	$post_data['age'] = h_get_age($dob);
 	
+	$unique_id = $_POST['unique_id'];
+	
 	$post_data['hobbies'] = json_encode($_POST['hobbies']);
 	
 	$lang_array = array();
@@ -84,8 +86,32 @@ if ($_POST['submit_name']){
             </script>';
       }
 	  }
+	  
+	  //Image gallery upload
+		if(isset($_POST['hiddenmedia'])){
+			foreach($_POST['hiddenmedia'] as $hid_img){
+
+				$modal_img_list = DB::query('select file from model_images where file="'.$hid_img.'" AND unique_model_id="'.$unique_id.'" AND file_type = "Image" AND category = "Profile" Order by id DESC');
+				if(empty($modal_img_list)){
+					$post_data = array();
+					$post_data['unique_model_id'] = $unique_id;
+					$post_data['unique_image_id'] = 'img-'.rand(10,1000);
+					$post_data['file_type'] = 'Image';
+					$post_data['file'] = $hid_img;
+					$post_data['image_text'] = basename($hid_img);
+					$post_data['img_type_price'] = 'Free';
+					$post_data['coins'] = 0;
+					$post_data['category'] = 'Profile';
+					$post_data['date'] = date('Y-m-d H:i:s');
+					DB::insert('model_images', $post_data); 
+					$created_id = DB::insertId();
+				}
+			
+			}
+		}
+		
 	  //Gallery 1
-	  if (isset($_FILES["gallery_photo_1"]) && !empty($_FILES["gallery_photo_1"]['name'])) {
+	  /*if (isset($_FILES["gallery_photo_1"]) && !empty($_FILES["gallery_photo_1"]['name'])) {
 		  $target_file2 = $target_dir_profile . basename($_FILES["gallery_photo_1"]["name"]);
 		  $target_profile = "uploads/profile_pic/" . basename($_FILES["gallery_photo_1"]["name"]);
 
@@ -107,7 +133,7 @@ if ($_POST['submit_name']){
 				
 			}
 		  }
-	  }
+	  }*/
 	//End
 	
 	

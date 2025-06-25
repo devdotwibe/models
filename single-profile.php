@@ -351,6 +351,12 @@ if (mysqli_num_rows($res_ap) > 0) {
 				<?php } ?>
                 </div>
 			<?php } ?>
+			
+			<?php 
+			$modal_img_list = DB::query('select * from model_images where unique_model_id="'.$_GET['m_unique_id'].'" AND category = "Profile" Order by id DESC');
+			  if(!empty($modal_img_list)){
+			
+			?>
 
                 <!-- Tabs -->
                 <div class="border-b border-white/10 mb-6 sm:mb-8">
@@ -364,12 +370,18 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 <!-- Media Grid -->
                 <div class="media-grid">
-                    <!-- Media Item 1 -->
+				
+				<?php foreach($modal_img_list as $uplds){ 
+				if(!empty($uplds['file'])){
+					
+					if($uplds['file_type'] == 'Image'){
+				?>
+                    <!-- Media Item Image -->
                     <div class="media-item">
-                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=600&fit=crop" alt="Fashion model in yellow outfit">
+                        <img src="<?php echo SITEURL.'uploads/profile_pic/'.$uplds['file']; ?>" alt="<?php echo ucfirst($uplds['image_text']); ?>">
                         <div class="media-overlay">
                             <div class="flex justify-between items-center">
-                                <div class="text-sm font-medium">Hello guys!</div>
+                                <?php /*<div class="text-sm font-medium"><?php echo ucfirst($uplds['image_text']); ?></div> */ ?>
                                 <div class="flex items-center gap-2">
                                     <span class="flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
@@ -383,11 +395,15 @@ if (mysqli_num_rows($res_ap) > 0) {
                             </div>
                         </div>
                     </div>
+					
+					<?php } else if($uplds['file_type'] == 'Video'){ ?>
 
-                    <!-- Media Item 2 (Video) -->
+                    <!-- Media Item Video -->
                     <div class="media-item">
                         <div class="w-full h-full bg-gray-800 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/50 sm:w-48 sm:h-48"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                            <video class="video-ci" controls  >
+								<source src="<?php echo SITEURL.'uploads/profile_pic/'.$uplds['file']; ?>" type="video/mp4">
+							</video>
                         </div>
                         <div class="media-overlay">
                             <div class="flex justify-between items-center">
@@ -405,103 +421,27 @@ if (mysqli_num_rows($res_ap) > 0) {
                             </div>
                         </div>
                     </div>
+					
+					<?php } ?>
 
-                    <!-- Media Item 3 (Video) -->
-                    <div class="media-item">
-                        <div class="w-full h-full bg-gray-800 flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/50 sm:w-48 sm:h-48"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
-                        </div>
-                        <div class="media-overlay">
-                            <div class="flex justify-between items-center">
-                                <div class="text-sm font-medium">My first video</div>
-                                <div class="flex items-center gap-2">
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                        <span class="ml-1">84</span>
-                                    </span>
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                                        <span class="ml-1">Tip</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Media Item 4 -->
-                    <div class="media-item">
-                        <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&h=600&fit=crop" alt="Fashion model">
-                        <div class="media-overlay">
-                            <div class="flex justify-between items-center">
-                                <div class="text-sm font-medium">My first paid image. Hope you enjoy it!</div>
-                                <div class="flex items-center gap-2">
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                        <span class="ml-1">92</span>
-                                    </span>
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                                        <span class="ml-1">Tip</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Media Item 5 -->
-                    <div class="media-item">
-                        <img src="https://images.unsplash.com/photo-1550928431-ee0ec6db30d3?w=600&h=600&fit=crop" alt="Fashion model in winter coat">
-                        <div class="media-overlay">
-                            <div class="flex justify-between items-center">
-                                <div class="text-sm font-medium">Morning sunshine ☀️</div>
-                                <div class="flex items-center gap-2">
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                        <span class="ml-1">36</span>
-                                    </span>
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                                        <span class="ml-1">Tip</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Media Item 6 -->
-                    <div class="media-item">
-                        <div class="w-full h-full bg-gradient-to-br from-red-500/30 to-purple-500/30 flex items-center justify-center">
-                            <span class="text-lg font-bold">Red Hot Chili</span>
-                        </div>
-                        <div class="media-overlay">
-                            <div class="flex justify-between items-center">
-                                <div class="text-sm font-medium">Red Hot Chili</div>
-                                <div class="flex items-center gap-2">
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                        <span class="ml-1">78</span>
-                                    </span>
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                                        <span class="ml-1">Tip</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+				<?php } } ?>
+				
                 </div>
 
                 <!-- Load More Button -->
-                <div class="mt-6 sm:mt-8 text-center">
+                <?php /*?><div class="mt-6 sm:mt-8 text-center">
                     <button class="btn-secondary px-6 sm:px-8 py-2 sm:py-3 rounded-xl text-white font-semibold">
                         Load More
                     </button>
-                </div>
+                </div> <?php */ ?>
+				
+			  <?php } ?>
+				
             </div>
 			
 			<?php
 
-            $sql_img = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Image' Order by id DESC";
+            $sql_img = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Image' AND category = 'Profile' Order by id DESC";
 
             $result_img = mysqli_query($con, $sql_img);
 
@@ -515,7 +455,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
 
 
-            $sql_vdo = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Video' Order by id DESC";
+            $sql_vdo = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Video' AND category = 'Profile' Order by id DESC";
 
             $result_vdo = mysqli_query($con, $sql_vdo);
 
@@ -561,11 +501,11 @@ if (mysqli_num_rows($res_ap) > 0) {
                             <div class="text-xs sm:text-sm text-white/60">Total Posts</div>
                         </div>
                         <div>
-                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num2; ?></div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num1; ?></div>
                             <div class="text-xs sm:text-sm text-white/60">Photos</div>
                         </div>
                         <div>
-                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num1 + $num2; ?></div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num2; ?></div>
                             <div class="text-xs sm:text-sm text-white/60">Videos</div>
                         </div>
                         <div>
