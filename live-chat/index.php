@@ -16,6 +16,9 @@ if(isset($_SESSION["log_user_id"])){
 	}
 }
 else{
+
+  die('ytetet');
+  
 	echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
 	die;
 }
