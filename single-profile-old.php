@@ -992,7 +992,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                 if ($_SESSION["log_user_unique_id"] == $session_id) {
                 } else if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') {
                 ?>
-                  <form style="display:inline-block" method="post" action="https://thelivemodels.com/live-chat/index.php?user=viewer&unique_model_id=<?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
+                  <form style="display:inline-block" method="post" action="https://models.staging3.dotwibe.com/live-chat/index.php?user=viewer&unique_model_id=<?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
                     <button type="submit" class="fancy_button" style="padding: 8px;">Watch Live</button>
                   </form>
 
@@ -1003,7 +1003,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <?php
                 if ($_SESSION["log_user_unique_id"] == $session_id) {
                 ?>
-                  <form style="display:flex; width:80%;" method="post" action="https://thelivemodels.com/live-chat/index.php?user=streamer&unique_model_id=<?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
+                  <form style="display:flex; width:80%;" method="post" action="https://models.staging3.dotwibe.com/live-chat/index.php?user=streamer&unique_model_id=<?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
                     <button type="submit" class="fancy_button" style="padding: 8px;">Go Live</button>
                     <select name="tlm_camera_id" class="form-control tlm_camera_id" id="tlm_camera_id" required="required">
                     </select>
@@ -1478,7 +1478,7 @@ if (mysqli_num_rows($res_ap) > 0) {
               <?php } ?>
               <tr>
                 <td><img alt="modelss" style="width: 28px;" src="assets/images/facility-icon/film.png">&nbsp;&nbsp;Selling Video's & Picture's</td>
-                <td><a href="https://thelivemodels.com/single-profile.php?m_unique_id=<?php echo $_SESSION["log_user_unique_id"]; ?>" class="fancy_button">View Now</a></td>
+                <td><a href="https://models.staging3.dotwibe.com/single-profile.php?m_unique_id=<?php echo $_SESSION["log_user_unique_id"]; ?>" class="fancy_button">View Now</a></td>
               </tr>
               <?php if ($row_d['modeling_porn_assignment'] == 'Yes') { ?>
                 <tr>
@@ -1516,7 +1516,7 @@ if (mysqli_num_rows($res_ap) > 0) {
           <!-- <table class="table">
               <tr>
                 <td><img alt="modelss" style="width: 28px;" src="assets/images/facility-icon/film.png">&nbsp;&nbsp;Selling Video's & Picture's</td>
-                <td><a href="https://thelivemodels.com/single-profile.php?m_unique_id=<?php echo $_SESSION["log_user_unique_id"]; ?>" class="fancy_button">View Now</a></td>
+                <td><a href="https://models.staging3.dotwibe.com/single-profile.php?m_unique_id=<?php echo $_SESSION["log_user_unique_id"]; ?>" class="fancy_button">View Now</a></td>
               </tr>
             </table> -->
         </div>
