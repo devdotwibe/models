@@ -1137,7 +1137,9 @@ Please wait...
 
  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-  <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
+  <!-- <script src="<?= 'assest/script.js?v=' . time() ?>"></script> -->
+
+   <script src="assest/script.js"></script>
   <script>
     $('#open_emoji_btn').click(function() {
       $('#open_emoji_modal').toggle();
