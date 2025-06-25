@@ -1,5 +1,8 @@
 (function( $ ) {
     'use strict';
+
+    console.log("script.js loaded");
+    
     tlm_check_url();
     $(document).on('click', '#tlm_status_notify', function(){
         let model_id    = $('.str_privatechat_send_btn2').data('model_id');
