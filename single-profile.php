@@ -1,6 +1,5 @@
-<?php session_start(); ?>
-<?php
-$footer_hide_script = true;
+<?php session_start(); 
+
 include('includes/config.php');
 include('includes/helper.php');
 $error = '';
@@ -24,10 +23,10 @@ if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id']) {
 }
 $session_id = $_GET['m_unique_id'];
 
-?>
+$activeTab = 'group-show';
+$m_link= SITEURL.'user/group-show/';
 
 
-<?php
 $sql_ap = "SELECT * FROM user_all_access WHERE model_id = '" . $_GET['m_unique_id'] . "' AND user_id = '" . $_SESSION['log_user_unique_id'] . "' and status=1";
 $res_ap = mysqli_query($con, $sql_ap);
 if (mysqli_num_rows($res_ap) > 0) {
@@ -47,675 +46,22 @@ if (mysqli_num_rows($res_ap) > 0) {
   }
 }
 
-
-
 ?>
-<!doctype html>
-<html lang="en-US">
-
+<html>
 <head>
-  <title>Stacia | Your Agency Name</title>
-  <meta name="MobileOptimized" content="320">
-
-  <link rel='stylesheet' id='model-details-custom_profile-styles-css' href='<?= SITEURL ?>assets/wp-content/themes/theagency3/framework/assets/css/styles-custom_profile.css' type='text/css' media='all' />
-  <link rel='stylesheet' id='model-details-pricing-styles-css' href='<?= SITEURL ?>assets/wp-content/themes/theagency3/framework/assets/css/styles-pricing.css' type='text/css' media='all' />
-
-  <?php include('includes/head.php'); ?>
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-  <!--    <script src="<?= 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js' ?>"></script>-->
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-  <!-- <script src='https://kit.fontawesome.com/a076d05399.js'></script> -->
-  <link rel="stylesheet" href="<?= 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' ?>">
-  <script>
-    $(document).ready(function() {
-      $(document).bind("contextmenu", function(e) {
-        return false;
-      });
-      $(document).on('click', '.tlm_live_chat_btn', function() {
-        // console.log('test');
-      });
-
-      function getConnectedDevices(type, callback) {
-        navigator.mediaDevices.enumerateDevices()
-          .then(devices => {
-            const filtered = devices.filter(device => device.kind === type);
-            callback(filtered);
-          })
-          .catch(err => console.error('Error enumerating devices:', err));
-      }
-
-      function requestMediaPermissions() {
-        return navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-      }
-
-      let count = 0;
-
-      requestMediaPermissions()
-        .then(() => {
-          getConnectedDevices('videoinput', cameras => {
-            cameras.forEach(function(device) {
-              console.log(device);
-              count++;
-              $('#tlm_camera_id').append('<option value="' + device.deviceId + '">Camera ' + count + ' (' + device.label + ')</option>');
-            });
-          });
-        })
-        .catch(err => console.error('Error accessing media devices:', err));
-
-
-
-
-    });
-  </script>
-  <style type="text/css">
-    .tlm_camera_id {
-      display: inline-block;
-      max-width: 118px;
-      margin-left: 10px;
-      padding: 5px 7px;
-      background-color: #d83b21;
-      color: #fff;
-      font-weight: 600;
-      border: 0;
-      border-radius: 4px;
-    }
-
-    .main_img_div {
-      height: 350px;
-      border-radius: 30px;
-      overflow: hidden;
-      text-align: right;
-      position: relative;
-    }
-
-    .img-scd {
-      /*height: 350px;*/
-      transition: 1s ease;
-    }
-
-    .img-scd:hover {
-      transform: scale(1.7);
-      /*height: 350px;*/
-      overflow: hidden;
-    }
-
-    .banner_img {
-      width: 100%;
-      background-repeat: no-repeat;
-      height: 450px;
-      /*margin-left: 10%;*/
-      /*margin-right: 10%;*/
-      border-radius: 0px 0px 20px 20px;
-    }
-
-    .banner_img_dynmic {
-      width: 100%;
-      background-repeat: no-repeat;
-      height: 450px;
-      border-radius: 0px 0px 20px 20px;
-    }
-
-    .u-cir-img {
-      position: relative;
-    }
-
-    .cir_img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 2px solid red;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .cir_img.storyimg {
-      padding: 2px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: none;
-    }
-
-    .cir_img.storyimg:before {
-      content: " ";
-      position: absolute;
-      display: block;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      margin: auto;
-      border-radius: 100%;
-      -webkit-animation: rotate360 2s infinite linear;
-      animation: rotate360 2s infinite linear;
-      background-color: #21d4fd;
-      background-image: linear-gradient(19deg, #fd2168 0, #1f1cdf 100%);
-    }
-
-    .cir_img img {
-      width: 120px;
-      height: 120px;
-      position: relative;
-      border-radius:100%;      
-      /*border-radius: 50%;
-      border:2px solid red;
-      overflow: hidden;*/
-    }
-    .cir_img.storyimg img{
-      width: 110px;
-      height: 110px;
-    }    
-
-    .mol_name {
-      font-size: 22px;
-      font-weight: bold;
-      text-transform: capitalize;
-      vertical-align: middle;
-      padding-top: 20px;
-      /*color: #4c4b4b;*/
-      color: #ffffff;
-      margin: unset;
-    }
-
-    .main_idv {
-      height: 350px;
-      border-radius: 30px;
-      overflow: hidden;
-    }
-
-    .post_img,
-    .vid_tg {
-      border: none;
-    }
-
-    .post_img:hover {
-      transform: scale(1.2);
-    }
-
-    .my_dvf {
-      padding-top: 20px;
-      padding-bottom: 20px;
-      float: left;
-    }
-
-    .menuyg {
-      padding-top: 15px;
-      padding-bottom: 15px;
-    }
-
-    .profil_img {
-      /*width: 40px;
-      height: 40px;*/
-    }
-
-    @keyframes rotate360 {
-      from {
-        -webkit-transform: rotate(0);
-        transform: rotate(0)
-      }
-
-      to {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg)
-      }
-    }
-
-    @-webkit-keyframes rotate360 {
-      from {
-        -webkit-transform: rotate(0)
-      }
-
-      to {
-        -webkit-transform: rotate(359deg)
-      }
-    }
-  </style>
-  <style>
-    .gallery img {
-      width: 100%;
-      height: 100%;
-      transition: 1s ease;
-      vertical-align: top;
-      border: 2px solid #968e75;
-    }
-
-    .mn-dv-img {
-      width: 100%;
-      /*height: 100%;*/
-      position: relative;
-      /*      float: left;
-      margin-left: 10px;
-      margin-right: 10px;*/
-
-      margin-top: 10px;
-      margin-bottom: 20px;
-      vertical-align: top;
-    }
-
-    .main-uper-div-img {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      /*background: #6d5a139e;*/
-      width: 100%;
-      height: 100%;
-      /*      border-radius: 30px;
-      border: 1px solid #ff2424;*/
-    }
-
-    .mn-dv-vdo {
-      width: 100%;
-      /*      height: 100%; */
-      position: relative;
-      /*      float: left;
-      margin-left: 10px;
-      margin-right: 10px;
-      margin-top: 10px;*/
-      margin-bottom: 20px;
-      vertical-align: top;
-    }
-
-    .main-uper-div-vdo {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      /*      background: #968e75;*/
-      background: transparent;
-
-      width: 100%;
-      height: 100%;
-      /*      border-radius: 30px;
-      border: 1px solid #ff2424;*/
-    }
-
-    .gallery .free-video {
-      width: 100%;
-      height: 100%;
-      transition: 1s ease;
-      /*margin-left: 10px;
-      margin-right: 10px;*/
-      margin-top: 10px;
-      margin-bottom: 20px;
-      border: 2px solid #968e75;
-    }
-
-    .gallery .paid-video {
-      /*width: 200px; */
-      /*height: 300px; */
-      transition: 1s ease;
-      /*margin-left: 10px;
-      margin-right: 10px;*/
-      /*margin-top: 10px;*/
-      margin-bottom: 20px;
-      border: 2px solid #968e75;
-    }
-
-    .gallery img:hover {
-      filter: drop-shadow(4px 4px 6px gray);
-      transform: scale(1.0);
-    }
-
-    .free-image {
-      margin-top: 10px;
-      margin-bottom: 20px;
-    }
-
-    .btn-chng_dp {
-      bottom: -13px;
-      top: auto;
-      right: 25px;
-    }
-
-    .btn-chng_pp {
-      right: 47px;
-    }
-
-    @media only screen and (max-width: 600px) {
-      h4 {
-        font-size: 14px !important;
-      }
-
-      .fancy_button {
-        padding: 6px 8px !important;
-      }
-
-      .book {
-        width: 120px !important;
-      }
-
-      .btn-chng_pp {
-        right: 36px;
-      }
-
-      .btn-chng_dp {
-        right: 15px;
-      }
-
-      .gallery {
-        text-align: center !important;
-      }
-
-      .banner_img {
-        width: 100%;
-        background-repeat: no-repeat;
-        height: auto;
-        margin-left: 0%;
-        margin-right: 0%;
-      }
-
-      .main_img_wdth {
-        width: 100% !important;
-      }
-    }
-
-    .icn-vdo {
-      font-size: 26px;
-      color: #ff2424;
-      margin-left: 15px;
-      margin-top: 15px;
-    }
-
-    .icn-img {
-      font-size: 26px;
-      color: #ff2424;
-      margin-left: 15px;
-      margin-top: 15px;
-    }
-
-    .mybtn {
-      border: 1px solid white;
-      border-radius: 10%;
-      font-size: 15px;
-      color: white;
-      background: transparent;
-      transition: 1s ease;
-      margin-left: 30%;
-      margin-right: 30%;
-      margin-top: 100px;
-      margin-bottom: 100px;
-      padding: 5px 20px;
-    }
-
-    .mybtn:hover {
-      border: 1px solid #e2e2e2;
-      border-radius: 10%;
-      font-size: 15px;
-      color: white;
-      background: red;
-    }
-
-    .coin_icon {
-      font-size: 18px;
-      color: #ff2424;
-      display: inline;
-    }
-
-    .full_img {}
-
-    .main_img_wdth {
-      width: 80%;
-      margin: auto;
-      background: #e54720;
-      border-radius: 0px 0px 20px 20px;
-      position: relative;
-    }
-
-    .myleft_dv {
-      text-align: center;
-      padding: 8px;
-    }
-
-    .past_heade {
-      font-weight: bold;
-      /*color: #4c4b4b;*/
-      color: #ffffff;
-    }
-
-    .angle_dwn {
-      font-weight: normal;
-    }
-
-    #mol-des {
-      margin: 10px 0px;
-    }
-
-    .table {
-      width: 100%;
-      margin: auto;
-    }
-
-    .tab_head {
-      padding: 20px;
-      /*margin-top: unset;*/
-      /*margin-bottom: unset;*/
-    }
-
-    .view_div {
-      cursor: pointer;
-      color: red;
-      text-align: right;
-      font-size: 14px;
-    }
-
-    @media (max-width: 576px) {
-      .mybtn {
-        display: block;
-      }
-    }
-  </style>
-  <style type="text/css">
-    .i_main {
-      cursor: pointer;
-      color: #e54720;
-      transition: 1s;
-    }
-
-    .i_main:hover {
-      color: #666;
-    }
-
-    .i_main:before {
-      font-family: fontawesome;
-      content: '\f08a';
-      font-style: normal;
-      font-size: 16px;
-    }
-
-    .i_inverse {
-      cursor: pointer;
-      color: #aaa;
-      transition: 1s;
-    }
-
-    .i_inverse:hover {
-      color: #666;
-    }
-
-    .i_inverse:before {
-      font-family: fontawesome;
-      content: '\f004';
-      font-style: normal;
-      color: #e54720;
-      font-size: 16px;
-    }
-
-    #unflow,
-    #flow {
-      color: #e54720;
-    }
-
-    .new_p_head {
-      font-size: 18px;
-      font-weight: bold;
-      float: left;
-    }
-
-    .post_btn {
-      float: right;
-      border: none;
-      padding: 5px 20px;
-      border-radius: 30px;
-      background-color: red;
-      color: white;
-      font-weight: bold;
-      font-family: system-ui;
-      margin-top: 6px;
-      margin-right: 20px;
-    }
-
-    .inp_post {
-      border: none;
-      box-shadow: none;
-      width: 100%;
-      padding: 20px;
-    }
-
-    .file-upload {
-      /*height:100px;
-        width:100px;
-        margin:40px auto;*/
-      /*border:1px solid #f0c0d0;*/
-      border-radius: 100px;
-      overflow: hidden;
-      position: relative;
-      text-align: center;
-    }
-
-    .file-upload input {
-      position: absolute;
-      height: 400px;
-      /*width:400px;
-        left:-200px;*/
-      top: -200px;
-      background: transparent;
-      opacity: 0;
-      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-      filter: alpha(opacity=0);
-    }
-
-    .file-upload img {
-      height: 170px;
-      width: 170px;
-      margin: 15px;
-    }
-
-    .bor_div {
-      border-bottom: 1px solid #efefef;
-    }
-
-    .coin_fle {
-      border: none;
-      padding: 10px;
-      border-bottom: 1px solid #efefef;
-      width: 100%;
-    }
-
-    .post_radio {
-      margin-left: 15px !important;
-      margin-right: 15px !important;
-    }
-
-    .share {
-      color: #ffffff;
-    }
-
-    .fil_radio {
-      margin-left: 15px !important;
-      margin-right: 15px !important;
-    }
-
-    .post_t_div {
-      padding: 10px;
-      margin-left: 10px;
-    }
-
-    .file_t_div {
-      padding: 10px;
-      margin-left: 10px;
-    }
-
-    .file-upload {
-      display: none;
-    }
-
-    .file_t_div {
-      display: none;
-    }
-
-    .post_t_div {
-      display: none;
-    }
-
-    .fancy_button {
-      transition: 1s ease;
-      padding: 6px 15px;
-    }
-
-    .fancy_button:hover {
-      color: #f5b8b8;
-    }
-
-    .modal-titlea {
-      color: white;
-      border-bottom: 1px solid black;
-      padding: 5px 0px 10px 10px;
-      margin-bottom: 10px;
-    }
-
-    .modal-headera {
-      border: none !important;
-    }
-
-    .modal-bodya {
-      color: white;
-    }
-
-    .modal-titlea {
-      font-size: 25px;
-    }
-
-    .followbers_popup p:hover {
-      color: #d83b21;
-    }
-  </style>
-  <style>
-    .model-item-li {
-      border: 1px solid #ff2424;
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 10px
-    }
-
-    .model-items {
-      display: flex;
-      flex-direction: row;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-    }
-
-    .user-like-count {
-      margin-top: 5px;
-      display: block;
-    }
-
-    .pay-btn {
-      display: flex;
-      justify-content: center;
-    }
-
-    .modal-content h1,
-    .modal-content h2,
-    .modal-content h3,
-    .modal-content h4,
-    .modal-content h5,
-    .modal-content h6 {
-      color: #000;
-    }
-  </style>
-
-  <script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model Profile - Million Dollar Page</title>
+<meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
+<?php  include('includes/head.php'); ?>
+
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
+<script>
     function like(postid, userid) {
 
       if (userid == 0) {
@@ -754,11 +100,28 @@ if (mysqli_num_rows($res_ap) > 0) {
       alert("Link Copyied To Clipboard Now Share Profile Anywhere");
     }
   </script>
-
 </head>
 
-<body class="models-template-default single single-models postid-410 custom-background">
-  <?php include('includes/header.php'); ?>
+<body class="enhanced5 min-h-screen bg-animated text-white socialwall-page">
+<!-- Premium Particle System -->
+<div class="particles" id="particles"></div>
+
+  <?php if (isset($_SESSION["log_user_id"])) { ?>
+ 
+    <?php  include('includes/side-bar.php'); ?>
+
+    <?php  include('includes/profile_header_index.php'); ?>  
+ 
+  <?php } else{ ?>
+  
+	<?php include('includes/header.php'); ?>
+	
+  <?php } ?>
+
+
+  
+
+
   <?php
   $sqls = "SELECT * FROM model_user WHERE unique_id = '" . $_GET['m_unique_id'] . "'";
   $resultd = mysqli_query($con, $sqls);
@@ -778,1112 +141,1545 @@ if (mysqli_num_rows($res_ap) > 0) {
     if (mysqli_num_rows($result_sl) > 0) {
       $row_sl = mysqli_fetch_assoc($result_sl);
     }
+	
+	$mDefaultImage =SITEURL."/assets/images/girl.png";
+	if($rowesdw['gender']=='Male'){
+		$mDefaultImage =SITEURL."/assets/images/profile.png";
+	}
+	if(!empty($rowesdw['profile_pic'])){
+		$mDefaultImage = SITEURL.$rowesdw['profile_pic'];
+	}
 
   ?>
-    <div class="ban_img_dv">
-      <div class="main_img_wdth">
-        <?php
-        $sql_bi = "SELECT * FROM model_dp_banner WHERE unique_model_id = '" . $_GET['m_unique_id'] . "'";
-        $res_bi = mysqli_query($con, $sql_bi);
-        if (mysqli_num_rows($res_bi) > 0) {
-          $row_bi = mysqli_fetch_assoc($res_bi);
+    
+<main>
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="container mx-auto relative z-10">
+            <div class="profile-info pt-32 sm:pt-40 md:pt-48 pb-6 px-4 md:px-0">
+                <div class="flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
+                    <div class="profile-avatar-container">
 
-        ?>
-          <img alt="models" class="banner_img_dynmic" src="<?= SITEURL . 'ajax/banner.php?image=' . $row_bi['model_banner_pic']; ?>">
-        <?php } else { ?>
-          <img alt="modelss" class="banner_img" src="assets/images/bg.jpg">
-        <?php } ?>
-        <?php
+                            <?php
+                               $profile_pic = $rowesdw['profile_pic'] ?? '';
 
-        if ($_SESSION["log_user_unique_id"] == $session_id) { ?>
-          <button style="" class="btn-chng_dp" data-toggle="modal" data-target="#myModadp">+</button>
-        <?php } ?>
-      </div>
+                                if (file_exists($profile_pic)) {
+
+                                  $imageUrl = SITEURL . $profile_pic;
+                                  
+                              ?>
+
+                                <img src="<?php echo $imageUrl; ?>" alt="<?php echo $rowesdw['name']; ?>" class="profile-avatar">
+
+                            <?php }else{ ?>
+
+                                <img src="<?php echo SITEURL; ?>assets/images/model-gal-no-img.jpg" alt="<?php echo $rowesdw['name']; ?>" class="profile-avatar">
+
+                            <?php } ?>
+
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div>
+                                <h1 class="text-3xl sm:text-4xl font-bold heading-font gradient-text mb-1"><?php echo ucfirst($rowesdw['name']); ?></h1>
+                                <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                    <span class="text-white/70">@<?php echo $rowesdw['username']; ?></span>
+                                    <span class="status-badge status-online">
+                                        <span class="w-2 h-2 bg-white rounded-full mr-2"></span>
+                                        Online
+                                    </span>
+                                </div>
+								<?php 
+									$country_list = DB::query('select name from countries where id="'.$rowesdw['country'].'"');
+									$state_list = DB::query('select name from states where id="'.$rowesdw['state'].'"');
+									$city_list = DB::query('select name from cities where id="'.$rowesdw['city'].'"');
+									if(!empty($country_list) && !empty($country_list[0]['name'])){ ?>
+                                <div class="flex items-center gap-2 text-white/70 mb-2 sm:mb-3 text-sm sm:text-base">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    
+									<?php echo $city_list[0]['name'].', '.$state_list[0]['name'].', '.$country_list[0]['name']; ?>
+									
+                                </div>
+								<?php } ?>
+								
+                                <div class="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-xs sm:text-sm inline-flex items-center mb-2 sm:mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                    Fashion Model
+                                </div>
+								
+								<?php if(!empty($rowesdw['services'])){ ?>
+								
+                                <div class="flex items-center gap-2 text-white/80 text-sm sm:text-base">
+									<?php if($rowesdw['services'] == 'Chat Only' || $rowesdw['services'] == 'Chat & Watch' || $rowesdw['services'] == 'Chat, Watch & Meet'){ ?>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                    <?php } ?>
+									<?php if($rowesdw['services'] == 'Chat & Watch' || $rowesdw['services'] == 'Chat, Watch & Meet'){ ?>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+									<?php } ?>
+									<?php if($rowesdw['services'] == 'Chat, Watch & Meet'){ ?>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                    <?php } ?>
+									<?php if($rowesdw['services'] == 'Premium Experience'){ echo '👑'; } ?>
+									<span class="font-medium"><?php echo $rowesdw['services']; ?></span>
+                                </div>
+								
+								<?php } ?>
+                            </div>
+                            <div class="flex flex-wrap gap-2 sm:gap-3 mt-2 md:mt-0">
+                                <button class="btn-primary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base" id="openServicesBtn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                    Message
+                                </button>
+                                <button class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                    Follow
+                                </button>
+
+
+                                
+
+                                <div class="action-dropdown" id="moreActions">
+
+                                    <button class="btn-secondary px-3 py-2 rounded-full text-white" id="moreActionsBtn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                    </button>
+
+
+                                    <div class="action-menu" bis_skin_checked="1">
+
+                               <div class="action-item" id="aboutBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                                About
+                            </div>
+                            <div class="action-item" id="servicesBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                                Services
+                            </div>
+                            <div class="action-item" id="wishlistBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                                Wishlist
+                            </div>
+                            <div class="action-item" id="liveBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                </svg>
+                                On Live
+                            </div>
+                            <div class="action-item" id="tipBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                                Send Tip
+                            </div>
+
+
+                            <div class="action-item" id="giftBtn" bis_skin_checked="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                                    <path d="M12 8v13"></path>
+                                    <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                                    <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+                                </svg>
+                                Send Gift
+                            </div>
+
+                            
+
+                            <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
+
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    
+                                    <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                                    <path d="M12 8v13"></path>
+                                    <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                                    <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+                                </svg> -->
+
+                                <div class="all-link-btn">
+                                    <img src="<?=SITEURL?>assets/images/all-links.svg" />
+                                </div>
+
+                                All my links
+                            </div>
+
+
+
+                                   </div>
+                                    
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="container">
-      <div class="alert alert-success alert-dismissible" id="success" style="display:none;">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-      </div>
-      <div class="row menuyg">
-        <div class="col-md-2 col-sm-6 col-xs-6 ">
-          <div class="u-cir-img">
-            <div class="cir_img <?=get_data('model_user_story',array('user_id'=>$rowesdw['id']))?'storyimg':''?>" onclick="storyModal('<?= $rowesdw['id'] ?>')">
-              <img src="<?php echo !empty($rowesdw['profile_pic']) ? SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic'] : SITEURL . 'assets/images/girl.png'; ?>">
-            </div>
-            <?php
-            if ($_SESSION["log_user_unique_id"] == $session_id) { ?>
-              <button class="btn-chng_pp" data-toggle="modal" data-target="#upload-options-model" >+</button>
-            <?php } ?>
-          </div>
-        </div>
-        <div class="col-md-2 col-sm-6 col-xs-6">
-          <p class="mol_name" id="show"><?php echo $rowesdw['name']; ?>
-            <!--<i class="fa fa-angle-down angle_dwn" style="font-size:25px"></i><i class="fa fa-angle-up angle_up" style="font-size:25px"></i>-->
-            <?php
-            if ($_SESSION["log_user"]) {
 
-              $sql_folo = "SELECT * FROM model_follow WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND unique_user_id = '" . $_SESSION['log_user_unique_id'] . "' AND status = 'Follow'";
+    <!-- Profile Bio & Stats -->
+    <div class="container mx-auto py-6 sm:py-8 px-4 md:px-0">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div class="md:col-span-2">
+			<?php if(!empty($rowesdw['user_bio']) || !empty($rowesdw['hobbies'])){ ?>
+                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+				<?php if(!empty($rowesdw['user_bio'])){ ?>
+                    <h2 class="text-xl font-bold mb-4 premium-text">About Me</h2>
+                    <p class="text-white/80 mb-4"><?php echo $rowesdw['user_bio']; ?></p>
+				<?php } ?>
+				<?php if(!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null'){ 
+				$hobbies = json_decode($rowesdw['hobbies']); 
+				?>
+                    <div class="flex flex-wrap gap-2">
+					<?php foreach($hobbies as $hb){ ?>
+					
+                        <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm"><?php echo $hb; ?></span>
+                        
+					<?php } ?>
+					
+                    </div>
+				<?php } ?>
+                </div>
+			<?php } ?>
 
-              $res_folo = mysqli_query($con, $sql_folo);
-              if (mysqli_num_rows($res_folo) > 0) {
-            ?>
-          <form>
-            <input type="hidden" name="model_id" id="model_id" value="<?php echo $_GET['m_unique_id']; ?>">
-            <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['log_user_unique_id']; ?>">
-            <div id="flow">
-              <i class="i_inverse"></i>&nbsp;Unfollow
+                <!-- Tabs -->
+                <div class="border-b border-white/10 mb-6 sm:mb-8">
+                    <div class="tabs-container flex">
+                        <button class="px-4 sm:px-6 py-3 font-medium tab-active whitespace-nowrap">All Content</button>
+                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Photos</button>
+                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Videos</button>
+                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Exclusive</button>
+                    </div>
+                </div>
+
+                <!-- Media Grid -->
+                <div class="media-grid">
+                    <!-- Media Item 1 -->
+                    <div class="media-item">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=600&fit=crop" alt="Fashion model in yellow outfit">
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">Hello guys!</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">48</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Item 2 (Video) -->
+                    <div class="media-item">
+                        <div class="w-full h-full bg-gray-800 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/50 sm:w-48 sm:h-48"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                        </div>
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">Play this!!</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">88</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Item 3 (Video) -->
+                    <div class="media-item">
+                        <div class="w-full h-full bg-gray-800 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/50 sm:w-48 sm:h-48"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                        </div>
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">My first video</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">84</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Item 4 -->
+                    <div class="media-item">
+                        <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&h=600&fit=crop" alt="Fashion model">
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">My first paid image. Hope you enjoy it!</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">92</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Item 5 -->
+                    <div class="media-item">
+                        <img src="https://images.unsplash.com/photo-1550928431-ee0ec6db30d3?w=600&h=600&fit=crop" alt="Fashion model in winter coat">
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">Morning sunshine ☀️</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">36</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Item 6 -->
+                    <div class="media-item">
+                        <div class="w-full h-full bg-gradient-to-br from-red-500/30 to-purple-500/30 flex items-center justify-center">
+                            <span class="text-lg font-bold">Red Hot Chili</span>
+                        </div>
+                        <div class="media-overlay">
+                            <div class="flex justify-between items-center">
+                                <div class="text-sm font-medium">Red Hot Chili</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                        <span class="ml-1">78</span>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                        <span class="ml-1">Tip</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="mt-6 sm:mt-8 text-center">
+                    <button class="btn-secondary px-6 sm:px-8 py-2 sm:py-3 rounded-xl text-white font-semibold">
+                        Load More
+                    </button>
+                </div>
             </div>
-          </form>
-        <?php } else { ?>
-          <form>
-            <input type="hidden" name="model_id" id="model_id" value="<?php echo $_GET['m_unique_id']; ?>">
-            <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['log_user_unique_id']; ?>">
-            <div id="unflow">
-              <i class="i_main"></i>&nbsp;Follow
-            </div>
-          </form>
-        <?php } ?>
-        </p>
-      <?php } ?>
-      <p id="mol-des">
-        <?php if ($row_sl['insta_p_url']) { ?>
-          <a href="<?php echo $row_sl['insta_p_url']; ?>" style="color: black;">
-            <img alt="modelss" src="assets/images/instagram.jpg" style="width: 25px;">
-          </a>
-        <?php } ?>
-        <?php if ($row_sl['snap_p_url']) { ?>
-          &nbsp;|&nbsp;
-          <a href="<?php echo $row_sl['snap_p_url']; ?>">
-            <img alt="modelss" src="assets/images/snapchat.png" style="width: 25px;">
-          </a>
-        <?php } ?>
-      </p>
-      <small>@<?php echo $rowesdw['username']; ?></small>
-        </div>
-        <div class="col-md-8 col-sm-12 col-xs-12">
-          <div class="row">
-            <?php
+			
+			<?php
+
             $sql_img = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Image' Order by id DESC";
+
             $result_img = mysqli_query($con, $sql_img);
+
             if (mysqli_num_rows($result_img) > 0) {
+
               $row_img = mysqli_fetch_assoc($result_img);
+
               $num1 = $row_img['COUNT(file_type)'];
+
             }
+
+
 
             $sql_vdo = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Video' Order by id DESC";
+
             $result_vdo = mysqli_query($con, $sql_vdo);
+
             if (mysqli_num_rows($result_vdo) > 0) {
+
               $row_vdo = mysqli_fetch_assoc($result_vdo);
+
               $num2 = $row_vdo['COUNT(file_type)'];
+
             }
 
+
+
             $sql_flow = "SELECT COUNT(status) FROM model_follow WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND status = 'Follow' Order by id DESC";
+
             //echo $sql_flow." sql query1"."<br>";
+
             $result_flow = mysqli_query($con, $sql_flow);
+
             if (mysqli_num_rows($result_flow) > 0) {
+
               $row_flow = mysqli_fetch_assoc($result_flow);
+
               $num3 = $row_flow['COUNT(status)'];
+
             }
+
+
+
 
 
             ?>
 
-            <div class="col-md-3 col-sm-3 col-xs-3 myleft_dv">
-              <h4 class="past_heade">Total Post</h4>
-              <p><?php echo $num1; ?></p>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-3 myleft_dv">
-              <h4 class="past_heade">Photo</h4>
-              <p><?php echo $num2; ?></p>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-3 myleft_dv">
-              <h4 class="past_heade">Videos</h4>
-              <p><?php echo $num1 + $num2; ?></p>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-3 myleft_dv">
-              <div class="followbers_popup">
-                <h4 class="past_heade">Followers</h4>
-                <!-- <a href="#"><p><?php echo $num3; ?></p></a> -->
-                <!-- <button style="background: none;" type="button" data-toggle="modal" data-target="#exampleModal"> -->
-                <p style="cursor:pointer;" data-toggle="modal" data-target="#exampleModal"><?php echo $num3; ?></p>
-                </button>
+            <!-- Sidebar -->
+            <div class="md:col-span-1">
+                <!-- Stats Card -->
+                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                    <h2 class="text-xl font-bold mb-4 premium-text">Status</h2>
 
-              </div>
-            </div>
+                    <div class="post-div flex flex-wrap gap-8 text-center">
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num1; ?></div>
+                            <div class="text-xs sm:text-sm text-white/60">Total Posts</div>
+                        </div>
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num2; ?></div>
+                            <div class="text-xs sm:text-sm text-white/60">Photos</div>
+                        </div>
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num1 + $num2; ?></div>
+                            <div class="text-xs sm:text-sm text-white/60">Videos</div>
+                        </div>
+                        <div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text"><p style="cursor:pointer;" data-toggle="modal" data-target="#exampleModal"><?php echo $num3; ?></p></div>
+                            <div class="text-xs sm:text-sm text-white/60">Followers</div>
+                        </div>
+                    </div>
 
-            <!-- Button trigger modal get followbers id -->
+
+                    
+
+
+                </div>
+
+		<?php if (isset($_SESSION['log_user_unique_id'])) { ?>
+
+                <form id="createPostForm"  enctype="multipart/form-data" method="post">
+
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+
+                        <h2 class="text-xl font-bold mb-4 premium-text">Create New Post</h2>
+
+                        
+                        <input type="text" name="post_title" 
+                            class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" 
+                            placeholder="Post title">
+
+                        <textarea name="post_content"  class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" rows="3" placeholder="What's on your mind?"></textarea>
+
+                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $rowesdw['id'] ?>">
+
+                        <div class="flex justify-between items-center">
+
+
+                             <label for="post_image" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                                Upload
+
+                            </label>
+
+                            <input style="display:none;" type="file" name="post_image" id="post_image" accept="/*images">
+
+                            <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
+                                Post
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+				
+		<?php } ?>
+
+
+                <!-- Services Card -->
+                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                    <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-sm sm:text-base">Chat</div>
+                                <div class="text-xs sm:text-sm text-white/60">Private messaging</div>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-sm sm:text-base">Watch</div>
+                                <div class="text-xs sm:text-sm text-white/60">Live streams & content</div>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-sm sm:text-base">Meet</div>
+                                <div class="text-xs sm:text-sm text-white/60">In-person experiences</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <button class="w-full btn-primary text-white font-semibold py-2 sm:py-3 rounded-xl mt-4 text-sm sm:text-base" id="viewServicesBtn">
+                        View All Services
+                    </button>
+                </div>
+
+                <!-- Similar Models Card -->
+                <div class="ultra-glass rounded-2xl p-4 sm:p-6">
+                    <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&h=100&fit=crop&crop=faces" alt="Aria" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                            <div class="flex-1">
+                                <div class="font-semibold text-sm sm:text-base">Aria M.</div>
+                                <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
+                            </div>
+                            <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                Follow
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=faces" alt="Phoenix" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                            <div class="flex-1">
+                                <div class="font-semibold text-sm sm:text-base">Phoenix R.</div>
+                                <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
+                            </div>
+                            <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                Follow
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?w=100&h=100&fit=crop&crop=faces" alt="Zara" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                            <div class="flex-1">
+                                <div class="font-semibold text-sm sm:text-base">Zara C.</div>
+                                <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
+                            </div>
+                            <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                Follow
+                            </button>
+                        </div>
+                    </div>
+                    <button class="w-full btn-secondary text-white font-semibold py-2 rounded-xl mt-4 text-sm sm:text-base">
+                        View More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+    <!-- ======================== -->
+
+
+    <!-- About Modal -->
+<div class="modal-overlay" id="aboutModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">About <?php echo ucfirst($rowesdw['name']); ?></h2>
+            <button class="close-modal" id="closeAboutModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="about-section">
+                <h3 class="about-section-title">Bio</h3>
+                <?php echo $rowesdw['user_bio']; ?>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Model Type</h3>
+                <p>Fashion Model | Commercial Model | Content Creator</p>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Physical Attributes</h3>
+                <div class="attributes-grid">
+                    <div class="attribute">
+                        <div class="attribute-label">Height</div>
+                        <div class="attribute-value">5'9" (175 cm)</div>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Weight</div>
+                        <div class="attribute-value">125 lbs (57 kg)</div>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Hair Color</div>
+                        <div class="attribute-value">Blonde</div>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Eye Color</div>
+                        <div class="attribute-value">Blue</div>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Dress Size</div>
+                        <div class="attribute-value">4 US</div>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Shoe Size</div>
+                        <div class="attribute-value">8 US</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Experience</h3>
+                <p>5+ years professional modeling experience with top agencies in Los Angeles and New York. Featured in Vogue, Elle, and Cosmopolitan. Runway experience with major fashion brands during Fashion Week events.</p>
+            </div>
+            <?php if(!empty($country_list) && !empty($country_list[0]['name'])){ ?>
+            <div class="about-section">
+                <h3 class="about-section-title">Location</h3>
+                <p><?php echo $city_list[0]['name'].', '.$state_list[0]['name'].', '.$country_list[0]['name']; ?></p>
+            </div>
+			<?php } ?>
+        </div>
+    </div>
+</div>
+
+<!-- Services Modal -->
+<div class="modal-overlay" id="servicesModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Premium Services</h2>
+            <button class="close-modal" id="closeServicesModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="about-section">
+                <h3 class="about-section-title">Chat Services</h3>
+                <div class="attributes-grid">
+                    <div class="attribute">
+                        <div class="attribute-label">1-on-1 Chat Session</div>
+                        <div class="attribute-value">$50/hr</div>
+                        <p>Exclusive private chat sessions where we can discuss anything you'd like.</p>
+                        <button class="btn btn-primary">Book Now</button>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Private Messaging</div>
+                        <div class="attribute-value">$25/day</div>
+                        <p>Priority responses to your messages throughout the day.</p>
+                        <button class="btn btn-primary">Book Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Watch/Stream Services</h3>
+                <div class="attributes-grid">
+                    <div class="attribute">
+                        <div class="attribute-label">Live Video Stream</div>
+                        <div class="attribute-value">$100</div>
+                        <p>Private live stream just for you.</p>
+                        <button class="btn btn-primary">Watch Now</button>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Group Interactive Stream</div>
+                        <div class="attribute-value">$30</div>
+                        <p>Join my exclusive group streams with interactive features.</p>
+                        <button class="btn btn-primary">Join Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-section">
+                <h3 class="about-section-title">Meet Services</h3>
+                <div class="attributes-grid">
+                    <div class="attribute">
+                        <div class="attribute-label">Dating Experiences</div>
+                        <div class="attribute-value">Custom</div>
+                        <p>Enjoy a personalized date experience.</p>
+                        <button class="btn btn-primary">Book Now</button>
+                    </div>
+                    <div class="attribute">
+                        <div class="attribute-label">Travel & Tours Together</div>
+                        <div class="attribute-value">Custom</div>
+                        <p>Travel with me to exciting destinations.</p>
+                        <button class="btn btn-primary">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Subscription Modal -->
+<div class="modal-overlay" id="subscriptionModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Subscription Plans</h2>
+            <button class="close-modal" id="closeSubscriptionModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="about-section">
+
+
+
+                <div class="attribute mod-rel1">
+                    <div class="attribute-label">Basic</div>
+
+                    <div class="attribute-value">$9.99/mo</div>
+
+                    <ul>
+
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Access to all free content</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Direct messaging</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>100 tokens monthly</span>
+                        </li>
+
+                    </ul>
+                    <button class="btn btn-primary">Subscribe</button>
+                </div>
+
+
+
+                
+                <div class="attribute mod-rel2">
+                    
+                    <div class="mod-inner-rel">POPULAR</div>
+                    <div class="attribute-label">Premium</div>
+                    <div class="attribute-value">$24.99/mo</div>
+
+
+                    <ul>
+
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>All Basic features</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Access to exclusive content</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>300 tokens monthly</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Weekly exclusive live streams</span>
+                        </li>
+                    </ul>
+
+
+                    <button class="">Subscribe</button>
+                </div>
+                
+                <div class="attribute mod-rel3">
+                    <div class="attribute-label">VIP</div>
+                    <div class="attribute-value">$49.99/mo</div>
+
+
+                    <ul>
+
+
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>All Premium features</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>1-on-1 video calls (30 min monthly)</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>750 tokens monthly</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--neon-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Early access to all new content</span>
+                        </li>
+
+                        
+                    </ul>
+
+
+                    <button class="btn btn-primary">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gift Modal -->
+<div class="modal-overlay" id="giftModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Send a Gift</h2>
+            <button class="close-modal" id="closeGiftModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="gift-grid">
+                <div class="gift-item">
+                    <div class="gift-emoji">🌹</div>
+                    <div class="gift-name">Rose</div>
+                    <div class="gift-price">$5</div>
+                </div>
+                <div class="gift-item">
+                    <div class="gift-emoji">❤️</div>
+                    <div class="gift-name">Heart</div>
+                    <div class="gift-price">$10</div>
+                </div>
+                <div class="gift-item">
+                    <div class="gift-emoji">👑</div>
+                    <div class="gift-name">Crown</div>
+                    <div class="gift-price">$25</div>
+                </div>
+                <div class="gift-item">
+                    <div class="gift-emoji">💎</div>
+                    <div class="gift-name">Diamond</div>
+                    <div class="gift-price">$50</div>
+                </div>
+                <div class="gift-item">
+                    <div class="gift-emoji">🚀</div>
+                    <div class="gift-name">Rocket</div>
+                    <div class="gift-price">$75</div>
+                </div>
+                <div class="gift-item">
+                    <div class="gift-emoji">🔥</div>
+                    <div class="gift-name">Fire</div>
+                    <div class="gift-price">$15</div>
+                </div>
+            </div>
+            
+            <textarea class="gift-message" placeholder="Add a personal message (optional)"></textarea>
+            
+            <button class="btn btn-primary">Send Gift</button>
+        </div>
+    </div>
+</div>
+
+<!-- Tip Modal -->
+<div class="modal-overlay" id="tipModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Send a Tip</h2>
+            <button class="close-modal" id="closeTipModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="tip-options">
+                <div class="tip-option">
+                    <div class="tip-amount">$10</div>
+                    <div class="tip-label">Coffee</div>
+                </div>
+                <div class="tip-option">
+                    <div class="tip-amount">$25</div>
+                    <div class="tip-label">Lunch</div>
+                </div>
+                <div class="tip-option">
+                    <div class="tip-amount">$50</div>
+                    <div class="tip-label">Dinner</div>
+                </div>
+                <div class="tip-option">
+                    <div class="tip-amount">$100</div>
+                    <div class="tip-label">VIP</div>
+                </div>
+            </div>
+            
+            <div class="custom-tip">
+                <span>$</span>
+                <input type="number" class="custom-tip-input" placeholder="Custom amount" min="1">
+            </div>
+            
+            <textarea class="gift-message" placeholder="Add a personal message (optional)"></textarea>
+            
+            <button class="btn btn-primary">Send Tip</button>
+        </div>
+    </div>
+</div>
+
+<!-- Wishlist Modal -->
+<div class="modal-overlay" id="wishlistModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">My Wishlist</h2>
+            <button class="close-modal" id="closeWishlistModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="wishlist-item">
+                <img src="https://images.unsplash.com/photo-1575695342320-d2d2d2f9b73f?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Luxury Handbag" class="wishlist-image">
+                <div class="wishlist-info">
+                    <div class="wishlist-name">Luxury Designer Handbag</div>
+                    <div class="wishlist-price">$1,200</div>
+                    <div class="wishlist-progress">
+                        <div class="wishlist-progress-bar w-[65%]"></div>
+                    </div>
+                    <div class="wishlist-progress-text">
+                        <span>$780 raised</span>
+                        <span>65%</span>
+                    </div>
+                    <button class="btn btn-primary">Contribute</button>
+                </div>
+            </div>
+            
+            <div class="wishlist-item">
+                <img src="https://images.unsplash.com/photo-1581338834647-b0fb40704e21?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Vacation" class="wishlist-image">
+                <div class="wishlist-info">
+                    <div class="wishlist-name">Weekend Getaway to Malibu</div>
+                    <div class="wishlist-price">$800</div>
+                    <div class="wishlist-progress">
+                        <div class="wishlist-progress-bar w-[40%]"></div>
+                    </div>
+                    <div class="wishlist-progress-text">
+                        <span>$320 raised</span>
+                        <span>40%</span>
+                    </div>
+                    <button class="btn btn-primary">Contribute</button>
+                </div>
+            </div>
+            
+            <div class="wishlist-item">
+                <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Camera" class="wishlist-image">
+                <div class="wishlist-info">
+                    <div class="wishlist-name">Professional Camera Setup</div>
+                    <div class="wishlist-price">$2,500</div>
+                    <div class="wishlist-progress">
+                        <div class="wishlist-progress-bar w-[25%]"></div>
+                    </div>
+                    <div class="wishlist-progress-text">
+                        <span>$625 raised</span>
+                        <span>25%</span>
+                    </div>
+                    <button class="btn btn-primary">Contribute</button>
+                </div>
+            </div>
+            
+            <button class="btn btn-secondary mb-[20px]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add New Wishlist Item
+            </button>
+        </div>
+    </div>
+</div>
+
+
+ <div class="modal-overlay" id="allLinkModalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">All My Links</h2>
+            <button class="close-modal" id="closeAllLinkModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="modal-body">
+           
+          
+            
+            <div class="wishlist-item">
+
+
+                <div class="all-linkdiv">
+
+                    <div class="ss-icons">
+                        <img src="<?=SITEURL?>assets/images/ss-facebook.svg" alt="social-icon" />
+                    </div>
+                    <div class="ss-icons">
+                        <img src="<?=SITEURL?>assets/images/ss-instagram.svg" alt="social-icon" />
+                    </div>
+                    <div class="ss-icons">
+                        <img src="<?=SITEURL?>assets/images/ss-whatsapp.svg" alt="social-icon" />
+                    </div>
+
+                </div>
+               
+                
+            </div>
+            
+           
+
+        </div>
+    </div>
+</div> 
+
+<!-- Services Popup -->
+
+
+ <div id="servicesPopup" class="service-popup">
+
+    <div class="service-content">
+
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl sm:text-2xl font-bold premium-text">Services</h3>
+            <button id="closeServicesBtn" class="text-white/70 hover:text-white transition duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+
+        <div class="space-y-6">
+         
+            <div>
+                <h4 class="text-lg sm:text-xl font-bold gradient-text mb-4">💬 Chat</h4>
+                <div class="space-y-4">
+                    <div class="service-item">
+                        <div class="flex justify-between items-start mb-2">
+
+                            <h5 class="text-base sm:text-lg font-semibold">1-on-1 Chat Session</h5>
+                            <span class="bg-indigo-600/20 text-indigo-300 px"></span>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div> 
+
+<!-- Button trigger modal get followbers id -->
+
+
+
+
+
 
 
 
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
               <div class="modal-dialog" role="document">
+
                 <div class="modal-content" style=" width: 50%;margin: auto;background: #6d1e11 ">
+
                   <div class="modal-headera">
+
                     <div class="modal-titlea" id="exampleModalLabel"> Followers</div>
+
                     <button style="margin-top: -45px;margin-right:7px; opacity: 1; color: white" type="button" class="close" data-dismiss="modal" aria-label="Close">
+
                       <span aria-hidden="true">&times;</span>
+
                     </button>
+
                     <div class="modal-bodya">
+
                       <a href="">
+
                         <table style="color: white;">
+
                           <tr>
+
                             <td style="padding: 10px;">
+
+
 
                               <?php
 
-                              //$x = $_GET['m_unique_id'];
-
-                              // echo $x;
 
                               $query = "SELECT * from model_follow where unique_model_id ='" . $_GET['m_unique_id'] . "' AND status = 'Follow' ";
 
-                              //echo $query;
                               $resultd = mysqli_query($con, $query);
+
                               while ($row = mysqli_fetch_assoc($resultd)) {
 
+
+
                                 if (isset($row)) {
-                                  // echo $row['unique_user_id'];
-                                  // echo $row['unique_user_id']."<br>";
+
                                   $query1 = "SELECT * from model_user where unique_id ='" . $row['unique_user_id'] . "'";
 
+
+
                                   //echo $query;
+
                                   $resultd1 = mysqli_query($con, $query1);
+
                                   while ($row1 = mysqli_fetch_assoc($resultd1)) {
 
+
+
                                     if (isset($row1)) {
-                                      // echo $row['unique_user_id'];
-                                      // echo $row[0];
+
                                       echo $row1['name'] . "<br><br>";
+
                                     }
+
                                   }
+
                                 }
+
                               }
 
+
+
                               ?>
-                              <?php //echo $row['unique_user_id']
-                              ?>
+
 
                             </td>
+
                           </tr>
+
                         </table>
+
                       </a>
+
                     </div>
+
                   </div>
+
                 </div>
+
               </div>
+
             </div>
-
-            <br>
-            <br>
-            <div style="clear: both;"></div>
-            <div>
-              <div class="profile-btns">
-                <button type="button" class="fancy_button mb-1" onClick="<?= $showMessgeBtn > 0 ? "window.location='" . SITEURL . "chat/view.php?id=" . $rowesdw['id'] . "'" : 'alert("Please follow first!!")' ?>">Message</button>
-                <button class="fancy_button mb-1" data-toggle="modal" data-target="#myModal_v_sf">About</button>
-                <button class="fancy_button mb-1" data-toggle="modal" data-target="#myModal_v_faci">Services</button>
-                <!--style="padding: 8px;" -->
-
-
-                <?php if ($_GET['m_unique_id'] != $_SESSION["log_user_unique_id"]) { ?>
-                  <button class="fancy_button mb-1" data-toggle="modal" data-target="#all_access">All Access (30 Days)</button>
-                <?php } ?>
-                <?php
-                if ($_SESSION["log_user_unique_id"] == $session_id) {
-                } else if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') {
-                ?>
-                  <form style="display:inline-block" method="post" action="https://thelivemodels.com/live-chat/index.php?user=viewer&unique_model_id=<?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
-                    <button type="submit" class="fancy_button" style="padding: 8px;">Watch Live</button>
-                  </form>
-
-
-                <?php
-                }
-                ?>
-                <?php
-                if ($_SESSION["log_user_unique_id"] == $session_id) {
-                ?>
-                  <form style="display:flex; width:80%;" method="post" action="https://thelivemodels.com/live-chat/index.php?user=streamer&unique_model_id=<?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
-                    <button type="submit" class="fancy_button" style="padding: 8px;">Go Live</button>
-                    <select name="tlm_camera_id" class="form-control tlm_camera_id" id="tlm_camera_id" required="required">
-                    </select>
-                  </form>
-                <?php
-                }
-                ?>
-              </div>
-            </div>
-            <!-- <p class="view_div fancy_button" data-toggle="modal" data-target="#myModal_v_sf">View Other Facilities</p>
-            <p class="view_div fancy_button" data-toggle="modal" data-target="#myModal_v_faci">View Other Facilities</p> -->
-
-            <br>
-            <br>
-
-            <p style="padding: 10px;">
-              <?php
-              $sql_fwa = "SELECT * FROM model_extra_details WHERE unique_model_id = '" . $_GET["m_unique_id"] . "'";
-              $result_fwa = mysqli_query($con, $sql_fwa);
-              if (mysqli_num_rows($result_fwa) > 0) {
-                $row_fwa = mysqli_fetch_assoc($result_fwa);
-                $insta_coins = $row_fwa['insta_tokens'];
-                $snap_coins = $row_fwa['snap_tokens'];
-                echo 'Book a video call on:';
-
-                if ($insta_coins) {
-              ?>
-                  <button style="padding: 5px 10px;" data-toggle="modal" data-target="#myModalinsta">
-                    <i class="fa fa-instagram" aria-hidden="true"></i>
-                  </button>
-                <?php }
-                if ($snap_coins) { ?>
-                  |
-                  <button style="padding: 5px 10px;" data-toggle="modal" data-target="#myModalsnap">
-                    <i class="fa fa-snapchat" aria-hidden="true"></i>
-                  </button>
-                <?php } ?>
-              <?php
-              }
-              ?>
-
-
-            </p>
-
-          </div>
-        </div>
-        <div class="arrow-down" style="position: absolute;left: 37%;" onclick="this.classList.toggle('active')"></div>
-      </div>
-      <!-- <hr style="margin-top: 0px;"> -->
-      <?php if ($_SESSION["log_user_unique_id"] == $_GET["m_unique_id"]) { ?>
-        <div class="row">
-          <div class="col-md-12" style="font-family: system-ui;">
-            <form method="post" action="post-up.php" enctype="multipart/form-data">
-              <input type="hidden" name="m_uni_id" value="<?php echo $_SESSION["log_user_unique_id"]; ?>">
-              <div style="border: 1px solid #d83b21;height: 50px;border-radius: 10px 10px 1px 0px;">
-                <p class="new_p_head" style="margin-left: 20px;">NEW POST</p>
-                <button type="submit" name="upload_image" class="post_btn">POST</button>
-              </div>
-              <div style="border: 1px solid #d83b21;border-top: none;border-radius: 0px 0px 10px 10px;">
-                <!-- <div class="bor_div"></div> -->
-                <input type="text" name="img_text" placeholder="Compose new post..." class="inp_post">
-                <p style="padding: 20px;">Upload your image or video here...</p>
-                <!-- <button class="up_med">Upload Media</button> -->
-                <p class="fancy_button up_med" style="padding: 6px;width: max-content;margin-left: 20px;">Upload Media</p>
-                <div class="file-upload">
-                  <img alt="modelss" src="https://i.stack.imgur.com/dy62M.png" id="blah" />
-                  <input type="file" name="filess" id="imgInp" />
-                </div>
-                <div class="file_t_div">
-                  File Type:
-                  <input type="radio" name="file" value="Image" class="fil_radio">Image
-                  <input type="radio" name="file" value="Video" class="fil_radio">Video
-                </div>
-                <div class="post_t_div">
-                  Post Type:
-                  <input type="radio" name="file_type_price" value="Free" class="post_radio">Free
-                  <input type="radio" name="file_type_price" value="Paid" class="post_radio">Paid
-                </div>
-                <div>
-                  <input type="text" name="coins" placeholder="Enter coins for post.." class="coin_fle" id="coin_field">
-                </div>
-              </div>
-              <script>
-                $(document).ready(function() {
-                  $("#coin_field").hide();
-                  // $(".file-upload").hide();
-                  // $(".file_t_div").hide();
-                  // $(".post_t_div").hide();
-                  $('input:radio[name="file_type_price"]').change(function() {
-                    if (this.value == 'Paid') {
-                      $("#coin_field").show();
-                    } else {
-                      $("#coin_field").hide();
-                    }
-                  });
-                  $('.up_med').click(function() {
-                    $(".file-upload").toggle();
-                  });
-                  $("#imgInp").change(function() {
-                    $(".file_t_div").show();
-                  });
-                  $(".fil_radio").change(function() {
-                    $(".post_t_div").show();
-                  });
-                });
-
-                function readURL(input) {
-                  if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function(e) {
-                      $('#blah').attr('src', e.target.result);
-                    }
-
-                    reader.readAsDataURL(input.files[0]);
-                  }
-                }
-
-                $("#imgInp").change(function() {
-                  readURL(this);
-                });
-              </script>
-              <!-- <div class="bor_div"></div> -->
-            </form>
-          </div>
-        </div>
-      <?php } ?>
-
-
-      <p style="padding: 10px;"></p>
-      <div class="row model-items">
-        <?php
-        $log_user_id = $_SESSION["log_user_unique_id"];
-        $count = 1;
-        $sql = "SELECT * FROM model_images WHERE unique_model_id = '" . $rowesdw['unique_id'] . "' Order by id DESC";
-        $result = mysqli_query($con, $sql);
-        if (mysqli_num_rows($result) > 0) {
-          while ($rowes = mysqli_fetch_assoc($result)) {
-            $unique_image_id = $rowes['id'];
-            $stat = "";
-
-            $sql45 = "SELECT * FROM user_purchased_image WHERE file_unique_id = '" . $unique_image_id . "' AND user_unique_id = '" . $log_user_id . "'";
-            $result45 = mysqli_query($con, $sql45);
-            if (mysqli_num_rows($result45) > 0) {
-              $stat = "Purchased";
-            }
-        ?>
-            <?php if ($rowes['img_type_price'] == 'Free') { ?>
-              <div class="col-md-3 col-xs-12 ">
-                <!--my_dvf-->
-                <div class="model-item-li">
-                  <?php if ($rowes['file_type'] == 'Image') { ?>
-                    <div class="main_idv" data-toggle="modal" data-target="#myModal<?php echo $count; ?>">
-                      <img alt="modelss" class="post_img" src="<?= SITEURL . 'ajax/image.php?image=' . $rowes['file']; ?>">
-                    </div>
-                  <?php } else { ?>
-                    <video class="vid_tg" controls data-toggle="modal" data-target="#myModal<?php echo $count; ?>">
-                      <source src="<?= SITEURL . 'ajax/video.php?image=' . $rowes['file']; ?>" type="video/mp4">
-                    </video>
-                  <?php } ?>
-                  <p class="img_desc"><?php echo $rowes['image_text']; ?></p>
-                  <!-- <p style="font-size: 12px;text-align: center;"><span><a href="#" class="share">buy</a> | <a href="#" class="share">like</a> | <a href="#" class="share">share</a> |<a href="#" class="share"> comment </a>| <a href="#" class="share">download</a></span></p> -->
-
-                  <div style="color:white;">
-                    <span>
-                      <button class="btn-primary btn-xs" style="color:white; " onClick="openPostModal(<?= $rowes["id"] ?>)">
-                        <i class="fa fa-comments"></i> Comments</button>
-                      <span id="likebody<?= $rowes["id"] ?>">
-                        <?php
-                        $pid = $rowes["id"];
-
-                        if (!empty($_SESSION["log_user_id"])) {
-                          $uid = $_SESSION["log_user_id"];
-                        } else {
-                          $uid = 0;
-                        }
-
-                        $onclick = 'onclick="like( ' . $pid . ' ,' . $uid . ' )"';
-                        $qurdd = mysqli_query($con, "select * from postlike where pid='$pid' and uid='$uid'");
-                        $userLiketxt = '';
-                        if (mysqli_num_rows($qurdd) > 0) {
-                          $onclick = 'readonly';
-                          $userLiketxt = 'You & ';
-                        }
-                        ?>
-                        <button class="btn-primary btn-xs" style="color:white; " <?= $onclick ?>>
-                          <i class="fa fa-thumbs-up" style="<?= $onclick == 'readonly' ? 'color:green' : '' ?>"></i> Like
-                        </button>
-                        <button class="btn-primary btn-xs" onclick="share()"><i class="fa fa-share"></i> Share</button>
-                      </span>
-                    </span>
-                    <?php
-
-                    $qurlike = mysqli_query($con, "select * from postlike where pid='$pid'");
-                    echo '<span class="user-like-count">' . $userLiketxt . mysqli_num_rows($qurlike) . " Users Liked</span>";
-
-                    ?>
-                  </div>
-
-                </div>
-                <!-- Modal -->
-                <div id="myModal<?php echo $count; ?>" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
-                    <div class="modal-content" style="border-radius: 20px;">
-                      <div class="modal-body">
-                        <button type="button" class="close close_stle" data-dismiss="modal">&times;</button>
-                        <div class="row">
-                          <div class="col-md-6"><img alt="modelss" class="full_img" src="<?= SITEURL . 'ajax/image.php?image=' . $rowes['file']; ?>"></div>
-                          <div class="col-md-6">
-                            <div class="usern model-prof">
-                              <a title="" href="single-model.php?model=<?php echo $rowesdw['username']; ?>&m_id=<?php echo $rowesdw['id']; ?>&m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
-                                <figure class="user_profile">
-                                  <img alt="modelss" class="profil_img" src="<?php echo $rowesdw['profile_pic'] ?>">
-                                </figure>
-                                <span><?php echo $rowesdw['username']; ?></span>
-                              </a>
-                            </div>
-                            <hr>
-                            <p><?php echo $rowes['image_text'] ?></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--modal-->
-              </div>
-            <?php } else if ($rowes['img_type_price'] == 'Paid') { ?>
-              <div class="col-md-3 col-xs-12 ">
-                <!--my_dvf-->
-                <div class="model-item-li">
-
-                  <?php if ($rowes['file_type'] == 'Image') { ?>
-
-                    <?php if ($stat == "Purchased") { ?>
-                      <div class="main_idv" data-toggle="modal" data-target="#myModal<?php echo $count; ?>">
-                        <img alt="modelss" class="post_img" src="<?= SITEURL . 'ajax/image.php?image=' . $rowes['file']; ?>">
-                      </div>
-                    <?php } else { ?>
-                      <div class="mn-dv-img">
-                        <form method="post" action="file-process.php">
-                          <input type="hidden" name="file_id" value="<?php echo $rowes['id']; ?>">
-                          <input type="hidden" name="user_id" value="<?php echo $_SESSION["log_user_unique_id"]; ?>">
-                          <input type="hidden" name="coins" value="<?php echo $rowes["coins"]; ?>">
-                          <input type="hidden" name="file_type" value="<?php echo $rowes['file_type']; ?>">
-                          <input type="hidden" name="m_unique_id" value="<?php echo $_GET['m_unique_id']; ?>">
-                          <input type="hidden" name="m_id" value="<?php echo $_GET['m_id']; ?>">
-                          <input type="hidden" name="model_id" value="<?php echo $rowesdw['id']; ?>">
-
-                          <input type="hidden" name="model" value="<?php echo $_GET['model']; ?>">
-                          <img alt="modelss" style="filter: blur(10px);" class="post_img" src="<?= SITEURL . 'ajax/image.php?image=' . $rowes['file']; ?>">
-                          <div class="main-uper-div-img">
-                            <i class="fa fa-image icn-img"></i>
-                            <div class="pay-btn">
-                              <button class="mybtn" type="submit" name="submit">
-                                <i class="fa fa-database coin_icon" aria-hidden="true"></i>&nbsp;<?php echo $rowes["coins"]; ?>
-                              </button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    <?php } ?>
-
-                  <?php } else { ?>
-
-                    <?php if ($stat == "Purchased") { ?>
-
-                      <video class="vid_tg" controls data-toggle="modal" data-target="#myModal<?php echo $count; ?>">
-                        <source src="<?= SITEURL . 'ajax/video.php?image=' . $rowes['file']; ?>" type="video/mp4">
-                      </video>
-
-                    <?php } else { ?>
-
-                      <div class="mn-dv-vdo">
-                        <form method="post" action="file-process.php">
-                          <input type="hidden" name="file_id" value="<?php echo $rowes['id']; ?>">
-                          <input type="hidden" name="user_id" value="<?php echo $_SESSION["log_user_unique_id"]; ?>">
-                          <input type="hidden" name="coins" value="<?php echo $rowes["coins"]; ?>">
-                          <input type="hidden" name="file_type" value="<?php echo $rowes['file_type']; ?>">
-                          <input type="hidden" name="m_unique_id" value="<?php echo $_GET['m_unique_id']; ?>">
-                          <input type="hidden" name="m_id" value="<?php echo $_GET['m_id']; ?>">
-                          <input type="hidden" name="model" value="<?php echo $_GET['model']; ?>">
-                          <input type="hidden" name="model_id" value="<?php echo $rowesdw['id']; ?>">
-
-                          <video class="paid-video vid_tg" controls poster="assets/images/unnamed.jpg" style="filter: blur(14px);">
-                            <source src="<?= SITEURL . 'ajax/video.php?image=' . $rowes['file']; ?>" type="video/mp4">
-                          </video>
-                          <div class="main-uper-div-vdo">
-                            <i class="fa fa-play icn-vdo"></i>
-                            <div class="pay-btn">
-                              <button class="mybtn" type="submit" name="submit">
-                                <i class="fa fa-database coin_icon" aria-hidden="true"></i>&nbsp;<?php echo $rowes["coins"]; ?>
-                              </button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    <?php } ?>
-
-                  <?php } ?>
-                  <p class="img_desc"><?php echo $rowes['image_text']; ?></p>
-                  <div style="color:white;">
-                    <span>
-                      <button class="btn-primary btn-xs" style="color:white; " onClick="openPostModal(<?= $rowes["id"] ?>)">
-                        <i class="fa fa-comments"></i> Comments</button>
-                      <span id="likebody<?= $rowes["id"] ?>">
-                        <?php
-                        $pid = $rowes["id"];
-
-                        if (!empty($_SESSION["log_user_id"])) {
-                          $uid = $_SESSION["log_user_id"];
-                        } else {
-                          $uid = 0;
-                        }
-
-                        $onclick = 'onclick="like( ' . $pid . ' ,' . $uid . ' )"';
-                        $qurdd = mysqli_query($con, "select * from postlike where pid='$pid' and uid='$uid'");
-                        $userLiketxt = '';
-                        if (mysqli_num_rows($qurdd) > 0) {
-                          $onclick = 'readonly';
-                          $userLiketxt = 'You & ';
-                        }
-                        ?>
-                        <button class="btn-primary btn-xs" style="color:white; " <?= $onclick ?>>
-                          <i class="fa fa-thumbs-up" style="<?= $onclick == 'readonly' ? 'color:green' : '' ?>"></i> Like
-                        </button>
-                        <button class="btn-primary btn-xs" onclick="share()"><i class="fa fa-share"></i> Share</button>
-                      </span>
-                    </span>
-                    <?php
-
-                    $qurlike = mysqli_query($con, "select * from postlike where pid='$pid'");
-                    echo '<span class="user-like-count">' . $userLiketxt . mysqli_num_rows($qurlike) . " Users Liked</span>";
-
-                    ?>
-                  </div>
-                </div>
-
-                <!-- Modal -->
-                <div id="myModal<?php echo $count; ?>" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
-                    <div class="modal-content" style="border-radius: 20px;">
-                      <div class="modal-body">
-                        <button type="button" class="close close_stle" data-dismiss="modal">&times;</button>
-                        <div class="row">
-                          <div class="col-md-6"><img src="<?php echo $rowes['file']; ?>" alt="modelss" class="full_img" /></div>
-                          <div class="col-md-6">
-                            <div class="usern model-prof">
-                              <a title="" href="single.php?model=<?php echo $rowesdw['username']; ?>&m_id=<?php echo $rowesdw['id']; ?>&m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
-                                <figure class="user_profile">
-                                  <img alt="modelss" class="profil_img" src="<?php echo $rowesdw['profile_pic'] ?>">
-                                </figure>
-                                <span><?php echo $rowesdw['username']; ?></span>
-                              </a>
-                            </div>
-                            <hr>
-                            <p><?php echo $rowes['image_text'] ?></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div><!-- Modal -->
-
-              </div>
-
-            <?php } ?>
-        <?php
-            $count++;
-          }
-        } else {
-          echo "<center><h3>This Model Does not have post.</h3></center>";
-        }
-        ?>
-      </div>
-    </div>
+	
+	
   <?php
   } else {
     echo "No Record Found";
   }
   ?>
-  <div id="myModal_v_sf" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content" style="border-radius: 20px;">
-        <div class="modal-body">
-          <button type="button" class="close close_stle" data-dismiss="modal">&times;</button>
-          <p class="tab_head">Profile: </p>
-          <?php
-          $sql_d = "SELECT * FROM model_extra_details WHERE unique_model_id = '" . $_GET['m_unique_id'] . "'";
-          $result_d = mysqli_query($con, $sql_d);
-          if (mysqli_num_rows($result_d) > 0) {
-            $row_d = mysqli_fetch_assoc($result_d);
-          ?>
-            <table class="table">
-              <p style="font-size: 16px;font-weight: bold;padding-left: 30px;">Figure and Stats:</p>
-              <tr>
-                <td>Bust size</td>
-                <td><?php echo $row_d['bust_size']; ?></td>
-              </tr>
-              <tr>
-                <td>Cup size</td>
-                <td><?php echo $row_d['cup_size']; ?></td>
-              </tr>
-              <tr>
-                <td>Waist size</td>
-                <td><?php echo $row_d['waist_size']; ?></td>
-              </tr>
-              <tr>
-                <td>Ethnicity</td>
-                <td><?php echo $row_d['ethnicity']; ?></td>
-              </tr>
-              <tr>
-                <td>Height</td>
-                <td><?php echo $row_d['height']; ?></td>
-              </tr>
-              <tr>
-                <td>Weight</td>
-                <td><?php echo $row_d['weight']; ?></td>
-              </tr>
-              <tr>
-                <td>Eye color</td>
-                <td><?php echo $row_d['eye_color']; ?></td>
-              </tr>
-              <tr>
-                <td>Hair color</td>
-                <td><?php echo $row_d['hair_color']; ?></td>
-              </tr>
-            </table>
-          <?php } else { ?>
-            <p style="padding-left: 20px;">No Details Found.</p>
-          <?php } ?>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="myModal_v_faci" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content" style="border-radius: 20px;">
-        <div class="modal-body" style="padding: 15px;">
-          <button type="button" class="close close_stle" data-dismiss="modal">&times;</button>
-          <p style="font-size: 16px;font-weight: bold;padding-left: 10px;">Other Facilities:</p>
-          <?php
-          $sql_d = "SELECT * FROM model_extra_details WHERE unique_model_id = '" . $_GET['m_unique_id'] . "'";
-          $result_d = mysqli_query($con, $sql_d);
-          if (mysqli_num_rows($result_d) > 0) {
-            $row_d = mysqli_fetch_assoc($result_d);
-          ?>
-            <table class="table">
-              <?php if ($row_d['live_cam'] == 'Yes') { ?>
-                <tr>
-                  <td><img alt="modelss" style="width: 28px;" src="assets/images/facility-icon/live.png">&nbsp;&nbsp;Live cam</td>
-                  <td class="book"><a href="#" onclick="alert('Please Use Profile Page option for book call.')" class="fancy_button">Book Now</a></td>
-                </tr>
-              <?php } ?>
-              <?php if ($row_d['group_show'] == 'Yes') { ?>
-                <tr>
-                  <td><img alt="modelss" style="width: 28px;" src="assets/images/facility-icon/group.png">&nbsp;&nbsp;Group Show</td>
-                  <td><a href="booking-forms/group-show.php?model=<?php echo $movel_name; ?>&m_id=<?php echo $_GET['m_unique_id']; ?>" class="fancy_button">Book Now</a></td>
-                </tr>
-              <?php } ?>
-              <?php if ($row_d['work_escort'] == 'Yes') { ?>
-                <tr>
-                  <td><img alt="modelss" style="width: 28px;" src="assets/images/facility-icon/girl.png">&nbsp;&nbsp;Dating assignments</td>
-                  <td><a href="booking-forms/as-an-escorts.php?model=<?php echo $movel_name; ?>&m_id=<?php echo $_GET['m_unique_id']; ?>" class="fancy_button">Book Now</a></td>
-                </tr>
-              <?php } ?>
-              <?php if ($row_d['International_tours'] == 'Yes') { ?>
-                <tr>
-                  <td><img alt="modelss" style="width: 28px;" src="assets/images/facility-icon/earth-globe.png">&nbsp;&nbsp;International Tours</td>
-                  <td><a href="booking-forms/international-tour.php?model=<?php echo $movel_name; ?>&m_id=<?php echo $_GET['m_unique_id']; ?>" class="fancy_button">Book Now</a></td>
-                </tr>
-              <?php } ?>
-              <tr>
-                <td><img alt="modelss" style="width: 28px;" src="assets/images/facility-icon/film.png">&nbsp;&nbsp;Selling Video's & Picture's</td>
-                <td><a href="https://thelivemodels.com/single-profile.php?m_unique_id=<?php echo $_SESSION["log_user_unique_id"]; ?>" class="fancy_button">View Now</a></td>
-              </tr>
-              <?php if ($row_d['modeling_porn_assignment'] == 'Yes') { ?>
-                <tr>
-                  <td><img alt="modelss" style="width: 28px;" src="assets/images/facility-icon/porn.png">&nbsp;&nbsp;Modeling/Movie Assignment's?</td>
-                  <td><a href="booking-forms/modeling-movie-assignment.php?model=<?php echo $movel_name; ?>&m_id=<?php echo $_GET['m_unique_id']; ?>" class="fancy_button">Book Now</a></td>
-                </tr>
-              <?php } ?>
-            </table>
-          <?php } else { ?>
-            <p style="padding-left: 20px;">The model is not offering any services at the moment.
-            </p>
-            <div style="padding: 10px;">
-              <a href="#" class="fancy_button">Request Services</a>
-            </div>
-          <?php } ?>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="all_access" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content" style="border-radius: 20px;">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 style="color: grey;" class="modal-title">Confirmation</h4>
-        </div>
-        <div class="modal-body" style="padding: 15px;">
-          <?php if (!$_SESSION["log_user"]) { ?>
-            <h4 style="color: grey;">You need to login/register first. Going to login...</h4>
-            <a style="transition: 1s ease;" class="btn btn-default" href="login.php">Login</a>
-          <?php } else { ?>
-            <h5 style="color: grey;">Are you sure to continue. Once you have click then the amount will be deducted from your account and your 30 day's counted from today. If you agree please click on pay and continue.</h5>
-            <a class="btn btn-default" href="all-access-processing.php?model_id=<?php echo $_GET['m_unique_id']; ?>&user_id=<?php echo $_SESSION['log_user_unique_id']; ?>&action=all_access" style="transition: 1s ease;">Pay and Continue</a>
-          <?php } ?>
-          <!-- <table class="table">
-              <tr>
-                <td><img alt="modelss" style="width: 28px;" src="assets/images/facility-icon/film.png">&nbsp;&nbsp;Selling Video's & Picture's</td>
-                <td><a href="https://thelivemodels.com/single-profile.php?m_unique_id=<?php echo $_SESSION["log_user_unique_id"]; ?>" class="fancy_button">View Now</a></td>
-              </tr>
-            </table> -->
-        </div>
-      </div>
-    </div>
-  </div>
+  
+  
+  
+  
   <?php include('includes/footer.php'); ?>
-  <script>
-    $(document).ready(function() {
-      $(".angle_dwn").show();
-      $(".angle_up").hide();
-      $("#mol-des").hide();
-      $(".angle_dwn").click(function() {
-        $(".angle_up").show();
-        $(".angle_dwn").hide();
-        $("#mol-des").show();
-      });
-      $(".angle_up").click(function() {
-        $(".angle_dwn").show();
-        $(".angle_up").hide();
-        $("#mol-des").hide();
-      });
-    });
-  </script>
-  <script>
-    $(function() {
-      $(".i_inverse").click(function() {
-        $(".i_inverse,.s_inverse").toggleClass("press", 1000);
-        var model_id = $('#model_id').val();
-        var user_id = $('#user_id').val();
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-        if (model_id != "" && user_id != "") {
-          $.ajax({
-            url: "unfollow_model.php",
-            type: "POST",
-            data: {
-              model_id: model_id,
-              user_id: user_id
-            },
-            cache: false,
-            success: function(dataResult) {
-              var dataResult = JSON.parse(dataResult);
-              if (dataResult.statusCode == 2000) {
-                //$("#btn-inverse").removeAttr("disabled");
-                //$('#fupForm').find('input:text').val('');
-                //$("#success").show();
-                //$('#success').html('Model Unfollow successfully !'); 
-                location.reload();
-                $("#flow").show();
-                $("#unflow").hide();
-              } else if (dataResult.statusCode == 2001) {
-                alert("Error occured !");
-              }
+    <script>
+
+        $(document).ready(function () {
+
+            $('#createPostForm').on('submit', function (e) {
+                e.preventDefault();
+
+                var formData = new FormData(this); 
+
+                $.ajax({
+                    url: 'savepost.php', 
+                    type: 'POST',
+                    data: formData,
+                    contentType: false, 
+                    processData: false, 
+                    success: function (response) {
+                        alert("Post submitted successfully!");
+                        console.log(response);
+                        $('#createPostForm')[0].reset();
+                    },
+                    error: function (xhr) {
+                        alert("An error occurred while submitting the post.");
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+
+        // Initialize Modal Functions
+   document.addEventListener('DOMContentLoaded', function() {
+    // More Actions Dropdown
+    const moreActionsBtn = document.getElementById('moreActionsBtn');
+    const moreActions = document.getElementById('moreActions');
+    
+    if (moreActionsBtn && moreActions) {
+        moreActionsBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            moreActions.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (!moreActions.contains(e.target)) {
+                moreActions.classList.remove('active');
             }
-          });
-        } else {
-          alert('Please fill all the field !');
+        });
+    }
+    
+    // Modal Functions
+    function openModal(modalId) {
+        const modalOverlay = document.getElementById(modalId);
+        if (modalOverlay) {
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-      });
-      $(".i_main").click(function() {
-        $(".i_main,.s_main").toggleClass("press", 1000);
-
-        $("#i_main").css('color', '#e54720');
-        var model_id = $('#model_id').val();
-        var user_id = $('#user_id').val();
-
-        if (model_id != "" && user_id != "") {
-          $.ajax({
-            url: "follow_model.php",
-            type: "POST",
-            data: {
-              model_id: model_id,
-              user_id: user_id
-            },
-            cache: false,
-            success: function(dataResult) {
-              var dataResult = JSON.parse(dataResult);
-              if (dataResult.statusCode == 200) {
-                //$("#btn").removeAttr("disabled");
-                //$('#fupForm').find('input:text').val('');
-                //$("#success").show();
-                //$('#success').html('Model Follow successfully !');  
-                location.reload();
-                $("#flow").hide();
-                $("#unflow").show();
-              } else if (dataResult.statusCode == 201) {
-                alert("Error occured !");
-              }
-            }
-          });
-        } else {
-          alert('Please fill all the field !');
+    }
+    
+    function closeModal(modalId) {
+        const modalOverlay = document.getElementById(modalId);
+        if (modalOverlay) {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
-      });
-    });
-  </script>
-  <div class="modal fade" id="myModadp" role="dialog">
-    <div class="modal-dialog">
-
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Change Banner image</h4>
-        </div>
-        <div class="modal-body">
-          <form method="post" enctype="multipart/form-data" action="act-single-profile.php" style="padding: 20px;">
-            <?php $log_user_id = $_SESSION["log_user_unique_id"]; ?>
-            <input type="hidden" name="u_id" value="<?php echo $log_user_id; ?>">
-            <input type="hidden" name="get_path" value="1">
-            <label>Banner Image</label>
-            <input type="file" name="banner_pic">
-            <input type="submit" class="fancy_button" name="submit_pic" value="upload image" style="margin-top: 20px;">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="modal fade" id="myModapp" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Change Profile picture</h4>
-        </div>
-        <div class="modal-body">
-          <form method="post" enctype="multipart/form-data" action="act-single-profile.php" style="padding: 20px;">
-            <?php $log_user_id = $_SESSION["log_user_unique_id"]; ?>
-            <input type="hidden" name="u_id" value="<?php echo $log_user_id; ?>">
-            <input type="hidden" name="get_path" value="1">
-            <label>Profile Image</label>
-            <input type="file" name="profile_img">
-            <input type="submit" class="fancy_button" name="submit_profile_pic" value="upload image" style="margin-top: 20px;">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="modal fade" id="myModalinsta" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Instagram Call</h4>
-        </div>
-        <div class="modal-body">
-          <?php
-          if ($error == 'login') {
-          ?>
-            <center>
-              <h4>Please Login First!!</h4>
-            </center>
-          <?php
-          } else if ($error == 'empty') {
-          ?>
-            <center>
-              <h4>Please fill your social media link!!</h4>
-            </center>
-          <?php
-          } else {
-            $sql_fwa = "SELECT * FROM model_extra_details WHERE unique_model_id = '" . $_SESSION["log_user_unique_id"] . "'";
-            $result_fwa = mysqli_query($con, $sql_fwa);
-            if (mysqli_num_rows($result_fwa) > 0) {
-              $row_fwa = mysqli_fetch_assoc($result_fwa);
-              $insta_coins = $row_fwa['insta_tokens'];
-            }
-          ?>
-            <center>
-              <h4>ADD CALL ON INSTA</h4>
-              <p><i class="fas fa-coins" style="font-size:15px;color:gold" aria-hidden="true"></i><?php echo $insta_coins; ?>.</p>
-              <ul class="mmInstaList" style="list-style-type: none;">
-                <li>1 time Private Video Call(10 mins)</li>
-                <li>Please allow 4-6 hours for activation</li>
-              </ul>
-              <form method="post" enctype="multipart/form-data" action="act-insta_call.php" style="padding: 20px;">
-                <input type="hidden" name="u_id" value="<?php echo $_SESSION["log_user_unique_id"]; ?>">
-                <input type="hidden" name="m_unique_id" value="<?php echo $_GET["m_unique_id"]; ?>">
-                <input type="hidden" name="coins" value="<?php echo $insta_coins; ?>">
-                <input type="text" name="i_username" placeholder="Instagram Username" style="padding: 6px;width: 70%;">
-                <br>
-                <input type="email" name="i_email" placeholder="Email Address" style="padding: 6px;width: 70%;margin-top: 10px;">
-                <br>
-                <input type="submit" class="fancy_button" name="submit_insta_call" value="Add Call" style="margin-top: 20px;padding: 5px 15px;">
-              </form>
-            </center>
-          <?php
-          }
-
-          ?>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="myModalsnap" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Snapchat call</h4>
-        </div>
-        <div class="modal-body">
-          <?php
-          if ($error == 'login') {
-          ?>
-            <center>
-              <h4>Please Login First!!</h4>
-            </center>
-          <?php
-          } else if ($error == 'empty') {
-          ?>
-            <center>
-              <h4>Please fill your social media link!!</h4>
-            </center>
-          <?php
-          } else {
-            $sql_fwa = "SELECT * FROM model_extra_details WHERE unique_model_id = '" . $_SESSION["log_user_unique_id"] . "'";
-            $result_fwa = mysqli_query($con, $sql_fwa);
-            if (mysqli_num_rows($result_fwa) > 0) {
-              $row_fwa = mysqli_fetch_assoc($result_fwa);
-              $snap_coins = $row_fwa['snap_tokens'];
-            }
-          ?>
-            <center>
-              <h4>ADD CALL ON SNAP</h4>
-              <p><i class="fas fa-coins" style="font-size:15px;color:gold" aria-hidden="true"></i><?php echo $snap_coins; ?>.</p>
-              <ul class="mmInstaList" style="list-style-type: none;">
-                <li>1 time Private Video Call(10 mins)</li>
-                <li>Please allow 4-6 hours for activation</li>
-              </ul>
-              <form method="post" enctype="multipart/form-data" action="act-insta_call.php" style="padding: 20px;">
-                <input type="hidden" name="u_id" value="<?php echo $_SESSION["log_user_unique_id"]; ?>">
-                <input type="hidden" name="m_unique_id" value="<?php echo $_GET["m_unique_id"]; ?>">
-                <input type="hidden" name="coins" value="<?php echo $snap_coins; ?>">
-                <input type="text" name="s_username" placeholder="Snapchat Username" style="padding: 6px;width: 70%;">
-                <input type="email" name="s_email" placeholder="Email Address" style="padding: 6px;width: 70%;margin-top: 10px;">
-                <br>
-                <input type="submit" class="fancy_button" name="submit_snap_call" value="Add Call" style="margin-top: 20px;padding: 5px 15px;">
-              </form>
-            </center>
-          <?php
-          }
-          ?>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- header.php included get following data -->
-
-
-  <!-- upload-story -->
-  <div class="modal fade" id="upload-story-modal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Upload Story</h4>
-        </div>
-        <div class="modal-body">
-          <form method="post" enctype="multipart/form-data" action="act-upload-story.php" style="padding: 20px;">
-            <textarea name="message" class="form-control mb-2" placeholder="Write message (optional)"></textarea>
-            <div class="fileinput fileinput-new" data-provides="fileinput">
-              <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
-                <img src="<?= SITEURL . 'assets/images/no-image.gif' ?>" />
-              </div>
-              <div>
-                <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
-                  <input type="file" name="image_1" value="" class="form-control" required /></span>
-                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-              </div>
-            </div>
-            <br>
-
-            <input type="submit" class="fancy_button" name="submit_profile_pic" value="Upload" style="margin-top: 20px;">
-          </form>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <!-- end-upload-story -->
-
-
-  <!-- The Modal -->
-
-
-  <div id="post-modal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content" style="border-radius: 20px;">
-        <div class="modal-body">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="<?= SITEURL ?>assets/plugins/jquery.validate.js"></script>
-  <script>
-    function openPostModal(id) {
-      $('#post-modal').modal();
-      ajaxPostModal(id);
+    }
+    
+    // About Modal
+    const aboutBtn = document.getElementById('aboutBtn');
+    const closeAboutModal = document.getElementById('closeAboutModal');
+    
+    if (aboutBtn) {
+        aboutBtn.addEventListener('click', function() {
+            openModal('aboutModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeAboutModal) {
+        closeAboutModal.addEventListener('click', function() {
+            closeModal('aboutModalOverlay');
+        });
+    }
+    
+    // Services Modal
+    const servicesBtn = document.getElementById('servicesBtn');
+    const closeServicesModal = document.getElementById('closeServicesModal');
+    
+    if (servicesBtn) {
+        servicesBtn.addEventListener('click', function() {
+            openModal('servicesModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeServicesModal) {
+        closeServicesModal.addEventListener('click', function() {
+            closeModal('servicesModalOverlay');
+        });
+    }
+    
+    // Subscription Modal
+    const subscribeBtn = document.getElementById('subscribeBtn');
+    const closeSubscriptionModal = document.getElementById('closeSubscriptionModal');
+    
+    if (subscribeBtn) {
+        subscribeBtn.addEventListener('click', function() {
+            openModal('subscriptionModalOverlay');
+        });
+    }
+    
+    if (closeSubscriptionModal) {
+        closeSubscriptionModal.addEventListener('click', function() {
+            closeModal('subscriptionModalOverlay');
+        });
+    }
+    
+    // Gift Modal
+    const giftBtn = document.getElementById('giftBtn');
+    const closeGiftModal = document.getElementById('closeGiftModal');
+    
+    if (giftBtn) {
+        giftBtn.addEventListener('click', function() {
+            openModal('giftModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeGiftModal) {
+        closeGiftModal.addEventListener('click', function() {
+            closeModal('giftModalOverlay');
+        });
+    }
+    
+    // Tip Modal
+    const tipBtn = document.getElementById('tipBtn');
+    const closeTipModal = document.getElementById('closeTipModal');
+    
+    if (tipBtn) {
+        tipBtn.addEventListener('click', function() {
+            openModal('tipModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeTipModal) {
+        closeTipModal.addEventListener('click', function() {
+            closeModal('tipModalOverlay');
+        });
+    }
+    
+    // Wishlist Modal
+    const wishlistBtn = document.getElementById('wishlistBtn');
+    const closeWishlistModal = document.getElementById('closeWishlistModal');
+    
+    if (wishlistBtn) {
+        wishlistBtn.addEventListener('click', function() {
+            openModal('wishlistModalOverlay');
+            moreActions.classList.remove('active');
+        });
+    }
+    
+    if (closeWishlistModal) {
+        closeWishlistModal.addEventListener('click', function() {
+            closeModal('wishlistModalOverlay');
+        });
     }
 
-    function ajaxPostModal(id) {
-      $('#post-modal .modal-body').html('<div class="text-center">Loading..</div>');
-      $.ajax({
-        type: 'GET',
-        url: "<?php echo SITEURL . 'modalprofile/ajax_comment.php' ?>",
-        data: {
-          id: id
-        },
-        dataType: 'json',
-        success: function(response) {
-          $('#post-modal .modal-body').html('<button type="button" class="close close_stle" data-dismiss="modal">&times;</button>' + response.html);
-        }
-      });
 
+   
+
+
+    // Wishlist Modal
+    const allLinkBtn = document.getElementById('allLinkBtn');
+    const closeAllLinkModal = document.getElementById('closeAllLinkModal');
+    
+    if (allLinkBtn) {
+        allLinkBtn.addEventListener('click', function() {
+            openModal('allLinkModalOverlay');
+            moreActions.classList.remove('active');
+        });
     }
-  </script>
+    
+    if (closeAllLinkModal) {
+        closeAllLinkModal.addEventListener('click', function() {
+            closeModal('allLinkModalOverlay');
+        });
+    }
 
-  <?php
-  include('comman_file/profile-story.php');
-  ?>
+
+
+
+
+
+
+
+    
+    // Close modals when clicking outside
+    const modalOverlays = document.querySelectorAll('.modal-overlay');
+    modalOverlays.forEach(overlay => {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+  
+    });
+
+
+
+
+
+
+
+
+    
+    // Initialize Tabs
+    const tabs = document.querySelectorAll('.tab');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            tabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Here you would typically show/hide content based on the selected tab
+            const tabType = this.getAttribute('data-tab');
+            console.log(`Selected tab: ${tabType}`);
+        });
+    });
+
+
+
+
+
+
+
+
+    
+    
+    // Initialize Gift Items
+    const giftItems = document.querySelectorAll('.gift-item');
+    
+    giftItems.forEach(item => {
+        item.addEventListener('click', function() {
+            giftItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+    
+    // Initialize Tip Options
+    const tipOptions = document.querySelectorAll('.tip-option');
+    
+    tipOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            tipOptions.forEach(o => o.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+
+
+
+
+    
+    // Initialize Follow Button
+    const followBtn = document.getElementById('followBtn');
+    let isFollowing = false;
+    
+    if (followBtn) {
+        followBtn.addEventListener('click', function() {
+            if (isFollowing) {
+                followBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    Follow
+                `;
+            } else {
+                followBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    Unfollow
+                `;
+            }
+            
+            isFollowing = !isFollowing;
+        });
+    }
+    
+    // Initialize Unlock Buttons
+    const unlockBtns = document.querySelectorAll('.unlock-btn');
+    
+    unlockBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const contentItem = this.closest('.content-item');
+            const tokenOverlay = contentItem.querySelector('.token-overlay');
+            const tokens = tokenOverlay.textContent.split(' ')[0];
+            
+            const confirmed = confirm(`Do you want to unlock this content for ${tokens} tokens?`);
+            if (confirmed) {
+                alert(`Content unlocked successfully! ${tokens} tokens have been deducted from your account.`);
+                
+                // Remove blur and unlock button
+                contentItem.classList.remove('paid-content');
+                this.style.display = 'none';
+                tokenOverlay.style.display = 'none';
+            }
+        });
+    });
+    
+    // Initialize Post Type Radio Buttons
+    const postTypeRadios = document.querySelectorAll('input[name="post-type"]');
+    const tokenInput = document.getElementById('tokenInput');
+    
+    if (tokenInput) {
+        tokenInput.disabled = true;
+    }
+    
+    postTypeRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'paid' && tokenInput) {
+                tokenInput.disabled = false;
+                tokenInput.focus();
+            } else if (tokenInput) {
+                tokenInput.disabled = true;
+            }
+        });
+    });
+});
+    </script>
+
+  
 </body>
 
-
-
-<button type="button" class="btn btn-info btn-lg" >Open Small Modal</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="upload-options-model" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Options</h4>
-        </div>
-        <div class="modal-body p-4">
-<?php
-if ($_SESSION["log_user_unique_id"] == $session_id) { 
-?>
-<button type="button" class="fancy_button btn-block mb-1 " data-toggle="modal" data-target="#myModapp">Upload Image</button>
-<button type="button" class="fancy_button btn-block mb-1 " data-toggle="modal" data-target="#upload-story-modal">Upload Story</button>
-
-<?php
-}
-?>
-        </div>
-      </div>
-    </div>
-  </div>
 </html>

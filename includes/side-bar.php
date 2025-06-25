@@ -1,17 +1,19 @@
 <?php 
 if (isset($_SESSION['log_user_id'])) {
 	$log_user_id = $_SESSION['log_user_id'];
-	$get_modal_user = DB::query('select * from model_user where id='.$log_user_id); 
+	$get_modal_user = DB::query('select * from model_user where id='.$log_user_id);
 	if(!empty($get_modal_user[0]['username'])){
 		$modalname = ucfirst($get_modal_user[0]['username']);
 	}else{
 		$modalname = ucfirst($get_modal_user[0]['name']);
 	}
 	$as_a_model = $get_modal_user[0]['as_a_model'];
+	$unique_id = $get_modal_user[0]['unique_id'];
 }else{ 
 	$log_user_id = 0; 
 	$get_modal_user = array(); 
 	$as_a_model = '';
+	$unique_id = '';
 }
 ?>
  <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -53,7 +55,7 @@ if (isset($_SESSION['log_user_id'])) {
       Edit Profile Detail
     </div>
 
-    <div class="menu-item" onclick="navigateTo('user/profile/view.php')">
+    <div class="menu-item" onclick="navigateTo('single-profile.php?m_unique_id=<?php echo $unique_id; ?>')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
       </svg>
