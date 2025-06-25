@@ -16,12 +16,11 @@ if(isset($_SESSION["log_user_id"])){
 	}
 }
 else{
-
-  die('ytetet');
-  
 	echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
 	die;
 }
+
+die('tetete emoji');
 
 $getemojiList = get_data('emoji', array('status' => 1), false);
 $ChatLink  = SITEURL . 'live-chat/';
