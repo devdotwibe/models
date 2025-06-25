@@ -8,11 +8,12 @@ if(isset($_SESSION["log_user_id"])){
 
 	$usern = $_SESSION["log_user"];
 
-  die('rte');
-
 	$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 	if($userDetails){}
 	else{
+
+    die('ooo');
+    
 		echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
 		die;
 	}
