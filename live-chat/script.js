@@ -1,5 +1,5 @@
-// (function( $ ) {
-//     'use strict';
+(function( $ ) {
+    'use strict';
     tlm_check_url();
     $(document).on('click', '#tlm_status_notify', function(){
         let model_id    = $('.str_privatechat_send_btn2').data('model_id');
@@ -503,7 +503,6 @@
         $(document).on('click', '.tlm_chat_top_tab', function(){
 
             console.log('test chat');
-
             $('.tlm_chat_top_tab').removeClass('active');
             $('.tlm_display_chat').attr('style','display:none;');
             // $('.tlm_chat_top_tab').attr('style','border-bottom: none;');
@@ -644,4 +643,4 @@
             });
         }
     }
-// })( jQuery );
+})( jQuery );
