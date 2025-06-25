@@ -2,26 +2,33 @@
 session_start();
 include('../includes/config.php');
 include('../includes/helper.php');
-if ($_SESSION["log_user"]) {
-  $userDetails = get_data('model_user', array('id' => $_SESSION['log_user_id']), true);
-  if (!$userDetails) {
-    echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
-    echo "<script>window.location='" . SITEURL . "/login.php';</script>";
-    die;
-  }
-} else {
-  echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
-  echo "<script>window.location='" . SITEURL . "/login.php';</script>";
-  die;
+
+
+if(isset($_SESSION["log_user_id"])){
+
+	$usern = $_SESSION["log_user"];
+
+	$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+	if($userDetails){}
+	else{
+		echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
+		die;
+	}
+}
+else{
+	echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
+	die;
 }
 
 $getemojiList = get_data('emoji', array('status' => 1), false);
 $ChatLink  = SITEURL . 'live-chat/';
 
 if($_GET['unique_model_id']==''){
+
   echo "<script>window.location='" . SITEURL ."';</script>";
   die;
 }
+
 // die();
 if (isset($_GET['pra']) && $_GET['user'] == 'viewer' && $_GET['private_id'] !='') {
   if ($_GET["unique_model_id"] == $_SESSION['log_user_unique_id']) {
