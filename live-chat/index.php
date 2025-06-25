@@ -20,8 +20,6 @@ else{
 	die;
 }
 
-die('tetete emoji');
-
 $getemojiList = get_data('emoji', array('status' => 1), false);
 $ChatLink  = SITEURL . 'live-chat/';
 
@@ -29,6 +27,9 @@ if($_GET['unique_model_id']==''){
   echo "<script>window.location='" . SITEURL ."';</script>";
   die;
 }
+
+die('tetsttett1');
+
 // die();
 if (isset($_GET['pra']) && $_GET['user'] == 'viewer' && $_GET['private_id'] !='') {
   if ($_GET["unique_model_id"] == $_SESSION['log_user_unique_id']) {
