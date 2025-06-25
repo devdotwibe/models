@@ -1137,7 +1137,7 @@ Please wait...
 
  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-  <!-- <script src="<?= 'assest/script.js?v=' . time() ?>"></script> -->
+  <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
 
   <!-- <script src="<?= 'script.js?v=' . time() ?>"></script> -->
 

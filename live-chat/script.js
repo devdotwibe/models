@@ -2,7 +2,7 @@
     'use strict';
 
     console.log("script.js loaded");
-    
+
     tlm_check_url();
     $(document).on('click', '#tlm_status_notify', function(){
         let model_id    = $('.str_privatechat_send_btn2').data('model_id');
@@ -49,8 +49,8 @@
 
   connection.socketURL = '/';
 
-//  connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
-  connection.socketURL = 'http://muazkhan.com:9001/';
+ connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+//   connection.socketURL = 'http://muazkhan.com:9001/';
   
 
   connection.socketMessageEvent = 'video-broadcast-demo';
