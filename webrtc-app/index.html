@@ -1,108 +1,135 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Live Broadcast</title>
+  <title>WebRTC Broadcast</title>
 </head>
 <body>
   <h2>WebRTC Live Broadcast</h2>
   <button onclick="startBroadcast()">Start Broadcast</button>
-  <button onclick="watchBroadcast()">Watch Broadcast</button>
+  <button onclick="startViewer()">Start Viewer</button>
+
+  <h3>Broadcaster Video:</h3>
   <video id="localVideo" autoplay muted playsinline></video>
+
+  <h3>Viewer Video:</h3>
   <video id="remoteVideo" autoplay playsinline></video>
 
   <script>
     let pc;
+    let viewerId = Math.floor(Math.random() * 100000);
     let localStream;
-    let viewerId = Math.floor(Math.random() * 100000); // unique viewer id
 
-    const config = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+    const config = {
+      iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
+    };
 
     function startBroadcast() {
       navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
         document.getElementById('localVideo').srcObject = stream;
         localStream = stream;
 
-        pollViewers(); // keep checking for viewers
+        // Poll for viewers every second
+        setInterval(pollViewers, 1000);
       });
     }
 
     function pollViewers() {
-      setInterval(() => {
-        fetch('signal.php?action=get_viewers')
-          .then(res => res.json())
-          .then(async (viewers) => {
-            for (let viewer of viewers) {
-              if (!viewer.answer) {
-                pc = new RTCPeerConnection(config);
-                localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
-                pc.onicecandidate = e => {
-                  if (e.candidate) {
-                    fetch('signal.php', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ action: 'ice', viewer, candidate: e.candidate })
-                    });
-                  }
-                };
-                const offer = await pc.createOffer();
-                await pc.setLocalDescription(offer);
+      fetch("signal.php?action=get_viewers")
+        .then(res => res.json())
+        .then(async viewers => {
+          for (const viewerId in viewers) {
+            const v = viewers[viewerId];
+            if (!v.offer && !v.sent) {
+              // Offer not sent yet
+              pc = new RTCPeerConnection(config);
 
-                fetch('signal.php', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ action: 'offer', viewer, offer })
-                });
-              }
+              localStream.getTracks().forEach(track => {
+                pc.addTrack(track, localStream);
+              });
+
+              pc.onicecandidate = e => {
+                if (e.candidate) {
+                  sendSignal("ice", viewerId, e.candidate);
+                }
+              };
+
+              const offer = await pc.createOffer();
+              await pc.setLocalDescription(offer);
+              sendSignal("offer", viewerId, offer);
             }
-          });
-      }, 2000);
+          }
+        });
     }
 
-    function watchBroadcast() {
+    function sendSignal(type, viewerId, data) {
+      fetch("signal.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: type,
+          viewer: viewerId,
+          data: data
+        })
+      });
+    }
+
+    function startViewer() {
       pc = new RTCPeerConnection(config);
 
-      pc.ontrack = (e) => {
+      pc.ontrack = e => {
         document.getElementById('remoteVideo').srcObject = e.streams[0];
       };
 
       pc.onicecandidate = e => {
         if (e.candidate) {
-          fetch('signal.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'ice', viewer: viewerId, candidate: e.candidate })
-          });
+          sendViewerSignal("ice", e.candidate);
         }
       };
 
-      fetch('signal.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'register_viewer', viewer: viewerId })
+      fetch("signal.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "register_viewer",
+          viewer: viewerId
+        })
       });
 
+      // Start polling for offer/ice
       setInterval(async () => {
-        fetch(`signal.php?action=get_offer&viewer=${viewerId}`)
+        fetch("signal.php?action=get_offer&viewer=" + viewerId)
           .then(res => res.json())
-          .then(async data => {
-            if (data.offer && !pc.remoteDescription) {
-              await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
+          .then(async res => {
+            if (res.offer && !pc.remoteDescription) {
+              await pc.setRemoteDescription(new RTCSessionDescription(res.offer));
               const answer = await pc.createAnswer();
               await pc.setLocalDescription(answer);
-              fetch('signal.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action: 'answer', viewer: viewerId, answer })
-              });
+              sendViewerSignal("answer", answer);
             }
 
-            if (data.ice && Array.isArray(data.ice)) {
-              for (let c of data.ice) {
-                await pc.addIceCandidate(c);
+            if (res.ice) {
+              for (let candidate of res.ice) {
+                try {
+                  await pc.addIceCandidate(candidate);
+                } catch (e) {
+                  console.log("ICE error", e);
+                }
               }
             }
           });
-      }, 15000);
+      }, 1000);
+    }
+
+    function sendViewerSignal(type, data) {
+      fetch("signal.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: type,
+          viewer: viewerId,
+          data: data
+        })
+      });
     }
   </script>
 </body>
