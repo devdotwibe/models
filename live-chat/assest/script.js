@@ -26,6 +26,9 @@
             });
         }
     });
+
+        console,log(document.getElementById('room-id').value,'vcxvxcxcxxcxxccxcxc');
+
     document.getElementById('open-room').onclick = function () {
 
         console,log('tesr run');
