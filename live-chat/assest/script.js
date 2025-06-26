@@ -317,11 +317,11 @@
     // })
     var tlm_streamer_length = '';
     setInterval(function () {
-        var arrayOfUserIds = connection.getAllParticipants();
+        // var arrayOfUserIds = connection.getAllParticipants();
         var user = [];
-        connection.getAllParticipants().forEach(function (participantId) {
-            user.push(connection.peers[participantId].extra.user_id);
-        });
+        // connection.getAllParticipants().forEach(function (participantId) {
+        //     user.push(connection.peers[participantId].extra.user_id);
+        // });
         if (user.length > 0) {
             var tlm_user_name = $('#tlm_usere').val();
             var tlm_data = {
