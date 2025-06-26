@@ -29,11 +29,14 @@
 
         console.log(document.getElementById('room-id').value,'vcxvxcxcxxcxxccxcxc');
 
+
+    var connection = new RTCMultiConnection();
+    
     document.getElementById('open-room').onclick = function () {
 
         console.log('tesr run');
         disableInputButtons();
-         console.log('tesr run1');
+         console.log(connection,'tesr run1');
         connection.open(document.getElementById('room-id').value, function () {
              console.log('tesr run2');
             showRoomURL(connection.sessionid);
@@ -53,7 +56,6 @@
         connection.join(document.getElementById('room-id').value);
     };
 
-    var connection = new RTCMultiConnection();
 
     // connection.socketURL = '/';
 
