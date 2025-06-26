@@ -1,56 +1,63 @@
 <?php
-$room = $_GET['room'] ?? '';
-$action = $_GET['action'] ?? '';
-$signalFile = "rooms/$room.txt";
+$file = "rooms/room.json";
 
 if (!file_exists("rooms")) {
     mkdir("rooms", 0777, true);
 }
+if (!file_exists($file)) {
+    file_put_contents($file, json_encode(["viewers" => []]));
+}
 
-// CREATE or POLL
-if ($action === "check") {
-    if (!file_exists($signalFile)) {
-        file_put_contents($signalFile, json_encode([]));
-        echo json_encode(['hasOffer' => false]);
-    } else {
-        $json = json_decode(file_get_contents($signalFile), true);
-        echo json_encode([
-            'hasOffer' => isset($json['offer']),
-            'offer' => $json['offer'] ?? null
-        ]);
-    }
+$data = json_decode(file_get_contents("php://input"), true);
+$action = $_GET['action'] ?? $data['action'] ?? '';
+
+$room = json_decode(file_get_contents($file), true);
+
+// Register a viewer
+if ($action === 'register_viewer') {
+    $viewerId = $data['viewer'];
+    $room['viewers'][$viewerId] = ["offer" => null, "answer" => null, "ice" => []];
+    file_put_contents($file, json_encode($room));
     exit;
 }
 
-if ($action === "poll") {
-    $json = json_decode(file_get_contents($signalFile), true);
+// Get all viewers (for broadcaster)
+if ($action === 'get_viewers') {
+    echo json_encode($room['viewers']);
+    exit;
+}
+
+// Send offer from broadcaster
+if ($action === 'offer') {
+    $viewerId = $data['viewer'];
+    $room['viewers'][$viewerId]['offer'] = $data['offer'];
+    file_put_contents($file, json_encode($room));
+    exit;
+}
+
+// Viewer sends answer
+if ($action === 'answer') {
+    $viewerId = $data['viewer'];
+    $room['viewers'][$viewerId]['answer'] = $data['answer'];
+    file_put_contents($file, json_encode($room));
+    exit;
+}
+
+// ICE candidates
+if ($action === 'ice') {
+    $viewerId = $data['viewer'];
+    $room['viewers'][$viewerId]['ice'][] = $data['candidate'];
+    file_put_contents($file, json_encode($room));
+    exit;
+}
+
+// Viewer gets offer + ICE
+if ($action === 'get_offer') {
+    $viewerId = $_GET['viewer'];
+    $viewer = $room['viewers'][$viewerId] ?? [];
     echo json_encode([
-        'answer' => $json['answer'] ?? null,
-        'ice' => $json['ice'] ?? []
+        'offer' => $viewer['offer'] ?? null,
+        'ice' => $viewer['ice'] ?? []
     ]);
     exit;
-}
-
-// RECEIVE SIGNAL
-$input = json_decode(file_get_contents("php://input"), true);
-if ($input) {
-    $room = $input['room'];
-    $data = $input['data'];
-
-    $signalFile = "rooms/$room.txt";
-    $existing = file_exists($signalFile) ? json_decode(file_get_contents($signalFile), true) : [];
-
-    if ($data['type'] === 'offer') {
-        $existing['offer'] = json_encode($data['offer']);
-    }
-
-    if ($data['type'] === 'answer') {
-        $existing['answer'] = json_encode($data['answer']);
-    }
-
-    if ($data['type'] === 'ice') {
-        $existing['ice'][] = $data['candidate'];
-    }
-
-    file_put_contents($signalFile, json_encode($existing));
 }

@@ -1,93 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WebRTC PHP AJAX</title>
+  <title>Live Broadcast</title>
 </head>
 <body>
-  <h2>Enter Room Name:</h2>
-  <input type="text" id="roomName">
-  <button onclick="start()">Join Room</button>
-
-  <h3>Video Chat</h3>
+  <h2>WebRTC Live Broadcast</h2>
+  <button onclick="startBroadcast()">Start Broadcast</button>
+  <button onclick="watchBroadcast()">Watch Broadcast</button>
   <video id="localVideo" autoplay muted playsinline></video>
   <video id="remoteVideo" autoplay playsinline></video>
 
   <script>
     let pc;
-    let room;
-    let isCaller = false;
-    let remoteReceived = false;
+    let localStream;
+    let viewerId = Math.floor(Math.random() * 100000); // unique viewer id
 
-    const localVideo = document.getElementById('localVideo');
-    const remoteVideo = document.getElementById('remoteVideo');
+    const config = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
 
-    async function start() {
-      room = document.getElementById('roomName').value;
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-      localVideo.srcObject = stream;
+    function startBroadcast() {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        document.getElementById('localVideo').srcObject = stream;
+        localStream = stream;
 
-      pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
-      stream.getTracks().forEach(track => pc.addTrack(track, stream));
+        pollViewers(); // keep checking for viewers
+      });
+    }
 
-      pc.ontrack = e => {
-        remoteVideo.srcObject = e.streams[0];
+    function pollViewers() {
+      setInterval(() => {
+        fetch('signal.php?action=get_viewers')
+          .then(res => res.json())
+          .then(async (viewers) => {
+            for (let viewer of viewers) {
+              if (!viewer.answer) {
+                pc = new RTCPeerConnection(config);
+                localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+                pc.onicecandidate = e => {
+                  if (e.candidate) {
+                    fetch('signal.php', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ action: 'ice', viewer, candidate: e.candidate })
+                    });
+                  }
+                };
+                const offer = await pc.createOffer();
+                await pc.setLocalDescription(offer);
+
+                fetch('signal.php', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ action: 'offer', viewer, offer })
+                });
+              }
+            }
+          });
+      }, 2000);
+    }
+
+    function watchBroadcast() {
+      pc = new RTCPeerConnection(config);
+
+      pc.ontrack = (e) => {
+        document.getElementById('remoteVideo').srcObject = e.streams[0];
       };
 
       pc.onicecandidate = e => {
         if (e.candidate) {
-          sendSignal({ type: "ice", candidate: e.candidate });
+          fetch('signal.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'ice', viewer: viewerId, candidate: e.candidate })
+          });
         }
       };
 
-      checkRoom(); // Check if offer exists or create new one
-      pollSignal(); // Start polling for signal
-    }
-
-    function checkRoom() {
-      fetch(`signal.php?room=${room}&action=check`)
-        .then(res => res.json())
-        .then(async data => {
-          if (data.hasOffer) {
-            // Joiner
-            const offer = JSON.parse(data.offer);
-            await pc.setRemoteDescription(offer);
-            const answer = await pc.createAnswer();
-            await pc.setLocalDescription(answer);
-            sendSignal({ type: "answer", answer });
-          } else {
-            // Caller
-            isCaller = true;
-            const offer = await pc.createOffer();
-            await pc.setLocalDescription(offer);
-            sendSignal({ type: "offer", offer });
-          }
-        });
-    }
-
-    function sendSignal(data) {
       fetch('signal.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ room, data })
+        body: JSON.stringify({ action: 'register_viewer', viewer: viewerId })
       });
-    }
 
-    function pollSignal() {
-      setInterval(() => {
-        fetch(`signal.php?room=${room}&action=poll`)
+      setInterval(async () => {
+        fetch(`signal.php?action=get_offer&viewer=${viewerId}`)
           .then(res => res.json())
           .then(async data => {
-            if (data.answer && isCaller && !remoteReceived) {
-              await pc.setRemoteDescription(JSON.parse(data.answer));
-              remoteReceived = true;
+            if (data.offer && !pc.remoteDescription) {
+              await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
+              const answer = await pc.createAnswer();
+              await pc.setLocalDescription(answer);
+              fetch('signal.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'answer', viewer: viewerId, answer })
+              });
             }
 
-            if (data.ice) {
-              data.ice.forEach(async c => {
-                try {
-                  await pc.addIceCandidate(c);
-                } catch (e) { console.log("ICE Error", e); }
-              });
+            if (data.ice && Array.isArray(data.ice)) {
+              for (let c of data.ice) {
+                await pc.addIceCandidate(c);
+              }
             }
           });
       }, 15000);
