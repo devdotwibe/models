@@ -512,67 +512,67 @@ $lang_list = modal_language_list();
         <p class="text-white/70 text-sm mb-4">Select your interests to help clients find you based on shared hobbies</p>
         <div class="flex flex-wrap gap-2">
           <span class="interest-tag <?php if((!empty($hobbies) && in_array('Travel',$hobbies)) || empty($hobbies)) echo 'selected';  ?>" onclick="toggleInterest(this)">
-			<input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Travel" <?php if((!empty($hobbies) && in_array('Travel',$hobbies)) || empty($hobbies)) echo 'selected';  ?> >Travel
+			<input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Travel" <?php if((!empty($hobbies) && in_array('Travel',$hobbies)) || empty($hobbies)) echo 'checked';  ?> >Travel
 		  </span>
           <span class="interest-tag <?php if((!empty($hobbies) && in_array('Dancing',$hobbies)) || empty($hobbies)) echo 'selected';  ?>" onclick="toggleInterest(this)">
-			<input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Dancing"  <?php if((!empty($hobbies) && in_array('Dancing',$hobbies)) || empty($hobbies)) echo 'selected';  ?> >Dancing
+			<input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Dancing"  <?php if((!empty($hobbies) && in_array('Dancing',$hobbies)) || empty($hobbies)) echo 'checked';  ?> >Dancing
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Photography',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Photography" <?php if(!empty($hobbies) && in_array('Photography',$hobbies)) echo 'selected';  ?> >Photography
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Photography" <?php if(!empty($hobbies) && in_array('Photography',$hobbies)) echo 'checked';  ?> >Photography
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Yoga',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Yoga" <?php if(!empty($hobbies) && in_array('Yoga',$hobbies)) echo 'selected';  ?> >Yoga
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Yoga" <?php if(!empty($hobbies) && in_array('Yoga',$hobbies)) echo 'checked';  ?> >Yoga
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Cooking',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Cooking" <?php if(!empty($hobbies) && in_array('Cooking',$hobbies)) echo 'selected';  ?> >Cooking
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Cooking" <?php if(!empty($hobbies) && in_array('Cooking',$hobbies)) echo 'checked';  ?> >Cooking
 		  </span>
 		  <span class="interest-tag <?php if(!empty($hobbies) && in_array('Music',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Music" <?php if(!empty($hobbies) && in_array('Music',$hobbies)) echo 'selected';  ?> >Music
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Music" <?php if(!empty($hobbies) && in_array('Music',$hobbies)) echo 'checked';  ?> >Music
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Art',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Art" <?php if(!empty($hobbies) && in_array('Art',$hobbies)) echo 'selected';  ?> >Art
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Art" <?php if(!empty($hobbies) && in_array('Art',$hobbies)) echo 'checked';  ?> >Art
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Fitness',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Fitness" <?php if(!empty($hobbies) && in_array('Fitness',$hobbies)) echo 'selected';  ?> >Fitness
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Fitness" <?php if(!empty($hobbies) && in_array('Fitness',$hobbies)) echo 'checked';  ?> >Fitness
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Reading',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Reading" <?php if(!empty($hobbies) && in_array('Reading',$hobbies)) echo 'selected';  ?> >Reading
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Reading" <?php if(!empty($hobbies) && in_array('Reading',$hobbies)) echo 'checked';  ?> >Reading
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Movies',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Movies" <?php if(!empty($hobbies) && in_array('Movies',$hobbies)) echo 'selected';  ?> >Movies
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Movies" <?php if(!empty($hobbies) && in_array('Movies',$hobbies)) echo 'checked';  ?> >Movies
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Gaming',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Gaming" <?php if(!empty($hobbies) && in_array('Gaming',$hobbies)) echo 'selected';  ?> >Gaming
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Gaming" <?php if(!empty($hobbies) && in_array('Gaming',$hobbies)) echo 'checked';  ?> >Gaming
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Fashion',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Fashion" <?php if(!empty($hobbies) && in_array('Fashion',$hobbies)) echo 'selected';  ?> >Fashion
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Fashion" <?php if(!empty($hobbies) && in_array('Fashion',$hobbies)) echo 'checked';  ?> >Fashion
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Wine Tasting',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Wine Tasting" <?php if(!empty($hobbies) && in_array('Wine Tasting',$hobbies)) echo 'selected';  ?> >Wine Tasting
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Wine Tasting" <?php if(!empty($hobbies) && in_array('Wine Tasting',$hobbies)) echo 'checked';  ?> >Wine Tasting
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Hiking',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Hiking" <?php if(!empty($hobbies) && in_array('Hiking',$hobbies)) echo 'selected';  ?> >Hiking
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Hiking" <?php if(!empty($hobbies) && in_array('Hiking',$hobbies)) echo 'checked';  ?> >Hiking
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Beach',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Beach" <?php if(!empty($hobbies) && in_array('Beach',$hobbies)) echo 'selected';  ?> >Beach
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Beach" <?php if(!empty($hobbies) && in_array('Beach',$hobbies)) echo 'checked';  ?> >Beach
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Nightlife',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Nightlife" <?php if(!empty($hobbies) && in_array('Nightlife',$hobbies)) echo 'selected';  ?> >Nightlife
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Nightlife" <?php if(!empty($hobbies) && in_array('Nightlife',$hobbies)) echo 'checked';  ?> >Nightlife
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Sports',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Sports" <?php if(!empty($hobbies) && in_array('Sports',$hobbies)) echo 'selected';  ?> >Sports
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Sports" <?php if(!empty($hobbies) && in_array('Sports',$hobbies)) echo 'checked';  ?> >Sports
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Adventure',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Adventure" <?php if(!empty($hobbies) && in_array('Adventure',$hobbies)) echo 'selected';  ?> >Adventure
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Adventure" <?php if(!empty($hobbies) && in_array('Adventure',$hobbies)) echo 'checked';  ?> >Adventure
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Meditation',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Meditation" <?php if(!empty($hobbies) && in_array('Meditation',$hobbies)) echo 'selected';  ?> >Meditation
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Meditation" <?php if(!empty($hobbies) && in_array('Meditation',$hobbies)) echo 'checked';  ?> >Meditation
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Theater',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Theater" <?php if(!empty($hobbies) && in_array('Theater',$hobbies)) echo 'selected';  ?> >Theater
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Theater" <?php if(!empty($hobbies) && in_array('Theater',$hobbies)) echo 'checked';  ?> >Theater
 		  </span>
           <span class="interest-tag <?php if(!empty($hobbies) && in_array('Shopping',$hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Shopping" <?php if(!empty($hobbies) && in_array('Shopping',$hobbies)) echo 'selected';  ?> >Shopping
+		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Shopping" <?php if(!empty($hobbies) && in_array('Shopping',$hobbies)) echo 'checked';  ?> >Shopping
 		  </span>
         </div>
       </div>
@@ -627,12 +627,19 @@ $lang_list = modal_language_list();
         <button type="button" class="btn-secondary mt-3" onclick="addLanguage()">+ Add Language</button>
 		<?php /*<input type="text" name="lang_count" class="lang_count" id="lang_count" value="<?php echo $lang_count; ?>"> */ ?>
       </div>
+	  
+	  <?php 
+	  $social_list = DB::query('select * from model_social_link where unique_model_id="'.$userDetails['unique_id'].'"  Order by id ASC');
+	  ?>
 
       <!-- Social Links - Enhanced -->
       <div class="form-section lg:col-span-2">
         <h3 class="text-xl font-bold gradient-text mb-6">Social Links & Platforms</h3>
         <p class="text-white/70 text-sm mb-4">Connect your social media accounts and specify if they're free to view or paid content</p>
         <div id="social-links-container">
+		
+		<?php if(empty($social_list)){ ?>
+		
           <!-- Instagram -->
           <div class="social-link-item  instagram">
             <div class="social-icon">
@@ -641,16 +648,18 @@ $lang_list = modal_language_list();
               </svg>
             </div>
             <div class="social-content">
-              <input type="text" class="social-platform-input" value="Instagram" readonly>
-              <input type="url" class="social-url-input" placeholder="https://instagram.com/username" value="https://instagram.com/sophie_model">
+              <input type="text" name="platform[]" class="social-platform-input" value="Instagram" readonly>
+              <input type="url" name="URL[]"  class="social-url-input" placeholder="https://instagram.com/username" value="">
+			  <input type="hidden" name="socialid[]" value="" >
             </div>
             <div class="social-controls">
               <div class="access-toggle">
-                <div class="access-option free active" onclick="toggleAccess(this, 'free')">Free</div>
-                <div class="access-option paid" onclick="toggleAccess(this, 'paid')">Paid</div>
+                <div class="access-option free active" onclick="toggleAccess(this, 'free','insta')">Free</div>
+                <div class="access-option paid" onclick="toggleAccess(this, 'paid','insta')">Paid</div>
+				<input type="hidden" name="status[]" class="insta" value="free">
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" name="public[]" value="yes" checked>
                 <span class="toggle-slider"></span>
               </label>
               <span class="text-xs text-white/60">Public</span>
@@ -665,16 +674,18 @@ $lang_list = modal_language_list();
               </svg>
             </div>
             <div class="social-content">
-              <input type="text" class="social-platform-input" value="Twitter" readonly>
-              <input type="url" class="social-url-input" placeholder="https://twitter.com/username" value="https://twitter.com/sophie_model">
+              <input type="text" name="platform[]" class="social-platform-input" value="Twitter" readonly>
+              <input type="url"  name="URL[]" class="social-url-input" placeholder="https://twitter.com/username" value="">
+			  <input type="hidden" name="socialid[]" value="" >
             </div>
             <div class="social-controls">
               <div class="access-toggle">
-                <div class="access-option free active" onclick="toggleAccess(this, 'free')">Free</div>
-                <div class="access-option paid" onclick="toggleAccess(this, 'paid')">Paid</div>
+                <div class="access-option free active" onclick="toggleAccess(this, 'free','tw')">Free</div>
+                <div class="access-option paid" onclick="toggleAccess(this, 'paid','tw')">Paid</div>
+				<input type="hidden" name="status[]" class="tw" value="free">
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" name="public[]" value="yes" checked>
                 <span class="toggle-slider"></span>
               </label>
               <span class="text-xs text-white/60">Public</span>
@@ -689,16 +700,18 @@ $lang_list = modal_language_list();
               </svg>
             </div>
             <div class="social-content">
-              <input type="text" class="social-platform-input" value="TikTok" readonly>
-              <input type="url" class="social-url-input" placeholder="https://tiktok.com/@username" value="https://tiktok.com/@sophie_model">
+              <input type="text" name="platform[]" class="social-platform-input" value="TikTok" readonly>
+              <input type="url" name="URL[]" class="social-url-input" placeholder="https://tiktok.com/@username" value="">
+			  <input type="hidden" name="socialid[]" value="" >
             </div>
             <div class="social-controls">
               <div class="access-toggle">
-                <div class="access-option free active" onclick="toggleAccess(this, 'free')">Free</div>
-                <div class="access-option paid" onclick="toggleAccess(this, 'paid')">Paid</div>
+                <div class="access-option free active" onclick="toggleAccess(this, 'free','tiktk')">Free</div>
+                <div class="access-option paid" onclick="toggleAccess(this, 'paid','tiktk')">Paid</div>
+				<input type="hidden" name="status[]" class="tiktk" value="free">
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" name="public[]" value="yes" checked>
                 <span class="toggle-slider"></span>
               </label>
               <span class="text-xs text-white/60">Public</span>
@@ -713,16 +726,18 @@ $lang_list = modal_language_list();
               </svg>
             </div>
             <div class="social-content">
-              <input type="text" class="social-platform-input" value="OnlyFans" readonly>
-              <input type="url" class="social-url-input" placeholder="https://onlyfans.com/username">
+              <input type="text" name="platform[]" class="social-platform-input" value="OnlyFans" readonly>
+              <input type="url" name="URL[]" class="social-url-input" placeholder="https://onlyfans.com/username" value="">
+			  <input type="hidden" name="socialid[]" value="" >
             </div>
             <div class="social-controls">
               <div class="access-toggle">
-                <div class="access-option free" onclick="toggleAccess(this, 'free')">Free</div>
-                <div class="access-option paid active" onclick="toggleAccess(this, 'paid')">Paid</div>
+                <div class="access-option free" onclick="toggleAccess(this, 'free','onf')">Free</div>
+                <div class="access-option paid active" onclick="toggleAccess(this, 'paid','onf')">Paid</div>
+				<input type="hidden" name="status[]" class="onf" value="paid">
               </div>
               <label class="toggle-switch">
-                <input type="checkbox">
+                <input type="checkbox" name="public[]" value="yes" >
                 <span class="toggle-slider"></span>
               </label>
               <span class="text-xs text-white/60">Public</span>
@@ -737,21 +752,196 @@ $lang_list = modal_language_list();
               </svg>
             </div>
             <div class="social-content">
-              <input type="text" class="social-platform-input" value="Snapchat" readonly>
-              <input type="text" class="social-url-input" placeholder="Your Snapchat username" value="sophie_model">
+              <input type="text" name="platform[]" class="social-platform-input" value="Snapchat" readonly>
+              <input type="text" name="URL[]" class="social-url-input" placeholder="https://www.snapchat.com/username" value="">
+			  <input type="hidden" name="socialid[]" value="" >
             </div>
             <div class="social-controls">
               <div class="access-toggle">
-                <div class="access-option free active" onclick="toggleAccess(this, 'free')">Free</div>
-                <div class="access-option paid" onclick="toggleAccess(this, 'paid')">Paid</div>
+                <div class="access-option free active" onclick="toggleAccess(this, 'free','snap')">Free</div>
+                <div class="access-option paid" onclick="toggleAccess(this, 'paid','snap')">Paid</div>
+				<input type="hidden" name="status[]" class="snap" value="free">
               </div>
               <label class="toggle-switch">
-                <input type="checkbox">
+                <input type="checkbox" name="public[]" value="yes">
                 <span class="toggle-slider"></span>
               </label>
               <span class="text-xs text-white/60">Public</span>
             </div>
           </div>
+		  
+		<?php }else{ $cnt = 1;
+		foreach($social_list as $sc){
+			if($sc['platform'] == 'Instagram'){
+		?>
+			<!-- Instagram -->
+          <div class="social-link-item  instagram">
+            <div class="social-icon">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+            <div class="social-content">
+              <input type="text" name="platform[]" class="social-platform-input" value="Instagram" readonly>
+              <input type="url" name="URL[]"  class="social-url-input" placeholder="https://instagram.com/username" value="<?php echo $sc['URL']; ?>">
+				<input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>" >
+			</div>
+            <div class="social-controls">
+              <div class="access-toggle">
+                <div class="access-option free <?php if($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','insta')">Free</div>
+                <div class="access-option paid <?php if($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','insta')">Paid</div>
+				<input type="hidden" name="status[]" class="insta" value="<?php echo $sc['status']; ?>">
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?> >
+                <span class="toggle-slider"></span>
+              </label>
+              <span class="text-xs text-white/60">Public</span>
+            </div>
+          </div>
+			<?php } else if($sc['platform'] == 'Twitter'){ ?>
+          <!-- Twitter -->
+          <div class="social-link-item twitter">
+            <div class="social-icon">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </div>
+            <div class="social-content">
+              <input type="text" name="platform[]" class="social-platform-input" value="Twitter" readonly>
+              <input type="url"  name="URL[]" class="social-url-input" placeholder="https://twitter.com/username" value="<?php echo $sc['URL']; ?>">
+				<input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>" >
+			</div>
+            <div class="social-controls">
+              <div class="access-toggle">
+                <div class="access-option free  <?php if($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','tw')">Free</div>
+                <div class="access-option paid <?php if($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','tw')">Paid</div>
+				<input type="hidden" name="status[]" class="tw" value="<?php echo $sc['status']; ?>">
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?>>
+                <span class="toggle-slider"></span>
+              </label>
+              <span class="text-xs text-white/60">Public</span>
+            </div>
+          </div>
+		  
+		  <?php } else if($sc['platform'] == 'TikTok'){ ?>
+
+          <!-- TikTok -->
+          <div class="social-link-item tiktok">
+            <div class="social-icon">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-.88-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
+              </svg>
+            </div>
+            <div class="social-content">
+              <input type="text" name="platform[]" class="social-platform-input" value="TikTok" readonly>
+              <input type="url" name="URL[]" class="social-url-input" placeholder="https://tiktok.com/@username" value="<?php echo $sc['URL']; ?>">
+				<input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>" >
+			</div>
+            <div class="social-controls">
+              <div class="access-toggle">
+                <div class="access-option free  <?php if($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','tiktk')">Free</div>
+                <div class="access-option paid <?php if($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','tiktk')">Paid</div>
+				<input type="hidden" name="status[]" class="tiktk" value="<?php echo $sc['status']; ?>">
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?>>
+                <span class="toggle-slider"></span>
+              </label>
+              <span class="text-xs text-white/60">Public</span>
+            </div>
+          </div>
+		  
+		  <?php } else if($sc['platform'] == 'OnlyFans'){ ?>
+
+          <!-- OnlyFans -->
+          <div class="social-link-item fans">
+            <div class="social-icon">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <div class="social-content">
+              <input type="text" name="platform[]" class="social-platform-input" value="OnlyFans" readonly>
+              <input type="url" name="URL[]" class="social-url-input" placeholder="https://onlyfans.com/username" value="<?php echo $sc['URL']; ?>">
+				<input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>" >
+			</div>
+            <div class="social-controls">
+              <div class="access-toggle">
+                <div class="access-option free <?php if($sc['status'] == 'free') echo 'active'; ?> " onclick="toggleAccess(this, 'free','onf')">Free</div>
+                <div class="access-option paid  <?php if($sc['status'] == 'paid' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'paid','onf')">Paid</div>
+				<input type="hidden" name="status[]" class="onf" value="<?php echo $sc['status']; ?>">
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?> >
+                <span class="toggle-slider"></span>
+              </label>
+              <span class="text-xs text-white/60">Public</span>
+            </div>
+          </div>
+		  
+		  <?php } else if($sc['platform'] == 'Snapchat'){ ?>
+
+          <!-- Snapchat -->
+          <div class="social-link-item snapchat">
+            <div class="social-icon">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.748-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-12C24.007 5.367 18.641.001 12.017.001z"/>
+              </svg>
+            </div>
+            <div class="social-content">
+              <input type="text" name="platform[]" class="social-platform-input" value="Snapchat" readonly>
+              <input type="text" name="URL[]" class="social-url-input" placeholder="https://www.snapchat.com/username" value="<?php echo $sc['URL']; ?>">
+				<input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>" >
+			</div>
+            <div class="social-controls">
+              <div class="access-toggle">
+                <div class="access-option free  <?php if($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','snap')">Free</div>
+                <div class="access-option paid <?php if($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','snap')">Paid</div>
+				<input type="hidden" name="status[]" class="snap" value="<?php echo $sc['status']; ?>">
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?> >
+                <span class="toggle-slider"></span>
+              </label>
+              <span class="text-xs text-white/60">Public</span>
+            </div>
+          </div>
+		  
+		  <?php } else{ ?>
+		  
+		  <!-- Others -->
+          <div class="social-link-item snapchat">
+			<div class="social-icon" style="background: #6b7280;">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+				</svg>
+            </div>
+            <div class="social-content">
+				<input type="text" name="platform[]" class="social-platform-input" placeholder="Platform name (e.g., YouTube, LinkedIn)" value="<?php echo $sc['platform']; ?>">
+				<input type="url" name="URL[]"  class="social-url-input" placeholder="Profile URL" value="<?php echo $sc['URL']; ?>" >
+				<input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>" >
+			</div>
+            <div class="social-controls">
+				<div class="access-toggle">
+					<div class="access-option free  <?php if($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','sc<?php echo $cnt; ?>')">Free</div>
+					<div class="access-option paid <?php if($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','sc<?php echo $cnt; ?>')">Paid</div>
+					<input type="hidden" name="status[]" class="sc<?php echo $cnt; ?>" value="<?php echo $sc['status']; ?>">
+				</div>
+				<label class="toggle-switch">
+					<input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?> >
+					<span class="toggle-slider"></span>
+				</label>
+				<span class="text-xs text-white/60">Public</span>
+				<button class="btn-remove-social" onclick="removeSocialLink(this)">×</button>
+            </div>
+		   </div>
+			
+		  <?php } ?>
+		<?php $cnt++; }  } ?>
+		  
         </div>
 
         <div class="btn-add-social" onclick="addSocialLink()">
@@ -2389,7 +2579,7 @@ $lang_list = modal_language_list();
     updateProfileCompletion();
   }
 
-  function toggleAccess(element, type) {
+  function toggleAccess(element, type, cls) { 
     const parent = element.parentElement;
     if (parent) {
         parent.querySelectorAll('.access-option').forEach(option => {
@@ -2397,6 +2587,7 @@ $lang_list = modal_language_list();
         });
         element.classList.add('active');
     }
+	jQuery('.'+cls).val(type);
   }
 
   function addSocialLink() {
@@ -2412,16 +2603,18 @@ $lang_list = modal_language_list();
             </svg>
             </div>
             <div class="social-content">
-            <input type="text" class="social-platform-input" placeholder="Platform name (e.g., YouTube, LinkedIn)">
-            <input type="url" class="social-url-input" placeholder="Profile URL or username">
+            <input type="text" name="platform[]" class="social-platform-input" placeholder="Platform name (e.g., YouTube, LinkedIn)">
+            <input type="url" name="URL[]"  class="social-url-input" placeholder="Profile URL">
+			<input type="hidden" name="socialid[]" value="" >
             </div>
             <div class="social-controls">
             <div class="access-toggle">
-                <div class="access-option free active" onclick="toggleAccess(this, 'free')">Free</div>
-                <div class="access-option paid" onclick="toggleAccess(this, 'paid')">Paid</div>
+                <div class="access-option free active" onclick="toggleAccess(this, 'free','ext`+socialLinkCounter+`')">Free</div>
+                <div class="access-option paid" onclick="toggleAccess(this, 'paid','ext`+socialLinkCounter+`')">Paid</div>
+				<input type="hidden" name="status[]" class="ext`+socialLinkCounter+`" value="free">
             </div>
             <label class="toggle-switch">
-                <input type="checkbox">
+                <input type="checkbox" name="public[]" value="yes">
                 <span class="toggle-slider"></span>
             </label>
             <span class="text-xs text-white/60">Public</span>
@@ -2429,11 +2622,11 @@ $lang_list = modal_language_list();
             </div>
         `;
         const addButton = container.nextElementSibling; // Assuming add button is immediately after container
-        if (addButton) {
+       /* if (addButton) {
             container.parentNode.insertBefore(newSocialLink, addButton);
-        } else {
+        } else {*/
             container.appendChild(newSocialLink); // Fallback if no add button found
-        }
+        //}
     }
   }
 
