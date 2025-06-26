@@ -745,6 +745,9 @@ var userpage = '<?=$user_page?>';
       <input type="hidden" name="model_ids" id="i-model_ids" value="<?php echo $rowesdw['id'] ?>">
       <input type="hidden" name="unique_model_ids" id="i-unique_model_id" value="<?php echo $_GET['unique_model_id'] ?>">
       <input type="hidden" name="tlm_camera_id" id="tlm_camera_id" value="<?php echo isset($_POST['tlm_camera_id']) ? $_POST['tlm_camera_id'] : ''; ?>" />
+      
+      <div>Mgvnbvnvbvbnbvbnvvnvnbvnb</div>
+      <div id="room-urls"></div>
       <?PHP
       if (isset($_GET['unique_model_id'])) {
         if (isset($_GET['pra'])) {

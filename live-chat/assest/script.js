@@ -225,8 +225,8 @@
         html += '<br>';
         html += 'QueryString URL: <a href="' + roomQueryStringURL + '" target="_blank">' + roomQueryStringURL + '</a>';
 
-        // var roomURLsDiv = document.getElementById('room-urls');
-        // roomURLsDiv.innerHTML = html;
+        var roomURLsDiv = document.getElementById('room-urls');
+        roomURLsDiv.innerHTML = html;
 
     }
 
