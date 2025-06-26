@@ -43,7 +43,7 @@
              console.log('tesr run3');
         });
 
-         console.log(res,'tesr run4');
+         console.log(res.sessionid,'tesr run4');
     };
 
     document.getElementById('join-room').onclick = function () {
