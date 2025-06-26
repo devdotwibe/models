@@ -1020,11 +1020,11 @@ if(isset($_SESSION['log_user_id'])){
     }
 
     // Close modal when clicking outside
-    document.getElementById('modelModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeModelPreview();
-        }
-    });
+    // document.getElementById('modelModal').addEventListener('click', function(e) {
+    //     if (e.target === this) {
+    //         closeModelPreview();
+    //     }
+    // });
 
     // Premium Responsive Handling
     function handlePremiumResponsive() {
