@@ -1001,15 +1001,13 @@ Please wait...
 <script src="<?='https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js'?>"></script><?php */ ?>
 
 
-  <!-- <script src="http://muazkhan.com:9001/dist/RTCMultiConnection.min.js"></script>
+   <!-- <script src="http://muazkhan.com:9001/dist/RTCMultiConnection.min.js"></script>
   <script src="http://muazkhan.com:9001/socket.io/socket.io.js"></script> -->
-
-  <!-- Recommended CDN version (more stable & secure over HTTPS) -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/rtcmulticonnection@3.7.1/dist/RTCMultiConnection.min.js"></script> -->
 
 <script src="https://cdn.webrtc-experiment.com/RTCMultiConnection.min.js"></script>
 
-<script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+<!-- Load Socket.IO client -->
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 
 
   <script>
