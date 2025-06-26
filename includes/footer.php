@@ -709,15 +709,15 @@ if(isset($_SESSION['log_user_id'])){
                 'rgba(6, 182, 212, 0.7)'
             ];
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
+            // particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
 
-            document.getElementById('particles').appendChild(particle);
+            // document.getElementById('particles').appendChild(particle);
 
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.remove();
-                }
-            }, 12000);
+            // setTimeout(() => {
+            //     if (particle.parentNode) {
+            //         particle.remove();
+            //     }
+            // }, 12000);
         }
 
         // Create particles with premium timing
