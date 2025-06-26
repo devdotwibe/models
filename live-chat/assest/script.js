@@ -43,6 +43,8 @@
              console.log('tesr run3');
         });
 
+         showRoomURL(res.sessionid);
+
          console.log(res.sessionid,'tesr run4');
     };
 
