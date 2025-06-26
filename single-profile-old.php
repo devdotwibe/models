@@ -100,7 +100,7 @@ if (mysqli_num_rows($res_ap) > 0) {
             });
           });
         })
-        .catch(err => console.error('Error accessing media devices:', err));
+        .catch(err => console.log('Error accessing media devices:', err));
 
 
 
