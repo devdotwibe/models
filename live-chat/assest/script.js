@@ -303,9 +303,9 @@
     // })
     var tlm_streamer_length = '';
     setInterval(function () {
-        var arrayOfUserIds = connection.getAllConnectedUsers();
+        var arrayOfUserIds = connection.getAllParticipants();
         var user = [];
-        connection.getAllConnectedUsers().forEach(function (participantId) {
+        connection.getAllParticipants().forEach(function (participantId) {
             user.push(connection.peers[participantId].extra.user_id);
         });
         if (user.length > 0) {
