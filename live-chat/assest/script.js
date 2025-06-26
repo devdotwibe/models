@@ -27,10 +27,17 @@
         }
     });
     document.getElementById('open-room').onclick = function () {
+
+        console,log('tesr run');
         disableInputButtons();
+         console,log('tesr run1');
         connection.open(document.getElementById('room-id').value, function () {
+             console,log('tesr run2');
             showRoomURL(connection.sessionid);
+             console,log('tesr run3');
         });
+
+         console,log('tesr run4');
     };
 
     document.getElementById('join-room').onclick = function () {

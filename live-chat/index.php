@@ -1023,6 +1023,7 @@ Please wait...
     ?>
       $(function() {
         $('#open-room').click();
+
       });
     <?php
     }
