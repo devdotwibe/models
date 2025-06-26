@@ -766,26 +766,26 @@ if(isset($_SESSION['log_user_id'])){
         });
 
         // Premium Search Functionality
-        const searchInput = document.getElementById('searchInput');
-        const searchSuggestions = document.getElementById('searchSuggestions');
+        // const searchInput = document.getElementById('searchInput');
+        // const searchSuggestions = document.getElementById('searchSuggestions');
 
-        searchInput.addEventListener('focus', () => {
-            searchSuggestions.classList.add('show');
-        });
+        // searchInput.addEventListener('focus', () => {
+        //     searchSuggestions.classList.add('show');
+        // });
 
-        searchInput.addEventListener('blur', () => {
-            setTimeout(() => {
-                searchSuggestions.classList.remove('show');
-            }, 300);
-        });
+        // searchInput.addEventListener('blur', () => {
+        //     setTimeout(() => {
+        //         searchSuggestions.classList.remove('show');
+        //     }, 300);
+        // });
 
-        searchInput.addEventListener('input', (e) => {
-            if (e.target.value.length > 0) {
-                searchSuggestions.classList.add('show');
-            } else {
-                searchSuggestions.classList.remove('show');
-            }
-        });
+        // searchInput.addEventListener('input', (e) => {
+        //     if (e.target.value.length > 0) {
+        //         searchSuggestions.classList.add('show');
+        //     } else {
+        //         searchSuggestions.classList.remove('show');
+        //     }
+        // });
 
         // Initialize read more functionality
         initializeReadMore();
