@@ -71,7 +71,16 @@ if (isset($_SESSION['log_user_id'])) {
 		}
 		
 		//Video upload
-		$existing_vd_array =array(); 
+		$additional_vd = '';
+		if(isset($_POST['hidden_adv_vedio']) && !empty($_POST['hidden_adv_vedio'])){
+			foreach($_POST['hidden_adv_vedio'] as $hid_vd){
+				$additional_vd .= $hid_vd.'|';
+			}
+			if(!empty($additional_vd)){
+				$joe_id = DB::update('banners', array('video' => rtrim($additional_vd, "|")), "id=%s", $id);
+			}
+		}
+		/*$existing_vd_array =array(); 
 		$removed_vd_array =array();
 			if(!empty($form_data['video'])) {
 				$existing_vd_array = array_merge($existing_vd_array,explode('|',$form_data['video']));
@@ -97,77 +106,8 @@ if (isset($_SESSION['log_user_id'])) {
 			if(!empty($additional_vd)){
 			$joe_id = DB::update('banners', array('video' => $_POST['save_video_file'].'|'.$additional_vd), "id=%s", $id);
 			}
-		}
-		/*if (isset($_FILES["files"])) {
-			$totalFiles = count($_FILES['files']['name']);
-			$additional_img = '';
-			$target_dir_profile = "../uploads/banners/";
-			
-				$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][0]);
-				$target_profile = basename($_FILES["files"]["name"][0]);
-				if (move_uploaded_file($_FILES["files"]["tmp_name"][0], $target_file1)) {
-					$joe_id = DB::update('banners', array('image' => $target_profile), "id=%s", $id);
-				} 
-			if($totalFiles > 1){
-				for ($i = 1; $i < $totalFiles; $i++) {
-					$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][$i]);
-					$target_profile = basename($_FILES["files"]["name"][$i]);
-					if (move_uploaded_file($_FILES["files"]["tmp_name"][$i], $target_file1)) {
-						$additional_img .= $target_profile.'|';
-					}
-				}
-				if(!empty($additional_img)){ 
-					$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
-				}
-			}
-			
-			
-		}
-		
-		if (isset($_FILES["video_file"])) {
-			$totalFiles_v = count($_FILES['video_file']['name']);
-			$additional_vd = '';
-			$target_dir_profile = "../uploads/banners/";
-				for ($i = 0; $i < $totalFiles_v; $i++) {
-					$target_file1 = $target_dir_profile . basename($_FILES["video_file"]["name"][$i]);
-					$target_profile = basename($_FILES["video_file"]["name"][$i]);
-					if (move_uploaded_file($_FILES["video_file"]["tmp_name"][$i], $target_file1)) {
-						$additional_vd .= $target_profile.'|';
-					}
-				}
-				if(!empty($additional_vd)){ 
-					$joe_id = DB::update('banners', array('video' => rtrim($additional_vd, "|")), "id=%s", $id);
-				}
-		}
-		
-		
-		if (isset($_FILES["additionalimages"])) {
-			$totalFiles = count($_FILES['additionalimages']['name']);
-			$additional_img = '';
-			$target_dir_profile = "../uploads/banners/";
-			for ($i = 0; $i < $totalFiles; $i++) {
-				$target_file1 = $target_dir_profile . basename($_FILES["additionalimages"]["name"][$i]);
-				$target_profile = basename($_FILES["additionalimages"]["name"][$i]);
-				if (move_uploaded_file($_FILES["additionalimages"]["tmp_name"][$i], $target_file1)) {
-					$additional_img .= $target_profile.'|';
-				}
-			}
-			if(!empty($additional_img)){ 
-				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $id);
-			}
-		}
-		
-
-		if ($_FILES["video_file"]["name"]) {
-			$target_dir_profile = "../uploads/banners/";
-			$target_file1 = $target_dir_profile . basename($_FILES["video_file"]["name"]);
-			$target_profile = basename($_FILES["video_file"]["name"]);
-			if (move_uploaded_file($_FILES["video_file"]["tmp_name"], $target_file1)) {
-				$joe_id = DB::update('banners', array('video' => $target_profile), "id=%s", $id);
-			} else {
-				$error .= ' Video Not Updated';
-			}
 		}*/
+		
 
 		if ($error) {
 			echo '<script>alert("' . $error . '");</script>';
@@ -192,6 +132,16 @@ $serviceArr = array('Providing services', 'Looking for services');
 <head>
 	<title>Create Advertisement - The Live Models</title>
 	<?php include('../includes/head.php'); ?>
+	<link rel="stylesheet" href="<?=SITEURL?>assets/css/dropzone.min.css" />
+	<style>
+	.dropzone {
+		border: none !important;
+		background-color: transparent !important;
+	}
+	.dropzone .dz-preview .dz-remove{
+		color:#000;
+	}
+	</style>
 	<style>
 		.thumbnail {
 			background: #FFF;
@@ -432,7 +382,59 @@ $serviceArr = array('Providing services', 'Looking for services');
                             <span class="text-white/60 text-sm">Maximum 5 videos • MP4, MOV, AVI up to 100MB each</span>
                         </div>
 
-                        <div class="upload-area rounded-2xl p-8 text-center mb-6" id="videoUploadArea">
+                        
+						
+						<div id="adv_video_gallery" class="text-center dropzone"></div>
+						<ul class="visualizacao_adv sortable dropzone-previews" >
+						
+						<?php if(!empty($form_data['video']) ){  
+								$vd_count = 1;
+								$video = explode('|',$form_data['video']);
+								foreach($video as $add_vd){	
+									if(!empty($add_vd)){
+								?>
+								<li id="vdblock<?php echo $vd_count;?>" >
+									<div>
+										<div class="dz-preview dz-file-preview">
+											<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+											<div class="dz-error-mark"><a  data-id="vdblock<?php echo $vd_count;?>" img_name="<?php echo $add_vd; ?>" adv_type="video" class="removeinserted">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+													<line x1="18" y1="6" x2="6" y2="18"></line>
+													<line x1="6" y1="6" x2="18" y2="18"></line>
+												</svg>
+											</a></div>
+											<input type='hidden' name='hidden_adv_vedio[]' class='hidden_adv_vedio' value="<?php echo $add_vd; ?>" id="<?php echo $vd_count;?>">
+											<video controls="true" width="200" src="<?php echo SITEURL . 'uploads/banners/' . $add_vd; ?>" class=""></video>
+											<!-- <div class="dz-success-mark"><span>✔</span></div> -->
+											<!-- <div class="dz-error-mark"><span>✘</span></div> -->
+											
+											<div class="dz-error-message"><span data-dz-errormessage></span></div>
+										</div>
+									</div>
+								</li>
+								
+									<?php }
+								$vd_count++; }
+							 } ?>
+						
+						</ul>
+						<div class="preview_adv" style="display:none;">
+                            <li>
+                                <div>
+                                    <div class="dz-preview dz-file-preview">
+                                        <img data-dz-thumbnail />
+                                        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                                        <!-- <div class="dz-success-mark"><span>✔</span></div> -->
+                                        <!-- <div class="dz-error-mark"><span>✘</span></div> -->
+                                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                                    </div>
+                                </div>
+                            </li>  
+                        </div>
+						
+						
+						<?php /*?>
+						<div class="upload-area rounded-2xl p-8 text-center mb-6" id="videoUploadArea">
                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 text-white/50">
                                 <polygon points="23 7 16 12 23 17 23 7"></polygon>
                                 <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
@@ -448,7 +450,6 @@ $serviceArr = array('Providing services', 'Looking for services');
 							<input type="hidden" name="remobved_video" value="" id="remobved_video">
 							
 						</div>
-
                         <!-- Video Preview Grid -->
                         <div id="videoPreviewGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden1">
                             <!-- Video previews will be inserted here -->
@@ -469,7 +470,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 							<?php 
 								}
 							 } ?>
-                        </div>
+                        </div> <?php */ ?>
                     </div>
 
                     <!-- Upload Progress -->
@@ -1052,10 +1053,7 @@ let selectedFiles_video = [];
 		
 		var photoInput = document.getElementById('photoInput');
 		var files_img = photoInput.files;  // Get all selected images
-		
-		var videoInput = document.getElementById('videoInput');
-		var files_vd = videoInput.files;  // Get all selected videos
-		
+				
 		//uploading Image files
 
 		if (files_img.length > 0) {
@@ -1066,9 +1064,9 @@ let selectedFiles_video = [];
 				formData.append('uploaded_file[]', files_img[i]);  
 			}
 			
-			progressFill.style.width = '25%';
-            progressText.textContent = '25%';
-			progress = 25;
+			progressFill.style.width = '50%';
+            progressText.textContent = '50%';
+			progress = 50;
 			
 			// Send the FormData object using Fetch API
 			fetch('<?=SITEURL.'/ajax/adv_upload.php'?>', {
@@ -1084,15 +1082,10 @@ let selectedFiles_video = [];
 				}else{
 					jQuery('#save_image_file').val(data);
 				}
-				if (files_vd.length > 0) {
-				progressFill.style.width = '50%';
-				progressText.textContent = '50%';
-				progress = 50;
-				}else{
+				
 				progressFill.style.width = '100%';
 				progressText.textContent = '100%';
 				progress = 100;
-				}
 				
 				if(progress >= 100){
 				setTimeout(() => {
@@ -1103,63 +1096,14 @@ let selectedFiles_video = [];
 			.catch(error => {
 				console.error('Upload failed:', error);
 			});
-				if (files_vd.length > 0) progress = 50;
-				else progress = 100;
+				 progress = 100;
 			
 		}
-		//uploading video files
-
-		if (files_vd.length > 0) {
-			// Create a new FormData object
-			var formDataV = new FormData();
-			var uploaded_file = [];
-			for (var i = 0; i < files_vd.length; i++) {
-				formDataV.append('uploaded_file[]', files_vd[i]);  
-			}
-			
-			if (files_img.length > 0) {
-			progressFill.style.width = '75%';
-            progressText.textContent = '75%';	
-			progress = 75;
-			}else{
-			progressFill.style.width = '25%';
-            progressText.textContent = '25%';
-			progress = 25;			
-			}
-			// Send the FormData object using Fetch API
-			fetch('<?=SITEURL.'/ajax/adv_upload.php'?>', {
-				method: 'POST',
-				body: formDataV
-			})
-			.then(response => response.text())
-			.then(data => { 
-				if(data == 'No files were uploaded.'){
-					alert(data);
-				}else if(data == 'Error'){
-					alert('Sorry, there was an error uploading the video.')
-				}else{
-					jQuery('#save_video_file').val(data);
-				}
-				progressFill.style.width = '100%';
-				progressText.textContent = '100%';
-				progress = 100;
-				if(progress >= 100){
-				setTimeout(() => {
-                    event.target.submit();
-                }, 1000);
-			} 
-				
-			})
-			.catch(error => {
-				console.error('Upload failed:', error);
-			});
-			progress = 100;
-			
-		}
+		
 		
 		//uploading complete
 		
-		if (files_vd.length <= 0  && files_img.length <= 0) {
+		if (files_img.length <= 0) {
         // Simulate upload progress
         
         const interval = setInterval(() => {
@@ -1188,6 +1132,145 @@ let selectedFiles_video = [];
 
 	<link href="<?= SITEURL ?>assets/plugins/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="<?= SITEURL ?>assets/plugins/jasny-bootstrap/js/jasny-bootstrap.min.js" type="text/javascript" language="javascript"></script>
+
+
+<script src="<?=SITEURL?>assets/js/dropzone.min.js"></script>
+
+<script>
+  // Disable Dropzone auto-discovery
+  Dropzone.autoDiscover = false;
+
+  // Manual initialization
+  const myDropzone = new Dropzone("#adv_video_gallery", {
+    url: "advertisement_upload.php",
+    paramName: "file", // The name that will be used in $_FILES["file"]
+    maxFilesize: 500, // in MB
+    maxFiles: 5,
+    acceptedFiles: ".mp4,.mov,.avi,.MP4,.MOV,.AVI",
+    addRemoveLinks: true,
+    parallelUploads: 3,
+	previewsContainer: '.visualizacao_adv',
+    previewTemplate: jQuery('.preview_adv').html(),
+	dictDefaultMessage: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 text-white/50"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg> <h4 class="text-xl font-semibold text-white mb-2">Upload Your Videos</h4><p class="text-white/70 mb-4">Drag and drop your videos here, or click to browse</p><div class="btn-primary px-8 py-3 rounded-xl font-semibold choose-vd">Choose Videos</div>',
+	dictRemoveFile: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>',
+    init: function () {
+      this.on("success", function (file, response) {
+		  // Check if response is a valid object
+		  if (typeof response === 'string') {
+			// If it's a string, parse it manually
+			response = JSON.parse(response);
+		  }
+        console.log("Upload success:", response); 
+		
+		// Create hidden input element
+		  var hidden_adv_vedio = document.createElement("input");
+		  hidden_adv_vedio.setAttribute("type", "hidden");
+		  hidden_adv_vedio.setAttribute("name", "hidden_adv_vedio[]");
+		  hidden_adv_vedio.setAttribute("class", "hidden_adv_vedio");
+		  hidden_adv_vedio.setAttribute("value", response.file);
+
+		  // Append the hidden input to the file preview element
+		  file.previewElement.appendChild(hidden_adv_vedio);
+		  // Assuming response contains the file name or path on the server
+		  file.serverFileName = response.file;  // Store the server file name for later use		
+		
+			//Append file preview
+			var videoPreview = document.createElement('video');
+            videoPreview.setAttribute('controls', 'true');
+            videoPreview.setAttribute('width', '200'); // Adjust the preview size
+            videoPreview.src = URL.createObjectURL(file);
+
+            // Append the video element to the preview container
+            file.previewElement.appendChild(videoPreview);
+		
+      });
+      this.on("error", function (file, errorMessage) {
+        console.error("Upload error:", errorMessage);
+      });
+	  this.on("removedfile", function(file) {
+        // You can remove hidden input when the file is removed
+        var input = file.previewElement.querySelector("input[name='hidden_adv_vedio[]']");
+        if (input) {
+          input.remove();
+        }
+		
+		// If the file has a server-side name stored (this was set on successful upload)
+      if (file.serverFileName) {
+        // Make an AJAX request to delete the file on the server
+        fetch('advertisement_delete.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fileName: file.serverFileName  // Send the file name to the server to delete
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            console.log('File deleted from server');
+          } else {
+            console.error('Failed to delete the file from server');
+          }
+        })
+        .catch(error => {
+          console.error('Error deleting file from server:', error);
+        });
+      }
+		
+		
+      });
+    }
+  });
+  
+  
+  jQuery('.removeinserted').click(function(){ 
+    var selectedid = jQuery(this).attr('data-id'); 
+	var img_name = jQuery(this).attr('img_name');
+	var adv_type = jQuery(this).attr('adv_type');	
+    jQuery('#'+selectedid).remove();
+        fetch('advertisement_delete.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fileName: img_name  // Send the file name to the server to delete
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            console.log('File deleted from server');
+			
+			//Remove from DB 
+			$.ajax({
+				url: '<?= SITEURL . 'ajax/delete_adv_uploads.php' ?>',
+				type: 'get',
+				data: {
+					upl_name: img_name,
+					adv_id: '<?php echo $id; ?>',
+					adv_type: adv_type,
+				},
+				dataType: 'json',
+				success: function(res) {
+					
+				}
+			});
+			
+			
+          } else {
+            console.error('Failed to delete the file from server');
+          }
+        })
+        .catch(error => {
+          console.error('Error deleting file from server:', error);
+        });
+
+});
+  
+</script>
 
 </body>
 
