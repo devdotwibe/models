@@ -440,6 +440,18 @@ if (mysqli_num_rows($res_ap) > 0) {
             </div>
 			
 			<?php
+			
+			$sql_post = "SELECT COUNT(ID) FROM live_posts WHERE post_author = " . $rowesdw['id'];
+
+            $result_post = mysqli_query($con, $sql_post);
+
+            if (mysqli_num_rows($result_post) > 0) {
+
+              $row_post = mysqli_fetch_assoc($result_post);
+
+              $num_posts = $row_post['COUNT(ID)'];
+
+            }
 
             $sql_img = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Image' AND category = 'Profile' Order by id DESC";
 
@@ -497,7 +509,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                     <div class="post-div flex flex-wrap gap-8 text-center">
                         <div>
-                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num1; ?></div>
+                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num_posts; ?></div>
                             <div class="text-xs sm:text-sm text-white/60">Total Posts</div>
                         </div>
                         <div>
