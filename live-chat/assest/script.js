@@ -322,12 +322,16 @@
         disableInputButtons();
  
         var res =         connection.open(document.getElementById('room-id').value, function () {
+
+
+            console.log(connection,'tttttttttttttt');
     
             showRoomURL(connection.sessionid);
 
         });
 
-         showRoomURL(res.sessionid);
+        //  showRoomURL(res.sessionid);
+        console.log(res,'tttttttttttttt');
 
     };
 
@@ -344,7 +348,7 @@
 
     };
 
-    
+
     var tlm_streamer_length = '';
     setInterval(function () {
         // var arrayOfUserIds = connection.getAllParticipants();
