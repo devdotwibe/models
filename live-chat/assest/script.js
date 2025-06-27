@@ -27,33 +27,26 @@
         }
     });
 
-        console.log(document.getElementById('room-id').value,'vcxvxcxcxxcxxccxcxc');
 
 
     var connection = new RTCMultiConnection();
 
     document.getElementById('open-room').onclick = function () {
 
-        console.log('tesr run');
         disableInputButtons();
-         console.log(connection.open,'tesr run1');
+ 
         var res =         connection.open(document.getElementById('room-id').value, function () {
-             console.log('tesr run2');
+    
             showRoomURL(connection.sessionid);
-             console.log('tesr run3');
+
         });
 
          showRoomURL(res.sessionid);
 
-         console.log(connection,'tesr run4');
     };
 
 
-    console.log('user not joined');
-
     document.getElementById('join-room').onclick = function () {
-
-         console.log('user room entered');
 
         disableInputButtons();
 
@@ -63,11 +56,8 @@
         };
         connection.join(document.getElementById('room-id').value);
 
-         console.log(document.getElementById('room-id').value,'joined to room');
     };
 
-
-      console.log('user joined comepledted');
 
     // connection.socketURL = '/';
 
@@ -80,7 +70,6 @@
         user_id: user_id
     };
 
-    console.log(user_id,'user connection established');
 
 
     connection.session = {
@@ -106,7 +95,6 @@
     if (check_participant == 'true') {
         connection.maxParticipantsAllowed = 2;
     }
-    // console.log(cameras[0].deviceId));
 
 
     // connection.mediaConstraints = {
@@ -118,7 +106,6 @@
     //         }]
     //     }
     // };    
-    // console.log(DetectRTC.videoInputDevices);
     // var secondaryCamera = DetectRTC.videoInputDevices[0];
     // alert(secondaryCamera);    
     // if (!secondaryCamera) {
@@ -137,7 +124,7 @@
     // };
 
     //   var secondaryCamera = DetectRTC.videoInputDevices;
-    //   console.log(secondaryCamera);
+
 
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: false,
@@ -352,7 +339,7 @@
     // $('#click').on('click', function(){
     //   var arrayOfUserIds = connection.getAllParticipants();
     //   console.clear();
-    //   console.log(arrayOfUserIds);
+
     // })
     var tlm_streamer_length = '';
     setInterval(function () {
@@ -364,7 +351,6 @@
 
          var participants = Object.keys(connection.peers);
 
-         console.log(participants,'connected users');
 
 
         participants.forEach(function (participantId) {
@@ -376,17 +362,15 @@
 
         connection.onpeer = function(event) {
 
-            console.log('A viewer joined:', event.userid, event.extra.user_id);
             
         };
 
         connection.onstream = function(event) {
-            console.log('Broadcast started, stream received');
+
             document.getElementById('videoContainer').appendChild(event.mediaElement);
         };
 
 
-        console.log(user,'users commnects list ');
 
 
         if (user.length > 0) {
@@ -468,7 +452,7 @@
                     complete: function () {
                     },
                     success: function (response) {
-                        console.log(response);
+                 
                         $('#tlm_send_msg').val('');
                         tlm_get_msg();
                         scrolled = false;
@@ -496,7 +480,7 @@
                     complete: function () {
                     },
                     success: function (response) {
-                        console.log(response);
+              
                         $('#tlm_send_privatemsg').val('');
                         tlm_get_privatemsg();
                         scrolled = false;
@@ -738,7 +722,7 @@
                 complete: function () {
                 },
                 success: function (response) {
-                    // console.log(response.trim());
+               
                     if (response.status == 'ok') {
                         //$('#tlm_start_private_popup11').attr('style','display:block;opacity:1;');
                         $('#tlm_start_private_popup11 .modal-body').html(response.html);
