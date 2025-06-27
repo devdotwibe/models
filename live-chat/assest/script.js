@@ -332,7 +332,7 @@
     var tlm_streamer_length = '';
     setInterval(function () {
         // var arrayOfUserIds = connection.getAllParticipants();
-        var user = [];
+        var user = ['52'];
         // connection.getAllParticipants().forEach(function (participantId) {
         //     user.push(connection.peers[participantId].extra.user_id);
         // });
@@ -359,7 +359,7 @@
             console.log('Broadcast started, stream received');
             document.getElementById('videoContainer').appendChild(event.mediaElement);
         };
-        
+
 
         console.log(user,'users commnects list ');
 
