@@ -27,26 +27,42 @@
         }
     });
 
+        console.log(document.getElementById('room-id').value,'vcxvxcxcxxcxxccxcxc');
 
 
     var connection = new RTCMultiConnection();
 
-  
+    document.getElementById('open-room').onclick = function () {
 
+        console.log('tesr run');
+        disableInputButtons();
+         console.log(connection.open,'tesr run1');
+        var res =         connection.open(document.getElementById('room-id').value, function () {
+             console.log('tesr run2');
+            showRoomURL(connection.sessionid);
+             console.log('tesr run3');
+        });
 
-    // connection.socketURL = '/';
+         showRoomURL(res.sessionid);
 
-    //  connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
-    // connection.socketURL = 'http://muazkhan.com:9001/';
+         console.log(connection,'tesr run4');
+    };
+
+    document.getElementById('join-room').onclick = function () {
+        disableInputButtons();
+
+        connection.sdpConstraints.mandatory = {
+            OfferToReceiveAudio: true,
+            OfferToReceiveVideo: true
+        };
+        connection.join(document.getElementById('room-id').value);
+    };
 
     connection.socketMessageEvent = 'video-broadcast-demo';
     var user_id = document.getElementById('join-room').value
     connection.extra = {
         user_id: user_id
     };
-
-
-
     connection.session = {
         audio: true,
         video: true,
@@ -70,36 +86,7 @@
     if (check_participant == 'true') {
         connection.maxParticipantsAllowed = 2;
     }
-
-
-    // connection.mediaConstraints = {
-    //     audio: true,
-    //     video: {
-    //         mandatory: {},
-    //         optional: [{
-    //             facingMode: 'application' // or "application" for back camera
-    //         }]
-    //     }
-    // };    
-    // var secondaryCamera = DetectRTC.videoInputDevices[0];
-    // alert(secondaryCamera);    
-    // if (!secondaryCamera) {
-    //     alert('Please attach another camera device.');
-    //     return;
-    // }
-
-    // connection.mediaConstraints = {
-    //     audio: true,
-    //     video: {
-    //         mandatory: {},
-    //         optional: [{
-    //             sourceId: secondaryCamera.id
-    //         }]
-    //     }
-    // };
-
-    //   var secondaryCamera = DetectRTC.videoInputDevices;
-
+ 
 
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: false,
@@ -117,13 +104,10 @@
 
     connection.videosContainer = document.getElementById('videos-container');
 
-    console.log('stream started');
 
     connection.onstream = function (event) {
 
-
-           console.log('stream started 1');
-
+        
         var existing = document.getElementById(event.streamid);
         if (existing && existing.parentNode) {
             existing.parentNode.removeChild(existing);
@@ -134,21 +118,15 @@
         event.mediaElement.muted = true;
         event.mediaElement.volume = 0;
 
-           console.log('stream started 2');
-
         var video = document.createElement('video');
 
         try {
-
-               console.log('stream started 3');
-
             video.setAttributeNode(document.createAttribute('autoplay'));
             video.setAttributeNode(document.createAttribute('playsinline'));
             video.setAttributeNode(document.createAttribute('controls'));
             video.setAttributeNode(document.createAttribute('controlslist'));
             // video.setAttributeNode(document.createAttribute('audio'));
         } catch (e) {
-
             video.setAttribute('autoplay', true);
             video.setAttribute('playsinline', true);
             video.setAttribute('controls', true);
@@ -156,9 +134,6 @@
         }
 
         if (event.type === 'local') {
-
-               console.log('stream started 4');
-
             video.volume = 0;
             try {
                 video.setAttributeNode(document.createAttribute('muted'));
@@ -166,33 +141,20 @@
                 video.setAttribute('muted', true);
             }
         }
-
-           console.log('stream started 5');
-
         video.srcObject = event.stream;
 
 
-           console.log('stream started 6');
-
         var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
         var mediaElement = getHTMLMediaElement(video, {
-
             title: event.userid,
             buttons: ['full-screen'],
             width: width,
             showOnMouseEnter: false
         });
 
-           console.log('stream started 8');
-
         connection.videosContainer.appendChild(mediaElement);
         $('.wth_live_btn').attr('style', 'display:inline !important;');
         $('.tlm_img_chat').attr('style', 'display:inline !important;');
-
-           console.log('stream started 9');
-        // setTimeout(function() {
-        //     mediaElement.media.play();
-        // }, 5000);
 
         mediaElement.id = event.streamid;
     };
@@ -304,83 +266,14 @@
         navigator.connection.downlinkMax <= 0.115) {
         alert('2G is not supported. Please use a better internet service.');
     }
-    // $('video').attr('controls',true);
-    // function video_controls(){
-    //   $("video").prop("controls",true);
-    //   $('video').attr('controls',true);
-    // }
-    // setTimeout(video_controls, 5000);
-    // var numberOfUsers = connection.getAllParticipants().length;
-    // $('#click').on('click', function(){
-    //   var arrayOfUserIds = connection.getAllParticipants();
-    //   console.clear();
-
-    // })
-
-      document.getElementById('open-room').onclick = function () {
-
-        disableInputButtons();
- 
-        var res =         connection.open(document.getElementById('room-id').value, function () {
-
-
-            console.log(connection,'tttttttttttttt');
-    
-            showRoomURL(connection.sessionid);
-
-        });
-
-        //  showRoomURL(res.sessionid);
-        console.log(res,'tttttttttttttt');
-
-    };
-
-
-    document.getElementById('join-room').onclick = function () {
-
-        disableInputButtons();
-
-        connection.sdpConstraints.mandatory = {
-            OfferToReceiveAudio: true,
-            OfferToReceiveVideo: true
-        };
-        connection.join(document.getElementById('room-id').value);
-
-    };
-
 
     var tlm_streamer_length = '';
     setInterval(function () {
         // var arrayOfUserIds = connection.getAllParticipants();
-        var user = ['52'];
-        // connection.getAllParticipants().forEach(function (participantId) {
-        //     user.push(connection.peers[participantId].extra.user_id);
-        // });
-
-         var participants = Object.keys(connection.peers);
-
-
-
-        participants.forEach(function (participantId) {
-            var peer = connection.peers[participantId];
-            if (peer && peer.extra && peer.extra.user_id) {
-                user.push(peer.extra.user_id);
-            }
+        var user = [];
+        connection.getAllParticipants().forEach(function (participantId) {
+            user.push(connection.peers[participantId].extra.user_id);
         });
-
-        connection.onpeer = function(event) {
-
-            
-        };
-
-        connection.onstream = function(event) {
-
-            document.getElementById('videoContainer').appendChild(event.mediaElement);
-        };
-
-
-
-
         if (user.length > 0) {
             var tlm_user_name = $('#tlm_usere').val();
             var tlm_data = {
@@ -417,18 +310,8 @@
         } else {
             $('#tlm_user').html('0');
         }
-        // if( tlm_user_name == 'viewer' ) {
-        //     if( arrayOfUserIds && arrayOfUserIds.length == 1 ) {
-        //         $('#videos-container').attr('style','display:inline-block !important');
-        //     }else{
-        //         $('#videos-container').attr('style','display:none !important');
 
-        //     }
-        // }
-        //   $('.str_member').html(arrayOfUserIds.length);
     }, 3000);
-
-    
 
     $(document).on('click', 'video', function () {
     });
@@ -462,7 +345,7 @@
                     complete: function () {
                     },
                     success: function (response) {
-                 
+                        console.log(response);
                         $('#tlm_send_msg').val('');
                         tlm_get_msg();
                         scrolled = false;
@@ -490,7 +373,7 @@
                     complete: function () {
                     },
                     success: function (response) {
-              
+                        console.log(response);
                         $('#tlm_send_privatemsg').val('');
                         tlm_get_privatemsg();
                         scrolled = false;
@@ -498,11 +381,7 @@
                 });
             }
         });
-        // $("#tlm_send_msg").keypress(function(event) { 
-        //     if (event.keyCode === 13) { 
-        //         $(".str_chat_send_btn").click(); 
-        //     } 
-        // });
+    
 
         setInterval(function () {
             tlm_get_msg();
@@ -599,9 +478,7 @@
         });
         $('[data-toggle="tooltip"]').tooltip();
     });
-    // $(document).on('click', '.btn_send_tip', function(){
-    //     $('.razorpay-payment-button').trigger('click');
-    // });
+
     $(document).on('click', '#tlm_send_tip_main_btn', function () {
         var obj = $(this);
         let model_id = $('.str_privatechat_send_btn2').data('model_id');
@@ -703,10 +580,7 @@
                     setTimeout(function () {
                         tlm_private_chat_check();
                     }, 3000);
-                    // var total_coin = $('.tlm_show_coins_private_chat').html();
-                    // $('.tlm_show_coins_private_chat').html(parseInt(total_coin)-parseInt(coin));
-                    // // $('#tlm_close_private_chat_box').trigger('click');
-                    // tlm_private_chat_check();
+   
                 }
             });
         }
@@ -732,7 +606,7 @@
                 complete: function () {
                 },
                 success: function (response) {
-               
+                    // console.log(response.trim());
                     if (response.status == 'ok') {
                         //$('#tlm_start_private_popup11').attr('style','display:block;opacity:1;');
                         $('#tlm_start_private_popup11 .modal-body').html(response.html);

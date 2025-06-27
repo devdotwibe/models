@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RTCMultiConnection Broadcast</title>
+    <script src="https://cdn.webrtc-experiment.com/RTCMultiConnection.min.js"></script>
+    <script src="https://cdn.webrtc-experiment.com/socket.io.js"></script>
+    <style>
+        video {
+            width: 300px;
+            margin: 10px;
+            border: 2px solid #444;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>RTCMultiConnection Video Broadcast</h2>
+
+    <input type="text" id="room-id" value="demo-room" placeholder="Room ID" />
+    <button id="open-room">Start Broadcast</button>
+    <button id="join-room">Join Broadcast</button>
+
+    <div id="videoContainer"></div>
+
+    <script>
+        var connection = new RTCMultiConnection();
+
+        // Set your signaling server URL if different
+        connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+
+        // Media constraints: one-way video + audio
+        connection.session = {
+            audio: true,
+            video: true,
+            oneway: true
+        };
+
+        // Optional SDP config (disable receiving remote media for broadcaster)
+        connection.sdpConstraints.mandatory = {
+            OfferToReceiveAudio: false,
+            OfferToReceiveVideo: false
+        };
+
+        // Where to display video
+        connection.onstream = function(event) {
+            var video = event.mediaElement;
+            video.setAttribute('autoplay', true);
+            video.setAttribute('playsinline', true);
+            video.setAttribute('controls', false);
+            document.getElementById('videoContainer').appendChild(video);
+        };
+
+        // Broadcaster: open room
+        document.getElementById('open-room').onclick = function () {
+            var roomId = document.getElementById('room-id').value;
+            connection.extra = { user_id: 'broadcaster' };
+            connection.open(roomId, function () {
+                console.log('Broadcast started with room ID:', roomId);
+            });
+        };
+
+        // Viewer: join room
+        document.getElementById('join-room').onclick = function () {
+            var roomId = document.getElementById('room-id').value;
+            connection.extra = { user_id: 'viewer_' + Math.floor(Math.random() * 1000) };
+            connection.join(roomId);
+        };
+    </script>
+</body>
+</html>
