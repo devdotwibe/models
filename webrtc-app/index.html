@@ -82,9 +82,17 @@
     async function startViewer() {
       pc = new RTCPeerConnection(config);
 
+      console.log('start viewing');
+
       pc.ontrack = e => {
         if (!document.getElementById('remoteVideo').srcObject) {
+
+               console.log('start straam done ');
+
+
           document.getElementById('remoteVideo').srcObject = e.streams[0];
+
+            console.log('start straam',e.streams[0]);
         }
       };
 
