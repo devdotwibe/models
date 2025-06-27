@@ -39,7 +39,7 @@ if ($action === 'offer') {
     $viewer = $data['viewer'];
     $room['viewers'][$viewer]['offer'] = $data['data'];
     $room['viewers'][$viewer]['sent'] = true;
-    file_put_contents($roomFile, json_encode($room));
+    file_put_contents($roomFile, json_encode(value: $room));
     exit;
 }
 

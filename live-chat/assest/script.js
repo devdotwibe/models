@@ -154,7 +154,14 @@
     }];
 
     connection.videosContainer = document.getElementById('videos-container');
+
+    console.log('stream started');
+
     connection.onstream = function (event) {
+
+
+           console.log('stream started 1');
+
         var existing = document.getElementById(event.streamid);
         if (existing && existing.parentNode) {
             existing.parentNode.removeChild(existing);
@@ -165,15 +172,21 @@
         event.mediaElement.muted = true;
         event.mediaElement.volume = 0;
 
+           console.log('stream started 2');
+
         var video = document.createElement('video');
 
         try {
+
+               console.log('stream started 3');
+
             video.setAttributeNode(document.createAttribute('autoplay'));
             video.setAttributeNode(document.createAttribute('playsinline'));
             video.setAttributeNode(document.createAttribute('controls'));
             video.setAttributeNode(document.createAttribute('controlslist'));
             // video.setAttributeNode(document.createAttribute('audio'));
         } catch (e) {
+
             video.setAttribute('autoplay', true);
             video.setAttribute('playsinline', true);
             video.setAttribute('controls', true);
@@ -181,6 +194,9 @@
         }
 
         if (event.type === 'local') {
+
+               console.log('stream started 4');
+
             video.volume = 0;
             try {
                 video.setAttributeNode(document.createAttribute('muted'));
@@ -188,21 +204,33 @@
                 video.setAttribute('muted', true);
             }
         }
+
+           console.log('stream started 5');
+
         video.srcObject = event.stream;
 
 
+           console.log('stream started 6');
+
         var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
         var mediaElement = getHTMLMediaElement(video, {
+
+
+               console.log('stream started 7');
+
             title: event.userid,
             buttons: ['full-screen'],
             width: width,
             showOnMouseEnter: false
         });
 
+           console.log('stream started 8');
+
         connection.videosContainer.appendChild(mediaElement);
         $('.wth_live_btn').attr('style', 'display:inline !important;');
         $('.tlm_img_chat').attr('style', 'display:inline !important;');
 
+           console.log('stream started 9');
         // setTimeout(function() {
         //     mediaElement.media.play();
         // }, 5000);
@@ -332,7 +360,7 @@
     var tlm_streamer_length = '';
     setInterval(function () {
         // var arrayOfUserIds = connection.getAllParticipants();
-        var user = ['model-67054'];
+        var user = ['52'];
         // connection.getAllParticipants().forEach(function (participantId) {
         //     user.push(connection.peers[participantId].extra.user_id);
         // });
