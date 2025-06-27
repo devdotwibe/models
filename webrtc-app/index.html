@@ -85,64 +85,85 @@
     }
 
     // --- VIEWER LOGIC ---
-    async function startViewer() {
-      const pc = new RTCPeerConnection(config);
+   async function startViewer() {
+  const pc = new RTCPeerConnection(config);
 
-      pc.ontrack = e => {
-        document.getElementById('remoteVideo').srcObject = e.streams[0];
-      };
+  // Display the received stream
+  pc.ontrack = e => {
+    const remoteVideo = document.getElementById('remoteVideo');
+    if (!remoteVideo.srcObject) {
+      remoteVideo.srcObject = e.streams[0];
+    }
+  };
 
-      pc.onicecandidate = e => {
-        if (e.candidate) {
-          sendViewerSignal("ice", e.candidate);
-        }
-      };
+  // Send ICE candidates back to streamer
+  pc.onicecandidate = e => {
+    if (e.candidate) {
+      sendViewerSignal("ice", e.candidate);
+    }
+  };
 
-      await fetch("signal.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "register_viewer",
-          room_id: roomId,
-          viewer: viewerId
-        })
-      });
+  // Register viewer to server
+  await fetch("signal.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      action: "register_viewer",
+      room_id: roomId,
+      viewer: viewerId
+    })
+  });
 
-      const receivedIce = new Set();
-      setInterval(async () => {
-        const res = await fetch(`signal.php?action=get_offer&room_id=${roomId}&viewer=${viewerId}`);
-        const data = await res.json();
+  const receivedIce = new Set();
 
-        if (data.offer && !pc.remoteDescription) {
-          await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
-          const answer = await pc.createAnswer();
-          await pc.setLocalDescription(answer);
-          sendViewerSignal("answer", answer);
-        }
+  // Poll to get offer + ICE and respond with answer
+  setInterval(async () => {
+    const res = await fetch(`signal.php?action=get_offer&room_id=${roomId}&viewer=${viewerId}`);
+    const data = await res.json();
 
-        if (data.ice && Array.isArray(data.ice)) {
-          for (const candidate of data.ice) {
-            const key = JSON.stringify(candidate);
-            if (!receivedIce.has(key)) {
-              receivedIce.add(key);
-              try {
-                await pc.addIceCandidate(new RTCIceCandidate(candidate));
-              } catch (err) {
-                console.warn("Failed to add ICE candidate:", err);
-              }
-            }
+    // Set remote offer and send answer
+    if (data.offer && !pc.remoteDescription) {
+      try {
+        await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
+        const answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        sendViewerSignal("answer", answer);
+      } catch (err) {
+        console.error("Error handling offer:", err);
+      }
+    }
+
+    // Add new ICE candidates (avoid duplicates)
+    if (Array.isArray(data.ice)) {
+      for (const candidate of data.ice) {
+        const key = JSON.stringify(candidate);
+        if (!receivedIce.has(key)) {
+          receivedIce.add(key);
+          try {
+            await pc.addIceCandidate(new RTCIceCandidate(candidate));
+          } catch (err) {
+            console.warn("Failed to add ICE:", err);
           }
         }
-      }, 2000);
+      }
     }
+  }, 2000);
+}
 
-    function sendViewerSignal(type, data) {
-      fetch("signal.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: type, room_id: roomId, viewer: viewerId, data })
-      });
-    }
+function sendViewerSignal(type, data) {
+  fetch("signal.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      action: type,
+      room_id: roomId,
+      viewer: viewerId,
+      data: data
+    })
+  });
+}
+
+
   </script>
 </body>
 </html>
