@@ -319,9 +319,23 @@
     setInterval(function () {
         // var arrayOfUserIds = connection.getAllParticipants();
         var user = [];
-        connection.getAllParticipants().forEach(function (participantId) {
-            user.push(connection.peers[participantId].extra.user_id);
+        // connection.getAllParticipants().forEach(function (participantId) {
+        //     user.push(connection.peers[participantId].extra.user_id);
+        // });
+
+         var participants = Object.keys(connection.peers);
+
+         console.log(participants,'connected users');
+         
+
+        participants.forEach(function (participantId) {
+            var peer = connection.peers[participantId];
+            if (peer && peer.extra && peer.extra.user_id) {
+                user.push(peer.extra.user_id);
+            }
         });
+
+
         if (user.length > 0) {
             var tlm_user_name = $('#tlm_usere').val();
             var tlm_data = {
