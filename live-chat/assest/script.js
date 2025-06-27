@@ -31,32 +31,7 @@
 
     var connection = new RTCMultiConnection();
 
-    document.getElementById('open-room').onclick = function () {
-
-        disableInputButtons();
- 
-        var res =         connection.open(document.getElementById('room-id').value, function () {
-    
-            showRoomURL(connection.sessionid);
-
-        });
-
-         showRoomURL(res.sessionid);
-
-    };
-
-
-    document.getElementById('join-room').onclick = function () {
-
-        disableInputButtons();
-
-        connection.sdpConstraints.mandatory = {
-            OfferToReceiveAudio: true,
-            OfferToReceiveVideo: true
-        };
-        connection.join(document.getElementById('room-id').value);
-
-    };
+  
 
 
     // connection.socketURL = '/';
@@ -341,6 +316,35 @@
     //   console.clear();
 
     // })
+
+      document.getElementById('open-room').onclick = function () {
+
+        disableInputButtons();
+ 
+        var res =         connection.open(document.getElementById('room-id').value, function () {
+    
+            showRoomURL(connection.sessionid);
+
+        });
+
+         showRoomURL(res.sessionid);
+
+    };
+
+
+    document.getElementById('join-room').onclick = function () {
+
+        disableInputButtons();
+
+        connection.sdpConstraints.mandatory = {
+            OfferToReceiveAudio: true,
+            OfferToReceiveVideo: true
+        };
+        connection.join(document.getElementById('room-id').value);
+
+    };
+
+    
     var tlm_streamer_length = '';
     setInterval(function () {
         // var arrayOfUserIds = connection.getAllParticipants();
@@ -419,6 +423,8 @@
         // }
         //   $('.str_member').html(arrayOfUserIds.length);
     }, 3000);
+
+    
 
     $(document).on('click', 'video', function () {
     });
