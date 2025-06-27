@@ -60,7 +60,9 @@
           localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
           document.getElementById('localVideo').srcObject = localStream;
 
-          setInterval(pollViewers, 2000);
+          // setInterval(pollViewers, 2000);
+          pollViewers();
+          
         } catch (err) {
           console.error("Error accessing media devices:", err);
         }
