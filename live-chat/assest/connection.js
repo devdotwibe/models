@@ -81,7 +81,7 @@
                 document.getElementById('videos-container').innerHTML = '<video autoplay playsinline></video>';
                 document.querySelector('#videos-container video').srcObject = e.streams[0];
 
-                
+
             };
 
             pc.onicecandidate = e => {
@@ -107,6 +107,7 @@
 
 
     function disableInputButtons() {
+        
         document.getElementById('room-id').onkeyup();
         document.getElementById('room-id').disabled = true;
     }

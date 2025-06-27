@@ -1151,6 +1151,9 @@ Please wait...
 
   <!-- <script src="<?= 'script.js?v=' . time() ?>"></script> -->
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-JE7cQNRzKeHwEgdAgWbQ2GfHHF6DwvuUlLiQJ3MN5AekBP1z5FGP7BIuUUeVxkS9" crossorigin="anonymous"></script>
+
+
 
   <script src="<?= 'assest/connection.js?v=' . time() ?>"></script>
 
