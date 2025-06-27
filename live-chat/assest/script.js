@@ -48,7 +48,13 @@
          console.log(connection,'tesr run4');
     };
 
+
+    console.log('user not joined');
+
     document.getElementById('join-room').onclick = function () {
+
+         console.log('user room entered');
+
         disableInputButtons();
 
         connection.sdpConstraints.mandatory = {
@@ -60,6 +66,8 @@
          console.log(document.getElementById('room-id').value,'joined to room');
     };
 
+
+      console.log('user joined comepledted');
 
     // connection.socketURL = '/';
 
