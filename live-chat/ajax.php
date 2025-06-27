@@ -15,13 +15,15 @@ if ($_SESSION["log_user"]) {
 }
 
 if (isset($_POST['action']) && !empty($_POST['action'])) {
+
+    
     if ($_POST['action'] == 'tlm_msg_send_action') {
         if (isset($_POST['model_id'])) {
             $date = date("d-m-Y");
             $time = date("H:i");
             if (file_exists($_POST['model_id'] . '.txt')) {
             } else {
-                $myfile = fopen($_POST['model_id'] . '.txt', "w");
+                $myfile = fopen(filename: $_POST['model_id'] . '.txt', "w");
             }
             $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
             $message = htmlentities(strip_tags($_POST['msg']));
