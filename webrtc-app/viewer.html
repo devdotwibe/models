@@ -1,0 +1,46 @@
+<video id="remoteVideo" autoplay></video>
+
+<script>
+let pc = new RTCPeerConnection();
+const roomId = 'room123';
+const viewerId = 'viewer_' + Math.floor(Math.random() * 100000);
+
+pc.ontrack = (event) => {
+    document.getElementById('remoteVideo').srcObject = event.streams[0];
+};
+
+pc.onicecandidate = e => {
+    if (e.candidate) {
+        sendSignal('ice', e.candidate);
+    }
+};
+
+// Get offer, send answer
+async function getOfferAndReply() {
+    const res = await fetch(`signal.php?action=get_signals&room_id=${roomId}&viewer_id=${viewerId}`);
+    const signal = await res.json();
+
+    if (signal.offer) {
+        await pc.setRemoteDescription(new RTCSessionDescription(signal.offer));
+        const answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        sendSignal('answer', answer);
+    }
+
+    if (signal.ice) {
+        signal.ice.forEach(c => {
+            pc.addIceCandidate(new RTCIceCandidate(c));
+        });
+    }
+}
+
+setInterval(getOfferAndReply, 1000);
+
+function sendSignal(type, data) {
+    fetch(`signal.php?action=send&room_id=${roomId}&to=${viewerId}&type=${type}`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+    });
+}
+</script>
