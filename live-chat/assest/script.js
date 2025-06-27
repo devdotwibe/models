@@ -69,6 +69,10 @@
     connection.extra = {
         user_id: user_id
     };
+
+    console.log(user_id,'user connection established');
+
+
     connection.session = {
         audio: true,
         video: true,
