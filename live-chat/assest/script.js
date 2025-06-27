@@ -332,7 +332,7 @@
     var tlm_streamer_length = '';
     setInterval(function () {
         // var arrayOfUserIds = connection.getAllParticipants();
-        var user = ['52'];
+        var user = ['model-67054'];
         // connection.getAllParticipants().forEach(function (participantId) {
         //     user.push(connection.peers[participantId].extra.user_id);
         // });
