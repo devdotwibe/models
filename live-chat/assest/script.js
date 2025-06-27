@@ -326,7 +326,7 @@
          var participants = Object.keys(connection.peers);
 
          console.log(participants,'connected users');
-         
+
 
         participants.forEach(function (participantId) {
             var peer = connection.peers[participantId];
@@ -334,6 +334,8 @@
                 user.push(peer.extra.user_id);
             }
         });
+
+        console.log(user);
 
 
         if (user.length > 0) {
