@@ -349,6 +349,18 @@
             }
         });
 
+        connection.onpeer = function(event) {
+
+            console.log('A viewer joined:', event.userid, event.extra.user_id);
+            
+        };
+
+        connection.onstream = function(event) {
+            console.log('Broadcast started, stream received');
+            document.getElementById('videoContainer').appendChild(event.mediaElement);
+        };
+        
+
         console.log(user,'users commnects list ');
 
 
