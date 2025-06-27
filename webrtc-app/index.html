@@ -5,8 +5,6 @@
 </head>
 <body>
   <h2>WebRTC Live Broadcast</h2>
-  <button onclick="startBroadcast()">Start Broadcast</button>
-  <button onclick="startViewer()">Start Viewer</button>
 
   <h3>Broadcaster Video:</h3>
   <video id="localVideo" autoplay muted playsinline></video>
@@ -15,61 +13,60 @@
   <video id="remoteVideo" autoplay playsinline></video>
 
   <script>
-    let pc;
-    let viewerId = Math.floor(Math.random() * 100000);
-    let localStream;
+    const params = new URLSearchParams(window.location.search);
+    const roomId = params.get('room_id');
+    const role = params.get('role'); // 'streamer' or 'viewer'
 
-    const config = {
-      iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
-    };
+    let pc;
+    let localStream;
+    const viewerId = Math.floor(Math.random() * 100000);
+    const config = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] };
+
+    if (!roomId || !role) {
+      alert("Missing room_id or role in URL");
+    } else if (role === 'streamer') {
+      startBroadcast();
+    } else if (role === 'viewer') {
+      startViewer();
+    }
 
     function startBroadcast() {
       navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
         document.getElementById('localVideo').srcObject = stream;
         localStream = stream;
-
-        // Poll for viewers every second
-        setInterval(pollViewers, 15000);
+        setInterval(pollViewers, 5000);
       });
     }
 
     function pollViewers() {
-      fetch("signal.php?action=get_viewers")
+      fetch(`signal.php?action=get_viewers&room_id=${roomId}`)
         .then(res => res.json())
         .then(async viewers => {
-          for (const viewerId in viewers) {
-            const v = viewers[viewerId];
+          for (const viewer in viewers) {
+            const v = viewers[viewer];
             if (!v.offer && !v.sent) {
-              // Offer not sent yet
               pc = new RTCPeerConnection(config);
-
-              localStream.getTracks().forEach(track => {
-                pc.addTrack(track, localStream);
-              });
+              localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
 
               pc.onicecandidate = e => {
                 if (e.candidate) {
-                  sendSignal("ice", viewerId, e.candidate);
+                  sendSignal("ice", viewer, e.candidate);
                 }
               };
 
               const offer = await pc.createOffer();
               await pc.setLocalDescription(offer);
-              sendSignal("offer", viewerId, offer);
+              sendSignal("offer", viewer, offer);
             }
           }
         });
     }
 
-    function sendSignal(type, viewerId, data) {
+    function sendSignal(type, viewer, data) {
       fetch("signal.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: type,
-          viewer: viewerId,
-          data: data
-        })
+        body: JSON.stringify({ action: type, room_id: roomId, viewer, data })
       });
     }
 
@@ -89,15 +86,11 @@
       fetch("signal.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "register_viewer",
-          viewer: viewerId
-        })
+        body: JSON.stringify({ action: "register_viewer", room_id: roomId, viewer: viewerId })
       });
 
-      // Start polling for offer/ice
       setInterval(async () => {
-        fetch("signal.php?action=get_offer&viewer=" + viewerId)
+        fetch(`signal.php?action=get_offer&room_id=${roomId}&viewer=${viewerId}`)
           .then(res => res.json())
           .then(async res => {
             if (res.offer && !pc.remoteDescription) {
@@ -112,23 +105,19 @@
                 try {
                   await pc.addIceCandidate(candidate);
                 } catch (e) {
-                  console.log("ICE error", e);
+                  console.error("ICE error", e);
                 }
               }
             }
           });
-      }, 15000);
+      }, 5000);
     }
 
     function sendViewerSignal(type, data) {
       fetch("signal.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: type,
-          viewer: viewerId,
-          data: data
-        })
+        body: JSON.stringify({ action: type, room_id: roomId, viewer: viewerId, data })
       });
     }
   </script>
