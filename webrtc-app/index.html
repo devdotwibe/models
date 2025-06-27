@@ -68,39 +68,81 @@
         }
       }
 
-      async function pollViewers() {
-        const res = await fetch(`signal.php?action=get_viewers&room_id=${roomId}`);
-        const viewers = await res.json();
+      // async function pollViewers() {
+      //   const res = await fetch(`signal.php?action=get_viewers&room_id=${roomId}`);
+      //   const viewers = await res.json();
 
-        for (const vId in viewers) {
-          const v = viewers[vId];
+      //   for (const vId in viewers) {
+      //     const v = viewers[vId];
 
-          if (!roomConnections[vId]) {
-            const peer = new RTCPeerConnection(config);
-            roomConnections[vId] = peer;
+      //     // if (!roomConnections[vId]) {
+      //       const peer = new RTCPeerConnection(config);
+      //       roomConnections[vId] = peer;
 
-            localStream.getTracks().forEach(track => peer.addTrack(track, localStream));
+      //       localStream.getTracks().forEach(track => peer.addTrack(track, localStream));
 
-            peer.onicecandidate = e => {
-              if (e.candidate) {
-                sendSignal("ice", vId, e.candidate);
+      //       peer.onicecandidate = e => {
+      //         if (e.candidate) {
+      //           sendSignal("ice", vId, e.candidate);
+      //         }
+      //       };
+
+      //       const offer = await peer.createOffer();
+      //       await peer.setLocalDescription(offer);
+      //       sendSignal("offer", vId, offer);
+      //     // }
+
+      //     if (v.answer && !roomConnections[vId].remoteDescription) {
+      //       try {
+      //         await roomConnections[vId].setRemoteDescription(new RTCSessionDescription(v.answer));
+      //       } catch (err) {
+      //         console.error("Error setting remote answer:", err);
+      //       }
+      //     }
+      //   }
+      // }
+
+        async function pollViewers() {
+          const res = await fetch(`signal.php?action=get_viewers&room_id=${roomId}`);
+          const viewers = await res.json();
+
+          for (const vId in viewers) {
+            const v = viewers[vId];
+
+            // Only create connection once per viewer
+            if (!roomConnections[vId]) {
+              const peer = new RTCPeerConnection(config);
+              roomConnections[vId] = peer;
+
+              // Add local media tracks
+              localStream.getTracks().forEach(track => peer.addTrack(track, localStream));
+
+              // Send ICE candidates to viewer
+              peer.onicecandidate = e => {
+                if (e.candidate) {
+                  sendSignal("ice", vId, e.candidate);
+                }
+              };
+
+              // Create offer and send to viewer
+              const offer = await peer.createOffer();
+              await peer.setLocalDescription(offer);
+              sendSignal("offer", vId, offer);
+            }
+
+            // Set viewer's answer if available and not yet set
+            const peerConnection = roomConnections[vId];
+            if (v.answer && !peerConnection.remoteDescription) {
+              try {
+                await peerConnection.setRemoteDescription(new RTCSessionDescription(v.answer));
+              } catch (err) {
+                console.error(`Error setting remote answer for viewer ${vId}:`, err);
               }
-            };
-
-            const offer = await peer.createOffer();
-            await peer.setLocalDescription(offer);
-            sendSignal("offer", vId, offer);
-          }
-
-          if (v.answer && !roomConnections[vId].remoteDescription) {
-            try {
-              await roomConnections[vId].setRemoteDescription(new RTCSessionDescription(v.answer));
-            } catch (err) {
-              console.error("Error setting remote answer:", err);
             }
           }
         }
-      }
+
+
 
       function sendSignal(type, viewer, data) {
         fetch("signal.php", {
