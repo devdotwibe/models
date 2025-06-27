@@ -107,9 +107,11 @@
 
 
     function disableInputButtons() {
-        
-        document.getElementById('room-id').onkeyup();
-        document.getElementById('room-id').disabled = true;
+
+        // document.getElementById('room-id').onkeyup();
+        // document.getElementById('room-id').disabled = true;
+
+          $('#room-id').trigger('keyup').prop('disabled', true);
     }
 
     function sendSignal(type, data) {
