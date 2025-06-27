@@ -70,48 +70,66 @@
       });
     }
 
-    function startViewer() {
-      pc = new RTCPeerConnection(config);
+  let hasReceivedOffer = false;
+  let hasSentAnswer = false;
+  let receivedIce = new Set();
 
-      pc.ontrack = e => {
-        document.getElementById('remoteVideo').srcObject = e.streams[0];
-      };
+  function startViewer() {
+    pc = new RTCPeerConnection(config);
 
-      pc.onicecandidate = e => {
-        if (e.candidate) {
-          sendViewerSignal("ice", e.candidate);
-        }
-      };
+    pc.ontrack = e => {
+      document.getElementById('remoteVideo').srcObject = e.streams[0];
+    };
 
-      fetch("signal.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "register_viewer", room_id: roomId, viewer: viewerId })
-      });
+    pc.onicecandidate = e => {
+      if (e.candidate) {
+        sendViewerSignal("ice", e.candidate);
+      }
+    };
 
-      setInterval(async () => {
-        fetch(`signal.php?action=get_offer&room_id=${roomId}&viewer=${viewerId}`)
-          .then(res => res.json())
-          .then(async res => {
-            if (res.offer && !pc.remoteDescription) {
-              await pc.setRemoteDescription(new RTCSessionDescription(res.offer));
-              const answer = await pc.createAnswer();
-              await pc.setLocalDescription(answer);
-              sendViewerSignal("answer", answer);
-            }
+    // Register viewer
+    fetch("signal.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "register_viewer",
+        room_id: roomId,
+        viewer: viewerId
+      })
+    });
 
-            if (res.ice) {
-              for (let candidate of res.ice) {
+    // Poll every 3 seconds
+    setInterval(async () => {
+      fetch(`signal.php?action=get_offer&room_id=${roomId}&viewer=${viewerId}`)
+        .then(res => res.json())
+        .then(async res => {
+          if (res.offer && !hasReceivedOffer) {
+            hasReceivedOffer = true;
+            await pc.setRemoteDescription(new RTCSessionDescription(res.offer));
+
+            const answer = await pc.createAnswer();
+            await pc.setLocalDescription(answer);
+
+            sendViewerSignal("answer", answer);
+            hasSentAnswer = true;
+          }
+
+          if (res.ice && res.ice.length) {
+            for (let candidate of res.ice) {
+              const key = JSON.stringify(candidate);
+              if (!receivedIce.has(key)) {
+                receivedIce.add(key);
                 try {
-                  await pc.addIceCandidate(candidate);
+                  await pc.addIceCandidate(new RTCIceCandidate(candidate));
                 } catch (e) {
-                  console.error("ICE error", e);
+                  console.warn("Failed to add ICE:", e);
                 }
               }
             }
-          });
-      }, 5000);
-    }
+          }
+        });
+    }, 3000);
+  }
 
     function sendViewerSignal(type, data) {
       fetch("signal.php", {
