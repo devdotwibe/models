@@ -56,6 +56,8 @@
             OfferToReceiveVideo: true
         };
         connection.join(document.getElementById('room-id').value);
+
+         console.log(document.getElementById('room-id').value,'joined to room');
     };
 
 
