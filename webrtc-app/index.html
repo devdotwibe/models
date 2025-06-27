@@ -5,72 +5,151 @@
 </head>
 <body>
   <h2>WebRTC Live Broadcast</h2>
-<button id="start">Start Stream</button>
-<video id="localVideo" autoplay muted></video>
 
-<script>
-let localStream, pc;
-const roomId = 'room123';
-const roomConnections = {};
+<video id="localVideo" autoplay muted playsinline width="400" height="300" style="border:1px solid black;"></video>
+<video id="remoteVideo" autoplay playsinline width="400" height="300" style="border:1px solid black;"></video>
 
-document.getElementById('start').onclick = async () => {
-    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-    document.getElementById('localVideo').srcObject = localStream;
-    pollViewers();
-    setInterval(pollViewers, 1000);
-};
 
-async function pollViewers() {
-    const res = await fetch(`signal.php?action=get_viewers&room_id=${roomId}`);
-    const viewers = await res.json();
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const roomId = params.get('room_id');
+    const role = params.get('role'); // 'streamer' or 'viewer'
 
-    for (const viewerId in viewers) {
-        const viewer = viewers[viewerId];
+    let roomConnections = {}; 
+    let pc;
+    let localStream;
+    const viewerId = Math.floor(Math.random() * 100000);
+    const config = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] };
 
-        // 1. Send offer if not already sent
-        if (!roomConnections[viewerId]) {
-            const conn = new RTCPeerConnection();
-            localStream.getTracks().forEach(track => conn.addTrack(track, localStream));
-
-            conn.onicecandidate = e => {
-                if (e.candidate) {
-                    sendSignal('ice', viewerId, e.candidate);
-                }
-            };
-
-            const offer = await conn.createOffer();
-            await conn.setLocalDescription(offer);
-            sendSignal('offer', viewerId, offer);
-            conn._remoteSet = false;
-            roomConnections[viewerId] = conn;
-        }
-
-        // 2. Set answer from viewer if available
-        if (viewer.answer && !roomConnections[viewerId]._remoteSet) {
-            await roomConnections[viewerId].setRemoteDescription(new RTCSessionDescription(viewer.answer));
-            roomConnections[viewerId]._remoteSet = true;
-        }
-
-        // 3. Handle ICE
-        if (viewer.ice) {
-            viewer.ice.forEach(async candidate => {
-                try {
-                    await roomConnections[viewerId].addIceCandidate(new RTCIceCandidate(candidate));
-                } catch (e) {
-                    console.warn("ICE error", e);
-                }
-            });
-        }
+    if (!roomId || !role) {
+      alert("Missing room_id or role in URL");
+    } else if (role === 'streamer') {
+      startBroadcast();
+    } else if (role === 'viewer') {
+      startViewer();
     }
-}
 
-function sendSignal(type, to, data) {
-    fetch(`signal.php?action=send&room_id=${roomId}&to=${to}&type=${type}`, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
+    function startBroadcast() {
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        document.getElementById('localVideo').srcObject = stream;
+        localStream = stream;
+        setInterval(pollViewers, 5000);
+      });
+    }
+
+      function pollViewers() {
+      fetch(`signal.php?action=get_viewers&room_id=${roomId}`)
+        .then(res => res.json())
+        .then(async viewers => {
+          for (const viewerId in viewers) {
+            const v = viewers[viewerId];
+
+            // Create offer if not already sent
+            if (!v.offer && !v.sent) {
+             const pc = new RTCPeerConnection(config);
+                roomConnections[viewerId] = pc;
+
+              localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+
+              pc.onicecandidate = e => {
+                if (e.candidate) {
+                  sendSignal("ice", viewerId, e.candidate);
+                }
+              };
+
+              const offer = await pc.createOffer();
+              await pc.setLocalDescription(offer);
+              sendSignal("offer", viewerId, offer);
+
+              roomConnections[viewerId] = pc;
+            }
+          if (v.answer && roomConnections[viewerId] && !roomConnections[viewerId].remoteDescription) {
+              try {
+                await roomConnections[viewerId].setRemoteDescription(new RTCSessionDescription(v.answer));
+              } catch (err) {
+                console.error("Failed to set remote answer:", err);
+              }
+            }
+          }
+        });
+    }
+
+    function sendSignal(type, viewer, data) {
+      fetch("signal.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: type, room_id: roomId, viewer, data })
+      });
+    }
+
+  let hasReceivedOffer = false;
+  let hasSentAnswer = false;
+  let receivedIce = new Set();
+
+  function startViewer() {
+    pc = new RTCPeerConnection(config);
+
+    pc.ontrack = e => {
+      document.getElementById('remoteVideo').srcObject = e.streams[0];
+    };
+
+    pc.onicecandidate = e => {
+      if (e.candidate) {
+        sendViewerSignal("ice", e.candidate);
+      }
+    };
+
+    // Register viewer
+    fetch("signal.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "register_viewer",
+        room_id: roomId,
+        viewer: viewerId
+      })
     });
-}
-</script>
+
+    // Poll every 3 seconds
+    setInterval(async () => {
+      fetch(`signal.php?action=get_offer&room_id=${roomId}&viewer=${viewerId}`)
+        .then(res => res.json())
+        .then(async res => {
+          if (res.offer && !hasReceivedOffer) {
+            hasReceivedOffer = true;
+            await pc.setRemoteDescription(new RTCSessionDescription(res.offer));
+
+            const answer = await pc.createAnswer();
+            await pc.setLocalDescription(answer);
+
+            sendViewerSignal("answer", answer);
+            hasSentAnswer = true;
+          }
+
+          if (res.ice && res.ice.length) {
+            for (let candidate of res.ice) {
+              const key = JSON.stringify(candidate);
+              if (!receivedIce.has(key)) {
+                receivedIce.add(key);
+                try {
+                  await pc.addIceCandidate(new RTCIceCandidate(candidate));
+                } catch (e) {
+                  console.warn("Failed to add ICE:", e);
+                }
+              }
+            }
+          }
+        });
+    }, 3000);
+  }
+
+    function sendViewerSignal(type, data) {
+      fetch("signal.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: type, room_id: roomId, viewer: viewerId, data })
+      });
+    }
+  </script>
 </body>
 </html>
