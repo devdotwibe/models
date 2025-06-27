@@ -75,7 +75,7 @@
         for (const vId in viewers) {
           const v = viewers[vId];
 
-          // if (!roomConnections[vId]) {
+          if (!roomConnections[vId]) {
             const peer = new RTCPeerConnection(config);
             roomConnections[vId] = peer;
 
@@ -90,7 +90,7 @@
             const offer = await peer.createOffer();
             await peer.setLocalDescription(offer);
             sendSignal("offer", vId, offer);
-          // }
+          }
 
           if (v.answer && !roomConnections[vId].remoteDescription) {
             try {
