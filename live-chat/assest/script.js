@@ -335,7 +335,7 @@
             }
         });
 
-        console.log(user);
+        console.log(user,'users commnects list ');
 
 
         if (user.length > 0) {
