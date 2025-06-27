@@ -15,6 +15,7 @@
     const roomId = params.get('room_id');
     const role = params.get('role'); // 'streamer' or 'viewer'
 
+    let roomConnections = {}; 
     let pc;
     let localStream;
     const viewerId = Math.floor(Math.random() * 100000);
@@ -36,25 +37,37 @@
       });
     }
 
-    function pollViewers() {
+      function pollViewers() {
       fetch(`signal.php?action=get_viewers&room_id=${roomId}`)
         .then(res => res.json())
         .then(async viewers => {
-          for (const viewer in viewers) {
-            const v = viewers[viewer];
+          for (const viewerId in viewers) {
+            const v = viewers[viewerId];
+
+            // Create offer if not already sent
             if (!v.offer && !v.sent) {
               pc = new RTCPeerConnection(config);
               localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
 
               pc.onicecandidate = e => {
                 if (e.candidate) {
-                  sendSignal("ice", viewer, e.candidate);
+                  sendSignal("ice", viewerId, e.candidate);
                 }
               };
 
               const offer = await pc.createOffer();
               await pc.setLocalDescription(offer);
-              sendSignal("offer", viewer, offer);
+              sendSignal("offer", viewerId, offer);
+
+              roomConnections[viewerId] = pc;
+            }
+            if (v.answer && roomConnections[viewerId] && !roomConnections[viewerId].remoteDescriptionSet) {
+              try {
+                await roomConnections[viewerId].setRemoteDescription(new RTCSessionDescription(v.answer));
+                roomConnections[viewerId].remoteDescriptionSet = true;
+              } catch (err) {
+                console.error("Failed to set remote answer:", err);
+              }
             }
           }
         });
