@@ -1,72 +1,37 @@
 <?php
+session_start();
 
-$input = json_decode(file_get_contents("php://input"), true);
-$action = $_GET['action'] ?? ($input['action'] ?? null);
-$room_id = $_GET['room_id'] ?? ($input['room_id'] ?? null);
-$viewer = $_GET['viewer'] ?? ($input['viewer'] ?? null);
+$file = 'signal_data.json';
+$data = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
 
-if (!$room_id) {
-    http_response_code(400);
-    echo json_encode(["error" => "Missing room_id"]);
-    exit;
-}
+$action = $_GET['action'] ?? '';
+$room_id = $_GET['room_id'] ?? '';
+$viewer_id = $_GET['viewer_id'] ?? '';
+$to = $_GET['to'] ?? '';
+$type = $_GET['type'] ?? '';
 
-$roomDir = "rooms";
-$roomFile = "$roomDir/room_$room_id.json";
+switch ($action) {
+    case 'send':
+        $payload = json_decode(file_get_contents('php://input'), true);
+        if (!isset($data[$room_id])) $data[$room_id] = [];
+        if (!isset($data[$room_id][$to])) $data[$room_id][$to] = [];
 
-if (!file_exists($roomDir)) mkdir($roomDir);
-if (!file_exists($roomFile)) file_put_contents($roomFile, json_encode(["viewers" => []]));
+        if ($type === 'offer') {
+            $data[$room_id][$to]['offer'] = $payload;
+        } elseif ($type === 'answer') {
+            $data[$room_id][$to]['answer'] = $payload;
+        } elseif ($type === 'ice') {
+            if (!isset($data[$room_id][$to]['ice'])) $data[$room_id][$to]['ice'] = [];
+            $data[$room_id][$to]['ice'][] = $payload;
+        }
+        file_put_contents($file, json_encode($data));
+        break;
 
-$room = json_decode(file_get_contents($roomFile), true);
+    case 'get_viewers':
+        echo json_encode($data[$room_id] ?? []);
+        break;
 
-// Register viewer
-if ($action === 'register_viewer') {
-    if (!isset($room['viewers'][$viewer])) {
-        $room['viewers'][$viewer] = [
-            "offer" => null,
-            "answer" => null,
-            "ice" => [],
-            "sent" => false
-        ];
-        file_put_contents($roomFile, json_encode($room));
-    }
-    exit;
-}
-
-// Get viewers
-if ($action === 'get_viewers') {
-    echo json_encode($room['viewers']);
-    exit;
-}
-
-// Broadcaster sends offer
-if ($action === 'offer') {
-    $room['viewers'][$viewer]['offer'] = $input['data'];
-    $room['viewers'][$viewer]['sent'] = true;
-    file_put_contents($roomFile, json_encode($room));
-    exit;
-}
-
-// Viewer sends answer
-if ($action === 'answer') {
-    $room['viewers'][$viewer]['answer'] = $input['data'];
-    file_put_contents($roomFile, json_encode($room));
-    exit;
-}
-
-// Handle ICE
-if ($action === 'ice') {
-    $room['viewers'][$viewer]['ice'][] = $input['data'];
-    file_put_contents($roomFile, json_encode($room));
-    exit;
-}
-
-// Viewer gets offer and ICE
-if ($action === 'get_offer') {
-    $res = [
-        "offer" => $room['viewers'][$viewer]['offer'] ?? null,
-        "ice" => $room['viewers'][$viewer]['ice'] ?? []
-    ];
-    echo json_encode($res);
-    exit;
+    case 'get_signals':
+        echo json_encode($data[$room_id][$_GET['viewer_id']] ?? []);
+        break;
 }
