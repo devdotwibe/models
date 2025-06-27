@@ -215,9 +215,6 @@
         var width = parseInt(connection.videosContainer.clientWidth / 3) - 20;
         var mediaElement = getHTMLMediaElement(video, {
 
-
-               console.log('stream started 7');
-
             title: event.userid,
             buttons: ['full-screen'],
             width: width,
