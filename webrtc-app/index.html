@@ -6,19 +6,17 @@
 <body>
   <h2>WebRTC Live Broadcast</h2>
 
-<video id="localVideo" autoplay muted playsinline width="400" height="300" style="border:1px solid black;"></video>
-<video id="remoteVideo" autoplay playsinline width="400" height="300" style="border:1px solid black;"></video>
-
+  <video id="localVideo" autoplay muted playsinline width="400" height="300" style="border:1px solid black;"></video>
+  <video id="remoteVideo" autoplay playsinline width="400" height="300" style="border:1px solid black;"></video>
 
   <script>
     const params = new URLSearchParams(window.location.search);
     const roomId = params.get('room_id');
     const role = params.get('role'); // 'streamer' or 'viewer'
 
-    let roomConnections = {}; 
-    let pc;
+    let roomConnections = {};
     let localStream;
-    const viewerId = Math.floor(Math.random() * 100000);
+    let viewerId = Math.floor(Math.random() * 100000);
     const config = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] };
 
     if (!roomId || !role) {
@@ -29,49 +27,53 @@
       startViewer();
     }
 
+    // --- STREAMER LOGIC ---
     function startBroadcast() {
       navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
         document.getElementById('localVideo').srcObject = stream;
         localStream = stream;
-        setInterval(pollViewers, 5000);
+        setInterval(pollViewers, 3000);
       });
     }
 
-      function pollViewers() {
-      fetch(`signal.php?action=get_viewers&room_id=${roomId}`)
-        .then(res => res.json())
-        .then(async viewers => {
-          for (const viewerId in viewers) {
-            const v = viewers[viewerId];
+    async function pollViewers() {
+      const res = await fetch(`signal.php?action=get_viewers&room_id=${roomId}`);
+      const viewers = await res.json();
 
-            // Create offer if not already sent
-            if (!v.offer && !v.sent) {
-             const pc = new RTCPeerConnection(config);
-                roomConnections[viewerId] = pc;
+      for (const vId in viewers) {
+        const v = viewers[vId];
 
-              localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+        // Create new connection if not already
+        if (!v.offer && !v.sent && !roomConnections[vId]) {
+          const pc = new RTCPeerConnection(config);
+          roomConnections[vId] = pc;
 
-              pc.onicecandidate = e => {
-                if (e.candidate) {
-                  sendSignal("ice", viewerId, e.candidate);
-                }
-              };
+          localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
 
-              const offer = await pc.createOffer();
-              await pc.setLocalDescription(offer);
-              sendSignal("offer", viewerId, offer);
-
-              roomConnections[viewerId] = pc;
+          pc.onicecandidate = e => {
+            if (e.candidate) {
+              sendSignal("ice", vId, e.candidate);
             }
-          if (v.answer && roomConnections[viewerId] && !roomConnections[viewerId].remoteDescription) {
-              try {
-                await roomConnections[viewerId].setRemoteDescription(new RTCSessionDescription(v.answer));
-              } catch (err) {
-                console.error("Failed to set remote answer:", err);
-              }
+          };
+
+          const offer = await pc.createOffer();
+          await pc.setLocalDescription(offer);
+
+          sendSignal("offer", vId, offer);
+        }
+
+        // Check for viewer's answer
+        if (v.answer && roomConnections[vId]) {
+          const pc = roomConnections[vId];
+          if (!pc.remoteDescription) {
+            try {
+              await pc.setRemoteDescription(new RTCSessionDescription(v.answer));
+            } catch (err) {
+              console.error("Set remote answer failed:", err);
             }
           }
-        });
+        }
+      }
     }
 
     function sendSignal(type, viewer, data) {
@@ -82,66 +84,57 @@
       });
     }
 
-  let hasReceivedOffer = false;
-  let hasSentAnswer = false;
-  let receivedIce = new Set();
+    // --- VIEWER LOGIC ---
+    async function startViewer() {
+      const pc = new RTCPeerConnection(config);
 
-  function startViewer() {
-    pc = new RTCPeerConnection(config);
+      pc.ontrack = e => {
+        document.getElementById('remoteVideo').srcObject = e.streams[0];
+      };
 
-    pc.ontrack = e => {
-      document.getElementById('remoteVideo').srcObject = e.streams[0];
-    };
+      pc.onicecandidate = e => {
+        if (e.candidate) {
+          sendViewerSignal("ice", e.candidate);
+        }
+      };
 
-    pc.onicecandidate = e => {
-      if (e.candidate) {
-        sendViewerSignal("ice", e.candidate);
-      }
-    };
+      await fetch("signal.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "register_viewer",
+          room_id: roomId,
+          viewer: viewerId
+        })
+      });
 
-    // Register viewer
-    fetch("signal.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        action: "register_viewer",
-        room_id: roomId,
-        viewer: viewerId
-      })
-    });
+      const receivedIce = new Set();
+      setInterval(async () => {
+        const res = await fetch(`signal.php?action=get_offer&room_id=${roomId}&viewer=${viewerId}`);
+        const data = await res.json();
 
-    // Poll every 3 seconds
-    setInterval(async () => {
-      fetch(`signal.php?action=get_offer&room_id=${roomId}&viewer=${viewerId}`)
-        .then(res => res.json())
-        .then(async res => {
-          if (res.offer && !hasReceivedOffer) {
-            hasReceivedOffer = true;
-            await pc.setRemoteDescription(new RTCSessionDescription(res.offer));
+        if (data.offer && !pc.remoteDescription) {
+          await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
+          const answer = await pc.createAnswer();
+          await pc.setLocalDescription(answer);
+          sendViewerSignal("answer", answer);
+        }
 
-            const answer = await pc.createAnswer();
-            await pc.setLocalDescription(answer);
-
-            sendViewerSignal("answer", answer);
-            hasSentAnswer = true;
-          }
-
-          if (res.ice && res.ice.length) {
-            for (let candidate of res.ice) {
-              const key = JSON.stringify(candidate);
-              if (!receivedIce.has(key)) {
-                receivedIce.add(key);
-                try {
-                  await pc.addIceCandidate(new RTCIceCandidate(candidate));
-                } catch (e) {
-                  console.warn("Failed to add ICE:", e);
-                }
+        if (data.ice && Array.isArray(data.ice)) {
+          for (const candidate of data.ice) {
+            const key = JSON.stringify(candidate);
+            if (!receivedIce.has(key)) {
+              receivedIce.add(key);
+              try {
+                await pc.addIceCandidate(new RTCIceCandidate(candidate));
+              } catch (err) {
+                console.warn("Failed to add ICE candidate:", err);
               }
             }
           }
-        });
-    }, 3000);
-  }
+        }
+      }, 2000);
+    }
 
     function sendViewerSignal(type, data) {
       fetch("signal.php", {
