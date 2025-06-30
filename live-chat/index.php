@@ -1147,9 +1147,12 @@ Please wait...
         unlink('total_user' . $_GET['unique_model_id'] . 'prav' . ".txt");
       }
     ?> 
+    console.log("e")
       $(function() { 
         $('#open-room').click();
+        console.log("ww")
       }); 
+      console.log("888")
     <?php
     }
     if (isset($_GET['user']) && $_GET['user'] == 'viewer') {
