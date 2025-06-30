@@ -743,27 +743,38 @@ if (mysqli_num_rows($res_ap) > 0) {
                 </svg>
             </button>
         </div>
+		
+		<?php 
+		$serv_chats = DB::queryFirstRow('select * from model_service_chat where model_unique_id="'.$_GET['m_unique_id'].'"');
+		$serv_meets = DB::queryFirstRow('select * from model_service_meet where model_unique_id="'.$_GET['m_unique_id'].'"');
+		?>
         
         <div class="modal-body">
+		<?php if(!empty($serv_chats)){ ?>
             <div class="about-section">
                 <h3 class="about-section-title">Chat Services</h3>
                 <div class="attributes-grid">
+				<?php if($serv_chats['group_chat_tocken']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">1-on-1 Chat Session</div>
                         <div class="attribute-value">$50/hr</div>
                         <p>Exclusive private chat sessions where we can discuss anything you'd like.</p>
                         <button class="btn btn-primary">Book Now</button>
                     </div>
+				<?php } ?>
+				<?php if($serv_chats['private_chat_token']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Private Messaging</div>
                         <div class="attribute-value">$25/day</div>
                         <p>Priority responses to your messages throughout the day.</p>
                         <button class="btn btn-primary">Book Now</button>
                     </div>
+				<?php } ?>
                 </div>
             </div>
+		<?php } ?>
             
-            <div class="about-section">
+            <?php /*?><div class="about-section">
                 <h3 class="about-section-title">Watch/Stream Services</h3>
                 <div class="attributes-grid">
                     <div class="attribute">
@@ -779,25 +790,30 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <button class="btn btn-primary">Join Now</button>
                     </div>
                 </div>
-            </div>
-            
+            </div> <?php */  ?>
+            <?php if(!empty($serv_meets)){ ?>
             <div class="about-section">
                 <h3 class="about-section-title">Meet Services</h3>
                 <div class="attributes-grid">
+				<?php //if($serv_meets['private_chat_token']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Dating Experiences</div>
                         <div class="attribute-value">Custom</div>
                         <p>Enjoy a personalized date experience.</p>
                         <button class="btn btn-primary">Book Now</button>
                     </div>
+				<?php //} ?>
+				<?php //if($serv_meets['private_chat_token']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Travel & Tours Together</div>
                         <div class="attribute-value">Custom</div>
                         <p>Travel with me to exciting destinations.</p>
                         <button class="btn btn-primary">Book Now</button>
                     </div>
+				<?php //} ?>
                 </div>
             </div>
+			<?php } ?>
         </div>
     </div>
 </div>
