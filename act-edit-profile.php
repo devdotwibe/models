@@ -177,7 +177,40 @@ if ($_POST['submit_name']){
 	window.location="edit-profile.php"
 	</script>';
 	die;
-    }/*else if(isset($_POST['submit_pass'])){
+    }else if(isset($_POST['service_submit'])){
+		$model_unique_id = $_POST['model_unique_id']; 
+		$service_chat_list = DB::query('select offer_live_session from model_service_chat where model_unique_id="'.$model_unique_id.'"');
+			$arr_chat = array('model_unique_id','offer_live_session','instagram','snapchat','private_chat_token','group_chat_tocken'); 
+			$post_data_chat = array_from_post($arr_chat); 
+		if(empty($service_chat_list)){
+			
+			DB::insert('model_service_chat', $post_data_chat); 
+			$created_id = DB::insertId();
+			
+		}else{
+			
+			DB::update('model_service_chat', $post_data_chat, "model_unique_id=%s", $model_unique_id);
+		}
+		$service_meet_list = DB::query('select offer_service from model_service_meet where model_unique_id="'.$model_unique_id.'"');
+			$arr_meet = array('model_unique_id','offer_service','local_meet_rate','extended_rate','overnight_rate','preferred_meet_location'); 
+			$post_data_meet = array_from_post($arr_meet);
+		if(empty($service_meet_list)){
+			
+			DB::insert('model_service_meet', $post_data_meet); 
+			$created_id = DB::insertId();
+			
+		}else{
+			
+			DB::update('model_service_meet', $post_data_meet, "model_unique_id=%s", $model_unique_id);
+			
+		}
+		
+		echo '<script>alert("Your Services Successfully Updated");
+	window.location="edit-profile.php"
+	</script>';
+	die;
+		
+	}/*else if(isset($_POST['submit_pass'])){
 
       $user_id = $_POST['use_id'];
       $name = $_POST['name'];

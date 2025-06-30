@@ -963,6 +963,7 @@ $lang_list = modal_language_list();
 
   <!-- Creator Settings Tab -->
   <div id="creator-content" class="tab-content">
+    <form method="post" action="act-edit-profile.php" enctype="multipart/form-data" >
     <div class="text-center mb-8">
       <h2 class="text-2xl font-bold gradient-text mb-4">Creator Settings</h2>
       <p class="text-white/70">Customize your creator profile and service offerings</p>
@@ -982,6 +983,7 @@ $lang_list = modal_language_list();
 
     <!-- Chat Services Category -->
     <div id="chat-services" class="collapsible-section">
+	
       <div class="collapsible-header" onclick="toggleCollapsible(this)">
         <h2 class="text-xl font-bold">💬 Chat & Communication Services</h2>
         <svg class="w-6 h-6 collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -993,6 +995,11 @@ $lang_list = modal_language_list();
           <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
           <span>TLM tokens are our platform's currency. Users purchase tokens and spend them to access your services. You earn 70% of all token revenue.</span>
         </div>
+		
+		<?php $service_chat_list = DB::query('select * from model_service_chat where model_unique_id="'.$userDetails['unique_id'].'"'); 
+		
+		print_r($service_chat_list);
+		?>
         
         <!-- Live Streaming -->
         <div class="mb-6">
@@ -1000,11 +1007,11 @@ $lang_list = modal_language_list();
           <p class="help-text">Connect with viewers through live video streaming and interactive chat</p>
           <div class="radio-group mt-3">
             <div class="radio-option">
-              <input type="radio" id="stream-yes" name="live-streaming" value="yes" onchange="toggleConditionalSection('streaming-options', true)">
+              <input type="radio" id="stream-yes" name="offer_live_session" value="yes" onchange="toggleConditionalSection('streaming-options', true)">
               <label for="stream-yes">Yes, I'm interested</label>
             </div>
             <div class="radio-option">
-              <input type="radio" id="stream-no" name="live-streaming" value="no" checked onchange="toggleConditionalSection('streaming-options', false)">
+              <input type="radio" id="stream-no" name="offer_live_session" value="no" checked onchange="toggleConditionalSection('streaming-options', false)">
               <label for="stream-no">Not right now</label>
             </div>
           </div>
@@ -1023,7 +1030,7 @@ $lang_list = modal_language_list();
                   </label>
                 </div>
               </div>
-              <input type="url" class="form-input" placeholder="https://instagram.com/username">
+              <input type="url" class="form-input" name="instagram" placeholder="https://instagram.com/username">
               <p class="help-text">We'll use this to set up video calls through Instagram</p>
             </div>
             <div>
@@ -1037,7 +1044,7 @@ $lang_list = modal_language_list();
                   </label>
                 </div>
               </div>
-              <input type="text" class="form-input" placeholder="Your Snapchat username">
+              <input type="text" class="form-input" name="snapchat" placeholder="Your Snapchat username">
               <p class="help-text">We'll use this to set up video calls through Snapchat</p>
             </div>
           </div>
@@ -1045,12 +1052,12 @@ $lang_list = modal_language_list();
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div>
               <label class="form-label">TLM Tokens per Minute (Private Chat)</label>
-              <input type="number" class="form-input" placeholder="e.g., 50" min="1">
+              <input type="number" class="form-input" name="private_chat_token" placeholder="e.g., 50" min="1">
               <p class="help-text">Set your rate for private video chats</p>
             </div>
             <div>
               <label class="form-label">TLM Tokens per Minute (Group Chat)</label>
-              <input type="number" class="form-input" placeholder="e.g., 20" min="1">
+              <input type="number" class="form-input" name="group_chat_tocken" placeholder="e.g., 20" min="1">
               <p class="help-text">Set your rate for group video sessions</p>
             </div>
           </div>
@@ -1104,11 +1111,11 @@ $lang_list = modal_language_list();
           <p class="help-text">Provide friendly companionship for social events, dinners, or casual meetups</p>
           <div class="radio-group mt-3">
             <div class="radio-option">
-              <input type="radio" id="companion-yes" name="companionship" value="yes" onchange="toggleConditionalSection('companion-options', true)">
+              <input type="radio" id="companion-yes" name="offer_service" value="yes" onchange="toggleConditionalSection('companion-options', true)">
               <label for="companion-yes">Yes, I'd love to meet people</label>
             </div>
             <div class="radio-option">
-              <input type="radio" id="companion-no" name="companionship" value="no" checked onchange="toggleConditionalSection('companion-options', false)">
+              <input type="radio" id="companion-no" name="offer_service" value="no" checked onchange="toggleConditionalSection('companion-options', false)">
               <label for="companion-no">Not interested</label>
             </div>
           </div>
@@ -1118,12 +1125,12 @@ $lang_list = modal_language_list();
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="form-label">Local Meetup Rate (TLM tokens per hour)</label>
-              <input type="number" class="form-input" placeholder="e.g., 1000" min="1">
+              <input type="number" class="form-input" name="local_meet_rate" placeholder="e.g., 1000" min="1">
               <p class="help-text">Rate for local social meetups and events</p>
             </div>
             <div>
               <label class="form-label">Extended Social Rate (TLM tokens per hour)</label>
-              <input type="number" class="form-input" placeholder="e.g., 1500" min="1">
+              <input type="number" class="form-input" name="extended_rate" placeholder="e.g., 1500" min="1">
               <p class="help-text">Rate for longer social engagements</p>
             </div>
           </div>
@@ -1131,12 +1138,12 @@ $lang_list = modal_language_list();
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div>
               <label class="form-label">Overnight Social Rate (TLM tokens)</label>
-              <input type="number" class="form-input" placeholder="e.g., 8000" min="1">
+              <input type="number" class="form-input" name="overnight_rate" placeholder="e.g., 8000" min="1">
               <p class="help-text">Rate for overnight social companionship</p>
             </div>
             <div>
               <label class="form-label">Preferred Meeting Location</label>
-              <input type="text" class="form-input" placeholder="e.g., Coffee shops, restaurants, events">
+              <input type="text" class="form-input" name="preferred_meet_location" placeholder="e.g., Coffee shops, restaurants, events">
               <p class="help-text">Where you prefer to meet for social activities</p>
             </div>
           </div>
@@ -1728,8 +1735,11 @@ $lang_list = modal_language_list();
     </div>
 
     <div class="flex justify-center mt-8">
-      <button class="btn-primary text-lg px-8 py-4" onclick="saveCreatorSettings()">Save Creator Settings</button>
+			<input type="hidden" name="use_id" value="<?php echo $_SESSION["log_user_id"]; ?>">
+			<input type="hidden" name="model_unique_id" value="<?php echo $userDetails['unique_id']; ?>">
+      <button class="btn-primary text-lg px-8 py-4" type="submit" name="service_submit" onclick="saveCreatorSettings()">Save Creator Settings</button>
     </div>
+	</form>
   </div>
 
   <!-- Services Tab -->
