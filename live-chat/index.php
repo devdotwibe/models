@@ -1149,10 +1149,11 @@ Please wait...
     ?> 
     console.log("e")
       $(function() { 
-        setTimeout(function() {
-          $('#open-room').click();
+      //   setTimeout(function() {
+      //     $('#open-room').click();
       console.log("ss")
-        },1000) 
+      //   },1000) 
+      openRoom()
       }); 
       console.log("888")
     <?php
@@ -1163,7 +1164,8 @@ Please wait...
       }
     ?>
       $(function() {
-        $('#join-room').click();
+        // $('#join-room').click();
+      joinRoom()
       });
     <?php
     }
