@@ -1151,6 +1151,7 @@ Please wait...
       $(function() { 
         setTimeout(function() {
           $('#open-room').click();
+      console.log("ss")
         },1000) 
       }); 
       console.log("888")
