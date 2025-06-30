@@ -99,7 +99,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
         if (file_exists($_POST['key'] . 'prav' . '.txt')) {
             $lines = file($_POST['key'] . 'prav' . '.txt');
         }
-        $count =  count($lines);
+        $count =  $lines ? count($lines) : 0;
         if ($count > 0) {
             $log = array();
             $text = [];
