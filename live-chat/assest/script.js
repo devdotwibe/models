@@ -1,6 +1,3 @@
-(function( $ ) {
-    'use strict';
-
     console.log("script.js loaded");
 
     tlm_check_url();
@@ -645,5 +642,4 @@
                 }
             });
         }
-    }
-})( jQuery );
+    } 
