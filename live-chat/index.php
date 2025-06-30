@@ -1013,32 +1013,6 @@ Please wait...
 <!-- <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> -->
 
 
-  <script>
-    <?php
-    if (isset($_GET['user']) && $_GET['user'] == 'streamer') {
-      if (isset($_GET['unique_model_id'])) {
-        unlink($_GET['unique_model_id'] . ".txt");
-        unlink('total_user' . $_GET['unique_model_id'] . 'prav' . ".txt");
-      }
-    ?>
-      $(function() {
-        $('#open-room').click();
-
-      });
-    <?php
-    }
-    if (isset($_GET['user']) && $_GET['user'] == 'viewer') {
-      if (isset($_GET['unique_model_id']) && !empty($_SESSION['log_user_id'])) {
-        // unlink('total_user'.$_GET['unique_model_id'].$_SESSION['log_user_id'].".txt");
-      }
-    ?>
-      $(function() {
-        $('#join-room').click();
-      });
-    <?php
-    }
-    ?>
-  </script>
 
   <?php
   if (isset($_GET['user']) && $_GET['user'] == 'streamer' && !isset($_GET['pra'])) {
@@ -1163,6 +1137,35 @@ Please wait...
   <!-- <script src="<?= 'assest/connection.js?v=' . time() ?>"></script> -->
 
    <!-- <script src="script.js"></script> -->
+
+
+
+  <script>
+    <?php
+    if (isset($_GET['user']) && $_GET['user'] == 'streamer') {
+      if (isset($_GET['unique_model_id'])) {
+        unlink($_GET['unique_model_id'] . ".txt");
+        unlink('total_user' . $_GET['unique_model_id'] . 'prav' . ".txt");
+      }
+    ?>
+      $(function() {
+        $('#open-room').click();
+
+      });
+    <?php
+    }
+    if (isset($_GET['user']) && $_GET['user'] == 'viewer') {
+      if (isset($_GET['unique_model_id']) && !empty($_SESSION['log_user_id'])) {
+        // unlink('total_user'.$_GET['unique_model_id'].$_SESSION['log_user_id'].".txt");
+      }
+    ?>
+      $(function() {
+        $('#join-room').click();
+      });
+    <?php
+    }
+    ?>
+  </script>
   <script>
     $('#open_emoji_btn').click(function() {
       $('#open_emoji_modal').toggle();
