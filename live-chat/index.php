@@ -1149,8 +1149,9 @@ Please wait...
     ?> 
     console.log("e")
       $(function() { 
-        $('#open-room').click();
-        console.log("ww")
+        setTimeout(function() {
+          $('#open-room').click();
+        },1000) 
       }); 
       console.log("888")
     <?php
