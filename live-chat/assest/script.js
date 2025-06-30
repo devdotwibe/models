@@ -25,39 +25,6 @@
             });	
         }
     });
-    document.getElementById('open-room').onclick = function() {
-        disableInputButtons();
-        connection.open(document.getElementById('room-id').value, function() {
-            showRoomURL(connection.sessionid);
-        });
-    };
-    function openRoom(){
- console.log("33")
-        disableInputButtons();
-        connection.open(document.getElementById('room-id').value, function() {
-            showRoomURL(connection.sessionid);
-        });
-    }
-
-    document.getElementById('join-room').onclick = function() {
-        disableInputButtons();
-
-        connection.sdpConstraints.mandatory = {
-            OfferToReceiveAudio: true,
-            OfferToReceiveVideo: true
-        };
-        connection.join(document.getElementById('room-id').value);
-    };
-    function joinRoom(){
-
-        disableInputButtons();
-
-        connection.sdpConstraints.mandatory = {
-            OfferToReceiveAudio: true,
-            OfferToReceiveVideo: true
-        };
-        connection.join(document.getElementById('room-id').value);
-    }
 
   var connection = new RTCMultiConnection();
 
@@ -247,6 +214,39 @@
 
   }
 
+    document.getElementById('open-room').onclick = function() {
+        disableInputButtons();
+        connection.open(document.getElementById('room-id').value, function() {
+            showRoomURL(connection.sessionid);
+        });
+    };
+    function openRoom(){
+ console.log("33")
+        disableInputButtons();
+        connection.open(document.getElementById('room-id').value, function() {
+            showRoomURL(connection.sessionid);
+        });
+    }
+
+    document.getElementById('join-room').onclick = function() {
+        disableInputButtons();
+
+        connection.sdpConstraints.mandatory = {
+            OfferToReceiveAudio: true,
+            OfferToReceiveVideo: true
+        };
+        connection.join(document.getElementById('room-id').value);
+    };
+    function joinRoom(){
+
+        disableInputButtons();
+
+        connection.sdpConstraints.mandatory = {
+            OfferToReceiveAudio: true,
+            OfferToReceiveVideo: true
+        };
+        connection.join(document.getElementById('room-id').value);
+    }
   (function() {
       var params = {},
           r = /([^&=]+)=?([^&]*)/g;
