@@ -1150,8 +1150,9 @@ Please wait...
   <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
 
   <script src="<?='https://cdn.jsdelivr.net/npm/rtcmulticonnection@3.7.1/dist/RTCMultiConnection.min.js'?>"></script>
-  <script src="<?='https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js'?>"></script> 
+  <!-- <script src="<?='https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js'?>"></script>  -->
   <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
+  <script src="<?= 'node/client-dist/socket.io.js?v=' . time() ?>"></script>
 
   <!-- <script src="<?= 'script.js?v=' . time() ?>"></script> -->
 
