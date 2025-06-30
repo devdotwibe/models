@@ -7,6 +7,10 @@ if(!isset($_GET['service']) || !isset($_GET['m_id'])){
 
 	header("Location: login.php");
 
+}else{
+	
+	$country_list = DB::query('select id,name,sortname from countries order by name asc');
+	
 }
 
 ?>
@@ -140,7 +144,7 @@ if(!isset($_GET['service']) || !isset($_GET['m_id'])){
                             </div>
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Country</label>
-                                <select class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                <select name="country" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">Select...</option>
                                     <option value="us" class="bg-gray-900">🇺🇸 United States</option>
                                     <option value="uk" class="bg-gray-900">🇬🇧 United Kingdom</option>
@@ -168,7 +172,7 @@ if(!isset($_GET['service']) || !isset($_GET['m_id'])){
                         
                         <div>
                             <label class="block text-white/80 font-semibold mb-3 text-lg">Special Instructions, or notes (optional)</label>
-                            <textarea 
+                            <textarea name="instructions"
                                 class="w-full px-6 py-4 ultra-glass text-white placeholder-white/50 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-40 resize-none shadow-lg transition duration-300" 
                                 placeholder="Please provide any special requirements, preferences, dietary restrictions, accessibility needs, or other important information for your international tour experience. Include details about locations, activities, duration, or any specific requests you may have..."
                             ></textarea>
@@ -187,7 +191,7 @@ if(!isset($_GET['service']) || !isset($_GET['m_id'])){
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                             <div class="md:col-span-2">
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Date</label>
-                                <input 
+                                <input name="meeting_date"
                                     type="date" 
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                     required
@@ -196,7 +200,7 @@ if(!isset($_GET['service']) || !isset($_GET['m_id'])){
                             </div>
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Hour</label>
-                                <select class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                <select name="meeting_hrs" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">HH</option>
                                     <option value="01" class="bg-gray-900">01</option>
                                     <option value="02" class="bg-gray-900">02</option>
@@ -214,7 +218,7 @@ if(!isset($_GET['service']) || !isset($_GET['m_id'])){
                             </div>
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Minute</label>
-                                <select class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                <select name="meeting_min" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">MM</option>
                                     <option value="00" class="bg-gray-900">00</option>
                                     <option value="15" class="bg-gray-900">15</option>
@@ -227,11 +231,11 @@ if(!isset($_GET['service']) || !isset($_GET['m_id'])){
                         <div class="mt-6">
                             <div class="flex space-x-6">
                                 <label class="flex items-center space-x-3 text-white cursor-pointer hover-lift">
-                                    <input type="radio" name="ampm" value="AM" class="form-radio text-indigo-600 w-5 h-5" required>
+                                    <input type="radio"  name="meeting_g" value="AM" class="form-radio text-indigo-600 w-5 h-5" required>
                                     <span class="font-medium text-lg">AM</span>
                                 </label>
                                 <label class="flex items-center space-x-3 text-white cursor-pointer hover-lift">
-                                    <input type="radio" name="ampm" value="PM" class="form-radio text-indigo-600 w-5 h-5" required>
+                                    <input type="radio" name="meeting_g" value="PM" class="form-radio text-indigo-600 w-5 h-5" required>
                                     <span class="font-medium text-lg">PM</span>
                                 </label>
                             </div>
