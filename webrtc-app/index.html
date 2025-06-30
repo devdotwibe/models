@@ -45,23 +45,50 @@
     //         }
     //       ]
     // };
+const config = {
+  iceServers: [
+    // Primary STUN server
+    { urls: "stun:stun.l.google.com:19302" },
+    
+    // Reliable TURN servers with credentials
+    { 
+      urls: "turn:numb.viagenie.ca",
+      username: "webrtc@live.com",
+      credential: "muazkh"
+    },
+    { 
+      urls: "turn:turn.bistri.com:80",
+      username: "homeo",
+      credential: "homeo"
+    },
+    { 
+      urls: "turn:turn.anyfirewall.com:443?transport=tcp",
+      username: "webrtc",
+      credential: "webrtc"
+    },
+    
+    // Additional TCP/UDP options
+    { 
+      urls: [
+        "turn:turn01.hubl.in?transport=udp",
+        "turn:turn02.hubl.in?transport=tcp"
+      ]
+    },
+    
+    // Viagenie backup servers
+    { 
+      urls: [
+        "turn:192.158.29.39:3478?transport=udp",
+        "turn:192.158.29.39:3478?transport=tcp"
+      ],
+      username: "28224511:1379330808",
+      credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA="
+    }
+  ],
+  iceTransportPolicy: "all",
+  iceCandidatePoolSize: 0
+};
 
-    const config = {
-        iceServers: [
-          { urls: "stun:stun.l.google.com:19302" },
-          { 
-            urls: "turn:freeturn.net:3478",
-            username: "free",
-            credential: "free"
-          },
-          { 
-            urls: "turn:freeturn.net:3478?transport=tcp",
-            username: "free",
-            credential: "free"
-          }
-        ],
-        iceTransportPolicy: "all"
-      };
 
 
       // const config = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] };
