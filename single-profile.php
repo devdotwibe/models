@@ -756,20 +756,20 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <div class="attributes-grid">
 				<?php if($serv_chats['group_chat_tocken']){ ?>
                     <div class="attribute">
-                        <div class="attribute-label">1-on-1 Chat Session</div>
+                        <div class="attribute-label">Group Chat</div>
                         <div class="attribute-value">$50/hr</div>
 						<div class="attribute-value">Tokens <?php echo $serv_chats['group_chat_tocken']; ?>/min </div>
                         <p>Exclusive private chat sessions where we can discuss anything you'd like.</p>
-                        <button class="btn btn-primary">Book Now</button>
+                        <a class="btn btn-primary" href='<?=SITEURL?>booking.php?service=Group Chat&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
                     </div>
 				<?php } ?>
 				<?php if($serv_chats['private_chat_token']){ ?>
                     <div class="attribute">
-                        <div class="attribute-label">Private Messaging</div>
+                        <div class="attribute-label">Private Chat</div>
                         <div class="attribute-value">$25/day</div>
 						<div class="attribute-value">Tokens <?php echo $serv_chats['private_chat_token']; ?>/min </div>
                         <p>Priority responses to your messages throughout the day.</p>
-                        <button class="btn btn-primary">Book Now</button>
+                        <a class="btn btn-primary" href='<?=SITEURL?>booking.php?service=Private Chat&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
                     </div>
 				<?php } ?>
                 </div>
@@ -802,7 +802,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <div class="attribute-label">Local Meetup</div>
 						<div class="attribute-value">Tokens <?php echo $serv_meets['local_meet_rate']; ?>/hr </div>
                         <p>Enjoy a personalized date experience.</p>
-                        <button class="btn btn-primary">Book Now</button>
+                        <a class="btn btn-primary" href='<?=SITEURL?>booking.php?service=Local Meetup&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
                     </div>
 				<?php } ?>
 				<?php if($serv_meets['extended_rate']){ ?>
@@ -810,7 +810,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <div class="attribute-label">Extended Social</div>
                         <div class="attribute-value">Tokens <?php echo $serv_meets['extended_rate']; ?>/hr </div>
                         <p>Enjoy a personalized date experience.</p>
-                        <button class="btn btn-primary">Book Now</button>
+                        <a class="btn btn-primary" href='<?=SITEURL?>booking.php?service=Extended Social&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
                     </div>
 				<?php } ?>
 				<?php if($serv_meets['overnight_rate']){ ?>
@@ -818,7 +818,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <div class="attribute-label">Overnight Social</div>
                         <div class="attribute-value">Tokens <?php echo $serv_meets['overnight_rate']; ?>/hr </div>
                         <p>Enjoy a personalized date experience.</p>
-                        <button class="btn btn-primary">Book Now</button>
+                        <a class="btn btn-primary" href='<?=SITEURL?>booking.php?service=Overnight Social&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
                     </div>
 				<?php } ?>
                 </div>
