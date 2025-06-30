@@ -44,23 +44,45 @@ async function init() {
   await peerConnection.setLocalDescription(offer);
   sendSignal({ type: 'offer', sdp: offer.sdp });
 }
-
 async function handleSignal(data) {
   if (data.type === 'offer') {
-    await peerConnection.setRemoteDescription(new RTCSessionDescription({ type: 'offer', sdp: data.sdp }));
-    const answer = await peerConnection.createAnswer();
-    await peerConnection.setLocalDescription(answer);
-    sendSignal({ type: 'answer', sdp: answer.sdp });
+    if (!peerConnection.currentRemoteDescription) {
+      await peerConnection.setRemoteDescription(new RTCSessionDescription({ type: 'offer', sdp: data.sdp }));
+      const answer = await peerConnection.createAnswer();
+      await peerConnection.setLocalDescription(answer);
+      sendSignal({ type: 'answer', sdp: answer.sdp });
+    }
   } else if (data.type === 'answer') {
-    await peerConnection.setRemoteDescription(new RTCSessionDescription({ type: 'answer', sdp: data.sdp }));
+    if (!peerConnection.currentRemoteDescription) {
+      await peerConnection.setRemoteDescription(new RTCSessionDescription({ type: 'answer', sdp: data.sdp }));
+    }
   } else if (data.type === 'ice') {
-    try {
-      await peerConnection.addIceCandidate(data.candidate);
-    } catch (e) {
-      console.error('Error adding received ice candidate', e);
+    if (data.candidate) {
+      try {
+        await peerConnection.addIceCandidate(data.candidate);
+      } catch (e) {
+        console.error('Error adding ICE candidate', e);
+      }
     }
   }
 }
+
+// async function handleSignal(data) {
+//   if (data.type === 'offer') {
+//     await peerConnection.setRemoteDescription(new RTCSessionDescription({ type: 'offer', sdp: data.sdp }));
+//     const answer = await peerConnection.createAnswer();
+//     await peerConnection.setLocalDescription(answer);
+//     sendSignal({ type: 'answer', sdp: answer.sdp });
+//   } else if (data.type === 'answer') {
+//     await peerConnection.setRemoteDescription(new RTCSessionDescription({ type: 'answer', sdp: data.sdp }));
+//   } else if (data.type === 'ice') {
+//     try {
+//       await peerConnection.addIceCandidate(data.candidate);
+//     } catch (e) {
+//       console.error('Error adding received ice candidate', e);
+//     }
+//   }
+// }
 
 function sendSignal(data) {
   fetch('signaling.php', {
