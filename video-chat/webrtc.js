@@ -102,7 +102,7 @@ function listenForSignals() {
     .then(res => res.json())
     .then(signals => {
       signals.forEach(signal => {
-        // const data = JSON.parse(signal.data);
+        const data = JSON.parse(signal.data);
         // if(!unicheck[`${signal.from}-*-${signal.to}-*-${data.type}`]){
         //     unicheck[`${signal.from}-*-${signal.to}`]=data;
             handleSignal(data);
