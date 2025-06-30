@@ -1116,8 +1116,7 @@ Please wait...
     </div>
   </div>
   <link rel="stylesheet" href="<?= 'dev/getHTMLMediaElement.css' ?>">
-
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-JE7cQNRzKeHwEgdAgWbQ2GfHHF6DwvuUlLiQJ3MN5AekBP1z5FGP7BIuUUeVxkS9" crossorigin="anonymous"></script>
+ 
   <script src="<?= 'dev/getHTMLMediaElement.js' ?>"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="<?= 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' ?>" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -1147,14 +1146,10 @@ Please wait...
         unlink($_GET['unique_model_id'] . ".txt");
         unlink('total_user' . $_GET['unique_model_id'] . 'prav' . ".txt");
       }
-    ?>
-    console.log("--ssa---")
-      $(function() {
-    console.log("--ss---")
+    ?> 
+      $(function() { 
         $('#open-room').click();
-
-      });
-    console.log("--e---")
+      }); 
     <?php
     }
     if (isset($_GET['user']) && $_GET['user'] == 'viewer') {
