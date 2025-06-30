@@ -97,35 +97,7 @@
             const peer = new RTCPeerConnection(config);
             roomConnections[vId] = peer;
 
-              peer.onicecandidate = e => {
-                if (e.candidate) {
-                  console.log(`[${vId}] ICE Candidate:`, e.candidate.candidate);
-                  sendSignal("ice", vId, e.candidate);
-                } else {
-                  console.log(`[${vId}] ICE Gathering Complete`);
-                }
-              };
-
-              // Debug: ICE connection state
-              peer.oniceconnectionstatechange = () => {
-                console.log(`[${vId}] ICE Connection State:`, peer.iceConnectionState);
-              };
-
-              // Debug: ICE candidate pair selected (after connection)
-              peer.onicecandidatepairchange = (event) => {
-                if (peer.getStats) {
-                  peer.getStats(null).then(stats => {
-                    stats.forEach(report => {
-                      if (report.type === "candidate-pair" && report.selected) {
-                        console.log(`[${vId}] Selected candidate pair:`, report);
-                      }
-                    });
-                  });
-                }
-              };
-
             localStream.getTracks().forEach(track => peer.addTrack(track, localStream));
-
             const offer = await peer.createOffer();
             await peer.setLocalDescription(offer);
             sendSignal("offer", vId, offer);
