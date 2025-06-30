@@ -4500,7 +4500,7 @@
         uri = undefined;
       }
       opts = opts || {};
-      opts.path = opts.path || "/webrtcsocket";
+      opts.path = opts.path || "wss://models.staging3.dotwibe.com/webrtcsocket";
       _this.opts = opts;
       installTimerFunctions(_this, opts);
       _this.reconnection(opts.reconnection !== false);
