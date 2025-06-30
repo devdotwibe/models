@@ -25,7 +25,7 @@
     ];
 } ?>
 <script>
-  let credintial = <?=generateTurnCredentials('88d6f2e0208e1bcddbee2d2a6a957c3a')?>;
+  let credintial = <?=json_encode(generateTurnCredentials('88d6f2e0208e1bcddbee2d2a6a957c3a'))?>;
 
   console.log(credintial);
 </script>
