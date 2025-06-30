@@ -797,22 +797,30 @@ if (mysqli_num_rows($res_ap) > 0) {
             <div class="about-section">
                 <h3 class="about-section-title">Meet Services</h3>
                 <div class="attributes-grid">
-				<?php //if($serv_meets['private_chat_token']){ ?>
+				<?php if($serv_meets['local_meet_rate']){ ?>
                     <div class="attribute">
-                        <div class="attribute-label">Dating Experiences</div>
-                        <div class="attribute-value">Custom</div>
+                        <div class="attribute-label">Local Meetup</div>
+						<div class="attribute-value">Tokens <?php echo $serv_meets['local_meet_rate']; ?>/hr </div>
                         <p>Enjoy a personalized date experience.</p>
                         <button class="btn btn-primary">Book Now</button>
                     </div>
-				<?php //} ?>
-				<?php //if($serv_meets['private_chat_token']){ ?>
+				<?php } ?>
+				<?php if($serv_meets['extended_rate']){ ?>
                     <div class="attribute">
-                        <div class="attribute-label">Travel & Tours Together</div>
-                        <div class="attribute-value">Custom</div>
-                        <p>Travel with me to exciting destinations.</p>
+                        <div class="attribute-label">Extended Social</div>
+                        <div class="attribute-value">Tokens <?php echo $serv_meets['extended_rate']; ?>/hr </div>
+                        <p>Enjoy a personalized date experience.</p>
                         <button class="btn btn-primary">Book Now</button>
                     </div>
-				<?php //} ?>
+				<?php } ?>
+				<?php if($serv_meets['overnight_rate']){ ?>
+                    <div class="attribute">
+                        <div class="attribute-label">Overnight Social</div>
+                        <div class="attribute-value">Tokens <?php echo $serv_meets['overnight_rate']; ?>/hr </div>
+                        <p>Enjoy a personalized date experience.</p>
+                        <button class="btn btn-primary">Book Now</button>
+                    </div>
+				<?php } ?>
                 </div>
             </div>
 			<?php } ?>
