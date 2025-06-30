@@ -8,10 +8,15 @@ const config = {
             urls: "stun:stun.l.google.com:19302"
         },
         {
-            urls: "turn:209.182.232.170:3478",
-            username: "USERNAME",
-            credential: "PASSWORD"
+            urls: "turn:openrelay.metered.ca:80",
+            username: "openrelayproject",
+            credential: "openrelayproject"
         }
+        // {
+        //     urls: "turn:209.182.232.170:3478",
+        //     username: "dotwibe",
+        //     credential: "1751292717"
+        // }
     ]
 
 };
