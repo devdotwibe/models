@@ -101,7 +101,10 @@
 
             peer.onicecandidate = e => {
               if (e.candidate) {
+                console.log(`[${vId}] ICE Candidate:`, e.candidate.candidate);
                 sendSignal("ice", vId, e.candidate);
+              } else {
+                console.log(`[${vId}] ICE Gathering Complete`);
               }
             };
 
