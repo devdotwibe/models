@@ -758,6 +758,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                     <div class="attribute">
                         <div class="attribute-label">1-on-1 Chat Session</div>
                         <div class="attribute-value">$50/hr</div>
+						<div class="attribute-value">Tokens <?php echo $serv_chats['group_chat_tocken']; ?>/min </div>
                         <p>Exclusive private chat sessions where we can discuss anything you'd like.</p>
                         <button class="btn btn-primary">Book Now</button>
                     </div>
@@ -766,6 +767,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                     <div class="attribute">
                         <div class="attribute-label">Private Messaging</div>
                         <div class="attribute-value">$25/day</div>
+						<div class="attribute-value">Tokens <?php echo $serv_chats['private_chat_token']; ?>/min </div>
                         <p>Priority responses to your messages throughout the day.</p>
                         <button class="btn btn-primary">Book Now</button>
                     </div>
