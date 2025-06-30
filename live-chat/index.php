@@ -1142,20 +1142,23 @@ Please wait...
     </div>
   </div>
   <link rel="stylesheet" href="<?= 'dev/getHTMLMediaElement.css' ?>">
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-JE7cQNRzKeHwEgdAgWbQ2GfHHF6DwvuUlLiQJ3MN5AekBP1z5FGP7BIuUUeVxkS9" crossorigin="anonymous"></script>
   <script src="<?= 'dev/getHTMLMediaElement.js' ?>"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="<?= 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' ?>" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
 
-  <!-- <script src="<?= 'assest/script.js?v=' . time() ?>"></script> -->
+  <script src="<?='https://cdn.jsdelivr.net/npm/rtcmulticonnection@3.7.1/dist/RTCMultiConnection.min.js'?>"></script>
+  <script src="<?='https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js'?>"></script> 
+  <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
 
   <!-- <script src="<?= 'script.js?v=' . time() ?>"></script> -->
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-JE7cQNRzKeHwEgdAgWbQ2GfHHF6DwvuUlLiQJ3MN5AekBP1z5FGP7BIuUUeVxkS9" crossorigin="anonymous"></script>
 
 
 
-  <script src="<?= 'assest/connection.js?v=' . time() ?>"></script>
+  <!-- <script src="<?= 'assest/connection.js?v=' . time() ?>"></script> -->
 
    <!-- <script src="script.js"></script> -->
   <script>
