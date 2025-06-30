@@ -91,7 +91,7 @@ function sendSignal(data) {
     body: `action=send&from=${username}&to=${remoteUser}&data=${encodeURIComponent(JSON.stringify(data))}`
   });
 }
-
+let unicheck={};
 function listenForSignals() {
   setInterval(() => {
     fetch('signaling.php', {
@@ -102,8 +102,11 @@ function listenForSignals() {
     .then(res => res.json())
     .then(signals => {
       signals.forEach(signal => {
-        const data = JSON.parse(signal.data);
-        handleSignal(data);
+        if(!unicheck[`${signal.from}-*-${signal.to}`]){
+            const data = JSON.parse(signal.data);
+            unicheck[`${signal.from}-*-${signal.to}`]=data;
+            handleSignal(data);
+        }
       });
     });
   }, 1000);
