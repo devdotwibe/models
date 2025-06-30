@@ -1149,10 +1149,11 @@ Please wait...
   <script src="<?= 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' ?>" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
 
-  <script src="<?='https://cdn.jsdelivr.net/npm/rtcmulticonnection@3.7.1/dist/RTCMultiConnection.min.js'?>"></script>
+  <!-- <script src="<?='https://cdn.jsdelivr.net/npm/rtcmulticonnection@3.7.1/dist/RTCMultiConnection.min.js'?>"></script> -->
   <!-- <script src="<?='https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js'?>"></script>  -->
-  <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
+  <script src="<?= 'assest/RTCMultiConnection.js?v=' . time() ?>"></script>
   <script src="<?= 'client-dist/socket.io.js?v=' . time() ?>"></script>
+  <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
 
   <!-- <script src="<?= 'script.js?v=' . time() ?>"></script> -->
 

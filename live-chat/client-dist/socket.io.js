@@ -4500,7 +4500,7 @@
         uri = undefined;
       }
       opts = opts || {};
-      opts.path = opts.path || "/socket.io";
+      opts.path = opts.path || "/webrtcsocket";
       _this.opts = opts;
       installTimerFunctions(_this, opts);
       _this.reconnection(opts.reconnection !== false);
