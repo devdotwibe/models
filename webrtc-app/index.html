@@ -46,52 +46,15 @@
     //       ]
     // };
 
-    
-const config = {
-  iceServers: [
-    // STUN servers
-    { urls: "stun:stun.l.google.com:19302" },
-    { urls: "stun:stun.zadv.com:3478" },
-    { urls: "stun:stun.zoiper.com:3478" },
-    { urls: "stun:stun1.faktortel.com.au:3478" },
-    { urls: "stun:stun1.l.google.com:19302" },
-    { urls: "stun:stun1.voiceeclipse.net:3478" },
-    { urls: "stun:stun2.l.google.com:19302" },
-    { urls: "stun:stun3.l.google.com:19302" },
-    { urls: "stun:stun4.l.google.com:19302" },
-
-    // TURN servers (must have username and credential)
-    {
-      urls: "turn:numb.viagenie.ca",
-      username: "webrtc@live.com",
-      credential: "muazkh"
-    },
-    {
-      urls: "turn:turn.bistri.com:80",
-      username: "homeo",
-      credential: "homeo"
-    },
-    {
-      urls: "turn:turn.anyfirewall.com:443?transport=tcp",
-      username: "webrtc",
-      credential: "webrtc"
-    },
-    {
-      urls: [
-        "turn:192.158.29.39:3478?transport=udp",
-        "turn:192.158.29.39:3478?transport=tcp"
-      ],
-      username: "28224511:1379330808",
-      credential: "JZEOEt2V3Qb0y27GRntt2u2PAYA="
-    }
-  ],
-  iceTransportPolicy: "all"
-};
-
-
-
-
-
+        const config = {
+          iceServers: [
+            { urls: "stun:stun.l.google.com:19302" },
+            { urls: "stun:stun1.voiceeclipse.net:3478" },
+            { urls: "stun:stun2.l.google.com:19302" },
+            { urls: "stun:stun3.l.google.com:19302" }
+          ],
+          iceTransportPolicy: "all"
+        };
 
       // const config = { iceServers: [{ urls: "stun:stun.l.google.com:19302" }] };
 
