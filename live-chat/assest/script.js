@@ -47,7 +47,7 @@
 
   var connection = new RTCMultiConnection();
 
-  connection.socketURL = 'https://models.staging3.dotwibe.com/webrtcsocket/';
+  connection.socketURL = 'wss://models.staging3.dotwibe.com/webrtcsocket/';
 
 //  connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 //   connection.socketURL = 'http://muazkhan.com:9001/';
