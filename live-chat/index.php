@@ -1147,15 +1147,9 @@ Please wait...
         unlink('total_user' . $_GET['unique_model_id'] . 'prav' . ".txt");
       }
     ?> 
-    console.log("e")
       $(function() { 
-      //   setTimeout(function() {
-      //     $('#open-room').click();
-      console.log("ss")
-      //   },1000) 
-      openRoom()
+        $('#open-room').click();
       }); 
-      console.log("888")
     <?php
     }
     if (isset($_GET['user']) && $_GET['user'] == 'viewer') {
@@ -1164,8 +1158,7 @@ Please wait...
       }
     ?>
       $(function() {
-        // $('#join-room').click();
-      joinRoom()
+        $('#join-room').click();
       });
     <?php
     }
