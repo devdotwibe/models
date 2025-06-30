@@ -48,15 +48,15 @@
     
    const config = {
   iceServers: [
-      { urls: "stun.cloudflare.com:3478" },
+      { urls: "stun:freestun.net:3478" },
       { urls: "stun:stun.l.google.com:19302" },
       { urls: "stun:stun1.voiceeclipse.net:3478" },
       { urls: "stun:stun2.l.google.com:19302" },
       { urls: "stun:stun3.l.google.com:19302" },
       {
-        urls: "turn:turn.speed.cloudflare.com:50000",
-        username: "e95ced883c1e5161e3478b5a01ef7e23acbc37ad79fa1a65ce9a73d6f1b557a390e3d3890957ee27d57c58183848965c4c15d723252904880aa08231947d4034@live.com",
-        credential: "aba9b169546eb6dcc7bfb1cdf34544cf95b5161d602e3b5fa7c8342b2e9802fb"
+        urls: "turn:freestun.net:3478",
+        username: "free",
+        credential: "free"
       }
     ],
     iceTransportPolicy: "all"
