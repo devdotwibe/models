@@ -411,7 +411,7 @@ if (isset($_SESSION['log_user_id'])) {
 
               $resultd = mysqli_query($con, $sqls);
 
-                if (mysqli_num_rows($resultd) > 0) { ?>
+                if (mysqli_num_rows($resultd) > 0) { $loop_count = 1; ?>
 				
 				<div class="notf_grid">
 				
@@ -512,7 +512,7 @@ if (isset($_SESSION['log_user_id'])) {
 						<?php } ?>
 						</p>
 						<?php if(!empty($unique_id)){ 
-						
+						if($rowesdw['notification_type'] == 'follow'){
 						$get_modal_notif = DB::query('select status,follow_date from model_follow where unique_model_id = "'.$unique_rec_id.'" AND unique_user_id = "'.$unique_id.'"');
 						$followstatus = ''; $followdate = '';
 						if(!empty($get_modal_notif)){
@@ -532,13 +532,60 @@ if (isset($_SESSION['log_user_id'])) {
                                 View Profile
                             </button>
                         </div>
-						<?php } ?>
+						<?php } else if($rowesdw['notification_type'] == 'requests'){ 
+						$status = ''; $changed_date = ''; 
+							if(!empty($booking_id)){
+								$status = $model_booking['status'];
+								$changed_date = $model_booking['changed_date'];
+							}
+						?>
+							
+							<div class="flex space-x-3">
+								<button id="acc_<?php echo $loop_count; ?>" class="btn-success px-6 py-2 rounded-lg text-white font-semibold" <?php if($status == 'Accept') echo 'disabled'; ?> onclick="acceptRequest(<?php echo $booking_id; ?>,<?php echo $loop_count; ?>)">
+									<?php if($status == 'Accept'){ echo 'Accepted on '.date('d/m/Y',strtotime($changed_date)); }else{ ?>✓ Accept <?php } ?>
+								</button>
+								<button id="dec_<?php echo $loop_count; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($status == 'Decline') echo 'disabled'; ?>  onclick="declineRequest(<?php echo $booking_id; ?>,<?php echo $loop_count; ?>)">
+									<?php if($status == 'Decline'){ echo 'Declined on '.date('d/m/Y',strtotime($changed_date)); }else{ ?>✗ Decline <?php } ?>
+								</button>
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
+									View Profile
+								</button>
+							</div>
+							
+						<?php }else if($rowesdw['notification_type'] == 'tips'){ ?>
+							<div class="flex space-x-3">
+								<button class="btn-primary px-6 py-2 rounded-lg text-white font-semibold" onclick="thankUser('mike')">
+									💕 Send Thanks
+								</button>
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
+									View Profile
+								</button>
+							</div>
+						<?php }else if($rowesdw['notification_type'] == 'system'){ ?>
+							<div class="flex space-x-3">
+								<button class="btn-primary px-6 py-2 rounded-lg text-white font-semibold" onclick="startModelJourney()">
+									🚀 Get Started
+								</button>
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="learnMore()">
+									📚 Learn More
+								</button>
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
+									View Profile
+								</button>
+							</div>
+						<?php }else{   ?>
+							<div class="flex space-x-3">
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
+									View Profile
+								</button>
+							</div>
+						<?php } } ?>
                     </div>
                 </div>
             </div>
 
             
-			<?php } ?>
+			<?php $loop_count++; } ?>
 			
 			</div>
 			
@@ -635,14 +682,59 @@ offset = offset+limit;
     }
 
     // Notification Action Functions
-    function acceptRequest(type, userId) {
-        alert(`✅ ${type} request from ${userId} accepted! You'll be connected shortly.`);
+    function acceptRequest(bookingId,loopcount) {
+        //alert(`✅ ${type} request from ${userId} accepted! You'll be connected shortly.`);
+		//ajax for service request Accept
+			jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'/ajax/model_service_status.php'?>",
+				data:{bookingId:bookingId,status:'Accept'},
+				dataType:'json',
+				success: function(response){ 
+					showNotification(`✅ Service request accepted! You'll be connected shortly.`, 'success');
+					jQuery('#acc_'+loopcount).attr('disabled',true);
+					let today = new Date();
+					// Format the date as d/m/Y
+					let day = ('0' + today.getDate()).slice(-2);    // Day
+					let month = ('0' + (today.getMonth() + 1)).slice(-2);  // Month (0-11 so add 1)
+					let year = today.getFullYear();                 // Year
+				    // Combine into d/m/Y format
+				    let formattedDate = day + '/' + month + '/' + year;
+					jQuery('#acc_'+loopcount).text('Accepted on '+formattedDate);
+					jQuery('#dec_'+loopcount).attr('disabled',false);
+					jQuery('#dec_'+loopcount).text('✗ Decline');
+				}
+			});
+		
         // Remove notification or mark as handled
         event.target.closest('.notification-card').style.opacity = '0.5';
     }
 
-    function declineRequest(type, userId) {
-        alert(`❌ ${type} request from ${userId} declined.`);
+    function declineRequest(bookingId,loopcount) {
+       // alert(`❌ ${type} request from ${userId} declined.`);
+		//ajax for service request Accept
+			jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'/ajax/model_service_status.php'?>",
+				data:{bookingId:bookingId,status:'Decline'},
+				dataType:'json',
+				success: function(response){ 
+					showNotification(`❌ Service request declined.`, 'success');
+					jQuery('#dec_'+loopcount).attr('disabled',true);
+					let today = new Date();
+					// Format the date as d/m/Y
+					let day = ('0' + today.getDate()).slice(-2);    // Day
+					let month = ('0' + (today.getMonth() + 1)).slice(-2);  // Month (0-11 so add 1)
+					let year = today.getFullYear();                 // Year
+				    // Combine into d/m/Y format
+				    let formattedDate = day + '/' + month + '/' + year;
+					jQuery('#dec_'+loopcount).text('Declined on '+formattedDate);
+					jQuery('#acc_'+loopcount).attr('disabled',false);
+					jQuery('#acc_'+loopcount).text('✓ Accept');
+				}
+			});
+		
+		
         event.target.closest('.notification-card').style.opacity = '0.5';
     }
 
