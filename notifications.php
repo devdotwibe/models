@@ -359,11 +359,12 @@ else{
     }
 </style>
 </head>
-<body class="tlm-notification min-h-screen text-white">
+<body class="tlm-notification min-h-screen text-white socialwall-page">
 <!-- Premium Particle System -->
 <div class="particles" id="particles"></div>
 
-   <?php include('includes/header.php'); ?>
+   <?php  include('includes/side-bar.php'); ?>
+	<?php  include('includes/profile_header_index.php'); ?>
 	  
 <main class="py-12">
     <div class="container mx-auto">
