@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WebRTC Broadcast</title>
+  <title>WebRTC Live Broadcast</title>
 </head>
 <body>
-  <h2>WebRTC Live Broadcast</h2>
+  <h2>WebRTC Broadcast</h2>
   <video id="localVideo" autoplay muted playsinline width="400" height="300" style="border:1px solid black;"></video>
   <video id="remoteVideo" autoplay playsinline width="400" height="300" style="border:1px solid black;"></video>
 
@@ -19,8 +19,8 @@
     };
 
     let localStream;
-    let pcs = {}; // streamer: viewerId => RTCPeerConnection
-    let pc;       // viewer: single RTCPeerConnection
+    let pcs = {}; // Streamer: viewerId -> RTCPeerConnection
+    let pc;       // Viewer: single connection
     let socket;
 
     window.onload = () => {
@@ -28,7 +28,6 @@
         alert("Missing room_id or role in URL");
         return;
       }
-
       initWebSocket();
     };
 
@@ -44,11 +43,8 @@
           viewerId
         });
 
-        if (role === 'streamer') {
-          startBroadcast();
-        } else if (role === 'viewer') {
-          startViewer();
-        }
+        if (role === 'streamer') startBroadcast();
+        else startViewer();
       };
 
       socket.onmessage = async (event) => {
@@ -57,9 +53,9 @@
 
         const { event: evt, data } = msg;
 
-        // Viewer receives offer
-        if (role === 'viewer' && evt === 'offer' && data.viewerId === viewerId) {
-          console.log('📥 Offer received by viewer');
+        // Viewers get offer
+        if (role === 'viewer' && evt === 'offer') {
+          console.log("📩 Viewer received offer");
           await pc.setRemoteDescription(new RTCSessionDescription(data.payload));
           const answer = await pc.createAnswer();
           await pc.setLocalDescription(answer);
@@ -70,12 +66,14 @@
           });
         }
 
-        // Streamer receives answer from viewer
+        // Streamer gets answer from viewer
         if (role === 'streamer' && evt === 'answer') {
           const vId = data.viewerId;
           if (pcs[vId]) {
-            console.log('📥 Answer received by streamer');
+            console.log("📩 Streamer received answer from viewer:", vId);
             await pcs[vId].setRemoteDescription(new RTCSessionDescription(data.payload));
+          } else {
+            console.warn("⚠️ No peer connection for viewerId:", vId);
           }
         }
 
@@ -85,22 +83,25 @@
           try {
             if (role === 'viewer' && pc) {
               await pc.addIceCandidate(new RTCIceCandidate(payload));
+              console.log("✅ Viewer added ICE candidate");
             } else if (role === 'streamer' && pcs[vId]) {
               await pcs[vId].addIceCandidate(new RTCIceCandidate(payload));
+              console.log("✅ Streamer added ICE candidate for viewer:", vId);
             }
           } catch (err) {
-            console.warn("⚠️ ICE error:", err);
+            console.error("⚠️ ICE candidate error:", err);
           }
         }
 
         // Viewer requests offer
         if (role === 'streamer' && evt === 'request-offer') {
+          console.log("📨 Viewer requested offer:", data.viewerId);
           createPeerConnectionForViewer(data.viewerId);
         }
       };
 
       socket.onerror = (err) => {
-        console.error("WebSocket error:", err);
+        console.error("❌ WebSocket error:", err);
       };
     }
 
@@ -114,31 +115,28 @@
         localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         document.getElementById('localVideo').srcObject = localStream;
       } catch (err) {
-        console.error("🚫 Media error:", err);
+        console.error("🎥 Error accessing media:", err);
       }
     }
 
     async function createPeerConnectionForViewer(vId) {
-      const pc = new RTCPeerConnection(config);
-      pcs[vId] = pc;
+      const peer = new RTCPeerConnection(config);
+      pcs[vId] = peer;
 
-      // Add tracks to connection
-      localStream.getTracks().forEach(track => {
-        pc.addTrack(track, localStream);
-      });
+      localStream.getTracks().forEach(track => peer.addTrack(track, localStream));
 
-      pc.onicecandidate = (event) => {
-        if (event.candidate) {
+      peer.onicecandidate = (e) => {
+        if (e.candidate) {
           sendEvent("ice", {
             roomId,
             viewerId: vId,
-            payload: event.candidate
+            payload: e.candidate
           });
         }
       };
 
-      const offer = await pc.createOffer();
-      await pc.setLocalDescription(offer);
+      const offer = await peer.createOffer();
+      await peer.setLocalDescription(offer);
 
       sendEvent("offer", {
         roomId,
@@ -153,26 +151,22 @@
 
       pc = new RTCPeerConnection(config);
 
-      // When stream is received
       pc.ontrack = (event) => {
-        const remoteVideo = document.getElementById('remoteVideo');
-        if (!remoteVideo.srcObject) {
-          console.log("📺 Remote stream received");
-          remoteVideo.srcObject = event.streams[0];
-        }
+        console.log("📺 Viewer received stream");
+        document.getElementById('remoteVideo').srcObject = event.streams[0];
       };
 
-      pc.onicecandidate = (event) => {
-        if (event.candidate) {
+      pc.onicecandidate = (e) => {
+        if (e.candidate) {
           sendEvent("ice", {
             roomId,
             viewerId,
-            payload: event.candidate
+            payload: e.candidate
           });
         }
       };
 
-      // Ask streamer to send an offer
+      // Ask for offer
       sendEvent("request-offer", { roomId, viewerId });
     }
   </script>
