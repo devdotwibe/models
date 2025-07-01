@@ -33,9 +33,6 @@
     });
 
 
-
-    var connection = new RTCMultiConnection();
-    
      function openRoomNow() {
 
 

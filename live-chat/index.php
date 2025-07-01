@@ -1142,6 +1142,9 @@ Please wait...
 
 
   <script>
+
+    let connection = new RTCMultiConnection();
+
     <?php
     if (isset($_GET['user']) && $_GET['user'] == 'streamer') {
       if (isset($_GET['unique_model_id'])) {
