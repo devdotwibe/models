@@ -1147,11 +1147,9 @@ Please wait...
         unlink('total_user' . $_GET['unique_model_id'] . 'prav' . ".txt");
       }
     ?> 
-      $(function() { 
-
-          openRoomNow();
-
-      }); 
+        window.onload = function () {
+            opeRoomNow();
+        };
     <?php
     }
     if (isset($_GET['user']) && $_GET['user'] == 'viewer') {
@@ -1161,7 +1159,9 @@ Please wait...
     ?>
       $(function() {
 
-        joinRoomNow();
+        window.onload = function () {
+            joinRoomNow();
+        };
 
       });
     <?php
