@@ -19,18 +19,21 @@
     };
 
     let localStream;
-    let pcs = {}; // streamer: viewerId => RTCPeerConnection
-    let pc;       // viewer: single RTCPeerConnection
+    let pc;
     let socket;
 
-    window.onload = () => {
-      if (!roomId || !role) {
-        alert("Missing room_id or role in URL");
-        return;
-      }
+    async function joinRoomViaAjax() {
+      const res = await fetch('/api/join-room', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ room_id: roomId, role, viewer_id: viewerId })
+      });
 
-      initWebSocket();
-    };
+      const data = await res.json();
+      console.log("Room joined via AJAX:", data);
+
+      initWebSocket(); // Proceed to signaling
+    }
 
     function initWebSocket() {
       socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket/");
@@ -38,59 +41,41 @@
       socket.onopen = () => {
         console.log("✅ WebSocket connected");
 
+        // Notify server through socket
         socket.send(JSON.stringify({
-          type: 'join',
-          roomId,
-          role,
-          viewerId
+          event: 'join',
+          data: { roomId, role, viewerId }
         }));
 
-        if (role === 'streamer') {
-          startBroadcast();
-        } else if (role === 'viewer') {
-          startViewer();
-        }
+        if (role === 'streamer') startBroadcast();
+        else if (role === 'viewer') startViewer();
       };
 
       socket.onmessage = async (event) => {
         const msg = JSON.parse(event.data);
 
-        if (role === 'viewer' && msg.type === 'offer') {
+        if (msg.event === 'offer' && role === 'viewer') {
           await pc.setRemoteDescription(new RTCSessionDescription(msg.data));
           const answer = await pc.createAnswer();
           await pc.setLocalDescription(answer);
-          sendMessage("answer", answer);
+          sendSocketMessage('answer', pc.localDescription);
         }
 
-        if (role === 'streamer' && msg.type === 'answer') {
-          const viewerId = msg.viewerId;
-          if (pcs[viewerId]) {
-            await pcs[viewerId].setRemoteDescription(new RTCSessionDescription(msg.data));
+        if (msg.event === 'answer' && role === 'streamer') {
+          await pc.setRemoteDescription(new RTCSessionDescription(msg.data));
+        }
+
+        if (msg.event === 'ice') {
+          const candidate = new RTCIceCandidate(msg.data);
+          try {
+            await pc.addIceCandidate(candidate);
+          } catch (e) {
+            console.warn("ICE error:", e);
           }
         }
 
-        if (msg.type === 'ice') {
-          if (role === 'viewer' && pc) {
-            try {
-              await pc.addIceCandidate(new RTCIceCandidate(msg.data));
-            } catch (err) {
-              console.error("ICE error (viewer):", err);
-            }
-          } else if (role === 'streamer') {
-            const viewerId = msg.viewerId;
-            if (pcs[viewerId]) {
-              try {
-                await pcs[viewerId].addIceCandidate(new RTCIceCandidate(msg.data));
-              } catch (err) {
-                console.error("ICE error (streamer):", err);
-              }
-            }
-          }
-        }
-
-        // NEW: viewer asks streamer to send offer
-        if (role === 'streamer' && msg.type === 'request-offer') {
-          createPeerConnectionForViewer(msg.viewerId);
+        if (msg.event === 'custom-message') {
+          console.log("Custom Message Received:", msg.data);
         }
       };
 
@@ -99,61 +84,43 @@
       };
     }
 
-    function sendMessage(type, data) {
+    function sendSocketMessage(eventType, data) {
       socket.send(JSON.stringify({
-        type,
-        role,
-        roomId,
-        viewerId,
-        data
+        event: eventType,
+        data: {
+          roomId,
+          viewerId,
+          payload: data
+        }
       }));
     }
 
-    // STREAMER
     async function startBroadcast() {
       try {
         localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         document.getElementById('localVideo').srcObject = localStream;
+
+        pc = new RTCPeerConnection(config);
+
+        localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+
+        pc.onicecandidate = (event) => {
+          if (event.candidate) {
+            sendSocketMessage('ice', event.candidate);
+          }
+        };
+
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+        sendSocketMessage('offer', offer);
+
       } catch (err) {
-        console.error("Media error:", err);
+        console.error("Media access failed:", err);
       }
     }
 
-    async function createPeerConnectionForViewer(vId) {
-      const pc = new RTCPeerConnection(config);
-      pcs[vId] = pc;
-
-      localStream.getTracks().forEach(track => {
-        pc.addTrack(track, localStream);
-      });
-
-      pc.onicecandidate = (event) => {
-        if (event.candidate) {
-          socket.send(JSON.stringify({
-            type: "ice",
-            role,
-            roomId,
-            viewerId: vId,
-            data: event.candidate
-          }));
-        }
-      };
-
-      const offer = await pc.createOffer();
-      await pc.setLocalDescription(offer);
-
-      socket.send(JSON.stringify({
-        type: "offer",
-        role,
-        roomId,
-        viewerId: vId,
-        data: offer
-      }));
-    }
-
-    // VIEWER
     async function startViewer() {
-      document.getElementById('localVideo').style.display = 'none'; // Hide local for viewer
+      document.getElementById('localVideo').style.display = 'none';
 
       pc = new RTCPeerConnection(config);
 
@@ -163,12 +130,19 @@
 
       pc.onicecandidate = (event) => {
         if (event.candidate) {
-          sendMessage("ice", event.candidate);
+          sendSocketMessage('ice', event.candidate);
         }
       };
 
-      // NEW: ask streamer to send offer
-      sendMessage("request-offer", null);
+      // Optionally request offer manually
+      sendSocketMessage('request-offer', { viewerId });
+    }
+
+    // Auto-run
+    if (!roomId || !role) {
+      alert("Missing room_id or role");
+    } else {
+      joinRoomViaAjax(); // First AJAX join
     }
   </script>
 </body>
