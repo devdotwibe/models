@@ -1128,6 +1128,12 @@ Please wait...
   <!-- <script src="<?='https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js'?>"></script>  -->
   <script src="<?= 'assest/RTCMultiConnection.js?v=' . time() ?>"></script>
   <script src="<?= 'client-dist/socket.io.js?v=' . time() ?>"></script>
+
+  <script>
+
+       let connection = new RTCMultiConnection();
+
+  </script>
   <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
 
   <!-- <script src="<?= 'script.js?v=' . time() ?>"></script> -->
@@ -1139,11 +1145,8 @@ Please wait...
 
    <!-- <script src="script.js"></script> -->
 
-
-
   <script>
 
-    let connection = new RTCMultiConnection();
 
     <?php
     if (isset($_GET['user']) && $_GET['user'] == 'streamer') {
