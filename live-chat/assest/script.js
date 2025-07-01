@@ -32,6 +32,10 @@
         }
     });
 
+
+
+    var connection = new RTCMultiConnection();
+    
      function openRoomNow() {
 
 
@@ -43,10 +47,6 @@
         });
 
      }
-
-
-    var connection = new RTCMultiConnection();
-
     function joinRoomNow() {
 
         console.log('open comsepted');
