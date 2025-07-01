@@ -33,6 +33,14 @@
     });
 
 
+    document.getElementById('join-room').onclick = function () {
+
+        disableInputButtons();
+        connection.open(document.getElementById('room-id').value, function () {
+            showRoomURL(connection.sessionid);
+        });
+    };
+
      function openRoomNow() {
 
 
@@ -44,6 +52,16 @@
         });
 
      }
+
+     document.getElementById('join-room').onclick = function () {
+        disableInputButtons();
+        connection.sdpConstraints.mandatory = {
+            OfferToReceiveAudio: true,
+            OfferToReceiveVideo: true
+        };
+        connection.join(document.getElementById('room-id').value);
+    };
+
     function joinRoomNow() {
 
         console.log('open comsepted');
