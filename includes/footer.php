@@ -1261,25 +1261,25 @@ if(isset($_SESSION['log_user_id'])){
         });
     }
 
-    // const hamburger = document.getElementById('hamburgerMenu');
-    // const sidebar = document.getElementById('sidebarMenu');
-    // const overlay = document.getElementById('sidebarOverlay');
+    const hamburger = document.getElementById('hamburgerMenu');
+    const sidebar = document.getElementById('sidebarMenu');
+    const overlay = document.getElementById('sidebarOverlay');
 
-    // hamburger.addEventListener('click', toggleSidebar);
-    // overlay.addEventListener('click', toggleSidebar);
+    hamburger.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
 
-    // function toggleSidebar() {
-    //   hamburger.classList.toggle('open');
-    //   sidebar.classList.toggle('open');
-    //   overlay.classList.toggle('open');
+    function toggleSidebar() {
+      hamburger.classList.toggle('open');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
 
-    //   // Prevent body scrolling when sidebar is open
-    //   if (sidebar.classList.contains('open')) {
-    //     document.body.style.overflow = 'hidden';
-    //   } else {
-    //     document.body.style.overflow = '';
-    //   }
-    // }
+      // Prevent body scrolling when sidebar is open
+      if (sidebar.classList.contains('open')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
 
     // Simple like function
     function toggleLike(button) {
