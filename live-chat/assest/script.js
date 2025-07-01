@@ -28,6 +28,9 @@
             });	
         }
     });
+  var connection = new RTCMultiConnection();
+
+  connection.socketURL = 'wss://models.staging3.dotwibe.com/webrtcsocket/';
     document.getElementById('open-room').onclick = function() {
         disableInputButtons();
         connection.open(document.getElementById('room-id').value, function() {
@@ -45,9 +48,6 @@
         connection.join(document.getElementById('room-id').value);
     };
 
-  var connection = new RTCMultiConnection();
-
-  connection.socketURL = 'https://models.staging3.dotwibe.com/webrtcsocket/';
 
 //  connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 //   connection.socketURL = 'http://muazkhan.com:9001/';
