@@ -1220,19 +1220,15 @@ Please wait...
 
     }
 </script>
-
-
+<?php
+if (isset($_GET['pra']) && !empty($_GET['pra'])) {}
+else{
+?>
 <script>
 function gotoprivate(id){
   window.location='<?=$ChatLink.'index.php?user=viewer&pra=private&unique_model_id='.$_GET['unique_model_id'].'&private_id='?>'+id;
 }
 </script>
-
-<?php
-if (isset($_GET['pra']) && !empty($_GET['pra'])) {}
-else{
-?>
-
 <?php
 }
 ?>
