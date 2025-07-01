@@ -1,4 +1,5 @@
-(function ($) {
+$(function() {
+
     'use strict';
     tlm_check_url();
     $(document).on('click', '#tlm_status_notify', function () {
@@ -681,4 +682,5 @@
             });
         }
     }
-})(jQuery);
+
+ });
