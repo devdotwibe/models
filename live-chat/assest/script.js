@@ -36,13 +36,16 @@
 
 
         console.log('test accespt working');
-        
+
         disableInputButtons();
         connection.open(document.getElementById('room-id').value, function () {
             showRoomURL(connection.sessionid);
         });
 
      }
+
+
+    var connection = new RTCMultiConnection();
 
     function joinRoomNow() {
 
@@ -55,9 +58,6 @@
         };
         connection.join(document.getElementById('room-id').value);
     }
-
-
-    var connection = new RTCMultiConnection();
 
      connection.socketURL = 'wss://models.staging3.dotwibe.com/webrtcsocket/';
 
