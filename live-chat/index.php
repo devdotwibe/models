@@ -1148,7 +1148,13 @@ Please wait...
       }
     ?> 
         window.onload = function () {
+
+          console.log('tst startt');
+
             openRoomNow();
+
+
+          console.log('tst end');
         };
     <?php
     }
@@ -1160,12 +1166,8 @@ Please wait...
 
       window.onload = function () {
 
-        console.log('open starting');
-
           joinRoomNow();
 
-
-        console.log('open comsepted');
       };
     <?php
     }
