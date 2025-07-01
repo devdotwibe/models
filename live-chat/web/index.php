@@ -19,8 +19,8 @@
     };
 
     let localStream;
-    let pcs = {}; // For streamer: each viewer has a separate connection
-    let pc;       // For viewer: single peer connection
+    let pcs = {}; // streamer: viewerId => RTCPeerConnection
+    let pc;       // viewer: single RTCPeerConnection
     let socket;
 
     window.onload = () => {
@@ -55,27 +55,13 @@
       socket.onmessage = async (event) => {
         const msg = JSON.parse(event.data);
 
-        // Viewer receives offer
         if (role === 'viewer' && msg.type === 'offer') {
-          pc = new RTCPeerConnection(config);
-
-          pc.ontrack = (event) => {
-            document.getElementById('remoteVideo').srcObject = event.streams[0];
-          };
-
-          pc.onicecandidate = (event) => {
-            if (event.candidate) {
-              sendMessage("ice", event.candidate);
-            }
-          };
-
           await pc.setRemoteDescription(new RTCSessionDescription(msg.data));
           const answer = await pc.createAnswer();
           await pc.setLocalDescription(answer);
           sendMessage("answer", answer);
         }
 
-        // Streamer receives answer from a viewer
         if (role === 'streamer' && msg.type === 'answer') {
           const viewerId = msg.viewerId;
           if (pcs[viewerId]) {
@@ -83,7 +69,6 @@
           }
         }
 
-        // ICE candidate
         if (msg.type === 'ice') {
           if (role === 'viewer' && pc) {
             try {
@@ -103,8 +88,8 @@
           }
         }
 
-        // Notify streamer that a viewer joined
-        if (role === 'streamer' && msg.type === 'viewer-joined') {
+        // NEW: viewer asks streamer to send offer
+        if (role === 'streamer' && msg.type === 'request-offer') {
           createPeerConnectionForViewer(msg.viewerId);
         }
       };
@@ -124,7 +109,7 @@
       }));
     }
 
-    // STREAMER SIDE
+    // STREAMER
     async function startBroadcast() {
       try {
         localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
@@ -159,16 +144,31 @@
 
       socket.send(JSON.stringify({
         type: "offer",
-        roomId,
         role,
+        roomId,
         viewerId: vId,
         data: offer
       }));
     }
 
-    // VIEWER SIDE
-    function startViewer() {
-      document.getElementById('localVideo').style.display = 'none'; // Hide local for viewers
+    // VIEWER
+    async function startViewer() {
+      document.getElementById('localVideo').style.display = 'none'; // Hide local for viewer
+
+      pc = new RTCPeerConnection(config);
+
+      pc.ontrack = (event) => {
+        document.getElementById('remoteVideo').srcObject = event.streams[0];
+      };
+
+      pc.onicecandidate = (event) => {
+        if (event.candidate) {
+          sendMessage("ice", event.candidate);
+        }
+      };
+
+      // NEW: ask streamer to send offer
+      sendMessage("request-offer", null);
     }
   </script>
 </body>
