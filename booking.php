@@ -3,16 +3,11 @@
 include('includes/config.php');
 include('includes/helper.php');
 
-if(!isset($_GET['service']) || !isset($_GET['m_id'])){
-
-	//header("Location: login.php");
+if(!isset($_GET['service']) || !isset($_GET['m_id']) || !isset($_GET['type'])){
 	echo '<script>window.history.back();</script>';
 	die;
-
 }else{
-	
 	//$country_list = DB::query('select id,name,sortname from countries order by name asc');
-	
 }
 if($_SESSION["log_user"]){
 	$userDetails = get_data('model_user',array('id'=>$_SESSION['log_user_id']),true);
@@ -156,21 +151,21 @@ $model_ID = $model_data['id'];
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Booking Type</label>
                                 <select name="booking_type" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">Select...</option>
-                                    <option value="premium-experience" class="bg-gray-900">👑 Premium Experience</option>
-                                    <option value="international-tour" class="bg-gray-900">✈️ International Tour</option>
-                                    <option value="exclusive-meeting" class="bg-gray-900">💎 Exclusive Meeting</option>
-                                    <option value="vip-package" class="bg-gray-900">🌟 VIP Package</option>
-                                    <option value="luxury-companion" class="bg-gray-900">🥂 Luxury Companion</option>
+                                    <option value="Premium Experience" class="bg-gray-900">👑 Premium Experience</option>
+                                    <option value="International Tour" class="bg-gray-900">✈️ International Tour</option>
+                                    <option value="Exclusive Meeting" class="bg-gray-900">💎 Exclusive Meeting</option>
+                                    <option value="VIP Package" class="bg-gray-900">🌟 VIP Package</option>
+                                    <option value="Luxury Companion" class="bg-gray-900">🥂 Luxury Companion</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Booking For</label>
                                 <select name="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">Select...</option>
-                                    <option value="myself" class="bg-gray-900">👤 Myself</option>
-                                    <option value="business-partner" class="bg-gray-900">🤝 Business Partner</option>
-                                    <option value="special-client" class="bg-gray-900">⭐ Special Client</option>
-                                    <option value="group-booking" class="bg-gray-900">👥 Group Booking</option>
+                                    <option value="Myself" class="bg-gray-900">👤 Myself</option>
+                                    <option value="Business Partner" class="bg-gray-900">🤝 Business Partner</option>
+                                    <option value="Special Client" class="bg-gray-900">⭐ Special Client</option>
+                                    <option value="Group Booking" class="bg-gray-900">👥 Group Booking</option>
                                 </select>
                             </div>
                             <div>
@@ -283,6 +278,8 @@ $model_ID = $model_data['id'];
 						<input type="hidden" name="model_name" value="<?php echo $model_name; ?>">
 						<input type="hidden" name="model_ID" value="<?php echo $model_ID; ?>">						
 						<input type="hidden" name="name" value="<?php echo $userDetails['name']; ?>">
+						<input type="hidden" name="service_name" value="<?php echo $_GET['service']; ?>">
+						<input type="hidden" name="main_service" value="<?php echo $_GET['type']; ?>">
 					
                         <button name="booking_submit" type="submit" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>

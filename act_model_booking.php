@@ -22,7 +22,7 @@ if (isset($_POST['booking_submit'])) {
 
  	//$que = "INSERT INTO `model_booking` (`model_unique_id`, `name`, `phone`, `email`, `age`, `model_name`,`duration`,`meeting_date`,`meeting_time`,`address`,`city`,`state`,`zip_code`,`country`,`instructions`) VALUES ('".$name."', '".$phone."', '".$email."', '".$age."', '".$model_name."', '".$duration."', '".$meeting_date."','".$meeting_time."','".$address."','".$city."','".$state."','".$zip_code."','".$country."','".$instructions."')";
 
-	$arr = array('model_unique_id','user_unique_id','name','model_name','meeting_date','country','instructions','booking_type','booking_for'); 
+	$arr = array('model_unique_id','user_unique_id','name','model_name','meeting_date','country','instructions','booking_type','booking_for','service_name','main_service'); 
 	$post_data = array_from_post($arr);
 	
 	$post_data['phone'] = '';

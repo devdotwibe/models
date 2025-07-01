@@ -482,9 +482,19 @@ if (isset($_SESSION['log_user_id'])) {
                         <p class="text-white/80 mb-4">
 						<?php if($rowesdw['notification_type'] == 'follow'){ ?>
                             <strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> wants to follow you and get updates about your content and availability.
-                        <?php }else if($rowesdw['notification_type'] == 'requests'){ ?>
-							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> has requested a <strong class="text-pink-400">Chat & Watch</strong> session for tonight at 8 PM.
-                            <span class="text-green-400 font-semibold">$150</span> for 1 hour.
+                        <?php }else if($rowesdw['notification_type'] == 'requests'){ 
+						$booking_id = $rowesdw['booking_id'];
+						$model_serv = 'Services';
+						$booking_type = '';
+						if(!empty($booking_id)){
+							$model_booking = DB::queryFirstRow('select * from model_booking where id="'.$booking_id.'"');
+							if($model_booking['main_service'] == 'chat') $model_serv = 'Chat Services - '.$model_booking['service_name'];
+							else if($model_booking['main_service'] == 'meet') $model_serv = 'Meet Services - '.$model_booking['service_name'];
+							$booking_type = $model_booking['booking_type'].' at '.date('d/m/Y',strtotime($model_booking['meeting_date'])).' '.$model_booking['meeting_time'];
+						} 
+						?>
+							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> has requested a <strong class="text-pink-400"><?php echo $model_serv; ?></strong> <?=$booking_type?>.
+                           <?php /*<span class="text-green-400 font-semibold">$150</span> for 1 hour.<?php */ ?>
 						<?php }else if($rowesdw['notification_type'] == 'tips'){ ?> 
 							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> sent you a tip of <strong class="text-green-400">$50</strong> with the message:
                             <em class="text-white/60">"Amazing show last night! You're incredible! 🔥"</em>
