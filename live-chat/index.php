@@ -141,7 +141,9 @@ if($_GET['user'] == 'viewer' && $_GET['unique_model_id']) {
   <!-- <script type='text/javascript' src='<?= '../assets/wp-content/plugins/rich-reviews/js/rich-reviews.js' ?>' id='rich-reviews-js'></script> -->
   <script type='text/javascript' src='<?= '../assets/wp-content/themes/theagency3/library/js/libs/modernizr.custom.min.js' ?>' id='bones-modernizr-js'></script>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-  <script src="<?= 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js' ?>"></script>
+  <!-- <script src="<?= 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js' ?>"></script> -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
   <!-- <script src='https://kit.fontawesome.com/a076d05399.js'></script> -->
   <!-- <link rel="stylesheet" href="<?= 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' ?>"> -->
