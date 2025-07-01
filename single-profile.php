@@ -607,6 +607,27 @@ if (mysqli_num_rows($res_ap) > 0) {
                             </li>
 
                         <?php } ?>
+
+
+                          <?php
+                                if ($_SESSION["log_user_unique_id"] == $session_id) {?>
+                               
+                            <li class="flex items-center gap-3">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+
+                                    <form style="display:inline-block" method="post" action="https://models.staging3.dotwibe.com/live-chat/index.php?user=viewer&unique_model_id=<?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
+
+                                        <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
+                                    </form>
+                                    
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-sm sm:text-base">Go live</div>
+                                    <div class="text-xs sm:text-sm text-white/60">Live streams & content</div>
+                                </div>
+                            </li>
+
+                        <?php } ?>
                                 
                         <li class="flex items-center gap-3">
                             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
