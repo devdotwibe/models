@@ -46,26 +46,29 @@
         startViewer();
       };
 
-      socket.onmessage = async (event) => {
+     socket.onmessage = async (event) => {
         const msg = JSON.parse(event.data);
 
-        if (msg.type === 'offer' && msg.viewerId === viewerId) {
-          console.log("📡 Offer received from streamer");
-          await pc.setRemoteDescription(new RTCSessionDescription(msg.data));
+        if (msg.event === 'offer' && msg.data.viewerId === viewerId) {
+          await pc.setRemoteDescription(new RTCSessionDescription(msg.data.payload));
           const answer = await pc.createAnswer();
           await pc.setLocalDescription(answer);
-
-          sendMessage("answer", answer);
+          sendMessage('answer', pc.localDescription);
         }
 
-        if (msg.type === 'ice' && msg.viewerId === viewerId) {
+        if (msg.event === 'answer' && msg.data.viewerId === viewerId) {
+          await pc.setRemoteDescription(new RTCSessionDescription(msg.data.payload));
+        }
+
+        if (msg.event === 'ice' && msg.data.viewerId === viewerId) {
           try {
-            await pc.addIceCandidate(new RTCIceCandidate(msg.data));
+            await pc.addIceCandidate(new RTCIceCandidate(msg.data.payload));
           } catch (err) {
-            console.warn("Failed to add ICE candidate:", err);
+            console.error("ICE add error:", err);
           }
         }
       };
+
 
       socket.onerror = (err) => {
         console.error("WebSocket error:", err);
