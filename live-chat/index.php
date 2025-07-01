@@ -1168,13 +1168,9 @@ Please wait...
                 console.error('❌ Room ID is empty. Cannot join.');
                 return;
               }
-              if (isRoomExist) {
                 console.log('✅ Room exists. Joining...');
                 openRoomNow();
-              } else {
-                console.error('❌ Room does not exist');
-              }
-              
+           
             }, 5000);
 
             console.log('🌐 onload end');
