@@ -1178,7 +1178,7 @@ Please wait...
                 }
               });
 
-            }, 2000);
+            }, 5000);
 
             console.log('🌐 onload end');
     };
