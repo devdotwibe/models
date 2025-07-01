@@ -344,15 +344,15 @@
         } else {
             $('#tlm_user').html('0');
         }
-        // if( tlm_user_name == 'viewer' ) {
-        //     if( arrayOfUserIds && arrayOfUserIds.length == 1 ) {
-        //         $('#videos-container').attr('style','display:inline-block !important');
-        //     }else{
-        //         $('#videos-container').attr('style','display:none !important');
+        if( tlm_user_name == 'viewer' ) {
+            if( arrayOfUserIds && arrayOfUserIds.length == 1 ) {
+                $('#videos-container').attr('style','display:inline-block !important');
+            }else{
+                $('#videos-container').attr('style','display:none !important');
 
-        //     }
-        // }
-        //   $('.str_member').html(arrayOfUserIds.length);
+            }
+        }
+          $('.str_member').html(arrayOfUserIds.length);
     }, 3000);
 
     $(document).on('click', 'video', function () {

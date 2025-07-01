@@ -863,15 +863,15 @@ Please wait...
                   <div class="str_main_panel">
                     <img src="<?=SITEURL?>uploads/live-model-logo.png" class="tlm_img_chat1" alt="">
                     <div class="str_chat_header" style="">
-                      <!-- <div class="str_chat_avtar" style="width: 40px;height: 40px;    flex-basis: 40px;line-height: 40px;font-size: 20px;">
+                      <div class="str_chat_avtar" style="width: 40px;height: 40px;    flex-basis: 40px;line-height: 40px;font-size: 20px;">
 														<img src="<?php //echo isset($rowesdw['profile_pic'])?'../'.$rowesdw['profile_pic']:''; 
                                       ?>" class="img-fluid" style="width: 40px; height: 40px; flex-basis: 40px;object-fit: cover;">
-													</div> -->
-                      <!-- <div class="str_heder_left">
+													</div>
+                      <div class="str_heder_left">
 														<p class="str_title"><?php //echo isset($rowesdw['name'])?$rowesdw['name']:''; 
                                                   ?></p>
 														<p class="str_member"></p>
-                          </div> -->
+                          </div>
 
                       <div class="str_pub_wrap tlm_chat_top_tab active" data-chat="tlm_public_chat">
                         <i class="fa fa-comments" aria-hidden="true"></i>
