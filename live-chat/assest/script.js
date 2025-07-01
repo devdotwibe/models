@@ -34,6 +34,9 @@
 
      function openRoomNow() {
 
+
+        console.log('test accespt working');
+        
         disableInputButtons();
         connection.open(document.getElementById('room-id').value, function () {
             showRoomURL(connection.sessionid);
