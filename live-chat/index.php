@@ -1159,7 +1159,13 @@ Please wait...
     ?>
 
       window.onload = function () {
+
+        console.log('open starting');
+
           joinRoomNow();
+
+
+        console.log('open comsepted');
       };
     <?php
     }

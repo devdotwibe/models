@@ -43,6 +43,8 @@
 
     function joinRoomNow() {
 
+        console.log('open comsepted');
+
         disableInputButtons();
         connection.sdpConstraints.mandatory = {
             OfferToReceiveAudio: true,
