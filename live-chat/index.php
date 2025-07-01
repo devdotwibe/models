@@ -1148,7 +1148,7 @@ Please wait...
       }
     ?> 
         window.onload = function () {
-            opeRoomNow();
+            openRoomNow();
         };
     <?php
     }
