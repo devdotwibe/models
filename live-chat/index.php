@@ -1157,13 +1157,10 @@ Please wait...
         // unlink('total_user'.$_GET['unique_model_id'].$_SESSION['log_user_id'].".txt");
       }
     ?>
-      $(function() {
 
-        window.onload = function () {
-            joinRoomNow();
-        };
-
-      });
+      window.onload = function () {
+          joinRoomNow();
+      };
     <?php
     }
     ?>
