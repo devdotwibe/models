@@ -452,7 +452,9 @@ if (isset($_SESSION['log_user_id'])) {
                     </div>
                     <div class="flex-1">
                         <div class="flex items-center justify-between mb-2">
-                            <h3 class="text-lg font-semibold premium-text"><?php echo ucfirst($rowesdw['notification_type']); ?> Request</h3>
+                            <h3 class="text-lg font-semibold premium-text">
+							<?php if($rowesdw['notification_type'] != 'requests'){ echo ucfirst($rowesdw['notification_type']); }else echo 'Service'; ?> Request
+							</h3>
                             
 							<?php $date1 = new DateTime($rowesdw['notification_date']);
 							

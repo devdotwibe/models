@@ -5,14 +5,44 @@ include('includes/helper.php');
 
 if(!isset($_GET['service']) || !isset($_GET['m_id'])){
 
-	header("Location: login.php");
+	//header("Location: login.php");
+	echo '<script>window.history.back();</script>';
+	die;
 
 }else{
 	
-	$country_list = DB::query('select id,name,sortname from countries order by name asc');
+	//$country_list = DB::query('select id,name,sortname from countries order by name asc');
 	
 }
-
+if($_SESSION["log_user"]){
+	$userDetails = get_data('model_user',array('id'=>$_SESSION['log_user_id']),true);
+	if(!$userDetails){
+		echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
+		echo "<script>window.location='".SITEURL."/login.php';</script>";
+		die;
+	}
+	
+	if($_SESSION['log_user_unique_id'] == $_GET['m_id']){ ?>
+		<script>alert("Oops!! You can't book your service. Please choose another model...")</script>
+		<?php echo "<script>window.history.back();</script>";
+		die;
+	}
+	
+}
+else{
+	echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
+	echo "<script>window.location='".SITEURL."/login.php';</script>";
+	die;
+}
+$m_id = $_GET["m_id"];
+$model_data = DB::queryFirstRow("SELECT * FROM model_user WHERE unique_id =  %s ", $m_id);
+if(!$model_data){
+	echo '<script>window.history.back();</script>';
+	die;
+}else{
+$model_name = $model_data['name'];
+$model_ID = $model_data['id'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,7 +143,8 @@ if(!isset($_GET['service']) || !isset($_GET['m_id'])){
 				<form method="post" class="max-w-6xl mx-auto space-y-8" action="act_model_booking.php" enctype="multipart/form-data" >
                     <!-- Contact Details Section -->
                     <div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
-                        <div class="flex items-center mb-8">
+					 
+						<div class="flex items-center mb-8">
                             <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                             </div>
@@ -246,7 +277,14 @@ if(!isset($_GET['service']) || !isset($_GET['m_id'])){
 
                     <!-- Submit Section -->
                     <div class="text-center">
-                        <button type="submit" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
+					
+						<input type="hidden" name="model_unique_id" value="<?php echo $m_id; ?>">
+						<input type="hidden" name="user_unique_id" value="<?php echo $_SESSION['log_user_unique_id']; ?>">
+						<input type="hidden" name="model_name" value="<?php echo $model_name; ?>">
+						<input type="hidden" name="model_ID" value="<?php echo $model_ID; ?>">						
+						<input type="hidden" name="name" value="<?php echo $userDetails['name']; ?>">
+					
+                        <button name="booking_submit" type="submit" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>
                             Let's Meet - Confirm Booking
                         </button>
