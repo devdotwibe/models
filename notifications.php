@@ -1,14 +1,13 @@
 <?php 
-session_start(); 
-
-  include('includes/config.php');
-
-  include('includes/helper.php');
+session_start();
+include('includes/config.php');
+include('includes/helper.php');
   
-if (isset($_SESSION['log_user_id'])) {
-	
-} else {
-	header("Location: login.php");
+$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+
+if($userDetails){}
+else{
+	echo '<script>window.location.href="login.php"</script>';
 }
 ?>
 
