@@ -1148,7 +1148,9 @@ Please wait...
       }
     ?> 
       $(function() { 
-        $('#open-room').click();
+
+          openRoomNow();
+
       }); 
     <?php
     }
@@ -1158,7 +1160,9 @@ Please wait...
       }
     ?>
       $(function() {
-        $('#join-room').click();
+
+        joinRoomNow();
+
       });
     <?php
     }

@@ -26,22 +26,26 @@
             });
         }
     });
-    document.getElementById('open-room').onclick = function () {
+
+     function openRoomNow() {
+
         disableInputButtons();
         connection.open(document.getElementById('room-id').value, function () {
             showRoomURL(connection.sessionid);
         });
-    };
 
-    document.getElementById('join-room').onclick = function () {
+     }
+
+    function joinRoomNow() {
+
         disableInputButtons();
-
         connection.sdpConstraints.mandatory = {
             OfferToReceiveAudio: true,
             OfferToReceiveVideo: true
         };
         connection.join(document.getElementById('room-id').value);
-    };
+    }
+
 
     var connection = new RTCMultiConnection();
 
