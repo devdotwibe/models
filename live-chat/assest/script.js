@@ -33,7 +33,7 @@
     });
 
 
-    document.getElementById('join-room').onclick = function () {
+    document.getElementById('open-room').onclick = function () {
 
         disableInputButtons();
         connection.open(document.getElementById('room-id').value, function () {
@@ -43,6 +43,7 @@
 
      function openRoomNow() {
 
+         $('#open-room').trigger('click');
 
         console.log('test accespt working');
 
@@ -65,6 +66,8 @@
     function joinRoomNow() {
 
         console.log('open comsepted');
+
+        $('#join-room').trigger('click');
 
         disableInputButtons();
         connection.sdpConstraints.mandatory = {
