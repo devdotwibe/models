@@ -1155,7 +1155,7 @@ Please wait...
 
         setTimeout(function () {
           openRoomNow();
-        }, 5000); // 2000 milliseconds = 2 seconds
+        }, 15000); // 2000 milliseconds = 2 seconds
 
         console.log('tst end');
       };
