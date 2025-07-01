@@ -1,7 +1,11 @@
-$(function() {
 
-    'use strict';
-    tlm_check_url();
+
+    $(function() {
+        
+        tlm_check_url();
+
+    });
+
     $(document).on('click', '#tlm_status_notify', function () {
         var obj = $(this);
         let model_id = $('.str_privatechat_send_btn2').data('model_id');
@@ -682,5 +686,3 @@ $(function() {
             });
         }
     }
-
- });
