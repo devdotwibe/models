@@ -1152,15 +1152,31 @@ Please wait...
 
 
       window.onload = function () {
+            console.log('🌐 onload started');
 
-        console.log('tst start');
+            setTimeout(function () {
+              const roomid = document.getElementById('room-id').value;
+              console.log('ROOM ID:', roomid);
 
-        setTimeout(function () {
-          openRoomNow();
-        }, 5000); // 2000 milliseconds = 2 seconds
+              if (!roomid) {
+                console.error('❌ Room ID is empty. Cannot join.');
+                return;
+              }
 
-        console.log('tst end');
-      };
+              connection.checkPresence(roomid, function (isRoomExist) {
+                if (isRoomExist) {
+                  console.log('✅ Room exists. Joining...');
+                  openRoomNow();
+                } else {
+                  console.error('❌ Room does not exist');
+                }
+              });
+
+            }, 2000);
+
+            console.log('🌐 onload end');
+    };
+
 
     <?php
     }
