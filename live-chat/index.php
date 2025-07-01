@@ -1158,22 +1158,12 @@ Please wait...
 
 
       window.onload = function () {
-            console.log('🌐 onload started');
-
-            setTimeout(function () {
-              const roomid = document.getElementById('room-id').value;
-              console.log('ROOM ID:', roomid);
-
-              if (!roomid) {
-                console.error('❌ Room ID is empty. Cannot join.');
-                return;
-              }
-                console.log('✅ Room exists. Joining...');
-                openRoomNow();
-           
-            }, 5000);
-
-            console.log('🌐 onload end');
+         
+          setTimeout(function () {
+    
+              openRoomNow();
+          
+          }, 5000);
     };
 
 
@@ -1188,7 +1178,7 @@ Please wait...
       window.onload = function () {
         setTimeout(function () {
           joinRoomNow();
-        }, 2000);
+        }, 5000);
       };
 
     <?php
