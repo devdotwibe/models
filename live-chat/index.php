@@ -1172,17 +1172,6 @@ Please wait...
       }
     ?> 
 
-
-      window.onload = function () {
-         
-          setTimeout(function () {
-    
-              openRoomNow(private_id);
-          
-          }, 2000);
-    };
-
-
     <?php
     }
     if (isset($_GET['user']) && $_GET['user'] == 'viewer') {
@@ -1265,12 +1254,12 @@ if (isset($_GET['pra']) && !empty($_GET['pra'])) { ?>
 
    private_id = $_GET['pra'];
 
-  <?php if (isset($_GET['user']) && $_GET['user'] == 'viewer') { ?>
+  <?php if (isset($_GET['user']) && $_GET['user'] == 'streamer') { ?>
 
 
     openRoomNow(private_id);
 
-  <?php }?>
+  <?php  }?>
 
   <?php if (isset($_GET['user']) && $_GET['user'] == 'viewer') { ?>
 
@@ -1286,8 +1275,18 @@ if (isset($_GET['pra']) && !empty($_GET['pra'])) { ?>
 <?php }
 else{
 ?>
-
 <script>
+
+
+    window.onload = function () {
+        
+        setTimeout(function () {
+  
+            openRoomNow(private_id);
+        
+        }, 2000);
+  };
+  
 function gotoprivate(id){
   window.location='<?=$ChatLink.'index.php?user=viewer&pra=private&unique_model_id='.$_GET['unique_model_id'].'&private_id='?>'+id;
 }
