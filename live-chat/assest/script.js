@@ -69,7 +69,7 @@
 
                 stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
 
-                const videoElement = document.getElementById('videos');
+                const videoElement = document.getElementById('video_stream');
                 videoElement.srcObject = stream;
 
                 mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
