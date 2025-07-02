@@ -65,9 +65,11 @@
 
                 console.log('stram startd');
 
+                $('.tlm_video_not_started').hide();
+
                 stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
 
-                const videoElement = document.getElementById('videos-container');
+                const videoElement = document.getElementById('videos');
                 videoElement.srcObject = stream;
 
                 mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });

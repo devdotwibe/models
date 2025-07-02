@@ -774,13 +774,15 @@ var userpage = '<?=$user_page?>';
 <?php
 if($_GET['user'] == 'viewer'){
 ?>
-<div class="tlm_video_not_started text-center">
-  Model Currently offline
-  <p>
-    Click here to know when the <b><?php echo isset($rowesdw['name']) ? $rowesdw['name'] : ''; ?></b> comes online..<br>
-    <button class="btn btn-primary" id="tlm_status_notify">Notify me</button>
-  </p>
-</div>
+    <div class="tlm_video_not_started text-center">
+      Model Currently offline
+      <p>
+        Click here to know when the <b><?php echo isset($rowesdw['name']) ? $rowesdw['name'] : ''; ?></b> comes online..<br>
+        <button class="btn btn-primary" id="tlm_status_notify">Notify me</button>
+      </p>
+    </div>
+
+    <video id="video" autoplay muted></video><br>
 
 <?php
 }
