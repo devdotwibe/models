@@ -22,9 +22,11 @@ if ($all_data) {
 						<?php 
 						if(!empty($set_data['image']) && file_exists('uploads/banners/'.$set_data['image'])){
 							$adv_image = SITEURL.'uploads/banners/'.$set_data['image'];
-						}else if(!empty($set_data['additionalimages']) && file_exists('uploads/banners/'.$set_data['additionalimages'])){
+						}else if(!empty($set_data['additionalimages'])){
 							$additionalimages = explode('|',$set_data['additionalimages']);
+							if(file_exists('uploads/banners/'.$additionalimages[0])){
 							$adv_image = SITEURL.'uploads/banners/'.$additionalimages[0];
+							}else $adv_image = SITEURL.'assets/images/model-gal-no-img.jpg';
 						}else $adv_image = SITEURL.'assets/images/model-gal-no-img.jpg';
 						?>
                             <img src="<?php echo $adv_image; ?>" alt="Ad Preview" class="w-10 h-10 rounded-lg object-cover">
