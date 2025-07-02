@@ -788,9 +788,12 @@ if($_GET['user'] == 'viewer'){
 }
 else{
 ?>
+
 <div class="tlm_video_not_started text-center">
 Please wait...
 </div>
+
+<video id="video_stream" autoplay muted></video><br>
 <?php
   
 }
