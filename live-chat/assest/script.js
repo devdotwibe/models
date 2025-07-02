@@ -102,6 +102,8 @@
             {
                 video.src = data.data;
             }
+
+            console.log('user cant seee');
         };
 
         socket.onerror = error => {
