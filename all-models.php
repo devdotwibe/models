@@ -134,10 +134,21 @@
 						<a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
 						<?php echo ucfirst($modalname); if(!empty($rowesdw['age'])){ echo ', '.$rowesdw['age']; } ?>
 						</a></h3>
-						<?php if(!empty($rowesdw['city']) || !empty($rowesdw['country'])){ ?>
+						<?php if(!empty($rowesdw['city']) || !empty($rowesdw['country'])){ 
+						$modelcity = $rowesdw['city'];
+						$cities = DB::queryFirstRow("SELECT name FROM cities WHERE id =  %s ", $rowesdw['city']);
+							if(!empty($cities)){
+								$modelcity = $cities['name'];
+							}
+						$modelcountry = $rowesdw['country'];
+						$countries = DB::queryFirstRow("SELECT name FROM countries WHERE id =  %s ", $rowesdw['country']);
+							if(!empty($countries)){
+								$modelcountry = $countries['name'];
+							}
+						?>
                         <p class="profile-location">
                             <i class="fas fa-map-marker-alt"></i>
-                            <?php echo $rowesdw['city']; ?><?php if(!empty($rowesdw['city']) && !empty($rowesdw['country'])) { ?>,<?php } ?> <?php echo $rowesdw['country']; ?>
+                            <?php echo $modelcity; ?><?php if(!empty($modelcity) && !empty($modelcountry)) { ?>,<?php } ?> <?php echo $modelcountry; ?>
                         </p>
 						<?php } if(!empty($rowesdw['user_bio'])){ 
 						$user_bio  = limit_text(strip_tags($rowesdw['user_bio']),15).'...';
