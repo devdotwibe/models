@@ -23,15 +23,17 @@
     socket.onmessage = async ({ data }) => {
       const msg = JSON.parse(data);
 
-      if (msg.offer) {
-        await peer.setRemoteDescription(new RTCSessionDescription(msg.offer));
+      if (msg.event =='ice_offer') {
+
+        await peer.setRemoteDescription(new RTCSessionDescription(msg.data));
         const answer = await peer.createAnswer();
         await peer.setLocalDescription(answer);
 
-        socket.send(JSON.stringify({ event:'ice_answer',  data:answer }));
+        socket.send(JSON.stringify({ event:'ice_answer',  data:data }));
 
-      } else if (msg.candidate) {
-        await peer.addIceCandidate(new RTCIceCandidate(msg.candidate));
+      } else if (msg.event=='ice_candidate') {
+
+        await peer.addIceCandidate(new RTCIceCandidate(msg.data));
       }
     };
   </script>

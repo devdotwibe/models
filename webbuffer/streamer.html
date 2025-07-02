@@ -33,10 +33,13 @@
     socket.onmessage = async ({ data }) => {
       const msg = JSON.parse(data);
 
-      if (msg.answer) {
-        await peer.setRemoteDescription(new RTCSessionDescription(msg.answer));
-      } else if (msg.candidate) {
-        await peer.addIceCandidate(new RTCIceCandidate(msg.candidate));
+      if (msg.event =='ice_answer') {
+
+        await peer.setRemoteDescription(new RTCSessionDescription(msg.data));
+
+      } else if (msg.event=='ice_candidate') {
+        
+        await peer.addIceCandidate(new RTCIceCandidate(msg.data));
       }
     };
   </script>
