@@ -98,9 +98,7 @@
 
         var data = JSON.parse(event.data);
 
-        var private_id_data = JSON.parse(event.private_id);
-
-            if(private_id == private_id_data && private_id_data !="")
+            if(private_id == data.private_id && private_id !="")
             {
                 video.src = data.data;
             }
