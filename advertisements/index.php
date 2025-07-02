@@ -135,6 +135,12 @@ foreach ($f_country_list as $val) {
             <div class="search-section">
                 <div class="search-form">
                     <div class="form-grid">
+
+            <?php 
+			
+			$total_adv = DB::queryFirstrow("SELECT COUNT(*) AS total FROM banners where user_id=".$_SESSION['log_user_id']);
+			
+			?>
 					
 					<form method="get" id="search-form" class="mb-2" onSubmit="submit_search(1);return false;">
 						<input type="hidden" id="selpagesize" value="6" />
@@ -510,7 +516,8 @@ foreach ($f_country_list as $val) {
         function rebindpagination() {
             $("#list-paginations").pagination('destroy');
             $("#list-paginations").pagination({
-                pages: $("#i-total-page").val(),
+               // pages: $("#i-total-page").val(),
+               items: '<?php echo $total_adv['total']; ?>',
                 displayedPages: 5,
                 edges: 0,
                 cssStyle: 'light-theme',
