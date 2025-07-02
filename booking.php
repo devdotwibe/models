@@ -94,16 +94,40 @@ $model_ID = $model_data['id'];
                     <div class="flex justify-center items-center space-x-12">
                         <!-- User Avatar -->
                         <div class="text-center floating">
-                            <div class="model-avatar w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-2xl mb-4 mx-auto shadow-2xl">
-                                T
+						<?php if(!empty($userDetails['profile_pic']) && file_exists($userDetails['profile_pic'])){ ?>
+							<div class="model-avatar w-20 h-20 rounded-full overflow-hidden mb-4 mx-auto shadow-2xl border-3 border-green-500">
+                                <img src="<?php echo SITEURL.$userDetails['profile_pic']; ?>" alt="<?php echo $userDetails['name']; ?>" class="w-full h-full object-cover">
                             </div>
-                            <div class="premium-text font-bold text-lg mb-2">Test14</div>
+						<?php }else{ ?>
+							<div class="model-avatar w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-2xl mb-4 mx-auto shadow-2xl">
+                                <?php echo substr(strtoupper($userDetails['name']), 0, 1); ?>
+                            </div>
+						<?php } ?>
+                            <div class="premium-text font-bold text-lg mb-2"><?php echo $userDetails['name']; ?></div>
                             <div class="flex items-center justify-center mb-2">
                                 <span class="status-online w-3 h-3 rounded-full mr-2"></span>
                                 <span class="text-sm text-white/60">Online</span>
                             </div>
-                            <div class="text-xs text-white/50 max-w-32">THE USER IS IN CITY Test14 AND THE MODEL IS IN CITY Lahore</div>
-                        </div>
+							<?php 
+							$user_city = $userDetails['city'];
+							$u_cities = DB::queryFirstRow("SELECT name FROM cities WHERE id =  %s ", $user_city);
+							if(!empty($u_cities)){
+								$user_city = $u_cities['name'];
+							}
+							$model_city = $model_data['city'];
+							$m_cities = DB::queryFirstRow("SELECT name FROM cities WHERE id =  %s ", $model_city); 
+							if(!empty($m_cities)){
+								$model_city = $m_cities['name'];
+							}
+							?>
+                            <div class="text-xs text-white/50 max-w-32">
+								<?php 
+								if(!empty($user_city)) echo 'THE USER IS IN CITY '.$user_city; 
+								if(!empty($user_city) && !empty($model_city)) echo ' AND ';
+								if(!empty($model_city)) echo 'THE MODEL IS IN CITY '.$model_city;
+								?>
+							</div>
+						</div>
 
                         <!-- Connection Arrow -->
                         <div class="flex items-center">
@@ -114,10 +138,16 @@ $model_ID = $model_data['id'];
 
                         <!-- Model Avatar -->
                         <div class="text-center floating">
-                            <div class="model-avatar w-20 h-20 rounded-full overflow-hidden mb-4 mx-auto shadow-2xl border-3 border-green-500">
-                                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150&h=150&fit=crop&crop=faces" alt="UltraGalaxy" class="w-full h-full object-cover">
+						<?php if(!empty($model_data['profile_pic']) && file_exists($model_data['profile_pic'])){ ?>
+							<div class="model-avatar w-20 h-20 rounded-full overflow-hidden mb-4 mx-auto shadow-2xl border-3 border-green-500">
+                                <img src="<?php echo SITEURL.$model_data['profile_pic']; ?>" alt="<?php echo $model_data['name']; ?>" class="w-full h-full object-cover">
                             </div>
-                            <div class="premium-text font-bold text-lg mb-2">UltraGalaxy</div>
+						<?php }else{ ?>
+							<div class="model-avatar w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-2xl mb-4 mx-auto shadow-2xl">
+                                <?php echo substr(strtoupper($model_data['name']), 0, 1); ?>
+                            </div>
+						<?php } ?>
+                            <div class="premium-text font-bold text-lg mb-2"><?php echo $model_data['name']; ?></div>
                             <div class="flex items-center justify-center mb-2">
                                 <span class="status-online w-3 h-3 rounded-full mr-2"></span>
                                 <span class="text-sm text-white/60">Available</span>
