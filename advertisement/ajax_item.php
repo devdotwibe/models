@@ -19,7 +19,7 @@ if ($all_data) {
                     <div class="col-span-1 text-white/60 font-mono">#<?= $set_data['id'] ?></div>
                     <div class="col-span-3">
                         <div class="flex items-center space-x-3">
-						<?php 
+						<?php echo $set_data['additionalimages'];
 						if(!empty($set_data['image']) && file_exists('uploads/banners/'.$set_data['image'])){
 							$adv_image = SITEURL.'uploads/banners/'.$set_data['image'];
 						}else if(!empty($set_data['additionalimages'])){
