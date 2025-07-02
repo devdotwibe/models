@@ -90,7 +90,7 @@
 
     function joinRoomNow(private_id) {
 
-        console.log('viwer can see the video');
+        console.log('viwer can see the video',private_id);
 
         $('.tlm_video_not_started').hide();
 
