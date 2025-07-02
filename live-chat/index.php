@@ -1252,7 +1252,7 @@ if (isset($_GET['pra']) && !empty($_GET['pra'])) { ?>
 
 <script>
 
-   private_id = $_GET['private_id'];
+   private_id = "<?php echo $_GET['private_id'] ?>";
 
   <?php if (isset($_GET['user']) && $_GET['user'] == 'streamer') { ?>
 
