@@ -98,10 +98,12 @@
 
         var data = JSON.parse(event.data);
 
-            if(private_id == data.private_id && private_id !="")
-            {
-                video.src = data.data;
-            }
+            // if(private_id == data.private_id && private_id !="")
+            // {
+            //     video.src = data.data;
+            // }
+
+             video.src = data.data;
 
             console.log('user cant seee');
         };
