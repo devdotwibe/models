@@ -46,7 +46,7 @@
 
     const video = document.getElementById("video_stream");
 
-     function openRoomNow() {
+     function openRoomNow(private_id) {
 
             $('.tlm_video_not_started').hide();
 
@@ -62,9 +62,12 @@
                 canvas.height = video.videoHeight;
 
                 setInterval(() => {
+
                     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                    const imageData = canvas.toDataURL('image/jpeg', 0.4); // compress
-                    socket.send(JSON.stringify({event:'live_streaming',data:imageData}));
+
+                    const imageData = canvas.toDataURL('image/jpeg', 0.4);
+
+                    socket.send(JSON.stringify({private_id:private_id,event:'live_streaming',data:imageData}));
                 }, 100); // ~10 FPS
                 });
             })
@@ -83,17 +86,18 @@
     //     connection.join(document.getElementById('room-id').value);
     // };
 
-    function joinRoomNow() {
+    function joinRoomNow(private_id) {
 
         $('.tlm_video_not_started').hide();
 
         socket.onmessage = event => {
 
-        console.log(event.data);
-
         var data = JSON.parse(event.data);
 
-        video.src = data.data;
+            if(private_id == data.private_id && private_id !="")
+            {
+                video.src = data.data;
+            }
         };
 
         socket.onerror = error => {

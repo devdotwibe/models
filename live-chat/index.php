@@ -1147,6 +1147,8 @@ Please wait...
     
     let streaming = true;
 
+    let private_id = "";
+
   </script>
   <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
 
@@ -1175,9 +1177,9 @@ Please wait...
          
           setTimeout(function () {
     
-              openRoomNow();
+              openRoomNow(private_id);
           
-          }, 5000);
+          }, 2000);
     };
 
 
@@ -1189,11 +1191,11 @@ Please wait...
       }
     ?>
 
-      window.onload = function () {
-        setTimeout(function () {
-          joinRoomNow();
-        }, 5000);
-      };
+      // window.onload = function () {
+      //   setTimeout(function () {
+      //     joinRoomNow();
+      //   }, 5000);
+      // };
 
     <?php
     }
@@ -1256,9 +1258,35 @@ Please wait...
     }
 </script>
 <?php
-if (isset($_GET['pra']) && !empty($_GET['pra'])) {}
+
+if (isset($_GET['pra']) && !empty($_GET['pra'])) { ?>
+
+<script>
+
+   private_id = $_GET['pra'];
+
+  <?php if (isset($_GET['user']) && $_GET['user'] == 'viewer') { ?>
+
+
+    openRoomNow(private_id);
+
+  <?php }?>
+
+  <?php if (isset($_GET['user']) && $_GET['user'] == 'viewer') { ?>
+
+    
+
+    joinRoomNow(private_id);
+
+  <?php }?>
+
+
+</script>  
+
+<?php }
 else{
 ?>
+
 <script>
 function gotoprivate(id){
   window.location='<?=$ChatLink.'index.php?user=viewer&pra=private&unique_model_id='.$_GET['unique_model_id'].'&private_id='?>'+id;
