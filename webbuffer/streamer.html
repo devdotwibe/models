@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head><title>Broadcaster</title></head>
+<body>
+  <h2>Broadcaster</h2>
+  <video id="local" autoplay muted playsinline></video>
+
+  <script>
+    const localVideo = document.getElementById("local");
+    const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
+    let peer;
+
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+      localVideo.srcObject = stream;
+
+      peer = new RTCPeerConnection();
+      stream.getTracks().forEach(track => peer.addTrack(track, stream));
+
+      peer.onicecandidate = e => {
+        if (e.candidate) socket.send(JSON.stringify({  event:'live_streame', candidate: e.candidate }));
+      };
+
+      peer.createOffer().then(offer => {
+        peer.setLocalDescription(offer);
+        socket.send(JSON.stringify({ offer }));
+      });
+    });
+
+    socket.onmessage = async ({ data }) => {
+      const msg = JSON.parse(data);
+
+      if (msg.answer) {
+        await peer.setRemoteDescription(new RTCSessionDescription(msg.answer));
+      } else if (msg.candidate) {
+        await peer.addIceCandidate(new RTCIceCandidate(msg.candidate));
+      }
+    };
+  </script>
+</body>
+</html>

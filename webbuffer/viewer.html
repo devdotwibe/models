@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head><title>Viewer</title></head>
+<body>
+  <h2>Viewer</h2>
+  <video id="remote" autoplay playsinline></video>
+
+  <script>
+    const remoteVideo = document.getElementById("remote");
+    const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
+    let peer = new RTCPeerConnection();
+
+    peer.ontrack = e => {
+      remoteVideo.srcObject = e.streams[0];
+    };
+
+    peer.onicecandidate = e => {
+
+      if (e.candidate) socket.send(JSON.stringify({ event:'live_streame', candidate: e.candidate }));
+
+    };
+
+    socket.onmessage = async ({ data }) => {
+      const msg = JSON.parse(data);
+
+      if (msg.offer) {
+        await peer.setRemoteDescription(new RTCSessionDescription(msg.offer));
+        const answer = await peer.createAnswer();
+        await peer.setLocalDescription(answer);
+        socket.send(JSON.stringify({ answer }));
+      } else if (msg.candidate) {
+        await peer.addIceCandidate(new RTCIceCandidate(msg.candidate));
+      }
+    };
+  </script>
+</body>
+</html>
