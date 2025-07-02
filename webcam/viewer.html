@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>View Recorded Video</title>
+  <title>Live Stream Viewer</title>
 </head>
 <body>
-  <h2>Recorded Video</h2>
-  <video id="recorded" width="640" height="480" controls>
-    <source src="uploads/output.webm" type="video/webm">
+  <h2>Live Stream Viewer</h2>
+  <video id="player" width="640" height="480" controls autoplay>
+    <source src="stream.php" type="video/webm">
     Your browser does not support the video tag.
   </video>
+
+  <script>
+    // Optional: Check if stream has ended
+    setInterval(async () => {
+      const res = await fetch('stream.php', { method: 'HEAD' });
+      const streamStatus = res.headers.get('X-Stream-Status');
+      if (streamStatus === 'closed') {
+        alert("Stream has ended.");
+      }
+    }, 5000);
+  </script>
 </body>
 </html>

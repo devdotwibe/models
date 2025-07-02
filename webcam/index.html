@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Webcam Stream to PHP Server</title>
+  <title>Record Webcam to Server</title>
 </head>
 <body>
-  <h2>Webcam Stream</h2>
+  <h2>Record Webcam Stream</h2>
   <video id="video" autoplay muted></video><br>
   <button id="start">Start Recording</button>
   <button id="stop">Stop Recording</button>
@@ -23,7 +23,6 @@
         if (e.data.size > 0) {
           const formData = new FormData();
           formData.append('video', e.data, 'chunk.webm');
-
           await fetch('upload.php', {
             method: 'POST',
             body: formData
@@ -31,12 +30,19 @@
         }
       };
 
-      mediaRecorder.start(1000); // record in 1-second chunks
+      mediaRecorder.start(1000); // 1-second chunks
     };
 
-    document.getElementById('stop').onclick = () => {
+    document.getElementById('stop').onclick = async () => {
       mediaRecorder.stop();
       stream.getTracks().forEach(track => track.stop());
+
+      // Notify server that recording is done
+      await fetch('upload.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'stop=true'
+      });
     };
   </script>
 </body>
