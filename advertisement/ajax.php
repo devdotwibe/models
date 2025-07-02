@@ -3,14 +3,13 @@ session_start();
 include('../includes/config.php');
 include('../includes/helper.php');
 $table_name = "banners";
-$perPage = 20;
 $output = array();
 $output['result']= 'ok';
 if(isset($_SESSION['log_user_id'])){
 	$user_id = $_SESSION['log_user_id'];
 	$output['total'] = 0;
 	$where_clause = '';
-	$perPage =10;
+	$perPage = $_GET['limit'];
 
 	$list_data = $perPage;
 	$page = $_GET['page'];
@@ -31,8 +30,10 @@ if(isset($_SESSION['log_user_id'])){
 	}
 
 	$sort_by = ' ORDER BY tb.id desc ';
-	$sort_column = $_GET['sort_column'];
-	$sort_type = $_GET['sort_type'];
+	//$sort_column = $_GET['sort_column'];
+	//$sort_type = $_GET['sort_type'];
+	$sort_column = '';
+	$sort_type = '';
 	if($sort_column){
 		if($sort_column=='id'){$sort_by = ' ORDER BY tb.id '.$sort_type.' ';}
 		else {$sort_by = ' ORDER BY lower(tb.'.$sort_column.') '.$sort_type.' ';}
