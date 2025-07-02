@@ -96,16 +96,18 @@
 
         socket.onmessage = event => {
 
-        var data = JSON.parse(event.data);
+            try {
+            const msg = JSON.parse(event.data);
 
-            if(private_id == data.private_id && private_id !="")
-            {
-                video.src = data.data;
+            if (msg.event === "live_streaming" && msg.private_id === private_id) {
+                
+                video.src = msg.data;
             }
 
-            //  video.src = data.data;
+            } catch (e) {
 
-            console.log('user cant seee');
+                console.error("Invalid message:", e);
+            }
         };
 
         socket.onerror = error => {
@@ -113,7 +115,7 @@
         };
     }
 
-     connection.socketURL = 'wss://models.staging3.dotwibe.com/webrtcsocket/';
+    //  connection.socketURL = 'wss://models.staging3.dotwibe.com/webrtcsocket/';
 
     //  connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
     // connection.socketURL = 'http://muazkhan.com:9001/';
