@@ -793,7 +793,7 @@ else{
 Please wait...
 </div>
 
-<video id="video_stream" autoplay muted></video><br>
+<img id="video_stream" alt="live video stream"><br>
 <?php
   
 }
