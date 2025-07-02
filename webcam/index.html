@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Webcam Stream to PHP Server</title>
+</head>
+<body>
+  <h2>Webcam Stream</h2>
+  <video id="video" autoplay muted></video><br>
+  <button id="start">Start Recording</button>
+  <button id="stop">Stop Recording</button>
+
+  <script>
+    let mediaRecorder;
+    let stream;
+
+    document.getElementById('start').onclick = async () => {
+      stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      document.getElementById('video').srcObject = stream;
+
+      mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+
+      mediaRecorder.ondataavailable = async function (e) {
+        if (e.data.size > 0) {
+          const formData = new FormData();
+          formData.append('video', e.data, 'chunk.webm');
+
+          await fetch('upload.php', {
+            method: 'POST',
+            body: formData
+          });
+        }
+      };
+
+      mediaRecorder.start(1000); // record in 1-second chunks
+    };
+
+    document.getElementById('stop').onclick = () => {
+      mediaRecorder.stop();
+      stream.getTracks().forEach(track => track.stop());
+    };
+  </script>
+</body>
+</html>
