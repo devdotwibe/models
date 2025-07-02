@@ -35,90 +35,66 @@
 
     // document.getElementById('open-room').onclick = function () {
 
-    //       stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-            
-    //         document.getElementById('videos-container').srcObject = stream;
-
-    //         mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
-
-    //         mediaRecorder.ondataavailable = function (e) {
-    //             if (e.data.size > 0) {
-    //             const formData = new FormData();
-    //             formData.append('video', e.data, 'chunk.webm');
-    //             formData.append('index', chunkIndex);
-
-    //             fetch('upload.php', {
-    //                 method: 'POST',
-    //                 body: formData
-    //             });
-
-    //             chunkIndex++;
-    //             }
-    //         };
-
-    //         mediaRecorder.start(1000); 
+    //     disableInputButtons();
+    //     connection.open(document.getElementById('room-id').value, function () {
+    //         showRoomURL(connection.sessionid);
+    //     });
     // };
 
-        async function openRoomNow() {
+    const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
 
-            try {
 
-                console.log('stram startd');
+    const video = document.getElementById("video_stream");
 
-                $('.tlm_video_not_started').hide();
+     function openRoomNow() {
 
-                stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+           navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            .then(stream => {
+                video.srcObject = stream;
 
-                const videoElement = document.getElementById('video_stream');
-                videoElement.srcObject = stream;
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
 
-                mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+                video.addEventListener('loadedmetadata', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
 
-                mediaRecorder.ondataavailable = function (e) {
-                if (e.data.size > 0) {
-                    const formData = new FormData();
-                    formData.append('video', e.data, 'chunk.webm');
-                    formData.append('index', chunkIndex);
+                setInterval(() => {
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    const imageData = canvas.toDataURL('image/jpeg', 0.4); // compress
+                    socket.send(JSON.stringify({event:'live_streaming',data:imageData}));
+                }, 100); // ~10 FPS
+                });
+            })
+            .catch(error => {
+                console.error("Webcam error:", error);
+            });
 
-                    fetch('upload.php', {
-                    method: 'POST',
-                    body: formData
-                    });
+     }
 
-                    chunkIndex++;
-                }
-                };
-
-                mediaRecorder.start(1000);
-                console.log('Recording started');
-
-            } catch (err) {
-                console.error("Could not access webcam:", err);
-                alert("Error accessing webcam. Check permissions.");
-            }
-        }
-
-     document.getElementById('join-room').onclick = function () {
-        disableInputButtons();
-        connection.sdpConstraints.mandatory = {
-            OfferToReceiveAudio: true,
-            OfferToReceiveVideo: true
-        };
-        connection.join(document.getElementById('room-id').value);
-    };
+    //  document.getElementById('join-room').onclick = function () {
+    //     disableInputButtons();
+    //     connection.sdpConstraints.mandatory = {
+    //         OfferToReceiveAudio: true,
+    //         OfferToReceiveVideo: true
+    //     };
+    //     connection.join(document.getElementById('room-id').value);
+    // };
 
     function joinRoomNow() {
 
-        console.log('open comsepted');
+            socket.onmessage = event => {
 
-        $('#join-room').trigger('click');
+        console.log(event.data);
 
-        disableInputButtons();
-        connection.sdpConstraints.mandatory = {
-            OfferToReceiveAudio: true,
-            OfferToReceiveVideo: true
+        var data = JSON.parse(event.data);
+
+        video.src = data.data;
         };
-        connection.join(document.getElementById('room-id').value);
+
+        socket.onerror = error => {
+        console.error("WebSocket error:", error);
+        };
     }
 
      connection.socketURL = 'wss://models.staging3.dotwibe.com/webrtcsocket/';

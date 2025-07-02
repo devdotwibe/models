@@ -1142,6 +1142,10 @@ Please wait...
 
     let chunkIndex = 0;
 
+    let sourceBuffer;
+    
+    let streaming = true;
+
   </script>
   <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
 
