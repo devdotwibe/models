@@ -141,7 +141,9 @@ if($_GET['user'] == 'viewer' && $_GET['unique_model_id']) {
   <!-- <script type='text/javascript' src='<?= '../assets/wp-content/plugins/rich-reviews/js/rich-reviews.js' ?>' id='rich-reviews-js'></script> -->
   <script type='text/javascript' src='<?= '../assets/wp-content/themes/theagency3/library/js/libs/modernizr.custom.min.js' ?>' id='bones-modernizr-js'></script>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-  <script src="<?= 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js' ?>"></script>
+  <!-- <script src="<?= 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js' ?>"></script> -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
   <!-- <script src='https://kit.fontawesome.com/a076d05399.js'></script> -->
   <!-- <link rel="stylesheet" href="<?= 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' ?>"> -->
@@ -863,15 +865,15 @@ Please wait...
                   <div class="str_main_panel">
                     <img src="<?=SITEURL?>uploads/live-model-logo.png" class="tlm_img_chat1" alt="">
                     <div class="str_chat_header" style="">
-                      <!-- <div class="str_chat_avtar" style="width: 40px;height: 40px;    flex-basis: 40px;line-height: 40px;font-size: 20px;">
+                      <div class="str_chat_avtar" style="width: 40px;height: 40px;    flex-basis: 40px;line-height: 40px;font-size: 20px;">
 														<img src="<?php //echo isset($rowesdw['profile_pic'])?'../'.$rowesdw['profile_pic']:''; 
                                       ?>" class="img-fluid" style="width: 40px; height: 40px; flex-basis: 40px;object-fit: cover;">
-													</div> -->
-                      <!-- <div class="str_heder_left">
+													</div>
+                      <div class="str_heder_left">
 														<p class="str_title"><?php //echo isset($rowesdw['name'])?$rowesdw['name']:''; 
                                                   ?></p>
 														<p class="str_member"></p>
-                          </div> -->
+                          </div>
 
                       <div class="str_pub_wrap tlm_chat_top_tab active" data-chat="tlm_public_chat">
                         <i class="fa fa-comments" aria-hidden="true"></i>
@@ -1126,6 +1128,12 @@ Please wait...
   <!-- <script src="<?='https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js'?>"></script>  -->
   <script src="<?= 'assest/RTCMultiConnection.js?v=' . time() ?>"></script>
   <script src="<?= 'client-dist/socket.io.js?v=' . time() ?>"></script>
+
+  <script>
+
+       let connection = new RTCMultiConnection();
+
+  </script>
   <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
 
   <!-- <script src="<?= 'script.js?v=' . time() ?>"></script> -->
@@ -1137,9 +1145,9 @@ Please wait...
 
    <!-- <script src="script.js"></script> -->
 
-
-
   <script>
+
+
     <?php
     if (isset($_GET['user']) && $_GET['user'] == 'streamer') {
       if (isset($_GET['unique_model_id'])) {
@@ -1147,9 +1155,18 @@ Please wait...
         unlink('total_user' . $_GET['unique_model_id'] . 'prav' . ".txt");
       }
     ?> 
-      $(function() { 
-        $('#open-room').click();
-      }); 
+
+
+      window.onload = function () {
+         
+          setTimeout(function () {
+    
+              openRoomNow();
+          
+          }, 5000);
+    };
+
+
     <?php
     }
     if (isset($_GET['user']) && $_GET['user'] == 'viewer') {
@@ -1157,9 +1174,13 @@ Please wait...
         // unlink('total_user'.$_GET['unique_model_id'].$_SESSION['log_user_id'].".txt");
       }
     ?>
-      $(function() {
-        $('#join-room').click();
-      });
+
+      window.onload = function () {
+        setTimeout(function () {
+          joinRoomNow();
+        }, 5000);
+      };
+
     <?php
     }
     ?>

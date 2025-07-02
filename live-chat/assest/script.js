@@ -1,6 +1,11 @@
-(function ($) {
-    'use strict';
-    tlm_check_url();
+
+
+    $(function() {
+        
+        tlm_check_url();
+
+    });
+
     $(document).on('click', '#tlm_status_notify', function () {
         var obj = $(this);
         let model_id = $('.str_privatechat_send_btn2').data('model_id');
@@ -26,16 +31,31 @@
             });
         }
     });
+
+
     document.getElementById('open-room').onclick = function () {
+
         disableInputButtons();
         connection.open(document.getElementById('room-id').value, function () {
             showRoomURL(connection.sessionid);
         });
     };
 
-    document.getElementById('join-room').onclick = function () {
-        disableInputButtons();
+     function openRoomNow() {
 
+         $('#open-room').trigger('click');
+
+        console.log('test accespt working');
+
+        disableInputButtons();
+        connection.open(document.getElementById('room-id').value, function () {
+            showRoomURL(connection.sessionid);
+        });
+
+     }
+
+     document.getElementById('join-room').onclick = function () {
+        disableInputButtons();
         connection.sdpConstraints.mandatory = {
             OfferToReceiveAudio: true,
             OfferToReceiveVideo: true
@@ -43,7 +63,19 @@
         connection.join(document.getElementById('room-id').value);
     };
 
-    var connection = new RTCMultiConnection();
+    function joinRoomNow() {
+
+        console.log('open comsepted');
+
+        $('#join-room').trigger('click');
+
+        disableInputButtons();
+        connection.sdpConstraints.mandatory = {
+            OfferToReceiveAudio: true,
+            OfferToReceiveVideo: true
+        };
+        connection.join(document.getElementById('room-id').value);
+    }
 
      connection.socketURL = 'wss://models.staging3.dotwibe.com/webrtcsocket/';
 
@@ -344,15 +376,15 @@
         } else {
             $('#tlm_user').html('0');
         }
-        // if( tlm_user_name == 'viewer' ) {
-        //     if( arrayOfUserIds && arrayOfUserIds.length == 1 ) {
-        //         $('#videos-container').attr('style','display:inline-block !important');
-        //     }else{
-        //         $('#videos-container').attr('style','display:none !important');
+        if( tlm_user_name == 'viewer' ) {
+            if( arrayOfUserIds && arrayOfUserIds.length == 1 ) {
+                $('#videos-container').attr('style','display:inline-block !important');
+            }else{
+                $('#videos-container').attr('style','display:none !important');
 
-        //     }
-        // }
-        //   $('.str_member').html(arrayOfUserIds.length);
+            }
+        }
+          $('.str_member').html(arrayOfUserIds.length);
     }, 3000);
 
     $(document).on('click', 'video', function () {
@@ -677,4 +709,3 @@
             });
         }
     }
-})(jQuery);
