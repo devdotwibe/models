@@ -13,7 +13,12 @@
     const viewerImg = document.getElementById("viewer");
 
     socket.onmessage = event => {
-      viewerImg.src = event.data;
+
+    console.log(event.data);
+
+    var data = JSON.parse(event.data);
+
+      viewerImg.src = data.data;
     };
 
     socket.onerror = error => {
