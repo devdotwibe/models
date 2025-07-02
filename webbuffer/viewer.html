@@ -21,9 +21,14 @@
     };
 
     socket.onmessage = async ({ data }) => {
+
+        console.log('t1',data);
+
       const msg = JSON.parse(data);
 
       if (msg.event =='ice_offer') {
+
+         console.log('t3',msg);
 
         await peer.setRemoteDescription(new RTCSessionDescription(msg.data));
         const answer = await peer.createAnswer();
@@ -32,6 +37,9 @@
         socket.send(JSON.stringify({ event:'ice_answer',  data:data }));
 
       } else if (msg.event=='ice_candidate') {
+
+
+         console.log('t2',msg);
 
         await peer.addIceCandidate(new RTCIceCandidate(msg.data));
       }
