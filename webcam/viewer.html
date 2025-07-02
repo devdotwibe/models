@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Stream Viewer</title>
+</head>
+<body>
+  <h2>Live Stream Viewer</h2>
+  <video id="video" width="640" height="480" controls autoplay></video>
+
+  <script>
+    const video = document.getElementById('video');
+    const mediaSource = new MediaSource();
+    video.src = URL.createObjectURL(mediaSource);
+
+    let sourceBuffer;
+    let chunkIndex = 0;
+    let streaming = true;
+
+    mediaSource.addEventListener('sourceopen', () => {
+      const mime = 'video/webm; codecs="vp8,opus"';
+
+      if (!MediaSource.isTypeSupported(mime)) {
+        alert('Unsupported MIME type: ' + mime);
+        return;
+      }
+
+      sourceBuffer = mediaSource.addSourceBuffer(mime);
+
+      // Start the chunk polling after sourceBuffer is ready
+      fetchNextChunk();
+    });
+
+    async function fetchNextChunk() {
+
+        console.log(1);
+
+      while (streaming && mediaSource.readyState === 'open') {
+
+          console.log(5);
+
+        try {
+          const response = await fetch(`stream_chunk.php?index=${chunkIndex}`);
+
+          if (response.status === 204) {
+
+                    console.log(7);
+            // Wait and retry if chunk doesn't exist yet
+            await delay(1000);
+            continue;
+          }
+
+          const chunk = await response.arrayBuffer();
+          await appendChunkSafely(chunk);
+          chunkIndex++;
+
+        } catch (err) {
+          console.error('Error fetching/appending chunk:', err);
+          await delay(2000);
+        }
+      }
+
+      console.warn('Stopped fetching chunks. MediaSource state:', mediaSource.readyState);
+    }
+
+    function appendChunkSafely(chunk) {
+
+           console.log(2);
+
+      return new Promise(resolve => {
+        if (mediaSource.readyState !== 'open') {
+
+                    console.log(6);
+                    
+          console.warn('MediaSource is not open. Skipping chunk.');
+          streaming = false;
+          return resolve();
+        }
+
+        const tryAppend = () => {
+
+                    console.log(8);
+
+          if (!sourceBuffer.updating) {
+
+
+                    console.log(9);
+            try {
+              sourceBuffer.appendBuffer(chunk);
+              resolve();
+            } catch (e) {
+              console.error("appendBuffer failed:", e);
+              streaming = false;
+              resolve();
+            }
+          } else {
+            sourceBuffer.addEventListener('updateend', () => tryAppend(), { once: true });
+          }
+        };
+
+        tryAppend();
+      });
+    }
+
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // Debug logs
+    mediaSource.addEventListener('sourceclose', () => {
+
+           console.log(3);
+
+      console.warn('MediaSource closed.');
+    });
+
+    mediaSource.addEventListener('sourceended', () => {
+
+           console.log(4);
+      console.warn('MediaSource ended.');
+    });
+  </script>
+</body>
+</html>

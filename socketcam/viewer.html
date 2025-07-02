@@ -1,0 +1,29 @@
+<!-- viewer.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Webcam Viewer</title>
+</head>
+<body>
+  <h2>Live Stream</h2>
+  <img id="viewer" alt="stream will appear here..." />
+
+  <script>
+    const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
+    const viewerImg = document.getElementById("viewer");
+
+    socket.onmessage = event => {
+
+    console.log(event.data);
+
+    var data = JSON.parse(event.data);
+
+      viewerImg.src = data.data;
+    };
+
+    socket.onerror = error => {
+      console.error("WebSocket error:", error);
+    };
+  </script>
+</body>
+</html>
