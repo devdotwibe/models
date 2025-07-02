@@ -48,6 +48,8 @@
 
      function openRoomNow() {
 
+            $('.tlm_video_not_started').hide();
+
            navigator.mediaDevices.getUserMedia({ video: true, audio: false })
             .then(stream => {
                 video.srcObject = stream;
@@ -83,7 +85,9 @@
 
     function joinRoomNow() {
 
-            socket.onmessage = event => {
+        $('.tlm_video_not_started').hide();
+
+        socket.onmessage = event => {
 
         console.log(event.data);
 
