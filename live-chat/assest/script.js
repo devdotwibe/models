@@ -90,6 +90,8 @@
 
     function joinRoomNow(private_id) {
 
+        console.log('viwer can see the video');
+
         $('.tlm_video_not_started').hide();
 
         socket.onmessage = event => {
