@@ -27,7 +27,9 @@
         await peer.setRemoteDescription(new RTCSessionDescription(msg.offer));
         const answer = await peer.createAnswer();
         await peer.setLocalDescription(answer);
-        socket.send(JSON.stringify({ answer }));
+
+        socket.send(JSON.stringify({ event:'live_streame',  answer }));
+
       } else if (msg.candidate) {
         await peer.addIceCandidate(new RTCIceCandidate(msg.candidate));
       }
