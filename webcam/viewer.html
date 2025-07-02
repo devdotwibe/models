@@ -1,24 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Live Stream Viewer</title>
+  <title>Live Viewer</title>
 </head>
 <body>
   <h2>Live Stream Viewer</h2>
-  <video id="player" width="640" height="480" controls autoplay>
-    <source src="stream.php" type="video/webm">
-    Your browser does not support the video tag.
-  </video>
+  <video id="video" width="640" height="480" controls autoplay></video>
 
   <script>
-    // Optional: Check if stream has ended
-    // setInterval(async () => {
-    //   const res = await fetch('stream.php', { method: 'HEAD' });
-    //   const streamStatus = res.headers.get('X-Stream-Status');
-    //   if (streamStatus === 'closed') {
-    //     alert("Stream has ended.");
-    //   }
-    // }, 5000);
+    const video = document.getElementById('video');
+    const mediaSource = new MediaSource();
+    let sourceBuffer;
+    let chunkIndex = 0;
+
+    video.src = URL.createObjectURL(mediaSource);
+
+    mediaSource.addEventListener('sourceopen', () => {
+      const mime = 'video/webm; codecs="vp8,opus"';
+
+      if (MediaSource.isTypeSupported(mime)) {
+        sourceBuffer = mediaSource.addSourceBuffer(mime);
+        fetchNextChunk();
+      } else {
+        alert("Unsupported MIME type: " + mime);
+      }
+    });
+
+    async function fetchNextChunk() {
+      while (true) {
+        try {
+          const response = await fetch(`stream_chunk.php?index=${chunkIndex}`);
+
+          if (response.status === 204) {
+            // No new chunk, wait a bit
+            await new Promise(r => setTimeout(r, 1000));
+            continue;
+          }
+
+          const chunk = await response.arrayBuffer();
+          if (!sourceBuffer.updating) {
+            sourceBuffer.appendBuffer(chunk);
+            chunkIndex++;
+          } else {
+            await new Promise(resolve => {
+              sourceBuffer.addEventListener('updateend', resolve, { once: true });
+              sourceBuffer.appendBuffer(chunk);
+              chunkIndex++;
+            });
+          }
+        } catch (err) {
+          console.error("Error fetching chunk", err);
+          await new Promise(r => setTimeout(r, 2000));
+        }
+      }
+    }
   </script>
 </body>
 </html>

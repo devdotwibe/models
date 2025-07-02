@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Record Webcam to Server</title>
+  <title>Webcam Recorder</title>
 </head>
 <body>
-  <h2>Record Webcam Stream</h2>
+  <h2>Record Webcam Video</h2>
   <video id="video" autoplay muted></video><br>
   <button id="start">Start Recording</button>
   <button id="stop">Stop Recording</button>
 
   <script>
-    let mediaRecorder;
-    let stream;
+    let mediaRecorder, stream;
+    let chunkIndex = 0;
 
     document.getElementById('start').onclick = async () => {
       stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
@@ -19,30 +19,27 @@
 
       mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
 
-      mediaRecorder.ondataavailable = async function (e) {
+      mediaRecorder.ondataavailable = function (e) {
         if (e.data.size > 0) {
           const formData = new FormData();
           formData.append('video', e.data, 'chunk.webm');
-          await fetch('upload.php', {
+          formData.append('index', chunkIndex);
+
+          fetch('upload.php', {
             method: 'POST',
             body: formData
           });
+
+          chunkIndex++;
         }
       };
 
-      mediaRecorder.start(1000); // 1-second chunks
+      mediaRecorder.start(1000); // 1 second chunks
     };
 
-    document.getElementById('stop').onclick = async () => {
+    document.getElementById('stop').onclick = () => {
       mediaRecorder.stop();
       stream.getTracks().forEach(track => track.stop());
-
-      // Notify server that recording is done
-      await fetch('upload.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'stop=true'
-      });
     };
   </script>
 </body>
