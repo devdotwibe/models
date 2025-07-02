@@ -782,7 +782,8 @@ if($_GET['user'] == 'viewer'){
       </p>
     </div>
 
-    <video id="video_stream" autoplay muted></video><br>
+   
+<img id="video_stream" alt="live video stream"><br>
 
 <?php
 }
@@ -793,7 +794,7 @@ else{
 Please wait...
 </div>
 
-<img id="video_stream" alt="live video stream"><br>
+<video id="video_stream" autoplay muted></video><br>
 <?php
   
 }
