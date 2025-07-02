@@ -31,6 +31,10 @@
     });
 
     socket.onmessage = async ({ data }) => {
+
+
+       console.log('s1',data);
+
       const msg = JSON.parse(data);
 
       if (msg.event =='ice_answer') {
