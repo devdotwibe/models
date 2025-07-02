@@ -96,9 +96,6 @@
 
         socket.onmessage = event => {
 
-
-        console.log('data',event);
-        
         var data = JSON.parse(event.data);
 
         var private_id_data = JSON.parse(event.private_id);
