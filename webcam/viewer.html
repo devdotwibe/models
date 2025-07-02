@@ -4,7 +4,7 @@
   <title>Live Stream Viewer</title>
 </head>
 <body>
-  <h2>Live Stream Viewer with MediaSource</h2>
+  <h2>Live Stream Viewer</h2>
   <video id="video" width="640" height="480" controls autoplay></video>
 
   <script>
@@ -14,6 +14,7 @@
 
     let sourceBuffer;
     let chunkIndex = 0;
+    let streaming = true;
 
     mediaSource.addEventListener('sourceopen', () => {
       const mime = 'video/webm; codecs="vp8,opus"';
@@ -24,71 +25,67 @@
       }
 
       sourceBuffer = mediaSource.addSourceBuffer(mime);
-      fetchNextChunk(); // start polling
+
+      // Start the chunk polling after sourceBuffer is ready
+      fetchNextChunk();
     });
 
     async function fetchNextChunk() {
-      while (true) {
-        // Prevent trying to append if media source is closed
-        if (mediaSource.readyState !== 'open') {
-          console.warn('MediaSource is not open. Stopping...');
-          break;
-        }
-
+      while (streaming && mediaSource.readyState === 'open') {
         try {
           const response = await fetch(`stream_chunk.php?index=${chunkIndex}`);
 
           if (response.status === 204) {
-            await sleep(1000); // wait for new chunk
+            // Wait and retry if chunk doesn't exist yet
+            await delay(1000);
             continue;
           }
 
           const chunk = await response.arrayBuffer();
-          await appendChunk(chunk); // safely append
+          await appendChunkSafely(chunk);
           chunkIndex++;
 
         } catch (err) {
           console.error('Error fetching/appending chunk:', err);
-          await sleep(2000);
+          await delay(2000);
         }
       }
+
+      console.warn('Stopped fetching chunks. MediaSource state:', mediaSource.readyState);
     }
 
-    function appendChunk(chunk) {
+    function appendChunkSafely(chunk) {
       return new Promise(resolve => {
         if (mediaSource.readyState !== 'open') {
-          console.warn('Cannot append, media source closed');
+          console.warn('MediaSource is not open. Skipping chunk.');
+          streaming = false;
           return resolve();
         }
 
-        if (!sourceBuffer.updating) {
-          try {
-            sourceBuffer.appendBuffer(chunk);
-            resolve();
-          } catch (e) {
-            console.error("appendBuffer failed:", e);
-            resolve();
-          }
-        } else {
-          sourceBuffer.addEventListener('updateend', function handler() {
-            sourceBuffer.removeEventListener('updateend', handler);
-            if (mediaSource.readyState === 'open') {
-              try {
-                sourceBuffer.appendBuffer(chunk);
-              } catch (e) {
-                console.error("Delayed appendBuffer failed:", e);
-              }
+        const tryAppend = () => {
+          if (!sourceBuffer.updating) {
+            try {
+              sourceBuffer.appendBuffer(chunk);
+              resolve();
+            } catch (e) {
+              console.error("appendBuffer failed:", e);
+              streaming = false;
+              resolve();
             }
-            resolve();
-          });
-        }
+          } else {
+            sourceBuffer.addEventListener('updateend', () => tryAppend(), { once: true });
+          }
+        };
+
+        tryAppend();
       });
     }
 
-    function sleep(ms) {
+    function delay(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    // Debug logs
     mediaSource.addEventListener('sourceclose', () => {
       console.warn('MediaSource closed.');
     });
