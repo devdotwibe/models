@@ -12,13 +12,13 @@
 
   <script>
     // Optional: Check if stream has ended
-    setInterval(async () => {
-      const res = await fetch('stream.php', { method: 'HEAD' });
-      const streamStatus = res.headers.get('X-Stream-Status');
-      if (streamStatus === 'closed') {
-        alert("Stream has ended.");
-      }
-    }, 5000);
+    // setInterval(async () => {
+    //   const res = await fetch('stream.php', { method: 'HEAD' });
+    //   const streamStatus = res.headers.get('X-Stream-Status');
+    //   if (streamStatus === 'closed') {
+    //     alert("Stream has ended.");
+    //   }
+    // }, 5000);
   </script>
 </body>
 </html>
