@@ -42,6 +42,8 @@
           const response = await fetch(`stream_chunk.php?index=${chunkIndex}`);
 
           if (response.status === 204) {
+
+                    console.log(7);
             // Wait and retry if chunk doesn't exist yet
             await delay(1000);
             continue;
@@ -75,7 +77,13 @@
         }
 
         const tryAppend = () => {
+
+                    console.log(8);
+
           if (!sourceBuffer.updating) {
+
+
+                    console.log(9);
             try {
               sourceBuffer.appendBuffer(chunk);
               resolve();
