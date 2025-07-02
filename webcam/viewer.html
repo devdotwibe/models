@@ -31,6 +31,9 @@
     });
 
     async function fetchNextChunk() {
+
+        console.log(1);
+
       while (streaming && mediaSource.readyState === 'open') {
         try {
           const response = await fetch(`stream_chunk.php?index=${chunkIndex}`);
@@ -55,6 +58,9 @@
     }
 
     function appendChunkSafely(chunk) {
+
+           console.log(2);
+
       return new Promise(resolve => {
         if (mediaSource.readyState !== 'open') {
           console.warn('MediaSource is not open. Skipping chunk.');
@@ -87,10 +93,15 @@
 
     // Debug logs
     mediaSource.addEventListener('sourceclose', () => {
+
+           console.log(3);
+
       console.warn('MediaSource closed.');
     });
 
     mediaSource.addEventListener('sourceended', () => {
+
+           console.log(4);
       console.warn('MediaSource ended.');
     });
   </script>
