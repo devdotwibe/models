@@ -62,6 +62,9 @@
         async function openRoomNow() {
 
             try {
+
+                console.log('stram startd');
+
                 stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
 
                 const videoElement = document.getElementById('videos-container');
@@ -84,7 +87,7 @@
                 }
                 };
 
-                mediaRecorder.start(1000); // 1-second chunks
+                mediaRecorder.start(1000);
                 console.log('Recording started');
 
             } catch (err) {
