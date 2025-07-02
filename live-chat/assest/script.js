@@ -33,26 +33,65 @@
     });
 
 
-    document.getElementById('open-room').onclick = function () {
+    // document.getElementById('open-room').onclick = function () {
 
-        disableInputButtons();
-        connection.open(document.getElementById('room-id').value, function () {
-            showRoomURL(connection.sessionid);
-        });
-    };
+    //       stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            
+    //         document.getElementById('videos-container').srcObject = stream;
 
-     function openRoomNow() {
+    //         mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
 
-         $('#open-room').trigger('click');
+    //         mediaRecorder.ondataavailable = function (e) {
+    //             if (e.data.size > 0) {
+    //             const formData = new FormData();
+    //             formData.append('video', e.data, 'chunk.webm');
+    //             formData.append('index', chunkIndex);
 
-        console.log('test accespt working');
+    //             fetch('upload.php', {
+    //                 method: 'POST',
+    //                 body: formData
+    //             });
 
-        disableInputButtons();
-        connection.open(document.getElementById('room-id').value, function () {
-            showRoomURL(connection.sessionid);
-        });
+    //             chunkIndex++;
+    //             }
+    //         };
 
-     }
+    //         mediaRecorder.start(1000); 
+    // };
+
+        async function openRoomNow() {
+
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+
+                const videoElement = document.getElementById('videos-container');
+                videoElement.srcObject = stream;
+
+                mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+
+                mediaRecorder.ondataavailable = function (e) {
+                if (e.data.size > 0) {
+                    const formData = new FormData();
+                    formData.append('video', e.data, 'chunk.webm');
+                    formData.append('index', chunkIndex);
+
+                    fetch('upload.php', {
+                    method: 'POST',
+                    body: formData
+                    });
+
+                    chunkIndex++;
+                }
+                };
+
+                mediaRecorder.start(1000); // 1-second chunks
+                console.log('Recording started');
+
+            } catch (err) {
+                console.error("Could not access webcam:", err);
+                alert("Error accessing webcam. Check permissions.");
+            }
+        }
 
      document.getElementById('join-room').onclick = function () {
         disableInputButtons();

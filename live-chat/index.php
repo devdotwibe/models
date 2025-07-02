@@ -1131,7 +1131,11 @@ Please wait...
 
   <script>
 
-       let connection = new RTCMultiConnection();
+    let connection = new RTCMultiConnection();
+
+    let mediaRecorder, stream;
+
+    let chunkIndex = 0;
 
   </script>
   <script src="<?= 'assest/script.js?v=' . time() ?>"></script>
