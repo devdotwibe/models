@@ -16,7 +16,7 @@
 
     peer.onicecandidate = e => {
 
-      if (e.candidate) socket.send(JSON.stringify({ event:'live_streame', candidate: e.candidate }));
+      if (e.candidate) socket.send(JSON.stringify({ event:'ice_candidate', data: e.candidate }));
 
     };
 
@@ -28,7 +28,7 @@
         const answer = await peer.createAnswer();
         await peer.setLocalDescription(answer);
 
-        socket.send(JSON.stringify({ event:'live_streame',  answer }));
+        socket.send(JSON.stringify({ event:'ice_answer',  data:answer }));
 
       } else if (msg.candidate) {
         await peer.addIceCandidate(new RTCIceCandidate(msg.candidate));
