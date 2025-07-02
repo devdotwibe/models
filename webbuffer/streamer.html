@@ -21,9 +21,13 @@
       };
 
       peer.createOffer().then(offer => {
+
         peer.setLocalDescription(offer);
-        socket.send(JSON.stringify({ offer }));
+
+        socket.send(JSON.stringify({  event:'live_streame', offer }));
+
       });
+
     });
 
     socket.onmessage = async ({ data }) => {
