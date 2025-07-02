@@ -48,6 +48,8 @@
 
      function openRoomNow(private_id) {
 
+            console.log('user start streaming');
+
             $('.tlm_video_not_started').hide();
 
            navigator.mediaDevices.getUserMedia({ video: true, audio: false })
