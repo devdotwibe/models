@@ -40,19 +40,19 @@
       };
       isconnected = true;
       setTimeout(()=>{
-        if(storedevent["stream-offer"]&&storedevent["stream-offer"].length>0){
+        if(storedevent["stream-candidate"]&&storedevent["stream-candidate"].length>0){
+          storedevent["stream-candidate"].forEach(async function(candidate){
+            iscandidate = false;
+            await peer.addIceCandidate(new RTCIceCandidate(candidate));
+          })
+        }
+        if(storedevent["stream-offer"]&&storedevent["stream-offer"].length>0&&isoffer){
           storedevent["stream-offer"].forEach(async function(offer){
             isoffer = false;
             await peer.setRemoteDescription(new RTCSessionDescription(offer));
             const answer = await peer.createAnswer();
             await peer.setLocalDescription(answer);
             socket.send(JSON.stringify({ event: "view-answer", data: answer }));
-          })
-        }
-        if(storedevent["stream-candidate"]&&storedevent["stream-candidate"].length>0){
-          storedevent["stream-candidate"].forEach(async function(candidate){
-            iscandidate = false;
-            await peer.addIceCandidate(new RTCIceCandidate(candidate));
           })
         }
       },1000)
