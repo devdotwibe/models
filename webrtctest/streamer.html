@@ -9,6 +9,8 @@
     const localVideo = document.getElementById("local");
     const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
     let peer;
+    let streamcandidate=null;
+    let streamoffer=null;
 
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
       localVideo.srcObject = stream;
@@ -23,11 +25,15 @@
       stream.getTracks().forEach(track => peer.addTrack(track, stream));
 
       peer.onicecandidate = e => {
-        if (e.candidate) socket.send(JSON.stringify({ event:"stream-candidate",data: e.candidate }));
+        if (e.candidate){
+            streamcandidate=e.candidate;
+            socket.send(JSON.stringify({ event:"stream-candidate",data: e.candidate }));
+        }
       };
 
       peer.createOffer().then(offer => {
         peer.setLocalDescription(offer);
+        streamoffer=offer;
         socket.send(JSON.stringify({ event:"stream-offer",data:offer }));
       });
     });
@@ -39,6 +45,10 @@
         await peer.setRemoteDescription(new RTCSessionDescription(msg.data));
       } else if (msg.event=="view-candidate") {
         await peer.addIceCandidate(new RTCIceCandidate(msg.data));
+        socket.send(JSON.stringify({ event:"stream-candidate",data: streamcandidate }));
+      }else if(msg.event=="request-offer"){
+        socket.send(JSON.stringify({ event:"stream-offer",data:streamoffer }));
+
       }
     };
   </script>

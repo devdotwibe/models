@@ -15,6 +15,8 @@
             { urls: "turn:turn01.hubl.in?transport=tcp"}
         ]
     });
+    let iscandidate=true;
+    let isoffer=true;
 
     peer.ontrack = e => {
       remoteVideo.srcObject = e.streams[0];
@@ -27,13 +29,16 @@
     socket.onmessage = async ({ data }) => {
       const msg = JSON.parse(data);
 
-      if (msg.event=="stream-offer") {
+      if (msg.event=="stream-offer"&&isoffer) {
+        isoffer=false;
         await peer.setRemoteDescription(new RTCSessionDescription(msg.data));
         const answer = await peer.createAnswer();
         await peer.setLocalDescription(answer);
         socket.send(JSON.stringify({event:"view-answer",data: answer }));
-      } else if (msg.event=="stream-candidate") {
+      } else if (msg.event=="stream-candidate"&&iscandidate) {
+        iscandidate=false;
         await peer.addIceCandidate(new RTCIceCandidate(msg.data));
+        socket.send(JSON.stringify({event:"request-offer",data: true }));
       }
     };
   </script>
