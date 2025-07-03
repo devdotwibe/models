@@ -18,6 +18,27 @@
     let isoffer = true;
     let isconnected = false;
     let storedevent = {};
+    async function candisatev(){ 
+        if(storedevent["stream-candidate"]&&storedevent["stream-candidate"].length>0&&iscandidate){
+          for (const key in storedevent["stream-candidate"]) {
+            if (Object.prototype.hasOwnProperty.call(storedevent["stream-candidate"], key)) {
+              const candidate = storedevent["stream-candidate"][key];
+              
+            iscandidate = false;
+            await peer.addIceCandidate(new RTCIceCandidate(candidate));
+            }
+          }
+        }
+        if(storedevent["stream-offer"]&&storedevent["stream-offer"].length>0&&isoffer){
+          storedevent["stream-offer"].forEach(async function(offer){
+            isoffer = false;
+            await peer.setRemoteDescription(new RTCSessionDescription(offer));
+            const answer = await peer.createAnswer();
+            await peer.setLocalDescription(answer);
+            socket.send(JSON.stringify({ event: "view-answer", data: answer }));
+          })
+        } 
+    }
     function connectrt() {
 
       peer = new RTCPeerConnection({
@@ -37,29 +58,12 @@
 
       peer.onicecandidate = e => {
         if (e.candidate) socket.send(JSON.stringify({ event: "view-candidate", data: e.candidate }));
+        setTimeout(function(){
+candisatev()
+        },1000)
       };
       isconnected = true;
-      setTimeout(async ()=>{
-        if(storedevent["stream-candidate"]&&storedevent["stream-candidate"].length>0){
-          for (const key in storedevent["stream-candidate"]) {
-            if (Object.prototype.hasOwnProperty.call(storedevent["stream-candidate"], key)) {
-              const candidate = storedevent["stream-candidate"][key];
-              
-            iscandidate = false;
-            await peer.addIceCandidate(new RTCIceCandidate(candidate));
-            }
-          }
-        }
-        if(storedevent["stream-offer"]&&storedevent["stream-offer"].length>0&&isoffer){
-          storedevent["stream-offer"].forEach(async function(offer){
-            isoffer = false;
-            await peer.setRemoteDescription(new RTCSessionDescription(offer));
-            const answer = await peer.createAnswer();
-            await peer.setLocalDescription(answer);
-            socket.send(JSON.stringify({ event: "view-answer", data: answer }));
-          })
-        }
-      },3000)
+      
 
     } 
 
