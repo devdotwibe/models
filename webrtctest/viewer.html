@@ -9,8 +9,7 @@
   <h2>Viewer</h2>
   <video id="remote" autoplay playsinline></video>
   <button onclick="connectrt()">view</button>
-
-  <button onclick="connectrtice()">ice</button>
+ 
   <script>
     const remoteVideo = document.getElementById("remote");
     const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
