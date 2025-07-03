@@ -8,29 +8,21 @@
 <body>
   <h2>Viewer</h2>
   <video id="remote" autoplay playsinline></video>
-  <button onclick="connectrt()">view</button>
- 
+  <button onclick="connectrt()">View Stream</button>
+
   <script>
     const remoteVideo = document.getElementById("remote");
     const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
-    let peer;
-    let iscandidate = true;
-    let isoffer = true;
-    let isconnected = false;
-    let storedevent = {};
-    async function candisatev(){ 
-        
-        if(storedevent["stream-offer"]&&storedevent["stream-offer"].length>0&&isoffer){
-          storedevent["stream-offer"].forEach(async function(offer){
-            isoffer = false;
-            await peer.setRemoteDescription(new RTCSessionDescription(offer));
-            const answer = await peer.createAnswer();
-            await peer.setLocalDescription(answer);
-            socket.send(JSON.stringify({ event: "view-answer", data: answer }));
-          })
-        } 
-    }
-    async function connectrt() {
+
+    let peer = null;
+    let isConnected = false;
+    const storedevent = {
+      "stream-offer": [],
+      "stream-candidate": []
+    };
+
+    function connectrt() {
+      if (peer || isConnected) return; // prevent multiple init
 
       peer = new RTCPeerConnection({
         iceServers: [
@@ -43,52 +35,70 @@
         ]
       });
 
-      peer.ontrack = e => {
+      peer.ontrack = (e) => {
         remoteVideo.srcObject = e.streams[0];
       };
 
-      peer.onicecandidate = e => {
-        if (e.candidate) socket.send(JSON.stringify({ event: "view-candidate", data: e.candidate }));
-        setTimeout(function(){
-candisatev()
-        },1000)
-      };
-      isconnected = true;
-      if(storedevent["stream-candidate"]&&storedevent["stream-candidate"].length>0&&iscandidate){
-          for (const key in storedevent["stream-candidate"]) {
-            if (Object.prototype.hasOwnProperty.call(storedevent["stream-candidate"], key)) {
-              const candidate = storedevent["stream-candidate"][key];
-              
-            iscandidate = false;
-            await peer.addIceCandidate(new RTCIceCandidate(candidate));
-            }
-          }
+      peer.onicecandidate = (e) => {
+        if (e.candidate) {
+          socket.send(JSON.stringify({
+            event: "view-candidate",
+            data: e.candidate
+          }));
         }
+      };
 
-    } 
+      isConnected = true;
+
+      // Process any stored events
+      processStoredEvents();
+    }
+
+    async function handleOffer(offer) {
+      if (!peer) return;
+
+      await peer.setRemoteDescription(new RTCSessionDescription(offer));
+      const answer = await peer.createAnswer();
+      await peer.setLocalDescription(answer);
+      socket.send(JSON.stringify({ event: "view-answer", data: answer }));
+    }
+
+    async function handleCandidate(candidate) {
+      if (!peer) return;
+
+      try {
+        await peer.addIceCandidate(new RTCIceCandidate(candidate));
+      } catch (e) {
+        console.warn("Failed to add ICE candidate:", e);
+      }
+    }
+
+    function processStoredEvents() {
+      storedevent["stream-offer"].forEach(handleOffer);
+      storedevent["stream-offer"] = [];
+
+      storedevent["stream-candidate"].forEach(handleCandidate);
+      storedevent["stream-candidate"] = [];
+    }
 
     socket.onmessage = async ({ data }) => {
       const msg = JSON.parse(data);
 
-      if (isconnected) {
-        if (msg.event == "stream-offer" && isoffer) {
-          isoffer = false;
-          await peer.setRemoteDescription(new RTCSessionDescription(msg.data));
-          const answer = await peer.createAnswer();
-          await peer.setLocalDescription(answer);
-          socket.send(JSON.stringify({ event: "view-answer", data: answer }));
-        } else if (msg.event == "stream-candidate" && iscandidate) {
-          iscandidate = false;
-          await peer.addIceCandidate(new RTCIceCandidate(msg.data));
+      if (msg.event === "stream-offer") {
+        if (isConnected && peer) {
+          await handleOffer(msg.data);
+        } else {
+          storedevent["stream-offer"].push(msg.data);
         }
-      } else {
-        if (!storedevent[msg.event]) {
-          storedevent[msg.event] = [];
-        }
-        storedevent[msg.event].push(msg.data)
       }
 
-
+      if (msg.event === "stream-candidate") {
+        if (isConnected && peer) {
+          await handleCandidate(msg.data);
+        } else {
+          storedevent["stream-candidate"].push(msg.data);
+        }
+      }
     };
   </script>
 </body>
