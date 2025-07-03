@@ -39,12 +39,16 @@
         if (e.candidate) socket.send(JSON.stringify({ event: "view-candidate", data: e.candidate }));
       };
       isconnected = true;
-      setTimeout(()=>{
+      setTimeout(async ()=>{
         if(storedevent["stream-candidate"]&&storedevent["stream-candidate"].length>0){
-          storedevent["stream-candidate"].forEach(async function(candidate){
+          for (const key in storedevent["stream-candidate"]) {
+            if (Object.prototype.hasOwnProperty.call(storedevent["stream-candidate"], key)) {
+              const candidate = storedevent["stream-candidate"][key];
+              
             iscandidate = false;
             await peer.addIceCandidate(new RTCIceCandidate(candidate));
-          })
+            }
+          }
         }
         if(storedevent["stream-offer"]&&storedevent["stream-offer"].length>0&&isoffer){
           storedevent["stream-offer"].forEach(async function(offer){
@@ -55,7 +59,7 @@
             socket.send(JSON.stringify({ event: "view-answer", data: answer }));
           })
         }
-      },1000)
+      },3000)
 
     } 
 
