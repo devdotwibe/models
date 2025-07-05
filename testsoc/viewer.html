@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewer</title>
+</head>
+<body>
+  <h2>Viewer</h2>
+  <video id="viewer" autoplay playsinline controls width="600"></video>
+
+  <script>
+    const video = document.getElementById("viewer");
+    const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket"); // update to your WebSocket server
+    const mediaSource = new MediaSource();
+    let sourceBuffer;
+    let queue = [];
+
+    video.src = URL.createObjectURL(mediaSource);
+
+    mediaSource.addEventListener("sourceopen", () => {
+      sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs=vp8,opus');
+
+      sourceBuffer.addEventListener("updateend", () => {
+        if (queue.length > 0 && !sourceBuffer.updating) {
+          sourceBuffer.appendBuffer(queue.shift());
+        }
+      });
+    });
+
+    socket.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
+      if (msg.type === 'stream-chunk') {
+        const buffer = base64ToUint8Array(msg.data);
+        if (sourceBuffer && !sourceBuffer.updating) {
+          sourceBuffer.appendBuffer(buffer);
+        } else {
+          queue.push(buffer);
+        }
+      }
+    };
+
+    function base64ToUint8Array(base64) {
+      const binary = atob(base64);
+      const len = binary.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+      return bytes;
+    }
+  </script>
+</body>
+</html>

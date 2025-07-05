@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamer</title>
+</head>
+<body>
+  <h2>Streamer</h2>
+  <video id="preview" autoplay muted playsinline width="600"></video><br>
+  <button onclick="startStreaming()">Start Streaming</button>
+  <button onclick="stopStreaming()">Stop</button>
+
+  <script>
+    const preview = document.getElementById("preview");
+    const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket"); // update to your WebSocket server
+    let stream, recorder;
+
+    async function startStreaming() {
+      stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      preview.srcObject = stream;
+
+      recorder = new MediaRecorder(stream, {
+        mimeType: 'video/webm; codecs=vp8,opus'
+      });
+
+      recorder.ondataavailable = (event) => {
+        if (event.data.size > 0 && socket.readyState === WebSocket.OPEN) {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const base64 = arrayBufferToBase64(reader.result);
+            socket.send(JSON.stringify({ type: 'stream-chunk', data: base64 }));
+          };
+          reader.readAsArrayBuffer(event.data);
+        }
+      };
+
+      recorder.start(1000); // chunk every 1 second
+      console.log("Streaming started");
+    }
+
+    function stopStreaming() {
+      if (recorder && recorder.state !== "inactive") {
+        recorder.stop();
+      }
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        preview.srcObject = null;
+      }
+      console.log("Streaming stopped");
+    }
+
+    function arrayBufferToBase64(buffer) {
+      let binary = '';
+      const bytes = new Uint8Array(buffer);
+      bytes.forEach(b => binary += String.fromCharCode(b));
+      return btoa(binary);
+    }
+  </script>
+</body>
+</html>
