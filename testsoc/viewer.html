@@ -30,7 +30,7 @@
 
     socket.onmessage = (event) => {
       const msg = JSON.parse(event.data);
-      if (msg.type === 'stream-chunk') {
+      if (msg.event === 'stream-chunk') {
         const buffer = base64ToUint8Array(msg.data);
         if (sourceBuffer && !sourceBuffer.updating) {
           sourceBuffer.appendBuffer(buffer);
