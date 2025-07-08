@@ -23,7 +23,7 @@
             --warning: #f59e0b;
             --danger: #ef4444;
             --success: #10b981;
-            --pending: #f97316; 
+            --pending: #f97316;
             --bg-primary: #0a0a0f;
             --bg-secondary: #111118;
             --bg-tertiary: #1a1a2e;
@@ -2538,6 +2538,7 @@ background: linear-gradient(45deg, #8b5cf6, #a78bfa, #c4b5fd, #ddd6fe);}
       border: 1px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
       transition: all 0.3s ease;
+      display: inline-block;
     }
 
    .socialwall-page .btn-secondary:hover {
