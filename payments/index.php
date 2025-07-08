@@ -51,7 +51,10 @@
 <body>
 <div class="container">
 <?php 
-	if(isset($_POST['submit100'])){
+	if(isset($_POST['submit10'])){
+		$amount = $_POST['amount'];
+		$coins = $_POST['coins'];
+	}else if(isset($_POST['submit100'])){
 		$amount = $_POST['amount'];
 		$coins = $_POST['coins'];
 	}else if(isset($_POST['submit500'])){
@@ -60,10 +63,13 @@
 	}else if(isset($_POST['submit900'])){
 		$amount = $_POST['amount'];
 		$coins = $_POST['coins'];
+	}else if(isset($_POST['submit1000'])){
+		$amount = $_POST['amount'];
+		$coins = $_POST['coins'];
 	}else if(isset($_POST['submit1500'])){
 		$amount = $_POST['amount'];
 		$coins = $_POST['coins'];
-	}else if(isset($_POST['submit2000'])){
+	}else if(isset($_POST['submit2500'])){
 		$amount = $_POST['amount'];
 		$coins = $_POST['coins'];
 	}else if(isset($_POST['submit3000'])){

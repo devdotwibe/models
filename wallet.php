@@ -5,7 +5,11 @@ include('includes/helper.php');
 if(isset($_SESSION["log_user_id"])){
 	$usern = $_SESSION["log_user"];
 	$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
-	if($userDetails){}
+	if($userDetails){
+		//echo '<pre>'; print_r($userDetails); echo '</pre>';
+		if($userDetails['as_a_model'] == 'Yes') $user_type = 'model';
+		else $user_type = 'user';
+	}
 	else{
 		echo '<script>window.location.href="login.php"</script>';
 	}
@@ -15,393 +19,742 @@ else{
 }
 $activeTab = 'wallet';
 ?>
-<!doctype html>
-<html lang="en-US" class="no-js">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Purchase </title>
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Digital Wallet - The Live Models</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+	<?php  include('includes/head.php'); ?>
+    
+</head>
+<body id="app" class="advt-page  socialwall-page">
 
-<link rel="apple-touch-icon" href="assets/wp-content/themes/theagency3/library/images/apple-icon-touch.png">
-<link rel="icon" href="assets/wp-content/themes/theagency3/favicon5e1f.png?v=2">
-<link href='<?='https://fonts.googleapis.com/css?family=EB+Garamond|Great+Vibes|Petit+Formal+Script'?>' rel='stylesheet' type='text/css'>
-
-  <script src='<?='//kit.fontawesome.com/a076d05399.js'?>'></script>
-
-    <style type="text/css">
-img.wp-smiley,
-img.emoji {
-  display: inline !important;
-  border: none !important;
-  box-shadow: none !important;
-  height: 1em !important;
-  width: 1em !important;
-  margin: 0 .07em !important;
-  vertical-align: -0.1em !important;
-  background: none !important;
-  padding: 0 !important;
-}
-</style>
-  <link rel='stylesheet' id='wp-block-library-css'  href='<?=SITEURL?>assets/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='spiffycal-styles-css'  href='<?=SITEURL?>assets/wp-content/plugins/spiffy-calendar/styles/default.css' type='text/css' media='all' />
-<link rel='stylesheet' id='dashicons-css'  href='<?=SITEURL?>assets/wp-includes/css/dashicons.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-style-css'  href='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/css/style.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-popup-style-css'  href='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/css/magnific-popup.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-flexslider-style-css'  href='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/flexslider/flexslider.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-owlcarousel-style-css'  href='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/owlcarousel/assets/owl.carousel.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-owlcarousel-theme-style-css'  href='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/owlcarousel/assets/owl.theme.default.css' type='text/css' media='all' />
-<link rel='stylesheet' id='options_typography_Rokkitt-css'  href='<?='http://fonts.googleapis.com/css?family=Rokkitt'?>' type='text/css' media='all' />
-<link rel='stylesheet' id='rich-reviews-css'  href='<?=SITEURL?>assets/wp-content/plugins/rich-reviews/css/rich-reviews.css' type='text/css' media='all' />
-<link rel='stylesheet' id='bones-stylesheet-css'  href='<?=SITEURL?>assets/wp-content/themes/theagency3/library/css/style.css' type='text/css' media='all' />
-
-
-<?php include('includes/head_css.php'); ?>
-
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-includes/js/jquery/jquery.js' id='jquery-core-js'></script>
-
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/rich-reviews/js/rich-reviews.js' id='rich-reviews-js'></script>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/themes/theagency3/library/js/libs/modernizr.custom.min.js' id='bones-modernizr-js'></script>
-<link rel="<?='https://api.w.org/'?>" href="assets/wp-json/index.html" />
-<!-- <style>
-body, .visual-form-builder label, label.vfb-desc { color:#999999; font-family:georgia, serif; font-weight:Normal; font-size:17px; }
-h1,h2,h3,h4,h5,h6, #footer h4 { color:#ffffff; font-family:"Georgia", Helvetica, serif; font-weight:normal; font-size:36px; }
-a {color:#BDB392}.navbar.navbar-default.navbar-inverse.navbar-right, .dropdown-menu {background:#222222}.td-vam-inner.border-top-bottom, .td-vam-inner.border-bottom {border-color:#ffffff}.navbar-inverse .navbar-nav > li > a, .dropdown-menu > li > a {color:#999999}.navbar-inverse .navbar-nav > li > a:hover, .dropdown-menu > li > a:hover {color:#ffffff}a:hover, .btn.btn-facebook:hover {color:#ffffff}#content, #footer, #sub-floor, .protable-outer, ul.profile span:first-child, ul.profile span + span {background:#181818}.google-mixed { color:#ffffff; font-family:Georgia, serif; font-weight:Normal; font-size:38px; }
-.google-mixed-2 { color:#999999; font-family:Georgia, serif; font-weight:Normal; font-size:20px; }
-</style>
-<style type="text/css" id="custom-background-css">
-body.custom-background { background-image: url("assets/wp-content/themes/theagency3/images/default-bg.jpg"); background-position: center top; background-size: auto; background-repeat: no-repeat; background-attachment: fixed; }
-</style> -->
-  </head>
-
-<body class="archive post-type-archive post-type-archive-testimonials custom-background">
-    <?php include('includes/header.php'); ?>
-
-      <div class="container">
-
-        <div id="content" class="clearfix row">
-        
-          <div id="main" class="col-md-12 clearfix" role="main">
-<?php
-include('user_tab/wallet_menu_tab.php');
-?>
-
-          <!-- <div class="headline-outer">
-            <h4 itemprop="headline" class="page-title entry-title">
-              <div class="prefancy fancy">
-                <span>Current Wallet Status</span>
-              </div>
-            </h4>
-          </div> -->
-          <?php
-            $log_user_id = $_SESSION["log_user_unique_id"];
-            $sql = "SELECT * FROM model_user_wallet WHERE user_unique_id = '".$log_user_id."'";
-            $result = mysqli_query($con,$sql);
-
-              if (mysqli_num_rows($result) > 0) {
-
-                $row1 = mysqli_fetch_assoc($result);
-                 
-                $wallet_coins = $row1['wallet_coins'];
-            }       
-          ?>
-          <h3>Currently you have <i class="fas fa-coins" style="font-size:15px;color:gold" aria-hidden="true"></i> <?php echo $userDetails['balance']; ?> coins in your wallet.</h3>
-             <div class="panel panel-default">
-            <a class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion" href="#faq-925">
-    <h4 class="panel-title">
-        <span class="pull-right icon"></span>For Indian Users (in INR.)</h4>
-</a>
-            <div id="faq-925" class="panel-collapse ">
-              <div class="panel-body">
-                <table style="width:100%">
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <input type="hidden" name="coins" value="50coins">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 Coins</th>
-                      <input type="hidden" name="amount" value="100">
-                      <input type="hidden" name="coins" value="10">
-                      <th>Rs. 100</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit100" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50 Coins</th>
-                      <input type="hidden" name="amount" value="500">
-                      <input type="hidden" name="coins" value="50">
-                      <th>Rs. 500</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit500" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100 Coins</th>
-                      <input type="hidden" name="amount" value="900">
-                      <input type="hidden" name="coins" value="100">
-                      <th>Rs. 900</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit900" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200 Coins</th>
-                      <input type="hidden" name="amount" value="1500">
-                      <input type="hidden" name="coins" value="200">
-                      <th>Rs. 1500</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit1500" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;300 Coins</th>
-                      <input type="hidden" name="amount" value="2000">
-                      <input type="hidden" name="coins" value="300">
-                      <th>Rs. 2000</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit2000" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 Coins</th>
-                      <input type="hidden" name="amount" value="3000">
-                      <input type="hidden" name="coins" value="500">
-                      <th>Rs. 3000</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit3000" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;700 Coins</th>
-                      <input type="hidden" name="amount" value="4000">
-                      <input type="hidden" name="coins" value="700">
-                      <th>Rs. 4000</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit4000" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1000 Coins</th>
-                      <input type="hidden" name="amount" value="5000">
-                      <input type="hidden" name="coins" value="1000">
-                      <th>Rs. 5000</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit5000" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2500 Coins</th>
-                      <input type="hidden" name="amount" value="10000">
-                      <input type="hidden" name="coins" value="2500">
-                      <th>Rs. 10,000</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit10000" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5000 Coins</th>
-                      <input type="hidden" name="amount" value="15000">
-                      <input type="hidden" name="coins" value="5000">
-                      <th>Rs. 15,000</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit15000" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7500 Coins</th>
-                      <input type="hidden" name="amount" value="20000">
-                      <input type="hidden" name="coins" value="7500">
-                      <th>Rs. 20,000</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit20000" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9999 Coins</th>
-                      <input type="hidden" name="amount" value="25000">
-                      <input type="hidden" name="coins" value="9999">
-                      <th>Rs. 25,000</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit25000" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20000 Coins</th>
-                      <input type="hidden" name="amount" value="50000">
-                      <input type="hidden" name="coins" value="20000">
-                      <th>Rs. 50,000</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit50000" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                      <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;40000 Coins</th>
-                      <input type="hidden" name="amount" value="100000">
-                      <input type="hidden" name="coins" value="40000">
-                      <th>Rs. 1,00,000</th>
-                      <th><button type="submit" class="btn fancy_button" name="submit100000" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                </table>
-               
-              </div>
-            </div>
-          </div>
-                              <div class="panel panel-default">
-            <a class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion" href="#faq-924">
-    <h4 class="panel-title">
-        <span class="pull-right icon"></span>For Foreign Users (in USD.)</h4>
-</a>
-            <div id="faq-924" class="panel-collapse ">
-              <div class="panel-body">
-                <table style="width:100%">
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10 Coins</th>
-                    <input type="hidden" name="amount" value="00.99">
-                    <input type="hidden" name="coins" value="10">
-                    <th>$ 00.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f0" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50 Coins</th>
-                    <input type="hidden" name="amount" value="4.99">
-                    <input type="hidden" name="coins" value="50">
-                    <th>$ 4.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f5" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100 Coins</th>
-                    <input type="hidden" name="amount" value="9.99">
-                    <input type="hidden" name="coins" value="100">
-                    <th>$ 9.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f9" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200 Coins</th>
-                    <input type="hidden" name="amount" value="14.99">
-                    <input type="hidden" name="coins" value="200">
-                    <th>$ 14.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f14" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;300 Coins</th>
-                    <input type="hidden" name="amount" value="19.99">
-                    <input type="hidden" name="coins" value="300">
-                    <th>$ 19.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f19" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500 Coins</th>
-                    <input type="hidden" name="amount" value="29.99">
-                    <input type="hidden" name="coins" value="500">
-                    <th>$ 29.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f29" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;700 Coins</th>
-                    <input type="hidden" name="amount" value="39.99">
-                    <input type="hidden" name="coins" value="700">
-                    <th>$ 39.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f39" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1000 Coins</th>
-                    <input type="hidden" name="amount" value="49.99">
-                    <input type="hidden" name="coins" value="1000">
-                    <th>$ 49.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f49" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2500 Coins</th>
-                    <input type="hidden" name="amount" value="99.99">
-                    <input type="hidden" name="coins" value="2500">
-                    <th>$ 99.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f99" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5000 Coins</th>
-                    <input type="hidden" name="amount" value="149.99">
-                    <input type="hidden" name="coins" value="5000">
-                    <th>$ 149.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f149" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7500 Coins</th>
-                    <input type="hidden" name="amount" value="199.99">
-                    <input type="hidden" name="coins" value="7500">
-                    <th>$ 199.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f199" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9999 Coins</th>
-                    <input type="hidden" name="amount" value="249.99">
-                    <input type="hidden" name="coins" value="9999">
-                    <th>$ 249.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f249" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20000 Coins</th>
-                    <input type="hidden" name="amount" value="499.99">
-                    <input type="hidden" name="coins" value="20000">
-                    <th>$ 499.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f499" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                  <tr>
-                    <form method="post" action="payments/index.php">
-                    <th><i class='fas fa-coins' style='font-size:25px;color:gold'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;40000 Coins</th>
-                    <input type="hidden" name="amount" value="999.99">
-                    <input type="hidden" name="coins" value="40000">
-                    <th>$ 999.99</th>
-                    <th><button type="submit" class="btn fancy_button" name="submit_f999" >Purchase Now</button></th>
-                    </form>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-                
- 
-             
-                    
-          </div> <!-- end #main -->
-
-                  
+    <div class="premium-wallet">
+		
+    <?php  include('includes/side-bar.php'); ?>
+	<?php  include('includes/profile_header_index.php'); ?>
+	
+	
+	<div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Premium Digital Wallet
+            </h1>
+            <p class="text-gray-300 text-lg">Manage your tokens, earnings, and transactions</p>
         </div>
-      </div> 
 
-   <?php include('includes/footer.php'); ?>
+        <!-- User Type Toggle -->
+        <div class="user-toggle" style="display:none;">
+            <button class="toggle-btn <?php if($user_type == 'user'){ ?> active <?php } ?>" id="userBtn" onclick="switchMode('user')">
+                👤 User Mode
+            </button>
+            <button class="toggle-btn <?php if($user_type == 'model'){ ?> active <?php } ?>" id="modelBtn" onclick="switchMode('model')">
+                💎 Model Mode
+            </button>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <h2 class="text-xl md:text-2xl font-semibold mb-2">Current Balance</h2>
+            <div class="balance-amount" id="balance"><?php echo $userDetails['balance']; ?></div>
+            <p class="text-gray-300">Coins in your wallet</p>
+            <div class="model-only mt-4">
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div>
+                        <div class="text-2xl font-bold text-green-400">₹15,420</div>
+                        <div class="text-sm text-gray-400">Available for Withdrawal</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-blue-400">₹8,750</div>
+                        <div class="text-sm text-gray-400">This Month Earnings</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="glass-card p-6">
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="switchTab('buy')" data-tab="buy">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="8" cy="21" r="1"></circle>
+                        <circle cx="19" cy="21" r="1"></circle>
+                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57L20.42 9H5.12"></path>
+                    </svg>
+                    Buy Tokens
+                </button>
+                
+                <button class="tab-btn model-only" onclick="switchTab('withdraw')" data-tab="withdraw">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                    Withdraw
+                </button>
+                
+                <button class="tab-btn" onclick="switchTab('history')" data-tab="history">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 3v5h5"></path>
+                        <path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"></path>
+                        <path d="M12 7v5l4 2"></path>
+                    </svg>
+                    History
+                </button>
+                
+                <button class="tab-btn model-only" onclick="switchTab('bank')" data-tab="bank">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 21h18"></path>
+                        <path d="M5 21V7l8-4v18"></path>
+                        <path d="M19 21V11l-6-4"></path>
+                    </svg>
+                    Bank Details
+                </button>
+                
+                <button class="tab-btn model-only" onclick="switchTab('tax')" data-tab="tax">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                    Tax Info
+                </button>
+            </div>
+
+            <!-- Buy Tokens Tab -->
+            <div id="buy" class="tab-content <?php if($user_type == 'user'){ ?> active <?php } ?>">
+                <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Purchase Token Packages
+                </h3>
+                
+                <!-- Indian Users -->
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold mb-4 flex items-center">
+                        <span class="mr-2">🇮🇳</span> Indian Users (INR)
+                    </h4>
+                    <div class="purchase-grid">
+					
+					<?php
+						$log_user_id = $_SESSION["log_user_unique_id"];
+						$sql = "SELECT * FROM model_user_wallet WHERE user_unique_id = '".$log_user_id."'";
+						$result = mysqli_query($con,$sql);
+
+						  if (mysqli_num_rows($result) > 0) {
+
+							$row1 = mysqli_fetch_assoc($result);
+							 
+							$wallet_coins = $row1['wallet_coins'];
+						}       
+					  ?>
+					
+                        <div class="purchase-card">
+                            <div class="coin-icon">₹</div>
+                            <h5 class="text-lg font-bold mb-2">Starter Pack</h5>
+                            <div class="text-3xl font-bold mb-2">10 Coins</div>
+                            <div class="text-gray-400 mb-4">Perfect for beginners</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">₹10.00</div>
+							
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="10">
+							<input type="hidden" name="coins" value="10">
+                            <button class="btn btn-primary w-full" type="submit" name="submit10" <?php /*onclick="purchase(10, 'INR', 10)" */ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+
+                        <div class="purchase-card popular">
+                            <div class="coin-icon">₹</div>
+                            <h5 class="text-lg font-bold mb-2">Popular Pack</h5>
+                            <div class="text-3xl font-bold mb-2">100 Coins</div>
+                            <div class="text-gray-400 mb-4">Best value for money</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">₹100.00</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="100">
+							<input type="hidden" name="coins" value="100">
+                            <button class="btn btn-primary w-full" type="submit" name="submit100" <?php /*onclick="purchase(100, 'INR', 100)"*/ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+
+                        <div class="purchase-card">
+                            <div class="coin-icon">₹</div>
+                            <h5 class="text-lg font-bold mb-2">Premium Pack</h5>
+                            <div class="text-3xl font-bold mb-2">500 Coins</div>
+                            <div class="text-gray-400 mb-4">For heavy users</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">₹500.00</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="500">
+							<input type="hidden" name="coins" value="500">
+                            <button class="btn btn-primary w-full" type="submit" name="submit500" <?php /*onclick="purchase(500, 'INR', 500)"*/ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+
+                        <div class="purchase-card">
+                            <div class="coin-icon">₹</div>
+                            <h5 class="text-lg font-bold mb-2">Ultimate Pack</h5>
+                            <div class="text-3xl font-bold mb-2">1000 Coins</div>
+                            <div class="text-gray-400 mb-4">Maximum value</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">₹1,000.00</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="1000">
+							<input type="hidden" name="coins" value="1000">
+                            <button class="btn btn-primary w-full" type="submit" name="submit1000" <?php /*onclick="purchase(1000, 'INR', 1000)" */ ?> >
+                                Purchase Now
+                            </button>
+                        </div>
+
+                        <div class="purchase-card">
+                            <div class="coin-icon">₹</div>
+                            <h5 class="text-lg font-bold mb-2">VIP Pack</h5>
+                            <div class="text-3xl font-bold mb-2">2500 Coins</div>
+                            <div class="text-gray-400 mb-4">VIP experience</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">₹2,500.00</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="2500">
+							<input type="hidden" name="coins" value="2500">
+                            <button class="btn btn-primary w-full" type="submit" name="submit2500" <?php /*onclick="purchase(2500, 'INR', 2500)" */ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+
+                        <div class="purchase-card">
+                            <div class="coin-icon">₹</div>
+                            <h5 class="text-lg font-bold mb-2">Elite Pack</h5>
+                            <div class="text-3xl font-bold mb-2">5000 Coins</div>
+                            <div class="text-gray-400 mb-4">Elite status</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">₹5,000.00</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="5000">
+							<input type="hidden" name="coins" value="5000">
+                            <button class="btn btn-primary w-full" type="submit" name="submit5000" <?php /*onclick="purchase(5000, 'INR', 5000)"*/ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Foreign Users -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-4 flex items-center">
+                        <span class="mr-2">🌍</span> International Users (USD)
+                    </h4>
+                    <div class="purchase-grid">
+                        <div class="purchase-card">
+                            <div class="coin-icon">$</div>
+                            <h5 class="text-lg font-bold mb-2">Starter Pack</h5>
+                            <div class="text-3xl font-bold mb-2">10 Coins</div>
+                            <div class="text-gray-400 mb-4">Perfect for beginners</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">$0.12</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="0.12">
+							<input type="hidden" name="coins" value="10">
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f0" <?php /*onclick="purchase(10, 'USD', 0.12)"*/ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+
+                        <div class="purchase-card popular">
+                            <div class="coin-icon">$</div>
+                            <h5 class="text-lg font-bold mb-2">Popular Pack</h5>
+                            <div class="text-3xl font-bold mb-2">100 Coins</div>
+                            <div class="text-gray-400 mb-4">Best value for money</div>
+							<div class="text-2xl font-bold text-green-400 mb-4">$1.20</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="1.20">
+							<input type="hidden" name="coins" value="100">
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f5" <?php /*onclick="purchase(100, 'USD', 1.20)"*/ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+
+                        <div class="purchase-card">
+                            <div class="coin-icon">$</div>
+                            <h5 class="text-lg font-bold mb-2">Premium Pack</h5>
+                            <div class="text-3xl font-bold mb-2">500 Coins</div>
+                            <div class="text-gray-400 mb-4">For heavy users</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">$6.00</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="6.00">
+							<input type="hidden" name="coins" value="500">
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f9" <?php /*onclick="purchase(500, 'USD', 6.00)"*/ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+
+                        <div class="purchase-card">
+                            <div class="coin-icon">$</div>
+                            <h5 class="text-lg font-bold mb-2">Ultimate Pack</h5>
+                            <div class="text-3xl font-bold mb-2">1000 Coins</div>
+                            <div class="text-gray-400 mb-4">Maximum value</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">$12.00</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="12.00">
+							<input type="hidden" name="coins" value="1000">
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f14" <?php /*onclick="purchase(1000, 'USD', 12.00)"*/ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+
+                        <div class="purchase-card">
+                            <div class="coin-icon">$</div>
+                            <h5 class="text-lg font-bold mb-2">VIP Pack</h5>
+                            <div class="text-3xl font-bold mb-2">2500 Coins</div>
+                            <div class="text-gray-400 mb-4">VIP experience</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">$30.00</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="30.00">
+							<input type="hidden" name="coins" value="2500">
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f19" <?php /*onclick="purchase(2500, 'USD', 30.00)"*/ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+
+                        <div class="purchase-card">
+                            <div class="coin-icon">$</div>
+                            <h5 class="text-lg font-bold mb-2">Elite Pack</h5>
+                            <div class="text-3xl font-bold mb-2">5000 Coins</div>
+                            <div class="text-gray-400 mb-4">Elite status</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">$60.00</div>
+							<form method="post" action="payments/index.php">
+							<input type="hidden" name="amount" value="60.00">
+							<input type="hidden" name="coins" value="5000">
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f29" <?php /*onclick="purchase(5000, 'USD', 60.00)"*/ ?> >
+                                Purchase Now
+                            </button>
+							</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Withdraw Tab -->
+            <div id="withdraw" class="tab-content <?php if($user_type == 'model'){ ?> active <?php } ?>">
+                <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Withdraw Earnings
+                </h3>
+                
+                <div class="max-w-2xl mx-auto">
+                    <div class="glass-card p-6 mb-6">
+                        <h4 class="text-xl font-semibold mb-4">Available for Withdrawal</h4>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-green-400 mb-2">₹15,420</div>
+                            <p class="text-gray-400">Minimum withdrawal: ₹1,000</p>
+                        </div>
+                    </div>
+
+                    <form class="space-y-6" onsubmit="handleWithdraw(event)">
+                        <div class="form-group">
+                            <label class="form-label">Withdrawal Amount</label>
+                            <input type="number" class="form-input" placeholder="Enter amount" min="1000" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Withdrawal Method</label>
+                            <select class="form-input" required>
+                                <option value="">Select method</option>
+                                <option value="bank">Bank Transfer</option>
+                                <option value="upi">UPI</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-full">
+                            Request Withdrawal
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- History Tab -->
+            <div id="history" class="tab-content">
+                <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Transaction History
+                </h3>
+                
+                <div id="transactionList">
+                    <div class="transaction-item">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Token Purchase</div>
+                                <div class="text-sm text-gray-400">Dec 20, 2024 - 2:30 PM</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-green-400 font-semibold">+500 Coins</div>
+                            <div class="text-sm text-gray-400">₹500.00</div>
+                        </div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold">Private Show</div>
+                                <div class="text-sm text-gray-400">Dec 19, 2024 - 8:45 PM</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-red-400 font-semibold">-150 Coins</div>
+                            <div class="text-sm text-gray-400">30 minutes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bank Details Tab -->
+            <div id="bank" class="tab-content">
+                <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Bank Account Details
+                </h3>
+                
+                <div class="max-w-2xl mx-auto">
+                    <form class="space-y-6" onsubmit="handleBankDetails(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Account Holder Name</label>
+                                <input type="text" class="form-input" placeholder="Full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Bank Name</label>
+                                <input type="text" class="form-input" placeholder="Bank name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Account Number</label>
+                                <input type="text" class="form-input" placeholder="Account number" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">IFSC Code</label>
+                                <input type="text" class="form-input" placeholder="IFSC code" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">UPI ID (Optional)</label>
+                            <input type="text" class="form-input" placeholder="your-upi@bank">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-full">
+                            Save Bank Details
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tax Info Tab -->
+            <div id="tax" class="tab-content">
+                <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Tax Information
+                </h3>
+                
+                <div class="max-w-2xl mx-auto">
+                    <form class="space-y-6" onsubmit="handleTaxInfo(event)">
+                        <div class="form-group">
+                            <label class="form-label">Tax Residency Country</label>
+                            <select class="form-input" required>
+                                <option value="">Select country</option>
+                                <option value="IN">India</option>
+                                <option value="US">United States</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="CA">Canada</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">PAN Number</label>
+                                <input type="text" class="form-input" placeholder="ABCDE1234F" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Aadhaar Number</label>
+                                <input type="text" class="form-input" placeholder="1234 5678 9012">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Annual Income Range</label>
+                            <select class="form-input">
+                                <option value="">Select range</option>
+                                <option value="0-250000">₹0 - ₹2,50,000</option>
+                                <option value="250000-500000">₹2,50,000 - ₹5,00,000</option>
+                                <option value="500000-1000000">₹5,00,000 - ₹10,00,000</option>
+                                <option value="1000000+">₹10,00,000+</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-full">
+                            Save Tax Information
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+<?php include('includes/footer.php'); ?>
+
   </body>
 
 
 </html> 
+	
+
+    <script>
+        // Global state
+        let currentMode = 'user';
+        let currentBalance = 84250;
+        let transactions = [];
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initParticles();
+            updateBalance();
+            updateMode();
+        });
+
+        // Particle system
+        function initParticles() {
+            const particlesContainer = document.getElementById('particles');
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                
+                particlesContainer.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.remove();
+                    }
+                }, 8000);
+            }
+
+            setInterval(createParticle, 200);
+        }
+
+        // Mode switching
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            // Update toggle buttons
+            document.getElementById('userBtn').classList.toggle('active', mode === 'user');
+            document.getElementById('modelBtn').classList.toggle('active', mode === 'model');
+            
+            // Update body class
+            document.body.className = mode === 'model' ? 'model-mode' : '';
+            
+            // Switch to appropriate tab
+            if (mode === 'model') {
+                switchTab('withdraw');
+            } else {
+                switchTab('buy');
+            }
+            
+            updateMode();
+        }
+
+        function updateMode() {
+            // Update visibility of mode-specific elements
+            const userElements = document.querySelectorAll('.user-only');
+            const modelElements = document.querySelectorAll('.model-only');
+            
+            userElements.forEach(el => {
+                el.style.display = currentMode === 'user' ? 'block' : 'none';
+            });
+            
+            modelElements.forEach(el => {
+                el.style.display = currentMode === 'model' ? 'block' : 'none';
+            });
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Remove active from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Add active to selected tab
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Purchase function
+        function purchase(coins, currency, amount) {
+            const button = event.target;
+            const originalText = button.innerHTML;
+            
+            // Show loading
+            button.innerHTML = '<div class="spinner"></div> Processing...';
+            button.classList.add('loading');
+            
+            setTimeout(() => {
+                currentBalance += coins;
+                updateBalance();
+                
+                // Add transaction
+                addTransaction('purchase', `Purchased ${coins} coins`, `+${coins}`, `${currency === 'INR' ? '₹' : '$'}${amount}`);
+                
+                // Show success
+                showNotification(`✅ Successfully purchased ${coins} coins!`, 'success');
+                
+                // Reset button
+                button.innerHTML = originalText;
+                button.classList.remove('loading');
+            }, 2000);
+        }
+
+        // Update balance display
+        function updateBalance() {
+            document.getElementById('balance').textContent = currentBalance.toLocaleString();
+        }
+
+        // Add transaction to history
+        function addTransaction(type, description, amount, price) {
+            const transaction = {
+                type,
+                description,
+                amount,
+                price,
+                date: new Date().toLocaleString()
+            };
+            
+            transactions.unshift(transaction);
+            updateTransactionHistory();
+        }
+
+        // Update transaction history display
+        function updateTransactionHistory() {
+            const container = document.getElementById('transactionList');
+            const existingTransactions = container.querySelectorAll('.transaction-item');
+            
+            // Keep only the first 2 default transactions and add new ones
+            if (transactions.length > 0) {
+                const newTransaction = transactions[0];
+                const transactionElement = document.createElement('div');
+                transactionElement.className = 'transaction-item';
+                transactionElement.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold">${newTransaction.description}</div>
+                            <div class="text-sm text-gray-400">${newTransaction.date}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-green-400 font-semibold">${newTransaction.amount}</div>
+                        <div class="text-sm text-gray-400">${newTransaction.price}</div>
+                    </div>
+                `;
+                
+                container.insertBefore(transactionElement, container.firstChild);
+            }
+        }
+
+        // Form handlers
+        function handleWithdraw(event) {
+            event.preventDefault();
+            showNotification('Withdrawal request submitted successfully!', 'success');
+        }
+
+        function handleBankDetails(event) {
+            event.preventDefault();
+            showNotification('Bank details saved successfully!', 'success');
+        }
+
+        function handleTaxInfo(event) {
+            event.preventDefault();
+            showNotification('Tax information saved successfully!', 'success');
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${
+                type === 'success' ? 'bg-green-500' : 
+                type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+            }`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Performance optimizations
+        const debounce = (func, wait) => {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        };
+
+        // Lazy loading for images
+        const lazyLoad = () => {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        };
+
+        // Initialize lazy loading
+        document.addEventListener('DOMContentLoaded', lazyLoad);
+    </script>
+	
+	 
