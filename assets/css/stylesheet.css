@@ -8438,6 +8438,10 @@ section.preminum-sersec {
 .enhanced5 .profile-avatar {
     width: 100px;
     height: 100px;}
+
+        .container{
+        max-width: 90% !important;
+}
 }
 
 /* ------------------------------------------------ */
