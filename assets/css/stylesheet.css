@@ -8471,8 +8471,13 @@ section.preminum-sersec {
 .ul-premiumdiv button {
     font-size: 14px;
 }
+.home-page .premium-testsec .premium-text {
+    font-size: 15px;
+}
+.home-page .ultra-premiumsec .ultra-glass p:first-child {
 
-
+    font-size: 15px;
+}
  }
 
 
