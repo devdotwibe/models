@@ -8355,6 +8355,14 @@ left: 83%;
 
  }
 
+
+@media (min-width: 1024px) {
+ body header .container .hidden {
+    display: none !important;
+}}
+
+
+
 @media (min-width: 900px) {
 
  }
