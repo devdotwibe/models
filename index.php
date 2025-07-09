@@ -319,7 +319,7 @@ include('includes/helper.php');
     </section>
 
     <!-- Enhanced VIP Section with Floating Animation and Better Content -->
-    <section class="py-20 relative scroll-reveal">
+    <section class="py-20 relative scroll-reveal join-sec">
         <div class="container mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold heading-font gradient-text mb-6 text-glow">Premium Experience</h2>
@@ -495,7 +495,7 @@ include('includes/helper.php');
 				<?php } ?>
 
     <!-- Ultra Premium Services Section -->
-    <section class="py-24 relative scroll-reveal">
+    <section class="py-24 relative scroll-reveal preminum-sersec">
         <div class="container mx-auto">
             <div class="text-center mb-20">
                 <h2 class="text-5xl md:text-6xl font-bold heading-font gradient-text mb-6 text-glow">Experience the Connection</h2>
@@ -585,7 +585,7 @@ include('includes/helper.php');
     </section>
 
     <!-- Single Premium Testimonial Section -->
-    <section class="py-24 relative scroll-reveal">
+    <section class="py-24 relative scroll-reveal premium-testsec">
         <div class="container mx-auto">
             <div class="text-center mb-20">
                 <h2 class="text-5xl md:text-6xl font-bold heading-font gradient-text mb-6 text-glow">Success Story</h2>
@@ -611,7 +611,7 @@ include('includes/helper.php');
     </section>
 
     <!-- Ultra Premium Call to Action -->
-    <section class="py-24 gradient-bg relative overflow-hidden">
+    <section class="py-24 gradient-bg relative overflow-hidden ultra-premiumsec">
         <div class="absolute inset-0 bg-black/40"></div>
         <div class="container mx-auto relative z-10">
             <div class="text-center text-white">
@@ -640,7 +640,7 @@ include('includes/helper.php');
 
 
 <!-- Ultra Premium Model Preview Modal -->
-<div id="modelModal" class="modal-overlay">
+<div id="modelModal" class="modal-overlay home-page-modal">
     <div class="modal-content ultra-glass rounded-3xl p-12 max-w-4xl shadow-2xl">
         <div class="flex justify-between items-center mb-8">
             <h3 class="text-3xl font-bold premium-text">Model Preview</h3>
