@@ -8481,6 +8481,15 @@ section.preminum-sersec {
 .image-center-profile {
     font-size: 13px;
 }
+.profile-flex-wrapp {
+    gap: 8px;
+}
+.profile-wrapp1 > div > div:nth-child(2) {
+
+    width: 100%;
+    justify-content: flex-end;
+}
+
 
 
 
