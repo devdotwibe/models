@@ -8390,6 +8390,10 @@ left: 83%;
     font-size: 15px;
     line-height: 20px;
 }
+.home-page .vip-enhanced .btn-primary {
+    padding-block: 20px !important;
+    font-size: 15px;
+}
 
 }
 
