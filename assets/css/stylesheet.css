@@ -8435,9 +8435,7 @@ section.preminum-sersec {
 
 
 @media (max-width: 1023px) {
-    .enhanced5 .profile-avatar {
-    width: 100px;
-    height: 100px;}
+
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -8450,6 +8448,9 @@ section.preminum-sersec {
 /* ------------------------------------------------ */
 
 @media (max-width: 900px) {
+    .enhanced5 .profile-avatar {
+    width: 100px;
+    height: 100px;}
 
  }
 
