@@ -8458,12 +8458,14 @@ section.preminum-sersec {
         height: 381px !important;
         display: flex;
     }
-    .profile-flex-wrapp {
-    gap: 15px;
-}
+
 
 .profile-wrapp1 > div {
     gap: 4px;
+}
+
+.profile-flex-wrapp {
+    gap: 4px !important;
 }
 
 .action-dropdown .btn-secondary {
