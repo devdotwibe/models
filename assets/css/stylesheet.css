@@ -8590,7 +8590,13 @@ section.preminum-sersec {
     }
 
 
+footer .container > .grid {
+    gap: 20px;
+}
 
+footer .container > .grid h4 {
+    margin-bottom: 7px;
+}
 
 
 
@@ -8683,7 +8689,14 @@ right: 12px;
 .image-center-profile {
         margin-bottom: 20px !important;
     }
+.hobbies-sec {
+    margin-top: 20px;
+}
 
+.enhanced5 .post-div > div {
+    width: 42%;
+    margin-inline: 0 !important;
+}
 
 
 }
