@@ -8490,6 +8490,10 @@ right: 12px;
     width: 90%;
     margin-right: 0;
 }
-
-
+.premium-status {
+    flex-wrap: wrap;
+}
+.premium-status > div{
+    margin-inline: 0 !important;
+}
 }
