@@ -1,6 +1,6 @@
-<?php  session_start(); 
+<?php  session_start();
 include('includes/config.php');
-include('includes/helper.php'); 
+include('includes/helper.php');
 ?>
 <!doctype html>
 <html lang="en-US" class="no-js">
@@ -11,7 +11,7 @@ include('includes/helper.php');
 <?php include('includes/head.php'); ?>
 
     <style>
-      
+
     </style>
     <!-- <style type="text/css" id="custom-background-css">
       body.custom-background { background-image: url("assets/wp-content/themes/theagency3/images/default-bg.jpg"); background-position: center top; background-size: auto; background-repeat: no-repeat; background-attachment: fixed; }
@@ -46,7 +46,7 @@ include('includes/helper.php');
       @media screen and (max-width: 767px) {
 			  .larg_img {
 			    height: auto !important;
-			    padding: 10px; 
+			    padding: 10px;
 			  }
 			  .img_hme{
 			  	height: auto !important;
@@ -76,8 +76,8 @@ include('includes/helper.php');
       }
     </style>
   </head>
-  <body class="min-h-screen bg-animated text-white home-page socialwall-page">    
-  <!-- Premium Particle System -->  
+  <body class="min-h-screen bg-animated text-white home-page socialwall-page">
+  <!-- Premium Particle System -->
   <div class="particles" id="particles"></div>
     <!-- Ultra Premium Header -->
     <?php if (isset($_SESSION["log_user_id"])) { ?>
@@ -86,7 +86,7 @@ include('includes/helper.php');
 	<?php } else{ ?>
     <?php include('includes/header.php'); ?>
 	<?php } ?>
-<main class="home-page">    <!-- Ultra Premium Hero Section with Side-by-Side Layout -->    
+<main class="home-page">    <!-- Ultra Premium Hero Section with Side-by-Side Layout -->
     <!-- Ultra Premium Hero Section with Side-by-Side Layout -->
     <section class="py-24 md:py-32 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-purple-900/20 to-pink-900/30"></div>
@@ -210,12 +210,12 @@ include('includes/helper.php');
                                     </span>
                                 </div>
                             </div>
-							
+
 							<?php
 
                           /*$sqls = "SELECT * FROM model_user WHERE unique_id='model-67054'";
 
-                            $resultd = mysqli_query($con, $sqls); 
+                            $resultd = mysqli_query($con, $sqls);
 							$count = 1;
 
                               if (mysqli_num_rows($resultd) > 0) {
@@ -226,9 +226,9 @@ include('includes/helper.php');
 										break;
 									}
 								}
-								
+
 							  } */
-							
+
 							?>
 
                             <div class="flex space-x-4 mb-8">
@@ -370,7 +370,7 @@ include('includes/helper.php');
             </div>
         </div>
     </section>
-	
+
 	<?php $sqls_model = "SELECT * FROM model_user WHERE as_a_model = 'Yes' Order by id DESC LIMIT 4";
 
               $resultd_model = mysqli_query($con, $sqls_model);
@@ -387,12 +387,12 @@ include('includes/helper.php');
                 <p class="text-2xl text-white/70 max-w-3xl mx-auto">Explore our selection of verified models ready to connect with you</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-			
-			<?php while($rowesdw = mysqli_fetch_assoc($resultd_model)) {  
-			
+            <div class="discover-outerdiv">
+
+			<?php while($rowesdw = mysqli_fetch_assoc($resultd_model)) {
+
 			$unique_id = $rowesdw['unique_id'];
-					
+
 					$sql = "SELECT count(*) FROM model_images WHERE unique_model_id = '".$unique_id."' AND file_type = 'Image'";
 
                       $result = mysqli_query($con, $sql);
@@ -420,16 +420,16 @@ include('includes/helper.php');
                         }
 
                       }
-					  
+
 							if(empty($rowesdw['name'])){
 								$modelname = ucfirst($rowesdw['username']);
 							}else{
 								$modelname = ucfirst($rowesdw['name']);
 							}
 
-					
+
 			?>
-			
+
                 <!-- Model Card 1 - Aria -->
                 <div class="model-card rounded-2xl overflow-hidden hover-lift" onclick="openModelPreview_new('<?php echo $rowesdw['unique_id']; ?>')">
                     <div class="relative">
@@ -449,7 +449,7 @@ include('includes/helper.php');
                             <span class="text-lg text-white/60 font-medium"><?php echo $rowesdw['age']; ?></span>
 							<?php } ?>
                         </div>
-						<?php 
+						<?php
 						$services = '';
 						if(!empty($rowesdw['services'])){
 							if($rowesdw['services'] == 'Chat Only') $services = '💬 '.$rowesdw['services'];
@@ -459,7 +459,7 @@ include('includes/helper.php');
 						 ?>
                         <p class="text-indigo-400 font-semibold mb-3 text-lg"><?php echo $services; ?></p>
 						<?php } ?>
-						
+
 						<?php if(!empty($rowesdw['user_bio'])){ ?>
                         <div class="flex-1 mb-6">
                             <p class="text-white/70 text-base description-text" data-full-text="Let me be your escape from reality. I promise an unforgettable experience that will leave you wanting more and more. Every moment with me is crafted to perfection.">
@@ -480,7 +480,7 @@ include('includes/helper.php');
                         </button>
                     </div>
                 </div>
-				
+
 			<?php }  ?>
             </div>
 
@@ -491,7 +491,7 @@ include('includes/helper.php');
             </div>
         </div>
     </section>
-	
+
 				<?php } ?>
 
     <!-- Ultra Premium Services Section -->
@@ -502,7 +502,7 @@ include('includes/helper.php');
                 <p class="text-2xl text-white/70 max-w-3xl mx-auto">Choose how you want to connect and create unforgettable moments</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+            <div class="exp-grid">
                 <div class="ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
@@ -655,8 +655,8 @@ include('includes/helper.php');
 </div>
 
     <?php  include('includes/footer.php'); ?>
-    
-    
+
+
   </body>
 </html>
 
