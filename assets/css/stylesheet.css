@@ -8374,10 +8374,25 @@ left: 83%;
 
  }
 
+/* ---------------------------------------------------- */
 
  @media (max-width: 767px) {
 
+.h-banner-btns button{
+    padding-block: 18px !important;
+}
+
+#signupForm input {
+    background: red;
+    padding-block: 18px !important;
+    font-size: 14px;
+}
  }
+
+
+
+/* ---------------------------------------------------- */
+
  @media (max-width: 575px) {
 
     .home-page .home-banner .btn-primary {
