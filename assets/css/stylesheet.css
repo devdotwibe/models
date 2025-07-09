@@ -8580,7 +8580,10 @@ section.preminum-sersec {
         height: auto;}
 
 
-
+    .profile-wrapp1 > div > div:nth-child(2) {
+        justify-content: flex-start;
+        margin-inline: 0 !important;
+    }
 
 
 
