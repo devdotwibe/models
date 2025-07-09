@@ -88,7 +88,7 @@ include('includes/helper.php');
 	<?php } ?>
 <main class="home-page">    <!-- Ultra Premium Hero Section with Side-by-Side Layout -->
     <!-- Ultra Premium Hero Section with Side-by-Side Layout -->
-    <section class="py-24 md:py-32 relative overflow-hidden">
+    <section class="py-24 md:py-32 relative overflow-hidden home-banner">
         <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-purple-900/20 to-pink-900/30"></div>
         <div class="container mx-auto relative z-10">
             <div class="hero-grid">
