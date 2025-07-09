@@ -274,7 +274,7 @@ include('includes/helper.php');
                                     <option value="Other" class="bg-gray-900">🌍 Other</option>
                                 </select>
 
-                                <div class="flex flex-wrap space-x-6">
+                                <div class="flex banner-select flex-wrap space-x-6">
                                     <label class="flex items-center space-x-3 text-white cursor-pointer hover-lift">
                                         <input type="radio" name="gender" value="male" class="form-radio text-indigo-600 w-5 h-5" required>
                                         <span class="font-medium">Male</span>
