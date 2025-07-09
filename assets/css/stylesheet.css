@@ -8415,7 +8415,15 @@ right: 12px;
 }
 
 
+.h-banner-btns {
+    flex-wrap: wrap;
+}
 
+.h-banner-btns button {
+    width: 100% !important;
+    flex: unset;
+    margin: 10px 0 !important;
+}
 
 
  }
