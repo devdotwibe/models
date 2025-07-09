@@ -8410,6 +8410,13 @@ left: 83%;
         padding: 30px 15px;
     }
 
+    .home-page .discover-sec .model-card {
+    width: 90%;
+    margin-right: 0;
+}
+
+
+
 
 
  }
@@ -8453,6 +8460,11 @@ right: 12px;
     width: 100% !important;
     flex: unset;
     margin: 10px 0 !important;
+}
+
+.home-page .discover-sec .model-card {
+    width: 90%;
+    margin-right: 0;
 }
 
 
