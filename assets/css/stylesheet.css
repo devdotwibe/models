@@ -8448,9 +8448,9 @@ section.preminum-sersec {
 /* ------------------------------------------------ */
 
 @media (max-width: 900px) {
-    .enhanced5 .profile-avatar {
+    /* .enhanced5 .profile-avatar {
     width: 100px;
-    height: 100px;}
+    height: 100px;} */
 
 
 .enhanced5 .profile-info {
@@ -8491,7 +8491,14 @@ section.preminum-sersec {
     margin-left: 10px;
 }
 
+.profile-wrapp1 h1 {
+    font-size: 22px;
+    margin-bottom: 0;
+}
 
+.image-center-profile {
+    font-size: 13px;
+}
 
 
 
