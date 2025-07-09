@@ -8451,9 +8451,13 @@ section.preminum-sersec {
     .enhanced5 .profile-avatar {
     width: 100px;
     height: 100px;}
-    .enhanced5 .profile-info {
-    padding-top: 164px !important;
-}
+
+
+.enhanced5 .profile-info {
+        padding-top: 0 !important;
+        height: 381px !important;
+        display: flex;
+    }
 
  }
 
