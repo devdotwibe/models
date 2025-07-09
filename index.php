@@ -442,7 +442,7 @@ include('includes/helper.php');
                             🔴 Live Now
                         </div>
                     </div>
-                    <div class="p-8 flex flex-col">
+                    <div class="mod-card-content flex flex-col">
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="text-2xl font-bold premium-text"><?php echo $modelname; ?></h4>
 							<?php if(!empty($rowesdw['age'])){ ?>
