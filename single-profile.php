@@ -157,7 +157,7 @@ if (mysqli_num_rows($res_ap) > 0) {
     <div class="profile-header">
         <div class="container mx-auto relative z-10">
             <div class="profile-info pt-32 sm:pt-40 md:pt-48 pb-6 px-4 md:px-0">
-                <div class="flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
+                <div class="profile-flex-wrapp flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
                     <div class="profile-avatar-container">
 
                             <?php
@@ -178,7 +178,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                             <?php } ?>
 
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 profile-wrapp1">
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div>
                                 <h1 class="text-3xl sm:text-4xl font-bold heading-font gradient-text mb-1"><?php echo ucfirst($rowesdw['name']); ?></h1>
@@ -194,7 +194,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 									$state_list = DB::query('select name from states where id="'.$rowesdw['state'].'"');
 									$city_list = DB::query('select name from cities where id="'.$rowesdw['city'].'"');
 									if(!empty($country_list) && !empty($country_list[0]['name'])){ ?>
-                                <div class="flex items-center gap-2 text-white/70 mb-2 sm:mb-3 text-sm sm:text-base">
+                                <div class="flex items-center gap-2 text-white/70 mb-2 sm:mb-3 text-sm sm:text-base image-center-profile">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                     
 									<?php echo $city_list[0]['name'].', '.$state_list[0]['name'].', '.$country_list[0]['name']; ?>

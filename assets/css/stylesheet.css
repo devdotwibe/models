@@ -1007,6 +1007,7 @@ body header.ultra-glass {
     left: 2rem;
     right: 2rem;
     width: auto !important;
+    z-index: 9;
 }
 
 
@@ -7602,9 +7603,9 @@ left: 83%;
 
 
 
-       
 
-       
+
+
 
 
 
@@ -8170,7 +8171,7 @@ left: 83%;
 
         .premium-wallet .model-only { display: none; }
 
-        
+
 
         body.model-mode .user-only { display: none; }
 
@@ -8193,9 +8194,6 @@ left: 83%;
             .premium-wallet .purchase-card { padding: 20px; }
 
         }
-
-
-
         @media (max-width: 480px) {
 
             .premium-wallet .balance-amount { font-size: 2rem; }
@@ -8205,9 +8203,6 @@ left: 83%;
             .premium-wallet .purchase-card { padding: 16px; }
 
         }
-
-
-
         /* Loading Animation */
 
         .premium-wallet .loading {
@@ -8217,9 +8212,6 @@ left: 83%;
             pointer-events: none;
 
         }
-
-
-
         .premium-wallet .spinner {
 
             width: 20px;
@@ -8235,9 +8227,6 @@ left: 83%;
             animation: spin 1s linear infinite;
 
         }
-
-
-
         @keyframes spin {
 
             0% { transform: rotate(0deg); }
@@ -8245,9 +8234,6 @@ left: 83%;
             100% { transform: rotate(360deg); }
 
         }
-
-
-
         /* Particles */
 
         .premium-wallet .particles {
@@ -8267,9 +8253,6 @@ left: 83%;
             z-index: 1;
 
         }
-
-
-
         .premium-wallet .particle {
 
             position: absolute;
@@ -8287,9 +8270,6 @@ left: 83%;
             animation: float 8s infinite linear;
 
         }
-
-
-
         @keyframes float {
 
             0% { transform: translateY(100vh) scale(0); opacity: 0; }
@@ -8301,3 +8281,318 @@ left: 83%;
             100% { transform: translateY(-100vh) scale(1); opacity: 0; }
 
         }
+
+
+
+
+
+/* homeedited */
+
+.discover-outerdiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.home-page .discover-sec .model-card {
+    width: 23%;
+    margin-right: 2.6%;
+    padding: 10px;
+
+}
+.mod-card-content.flex.flex-col {
+    padding: 20px 10px 110px 10px;
+}
+
+.home-page .discover-sec .model-card:last-child {
+    margin-right: 0;
+}
+
+.home-page .discover-sec .model-card:nth-child(4n) {
+    margin-right: 0;
+}
+
+.exp-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.exp-grid .ultra-glass {
+    width: 23%;
+    margin-right: 2.6%;
+}
+
+.exp-grid .ultra-glass:last-child {
+    margin-right: 0;
+}
+
+.exp-grid .ultra-glass:nth-child(4n) {
+    margin-right: 0;
+}
+
+
+.home-page .home-banner .create-profilebtn.btn-primary {
+    right: 0;
+}
+
+
+
+
+
+
+
+
+@media (max-width: 1540px) {
+.home-page .discover-sec .model-card .btn-primary {
+
+    font-size: 14px;
+    padding: 9px 10px !important;
+}
+.mod-card-content.flex.flex-col {
+    padding: 20px 10px 76px 10px;
+}
+.home-page .discover-sec .btn-secondary {
+    padding: 15px 20px !important;
+}
+.exp-grid .ultra-glass {
+    padding: 20px 20px;
+}
+
+ }
+
+
+
+ @media (max-width: 1440px) {
+    .home-page .discover-sec .model-card {
+    width: 24.2%;
+    margin-right: 1%;
+}
+
+ }
+
+
+@media (max-width: 1240px) {
+
+    .profile-header .container {
+    padding: 0 !important;
+}
+
+ }
+
+
+@media (max-width: 1024px) {
+ body header .container .hidden {
+    display: none !important;
+}
+.home-page .discover-sec .model-card {
+    width: 49%;
+    margin-right: 2%;
+}
+.home-page .discover-sec .model-card:nth-child(2n){
+    margin-right: 0;
+}
+
+.exp-grid .ultra-glass{
+     width: 49%;
+    margin-right:2%;
+    margin-bottom: 20px;
+}
+
+.exp-grid .ultra-glass:nth-child(2n){
+    margin-right: 0;
+}
+.home-page .vip-enhanced {
+    padding: 25px 18px !important;
+}
+.home-page .vip-enhanced h3 {
+    font-size: 20px;
+    margin-bottom: 5px !important;
+}
+.home-page .vip-enhanced p{
+    font-size: 15px;
+    line-height: 20px;
+}
+.home-page .vip-enhanced .btn-primary {
+    padding-block: 20px !important;
+    font-size: 15px;
+}
+.home-page .preminum-sersec .premium-text {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+.ul-premiumdiv button {
+    padding-block: 17px !important;
+}
+section.discover-sec {
+    padding-top: 0;
+}
+section.preminum-sersec {
+    padding-top: 0;
+}
+
+}
+
+
+@media (max-width: 1023px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+        .container{
+        max-width: 96% !important;
+}
+
+}
+
+/* ------------------------------------------------ */
+
+@media (max-width: 900px) {
+    .enhanced5 .profile-avatar {
+    width: 100px;
+    height: 100px;}
+
+
+.enhanced5 .profile-info {
+        padding-top: 0 !important;
+        height: 381px !important;
+        display: flex;
+    }
+
+ }
+
+
+
+
+
+
+
+ @media (min-width: 768px) {
+
+ }
+
+/* ---------------------------------------------------- */
+
+ @media (max-width: 767px) {
+
+.h-banner-btns button{
+    padding-block: 18px !important;
+}
+
+#signupForm input {
+
+    padding-block: 18px !important;
+    font-size: 14px;
+}
+.home-page .home-banner .create-profilebtn.btn-primary {
+    padding-block: 18px !important;
+    font-size: 14px;
+}
+.banner-select label {
+    font-size: 13px;
+}
+.banner-select label span {
+    margin-left: 5px !important;
+}
+.home-page .vip-enhanced .btn-primary {
+    padding-block: 15px !important;
+    font-size: 14px;
+}
+.ul-premiumdiv button {
+    font-size: 14px;
+}
+.home-page .premium-testsec .premium-text {
+    font-size: 15px;
+}
+.home-page .ultra-premiumsec .ultra-glass p:first-child {
+
+    font-size: 15px;
+}
+.ultra-intro p {
+    font-size: 18px;
+}
+ }
+
+
+
+/* ---------------------------------------------------- */
+
+ @media (max-width: 575px) {
+
+    .home-page .home-banner .btn-primary {
+    padding: 20px;
+}
+
+    .home-page .home-banner input.ultra-glass {
+        padding: 25px 15px !important;
+    }
+.home-page .micro-bounce>.ultra-glass {
+        padding: 30px 15px;
+    }
+
+    .home-page .discover-sec .model-card {
+    width: 90%;
+    margin-right: 0;
+}
+
+.exp-grid .ultra-glass{
+     width: 90%;
+    margin-right: 0%;
+}
+
+
+
+ }
+
+
+
+
+
+ @media (max-width: 480px) {
+    body header .btn-primary {
+    padding:  10px 15px !important;
+}
+.home-page .home-banner input.ultra-glass {
+    padding: 25px 13px !important;
+}
+
+
+.home-page .home-banner input.ultra-glass {
+    font-size: 13px;
+}
+.home-page .home-banner .btn-primary svg {
+    width: 14px;
+    margin-right: 2px !important;
+}
+.home-page .home-banner .btn-primary {
+padding: 20px 10px;
+font-size: 11px;
+right: 12px;
+}
+
+ .home-page .micro-bounce>.ultra-glass {
+    padding: 25px 10px;
+}
+
+
+.h-banner-btns {
+    flex-wrap: wrap;
+}
+
+.h-banner-btns button {
+    width: 100% !important;
+    flex: unset;
+    margin: 10px 0 !important;
+}
+
+.home-page .discover-sec .model-card {
+    width: 90%;
+    margin-right: 0;
+}
+.premium-status {
+    flex-wrap: wrap;
+}
+.premium-status > div{
+    margin-inline: 0 !important;
+}
+}

@@ -1,6 +1,6 @@
-<?php  session_start(); 
+<?php  session_start();
 include('includes/config.php');
-include('includes/helper.php'); 
+include('includes/helper.php');
 ?>
 <!doctype html>
 <html lang="en-US" class="no-js">
@@ -11,7 +11,7 @@ include('includes/helper.php');
 <?php include('includes/head.php'); ?>
 
     <style>
-      
+
     </style>
     <!-- <style type="text/css" id="custom-background-css">
       body.custom-background { background-image: url("assets/wp-content/themes/theagency3/images/default-bg.jpg"); background-position: center top; background-size: auto; background-repeat: no-repeat; background-attachment: fixed; }
@@ -46,7 +46,7 @@ include('includes/helper.php');
       @media screen and (max-width: 767px) {
 			  .larg_img {
 			    height: auto !important;
-			    padding: 10px; 
+			    padding: 10px;
 			  }
 			  .img_hme{
 			  	height: auto !important;
@@ -76,8 +76,8 @@ include('includes/helper.php');
       }
     </style>
   </head>
-  <body class="min-h-screen bg-animated text-white home-page socialwall-page">    
-  <!-- Premium Particle System -->  
+  <body class="min-h-screen bg-animated text-white home-page socialwall-page">
+  <!-- Premium Particle System -->
   <div class="particles" id="particles"></div>
     <!-- Ultra Premium Header -->
     <?php if (isset($_SESSION["log_user_id"])) { ?>
@@ -86,9 +86,9 @@ include('includes/helper.php');
 	<?php } else{ ?>
     <?php include('includes/header.php'); ?>
 	<?php } ?>
-<main class="home-page">    <!-- Ultra Premium Hero Section with Side-by-Side Layout -->    
+<main class="home-page">    <!-- Ultra Premium Hero Section with Side-by-Side Layout -->
     <!-- Ultra Premium Hero Section with Side-by-Side Layout -->
-    <section class="py-24 md:py-32 relative overflow-hidden">
+    <section class="py-24 md:py-32 relative overflow-hidden home-banner">
         <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-purple-900/20 to-pink-900/30"></div>
         <div class="container mx-auto relative z-10">
             <div class="hero-grid">
@@ -162,7 +162,7 @@ include('includes/helper.php');
                     </div>
 
                     <!-- Premium Stats -->
-                    <div class="flex items-center space-x-8">
+                    <div class="flex premium-status items-center space-x-8">
                         <div class="flex -space-x-4">
                             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces" alt="User 1" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces" alt="User 2" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
@@ -210,12 +210,12 @@ include('includes/helper.php');
                                     </span>
                                 </div>
                             </div>
-							
+
 							<?php
 
                           /*$sqls = "SELECT * FROM model_user WHERE unique_id='model-67054'";
 
-                            $resultd = mysqli_query($con, $sqls); 
+                            $resultd = mysqli_query($con, $sqls);
 							$count = 1;
 
                               if (mysqli_num_rows($resultd) > 0) {
@@ -226,12 +226,12 @@ include('includes/helper.php');
 										break;
 									}
 								}
-								
+
 							  } */
-							
+
 							?>
 
-                            <div class="flex space-x-4 mb-8">
+                            <div class="flex space-x-4 mb-8 h-banner-btns">
                                 <button id="userTab" class="flex-1 py-4 px-6 bg-white text-indigo-600 rounded-xl font-semibold transition duration-300 shadow-lg relative overflow-hidden hover-lift" onclick="switchTab('user')">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                     I'm a User
@@ -274,7 +274,7 @@ include('includes/helper.php');
                                     <option value="Other" class="bg-gray-900">🌍 Other</option>
                                 </select>
 
-                                <div class="flex space-x-6">
+                                <div class="flex banner-select flex-wrap space-x-6">
                                     <label class="flex items-center space-x-3 text-white cursor-pointer hover-lift">
                                         <input type="radio" name="gender" value="male" class="form-radio text-indigo-600 w-5 h-5" required>
                                         <span class="font-medium">Male</span>
@@ -300,7 +300,7 @@ include('includes/helper.php');
                                     <textarea name="user_bio" placeholder="Tell potential matches about yourself..." class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-28 resize-none shadow-lg transition duration-300 border border-white/10"></textarea>
                                 </div>
 
-                                <button type="submit" class="w-full btn-primary text-white font-bold py-4 rounded-xl transition duration-300 relative overflow-hidden text-lg">
+                                <button type="submit" class="create-profilebtn w-full btn-primary text-white font-bold py-4 rounded-xl transition duration-300 relative overflow-hidden text-lg">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>
                                     CREATE MY PROFILE
                                 </button>
@@ -319,7 +319,7 @@ include('includes/helper.php');
     </section>
 
     <!-- Enhanced VIP Section with Floating Animation and Better Content -->
-    <section class="py-20 relative scroll-reveal">
+    <section class="py-20 relative scroll-reveal join-sec">
         <div class="container mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold heading-font gradient-text mb-6 text-glow">Premium Experience</h2>
@@ -370,7 +370,7 @@ include('includes/helper.php');
             </div>
         </div>
     </section>
-	
+
 	<?php $sqls_model = "SELECT * FROM model_user WHERE as_a_model = 'Yes' Order by id DESC LIMIT 4";
 
               $resultd_model = mysqli_query($con, $sqls_model);
@@ -387,12 +387,12 @@ include('includes/helper.php');
                 <p class="text-2xl text-white/70 max-w-3xl mx-auto">Explore our selection of verified models ready to connect with you</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-			
-			<?php while($rowesdw = mysqli_fetch_assoc($resultd_model)) {  
-			
+            <div class="discover-outerdiv">
+
+			<?php while($rowesdw = mysqli_fetch_assoc($resultd_model)) {
+
 			$unique_id = $rowesdw['unique_id'];
-					
+
 					$sql = "SELECT count(*) FROM model_images WHERE unique_model_id = '".$unique_id."' AND file_type = 'Image'";
 
                       $result = mysqli_query($con, $sql);
@@ -420,16 +420,16 @@ include('includes/helper.php');
                         }
 
                       }
-					  
+
 							if(empty($rowesdw['name'])){
 								$modelname = ucfirst($rowesdw['username']);
 							}else{
 								$modelname = ucfirst($rowesdw['name']);
 							}
 
-					
+
 			?>
-			
+
                 <!-- Model Card 1 - Aria -->
                 <div class="model-card rounded-2xl overflow-hidden hover-lift" onclick="openModelPreview_new('<?php echo $rowesdw['unique_id']; ?>')">
                     <div class="relative">
@@ -442,14 +442,14 @@ include('includes/helper.php');
                             🔴 Live Now
                         </div>
                     </div>
-                    <div class="p-8 flex flex-col">
+                    <div class="mod-card-content flex flex-col">
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="text-2xl font-bold premium-text"><?php echo $modelname; ?></h4>
 							<?php if(!empty($rowesdw['age'])){ ?>
                             <span class="text-lg text-white/60 font-medium"><?php echo $rowesdw['age']; ?></span>
 							<?php } ?>
                         </div>
-						<?php 
+						<?php
 						$services = '';
 						if(!empty($rowesdw['services'])){
 							if($rowesdw['services'] == 'Chat Only') $services = '💬 '.$rowesdw['services'];
@@ -459,7 +459,7 @@ include('includes/helper.php');
 						 ?>
                         <p class="text-indigo-400 font-semibold mb-3 text-lg"><?php echo $services; ?></p>
 						<?php } ?>
-						
+
 						<?php if(!empty($rowesdw['user_bio'])){ ?>
                         <div class="flex-1 mb-6">
                             <p class="text-white/70 text-base description-text" data-full-text="Let me be your escape from reality. I promise an unforgettable experience that will leave you wanting more and more. Every moment with me is crafted to perfection.">
@@ -480,7 +480,7 @@ include('includes/helper.php');
                         </button>
                     </div>
                 </div>
-				
+
 			<?php }  ?>
             </div>
 
@@ -491,19 +491,19 @@ include('includes/helper.php');
             </div>
         </div>
     </section>
-	
+
 				<?php } ?>
 
     <!-- Ultra Premium Services Section -->
-    <section class="py-24 relative scroll-reveal">
+    <section class="py-24 relative scroll-reveal preminum-sersec">
         <div class="container mx-auto">
             <div class="text-center mb-20">
                 <h2 class="text-5xl md:text-6xl font-bold heading-font gradient-text mb-6 text-glow">Experience the Connection</h2>
                 <p class="text-2xl text-white/70 max-w-3xl mx-auto">Choose how you want to connect and create unforgettable moments</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-                <div class="ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+            <div class="exp-grid">
+                <div class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                     </div>
@@ -529,7 +529,7 @@ include('includes/helper.php');
                     </ul>
                 </div>
 
-                <div class="ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
                     </div>
@@ -555,7 +555,7 @@ include('includes/helper.php');
                     </ul>
                 </div>
 
-                <div class="ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     </div>
@@ -585,7 +585,7 @@ include('includes/helper.php');
     </section>
 
     <!-- Single Premium Testimonial Section -->
-    <section class="py-24 relative scroll-reveal">
+    <section class="py-24 relative scroll-reveal premium-testsec">
         <div class="container mx-auto">
             <div class="text-center mb-20">
                 <h2 class="text-5xl md:text-6xl font-bold heading-font gradient-text mb-6 text-glow">Success Story</h2>
@@ -611,14 +611,18 @@ include('includes/helper.php');
     </section>
 
     <!-- Ultra Premium Call to Action -->
-    <section class="py-24 gradient-bg relative overflow-hidden">
+    <section class="py-24 gradient-bg relative overflow-hidden ultra-premiumsec">
         <div class="absolute inset-0 bg-black/40"></div>
         <div class="container mx-auto relative z-10">
             <div class="text-center text-white">
                 <h2 class="text-5xl md:text-7xl font-bold heading-font mb-8 text-glow">Ready to Find Your Connection?</h2>
-                <p class="text-2xl mb-12 opacity-90 max-w-4xl mx-auto">Join thousands of models and users already experiencing meaningful connections on our premium platform</p>
+                <div class="ultra-intro">
+                     <p class="text-2xl mb-12 opacity-90 max-w-4xl mx-auto">Join thousands of models and users already experiencing meaningful connections on our premium platform</p>
+                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+
+
+                <div class="ul-premiumdiv flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
                     <button class="px-12 py-5 bg-white text-indigo-600 font-bold rounded-xl hover:bg-gray-100 transition duration-300 shadow-2xl text-xl hover-lift" onclick="becomeModel()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         Become a Model
@@ -640,7 +644,7 @@ include('includes/helper.php');
 
 
 <!-- Ultra Premium Model Preview Modal -->
-<div id="modelModal" class="modal-overlay">
+<div id="modelModal" class="modal-overlay home-page-modal">
     <div class="modal-content ultra-glass rounded-3xl p-12 max-w-4xl shadow-2xl">
         <div class="flex justify-between items-center mb-8">
             <h3 class="text-3xl font-bold premium-text">Model Preview</h3>
@@ -655,8 +659,8 @@ include('includes/helper.php');
 </div>
 
     <?php  include('includes/footer.php'); ?>
-    
-    
+
+
   </body>
 </html>
 
