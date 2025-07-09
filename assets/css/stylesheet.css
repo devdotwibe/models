@@ -8348,7 +8348,11 @@ left: 83%;
 
 
 @media (max-width: 1540px) {
+.home-page .discover-sec .model-card .btn-primary {
 
+    font-size: 14px;
+    padding: 9px 10px !important;
+}
  }
 
 
@@ -8359,11 +8363,7 @@ left: 83%;
     margin-right: 1%;
 }
 
-.home-page .discover-sec .model-card .btn-primary {
 
-    font-size: 14px;
-    padding: 9px 10px !important;
-}
 
 
 
