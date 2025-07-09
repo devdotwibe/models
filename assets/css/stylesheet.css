@@ -8406,9 +8406,13 @@ left: 83%;
 }
 .home-page .home-banner .btn-primary {
 padding: 20px 10px;
-    font-size: 11px;
-     right: 12px;
-    }
+font-size: 11px;
+right: 12px;
+}
+
+ .home-page .micro-bounce>.ultra-glass {
+    padding: 10px;
+}
 
 
 
