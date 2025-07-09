@@ -8486,8 +8486,9 @@ section.preminum-sersec {
 }
 .profile-wrapp1 > div > div:nth-child(2) {
 
-    width: 100%;
+
     justify-content: flex-end;
+    margin-left: 10px;
 }
 
 
