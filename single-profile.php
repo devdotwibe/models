@@ -178,7 +178,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                             <?php } ?>
 
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 profile-wrapp1">
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div>
                                 <h1 class="text-3xl sm:text-4xl font-bold heading-font gradient-text mb-1"><?php echo ucfirst($rowesdw['name']); ?></h1>
