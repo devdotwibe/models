@@ -8433,12 +8433,14 @@ section.preminum-sersec {
 
 }
 
-@media (max-width: 1023px) {
 
-.enhanced5 .profile-avatar {
+@media (max-width: 1023px) {
+    .enhanced5 .profile-avatar {
     width: 100px;
     height: 100px;}
+}
 
+@media (max-width: 768px) and (max-width: 1023px) {
         .container{
         max-width: 90% !important;
 }
