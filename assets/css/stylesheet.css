@@ -8379,6 +8379,13 @@ left: 83%;
  @media (max-width: 575px) {
 
  }
+
+
+
  @media (max-width: 480px) {
+    body header .btn-primary {
+    padding:  10px 15px !important;
+}
+
 
  }
