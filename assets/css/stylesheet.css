@@ -8523,6 +8523,11 @@ section.preminum-sersec {
 
  @media (min-width: 768px) {
 
+        .enhanced5 .profile-info {
+        height: 279px !important;
+
+    }
+
  }
 
 /* ---------------------------------------------------- */
