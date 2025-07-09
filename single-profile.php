@@ -340,7 +340,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 				<?php if(!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null'){ 
 				$hobbies = json_decode($rowesdw['hobbies']); 
 				?>
-                    <div class="flex flex-wrap gap-2">
+                    <div class="flex flex-wrap gap-2 hobbies-sec">
 					<?php foreach($hobbies as $hb){ ?>
 					
                         <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm"><?php echo $hb; ?></span>
