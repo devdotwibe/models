@@ -8372,7 +8372,8 @@ left: 83%;
 
 .exp-grid .ultra-glass{
      width: 49%;
-    margin-right: 2%;
+    margin-right:2%;
+    margin-bottom: 20px;
 }
 
 .exp-grid .ultra-glass::nth-child(2n){
@@ -8381,6 +8382,7 @@ left: 83%;
 
 
 }
+
 
 
 
