@@ -8458,6 +8458,29 @@ section.preminum-sersec {
         height: 381px !important;
         display: flex;
     }
+    .profile-flex-wrapp {
+    gap: 15px;
+}
+
+.profile-wrapp1 > div {
+    gap: 4px;
+}
+
+.action-dropdown .btn-secondary {
+    padding-inline: 5px !important;
+}
+.profile-wrapp1 .btn-secondary {
+    font-size: 12px;
+    padding-inline: 10px !important;
+}
+
+.profile-wrapp1 .btn-primary{
+    font-size: 12px;
+    padding-inline: 10px !important;
+}
+
+
+
 
  }
 
