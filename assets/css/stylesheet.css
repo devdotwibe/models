@@ -8397,5 +8397,13 @@ left: 83%;
 .home-page .home-banner input.ultra-glass {
     font-size: 13px;
 }
+.home-page .home-banner .btn-primary svg {
+    width: 14px;
+    margin-right: 2px !important;
+}
+    .home-page .home-banner .btn-primary {
+        padding: 20px 10px;
+        font-size: 11px;
+    }
 
  }
