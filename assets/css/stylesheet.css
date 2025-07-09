@@ -8366,6 +8366,9 @@ left: 83%;
     width: 49%;
     margin-right: 2%;
 }
+.home-page .discover-sec .model-card:nth-child(2n){
+    margin-right: 0;
+}
 
 }
 
