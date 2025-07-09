@@ -8378,6 +8378,10 @@ left: 83%;
  }
  @media (max-width: 575px) {
 
+    .home-page .home-banner .btn-primary {
+    padding: 20px;
+}
+
  }
 
 
@@ -8386,6 +8390,12 @@ left: 83%;
     body header .btn-primary {
     padding:  10px 15px !important;
 }
+.home-page .home-banner input.ultra-glass {
+    padding-inline: 13px;
+}
 
+.home-page .home-banner input.ultra-glass {
+    font-size: 13px;
+}
 
  }
