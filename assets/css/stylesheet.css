@@ -8352,6 +8352,11 @@ left: 83%;
 .mod-card-content.flex.flex-col {
     padding: 20px 10px 76px 10px;
 }
+.home-page .discover-sec .btn-secondary {
+    padding: 20px !important;
+}
+
+
  }
 
 
