@@ -8478,6 +8478,13 @@ section.preminum-sersec {
     font-size: 12px;
     padding-inline: 10px !important;
 }
+.profile-wrapp1 .btn-secondary svg{
+    margin-right: 4px !important;
+}
+.profile-wrapp1 .btn-primary svg{
+    margin-right: 4px !important;
+}
+
 .image-center-profile {
     font-size: 13px;
 }
