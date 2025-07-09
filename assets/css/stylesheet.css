@@ -8372,7 +8372,11 @@ left: 83%;
  }
 
 
-@media (max-width: 10240px) {
+@media (max-width: 1240px) {
+
+    .profile-header .container {
+    padding: 0 !important;
+}
 
  }
 
@@ -8477,6 +8481,9 @@ section.preminum-sersec {
 .home-page .ultra-premiumsec .ultra-glass p:first-child {
 
     font-size: 15px;
+}
+.ultra-intro p {
+    font-size: 18px;
 }
  }
 
