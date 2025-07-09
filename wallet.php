@@ -2,6 +2,9 @@
 session_start(); 
 include('includes/config.php');
 include('includes/helper.php');
+
+$m_link= SITEURL.'user/transaction-history/';
+
 if(isset($_SESSION["log_user_id"])){
 	$usern = $_SESSION["log_user"];
 	$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
@@ -88,7 +91,7 @@ $activeTab = 'wallet';
                     Buy Tokens
                 </button>
                 
-                <button class="tab-btn model-only" onclick="switchTab('withdraw')" data-tab="withdraw">
+                <button class="tab-btn <?php if($user_type == 'user'){ ?> model-only <?php } ?>" onclick="switchTab('withdraw')" data-tab="withdraw">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="12" y1="1" x2="12" y2="23"></line>
                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
@@ -105,7 +108,7 @@ $activeTab = 'wallet';
                     History
                 </button>
                 
-                <button class="tab-btn model-only" onclick="switchTab('bank')" data-tab="bank">
+                <button class="tab-btn <?php if($user_type == 'user'){ ?> model-only <?php } ?>" onclick="switchTab('bank')" data-tab="bank">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M3 21h18"></path>
                         <path d="M5 21V7l8-4v18"></path>
@@ -114,7 +117,7 @@ $activeTab = 'wallet';
                     Bank Details
                 </button>
                 
-                <button class="tab-btn model-only" onclick="switchTab('tax')" data-tab="tax">
+                <button class="tab-btn <?php if($user_type == 'user'){ ?> model-only <?php } ?>" onclick="switchTab('tax')" data-tab="tax">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                         <polyline points="14,2 14,8 20,8"></polyline>
@@ -385,45 +388,39 @@ $activeTab = 'wallet';
                 <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                     Transaction History
                 </h3>
+				
+				<?php 
+			
+				$total_trans = DB::queryFirstrow("SELECT COUNT(*) AS total FROM model_user_transaction_history where user_id=".$userDetails['id']);
+				
+				?>
+				
+				<form method="get" id="search-form" class="form-inline" onSubmit="submit_search(1);return false;">
+				<input type="hidden" id="selpagesize" value="10" />
+				<input type="hidden" name="pages" id="i-page" value="1" />
+				<input type="hidden" name="total_item" id="i-total-page" value="0" />
+				<input type="hidden" name="sort_column" id="hdnSortColumn" value="" />
+				<input type="hidden" name="sort_type" id="hdnSortOrder" value="" />
+				</form>
                 
-                <div id="transactionList">
-                    <div class="transaction-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="font-semibold">Token Purchase</div>
-                                <div class="text-sm text-gray-400">Dec 20, 2024 - 2:30 PM</div>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-green-400 font-semibold">+500 Coins</div>
-                            <div class="text-sm text-gray-400">₹500.00</div>
-                        </div>
-                    </div>
-
-                    <div class="transaction-item">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="font-semibold">Private Show</div>
-                                <div class="text-sm text-gray-400">Dec 19, 2024 - 8:45 PM</div>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-red-400 font-semibold">-150 Coins</div>
-                            <div class="text-sm text-gray-400">30 minutes</div>
-                        </div>
-                    </div>
+                <div id="transactionList"></div>
+				
+				<?php if($total_trans['total'] > 20){ ?>
+				<!-- Pagination -->
+            <div class="pagination">
+			
+				
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <ul class="pagination pull-right" style="margin:0" id="list-paginations"></ul>
                 </div>
+            </div>
+			
+			</div>
+			
+				<?php } ?>
+				
             </div>
 
             <!-- Bank Details Tab -->
@@ -521,6 +518,54 @@ $activeTab = 'wallet';
     </div>
 
 <?php include('includes/footer.php'); ?>
+
+
+<link href="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
+<script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
+
+<script>
+var currentPage = 1;
+$('#transactionList').html('<div class="text-center p-3"><h5 class="m-0">Loading..</h5></div>');
+function submit_search(pageNum){
+	perPage =  $("#selpagesize").val();
+    var data = $('#search-form').serialize()+'&page='+pageNum+'&data_list='+perPage;
+	$.ajax({
+		type: 'GET',
+		url : "<?php echo $m_link.'ajax.php'?>",
+		data:data,
+		dataType:'json',
+		success: function(response){
+			$('#transactionList').html(response.html);
+			$('.search-total').html(response.total);
+			$('#i-total-page').val(response.total_page);
+			currentPage = response.page;
+			rebindpagination();
+		}
+	});
+}
+function rebindpagination() {
+	$("#list-paginations").pagination('destroy');
+	$("#list-paginations").pagination({
+		items: '<?php echo $total_trans['total']; ?>',
+		//pages: $("#i-total-page").val(),
+		displayedPages: 5,
+		edges: 0,
+		cssStyle: 'light-theme',
+		hrefTextPrefix: 'javascript:;',
+		currentPage: currentPage,
+		onPageClick: function (pageNum, e) {
+			submit_search(pageNum);
+			currentPage = pageNum;
+		}
+	});
+}
+
+submit_search(1);
+$('#search-form').submit(function(e){
+	e.preventDefault();
+});
+
+</script>
 
   </body>
 

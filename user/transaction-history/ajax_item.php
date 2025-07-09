@@ -53,45 +53,26 @@ if($all_data){
             $message = 'Model rejected movie assignments';
         }
 ?>
-<div class="nk-odr-item ">
-    <div class="nk-odr-col">
-        <div class="nk-odr-info">
-            <div class="nk-odr-badge">
-                <span class="nk-odr-icon <?=$amountType=='plus'?'bg-success-dim text-success':'bg-warning-dim text-warning'?> icon ni ni-arrow-up-right">
-                <i class="fas <?=$amountType=='plus'?'fa-arrow-up':'fa-arrow-down'?>"></i>
-            </div>
-            <div class="nk-odr-data">
-                <div class="nk-odr-label">
-                    <strong class="ellipsis"><?=$message?></strong>
-                </div>
-                <div class="nk-odr-meta">
-                <span class="date">Date: <?=h_dateFormat($set_data['created_at'],'d M, Y')?></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--<div class="nk-plan-term">
-        <div class="nk-plan-start nk-plan-order">
-            <span class="nk-plan-label text-soft font-weight-bold">Payment Type</span>
-            <span class="nk-plan-value date">Card</span>
-        </div>
-        
-    </div>-->
-    <div class="nk-odr-col nk-odr-col-amount">
-        <div class="nk-odr-amount">
-            <div class="number-md text-s text-success">
-<span class="currency <?=$amountType=='plus'?'text-success':'text-warning'?>"><i class="far fa-coins"></i></span><?=$set_data['amount']?>
-            </div>
-            
-        </div>
-    </div>
-    <!-- <div class="nk-odr-col nk-odr-col-action">
-        <div class="nk-odr-action ">
-            <a class="wd-view-account" href="javsacript:;" data-toggle="modal" data-target="#myModal_details-<?php echo $set_data['id']; ?>" ><span class="data-more"><i class="fa fa-chevron-right"></i></span></a>
-        </div>
-    </div> -->
-</div>
 
+
+<div class="transaction-item">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold"><?=$message?></div>
+                                <div class="text-sm text-gray-400"><?=h_dateFormat($set_data['created_at'],'M d, Y - h:i A')?></div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <?php /*<div class="text-green-400 font-semibold">+500 Coins</div> */ ?>
+                            <div class="text-sm text-gray-400">₹<?=$set_data['amount']?></div>
+                        </div>
+                    </div>
 
 <?php
 	}
