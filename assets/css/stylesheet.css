@@ -8376,7 +8376,7 @@ left: 83%;
     margin-bottom: 20px;
 }
 
-.exp-grid .ultra-glass::nth-child(2n){
+.exp-grid .ultra-glass:nth-child(2n){
     margin-right: 0;
 }
 
