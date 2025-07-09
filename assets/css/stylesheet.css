@@ -8327,7 +8327,9 @@ left: 83%;
 }
 
 
-
+.home-page .home-banner .create-profilebtn.btn-primary {
+    right: 0;
+}
 
 
 
