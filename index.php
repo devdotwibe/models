@@ -162,7 +162,7 @@ include('includes/helper.php');
                     </div>
 
                     <!-- Premium Stats -->
-                    <div class="flex items-center space-x-8">
+                    <div class="flex premium-status items-center space-x-8">
                         <div class="flex -space-x-4">
                             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces" alt="User 1" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
                             <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces" alt="User 2" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
