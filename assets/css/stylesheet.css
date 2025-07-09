@@ -8382,6 +8382,14 @@ left: 83%;
 .home-page .vip-enhanced {
     padding: 25px 18px !important;
 }
+.home-page .vip-enhanced h3 {
+    font-size: 20px;
+    margin-bottom: 5px !important;
+}
+.home-page .vip-enhanced p{
+    font-size: 15px;
+    line-height: 20px;
+}
 
 }
 
@@ -8420,6 +8428,13 @@ left: 83%;
 .banner-select label span {
     margin-left: 5px !important;
 }
+.home-page .vip-enhanced .btn-primary {
+    padding-block: 15px !important;
+    font-size: 14px;
+}
+
+
+
  }
 
 
