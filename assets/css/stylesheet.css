@@ -8393,8 +8393,9 @@ left: 83%;
     padding:  10px 15px !important;
 }
 .home-page .home-banner input.ultra-glass {
-    padding-inline: 13px;
+    padding: 25px 13px !important;
 }
+
 
 .home-page .home-banner input.ultra-glass {
     font-size: 13px;
