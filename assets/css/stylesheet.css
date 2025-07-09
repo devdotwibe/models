@@ -8417,10 +8417,16 @@ left: 83%;
     font-size: 20px;
     margin-bottom: 4px;
 }
+.ul-premiumdiv button {
+    padding-block: 17px !important;
+    font-size: 14px;
 }
 
 
+}
 
+
+/* ------------------------------------------------ */
 
 @media (max-width: 900px) {
 
@@ -8458,7 +8464,9 @@ left: 83%;
     padding-block: 15px !important;
     font-size: 14px;
 }
-
+.ul-premiumdiv button {
+    font-size: 14px;
+}
 
 
  }
