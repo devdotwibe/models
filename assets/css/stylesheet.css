@@ -8370,6 +8370,16 @@ left: 83%;
     margin-right: 0;
 }
 
+.exp-grid .ultra-glass{
+     width: 49%;
+    margin-right: 2%;
+}
+
+.exp-grid .ultra-glass::nth-child(2n){
+    margin-right: 0;
+}
+
+
 }
 
 
@@ -8424,7 +8434,10 @@ left: 83%;
     margin-right: 0;
 }
 
-
+.exp-grid .ultra-glass{
+     width: 90%;
+    margin-right: 0%;
+}
 
 
 
