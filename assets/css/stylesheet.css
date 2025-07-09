@@ -8452,7 +8452,7 @@ section.preminum-sersec {
     width: 100px;
     height: 100px;}
     .enhanced5 .profile-info {
-    padding-top: 164px;
+    padding-top: 164px !important;
 }
 
  }
