@@ -8386,6 +8386,8 @@ left: 83%;
 
 
 
+
+
  @media (max-width: 480px) {
     body header .btn-primary {
     padding:  10px 15px !important;
@@ -8401,9 +8403,13 @@ left: 83%;
     width: 14px;
     margin-right: 2px !important;
 }
-    .home-page .home-banner .btn-primary {
-        padding: 20px 10px;
-        font-size: 11px;
+.home-page .home-banner .btn-primary {
+padding: 20px 10px;
+    font-size: 11px;
     }
+
+
+
+
 
  }
