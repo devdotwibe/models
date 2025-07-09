@@ -8300,6 +8300,9 @@ left: 83%;
     padding: 10px;
 
 }
+.mod-card-content.flex.flex-col {
+    padding: 20px 10px 50px 10px;
+}
 
 .home-page .discover-sec .model-card:last-child {
     margin-right: 0;
