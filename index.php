@@ -616,10 +616,10 @@ include('includes/helper.php');
         <div class="container mx-auto relative z-10">
             <div class="text-center text-white">
                 <h2 class="text-5xl md:text-7xl font-bold heading-font mb-8 text-glow">Ready to Find Your Connection?</h2>
-                <div class="ultra-intro>
+                <div class="ultra-intro">
                      <p class="text-2xl mb-12 opacity-90 max-w-4xl mx-auto">Join thousands of models and users already experiencing meaningful connections on our premium platform</p>
-
                  </div>
+
 
 
                 <div class="ul-premiumdiv flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
