@@ -8297,6 +8297,8 @@ left: 83%;
 .home-page .discover-sec .model-card {
     width: 23%;
     margin-right: 2.6%;
+    padding: 10px;
+
 }
 
 .home-page .discover-sec .model-card:last-child {
