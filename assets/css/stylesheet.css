@@ -8361,7 +8361,13 @@ left: 83%;
 @media (max-width: 1024px) {
  body header .container .hidden {
     display: none !important;
-}}
+}
+.home-page .discover-sec .model-card {
+    width: 49%;
+    margin-right: 2%;
+}
+
+}
 
 
 
@@ -8468,4 +8474,4 @@ right: 12px;
 }
 
 
- }
+}
