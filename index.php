@@ -503,7 +503,7 @@ include('includes/helper.php');
             </div>
 
             <div class="exp-grid">
-                <div class="ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                     </div>
@@ -529,7 +529,7 @@ include('includes/helper.php');
                     </ul>
                 </div>
 
-                <div class="ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
                     </div>
@@ -555,7 +555,7 @@ include('includes/helper.php');
                     </ul>
                 </div>
 
-                <div class="ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     </div>
