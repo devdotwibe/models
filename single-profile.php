@@ -157,7 +157,7 @@ if (mysqli_num_rows($res_ap) > 0) {
     <div class="profile-header">
         <div class="container mx-auto relative z-10">
             <div class="profile-info pt-32 sm:pt-40 md:pt-48 pb-6 px-4 md:px-0">
-                <div class="flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
+                <div class="profile-flex-wrapp flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
                     <div class="profile-avatar-container">
 
                             <?php
@@ -179,7 +179,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                     </div>
                     <div class="flex-1 profile-wrapp1">
-                        <div class="profile-flex-wrapp flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div>
                                 <h1 class="text-3xl sm:text-4xl font-bold heading-font gradient-text mb-1"><?php echo ucfirst($rowesdw['name']); ?></h1>
                                 <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
