@@ -559,7 +559,7 @@ $activeTab = 'wallet';
 							$country = '';
 							if(isset($_POST['country'])) {
 								$country = $_POST['country'];
-							}else if(!empty($taxdetail['annual_income'])){
+							}else if(!empty($taxdetail['country'])){
 								$country = $taxdetail['country'];
 							}
 							
