@@ -80,8 +80,8 @@ if(isset($_SESSION["log_user_id"])){
 			echo '<script>alert("Bank details updated successfully.");</script>';
 		}
 	
-	header('Location: wallet.php');
-		exit();
+	//header('Location: wallet.php');
+	//	exit();
 	}	
 	
 }
