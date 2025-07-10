@@ -74,11 +74,12 @@ if(isset($_SESSION["log_user_id"])){
 
 			DB::insert('users_bankdetail', $post_data_bnk);
 			$created_id = DB::insertId();
-			echo '<script>alert("Bank details added successfully."); location.reload(); </script>';
+			echo '<script>alert("Bank details added successfully.");  </script>';
 		}else{
 			DB::update('users_bankdetail', $post_data_bnk, "user_id=%s", $userDetails["id"]);
-			echo '<script>alert("Bank details updated successfully."); location.reload();</script>';
+			echo '<script>alert("Bank details updated successfully.");</script>';
 		}
+		unset($_POST);
 	}	
 	
 }
