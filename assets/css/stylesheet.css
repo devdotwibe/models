@@ -8338,6 +8338,10 @@ left: 83%;
 
 
 
+.hobbies-sec {
+    margin-top: 10px;
+}
+
 
 
 
@@ -8448,9 +8452,9 @@ section.preminum-sersec {
 /* ------------------------------------------------ */
 
 @media (max-width: 900px) {
-    .enhanced5 .profile-avatar {
+    /* .enhanced5 .profile-avatar {
     width: 100px;
-    height: 100px;}
+    height: 100px;} */
 
 
 .enhanced5 .profile-info {
@@ -8458,6 +8462,60 @@ section.preminum-sersec {
         height: 381px !important;
         display: flex;
     }
+
+
+.profile-wrapp1 > div {
+    gap: 4px;
+}
+
+.profile-flex-wrapp {
+    gap: 10px !important;
+}
+.image-center-profile {
+    font-size: 15px !important;
+}
+.action-dropdown .btn-secondary {
+    padding-inline: 5px !important;
+}
+.profile-wrapp1 .btn-secondary {
+    font-size: 12px;
+    padding-inline: 10px !important;
+}
+
+.profile-wrapp1 .btn-primary{
+    font-size: 12px;
+    padding-inline: 10px !important;
+}
+.profile-wrapp1 .btn-secondary svg{
+    margin-right: 2px !important;
+}
+.profile-wrapp1 .btn-primary svg{
+    margin-right: 2px !important;
+}
+
+.image-center-profile {
+    font-size: 13px;
+}
+.profile-flex-wrapp {
+    gap: 8px;
+}
+.profile-wrapp1 > div > div:nth-child(2) {
+
+
+    justify-content: flex-end;
+    margin-left: 10px;
+}
+
+.profile-wrapp1 h1 {
+    font-size: 22px;
+    margin-bottom: 0;
+}
+
+.image-center-profile {
+    font-size: 13px;
+}
+
+
 
  }
 
@@ -8467,7 +8525,12 @@ section.preminum-sersec {
 
 
 
- @media (min-width: 768px) {
+ @media (max-width: 768px) {
+
+        .enhanced5 .profile-info {
+        height: 279px !important;
+
+    }
 
  }
 
@@ -8511,6 +8574,33 @@ section.preminum-sersec {
 .ultra-intro p {
     font-size: 18px;
 }
+
+    .enhanced5 .profile-info {
+        height: auto !important;
+        padding-top: 40px !important;
+    }
+
+        .enhanced5 .profile-header {
+        height: auto;}
+
+
+    .profile-wrapp1 > div > div:nth-child(2) {
+        justify-content: flex-start;
+        margin-inline: 0 !important;
+    }
+
+
+footer .container > .grid {
+    gap: 20px !important;
+}
+
+footer .container > .grid h4 {
+    margin-bottom: 7px !important;
+}
+
+
+
+
  }
 
 
@@ -8595,4 +8685,18 @@ right: 12px;
 .premium-status > div{
     margin-inline: 0 !important;
 }
+
+.image-center-profile {
+        margin-bottom: 20px !important;
+    }
+.hobbies-sec {
+    margin-top: 20px;
+}
+
+.enhanced5 .post-div > div {
+    width: 42%;
+    margin-inline: 0 !important;
+}
+
+
 }
