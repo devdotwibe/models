@@ -4,6 +4,8 @@ include('includes/config.php');
 include('includes/helper.php');
 
 $m_link= SITEURL.'user/transaction-history/';
+$table_name = "users_withdrow_request";	
+$per_amount = 50;
 
 if(isset($_SESSION["log_user_id"])){
 	$usern = $_SESSION["log_user"];
@@ -16,6 +18,69 @@ if(isset($_SESSION["log_user_id"])){
 	else{
 		echo '<script>window.location.href="login.php"</script>';
 	}
+	$checkbankdetail = get_data('users_bankdetail',array('user_id'=>$userDetails["id"]),true);
+	/*if(!$checkbankdetail){
+		echo '<script>window.location.href="'.SITEURL.'user/bankdetails/create.php"</script>';
+		die;
+	}*/
+
+	$check_request = get_data($table_name,array('user_id'=>$userDetails["id"],'status'=>'0'),true);
+	/*if($check_request){
+		echo '<script>alert("You already sent request. Please wait for pending request")</script>';
+		echo '<script>window.location.href="'.SITEURL.'/wallet.php"</script>';
+		die;
+	}*/
+	
+	
+	//create withdraw data
+	if($_POST && isset($_POST['req_withdraw'])){
+		$arr = array('coins','withdrawal_method');
+		$post_data = array_from_post($arr);
+		$post_data['amount'] = round($post_data['coins']/$per_amount,2);
+		$post_data['transaction_fee'] = 5;
+		
+		$post_data['account_name'] = $checkbankdetail['account_name'];
+		$post_data['account_number'] = $checkbankdetail['account_number'];
+		$post_data['bank_name'] = $checkbankdetail['bank_name'];
+		$post_data['branch_name'] = '';
+		$post_data['bank_address'] = '';
+		$post_data['country'] = '';
+		$post_data['swift_code'] = '';
+		$post_data['ifsc_code'] = $checkbankdetail['ifsc_code'];
+		$post_data['upi_id'] = $checkbankdetail['upi_id'];
+		
+		//$post_data = array_from_get($arr);
+		$post_data['user_id'] = $userDetails['id'];
+		$post_data['created_date'] = date('Y-m-d H:i:s');
+		
+		DB::insert($table_name, $post_data);
+		$created_id = DB::insertId();
+		$withdraw_msg = 'Withdrawal request submitted.';
+		//echo '<script>window.location="'.$m_link.'"</script>';
+		header('Location: wallet.php');
+		exit();
+	}	
+	
+	//Bank data
+	
+	if($_POST && isset($_POST['bankdata_sub'])){
+	$arr_bnk = array('account_name','bank_name','account_number','ifsc_code','upi_id'); 
+	$post_data_bnk = array_from_post($arr_bnk); 
+	$get_bankdata = DB::query('select * from users_bankdetail where user_id = '.$userDetails["id"]); 
+		if(empty($get_bankdata)){
+			$post_data_bnk['user_id'] = $userDetails["id"];
+			$post_data_bnk['status'] = 1;
+			$post_data_bnk['created_date'] = date('Y-m-d H:i:s');
+
+			DB::insert('users_bankdetail', $post_data_bnk);
+			$created_id = DB::insertId();
+			echo '<script>alert("Bank details added successfully.");</script>';
+		}else{
+			DB::update('users_bankdetail', $post_data_bnk, "user_id=%s", $userDetails["id"]);
+			echo '<script>alert("Bank details updated successfully.");</script>';
+		}
+	}	
+	
 }
 else{
 	echo '<script>window.location.href="login.php"</script>';
@@ -82,7 +147,7 @@ $activeTab = 'wallet';
         <!-- Tab Navigation -->
         <div class="glass-card p-6">
             <div class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('buy')" data-tab="buy">
+                <button class="tab-btn <?php if($user_type == 'user'){ ?> active <?php } ?> " onclick="switchTab('buy')" data-tab="buy">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="8" cy="21" r="1"></circle>
                         <circle cx="19" cy="21" r="1"></circle>
@@ -91,7 +156,7 @@ $activeTab = 'wallet';
                     Buy Tokens
                 </button>
                 
-                <button class="tab-btn <?php if($user_type == 'user'){ ?> model-only <?php } ?>" onclick="switchTab('withdraw')" data-tab="withdraw">
+                <button class="tab-btn <?php if($user_type == 'user'){ ?> model-only <?php }else  echo ' active '; ?>" onclick="switchTab('withdraw')" data-tab="withdraw">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="12" y1="1" x2="12" y2="23"></line>
                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
@@ -355,20 +420,25 @@ $activeTab = 'wallet';
                     <div class="glass-card p-6 mb-6">
                         <h4 class="text-xl font-semibold mb-4">Available for Withdrawal</h4>
                         <div class="text-center">
-                            <div class="text-4xl font-bold text-green-400 mb-2">₹15,420</div>
+                            <div class="text-4xl font-bold text-green-400 mb-2">₹<?=$userDetails['balance']?></div>
                             <p class="text-gray-400">Minimum withdrawal: ₹1,000</p>
                         </div>
                     </div>
+					
+					<?php if(isset($withdraw_msg)){ ?>
+					<div class="withdraw_msg"><?php echo $withdraw_msg; ?></div>
+					<?php } ?>
+					
 
-                    <form class="space-y-6" onsubmit="handleWithdraw(event)">
+					<form action="" method="post" class="space-y-6  edit-form" role="form" enctype="multipart/form-data" <?php /*onsubmit="handleWithdraw(event)" */ ?>  >
                         <div class="form-group">
                             <label class="form-label">Withdrawal Amount</label>
-                            <input type="number" class="form-input" placeholder="Enter amount" min="1000" required>
+                            <input type="number" class="form-input" placeholder="Enter amount" name="coins"  value="<?=$userDetails['balance']?>" min="1000" max="<?=$userDetails['balance']?>"  required>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Withdrawal Method</label>
-                            <select class="form-input" required>
+                            <select class="form-input" name="withdrawal_method" required>
                                 <option value="">Select method</option>
                                 <option value="bank">Bank Transfer</option>
                                 <option value="upi">UPI</option>
@@ -376,7 +446,7 @@ $activeTab = 'wallet';
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-success w-full">
+                        <button type="<?php if($check_request){ echo 'button'; } else{ ?>submit<?php } ?>" name="req_withdraw" class="btn btn-success w-full" <?php if($check_request){ ?> onclick="rejectWithdraw()" <?php } ?> >
                             Request Withdrawal
                         </button>
                     </form>
@@ -430,35 +500,36 @@ $activeTab = 'wallet';
                 </h3>
                 
                 <div class="max-w-2xl mx-auto">
-                    <form class="space-y-6" onsubmit="handleBankDetails(event)">
+                    <form action="" method="post" class="space-y-6" role="form" enctype="multipart/form-data" <?php /* onsubmit="handleBankDetails(event)" */ ?> >
                         <div class="form-row">
-                            <div class="form-group">
+                            <div class="form-group"> 
                                 <label class="form-label">Account Holder Name</label>
-                                <input type="text" class="form-input" placeholder="Full name" required>
+                                <input type="text" class="form-input" placeholder="Full name" name="account_name" value="<?=$checkbankdetail['account_name']?>" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Bank Name</label>
-                                <input type="text" class="form-input" placeholder="Bank name" required>
+                                <input type="text" class="form-input" placeholder="Bank name" name="bank_name" value="<?=$checkbankdetail['bank_name']?>" required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">Account Number</label>
-                                <input type="text" class="form-input" placeholder="Account number" required>
+                                <input type="text" class="form-input" placeholder="Account number" name="account_number" value="<?=$checkbankdetail['account_number']?>" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">IFSC Code</label>
-                                <input type="text" class="form-input" placeholder="IFSC code" required>
+                                <input type="text" class="form-input" placeholder="IFSC code" name="ifsc_code" value="<?=$checkbankdetail['ifsc_code']?>" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">UPI ID (Optional)</label>
-                            <input type="text" class="form-input" placeholder="your-upi@bank">
+                            <input type="text" class="form-input" placeholder="your-upi@bank" name="upi_id" value="<?=$checkbankdetail['upi_id']?>" >
                         </div>
-
-                        <button type="submit" class="btn btn-primary w-full">
+						
+						
+                        <button type="submit" name="bankdata_sub" class="btn btn-primary w-full">
                             Save Bank Details
                         </button>
                     </form>
@@ -737,6 +808,12 @@ $('#search-form').submit(function(e){
         }
 
         // Form handlers
+		
+		function rejectWithdraw() {
+            event.preventDefault();
+            showNotification('You already sent request. Please wait for pending request', 'error');
+        }
+		
         function handleWithdraw(event) {
             event.preventDefault();
             showNotification('Withdrawal request submitted successfully!', 'success');
