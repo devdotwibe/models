@@ -19,18 +19,10 @@ if(isset($_SESSION["log_user_id"])){
 		echo '<script>window.location.href="login.php"</script>';
 	}
 	$checkbankdetail = get_data('users_bankdetail',array('user_id'=>$userDetails["id"]),true);
-	/*if(!$checkbankdetail){
-		echo '<script>window.location.href="'.SITEURL.'user/bankdetails/create.php"</script>';
-		die;
-	}*/
 
 	$check_request = get_data($table_name,array('user_id'=>$userDetails["id"],'status'=>'0'),true);
-	/*if($check_request){
-		echo '<script>alert("You already sent request. Please wait for pending request")</script>';
-		echo '<script>window.location.href="'.SITEURL.'/wallet.php"</script>';
-		die;
-	}*/
-	
+
+	$taxdetail = get_data('model_tax_info',array('user_id'=>$userDetails["id"]),true);
 	
 	//create withdraw data
 	if($_POST && isset($_POST['req_withdraw'])){
@@ -79,10 +71,24 @@ if(isset($_SESSION["log_user_id"])){
 			DB::update('users_bankdetail', $post_data_bnk, "user_id=%s", $userDetails["id"]);
 			echo '<script>alert("Bank details updated successfully.");</script>';
 		}
-	
-	//header('Location: wallet.php');
-	//	exit();
-	}	
+	}
+
+	//Tax info
+	if($_POST && isset($_POST['tax_submit'])){
+	$arr_tax = array('country','pan_number','aadhaar_number','annual_income'); 
+	$post_data_tax = array_from_post($arr_tax); 
+		if(empty($taxdetail)){
+			$post_data_tax['user_id'] = $userDetails["id"];
+			$post_data_tax['created_date'] = date('Y-m-d H:i:s');
+
+			DB::insert('model_tax_info', $post_data_tax);
+			$created_id = DB::insertId();
+			echo '<script>alert("Tax Information added successfully.");</script>';
+		}else{
+			DB::update('model_tax_info', $post_data_tax, "user_id=%s", $userDetails["id"]);
+			echo '<script>alert("Tax Information updated successfully.");</script>';
+		}
+	}
 	
 }
 else{
@@ -546,41 +552,63 @@ $activeTab = 'wallet';
                 </h3>
                 
                 <div class="max-w-2xl mx-auto">
-                    <form class="space-y-6" onsubmit="handleTaxInfo(event)">
+					<form action="" method="post" class="space-y-6" role="form" enctype="multipart/form-data" <?php /* onsubmit="handleTaxInfo(event)" */ ?> >
                         <div class="form-group">
                             <label class="form-label">Tax Residency Country</label>
-                            <select class="form-input" required>
+							<?php $f_country_list = DB::query('select id,name,sortname from countries order by name asc'); 
+							$country = '';
+							if(isset($_POST['country'])) {
+								$country = $_POST['country'];
+							}else if(!empty($taxdetail['annual_income'])){
+								$country = $taxdetail['country'];
+							}
+							
+							?>
+                            <select class="form-input" name="country" required>
                                 <option value="">Select country</option>
-                                <option value="IN">India</option>
-                                <option value="US">United States</option>
-                                <option value="UK">United Kingdom</option>
-                                <option value="CA">Canada</option>
+								
+								<?php foreach($f_country_list as $val){ ?>
+								
+								<option value="<?=$val['id']?>" <?=$country==$val['id']?'selected':''?>><?=$val['name']?></option>
+								
+								<?php } ?>
+								
                             </select>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">PAN Number</label>
-                                <input type="text" class="form-input" placeholder="ABCDE1234F" required>
+                                <input type="text" class="form-input" name="pan_number" value="<?php if(isset($_POST['pan_number'])) { echo $_POST['pan_number']; } else echo $taxdetail['pan_number']; ?>" placeholder="ABCDE1234F" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Aadhaar Number</label>
-                                <input type="text" class="form-input" placeholder="1234 5678 9012">
+                                <input type="text" class="form-input" name="aadhaar_number" value="<?php if(isset($_POST['aadhaar_number'])) { echo $_POST['aadhaar_number']; } else echo $taxdetail['aadhaar_number']; ?>" placeholder="1234 5678 9012">
                             </div>
                         </div>
+						
+						<?php 
+						$annual_income = '';
+						if(isset($_POST['annual_income'])) {
+							$annual_income = $_POST['annual_income'];
+						}else if(!empty($taxdetail['annual_income'])){
+							$annual_income = $taxdetail['annual_income'];
+						}
+						
+						?>
 
                         <div class="form-group">
                             <label class="form-label">Annual Income Range</label>
-                            <select class="form-input">
+                            <select class="form-input" name="annual_income" >
                                 <option value="">Select range</option>
-                                <option value="0-250000">₹0 - ₹2,50,000</option>
-                                <option value="250000-500000">₹2,50,000 - ₹5,00,000</option>
-                                <option value="500000-1000000">₹5,00,000 - ₹10,00,000</option>
-                                <option value="1000000+">₹10,00,000+</option>
+                                <option value="0-250000" <?php if($annual_income == '0-250000'){ echo 'selected'; } ?> >₹0 - ₹2,50,000</option>
+                                <option value="250000-500000" <?php if($annual_income == '250000-500000'){ echo 'selected'; } ?> >₹2,50,000 - ₹5,00,000</option>
+                                <option value="500000-1000000" <?php if($annual_income == '500000-1000000'){ echo 'selected'; } ?> >₹5,00,000 - ₹10,00,000</option>
+                                <option value="1000000+" <?php if($annual_income == '1000000+'){ echo 'selected'; } ?> >₹10,00,000+</option>
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-full">
+                        <button type="submit" name="tax_submit" class="btn btn-primary w-full">
                             Save Tax Information
                         </button>
                     </form>
