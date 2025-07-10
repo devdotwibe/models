@@ -507,28 +507,28 @@ $activeTab = 'wallet';
                         <div class="form-row">
                             <div class="form-group"> 
                                 <label class="form-label">Account Holder Name</label>
-                                <input type="text" class="form-input" placeholder="Full name" name="account_name" value="<?=$checkbankdetail['account_name']?>" required>
+                                <input type="text" class="form-input" placeholder="Full name" name="account_name" value="<?php if(isset($_POST['account_name'])) { echo $_POST['account_name']; } else echo $checkbankdetail['account_name']?>" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Bank Name</label>
-                                <input type="text" class="form-input" placeholder="Bank name" name="bank_name" value="<?=$checkbankdetail['bank_name']?>" required>
+                                <input type="text" class="form-input" placeholder="Bank name" name="bank_name" value="<?php if(isset($_POST['bank_name'])) { echo $_POST['bank_name']; } else echo $checkbankdetail['bank_name']?>" required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">Account Number</label>
-                                <input type="text" class="form-input" placeholder="Account number" name="account_number" value="<?=$checkbankdetail['account_number']?>" required>
+                                <input type="text" class="form-input" placeholder="Account number" name="account_number" value="<?php if(isset($_POST['account_number'])) { echo $_POST['account_number']; } else echo $checkbankdetail['account_number']?>" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">IFSC Code</label>
-                                <input type="text" class="form-input" placeholder="IFSC code" name="ifsc_code" value="<?=$checkbankdetail['ifsc_code']?>" required>
+                                <input type="text" class="form-input" placeholder="IFSC code" name="ifsc_code" value="<?php if(isset($_POST['ifsc_code'])) { echo $_POST['ifsc_code']; } else echo $checkbankdetail['ifsc_code']?>" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">UPI ID (Optional)</label>
-                            <input type="text" class="form-input" placeholder="your-upi@bank" name="upi_id" value="<?=$checkbankdetail['upi_id']?>" >
+                            <input type="text" class="form-input" placeholder="your-upi@bank" name="upi_id" value="<?php if(isset($_POST['upi_id'])) { echo $_POST['upi_id']; } else echo $checkbankdetail['upi_id']?>" >
                         </div>
 						
 						
