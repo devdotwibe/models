@@ -425,7 +425,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         </div>
                     </div>
 					
-					<?php } else if($uplds['file_type'] == 'video'){ 
+					<?php } else if($uplds['post_mime_type'] == 'video'){ 
                         
                                $post_video = $uplds['post_image'];
 
