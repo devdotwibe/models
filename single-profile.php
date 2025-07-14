@@ -166,9 +166,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 		}
 	}
 
-    $model_posts = query('select * from live_posts where post_author="'.$model_id.'" Order by id DESC');
-
-    dd($model_posts);
+    $model_posts =  DB::query('select * from live_posts where post_author="'.$model_id.'" Order by id DESC');
 
   ?>
     
