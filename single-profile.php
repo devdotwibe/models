@@ -585,9 +585,9 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                            <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
 
-                                <div class="flex flex-col text-white text-sm sm:text-base file_type_sec">
+                               <div class="flex flex-col text-white text-sm sm:text-base file_type_sec">
                                     <label class="mb-2">File Type:</label>
-                                    <div class="flex gap-4">
+                                    <div class="flex flex-col gap-2">
                                         <label class="flex items-center gap-2 cursor-pointer">
                                             <input type="radio" name="file_type" value="image" onchange="ShowPostType()" class="accent-indigo-500">
                                             <span>Image</span>
@@ -599,9 +599,9 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     </div>
                                 </div>
 
-                                <div class="flex flex-col text-white text-sm sm:text-base post_type_sec" style="display:none;">
+                               <div class="flex flex-col text-white text-sm sm:text-base post_type_sec" style="display:none;">
                                     <label class="mb-2">Post Type:</label>
-                                    <div class="flex gap-4">
+                                    <div class="flex flex-col gap-2">
                                         <label class="flex items-center gap-2 cursor-pointer">
                                             <input type="radio" name="post_type" value="free" class="accent-indigo-500">
                                             <span>Free</span>
