@@ -382,10 +382,10 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <!-- Tabs -->
                 <div class="border-b border-white/10 mb-6 sm:mb-8">
                     <div class="tabs-container flex">
-                        <button type="button" onclick="TabChange(this)" class="px-4 sm:px-6 py-3 font-medium tab-active whitespace-nowrap tab_menu">All Content</button>
-                        <button type="button" onclick="TabChange(this)" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Photos</button>
-                        <button type="button" onclick="TabChange(this)" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Videos</button>
-                        <button type="button" onclick="TabChange(this)" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Exclusive</button>
+                        <button type="button" onclick="TabChange(this,'all')" class="px-4 sm:px-6 py-3 font-medium tab-active whitespace-nowrap tab_menu">All Content</button>
+                        <button type="button" onclick="TabChange(this,'image')" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Photos</button>
+                        <button type="button" onclick="TabChange(this,'video')" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Videos</button>
+                        <button type="button" onclick="TabChange(this,'exclusive')" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Exclusive</button>
                     </div>
                 </div>
 
@@ -1435,13 +1435,28 @@ if (mysqli_num_rows($res_ap) > 0) {
 
     <script>
 
-        function TabChange(el)
+        function TabChange(el,type)
         {
             $('.tab_menu').removeClass('tab-active');
 
             $('.tab_menu').addClass('tab-inactive');
 
             $(el).addClass('tab-active');
+
+            $('.all_items_tab').hide();
+
+            if(type =='all')
+            {
+                $('.all_items_tab').show();
+            }
+            else if(type =='image')
+            {
+                $('.images_tab').show();
+            }
+            else if(type == 'video')
+            {
+                $('.videos_tab').show();
+            }
         }
 
         function ImageShow(input) {
