@@ -1633,6 +1633,8 @@ if (mysqli_num_rows($res_ap) > 0) {
                         $('.post_type_sec').hide();
 
                         $('#post_image_label').show();
+
+                        $('.token_sec').hide();
                     },
                     error: function (xhr) {
                         alert("An error occurred while submitting the post.");
