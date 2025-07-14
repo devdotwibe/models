@@ -1,3 +1,8 @@
+<?php 
+    session_start(); 
+	include('includes/config.php');
+	include('includes/helper.php');
+?>
 <style type="text/css">
         body {
             width: 100%;
@@ -116,8 +121,6 @@
         }
     </style>
 <?php 
-
-//include('includes/config.php');
 if (isset($_POST['vfb-submit'])) {
 
    $user_name = $_POST['username'];
