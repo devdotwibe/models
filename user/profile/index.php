@@ -354,7 +354,7 @@ if(!empty($userDetails['profile_pic'])){
                   <?php if($post['post_mime_type'] == 'image'){ ?>
 
                   
-                      <img src="<?= $imageUrl ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4 <?php echo $blur_class ?>">
+                      <img src="<?= $imageUrl ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4" <?php echo $blur_class ?>>
 
                   <?php } elseif($post['post_mime_type'] == 'video') { ?>
 
