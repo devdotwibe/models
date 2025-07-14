@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post_mime_type = trim($_POST['file_type'] ?? '');
     $post_type = trim($_POST['post_type'] ?? '');
 
+    $token = trim($_POST['token'] ?? '');
+
     $image_path   = null;
 
     $upload_folder_relative = '../../uploads/post_image/';
@@ -34,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $stmt = $con->prepare("INSERT INTO live_posts (post_author, post_title, post_content, post_image,post_mime_type,post_type,post_date, post_date_gmt) VALUES (?, ?, ?, ? ,? , ?, NOW(), NOW())");
-    $stmt->bind_param("isssss", $user_id, $post_title, $post_content, $image_path,$post_mime_type,$post_type);
+    $stmt = $con->prepare("INSERT INTO live_posts (post_author, post_title, post_content, post_image,post_mime_type,post_type,token,post_date, post_date_gmt) VALUES (?, ?, ?, ? ,? , ?, ?, NOW(), NOW())");
+    $stmt->bind_param("issssss", $user_id, $post_title, $post_content, $image_path,$post_mime_type,$post_type,$token);
 
     if ($stmt->execute()) {
         echo "success";
