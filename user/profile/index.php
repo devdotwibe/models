@@ -57,6 +57,9 @@ if(!empty($userDetails['profile_pic'])){
 <?php
 
     $user_id = $userDetails['unique_id']; 
+
+    $user_mode_id = $userDetails['id']; 
+
     $posts = [];
 
     if ($con->connect_error) {
@@ -336,9 +339,37 @@ if(!empty($userDetails['profile_pic'])){
                 $post_image = $post['post_image'] ?? '';
 
                   if (checkImageExists($post_image)) {
+
                       $imageUrl = SITEURL . $post_image;
+
+                  $blur_class="";
+
+                  if( $post['post_type'] =='paid')
+                  {
+                      $imageUrl ="";
+
+                      $blur_class="style='filter: blur(10px);'";
+                  }
               ?>
-                      <img src="<?= $imageUrl ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+                  <?php if($post['post_mime_type'] == 'image'){ ?>
+
+                  
+                      <img src="<?= $imageUrl ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4" <?php echo $blur_class ?>>
+
+                  <?php } elseif($post['post_mime_type'] == 'video') { ?>
+
+                        <div class="video-outer" <?php echo $blur_class ?> >
+
+                            <video class="video-ci" controls  >
+
+                                <source src="<?php echo $imageUrl ?>" type="video/mp4" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+
+                              </video>
+
+                        </div>
+
+                  <?php } ?>
+                      
               <?php
                   }
             ?>

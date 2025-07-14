@@ -13,6 +13,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post_mime_type = trim($_POST['file_type'] ?? '');
     $post_type = trim($_POST['post_type'] ?? '');
 
+    $token = trim($_POST['token'] ?? '');
+
+    if ($post_type === 'paid' && empty($token)) {
+        echo "Token is required for paid posts.";
+        exit;
+    }
+
+    $allowed_mime_types = ['image', 'video'];
+    if (!in_array($post_mime_type, $allowed_mime_types)) {
+        echo "Invalid file type. Only 'image' or 'video' allowed.";
+        exit;
+    }
+
     $image_path   = null;
 
     $upload_folder_relative = '../../uploads/post_image/';
@@ -22,20 +35,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mkdir($upload_folder_relative, 0755, true);
     }
 
-    if (isset($_FILES["post_image"]) && $_FILES["post_image"]["error"] === 0) {
-        $filename     = uniqid() . '_' . basename($_FILES["post_image"]["name"]);
-        $target_file  = $upload_folder_relative . $filename;
+    // if (isset($_FILES["post_image"]) && $_FILES["post_image"]["error"] === 0) {
+    //     $filename     = uniqid() . '_' . basename($_FILES["post_image"]["name"]);
+    //     $target_file  = $upload_folder_relative . $filename;
+
+    //     if (move_uploaded_file($_FILES["post_image"]["tmp_name"], $target_file)) {
+    //         $image_path = $upload_folder_for_db . $filename;
+    //     } else {
+    //         echo "Image upload failed.";
+    //         exit;
+    //     }
+    // }
+
+     if (isset($_FILES["post_image"]) && $_FILES["post_image"]["error"] === 0) {
+
+        $filename = uniqid() . '_' . basename($_FILES["post_image"]["name"]);
+        $target_file = $upload_folder_relative . $filename;
+
+        $file_mime_type = mime_content_type($_FILES["post_image"]["tmp_name"]);
+        
+        if ($post_mime_type === 'image' && strpos($file_mime_type, 'image/') !== 0) {
+
+            echo "Uploaded file must be an image.";
+            exit;
+        }
+        if ($post_mime_type === 'video' && strpos($file_mime_type, 'video/') !== 0) {
+            
+            echo "Uploaded file must be a video.";
+            exit;
+        }
 
         if (move_uploaded_file($_FILES["post_image"]["tmp_name"], $target_file)) {
             $image_path = $upload_folder_for_db . $filename;
         } else {
-            echo "Image upload failed.";
+            echo "Image/Video upload failed.";
             exit;
         }
     }
 
-    $stmt = $con->prepare("INSERT INTO live_posts (post_author, post_title, post_content, post_image,post_mime_type,post_type,post_date, post_date_gmt) VALUES (?, ?, ?, ? ,? , ?, NOW(), NOW())");
-    $stmt->bind_param("isssss", $user_id, $post_title, $post_content, $image_path,$post_mime_type,$post_type);
+
+    $stmt = $con->prepare("INSERT INTO live_posts (post_author, post_title, post_content, post_image,post_mime_type,post_type,token,post_date, post_date_gmt) VALUES (?, ?, ?, ? ,? , ?, ?, NOW(), NOW())");
+    $stmt->bind_param("issssss", $user_id, $post_title, $post_content, $image_path,$post_mime_type,$post_type,$token);
 
     if ($stmt->execute()) {
         echo "success";

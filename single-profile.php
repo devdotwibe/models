@@ -61,6 +61,8 @@ if (mysqli_num_rows($res_ap) > 0) {
 
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <script>
     function like(postid, userid) {
 
@@ -404,28 +406,55 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             $imageUrl = SITEURL . $post_image;
                         }
+
+                        $blur_class="";
+
+                        if($uplds['post_type'] =='paid')
+                        {
+                            $imageUrl = "";
+
+                                $blur_class="style='filter: blur(10px);'";
+                        }
 				?>
                     <!-- Media Item Image -->
                     <div class="media-item images_tab all_items_tab">
-                        <img src="<?php echo $imageUrl ?>" alt="<?php echo ucfirst($uplds['post_image']); ?>">
-                        <div class="media-overlay">
-                            <div class="flex justify-between items-center">
-                                <?php /*<div class="text-sm font-medium"><?php echo ucfirst($uplds['image_text']); ?></div> */ ?>
-                                <div class="flex items-center gap-2">
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                        <span class="ml-1">48</span>
-                                    </span>
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                                        <span class="ml-1">Tip</span>
-                                    </span>
+
+                        <img src="<?php echo $imageUrl ?>" <?php echo $blur_class ?> alt="<?php echo ucfirst($uplds['post_image']); ?>">
+
+                         <?php if($uplds['post_type'] !='paid') {?>
+
+                            <div class="media-overlay">
+                                <div class="flex justify-between items-center">
+                                    <?php /*<div class="text-sm font-medium"><?php echo ucfirst($uplds['image_text']); ?></div> */ ?>
+                                    <div class="flex items-center gap-2">
+                                        <span class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                            <span class="ml-1">48</span>
+                                        </span>
+                                        <span class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                            <span class="ml-1">Tip</span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                        <?php } ?> 
+
+                            <?php if($uplds['post_type'] =='paid') {?>
+
+                                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                                        <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
+                                            <i class="fas fa-database" aria-hidden="true"></i>
+                                            <span> <?php echo $uplds['token']  ?></span>
+                                        </div>
+                                    </div>
+
+                            <?php } ?>
+
                     </div>
 					
-					<?php } else if($uplds['file_type'] == 'Video'){ 
+					<?php } else if($uplds['post_mime_type'] == 'video'){ 
                         
                                $post_video = $uplds['post_image'];
 
@@ -433,30 +462,58 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                     $videoUrl = SITEURL . $post_video;
                                 }
+
+                                $blur_class="";
+
+                                if($uplds['post_type'] =='paid')
+                                {
+                                    $videoUrl = "";
+
+                                     $blur_class="style='filter: blur(10px);'";
+                                }
+
+                            
                         ?>
 
                     <!-- Media Item Video -->
                     <div class="media-item videos_tab all_items_tab">
-                        <div class="w-full h-full bg-gray-800 flex items-center justify-center">
+                        <div class="w-full h-full bg-gray-800 flex items-center justify-center" <?php echo $blur_class ?> >
                             <video class="video-ci" controls  >
 								<source src="<?php echo $videoUrl ?>" type="video/mp4">
 							</video>
                         </div>
-                        <div class="media-overlay">
-                            <div class="flex justify-between items-center">
-                                <div class="text-sm font-medium">Play this!!</div>
-                                <div class="flex items-center gap-2">
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                        <span class="ml-1">88</span>
-                                    </span>
-                                    <span class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                                        <span class="ml-1">Tip</span>
-                                    </span>
+
+                         <?php if($uplds['post_type'] !='paid') {?>
+
+                            <div class="media-overlay">
+                                <div class="flex justify-between items-center">
+                                    <div class="text-sm font-medium">Play this!!</div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                            <span class="ml-1">88</span>
+                                        </span>
+                                        <span class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                            <span class="ml-1">Tip</span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            
+                        <?php }?>
+
+                        <?php if($uplds['post_type'] =='paid') {?>
+
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                                    <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
+                                        <i class="fas fa-database" aria-hidden="true"></i>
+                                        <span> <?php echo $uplds['token']  ?></span>
+                                    </div>
+                                </div>
+
+                        <?php } ?>
+
                     </div>
 					
 					<?php } ?>
@@ -617,17 +674,30 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     <label class="mb-2">Post Type:</label>
                                     <div class="flex flex-col gap-2">
                                         <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="post_type" value="free" class="accent-indigo-500">
+                                            <input type="radio" name="post_type" value="free" onchange="PostType(this)" class="accent-indigo-500">
                                             <span>Free</span>
                                         </label>
                                         <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="post_type" value="paid" class="accent-indigo-500">
+                                            <input type="radio" name="post_type" value="paid" onchange="PostType(this)" class="accent-indigo-500">
                                             <span>Paid</span>
                                         </label>
                                     </div>
                                 </div>
 
                             </div>
+
+                            <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 token_sec" style="display:none;">
+
+                               <div class="flex flex-col text-white text-sm sm:text-base">
+
+                                    <label class="mb-2">Token</label>
+
+                                    <input type="text" oninput="TypeNumber()" name="token" placeholder="Enter token amount" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base">
+
+                                </div>
+
+                            </div>
+
 
                             <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
                                 Post
@@ -1501,6 +1571,23 @@ if (mysqli_num_rows($res_ap) > 0) {
             
         }
 
+        function TypeNumber(input) {
+            input.value = input.value.replace(/[^0-9]/g, '').replace(/^0+/, '');
+        }
+        function PostType(el)
+        {
+            var value = $(el).val();
+
+            if(value =='paid')
+            {
+                $('.token_sec').show();
+            }
+            else
+            {
+                 $('.token_sec').hide();
+            }
+        }
+
         function ShowPostType()
         {
              $('.post_type_sec').show();
@@ -1519,7 +1606,9 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             $('.post_type_sec').hide();
 
-             $('#post_image_label').show();
+            $('#post_image_label').show();
+
+            $('.token_sec').hide();
         }
 
 
@@ -1550,6 +1639,8 @@ if (mysqli_num_rows($res_ap) > 0) {
                         $('.post_type_sec').hide();
 
                         $('#post_image_label').show();
+
+                        $('.token_sec').hide();
                     },
                     error: function (xhr) {
                         alert("An error occurred while submitting the post.");
