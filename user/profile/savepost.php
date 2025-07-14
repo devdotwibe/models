@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $target_file  = $upload_folder_relative . $filename;
 
         if (move_uploaded_file($_FILES["post_image"]["tmp_name"], $target_file)) {
-            $image_path = $upload_folder_for_db . $filename; // this is stored in DB
+            $image_path = $upload_folder_for_db . $filename;
         } else {
             echo "Image upload failed.";
             exit;
