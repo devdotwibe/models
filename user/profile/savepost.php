@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 }
 
-                if ($file_size > 5 * 1024 * 1024) {
+                if ($file_size > 2 * 1024 * 1024) {
                     echo "Image size must not exceed 5MB.";
                     exit;
                 }
