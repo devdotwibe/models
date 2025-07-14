@@ -150,6 +150,20 @@ if (mysqli_num_rows($res_ap) > 0) {
 		$mDefaultImage = SITEURL.$rowesdw['profile_pic'];
 	}
 
+	$modal_img_list = DB::query('select * from model_images where unique_model_id="'.$_GET['m_unique_id'].'" AND category = "Profile" Order by id DESC');
+	$modal_img_list_array = array();
+	if(!empty($modal_img_list)){ 
+		
+		foreach($modal_img_list as $uplds){ 
+					
+			if(!empty($uplds['file']) && $uplds['file_type'] == 'Image'){
+				$modal_img_list_array[] = SITEURL.'uploads/profile_pic/'.$uplds['file'];		
+				
+			}
+					
+		}
+	}
+
   ?>
     
 <main>
@@ -159,17 +173,20 @@ if (mysqli_num_rows($res_ap) > 0) {
             <div class="profile-info pt-32 sm:pt-40 md:pt-48 pb-6 px-4 md:px-0">
                 <div class="profile-flex-wrapp flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
                     <div class="profile-avatar-container">
-
+ 
                             <?php
                                $profile_pic = $rowesdw['profile_pic'] ?? '';
 
-                                if (file_exists($profile_pic)) {
+                                if (file_exists($profile_pic) || !empty($modal_img_list_array)) {
 
-                                  $imageUrl = SITEURL . $profile_pic;
-                                  
+                                  $modal_img_list_array[] = SITEURL . $profile_pic; 
+								  
+								  $randomKey = array_rand($modal_img_list_array);
+								  $randomImage = $modal_img_list_array[$randomKey];
+
                               ?>
 
-                                <img src="<?php echo $imageUrl; ?>" alt="<?php echo $rowesdw['name']; ?>" class="profile-avatar">
+                                <img src="<?php echo $randomImage; ?>" alt="Profile Pic<?php //echo $rowesdw['name']; ?>" class="profile-avatar">
 
                             <?php }else{ ?>
 
@@ -186,7 +203,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     <span class="text-white/70">@<?php echo $rowesdw['username']; ?></span>
                                     <span class="status-badge status-online">
                                         <span class="w-2 h-2 bg-white rounded-full mr-2"></span>
-                                        Online
+                                        Online 
                                     </span>
                                 </div>
 								<?php 
@@ -353,7 +370,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 			<?php } ?>
 			
 			<?php 
-			$modal_img_list = DB::query('select * from model_images where unique_model_id="'.$_GET['m_unique_id'].'" AND category = "Profile" Order by id DESC');
+			
 			  if(!empty($modal_img_list)){
 			
 			?>
