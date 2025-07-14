@@ -1024,7 +1024,7 @@
 					  if (mysqli_num_rows($result) > 0) {
 						while($row = mysqli_fetch_assoc($result)) {
 						 $url = $row['file'];
-						 
+						 $url_ext = $row['file'];
 						 if (!file_exists($url)) {
 							$url = 'assets/images/model-gal-no-img.jpg';
 						 }
@@ -1099,8 +1099,8 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                     View
                                 </button>
-								<?php if (file_exists($url)) {?>
-                                <a href="<?= SITEURL . 'ajax/download.php?file=' . $url.'&id='.$rowesdw['id']; ?>" class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" aria-label="Download content">
+								<?php if (file_exists($url_ext)) { ?>
+                                <a href="<?= SITEURL . 'ajax/download.php?file=' . $url_ext.'&id='.$rowesdw['id']; ?>" class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" aria-label="Download content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                 </a>
 								<?php }else{ ?>
@@ -1179,8 +1179,8 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                                     Play
                                 </button>
-                                <?php if (file_exists($url)) {?>
-                                <a href="<?= SITEURL . 'ajax/download.php?file=' . $url.'&id='.$rowesdw['id']; ?>" class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" aria-label="Download content">
+                                <?php if (file_exists($url_ext)) {?>
+                                <a href="<?= SITEURL . 'ajax/download.php?file=' . $url_ext.'&id='.$rowesdw['id']; ?>" class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" aria-label="Download content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                 </a>
 								<?php }else{ ?>
