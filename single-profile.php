@@ -1671,9 +1671,8 @@ if (mysqli_num_rows($res_ap) > 0) {
            
                         console.log(response);
 
-                        if(response =='success')
-                        {
-                                         
+                       if (response.trim() === 'success') {
+                                   
                             alert("Post submitted successfully!");
                             $('#createPostForm')[0].reset();
 
