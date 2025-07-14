@@ -1668,11 +1668,13 @@ if (mysqli_num_rows($res_ap) > 0) {
                     contentType: false, 
                     processData: false, 
                     success: function (response) {
-                        alert("Post submitted successfully!");
+           
                         console.log(response);
 
                         if(response =='success')
                         {
+                                         
+                            alert("Post submitted successfully!");
                             $('#createPostForm')[0].reset();
 
                             $('#filePreview').attr('src',"");
