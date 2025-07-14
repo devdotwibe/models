@@ -437,13 +437,12 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             <?php if($uplds['post_type'] =='paid') {?>
 
-                                <div class="token-btn">
+                                    <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600">
+                                        <i class="fa fa-database mr-2"></i> 20
+                                    </div>
 
-                                    <i class="fa fa-database coin_icon"> 20</i>
-
-                                </div>
-                                
                             <?php } ?>
+                            
                     </div>
 					
 					<?php } else if($uplds['post_mime_type'] == 'video'){ 
