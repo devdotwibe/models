@@ -22,7 +22,7 @@ function checkImageExists($relativePath) {
 	$imagePath = '../../'. ltrim($relativePath, '/');
     // return !empty($relativePath) && file_exists($imagePath);
 
-	$imagePath;
+	return $imagePath;
 }
 
 function extra_setting($field,$default=false,$set_zero=false){
