@@ -569,7 +569,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <div class="flex justify-between items-center">
 
 
-                             <label for="post_image" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
+                             <label for="post_image" id="post_image_label" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                                 Upload
 
@@ -595,7 +595,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     </div>
                                 </div>
 
-                                <div class="flex flex-col text-white text-sm sm:text-base post_type_sec">
+                                <div class="flex flex-col text-white text-sm sm:text-base post_type_sec" style="display:none;">
                                     <label class="mb-2">Post Type:</label>
                                     <div class="flex gap-4">
                                         <label class="flex items-center gap-2 cursor-pointer">
@@ -1451,6 +1451,9 @@ if (mysqli_num_rows($res_ap) > 0) {
             }
 
             $('.file_type_sec').show();
+
+            $('#post_image_label').hide();
+            
         }
 
 
