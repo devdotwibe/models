@@ -129,6 +129,8 @@ if (mysqli_num_rows($res_ap) > 0) {
     $rowesdw = mysqli_fetch_assoc($resultd);
     $movel_name = $rowesdw['username'];
 
+    $model_id =  $rowesdw['id'];
+
 
     // $sql_sl = "SELECT * FROM model_social_link WHERE unique_model_id = '".$_GET['m_unique_id']."' ";
     // $result_sl = mysqli_query($con, $sql_sl);
@@ -163,6 +165,8 @@ if (mysqli_num_rows($res_ap) > 0) {
 					
 		}
 	}
+
+    $model_posts =  DB::query('select * from live_posts where post_author="'.$model_id.'" Order by id DESC');
 
   ?>
     
@@ -371,31 +375,39 @@ if (mysqli_num_rows($res_ap) > 0) {
 			
 			<?php 
 			
-			  if(!empty($modal_img_list)){
+			  if(!empty($model_posts) && count($model_posts ) > 0){
 			
 			?>
 
                 <!-- Tabs -->
                 <div class="border-b border-white/10 mb-6 sm:mb-8">
                     <div class="tabs-container flex">
-                        <button class="px-4 sm:px-6 py-3 font-medium tab-active whitespace-nowrap">All Content</button>
-                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Photos</button>
-                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Videos</button>
-                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Exclusive</button>
+                        <button type="button" onclick="TabChange(this,'all')" class="px-4 sm:px-6 py-3 font-medium tab-active whitespace-nowrap tab_menu">All Content</button>
+                        <button type="button" onclick="TabChange(this,'image')" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Photos</button>
+                        <button type="button" onclick="TabChange(this,'video')" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Videos</button>
+                        <button type="button" onclick="TabChange(this,'exclusive')" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Exclusive</button>
                     </div>
                 </div>
 
                 <!-- Media Grid -->
                 <div class="media-grid">
 				
-				<?php foreach($modal_img_list as $uplds){ 
-				if(!empty($uplds['file'])){
+				<?php foreach($model_posts as $uplds){ 
+
+				if(!empty($uplds['post_image'])){
 					
-					if($uplds['file_type'] == 'Image'){
+					if($uplds['post_mime_type'] == 'image'){
+
+                         $post_image = $uplds['post_image'];
+
+                         if (checkImageExists($post_image)) {
+
+                            $imageUrl = SITEURL . $post_image;
+                        }
 				?>
                     <!-- Media Item Image -->
-                    <div class="media-item">
-                        <img src="<?php echo SITEURL.'uploads/profile_pic/'.$uplds['file']; ?>" alt="<?php echo ucfirst($uplds['image_text']); ?>">
+                    <div class="media-item images_tab all_items_tab">
+                        <img src="<?php echo $imageUrl ?>" alt="<?php echo ucfirst($uplds['post_image']); ?>">
                         <div class="media-overlay">
                             <div class="flex justify-between items-center">
                                 <?php /*<div class="text-sm font-medium"><?php echo ucfirst($uplds['image_text']); ?></div> */ ?>
@@ -413,13 +425,21 @@ if (mysqli_num_rows($res_ap) > 0) {
                         </div>
                     </div>
 					
-					<?php } else if($uplds['file_type'] == 'Video'){ ?>
+					<?php } else if($uplds['file_type'] == 'Video'){ 
+                        
+                               $post_video = $uplds['post_image'];
+
+                                if (checkImageExists($post_video)) {
+
+                                    $videoUrl = SITEURL . $post_video;
+                                }
+                        ?>
 
                     <!-- Media Item Video -->
-                    <div class="media-item">
+                    <div class="media-item videos_tab all_items_tab">
                         <div class="w-full h-full bg-gray-800 flex items-center justify-center">
                             <video class="video-ci" controls  >
-								<source src="<?php echo SITEURL.'uploads/profile_pic/'.$uplds['file']; ?>" type="video/mp4">
+								<source src="<?php echo $videoUrl ?>" type="video/mp4">
 							</video>
                         </div>
                         <div class="media-overlay">
@@ -445,12 +465,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 				
                 </div>
 
-                <!-- Load More Button -->
-                <?php /*?><div class="mt-6 sm:mt-8 text-center">
-                    <button class="btn-secondary px-6 sm:px-8 py-2 sm:py-3 rounded-xl text-white font-semibold">
-                        Load More
-                    </button>
-                </div> <?php */ ?>
 				
 			  <?php } ?>
 				
@@ -569,7 +583,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <div class="flex justify-between items-center">
 
 
-                             <label for="post_image" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
+                             <label for="post_image" id="post_image_label" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                                 Upload
 
@@ -577,27 +591,31 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             <input style="display:none;" type="file" onchange="ImageShow(this)" name="post_image" id="post_image" accept="image/*,video/*">
 
-                           <img id="filePreview" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
+                            <div class="relative inline-block" style="display:none" id="filePreview_div">
+                                
+                                <img id="filePreview" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
+
+                            </div>
 
                            <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
 
-                                <div class="flex flex-col text-white text-sm sm:text-base file_type_sec">
+                               <div class="flex flex-col text-white text-sm sm:text-base file_type_sec">
                                     <label class="mb-2">File Type:</label>
-                                    <div class="flex gap-4">
+                                    <div class="flex flex-col gap-2">
                                         <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="file_type" value="image" class="accent-indigo-500">
+                                            <input type="radio" name="file_type" value="image" onchange="ShowPostType()" class="accent-indigo-500">
                                             <span>Image</span>
                                         </label>
                                         <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="file_type" value="video" class="accent-indigo-500">
+                                            <input type="radio" name="file_type" value="video" onchange="ShowPostType()" class="accent-indigo-500">
                                             <span>Video</span>
                                         </label>
                                     </div>
                                 </div>
 
-                                <div class="flex flex-col text-white text-sm sm:text-base post_type_sec">
+                               <div class="flex flex-col text-white text-sm sm:text-base post_type_sec" style="display:none;">
                                     <label class="mb-2">Post Type:</label>
-                                    <div class="flex gap-4">
+                                    <div class="flex flex-col gap-2">
                                         <label class="flex items-center gap-2 cursor-pointer">
                                             <input type="radio" name="post_type" value="free" class="accent-indigo-500">
                                             <span>Free</span>
@@ -1417,6 +1435,29 @@ if (mysqli_num_rows($res_ap) > 0) {
 
     <script>
 
+        function TabChange(el,type)
+        {
+            $('.tab_menu').removeClass('tab-active');
+
+            $('.tab_menu').addClass('tab-inactive');
+
+            $(el).addClass('tab-active');
+
+            $('.all_items_tab').hide();
+
+            if(type =='all')
+            {
+                $('.all_items_tab').show();
+            }
+            else if(type =='image')
+            {
+                $('.images_tab').show();
+            }
+            else if(type == 'video')
+            {
+                $('.videos_tab').show();
+            }
+        }
 
         function ImageShow(input) {
 
@@ -1450,7 +1491,35 @@ if (mysqli_num_rows($res_ap) > 0) {
                 preview.style.display = 'none';
             }
 
+            $('#filePreview').after(`<button class="remove-btn absolute top-0 right-0" onclick="removePreview(this)">×</button>`);
+
+            $('#filePreview_div').show();
+
             $('.file_type_sec').show();
+
+            $('#post_image_label').hide();
+            
+        }
+
+        function ShowPostType()
+        {
+             $('.post_type_sec').show();
+
+        }
+
+        function removePreview(el)
+        {
+            $(el).remove();
+
+            $('#filePreview').attr('src',"");
+
+            $('#filePreview_div').hide();
+
+            $('.file_type_sec').hide();
+
+            $('.post_type_sec').hide();
+
+             $('#post_image_label').show();
         }
 
 
@@ -1462,7 +1531,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                 var formData = new FormData(this); 
 
                 $.ajax({
-                    url: 'savepost.php', 
+                    url: 'user/profile/savepost.php', 
                     type: 'POST',
                     data: formData,
                     contentType: false, 
@@ -1471,6 +1540,16 @@ if (mysqli_num_rows($res_ap) > 0) {
                         alert("Post submitted successfully!");
                         console.log(response);
                         $('#createPostForm')[0].reset();
+
+                        $('#filePreview').attr('src',"");
+
+                        $('#filePreview_div').hide();
+
+                        $('.file_type_sec').hide();
+
+                        $('.post_type_sec').hide();
+
+                        $('#post_image_label').show();
                     },
                     error: function (xhr) {
                         alert("An error occurred while submitting the post.");

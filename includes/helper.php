@@ -18,10 +18,14 @@ function h_my_ip_address(){
 
 
 function checkImageExists($relativePath) {
-	
-	$imagePath = '../../'. ltrim($relativePath, '/');
+
+    $rootPath = $_SERVER['DOCUMENT_ROOT']; 
+
+    $imagePath = $rootPath . '/' . ltrim($relativePath, '/');
+
     return !empty($relativePath) && file_exists($imagePath);
 }
+
 
 function extra_setting($field,$default=false,$set_zero=false){
 	$where_clause = " `fields` = '".$field."' ";
