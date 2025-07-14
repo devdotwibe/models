@@ -1503,6 +1503,16 @@ if (mysqli_num_rows($res_ap) > 0) {
                         alert("Post submitted successfully!");
                         console.log(response);
                         $('#createPostForm')[0].reset();
+
+                        $('#filePreview').attr('src',"");
+
+                        $('#filePreview_div').hide();
+
+                        $('.file_type_sec').hide();
+
+                        $('.post_type_sec').hide();
+
+                        $('#post_image_label').show();
                     },
                     error: function (xhr) {
                         alert("An error occurred while submitting the post.");
