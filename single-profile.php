@@ -407,7 +407,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                         $blur_class="";
 
-                        if($uplds['post_mime_type'] =='paid')
+                        if($uplds['post_type'] =='paid')
                         {
                             $imageUrl = "";
 
@@ -447,7 +447,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                 $blur_class="";
 
-                                if($uplds['post_mime_type'] =='paid')
+                                if($uplds['post_type'] =='paid')
                                 {
                                     $videoUrl = "";
 
