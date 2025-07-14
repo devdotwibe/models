@@ -577,7 +577,11 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             <input style="display:none;" type="file" onchange="ImageShow(this)" name="post_image" id="post_image" accept="image/*,video/*">
 
-                           <img id="filePreview" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
+                            <div class="relative inline-block" style="display:none" id="filePreview_div">
+                                
+                                <img id="filePreview" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
+
+                            </div>
 
                            <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
 
@@ -1450,10 +1454,25 @@ if (mysqli_num_rows($res_ap) > 0) {
                 preview.style.display = 'none';
             }
 
+            $('#filePreview').after(`<button class="remove-btn absolute top-0 right-0" onclick="removePreview(this)">×</button>`);
+
+            $('#filePreview_div').show();
+
             $('.file_type_sec').show();
 
             $('#post_image_label').hide();
             
+        }
+
+        function removePreview(el)
+        {
+            $(el).remove();
+
+            $('#filePreview').attr('src',"");
+
+            $('#filePreview_div').hide();
+
+             $('#post_image_label').show();
         }
 
 
