@@ -175,6 +175,19 @@ if (mysqli_num_rows($res_ap) > 0) {
 
     $model_posts =  DB::query('select * from live_posts where post_author="'.$model_id.'" Order by id DESC');
 
+    $user_purchased_ids = DB::query('select * from user_purchased_image where user_unique_id="'.$_SESSION['log_user_unique_id'].'" AND model_unique_id="'.$_GET['m_unique_id'].'" Order by id DESC');
+
+    $puschased_post_ids = [];
+
+    if(!empty($user_purchased_ids) && count($user_purchased_ids) > 0)
+    {
+        foreach($user_purchased_ids as $pur_posts)
+        {
+        
+            $puschased_post_ids[] = $pur_posts['file_unique_id'];
+        }
+    }
+
   ?>
     
 <main>
@@ -414,7 +427,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                         $blur_class="";
 
-                        if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] )
+                        if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids))
                         {
                             $imageUrl = "";
 
@@ -443,15 +456,15 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 </div>
                             </div>
 
-                            <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] ) {?>
+                            <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) ) {?>
 
                                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                                         <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
 
                                             <form method="post" action="file-process.php">
 
-                                                <input type="hidden" name="file_id" value="<?php echo $uplds['id']; ?>">
-                                                <input type="hidden" name="user_id" value="<?php echo $user_mode_id ?>">
+                                                <input type="hidden" name="file_id" value="<?php echo $uplds['ID']; ?>">
+                                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['log_user_unique_id']?>">
                                                 <input type="hidden" name="coins" value="<?php echo $uplds["token"]; ?>">
                                                 <input type="hidden" name="file_type" value="<?php echo $uplds['post_mime_type']; ?>">
                                                 <input type="hidden" name="m_unique_id" value="<?php echo $_GET['m_unique_id']; ?>">
@@ -482,7 +495,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                 $blur_class="";
 
-                                if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] )
+                                if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) )
                                 {
                                     $videoUrl = "";
 
@@ -517,12 +530,27 @@ if (mysqli_num_rows($res_ap) > 0) {
                             </div>
 
 
-                        <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author']  ) {?>
+                        <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) ) {?>
 
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                                     <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
-                                        <i class="fas fa-database" aria-hidden="true"></i>
-                                        <span> <?php echo $uplds['token']  ?></span>
+
+                                        <form method="post" action="file-process.php">
+
+                                            <input type="hidden" name="file_id" value="<?php echo $uplds['ID']; ?>">
+                                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['log_user_unique_id']?>">
+                                            <input type="hidden" name="coins" value="<?php echo $uplds["token"]; ?>">
+                                            <input type="hidden" name="file_type" value="<?php echo $uplds['post_mime_type']; ?>">
+                                            <input type="hidden" name="m_unique_id" value="<?php echo $_GET['m_unique_id']; ?>">
+                                            <input type="hidden" name="model_id" value="<?php echo $uplds['post_author']; ?>">
+                                            
+                                            <button class="mybtn"  type="submit" name="submit">
+
+                                                <i class="fas fa-database" aria-hidden="true"></i>
+                                                <span> <?php echo $uplds['token']  ?></span>
+                                            </button>
+
+                                        </form>
                                     </div>
                                 </div>
 
