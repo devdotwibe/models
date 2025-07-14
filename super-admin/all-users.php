@@ -81,7 +81,7 @@
                           
                               if (mysqli_num_rows($resultd) > 0) {
                                 while ($rowesdw = mysqli_fetch_assoc($resultd)){
-                              echo  $rowesdw['id'].'<br/>';
+                              
                         ?>
                         <form method="post" >
                         <tr>
@@ -109,11 +109,11 @@
                           	<a href="https://models.staging3.dotwibe.com/single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">View Profile</a>
                           </td>
                           <td>
-                            <!-- <a class="btn btn-primary" href="single-profile.php?model=<?php// echo $rowesdw['username']; ?>&m_id=<?php// echo $rowesdw['id']; ?>">View Full Profile</a> -->
+                           
                             <input type="hidden" name="as_a_model" value="<?php echo $rowesdw['as_a_model']; ?>">
                             <input type="hidden" name="unique_id" value="<?php echo $rowesdw['unique_id']; ?>">
                             <input type="submit" name="submit" class="btn btn-danger" value="Delete User">
-                            <!-- <input type="submit"  name="accept-request" value=""> -->
+                            
                           </td>
                           </form>
                         </tr>
