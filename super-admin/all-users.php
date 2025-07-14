@@ -81,7 +81,7 @@
                           
                               if (mysqli_num_rows($resultd) > 0) {
                                 while ($rowesdw = mysqli_fetch_assoc($resultd)){
-                              echo  $rowesdw['id'];
+                              echo  $rowesdw['id'].'<br/>';
                         ?>
                         <form method="post" >
                         <tr>
