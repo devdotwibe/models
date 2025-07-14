@@ -57,6 +57,9 @@ if(!empty($userDetails['profile_pic'])){
 <?php
 
     $user_id = $userDetails['unique_id']; 
+
+    $user_mode_id = $userDetails['id']; 
+
     $posts = [];
 
     if ($con->connect_error) {
@@ -337,8 +340,17 @@ if(!empty($userDetails['profile_pic'])){
 
                   if (checkImageExists($post_image)) {
                       $imageUrl = SITEURL . $post_image;
+
+                  $blur_class="";
+
+                  if($user_mode_id != $post['user_id'] && $post['post_type'] =='paid')
+                  {
+                      $imageUrl ="";
+
+                      $blur_class="style='filter: blur(10px);'";
+                  }
               ?>
-                      <img src="<?= $imageUrl ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
+                      <img src="<?= $imageUrl ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4 <?php echo $blur_class ?>">
               <?php
                   }
             ?>
