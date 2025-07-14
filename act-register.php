@@ -152,7 +152,7 @@ if (isset($_POST['vfb-submit'])) {
     }else if(mysqli_num_rows($res_e) > 0){
       echo  '<script>alert("Sorry... email already taken")</script>';
                 echo '<script>window.location="login.php"</script>';  
-    }else{
+    }/*else{
 
  	$que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`as_a_model`,`user_bio`,`services`) 
 	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password."', '".$country."', '".$gender."', '".$as_a_model."', '".$user_bio."', '".$services."')";
@@ -184,7 +184,7 @@ if (isset($_POST['vfb-submit'])) {
       echo '<script>window.location="register.php"</script>';
     }
 
- }
+ } */
 /*}else{
  	echo '<script>alert("Oops!! Password and Confirm Password Not Same.");</script>';
   echo '<script>window.location="register.php"</script>';
