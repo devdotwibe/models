@@ -976,6 +976,7 @@ $lang_list = modal_language_list();
       <div class="step" onclick="scrollToSection('content-creation')">Content Creation</div>
       <div class="step" onclick="scrollToSection('professional-work')">Professional Work</div>
       <div class="step" onclick="scrollToSection('physical-attributes')">Physical Attributes</div>
+	  <div class="step" onclick="scrollToSection('govt-id-proof')">Govt Id Proof</div>
     </div>
     <div class="progress-bar">
       <div class="progress-fill"></div>
@@ -1306,7 +1307,7 @@ $lang_list = modal_language_list();
           </div>
         </div>
 
-        <?php /* ?><div id="content-options" class="conditional-section">
+        <?php /*?><div id="content-options" class="conditional-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="form-label">Photo Set Price (TLM tokens)</label>
@@ -1732,6 +1733,44 @@ $lang_list = modal_language_list();
         </div>
       </div>
     </div>
+	
+	<!-- Govt ID Proof Attributes -->
+    <div id="govt-id-proof" class="collapsible-section">
+      <div class="collapsible-header" onclick="toggleCollapsible(this)">
+        <h2 class="text-xl font-bold">👤 Govt Id Proof</h2>
+        <svg class="w-6 h-6 collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+      <div class="collapsible-content">
+	  
+							<fieldset class="vfb-fieldset vfb-fieldset-4 stats " id="item-vfb-42">
+                              
+
+                              <ul class="vfb-section vfb-section-3">
+                                 <li class="vfb-item vfb-item-select   vfb-left-half" id="item-vfb-43">
+                                    <label for="vfb-43" class="vfb-desc">Choose Document Type <span class="vfb-required-asterisk">*</span></label>
+                                    <select name="choose_document" id="vfb-43" class="vfb-select  vfb-medium  required ">
+                                       <option value="" selected='selected'>Choose Document</option>
+                                       <option value="Passport">Passport</option>
+                                       <option value="Driving License">Driving License</option>
+                                       <option value="National ID">National ID</option>
+                                       <option value="Pan Card">Pan Card</option>
+                                       <option value="Aadhar">Aadhar</option>
+                                    </select>
+                                 </li>
+                                 <li class="vfb-item vfb-item-textarea vfb-left-half" >
+                                    <label class="vfb-desc">Upload ID Card <span class="vfb-required-asterisk">*</span></label>
+                                    <input type="file" name="govt_id">
+                                 </li>
+                              </ul>
+                           </fieldset>
+	  
+	  </div>
+	  
+	</div>
+	
+	
 
     <div class="flex justify-center mt-8">
 			<input type="hidden" name="use_id" value="<?php echo $_SESSION["log_user_id"]; ?>">
