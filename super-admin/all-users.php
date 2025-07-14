@@ -40,7 +40,7 @@
                   
                   $sqls = "SELECT * FROM model_user Order by id DESC";
                             $resultd = mysqli_query($con, $sqls);
-                            $count = 1; echo mysqli_num_rows($resultd);
+                            $count = 1; 
                   
                   ?>
                   <!-- <p class="card-description">
@@ -81,7 +81,7 @@
                           
                               if (mysqli_num_rows($resultd) > 0) {
                                 while ($rowesdw = mysqli_fetch_assoc($resultd)){
-                              
+                              echo  $rowesdw['id'];
                         ?>
                         <form method="post" >
                         <tr>
