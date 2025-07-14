@@ -1306,7 +1306,7 @@ $lang_list = modal_language_list();
           </div>
         </div>
 
-        <div id="content-options" class="conditional-section">
+        <?php /* ?><div id="content-options" class="conditional-section">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="form-label">Photo Set Price (TLM tokens)</label>
@@ -1319,7 +1319,7 @@ $lang_list = modal_language_list();
               <p class="help-text">Price per minute for custom videos</p>
             </div>
           </div>
-        </div>
+        </div><?php */ ?>
       </div>
     </div>
 
