@@ -434,6 +434,16 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 </div>
                             </div>
                         </div>
+
+                            <?php if($uplds['post_type'] =='paid') {?>
+
+                                <div class="token-btn">
+
+                                    <i class="fa fa-database coin_icon"> 20</i>
+
+                                </div>
+                                
+                            <?php } ?>
                     </div>
 					
 					<?php } else if($uplds['post_mime_type'] == 'video'){ 
@@ -487,7 +497,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 <i class="fa fa-database coin_icon"> 20</i>
 
                             </div>
-                            
+
                         <?php } ?>
 
                     </div>
