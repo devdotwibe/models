@@ -668,17 +668,30 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     <label class="mb-2">Post Type:</label>
                                     <div class="flex flex-col gap-2">
                                         <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="post_type" value="free" class="accent-indigo-500">
+                                            <input type="radio" name="post_type" value="free" onchange="PostType(this)" class="accent-indigo-500">
                                             <span>Free</span>
                                         </label>
                                         <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="post_type" value="paid" class="accent-indigo-500">
+                                            <input type="radio" name="post_type" value="paid" onchange="PostType(this)" class="accent-indigo-500">
                                             <span>Paid</span>
                                         </label>
                                     </div>
                                 </div>
 
                             </div>
+
+                            <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 token_sec" style="display:none;">
+
+                               <div class="flex flex-col text-white text-sm sm:text-base">
+
+                                    <label class="mb-2">Token</label>
+
+                                    <input type="number" name="token" placeholder="Enter token amount" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base">
+
+                                </div>
+
+                            </div>
+
 
                             <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
                                 Post
@@ -1551,6 +1564,19 @@ if (mysqli_num_rows($res_ap) > 0) {
             $('#post_image_label').hide();
             
         }
+        function PostType(this)
+        {
+            var value = $(this).val();
+
+            if(value =='paid')
+            {
+                $('.token_sec').show();
+            }
+            else
+            {
+                 $('.token_sec').hide();
+            }
+        }
 
         function ShowPostType()
         {
@@ -1570,7 +1596,9 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             $('.post_type_sec').hide();
 
-             $('#post_image_label').show();
+            $('#post_image_label').show();
+
+            $('.token_sec').hide();
         }
 
 
