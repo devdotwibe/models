@@ -139,7 +139,7 @@ if (isset($_POST['vfb-submit'])) {
 	}else{
 		$as_a_model = 'No';
 	}
-
+echo 'test'; exit;
  //if($password == $c_pasword){
 
     $sql_u = "SELECT * FROM model_user WHERE username='$user_name'";
