@@ -20,7 +20,9 @@ function h_my_ip_address(){
 function checkImageExists($relativePath) {
 	
 	$imagePath = '../../'. ltrim($relativePath, '/');
-    return !empty($relativePath) && file_exists($imagePath);
+    // return !empty($relativePath) && file_exists($imagePath);
+
+	$imagePath;
 }
 
 function extra_setting($field,$default=false,$set_zero=false){

@@ -400,14 +400,18 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                          $post_image = $uplds['post_image'];
 
-                         if (checkImageExists($post_image)) {
+                        //  if (checkImageExists($post_image)) {
 
-                            $imageUrl = SITEURL . $post_image;
-                        }
+                        //     $imageUrl = SITEURL . $post_image;
+
+                          
+                        // }
+
+                          $moage = checkImageExists($post_image);
 				?>
                     <!-- Media Item Image -->
                     <div class="media-item">
-                        <img src="<?php echo SITEURL.$imageUrl ?>" alt="<?php echo ucfirst($uplds['post_image']); ?>">
+                        <img src="<?php echo SITEURL.$imageUrl ?>" alt="<?php echo $moage ?>">
                         <div class="media-overlay">
                             <div class="flex justify-between items-center">
                                 <?php /*<div class="text-sm font-medium"><?php echo ucfirst($uplds['image_text']); ?></div> */ ?>
