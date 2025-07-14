@@ -351,12 +351,12 @@ if(!empty($userDetails['profile_pic'])){
                       $blur_class="style='filter: blur(10px);'";
                   }
               ?>
-                  <?php if($post['post_mime_type'] == 'image'){ ?>
+                  <?php if($post['post_mime_type'] == 'Image'){ ?>
 
                   
                       <img src="<?= $imageUrl ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4 " <?php echo $blur_class ?>>
 
-                  <?php } elseif($post['post_mime_type'] == 'video') { ?>
+                  <?php } elseif($post['post_mime_type'] == 'Video') { ?>
 
                         <div class="video-outer" <?php echo $blur_class ?> >
 

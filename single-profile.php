@@ -403,7 +403,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
 				if(!empty($uplds['post_image'])){
 					
-					if($uplds['post_mime_type'] == 'image'){
+					if($uplds['post_mime_type'] == 'Image'){
 
                          $post_image = $uplds['post_image'];
 
@@ -447,8 +447,23 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                                         <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
-                                            <i class="fas fa-database" aria-hidden="true"></i>
-                                            <span> <?php echo $uplds['token']  ?></span>
+
+                                            <form method="post" action="file-process.php">
+
+                                                <input type="hidden" name="file_id" value="<?php echo $uplds['id']; ?>">
+                                                <input type="hidden" name="user_id" value="<?php echo $user_mode_id ?>">
+                                                <input type="hidden" name="coins" value="<?php echo $uplds["token"]; ?>">
+                                                <input type="hidden" name="file_type" value="<?php echo $uplds['post_mime_type']; ?>">
+                                                <input type="hidden" name="m_unique_id" value="<?php echo $_GET['m_unique_id']; ?>">
+                                                <input type="hidden" name="model_id" value="<?php echo $uplds['post_author']; ?>">
+                                                
+                                                <button class="mybtn"  type="submit" name="submit">
+
+                                                    <i class="fas fa-database" aria-hidden="true"></i>
+                                                    <span> <?php echo $uplds['token']  ?></span>
+                                                </button>
+
+                                             </form>
                                         </div>
                                     </div>
 
@@ -456,7 +471,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                     </div>
 					
-					<?php } else if($uplds['post_mime_type'] == 'video'){ 
+					<?php } else if($uplds['post_mime_type'] == 'Video'){ 
                         
                                $post_video = $uplds['post_image'];
 
@@ -659,11 +674,11 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     <label class="mb-2">File Type:</label>
                                     <div class="flex flex-col gap-2">
                                         <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="file_type" value="image" onchange="ShowPostType()" class="accent-indigo-500">
+                                            <input type="radio" name="file_type" value="Image" onchange="ShowPostType()" class="accent-indigo-500">
                                             <span>Image</span>
                                         </label>
                                         <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="file_type" value="video" onchange="ShowPostType()" class="accent-indigo-500">
+                                            <input type="radio" name="file_type" value="Video" onchange="ShowPostType()" class="accent-indigo-500">
                                             <span>Video</span>
                                         </label>
                                     </div>
