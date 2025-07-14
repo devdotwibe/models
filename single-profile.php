@@ -1453,7 +1453,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 preview.style.display = 'none';
             }
-            
+
             $('#filePreview').after(`<button class="remove-btn absolute top-0 right-0" onclick="removePreview(this)">×</button>`);
 
             $('#filePreview_div').show();
@@ -1471,6 +1471,10 @@ if (mysqli_num_rows($res_ap) > 0) {
             $('#filePreview').attr('src',"");
 
             $('#filePreview_div').hide();
+
+            $('.file_type_sec').hide();
+
+            $('.post_type_sec').hide();
 
              $('#post_image_label').show();
         }
