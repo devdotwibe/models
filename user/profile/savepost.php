@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $allowed_mime_types = ['image', 'video'];
+    $allowed_mime_types = ['Image', 'Video'];
     if (!in_array($post_mime_type, $allowed_mime_types)) {
         echo "Invalid file type. Only 'image' or 'video' allowed.";
         exit;
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $file_mime_type = mime_content_type($file_tmp);
 
-            if ($post_mime_type === 'image') {
+            if ($post_mime_type === 'Image') {
                 if (strpos($file_mime_type, 'image/') !== 0) {
                     echo "Uploaded file must be an image.";
                     exit;
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-            if ($post_mime_type === 'video') {
+            if ($post_mime_type === 'Video') {
                 if (strpos($file_mime_type, 'video/') !== 0) {
                     echo "Uploaded file must be a video.";
                     exit;
