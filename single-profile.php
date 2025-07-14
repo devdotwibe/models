@@ -589,11 +589,11 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     <label class="mb-2">File Type:</label>
                                     <div class="flex gap-4">
                                         <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="file_type" value="image" class="accent-indigo-500">
+                                            <input type="radio" name="file_type" value="image" onchange="ShowPostType()" class="accent-indigo-500">
                                             <span>Image</span>
                                         </label>
                                         <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="file_type" value="video" class="accent-indigo-500">
+                                            <input type="radio" name="file_type" value="video" onchange="ShowPostType()" class="accent-indigo-500">
                                             <span>Video</span>
                                         </label>
                                     </div>
@@ -1462,6 +1462,12 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             $('#post_image_label').hide();
             
+        }
+
+        function ShowPostType()
+        {
+             $('.post_type_sec').show();
+
         }
 
         function removePreview(el)
