@@ -407,7 +407,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 				?>
                     <!-- Media Item Image -->
                     <div class="media-item">
-                        <img src="<?php echo SITEURL.$imageUrl ?>" alt="<?php echo ucfirst($uplds['post_title']); ?>">
+                        <img src="<?php echo SITEURL.$imageUrl ?>" alt="<?php echo ucfirst($uplds['post_image']); ?>">
                         <div class="media-overlay">
                             <div class="flex justify-between items-center">
                                 <?php /*<div class="text-sm font-medium"><?php echo ucfirst($uplds['image_text']); ?></div> */ ?>
