@@ -117,7 +117,7 @@
     </style>
 <?php
 
-include('includes/config.php');
+//include('includes/config.php');
 if (isset($_POST['vfb-submit'])) {
 
    $user_name = $_POST['username'];
