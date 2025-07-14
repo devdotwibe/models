@@ -445,12 +445,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 				
                 </div>
 
-                <!-- Load More Button -->
-                <?php /*?><div class="mt-6 sm:mt-8 text-center">
-                    <button class="btn-secondary px-6 sm:px-8 py-2 sm:py-3 rounded-xl text-white font-semibold">
-                        Load More
-                    </button>
-                </div> <?php */ ?>
 				
 			  <?php } ?>
 				
