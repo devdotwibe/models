@@ -49,29 +49,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
      if (isset($_FILES["post_image"]) && $_FILES["post_image"]["error"] === 0) {
 
-        $filename = uniqid() . '_' . basename($_FILES["post_image"]["name"]);
-        $target_file = $upload_folder_relative . $filename;
+            $file_size = $_FILES["post_image"]["size"];
+            $file_tmp  = $_FILES["post_image"]["tmp_name"];
+            $filename  = uniqid() . '_' . basename($_FILES["post_image"]["name"]);
+            $target_file = $upload_folder_relative . $filename;
 
-        $file_mime_type = mime_content_type($_FILES["post_image"]["tmp_name"]);
-        
-        if ($post_mime_type === 'image' && strpos($file_mime_type, 'image/') !== 0) {
+            $file_mime_type = mime_content_type($file_tmp);
 
-            echo "Uploaded file must be an image.";
-            exit;
-        }
-        if ($post_mime_type === 'video' && strpos($file_mime_type, 'video/') !== 0) {
-            
-            echo "Uploaded file must be a video.";
-            exit;
+            if ($post_mime_type === 'image') {
+                if (strpos($file_mime_type, 'image/') !== 0) {
+                    echo "Uploaded file must be an image.";
+                    exit;
+                }
+
+                if ($file_size > 5 * 1024 * 1024) {
+                    echo "Image size must not exceed 5MB.";
+                    exit;
+                }
+            }
+
+            if ($post_mime_type === 'video') {
+                if (strpos($file_mime_type, 'video/') !== 0) {
+                    echo "Uploaded file must be a video.";
+                    exit;
+                }
+
+                if ($file_size > 20 * 1024 * 1024) {
+                    echo "Video size must not exceed 20MB.";
+                    exit;
+                }
+            }
+
+            if (move_uploaded_file($file_tmp, $target_file)) {
+                $image_path = $upload_folder_for_db . $filename;
+            } else {
+                echo "Image/Video upload failed.";
+                exit;
+            }
         }
 
-        if (move_uploaded_file($_FILES["post_image"]["tmp_name"], $target_file)) {
-            $image_path = $upload_folder_for_db . $filename;
-        } else {
-            echo "Image/Video upload failed.";
-            exit;
-        }
-    }
 
 
     $stmt = $con->prepare("INSERT INTO live_posts (post_author, post_title, post_content, post_image,post_mime_type,post_type,token,post_date, post_date_gmt) VALUES (?, ?, ?, ? ,? , ?, ?, NOW(), NOW())");
