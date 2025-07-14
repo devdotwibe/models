@@ -450,7 +450,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                             <form method="post" action="file-process.php">
 
-                                                <input type="hidden" name="file_id" value="<?php echo $uplds['id']; ?>">
+                                                <input type="hidden" name="file_id" value="<?php echo $uplds['ID']; ?>">
                                                 <input type="hidden" name="user_id" value="<?php echo $_SESSION['log_user_unique_id']?>">
                                                 <input type="hidden" name="coins" value="<?php echo $uplds["token"]; ?>">
                                                 <input type="hidden" name="file_type" value="<?php echo $uplds['post_mime_type']; ?>">
