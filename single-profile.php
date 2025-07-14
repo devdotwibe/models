@@ -134,7 +134,10 @@ if (mysqli_num_rows($res_ap) > 0) {
     $rowesdw = mysqli_fetch_assoc($resultd);
     $movel_name = $rowesdw['username'];
 
-    $model_id = $userDetails['id']; 
+    $model_id =  $rowesdw['id'];
+
+    $user_mode_id = $userDetails['id']; 
+
 
     // $sql_sl = "SELECT * FROM model_social_link WHERE unique_model_id = '".$_GET['m_unique_id']."' ";
     // $result_sl = mysqli_query($con, $sql_sl);
@@ -411,7 +414,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                         $blur_class="";
 
-                        if($uplds['post_type'] =='paid' && $model_id != $uplds['post_author'] )
+                        if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] )
                         {
                             $imageUrl = "";
 
@@ -440,7 +443,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 </div>
                             </div>
 
-                            <?php if($uplds['post_type'] =='paid' && $model_id != $uplds['post_author'] ) {?>
+                            <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] ) {?>
 
                                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                                         <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
@@ -464,7 +467,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                 $blur_class="";
 
-                                if($uplds['post_type'] =='paid' && $model_id != $uplds['post_author'] )
+                                if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] )
                                 {
                                     $videoUrl = "";
 
@@ -499,7 +502,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                             </div>
 
 
-                        <?php if($uplds['post_type'] =='paid' && $model_id != $uplds['post_author']  ) {?>
+                        <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author']  ) {?>
 
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                                     <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
