@@ -146,13 +146,13 @@ if (isset($_POST['vfb-submit'])) {
     $sql_e = "SELECT * FROM model_user WHERE email='$email'";
     $res_u = mysqli_query($con, $sql_u);
     $res_e = mysqli_query($con, $sql_e);
-    if (mysqli_num_rows($res_u) > 0) { 
+   /* if (mysqli_num_rows($res_u) > 0) { 
         echo  '<script>alert("Sorry... username already taken")</script>';
                 echo '<script>window.location="login.php"</script>';
     }else if(mysqli_num_rows($res_e) > 0){
       echo  '<script>alert("Sorry... email already taken")</script>';
                 echo '<script>window.location="login.php"</script>';  
-    }/*else{
+    }else{
 
  	$que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`as_a_model`,`user_bio`,`services`) 
 	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password."', '".$country."', '".$gender."', '".$as_a_model."', '".$user_bio."', '".$services."')";
