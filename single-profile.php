@@ -575,7 +575,41 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             </label>
 
-                            <input style="display:none;" type="file" name="post_image" id="post_image" accept="/*images">
+                            <input style="display:none;" type="file" onchange="ImageShow(this)" name="post_image" id="post_image" accept="image/*,video/*">
+
+                           <img id="filePreview" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
+
+                           <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
+
+                                <div class="flex flex-col text-white text-sm sm:text-base file_type_sec">
+                                    <label class="mb-2">File Type:</label>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="file_type" value="image" class="accent-indigo-500">
+                                            <span>Image</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="file_type" value="video" class="accent-indigo-500">
+                                            <span>Video</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col text-white text-sm sm:text-base post_type_sec">
+                                    <label class="mb-2">Post Type:</label>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="post_type" value="free" class="accent-indigo-500">
+                                            <span>Free</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer">
+                                            <input type="radio" name="post_type" value="paid" class="accent-indigo-500">
+                                            <span>Paid</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
 
                             <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
                                 Post
@@ -1382,6 +1416,43 @@ if (mysqli_num_rows($res_ap) > 0) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script>
+
+
+        function ImageShow(input) {
+
+            console.log('file upalod start');
+
+            const file = input.files[0];
+
+            const preview = document.getElementById('filePreview');
+            const fileType = file.type;
+
+            if (!file) {
+                preview.style.display = 'none';
+                return;
+            }
+
+            if (fileType.startsWith('image/')) {
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+
+            } else if (fileType.startsWith('video/')) {
+
+                preview.src = 'https://thumbs.dreamstime.com/b/video-file-icon-364440376.jpg';
+                preview.style.display = 'block';
+            } else {
+
+                preview.style.display = 'none';
+            }
+
+            $('.file_type_sec').show();
+        }
+
 
         $(document).ready(function () {
 
