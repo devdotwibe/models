@@ -1404,7 +1404,7 @@ if (mysqli_num_rows($res_ap) > 0) {
         function ImageShow(input) {
 
             console.log('file upalod start');
-            
+
             const file = input.files[0];
 
             const preview = document.getElementById('filePreview');
@@ -1432,6 +1432,8 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 preview.style.display = 'none';
             }
+
+            $('.file_type_sec').show();
         }
 
 
