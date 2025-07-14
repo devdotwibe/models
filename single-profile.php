@@ -1564,9 +1564,9 @@ if (mysqli_num_rows($res_ap) > 0) {
             $('#post_image_label').hide();
             
         }
-        function PostType(this)
+        function PostType(el)
         {
-            var value = $(this).val();
+            var value = $(el).val();
 
             if(value =='paid')
             {
