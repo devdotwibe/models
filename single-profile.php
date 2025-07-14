@@ -382,10 +382,10 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <!-- Tabs -->
                 <div class="border-b border-white/10 mb-6 sm:mb-8">
                     <div class="tabs-container flex">
-                        <button class="px-4 sm:px-6 py-3 font-medium tab-active whitespace-nowrap">All Content</button>
-                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Photos</button>
-                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Videos</button>
-                        <button class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap">Exclusive</button>
+                        <button type="button" onclick="TabChange(this)" class="px-4 sm:px-6 py-3 font-medium tab-active whitespace-nowrap tab_menu">All Content</button>
+                        <button type="button" onclick="TabChange(this)" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Photos</button>
+                        <button type="button" onclick="TabChange(this)" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Videos</button>
+                        <button type="button" onclick="TabChange(this)" class="px-4 sm:px-6 py-3 font-medium tab-inactive whitespace-nowrap tab_menu">Exclusive</button>
                     </div>
                 </div>
 
@@ -406,7 +406,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         }
 				?>
                     <!-- Media Item Image -->
-                    <div class="media-item">
+                    <div class="media-item images_tab all_items_tab">
                         <img src="<?php echo $imageUrl ?>" alt="<?php echo ucfirst($uplds['post_image']); ?>">
                         <div class="media-overlay">
                             <div class="flex justify-between items-center">
@@ -436,7 +436,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         ?>
 
                     <!-- Media Item Video -->
-                    <div class="media-item">
+                    <div class="media-item videos_tab all_items_tab">
                         <div class="w-full h-full bg-gray-800 flex items-center justify-center">
                             <video class="video-ci" controls  >
 								<source src="<?php echo $videoUrl ?>" type="video/mp4">
@@ -1435,6 +1435,14 @@ if (mysqli_num_rows($res_ap) > 0) {
 
     <script>
 
+        function TabChange(el)
+        {
+            $('.tab_menu').removeClass('tab-active');
+
+            $('.tab_menu').addClass('tab-inactive');
+
+            $(el).addClass('tab-active');
+        }
 
         function ImageShow(input) {
 
