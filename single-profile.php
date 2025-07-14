@@ -404,10 +404,21 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             $imageUrl = SITEURL . $post_image;
                         }
+
+                        $blur_class="";
+
+                        if($uplds['post_mime_type'] =='paid')
+                        {
+                            $imageUrl = "";
+
+                                $blur_class="style='filter: blur(10px);'";
+                        }
 				?>
                     <!-- Media Item Image -->
                     <div class="media-item images_tab all_items_tab">
-                        <img src="<?php echo $imageUrl ?>" alt="<?php echo ucfirst($uplds['post_image']); ?>">
+
+                        <img src="<?php echo $imageUrl ?>" <?php echo $blur_class ?> alt="<?php echo ucfirst($uplds['post_image']); ?>">
+
                         <div class="media-overlay">
                             <div class="flex justify-between items-center">
                                 <?php /*<div class="text-sm font-medium"><?php echo ucfirst($uplds['image_text']); ?></div> */ ?>
@@ -433,11 +444,22 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                     $videoUrl = SITEURL . $post_video;
                                 }
+
+                                $blur_class="";
+
+                                if($uplds['post_mime_type'] =='paid')
+                                {
+                                    $videoUrl = "";
+
+                                     $blur_class="style='filter: blur(10px);'";
+                                }
+
+                            
                         ?>
 
                     <!-- Media Item Video -->
                     <div class="media-item videos_tab all_items_tab">
-                        <div class="w-full h-full bg-gray-800 flex items-center justify-center">
+                        <div class="w-full h-full bg-gray-800 flex items-center justify-center" <?php echo $blur_class ?> >
                             <video class="video-ci" controls  >
 								<source src="<?php echo $videoUrl ?>" type="video/mp4">
 							</video>
