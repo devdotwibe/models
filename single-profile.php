@@ -686,7 +686,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                     <label class="mb-2">Token</label>
 
-                                    <input type="number" name="token" placeholder="Enter token amount" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base">
+                                    <input type="text" oninput="TypeNumber()" name="token" placeholder="Enter token amount" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base">
 
                                 </div>
 
@@ -1563,6 +1563,10 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             $('#post_image_label').hide();
             
+        }
+
+        function TypeNumber(input) {
+            input.value = input.value.replace(/[^0-9]/g, '').replace(/^0+/, '');
         }
         function PostType(el)
         {
