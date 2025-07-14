@@ -344,7 +344,7 @@ if(!empty($userDetails['profile_pic'])){
 
                   $blur_class="";
 
-                  if($user_mode_id != $post['user_id'] && $post['post_type'] =='paid')
+                  if( $post['post_type'] =='paid')
                   {
                       $imageUrl ="";
 
