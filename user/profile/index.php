@@ -358,11 +358,11 @@ if(!empty($userDetails['profile_pic'])){
 
                   <?php } elseif($post['post_mime_type'] == 'video') { ?>
 
-                        <div class="w-full h-48 md:h-64 object-cover rounded-lg mb-4" <?php echo $blur_class ?> >
+                        <div class="video-outer" <?php echo $blur_class ?> >
 
                             <video class="video-ci" controls  >
 
-                                <source src="<?php echo $imageUrl ?>" type="video/mp4">
+                                <source src="<?php echo $imageUrl ?>" type="video/mp4" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4">
 
                               </video>
 
