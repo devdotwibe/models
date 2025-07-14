@@ -1453,7 +1453,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 preview.style.display = 'none';
             }
-hide
+            
             $('#filePreview').after(`<button class="remove-btn absolute top-0 right-0" onclick="removePreview(this)">×</button>`);
 
             $('#filePreview_div').show();
