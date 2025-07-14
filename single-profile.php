@@ -129,6 +129,8 @@ if (mysqli_num_rows($res_ap) > 0) {
     $rowesdw = mysqli_fetch_assoc($resultd);
     $movel_name = $rowesdw['username'];
 
+    $model_id =  $rowesdw['id'];
+
 
     // $sql_sl = "SELECT * FROM model_social_link WHERE unique_model_id = '".$_GET['m_unique_id']."' ";
     // $result_sl = mysqli_query($con, $sql_sl);
@@ -163,6 +165,10 @@ if (mysqli_num_rows($res_ap) > 0) {
 					
 		}
 	}
+
+    $model_posts = query('select * from live_posts where post_author="'.$model_id.'" Order by id DESC');
+
+    dd($model_posts);
 
   ?>
     
