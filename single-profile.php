@@ -407,7 +407,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 				?>
                     <!-- Media Item Image -->
                     <div class="media-item">
-                        <img src="<?php echo SITEURL.$imageUrl ?>" alt="<?php echo ucfirst($uplds['post_image']); ?>">
+                        <img src="<?php echo $imageUrl ?>" alt="<?php echo ucfirst($uplds['post_image']); ?>">
                         <div class="media-overlay">
                             <div class="flex justify-between items-center">
                                 <?php /*<div class="text-sm font-medium"><?php echo ucfirst($uplds['image_text']); ?></div> */ ?>
@@ -439,7 +439,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                     <div class="media-item">
                         <div class="w-full h-full bg-gray-800 flex items-center justify-center">
                             <video class="video-ci" controls  >
-								<source src="<?php echo SITEURL.$imageUrl ?>" type="video/mp4">
+								<source src="<?php echo $videoUrl ?>" type="video/mp4">
 							</video>
                         </div>
                         <div class="media-overlay">
