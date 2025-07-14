@@ -421,7 +421,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                         <img src="<?php echo $imageUrl ?>" <?php echo $blur_class ?> alt="<?php echo ucfirst($uplds['post_image']); ?>">
 
-                         <?php if($uplds['post_type'] !='paid') {?>
 
                             <div class="media-overlay">
                                 <div class="flex justify-between items-center">
@@ -438,8 +437,6 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     </div>
                                 </div>
                             </div>
-
-                        <?php } ?> 
 
                             <?php if($uplds['post_type'] =='paid') {?>
 
@@ -483,8 +480,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 							</video>
                         </div>
 
-                         <?php if($uplds['post_type'] !='paid') {?>
-
                             <div class="media-overlay">
                                 <div class="flex justify-between items-center">
                                     <div class="text-sm font-medium">Play this!!</div>
@@ -500,8 +495,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     </div>
                                 </div>
                             </div>
-                            
-                        <?php }?>
+
 
                         <?php if($uplds['post_type'] =='paid') {?>
 
