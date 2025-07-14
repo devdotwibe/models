@@ -1,4 +1,4 @@
- <style type="text/css">
+ <?php /* ?><style type="text/css">
         body {
             width: 100%;
             background-color: #ffffff;
@@ -115,7 +115,7 @@
             }
         }
     </style>
-<?php
+<?php */ 
 
 //include('includes/config.php');
 if (isset($_POST['vfb-submit'])) {
