@@ -1494,7 +1494,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                 var formData = new FormData(this); 
 
                 $.ajax({
-                    url: 'profile/savepost.php', 
+                    url: 'user/profile/savepost.php', 
                     type: 'POST',
                     data: formData,
                     contentType: false, 
