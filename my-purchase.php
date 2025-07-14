@@ -14,10 +14,10 @@
 	}else{ 
 		$as_a_model = '';
 	}
-	if($as_a_model != 'Yes'){
+	/*if($as_a_model != 'Yes'){
 		//header("Location: login.php");
 		echo '<script>window.location.href="login.php"</script>';
-	}
+	} */
 ?>
 <!DOCTYPE html>
 <html lang="en">
