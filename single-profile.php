@@ -61,6 +61,8 @@ if (mysqli_num_rows($res_ap) > 0) {
 
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <script>
     function like(postid, userid) {
 
@@ -437,8 +439,9 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             <?php if($uplds['post_type'] =='paid') {?>
 
-                                    <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600">
-                                        <i class="fa fa-database" aria-hidden="true"></i>20
+                                   <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
+                                        <i class="fa fa-database" aria-hidden="true"></i>
+                                        <span>20</span>
                                     </div>
 
                             <?php } ?>
