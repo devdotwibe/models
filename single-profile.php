@@ -631,246 +631,251 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             ?>
 
-            <!-- Sidebar -->
-            <div class="md:col-span-1">
-                <!-- Stats Card -->
-                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
-                    <h2 class="text-xl font-bold mb-4 premium-text">Status</h2>
+        
+            <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] ) { ?>
 
-                    <div class="post-div flex flex-wrap gap-8 text-center">
-                        <div>
-                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num_posts; ?></div>
-                            <div class="text-xs sm:text-sm text-white/60">Total Posts</div>
-                        </div>
-                        <div>
-                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num1; ?></div>
-                            <div class="text-xs sm:text-sm text-white/60">Photos</div>
-                        </div>
-                        <div>
-                            <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num2; ?></div>
-                            <div class="text-xs sm:text-sm text-white/60">Videos</div>
-                        </div>
-                        <div>
-                            <div class="text-xl sm:text-2xl font-bold gradient-text"><p style="cursor:pointer;" data-toggle="modal" data-target="#exampleModal"><?php echo $num3; ?></p></div>
-                            <div class="text-xs sm:text-sm text-white/60">Followers</div>
-                        </div>
-                    </div>
-
-
-                    
-
-
-                </div>
-
-		<?php if (isset($_SESSION['log_user_unique_id'])) { ?>
-
-                <form id="createPostForm"  enctype="multipart/form-data" method="post">
-
+                <div class="md:col-span-1">
+                    <!-- Stats Card -->
                     <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                        <h2 class="text-xl font-bold mb-4 premium-text">Status</h2>
 
-                        <h2 class="text-xl font-bold mb-4 premium-text">Create New Post</h2>
-
-                        
-                        <input type="text" name="post_title" 
-                            class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" 
-                            placeholder="Post title">
-
-                        <textarea name="post_content"  class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" rows="3" placeholder="What's on your mind?"></textarea>
-
-                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $rowesdw['id'] ?>">
-
-                        <div class="flex justify-between items-center">
-
-
-                             <label for="post_image" id="post_image_label" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                                Upload
-
-                            </label>
-
-                            <input style="display:none;" type="file" onchange="ImageShow(this)" name="post_image" id="post_image" accept="image/*,video/*">
-
-                            <div class="relative inline-block" style="display:none" id="filePreview_div">
-                                
-                                <img id="filePreview" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
-
-                            </div>
-
-                           <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
-
-                               <div class="flex flex-col text-white text-sm sm:text-base file_type_sec">
-                                    <label class="mb-2">File Type:</label>
-                                    <div class="flex flex-col gap-2">
-                                        <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="file_type" value="Image" onchange="ShowPostType()" class="accent-indigo-500">
-                                            <span>Image</span>
-                                        </label>
-                                        <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="file_type" value="Video" onchange="ShowPostType()" class="accent-indigo-500">
-                                            <span>Video</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                               <div class="flex flex-col text-white text-sm sm:text-base post_type_sec" style="display:none;">
-                                    <label class="mb-2">Post Type:</label>
-                                    <div class="flex flex-col gap-2">
-                                        <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="post_type" value="free" onchange="PostType(this)" class="accent-indigo-500">
-                                            <span>Free</span>
-                                        </label>
-                                        <label class="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="post_type" value="paid" onchange="PostType(this)" class="accent-indigo-500">
-                                            <span>Paid</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 token_sec" style="display:none;">
-
-                               <div class="flex flex-col text-white text-sm sm:text-base">
-
-                                    <label class="mb-2">Token</label>
-
-                                    <input type="text" oninput="TypeNumber()" name="token" placeholder="Enter token amount" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base">
-
-                                </div>
-
-                            </div>
-
-
-                            <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
-                                Post
-                            </button>
-                        </div>
-
-                    </div>
-                </form>
-				
-		<?php } ?>
-
-
-                <!-- Services Card -->
-                <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
-                    <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
-                    <ul class="space-y-4">
-                        <li class="flex items-center gap-3">
-                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        <div class="post-div flex flex-wrap gap-8 text-center">
+                            <div>
+                                <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num_posts; ?></div>
+                                <div class="text-xs sm:text-sm text-white/60">Total Posts</div>
                             </div>
                             <div>
-                                <div class="font-semibold text-sm sm:text-base">Chat</div>
-                                <div class="text-xs sm:text-sm text-white/60">Private messaging</div>
+                                <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num1; ?></div>
+                                <div class="text-xs sm:text-sm text-white/60">Photos</div>
                             </div>
-                        </li>
+                            <div>
+                                <div class="text-xl sm:text-2xl font-bold gradient-text"><?php echo $num2; ?></div>
+                                <div class="text-xs sm:text-sm text-white/60">Videos</div>
+                            </div>
+                            <div>
+                                <div class="text-xl sm:text-2xl font-bold gradient-text"><p style="cursor:pointer;" data-toggle="modal" data-target="#exampleModal"><?php echo $num3; ?></p></div>
+                                <div class="text-xs sm:text-sm text-white/60">Followers</div>
+                            </div>
+                        </div>
 
 
-                          <?php
-                                if ($_SESSION["log_user_unique_id"] == $session_id) {
-                                } else if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') {
-                                ?>
+                        
 
+
+                    </div>
+
+            <?php if (isset($_SESSION['log_user_unique_id'])) { ?>
+
+                    <form id="createPostForm"  enctype="multipart/form-data" method="post">
+
+                        <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+
+                            <h2 class="text-xl font-bold mb-4 premium-text">Create New Post</h2>
+
+                            
+                            <input type="text" name="post_title" 
+                                class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" 
+                                placeholder="Post title">
+
+                            <textarea name="post_content"  class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" rows="3" placeholder="What's on your mind?"></textarea>
+
+                            <input type="hidden" name="user_id" id="user_id" value="<?php echo $rowesdw['id'] ?>">
+
+                            <div class="flex justify-between items-center">
+
+
+                                <label for="post_image" id="post_image_label" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                                    Upload
+
+                                </label>
+
+                                <input style="display:none;" type="file" onchange="ImageShow(this)" name="post_image" id="post_image" accept="image/*,video/*">
+
+                                <div class="relative inline-block" style="display:none" id="filePreview_div">
+                                    
+                                    <img id="filePreview" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
+
+                                </div>
+
+                            <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
+
+                                <div class="flex flex-col text-white text-sm sm:text-base file_type_sec">
+                                        <label class="mb-2">File Type:</label>
+                                        <div class="flex flex-col gap-2">
+                                            <label class="flex items-center gap-2 cursor-pointer">
+                                                <input type="radio" name="file_type" value="Image" onchange="ShowPostType()" class="accent-indigo-500">
+                                                <span>Image</span>
+                                            </label>
+                                            <label class="flex items-center gap-2 cursor-pointer">
+                                                <input type="radio" name="file_type" value="Video" onchange="ShowPostType()" class="accent-indigo-500">
+                                                <span>Video</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                <div class="flex flex-col text-white text-sm sm:text-base post_type_sec" style="display:none;">
+                                        <label class="mb-2">Post Type:</label>
+                                        <div class="flex flex-col gap-2">
+                                            <label class="flex items-center gap-2 cursor-pointer">
+                                                <input type="radio" name="post_type" value="free" onchange="PostType(this)" class="accent-indigo-500">
+                                                <span>Free</span>
+                                            </label>
+                                            <label class="flex items-center gap-2 cursor-pointer">
+                                                <input type="radio" name="post_type" value="paid" onchange="PostType(this)" class="accent-indigo-500">
+                                                <span>Paid</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 token_sec" style="display:none;">
+
+                                <div class="flex flex-col text-white text-sm sm:text-base">
+
+                                        <label class="mb-2">Token</label>
+
+                                        <input type="text" oninput="TypeNumber()" name="token" placeholder="Enter token amount" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base">
+
+                                    </div>
+
+                                </div>
+
+
+                                <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
+                                    Post
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                    
+            <?php } ?>
+
+
+                    <!-- Services Card -->
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                        <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
+                        <ul class="space-y-4">
                             <li class="flex items-center gap-3">
                                 <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
-
-                                    <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-chat/index.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
-
-                                        <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
-                                    </form>
-                                    
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                                 </div>
                                 <div>
-                                    <div class="font-semibold text-sm sm:text-base">Watch</div>
-                                    <div class="text-xs sm:text-sm text-white/60">Live streams & content</div>
+                                    <div class="font-semibold text-sm sm:text-base">Chat</div>
+                                    <div class="text-xs sm:text-sm text-white/60">Private messaging</div>
                                 </div>
                             </li>
 
-                        <?php } ?>
+
+                            <?php
+                                    if ($_SESSION["log_user_unique_id"] == $session_id) {
+                                    } else if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') {
+                                    ?>
+
+                                <li class="flex items-center gap-3">
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+
+                                        <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-chat/index.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
+
+                                            <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
+                                        </form>
+                                        
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-sm sm:text-base">Watch</div>
+                                        <div class="text-xs sm:text-sm text-white/60">Live streams & content</div>
+                                    </div>
+                                </li>
+
+                            <?php } ?>
 
 
-                          <?php
-                                if ($_SESSION["log_user_unique_id"] == $session_id) {?>
-                               
+                            <?php
+                                    if ($_SESSION["log_user_unique_id"] == $session_id) {?>
+                                
+                                <li class="flex items-center gap-3">
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+
+                                        <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-chat/index.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
+
+                                            <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
+                                        </form>
+                                        
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-sm sm:text-base">Go live</div>
+                                        <div class="text-xs sm:text-sm text-white/60">Live streams & content</div>
+                                    </div>
+                                </li>
+
+                            <?php } ?>
+                                    
                             <li class="flex items-center gap-3">
                                 <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
-
-                                    <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-chat/index.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
-
-                                        <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
-                                    </form>
-                                    
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                                 </div>
                                 <div>
-                                    <div class="font-semibold text-sm sm:text-base">Go live</div>
-                                    <div class="text-xs sm:text-sm text-white/60">Live streams & content</div>
+                                    <div class="font-semibold text-sm sm:text-base">Meet</div>
+                                    <div class="text-xs sm:text-sm text-white/60">In-person experiences</div>
                                 </div>
                             </li>
-
-                        <?php } ?>
-                                
-                        <li class="flex items-center gap-3">
-                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-sm sm:text-base">Meet</div>
-                                <div class="text-xs sm:text-sm text-white/60">In-person experiences</div>
-                            </div>
-                        </li>
-                    </ul>
-                    <button class="w-full btn-primary text-white font-semibold py-2 sm:py-3 rounded-xl mt-4 text-sm sm:text-base" id="viewServicesBtn">
-                        View All Services
-                    </button>
-                </div>
-
-                <!-- Similar Models Card -->
-                <div class="ultra-glass rounded-2xl p-4 sm:p-6">
-                    <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
-                    <div class="space-y-4">
-					
-					<?php $sqls_m = "SELECT * FROM model_user WHERE as_a_model = 'Yes' AND unique_id != '" . $_GET['m_unique_id'] . "'  Order by RAND() DESC LIMIT 3";
-
-					  $resulmd = mysqli_query($con, $sqls_m);
-					  
-					  if (mysqli_num_rows($resulmd) > 0) { 
-				
-					 while($rows_md = mysqli_fetch_assoc($resulmd)) {
-					
-					if(!empty($rows_md['profile_pic'])){
-						 $profile_pic = SITEURL.$rows_md['profile_pic'];
-					 }else{
-						 $profile_pic = SITEURL.'assets/images/model-gal-no-img.jpg';
-					 }
-					 
-					 if(!empty($rows_md['username'])){
-						 $modalname = $rows_md['username'];
-					 }else{
-						 $modalname = $rows_md['name'];
-					 }
-					  
-					  ?>
-                        <div class="flex items-center gap-3">
-                            <img src="<?php echo $profile_pic; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
-                            <div class="flex-1">
-                                <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
-                                <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
-                            </div>
-                            <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
-                                Follow
-                            </button>
-                        </div>
-                        
-					  <?php } } ?>
-						
-						
+                        </ul>
+                        <button class="w-full btn-primary text-white font-semibold py-2 sm:py-3 rounded-xl mt-4 text-sm sm:text-base" id="viewServicesBtn">
+                            View All Services
+                        </button>
                     </div>
-                    <button onclick="navigateTo('all-models.php')" class="w-full btn-secondary text-white font-semibold py-2 rounded-xl mt-4 text-sm sm:text-base">
-                        View More
-                    </button>
+
+                    <!-- Similar Models Card -->
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6">
+                        <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
+                        <div class="space-y-4">
+                        
+                        <?php $sqls_m = "SELECT * FROM model_user WHERE as_a_model = 'Yes' AND unique_id != '" . $_GET['m_unique_id'] . "'  Order by RAND() DESC LIMIT 3";
+
+                        $resulmd = mysqli_query($con, $sqls_m);
+                        
+                        if (mysqli_num_rows($resulmd) > 0) { 
+                    
+                        while($rows_md = mysqli_fetch_assoc($resulmd)) {
+                        
+                        if(!empty($rows_md['profile_pic'])){
+                            $profile_pic = SITEURL.$rows_md['profile_pic'];
+                        }else{
+                            $profile_pic = SITEURL.'assets/images/model-gal-no-img.jpg';
+                        }
+                        
+                        if(!empty($rows_md['username'])){
+                            $modalname = $rows_md['username'];
+                        }else{
+                            $modalname = $rows_md['name'];
+                        }
+                        
+                        ?>
+                            <div class="flex items-center gap-3">
+                                <img src="<?php echo $profile_pic; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                                <div class="flex-1">
+                                    <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
+                                    <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
+                                </div>
+                                <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                    Follow
+                                </button>
+                            </div>
+                            
+                        <?php } } ?>
+                            
+                            
+                        </div>
+                        <button onclick="navigateTo('all-models.php')" class="w-full btn-secondary text-white font-semibold py-2 rounded-xl mt-4 text-sm sm:text-base">
+                            View More
+                        </button>
+                    </div>
                 </div>
-            </div>
+
+        <?php } ?>
+
         </div>
     </div>
 </main>
