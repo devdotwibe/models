@@ -36,6 +36,13 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">All Models</h4>
+                  <?php 
+                  
+                  $sqls = "SELECT * FROM model_user Order by id DESC";
+                            $resultd = mysqli_query($con, $sqls);
+                            $count = 1; echo mysqli_num_rows($resultd);
+                  
+                  ?>
                   <!-- <p class="card-description">
                     Add class <code>.table-striped</code>
                   </p> -->
@@ -71,9 +78,7 @@
                       </thead>
                       <tbody>
                         <?php
-                          $sqls = "SELECT * FROM model_user Order by id DESC";
-                            $resultd = mysqli_query($con, $sqls);
-                            $count = 1; echo mysqli_num_rows($resultd);
+                          
                               if (mysqli_num_rows($resultd) > 0) {
                                 while ($rowesdw = mysqli_fetch_assoc($resultd)){
                               
