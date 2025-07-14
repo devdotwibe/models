@@ -142,9 +142,9 @@ if (isset($_POST['vfb-submit'])) {
 
 
  //if($password == $c_pasword){
-echo  '<script>alert("test")</script>';
-  $sql_u = "SELECT * FROM model_user WHERE username='$user_name'";
-    $sql_e = "SELECT * FROM model_user WHERE email='$email'";
+
+  $sql_u = "SELECT * FROM model_user WHERE username='$user_name'"; 
+    $sql_e = "SELECT * FROM model_user WHERE email='$email'"; echo  '<script>alert("test")</script>';
     $res_u = mysqli_query($con, $sql_u);
     $res_e = mysqli_query($con, $sql_e); 
    if (mysqli_num_rows($res_u) > 0) { 
