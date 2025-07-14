@@ -339,6 +339,7 @@ if(!empty($userDetails['profile_pic'])){
                 $post_image = $post['post_image'] ?? '';
 
                   if (checkImageExists($post_image)) {
+
                       $imageUrl = SITEURL . $post_image;
 
                   $blur_class="";
@@ -350,7 +351,25 @@ if(!empty($userDetails['profile_pic'])){
                       $blur_class="style='filter: blur(10px);'";
                   }
               ?>
+                  <?php if($uplds['post_mime_type'] == 'image'){ ?>
+
+                  
                       <img src="<?= $imageUrl ?>" alt="Yoga" class="w-full h-48 md:h-64 object-cover rounded-lg mb-4 <?php echo $blur_class ?>">
+
+                  <?php } elseif($uplds['post_mime_type'] == 'video') { ?>
+
+                        <div class="w-full h-full bg-gray-800 flex items-center justify-center" <?php echo $blur_class ?> >
+
+                            <video class="video-ci" controls  >
+
+                                <source src="<?php echo $imageUrl ?>" type="video/mp4">
+
+                              </video>
+                              
+                        </div>
+
+                  <?php } ?>
+                      
               <?php
                   }
             ?>
