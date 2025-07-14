@@ -910,30 +910,30 @@
                     <div class="glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in" style="animation-delay: 0.1s">
                         <div class="counter-advanced mb-2" data-target="47"><?php echo $photo_count+$video_count; ?></div>
                         <div class="text-white/70 font-medium text-sm sm:text-base">Total Purchases</div>
-                        <div class="w-full bg-white/10 rounded-full h-2 mt-3">
+                        <?php /*?><div class="w-full bg-white/10 rounded-full h-2 mt-3">
                             <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full" style="width: 78%"></div>
-                        </div>
+                        </div><?php */ ?>
                     </div>
                     <div class="glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in" style="animation-delay: 0.2s">
                         <div class="counter-advanced mb-2" data-target="28"><?php echo $photo_count; ?></div>
                         <div class="text-white/70 font-medium text-sm sm:text-base">Photos</div>
-                        <div class="w-full bg-white/10 rounded-full h-2 mt-3">
+                        <?php /*?><div class="w-full bg-white/10 rounded-full h-2 mt-3">
                             <div class="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full" style="width: 65%"></div>
-                        </div>
+                        </div><?php */ ?>
                     </div>
                     <div class="glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in" style="animation-delay: 0.3s">
                         <div class="counter-advanced mb-2" data-target="19"><?php echo $video_count; ?></div>
                         <div class="text-white/70 font-medium text-sm sm:text-base">Videos</div>
-                        <div class="w-full bg-white/10 rounded-full h-2 mt-3">
+                        <?php /*?><div class="w-full bg-white/10 rounded-full h-2 mt-3">
                             <div class="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full" style="width: 45%"></div>
-                        </div>
+                        </div><?php */ ?>
                     </div>
                     <div class="glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in" style="animation-delay: 0.4s">
                         <div class="text-xl sm:text-2xl font-bold gradient-text-premium mb-2">$1,247</div>
                         <div class="text-white/70 font-medium text-sm sm:text-base">Total Investment</div>
-                        <div class="w-full bg-white/10 rounded-full h-2 mt-3">
+                        <?php /*?><div class="w-full bg-white/10 rounded-full h-2 mt-3">
                             <div class="bg-gradient-to-r from-yellow-500 to-orange-500 h-2 rounded-full" style="width: 85%"></div>
-                        </div>
+                        </div><?php */ ?>
                     </div>
                 </div>
             </div>
@@ -1017,13 +1017,18 @@
 					   $file_id = $rowesdw['file_unique_id'];
 					   $file_type = $rowesdw['file_type'];
 					   $model_unique_id = $rowesdw['model_unique_id'];
-
+						$file_downloads = $rowesdw['file_downloads'];
 
 					  $sql = "SELECT * FROM model_images WHERE id = '".$file_id."'";
 					  $result = mysqli_query($con, $sql);
 					  if (mysqli_num_rows($result) > 0) {
 						while($row = mysqli_fetch_assoc($result)) {
-						  $url = $row['file'];
+						 $url = $row['file'];
+						 
+						 if (!file_exists($url)) {
+							$url = 'assets/images/model-gal-no-img.jpg';
+						 }
+						 
 						  $image_text = $row['image_text'];
 						}
 					  }
@@ -1032,6 +1037,8 @@
 					  $result1 = mysqli_query($con, $sql1);
 					  if (mysqli_num_rows($result1) > 0) {
 						$row1 = mysqli_fetch_assoc($result1);
+						if(!empty($row1['profile_pic'])) $prof_img = SITEURL.$row1['profile_pic'];
+			 			else $prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
 			  ?>
 				
 				<?php if($file_type == 'Image'){ ?>
@@ -1052,9 +1059,9 @@
                         </div>
                         <div class="p-4 sm:p-6 relative z-10">
                             <div class="flex items-center mb-4">
-                                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=50&h=50&fit=crop&crop=faces" alt="Aria Profile" class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500">
+                                <img src="<?php echo $prof_img ?>" alt="<?php echo ucfirst($row1['username']); ?> Profile" class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500">
                                 <div class="flex-1">
-                                    <h4 class="text-base sm:text-lg font-bold gradient-text-premium">Aria M.</h4>
+                                    <h4 class="text-base sm:text-lg font-bold gradient-text-premium"><?php echo ucfirst($row1['username']); ?>.</h4>
                                     <div class="flex items-center gap-2">
                                         <span class="status-premium status-online-premium w-2 h-2 rounded-full"></span>
                                         <span class="text-xs sm:text-sm text-white/60">Verified Model</span>
@@ -1068,7 +1075,7 @@
                             <div class="space-y-2 sm:space-y-3 mb-4">
                                 <div class="flex justify-between text-xs sm:text-sm">
                                     <span class="text-white/70">Purchase Date:</span>
-                                    <span class="text-white font-medium">Dec 15, 2024</span>
+                                    <span class="text-white font-medium"><?php echo date('M d, Y',strtotime($rowesdw['purchase_date'])); ?></span>
                                 </div>
                                 <div class="flex justify-between text-xs sm:text-sm">
                                     <span class="text-white/70">Price:</span>
@@ -1080,7 +1087,11 @@
                                 </div>
                                 <div class="flex justify-between text-xs sm:text-sm">
                                     <span class="text-white/70">Downloads:</span>
-                                    <span class="text-white font-medium">3 remaining</span>
+									<?php if(!empty($file_downloads)){ ?>
+                                    <span class="text-white font-medium"><?php echo $file_downloads; ?></span>
+									<?php } else{ ?> 
+									<span class="text-white font-medium">0</span>
+									<?php } ?>
                                 </div>
                             </div>
                             <div class="flex gap-2 sm:gap-3">
@@ -1088,9 +1099,15 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                     View
                                 </button>
-                                <button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="downloadContent('aria-1')" aria-label="Download content">
+								<?php if (file_exists($url)) {?>
+                                <a href="<?= SITEURL . 'ajax/download.php?file=' . $url.'&id='.$rowesdw['id']; ?>" class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" aria-label="Download content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                                </button>
+                                </a>
+								<?php }else{ ?>
+								<button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="downloadContent()" aria-label="Download content">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                </button>	
+								<?php } ?>
                                 <button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="shareContent('aria-1')" aria-label="Share content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                                 </button>
@@ -1126,9 +1143,9 @@
                         </div>
                         <div class="p-4 sm:p-6 relative z-10">
                             <div class="flex items-center mb-4">
-                                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=50&h=50&fit=crop&crop=faces" alt="Phoenix Profile" class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500">
+                                <img src="<?php echo $prof_img ?>" alt="<?php echo ucfirst($row1['username']); ?> Profile" class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500">
                                 <div class="flex-1">
-                                    <h4 class="text-base sm:text-lg font-bold gradient-text-premium">Phoenix R.</h4>
+                                    <h4 class="text-base sm:text-lg font-bold gradient-text-premium"><?php echo ucfirst($row1['username']); ?>.</h4>
                                     <div class="flex items-center gap-2">
                                         <span class="status-premium status-online-premium w-2 h-2 rounded-full"></span>
                                         <span class="text-xs sm:text-sm text-white/60">Premium Model</span>
@@ -1142,7 +1159,7 @@
                             <div class="space-y-2 sm:space-y-3 mb-4">
                                 <div class="flex justify-between text-xs sm:text-sm">
                                     <span class="text-white/70">Purchase Date:</span>
-                                    <span class="text-white font-medium">Dec 14, 2024</span>
+                                    <span class="text-white font-medium"><?php echo date('M d, Y',strtotime($rowesdw['purchase_date'])); ?></span>
                                 </div>
                                 <div class="flex justify-between text-xs sm:text-sm">
                                     <span class="text-white/70">Price:</span>
@@ -1162,9 +1179,15 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                                     Play
                                 </button>
-                                <button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="downloadContent('phoenix-1')" aria-label="Download content">
+                                <?php if (file_exists($url)) {?>
+                                <a href="<?= SITEURL . 'ajax/download.php?file=' . $url.'&id='.$rowesdw['id']; ?>" class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" aria-label="Download content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                                </button>
+                                </a>
+								<?php }else{ ?>
+								<button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="downloadContent()" aria-label="Download content">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                </button>	
+								<?php } ?>
                                 <button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="shareContent('phoenix-1')" aria-label="Share content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                                 </button>
@@ -1372,3 +1395,9 @@
 </body>
 
 </html> 
+
+<script>
+function downloadContent(){
+	alert('File is not exist');
+}
+</script>
