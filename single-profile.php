@@ -5,6 +5,9 @@ include('includes/helper.php');
 $error = '';
 if (isset($_SESSION['log_user_unique_id'])) {
   $getUserData = get_data('model_social_link', array('unique_model_id' => $_SESSION['log_user_unique_id']), true);
+
+ $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+
   if ($getUserData) {
     if (empty($getUserData['i_username'])) {
       $error = 'empty';
@@ -131,8 +134,7 @@ if (mysqli_num_rows($res_ap) > 0) {
     $rowesdw = mysqli_fetch_assoc($resultd);
     $movel_name = $rowesdw['username'];
 
-    $model_id =  $rowesdw['id'];
-
+    $model_id = $userDetails['id']; 
 
     // $sql_sl = "SELECT * FROM model_social_link WHERE unique_model_id = '".$_GET['m_unique_id']."' ";
     // $result_sl = mysqli_query($con, $sql_sl);
