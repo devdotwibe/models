@@ -1670,21 +1670,30 @@ if (mysqli_num_rows($res_ap) > 0) {
                     success: function (response) {
                         alert("Post submitted successfully!");
                         console.log(response);
-                        $('#createPostForm')[0].reset();
 
-                        $('#filePreview').attr('src',"");
+                        if(response =='success')
+                        {
+                            $('#createPostForm')[0].reset();
 
-                        $('#filePreview_div').hide();
+                            $('#filePreview').attr('src',"");
 
-                        $('.file_type_sec').hide();
+                            $('#filePreview_div').hide();
 
-                        $('.post_type_sec').hide();
+                            $('.file_type_sec').hide();
 
-                        $('#post_image_label').show();
+                            $('.post_type_sec').hide();
 
-                        $('.token_sec').hide();
+                            $('#post_image_label').show();
 
-                        window.location.reload();
+                            $('.token_sec').hide();
+
+                            window.location.reload();
+
+                        }
+                        else
+                        {
+                            alert(response);
+                        }
                     },
                     error: function (xhr) {
                         alert("An error occurred while submitting the post.");
