@@ -168,7 +168,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 
     $model_posts =  DB::query('select * from live_posts where post_author="'.$model_id.'" Order by id DESC');
 
-        echo $model_posts;
   ?>
     
 <main>
@@ -376,7 +375,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 			
 			<?php 
 			
-			  if(!empty($modal_img_list)){
+			  if(!empty($model_posts) && count($model_posts ) > 0){
 			
 			?>
 
@@ -393,14 +392,22 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <!-- Media Grid -->
                 <div class="media-grid">
 				
-				<?php foreach($modal_img_list as $uplds){ 
-				if(!empty($uplds['file'])){
+				<?php foreach($model_posts as $uplds){ 
+
+				if(!empty($uplds['post_image'])){
 					
-					if($uplds['file_type'] == 'Image'){
+					if($uplds['post_mime_type'] == 'image'){
+
+                         $post_image = $uplds['post_image'];
+
+                         if (checkImageExists($post_image)) {
+
+                            $imageUrl = SITEURL . $post_image;
+                        }
 				?>
                     <!-- Media Item Image -->
                     <div class="media-item">
-                        <img src="<?php echo SITEURL.'uploads/profile_pic/'.$uplds['file']; ?>" alt="<?php echo ucfirst($uplds['image_text']); ?>">
+                        <img src="<?php echo SITEURL.$imageUrl ?>" alt="<?php echo ucfirst($uplds['post_title']); ?>">
                         <div class="media-overlay">
                             <div class="flex justify-between items-center">
                                 <?php /*<div class="text-sm font-medium"><?php echo ucfirst($uplds['image_text']); ?></div> */ ?>
@@ -418,13 +425,21 @@ if (mysqli_num_rows($res_ap) > 0) {
                         </div>
                     </div>
 					
-					<?php } else if($uplds['file_type'] == 'Video'){ ?>
+					<?php } else if($uplds['file_type'] == 'Video'){ 
+                        
+                               $post_video = $uplds['post_image'];
+
+                                if (checkImageExists($post_video)) {
+
+                                    $videoUrl = SITEURL . $post_video;
+                                }
+                        ?>
 
                     <!-- Media Item Video -->
                     <div class="media-item">
                         <div class="w-full h-full bg-gray-800 flex items-center justify-center">
                             <video class="video-ci" controls  >
-								<source src="<?php echo SITEURL.'uploads/profile_pic/'.$uplds['file']; ?>" type="video/mp4">
+								<source src="<?php echo SITEURL.$imageUrl ?>" type="video/mp4">
 							</video>
                         </div>
                         <div class="media-overlay">
