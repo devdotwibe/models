@@ -118,7 +118,7 @@ if(!empty($userDetails['profile_pic'])){
     <div class="particles" id="particles"></div>
 
     <div class="chat-container">
-        <!-- Header -->
+    
         <div class="chat-header">
             <div class="header-left">
 
@@ -151,26 +151,60 @@ if(!empty($userDetails['profile_pic'])){
         <div class="chat-messages" id="chatMessages">
 
         
-            <div class="message user">
-                <div class="message-avatar">
-                    <div class="avatar-placeholder user-avatar-placeholder">U</div>
-                </div>
-                <div class="message-content">
-                    <div class="message-text">Hi there Aria! I loved your latest photos 👋</div>
-                    <div class="timestamp">10:00 AM ✓✓</div>
-                </div>
-            </div>
+        <?php foreach($all_message_data as $set_user) { 
+            
+                $defaultImage =SITEURL."/assets/images/girl.png";
+                $type ="sent";
+            
+                if($set_user['sender_id']==$userDetails['id']){
 
-            <!-- Model Message -->
-            <div class="message">
-                <div class="message-avatar">
-                    <div class="avatar-placeholder">AM</div>
+                    $type ="replies";
+                    if($userDetails['gender']=='Male'){
+                        $defaultImage =SITEURL."/assets/images/profile.png";
+                    }
+                    if(!empty($userDetails['profile_pic'])){
+                        $defaultImage = SITEURL.$userDetails['profile_pic'];
+                    }
+                }
+                else{
+                    $type ="sent";
+                    if($user_data['gender']=='Male'){
+                        $defaultImage =SITEURL."/assets/images/profile.png";
+                    }
+                    if(!empty($user_data['profile_pic'])){
+                        $defaultImage = SITEURL.$user_data['profile_pic'];
+                    }
+                }
+            ?>
+
+            <?php if($type =='sent') { ?>
+
+                <div class="message user">
+                    <div class="message-avatar">
+                        <div class="avatar-placeholder user-avatar-placeholder"><img src="<?php echo $defaultImage ?>"> </div>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text"> <?php echo $set_user['message'] ?> </div>
+                        <div class="timestamp">10:00 AM ✓✓</div>
+                    </div>
                 </div>
-                <div class="message-content">
-                    <div class="message-text">Hello! Thanks for the compliment! I have some special content just for you today 💕</div>
-                    <div class="timestamp">10:01 AM ✓</div>
+
+            <?php } else { ?>
+
+
+                <div class="message">
+                    <div class="message-avatar">
+                        <div class="avatar-placeholder"><img src="<?php echo $defaultImage ?>"></div>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text"> <?php echo $set_user['message'] ?></div>
+                        <div class="timestamp">10:01 AM ✓</div>
+                    </div>
                 </div>
-            </div>
+
+            <?php } ?>
+
+        <?php }?>
 
      
 
