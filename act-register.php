@@ -144,8 +144,10 @@ if (isset($_POST['vfb-submit'])) {
 	}else{
 		$as_a_model = 'No';
 	}
+    echo '<pre>';
+    var_dump($_POST);
+    echo '</pre>';
 
-    echo $_POST;
 
 
 
