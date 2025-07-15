@@ -16,6 +16,9 @@ if ($result && mysqli_num_rows($result) > 0) {
 
         // Hash the password
         $hashed_password = password_hash($plain_password, PASSWORD_DEFAULT);
+
+        var_dump($hashed_password); exit;
+
         $escaped_password = mysqli_real_escape_string($con, $hashed_password);
 
         // Update the hashed password in the database
