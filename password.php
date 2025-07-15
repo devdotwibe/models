@@ -1,7 +1,5 @@
 <?php
-
 include('includes/config.php');
-include('includes/helper.php');
 
 $sql = "SELECT id, password FROM model_user";
 $result = mysqli_query($con, $sql);
@@ -11,12 +9,17 @@ if ($result && mysqli_num_rows($result) > 0) {
         $id = $row['id'];
         $plain_password = $row['password'];
 
+        // Skip if already hashed
         if (password_get_info($plain_password)['algo'] !== 0) {
             continue;
         }
-        $hashed_password = password_hash($plain_password, PASSWORD_DEFAULT);
 
-        $update = "UPDATE model_user SET password = '$hashed_password' WHERE id = $id";
+        // Hash the password
+        $hashed_password = password_hash($plain_password, PASSWORD_DEFAULT);
+        $escaped_password = mysqli_real_escape_string($con, $hashed_password);
+
+        // Update the hashed password in the database
+        $update = "UPDATE model_user SET password = '$escaped_password' WHERE id = $id";
         mysqli_query($con, $update);
     }
     echo "Password update completed.";
