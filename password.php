@@ -8,11 +8,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $id = $row['id'];
         $plain_password = $row['password'];
-
-        if (password_get_info($plain_password)['algo'] !== 0) {
-            continue;
-        }
-
+        
         $hashed_password = password_hash($plain_password, PASSWORD_DEFAULT);
         $escaped_password = mysqli_real_escape_string($con, $hashed_password);
 
