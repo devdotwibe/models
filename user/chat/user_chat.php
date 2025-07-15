@@ -120,7 +120,7 @@ else{
 
                     <div class="model-avatar">
 
-                        <div class="avatar-placeholder"><img src="<?php echo $prof_img; ?>" alt="Profile" class="w-20 h-20 rounded-full"></div>
+                        <div class="avatar-placeholder"><img src="<?php echo $mDefaultImage; ?>" alt="Profile" class="w-20 h-20 rounded-full"></div>
 
                     </div>
 
