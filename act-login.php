@@ -18,19 +18,14 @@ session_start();
 
        if ($result1 && $result1->num_rows > 0) {
 
-          $row = $result1->fetch_assoc();
+          $row1 = $result1->fetch_assoc();
 
-          $hashed_password = $row['password']; 
+          $hashed_password = $row1['password']; 
 
           if (password_verify($password, $hashed_password)) {
             
-              $count1 =1;
-          }
-      }
+         $count1 =1;
 
-      if($count1 == 1) {
-
-        $row1 = mysqli_fetch_assoc($result1);
          $user_id1 = $row1['id'];
          $user_name1 = $row1['username'];
          $unique_id = $row1['unique_id'];
