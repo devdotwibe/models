@@ -129,7 +129,7 @@ else{
                 </div>
 
                 <div class="model-info">
-                    <h2> <?php echo $user_data['name'] ;?></h2>
+                    <h2> <?php echo $user_data['username'] ;?></h2>
                     <div class="model-status">
                         <div class="status-dot"></div>
                         <span>Online Now</span>
