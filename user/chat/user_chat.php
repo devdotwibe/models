@@ -251,74 +251,7 @@ if(!empty($userDetails['profile_pic'])){
                 </div>
             </div>
 
-            <!-- Model Message with Media -->
-            <div class="message">
-                <div class="message-avatar">
-                    <div class="avatar-placeholder">AM</div>
-                </div>
-                <div class="message-content">
-                    <div class="message-text">Here are some of my favorite shots from today's photoshoot!</div>
-                    
-                    <div class="media-grid three-items">
-                        <!-- FREE IMAGE - Clear -->
-                        <div class="media-item free">
-                            <div class="media-badge free">Free</div>
-                            <div class="media-type-icon">
-                                <div class="image-icon"></div>
-                            </div>
-                            <div class="stock-image portrait1">
-                                Beautiful Portrait
-                            </div>
-                        </div>
-
-                        <!-- PAID IMAGE - Blurred -->
-                        <div class="media-item paid" onclick="showUnlockModal('Exclusive Portrait', 500)">
-                            <div class="media-badge premium">Premium</div>
-                            <div class="media-type-icon">
-                                <div class="image-icon"></div>
-                            </div>
-                            <div class="lock-icon">
-                                <svg class="lock-svg" viewBox="0 0 24 24">
-                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
-                                </svg>
-                            </div>
-                            <div class="mobile-price-badge">💎 500</div>
-                            <div class="stock-image portrait2">
-                                Exclusive Portrait
-                            </div>
-                            <div class="lock-overlay">
-                                <div class="unlock-price">💎 500 Tokens</div>
-                                <button class="unlock-btn">Unlock</button>
-                            </div>
-                        </div>
-
-                        <!-- PAID IMAGE - Blurred -->
-                        <div class="media-item paid" onclick="showUnlockModal('Premium Collection', 750)">
-                            <div class="media-badge premium">Premium</div>
-                            <div class="media-type-icon">
-                                <div class="image-icon"></div>
-                            </div>
-                            <div class="lock-icon">
-                                <svg class="lock-svg" viewBox="0 0 24 24">
-                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
-                                </svg>
-                            </div>
-                            <div class="mobile-price-badge">💎 750</div>
-                            <div class="stock-image portrait3">
-                                Premium Collection
-                            </div>
-                            <div class="lock-overlay">
-                                <div class="unlock-price">💎 750 Tokens</div>
-                                <button class="unlock-btn">Unlock</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="timestamp">10:05 AM ✓</div>
-                </div>
-            </div>
-
-            <!-- User Message -->
+     
             <div class="message user">
                 <div class="message-avatar">
                     <div class="avatar-placeholder user-avatar-placeholder">U</div>
@@ -329,74 +262,8 @@ if(!empty($userDetails['profile_pic'])){
                 </div>
             </div>
 
-            <!-- Model Message with Videos -->
-            <div class="message">
-                <div class="message-avatar">
-                    <div class="avatar-placeholder">AM</div>
-                </div>
-                <div class="message-content">
-                    <div class="message-text">I just recorded these videos for my VIP members 💋</div>
-                    
-                    <div class="media-grid three-items">
-                        <!-- FREE VIDEO - Clear -->
-                        <div class="media-item free" onclick="playVideo(this)">
-                            <div class="media-badge free">Free</div>
-                            <div class="media-type-icon">
-                                <div class="play-icon"></div>
-                            </div>
-                            <div class="stock-image landscape1">
-                                Free Video Preview
-                            </div>
-                        </div>
+        
 
-                        <!-- PAID VIDEO - Blurred -->
-                        <div class="media-item paid" onclick="showUnlockModal('Private Performance', 1200)">
-                            <div class="media-badge premium">Premium</div>
-                            <div class="media-type-icon">
-                                <div class="play-icon"></div>
-                            </div>
-                            <div class="lock-icon">
-                                <svg class="lock-svg" viewBox="0 0 24 24">
-                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
-                                </svg>
-                            </div>
-                            <div class="mobile-price-badge">💎 1200</div>
-                            <div class="stock-image video1">
-                                Private Performance
-                            </div>
-                            <div class="lock-overlay">
-                                <div class="unlock-price">💎 1200 Tokens</div>
-                                <button class="unlock-btn">Unlock</button>
-                            </div>
-                        </div>
-
-                        <!-- PAID VIDEO - Blurred -->
-                        <div class="media-item paid" onclick="showUnlockModal('Personal Message', 800)">
-                            <div class="media-badge premium">Premium</div>
-                            <div class="media-type-icon">
-                                <div class="play-icon"></div>
-                            </div>
-                            <div class="lock-icon">
-                                <svg class="lock-svg" viewBox="0 0 24 24">
-                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
-                                </svg>
-                            </div>
-                            <div class="mobile-price-badge">💎 800</div>
-                            <div class="stock-image video2">
-                                Personal Message
-                            </div>
-                            <div class="lock-overlay">
-                                <div class="unlock-price">💎 800 Tokens</div>
-                                <button class="unlock-btn">Unlock</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="timestamp">10:12 AM ✓</div>
-                </div>
-            </div>
-
-            <!-- More content with mix of free and paid -->
             <div class="message user">
                 <div class="message-avatar">
                     <div class="avatar-placeholder user-avatar-placeholder">U</div>
@@ -407,84 +274,7 @@ if(!empty($userDetails['profile_pic'])){
                 </div>
             </div>
 
-            <div class="message">
-                <div class="message-avatar">
-                    <div class="avatar-placeholder">AM</div>
-                </div>
-                <div class="message-content">
-                    <div class="message-text">Here's a mix of free previews and premium content just for you! 😘</div>
-                    
-                    <div class="media-grid">
-                        <!-- FREE IMAGE - Clear -->
-                        <div class="media-item free">
-                            <div class="media-badge free">Free</div>
-                            <div class="media-type-icon">
-                                <div class="image-icon"></div>
-                            </div>
-                            <div class="stock-image landscape2">
-                                Free Preview
-                            </div>
-                        </div>
 
-                        <!-- PAID IMAGE - Blurred -->
-                        <div class="media-item paid" onclick="showUnlockModal('Sunset Beauty', 600)">
-                            <div class="media-badge premium">Premium</div>
-                            <div class="media-type-icon">
-                                <div class="image-icon"></div>
-                            </div>
-                            <div class="lock-icon">
-                                <svg class="lock-svg" viewBox="0 0 24 24">
-                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
-                                </svg>
-                            </div>
-                            <div class="mobile-price-badge">💎 600</div>
-                            <div class="stock-image portrait1">
-                                Sunset Beauty
-                            </div>
-                            <div class="lock-overlay">
-                                <div class="unlock-price">💎 600 Tokens</div>
-                                <button class="unlock-btn">Unlock</button>
-                            </div>
-                        </div>
-
-                        <!-- FREE VIDEO - Clear -->
-                        <div class="media-item free" onclick="playVideo(this)">
-                            <div class="media-badge free">Free</div>
-                            <div class="media-type-icon">
-                                <div class="play-icon"></div>
-                            </div>
-                            <div class="stock-image video1">
-                                Free Video
-                            </div>
-                        </div>
-
-                        <!-- PAID VIDEO - Blurred -->
-                        <div class="media-item paid" onclick="showUnlockModal('Exclusive Dance', 950)">
-                            <div class="media-badge premium">Premium</div>
-                            <div class="media-type-icon">
-                                <div class="play-icon"></div>
-                            </div>
-                            <div class="lock-icon">
-                                <svg class="lock-svg" viewBox="0 0 24 24">
-                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
-                                </svg>
-                            </div>
-                            <div class="mobile-price-badge">💎 950</div>
-                            <div class="stock-image video2">
-                                Exclusive Dance
-                            </div>
-                            <div class="lock-overlay">
-                                <div class="unlock-price">💎 950 Tokens</div>
-                                <button class="unlock-btn">Unlock</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="timestamp">10:18 AM ✓</div>
-                </div>
-            </div>
-
-            <!-- Typing Indicator -->
             <div class="message hidden" id="typingIndicator">
                 <div class="message-avatar">
                     <div class="avatar-placeholder">AM</div>
@@ -497,6 +287,7 @@ if(!empty($userDetails['profile_pic'])){
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!-- Input Area -->
