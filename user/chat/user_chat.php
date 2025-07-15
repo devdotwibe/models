@@ -50,7 +50,7 @@ if(!empty($userDetails['profile_pic'])){
 
 <body class="socialwall-page">
 
- <?php  include('../../includes/profile_header_index.php'); ?>
+ <?php /*  include('../../includes/profile_header_index.php'); */?>
 
 <?php
 
@@ -531,7 +531,7 @@ if(!empty($userDetails['profile_pic'])){
 
 
 
-<?php include('../../includes/footer.php'); ?>
+<?php /* include('../../includes/footer.php'); */ ?>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
