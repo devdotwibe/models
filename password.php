@@ -25,7 +25,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         $update = "UPDATE model_user SET password = '$escaped_password' WHERE id = $id";
         mysqli_query($con, $update);
     }
-    echo "Password update completed.";
+    echo "Password update completed. tetst";
 } else {
     echo "No users found.";
 }
