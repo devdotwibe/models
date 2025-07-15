@@ -144,11 +144,6 @@ if (isset($_POST['vfb-submit'])) {
 	}else{
 		$as_a_model = 'No';
 	}
-    echo '<pre>';
-    var_dump($_POST);
-    echo '</pre>';
-
-
 
 
   $sql_u = "SELECT * FROM model_user WHERE username='$user_name'"; 
@@ -162,6 +157,8 @@ if (isset($_POST['vfb-submit'])) {
       echo  '<script>alert("Sorry... email already taken")</script>';
                 echo '<script>window.location="login.php"</script>';  
     }else{
+
+    echo 'test';
 
  	$que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`as_a_model`,`user_bio`,`services`) 
 	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password."', '".$country."', '".$gender."', '".$as_a_model."', '".$user_bio."', '".$services."')";
