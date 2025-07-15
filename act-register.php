@@ -145,6 +145,8 @@ if (isset($_POST['vfb-submit'])) {
 		$as_a_model = 'No';
 	}
 
+    echo $_POST;
+
 
 
   $sql_u = "SELECT * FROM model_user WHERE username='$user_name'"; 
