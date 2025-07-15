@@ -122,7 +122,6 @@
     </style>
 <?php 
 
-echo "test";
 
 if (isset($_POST['vfb-submit'])) {
 
