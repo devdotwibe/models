@@ -206,9 +206,14 @@ if ($_POST['submit_name']){
 		}
 		
 		
-		$arr_proof = array('choose_document');
+		$arr_proof = array('choose_document','height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
 		$post_data_extra = array_from_post($arr_proof);
 		$post_data_extra['unique_model_id'] = $model_unique_id;
+		if($_POST['height_type'] == 'ft'){
+			$post_data_extra['height'] = $_POST['feet'].'.'.$_POST['inches'];
+		}else{
+			$post_data_extra['height'] = $_POST['height_cm'];
+		}
 		$model_extra_list = DB::query('select id from model_extra_details where unique_model_id="'.$model_unique_id.'"');
 		
 		//Proof file

@@ -1609,97 +1609,105 @@ $lang_list = modal_language_list();
           <div>
             <label class="form-label">Height</label>
             <div class="unit-toggle unit-toggleh" id="unit-toggleh">
-              <div class="unit-option active ft-option" onclick="toggleHeightUnit('ft',this)">ft/in</div>
-              <div class="unit-option cm-option" onclick="toggleHeightUnit('cm',this)">cm</div>
+              <div class="unit-option <?php if(!empty($extra_details) && $extra_details['height_type'] == 'ft'){ echo 'active'; }else if(empty($extra_details['height_type'])){ echo 'active'; } ?> ft-option" onclick="toggleHeightUnit('ft',this)">ft/in</div>
+              <div class="unit-option <?php if(!empty($extra_details) && $extra_details['height_type'] == 'cm'){ echo 'active'; } ?> cm-option" onclick="toggleHeightUnit('cm',this)">cm</div>
             </div>
-            <div id="height-ft" class="grid grid-cols-2 gap-2">
+            <div id="height-ft" class="grid grid-cols-2 gap-2 <?php if($extra_details['height_type'] == 'cm') echo 'hidden'; ?>">
+			<?php 
+			$feet = ''; $inches = '';
+			if($extra_details['height_type'] == 'ft' || empty($extra_details['height_type'])){
+				$exp_hght = explode('.',$extra_details['height']);
+				$feet = $exp_hght[0];
+				$inches = $exp_hght[1];
+			} ?>
               <select class="form-select" name="feet">
                 <option value="">Feet</option>
-                <option value="4">4'</option>
-                <option value="5" selected>5'</option>
-                <option value="6">6'</option>
+                <option value="4" <?php if($feet == 4){ echo 'selected'; } ?> >4'</option>
+                <option value="5" <?php if($feet == 5){ echo 'selected'; }else if(empty($feet)){ echo 'selected'; } ?>  >5'</option>
+                <option value="6" <?php if($feet == 6){ echo 'selected'; } ?> >6'</option>
               </select>
               <select class="form-select" name="inches" >
                 <option value="">Inches</option>
-                <option value="0">0"</option>
-                <option value="1">1"</option>
-                <option value="2">2"</option>
-                <option value="3">3"</option>
-                <option value="4">4"</option>
-                <option value="5">5"</option>
-                <option value="6" selected>6"</option>
-                <option value="7">7"</option>
-                <option value="8">8"</option>
-                <option value="9">9"</option>
-                <option value="10">10"</option>
-                <option value="11">11"</option>
+                <option value="0" <?php if($inches == 0){ echo 'selected'; } ?> >0"</option>
+                <option value="1" <?php if($inches == 1){ echo 'selected'; } ?> >1"</option>
+                <option value="2" <?php if($inches == 2){ echo 'selected'; } ?> >2"</option>
+                <option value="3" <?php if($inches == 3){ echo 'selected'; } ?> >3"</option>
+                <option value="4" <?php if($inches == 4){ echo 'selected'; } ?> >4"</option>
+                <option value="5" <?php if($inches == 5){ echo 'selected'; } ?> >5"</option>
+                <option value="6" <?php if($inches == 6){ echo 'selected'; }else if(empty($inches)){ echo 'selected'; } ?> >6"</option>
+                <option value="7" <?php if($inches == 7){ echo 'selected'; } ?> >7"</option>
+                <option value="8" <?php if($inches == 8){ echo 'selected'; } ?> >8"</option>
+                <option value="9" <?php if($inches == 9){ echo 'selected'; } ?> >9"</option>
+                <option value="10" <?php if($inches == 10){ echo 'selected'; } ?> >10"</option>
+                <option value="11" <?php if($inches == 11){ echo 'selected'; } ?> >11"</option>
               </select>
             </div>
-            <div id="height-cm" class="hidden">
-              <input type="number" name="height_cm" class="form-input" placeholder="Height in cm" min="140" max="200" value="168">
+            <div id="height-cm" class="<?php if($extra_details['height_type'] == 'ft' || empty($extra_details['height_type'])) echo 'hidden'; ?>">
+              <input type="number" name="height_cm" class="form-input" placeholder="Height in cm" min="140" max="200" value="<?php if($extra_details['height_type'] == 'cm') { echo $extra_details['height']; } ?>">
             </div>
-			<input type="hidden" name="height_type" id="height_type" value="ft">
+			<input type="hidden" name="height_type" id="height_type" value="<?php if(empty($extra_details['height_type'])){ echo 'ft'; } else{ echo $extra_details['height_type']; } ?>">
           </div>
           <div>
             <label class="form-label">Weight</label>
-            <div class="unit-toggle">
-              <div class="unit-option active" onclick="toggleWeightUnit('lbs')">lbs</div>
-              <div class="unit-option" onclick="toggleWeightUnit('kg')">kg</div>
+            <div class="unit-toggle unit-togglew" id="unit-togglew">
+              <div class="unit-option <?php if(!empty($extra_details) && $extra_details['weight_type'] == 'lbs'){ echo 'active'; }else if(empty($extra_details['weight_type'])){ echo 'active'; } ?> lbs-option" onclick="toggleWeightUnit('lbs')">lbs</div>
+              <div class="unit-option <?php if(!empty($extra_details) && $extra_details['weight_type'] == 'kg'){ echo 'active'; } ?> kg-option" onclick="toggleWeightUnit('kg')">kg</div>
             </div>
-            <input type="number" id="weight-input" class="form-input" placeholder="Weight" min="80" max="300" value="125">
+            <input type="number" id="weight-input" name="weight" class="form-input" placeholder="Weight" min="80" max="300" value="<?php echo $extra_details['weight']; ?>">
             <p class="help-text">Optional - helps with matching</p>
+			<input type="hidden" name="weight_type" id="weight_type" value="<?php if(empty($extra_details['weight_type'])){ echo 'lbs'; }else { echo $extra_details['weight_type']; } ?>">
           </div>
           <div>
             <label class="form-label">Hair Color</label>
-            <select class="form-select">
+            <select class="form-select" name="hair_color" >
               <option value="">Select hair color</option>
-              <option value="blonde" selected>Blonde</option>
-              <option value="brunette">Brunette</option>
-              <option value="black">Black</option>
-              <option value="red">Red</option>
-              <option value="auburn">Auburn</option>
-              <option value="gray">Gray</option>
-              <option value="other">Other</option>
+              <option value="Blonde" <?php if($extra_details['hair_color'] == 'Blonde'){ echo 'selected'; } ?> >Blonde</option>
+              <option value="Brunette" <?php if($extra_details['hair_color'] == 'Brunette'){ echo 'selected'; } ?> >Brunette</option>
+              <option value="Black" <?php if($extra_details['hair_color'] == 'Black'){ echo 'selected'; } ?> >Black</option>
+              <option value="Red" <?php if($extra_details['hair_color'] == 'Red'){ echo 'selected'; } ?> >Red</option>
+              <option value="Auburn" <?php if($extra_details['hair_color'] == 'Auburn'){ echo 'selected'; } ?> >Auburn</option>
+              <option value="Gray" <?php if($extra_details['hair_color'] == 'Gray'){ echo 'selected'; } ?> >Gray</option>
+              <option value="Other" <?php if($extra_details['hair_color'] == 'Other'){ echo 'selected'; } ?> >Other</option>
             </select>
           </div>
           <div>
             <label class="form-label">Eye Color</label>
-            <select class="form-select">
+            <select class="form-select" name="eye_color">
               <option value="">Select eye color</option>
-              <option value="brown">Brown</option>
-              <option value="blue" selected>Blue</option>
-              <option value="green">Green</option>
-              <option value="hazel">Hazel</option>
-              <option value="gray">Gray</option>
-              <option value="amber">Amber</option>
+              <option value="Brown" <?php if($extra_details['eye_color'] == 'Brown'){ echo 'selected'; } ?> >Brown</option>
+              <option value="Blue"  <?php if($extra_details['eye_color'] == 'Blue'){ echo 'selected'; } ?> >Blue</option>
+              <option value="Green" <?php if($extra_details['eye_color'] == 'Green'){ echo 'selected'; } ?> >Green</option>
+              <option value="Hazel" <?php if($extra_details['eye_color'] == 'Hazel'){ echo 'selected'; } ?> >Hazel</option>
+              <option value="Gray" <?php if($extra_details['eye_color'] == 'Gray'){ echo 'selected'; } ?> >Gray</option>
+              <option value="Amber" <?php if($extra_details['eye_color'] == 'Amber'){ echo 'selected'; } ?> >Amber</option>
             </select>
           </div>
           <div>
             <label class="form-label">Ethnicity</label>
-            <input type="text" class="form-input" placeholder="Enter your ethnicity" value="Caucasian">
+            <input type="text" class="form-input" name="ethnicity" placeholder="Enter your ethnicity" value="<?php echo $extra_details['ethnicity']; ?>">
           </div>
           <div>
             <label class="form-label">Body Type</label>
-            <select class="form-select">
+            <select class="form-select" name="body_type">
               <option value="">Select body type</option>
-              <option value="petite">Petite</option>
-              <option value="slim" selected>Slim</option>
-              <option value="athletic">Athletic</option>
-              <option value="average">Average</option>
-              <option value="curvy">Curvy</option>
-              <option value="full-figured">Full Figured</option>
+              <option value="Petite" <?php if($extra_details['body_type'] == 'Petite'){ echo 'selected'; } ?> >Petite</option>
+              <option value="Slim" <?php if($extra_details['body_type'] == 'Slim'){ echo 'selected'; } ?> >Slim</option>
+              <option value="Athletic" <?php if($extra_details['body_type'] == 'Athletic'){ echo 'selected'; } ?> >Athletic</option>
+              <option value="Average" <?php if($extra_details['body_type'] == 'Average'){ echo 'selected'; } ?> >Average</option>
+              <option value="Curvy" <?php if($extra_details['body_type'] == 'Curvy'){ echo 'selected'; } ?> >Curvy</option>
+              <option value="Full Figured" <?php if($extra_details['body_type'] == 'Full Figured'){ echo 'selected'; } ?> >Full Figured</option>
             </select>
           </div>
           <div>
             <label class="form-label">Dress Size</label>
-            <select class="form-select">
+            <select class="form-select" name="dress_size" >
               <option value="">Select dress size</option>
-              <option value="XS">XS (0-2)</option>
-              <option value="S" selected>S (4-6)</option>
-              <option value="M">M (8-10)</option>
-              <option value="L">L (12-14)</option>
-              <option value="XL">XL (16-18)</option>
-              <option value="XXL">XXL (20+)</option>
+              <option value="XS (0-2)" <?php if($extra_details['dress_size'] == 'XS (0-2)'){ echo 'selected'; } ?> >XS (0-2)</option>
+              <option value="S (4-6)"  <?php if($extra_details['dress_size'] == 'S (4-6)'){ echo 'selected'; } ?> >S (4-6)</option>
+              <option value="M (8-10)" <?php if($extra_details['dress_size'] == 'M (8-10)'){ echo 'selected'; } ?> >M (8-10)</option>
+              <option value="L (12-14)" <?php if($extra_details['dress_size'] == 'L (12-14)'){ echo 'selected'; } ?> >L (12-14)</option>
+              <option value="XL (16-18)" <?php if($extra_details['dress_size'] == 'XL (16-18)'){ echo 'selected'; } ?> >XL (16-18)</option>
+              <option value="XXL (20+)" <?php if($extra_details['dress_size'] == 'XXL (20+)'){ echo 'selected'; } ?> >XXL (20+)</option>
             </select>
           </div>
         </div>
@@ -1711,25 +1719,25 @@ $lang_list = modal_language_list();
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label class="form-label text-sm">Bust (inches)</label>
-              <input type="number" class="form-input" placeholder="e.g., 34" min="28" max="50" value="34">
+              <input type="number" class="form-input" name="bust_size" placeholder="e.g., 34" min="28" max="50" value="<?php echo $extra_details['bust_size']; ?>">
             </div>
             <div>
               <label class="form-label text-sm">Waist (inches)</label>
-              <input type="number" class="form-input" placeholder="e.g., 26" min="20" max="40" value="26">
+              <input type="number" class="form-input" name="waist_size" placeholder="e.g., 26" min="20" max="40" value="<?php echo $extra_details['waist_size']; ?>">
             </div>
             <div>
               <label class="form-label text-sm">Cup Size</label>
-              <select class="form-select">
+              <select class="form-select" name="cup_size">
                 <option value="">Select</option>
-                <option value="AA">AA</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C" selected>C</option>
-                <option value="D">D</option>
-                <option value="DD">DD</option>
-                <option value="DDD">DDD</option>
-                <option value="F">F</option>
-                <option value="G">G</option>
+                <option value="AA" <?php if($extra_details['cup_size'] == 'AA'){ echo 'selected'; } ?> >AA</option>
+                <option value="A" <?php if($extra_details['cup_size'] == 'A'){ echo 'selected'; } ?> >A</option>
+                <option value="B" <?php if($extra_details['cup_size'] == 'B'){ echo 'selected'; } ?> >B</option>
+                <option value="C" <?php if($extra_details['cup_size'] == 'C'){ echo 'selected'; } ?> >C</option>
+                <option value="D" <?php if($extra_details['cup_size'] == 'D'){ echo 'selected'; } ?> >D</option>
+                <option value="DD" <?php if($extra_details['cup_size'] == 'DD'){ echo 'selected'; } ?> >DD</option>
+                <option value="DDD" <?php if($extra_details['cup_size'] == 'DDD'){ echo 'selected'; } ?> >DDD</option>
+                <option value="F" <?php if($extra_details['cup_size'] == 'F'){ echo 'selected'; } ?> >F</option>
+                <option value="G" <?php if($extra_details['cup_size'] == 'G'){ echo 'selected'; } ?> >G</option>
               </select>
             </div>
           </div>
@@ -2552,14 +2560,16 @@ $lang_list = modal_language_list();
   function toggleWeightUnit(unit, event) {
     currentWeightUnit = unit;
     const weightInput = document.getElementById('weight-input');
-    const unitToggle = event.target.closest('.unit-toggle');
-    
+	const unitToggle = document.getElementById('unit-togglew');
+
     if (unitToggle) {
         unitToggle.querySelectorAll('.unit-option').forEach(option => {
-        option.classList.remove('active');
-      });
-      event.target.classList.add('active');
-    }
+            option.classList.remove('active');
+        });
+        //event.target.classList.add('active');
+    } 
+    jQuery('.'+currentWeightUnit+'-option').addClass('active');
+	jQuery('#weight_type').val(currentWeightUnit);
 
     if (weightInput) {
         const currentValue = parseFloat(weightInput.value) || 0;
