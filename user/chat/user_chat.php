@@ -8,6 +8,20 @@ $m_link= SITEURL.'user/group-show/';
 
 if(isset($_SESSION["log_user_id"])){
 
+
+    $log_user_id = $_SESSION['log_user_id'];
+
+	$get_modal_user = DB::query('select * from model_user where id='.$log_user_id);
+
+	// if(!empty($get_modal_user[0]['username'])){
+	// 	$modalname = ucfirst($get_modal_user[0]['username']);
+	// }else{
+	// 	$modalname = ucfirst($get_modal_user[0]['name']);
+	// }
+	// $as_a_model = $get_modal_user[0]['as_a_model'];
+	// $unique_id = $get_modal_user[0]['unique_id'];
+
+
 	$usern = $_SESSION["log_user"];
 
 	$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
@@ -207,12 +221,19 @@ if(!empty($userDetails['profile_pic'])){
         <!-- Header -->
         <div class="chat-header">
             <div class="header-left">
+
                 <div class="avatar-container">
+
                     <div class="model-avatar">
-                        <div class="avatar-placeholder">AM</div>
+
+                        <div class="avatar-placeholder"><img src="<?= SITEURL . 'ajax/noimage.php?image=' . $get_modal_user[0]['profile_pic']; ?>" alt="Profile" class="w-20 h-20 rounded-full"></div>
+
                     </div>
+
                     <div class="online-indicator"></div>
+
                 </div>
+
                 <div class="model-info">
                     <h2>Aria M.</h2>
                     <div class="model-status">
