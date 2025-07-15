@@ -1223,18 +1223,12 @@
 	
 </html>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+<script>
+function downloadContent(){
+	alert('File is not exist');
+}
+</script>	
 	
 	
 	<?php /*?>
@@ -1391,13 +1385,3 @@
       }
 	  */
   ?>
-  <?php include('includes/footer.php'); ?>
-</body>
-
-</html> 
-
-<script>
-function downloadContent(){
-	alert('File is not exist');
-}
-</script>
