@@ -44,6 +44,8 @@ if(!empty($userDetails['profile_pic'])){
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
 
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/user_chat.css?v=<?=time()?>' type='text/css' media='all' />
+
 </head>
 
 <body class="socialwall-page">
@@ -199,13 +201,341 @@ if(!empty($userDetails['profile_pic'])){
     }
 ?>
 
+    <div class="particles" id="particles"></div>
 
-  <?php include('../../includes/footer.php'); ?>
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <div class="header-left">
+                <div class="avatar-container">
+                    <div class="model-avatar">
+                        <div class="avatar-placeholder">AM</div>
+                    </div>
+                    <div class="online-indicator"></div>
+                </div>
+                <div class="model-info">
+                    <h2>Aria M.</h2>
+                    <div class="model-status">
+                        <div class="status-dot"></div>
+                        <span>Online Now</span>
+                    </div>
+                </div>
+            </div>
+            <div class="token-balance">
+                <span>💎</span>
+                <span id="tokenCount">3,500</span>
+            </div>
+        </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <!-- Messages -->
+        <div class="chat-messages" id="chatMessages">
+            <!-- User Message -->
+            <div class="message user">
+                <div class="message-avatar">
+                    <div class="avatar-placeholder user-avatar-placeholder">U</div>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">Hi there Aria! I loved your latest photos 👋</div>
+                    <div class="timestamp">10:00 AM ✓✓</div>
+                </div>
+            </div>
+
+            <!-- Model Message -->
+            <div class="message">
+                <div class="message-avatar">
+                    <div class="avatar-placeholder">AM</div>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">Hello! Thanks for the compliment! I have some special content just for you today 💕</div>
+                    <div class="timestamp">10:01 AM ✓</div>
+                </div>
+            </div>
+
+            <!-- Model Message with Media -->
+            <div class="message">
+                <div class="message-avatar">
+                    <div class="avatar-placeholder">AM</div>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">Here are some of my favorite shots from today's photoshoot!</div>
+                    
+                    <div class="media-grid three-items">
+                        <!-- FREE IMAGE - Clear -->
+                        <div class="media-item free">
+                            <div class="media-badge free">Free</div>
+                            <div class="media-type-icon">
+                                <div class="image-icon"></div>
+                            </div>
+                            <div class="stock-image portrait1">
+                                Beautiful Portrait
+                            </div>
+                        </div>
+
+                        <!-- PAID IMAGE - Blurred -->
+                        <div class="media-item paid" onclick="showUnlockModal('Exclusive Portrait', 500)">
+                            <div class="media-badge premium">Premium</div>
+                            <div class="media-type-icon">
+                                <div class="image-icon"></div>
+                            </div>
+                            <div class="lock-icon">
+                                <svg class="lock-svg" viewBox="0 0 24 24">
+                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
+                                </svg>
+                            </div>
+                            <div class="mobile-price-badge">💎 500</div>
+                            <div class="stock-image portrait2">
+                                Exclusive Portrait
+                            </div>
+                            <div class="lock-overlay">
+                                <div class="unlock-price">💎 500 Tokens</div>
+                                <button class="unlock-btn">Unlock</button>
+                            </div>
+                        </div>
+
+                        <!-- PAID IMAGE - Blurred -->
+                        <div class="media-item paid" onclick="showUnlockModal('Premium Collection', 750)">
+                            <div class="media-badge premium">Premium</div>
+                            <div class="media-type-icon">
+                                <div class="image-icon"></div>
+                            </div>
+                            <div class="lock-icon">
+                                <svg class="lock-svg" viewBox="0 0 24 24">
+                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
+                                </svg>
+                            </div>
+                            <div class="mobile-price-badge">💎 750</div>
+                            <div class="stock-image portrait3">
+                                Premium Collection
+                            </div>
+                            <div class="lock-overlay">
+                                <div class="unlock-price">💎 750 Tokens</div>
+                                <button class="unlock-btn">Unlock</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timestamp">10:05 AM ✓</div>
+                </div>
+            </div>
+
+            <!-- User Message -->
+            <div class="message user">
+                <div class="message-avatar">
+                    <div class="avatar-placeholder user-avatar-placeholder">U</div>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">These look amazing! Do you have any videos to share?</div>
+                    <div class="timestamp">10:08 AM ✓✓</div>
+                </div>
+            </div>
+
+            <!-- Model Message with Videos -->
+            <div class="message">
+                <div class="message-avatar">
+                    <div class="avatar-placeholder">AM</div>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">I just recorded these videos for my VIP members 💋</div>
+                    
+                    <div class="media-grid three-items">
+                        <!-- FREE VIDEO - Clear -->
+                        <div class="media-item free" onclick="playVideo(this)">
+                            <div class="media-badge free">Free</div>
+                            <div class="media-type-icon">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="stock-image landscape1">
+                                Free Video Preview
+                            </div>
+                        </div>
+
+                        <!-- PAID VIDEO - Blurred -->
+                        <div class="media-item paid" onclick="showUnlockModal('Private Performance', 1200)">
+                            <div class="media-badge premium">Premium</div>
+                            <div class="media-type-icon">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="lock-icon">
+                                <svg class="lock-svg" viewBox="0 0 24 24">
+                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
+                                </svg>
+                            </div>
+                            <div class="mobile-price-badge">💎 1200</div>
+                            <div class="stock-image video1">
+                                Private Performance
+                            </div>
+                            <div class="lock-overlay">
+                                <div class="unlock-price">💎 1200 Tokens</div>
+                                <button class="unlock-btn">Unlock</button>
+                            </div>
+                        </div>
+
+                        <!-- PAID VIDEO - Blurred -->
+                        <div class="media-item paid" onclick="showUnlockModal('Personal Message', 800)">
+                            <div class="media-badge premium">Premium</div>
+                            <div class="media-type-icon">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="lock-icon">
+                                <svg class="lock-svg" viewBox="0 0 24 24">
+                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
+                                </svg>
+                            </div>
+                            <div class="mobile-price-badge">💎 800</div>
+                            <div class="stock-image video2">
+                                Personal Message
+                            </div>
+                            <div class="lock-overlay">
+                                <div class="unlock-price">💎 800 Tokens</div>
+                                <button class="unlock-btn">Unlock</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timestamp">10:12 AM ✓</div>
+                </div>
+            </div>
+
+            <!-- More content with mix of free and paid -->
+            <div class="message user">
+                <div class="message-avatar">
+                    <div class="avatar-placeholder user-avatar-placeholder">U</div>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">I love the free content! Can I see more?</div>
+                    <div class="timestamp">10:15 AM ✓✓</div>
+                </div>
+            </div>
+
+            <div class="message">
+                <div class="message-avatar">
+                    <div class="avatar-placeholder">AM</div>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">Here's a mix of free previews and premium content just for you! 😘</div>
+                    
+                    <div class="media-grid">
+                        <!-- FREE IMAGE - Clear -->
+                        <div class="media-item free">
+                            <div class="media-badge free">Free</div>
+                            <div class="media-type-icon">
+                                <div class="image-icon"></div>
+                            </div>
+                            <div class="stock-image landscape2">
+                                Free Preview
+                            </div>
+                        </div>
+
+                        <!-- PAID IMAGE - Blurred -->
+                        <div class="media-item paid" onclick="showUnlockModal('Sunset Beauty', 600)">
+                            <div class="media-badge premium">Premium</div>
+                            <div class="media-type-icon">
+                                <div class="image-icon"></div>
+                            </div>
+                            <div class="lock-icon">
+                                <svg class="lock-svg" viewBox="0 0 24 24">
+                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
+                                </svg>
+                            </div>
+                            <div class="mobile-price-badge">💎 600</div>
+                            <div class="stock-image portrait1">
+                                Sunset Beauty
+                            </div>
+                            <div class="lock-overlay">
+                                <div class="unlock-price">💎 600 Tokens</div>
+                                <button class="unlock-btn">Unlock</button>
+                            </div>
+                        </div>
+
+                        <!-- FREE VIDEO - Clear -->
+                        <div class="media-item free" onclick="playVideo(this)">
+                            <div class="media-badge free">Free</div>
+                            <div class="media-type-icon">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="stock-image video1">
+                                Free Video
+                            </div>
+                        </div>
+
+                        <!-- PAID VIDEO - Blurred -->
+                        <div class="media-item paid" onclick="showUnlockModal('Exclusive Dance', 950)">
+                            <div class="media-badge premium">Premium</div>
+                            <div class="media-type-icon">
+                                <div class="play-icon"></div>
+                            </div>
+                            <div class="lock-icon">
+                                <svg class="lock-svg" viewBox="0 0 24 24">
+                                    <path d="M18,8H17V6A5,5 0 0,0 12,1A5,5 0 0,0 7,6V8H6A2,2 0 0,0 4,10V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V10A2,2 0 0,0 18,8M12,3A3,3 0 0,1 15,6V8H9V6A3,3 0 0,1 12,3Z"/>
+                                </svg>
+                            </div>
+                            <div class="mobile-price-badge">💎 950</div>
+                            <div class="stock-image video2">
+                                Exclusive Dance
+                            </div>
+                            <div class="lock-overlay">
+                                <div class="unlock-price">💎 950 Tokens</div>
+                                <button class="unlock-btn">Unlock</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timestamp">10:18 AM ✓</div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="message hidden" id="typingIndicator">
+                <div class="message-avatar">
+                    <div class="avatar-placeholder">AM</div>
+                </div>
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-input-area">
+            <input type="text" class="message-input" id="messageInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+            
+            <!-- Combined Attachment Button -->
+            <div class="attachment-container">
+                <button class="attachment-btn" id="attachmentBtn" onclick="toggleAttachmentMenu()">
+                    📎
+                </button>
+                <div class="attachment-menu" id="attachmentMenu">
+                    <button class="attachment-option" onclick="handleAttachmentOption('audio')">
+                        🎤 Audio Call
+                    </button>
+                    <button class="attachment-option" onclick="handleAttachmentOption('video')">
+                        📹 Video Call
+                    </button>
+                    <button class="attachment-option" onclick="handleAttachmentOption('file')">
+                        📁 Attach File
+                    </button>
+                </div>
+            </div>
+            
+            <button class="send-btn" onclick="sendMessage()">
+                <div class="send-icon"></div>
+            </button>
+        </div>
+    </div>
+
+    <input type="file" id="fileInput" style="display:none" onchange="handleFile(event)" />
 
 
-  
+
+<?php include('../../includes/footer.php'); ?>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+
 
 </body>
 
