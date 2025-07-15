@@ -175,6 +175,10 @@ if(!empty($userDetails['profile_pic'])){
                         $defaultImage = SITEURL.$user_data['profile_pic'];
                     }
                 }
+
+                $date = $set_user['created_date']; 
+                $display_date =  date('h:i A', strtotime($date));
+                    
             ?>
 
             <?php if($type =='sent') { ?>
@@ -185,7 +189,7 @@ if(!empty($userDetails['profile_pic'])){
                     </div>
                     <div class="message-content">
                         <div class="message-text"> <?php echo $set_user['message'] ?> </div>
-                        <div class="timestamp"><?php echo $set_user['created_date']?> ✓✓</div>
+                        <div class="timestamp"><?php echo $display_date?> ✓✓</div>
                     </div>
                 </div>
 
@@ -198,7 +202,7 @@ if(!empty($userDetails['profile_pic'])){
                     </div>
                     <div class="message-content">
                         <div class="message-text"> <?php echo $set_user['message'] ?></div>
-                        <div class="timestamp"><?php echo $set_user['created_date']?> ✓</div>
+                        <div class="timestamp"><?php echo $display_date?> ✓</div>
                     </div>
                 </div>
 
