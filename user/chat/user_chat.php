@@ -175,7 +175,7 @@ else{
                     
             ?>
 
-            <?php if($type =='sent') { ?>
+            <?php if($type =='replies') { ?>
 
                 <div class="message user">
                     <div class="message-avatar">
