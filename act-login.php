@@ -9,12 +9,26 @@ session_start();
 
   //  echo '<script>alert("'.$userid.'");</script>';
     // echo '<script>alert("'.$password.'");</script>';
-
+      $password_hashed = password_hash($password, PASSWORD_DEFAULT);
       
-      $sql1 = "SELECT * FROM model_user WHERE username = '".$userid."' and password = '".$password."'";
+      $count1 =0;
+
+      $sql1 = "SELECT * FROM model_user WHERE username = '".$userid."' and password = '".$password_hashed."'";
       $result1 = mysqli_query($con,$sql1);
 
-      if (mysqli_num_rows($result1) > 0) {
+       if ($result1 && $result1->num_rows > 0) {
+
+          $row = $result1->fetch_assoc();
+
+          $hashed_password = $row['password']; 
+
+          if (password_verify($password, $hashed_password)) {
+            
+              $$count1 =1;
+          }
+      }
+
+      if($count1 == 1) {
 
         $row1 = mysqli_fetch_assoc($result1);
          $user_id1 = $row1['id'];
@@ -38,9 +52,6 @@ session_start();
 
       }
 
-
-      $count1 = mysqli_num_rows($result1);
-      
       if($count1 == 1) {
 
          $_SESSION["log_user_id"] = $user_id1;
