@@ -146,9 +146,6 @@ if (isset($_POST['vfb-submit'])) {
 	}
 
 
- //if($password == $c_pasword){
-
-    echo 'test';
 
   $sql_u = "SELECT * FROM model_user WHERE username='$user_name'"; 
     $sql_e = "SELECT * FROM model_user WHERE email='$email'"; 
