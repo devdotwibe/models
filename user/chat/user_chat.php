@@ -73,13 +73,7 @@ else{
 	die;
 }
 
-$mDefaultImage =SITEURL."/assets/images/girl.png";
-if($userDetails['gender']=='Male'){
-	$mDefaultImage =SITEURL."/assets/images/profile.png";
-}
-if(!empty($userDetails['profile_pic'])){
-	$mDefaultImage = SITEURL.$userDetails['profile_pic'];
-}
+
 
 ?>
 
