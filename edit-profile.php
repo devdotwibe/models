@@ -1588,6 +1588,8 @@ $lang_list = modal_language_list();
         </div>
       </div>
     </div>
+	
+	<?php $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_SESSION['log_user_unique_id']); ?>
 
     <!-- Physical Attributes -->
     <div id="physical-attributes" class="collapsible-section">
@@ -1606,18 +1608,18 @@ $lang_list = modal_language_list();
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <label class="form-label">Height</label>
-            <div class="unit-toggle">
-              <div class="unit-option active" onclick="toggleHeightUnit('ft')">ft/in</div>
-              <div class="unit-option" onclick="toggleHeightUnit('cm')">cm</div>
+            <div class="unit-toggle unit-toggleh" id="unit-toggleh">
+              <div class="unit-option active ft-option" onclick="toggleHeightUnit('ft',this)">ft/in</div>
+              <div class="unit-option cm-option" onclick="toggleHeightUnit('cm',this)">cm</div>
             </div>
             <div id="height-ft" class="grid grid-cols-2 gap-2">
-              <select class="form-select">
+              <select class="form-select" name="feet">
                 <option value="">Feet</option>
                 <option value="4">4'</option>
                 <option value="5" selected>5'</option>
                 <option value="6">6'</option>
               </select>
-              <select class="form-select">
+              <select class="form-select" name="inches" >
                 <option value="">Inches</option>
                 <option value="0">0"</option>
                 <option value="1">1"</option>
@@ -1634,8 +1636,9 @@ $lang_list = modal_language_list();
               </select>
             </div>
             <div id="height-cm" class="hidden">
-              <input type="number" class="form-input" placeholder="Height in cm" min="140" max="200" value="168">
+              <input type="number" name="height_cm" class="form-input" placeholder="Height in cm" min="140" max="200" value="168">
             </div>
+			<input type="hidden" name="height_type" id="height_type" value="ft">
           </div>
           <div>
             <label class="form-label">Weight</label>
@@ -1744,27 +1747,41 @@ $lang_list = modal_language_list();
       </div>
       <div class="collapsible-content">
 	  
-							<fieldset class="vfb-fieldset vfb-fieldset-4 stats " id="item-vfb-42">
-                              
+		  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div>
+              <label class="form-label">Choose Document Type</label>
+			  <select name="choose_document" id="vfb-43" class="vfb-select  vfb-medium form-select  required ">
+                    <option value="" selected='selected'>Choose Document</option>
+                    <option value="Passport" <?php if(isset($extra_details['choose_document']) && $extra_details['choose_document'] == 'Passport'){ echo 'selected'; } ?> >Passport</option>
+                    <option value="Driving License" <?php if(isset($extra_details['choose_document']) && $extra_details['choose_document'] == 'Driving License'){ echo 'selected'; } ?> >Driving License</option>
+                    <option value="National ID" <?php if(isset($extra_details['choose_document']) && $extra_details['choose_document'] == 'National ID'){ echo 'selected'; } ?> >National ID</option>
+                    <option value="Pan Card" <?php if(isset($extra_details['choose_document']) && $extra_details['choose_document'] == 'Pan Card'){ echo 'selected'; } ?> >Pan Card</option>
+                    <option value="Aadhar" <?php if(isset($extra_details['choose_document']) && $extra_details['choose_document'] == 'Aadhar'){ echo 'selected'; } ?> >Aadhar</option>
+                </select>
+            </div>
+            <div>
+              <label class="form-label">Upload ID Card</label>
+              <input type="file" name="govt_id_proof" class="govt_id_proof" value="">
+			  
+			  <?php
+			  if(isset($extra_details['govt_id_proof'])){ 
+			  echo '<div class="idproof-section">';
+				  $extension = strtolower(pathinfo($extra_details['govt_id_proof'], PATHINFO_EXTENSION));
+				  $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
-                              <ul class="vfb-section vfb-section-3">
-                                 <li class="vfb-item vfb-item-select   vfb-left-half" id="item-vfb-43">
-                                    <label for="vfb-43" class="vfb-desc">Choose Document Type <span class="vfb-required-asterisk">*</span></label>
-                                    <select name="choose_document" id="vfb-43" class="vfb-select  vfb-medium  required ">
-                                       <option value="" selected='selected'>Choose Document</option>
-                                       <option value="Passport">Passport</option>
-                                       <option value="Driving License">Driving License</option>
-                                       <option value="National ID">National ID</option>
-                                       <option value="Pan Card">Pan Card</option>
-                                       <option value="Aadhar">Aadhar</option>
-                                    </select>
-                                 </li>
-                                 <li class="vfb-item vfb-item-textarea vfb-left-half" >
-                                    <label class="vfb-desc">Upload ID Card <span class="vfb-required-asterisk">*</span></label>
-                                    <input type="file" name="govt_id">
-                                 </li>
-                              </ul>
-                           </fieldset>
+					if (in_array($extension, $allowed_extensions)) {
+						echo '<img src="'.SITEURL.$extra_details['govt_id_proof'].'" class="id_proof_img">';
+					} else {
+						echo '<a href="'.SITEURL.$extra_details['govt_id_proof'].'" target="_blank"><img src="'.SITEURL.'/uploads/govt-proof.svg" class="id_proof_img"></a>';
+					}
+				echo '</div>';
+			  }
+			  
+			  ?>
+			  
+            </div>
+          </div>
+	  
 	  
 	  </div>
 	  
@@ -2557,21 +2574,22 @@ $lang_list = modal_language_list();
     currentWeightUnit = unit; // Update after conversion
   }
 
-  function toggleHeightUnit(unit, event) {
+  function toggleHeightUnit(unit, event) { 
     currentHeightUnit = unit;
     const heightFtDiv = document.getElementById('height-ft');
     const heightCmDiv = document.getElementById('height-cm');
-    const unitToggle = event.target.closest('.unit-toggle');
+    const unitToggle = document.getElementById('unit-toggleh');
 
     if (unitToggle) {
         unitToggle.querySelectorAll('.unit-option').forEach(option => {
             option.classList.remove('active');
         });
-        event.target.classList.add('active');
-    }
-    
+        //event.target.classList.add('active');
+    } 
+    jQuery('.'+currentHeightUnit+'-option').addClass('active');
+	jQuery('#height_type').val(currentHeightUnit);
     if (heightFtDiv && heightCmDiv) {
-        if (unit === 'cm') {
+        if (unit === 'cm') { 
             heightFtDiv.classList.add('hidden');
             heightCmDiv.classList.remove('hidden');
         } else {

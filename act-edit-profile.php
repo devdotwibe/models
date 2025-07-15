@@ -205,6 +205,32 @@ if ($_POST['submit_name']){
 			
 		}
 		
+		
+		$arr_proof = array('choose_document');
+		$post_data_extra = array_from_post($arr_proof);
+		$post_data_extra['unique_model_id'] = $model_unique_id;
+		$model_extra_list = DB::query('select id from model_extra_details where unique_model_id="'.$model_unique_id.'"');
+		
+		//Proof file
+		$target_dir_doc = "uploads/casting/document/";
+		  if (isset($_FILES["govt_id_proof"]) && !empty($_FILES["govt_id_proof"]['name'])) {
+		  $target_file_doc = $target_dir_doc . basename($_FILES["govt_id_proof"]["name"]);
+			  if (move_uploaded_file($_FILES["govt_id_proof"]["tmp_name"], $target_file_doc)){
+				$post_data_extra['govt_id_proof'] = "uploads/casting/document/" . basename($_FILES["govt_id_proof"]["name"]);
+			  }
+		  }
+		if(empty($model_extra_list)){
+			
+			DB::insert('model_extra_details', $post_data_extra); 
+			$created_id = DB::insertId();
+			
+		}else{
+			
+			DB::update('model_extra_details', $post_data_extra, "unique_model_id=%s", $model_unique_id);
+			
+		}
+		
+		
 		echo '<script>alert("Your Services Successfully Updated");
 	window.location="edit-profile.php"
 	</script>';
