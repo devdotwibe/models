@@ -300,7 +300,7 @@ include('includes/helper.php');
                                     <textarea name="user_bio" placeholder="Tell potential matches about yourself..." class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-28 resize-none shadow-lg transition duration-300 border border-white/10"></textarea>
                                 </div>
 
-                                <button type="submit" class="create-profilebtn w-full btn-primary text-white font-bold py-4 rounded-xl transition duration-300 relative overflow-hidden text-lg">
+                                <button type="submit" value="vfb-submit" class="create-profilebtn w-full btn-primary text-white font-bold py-4 rounded-xl transition duration-300 relative overflow-hidden text-lg">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>
                                     CREATE MY PROFILE
                                 </button>
