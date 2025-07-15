@@ -163,8 +163,6 @@ if (isset($_POST['vfb-submit'])) {
  	$que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`as_a_model`,`user_bio`,`services`) 
 	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password."', '".$country."', '".$gender."', '".$as_a_model."', '".$user_bio."', '".$services."')";
 
-     echo 'test';
-     
     if(mysqli_query($con,$que)){
  
       echo '<script>alert("You have Successfully Registered")</script>';
