@@ -24,7 +24,7 @@ session_start();
 
           if (password_verify($password, $hashed_password)) {
             
-              $$count1 =1;
+              $count1 =1;
           }
       }
 
