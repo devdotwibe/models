@@ -213,6 +213,16 @@ if(!empty($userDetails['profile_pic'])){
         }
 
     }
+
+    	  
+        if(!empty($get_modal_user[0]['profile_pic'])){
+
+            $prof_img = SITEURL.$get_modal_user[0]['profile_pic'];
+
+        } else{
+
+            $prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
+        }
 ?>
 
     <div class="particles" id="particles"></div>
@@ -226,7 +236,7 @@ if(!empty($userDetails['profile_pic'])){
 
                     <div class="model-avatar">
 
-                        <div class="avatar-placeholder"><img src="<?= SITEURL . 'ajax/noimage.php?image=' . $get_modal_user[0]['profile_pic']; ?>" alt="Profile" class="w-20 h-20 rounded-full"></div>
+                        <div class="avatar-placeholder"><img src="<?php echo $prof_img; ?>" alt="Profile" class="w-20 h-20 rounded-full"></div>
 
                     </div>
 
