@@ -22,28 +22,29 @@ session_start();
 
           $hashed_password = $row1['password']; 
 
-          if (password_verify($password, $hashed_password)) {
+          if(password_verify($password, $hashed_password)) {
+                
+            $count1 =1;
+
+            $user_id1 = $row1['id'];
+            $user_name1 = $row1['username'];
+            $unique_id = $row1['unique_id'];
+            $email = $row1['email'];
+            $city = $row1['city'];
+            $user_type = 'User';
+            if($row1['as_a_model'] == 'Yes'){
+              $user_type = 'Model';
+            }
             
-         $count1 =1;
+              
+              $sql = "SELECT * FROM model_dp_banner WHERE unique_model_id = '".$unique_id."'";
+              $result = mysqli_query($con,$sql);
 
-         $user_id1 = $row1['id'];
-         $user_name1 = $row1['username'];
-         $unique_id = $row1['unique_id'];
-         $email = $row1['email'];
-         $city = $row1['city'];
-         $user_type = 'User';
-         if($row1['as_a_model'] == 'Yes'){
-          $user_type = 'Model';
-         }
-         
-          
-          $sql = "SELECT * FROM model_dp_banner WHERE unique_model_id = '".$unique_id."'";
-          $result = mysqli_query($con,$sql);
-
-          if (mysqli_num_rows($result) > 0) {
-            $row1 = mysqli_fetch_assoc($result);
-             $model_profile_pic = $row1['model_profile_pic'];
+              if (mysqli_num_rows($result) > 0) {
+                $row1 = mysqli_fetch_assoc($result);
+                $model_profile_pic = $row1['model_profile_pic'];
           }
+        }
 
       }
 
