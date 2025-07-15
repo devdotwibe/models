@@ -185,7 +185,7 @@ if(!empty($userDetails['profile_pic'])){
                     </div>
                     <div class="message-content">
                         <div class="message-text"> <?php echo $set_user['message'] ?> </div>
-                        <div class="timestamp">10:00 AM ✓✓</div>
+                        <div class="timestamp"><?php echo $set_user['created_date']?> ✓✓</div>
                     </div>
                 </div>
 
@@ -198,7 +198,7 @@ if(!empty($userDetails['profile_pic'])){
                     </div>
                     <div class="message-content">
                         <div class="message-text"> <?php echo $set_user['message'] ?></div>
-                        <div class="timestamp">10:01 AM ✓</div>
+                        <div class="timestamp"><?php echo $set_user['created_date']?> ✓</div>
                     </div>
                 </div>
 
