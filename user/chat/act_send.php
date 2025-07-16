@@ -21,9 +21,6 @@ if(isset($_SESSION['log_user_id'])){
             if($post['user_id']&&$post['message'])
             {
 
-
-                echo 'test2';
-
                 $date = date('Y-m-d H:i:s');
                 $post_data = $post;
                 $post_data['created_date'] = $date;
@@ -32,6 +29,9 @@ if(isset($_SESSION['log_user_id'])){
                 $joe_id = DB::insertId();
             
                 $display_date =  date('h:i A', strtotime($date));
+
+
+                echo 'test3';
 
                 $type ="replies";
                 if($userDetails['gender']=='Male'){
