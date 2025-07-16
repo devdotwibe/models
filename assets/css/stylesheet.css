@@ -8490,6 +8490,10 @@ left: 83%;
             border-radius: 50px;
         }
 
+      body.advt-page.my-purpose .pp-sec .anim-div{
+        animation-delay: 0.1s
+      }
+
         @keyframes particle-float {
             0% {
                 opacity: 0;

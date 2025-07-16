@@ -74,7 +74,7 @@
 
     <main>
         <!-- Premium Page Header -->
-        <section class="py-8 sm:py-16 relative overflow-hidden">
+        <section class="py-8 sm:py-16 relative overflow-hidden pp-sec">
             <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-purple-900/15 to-pink-900/20"></div>
             <div class="container-advanced mx-auto relative z-10">
                 <div class="text-center mb-8 sm:mb-12">
@@ -84,28 +84,28 @@
 
                 <!-- Advanced Stats Dashboard -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 max-w-5xl mx-auto">
-                    <div class="glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in" style="animation-delay: 0.1s">
+                    <div class="anim-div glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in">
                         <div class="counter-advanced mb-2" data-target="47"><?php echo $photo_count+$video_count; ?></div>
                         <div class="text-white/70 font-medium text-sm sm:text-base">Total Purchases</div>
                         <?php /*?><div class="w-full bg-white/10 rounded-full h-2 mt-3">
                             <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full" style="width: 78%"></div>
                         </div><?php */ ?>
                     </div>
-                    <div class="glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in" style="animation-delay: 0.2s">
+                    <div class="anim-div glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in">
                         <div class="counter-advanced mb-2" data-target="28"><?php echo $photo_count; ?></div>
                         <div class="text-white/70 font-medium text-sm sm:text-base">Photos</div>
                         <?php /*?><div class="w-full bg-white/10 rounded-full h-2 mt-3">
                             <div class="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full" style="width: 65%"></div>
                         </div><?php */ ?>
                     </div>
-                    <div class="glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in" style="animation-delay: 0.3s">
+                    <div class="anim-div glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in">
                         <div class="counter-advanced mb-2" data-target="19"><?php echo $video_count; ?></div>
                         <div class="text-white/70 font-medium text-sm sm:text-base">Videos</div>
                         <?php /*?><div class="w-full bg-white/10 rounded-full h-2 mt-3">
                             <div class="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full" style="width: 45%"></div>
                         </div><?php */ ?>
                     </div>
-                    <div class="glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in" style="animation-delay: 0.4s">
+                    <div class="anim-div glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in">
                         <div class="text-xl sm:text-2xl font-bold gradient-text-premium mb-2">$1,247</div>
                         <div class="text-white/70 font-medium text-sm sm:text-base">Total Investment</div>
                         <?php /*?><div class="w-full bg-white/10 rounded-full h-2 mt-3">
