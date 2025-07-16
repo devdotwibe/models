@@ -232,10 +232,14 @@ if(!empty($userDetails['profile_pic'])){
 				$city_list = DB::query('select name from cities where id="'.$userDetails['city'].'"');
 			if(!empty($country_list) && !empty($country_list[0]['name'])){
 			echo '<p class="text-white/60 text-sm mb-2">'.$city_list[0]['name'].', '.$state_list[0]['name'].', '.$country_list[0]['name'].'</p>';
-			 } ?>
+			 } 
+			 $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $userDetails['unique_id']);
+			 ?>
+		<?php if(!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published'){ ?>
           <div class="flex justify-center mb-4">
             <span class="verified-badge">✓ Verified</span>
           </div>
+		<?php } ?>
           <div class="space-y-2">
             <button class="btn-primary w-full" onclick="navigateTo('edit-profile.php')">Edit Profile</button>
             <a class="btn-secondary w-full" href="<?= SITEURL ?>single-profile.php?m_unique_id=<?php echo $userDetails['unique_id']; ?>">View Profile</a>
