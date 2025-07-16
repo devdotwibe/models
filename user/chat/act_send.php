@@ -20,41 +20,41 @@ if(isset($_SESSION['log_user_id'])){
 
             if($post['user_id']&&$post['message']){
 
-                $date = date('Y-m-d H:i:s');
-                $post_data = $post;
-                $post_data['created_date'] = $date;
-                $post_data['sender_id'] = $userDetails['id'];
-                DB::insert('model_user_message', $post_data);
-                $joe_id = DB::insertId();
-            
-                $display_date =  date('h:i A', strtotime($date));
+                        $date = date('Y-m-d H:i:s');
+                        $post_data = $post;
+                        $post_data['created_date'] = $date;
+                        $post_data['sender_id'] = $userDetails['id'];
+                        DB::insert('model_user_message', $post_data);
+                        $joe_id = DB::insertId();
+                    
+                        $display_date =  date('h:i A', strtotime($date));
 
-                $type ="replies";
-                if($userDetails['gender']=='Male'){
-                    $defaultImage =SITEURL."/assets/images/profile.png";
-                }
-                if(!empty($userDetails['profile_pic'])){
-                    $defaultImage = SITEURL.$userDetails['profile_pic'];
-                }
+                        $type ="replies";
+                        if($userDetails['gender']=='Male'){
+                            $defaultImage =SITEURL."/assets/images/profile.png";
+                        }
+                        if(!empty($userDetails['profile_pic'])){
+                            $defaultImage = SITEURL.$userDetails['profile_pic'];
+                        }
 
-                $output['status']= 'ok';
+                        $output['status']= 'ok';
 
-                $result = '<div class="message user">
-                                <div class="message-avatar">
-                                    <div class="avatar-placeholder user-avatar-placeholder">
-                                        <img src="' . $defaultImage . '">
-                                    </div>
-                                </div>
-                                <div class="message-content">
-                                    <div class="message-text">' . htmlspecialchars($post['message']) . '</div>
-                                    <div class="timestamp">' . $display_date . ' ✓✓</div>
-                                </div>
-                            </div>';
+                        $result = '<div class="message user">
+                                        <div class="message-avatar">
+                                            <div class="avatar-placeholder user-avatar-placeholder">
+                                                <img src="' . $defaultImage . '">
+                                            </div>
+                                        </div>
+                                        <div class="message-content">
+                                            <div class="message-text">' . htmlspecialchars($post['message']) . '</div>
+                                            <div class="timestamp">' . $display_date . ' ✓✓</div>
+                                        </div>
+                                    </div>';
 
 
-                $output['message']= $result;
-                
-            }
+                        $output['message']= $result;
+                        
+                    }
         }
 
 
