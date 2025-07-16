@@ -1,29 +1,60 @@
-<!-- viewer.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Webcam Viewer</title>
+    <meta charset="UTF-8">
+    <title>Viewer</title>
 </head>
 <body>
-  <h2>Live Stream</h2>
-  <img id="viewer" alt="stream will appear here..." />
+    <h2>Viewer</h2>
+    <video id="remote" autoplay playsinline controls width="600"></video>
 
-  <script>
-    const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
-    const viewerImg = document.getElementById("viewer");
+    <script>
+        const video = document.getElementById('remote');
+        const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
 
-    socket.onmessage = event => {
+        let mediaSource = new MediaSource();
+        let sourceBuffer;
+        let queue = [];
+        let isBufferUpdating = false;
 
-    console.log(event.data);
+        video.src = URL.createObjectURL(mediaSource);
 
-    var data = JSON.parse(event.data);
+        mediaSource.addEventListener('sourceopen', () => {
+            sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8,opus"');
+            sourceBuffer.mode = 'segments';
 
-      viewerImg.src = data.data;
-    };
+            sourceBuffer.addEventListener('updateend', () => {
+                isBufferUpdating = false;
+                processQueue();
+            });
+        });
 
-    socket.onerror = error => {
-      console.error("WebSocket error:", error);
-    };
-  </script>
+        socket.onmessage = ({ data }) => {
+            const msg = JSON.parse(data);
+
+            if (msg.event === 'stream-chunk') {
+                const arrayBuffer = base64ToArrayBuffer(msg.data);
+                queue.push(arrayBuffer);
+                processQueue();
+            }
+        };
+
+        function processQueue() {
+            if (!sourceBuffer || !queue.length || sourceBuffer.updating || isBufferUpdating) return;
+
+            isBufferUpdating = true;
+            sourceBuffer.appendBuffer(queue.shift());
+        }
+
+        function base64ToArrayBuffer(base64) {
+            const binaryString = atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+    </script>
 </body>
 </html>

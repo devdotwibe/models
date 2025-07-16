@@ -1,39 +1,65 @@
-<!-- streamer.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Webcam Streamer</title>
+    <meta charset="UTF-8">
+    <title>Streamer</title>
 </head>
 <body>
-  <h2>Streaming Webcam...</h2>
-  <video id="video" autoplay muted playsinline></video>
+    <h2>Streamer</h2>
+    <video id="preview" autoplay muted playsinline width="600"></video><br>
+    <button onclick="startStreaming()">Start Streaming</button>
+    <button onclick="stopStreaming()">Stop</button>
 
-  <script>
-    const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
+    <script>
+        const preview = document.getElementById("preview");
+        const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket"); // your server
+        let stream, recorder;
+        let seqnce_no = 0;
 
-    const video = document.getElementById("video");
+        async function startStreaming() {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            preview.srcObject = stream;
 
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-      .then(stream => {
-        video.srcObject = stream;
+            recorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp8,opus' });
 
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
+            recorder.ondataavailable = (event) => {
+                if (event.data.size > 0 && socket.readyState === WebSocket.OPEN) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        const arrayBuffer = reader.result;
+                        const base64 = arrayBufferToBase64(arrayBuffer);
+                        socket.send(JSON.stringify({
+                            event: 'stream-chunk',
+                            data: base64,
+                            private_id: seqnce_no
+                        }));
+                        seqnce_no++;
+                    };
+                    reader.readAsArrayBuffer(event.data);
+                }
+            };
 
-        video.addEventListener('loadedmetadata', () => {
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
+            recorder.start(1000); // 1-second chunks
+            console.log("Streaming started");
+        }
 
-          setInterval(() => {
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const imageData = canvas.toDataURL('image/jpeg', 0.4); // compress
-            socket.send(JSON.stringify({event:'live_streaming',data:imageData}));
-          }, 100); // ~10 FPS
-        });
-      })
-      .catch(error => {
-        console.error("Webcam error:", error);
-      });
-  </script>
+        function stopStreaming() {
+            if (recorder && recorder.state !== "inactive") {
+                recorder.stop();
+            }
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                preview.srcObject = null;
+            }
+            console.log("Streaming stopped");
+        }
+
+        function arrayBufferToBase64(buffer) {
+            let binary = '';
+            const bytes = new Uint8Array(buffer);
+            bytes.forEach(b => binary += String.fromCharCode(b));
+            return btoa(binary);
+        }
+    </script>
 </body>
 </html>
