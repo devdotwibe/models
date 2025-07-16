@@ -997,7 +997,8 @@ $lang_list = modal_language_list();
           <span>TLM tokens are our platform's currency. Users purchase tokens and spend them to access your services. You earn 70% of all token revenue.</span>
         </div>
 		
-		<?php $serv_chats = DB::queryFirstRow('select * from model_service_chat where model_unique_id="'.$userDetails['unique_id'].'"'); ?>
+		<?php $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_SESSION['log_user_unique_id']); ?>
+		<?php //$serv_chats = DB::queryFirstRow('select * from model_service_chat where model_unique_id="'.$userDetails['unique_id'].'"'); ?>
         
 		<!-- Live Streaming -->
         <div class="mb-6">
@@ -1005,17 +1006,17 @@ $lang_list = modal_language_list();
           <p class="help-text">Connect with viewers through live video streaming and interactive chat</p>
           <div class="radio-group mt-3">
             <div class="radio-option">
-              <input type="radio" id="stream-yes" name="offer_live_session" value="yes" <?php if(!empty($serv_chats['offer_live_session']) && $serv_chats['offer_live_session'] == 'yes'){ echo 'checked'; } ?> onchange="toggleConditionalSection('streaming-options', true)">
+              <input type="radio" id="stream-yes" name="live_cam" value="Yes" <?php if(!empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes'){ echo 'checked'; } ?> onchange="toggleConditionalSection('streaming-options', true)">
               <label for="stream-yes">Yes, I'm interested</label>
             </div>
             <div class="radio-option">
-              <input type="radio" id="stream-no" name="offer_live_session" value="no" <?php if((!empty($serv_chats['offer_live_session']) && $serv_chats['offer_live_session'] == 'no') || empty($serv_chats['offer_live_session'])){ echo 'checked'; } ?> onchange="toggleConditionalSection('streaming-options', false)">
+              <input type="radio" id="stream-no" name="live_cam" value="No" <?php if((!empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'No') || empty($extra_details['live_cam'])){ echo 'checked'; } ?> onchange="toggleConditionalSection('streaming-options', false)">
               <label for="stream-no">Not right now</label>
             </div>
           </div>
         </div>
 
-        <div id="streaming-options" class="conditional-section <?php if(!empty($serv_chats['offer_live_session']) && $serv_chats['offer_live_session'] == 'yes'){ echo 'show'; } ?> " >
+        <div id="streaming-options" class="conditional-section <?php if(!empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes'){ echo 'show'; } ?> " >
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <div class="flex justify-between items-center mb-2">
@@ -1028,7 +1029,7 @@ $lang_list = modal_language_list();
                   </label>
                 </div>
               </div>
-              <input type="url" class="form-input" name="instagram" value="<?php if(!empty($serv_chats)) echo $serv_chats['instagram']; ?>"  placeholder="https://instagram.com/username">
+              <input type="url" class="form-input" name="insta_p_url" value="<?php if(!empty($extra_details)) echo $extra_details['insta_p_url']; ?>"  placeholder="https://instagram.com/username">
               <p class="help-text">We'll use this to set up video calls through Instagram</p>
             </div>
             <div>
@@ -1042,7 +1043,7 @@ $lang_list = modal_language_list();
                   </label>
                 </div>
               </div>
-              <input type="text" class="form-input" name="snapchat" value="<?php if(!empty($serv_chats)) echo $serv_chats['instagram']; ?>" placeholder="Your Snapchat username">
+              <input type="text" class="form-input" name="snap_p_url" value="<?php if(!empty($extra_details)) echo $serv_chats['snap_p_url']; ?>" placeholder="Your Snapchat username">
               <p class="help-text">We'll use this to set up video calls through Snapchat</p>
             </div>
           </div>
@@ -1050,12 +1051,12 @@ $lang_list = modal_language_list();
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div>
               <label class="form-label">TLM Tokens per Minute (Private Chat)</label>
-              <input type="number" class="form-input" name="private_chat_token" value="<?php if(!empty($serv_chats)) echo $serv_chats['private_chat_token']; ?>" placeholder="e.g., 50" min="1">
+              <input type="number" class="form-input" name="private_chat_token" value="<?php if(!empty($extra_details)) echo $extra_details['private_chat_token']; ?>" placeholder="e.g., 50" min="1">
               <p class="help-text">Set your rate for private video chats</p>
             </div>
             <div>
               <label class="form-label">TLM Tokens per Minute (Group Chat)</label>
-              <input type="number" class="form-input" name="group_chat_tocken" value="<?php if(!empty($serv_chats)) echo $serv_chats['group_chat_tocken']; ?>" placeholder="e.g., 20" min="1">
+              <input type="number" class="form-input" name="group_chat_tocken" value="<?php if(!empty($extra_details)) echo $extra_details['group_chat_tocken']; ?>" placeholder="e.g., 20" min="1">
               <p class="help-text">Set your rate for group video sessions</p>
             </div>
           </div>
@@ -1067,26 +1068,26 @@ $lang_list = modal_language_list();
           <p class="help-text">Host interactive group sessions where multiple viewers can join and chat together</p>
           <div class="radio-group mt-3">
             <div class="radio-option">
-              <input type="radio" id="group-yes" name="group-sessions" value="yes" onchange="toggleConditionalSection('group-options', true)">
+              <input type="radio" id="group-yes" name="group_show" value="Yes" <?php if(!empty($extra_details['group_show']) && $extra_details['group_show'] == 'Yes'){ echo 'checked'; } ?>  onchange="toggleConditionalSection('group-options', true)">
               <label for="group-yes">Yes, sounds fun!</label>
             </div>
             <div class="radio-option">
-              <input type="radio" id="group-no" name="group-sessions" value="no" checked onchange="toggleConditionalSection('group-options', false)">
+              <input type="radio" id="group-no" name="group_show" value="No"  <?php if((!empty($extra_details['group_show']) && $extra_details['group_show'] == 'No') || empty($extra_details['group_show'])){ echo 'checked'; } ?>  onchange="toggleConditionalSection('group-options', false)">
               <label for="group-no">Not interested</label>
             </div>
           </div>
         </div>
 
-        <div id="group-options" class="conditional-section">
+        <div id="group-options" class="conditional-section <?php if(!empty($extra_details['group_show']) && $extra_details['group_show'] == 'Yes'){ echo 'show'; } ?> ">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="form-label">Minimum Group Size</label>
-              <input type="number" class="form-input" placeholder="e.g., 3" min="2" max="20">
+              <input type="number" class="form-input" name="gs_min_member" value="<?php echo $extra_details['gs_min_member']; ?>" placeholder="e.g., 3" min="2" max="20">
               <p class="help-text">Minimum number of participants to start a session</p>
             </div>
             <div>
               <label class="form-label">TLM Tokens per Person per Minute</label>
-              <input type="number" class="form-input" placeholder="e.g., 15" min="1">
+              <input type="number" class="form-input" name="gs_token_price" value="<?php echo $extra_details['gs_token_price']; ?>" placeholder="e.g., 15" min="1">
               <p class="help-text">Rate per participant in group sessions</p>
             </div>
           </div>
@@ -1094,7 +1095,7 @@ $lang_list = modal_language_list();
       </div>
     </div>
 
-	<?php $serv_meets = DB::queryFirstRow('select * from model_service_meet where model_unique_id="'.$userDetails['unique_id'].'"'); ?>
+	<?php //$serv_meets = DB::queryFirstRow('select * from model_service_meet where model_unique_id="'.$userDetails['unique_id'].'"'); ?>
 
     <!-- Meet Services Category -->
     <div id="meet-services" class="collapsible-section">
@@ -1111,26 +1112,26 @@ $lang_list = modal_language_list();
           <p class="help-text">Provide friendly companionship for social events, dinners, or casual meetups</p>
           <div class="radio-group mt-3">
             <div class="radio-option">
-              <input type="radio" id="companion-yes" name="offer_service" value="yes" <?php if(!empty($serv_meets['offer_service']) && $serv_meets['offer_service'] == 'yes'){ echo 'checked'; } ?>  onchange="toggleConditionalSection('companion-options', true)">
+              <input type="radio" id="companion-yes" name="work_escort" value="Yes" <?php if(!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ echo 'checked'; } ?>  onchange="toggleConditionalSection('companion-options', true)">
               <label for="companion-yes">Yes, I'd love to meet people</label>
             </div>
             <div class="radio-option">
-              <input type="radio" id="companion-no" name="offer_service" value="no" <?php if((!empty($serv_meets['offer_service']) && $serv_meets['offer_service'] == 'no') || empty($serv_meets['offer_service'])){ echo 'checked'; } ?>  onchange="toggleConditionalSection('companion-options', false)">
+              <input type="radio" id="companion-no" name="work_escort" value="No" <?php if((!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'No') || empty($extra_details['work_escort'])){ echo 'checked'; } ?>  onchange="toggleConditionalSection('companion-options', false)">
               <label for="companion-no">Not interested</label>
             </div>
           </div>
         </div>
 
-        <div id="companion-options" class="conditional-section <?php if(!empty($serv_meets['offer_service']) && $serv_meets['offer_service'] == 'yes'){ echo 'show'; } ?>  ">
+        <div id="companion-options" class="conditional-section <?php if(!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ echo 'show'; } ?>  ">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="form-label">Local Meetup Rate (TLM tokens per hour)</label>
-              <input type="number" class="form-input" name="local_meet_rate"  value="<?php if(!empty($serv_meets)) echo $serv_meets['local_meet_rate']; ?>" placeholder="e.g., 1000" min="1">
+              <input type="number" class="form-input" name="in_per_hour"  value="<?php if(!empty($extra_details)) echo $extra_details['in_per_hour']; ?>" placeholder="e.g., 1000" min="1">
               <p class="help-text">Rate for local social meetups and events</p>
             </div>
             <div>
               <label class="form-label">Extended Social Rate (TLM tokens per hour)</label>
-              <input type="number" class="form-input" name="extended_rate" value="<?php if(!empty($serv_meets)) echo $serv_meets['extended_rate']; ?>" placeholder="e.g., 1500" min="1">
+              <input type="number" class="form-input" name="extended_rate" value="<?php if(!empty($extra_details)) echo $extra_details['extended_rate']; ?>" placeholder="e.g., 1500" min="1">
               <p class="help-text">Rate for longer social engagements</p>
             </div>
           </div>
@@ -1138,12 +1139,12 @@ $lang_list = modal_language_list();
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div>
               <label class="form-label">Overnight Social Rate (TLM tokens)</label>
-              <input type="number" class="form-input" name="overnight_rate" value="<?php if(!empty($serv_meets)) echo $serv_meets['overnight_rate']; ?>" placeholder="e.g., 8000" min="1">
+              <input type="number" class="form-input" name="in_overnight" value="<?php if(!empty($extra_details)) echo $extra_details['in_overnight']; ?>" placeholder="e.g., 8000" min="1">
               <p class="help-text">Rate for overnight social companionship</p>
             </div>
             <div>
               <label class="form-label">Preferred Meeting Location</label>
-              <input type="text" class="form-input" name="preferred_meet_location" value="<?php if(!empty($serv_meets)) echo $serv_meets['preferred_meet_location']; ?>" placeholder="e.g., Coffee shops, restaurants, events">
+              <input type="text" class="form-input" name="d_a_address" value="<?php if(!empty($extra_details)) echo $extra_details['d_a_address']; ?>" placeholder="e.g., Coffee shops, restaurants, events">
               <p class="help-text">Where you prefer to meet for social activities</p>
             </div>
           </div>
@@ -1190,17 +1191,17 @@ $lang_list = modal_language_list();
           <p class="help-text">Accompany clients on trips, vacations, or business travel as a social companion</p>
           <div class="radio-group mt-3">
             <div class="radio-option">
-              <input type="radio" id="travel-yes" name="travel-companion" value="yes" onchange="toggleConditionalSection('travel-options', true)">
+              <input type="radio" id="travel-yes" name="International_tours" value="Yes"  <?php if(!empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ echo 'checked'; } ?>  onchange="toggleConditionalSection('travel-options', true)">
               <label for="travel-yes">Yes, I love to travel!</label>
             </div>
             <div class="radio-option">
-              <input type="radio" id="travel-no" name="travel-companion" value="no" checked onchange="toggleConditionalSection('travel-options', false)">
+              <input type="radio" id="travel-no" name="International_tours" value="No"  <?php if((!empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'No') || empty($extra_details['International_tours'])){ echo 'checked'; } ?>   onchange="toggleConditionalSection('travel-options', false)">
               <label for="travel-no">Not interested</label>
             </div>
           </div>
         </div>
 
-        <div id="travel-options" class="conditional-section">
+        <div id="travel-options" class="conditional-section <?php if(!empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ echo 'show'; } ?> ">
           <div>
             <label class="form-label">Available Months for Travel</label>
             <p class="help-text">Select months when you're available for travel companionship</p>
@@ -1259,24 +1260,24 @@ $lang_list = modal_language_list();
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             <div>
               <label class="form-label">Daily Rate (TLM tokens)</label>
-              <input type="number" class="form-input" placeholder="e.g., 5000" min="1">
+              <input type="number" class="form-input" name="daily_rate" value="<?php if(!empty($extra_details)) echo $extra_details['daily_rate']; ?>" placeholder="e.g., 5000" min="1">
               <p class="help-text">Rate per day for travel companionship</p>
             </div>
             <div>
               <label class="form-label">Weekly Rate (TLM tokens)</label>
-              <input type="number" class="form-input" placeholder="e.g., 30000" min="1">
+              <input type="number" class="form-input" name="weekly_rate" value="<?php if(!empty($extra_details)) echo $extra_details['weekly_rate']; ?>"  placeholder="e.g., 30000" min="1">
               <p class="help-text">Rate per week for extended travel</p>
             </div>
             <div>
               <label class="form-label">Monthly Rate (TLM tokens)</label>
-              <input type="number" class="form-input" placeholder="e.g., 100000" min="1">
+              <input type="number" class="form-input" name="monthly_rate" value="<?php if(!empty($extra_details)) echo $extra_details['monthly_rate']; ?>"  placeholder="e.g., 100000" min="1">
               <p class="help-text">Rate per month for long-term travel</p>
             </div>
           </div>
 
           <div class="mt-4">
             <label class="form-label">Preferred Travel Destinations</label>
-            <input type="text" class="form-input" placeholder="e.g., Europe, Asia, Caribbean, Domestic US">
+            <input type="text" class="form-input" name="travel_destination" value="<?php if(!empty($extra_details)) echo $extra_details['travel_destination']; ?>"  placeholder="e.g., Europe, Asia, Caribbean, Domestic US">
             <p class="help-text">List countries or regions you'd like to visit</p>
           </div>
         </div>
@@ -1297,11 +1298,11 @@ $lang_list = modal_language_list();
           <p class="help-text">Create and sell custom content for your audience</p>
           <div class="radio-group mt-3">
             <div class="radio-option">
-              <input type="radio" id="content-yes" name="content-creation" value="yes" onchange="toggleConditionalSection('content-options', true)">
+              <input type="radio" id="content-yes" name="video_pictures" value="Yes" <?php if(!empty($extra_details['video_pictures']) && $extra_details['video_pictures'] == 'Yes'){ echo 'checked'; } ?>  onchange="toggleConditionalSection('content-options', true)">
               <label for="content-yes">Yes, I'm creative!</label>
             </div>
             <div class="radio-option">
-              <input type="radio" id="content-no" name="content-creation" value="no" checked onchange="toggleConditionalSection('content-options', false)">
+              <input type="radio" id="content-no" name="video_pictures" value="No"  <?php if((!empty($extra_details['video_pictures']) && $extra_details['video_pictures'] == 'No') || empty($extra_details['video_pictures'])){ echo 'checked'; } ?>  onchange="toggleConditionalSection('content-options', false)">
               <label for="content-no">Not interested</label>
             </div>
           </div>
@@ -1342,17 +1343,17 @@ $lang_list = modal_language_list();
           <div class="question-text">Are you interested in professional modeling opportunities?</div>
           <div class="radio-group mt-3">
             <div class="radio-option">
-              <input type="radio" id="modeling-yes" name="modeling" value="yes" onchange="toggleConditionalSection('modeling-options', true)">
+              <input type="radio" id="modeling-yes" name="modeling" value="Yes" <?php if(!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes'){ echo 'checked'; } ?>  onchange="toggleConditionalSection('modeling-options', true)">
               <label for="modeling-yes">Yes</label>
             </div>
             <div class="radio-option">
-              <input type="radio" id="modeling-no" name="modeling" value="no" checked onchange="toggleConditionalSection('modeling-options', false)">
+              <input type="radio" id="modeling-no" name="modeling" value="No"  <?php if((!empty($extra_details['modeling']) && $extra_details['modeling'] == 'No') || empty($extra_details['modeling'])){ echo 'checked'; } ?>  onchange="toggleConditionalSection('modeling-options', false)">
               <label for="modeling-no">No</label>
             </div>
           </div>
         </div>
 
-        <div id="modeling-options" class="conditional-section">
+        <div id="modeling-options" class="conditional-section <?php if(!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes'){ echo 'show'; } ?> ">
           <div class="adult-section mb-6">
             <div class="adult-badge">🔞 Adult Content</div>
             <div class="mb-4">
@@ -1360,11 +1361,11 @@ $lang_list = modal_language_list();
               <p class="help-text">This includes lingerie, swimwear, artistic nude, and adult-oriented content</p>
               <div class="radio-group mt-3">
                 <div class="radio-option">
-                  <input type="radio" id="adult-yes" name="adult-content" value="yes" onchange="toggleConditionalSection('adult-services', true)">
+                  <input type="radio" id="adult-yes" name="adult_content" value="Yes"  <?php if(!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes'){ echo 'checked'; } ?>  onchange="toggleConditionalSection('adult-services', true)">
                   <label for="adult-yes">Yes, I'm comfortable</label>
                 </div>
                 <div class="radio-option">
-                  <input type="radio" id="adult-no" name="adult-content" value="no" checked onchange="toggleConditionalSection('adult-services', false)">
+                  <input type="radio" id="adult-no" name="adult_content" value="No"  <?php if((!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'No') || empty($extra_details['adult_content'])){ echo 'checked'; } ?>  onchange="toggleConditionalSection('adult-services', false)">
                   <label for="adult-no">No, only non-adult content</label>
                 </div>
               </div>
@@ -1589,8 +1590,6 @@ $lang_list = modal_language_list();
       </div>
     </div>
 	
-	<?php $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_SESSION['log_user_unique_id']); ?>
-
     <!-- Physical Attributes -->
     <div id="physical-attributes" class="collapsible-section">
       <div class="collapsible-header" onclick="toggleCollapsible(this)">

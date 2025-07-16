@@ -179,7 +179,7 @@ if ($_POST['submit_name']){
 	die;
     }else if(isset($_POST['service_submit'])){
 		$model_unique_id = $_POST['model_unique_id']; 
-		$service_chat_list = DB::query('select offer_live_session from model_service_chat where model_unique_id="'.$model_unique_id.'"');
+		/*$service_chat_list = DB::query('select offer_live_session from model_service_chat where model_unique_id="'.$model_unique_id.'"');
 			$arr_chat = array('model_unique_id','offer_live_session','instagram','snapchat','private_chat_token','group_chat_tocken'); 
 			$post_data_chat = array_from_post($arr_chat); 
 		if(empty($service_chat_list)){
@@ -203,10 +203,10 @@ if ($_POST['submit_name']){
 			
 			DB::update('model_service_meet', $post_data_meet, "model_unique_id=%s", $model_unique_id);
 			
-		}
+		}*/
 		
 		
-		$arr_proof = array('choose_document','height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
+		$arr_proof = array('live_cam','insta_p_url','snap_p_url','private_chat_token','group_chat_tocken','group_show','gs_min_member','gs_token_price','work_escort','in_per_hour','extended_rate','in_overnight','d_a_address','International_tours','daily_rate','weekly_rate','monthly_rate','travel_destination','video_pictures','modeling','adult_content','choose_document','height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
 		$post_data_extra = array_from_post($arr_proof);
 		$post_data_extra['unique_model_id'] = $model_unique_id;
 		if($_POST['height_type'] == 'ft'){
