@@ -43,7 +43,7 @@
 
     function updateFrame() {
       if (queue.length > 0&&sourceBuffer && !sourceBuffer.updating) {
-              sourceBuffer.appendBuffer(buffer);
+             sourceBuffer.appendBuffer(queue.shift());
             }
 
       requestAnimationFrame(updateFrame); 
