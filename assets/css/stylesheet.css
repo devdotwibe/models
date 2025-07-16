@@ -9448,14 +9448,22 @@ section.preminum-sersec {
 
 footer .container > .grid {
     gap: 20px !important;
+    margin-bottom: 30px;
 }
 
 footer .container > .grid h4 {
     margin-bottom: 7px !important;
 }
+.home-page .scroll-reveal.revealed {
+    padding-top: 0;
+}
 
-
-
+.home-page .scroll-reveal.revealed > div > div:nth-child(3) {
+    margin-top: 15px !important;
+}
+.home-page .scroll-reveal.revealed > div > div:first-child {
+    margin-bottom: 25px;
+}
 
  }
 
