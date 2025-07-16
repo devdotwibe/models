@@ -320,7 +320,7 @@ else{
                     $('#typingIndicator').before(response.message);
 
                     $("#chatMessages").animate({
-                        scrollTop: $('html, body').get(0).scrollHeight
+                        scrollTop: $("#chatMessages")[0].scrollHeight
                     }, 500);
                 }
                 else{
@@ -330,7 +330,7 @@ else{
         });
         
           $("#chatMessages").animate({
-            scrollTop: $('html, body').get(0).scrollHeight
+            scrollTop: $("#chatMessages")[0].scrollHeight
         }, 500);
     }
 
@@ -360,7 +360,7 @@ else{
                     $('#typingIndicator').before(response.message);
 
                     $("#chatMessages").animate({
-                        scrollTop: $('html, body').get(0).scrollHeight
+                        scrollTop: $("#chatMessages")[0].scrollHeight
                     }, 500);
                 }
              
