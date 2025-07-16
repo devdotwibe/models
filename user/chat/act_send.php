@@ -25,13 +25,16 @@ if(isset($_SESSION['log_user_id'])){
                 $post_data = $post;
                 $post_data['created_date'] = $date;
                 $post_data['sender_id'] = $userDetails['id'];
+
+
+                echo 'test3';
+                
                 DB::insert('model_user_message', $post_data);
                 $joe_id = DB::insertId();
             
                 $display_date =  date('h:i A', strtotime($date));
 
 
-                echo 'test3';
 
                 $type ="replies";
                 if($userDetails['gender']=='Male'){
