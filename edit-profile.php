@@ -1148,37 +1148,39 @@ $lang_list = modal_language_list();
               <p class="help-text">Where you prefer to meet for social activities</p>
             </div>
           </div>
+		  
+		  <?php $social_availability = json_decode($extra_details['social_availability']); ?>
 
           <div class="mt-4">
             <label class="form-label">Available Days</label>
             <p class="help-text">Select the days you're available for social meetups</p>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3">
               <div class="checkbox-option">
-                <input type="checkbox" id="mon" name="availability" value="monday">
+                <input type="checkbox" id="mon" name="social_availability[]" value="Monday" <?php if(!empty($social_availability) && in_array('Monday',$social_availability)) echo 'checked'; ?> >
                 <label for="mon">Monday</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="tue" name="availability" value="tuesday">
+                <input type="checkbox" id="tue" name="social_availability[]" value="Tuesday" <?php if(!empty($social_availability) && in_array('Tuesday',$social_availability)) echo 'checked'; ?> >
                 <label for="tue">Tuesday</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="wed" name="availability" value="wednesday">
+                <input type="checkbox" id="wed" name="social_availability[]" value="Wednesday" <?php if(!empty($social_availability) && in_array('Wednesday',$social_availability)) echo 'checked'; ?> >
                 <label for="wed">Wednesday</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="thu" name="availability" value="thursday">
+                <input type="checkbox" id="thu" name="social_availability[]" value="Thursday" <?php if(!empty($social_availability) && in_array('Thursday',$social_availability)) echo 'checked'; ?> >
                 <label for="thu">Thursday</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="fri" name="availability" value="friday">
+                <input type="checkbox" id="fri" name="social_availability[]" value="Friday" <?php if(!empty($social_availability) && in_array('Friday',$social_availability)) echo 'checked'; ?> >
                 <label for="fri">Friday</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="sat" name="availability" value="saturday">
+                <input type="checkbox" id="sat" name="social_availability[]" value="Saturday" <?php if(!empty($social_availability) && in_array('Saturday',$social_availability)) echo 'checked'; ?> >
                 <label for="sat">Saturday</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="sun" name="availability" value="sunday">
+                <input type="checkbox" id="sun" name="social_availability[]" value="Sunday" <?php if(!empty($social_availability) && in_array('Sunday',$social_availability)) echo 'checked'; ?> >
                 <label for="sun">Sunday</label>
               </div>
             </div>
@@ -1202,56 +1204,57 @@ $lang_list = modal_language_list();
         </div>
 
         <div id="travel-options" class="conditional-section <?php if(!empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ echo 'show'; } ?> ">
-          <div>
+          <?php $travel_months = json_decode($extra_details['travel_months']); ?>
+		  <div>
             <label class="form-label">Available Months for Travel</label>
             <p class="help-text">Select months when you're available for travel companionship</p>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3">
               <div class="checkbox-option">
-                <input type="checkbox" id="jan" name="travel-months" value="january">
+                <input type="checkbox" id="jan" name="travel_months[]" value="January" <?php if(!empty($travel_months) && in_array('January',$travel_months)) echo 'checked'; ?> >
                 <label for="jan">January</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="feb" name="travel-months" value="february">
+                <input type="checkbox" id="feb" name="travel_months[]" value="February" <?php if(!empty($travel_months) && in_array('February',$travel_months)) echo 'checked'; ?> >
                 <label for="feb">February</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="mar" name="travel-months" value="march">
+                <input type="checkbox" id="mar" name="travel_months[]" value="March" <?php if(!empty($travel_months) && in_array('March',$travel_months)) echo 'checked'; ?> >
                 <label for="mar">March</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="apr" name="travel-months" value="april">
+                <input type="checkbox" id="apr" name="travel_months[]" value="April" <?php if(!empty($travel_months) && in_array('April',$travel_months)) echo 'checked'; ?> >
                 <label for="apr">April</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="may" name="travel-months" value="may">
+                <input type="checkbox" id="may" name="travel_months[]" value="May" <?php if(!empty($travel_months) && in_array('May',$travel_months)) echo 'checked'; ?> >
                 <label for="may">May</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="jun" name="travel-months" value="june">
+                <input type="checkbox" id="jun" name="travel_months[]" value="June" <?php if(!empty($travel_months) && in_array('June',$travel_months)) echo 'checked'; ?> >
                 <label for="jun">June</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="jul" name="travel-months" value="july">
+                <input type="checkbox" id="jul" name="travel_months[]" value="July" <?php if(!empty($travel_months) && in_array('July',$travel_months)) echo 'checked'; ?> >
                 <label for="jul">July</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="aug" name="travel-months" value="august">
+                <input type="checkbox" id="aug" name="travel_months[]" value="August" <?php if(!empty($travel_months) && in_array('August',$travel_months)) echo 'checked'; ?> >
                 <label for="aug">August</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="sep" name="travel-months" value="september">
+                <input type="checkbox" id="sep" name="travel_months[]" value="September" <?php if(!empty($travel_months) && in_array('September',$travel_months)) echo 'checked'; ?> >
                 <label for="sep">September</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="oct" name="travel-months" value="october">
+                <input type="checkbox" id="oct" name="travel_months[]" value="October" <?php if(!empty($travel_months) && in_array('October',$travel_months)) echo 'checked'; ?> >
                 <label for="oct">October</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="nov" name="travel-months" value="november">
+                <input type="checkbox" id="nov" name="travel_months[]" value="November" <?php if(!empty($travel_months) && in_array('November',$travel_months)) echo 'checked'; ?> >
                 <label for="nov">November</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="dec" name="travel-months" value="december">
+                <input type="checkbox" id="dec" name="travel_months[]" value="December" <?php if(!empty($travel_months) && in_array('December',$travel_months)) echo 'checked'; ?> >
                 <label for="dec">December</label>
               </div>
             </div>
@@ -1371,108 +1374,108 @@ $lang_list = modal_language_list();
               </div>
             </div>
 
-            <div id="adult-services" class="conditional-section">
+            <div id="adult-services" class="conditional-section  <?php if(!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes' && $extra_details['status'] == 'Published'){ echo 'show'; } ?> ">
               <div class="confidential-section">
                 <div class="confidential-badge">🔐 STRICTLY CONFIDENTIAL - APPROVED MODELS ONLY</div>
                 <p class="text-sm text-white/80 mb-4">The following services are only visible to verified and approved models. This information is encrypted and never shared publicly.</p>
-                
+                <?php $escort_services = json_decode($extra_details['escort_services']); ?>
                 <div class="mb-6">
                   <label class="form-label">Escort & Companionship Services</label>
                   <p class="help-text">Select the professional companionship services you're comfortable providing</p>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
                     <div class="checkbox-option">
-                      <input type="checkbox" id="dinner-companion" name="escort-services" value="dinner-companion">
+                      <input type="checkbox" id="dinner-companion" name="escort_services[]" value="Dinner Companion" <?php if(!empty($escort_services) && in_array('Dinner Companion',$escort_services)) echo 'checked'; ?> >
                       <label for="dinner-companion">Dinner Companion</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="social-events" name="escort-services" value="social-events">
+                      <input type="checkbox" id="social-events" name="escort_services[]" value="Social Events Companion" <?php if(!empty($escort_services) && in_array('Social Events Companion',$escort_services)) echo 'checked'; ?> >
                       <label for="social-events">Social Events Companion</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="business-companion" name="escort-services" value="business-companion">
+                      <input type="checkbox" id="business-companion" name="escort_services[]" value="Business Events Companion" <?php if(!empty($escort_services) && in_array('Business Events Companion',$escort_services)) echo 'checked'; ?> >
                       <label for="business-companion">Business Events Companion</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="travel-escort" name="escort-services" value="travel-escort">
+                      <input type="checkbox" id="travel-escort" name="escort-services[]" value="Travel Companion" <?php if(!empty($escort_services) && in_array('Travel Companion',$escort_services)) echo 'checked'; ?> >
                       <label for="travel-escort">Travel Companion</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="overnight-companion" name="escort-services" value="overnight-companion">
+                      <input type="checkbox" id="overnight-companion" name="escort_services[]" value="Overnight Companionship" <?php if(!empty($escort_services) && in_array('Overnight Companionship',$escort_services)) echo 'checked'; ?> >
                       <label for="overnight-companion">Overnight Companionship</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="weekend-companion" name="escort-services" value="weekend-companion">
+                      <input type="checkbox" id="weekend-companion" name="escort_services[]" value="Weekend Companion" <?php if(!empty($escort_services) && in_array('Weekend Companion',$escort_services)) echo 'checked'; ?> >
                       <label for="weekend-companion">Weekend Companion</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="party-companion" name="escort-services" value="party-companion">
+                      <input type="checkbox" id="party-companion" name="escort-services[]" value="Party & Club Companion" <?php if(!empty($escort_services) && in_array('Party & Club Companion',$escort_services)) echo 'checked'; ?> >
                       <label for="party-companion">Party & Club Companion</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="cultural-companion" name="escort-services" value="cultural-companion">
+                      <input type="checkbox" id="cultural-companion" name="escort_services[]" value="Cultural Events Companion" <?php if(!empty($escort_services) && in_array('Cultural Events Companion',$escort_services)) echo 'checked'; ?> >
                       <label for="cultural-companion">Cultural Events Companion</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="arm-candy" name="escort-services" value="arm-candy">
+                      <input type="checkbox" id="arm-candy" name="escort_services[]" value="Arm Candy / Plus One" <?php if(!empty($escort_services) && in_array('Arm Candy / Plus One',$escort_services)) echo 'checked'; ?> >
                       <label for="arm-candy">Arm Candy / Plus One</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="massage-companion" name="escort-services" value="massage-companion">
+                      <input type="checkbox" id="massage-companion" name="escort_services[]" value="Massage Services" <?php if(!empty($escort_services) && in_array('Massage Services',$escort_services)) echo 'checked'; ?> >
                       <label for="massage-companion">Massage Services</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="gfe" name="escort-services" value="gfe">
+                      <input type="checkbox" id="gfe" name="escort_services[]" value="Girlfriend Experience (GFE)" <?php if(!empty($escort_services) && in_array('Girlfriend Experience (GFE)',$escort_services)) echo 'checked'; ?> >
                       <label for="gfe">Girlfriend Experience (GFE)</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="pse" name="escort-services" value="pse">
+                      <input type="checkbox" id="pse" name="escort_services[]" value="Pornstar Experience (PSE)" <?php if(!empty($escort_services) && in_array('Pornstar Experience (PSE)',$escort_services)) echo 'checked'; ?> >
                       <label for="pse">Pornstar Experience (PSE)</label>
                     </div>
                   </div>
                 </div>
-
+				<?php $intimate_services = json_decode($extra_details['intimate_services']); ?>
                 <div class="mb-6">
                   <label class="form-label">Intimate Services</label>
                   <p class="help-text">Select intimate services you're comfortable providing (18+ only)</p>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
                     <div class="checkbox-option">
-                      <input type="checkbox" id="intimate-companionship" name="intimate-services" value="intimate-companionship">
+                      <input type="checkbox" id="intimate-companionship" name="intimate_services[]" value="Intimate Companionship" <?php if(!empty($intimate_services) && in_array('Intimate Companionship',$intimate_services)) echo 'checked'; ?> >
                       <label for="intimate-companionship">Intimate Companionship</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="sensual-massage" name="intimate-services" value="sensual-massage">
+                      <input type="checkbox" id="sensual-massage" name="intimate_services[]" value="Sensual Massage" <?php if(!empty($intimate_services) && in_array('Sensual Massage',$intimate_services)) echo 'checked'; ?> >
                       <label for="sensual-massage">Sensual Massage</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="body-to-body" name="intimate-services" value="body-to-body">
+                      <input type="checkbox" id="body-to-body" name="intimate_services[]" value="Body to Body Massage" <?php if(!empty($intimate_services) && in_array('Body to Body Massage',$intimate_services)) echo 'checked'; ?> >
                       <label for="body-to-body">Body to Body Massage</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="tantric-massage" name="intimate-services" value="tantric-massage">
+                      <input type="checkbox" id="tantric-massage" name="intimate_services[]" value="Tantric Massage" <?php if(!empty($intimate_services) && in_array('Tantric Massage',$intimate_services)) echo 'checked'; ?> >
                       <label for="tantric-massage">Tantric Massage</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="fetish-friendly" name="intimate-services" value="fetish-friendly">
+                      <input type="checkbox" id="fetish-friendly" name="intimate_services[]" value="Fetish Friendly" <?php if(!empty($intimate_services) && in_array('Fetish Friendly',$intimate_services)) echo 'checked'; ?> >
                       <label for="fetish-friendly">Fetish Friendly</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="role-play" name="intimate-services" value="role-play">
+                      <input type="checkbox" id="role-play" name="intimate_services[]" value="Role Play" <?php if(!empty($intimate_services) && in_array('Role Play',$intimate_services)) echo 'checked'; ?> >
                       <label for="role-play">Role Play</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="domination" name="intimate-services" value="domination">
+                      <input type="checkbox" id="domination" name="intimate_services[]" value="Domination Services" <?php if(!empty($intimate_services) && in_array('Domination Services',$intimate_services)) echo 'checked'; ?> >
                       <label for="domination">Domination Services</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="submission" name="intimate-services" value="submission">
+                      <input type="checkbox" id="submission" name="intimate_services[]" value="Submission Services" <?php if(!empty($intimate_services) && in_array('Submission Services',$intimate_services)) echo 'checked'; ?> >
                       <label for="submission">Submission Services</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="couples-services" name="intimate-services" value="couples-services">
+                      <input type="checkbox" id="couples-services" name="intimate_services[]" value="Couples Services" <?php if(!empty($intimate_services) && in_array('Couples Services',$intimate_services)) echo 'checked'; ?> >
                       <label for="couples-services">Couples Services</label>
                     </div>
                     <div class="checkbox-option">
-                      <input type="checkbox" id="threesome" name="intimate-services" value="threesome">
+                      <input type="checkbox" id="threesome" name="intimate_services[]" value="Threesome Services" <?php if(!empty($intimate_services) && in_array('Threesome Services',$intimate_services)) echo 'checked'; ?> >
                       <label for="threesome">Threesome Services</label>
                     </div>
                   </div>
@@ -1481,95 +1484,95 @@ $lang_list = modal_language_list();
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label class="form-label">Hourly Rate (TLM tokens)</label>
-                    <input type="number" class="form-input" placeholder="e.g., 5000" min="1">
+                    <input type="number" class="form-input" name="hourly_rate" value="<?php if(!empty($extra_details)) echo $extra_details['hourly_rate']; ?>" placeholder="e.g., 5000" min="1">
                     <p class="help-text">Rate per hour for escort services</p>
                   </div>
                   <div>
                     <label class="form-label">Overnight Rate (TLM tokens)</label>
-                    <input type="number" class="form-input" placeholder="e.g., 25000" min="1">
+                    <input type="number" class="form-input" name="overnight_rate" value="<?php if(!empty($extra_details)) echo $extra_details['overnight_rate']; ?>"  placeholder="e.g., 25000" min="1">
                     <p class="help-text">Rate for overnight services</p>
                   </div>
                   <div>
                     <label class="form-label">Weekend Rate (TLM tokens)</label>
-                    <input type="number" class="form-input" placeholder="e.g., 50000" min="1">
+                    <input type="number" class="form-input" name="weekend_rate" value="<?php if(!empty($extra_details)) echo $extra_details['weekend_rate']; ?>"  placeholder="e.g., 50000" min="1">
                     <p class="help-text">Rate for weekend packages</p>
                   </div>
                 </div>
               </div>
-
+			<?php $adult_content_types = json_decode($extra_details['adult_content_types']); ?>
               <div class="mb-4">
                 <label class="form-label">Adult Content Types</label>
                 <p class="help-text">Select the types of adult content you're comfortable creating</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
                   <div class="checkbox-option">
-                    <input type="checkbox" id="lingerie-modeling" name="adult-content-types" value="lingerie">
+                    <input type="checkbox" id="lingerie-modeling" name="adult_content_types[]" value="Lingerie Modeling" <?php if(!empty($adult_content_types) && in_array('Lingerie Modeling',$adult_content_types)) echo 'checked'; ?> >
                     <label for="lingerie-modeling">Lingerie Modeling</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="swimwear-modeling" name="adult-content-types" value="swimwear">
+                    <input type="checkbox" id="swimwear-modeling" name="adult_content_types[]" value="Swimwear Modeling" <?php if(!empty($adult_content_types) && in_array('Swimwear Modeling',$adult_content_types)) echo 'checked'; ?> >
                     <label for="swimwear-modeling">Swimwear Modeling</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="artistic-nude" name="adult-content-types" value="artistic-nude">
+                    <input type="checkbox" id="artistic-nude" name="adult_content_types[]" value="Artistic Nude Photography" <?php if(!empty($adult_content_types) && in_array('Artistic Nude Photography',$adult_content_types)) echo 'checked'; ?> >
                     <label for="artistic-nude">Artistic Nude Photography</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="boudoir" name="adult-content-types" value="boudoir">
+                    <input type="checkbox" id="boudoir" name="adult_content_types[]" value="Boudoir Photography" <?php if(!empty($adult_content_types) && in_array('Boudoir Photography',$adult_content_types)) echo 'checked'; ?> >
                     <label for="boudoir">Boudoir Photography</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="adult-videos" name="adult-content-types" value="adult-videos">
+                    <input type="checkbox" id="adult-videos" name="adult_content_types[]" value="Adult Video Content" <?php if(!empty($adult_content_types) && in_array('Adult Video Content',$adult_content_types)) echo 'checked'; ?> >
                     <label for="adult-videos">Adult Video Content</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="cam-shows" name="adult-content-types" value="cam-shows">
+                    <input type="checkbox" id="cam-shows" name="adult_content_types[]" value="Live Cam Shows" <?php if(!empty($adult_content_types) && in_array('Live Cam Shows',$adult_content_types)) echo 'checked'; ?> >
                     <label for="cam-shows">Live Cam Shows</label>
                   </div>
                 </div>
               </div>
-
+				
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label class="form-label">Adult Content Rate (TLM tokens per session)</label>
-                  <input type="number" class="form-input" placeholder="e.g., 2000" min="1">
+                  <input type="number" class="form-input" name="adult_content_rate" value="<?php if(!empty($extra_details)) echo $extra_details['adult_content_rate']; ?>" placeholder="e.g., 2000" min="1">
                   <p class="help-text">Rate for adult content creation sessions</p>
                 </div>
                 <div>
                   <label class="form-label">Live Show Rate (TLM tokens per minute)</label>
-                  <input type="number" class="form-input" placeholder="e.g., 100" min="1">
+                  <input type="number" class="form-input" name="live_show_rate" value="<?php if(!empty($extra_details)) echo $extra_details['live_show_rate']; ?>"  placeholder="e.g., 100" min="1">
                   <p class="help-text">Rate for live adult shows</p>
                 </div>
               </div>
             </div>
           </div>
-
+		<?php $work_availability = json_decode($extra_details['work_availability']); ?>
           <div class="mb-4">
             <label class="form-label">Availability for Professional Work</label>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
               <div class="checkbox-option">
-                <input type="checkbox" id="local-work" name="work-availability" value="local">
+                <input type="checkbox" id="local-work" name="work_availability[]" value="Local assignments in my city" <?php if(!empty($work_availability) && in_array('Local assignments in my city',$work_availability)) echo 'checked'; ?> >
                 <label for="local-work">Local assignments in my city</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="travel-work" name="work-availability" value="travel">
+                <input type="checkbox" id="travel-work" name="work_availability[]" value="Willing to travel for assignments" <?php if(!empty($work_availability) && in_array('Willing to travel for assignments',$work_availability)) echo 'checked'; ?> >
                 <label for="travel-work">Willing to travel for assignments</label>
               </div>
             </div>
           </div>
-
+		<?php $content_types = json_decode($extra_details['content_types']); ?>
           <div class="mb-4">
             <label class="form-label">Professional Content Types</label>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
               <div class="checkbox-option">
-                <input type="checkbox" id="fashion" name="content-types" value="fashion">
+                <input type="checkbox" id="fashion" name="content_types[]" value="Fashion & Lifestyle" <?php if(!empty($content_types) && in_array('Fashion & Lifestyle',$content_types)) echo 'checked'; ?> >
                 <label for="fashion">Fashion & Lifestyle</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="commercial" name="content-types" value="commercial">
+                <input type="checkbox" id="commercial" name="content_types[]" value="Commercial Photography" <?php if(!empty($content_types) && in_array('Commercial Photography',$content_types)) echo 'checked'; ?> >
                 <label for="commercial">Commercial Photography</label>
               </div>
               <div class="checkbox-option">
-                <input type="checkbox" id="artistic" name="content-types" value="artistic">
+                <input type="checkbox" id="artistic" name="content_types[]" value="Artistic & Creative" <?php if(!empty($content_types) && in_array('Artistic & Creative',$content_types)) echo 'checked'; ?> >
                 <label for="artistic">Artistic & Creative</label>
               </div>
             </div>
@@ -1578,12 +1581,12 @@ $lang_list = modal_language_list();
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="form-label">Expected Rate per Professional Session (TLM tokens)</label>
-              <input type="number" class="form-input" placeholder="e.g., 5000" min="1">
+              <input type="number" class="form-input" name="professional_rate" value="<?php if(!empty($extra_details)) echo $extra_details['professional_rate']; ?>"  placeholder="e.g., 5000" min="1">
               <p class="help-text">Your expected rate for professional modeling sessions</p>
             </div>
             <div>
               <label class="form-label">Additional Professional Services</label>
-              <textarea class="form-input" rows="3" placeholder="Describe any additional professional services you offer..."></textarea>
+              <textarea class="form-input" rows="3" name="professional_service" placeholder="Describe any additional professional services you offer..."><?php if(!empty($extra_details)) echo $extra_details['professional_service']; ?></textarea>
             </div>
           </div>
         </div>

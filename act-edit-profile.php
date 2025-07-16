@@ -206,13 +206,37 @@ if ($_POST['submit_name']){
 		}*/
 		
 		
-		$arr_proof = array('live_cam','private_chat_token','group_chat_tocken','group_show','gs_min_member','gs_token_price','work_escort','in_per_hour','extended_rate','in_overnight','d_a_address','International_tours','daily_rate','weekly_rate','monthly_rate','travel_destination','video_pictures','modeling','adult_content','choose_document','height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
+		$arr_proof = array('live_cam','private_chat_token','group_chat_tocken','group_show','gs_min_member','gs_token_price','work_escort','in_per_hour','extended_rate','in_overnight','d_a_address','International_tours','daily_rate','weekly_rate','monthly_rate','travel_destination','video_pictures','modeling','adult_content','hourly_rate','overnight_rate','weekend_rate','adult_content_rate','live_show_rate','professional_rate','professional_service','choose_document','height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
 		$post_data_extra = array_from_post($arr_proof);
 		$post_data_extra['unique_model_id'] = $model_unique_id;
 		if($_POST['height_type'] == 'ft'){
 			$post_data_extra['height'] = $_POST['feet'].'.'.$_POST['inches'];
 		}else{
 			$post_data_extra['height'] = $_POST['height_cm'];
+		}
+		if(!empty($_POST['social_availability'])){
+			$post_data_extra['social_availability'] = json_encode($_POST['social_availability']);
+		}
+		if(!empty($_POST['travel_months'])){
+			$post_data_extra['travel_months'] = json_encode($_POST['travel_months']);
+		}
+		if(!empty($_POST['escort_services'])){
+			$post_data_extra['escort_services'] = json_encode($_POST['escort_services']);
+		}
+		if(!empty($_POST['intimate_services'])){
+			$post_data_extra['intimate_services'] = json_encode($_POST['intimate_services']);
+		}
+		if(!empty($_POST['adult_content_types'])){
+			$post_data_extra['adult_content_types'] = json_encode($_POST['adult_content_types']);
+		} 
+		if(!empty($_POST['work_availability'])){
+			$post_data_extra['work_availability'] = json_encode($_POST['work_availability']);
+		}
+		if(!empty($_POST['content_types'])){
+			$post_data_extra['content_types'] = json_encode($_POST['content_types']);
+		} 
+		if(!empty($_POST['adult_content_types'])){
+			$post_data_extra['adult_content_types'] = json_encode($_POST['adult_content_types']);
 		}
 		$model_extra_list = DB::query('select id from model_extra_details where unique_model_id="'.$model_unique_id.'"');
 		
