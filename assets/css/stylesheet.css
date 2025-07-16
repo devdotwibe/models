@@ -8415,7 +8415,6 @@ left: 83%;
                 var(--purpose-shadow-premium),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15),
                 0 0 0 1px rgba(139, 92, 246, 0.1);
-            position: relative;
             overflow: hidden;
         }
 
@@ -8745,7 +8744,6 @@ left: 83%;
             border-radius: 12px;
             padding: 0.5rem 1rem;
             font-size: 0.75rem;
-            position: relative;
             overflow: hidden;
             animation: badge-shimmer 4s infinite;
             box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
