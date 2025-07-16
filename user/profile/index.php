@@ -246,6 +246,7 @@ if(!empty($userDetails['profile_pic'])){
         <div class="model-card">
           <h3 class="font-bold mb-4 gradient-text">Online Now</h3>
           <div class="space-y-3">
+            
             <div class="flex items-center">
               <div class="relative">
                 <img src="https://randomuser.me/api/portraits/women/25.jpg" alt="User" class="w-12 h-12 rounded-full">
@@ -256,6 +257,7 @@ if(!empty($userDetails['profile_pic'])){
                 <p class="text-xs text-white/60">2 miles away</p>
               </div>
             </div>
+
             <div class="flex items-center">
               <div class="relative">
                 <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="User" class="w-12 h-12 rounded-full">
@@ -266,6 +268,7 @@ if(!empty($userDetails['profile_pic'])){
                 <p class="text-xs text-white/60">1 mile away</p>
               </div>
             </div>
+
           </div>
         </div>
 

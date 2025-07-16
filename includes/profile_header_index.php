@@ -27,12 +27,14 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </button>
-          <button class="p-2 glass-effect rounded-full hover:bg-white/10 transition-colors relative">
+
+          <button onclick="window.location.href='<?= SITEURL ?>user/chat/user_chat.php?m_unique_id=<?= $userDetails['unique_id'] ?>'; return false;" class="p-2 glass-effect rounded-full hover:bg-white/10 transition-colors relative">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
             </svg>
             <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
           </button>
+
         </div>
 
         <!-- Profile Image -->
