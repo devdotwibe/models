@@ -243,9 +243,9 @@ else{
                 </div>
             </div>
 
-            <input type="hidden" name="user_id" value="<?=$user_data['id']?>">
+            <input type="hidden" name="user_id" id="replay_user" value="<?=$user_data['id']?>">
             
-            <button class="send-btn" onclick="sendMessage()">
+            <button class="send-btn" type="button" id="submitBtn" onclick="sendMessage()">
                 <div class="send-icon"></div>
             </button>
 
@@ -265,39 +265,48 @@ else{
 
     function sendMessage()
     {
-        $(".edit-form" ).validate({
-                submitHandler: function (form) {
-                    var loadingText = '<i class="fa fa-circle-notch-o fa-spin"></i>';
-                    $('.submitBtn').prop('disabled', true).html(loadingText);
-                    $('.message').html('');
-                    $.ajax({ 
-                        type: 'GET',
-                        url: '<?=SITEURL.'chat/act_send.php'?>', 
-                        data: $(".edit-form").serialize(),
-                        dataType: 'json',
-                        success: function(response) { 
-                            $(".btn-login").html('<i class="glyphicon-send glyphicon" aria-hidden="true"></i>').prop('disabled', false);
-                            if(response.status=='ok'){
-                                $('#i-message').val('');
-                                $('.messages ul').append(response.message);
-            /*					$(".messages ul").animate({
-                                    scrollTop:  scrolled
-                                });*/
-                                $(".messages").animate({
-                                    scrollTop: $('html, body').get(0).scrollHeight
-                                }, 2000);
-                            }
-                            else{
-                                $('.message').html('<div class="alert alert-danger">'+response.message+'</div>');
-                            } 
-                        }
-                    });
-                    return false;
+        var loadingText = '<i class="fa fa-circle-notch-o fa-spin"></i>';
+
+        $('.submitBtn').prop('disabled', true).html(loadingText);
+
+        $('#chatMessages').html('');
+
+        var user_id = $('#replay_user').val();
+
+        var message = $('#i-message').val();
+
+        $.ajax({ 
+            type: 'GET',
+            url: '<?=SITEURL.'user/chat/act_send.php'?>', 
+            data: {
+                user_id: user_id,
+                message:message
+            },
+            dataType: 'json',
+            success: function(response) { 
+
+                $(".btn-login").html('<div class="send-icon"></div>').prop('disabled', false);
+
+                $('.submitBtn').prop('disabled', true).html(loadingText);
+                if(response.status=='ok'){
+
+                    $('#i-message').val('');
+
+                    $('#chatMessages').append(response.message);
+
+                    $("#chatMessages").animate({
+                        scrollTop: $('html, body').get(0).scrollHeight
+                    }, 2000);
                 }
-            });
-            $(".messages").animate({
-                scrollTop: $('html, body').get(0).scrollHeight
-            }, 2000);
+                else{
+                    $('#chatMessages').html('<div class="alert alert-danger">'+response.message+'</div>');
+                } 
+            }
+        });
+        
+        $("#chatMessages").animate({
+            scrollTop: $('html, body').get(0).scrollHeight
+        }, 2000);
     }
                 
 
