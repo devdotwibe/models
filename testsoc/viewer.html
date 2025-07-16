@@ -27,7 +27,7 @@
 
       sourceBuffer.addEventListener("updateend", () => {
 
-        update =false;
+        update =true;
       //   if (queue.length > 0 && !sourceBuffer.updating) {
       //     sourceBuffer.appendBuffer(queue.shift());
       //   }
@@ -51,6 +51,8 @@
 
     function updateFrame() {
       if (queue.length > 0&&sourceBuffer && !sourceBuffer.updating) {
+
+        update =false;
              sourceBuffer.appendBuffer(queue.shift());
             }
 
