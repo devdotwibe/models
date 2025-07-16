@@ -358,10 +358,7 @@ else{
              
             }
         });
-        
-          $("#chatMessages").animate({
-            scrollTop: $('html, body').get(0).scrollHeight
-        }, 500);
+    
     }
                 
 
