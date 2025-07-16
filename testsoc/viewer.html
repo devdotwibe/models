@@ -16,6 +16,8 @@
     let sourceBuffer;
     let queue = [];
 
+    let seqnce_no=[];
+
     video.src = URL.createObjectURL(mediaSource);
 
     mediaSource.addEventListener("sourceopen", () => {
@@ -38,6 +40,7 @@
         //   queue.push(buffer);
         // }
         queue.push(buffer);
+        seqnce_no.push(msg.seqnce_no);
       }
     };
 
