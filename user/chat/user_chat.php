@@ -204,8 +204,6 @@ else{
 
         <?php }?>
 
-     
-
             <div class="message hidden" id="typingIndicator">
                 <div class="message-avatar">
                     <div class="avatar-placeholder">AM</div>
@@ -269,7 +267,7 @@ else{
 
         $('.submitBtn').prop('disabled', true).html(loadingText);
 
-        $('#chatMessages').html('');
+        // $('#chatMessages').html('');
 
         var user_id = $('#replay_user').val();
 
@@ -292,7 +290,7 @@ else{
 
                     $('#i-message').val('');
 
-                    $('#chatMessages').append(response.message);
+                    $('#typingIndicator').before(response.message);
 
                     $("#chatMessages").animate({
                         scrollTop: $('html, body').get(0).scrollHeight
