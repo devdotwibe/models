@@ -115,8 +115,12 @@ if(isset($_SESSION['log_user_id'])){
 
                     $output['user_time'] = $user_time;
                 }
+                else
+                {
 
-                 $output['status'] = 'no';
+                     $output['status'] = 'no';
+                }
+
                 
             }
         }
