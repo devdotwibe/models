@@ -58,66 +58,66 @@ if(isset($_SESSION['log_user_id'])){
         }
 
 
-         if($post['type'] =='recievie'){
+        //  if($post['type'] =='recievie'){
 
-            if($post['user_id']){
+        //     if($post['user_id']){
 
-                $user_time = $post['user_time'];
+        //         $user_time = $post['user_time'];
 
-                $date = date('Y-m-d H:i:s');
+        //         $date = date('Y-m-d H:i:s');
 
-                $string = "SELECT tb.id, tb.user_id, tb.sender_id, tb.message, tb.created_date 
-                   FROM model_user_message tb 
-                   WHERE ((user_id = " . $userDetails['id'] . " AND sender_id = " . $post['user_id'] . "))
+        //         $string = "SELECT tb.id, tb.user_id, tb.sender_id, tb.message, tb.created_date 
+        //            FROM model_user_message tb 
+        //            WHERE ((user_id = " . $userDetails['id'] . " AND sender_id = " . $post['user_id'] . "))
                            
-                     AND created_date > '" . $user_time . "'
-                   ORDER BY id ASC";
+        //              AND created_date > '" . $user_time . "'
+        //            ORDER BY id ASC";
 
-                $all_message_data = DB::query($string);  
+        //         $all_message_data = DB::query($string);  
             
-                $user_data = get_data('model_user',array('id'=>$post['user_id']),true);
+        //         $user_data = get_data('model_user',array('id'=>$post['user_id']),true);
 
-                $defaultImage = SITEURL . "/assets/images/profile.png";
-                if (!empty($user_data['profile_pic'])) {
-                    $defaultImage = SITEURL . $user_data['profile_pic'];
-                }
+        //         $defaultImage = SITEURL . "/assets/images/profile.png";
+        //         if (!empty($user_data['profile_pic'])) {
+        //             $defaultImage = SITEURL . $user_data['profile_pic'];
+        //         }
 
-                if(count($all_message_data) > 0)
-                {
-                    $output['status'] = 'ok';
+        //         if(count($all_message_data) > 0)
+        //         {
+        //             $output['status'] = 'ok';
 
-                    $result = '';
+        //             $result = '';
 
-                    $user_time ="";
+        //             $user_time ="";
 
-                    foreach ($all_message_data as $messageRow) {
+        //             foreach ($all_message_data as $messageRow) {
 
-                        $user_time = $messageRow['created_date'];
+        //                 $user_time = $messageRow['created_date'];
 
-                        $display_date = date('h:i A', strtotime($messageRow['created_date']));
+        //                 $display_date = date('h:i A', strtotime($messageRow['created_date']));
 
-                        $result .= '<div class="message">
-                                        <div class="message-avatar">
-                                            <div class="avatar-placeholder">
-                                                <img src="' . $defaultImage . '">
-                                            </div>
-                                        </div>
-                                        <div class="message-content">
-                                            <div class="message-text">' . htmlspecialchars($messageRow['message']) . '</div>
-                                            <div class="timestamp">' . $display_date . ' ✓</div>
-                                        </div>
-                                    </div>';
-                        }
+        //                 $result .= '<div class="message">
+        //                                 <div class="message-avatar">
+        //                                     <div class="avatar-placeholder">
+        //                                         <img src="' . $defaultImage . '">
+        //                                     </div>
+        //                                 </div>
+        //                                 <div class="message-content">
+        //                                     <div class="message-text">' . htmlspecialchars($messageRow['message']) . '</div>
+        //                                     <div class="timestamp">' . $display_date . ' ✓</div>
+        //                                 </div>
+        //                             </div>';
+        //                 }
 
-                    $output['message']= $result;
+        //             $output['message']= $result;
 
-                    $output['user_time'] = $user_time;
-                }
+        //             $output['user_time'] = $user_time;
+        //         }
 
-                 $output['status'] = 'no';
+        //          $output['status'] = 'no';
                 
-            }
-        }
+        //     }
+        // }
 
 
 	}
