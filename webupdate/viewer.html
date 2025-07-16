@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Viewer</title>
+</head>
+<body>
+    <h2>Viewer</h2>
+    <video id="remote" autoplay playsinline></video>
+    <button onclick="startViewing()">View Stream</button>
+
+    <script>
+        const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
+        const remoteVideo = document.getElementById('remote');
+        let peer = null;
+
+        function startViewing() {
+            if (peer) return;
+
+            peer = new RTCPeerConnection({
+                iceServers: [
+                    { urls: "stun:stun.l.google.com:19302" },
+                    {
+                        urls: "turn:openrelay.metered.ca:80",
+                        username: "openrelayproject",
+                        credential: "openrelayproject"
+                    }
+                ]
+            });
+
+            peer.ontrack = e => {
+                remoteVideo.srcObject = e.streams[0];
+            };
+
+            peer.onicecandidate = e => {
+                if (e.candidate) {
+                    socket.send(JSON.stringify({
+                        event: "view-candidate",
+                        data: e.candidate
+                    }));
+                }
+            };
+
+            socket.send(JSON.stringify({ event: "request-offer" }));
+        }
+
+        socket.onmessage = async ({ data }) => {
+            const msg = JSON.parse(data);
+
+            if (msg.event === "stream-offer") {
+                await peer.setRemoteDescription(new RTCSessionDescription(msg.data));
+                const answer = await peer.createAnswer();
+                await peer.setLocalDescription(answer);
+                socket.send(JSON.stringify({ event: "view-answer", data: answer }));
+            }
+
+            if (msg.event === "stream-candidate") {
+                await peer.addIceCandidate(new RTCIceCandidate(msg.data));
+            }
+        };
+    </script>
+</body>
+</html>

@@ -7,7 +7,7 @@
 </head>
 <body>
   <h2>Viewer</h2>
-  <video id="viewer" autoplay playsinline controls width="600"></video>
+  <video id="viewer" autoplay playsinline controls width="600" muted></video>
 
   <script>
     const video = document.getElementById("viewer");
@@ -16,15 +16,21 @@
     let sourceBuffer;
     let queue = [];
 
+    let seqnce_no=[];
+
+    let update = true;
+
     video.src = URL.createObjectURL(mediaSource);
 
     mediaSource.addEventListener("sourceopen", () => {
       sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs=vp8,opus');
 
       sourceBuffer.addEventListener("updateend", () => {
-        if (queue.length > 0 && !sourceBuffer.updating) {
-          sourceBuffer.appendBuffer(queue.shift());
-        }
+
+        update =true;
+      //   if (queue.length > 0 && !sourceBuffer.updating) {
+      //     sourceBuffer.appendBuffer(queue.shift());
+      //   }
       });
     });
 
@@ -32,13 +38,27 @@
       const msg = JSON.parse(event.data);
       if (msg.event === 'stream-chunk') {
         const buffer = base64ToUint8Array(msg.data);
-        if (sourceBuffer && !sourceBuffer.updating) {
-          sourceBuffer.appendBuffer(buffer);
-        } else {
-          queue.push(buffer);
-        }
+        // if (sourceBuffer && !sourceBuffer.updating) {
+        //   sourceBuffer.appendBuffer(buffer);
+        // } else {
+        //   queue.push(buffer);
+        // }
+        queue.push(buffer);
+        seqnce_no.push(msg.private_id);
+        
       }
     };
+
+    function updateFrame() {
+      if (queue.length > 0&&sourceBuffer && !sourceBuffer.updating && update) {
+
+        update =false;
+             sourceBuffer.appendBuffer(queue.shift());
+            }
+
+      requestAnimationFrame(updateFrame); 
+    }
+    requestAnimationFrame(updateFrame);
 
     function base64ToUint8Array(base64) {
       const binary = atob(base64);

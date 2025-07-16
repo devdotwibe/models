@@ -16,6 +16,8 @@
     const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket"); // update to your WebSocket server
     let stream, recorder;
 
+    let seqnce_no =0;
+
     async function startStreaming() {
       stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
       preview.srcObject = stream;
@@ -29,7 +31,8 @@
           const reader = new FileReader();
           reader.onload = () => {
             const base64 = arrayBufferToBase64(reader.result);
-            socket.send(JSON.stringify({ event: 'stream-chunk', data: base64 }));
+            socket.send(JSON.stringify({ event: 'stream-chunk', data: base64,private_id :seqnce_no }));
+            seqnce_no++;
           };
           reader.readAsArrayBuffer(event.data);
         }
