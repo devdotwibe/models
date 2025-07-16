@@ -16,21 +16,34 @@
         let sourceBuffer;
         let queue = [];
         let isBufferUpdating = false;
+        let isSocketReady = false;
+        let isMediaReady = false;
 
         video.src = URL.createObjectURL(mediaSource);
+
+        socket.onopen = () => {
+            isSocketReady = true;
+            trySendNewViewer();
+        };
 
         mediaSource.addEventListener('sourceopen', () => {
             sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8,opus"');
             sourceBuffer.mode = 'segments';
+            isMediaReady = true;
 
             sourceBuffer.addEventListener('updateend', () => {
                 isBufferUpdating = false;
                 processQueue();
             });
 
-            // Notify streamer a new viewer is ready
-            socket.send(JSON.stringify({ event: 'new-viewer' }));
+            trySendNewViewer();
         });
+
+        function trySendNewViewer() {
+            if (isSocketReady && isMediaReady) {
+                socket.send(JSON.stringify({ event: 'new-viewer' }));
+            }
+        }
 
         socket.onmessage = ({ data }) => {
             const msg = JSON.parse(data);
@@ -44,7 +57,6 @@
 
         function processQueue() {
             if (!sourceBuffer || !queue.length || sourceBuffer.updating || isBufferUpdating) return;
-
             isBufferUpdating = true;
             sourceBuffer.appendBuffer(queue.shift());
         }
