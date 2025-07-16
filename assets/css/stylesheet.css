@@ -9525,7 +9525,10 @@ right: 12px;
  .home-page .micro-bounce>.ultra-glass {
     padding: 25px 10px;
 }
-
+.enhanced5 .tabs-container button {
+    padding: 10px 8px !important;
+    font-size: 13px;
+}
 
 .h-banner-btns {
     flex-wrap: wrap;
