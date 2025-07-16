@@ -1017,7 +1017,7 @@ $lang_list = modal_language_list();
         </div>
 
         <div id="streaming-options" class="conditional-section <?php if(!empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes'){ echo 'show'; } ?> " >
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <?php /*?><div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <div class="flex justify-between items-center mb-2">
                 <label class="form-label mb-0">Instagram Profile URL</label>
@@ -1046,7 +1046,7 @@ $lang_list = modal_language_list();
               <input type="text" class="form-input" name="snap_p_url" value="<?php if(!empty($extra_details)) echo $serv_chats['snap_p_url']; ?>" placeholder="Your Snapchat username">
               <p class="help-text">We'll use this to set up video calls through Snapchat</p>
             </div>
-          </div>
+          </div><?php */ ?>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div>
