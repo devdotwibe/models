@@ -21,11 +21,11 @@
     mediaSource.addEventListener("sourceopen", () => {
       sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs=vp8,opus');
 
-      sourceBuffer.addEventListener("updateend", () => {
-        if (queue.length > 0 && !sourceBuffer.updating) {
-          sourceBuffer.appendBuffer(queue.shift());
-        }
-      });
+      // sourceBuffer.addEventListener("updateend", () => {
+      //   if (queue.length > 0 && !sourceBuffer.updating) {
+      //     sourceBuffer.appendBuffer(queue.shift());
+      //   }
+      // });
     });
 
     socket.onmessage = (event) => {
