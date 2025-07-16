@@ -261,6 +261,13 @@ else{
 
 <script>
 
+    $(function()
+    {
+        $("#chatMessages").animate({
+                scrollTop: $('html, body').get(0).scrollHeight
+            }, 1000);
+    })
+
     function sendMessage()
     {
         var loadingText = '<i class="fa fa-circle-notch-o fa-spin"></i>';
