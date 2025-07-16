@@ -9288,7 +9288,7 @@ section.discover-sec {
     padding-top: 0;
 }
 section.preminum-sersec {
-    padding-top: 0;
+    padding-top: 40px;
 }
 
 }
@@ -9448,6 +9448,7 @@ section.preminum-sersec {
 
 footer .container > .grid {
     gap: 20px !important;
+    margin-bottom: 30px;
 }
 
 footer .container > .grid h4 {
@@ -9455,7 +9456,12 @@ footer .container > .grid h4 {
 }
 
 
-
+.home-page .scroll-reveal.revealed > div > div:nth-child(3) {
+    margin-top: 15px !important;
+}
+.home-page .scroll-reveal.revealed > div > div:first-child {
+    margin-bottom: 25px;
+}
 
  }
 
@@ -9519,7 +9525,10 @@ right: 12px;
  .home-page .micro-bounce>.ultra-glass {
     padding: 25px 10px;
 }
-
+.enhanced5 .tabs-container button {
+    padding: 10px 8px !important;
+    font-size: 13px;
+}
 
 .h-banner-btns {
     flex-wrap: wrap;
