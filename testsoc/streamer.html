@@ -29,7 +29,7 @@
       recorder.ondataavailable = (event) => {
         if (event.data.size > 0 && socket.readyState === WebSocket.OPEN) {
           const reader = new FileReader();
-          reader.onload = () => {
+          reader.onloadend = () => {
             const base64 = arrayBufferToBase64(reader.result);
             socket.send(JSON.stringify({ event: 'stream-chunk', data: base64,private_id :seqnce_no }));
             seqnce_no++;
