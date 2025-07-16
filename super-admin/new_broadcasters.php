@@ -64,8 +64,11 @@
                           <th>
                             Video Pictures
                           </th>
-                          <th>
+                          <?php /*<th>
                             Modeling Porn Assignment
+                          </th> */ ?>
+						  <th>
+                            Professional Modeling & <br/>Entertainment
                           </th>
                           <th>
                             Figure & stats
@@ -104,10 +107,10 @@
                             <?php echo $rowesdw['work_escort']; ?>
                             <?php if($rowesdw['work_escort'] == 'Yes'){ ?>
                               <ul>
-                                <li>Incall Per/Hour = <b><?php echo $rowesdw['in_per_hour']; ?></b></li>
-                                <li>Incall Overnight = <b><?php echo $rowesdw['in_overnight']; ?></b></li>
-                                <li>Outcall Per/Hour = <b><?php echo $rowesdw['out_per_hour']; ?></b></li>
-                                <li>Outcall Overnight = <b><?php echo $rowesdw['out_overnight']; ?></b></li>
+                                <li>Local Meetup Rate = <b><?php echo $rowesdw['in_per_hour']; ?></b></li>
+                                <li>Extended Social Rate = <b><?php echo $rowesdw['extended_rate']; ?></b></li>
+                                <li>Overnight Social Rate = <b><?php echo $rowesdw['in_overnight']; ?></b></li>
+                                <li>Preferred Meeting Location = <b><?php echo $rowesdw['d_a_address']; ?></b></li>
                               </ul>
                             <?php } ?>
                           </td>
@@ -119,7 +122,8 @@
                             ?>
                           </td>
                           <td>
-                            <?php echo $rowesdw['modeling_porn_assignment']; ?>
+                            <?php //echo $rowesdw['modeling_porn_assignment']; ?>
+							<?php echo $rowesdw['modeling']; ?>
                           </td>
                           <td>
 						  <?php  $hght = '';
