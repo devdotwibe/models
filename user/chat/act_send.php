@@ -68,8 +68,8 @@ if(isset($_SESSION['log_user_id'])){
 
                 $string = "SELECT tb.id, tb.user_id, tb.sender_id, tb.message, tb.created_date 
                    FROM model_user_message tb 
-                   WHERE ((sender_id = " . $userDetails['id'] . " AND user_id = " . $post['user_id'] . ") 
-                          OR (user_id = " . $userDetails['id'] . " AND sender_id = " . $post['user_id'] . ")) 
+                   WHERE ((user_id = " . $userDetails['id'] . " AND sender_id = " . $post['user_id'] . "))
+                           
                      AND created_date > '" . $user_time . "'
                    ORDER BY id ASC";
 
