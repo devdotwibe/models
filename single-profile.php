@@ -975,29 +975,30 @@ if (mysqli_num_rows($res_ap) > 0) {
         </div>
 		
 		<?php 
-		$serv_chats = DB::queryFirstRow('select * from model_service_chat where model_unique_id="'.$_GET['m_unique_id'].'"');
-		$serv_meets = DB::queryFirstRow('select * from model_service_meet where model_unique_id="'.$_GET['m_unique_id'].'"');
+		//$serv_chats = DB::queryFirstRow('select * from model_service_chat where model_unique_id="'.$_GET['m_unique_id'].'"');
+		//$serv_meets = DB::queryFirstRow('select * from model_service_meet where model_unique_id="'.$_GET['m_unique_id'].'"');
+		$extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_GET['m_unique_id']);
 		?>
         
         <div class="modal-body">
-		<?php if(!empty($serv_chats)){ ?>
+		<?php if(!empty($extra_details) && !empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes'){ ?>
             <div class="about-section">
                 <h3 class="about-section-title">Chat Services</h3>
                 <div class="attributes-grid">
-				<?php if($serv_chats['group_chat_tocken']){ ?>
+				<?php if($extra_details['group_chat_tocken']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Group Chat</div>
                         <div class="attribute-value">$50/hr</div>
-						<div class="attribute-value">Tokens <?php echo $serv_chats['group_chat_tocken']; ?>/min </div>
+						<div class="attribute-value">Tokens <?php echo $extra_details['group_chat_tocken']; ?>/min </div>
                         <p>Exclusive private chat sessions where we can discuss anything you'd like.</p>
                         <a class="btn btn-primary" href='<?=SITEURL?>booking.php?type=chat&service=Group Chat&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
                     </div>
 				<?php } ?>
-				<?php if($serv_chats['private_chat_token']){ ?>
+				<?php if($extra_details['private_chat_token']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Private Chat</div>
                         <div class="attribute-value">$25/day</div>
-						<div class="attribute-value">Tokens <?php echo $serv_chats['private_chat_token']; ?>/min </div>
+						<div class="attribute-value">Tokens <?php echo $extra_details['private_chat_token']; ?>/min </div>
                         <p>Priority responses to your messages throughout the day.</p>
                         <a class="btn btn-primary" href='<?=SITEURL?>booking.php?type=chat&service=Private Chat&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
                     </div>
@@ -1023,30 +1024,30 @@ if (mysqli_num_rows($res_ap) > 0) {
                     </div>
                 </div>
             </div> <?php */  ?>
-            <?php if(!empty($serv_meets)){ ?>
+            <?php if(!empty($extra_details) && !empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ ?>
             <div class="about-section">
                 <h3 class="about-section-title">Meet Services</h3>
                 <div class="attributes-grid">
-				<?php if($serv_meets['local_meet_rate']){ ?>
+				<?php if($extra_details['in_per_hour']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Local Meetup</div>
-						<div class="attribute-value">Tokens <?php echo $serv_meets['local_meet_rate']; ?>/hr </div>
+						<div class="attribute-value">Tokens <?php echo $extra_details['in_per_hour']; ?>/hr </div>
                         <p>Enjoy a personalized date experience.</p>
                         <a class="btn btn-primary" href='<?=SITEURL?>booking.php?type=meet&service=Local Meetup&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
                     </div>
 				<?php } ?>
-				<?php if($serv_meets['extended_rate']){ ?>
+				<?php if($extra_details['extended_rate']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Extended Social</div>
-                        <div class="attribute-value">Tokens <?php echo $serv_meets['extended_rate']; ?>/hr </div>
+                        <div class="attribute-value">Tokens <?php echo $extra_details['extended_rate']; ?>/hr </div>
                         <p>Enjoy a personalized date experience.</p>
                         <a class="btn btn-primary" href='<?=SITEURL?>booking.php?type=meet&service=Extended Social&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
                     </div>
 				<?php } ?>
-				<?php if($serv_meets['overnight_rate']){ ?>
+				<?php if($extra_details['in_overnight']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Overnight Social</div>
-                        <div class="attribute-value">Tokens <?php echo $serv_meets['overnight_rate']; ?>/hr </div>
+                        <div class="attribute-value">Tokens <?php echo $extra_details['in_overnight']; ?>/hr </div>
                         <p>Enjoy a personalized date experience.</p>
                         <a class="btn btn-primary" href='<?=SITEURL?>booking.php?type=meet&service=Overnight Social&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
                     </div>
