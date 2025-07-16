@@ -32,11 +32,12 @@
       const msg = JSON.parse(event.data);
       if (msg.event === 'stream-chunk') {
         const buffer = base64ToUint8Array(msg.data);
-        if (sourceBuffer && !sourceBuffer.updating) {
-          sourceBuffer.appendBuffer(buffer);
-        } else {
-          queue.push(buffer);
-        }
+        // if (sourceBuffer && !sourceBuffer.updating) {
+        //   sourceBuffer.appendBuffer(buffer);
+        // } else {
+        //   queue.push(buffer);
+        // }
+        queue.push(buffer);
       }
     };
 
