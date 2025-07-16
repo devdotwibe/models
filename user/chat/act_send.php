@@ -20,6 +20,7 @@ if(isset($_SESSION['log_user_id'])){
 
             if($post['user_id']&&$post['message'])
             {
+                echo 'test';
 
                 $date = date('Y-m-d H:i:s');
                 $post_data = $post;
