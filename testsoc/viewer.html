@@ -18,16 +18,20 @@
 
     let seqnce_no=[];
 
+    let update = true;
+
     video.src = URL.createObjectURL(mediaSource);
 
     mediaSource.addEventListener("sourceopen", () => {
       sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs=vp8,opus');
 
-      // sourceBuffer.addEventListener("updateend", () => {
+      sourceBuffer.addEventListener("updateend", () => {
+
+        update =false;
       //   if (queue.length > 0 && !sourceBuffer.updating) {
       //     sourceBuffer.appendBuffer(queue.shift());
       //   }
-      // });
+      });
     });
 
     socket.onmessage = (event) => {
@@ -41,6 +45,7 @@
         // }
         queue.push(buffer);
         seqnce_no.push(msg.private_id);
+        
       }
     };
 
