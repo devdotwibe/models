@@ -41,6 +41,15 @@
       }
     };
 
+    function updateFrame() {
+      if (queue.length > 0&&sourceBuffer && !sourceBuffer.updating) {
+              sourceBuffer.appendBuffer(buffer);
+            }
+
+      requestAnimationFrame(updateFrame); 
+    }
+    requestAnimationFrame(updateFrame);
+
     function base64ToUint8Array(base64) {
       const binary = atob(base64);
       const len = binary.length;
