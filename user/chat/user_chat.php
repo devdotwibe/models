@@ -294,7 +294,7 @@ else{
 
                     $("#chatMessages").animate({
                         scrollTop: $('html, body').get(0).scrollHeight
-                    }, 2000);
+                    }, 500);
                 }
                 else{
                     $('#chatMessages').html('<div class="alert alert-danger">'+response.message+'</div>');
@@ -302,9 +302,9 @@ else{
             }
         });
         
-        $("#chatMessages").animate({
+          $("#chatMessages").animate({
             scrollTop: $('html, body').get(0).scrollHeight
-        }, 2000);
+        }, 500);
     }
                 
 
