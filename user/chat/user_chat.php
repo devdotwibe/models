@@ -222,7 +222,7 @@ else{
         <div class="chat-input-area">
 
 
-            <input type="text" class="message-input" id="i-message" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+            <input type="text" class="message-input" id="i-message" placeholder="Type a message...">
             
             <div class="attachment-container">
                 <button class="attachment-btn" id="attachmentBtn" onclick="toggleAttachmentMenu()">
@@ -275,6 +275,14 @@ else{
             }, 5000);
 
         });
+
+    $('#i-message').on('keypress', function(e) {
+        if (e.which === 13 && !e.shiftKey) {
+            e.preventDefault(); // Prevents line break on Enter
+            sendMessage();
+        }
+    });
+
 
     function sendMessage()
     {
