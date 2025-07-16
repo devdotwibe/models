@@ -56,10 +56,12 @@ if(isset($_SESSION['log_user_id'])){
                 $output['message']= $result;
                 
             }
-        }
 
 
                 echo 'test1';
+        }
+
+
 
          if($post['type'] =='recievie'){
 
