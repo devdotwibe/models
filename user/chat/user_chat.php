@@ -266,7 +266,7 @@ else{
     $(function()
     {
         $("#chatMessages").animate({
-            scrollTop: $('html, body').get(0).scrollHeight
+           scrollTop: $("#chatMessages")[0].scrollHeight
         }, 1000);
 
         setInterval(function() {
