@@ -382,7 +382,7 @@ else{
                             </svg>
                             View Full Profile
                         </a>
-                        <button class="btn-secondary action-btn" onclick="window.location='<?= SITEURL ?>user/chat/user_chat.php?id=<?= $form_data['user_id'] ?>'" >
+                        <button class="btn-secondary action-btn" onclick="window.location='<?=SITEURL.'chat/view.php?id='.$form_data['user_id']?>'" >
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                             </svg>
@@ -483,15 +483,27 @@ else{
                         </tr>
 						<?php }
 						
-						if(!empty($rowes1['height'])){ ?>
+						if(!empty($rowes1['height'])){ 
+						  if($rowes1['height_type'] == 'ft' || empty($rowes1['height_type'])){
+							  $exp_hght = explode('.',$rowes1['height']);
+							  $hght = $exp_hght[0]."'".$exp_hght[1].'"';
+						  }else{
+							 $hght = $rowes1['height'].' cm';
+						  }
+						  if($rowes1['weight_type'] == 'lbs' || empty($rowes1['weight_type'])){
+							$wght = 'pounds';
+						  }else{
+							 $wght = 'cm'; 
+						  }
+						?>
 						<tr>
                             <th>Height</th>
-                            <td><?php echo $rowes1['height']; ?></td>
+                            <td><?php echo $hght; ?></td>
                         </tr>
 						<?php }
 						if(!empty($rowes1['weight'])){ ?>
 						<tr>
-                            <th>Weight (enter weight in pounds)</th>
+                            <th>Weight (enter weight in <?php echo $wght; ?>)</th>
                             <td><?php echo $rowes1['weight']; ?></td>
                         </tr>
 						<?php }

@@ -129,6 +129,11 @@
 						  }else{
 							 $hght = $rowesdw['height'].' cm';
 						  }
+						  if($rowesdw['weight_type'] == 'lbs' || empty($rowesdw['weight_type'])){
+							$wght = 'pounds';
+						  }else{
+							 $wght = 'cm'; 
+						  }
 						  ?>
                             <ul>
                               <li>Bust size = <b><?php echo $rowesdw['bust_size']; ?></b></li>
@@ -136,7 +141,7 @@
                               <li>Waist size = <b><?php echo $rowesdw['waist_size']; ?></b></li>
                               <li>Ethnicity = <b><?php echo $rowesdw['ethnicity']; ?></b></li>
                               <li>Height = <b><?php echo $hght; ?></b></li>
-                              <li>Weight = <b><?php echo $rowesdw['weight']; ?><?php echo ' '.$rowesdw['weight_type']; ?></b></li>
+                              <li>Weight (<?php echo $wght; ?>) = <b><?php echo $rowesdw['weight']; ?><?php echo ' '.$rowesdw['weight_type']; ?></b></li>
                               <li>eye color = <b><?php echo $rowesdw['eye_color']; ?></b></li>
                               <li>Hair color = <b><?php echo $rowesdw['hair_color']; ?></b></li>
 							  <li>Body Type = <b><?php echo $rowesdw['body_type']; ?></b></li>
