@@ -242,6 +242,8 @@ else{
             </div>
 
             <input type="hidden" name="user_id" id="replay_user" value="<?=$user_data['id']?>">
+
+            <input type="hidden" name="user_time" id="user_time" value="<?php echo date('Y-m-d H:i:s') ?>">
             
             <button class="send-btn" type="button" id="submitBtn" onclick="sendMessage()">
                 <div class="send-icon"></div>
@@ -264,9 +266,15 @@ else{
     $(function()
     {
         $("#chatMessages").animate({
-                scrollTop: $('html, body').get(0).scrollHeight
-            }, 1000);
-    })
+            scrollTop: $('html, body').get(0).scrollHeight
+        }, 1000);
+
+        setInterval(function() {
+
+            recieveMessage();
+            }, 5000);
+
+        });
 
     function sendMessage()
     {
@@ -280,12 +288,16 @@ else{
 
         var message = $('#i-message').val();
 
+        var user_time = $('#user_time').val();
+
         $.ajax({ 
             type: 'GET',
             url: '<?=SITEURL.'user/chat/act_send.php'?>', 
             data: {
                 user_id: user_id,
-                message:message
+                message:message,
+                type:'send',
+                user_time:user_time
             },
             dataType: 'json',
             success: function(response) { 
@@ -306,6 +318,44 @@ else{
                 else{
                     $('#chatMessages').html('<div class="alert alert-danger">'+response.message+'</div>');
                 } 
+            }
+        });
+        
+          $("#chatMessages").animate({
+            scrollTop: $('html, body').get(0).scrollHeight
+        }, 500);
+    }
+
+
+    function recieveMessage()
+    {
+       
+        var user_id = $('#replay_user').val();
+
+        var user_time = $('#user_time').val();
+
+        $.ajax({ 
+            type: 'GET',
+            url: '<?=SITEURL.'user/chat/act_send.php'?>', 
+            data: {
+                user_id: user_id,
+                user_time:user_time,
+                type:'recievie'
+            },
+            dataType: 'json',
+            success: function(response) { 
+
+                if(response.status=='ok')
+                {
+                    $('#user_time').val(response.user_time);
+
+                    $('#typingIndicator').before(response.message);
+
+                    $("#chatMessages").animate({
+                        scrollTop: $('html, body').get(0).scrollHeight
+                    }, 500);
+                }
+             
             }
         });
         
