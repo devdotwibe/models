@@ -12,15 +12,26 @@
 
     <script>
         const preview = document.getElementById("preview");
-        const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket"); // your server
+        const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
         let stream, recorder;
         let seqnce_no = 0;
+        let isStreaming = false;
+
+        socket.onmessage = ({ data }) => {
+            const msg = JSON.parse(data);
+            if (msg.event === 'new-viewer' && isStreaming) {
+                // Stop and restart to help new viewer
+                stopStreaming();
+                setTimeout(() => startStreaming(), 500);
+            }
+        };
 
         async function startStreaming() {
             stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
             preview.srcObject = stream;
 
             recorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp8,opus' });
+            isStreaming = true;
 
             recorder.ondataavailable = (event) => {
                 if (event.data.size > 0 && socket.readyState === WebSocket.OPEN) {
@@ -51,6 +62,7 @@
                 stream.getTracks().forEach(track => track.stop());
                 preview.srcObject = null;
             }
+            isStreaming = false;
             console.log("Streaming stopped");
         }
 

@@ -27,6 +27,9 @@
                 isBufferUpdating = false;
                 processQueue();
             });
+
+            // Notify streamer a new viewer is ready
+            socket.send(JSON.stringify({ event: 'new-viewer' }));
         });
 
         socket.onmessage = ({ data }) => {
