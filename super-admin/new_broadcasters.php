@@ -80,7 +80,7 @@
                       </thead>
                       <tbody>
                         <?php
-                          $sqls = "SELECT model_user.unique_id ,model_user.username,model_user.email, model_extra_details.id,model_extra_details.unique_model_id, model_extra_details.live_cam , model_extra_details.group_show, model_extra_details.work_escort,model_extra_details.International_tours,model_extra_details.video_pictures,model_extra_details.modeling_porn_assignment,model_extra_details.status,model_extra_details.govt_id_proof,model_extra_details.bust_size,model_extra_details.cup_size,model_extra_details.waist_size,model_extra_details.ethnicity,model_extra_details.height,model_extra_details.weight,model_extra_details.eye_color,model_extra_details.hair_color,model_extra_details.in_per_hour,model_extra_details.in_overnight,model_extra_details.out_per_hour,model_extra_details.out_overnight FROM model_user INNER JOIN model_extra_details ON model_user.unique_id = model_extra_details.unique_model_id ORDER BY model_extra_details.id DESC";
+                          $sqls = "SELECT model_user.unique_id ,model_user.username,model_user.email, model_extra_details.id,model_extra_details.unique_model_id, model_extra_details.live_cam , model_extra_details.group_show, model_extra_details.work_escort,model_extra_details.International_tours,model_extra_details.video_pictures,model_extra_details.modeling_porn_assignment,model_extra_details.status,model_extra_details.govt_id_proof,model_extra_details.bust_size,model_extra_details.cup_size,model_extra_details.waist_size,model_extra_details.ethnicity,model_extra_details.height,model_extra_details.weight,model_extra_details.eye_color,model_extra_details.hair_color,model_extra_details.in_per_hour,model_extra_details.in_overnight,model_extra_details.out_per_hour,model_extra_details.out_overnight,model_extra_details.body_type,model_extra_details.dress_size FROM model_user INNER JOIN model_extra_details ON model_user.unique_id = model_extra_details.unique_model_id ORDER BY model_extra_details.id DESC";
 
                             $resultd = mysqli_query($con, $sqls);
                               if (mysqli_num_rows($resultd) > 0) {
@@ -122,15 +122,25 @@
                             <?php echo $rowesdw['modeling_porn_assignment']; ?>
                           </td>
                           <td>
+						  <?php  $hght = '';
+						  if($rowesdw['height_type'] == 'ft' || empty($rowesdw['height_type'])){
+							  $exp_hght = explode('.',$rowesdw['height']);
+							  $hght = $exp_hght[0]."'".$exp_hght[1].'"';
+						  }else{
+							 $hght = $rowesdw['height'].' cm';
+						  }
+						  ?>
                             <ul>
                               <li>Bust size = <b><?php echo $rowesdw['bust_size']; ?></b></li>
                               <li>Cup size = <b><?php echo $rowesdw['cup_size']; ?></b></li>
                               <li>Waist size = <b><?php echo $rowesdw['waist_size']; ?></b></li>
                               <li>Ethnicity = <b><?php echo $rowesdw['ethnicity']; ?></b></li>
-                              <li>Height = <b><?php echo $rowesdw['height']; ?></b></li>
-                              <li>Weight = <b><?php echo $rowesdw['weight']; ?></b></li>
+                              <li>Height = <b><?php echo $hght; ?></b></li>
+                              <li>Weight = <b><?php echo $rowesdw['weight']; ?><?php echo ' '.$rowesdw['weight_type']; ?></b></li>
                               <li>eye color = <b><?php echo $rowesdw['eye_color']; ?></b></li>
                               <li>Hair color = <b><?php echo $rowesdw['hair_color']; ?></b></li>
+							  <li>Body Type = <b><?php echo $rowesdw['body_type']; ?></b></li>
+							  <li>Dress Size = <b><?php echo $rowesdw['dress_size']; ?></b></li>
                             </ul>
                           </td>
                           <td>

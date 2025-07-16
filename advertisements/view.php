@@ -448,9 +448,9 @@ else{
 
                 <!-- Specifications Tab -->
                 <div id="specifications" class="tab-content <?php if(empty($form_data['description'])){ echo 'active'; } ?>">
-                    <h3>Model Specifications</h3>
+                    <h3>Model Specifications</h3> 
 					
-                    <table class="specs-table">
+                    <table class="specs-table"> 
 					<?php if ($userDetails['gender'] == 'Female') { ?>
 						<?php if(!empty($rowes1) && !empty($rowes1['bust_size'])){ ?>
 						<tr>
@@ -505,6 +505,18 @@ else{
 						<tr>
                             <th>Hair Color</th>
                             <td><?php echo $rowes1['hair_color']; ?></td>
+                        </tr>
+						<?php } 
+						if(!empty($rowes1['body_type'])){ ?>
+						<tr>
+                            <th>Body Type</th>
+                            <td><?php echo $rowes1['body_type']; ?></td>
+                        </tr>
+						<?php }
+						if(!empty($rowes1['dress_size'])){ ?>
+						<tr>
+                            <th>Dress Size</th>
+                            <td><?php echo $rowes1['dress_size']; ?></td>
                         </tr>
 						<?php } ?>
 						
