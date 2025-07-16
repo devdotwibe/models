@@ -204,8 +204,6 @@ else{
 
         <?php }?>
 
-     
-
             <div class="message hidden" id="typingIndicator">
                 <div class="message-avatar">
                     <div class="avatar-placeholder">AM</div>
@@ -224,7 +222,7 @@ else{
         <div class="chat-input-area">
 
 
-            <input type="text" class="message-input" id="i-message" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+            <input type="text" class="message-input" id="i-message" placeholder="Type a message...">
             
             <div class="attachment-container">
                 <button class="attachment-btn" id="attachmentBtn" onclick="toggleAttachmentMenu()">
@@ -243,9 +241,11 @@ else{
                 </div>
             </div>
 
-            <input type="hidden" name="user_id" value="<?=$user_data['id']?>">
+            <input type="hidden" name="user_id" id="replay_user" value="<?=$user_data['id']?>">
+
+            <input type="hidden" name="user_time" id="user_time" value="<?php echo date('Y-m-d H:i:s') ?>">
             
-            <button class="send-btn" onclick="sendMessage()">
+            <button class="send-btn" type="button" id="submitBtn" onclick="sendMessage()">
                 <div class="send-icon"></div>
             </button>
 
@@ -263,41 +263,110 @@ else{
 
 <script>
 
+    $(function()
+    {
+        $("#chatMessages").animate({
+           scrollTop: $("#chatMessages")[0].scrollHeight
+        }, 1000);
+
+        setInterval(function() {
+
+            recieveMessage();
+            }, 5000);
+
+        });
+
+    $('#i-message').on('keypress', function(e) {
+        if (e.which === 13 && !e.shiftKey) {
+            e.preventDefault(); // Prevents line break on Enter
+            sendMessage();
+        }
+    });
+
+
     function sendMessage()
     {
-        $(".edit-form" ).validate({
-                submitHandler: function (form) {
-                    var loadingText = '<i class="fa fa-circle-notch-o fa-spin"></i>';
-                    $('.submitBtn').prop('disabled', true).html(loadingText);
-                    $('.message').html('');
-                    $.ajax({ 
-                        type: 'GET',
-                        url: '<?=SITEURL.'chat/act_send.php'?>', 
-                        data: $(".edit-form").serialize(),
-                        dataType: 'json',
-                        success: function(response) { 
-                            $(".btn-login").html('<i class="glyphicon-send glyphicon" aria-hidden="true"></i>').prop('disabled', false);
-                            if(response.status=='ok'){
-                                $('#i-message').val('');
-                                $('.messages ul').append(response.message);
-            /*					$(".messages ul").animate({
-                                    scrollTop:  scrolled
-                                });*/
-                                $(".messages").animate({
-                                    scrollTop: $('html, body').get(0).scrollHeight
-                                }, 2000);
-                            }
-                            else{
-                                $('.message').html('<div class="alert alert-danger">'+response.message+'</div>');
-                            } 
-                        }
-                    });
-                    return false;
+        var loadingText = '<i class="fa fa-circle-notch-o fa-spin"></i>';
+
+        $('.submitBtn').prop('disabled', true).html(loadingText);
+
+        // $('#chatMessages').html('');
+
+        var user_id = $('#replay_user').val();
+
+        var message = $('#i-message').val();
+
+        var user_time = $('#user_time').val();
+
+        $.ajax({ 
+            type: 'GET',
+            url: '<?=SITEURL.'user/chat/act_send.php'?>', 
+            data: {
+                user_id: user_id,
+                message:message,
+                type:'send',
+                user_time:user_time
+            },
+            dataType: 'json',
+            success: function(response) { 
+
+                $(".btn-login").html('<div class="send-icon"></div>').prop('disabled', false);
+
+                $('.submitBtn').prop('disabled', true).html(loadingText);
+                if(response.status=='ok'){
+
+                    $('#i-message').val('');
+
+                    $('#typingIndicator').before(response.message);
+
+                    $("#chatMessages").animate({
+                        scrollTop: $("#chatMessages")[0].scrollHeight
+                    }, 500);
                 }
-            });
-            $(".messages").animate({
-                scrollTop: $('html, body').get(0).scrollHeight
-            }, 2000);
+                else{
+                    $('#chatMessages').html('<div class="alert alert-danger">'+response.message+'</div>');
+                } 
+            }
+        });
+        
+          $("#chatMessages").animate({
+            scrollTop: $("#chatMessages")[0].scrollHeight
+        }, 500);
+    }
+
+
+    function recieveMessage()
+    {
+       
+        var user_id = $('#replay_user').val();
+
+        var user_time = $('#user_time').val();
+
+        $.ajax({ 
+            type: 'GET',
+            url: '<?=SITEURL.'user/chat/act_send.php'?>', 
+            data: {
+                user_id: user_id,
+                user_time:user_time,
+                type:'recievie'
+            },
+            dataType: 'json',
+            success: function(response) { 
+
+                if(response.status=='ok')
+                {
+                    $('#user_time').val(response.user_time);
+
+                    $('#typingIndicator').before(response.message);
+
+                    $("#chatMessages").animate({
+                        scrollTop: $("#chatMessages")[0].scrollHeight
+                    }, 500);
+                }
+             
+            }
+        });
+    
     }
                 
 
