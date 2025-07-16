@@ -1,17 +1,17 @@
-<?php 
-    session_start(); 
+<?php
+    session_start();
 	include('includes/config.php');
 	include('includes/helper.php');
     $usern = $_SESSION["log_user"];
-    
+
     if( !$usern ){
         echo '<script>window.location.href="login.php"</script>';
     }
 	if (isset($_SESSION['log_user_id'])) {
 		$log_user_id = $_SESSION['log_user_id'];
-		$get_modal_user = DB::query('select as_a_model from model_user where id='.$log_user_id); 
+		$get_modal_user = DB::query('select as_a_model from model_user where id='.$log_user_id);
 		$as_a_model = $get_modal_user[0]['as_a_model'];
-	}else{ 
+	}else{
 		$as_a_model = '';
 	}
 	/*if($as_a_model != 'Yes'){
@@ -28,36 +28,11 @@
     <meta name="description" content="Your premium content collection with advanced viewing and management features">
     <?php  include('includes/head.php'); ?>
     <style>
-        :root {
-            --primary: #667eea;
-            --primary-dark: #5a67d8;
-            --secondary: #764ba2;
-            --accent: #ec4899;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --glass-light: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #f97316 100%);
-            --gradient-success: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-            --blur-intense: blur(60px);
-            --transition-premium: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
+        body.advt-page.my-purpose {
             font-family: 'Inter', sans-serif;
-            background: 
+            background:
                 radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%),
@@ -72,55 +47,55 @@
             position: relative;
         }
 
-        .heading-font {
+        body.advt-page.my-purpose .heading-font {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             letter-spacing: -0.025em;
         }
 
         /* Advanced Glass Morphism */
-        .glass-ultra {
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%, 
-                rgba(255, 255, 255, 0.05) 50%, 
+        body.advt-page.my-purpose .glass-ultra {
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
                 rgba(255, 255, 255, 0.02) 100%);
             backdrop-filter: var(--blur-intense);
             -webkit-backdrop-filter: var(--blur-intense);
-            border: 1px solid var(--glass-border);
-            box-shadow: 
-                var(--shadow-premium),
+            border: 1px solid var(--purpose-glass-border);
+            box-shadow:
+                var(--purpose-shadow-premium),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15),
                 0 0 0 1px rgba(139, 92, 246, 0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .glass-ultra::before {
+        body.advt-page.my-purpose .glass-ultra::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.1), 
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
                 transparent);
             transition: left 1.5s cubic-bezier(0.23, 1, 0.32, 1);
             z-index: 1;
         }
 
-        .glass-ultra:hover::before {
+        body.advt-page.my-purpose .glass-ultra:hover::before {
             left: 100%;
         }
 
         /* Advanced Gradient Text */
-        .gradient-text-premium {
-            background: linear-gradient(135deg, 
-                #ffffff 0%, 
-                #a78bfa 25%, 
-                #ec4899 50%, 
-                #f97316 75%, 
+        body.advt-page.my-purpose .gradient-text-premium {
+            background: linear-gradient(135deg,
+                #ffffff 0%,
+                #a78bfa 25%,
+                #ec4899 50%,
+                #f97316 75%,
                 #10b981 100%);
             background-size: 300% 300%;
             -webkit-background-clip: text;
@@ -138,7 +113,7 @@
         }
 
         /* Premium Particle System */
-        .particles-advanced {
+        body.advt-page.my-purpose .particles-advanced {
             position: fixed;
             top: 0;
             left: 0;
@@ -149,7 +124,7 @@
             overflow: hidden;
         }
 
-        .particle-advanced {
+        body.advt-page.my-purpose .particle-advanced {
             position: absolute;
             border-radius: 50%;
             pointer-events: none;
@@ -157,12 +132,12 @@
             animation: particle-float 15s infinite linear;
         }
 
-        .particle-glow {
+        body.advt-page.my-purpose .particle-glow {
             box-shadow: 0 0 20px currentColor;
             filter: blur(1px);
         }
 
-        .particle-trail {
+        body.advt-page.my-purpose .particle-trail {
             background: linear-gradient(45deg, currentColor, transparent);
             border-radius: 50px;
         }
@@ -191,7 +166,7 @@
         }
 
         /* Advanced Button System */
-        .btn-premium {
+        body.advt-page.my-purpose .btn-premium {
             position: relative;
             background: var(--gradient-primary);
             border: none;
@@ -213,22 +188,22 @@
             transform-style: preserve-3d;
         }
 
-        .btn-premium::before {
+        body.advt-page.my-purpose .btn-premium::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.4), 
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
                 transparent);
             transition: left 0.8s ease;
             z-index: 2;
         }
 
-        .btn-premium::after {
+        body.advt-page.my-purpose .btn-premium::after {
             content: '';
             position: absolute;
             top: 50%;
@@ -242,52 +217,52 @@
             z-index: 1;
         }
 
-        .btn-premium:hover::before,
-        .btn-premium:active::before {
+        body.advt-page.my-purpose .btn-premium:hover::before,
+        body.advt-page.my-purpose .btn-premium:active::before {
             left: 100%;
         }
 
-        .btn-premium:hover::after,
-        .btn-premium:active::after {
+        body.advt-page.my-purpose .btn-premium:hover::after,
+        body.advt-page.my-purpose .btn-premium:active::after {
             width: 300px;
             height: 300px;
         }
 
-        .btn-premium:hover,
-        .btn-premium:active {
+        body.advt-page.my-purpose .btn-premium:hover,
+        body.advt-page.my-purpose .btn-premium:active {
             transform: translateY(-4px) scale(1.02) rotateX(5deg);
-            box-shadow: 
+            box-shadow:
                 0 30px 60px rgba(139, 92, 246, 0.4),
                 0 0 0 1px rgba(139, 92, 246, 0.3),
                 0 0 40px rgba(139, 92, 246, 0.2);
             background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
         }
 
-        .btn-premium:active {
+        body.advt-page.my-purpose .btn-premium:active {
             transform: translateY(-2px) scale(1.01) rotateX(2deg);
         }
 
-        .btn-secondary-premium {
+        body.advt-page.my-purpose .btn-secondary-premium {
             background: var(--glass-light);
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--purpose-glass-border);
             backdrop-filter: blur(20px);
             transition: var(--transition-premium);
         }
 
-        .btn-secondary-premium:hover {
+        body.advt-page.my-purpose .btn-secondary-premium:hover {
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.25);
             transform: translateY(-4px) scale(1.02);
-            box-shadow: 
+            box-shadow:
                 0 25px 50px rgba(255, 255, 255, 0.1),
                 0 0 0 1px rgba(255, 255, 255, 0.2);
         }
 
         /* Advanced Card System */
-        .card-premium {
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.08) 0%, 
-                rgba(255, 255, 255, 0.04) 50%, 
+        body.advt-page.my-purpose .card-premium {
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.08) 0%,
+                rgba(255, 255, 255, 0.04) 50%,
                 rgba(255, 255, 255, 0.02) 100%);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
@@ -300,47 +275,47 @@
             transform-style: preserve-3d;
         }
 
-        .card-premium::before {
+        body.advt-page.my-purpose .card-premium::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(139, 92, 246, 0.15), 
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(139, 92, 246, 0.15),
                 transparent);
             transition: left 1.2s ease;
             z-index: 2;
         }
 
-        .card-premium::after {
+        body.advt-page.my-purpose .card-premium::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 50% 50%, 
-                rgba(139, 92, 246, 0.1) 0%, 
+            background: radial-gradient(circle at 50% 50%,
+                rgba(139, 92, 246, 0.1) 0%,
                 transparent 70%);
             opacity: 0;
             transition: opacity 0.8s ease;
             z-index: 1;
         }
 
-        .card-premium:hover::before {
+        body.advt-page.my-purpose .card-premium:hover::before {
             left: 100%;
         }
 
-        .card-premium:hover::after {
+        body.advt-page.my-purpose .card-premium:hover::after {
             opacity: 1;
         }
 
-        .card-premium:hover {
+        body.advt-page.my-purpose .card-premium:hover {
             transform: translateY(-12px) scale(1.02) rotateX(5deg) rotateY(2deg);
-            box-shadow: 
+            box-shadow:
                 0 40px 80px rgba(139, 92, 246, 0.3),
                 0 0 0 1px rgba(139, 92, 246, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -348,72 +323,72 @@
         }
 
         /* Advanced Image Effects */
-        .image-premium {
+        body.advt-page.my-purpose .image-premium {
             position: relative;
             overflow: hidden;
             border-radius: 16px;
             transition: var(--transition-premium);
         }
 
-        .image-premium::before {
+        body.advt-page.my-purpose .image-premium::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(45deg, 
-                rgba(139, 92, 246, 0.2) 0%, 
+            background: linear-gradient(45deg,
+                rgba(139, 92, 246, 0.2) 0%,
                 rgba(236, 72, 153, 0.2) 100%);
             opacity: 0;
             transition: opacity 0.6s ease;
             z-index: 2;
         }
 
-        .image-premium:hover::before {
+        body.advt-page.my-purpose .image-premium:hover::before {
             opacity: 1;
         }
 
-        .image-premium img {
+        body.advt-page.my-purpose .image-premium img {
             transition: var(--transition-premium);
             filter: brightness(1) contrast(1) saturate(1);
         }
 
-        .image-premium:hover img {
+        body.advt-page.my-purpose .image-premium:hover img {
             transform: scale(1.1) rotate(2deg);
             filter: brightness(1.1) contrast(1.1) saturate(1.2);
         }
 
         /* Advanced Status Indicators */
-        .status-premium {
+        body.advt-page.my-purpose .status-premium {
             position: relative;
             border-radius: 50%;
             animation: status-pulse 2s infinite;
         }
 
-        .status-online-premium {
+        body.advt-page.my-purpose .status-online-premium {
             background: var(--gradient-success);
             box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
         }
 
-        .status-away-premium {
+        body.advt-page.my-purpose .status-away-premium {
             background: linear-gradient(45deg, var(--warning), #fb923c);
             box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
         }
 
         @keyframes status-pulse {
-            0%, 100% { 
+            0%, 100% {
                 transform: scale(1);
                 box-shadow: 0 0 20px currentColor;
             }
-            50% { 
+            50% {
                 transform: scale(1.3);
                 box-shadow: 0 0 30px currentColor;
             }
         }
 
         /* Advanced Badge System */
-        .badge-premium {
+        body.advt-page.my-purpose .badge-premium {
             background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
             color: #1a1a1a;
             font-weight: 800;
@@ -427,26 +402,26 @@
             box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
         }
 
-        .badge-premium::before {
+        body.advt-page.my-purpose .badge-premium::before {
             content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.4), 
+            background: linear-gradient(45deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
                 transparent);
             animation: badge-shine 3s infinite;
         }
 
         @keyframes badge-shimmer {
-            0%, 100% { 
+            0%, 100% {
                 transform: scale(1) rotate(0deg);
                 box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
             }
-            50% { 
+            50% {
                 transform: scale(1.05) rotate(1deg);
                 box-shadow: 0 12px 35px rgba(255, 215, 0, 0.6);
             }
@@ -458,25 +433,25 @@
             100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
         }
 
-        .badge-verified {
+        body.advt-page.my-purpose .badge-verified {
             background: var(--gradient-primary);
             color: white;
             animation: verified-glow 3s infinite;
         }
 
         @keyframes verified-glow {
-            0%, 100% { 
+            0%, 100% {
                 box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
                 transform: scale(1);
             }
-            50% { 
+            50% {
                 box-shadow: 0 0 30px rgba(102, 126, 234, 0.9);
                 transform: scale(1.05);
             }
         }
 
         /* Advanced Filter System */
-        .filter-advanced {
+        body.advt-page.my-purpose .filter-advanced {
             display: flex;
             gap: 0.5rem;
             overflow-x: auto;
@@ -486,13 +461,13 @@
             padding-bottom: 0.5rem;
         }
 
-        .filter-advanced::-webkit-scrollbar {
+        body.advt-page.my-purpose .filter-advanced::-webkit-scrollbar {
             display: none;
         }
 
-        .filter-tab-advanced {
+        body.advt-page.my-purpose .filter-tab-advanced {
             background: var(--glass-light);
-            border: 1px solid var(--glass-border);
+            border: 1px solid var(--purpose-glass-border);
             border-radius: 24px;
             padding: 0.75rem 1.5rem;
             color: rgba(255, 255, 255, 0.8);
@@ -510,25 +485,25 @@
             overflow: hidden;
         }
 
-        .filter-tab-advanced::before {
+        body.advt-page.my-purpose .filter-tab-advanced::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.1), 
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
                 transparent);
             transition: left 0.6s ease;
         }
 
-        .filter-tab-advanced:hover::before {
+        body.advt-page.my-purpose .filter-tab-advanced:hover::before {
             left: 100%;
         }
 
-        .filter-tab-advanced.active {
+        body.advt-page.my-purpose .filter-tab-advanced.active {
             background: var(--gradient-primary);
             color: white;
             border-color: rgba(139, 92, 246, 0.5);
@@ -536,7 +511,7 @@
             transform: scale(1.05);
         }
 
-        .filter-tab-advanced:hover:not(.active) {
+        body.advt-page.my-purpose .filter-tab-advanced:hover:not(.active) {
             background: rgba(255, 255, 255, 0.12);
             color: white;
             transform: translateY(-2px) scale(1.02);
@@ -544,7 +519,7 @@
         }
 
         /* Advanced Modal System */
-        .modal-advanced {
+        body.advt-page.my-purpose .modal-advanced {
             position: fixed;
             top: 0;
             left: 0;
@@ -562,14 +537,14 @@
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .modal-advanced.active {
+        body.advt-page.my-purpose .modal-advanced.active {
             opacity: 1;
             visibility: visible;
         }
 
-        .modal-content-advanced {
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%, 
+        body.advt-page.my-purpose .modal-content-advanced {
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.1) 0%,
                 rgba(255, 255, 255, 0.05) 100%);
             backdrop-filter: blur(60px);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -583,15 +558,15 @@
             transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .modal-advanced.active .modal-content-advanced {
+        body.advt-page.my-purpose .modal-advanced.active .modal-content-advanced {
             transform: scale(1) translateY(0);
         }
 
         /* Advanced Loading System */
-        .loading-advanced {
-            background: linear-gradient(90deg, 
-                rgba(255,255,255,0.1) 25%, 
-                rgba(255,255,255,0.3) 50%, 
+        body.advt-page.my-purpose .loading-advanced {
+            background: linear-gradient(90deg,
+                rgba(255,255,255,0.1) 25%,
+                rgba(255,255,255,0.3) 50%,
                 rgba(255,255,255,0.1) 75%);
             background-size: 200% 100%;
             animation: loading-shimmer 2s infinite;
@@ -603,11 +578,11 @@
             100% { background-position: -200% 0; }
         }
 
-        .loading-spinner {
+        body.advt-page.my-purpose .loading-spinner {
             width: 40px;
             height: 40px;
             border: 3px solid rgba(255, 255, 255, 0.2);
-            border-top: 3px solid var(--primary);
+            border-top: 3px solid var(--purpose-primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -618,22 +593,22 @@
         }
 
         /* Advanced Responsive Design */
-        .container-advanced {
+        body.advt-page.my-purpose .container-advanced {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 1rem;
         }
 
         /* Advanced Animations */
-        .animate-fade-in-up {
+        body.advt-page.my-purpose .animate-fade-in-up {
             animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
 
-        .animate-fade-out {
+        body.advt-page.my-purpose .animate-fade-out {
             animation: fadeOut 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
 
-        .animate-bounce-in {
+        body.advt-page.my-purpose .animate-bounce-in {
             animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
         }
 
@@ -678,14 +653,14 @@
         }
 
         /* Advanced Counter */
-        .counter-advanced {
+        body.advt-page.my-purpose .counter-advanced {
             font-size: 2rem;
             font-weight: 900;
-            background: linear-gradient(135deg, 
-                #667eea 0%, 
-                #764ba2 25%, 
-                #ec4899 50%, 
-                #f97316 75%, 
+            background: linear-gradient(135deg,
+                #667eea 0%,
+                #764ba2 25%,
+                #ec4899 50%,
+                #f97316 75%,
                 #10b981 100%);
             background-size: 300% 300%;
             -webkit-background-clip: text;
@@ -696,13 +671,13 @@
         }
 
         /* Advanced Video Overlay */
-        .video-overlay-advanced {
+        body.advt-page.my-purpose .video-overlay-advanced {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, 
-                rgba(0, 0, 0, 0.8) 0%, 
+            background: linear-gradient(135deg,
+                rgba(0, 0, 0, 0.8) 0%,
                 rgba(139, 92, 246, 0.8) 100%);
             border-radius: 50%;
             width: 70px;
@@ -717,65 +692,65 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
-        .video-overlay-advanced:hover {
+        body.advt-page.my-purpose .video-overlay-advanced:hover {
             transform: translate(-50%, -50%) scale(1.2) rotate(5deg);
-            background: linear-gradient(135deg, 
-                rgba(139, 92, 246, 0.9) 0%, 
+            background: linear-gradient(135deg,
+                rgba(139, 92, 246, 0.9) 0%,
                 rgba(236, 72, 153, 0.9) 100%);
             box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
         }
 
         /* Responsive Breakpoints */
         @media (max-width: 640px) {
-            .container-advanced { 
-                padding: 0 0.75rem; 
+            body.advt-page.my-purpose .container-advanced {
+                padding: 0 0.75rem;
             }
-            
-            .heading-font {
+
+            body.advt-page.my-purpose .heading-font {
                 font-size: 2.5rem !important;
                 line-height: 1.2;
             }
-            
-            .counter-advanced {
+
+            body.advt-page.my-purpose .counter-advanced {
                 font-size: 1.5rem;
             }
-            
-            .card-premium {
+
+            body.advt-page.my-purpose .card-premium {
                 margin-bottom: 1rem;
             }
-            
-            .card-premium:hover {
+
+            body.advt-page.my-purpose .card-premium:hover {
                 transform: translateY(-6px) scale(1.01);
             }
-            
-            .btn-premium {
+
+            body.advt-page.my-purpose .btn-premium {
                 min-height: 52px;
                 font-size: 0.875rem;
             }
-            
-            .video-overlay-advanced {
+
+            body.advt-page.my-purpose .video-overlay-advanced {
                 width: 60px;
                 height: 60px;
             }
-            
-            .glass-ultra {
+
+            body.advt-page.my-purpose .glass-ultra {
                 padding: 1rem !important;
             }
         }
 
         @media (min-width: 641px) and (max-width: 1024px) {
-            .container-advanced { 
-                padding: 0 1.5rem; 
+            body.advt-page.my-purpose .container-advanced {
+                padding: 0 1.5rem;
             }
-            
-            .heading-font {
+
+            body.advt-page.my-purpose .heading-font {
                 font-size: 3.5rem !important;
             }
         }
 
         @media (min-width: 1025px) {
-            .container-advanced { 
-                padding: 0 2rem; 
+            body.advt-page.my-purpose .container-advanced {
+                padding: 0 2rem;
             }
         }
 
@@ -790,15 +765,15 @@
 
         /* High DPI Support */
         @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            .particle-advanced {
+            body.advt-page.my-purpose .particle-advanced {
                 filter: blur(0.5px);
             }
         }
 
         /* Dark Mode Enhancement */
         @media (prefers-color-scheme: dark) {
-            body {
-                background: 
+            body.advt-page.my-purpose {
+                background:
                     radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
                     radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
                     linear-gradient(135deg, #050510 0%, #0a0a1a 50%, #0d1117 100%);
@@ -807,12 +782,12 @@
 
         /* Print Optimization */
         @media print {
-            .particles-advanced,
-            .btn-premium,
-            .btn-secondary-premium {
+            body.advt-page.my-purpose .particles-advanced,
+            body.advt-page.my-purpose .btn-premium,
+            body.advt-page.my-purpose .btn-secondary-premium {
                 display: none !important;
             }
-            
+
             body {
                 background: white !important;
                 color: black !important;
@@ -820,7 +795,7 @@
         }
 
         /* Accessibility Enhancements */
-        .sr-only {
+        body.advt-page.my-purpose .sr-only {
             position: absolute;
             width: 1px;
             height: 1px;
@@ -832,27 +807,37 @@
             border: 0;
         }
 
-        .focus-visible:focus {
-            outline: 2px solid var(--primary);
+        body.advt-page.my-purpose .focus-visible:focus {
+            outline: 2px solid var(--purpose-primary);
             outline-offset: 2px;
         }
 
         /* Advanced Scroll Indicators */
-        .scroll-indicator {
+        body.advt-page.my-purpose .scroll-indicator {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            background: linear-gradient(90deg, var(--purpose-primary), var(--purpose-accent));
             transform-origin: left;
             transform: scaleX(0);
             z-index: 1000;
             transition: transform 0.1s ease;
         }
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
-<body class="min-h-screen text-white advt-page  socialwall-page">
+<body class="min-h-screen text-white advt-page my-purpose socialwall-page">
 
 	<!-- Advanced Scroll Indicator -->
     <div class="scroll-indicator" id="scrollIndicator"></div>
@@ -861,10 +846,10 @@
     <div class="particles-advanced" id="particlesAdvanced"></div>
 
 	<?php  include('includes/side-bar.php'); ?>
-	
+
 	<?php  include('includes/profile_header_index.php'); ?>
-	
-    
+
+
 
     <!-- Advanced Content Viewer Modal -->
     <div class="modal-advanced" id="contentModal">
@@ -878,8 +863,8 @@
             </div>
         </div>
     </div>
-	
-	<?php 
+
+	<?php
 	$photo_count = 0; $video_count = 0;
 	$log_user_id = $_SESSION["log_user_unique_id"];
 	$sqls = "SELECT * FROM user_purchased_image WHERE user_unique_id = '".$log_user_id."' ORDER BY id DESC";
@@ -894,7 +879,7 @@
 			}
 		}
 	?>
-	
+
     <main>
         <!-- Premium Page Header -->
         <section class="py-8 sm:py-16 relative overflow-hidden">
@@ -975,9 +960,9 @@
                         <!-- Advanced Search & Controls -->
                         <div class="flex flex-col sm:flex-row gap-4">
                             <div class="relative flex-1">
-                                <input 
-                                    type="text" 
-                                    placeholder="Search by model name, content type, or date..." 
+                                <input
+                                    type="text"
+                                    placeholder="Search by model name, content type, or date..."
                                     class="w-full px-4 sm:px-6 py-3 glass-ultra text-white placeholder-white/50 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-lg transition-all duration-300 text-sm sm:text-base focus-visible:focus"
                                     id="searchInput"
                                 >
@@ -1005,9 +990,9 @@
         <section class="py-4 sm:py-8 relative">
             <div class="container-advanced mx-auto">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8" id="purchasesGrid">
-				
-				
-				
+
+
+
 			<?php
 			  $count = 1;
 			  $sqls = "SELECT * FROM user_purchased_image WHERE user_unique_id = '".$log_user_id."' ORDER BY id DESC";
@@ -1028,7 +1013,7 @@
 						 if (!file_exists($url)) {
 							$url = 'assets/images/model-gal-no-img.jpg';
 						 }
-						 
+
 						  $image_text = $row['image_text'];
 						}
 					  }
@@ -1040,9 +1025,9 @@
 						if(!empty($row1['profile_pic'])) $prof_img = SITEURL.$row1['profile_pic'];
 			 			else $prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
 			  ?>
-				
+
 				<?php if($file_type == 'Image'){ ?>
-                    
+
                     <!-- Premium Purchase Card 1 - Photo -->
                     <div class="card-premium animate-fade-in-up" data-type="photo" data-model="aria" data-price="25" data-date="2024-12-15" style="animation-delay: 0.1s">
                         <div class="image-premium relative">
@@ -1089,7 +1074,7 @@
                                     <span class="text-white/70">Downloads:</span>
 									<?php if(!empty($file_downloads)){ ?>
                                     <span class="text-white font-medium"><?php echo $file_downloads; ?></span>
-									<?php } else{ ?> 
+									<?php } else{ ?>
 									<span class="text-white font-medium">0</span>
 									<?php } ?>
                                 </div>
@@ -1106,7 +1091,7 @@
 								<?php }else{ ?>
 								<button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="downloadContent()" aria-label="Download content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                                </button>	
+                                </button>
 								<?php } ?>
                                 <button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="shareContent('aria-1')" aria-label="Share content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
@@ -1114,11 +1099,11 @@
                             </div>
                         </div>
                     </div>
-					
+
 				<?php }else if($file_type == 'Video'){ ?>
-				
-				<?php /*<video class="paid-video" controls> 
-				<source src="../<?php echo $url; ?>" type="video/mp4"> 
+
+				<?php /*<video class="paid-video" controls>
+				<source src="../<?php echo $url; ?>" type="video/mp4">
 				</video>*/ ?>
 
                     <!-- Premium Purchase Card 2 - Video -->
@@ -1186,7 +1171,7 @@
 								<?php }else{ ?>
 								<button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="downloadContent()" aria-label="Download content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                                </button>	
+                                </button>
 								<?php } ?>
                                 <button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="shareContent('phoenix-1')" aria-label="Share content">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
@@ -1194,43 +1179,43 @@
                             </div>
                         </div>
                     </div>
-					
+
 				<?php } ?>
-					
-			<?php  
-			  }    
+
+			<?php
+			  }
 				$count++;
 				}
 				  } else {
 					//echo "0 results";
 				  }
 			  ?>
-					
-					
+
+
 
 				</div>
-				
+
 			</div>
-			
+
 		</section>
 
-			
-    </main>	
-	
+
+    </main>
+
 	  <?php include('includes/footer.php'); ?>
-	
+
 	</body>
-	
+
 </html>
-	
+
 
 <script>
 function downloadContent(){
 	alert('File is not exist');
 }
-</script>	
-	
-	
+</script>
+
+
 	<?php /*?>
 
   <div class="container">
@@ -1269,13 +1254,13 @@ function downloadContent(){
           <div class="creator-list" data-toggle="modal" data-target="#myModal<?php echo $count; ?>">
             <img class="bot_plus" src="../<?php echo $url; ?>" alt="photo" />
           </div>
-        
+
           <span><?php echo $image_text; ?></span>
         <?php }else{ ?>
           <div class="creator-list" data-toggle="modal" data-target="#myModal<?php echo $count; ?>">
             <video class="paid-video" controls> <source src="../<?php echo $url; ?>" type="video/mp4"> </video>
           </div>
-         
+
           <span><?php echo $image_text; ?></span>
         <?php } ?>
       </div>
@@ -1286,7 +1271,7 @@ function downloadContent(){
             <div class="modal-body">
               <div class="row">
                 <div class="col-md-6">
-                  
+
                   <?php if($file_type == 'Image'){ ?>
                   <img class="full_img" src="../<?php echo $url; ?>" alt="photo">
                   <?php }else{ ?>
@@ -1305,7 +1290,7 @@ function downloadContent(){
                       <span>
                         <p class="username"><?php echo $row1['username']; ?></p>
                       </span>
-                    </a>      
+                    </a>
                   </div>
                   <p><?php echo $image_text; ?></p>
                 </div>
@@ -1315,8 +1300,8 @@ function downloadContent(){
         </div>
       </div>
 
-      <?php  
-      }    
+      <?php
+      }
         $count++;
         }
           } else {
@@ -1336,7 +1321,7 @@ function downloadContent(){
               $resultd = mysqli_query($con, $sqls);
                 if (mysqli_num_rows($resultd) > 0) {
                   while($rowesdw1 = mysqli_fetch_assoc($resultd)) {
-                    
+
                     $sql1 = "SELECT * FROM model_images WHERE unique_model_id = '".$rowesdw1['unique_id']."' Order by id DESC LIMIT 1 ";
                     $result1 = mysqli_query($con, $sql1);
                     if (mysqli_num_rows($result1) > 0) {
@@ -1348,7 +1333,7 @@ function downloadContent(){
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
-            
+
             <?php if($rowes1['file_type'] == 'Image'){ ?>
             <img src="<?php echo $rowes1['file']; ?>" style="height: 500px;border-radius: 20px 0 0 20px;" alt="image">
             <?php }else{ ?>
@@ -1367,7 +1352,7 @@ function downloadContent(){
                 <span>
                   <a title="" href="#" style="background: unset;"><?php echo $rowesdw1['username']; ?></a>
                 </span>
-              </a>      
+              </a>
             </div>
             <p><?php echo $rowes1['image_text'] ?></p>
           </div>
@@ -1377,7 +1362,7 @@ function downloadContent(){
   </div>
 </div>
  <?php
-                    } 
+                    }
     $count++;
     }
       } else {
