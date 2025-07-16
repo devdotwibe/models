@@ -33,15 +33,17 @@ $resultd = mysqli_query($con, $sqls);
 					 }else{
 						 $modalname = $rowesdw['name'];
 					 }
-					 
+					 $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
 				$html .= '<div class="profile-card">
                     <div class="profile-image-container">
 					<a href="'.SITEURL.'single-profile.php?m_unique_id='.$rowesdw['unique_id'].'">
                         <img src="'.SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic'].'" alt="'.$modalname.', '.$rowesdw['age'].'" class="profile-image">
                         <div class="profile-badges">
-                            <span class="profile-badge badge-live">Live</span>
-                            <span class="profile-badge badge-verified">Verified</span>
-                        </div>
+                            <span class="profile-badge badge-live">Live</span>';
+							if(!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published'){
+								$html .='<span class="profile-badge badge-verified">Verified</span>';
+							}
+                       $html .= '</div>
 					</a>
                     </div>
                     <div class="profile-info">

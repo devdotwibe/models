@@ -115,7 +115,7 @@
 					 }else{
 						 $modalname = $rowesdw['name'];
 					 }
-					 
+					 $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
 				?>
 			
                 <!-- Profile Card 1 -->
@@ -125,7 +125,9 @@
                         <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php echo $modalname.', '.$rowesdw['age']; ?>" class="profile-image">
                         <div class="profile-badges">
                             <span class="profile-badge badge-live">Live</span>
+							<?php if(!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published'){ ?>
                             <span class="profile-badge badge-verified">Verified</span>
+							<?php } ?>
                         </div>
 					</a>
                     </div>
