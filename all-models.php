@@ -91,7 +91,7 @@
 			}else $offset = 0;
 			
 			$where = '';
-			if (isset($_POST['filter_submit'])){  echo '<pre>'; print_r($_POST); echo '</pre>';
+			if (isset($_POST['filter_submit'])){  
 			
 				if(isset($_POST['f_gender']) && $_POST['f_gender'] != 'any'){
 					$where .= ' AND gender = "'.$_POST['f_gender'].'"';
