@@ -94,32 +94,49 @@
 			if (isset($_POST['filter_submit'])){  
 			
 				if(isset($_POST['f_gender']) && $_POST['f_gender'] != 'any'){
-					$where .= ' AND gender = "'.$_POST['f_gender'].'"';
+					$where .= ' AND mu.gender = "'.$_POST['f_gender'].'"';
 				}
 				if(isset($_POST['f_age'])){
 					if($_POST['f_age'] == 69) $where .= ' AND age >= '.$_POST['f_age'];
-					else $where .= ' AND age = '.$_POST['f_age'];
+					else $where .= ' AND mu.age = '.$_POST['f_age'];
 				}
-				if(isset($_POST['f_location'])){
+				if(isset($_POST['f_location']) && !empty($_POST['f_location'])){
 					$city_array = '';
 					$get_citylist = DB::query('select id,name from cities where name LIKE "%'.$_POST['f_location'].'%" order by name asc');
 					if(!empty($get_citylist)){
 						foreach($get_citylist as $ct){
 							$city_array .= $ct['id'].',';
 						} 
-						$where .= ' AND city IN ('.rtrim($city_array,',').')';
+						$where .= ' AND mu.city IN ('.rtrim($city_array,',').')';
 						
 					}
 				}
 			
-			}
+				if($_POST['f_body_type'] != 'any'){
+					$where .= ' AND md.body_type = "'.$_POST['f_body_type'].'"';
+				}
+				if($_POST['f_ethnicity'] != 'any'){
+					$where .= ' AND md.ethnicity = "'.$_POST['f_ethnicity'].'"';
+				}
+				if($_POST['f_hair_color'] != 'any'){
+					$where .= ' AND md.hair_color = "'.$_POST['f_hair_color'].'"';
+				}
+				if($_POST['f_eye_color'] != 'any'){
+					$where .= ' AND md.eye_color = "'.$_POST['f_eye_color'].'"';
+				}
+				
+			
+			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
+			
+			}else{
 			
 			$sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
             $result_count = mysqli_query($con, $sqls_count);
 			$row_cnt = mysqli_fetch_assoc($result_count);
 			
 			$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
-
+			}
+			
               $resultd = mysqli_query($con, $sqls);
 
                 if (mysqli_num_rows($resultd) > 0) { 
@@ -211,7 +228,9 @@
                 
             </div>
 
-			<?php if($row_cnt['total'] > 8){ ?>
+			<?php 
+			if (!isset($_POST['filter_submit'])){ 
+			if($row_cnt['total'] > 8){ ?>
             <!-- Load More -->
             <div class="load-more">
                 <button class="load-more-btn" id="loadMoreBtn">
@@ -221,7 +240,7 @@
                 <div class="loading-spinner hidden" id="loadingSpinner"></div>
             </div>
 			
-			<?php } ?>
+			<?php } } ?>
 			
         </div>
     </main>
@@ -487,7 +506,7 @@
     </div>
   </div>
 </div>
-
+<?php if (!isset($_POST['filter_submit'])){ ?>
 <script>
 
 
@@ -516,7 +535,7 @@ offset = offset+limit;
 	
 });
 </script>
-
+<?php } ?>
 
 <script>
 
