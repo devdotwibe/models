@@ -146,12 +146,44 @@ $(document).ready(function(){
 });
 </script> -->
 
-<header class="ultra-glass sticky top-0 z-50 border-b border-white/10">
+<header class="ultra-glass sticky top-0 z-50 border-b border-white/10 <?php if (basename($_SERVER['PHP_SELF']) == 'all-models.php') { echo 'header'; } ?> ">
     <div class="container mx-auto py-4 flex justify-between items-center">
         <a href="<?= SITEURL ?>" class="text-2xl font-bold flex items-center group">
             <img src="<?= SITEURL ?>uploads/live-model-logo-new.png" alt="The Live Models" class="h-12 mr-3 group-hover:scale-110 transition duration-500">
         </a>
-        <div class="flex items-center space-x-8">
+        <div class="flex items-center space-x-8 <?php if (basename($_SERVER['PHP_SELF']) == 'all-models.php') { echo 'header-content'; } ?>">
+		<?php if (basename($_SERVER['PHP_SELF']) == 'all-models.php') { ?>
+				<div class="header-actions">
+                   <button class="header-btn active" title="Grid View" id="gridViewBtn" style="display:none;">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="header-btn" title="Menu" id="menuBtn" style="display:none;">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <button class="header-btn" title="Advanced Filters" id="filterBtn">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                    
+                   <div class="sort-dropdown" style="display:none;">
+                        <button class="sort-btn" id="sortBtn">
+                            <span>Sort by</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="sort-options" id="sortOptions">
+                            <div class="sort-option" data-sort="newest">Newest First</div>
+                            <div class="sort-option" data-sort="online">Online Now</div>
+                            <div class="sort-option" data-sort="popular">Most Popular</div>
+                            <div class="sort-option" data-sort="distance">Distance</div>
+                            <div class="sort-option" data-sort="price">Price: Low to High</div>
+                        </div>
+                    </div>
+                    
+                    <button class="premium-btn" style="display:none;">
+                        <i class="fas fa-crown"></i>
+                        Go Premium
+                    </button>
+                </div>
+		<?php } else{ ?>
             <div class="hidden lg:flex items-center space-x-8">
                 <div class="flex items-center space-x-3 text-sm text-white/80 hover-lift">
                     <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
@@ -167,6 +199,7 @@ $(document).ready(function(){
                     <span class="font-medium">100% Secure</span>
                 </div>
             </div>
+		<?php } ?>
 			
 				<?php if ($_SESSION["log_user"]) { ?>
 			
