@@ -106,7 +106,7 @@
 					if(!empty($get_citylist)){
 						foreach($get_citylist as $ct){
 							$city_array .= $ct['id'].',';
-						} print_r($city_array);
+						} 
 						$where .= ' AND city IN ('.rtrim($city_array,',').')';
 						
 					}
