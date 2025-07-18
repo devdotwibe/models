@@ -1,4 +1,3 @@
-<!-- viewer.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +16,7 @@
         let sourceBuffer;
         let queue = [];
         let isBufferUpdating = false;
+        let isSourceOpen = false;
 
         video.src = URL.createObjectURL(mediaSource);
 
@@ -26,28 +26,64 @@
 
         mediaSource.addEventListener('sourceopen', () => {
             console.log('MediaSource opened');
-            if (!mediaSource.sourceBuffers.length) {
-                sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8,opus"');
-                sourceBuffer.mode = 'segments';
-
-                sourceBuffer.addEventListener('updateend', () => {
-                    isBufferUpdating = false;
-                    processQueue();
-                });
-            }
-            socket.send(JSON.stringify({ event: 'new-viewer' }));
+            isSourceOpen = true;
+            setupSourceBuffer();
+            sendNewViewer();
         });
+
+        function setupSourceBuffer() {
+            if (mediaSource.sourceBuffers.length > 0) return;
+
+            sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8,opus"');
+            sourceBuffer.mode = 'segments';
+            sourceBuffer.addEventListener('updateend', () => {
+                isBufferUpdating = false;
+                processQueue();
+            });
+        }
+
+        function sendNewViewer() {
+            if (isSourceOpen) {
+                socket.send(JSON.stringify({ event: 'new-viewer' }));
+            }
+        }
 
         socket.addEventListener('message', ({ data }) => {
             const msg = JSON.parse(data);
             if (msg.event === 'stream-chunk') {
                 const arrayBuffer = base64ToArrayBuffer(msg.data);
-                if (arrayBuffer.byteLength > 0) {
+
+                if (msg.private_id === -1) {
+                    resetMediaSource(arrayBuffer);
+                } else {
                     queue.push(arrayBuffer);
                     processQueue();
                 }
             }
         });
+
+        function resetMediaSource(headerBuffer) {
+            if (!mediaSource || mediaSource.readyState === 'closed') return;
+
+            console.log('Resetting media source with new header chunk.');
+            if (sourceBuffer) {
+                try {
+                    mediaSource.removeSourceBuffer(sourceBuffer);
+                } catch (e) {
+                    console.warn('No buffer to remove, ignore.');
+                }
+                sourceBuffer = null;
+            }
+
+            const newMediaSource = new MediaSource();
+            video.src = URL.createObjectURL(newMediaSource);
+            mediaSource = newMediaSource;
+
+            newMediaSource.addEventListener('sourceopen', () => {
+                setupSourceBuffer();
+                sourceBuffer.appendBuffer(headerBuffer);
+            });
+        }
 
         function processQueue() {
             if (!sourceBuffer || !queue.length || sourceBuffer.updating || isBufferUpdating) return;
@@ -57,7 +93,7 @@
             } catch (e) {
                 console.error('appendBuffer failed', e);
                 isBufferUpdating = false;
-                queue = []; // Clear bad data
+                queue = [];
             }
         }
 

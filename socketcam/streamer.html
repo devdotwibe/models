@@ -1,4 +1,3 @@
-<!-- streamer.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +28,8 @@
             console.log('Received message:', msg);
 
             if (msg.event === 'new-viewer') {
-                console.log('New viewer joined, sending header chunk.');
+                console.log('New viewer joined, sending header chunk again.');
+                // Re-send header again (not once)
                 if (headerChunk) {
                     socket.send(JSON.stringify({
                         event: 'stream-chunk',
@@ -69,7 +69,7 @@
                     }
                 };
 
-                recorder.start(1000); // Send 1-second chunks
+                recorder.start(1000); // 1-second chunks
                 console.log("Streaming started");
             } catch (error) {
                 console.error('Error starting streaming:', error);
