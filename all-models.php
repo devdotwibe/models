@@ -78,6 +78,45 @@
 
     <?php include('includes/header.php'); ?>
 
+<!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">Live Models</h1>
+                
+                <div class="header-actions">
+                    <button class="header-btn active" title="Grid View" id="gridViewBtn">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="header-btn" title="Menu" id="menuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <button class="header-btn" title="Advanced Filters" id="filterBtn">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                    
+                    <div class="sort-dropdown">
+                        <button class="sort-btn" id="sortBtn">
+                            <span>Sort by</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="sort-options" id="sortOptions">
+                            <div class="sort-option" data-sort="newest">Newest First</div>
+                            <div class="sort-option" data-sort="online">Online Now</div>
+                            <div class="sort-option" data-sort="popular">Most Popular</div>
+                            <div class="sort-option" data-sort="distance">Distance</div>
+                            <div class="sort-option" data-sort="price">Price: Low to High</div>
+                        </div>
+                    </div>
+                    
+                    <button class="premium-btn">
+                        <i class="fas fa-crown"></i>
+                        Go Premium
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
 
 	<!-- Main Content -->
     <main class="main-content">
