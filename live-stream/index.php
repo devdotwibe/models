@@ -1,7 +1,7 @@
 <?php session_start(); 
 
-include('includes/config.php');
-include('includes/helper.php');
+include('../includes/config.php');
+include('../includes/helper.php');
 $error = '';
 if (isset($_SESSION['log_user_unique_id'])) {
   $getUserData = get_data('model_social_link', array('unique_model_id' => $_SESSION['log_user_unique_id']), true);
