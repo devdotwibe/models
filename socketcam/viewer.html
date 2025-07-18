@@ -16,49 +16,48 @@
         let sourceBuffer;
         let queue = [];
         let isBufferUpdating = false;
-        let isSocketReady = false;
-        let isMediaReady = false;
 
         video.src = URL.createObjectURL(mediaSource);
 
-        socket.onopen = () => {
-            isSocketReady = true;
-            trySendNewViewer();
-        };
-
-        mediaSource.addEventListener('sourceopen', () => {
-            sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8,opus"');
-            sourceBuffer.mode = 'segments';
-            isMediaReady = true;
-
-            sourceBuffer.addEventListener('updateend', () => {
-                isBufferUpdating = false;
-                processQueue();
-            });
-
-            trySendNewViewer();
+        socket.addEventListener('open', () => {
+            console.log('WebSocket connected');
         });
 
-        function trySendNewViewer() {
-            if (isSocketReady && isMediaReady) {
-                socket.send(JSON.stringify({ event: 'new-viewer' }));
+        mediaSource.addEventListener('sourceopen', () => {
+            console.log('MediaSource opened');
+            if (!mediaSource.sourceBuffers.length) {
+                sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8,opus"');
+                sourceBuffer.mode = 'segments';
+
+                sourceBuffer.addEventListener('updateend', () => {
+                    isBufferUpdating = false;
+                    processQueue();
+                });
             }
-        }
+            socket.send(JSON.stringify({ event: 'new-viewer' }));
+        });
 
-        socket.onmessage = ({ data }) => {
+        socket.addEventListener('message', ({ data }) => {
             const msg = JSON.parse(data);
-
             if (msg.event === 'stream-chunk') {
                 const arrayBuffer = base64ToArrayBuffer(msg.data);
-                queue.push(arrayBuffer);
-                processQueue();
+                if (arrayBuffer.byteLength > 0) {
+                    queue.push(arrayBuffer);
+                    processQueue();
+                }
             }
-        };
+        });
 
         function processQueue() {
             if (!sourceBuffer || !queue.length || sourceBuffer.updating || isBufferUpdating) return;
             isBufferUpdating = true;
-            sourceBuffer.appendBuffer(queue.shift());
+            try {
+                sourceBuffer.appendBuffer(queue.shift());
+            } catch (e) {
+                console.error('appendBuffer failed', e);
+                isBufferUpdating = false;
+                queue = []; // Clear corrupted queue
+            }
         }
 
         function base64ToArrayBuffer(base64) {

@@ -17,44 +17,55 @@
         let seqnce_no = 0;
         let isStreaming = false;
 
-        socket.onmessage = ({ data }) => {
+        socket.addEventListener('open', () => {
+            console.log('WebSocket connection opened');
+        });
+
+        socket.addEventListener('message', ({ data }) => {
             const msg = JSON.parse(data);
-            if (msg.event === 'new-viewer' && isStreaming) {
-                // Stop and restart to help new viewer
-                stopStreaming();
-                setTimeout(() => startStreaming(), 500);
+            console.log('Received message:', msg);
+
+            if (msg.event === 'new-viewer') {
+                console.log('New viewer joined, stream continues without restarting.');
+                // You don't stop/start streaming here anymore.
             }
-        };
+        });
 
         async function startStreaming() {
-            stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-            preview.srcObject = stream;
+            if (isStreaming) return;
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                preview.srcObject = stream;
 
-            recorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp8,opus' });
-            isStreaming = true;
+                recorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp8,opus' });
+                isStreaming = true;
 
-            recorder.ondataavailable = (event) => {
-                if (event.data.size > 0 && socket.readyState === WebSocket.OPEN) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        const arrayBuffer = reader.result;
-                        const base64 = arrayBufferToBase64(arrayBuffer);
-                        socket.send(JSON.stringify({
-                            event: 'stream-chunk',
-                            data: base64,
-                            private_id: seqnce_no
-                        }));
-                        seqnce_no++;
-                    };
-                    reader.readAsArrayBuffer(event.data);
-                }
-            };
+                recorder.ondataavailable = (event) => {
+                    if (event.data.size > 0 && socket.readyState === WebSocket.OPEN) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            const arrayBuffer = reader.result;
+                            const base64 = arrayBufferToBase64(arrayBuffer);
+                            socket.send(JSON.stringify({
+                                event: 'stream-chunk',
+                                data: base64,
+                                private_id: seqnce_no
+                            }));
+                            seqnce_no++;
+                        };
+                        reader.readAsArrayBuffer(event.data);
+                    }
+                };
 
-            recorder.start(1000); // 1-second chunks
-            console.log("Streaming started");
+                recorder.start(1000); // 1-second chunks
+                console.log("Streaming started");
+            } catch (error) {
+                console.error('Error starting streaming:', error);
+            }
         }
 
         function stopStreaming() {
+            if (!isStreaming) return;
             if (recorder && recorder.state !== "inactive") {
                 recorder.stop();
             }
