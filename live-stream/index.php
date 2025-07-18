@@ -1,15 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php session_start(); 
 
+include('includes/config.php');
+include('includes/helper.php');
+$error = '';
+if (isset($_SESSION['log_user_unique_id'])) {
+  $getUserData = get_data('model_social_link', array('unique_model_id' => $_SESSION['log_user_unique_id']), true);
+
+ $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+
+  if ($getUserData) {
+    if (empty($getUserData['i_username'])) {
+      $error = 'empty';
+    } else if (empty($getUserData['s_username'])) {
+      $error = 'empty';
+    }
+  } else {
+    $error = 'empty';
+  }
+} else {
+  $error = 'login';
+}
+$showMessgeBtn = 0;
+if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id']) {
+  $showMessgeBtn = h_checkMessageShowBtn($_GET['m_unique_id'], $_SESSION['log_user_unique_id']);
+}
+$session_id = $_GET['m_unique_id'];
+
+
+
+?>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>TLM Model Dashboard - Elite Streaming</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TLM Model Dashboard - Elite Streaming</title>
+<meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
+<?php  include('includes/head.php'); ?>
+
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/stream.css?v=<?=time()?>' type='text/css' media='all' />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 
-    </style>
 </head>
 
 <body>
