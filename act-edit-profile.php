@@ -10,11 +10,11 @@ else{
 }
 
 if ($_POST['submit_name']){ 
-	$arr = array('name','country','state','city','gender','user_bio','services','relationship','travel_preference'); //,'user_current_status'
+	$arr = array('name','country','state','city','gender','age','user_bio','services','relationship','travel_preference'); //,'user_current_status'
 	$post_data = array_from_post($arr);
 	
 	$post_data['dob'] = h_dateFormat($_POST['dob'],'Y-m-d');
-	$post_data['age'] = h_get_age($dob);
+	//$post_data['age'] = h_get_age($dob);
 	
 	$unique_id = $_POST['unique_id'];
 	
