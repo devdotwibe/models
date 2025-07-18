@@ -1,45 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head><title>Streamer</title></head>
+<head><title>Streamer Live Upload</title></head>
 <body>
-<h2>Streamer</h2>
+<h2>Streaming to Server via AJAX</h2>
 <video id="preview" autoplay muted playsinline width="600"></video>
+<button onclick="startStreaming()">Start</button>
+<button onclick="stopStreaming()">Stop</button>
 
 <script>
-const ws = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
-let pc;
+let mediaRecorder, stream;
 const preview = document.getElementById('preview');
 
-const iceServers = [{ urls: 'stun:stun.l.google.com:19302' }];
-
-navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+async function startStreaming() {
+    stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
     preview.srcObject = stream;
-    ws.onopen = () => ws.send(JSON.stringify({ type: 'streamer-ready' }));
 
-    ws.onmessage = ({ data }) => {
-        const msg = JSON.parse(data);
-        if (msg.type === 'viewer-ready') {
-            startConnection(stream);
-        } else if (msg.type === 'answer' && pc) {
-            pc.setRemoteDescription(new RTCSessionDescription(msg.answer));
-        } else if (msg.type === 'candidate' && pc) {
-            pc.addIceCandidate(new RTCIceCandidate(msg.candidate));
+    mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp8,opus' });
+    mediaRecorder.ondataavailable = e => {
+        if (e.data.size > 0) {
+            sendChunk(e.data);
         }
     };
-});
+    mediaRecorder.start(1000); // 1 second chunks
+}
 
-function startConnection(stream) {
-    pc = new RTCPeerConnection({ iceServers });
-    stream.getTracks().forEach(track => pc.addTrack(track, stream));
-    pc.onicecandidate = ({ candidate }) => {
-        if (candidate) {
-            ws.send(JSON.stringify({ type: 'candidate', candidate }));
-        }
-    };
-    pc.createOffer().then(offer => {
-        pc.setLocalDescription(offer);
-        ws.send(JSON.stringify({ type: 'offer', offer }));
-    });
+function stopStreaming() {
+    mediaRecorder.stop();
+    stream.getTracks().forEach(track => track.stop());
+}
+
+function sendChunk(blob) {
+    const formData = new FormData();
+    formData.append('video', blob);
+    fetch('upload.php', { method: 'POST', body: formData });
 }
 </script>
 </body>
