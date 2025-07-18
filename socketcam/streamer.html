@@ -1,3 +1,4 @@
+<!-- streamer.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +14,11 @@
     <script>
         const preview = document.getElementById("preview");
         const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
+
         let stream, recorder;
         let seqnce_no = 0;
         let isStreaming = false;
+        let headerChunk = null; // Save first chunk for new viewers
 
         socket.addEventListener('open', () => {
             console.log('WebSocket connection opened');
@@ -26,8 +29,14 @@
             console.log('Received message:', msg);
 
             if (msg.event === 'new-viewer') {
-                console.log('New viewer joined, stream continues without restarting.');
-                // You don't stop/start streaming here anymore.
+                console.log('New viewer joined, sending header chunk.');
+                if (headerChunk) {
+                    socket.send(JSON.stringify({
+                        event: 'stream-chunk',
+                        data: headerChunk,
+                        private_id: -1
+                    }));
+                }
             }
         });
 
@@ -46,6 +55,9 @@
                         reader.onloadend = () => {
                             const arrayBuffer = reader.result;
                             const base64 = arrayBufferToBase64(arrayBuffer);
+                            if (!headerChunk) {
+                                headerChunk = base64;
+                            }
                             socket.send(JSON.stringify({
                                 event: 'stream-chunk',
                                 data: base64,
@@ -57,7 +69,7 @@
                     }
                 };
 
-                recorder.start(1000); // 1-second chunks
+                recorder.start(1000); // Send 1-second chunks
                 console.log("Streaming started");
             } catch (error) {
                 console.error('Error starting streaming:', error);
@@ -74,6 +86,7 @@
                 preview.srcObject = null;
             }
             isStreaming = false;
+            headerChunk = null;
             console.log("Streaming stopped");
         }
 
