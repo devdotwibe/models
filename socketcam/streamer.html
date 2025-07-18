@@ -6,38 +6,46 @@
 <video id="preview" autoplay muted playsinline width="600"></video>
 
 <script>
-const preview = document.getElementById('preview');
+const ws = new WebSocket("ws://YOUR_SERVER_IP:9001");
 let pc;
+const preview = document.getElementById('preview');
+
+const iceServers = [
+    { urls: 'stun:stun.l.google.com:19302' },
+    {
+        urls: 'turn:relay.metered.ca:80',
+        username: 'openai',
+        credential: 'openai'
+    }
+];
 
 navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
     preview.srcObject = stream;
-    pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
-    stream.getTracks().forEach(track => pc.addTrack(track, stream));
+    ws.onopen = () => ws.send(JSON.stringify({ type: 'streamer-ready' }));
 
-    pc.onicecandidate = ({ candidate }) => {
-        if (!candidate) {
-            fetch('save_offer.php', {
-                method: 'POST',
-                body: JSON.stringify({ offer: pc.localDescription }),
-                headers: { 'Content-Type': 'application/json' }
-            });
+    ws.onmessage = ({ data }) => {
+        const msg = JSON.parse(data);
+        if (msg.type === 'viewer-ready') {
+            startConnection(stream);
+        } else if (msg.type === 'answer' && pc) {
+            pc.setRemoteDescription(new RTCSessionDescription(msg.answer));
+        } else if (msg.type === 'candidate' && pc) {
+            pc.addIceCandidate(new RTCIceCandidate(msg.candidate));
         }
     };
-
-    pc.createOffer().then(offer => pc.setLocalDescription(offer));
 });
 
-// Poll for answer
-async function pollForAnswer() {
-    const res = await fetch('get_answer.php');
-    const { answer } = await res.json();
-    if (answer && pc.signalingState !== 'stable') {
-        await pc.setRemoteDescription(new RTCSessionDescription(answer));
-        console.log('Answer received.');
-    }
-    setTimeout(pollForAnswer, 1500);
+function startConnection(stream) {
+    pc = new RTCPeerConnection({ iceServers });
+    stream.getTracks().forEach(track => pc.addTrack(track, stream));
+    pc.onicecandidate = ({ candidate }) => {
+        if (candidate) ws.send(JSON.stringify({ type: 'candidate', candidate }));
+    };
+    pc.createOffer().then(offer => {
+        pc.setLocalDescription(offer);
+        ws.send(JSON.stringify({ type: 'offer', offer }));
+    });
 }
-pollForAnswer();
 </script>
 </body>
 </html>
