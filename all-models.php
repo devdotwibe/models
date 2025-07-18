@@ -101,7 +101,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="sort-options" id="sortOptions">
-                            <div class="sort-option" data-sort="newest">Newest First</div>
+                            <div class="sort-option" data-sort="newest"><a href="<?=SITEURL?>/all-models.php?sort=newest">Newest First</a></div>
                             <div class="sort-option" data-sort="online">Online Now</div>
                             <div class="sort-option" data-sort="popular">Most Popular</div>
                             <div class="sort-option" data-sort="distance">Distance</div>
@@ -128,6 +128,10 @@
 			if(isset($_GET['offset'])){
 			$offset = $_GET['offset'];
 			}else $offset = 0;
+			
+			if(isset($_GET['sort'])){
+			$sort_filter = $_GET['sort'];
+			}else $sort_filter = 0;
 			
 			$where = '';
 			if (isset($_POST['filter_submit'])){  
@@ -175,6 +179,14 @@
 			
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
 			
+			}else if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
+				
+			$sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' "; 
+            $result_count = mysqli_query($con, $sqls_count);
+			$row_cnt = mysqli_fetch_assoc($result_count);
+			
+			$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' ".$where."  Order by register_date DESC LIMIT $limit OFFSET $offset";
+				
 			}else{
 			
 			$sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
@@ -567,7 +579,7 @@ offset = offset+limit;
 	jQuery.ajax({
 				type: 'GET',
 				url : "<?=SITEURL.'load_more_model.php'?>",
-				data:{offset:offset,total:"<?php echo $row_cnt['total']; ?>"},
+				data:{offset:offset,total:"<?php echo $row_cnt['total']; ?>",sort:"<?php echo $sort_filter; ?>"},
 				dataType:'json',
 				success: function(response){ console.log(response.html);
 					jQuery('#profileGrid').append(response.html);
@@ -902,7 +914,7 @@ function showNotification(message, type = 'info') {
         }
 
         // Apply Sorting Function
-        function applySorting(sortType) {
+        function applySorting(sortType) { 
             showLoadingState();
             
             setTimeout(() => {

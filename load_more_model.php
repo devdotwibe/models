@@ -12,8 +12,13 @@
   $limit = 8;
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
 $total = isset($_GET['total']) ? intval($_GET['total']) : 0;
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 0;
 $html = '';
+if($sort == 'newest'){
+$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes'  Order by register_date DESC LIMIT $limit OFFSET $offset";	
+}else{
 $sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes'  Order by id DESC LIMIT $limit OFFSET $offset";
+}
 $resultd = mysqli_query($con, $sqls);
 
                 if (mysqli_num_rows($resultd) > 0) { 
