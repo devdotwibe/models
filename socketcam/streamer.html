@@ -6,7 +6,7 @@
 <video id="preview" autoplay muted playsinline width="600"></video>
 
 <script>
-const ws = new WebSocket("ws://209.182.232.170 :9001");
+const ws = new WebSocket("ws://staging3.dotwibe.com:9001");
 let pc;
 const preview = document.getElementById('preview');
 
@@ -39,7 +39,9 @@ function startConnection(stream) {
     pc = new RTCPeerConnection({ iceServers });
     stream.getTracks().forEach(track => pc.addTrack(track, stream));
     pc.onicecandidate = ({ candidate }) => {
-        if (candidate) ws.send(JSON.stringify({ type: 'candidate', candidate }));
+        if (candidate) {
+            ws.send(JSON.stringify({ type: 'candidate', candidate }));
+        }
     };
     pc.createOffer().then(offer => {
         pc.setLocalDescription(offer);
