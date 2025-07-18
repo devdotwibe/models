@@ -23,16 +23,18 @@ if ($_POST['submit_name']){
 	$lang_array = array();
 	$modal_lang = $_POST['modal_lang'];
 	$proficiency = $_POST['proficiency'];
-	
+	$english_ability = '';
 	if(!empty($modal_lang)){
-		$i = 0;
+		$i = 0; 
 		foreach($modal_lang as $lng){
+			if($lng == 'English'){ $english_ability = $proficiency[$i]; }
 			$lang_array[$i]['lan'] = $lng;
 			$lang_array[$i]['prof'] = $proficiency[$i];
 			$i++;
 		}
 	}
-	$post_data['languages'] = json_encode($lang_array);
+	$post_data['english_ability'] = $english_ability;
+	$post_data['languages'] = json_encode($lang_array); 
 	
 	//Social icons 
 	$platform = $_POST['platform'];
