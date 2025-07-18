@@ -213,8 +213,15 @@ if ($_POST['submit_name']){
 		$post_data_extra['unique_model_id'] = $model_unique_id;
 		if($_POST['height_type'] == 'ft'){
 			$post_data_extra['height'] = $_POST['feet'].'.'.$_POST['inches'];
+			$post_data_extra['height_in_cm'] = ($_POST['feet'] * 30.48) + ($_POST['inches'] * 2.54);
 		}else{
 			$post_data_extra['height'] = $_POST['height_cm'];
+			$post_data_extra['height_in_cm'] = $_POST['height_cm'];
+		}
+		if($_POST['weight_type'] == 'lbs'){
+			$post_data_extra['weight_in_kg'] = $_POST['weight'] * 0.45359237;
+		}else{
+			$post_data_extra['weight_in_kg'] = $_POST['weight'];
 		}
 		if(!empty($_POST['social_availability'])){
 			$post_data_extra['social_availability'] = json_encode($_POST['social_availability']);
