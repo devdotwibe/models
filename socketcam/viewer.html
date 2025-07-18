@@ -15,7 +15,7 @@ async function pollForOffer() {
     if (offer && !pc) {
         startViewer(offer);
     }
-    setTimeout(pollForOffer, 1000);
+    setTimeout(pollForOffer, 1500);
 }
 pollForOffer();
 
@@ -32,7 +32,7 @@ async function startViewer(offer) {
         }
     };
 
-    await pc.setRemoteDescription(offer);
+    await pc.setRemoteDescription(new RTCSessionDescription(offer));
     const answer = await pc.createAnswer();
     await pc.setLocalDescription(answer);
 }

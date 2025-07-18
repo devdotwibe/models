@@ -24,19 +24,18 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream =>
         }
     };
 
-    pc.createOffer().then(offer => {
-        pc.setLocalDescription(offer);
-    });
+    pc.createOffer().then(offer => pc.setLocalDescription(offer));
 });
 
+// Poll for answer
 async function pollForAnswer() {
     const res = await fetch('get_answer.php');
     const { answer } = await res.json();
     if (answer && pc.signalingState !== 'stable') {
-        await pc.setRemoteDescription(answer);
-        console.log('Answer received and set.');
+        await pc.setRemoteDescription(new RTCSessionDescription(answer));
+        console.log('Answer received.');
     }
-    setTimeout(pollForAnswer, 1000);
+    setTimeout(pollForAnswer, 1500);
 }
 pollForAnswer();
 </script>
