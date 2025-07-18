@@ -124,7 +124,15 @@
 				if($_POST['f_eye_color'] != 'any'){
 					$where .= ' AND md.eye_color = "'.$_POST['f_eye_color'].'"';
 				}
-				
+				if($_POST['f_language'] != 'any'){
+					$where .= ' AND mu.english_ability = "'.$_POST['f_language'].'"';
+				}
+				if(isset($_POST['f_height']) && !empty(($_POST['f_height']))){ 
+					$where .= ' AND md.height_in_cm >= '.$_POST['f_height'].' AND md.height_in_cm <= '.($_POST['f_height']+1);
+				}
+				if(isset($_POST['f_weight']) && !empty(($_POST['f_weight']))){ 
+					$where .= ' AND md.weight_in_kg >= '.$_POST['f_weight'].' AND md.weight_in_kg <= '.($_POST['f_weight']+1);
+				}
 			
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
 			
