@@ -97,7 +97,11 @@
                     
                     <div class="sort-dropdown">
                         <button class="sort-btn" id="sortBtn">
+						<?php if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
+							echo '<span>Newest First</span>';
+						}else{ ?>
                             <span>Sort by</span>
+						<?php } ?>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="sort-options" id="sortOptions">
