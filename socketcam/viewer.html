@@ -1,111 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Viewer</title>
-</head>
+<html>
+<head><title>Viewer</title></head>
 <body>
-    <h2>Viewer</h2>
-    <video id="remote" autoplay playsinline controls width="600"></video>
+<h2>Viewer</h2>
+<video id="remote" autoplay playsinline controls width="600"></video>
 
-    <script>
-        const video = document.getElementById('remote');
-        const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
+<script>
+const remote = document.getElementById('remote');
+const ws = new WebSocket('ws://localhost:3000');
+const pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
 
-        let mediaSource = new MediaSource();
-        let sourceBuffer;
-        let queue = [];
-        let isBufferUpdating = false;
-        let isSourceOpen = false;
+ws.onopen = () => ws.send(JSON.stringify({ type: 'viewer' }));
 
-        video.src = URL.createObjectURL(mediaSource);
+pc.onicecandidate = ({ candidate }) => {
+    if (candidate) ws.send(JSON.stringify({ to: 'streamer', payload: { candidate } }));
+};
 
-        socket.addEventListener('open', () => {
-            console.log('WebSocket connected');
+pc.ontrack = (event) => remote.srcObject = event.streams[0];
+
+ws.onmessage = ({ data }) => {
+    const msg = JSON.parse(data);
+    if (msg.offer) {
+        pc.setRemoteDescription(new RTCSessionDescription(msg.offer));
+        pc.createAnswer().then(answer => {
+            pc.setLocalDescription(answer);
+            ws.send(JSON.stringify({ to: 'streamer', payload: { answer } }));
         });
-
-        mediaSource.addEventListener('sourceopen', () => {
-            console.log('MediaSource opened');
-            isSourceOpen = true;
-            setupSourceBuffer();
-            sendNewViewer();
-        });
-
-        function setupSourceBuffer() {
-            if (mediaSource.sourceBuffers.length > 0) return;
-
-            sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8,opus"');
-            sourceBuffer.mode = 'segments';
-            sourceBuffer.addEventListener('updateend', () => {
-                isBufferUpdating = false;
-                processQueue();
-            });
-        }
-
-        function sendNewViewer() {
-            if (isSourceOpen) {
-                socket.send(JSON.stringify({ event: 'new-viewer' }));
-            }
-        }
-
-        socket.addEventListener('message', ({ data }) => {
-            const msg = JSON.parse(data);
-            if (msg.event === 'stream-chunk') {
-                const arrayBuffer = base64ToArrayBuffer(msg.data);
-
-                if (msg.private_id === -1) {
-                    resetMediaSource(arrayBuffer);
-                } else {
-                    queue.push(arrayBuffer);
-                    processQueue();
-                }
-            }
-        });
-
-        function resetMediaSource(headerBuffer) {
-            if (!mediaSource || mediaSource.readyState === 'closed') return;
-
-            console.log('Resetting media source with new header chunk.');
-            if (sourceBuffer) {
-                try {
-                    mediaSource.removeSourceBuffer(sourceBuffer);
-                } catch (e) {
-                    console.warn('No buffer to remove, ignore.');
-                }
-                sourceBuffer = null;
-            }
-
-            const newMediaSource = new MediaSource();
-            video.src = URL.createObjectURL(newMediaSource);
-            mediaSource = newMediaSource;
-
-            newMediaSource.addEventListener('sourceopen', () => {
-                setupSourceBuffer();
-                sourceBuffer.appendBuffer(headerBuffer);
-            });
-        }
-
-        function processQueue() {
-            if (!sourceBuffer || !queue.length || sourceBuffer.updating || isBufferUpdating) return;
-            isBufferUpdating = true;
-            try {
-                sourceBuffer.appendBuffer(queue.shift());
-            } catch (e) {
-                console.error('appendBuffer failed', e);
-                isBufferUpdating = false;
-                queue = [];
-            }
-        }
-
-        function base64ToArrayBuffer(base64) {
-            const binaryString = atob(base64);
-            const len = binaryString.length;
-            const bytes = new Uint8Array(len);
-            for (let i = 0; i < len; i++) {
-                bytes[i] = binaryString.charCodeAt(i);
-            }
-            return bytes.buffer;
-        }
-    </script>
+    }
+    if (msg.candidate) pc.addIceCandidate(new RTCIceCandidate(msg.candidate));
+};
+</script>
 </body>
 </html>

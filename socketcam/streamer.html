@@ -1,101 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Streamer</title>
-</head>
+<html>
+<head><title>Streamer</title></head>
 <body>
-    <h2>Streamer</h2>
-    <video id="preview" autoplay muted playsinline width="600"></video><br>
-    <button onclick="startStreaming()">Start Streaming</button>
-    <button onclick="stopStreaming()">Stop</button>
+<h2>Streamer</h2>
+<video id="preview" autoplay muted playsinline width="600"></video>
 
-    <script>
-        const preview = document.getElementById("preview");
-        const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket");
+<script>
+const preview = document.getElementById('preview');
+const ws = new WebSocket('ws://localhost:3000');
+const pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
 
-        let stream, recorder;
-        let seqnce_no = 0;
-        let isStreaming = false;
-        let headerChunk = null; // Save first chunk for new viewers
+ws.onopen = () => ws.send(JSON.stringify({ type: 'streamer' }));
 
-        socket.addEventListener('open', () => {
-            console.log('WebSocket connection opened');
-        });
+navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+    preview.srcObject = stream;
+    stream.getTracks().forEach(track => pc.addTrack(track, stream));
 
-        socket.addEventListener('message', ({ data }) => {
-            const msg = JSON.parse(data);
-            console.log('Received message:', msg);
+    pc.onicecandidate = ({ candidate }) => {
+        if (candidate) ws.send(JSON.stringify({ to: 'viewer', payload: { candidate } }));
+    };
 
-            if (msg.event === 'new-viewer') {
-                console.log('New viewer joined, sending header chunk again.');
-                // Re-send header again (not once)
-                if (headerChunk) {
-                    socket.send(JSON.stringify({
-                        event: 'stream-chunk',
-                        data: headerChunk,
-                        private_id: -1
-                    }));
-                }
-            }
-        });
+    pc.createOffer().then(offer => {
+        pc.setLocalDescription(offer);
+        ws.send(JSON.stringify({ to: 'viewer', payload: { offer } }));
+    });
+});
 
-        async function startStreaming() {
-            if (isStreaming) return;
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-                preview.srcObject = stream;
-
-                recorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp8,opus' });
-                isStreaming = true;
-
-                recorder.ondataavailable = (event) => {
-                    if (event.data.size > 0 && socket.readyState === WebSocket.OPEN) {
-                        const reader = new FileReader();
-                        reader.onloadend = () => {
-                            const arrayBuffer = reader.result;
-                            const base64 = arrayBufferToBase64(arrayBuffer);
-                            if (!headerChunk) {
-                                headerChunk = base64;
-                            }
-                            socket.send(JSON.stringify({
-                                event: 'stream-chunk',
-                                data: base64,
-                                private_id: seqnce_no
-                            }));
-                            seqnce_no++;
-                        };
-                        reader.readAsArrayBuffer(event.data);
-                    }
-                };
-
-                recorder.start(1000); // 1-second chunks
-                console.log("Streaming started");
-            } catch (error) {
-                console.error('Error starting streaming:', error);
-            }
-        }
-
-        function stopStreaming() {
-            if (!isStreaming) return;
-            if (recorder && recorder.state !== "inactive") {
-                recorder.stop();
-            }
-            if (stream) {
-                stream.getTracks().forEach(track => track.stop());
-                preview.srcObject = null;
-            }
-            isStreaming = false;
-            headerChunk = null;
-            console.log("Streaming stopped");
-        }
-
-        function arrayBufferToBase64(buffer) {
-            let binary = '';
-            const bytes = new Uint8Array(buffer);
-            bytes.forEach(b => binary += String.fromCharCode(b));
-            return btoa(binary);
-        }
-    </script>
+ws.onmessage = ({ data }) => {
+    const msg = JSON.parse(data);
+    if (msg.answer) pc.setRemoteDescription(new RTCSessionDescription(msg.answer));
+    if (msg.candidate) pc.addIceCandidate(new RTCIceCandidate(msg.candidate));
+};
+</script>
 </body>
 </html>
