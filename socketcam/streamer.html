@@ -6,56 +6,39 @@
 <video id="preview" autoplay muted playsinline width="600"></video>
 
 <script>
-const ws = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket"); 
-const peers = {};
 const preview = document.getElementById('preview');
+let pc;
 
 navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
     preview.srcObject = stream;
+    pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
+    stream.getTracks().forEach(track => pc.addTrack(track, stream));
 
-    ws.onopen = () => {
-        ws.send(JSON.stringify({ type: 'streamer' }));
-    };
-
-    ws.onmessage = ({ data }) => {
-        const msg = JSON.parse(data);
-
-        if (msg.type === 'viewer-ready') {
-            const viewer_id = msg.viewer_id;
-            const pc = createPeerConnection(viewer_id, stream);
-            pc.createOffer().then(offer => {
-                pc.setLocalDescription(offer);
-                ws.send(JSON.stringify({
-                    to: 'viewer',
-                    viewer_id,
-                    payload: { offer }
-                }));
+    pc.onicecandidate = ({ candidate }) => {
+        if (!candidate) {
+            fetch('save_offer.php', {
+                method: 'POST',
+                body: JSON.stringify({ offer: pc.localDescription }),
+                headers: { 'Content-Type': 'application/json' }
             });
-        } else if (msg.type === 'signal') {
-            const viewer_id = msg.viewer_id;
-            const pc = peers[viewer_id];
-            const { answer, candidate } = msg.data;
-            if (answer) pc.setRemoteDescription(new RTCSessionDescription(answer));
-            if (candidate) pc.addIceCandidate(new RTCIceCandidate(candidate));
         }
     };
 
-    function createPeerConnection(viewer_id, stream) {
-        const pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
-        stream.getTracks().forEach(track => pc.addTrack(track, stream));
-        pc.onicecandidate = ({ candidate }) => {
-            if (candidate) {
-                ws.send(JSON.stringify({
-                    to: 'viewer',
-                    viewer_id,
-                    payload: { candidate }
-                }));
-            }
-        };
-        peers[viewer_id] = pc;
-        return pc;
-    }
+    pc.createOffer().then(offer => {
+        pc.setLocalDescription(offer);
+    });
 });
+
+async function pollForAnswer() {
+    const res = await fetch('get_answer.php');
+    const { answer } = await res.json();
+    if (answer && pc.signalingState !== 'stable') {
+        await pc.setRemoteDescription(answer);
+        console.log('Answer received and set.');
+    }
+    setTimeout(pollForAnswer, 1000);
+}
+pollForAnswer();
 </script>
 </body>
 </html>
