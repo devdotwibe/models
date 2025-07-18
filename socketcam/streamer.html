@@ -6,31 +6,56 @@
 <video id="preview" autoplay muted playsinline width="600"></video>
 
 <script>
+const ws = new WebSocket('ws://localhost:9001');
+const peers = {};
 const preview = document.getElementById('preview');
-const ws = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket"); 
-const pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
-
-ws.onopen = () => ws.send(JSON.stringify({ type: 'streamer' }));
 
 navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
     preview.srcObject = stream;
-    stream.getTracks().forEach(track => pc.addTrack(track, stream));
 
-    pc.onicecandidate = ({ candidate }) => {
-        if (candidate) ws.send(JSON.stringify({ to: 'viewer', payload: { candidate } }));
+    ws.onopen = () => {
+        ws.send(JSON.stringify({ type: 'streamer' }));
     };
 
-    pc.createOffer().then(offer => {
-        pc.setLocalDescription(offer);
-        ws.send(JSON.stringify({ to: 'viewer', payload: { offer } }));
-    });
-});
+    ws.onmessage = ({ data }) => {
+        const msg = JSON.parse(data);
 
-ws.onmessage = ({ data }) => {
-    const msg = JSON.parse(data);
-    if (msg.answer) pc.setRemoteDescription(new RTCSessionDescription(msg.answer));
-    if (msg.candidate) pc.addIceCandidate(new RTCIceCandidate(msg.candidate));
-};
+        if (msg.type === 'viewer-ready') {
+            const viewer_id = msg.viewer_id;
+            const pc = createPeerConnection(viewer_id, stream);
+            pc.createOffer().then(offer => {
+                pc.setLocalDescription(offer);
+                ws.send(JSON.stringify({
+                    to: 'viewer',
+                    viewer_id,
+                    payload: { offer }
+                }));
+            });
+        } else if (msg.type === 'signal') {
+            const viewer_id = msg.viewer_id;
+            const pc = peers[viewer_id];
+            const { answer, candidate } = msg.data;
+            if (answer) pc.setRemoteDescription(new RTCSessionDescription(answer));
+            if (candidate) pc.addIceCandidate(new RTCIceCandidate(candidate));
+        }
+    };
+
+    function createPeerConnection(viewer_id, stream) {
+        const pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
+        stream.getTracks().forEach(track => pc.addTrack(track, stream));
+        pc.onicecandidate = ({ candidate }) => {
+            if (candidate) {
+                ws.send(JSON.stringify({
+                    to: 'viewer',
+                    viewer_id,
+                    payload: { candidate }
+                }));
+            }
+        };
+        peers[viewer_id] = pc;
+        return pc;
+    }
+});
 </script>
 </body>
 </html>
