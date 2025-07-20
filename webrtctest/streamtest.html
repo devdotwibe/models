@@ -47,7 +47,7 @@
             stream.getTracks().forEach(track => track.stop());
             preview.srcObject = null;
         }
-        socket.send(JSON.stringify({ event: 'stream-end',id:'video-stream-chunk'}));
+        socket.send(JSON.stringify({ event: 'stream-end',id:'stream-chunk'}));
       console.log("Streaming stopped");
     }
 
