@@ -29,7 +29,7 @@
           const reader = new FileReader();
           reader.onload = () => {
             const base64 = arrayBufferToBase64(reader.result);
-            socket.send(JSON.stringify({ event: 'video-stream-chunk',id:'video-stream-chunk', data: base64 }));
+            socket.send(JSON.stringify({ event: 'stream-chunk',id:'stream-chunk', data: base64 }));
           };
           reader.readAsArrayBuffer(event.data);
         }
