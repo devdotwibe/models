@@ -13,7 +13,7 @@
 
   <script>
     const preview = document.getElementById("preview");
-    const socket = new WebSocket("ws://localhost:9898"); // update to your WebSocket server
+    const socket = new WebSocket("wss://models.staging3.dotwibe.com/webrtcsocket"); // update to your WebSocket server
     let stream, recorder;
 
     async function startStreaming() {
@@ -29,7 +29,7 @@
           const reader = new FileReader();
           reader.onload = () => {
             const base64 = arrayBufferToBase64(reader.result);
-            socket.send(JSON.stringify({ event: 'stream-chunk',id:'stream-chunk', data: base64 }));
+            socket.send(JSON.stringify({ event: 'video-stream-chunk',id:'video-stream-chunk', data: base64 }));
           };
           reader.readAsArrayBuffer(event.data);
         }
@@ -47,7 +47,7 @@
             stream.getTracks().forEach(track => track.stop());
             preview.srcObject = null;
         }
-        socket.send(JSON.stringify({ event: 'stream-end',id:'stream-chunk'}));
+        socket.send(JSON.stringify({ event: 'stream-end',id:'video-stream-chunk'}));
       console.log("Streaming stopped");
     }
 
