@@ -1527,6 +1527,13 @@ $session_id = $_GET['unique_model_id'];
                         
                         alert(response.message);
                     }
+
+                    setTimeout(function() {
+
+                        set_user_chat(private_id);
+                        
+                    }, 5000);
+
                 }
             });
             
