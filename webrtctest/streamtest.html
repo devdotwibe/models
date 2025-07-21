@@ -22,12 +22,7 @@
           height: { ideal: 480 },
           frameRate: { ideal: 15 } // Lower FPS (saves bandwidth)
         },
-        audio: {
-          sampleRate: 16000, // Lower audio sample rate
-          channelCount: 1,   // Mono instead of stereo
-          echoCancellation: true,
-          noiseSuppression: true
-        }
+        audio: true
       });
       preview.srcObject = stream;
 
