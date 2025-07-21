@@ -1397,7 +1397,7 @@ $session_id = $_GET['unique_model_id'];
 
                         if ($('#active_user-' + item.id).length === 0) {
                                 var html = `
-                                     <div class="conversation-item" onclick="selectConversation('alex')" id="active_user-${item.id}">
+                                     <div class="conversation-item" onclick="set_user_chat(`${item.id}`)" id="active_user-${item.id}">
                                         <div class="user-avatar vip">
                                             <img src="${item.image_url}" alt="user image">
                                             <div class="online-indicator public" id="alexIndicator"></div>
