@@ -1525,7 +1525,7 @@ $session_id = $_GET['unique_model_id'];
 
         function set_user_chat(private_id)
         {
-            console.log(set_user_chat,'set_user_chat');
+            console.log(private_id,'set_user_chat');
         }
 
         function set_confirm_private_chat(id,type) {
