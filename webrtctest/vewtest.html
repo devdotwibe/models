@@ -34,7 +34,7 @@ if (Hls.isSupported()) {
     liveMaxLatencyDuration:6,
     maxLiveSyncPlaybackRate: 1,      // 🟢 Speed up if viewer lags
     enableWorker: true,
-    backBufferLength: 0.1              // 🧠 Prevents memory overload
+    backBufferLength:3              // 🧠 Prevents memory overload
   });
 
   hls.loadSource('https://models.staging3.dotwibe.com/webrtctest/stream-chunk/index.m3u8'); // 🔁 Replace with your actual stream URL
