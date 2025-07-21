@@ -6,7 +6,7 @@ $error = '';
 if (isset($_SESSION['log_user_id'])) {
   $getUserData = get_data('model_social_link', array('id' => $_SESSION['log_user_id']), true);
 
- $userDetails = get_data('model_user',array('unique_id'=>$_SESSION["log_user_id"]),true);
+ $userDetails = get_data('model_user',array('unique_id'=>$_SESSION["log_user_unique_id"]),true);
 
 } else {
 
