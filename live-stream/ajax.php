@@ -349,7 +349,7 @@ join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=1 and mode
 
             $defaultImage =SITEURL."/assets/images/girl.png";
 
-            foreach($acceptedUsers as $item)
+            foreach($acceptedUsers as &$item)
             {
                   if(!empty($item['profile_pic'])){
 
