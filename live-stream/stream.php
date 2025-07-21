@@ -173,42 +173,7 @@ $session_id = $_GET['unique_model_id'];
                             <div class="requests-count" id="requestsCount">3</div>
                         </div>
                         <div id="requestsList">
-                            <div class="request-item">
-                                <div>
-                                    <div class="request-user">Alex_VIP</div>
-                                    <div class="request-type">Private Show - 30min</div>
-                                </div>
-                                <div class="request-actions">
-                                    <button class="request-btn accept"
-                                        onclick="acceptRequest('alex', 'private')">✓</button>
-                                    <button class="request-btn decline"
-                                        onclick="declineRequest('alex', 'private')">✗</button>
-                                </div>
-                            </div>
-                            <div class="request-item">
-                                <div>
-                                    <div class="request-user">Emma_Gold</div>
-                                    <div class="request-type">Group Show</div>
-                                </div>
-                                <div class="request-actions">
-                                    <button class="request-btn accept"
-                                        onclick="acceptRequest('emma', 'group')">✓</button>
-                                    <button class="request-btn decline"
-                                        onclick="declineRequest('emma', 'group')">✗</button>
-                                </div>
-                            </div>
-                            <div class="request-item">
-                                <div>
-                                    <div class="request-user">David_Premium</div>
-                                    <div class="request-type">Private Show - 15min</div>
-                                </div>
-                                <div class="request-actions">
-                                    <button class="request-btn accept"
-                                        onclick="acceptRequest('david', 'private')">✓</button>
-                                    <button class="request-btn decline"
-                                        onclick="declineRequest('david', 'private')">✗</button>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
 

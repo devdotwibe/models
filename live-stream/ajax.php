@@ -318,7 +318,7 @@ join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=0 and mode
                 ob_start();
                 include 'ajax_private_list.php';
                 $html = ob_get_clean();
-                $output = array('status' => 'ok', 'counts' => count($checPrivate), 'html' => $html);
+                $output = array('status' => 'ok', 'counts' => count($checPrivate), 'html' => $checPrivate);
             }
         }
         else{
