@@ -150,7 +150,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
             $myfile = fopen('total_user' . $_POST['model_id'] . $_POST['user_id'] . '.txt', "w");
         }
         $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
-        $message = htmlentities(strip_tags($_POST['msg']));
+        $message = htmlentities(string: strip_tags($_POST['msg']));
         if (isset($_POST['tlm_user_name']) && $_POST['tlm_user_name'] == 'streamer') {
             if (preg_match($reg_exUrl, $message, $url)) {
                 $message = preg_replace($reg_exUrl, '<a href="' . $url[0] . '" target="_blank">' . $url[0] . '</a>', $message);

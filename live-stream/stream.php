@@ -188,100 +188,14 @@ $session_id = $_GET['unique_model_id'];
 
                 </div>
 
-                <!-- Chat Area -->
-                <div class="chat-area">
-                    <div class="chat-header">
-                        <div class="chat-user-info">
-                            <div class="user-avatar vip">
-                                👨
-                                <div class="online-indicator public"></div>
-                            </div>
-                            <div class="chat-user-details">
-                                <h4>Alex_VIP</h4>
-                                <div class="chat-user-status">
-                                    <div class="live-dot public"></div>
-                                    <span>Online • VIP Member • Tipped 2,500 TLM today</span>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="user-actions">
-                            <button class="action-btn favorite active" onclick="toggleFavorite()">
-                                ⭐ Favorite
-                            </button>
-                            <button class="action-btn tip-request" onclick="requestTip()">
-                                💰 Request Tip
-                            </button>
-                            <button class="action-btn ban" onclick="banUser()">
-                                ⛔ Ban
-                            </button>
-                        </div>
-                    </div>
 
-                    <div class="chat-messages" id="chatMessages">
-                        <!-- Messages will be populated here -->
-                        <div class="message received">
-                            Hey beautiful! 😍
-                            <div class="message-time">2:45 PM</div>
-                        </div>
+                <div class="chat-area" style="display:none" id="chat_area" style="display:none;">
 
-                        <div class="tip-message">
-                            💰 Alex_VIP tipped 500 TLM! "You're amazing!"
-                        </div>
 
-                        <div class="message received">
-                            Want to go private? I have some special requests 😘
-                            <div class="message-time">2:46 PM</div>
-                        </div>
-
-                        <div class="message sent">
-                            Thank you so much for the tip! 💕 I'd love to chat privately with you!
-                            <div class="message-time">2:47 PM</div>
-                        </div>
-
-                        <div class="message received">
-                            Perfect! How much for 30 minutes private?
-                            <div class="message-time">2:47 PM</div>
-                        </div>
-
-                        <div class="message sent">
-                            30 minutes private is 2000 TLM. We can have so much fun! 🔥
-                            <div class="message-time">2:48 PM</div>
-                        </div>
-
-                        <div class="tip-message">
-                            💰 Alex_VIP tipped 2000 TLM! "Let's go private now!"
-                        </div>
-                    </div>
-
-                    <div class="chat-input">
-                        <!-- Custom Templates -->
-                        <div class="custom-templates">
-                            <div class="template-header">
-                                <div class="template-title">My Templates</div>
-                                <button class="add-template-btn" onclick="openTemplateModal()">+ Add</button>
-                            </div>
-                            <div id="customTemplatesList">
-                                <!-- Custom templates will be added here -->
-                            </div>
-                        </div>
-
-                        <div class="quick-actions">
-                            <div class="quick-action" onclick="insertQuickMessage('Thank you! 💕')">Thank you! 💕</div>
-                            <div class="quick-action" onclick="insertQuickMessage('You\'re so sweet! 😘')">You're so
-                                sweet! 😘</div>
-                            <div class="quick-action" onclick="insertQuickMessage('Let\'s go private! 🔥')">Let's go
-                                private! 🔥</div>
-                            <div class="quick-action" onclick="insertQuickMessage('Love you! ❤️')">Love you! ❤️</div>
-                        </div>
-
-                        <div class="input-row">
-                            <textarea class="message-input" id="messageInput" placeholder="Type your message..."
-                                onkeypress="handleKeyPress(event)" rows="1"></textarea>
-                            <button class="send-btn" onclick="sendMessage()">Send</button>
-                        </div>
-                    </div>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -1525,7 +1439,26 @@ $session_id = $_GET['unique_model_id'];
 
         function set_user_chat(private_id)
         {
-            console.log(private_id,'set_user_chat');
+             $.ajax({
+                    url: 'single_user_private_chat.php',
+                    type: 'GET',
+                    data: {
+                    private_id: private_id,
+                },
+                dataType: 'json',
+
+                success: function(response) {
+                    
+                    if(response.status=='ok'){
+                    
+                    }
+                    else{
+                        
+                        alert(response.message);
+                    }
+                }
+            });
+            
         }
 
         function set_confirm_private_chat(id,type) {
