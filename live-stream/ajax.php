@@ -353,7 +353,7 @@ join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=1 and mode
 
             foreach($acceptedUsers as &$item)
             {
-                if($item->user_id != $_SESSION['log_user_id'] ) {
+                if($item['user_id'] != $_SESSION['log_user_id'] ) {
 
                     if(!empty($item['profile_pic'])){
 
