@@ -1501,14 +1501,14 @@ $session_id = $_GET['unique_model_id'];
 
                         if(response.message=='list_message')
                         {
-                            var chart_html = "";
+                            var chart_html_replay = "";
 
                             var chat_lines = response.lines;
                             chat_lines.forEach(function (line) {
-                                    chat_html += line;
+                                    chart_html_replay += line;
                                 });
 
-                            $('#chatMessages').append(chat_html).show();
+                            $('#chatMessages').append(chart_html_replay).show();
                         }
                     }
                     else{
