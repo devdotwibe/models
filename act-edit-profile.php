@@ -36,41 +36,7 @@ if ($_POST['submit_name']){
 	$post_data['english_ability'] = $english_ability;
 	$post_data['languages'] = json_encode($lang_array); 
 	
-	//Social icons 
-	$platform = $_POST['platform'];
-	$URL = $_POST['URL'];
-	$status = $_POST['status'];
-	$public = $_POST['public'];
-	$socialid = $_POST['socialid'];
-	$paid_token = $_POST['paid_token'];
-	if(!empty($platform)){
-		$cnt = 0; $string_paltform = '';
-		foreach($platform as $sc){
-			if(!empty($socialid[$cnt])){
-				$sql = "UPDATE model_social_link SET platform = '".$sc."', URL = '".$URL[$cnt]."', status='".$status[$cnt]."', public='".$public[$cnt]."',tokens=".$paid_token[$cnt]."  WHERE unique_model_id = '".$userDetails['unique_id']."' AND id='".$socialid[$cnt]."'";
-				mysqli_query($con, $sql);
-			}else{
-				$sc_data = array();
-					$sc_data['unique_model_id'] = $unique_id;
-					$sc_data['platform'] = $sc;
-					$sc_data['URL'] = $URL[$cnt];
-					$sc_data['status'] = $status[$cnt];
-					$sc_data['public'] = $public[$cnt];
-					$sc_data['tokens'] = $paid_token[$cnt];
-					DB::insert('model_social_link', $sc_data); 
-					$created_id = DB::insertId();
-			}
-			
-			$cnt++;
-			$string_paltform .= "'".$sc."',";
-		}
-		// Trim last comma
-		$string_paltform = rtrim($string_paltform, ',');
-		if(!empty($string_paltform)){
-			$sql_delete = "DELETE FROM `model_social_link` WHERE unique_model_id = '".$userDetails['unique_id']."' AND platform NOT IN (".$string_paltform.")";
-			mysqli_query($con,$sql_delete);
-		}
-	}
+	
 	
 
 	$error = '';
