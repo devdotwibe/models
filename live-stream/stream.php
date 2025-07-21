@@ -1439,6 +1439,10 @@ $session_id = $_GET['unique_model_id'];
 
         function set_user_chat(private_id)
         {
+            $('.conversation-item').removeClass('active');
+
+             $(`#active_user-${private_id}`).addClass('active');
+
              $.ajax({
                     url: 'single_user_private_chat.php',
                     type: 'GET',
