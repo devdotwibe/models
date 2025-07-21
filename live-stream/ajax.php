@@ -314,12 +314,12 @@ join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=0 and mode
 
             $output = array('status' => $checPrivate);
 
-            // if ($checPrivate) {
-            //     ob_start();
-            //     include 'ajax_private_list.php';
-            //     $html = ob_get_clean();
-            //     $output = array('status' => 'ok', 'counts' => count($checPrivate), 'html' => $checPrivate);
-            // }
+            if ($checPrivate) {
+                // ob_start();
+                // include 'ajax_private_list.php';
+                // $html = ob_get_clean();
+                $output = array('status' => 'ok', 'counts' => count($checPrivate), 'html' => $checPrivate);
+            }
         }
         else{
 
