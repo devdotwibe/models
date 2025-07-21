@@ -1,7 +1,7 @@
 <?php session_start();
 include('../includes/config.php');
 include('../includes/helper.php');
-$ChatLink  = SITEURL . 'live-stream/';
+$ChatLink  = SITEURL . 'live-chat/';
 
 if ($_SESSION["log_user"]) {
     $userDetails = get_data('model_user', array('id' => $_SESSION['log_user_id']), true);
