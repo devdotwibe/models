@@ -796,7 +796,7 @@ $lang_list = modal_language_list();
                 <div class="access-option free <?php if($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','insta')">Free</div>
                 <div class="access-option paid <?php if($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','insta')">Paid</div>
 				<input type="hidden" name="status[]" class="insta" value="<?php echo $sc['status']; ?>">
-                <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+                <input type="text" class="paid_token social-platform-input <?php if($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]" placeholder="Enter token amount">
 			  </div>
               <label class="toggle-switch">
                 <input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?> >
@@ -823,7 +823,7 @@ $lang_list = modal_language_list();
                 <div class="access-option free  <?php if($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','tw')">Free</div>
                 <div class="access-option paid <?php if($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','tw')">Paid</div>
 				<input type="hidden" name="status[]" class="tw" value="<?php echo $sc['status']; ?>">
-                <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+                <input type="text" class="paid_token social-platform-input <?php if($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]" placeholder="Enter token amount">
 			  </div>
               <label class="toggle-switch">
                 <input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?>>
@@ -852,7 +852,7 @@ $lang_list = modal_language_list();
                 <div class="access-option free  <?php if($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','tiktk')">Free</div>
                 <div class="access-option paid <?php if($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','tiktk')">Paid</div>
 				<input type="hidden" name="status[]" class="tiktk" value="<?php echo $sc['status']; ?>">
-				<input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+				<input type="text" class="paid_token social-platform-input <?php if($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]" placeholder="Enter token amount">
 			  </div>
               <label class="toggle-switch">
                 <input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?>>
@@ -881,7 +881,7 @@ $lang_list = modal_language_list();
                 <div class="access-option free <?php if($sc['status'] == 'free') echo 'active'; ?> " onclick="toggleAccess(this, 'free','onf')">Free</div>
                 <div class="access-option paid  <?php if($sc['status'] == 'paid' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'paid','onf')">Paid</div>
 				<input type="hidden" name="status[]" class="onf" value="<?php echo $sc['status']; ?>">
-				<input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+				<input type="text" class="paid_token social-platform-input <?php if($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]" placeholder="Enter token amount">
 			  </div>
               <label class="toggle-switch">
                 <input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?> >
@@ -910,7 +910,7 @@ $lang_list = modal_language_list();
                 <div class="access-option free  <?php if($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','snap')">Free</div>
                 <div class="access-option paid <?php if($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','snap')">Paid</div>
 				<input type="hidden" name="status[]" class="snap" value="<?php echo $sc['status']; ?>">
-				<input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+				<input type="text" class="paid_token social-platform-input <?php if($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]" placeholder="Enter token amount">
 			  </div>
               <label class="toggle-switch">
                 <input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?> >
@@ -939,7 +939,7 @@ $lang_list = modal_language_list();
 					<div class="access-option free  <?php if($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','sc<?php echo $cnt; ?>')">Free</div>
 					<div class="access-option paid <?php if($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','sc<?php echo $cnt; ?>')">Paid</div>
 					<input type="hidden" name="status[]" class="sc<?php echo $cnt; ?>" value="<?php echo $sc['status']; ?>">
-					<input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+					<input type="text" class="paid_token social-platform-input <?php if($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" name="paid_token[]" placeholder="Enter token amount">
 				</div>
 				<label class="toggle-switch">
 					<input type="checkbox" name="public[]" value="yes" <?php if($sc['public'] == 'yes') echo 'checked';  ?> >
@@ -2714,6 +2714,7 @@ $lang_list = modal_language_list();
                 <div class="access-option free active" onclick="toggleAccess(this, 'free','ext`+socialLinkCounter+`')">Free</div>
                 <div class="access-option paid" onclick="toggleAccess(this, 'paid','ext`+socialLinkCounter+`')">Paid</div>
 				<input type="hidden" name="status[]" class="ext`+socialLinkCounter+`" value="free">
+				<input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
             </div>
             <label class="toggle-switch">
                 <input type="checkbox" name="public[]" value="yes">
