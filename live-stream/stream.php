@@ -1446,8 +1446,10 @@ $session_id = $_GET['unique_model_id'];
                     private_id: private_id,
                 },
                 dataType: 'json',
-
+                
                 success: function(response) {
+
+                    $('#chat_area').html('');
                     
                     if(response.status=='ok'){
 
@@ -1531,7 +1533,7 @@ $session_id = $_GET['unique_model_id'];
                     setTimeout(function() {
 
                         set_user_chat(private_id);
-                        
+
                     }, 5000);
 
                 }
