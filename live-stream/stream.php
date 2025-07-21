@@ -3,10 +3,13 @@
 include('../includes/config.php');
 include('../includes/helper.php');
 $error = '';
+
+echo $_SESSION;
+die();
 if (isset($_SESSION['log_user_id'])) {
   $getUserData = get_data('model_social_link', array('id' => $_SESSION['log_user_id']), true);
 
- $userDetails = get_data('model_user',array('unique_id'=>$_SESSION["log_user_unique_id"]),true);
+ $userDetails = get_data('model_user',array('unique_id'=>$_SESSION["log_user_id"]),true);
 
 } else {
 
@@ -15,7 +18,7 @@ if (isset($_SESSION['log_user_id'])) {
 }
 $showMessgeBtn = 0;
 if (isset($_SESSION['log_user_id']) && $_GET['unique_model_id']) {
-  $showMessgeBtn = h_checkMessageShowBtn($_GET['unique_model_id'], $_SESSION['log_user_unique_id']);
+  $showMessgeBtn = h_checkMessageShowBtn($_GET['unique_model_id'], $_SESSION['log_user_id']);
 }
 $session_id = $_GET['unique_model_id'];
 
