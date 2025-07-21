@@ -310,7 +310,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
             $string = "select tb.*,ms.username,ms.profile_pic,ms.id as userid 
 from tlm_private_live_chat_url tb 
 join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=0 and model_id='" . $_POST["key"] . "' and r_date> '" . date("Y-m-d H:i:s", strtotime('-2 minute', time())) . "'";
-            // $checPrivate = DB::query($string);
+            $checPrivate = DB::query($string);
 
             $output = array('status' => $checPrivate);
 
