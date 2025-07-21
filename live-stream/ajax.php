@@ -343,7 +343,7 @@ join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=1 and mode
             $query = "SELECT tb.*, ms.username, ms.profile_pic, ms.id as userid 
                     FROM tlm_private_live_chat_url tb 
                     JOIN model_user ms ON ms.id = tb.user_id 
-                    WHERE tb.status = 1 AND tb.model_id = %s";
+                    WHERE tb.is_used = 0 AND tb.model_id = %s";
 
             $acceptedUsers = DB::query($query, $modelId);
 
