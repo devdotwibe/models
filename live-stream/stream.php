@@ -1451,21 +1451,33 @@ $session_id = $_GET['unique_model_id'];
                     
                     if(response.status=='ok'){
 
+
+                        var user_data = response.reciever_data;
+
                         let chat_html = `
 
                                 <div class="chat-header">
 
                                     <div class="chat-user-info">
+
                                         <div class="user-avatar vip">
-                                            👨
+
+                                             <img src="${user_data.image_url}" alt="user image">
+
                                             <div class="online-indicator public"></div>
+
                                         </div>
+
                                         <div class="chat-user-details">
-                                            <h4>Alex_VIP</h4>
+
+                                            <h4>${user_data.username}</h4>
+
                                             <div class="chat-user-status">
+
                                                 <div class="live-dot public"></div>
-                                                <span>Online • VIP Member • Tipped 2,500 TLM today</span>
+
                                             </div>
+
                                         </div>
                                     </div>
 
