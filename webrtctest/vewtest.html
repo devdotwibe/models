@@ -35,7 +35,7 @@ if (Hls.isSupported()) {
     maxLiveSyncPlaybackRate: 1,      // 🟢 Speed up if viewer lags
     enableWorker: true,
     backBufferLength:1 ,             // 🧠 Prevents memory overload
-    maxBufferHole: 1,               // Allows small gaps
+    maxBufferHole: 0.5,               // Allows small gaps
     maxBufferLength: 10,              // Buffer up to 10s
     backBufferLength: 0.1
   });
