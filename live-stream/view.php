@@ -422,6 +422,8 @@ var userpage = '<?=$user_page?>';
     <!-- Notification -->
     <div class="notification" id="notification" role="alert" aria-live="assertive"></div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <script>
         let selectedGift = null;
         let selectedTip = null;
