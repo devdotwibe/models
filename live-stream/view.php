@@ -97,7 +97,7 @@ var userpage = '<?=$user_page?>';
 
                 <input type="hidden" name="user_id" id="user_id_chat" value="<?php echo $userDetails['id'] ?>">
 
-                <input type="hidden" name="model_id" id="model_id_chat" value="<?php echo $_SESSION['m_unique_id'] ?>">
+                <input type="hidden" name="model_id" id="model_id_chat" value="<?php echo $_GET['m_unique_id'] ?>">
                                 
                 <video 
                     class="stream-video"
@@ -1106,7 +1106,6 @@ var userpage = '<?=$user_page?>';
                 user: user_id,
                 coin : coin,
             }
-            $(this).attr('style', 'display:none');
 
             if (model_id && model_id != '') {
                 $.ajax({
