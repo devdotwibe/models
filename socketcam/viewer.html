@@ -2,42 +2,8 @@
 <html>
 <head><title>Viewer</title></head>
 <body>
-<h2>Viewer</h2>
-<video id="remote" autoplay playsinline controls width="600"></video>
-
-<script>
-const ws = new WebSocket("ws://staging3.dotwibe.com:9001");
-let pc;
-const remote = document.getElementById('remote');
-
-const iceServers = [
-    { urls: 'stun:stun.l.google.com:19302' },
-    {
-        urls: 'turn:relay.metered.ca:80',
-        username: 'openai',
-        credential: 'openai'
-    }
-];
-
-ws.onopen = () => ws.send(JSON.stringify({ type: 'viewer-ready' }));
-
-ws.onmessage = ({ data }) => {
-    const msg = JSON.parse(data);
-    if (msg.type === 'offer') {
-        pc = new RTCPeerConnection({ iceServers });
-        pc.onicecandidate = ({ candidate }) => {
-            if (candidate) ws.send(JSON.stringify({ type: 'candidate', candidate }));
-        };
-        pc.ontrack = (event) => remote.srcObject = event.streams[0];
-        pc.setRemoteDescription(new RTCSessionDescription(msg.offer));
-        pc.createAnswer().then(answer => {
-            pc.setLocalDescription(answer);
-            ws.send(JSON.stringify({ type: 'answer', answer }));
-        });
-    } else if (msg.type === 'candidate' && pc) {
-        pc.addIceCandidate(new RTCIceCandidate(msg.candidate));
-    }
-};
-</script>
+<h2>Live Viewer (pulls from live/live.webm)</h2>
+<video src="https://models.staging3.dotwibe.com/socketcam/live/live.webm" controls autoplay playsinline width="600"></video>
+<p>Refresh to reconnect if paused.</p>
 </body>
 </html>

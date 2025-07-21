@@ -267,7 +267,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 								<?php } ?>
                             </div>
 
-                        <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] ) { ?>
 
                             <div class="flex flex-wrap gap-2 sm:gap-3 mt-2 md:mt-0">
 
@@ -312,13 +311,26 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     </svg>
                                     Wishlist
                                 </div>
-                                <div class="action-item" id="liveBtn" bis_skin_checked="1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <circle cx="12" cy="12" r="4"></circle>
-                                    </svg>
-                                    On Live
-                                </div>
+
+                                
+                                <?php
+                                        $uniqueModelId = isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : '';
+                                        if ($_SESSION["log_user_unique_id"] == $session_id) {
+                                            $link = SITEURL . 'live-stream/stream.php?user=streamer&unique_model_id=' . $uniqueModelId;
+                                        } else {
+                                            $link = SITEURL . 'live-stream/view.php?user=viewer&unique_model_id=' . $uniqueModelId;
+                                        }
+                                    ?>
+
+                                    <div class="action-item" id="liveBtn" bis_skin_checked="1" onclick="window.location.href='<?php echo $link; ?>' ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <circle cx="12" cy="12" r="4"></circle>
+                                        </svg>
+                                        Go Live
+                                    </div>
+
+
                                 <div class="action-item" id="tipBtn" bis_skin_checked="1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <line x1="12" y1="1" x2="12" y2="23"></line>
@@ -366,7 +378,6 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 
                             </div>
 
-                        <?php } ?>
 
 
                         </div>
@@ -639,8 +650,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             ?>
 
-        
-            <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] ) { ?>
 
                 <div class="md:col-span-1">
                     <!-- Stats Card -->
@@ -672,7 +681,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                     </div>
 
-            <?php if (isset($_SESSION['log_user_unique_id'])) { ?>
+            <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] == $_SESSION['log_user_unique_id']) { ?>
 
                     <form id="createPostForm"  enctype="multipart/form-data" method="post">
 
@@ -785,7 +794,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 <li class="flex items-center gap-3">
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
-                                        <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-chat/index.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
+                                        <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
 
                                             <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
                                         </form>
@@ -806,12 +815,15 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 <li class="flex items-center gap-3">
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
-                                        <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-chat/index.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
+                                        <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
 
                                             <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
                                         </form>
                                         
                                     </div>
+
+                                   
+
                                     <div>
                                         <div class="font-semibold text-sm sm:text-base">Go live</div>
                                         <div class="text-xs sm:text-sm text-white/60">Live streams & content</div>
@@ -836,6 +848,9 @@ if (mysqli_num_rows($res_ap) > 0) {
                     </div>
 
                     <!-- Similar Models Card -->
+
+                <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id']) { ?>
+
                     <div class="ultra-glass rounded-2xl p-4 sm:p-6">
                         <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
                         <div class="space-y-4">
@@ -880,9 +895,11 @@ if (mysqli_num_rows($res_ap) > 0) {
                             View More
                         </button>
                     </div>
+
+                <?php } ?>
+
                 </div>
 
-        <?php } ?>
 
         </div>
     </div>
