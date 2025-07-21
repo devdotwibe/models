@@ -30,7 +30,7 @@ if (Hls.isSupported()) {
   const video = document.getElementById('video');
   const hls = new Hls({
     lowLatencyMode: true,
-    liveSyncDuration: 2,             // 🟢 Small buffer = lower latency
+    liveSyncDuration: 3,             // 🟢 Small buffer = lower latency
     liveMaxLatencyDuration:6,
     maxLiveSyncPlaybackRate: 1,      // 🟢 Speed up if viewer lags
     enableWorker: true,
