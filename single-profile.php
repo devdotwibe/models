@@ -267,7 +267,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 								<?php } ?>
                             </div>
 
-                        <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] ) { ?>
 
                             <div class="flex flex-wrap gap-2 sm:gap-3 mt-2 md:mt-0">
 
@@ -366,7 +365,6 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 
                             </div>
 
-                        <?php } ?>
 
 
                         </div>
