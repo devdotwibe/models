@@ -49,14 +49,8 @@ if ($_POST['submit_name']){
 			if(!empty($socialid[$cnt])){
 				if(!empty($paid_token[$cnt])) $paid_tk = $paid_token[$cnt];
 				else $paid_tk = 0;
-				echo $sql = "UPDATE model_social_link SET platform = '".$sc."', URL = '".$URL[$cnt]."', status='".$status[$cnt]."', public='".$public[$cnt]."',tokens=".$paid_tk."  WHERE unique_model_id = '".$userDetails['unique_id']."' AND id='".$socialid[$cnt]."'";
-				$result = mysqli_query($con, $sql);
-				
-				if (!$result) {
-					// Print the MySQL error message
-					echo "Error: " . mysqli_error($con);
-				}
-				
+				$sql = "UPDATE model_social_link SET platform = '".$sc."', URL = '".$URL[$cnt]."', status='".$status[$cnt]."', public='".$public[$cnt]."',tokens=".$paid_tk."  WHERE unique_model_id = '".$userDetails['unique_id']."' AND id='".$socialid[$cnt]."'";
+				mysqli_query($con, $sql);
 				
 			}else{
 				$sc_data = array();
