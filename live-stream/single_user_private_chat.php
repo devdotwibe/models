@@ -24,7 +24,7 @@ $output = array('status' => 'error', 'message' => 'there is some problem');
             $string = "SELECT tb.*, ms.username, ms.profile_pic, ms.id AS userid 
                FROM tlm_private_live_chat_url tb 
                JOIN model_user ms ON ms.id = tb.user_id 
-               WHERE is_used = 0 AND tb.status = 0 AND tb.id = " . intval($id);
+               WHERE is_used = 0 AND tb.status = 1 AND tb.id = " . intval($id);
 
             $checPrivate = DB::queryFirstRow($string);
 
