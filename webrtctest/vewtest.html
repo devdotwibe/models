@@ -26,12 +26,18 @@
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
-if (Hls.isSupported()) {
+if (video.canPlayType('application/vnd.apple.mpegurl')) {
+  // Safari fallback
+  video.src = 'https://models.staging3.dotwibe.com/webrtctest/stream-chunk/index.m3u8'; // Replace with your actual stream URL
+  video.addEventListener('loadedmetadata', () => {
+    video.play();
+  });
+} else if (Hls.isSupported()) {
   const video = document.getElementById('video');
   const hls = new Hls({
     lowLatencyMode: true,
-    liveSyncDuration: 1.5,             // 🟢 Small buffer = lower latency
-    liveMaxLatencyDuration: 2.5,
+    liveSyncDuration: 1,             // 🟢 Small buffer = lower latency
+    liveMaxLatencyDuration: 6,
     maxLiveSyncPlaybackRate: 1.5,      // 🟢 Speed up if viewer lags
     enableWorker: true,
     backBufferLength: 0.1              // 🧠 Prevents memory overload
@@ -50,19 +56,13 @@ if (Hls.isSupported()) {
   });
 
   // Catch up logic if viewer falls behind
-  setInterval(() => {
-    if (video.buffered.length) {
-      const lag = video.buffered.end(0) - video.currentTime;
-      video.playbackRate = lag > 2 ? 1.25 : 1.0;
-    }
-  }, 2000);
+//   setInterval(() => {
+//     if (video.buffered.length) {
+//       const lag = video.buffered.end(0) - video.currentTime;
+//       video.playbackRate = lag > 2 ? 1.25 : 1.0;
+//     }
+//   }, 2000);
   
-} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-  // Safari fallback
-  video.src = '/path/to/stream.m3u8'; // Replace with your actual stream URL
-  video.addEventListener('loadedmetadata', () => {
-    video.play();
-  });
 }
 </script>
 
