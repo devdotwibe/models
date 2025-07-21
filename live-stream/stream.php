@@ -1507,7 +1507,7 @@ $session_id = $_GET['unique_model_id'];
                                                 </div>
                                                 <div class="request-actions">
                                                     <button class="request-btn accept"
-                                                        onclick="acceptRequest('${item.username}', 'private'); set_confirm_private_chat(${item.id}, 'accept');">✓</button>
+                                                        onclick="set_confirm_private_chat(${item.id}, 'accept');">✓</button>
                                                     <button class="request-btn decline"
                                                         onclick="set_confirm_private_chat(${item.id}, 'decline');">✗</button>
                                                 </div>
@@ -1529,6 +1529,31 @@ $session_id = $_GET['unique_model_id'];
                         }
                     });
                 }
+        }
+
+
+        function set_confirm_private_chat(id,type) {
+
+            $.ajax({
+                url: 'ajax_act_private_chat.php',
+                type: 'GET',
+                data: {
+                id: id,
+                type:type
+                },
+                dataType: 'json',
+                success: function(response) {
+                if(response.status=='ok'){
+                    if(type=='accept'){
+                    window.location='<?=$ChatLink.'stream.php?user=streamer&pra=private&unique_model_id='.$_SESSION['log_user_unique_id'].'&private_id='?>'+id;
+                    }
+                }
+                else{
+                    alert(response.message);
+                }
+                }
+            });
+
         }
 
     </script>
