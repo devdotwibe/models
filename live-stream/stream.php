@@ -1508,7 +1508,7 @@ $session_id = $_GET['unique_model_id'];
                                     chat_html += line;
                                 });
 
-                            $('#customTemplatesList').append(chat_html).show();
+                            $('#chatMessages').append(chat_html).show();
                         }
                     }
                     else{
