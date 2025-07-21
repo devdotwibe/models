@@ -173,7 +173,7 @@ $session_id = $_GET['unique_model_id'];
                             <div class="requests-count" id="requestsCount">3</div>
                         </div>
                         <div id="requestsList">
-                            
+
                         </div>
                     </div>
 
@@ -1486,8 +1486,23 @@ $session_id = $_GET['unique_model_id'];
                   
                             if (response.status == 'ok') {
                       
-                                $('#tlm_start_private_popup11 .modal-body').html(response.html);
-                                $('.private-request').html(response.counts);
+                                $('#requestsCount').text(response.counts);
+
+                                var html =` <div class="request-item">
+                                                <div>
+                                                        <div class="request-user">${response.html[0].username} </div>
+                                                        <div class="request-type">Private Show - 30min</div>
+                                                    </div>
+                                                    <div class="request-actions">
+                                                        <button class="request-btn accept"
+                                                            onclick="acceptRequest('alex', 'private')">✓</button>
+                                                        <button class="request-btn decline"
+                                                            onclick="declineRequest('alex', 'private')">✗</button>
+                                                    </div>
+                                            </div>`;
+
+                                $('#requestsList').append(html);
+
                                 if(userpage=='user'){
                                     gotoprivate(response.id);
                                 }
