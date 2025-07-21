@@ -733,33 +733,33 @@ $session_id = $_GET['unique_model_id'];
             updateRequestsDisplay();
         }
 
-        function updateRequestsDisplay() {
-            const requestsCount = document.getElementById('requestsCount');
-            const requestsList = document.getElementById('requestsList');
+        // function updateRequestsDisplay() {
+        //     const requestsCount = document.getElementById('requestsCount');
+        //     const requestsList = document.getElementById('requestsList');
 
-            requestsCount.textContent = showRequests.length;
+        //     requestsCount.textContent = showRequests.length;
 
-            if (showRequests.length === 0) {
-                document.getElementById('showRequests').style.display = 'none';
-            } else {
-                requestsList.innerHTML = '';
-                showRequests.forEach(request => {
-                    const requestDiv = document.createElement('div');
-                    requestDiv.className = 'request-item';
-                    requestDiv.innerHTML = `
-                        <div>
-                            <div class="request-user">${request.user}</div>
-                            <div class="request-type">${request.type}</div>
-                        </div>
-                        <div class="request-actions">
-                            <button class="request-btn accept" onclick="acceptRequest('${request.id.split('_')[0]}', '${request.id.split('_')[1]}')">✓</button>
-                            <button class="request-btn decline" onclick="declineRequest('${request.id.split('_')[0]}', '${request.id.split('_')[1]}')">✗</button>
-                        </div>
-                    `;
-                    requestsList.appendChild(requestDiv);
-                });
-            }
-        }
+        //     if (showRequests.length === 0) {
+        //         document.getElementById('showRequests').style.display = 'none';
+        //     } else {
+        //         requestsList.innerHTML = '';
+        //         showRequests.forEach(request => {
+        //             const requestDiv = document.createElement('div');
+        //             requestDiv.className = 'request-item';
+        //             requestDiv.innerHTML = `
+        //                 <div>
+        //                     <div class="request-user">${request.user}</div>
+        //                     <div class="request-type">${request.type}</div>
+        //                 </div>
+        //                 <div class="request-actions">
+        //                     <button class="request-btn accept" onclick="acceptRequest('${request.id.split('_')[0]}', '${request.id.split('_')[1]}')">✓</button>
+        //                     <button class="request-btn decline" onclick="declineRequest('${request.id.split('_')[0]}', '${request.id.split('_')[1]}')">✗</button>
+        //                 </div>
+        //             `;
+        //             requestsList.appendChild(requestDiv);
+        //         });
+        //     }
+        // }
 
         // Template functionality
         function openTemplateModal() {
