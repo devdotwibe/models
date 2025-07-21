@@ -774,45 +774,7 @@ $session_id = $_GET['unique_model_id'];
             }
         }
 
-        function sendMessage() {
-            const input = document.getElementById('messageInput');
-            const message = input.value.trim();
-
-            if (message) {
-                const conversation = conversations[currentConversation];
-                const newMessage = {
-                    type: 'sent',
-                    content: message,
-                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                };
-
-                conversation.messages.push(newMessage);
-                input.value = '';
-                loadConversation(currentConversation);
-
-                // Simulate user response after a delay
-                setTimeout(() => {
-                    const responses = [
-                        'Thank you beautiful! 💕',
-                        'You\'re so sweet! 😘',
-                        'Love chatting with you! ❤️',
-                        'You always make me smile! 😊',
-                        'Can\'t wait for our private time! 🔥'
-                    ];
-
-                    const response = responses[Math.floor(Math.random() * responses.length)];
-                    const responseMessage = {
-                        type: 'received',
-                        content: response,
-                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                    };
-
-                    conversation.messages.push(responseMessage);
-                    loadConversation(currentConversation);
-                }, 1000 + Math.random() * 2000);
-            }
-        }
-
+    
         function showNotification(message) {
             // Create a simple notification
             const notification = document.createElement('div');
@@ -1522,10 +1484,14 @@ $session_id = $_GET['unique_model_id'];
                                     </div>
 
                                     <div class="input-row">
+
                                         <textarea class="message-input" id="messageInput" placeholder="Type your message..."
                                             onkeypress="handleKeyPress(event)" rows="1"></textarea>
-                                        <button class="send-btn" onclick="sendMessage()">Send</button>
+
+                                        <button class="send-btn" onclick="sendMessage('${user_data.id}')">Send</button>
+
                                     </div>
+
                                 </div>
                         `;
 
@@ -1550,6 +1516,41 @@ $session_id = $_GET['unique_model_id'];
                 }
             });
             
+        }
+
+
+        function sendMessage(reciever_id) {
+
+            let user_id = $('#user_id_chat').val();
+
+            var msg = $('#messageInput').val();
+
+            var tlm_data = {
+                action: 'model_send_msg',
+                sender_id : user_id,
+                reciever_id : reciever_id,
+                msg:msg
+
+            }
+
+            $.ajax({
+                url: 'ajax.php',
+                type: 'POST',
+                data: tlm_data,
+                dataType: 'json',
+
+                success: function(response) {
+
+                    if(response.status=='ok'){
+                    
+                        console.log(response.message);
+                    }
+
+                    else{
+                        alert(response.message);
+                    }
+                }
+            });
         }
 
         function set_confirm_private_chat(id,type) {
