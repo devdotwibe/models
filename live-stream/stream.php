@@ -4,7 +4,7 @@ include('../includes/config.php');
 include('../includes/helper.php');
 $error = '';
 
-echo $_SESSION;
+ print_r($_SESSION);
 die();
 if (isset($_SESSION['log_user_id'])) {
   $getUserData = get_data('model_social_link', array('id' => $_SESSION['log_user_id']), true);
