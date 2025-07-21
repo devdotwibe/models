@@ -1482,13 +1482,15 @@ $session_id = $_GET['unique_model_id'];
                     },
                     success: function (response) {
 
+                    console.log(response);
+
                     response.data.forEach(function (item) {
 
                         if ($('#active_user-' + item.id).length === 0) {
                                 var html = `
                                      <div class="conversation-item active" onclick="selectConversation('alex')" active_user-${item.id}>
                                         <div class="user-avatar vip">
-                                            👨
+                                            <img src="${item.image_url}" alt="user image">
                                             <div class="online-indicator public" id="alexIndicator"></div>
                                         </div>
                                         <div class="conversation-info">
@@ -1496,7 +1498,7 @@ $session_id = $_GET['unique_model_id'];
                                                 <div class="user-name">${item.username}</div>
                                                 <div class="user-badge badge-vip">VIP</div>
                                             </div>
-                                            <div class="message-preview">Hey beautiful! Want to go private? 😘</div>
+                                            <div class="message-preview">${item.last_message}</div>
                                             <div class="conversation-meta">
                                                 <div class="message-time">2m ago</div>
                                                 <div class="unread-count">3</div>
