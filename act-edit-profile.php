@@ -47,10 +47,18 @@ if ($_POST['submit_name']){
 		$cnt = 0; $string_paltform = '';
 		foreach($platform as $sc){
 			if(!empty($socialid[$cnt])){
-				$sql = "UPDATE model_social_link SET platform = '".$sc."', URL = '".$URL[$cnt]."', status='".$status[$cnt]."', public='".$public[$cnt]."',tokens=".$paid_token[$cnt]."  WHERE unique_model_id = '".$userDetails['unique_id']."' AND id='".$socialid[$cnt]."'";
+				$sql = "UPDATE model_social_link SET platform = '".$sc."', URL = '".$URL[$cnt]."', status='".$status[$cnt]."', public='".$public[$cnt]."',tokens='".$paid_token[$cnt]."'  WHERE unique_model_id = '".$userDetails['unique_id']."' AND id='".$socialid[$cnt]."'";
 				mysqli_query($con, $sql);
 			}else{
-				
+				$sc_data = array();
+					$sc_data['unique_model_id'] = $unique_id;
+					$sc_data['platform'] = $sc;
+					$sc_data['URL'] = $URL[$cnt];
+					$sc_data['status'] = $status[$cnt];
+					$sc_data['public'] = $public[$cnt];
+					$sc_data['tokens'] = $paid_token[$cnt];
+					DB::insert('model_social_link', $sc_data); 
+					$created_id = DB::insertId();
 			}
 			
 			$cnt++;
