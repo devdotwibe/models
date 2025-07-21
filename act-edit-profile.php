@@ -56,7 +56,7 @@ if ($_POST['submit_name']){
 					$sc_data['URL'] = $URL[$cnt];
 					$sc_data['status'] = $status[$cnt];
 					$sc_data['public'] = $public[$cnt];
-					$sc_data['tokens'] = $paid_token[$cnt];
+					//$sc_data['tokens'] = $paid_token[$cnt];
 					DB::insert('model_social_link', $sc_data); 
 					$created_id = DB::insertId();
 			}
