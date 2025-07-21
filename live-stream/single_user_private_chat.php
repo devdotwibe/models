@@ -45,6 +45,8 @@ $output = array('status' => 'error', 'message' => 'there is some problem');
 
                 $output['message'] = 'file_not_fount';
 
+                $output['status'] = 'ok';
+
                 echo json_encode($output);
                 die;
             }
@@ -59,7 +61,7 @@ $output = array('status' => 'error', 'message' => 'there is some problem');
 
             $output = array(
                 'status' => 'ok',
-                'message' => 'User list loaded successfully',
+                'message' => 'list_message',
                 'lines' => $text
             );
 

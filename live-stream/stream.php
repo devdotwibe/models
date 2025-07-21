@@ -1451,11 +1451,65 @@ $session_id = $_GET['unique_model_id'];
                     
                     if(response.status=='ok'){
 
-                        
-                    }
-                    else if(response.message == 'file_not_fount')
-                    {
-                        $('#chat_area').html("");
+                        let chat_html = `
+
+                                <div class="chat-header">
+
+                                    <div class="chat-user-info">
+                                        <div class="user-avatar vip">
+                                            👨
+                                            <div class="online-indicator public"></div>
+                                        </div>
+                                        <div class="chat-user-details">
+                                            <h4>Alex_VIP</h4>
+                                            <div class="chat-user-status">
+                                                <div class="live-dot public"></div>
+                                                <span>Online • VIP Member • Tipped 2,500 TLM today</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="chat-messages" id="chatMessages" style="display:none;">
+                                
+                                </div>
+
+                                <div class="chat-input">
+                            
+                                    <div class="custom-templates">
+                                        <div class="template-header">
+                                            <div class="template-title">My Templates</div>
+                                            <button class="add-template-btn" onclick="openTemplateModal()">+ Add</button>
+                                        </div>
+                                        <div id="customTemplatesList">
+                                
+                                        </div>
+                                    </div>
+
+                                    <div class="quick-actions">
+                                        <div class="quick-action" onclick="insertQuickMessage('Thank you! 💕')">Thank you! 💕</div>
+                                        <div class="quick-action" onclick="insertQuickMessage('You\'re so sweet! 😘')">You're so
+                                            sweet! 😘</div>
+                                        <div class="quick-action" onclick="insertQuickMessage('Let\'s go private! 🔥')">Let's go
+                                            private! 🔥</div>
+                                        <div class="quick-action" onclick="insertQuickMessage('Love you! ❤️')">Love you! ❤️</div>
+                                    </div>
+
+                                    <div class="input-row">
+                                        <textarea class="message-input" id="messageInput" placeholder="Type your message..."
+                                            onkeypress="handleKeyPress(event)" rows="1"></textarea>
+                                        <button class="send-btn" onclick="sendMessage()">Send</button>
+                                    </div>
+                                </div>
+                        `;
+
+                        $('#chat_area').append(chat_html);
+
+                        if(response.message=='list_message')
+                        {
+                            
+                        }
                     }
                     else{
                         
