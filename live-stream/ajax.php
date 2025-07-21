@@ -349,23 +349,31 @@ join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=1 and mode
 
             $defaultImage =SITEURL."/assets/images/girl.png";
 
+            $filteredUsers = array();
+
             foreach($acceptedUsers as &$item)
             {
-                  if(!empty($item['profile_pic'])){
+                if($item->user_id != $_SESSION['log_user_id'] ) {
 
-                          $item['image_url'] = SITEURL . $item['profile_pic'];
+                    if(!empty($item['profile_pic'])){
+
+                            $item['image_url'] = SITEURL . $item['profile_pic'];
+                        }
+                    else
+                    {
+                        $item['image_url'] = $defaultImage;
                     }
-                else
-                {
-                    $item['image_url'] = $defaultImage;
-                }
+
+                 $filteredUsers[] = $item;   
+            }
             }
 
-            if ($acceptedUsers) {
+            if ($filteredUsers) {
+
                 $output = array(
                     'status' => 'ok',
                     'message' => 'Accepted users found',
-                    'data' => $acceptedUsers
+                    'data' => $filteredUsers
                 );
             }
 
