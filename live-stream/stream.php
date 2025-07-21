@@ -167,7 +167,7 @@ $session_id = $_GET['unique_model_id'];
                     </div>
 
                     <!-- Show Requests -->
-                    <div class="show-requests" id="showRequests">
+                    <div class="show-requests" id="showRequests" style="display:none;">
                         <div class="requests-header">
                             <div class="requests-title">🎭 Show Requests</div>
                             <div class="requests-count" id="requestsCount">3</div>
@@ -1487,6 +1487,15 @@ $session_id = $_GET['unique_model_id'];
                             if (response.status == 'ok') {
                       
                                 $('#requestsCount').text(response.counts);
+
+                                if(response.counts > 0)
+                                {
+                                    $('#showRequests').show();
+                                }
+                                else
+                                {
+                                    $('#showRequests').hide();
+                                }
 
                                 var html =` <div class="request-item">
                                                 <div>
