@@ -47,8 +47,8 @@ if ($_POST['submit_name']){
 		$cnt = 0; $string_paltform = '';
 		foreach($platform as $sc){
 			if(!empty($socialid[$cnt])){
-				$sql = "UPDATE model_social_link SET platform = '".$sc."', URL = '".$URL[$cnt]."', status='".$status[$cnt]."', public='".$public[$cnt]."',tokens='".$paid_token[$cnt]."'  WHERE unique_model_id = '".$userDetails['unique_id']."' AND id='".$socialid[$cnt]."'";
-				mysqli_query($con, $sql);
+				//$sql = "UPDATE model_social_link SET platform = '".$sc."', URL = '".$URL[$cnt]."', status='".$status[$cnt]."', public='".$public[$cnt]."',tokens='".$paid_token[$cnt]."'  WHERE unique_model_id = '".$userDetails['unique_id']."' AND id='".$socialid[$cnt]."'";
+				//mysqli_query($con, $sql);
 			}else{
 				$sc_data = array();
 					$sc_data['unique_model_id'] = $unique_id;
