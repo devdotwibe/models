@@ -18,13 +18,11 @@
     async function startStreaming() {
       stream = await navigator.mediaDevices.getUserMedia({
         video: {
-          width: { ideal: 640 },   // Lower resolution (e.g., 640x480)
-          height: { ideal: 480 },
-          frameRate: { ideal: 32 } // Lower FPS (saves bandwidth)
+          width: { ideal: 640 }, 
+          height: { ideal: 480 }, 
         },
-        audio: {
-          sampleRate: 16000, // Lower audio sample rate
-          channelCount: 1,   // Mono instead of stereo
+        audio: { 
+          channelCount: 1, 
           echoCancellation: true,
           noiseSuppression: true
         }
