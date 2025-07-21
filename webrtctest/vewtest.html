@@ -31,7 +31,7 @@ if (Hls.isSupported()) {
   const hls = new Hls({
     lowLatencyMode: true,
     liveSyncDuration: 1,             // 🟢 Small buffer = lower latency
-    liveMaxLatencyDuration:3,
+    liveMaxLatencyDuration:6,
     maxLiveSyncPlaybackRate: 1,      // 🟢 Speed up if viewer lags
     enableWorker: true,
     backBufferLength: 0.1              // 🧠 Prevents memory overload
