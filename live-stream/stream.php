@@ -1514,12 +1514,12 @@ $session_id = $_GET['unique_model_id'];
                                     `;
 
                                  $('#requestsList').append(html); 
-                                       
+
                                 });
 
-                                if(userpage=='user'){
-                                    gotoprivate(response.id);
-                                }
+                                // if(userpage=='user'){
+                                //     gotoprivate(response.id);
+                                // }
                             }
                             else {
 
