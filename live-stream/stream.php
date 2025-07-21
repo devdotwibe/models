@@ -1504,9 +1504,9 @@ $session_id = $_GET['unique_model_id'];
                                                     </div>
                                                     <div class="request-actions">
                                                         <button class="request-btn accept"
-                                                            onclick="acceptRequest('alex', 'private')">✓</button>
+                                                            onclick="acceptRequest('alex', 'private')" onclick="set_confirm_private_chat(${response.html[0].id},'accept');">✓</button>
                                                         <button class="request-btn decline"
-                                                            onclick="declineRequest('alex', 'private')">✗</button>
+                                                           onclick="set_confirm_private_chat(${response.html[0].id},'accept');" >✗</button>
                                                     </div>
                                             </div>`;
 
