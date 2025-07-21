@@ -353,11 +353,11 @@ join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=1 and mode
             {
                   if(!empty($item['profile_pic'])){
 
-                        $item->image_url = SITEURL.$item['profile_pic'];
+                          $item['image_url'] = SITEURL . $item['profile_pic'];
                     }
                 else
                 {
-                    $item->image_url = SITEURL.$item['profile_pic'];
+                    $item['image_url'] = $defaultImage;
                 }
             }
 
