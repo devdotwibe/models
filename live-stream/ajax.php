@@ -311,6 +311,9 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
 from tlm_private_live_chat_url tb 
 join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=0 and model_id='" . $_POST["key"] . "' and r_date> '" . date("Y-m-d H:i:s", strtotime('-2 minute', time())) . "'";
             $checPrivate = DB::query($string);
+
+            $output = array('status' => $checPrivate);
+
             if ($checPrivate) {
                 ob_start();
                 include 'ajax_private_list.php';
