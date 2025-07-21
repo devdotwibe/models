@@ -52,6 +52,9 @@ $session_id = $_GET['unique_model_id'];
 
                 <input type="hidden" name="model_id" id="model_id_chat" value="<?php echo $_GET['unique_model_id'] ?>">
 
+                <input type="hidden" name="private_id" id="private_id_chat" value=" <?php echo $_GET['private_id'] ?>">
+               
+
                     <div class="model-avatar">S</div>
                     <div class="model-details">
                         <h3>Sarah Elite</h3>
@@ -1524,11 +1527,46 @@ $session_id = $_GET['unique_model_id'];
                         
                             setTimeout(function () {
                                 tlm_check_url();
+
+                                tlm_get_privatemsg();
+
                             }, 3000);
 
                         }
                     });
                 }
+        }
+
+
+        function tlm_get_privatemsg() {
+
+            let user_id = $('#user_id_chat').val();
+            let model_id =  $('#model_id_chat').val();
+
+            let private_id =  $('#private_id_chat').val();
+
+            var tlm_data = {
+                action: 'check_accepted_users',
+                key: model_id,
+                user_id: user_id,
+                private_id:private_id,
+            }
+            if (model_id && model_id != '') {
+                $.ajax({
+                    url: 'ajax.php',
+                    type: 'POST',
+                    data: tlm_data,
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    },
+                    success: function (response) {
+                        
+                        var data = JSON.parse(response);
+                    
+                    }
+                });
+            }
         }
 
 

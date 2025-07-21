@@ -133,7 +133,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
         $log['line'] = $num;
         $log['text'] = $text;
         $log['key'] = $key;
-        echo json_encode($log);
+        echo json_encode(value: $log);
     }
     if (isset($_POST['action']) && !empty($_POST['action']) && $_POST['action'] == 'tlm_get_total_user' && isset($_POST['user'])) {
         $html = '';
@@ -334,4 +334,31 @@ join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=1 and mode
         echo json_encode($output);
     }
 }
+
+
+      if ($_POST['action'] == 'check_accepted_users' && isset($_POST['key'])) {
+
+            $modelId = $_POST['key'];
+
+            $query = "SELECT tb.*, ms.username, ms.profile_pic, ms.id as userid 
+                    FROM tlm_private_live_chat_url tb 
+                    JOIN model_user ms ON ms.id = tb.user_id 
+                    WHERE tb.status = 1 AND tb.model_id = %s";
+
+            $acceptedUsers = DB::query($query, $modelId);
+
+            if ($acceptedUsers) {
+                $output = array(
+                    'status' => 'ok',
+                    'message' => 'Accepted users found',
+                    'data' => $acceptedUsers
+                );
+            }
+
+            echo json_encode($output);
+            exit;
+        }
+
+
+
 die();
