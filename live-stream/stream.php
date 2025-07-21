@@ -1479,8 +1479,6 @@ $session_id = $_GET['unique_model_id'];
                     dataType: 'json', 
                     success: function (response) {
 
-                    console.log(response);
-
                     response.data.forEach(function (item) {
 
                         if ($('#active_user-' + item.id).length === 0) {
@@ -1492,10 +1490,11 @@ $session_id = $_GET['unique_model_id'];
                                         </div>
                                         <div class="conversation-info">
                                             <div class="conversation-header">
+
                                                 <div class="user-name">${item.username}</div>
-                                                <div class="user-badge badge-vip">VIP</div>
+                                             
                                             </div>
-                                            <div class="message-preview">${item.last_message}</div>
+                                            <div class="message-preview">${item.last_message??""}</div>
                                             <div class="conversation-meta">
                                                 <div class="message-time">2m ago</div>
                                                 <div class="unread-count">3</div>
