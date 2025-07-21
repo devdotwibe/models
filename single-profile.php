@@ -834,6 +834,9 @@ if (mysqli_num_rows($res_ap) > 0) {
                     </div>
 
                     <!-- Similar Models Card -->
+
+                <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id']) { ?>
+
                     <div class="ultra-glass rounded-2xl p-4 sm:p-6">
                         <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
                         <div class="space-y-4">
@@ -878,6 +881,9 @@ if (mysqli_num_rows($res_ap) > 0) {
                             View More
                         </button>
                     </div>
+
+                <?php } ?>
+
                 </div>
 
 
