@@ -3,28 +3,21 @@
 include('../includes/config.php');
 include('../includes/helper.php');
 $error = '';
-if (isset($_SESSION['log_user_unique_id'])) {
-  $getUserData = get_data('model_social_link', array('unique_model_id' => $_SESSION['log_user_unique_id']), true);
+if (isset($_SESSION['log_user_id'])) {
+  $getUserData = get_data('model_social_link', array('id' => $_SESSION['log_user_id']), true);
 
- $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+ $userDetails = get_data('model_user',array('unique_id'=>$_SESSION["log_user_unique_id"]),true);
 
-  if ($getUserData) {
-    if (empty($getUserData['i_username'])) {
-      $error = 'empty';
-    } else if (empty($getUserData['s_username'])) {
-      $error = 'empty';
-    }
-  } else {
-    $error = 'empty';
-  }
 } else {
-  $error = 'login';
+
+  	echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
+		die;
 }
 $showMessgeBtn = 0;
-if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id']) {
-  $showMessgeBtn = h_checkMessageShowBtn($_GET['m_unique_id'], $_SESSION['log_user_unique_id']);
+if (isset($_SESSION['log_user_id']) && $_GET['unique_model_id']) {
+  $showMessgeBtn = h_checkMessageShowBtn($_GET['unique_model_id'], $_SESSION['log_user_unique_id']);
 }
-$session_id = $_GET['m_unique_id'];
+$session_id = $_GET['unique_model_id'];
 
 
 
@@ -54,6 +47,11 @@ $session_id = $_GET['m_unique_id'];
         <div class="stream-sidebar" id="streamSidebar">
             <div class="stream-header">
                 <div class="model-info">
+
+                <input type="hidden" name="user_id" id="user_id_chat" value="<?php echo $userDetails['id'] . $error ?>">
+
+                <input type="hidden" name="model_id" id="model_id_chat" value="<?php echo $_GET['unique_model_id'] ?>">
+
                     <div class="model-avatar">S</div>
                     <div class="model-details">
                         <h3>Sarah Elite</h3>
@@ -532,6 +530,9 @@ $session_id = $_GET['m_unique_id'];
             </div>
         </div>
     </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
         let currentConversation = 'alex';
@@ -1484,6 +1485,64 @@ $session_id = $_GET['m_unique_id'];
             }
         }, 30000);
     </script>
+
+    <script>
+
+        $(function() {
+        
+            tlm_check_url();
+
+        });
+
+        function tlm_check_url() {
+
+            let user_id = $('#user_id_chat').val();
+            let model_id =  $('#model_id_chat').val();
+
+            var coin = $('#chat_coin').val();
+
+                var tlm_data = {
+                    action: 'tlm_check_url_action',
+                    key: model_id,
+                    user: user_id,
+                    coin      : coin,
+                }
+                if (model_id && model_id != '') {
+                    $.ajax({
+                        url: 'ajax.php',
+                        type: 'POST',
+                        data: tlm_data,
+                        dataType: 'json',
+                        beforeSend: function () {
+                        },
+                        complete: function () {
+                        },
+                        success: function (response) {
+                  
+                            if (response.status == 'ok') {
+                      
+                                $('#tlm_start_private_popup11 .modal-body').html(response.html);
+                                $('.private-request').html(response.counts);
+                                if(userpage=='user'){
+                                    gotoprivate(response.id);
+                                }
+                            }
+                            else {
+
+                                $('.private-request').html('');
+                            }
+                            setTimeout(function () {
+                                tlm_check_url();
+                            }, 3000);
+
+                        }
+                    });
+                }
+        }
+
+    </script>
+
+
 </body>
 
 </html>
