@@ -639,7 +639,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             ?>
 
-            
+
                 <div class="md:col-span-1">
                     <!-- Stats Card -->
                     <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
@@ -670,7 +670,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                     </div>
 
-            <?php if (isset($_SESSION['log_user_unique_id'])) { ?>
+            <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] == $_SESSION['log_user_unique_id']) { ?>
 
                     <form id="createPostForm"  enctype="multipart/form-data" method="post">
 
