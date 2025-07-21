@@ -1501,7 +1501,14 @@ $session_id = $_GET['unique_model_id'];
 
                         if(response.message=='list_message')
                         {
-                            
+                            var chart_html = "";
+
+                            var chat_lines = response.lines;
+                            chat_lines.forEach(function (line) {
+                                    chat_html += line;
+                                });
+
+                            $('#customTemplatesList').append(chat_html).show();
                         }
                     }
                     else{
