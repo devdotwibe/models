@@ -1371,6 +1371,9 @@ $session_id = $_GET['unique_model_id'];
                 }
         }
 
+        let currentPollingUserId = null;
+
+        let pollingTimeout = null;
 
         function tlm_get_privatemsg() {
 
@@ -1442,6 +1445,10 @@ $session_id = $_GET['unique_model_id'];
             $('.conversation-item').removeClass('active');
 
              $(`#active_user-${private_id}`).addClass('active');
+
+            clearTimeout(pollingTimeout);
+
+            currentPollingUserId = private_id;
 
              $.ajax({
                     url: 'single_user_private_chat.php',
@@ -1534,10 +1541,10 @@ $session_id = $_GET['unique_model_id'];
                         alert(response.message);
                     }
 
-                    setTimeout(function() {
-
-                        set_user_chat(private_id);
-
+                    pollingTimeout = setTimeout(function () {
+                        if ($(`#active_user-${currentPollingUserId}`).hasClass('active')) {
+                            set_user_chat(currentPollingUserId);
+                        }
                     }, 5000);
 
                 }
