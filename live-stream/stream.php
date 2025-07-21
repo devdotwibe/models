@@ -1521,7 +1521,7 @@ $session_id = $_GET['unique_model_id'];
 
         function sendMessage(reciever_id) {
 
-            let user_id = $('#user_id_chat').val();
+            let user_id = $('#model_id_chat').val();
 
             var msg = $('#messageInput').val();
 
