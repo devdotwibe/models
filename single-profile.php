@@ -1397,7 +1397,7 @@ if (mysqli_num_rows($res_ap) > 0) {
         
         <div class="modal-body">
            
-        <?php $sql_sc = "SELECT * FROM model_social_link WHERE unique_model_id = '" . $_SESSION['log_user_unique_id'] . "' AND  public='yes'";
+        <?php $sql_sc = "SELECT * FROM model_social_link WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND  public='yes'";
 			  $res_sc = mysqli_query($con, $sql_sc);  
 		?>
             
@@ -1448,7 +1448,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 					
 						<?php } }
 						
-				} ?>
+				} else echo 'No social links found.'; ?>
 					
                 </div>
                
