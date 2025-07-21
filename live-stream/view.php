@@ -21,10 +21,10 @@ if (isset($_SESSION['log_user_unique_id'])) {
   $error = 'login';
 }
 $showMessgeBtn = 0;
-if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id']) {
-  $showMessgeBtn = h_checkMessageShowBtn($_GET['m_unique_id'], $_SESSION['log_user_unique_id']);
+if (isset($_SESSION['log_user_unique_id']) && $_GET['unique_model_id']) {
+  $showMessgeBtn = h_checkMessageShowBtn($_GET['unique_model_id'], $_SESSION['log_user_unique_id']);
 }
-$session_id = $_GET['m_unique_id'];
+$session_id = $_GET['unique_model_id'];
 
 
 
@@ -97,7 +97,7 @@ var userpage = '<?=$user_page?>';
 
                 <input type="hidden" name="user_id" id="user_id_chat" value="<?php echo $userDetails['id'] ?>">
 
-                <input type="hidden" name="model_id" id="model_id_chat" value="<?php echo $_GET['m_unique_id'] ?>">
+                <input type="hidden" name="model_id" id="model_id_chat" value="<?php echo $_GET['unique_model_id'] ?>">
                                 
                 <video 
                     class="stream-video"
