@@ -95,7 +95,7 @@ var userpage = '<?=$user_page?>';
         
                 <div class="heart-rain" id="heartRain" aria-hidden="true"></div>
 
-                <input type="hidden" name="user_id" id="user_id_chat" value="<?php echo $userDetails['id'] ?>">
+                <input type="hidden" name="user_id" id="user_id_chat" value="<?php echo $userDetails['id'] . $error ?>">
 
                 <input type="hidden" name="model_id" id="model_id_chat" value="<?php echo $_GET['unique_model_id'] ?>">
                                 
