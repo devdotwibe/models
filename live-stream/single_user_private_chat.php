@@ -78,7 +78,8 @@ $output = array('status' => 'error', 'message' => 'there is some problem');
             $output = array(
                 'status' => 'ok',
                 'message' => 'list_message',
-                'lines' => $text
+                'lines' => $text,
+                'reciever_data'=>$recieverData,
             );
 
         }
