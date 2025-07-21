@@ -43,7 +43,21 @@ if ($_POST['submit_name']){
 	$public = $_POST['public'];
 	$socialid = $_POST['socialid'];
 	$paid_token = $_POST['paid_token'];
-	
+	if(!empty($platform)){
+		$cnt = 0; $string_paltform = '';
+		foreach($platform as $sc){
+			
+			
+			$cnt++;
+			$string_paltform .= "'".$sc."',";
+		}
+		// Trim last comma
+		$string_paltform = rtrim($string_paltform, ',');
+		if(!empty($string_paltform)){
+			$sql_delete = "DELETE FROM `model_social_link` WHERE unique_model_id = '".$userDetails['unique_id']."' AND platform NOT IN (".$string_paltform.")";
+			mysqli_query($con,$sql_delete);
+		}
+	}
 	
 
 	$error = '';
