@@ -20,9 +20,14 @@
         video: {
           width: { ideal: 640 },   // Lower resolution (e.g., 640x480)
           height: { ideal: 480 },
-          frameRate: { ideal: 15 } // Lower FPS (saves bandwidth)
+          frameRate: { ideal: 32 } // Lower FPS (saves bandwidth)
         },
-        audio: true
+        audio: {
+          sampleRate: 16000, // Lower audio sample rate
+          channelCount: 1,   // Mono instead of stereo
+          echoCancellation: true,
+          noiseSuppression: true
+        }
       });
       preview.srcObject = stream;
 
