@@ -1450,7 +1450,12 @@ $session_id = $_GET['unique_model_id'];
                 success: function(response) {
                     
                     if(response.status=='ok'){
-                    
+
+                        
+                    }
+                    else if(response.message == 'file_not_fount')
+                    {
+                        $('#chat_area').html("");
                     }
                     else{
                         
