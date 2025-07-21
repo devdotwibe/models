@@ -1337,6 +1337,8 @@ $session_id = $_GET['unique_model_id'];
 
         let pollingTimeout = null;
 
+        let isTyping = false;
+
         function tlm_get_privatemsg() {
 
             let user_id = $('#user_id_chat').val();
@@ -1552,6 +1554,48 @@ $session_id = $_GET['unique_model_id'];
                 }
             });
         }
+
+
+        $('#messageInput').on('input', function () {
+
+            const value = $(this).val().trim();
+
+            if (pollingTimeout) {
+                clearTimeout(pollingTimeout);
+                pollingTimeout = null;
+            }
+
+            if (value !== '') {
+             
+                isTyping = true;
+            } else {
+                
+                isTyping = false;
+                pollingTimeout = setTimeout(function () {
+
+                    const activeId = $('.conversation-item.active').attr('id');
+                    if (activeId) {
+
+                        const private_id = activeId.replace('active_user-', '');
+                        set_user_chat(private_id);
+                    }
+
+                }, 5000);
+            }
+        });
+
+
+        // $('#messageInput').on('blur', function () {
+        //     if ($(this).val().trim() === '' && !pollingTimeout) {
+        //         pollingTimeout = setTimeout(function () {
+        //             const activeId = $('.conversation-item.active').attr('id');
+        //             if (activeId) {
+        //                 const private_id = activeId.replace('active_user-', '');
+        //                 set_user_chat(private_id);
+        //             }
+        //         }, 5000);
+        //     }
+        // });
 
         function set_confirm_private_chat(id,type) {
 
