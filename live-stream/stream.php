@@ -1476,10 +1476,7 @@ $session_id = $_GET['unique_model_id'];
                     url: 'ajax.php',
                     type: 'POST',
                     data: tlm_data,
-                    beforeSend: function () {
-                    },
-                    complete: function () {
-                    },
+                    dataType: 'json', 
                     success: function (response) {
 
                     console.log(response);
