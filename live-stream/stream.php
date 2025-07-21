@@ -1503,7 +1503,19 @@ $session_id = $_GET['unique_model_id'];
                                     </div> 
                                 `;
                                 $('#active_chat_users').append(html);
+
+                                var firstChild = $('.conversation-item').first();
+
+                                var firstChild_id = firstChild.attr('id');
+
+                                if (firstChild_id === `active_user-${item.id}`)
+                                {
+                                    set_user_chat(`${item.id}`);
+
+                                    firstChild.addClass('active');
+                                }   
                             }
+
                         });
                     
                     }
@@ -1511,6 +1523,10 @@ $session_id = $_GET['unique_model_id'];
             }
         }
 
+        function set_user_chat(private_id)
+        {
+            console.log(set_user_chat,'set_user_chat');
+        }
 
         function set_confirm_private_chat(id,type) {
 
