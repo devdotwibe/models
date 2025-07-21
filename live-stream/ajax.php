@@ -263,7 +263,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
                     while ($row = $result->fetch_assoc()) {
                         $sql = "UPDATE tlm_private_live_chat_url 
                             SET 
-                            video_url='" . $ChatLink . "view.php?user=viewer&unique_model_id=" . $_POST["key"] . "&pra=private',
+                            video_url='" . $ChatLink . "index.php?user=viewer&unique_model_id=" . $_POST["key"] . "&pra=private',
                             coins='" . $modelCharge . "',
                             r_date='" . $date . "'
                             WHERE id=" . $row['id'];
@@ -274,7 +274,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
                     }
                 } else {
                     $sql = "INSERT INTO tlm_private_live_chat_url (model_id, video_url,coins,user_id, meta,r_date)VALUES ('" . $_POST["key"] . "', '
-                        " . $ChatLink . "view.php?user=viewer&unique_model_id=" . $_POST["key"] . "&pra=private','" . $modelCharge . "','" . $userDetails['id'] . "', '','" . $date . "')";
+                        " . $ChatLink . "index.php?user=viewer&unique_model_id=" . $_POST["key"] . "&pra=private','" . $modelCharge . "','" . $userDetails['id'] . "', '','" . $date . "')";
                     if ($con->query($sql) === TRUE) {
                         echo json_encode('success');
                     } else {
