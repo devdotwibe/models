@@ -1497,20 +1497,25 @@ $session_id = $_GET['unique_model_id'];
                                     $('#showRequests').hide();
                                 }
 
-                                var html =` <div class="request-item">
-                                                <div>
-                                                        <div class="request-user">${response.html[0].username} </div>
-                                                        <div class="request-type">Private Show - 30min</div>
-                                                    </div>
-                                                    <div class="request-actions">
-                                                        <button class="request-btn accept"
-                                                            onclick="acceptRequest('alex', 'private')" onclick="set_confirm_private_chat(${response.html[0].id},'accept');">✓</button>
-                                                        <button class="request-btn decline"
-                                                           onclick="set_confirm_private_chat(${response.html[0].id},'accept');" >✗</button>
-                                                    </div>
-                                            </div>`;
+                               response.html.forEach(function (item) {
+                                    var html = `
+                                        <div class="request-item" id="request-${item.id}">
+                                            <div>
+                                                <div class="request-user">${item.username}</div>
+                                                <div class="request-type">Private Show - 30min</div>
+                                            </div>
+                                            <div class="request-actions">
+                                                <button class="request-btn accept"
+                                                    onclick="acceptRequest('${item.username}', 'private'); set_confirm_private_chat(${item.id}, 'accept');">✓</button>
+                                                <button class="request-btn decline"
+                                                    onclick="set_confirm_private_chat(${item.id}, 'decline');">✗</button>
+                                            </div>
+                                        </div>
+                                    `;
 
-                                $('#requestsList').append(html);
+                                 $('#requestsList').append(html); 
+                                       
+                                });
 
                                 if(userpage=='user'){
                                     gotoprivate(response.id);
