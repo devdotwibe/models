@@ -45,8 +45,22 @@ $session_id = $_GET['m_unique_id'];
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<?php
+if ($_GET["unique_model_id"] == $_SESSION['log_user_unique_id']) {
+  $user_page = 'model';
+}
+else{
+  $user_page = 'user';
+}
+
+?>
+<script>
+var userpage = '<?=$user_page?>';
+</script>
 
 </head>
+
+
 
 <body>
     <div class="app-container">
@@ -75,14 +89,16 @@ $session_id = $_GET['m_unique_id'];
             </div>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
-            <!-- Clean Streaming Area -->
+
             <div class="streaming-area" id="streamingArea" role="main" aria-label="Streaming video area">
-                <!-- Effects Container -->
+        
                 <div class="heart-rain" id="heartRain" aria-hidden="true"></div>
+
+                <input type="hidden" name="user_id" id="user_id_chat" value="<?php echo $userDetails['id'] ?>">
+
+                <input type="hidden" name="model_id" id="model_id_chat" value="<?php echo $_SESSION['m_unique_id'] ?>">
                                 
-                <!-- Stock Video Element -->
                 <video 
                     class="stream-video"
                     id="streamVideo"
@@ -336,11 +352,13 @@ $session_id = $_GET['m_unique_id'];
             <p style="color: rgba(255,255,255,0.8); margin: 10px 0; font-size: 11px;">
                 Request a private session with exclusive features.
             </p>
-            <select style="width: 100%; padding: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; margin-bottom: 12px; font-size: 11px; font-family: inherit;" aria-label="Select private session duration">
-                <option>15 minutes - 1,000 tokens</option>
-                <option>30 minutes - 1,800 tokens</option>
-                <option>60 minutes - 3,000 tokens</option>
+            <select name="chat_coin" id="chat_coin" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; margin-bottom: 12px; font-size: 11px; font-family: inherit;" aria-label="Select private session duration">
+
+                <option value="15" >15 minutes - 1,000 tokens</option>
+                <option value="30" >30 minutes - 1,800 tokens</option>
+                <option value="60" >60 minutes - 3,000 tokens</option>
             </select>
+
             <button class="btn btn-primary" onclick="sendPrivateRequest()">Send Request</button>
             <button class="btn btn-secondary" onclick="closeModal('privateModal')">Cancel</button>
         </div>
@@ -1076,12 +1094,133 @@ $session_id = $_GET['m_unique_id'];
         }
 
         function sendPrivateRequest() {
+
+            let user_id = $('#user_id_chat').val();
+            let model_id =  $('#model_id_chat').val();
+            var coin = $('#chat_coin').val();
+            var tlm_data = {
+                action: 'tlm_private_chat_action',
+                key: model_id,
+                user: user_id,
+                coin : coin,
+            }
+            $(this).attr('style', 'display:none');
+
+            if (model_id && model_id != '') {
+                $.ajax({
+                    url: 'ajax.php',
+                    type: 'POST',
+                    data: tlm_data,
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    },
+                    success: function (response) {
+                        if(response=='success'){
+                            tlm_private_chat_check();
+                        }
+                        else{
+                            alert(response);
+                        }
+
+                    }
+                });
+            }
+
             closeModal('privateModal');
             showNotification('Private session request sent! 🔒');
                         
-            setTimeout(() => {
-                addMessage('I\'d love to go private with you! 😘', 'received', 'Sarah_Premium', 'premium');
-            }, 2000);
+            // setTimeout(() => {
+            //     addMessage('I\'d love to go private with you! 😘', 'received', 'Sarah_Premium', 'premium');
+            // }, 2000);
+        }
+
+
+        function tlm_private_chat_check() {
+
+            let user_id = $('#user_id_chat').val();
+            let model_id =  $('#model_id_chat').val();
+
+            var coin = $('#chat_coin').val();
+
+            var tlm_data = {
+                action: 'tlm_private_chat_url_action',
+                key: model_id,
+                user: user_id,
+                coin      : coin,
+            }
+            if (model_id && model_id != '') {
+                $.ajax({
+                    url: 'ajax.php',
+                    type: 'POST',
+                    data: tlm_data,
+                    beforeSend: function () {
+                    },
+                    complete: function () {
+                    },
+                    success: function (response) {
+                        if (response.trim() == '"success"') {
+                            setTimeout(function () {
+                                // window.location.href = "https://thelivemodels.com/live-chat/index.php?user=viewer&unique_model_id="+model_id+"&pra=private"; 
+                            //  $('#tlm_user_private_vidchat').trigger('click');
+                            }, 15000);
+                        }
+                        setTimeout(function () {
+                            tlm_private_chat_check();
+                        }, 3000);
+                        // var total_coin = $('.tlm_show_coins_private_chat').html();
+                        // $('.tlm_show_coins_private_chat').html(parseInt(total_coin)-parseInt(coin));
+                        // // $('#tlm_close_private_chat_box').trigger('click');
+                        // tlm_private_chat_check();
+                    }
+                });
+            }
+        }
+
+        function tlm_check_url() {
+
+            let user_id = $('#user_id_chat').val();
+            let model_id =  $('#model_id_chat').val();
+
+            var coin = $('#chat_coin').val();
+
+                var tlm_data = {
+                    action: 'tlm_check_url_action',
+                    key: model_id,
+                    user: user_id,
+                    coin      : coin,
+                }
+                if (model_id && model_id != '') {
+                    $.ajax({
+                        url: 'ajax.php',
+                        type: 'POST',
+                        data: tlm_data,
+                        dataType: 'json',
+                        beforeSend: function () {
+                        },
+                        complete: function () {
+                        },
+                        success: function (response) {
+                  
+                            if (response.status == 'ok') {
+                      
+                                $('#tlm_start_private_popup11 .modal-body').html(response.html);
+                                $('.private-request').html(response.counts);
+                                if(userpage=='user'){
+                                    gotoprivate(response.id);
+                                }
+                            }
+                            else {
+
+                                $('.private-request').html('');
+                            }
+                            setTimeout(function () {
+                                tlm_check_url();
+                            }, 3000);
+
+                        }
+                    });
+                }
         }
 
         function sendGroupRequest() {
