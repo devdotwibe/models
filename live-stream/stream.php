@@ -180,92 +180,12 @@ $session_id = $_GET['unique_model_id'];
                         </div>
                     </div>
 
-                    <div class="conversations-scroll">
-                        <!-- Active Conversation -->
-                        <div class="conversation-item active unread" onclick="selectConversation('alex')">
-                            <div class="user-avatar vip">
-                                👨
-                                <div class="online-indicator public" id="alexIndicator"></div>
-                            </div>
-                            <div class="conversation-info">
-                                <div class="conversation-header">
-                                    <div class="user-name">Alex_VIP</div>
-                                    <div class="user-badge badge-vip">VIP</div>
-                                </div>
-                                <div class="message-preview">Hey beautiful! Want to go private? 😘</div>
-                                <div class="conversation-meta">
-                                    <div class="message-time">2m ago</div>
-                                    <div class="unread-count">3</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Other Conversations -->
-                        <div class="conversation-item unread" onclick="selectConversation('emma')">
-                            <div class="user-avatar vip">
-                                👸
-                                <div class="online-indicator group" id="emmaIndicator"></div>
-                            </div>
-                            <div class="conversation-info">
-                                <div class="conversation-header">
-                                    <div class="user-name">Emma_Gold</div>
-                                    <div class="user-badge badge-vip">VIP</div>
-                                </div>
-                                <div class="message-preview">Thanks for the amazing show! 💕</div>
-                                <div class="conversation-meta">
-                                    <div class="message-time">5m ago</div>
-                                    <div class="unread-count">2</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="conversation-item unread" onclick="selectConversation('david')">
-                            <div class="user-avatar premium">
-                                🤵
-                                <div class="online-indicator private" id="davidIndicator"></div>
-                            </div>
-                            <div class="conversation-info">
-                                <div class="conversation-header">
-                                    <div class="user-name">David_Premium</div>
-                                    <div class="user-badge badge-premium">Premium</div>
-                                </div>
-                                <div class="message-preview">You're incredible tonight! 🔥</div>
-                                <div class="conversation-meta">
-                                    <div class="message-time">8m ago</div>
-                                    <div class="unread-count">1</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="conversation-item" onclick="selectConversation('lisa')">
-                            <div class="user-avatar premium">
-                                👩‍🦰
-                                <div class="online-indicator public" id="lisaIndicator"></div>
-                            </div>
-                            <div class="conversation-info">
-                                <div class="conversation-header">
-                                    <div class="user-name">Lisa_Premium</div>
-                                    <div class="user-badge badge-premium">Premium</div>
-                                </div>
-                                <div class="message-preview">Love your energy! ✨</div>
-                                <div class="conversation-meta">
-                                    <div class="message-time">12m ago</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="conversation-item" onclick="selectConversation('mike')">
-                            <div class="user-avatar regular">
-                                👤
-                                <div class="online-indicator public" id="mikeIndicator"></div>
-                            </div>
-                            <div class="conversation-info">
-                                <div class="conversation-header">
-                                    <div class="user-name">Mike_User</div>
-                                </div>
-                                <div class="message-preview">Hi there! 👋</div>
-                                <div class="conversation-meta">
-                                    <div class="message-time">15m ago</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="conversations-scroll" id="active_chat_users">
+                
+
+            
                     </div>
+
                 </div>
 
                 <!-- Chat Area -->
@@ -1561,8 +1481,32 @@ $session_id = $_GET['unique_model_id'];
                     complete: function () {
                     },
                     success: function (response) {
-                        
-                        var data = JSON.parse(response);
+
+                    response.data.forEach(function (item) {
+
+                        if ($('#active_user-' + item.id).length === 0) {
+                                var html = `
+                                     <div class="conversation-item active" onclick="selectConversation('alex')" active_user-${item.id}>
+                                        <div class="user-avatar vip">
+                                            👨
+                                            <div class="online-indicator public" id="alexIndicator"></div>
+                                        </div>
+                                        <div class="conversation-info">
+                                            <div class="conversation-header">
+                                                <div class="user-name">${item.username}</div>
+                                                <div class="user-badge badge-vip">VIP</div>
+                                            </div>
+                                            <div class="message-preview">Hey beautiful! Want to go private? 😘</div>
+                                            <div class="conversation-meta">
+                                                <div class="message-time">2m ago</div>
+                                                <div class="unread-count">3</div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                `;
+                                $('#active_chat_users').append(html);
+                            }
+                        });
                     
                     }
                 });
