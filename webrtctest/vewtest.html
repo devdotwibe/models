@@ -1,18 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Stream Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    video {
+      width: 100%;
+      max-width: 960px;
+      height: auto;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
 
-    
-    <link href="https://vjs.zencdn.net/8.5.1/video-js.css" rel="stylesheet" />
-    <script src="https://vjs.zencdn.net/8.5.1/video.min.js"></script>
-    <div class="wplsm-stream-box" style="margin-bottom: 40px;">
-        <video
-            id="player_view"
-            class="video-js vjs-default-skin"
-            controls
-            autoplay
-            preload="auto"
-            width="640"
-            height="360"
-            data-setup='{}'>
-            <source src="https://models.staging3.dotwibe.com/webrtctest/stream-chunk/index.m3u8" type="application/x-mpegURL">
-            Your browser does not support HLS streaming.
-        </video>
-    </div>
+<video id="video" controls autoplay muted></video>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+if (Hls.isSupported()) {
+  const video = document.getElementById('video');
+  const hls = new Hls({
+    lowLatencyMode: true,
+    liveSyncDuration: 1.5,             // 🟢 Small buffer = lower latency
+    liveMaxLatencyDuration: 2.5,
+    maxLiveSyncPlaybackRate: 1.5,      // 🟢 Speed up if viewer lags
+    enableWorker: true,
+    backBufferLength: 0.1              // 🧠 Prevents memory overload
+  });
+
+  hls.loadSource('https://models.staging3.dotwibe.com/webrtctest/stream-chunk/index.m3u8'); // 🔁 Replace with your actual stream URL
+  hls.attachMedia(video);
+
+  hls.on(Hls.Events.MANIFEST_PARSED, () => {
+    video.play();
+  });
+
+  // Auto jump to latest if behind
+  video.addEventListener('loadedmetadata', () => {
+    video.currentTime = video.duration;
+  });
+
+  // Catch up logic if viewer falls behind
+  setInterval(() => {
+    if (video.buffered.length) {
+      const lag = video.buffered.end(0) - video.currentTime;
+      video.playbackRate = lag > 2 ? 1.25 : 1.0;
+    }
+  }, 2000);
+  
+} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+  // Safari fallback
+  video.src = '/path/to/stream.m3u8'; // Replace with your actual stream URL
+  video.addEventListener('loadedmetadata', () => {
+    video.play();
+  });
+}
+</script>
+
+</body>
+</html>
