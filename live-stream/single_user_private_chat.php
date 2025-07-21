@@ -39,6 +39,22 @@ $output = array('status' => 'error', 'message' => 'there is some problem');
 
             $model_id = $checPrivate['model_id'];
 
+            $defaultImage =SITEURL."/assets/images/girl.png";
+
+            $recieverData = get_data('model_user',array('id'=>$user_id),true);
+
+            if(!empty($recieverData['profile_pic']))
+            {
+                $recieverData['image_url'] = SITEURL . $recieverData['profile_pic'];
+
+            }
+            else
+            {
+                 $recieverData['image_url'] = $defaultImage;
+            }
+
+            $output['reciever_data'] = $recieverData;
+
             $filename = 'total_user' . $model_id . $user_id . '.txt';
 
             if (!file_exists($filename)) {

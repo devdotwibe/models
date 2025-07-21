@@ -1471,7 +1471,7 @@ $session_id = $_GET['unique_model_id'];
 
                                 </div>
 
-                                <div class="chat-messages" id="chatMessages" style="display:none;">
+                                <div class="chat-messages" id="chatMessages">
                                 
                                 </div>
 
@@ -1504,7 +1504,7 @@ $session_id = $_GET['unique_model_id'];
                                 </div>
                         `;
 
-                        $('#chat_area').append(chat_html);
+                        $('#chat_area').append(chat_html).show();
 
                         if(response.message=='list_message')
                         {
