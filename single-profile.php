@@ -315,7 +315,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 
                                 <?php if ($_SESSION["log_user_unique_id"] == $session_id) {?>
 
-                                <div class="action-item" id="liveBtn" bis_skin_checked="1" onclick="window.loaction.href='<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>' ">
+                                <div class="action-item" id="liveBtn" bis_skin_checked="1" onclick="window.location.href='<?php echo SITEURL . 'live-stream/view.php?user=viewer&unique_model_id=' . (isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''); ?>' ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <circle cx="12" cy="12" r="10"></circle>
                                         <circle cx="12" cy="12" r="4"></circle>
