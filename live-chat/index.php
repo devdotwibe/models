@@ -1235,7 +1235,7 @@ Please wait...
         success: function(response) {
           if(response.status=='ok'){
             if(type=='accept'){
-              window.location='<?=$ChatLink.'index.php?user=streamer&pra=private&unique_model_id='.$_SESSION['log_user_unique_id'].'&private_id='?>'+id;
+              window.location='<?=SITEURL.'live-stream/index.php?user=streamer&pra=private&unique_model_id='.$_SESSION['log_user_unique_id'].'&private_id='?>'+id;
             }
           }
           else{
