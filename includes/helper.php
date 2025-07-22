@@ -18,14 +18,16 @@ function h_my_ip_address(){
 
 function updateUserActivity($userId) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
+
+    if (!is_dir($cacheDir)) {
+        mkdir($cacheDir, 0777, true);
+    }
+
     $file = $cacheDir . 'user_' . $userId . '.txt';
 
     file_put_contents($file, time());
-
-	echo $cacheDir;
-
-	die();
 }
+
 
 function isUserOnline($userId, $minutes = 5) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
