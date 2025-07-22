@@ -8,13 +8,13 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
     
     $search = $_POST['search'];
 
-    $userDetails = search_user('model_user', ['name' => $search, 'username' => $search], false);
+    $userDetails = search_user('model_user', ['name' => $search], false);
 
     if (!empty($userDetails)) {
 
         foreach ($userDetails as $user) {
 
-            echo "<div>{$user['name']} ({$user['username']})</div>";
+            echo "<div>{$user['name']}</div>";
         }
     } else {
 
