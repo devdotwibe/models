@@ -369,9 +369,28 @@ if(!empty($userDetails['profile_pic'])){
               <span class="text-white/70">Connections</span>
               <span class="font-bold text-purple-400"><?php echo $followers_count?> </span>
             </div>
+
+          <?php
+
+            $user_id = $userDetails['id'];
+
+              $string = "
+                  SELECT DISTINCT 
+                      CASE 
+                          WHEN sender_id = $user_id THEN user_id 
+                          ELSE sender_id 
+                      END AS chat_user_id
+                  FROM model_user_message
+                  WHERE sender_id = $user_id OR user_id = $user_id
+              ";
+
+              $chat_users = DB::query($string);
+              $message_count = count($chat_users);
+            ?>
+
             <div class="flex justify-between">
               <span class="text-white/70">Messages</span>
-              <span class="font-bold text-purple-400">156</span>
+              <span class="font-bold text-purple-400"> <?php echo $message_count ?></span>
             </div>
           </div>
         </div>
