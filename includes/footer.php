@@ -1074,10 +1074,6 @@ if(isset($_SESSION['log_user_id'])){
         openModelPreview(modelId);
     }
 
-    function filterModels(category) {
-        alert(`🎯 Premium Filter - Showing ${category} models`);
-    }
-
     function connectWithModel(modelId) {
        // alert(`💕 Premium Connection - Connecting with ${modelId}...`);
 	   window.location.href = '<?= SITEURL ?>single-profile.php?m_unique_id='+modelId;
