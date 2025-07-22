@@ -677,69 +677,90 @@ if(!empty($userDetails['profile_pic'])){
         <!-- Suggested Users -->
         <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">People You May Like</h2>
 
-        <!-- Suggestion 1 -->
-        <div class="model-card">
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center">
-              <div class="relative">
-                <img src="https://randomuser.me/api/portraits/women/71.jpg" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                <div class="online-dot"></div>
-              </div>
-              <div class="ml-3 md:ml-4">
-                <div class="flex items-center flex-wrap">
-                  <h4 class="font-bold text-base md:text-lg">Maya, 26</h4>
-                  <span class="verified-badge ml-2">✓</span>
+
+        <?php 
+        
+            $idList = !empty($followed_model_unique_ids) ? implode(',', $followed_model_unique_ids) : '0';
+          
+            $sqls = "SELECT * FROM model_user 
+              WHERE id NOT IN ($idList) 
+              AND as_a_model = 'Yes' 
+              ORDER BY RAND() 
+              LIMIT 2";
+
+            $result = mysqli_query($con, $sqls);
+
+            $users = [];
+            if ($result && mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $users[] = $row;
+                }
+            }
+        
+        ?>
+
+       <?php
+       
+       if(!empty($users) && count($users) > 0) {
+       
+       foreach ($users as $user) { 
+        
+              $defaultImage =SITEURL."/assets/images/girl.png";
+
+              if($user['gender']=='Male'){
+                  $defaultImage =SITEURL."/assets/images/profile.jpg";
+              }
+
+              if(!empty($user['profile_pic']))
+              {
+                  if (checkImageExists($user['profile_pic'])) {
+                
+                      $defaultImage = SITEURL . $user['profile_pic'];
+                  }
+              }
+        ?>
+
+          <div class="model-card">
+
+            <div class="flex items-center justify-between mb-4">
+
+              <div class="flex items-center">
+                <div class="relative">
+
+                  <img src="<?php echo $defaultImage ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+
+                  <div class="online-dot"></div>
                 </div>
-                <p class="text-xs md:text-sm text-white/60">Active now • 3 miles away</p>
-              </div>
-            </div>
-            <button class="btn-primary text-sm md:text-base" onclick="toggleConnect(this)">Connect</button>
-          </div>
-
-          <p class="mb-4 text-sm md:text-base text-white/90">Love dancing and traveling! Looking for adventure buddies 💃✈️</p>
-
-          <div class="grid grid-cols-3 gap-2 mb-4">
-            <img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=200&h=150&fit=crop" alt="Dancing" class="w-full h-20 md:h-24 object-cover rounded-lg">
-            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=200&h=150&fit=crop" alt="Travel" class="w-full h-20 md:h-24 object-cover rounded-lg">
-            <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200&h=150&fit=crop" alt="Beach" class="w-full h-20 md:h-24 object-cover rounded-lg">
-          </div>
-
-          <div class="flex justify-between text-xs md:text-sm text-white/60">
-            <span>🎯 95% match</span>
-            <span>📍 3 miles</span>
-            <span>⭐ 4.9 rating</span>
-          </div>
-        </div>
-
-        <!-- Suggestion 2 -->
-        <div class="model-card">
-          <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center">
-              <div class="relative">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                <span class="absolute bottom-0 right-0 w-4 h-4 bg-yellow-400 border-2 border-white rounded-full"></span>
-              </div>
-              <div class="ml-3 md:ml-4">
-                <div class="flex items-center flex-wrap">
-                  <h4 class="font-bold text-base md:text-lg">Zoe, 24</h4>
-                  <span class="premium-badge ml-2">★ Premium</span>
+                <div class="ml-3 md:ml-4">
+                  <div class="flex items-center flex-wrap">
+                    <h4 class="font-bold text-base md:text-lg"> <?php echo $user['name'] ?> </h4>
+                    <span class="verified-badge ml-2">✓</span>
+                  </div>
+                  <p class="text-xs md:text-sm text-white/60">Active now • 3 miles away</p>
                 </div>
-                <p class="text-xs md:text-sm text-white/60">Online 1h ago • 5 miles away</p>
               </div>
+              <button class="btn-primary text-sm md:text-base" onclick="toggleConnect(this)">Connect</button>
             </div>
-            <button class="btn-primary text-sm md:text-base" onclick="toggleConnect(this)">Connect</button>
+
+            <p class="mb-4 text-sm md:text-base text-white/90">Love dancing and traveling! Looking for adventure buddies 💃✈️</p>
+
+            <div class="grid grid-cols-3 gap-2 mb-4">
+              <img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=200&h=150&fit=crop" alt="Dancing" class="w-full h-20 md:h-24 object-cover rounded-lg">
+              <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=200&h=150&fit=crop" alt="Travel" class="w-full h-20 md:h-24 object-cover rounded-lg">
+              <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200&h=150&fit=crop" alt="Beach" class="w-full h-20 md:h-24 object-cover rounded-lg">
+            </div>
+
+            <div class="flex justify-between text-xs md:text-sm text-white/60">
+              <span>🎯 95% match</span>
+              <span>📍 3 miles</span>
+              <span>⭐ 4.9 rating</span>
+            </div>
           </div>
 
-          <p class="mb-4 text-sm md:text-base text-white/90">Artist and coffee lover ☕🎨 Let's create something beautiful together!</p>
+        <?php } } ?>
 
-          <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=300&fit=crop" alt="Art" class="w-full h-40 md:h-48 object-cover rounded-lg mb-4">
+     
 
-          <div class="flex justify-between text-xs md:text-sm text-white/60">
-            <span>🎯 87% match</span>
-            <span>📍 5 miles</span>
-            <span>⭐ 4.7 rating</span>
-          </div>
-        </div>
       </div>
     </div>
   </main>
