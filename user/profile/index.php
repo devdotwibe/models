@@ -278,10 +278,9 @@ if(!empty($userDetails['profile_pic'])){
                     $idList = 0;
                 }
 
+                $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $order";
 
                 $resulusers = mysqli_query($con, $sqls);
-
-                $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $order";
 
                 $resultd = [];
 
