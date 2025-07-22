@@ -122,7 +122,7 @@ include('includes/helper.php');
                                 class="w-full px-8 py-5 ultra-glass border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-lg shadow-2xl transition duration-300"
                             >
 
-                            <button class="absolute right-4 top-1/2 transform -translate-y-1/2 btn-primary text-white px-8 py-3 rounded-xl font-semibold shadow-lg" onclick="handleSearchInput('$('#searchInput').val()')">
+                            <button class="absolute right-4 top-1/2 transform -translate-y-1/2 btn-primary text-white px-8 py-3 rounded-xl font-semibold shadow-lg"   onclick="handleSearchInput(document.getElementById('searchInput'))">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
                                 Discover
                             </button>
