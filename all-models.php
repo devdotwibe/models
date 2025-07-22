@@ -138,6 +138,12 @@
 			}else $sort_filter = 0;
 			
 			$where = '';
+
+            if (isset($_GET['filter']) && $_GET['filter'] == 'new') {
+                
+                $where .= " AND register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
+            }
+
 			if (isset($_POST['filter_submit'])){  
 			
 				if(isset($_POST['f_gender']) && $_POST['f_gender'] != 'any'){

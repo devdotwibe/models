@@ -157,7 +157,7 @@ include('includes/helper.php');
                                     </div>
                                 </div>
                             </div> -->
-                            
+
                         </div>
 
                         <div class="flex flex-wrap gap-4">
@@ -701,7 +701,7 @@ include('includes/helper.php');
 
         function filterModels(link) {
    
-            window.location.href = 'all-models.php?=' + encodeURIComponent(link);
+            window.location.href = 'all-models.php?filter=' + encodeURIComponent(link);
             return false;
         }
 
