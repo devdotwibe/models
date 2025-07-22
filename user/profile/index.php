@@ -276,7 +276,13 @@ if(!empty($userDetails['profile_pic'])){
 
                 $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $order LIMIT $limit OFFSET $offset";
 
-                $resultd = mysqli_query($con, $sqls);
+                $resultd = [];
+
+                if ($resultd && mysqli_num_rows($resultd) > 0) {
+                    while ($row = mysqli_fetch_assoc($resultd)) {
+                        $resultd[] = $row;
+                    }
+                }
 
                 if(!empty($resultd) && count($resultd) ) { 
 
