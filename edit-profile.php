@@ -220,7 +220,7 @@ $lang_list = modal_language_list();
       <div>
         <div class="flex items-center text-3xl font-bold mb-1">
           <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token-large mr-2">
-          2,500
+          <?php echo $userDetails['balance']; ?>
         </div>
         <div class="text-white/80">Available Tokens</div>
       </div>
