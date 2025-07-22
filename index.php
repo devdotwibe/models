@@ -127,7 +127,7 @@ include('includes/helper.php');
                                 Discover
                             </button>
 
-                            <div id="searchResults" class="absolute w-full bg-white rounded-xl mt-2 shadow-lg hidden max-h-60 overflow-y-auto overflow-x-hidden text-black z-[9999]">
+                            <div id="searchResults" style="display: none;" class="absolute w-full bg-white rounded-xl mt-2 shadow-lg hidden max-h-60 overflow-y-auto overflow-x-hidden text-black z-[9999]">
                                 <!-- Results appear here dynamically -->
                             </div>
 
