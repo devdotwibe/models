@@ -200,14 +200,28 @@
 			}else{
 
             
+            $onlineUserIds = [];
+
                 if (isset($_GET['filter'])) {
 
                 if ($_GET['filter'] == 'new') {
 
                     $where .= " AND register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
                     $order = " ORDER BY register_date DESC ";
-                    
+
                 } elseif ($_GET['filter'] == 'available') {
+
+                    $idsQuery = "SELECT id FROM model_user WHERE as_a_model = 'Yes' $where";
+
+                    $result = mysqli_query($con, $idsQuery);
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        if (isUserOnline($row['id']) === 'Online') {
+                            $onlineUserIds[] = $row['id'];
+                        }
+                    }
+
+                    $idList = implode(',', $onlineUserIds);
 
                     $order = " ORDER BY RAND() ";
 
@@ -219,12 +233,28 @@
 
                     $order = " ORDER BY id DESC ";
                 }
-			
-			$sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
-            $result_count = mysqli_query($con, $sqls_count);
-			$row_cnt = mysqli_fetch_assoc($result_count);
-			
-			$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+
+                if (empty($onlineUserIds)) {
+
+                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
+                    $result_count = mysqli_query($con, $sqls_count);
+                    $row_cnt = mysqli_fetch_assoc($result_count);
+                    
+                    $sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                }
+                else
+                {
+                        $idList = implode(',', $onlineUserIds);
+                        
+                        $order = " ORDER BY RAND() ";
+
+                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE id IN ($idList)";
+                        $result_count = mysqli_query($con, $sqls_count);
+                        
+                        $row_cnt = mysqli_fetch_assoc($result_count);
+                        $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $order LIMIT $limit OFFSET $offset";
+                }
+
 
 			}
 			
