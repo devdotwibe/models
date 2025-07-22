@@ -21,6 +21,10 @@ function updateUserActivity($userId) {
     $file = $cacheDir . 'user_' . $userId . '.txt';
 
     file_put_contents($file, time());
+
+	echo $cacheDir;
+
+	die();
 }
 
 function isUserOnline($userId, $minutes = 5) {
@@ -38,7 +42,7 @@ function isUserOnline($userId, $minutes = 5) {
 }
 
 if (!empty($_SESSION['log_user_id'])) {
-	
+
     updateUserActivity($_SESSION['log_user_id']);
 }
 
