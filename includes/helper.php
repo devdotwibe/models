@@ -149,6 +149,30 @@ function get_data($table,$array,$single=false){
 	return $output;
 }
 
+	function search_user($table, $array = [], $single = false)
+	{
+		$where_clause = '';
+		if (!empty($array)) {
+			$conditions = [];
+			foreach ($array as $field => $value) {
+				$conditions[] = "`$field` LIKE '%$value%'";
+			}
+			$where_clause = implode(' OR ', $conditions);
+		}
+
+		$query = "SELECT * FROM $table";
+		if ($where_clause) {
+			$query .= " WHERE $where_clause";
+		}
+
+		if ($single) {
+			return DB::queryFirstRow($query);
+		} else {
+			return DB::query($query);
+		}
+	}
+
+
 function print_value($table,$array,$show,$default=false,$set_zero=false){
 	$where_clause = '';
 	if($array){

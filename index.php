@@ -109,15 +109,19 @@ include('includes/helper.php');
                         Discover verified models who offer personalized experiences. From intimate conversations to exclusive content and real meetings - your desires become reality.
                     </p>
 
-                    <!-- Premium Search Section -->
                     <div class="space-y-6">
                         <div class="relative">
+
                             <input
                                 type="text"
                                 id="searchInput"
                                 placeholder="Find your perfect match..."
+
+                                oninput="handleSearchInput(this)"
+
                                 class="w-full px-8 py-5 ultra-glass border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-lg shadow-2xl transition duration-300"
                             >
+
                             <button class="absolute right-4 top-1/2 transform -translate-y-1/2 btn-primary text-white px-8 py-3 rounded-xl font-semibold shadow-lg" onclick="handleSearch()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
                                 Discover
@@ -657,6 +661,35 @@ include('includes/helper.php');
         </div>
     </div>
 </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+
+
+        function handleSearchInput(element)
+        {
+            value = element.value.toLowerCase();
+            if(value.length > 0)
+            {  
+                $ajax({
+                    url: 'ajax/search.php',
+                    type: 'POST',
+                    data: {search: value},
+                    
+                    success: function(response) {
+
+                        $('#searchResults').html(response);
+                        $('#searchResults').show();
+                    }
+                });
+
+            }
+        }
+
+
+    </script>
+
 
     <?php  include('includes/footer.php'); ?>
 
