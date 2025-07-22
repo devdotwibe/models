@@ -10,14 +10,21 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
 
     $userDetails = search_user('model_user', ['name' => $search], false);
 
-    if (!empty($userDetails)) {
-
-        foreach ($userDetails as $user) {
-
-            echo "<div>{$user['name']}</div>";
+        if (!empty($userDetails)) {
+            foreach ($userDetails as $user) {
+                echo '
+                <a href="profile.php?user=' . $user['username'] . '" class="block p-3 hover:bg-gray-100">
+                    <div class="flex items-center space-x-4">
+                        <img src="' . $user['profile_image'] . '" alt="' . htmlspecialchars($user['name']) . '" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                            <div class="font-semibold text-black">' . htmlspecialchars($user['name']) . '</div>
+                            <div class="text-sm text-gray-500">' . htmlspecialchars($user['username']) . '</div>
+                        </div>
+                    </div>
+                </a>';
+            }
+        } else {
+            
+            echo "<div class='p-3 text-gray-500'>No results found.</div>";
         }
-    } else {
-
-        echo "<div>No results found.</div>";
-    }
 }
