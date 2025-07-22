@@ -108,6 +108,22 @@ if(!empty($userDetails['profile_pic'])){
             $followed_user_ids[] = (int)$row['id']; 
         }
     }
+    else
+    {
+
+          $sql = "
+            SELECT DISTINCT model_user.id AS user_id 
+            FROM live_posts 
+            JOIN model_user ON live_posts.post_author = model_user.id 
+            ORDER BY RAND() 
+            LIMIT 5
+        ";
+        $result = mysqli_query($con, $sql);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $followed_user_ids[] = (int)$row['user_id'];
+        }
+    }
 
 
     if (!empty($followed_user_ids)) {
