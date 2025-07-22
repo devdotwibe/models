@@ -127,10 +127,9 @@ include('includes/helper.php');
                                 Discover
                             </button>
 
-                                <div id="searchResults" class="absolute w-full z-50 bg-white rounded-xl mt-2 shadow-lg hidden max-h-60 overflow-auto text-black">
-                                    <!-- Results appear here dynamically -->
-                                </div>
-
+                            <div id="searchResults" class="absolute w-full bg-white rounded-xl mt-2 shadow-lg hidden max-h-60 overflow-y-auto overflow-x-hidden text-black z-[9999]">
+                                <!-- Results appear here dynamically -->
+                            </div>
 
                             <div id="searchSuggestions" class="search-suggestions">
                                 <div class="suggestion-item" onclick="selectSuggestion('aria')">
@@ -688,7 +687,7 @@ include('includes/helper.php');
         }
 
         $(document).on('click', function (e) {
-            
+
             if (!$(e.target).closest('#searchInput, #searchResults').length) {
                 $('#searchResults').addClass('hidden');
             }
