@@ -274,7 +274,7 @@ if(!empty($userDetails['profile_pic'])){
 
                 $idList = implode(',', $onlineUserIds);
 
-                $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $order LIMIT $limit OFFSET $offset";
+                $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $order";
 
                 $resultd = [];
 
