@@ -19,6 +19,8 @@ if (isset($_SESSION['log_user_unique_id'])) {
   }
 } else {
   $error = 'login';
+
+    echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
 }
 $showMessgeBtn = 0;
 if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id']) {
