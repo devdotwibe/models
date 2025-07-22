@@ -17,7 +17,10 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
 
             if(!empty($user['profile_pic']))
             {
-               $defaultImage = SITEURL . $user['profile_pic'];
+                 if (checkImageExists($user['profile_pic'])) {
+              
+                    $defaultImage = SITEURL . $user['profile_pic'];
+                 }
             }
 
                 echo '
