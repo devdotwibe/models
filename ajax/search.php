@@ -8,7 +8,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
     
     $search = $_POST['search'];
 
-    $userDetails = search_user('model_user', ['name' => $search], false);
+    $userDetails = search_user('model_user', ['name' => $search,'username'=>$search], false);
 
         if (!empty($userDetails)) {
             foreach ($userDetails as $user) {
@@ -24,7 +24,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
             }
 
                 echo '
-                <a href="profile.php?user=' . $user['username'] . '" class="block p-3 hover:bg-gray-100">
+                <a href="ingle-profile.php?m_unique_id=' . $user['unique_id'] . '" class="block p-3 hover:bg-gray-100">
                     <div class="flex items-center space-x-4">
                         <img src="'. $defaultImage . '" alt="' . htmlspecialchars($user['name']) . '" class="w-10 h-10 rounded-full object-cover">
                         <div>
