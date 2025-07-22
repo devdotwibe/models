@@ -34,18 +34,22 @@ function isUserOnline($userId, $minutes = 5) {
     $file = $cacheDir . 'user_' . $userId . '.txt';
 
     if (!file_exists($file)) {
-        return 'Offline';
+        echo 'Offline';
     }
 
     $lastSeen = (int)file_get_contents($file);
     $now = time();
 
-    return ($now - $lastSeen <= ($minutes * 60)) ? 'Online' : 'Offline';
+    echo ($now - $lastSeen <= ($minutes * 60)) ? 'Online' : 'Offline';
+
+	die();
 }
 
 if (!empty($_SESSION['log_user_id'])) {
 
     updateUserActivity($_SESSION['log_user_id']);
+
+	isUserOnline($_SESSION['log_user_id'], 3);
 }
 
 function checkImageExists($relativePath) {
