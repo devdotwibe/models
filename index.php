@@ -127,7 +127,9 @@ include('includes/helper.php');
                                 Discover
                             </button>
 
-                            <!-- Premium Search Suggestions -->
+                            <div id="searchResults" class="absolute w-full z-50 bg-white rounded-xl mt-2 shadow-lg hidden max-h-60 overflow-auto text-black"></div>
+
+                            
                             <div id="searchSuggestions" class="search-suggestions">
                                 <div class="suggestion-item" onclick="selectSuggestion('aria')">
                                     <div class="flex items-center space-x-4">
@@ -667,27 +669,24 @@ include('includes/helper.php');
     <script>
 
 
-        function handleSearchInput(element)
-        {
-            value = element.value.toLowerCase();
-            if(value.length > 0)
-            {  
-                $ajax({
-                    url: 'ajax/search.php',
-                    type: 'POST',
-                    data: {search: value},
-                    
-                    success: function(response) {
+           function handleSearchInput(element) {
+                let value = element.value.trim();
 
-                        $('#searchResults').html(response);
-                        $('#searchResults').show();
-                    }
-                });
+                if (value.length > 0) {
+                    $.ajax({
+                        url: 'ajax/search.php',
+                        type: 'POST',
+                        data: { search: value },
+                        success: function (response) {
 
+                            $('#searchResults').html(response).show();
+                        }
+                    });
+                } else {
+
+                    $('#searchResults').hide().html('');
+                }
             }
-        }
-
-
     </script>
 
 
