@@ -247,11 +247,8 @@ if(!empty($userDetails['profile_pic'])){
         </div>
 
         <!-- Online Users -->
-        <div class="model-card">
-          <h3 class="font-bold mb-4 gradient-text">Online Now</h3>
-          <div class="space-y-3">
-            
-            <?php 
+
+           <?php 
 
                 $offset = 0;
                 $limit = 5; 
@@ -290,9 +287,17 @@ if(!empty($userDetails['profile_pic'])){
                     }
                 }
 
-                if(!empty($resultd) && count($resultd) ) { 
+              if(!empty($resultd) && count($resultd) ) { 
 
-                  foreach($resultd as $user) { 
+            ?>
+
+            <div class="model-card">
+              <h3 class="font-bold mb-4 gradient-text">Online Now</h3>
+              <div class="space-y-3">
+                
+              <?php 
+
+                foreach($resultd as $user) { 
 
                   $defaultImage =SITEURL."/assets/images/girl.png";
 
@@ -308,32 +313,36 @@ if(!empty($userDetails['profile_pic'])){
                           $defaultImage = SITEURL . $user['profile_pic'];
                       }
                   }
-            ?>
-              <div class="flex items-center repeat-users">
 
-                  <div class="relative">
+                  ?>
 
-                    <img src="<?php echo $defaultImage ?>" alt="User" class="w-12 h-12 rounded-full">
+                  <div class="flex items-center repeat-users">
 
-                    <div class="online-dot"></div>
+                      <div class="relative">
+
+                        <img src="<?php echo $defaultImage ?>" alt="User" class="w-12 h-12 rounded-full">
+
+                        <div class="online-dot"></div>
+
+                      </div>
+
+                      <div class="ml-3">
+
+                        <p class="font-medium"><?php echo $user['name']?></p>
+
+                        <p class="text-xs text-white/60"> <?php echo $user['city']?></p>
+
+                      </div>
 
                   </div>
 
-                  <div class="ml-3">
-
-                    <p class="font-medium"><?php echo $user['name']?></p>
-
-                    <p class="text-xs text-white/60"> <?php echo $user['city']?></p>
-
-                  </div>
-
+                  <?php } ?>
+                  
               </div>
 
-            <?php }  } ?>
+            </div>
 
-    
-          </div>
-        </div>
+          <?php } ?>
 
         <!-- Quick Stats -->
         <div class="model-card">
