@@ -141,25 +141,29 @@ if (mysqli_num_rows($res_ap) > 0) {
     $user_mode_id = $userDetails['id']; 
 
     if ($user_mode_id != $model_id) {
-     
+
         $checkSql = "SELECT id FROM model_user_profile_views WHERE profile_user_id = ? AND viewer_user_id = ?";
         $stmt = $con->prepare($checkSql);
         $stmt->bind_param("ii", $model_id, $user_mode_id);
         $stmt->execute();
         $stmt->store_result();
-        
+
         if ($stmt->num_rows == 0) {
             $stmt->close();
 
-            $insertSql = "INSERT INTO model_user_profile_views (profile_user_id, viewer_user_id) VALUES (?, ?, ?)";
+            $insertSql = "INSERT INTO model_user_profile_views (profile_user_id, viewer_user_id, viewed_at) VALUES (?, ?, ?)";
             $stmt = $con->prepare($insertSql);
-            $stmt->bind_param("ii", $model_id, $user_mode_id);
+
+            $currentDatetime = date('Y-m-d H:i:s');
+            $stmt->bind_param("iis", $model_id, $user_mode_id, $currentDatetime);
+
             $stmt->execute();
             $stmt->close();
         } else {
             $stmt->close();
         }
     }
+
 
 
     // $sql_sl = "SELECT * FROM model_social_link WHERE unique_model_id = '".$_GET['m_unique_id']."' ";
