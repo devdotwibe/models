@@ -683,24 +683,24 @@ include('includes/helper.php');
                     type: 'POST',
                     data: { search: value },
                     success: function (response) {
-                        $('#searchResults').html(response).removeClass('hidden');
+                        $('#searchResults').html(response).show();
                     }
                 });
             } else {
-                $('#searchResults').addClass('hidden').html('');
+                $('#searchResults').hide().html('');
             }
         }
 
         $(document).on('click', function (e) {
 
             if (!$(e.target).closest('#searchInput, #searchResults').length) {
-                $('#searchResults').addClass('hidden');
+                $('#searchResults').hide().html('');
             }
         });
 
         function filterModels(link) {
    
-            window.location.href = 'all-models.php?filter=' + encodeURIComponent(link);
+            window.location.href = 'all-models.php?=' + encodeURIComponent(link);
             return false;
         }
 
