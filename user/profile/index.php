@@ -274,12 +274,14 @@ if(!empty($userDetails['profile_pic'])){
 
                 $idList = implode(',', $onlineUserIds);
 
+                $resulusers = mysqli_query($con, $sqls);
+
                 $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $order";
 
                 $resultd = [];
 
-                if ($resultd && mysqli_num_rows($resultd) > 0) {
-                    while ($row = mysqli_fetch_assoc($resultd)) {
+                if ($resultd && mysqli_num_rows($resulusers) > 0) {
+                    while ($row = mysqli_fetch_assoc($resulusers)) {
                         $resultd[] = $row;
                     }
                 }
