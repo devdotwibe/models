@@ -206,11 +206,12 @@
 
                     $where .= " AND register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
                     $order = " ORDER BY register_date DESC ";
-                    } elseif ($_GET['filter'] == 'available') {
+                    
+                } elseif ($_GET['filter'] == 'available') {
 
-                        $order = " ORDER BY RAND() ";
+                    $order = " ORDER BY RAND() ";
 
-                    } else {
+                } else {
 
                        $order = " ORDER BY RAND() ";
                 }
