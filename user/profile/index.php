@@ -262,7 +262,7 @@ if(!empty($userDetails['profile_pic'])){
 
                 $where = "";
 
-                $idsQuery = "SELECT id FROM model_user WHERE as_a_model = 'Yes' $where";
+                $idsQuery = "SELECT id FROM model_user;
 
                 $result = mysqli_query($con, $idsQuery);
 
