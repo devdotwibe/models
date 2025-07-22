@@ -1440,10 +1440,46 @@ if (mysqli_num_rows($res_ap) > 0) {
 				</svg>';
 							}
 							
+	$user_purchased_sids = DB::query('select * from user_purchased_social where user_unique_id="'.$_SESSION['log_user_unique_id'].'" AND model_unique_id="'.$_GET['m_unique_id'].'" Order by id DESC');
+
+    $puschased_sc_ids = [];
+
+    if(!empty($user_purchased_sids) && count($user_purchased_sids) > 0)
+    {
+        foreach($user_purchased_sids as $pur_posts)
+        {
+        
+            $puschased_sc_ids[] = $pur_posts['social_id'];
+        }
+    }  
+						
+						$blur_class= '';	
+						if($rows_sc['status'] == 'paid' && $_SESSION['log_user_unique_id'] != $rows_sc['unique_model_id'] && !in_array($rows_sc['id'], $puschased_sc_ids)){ 
+							$blur_class="style='filter: blur(10px);'";
+							
+						}	
+							
+							
 				?>
 
-                    <div class="ss-icons">
-                        <a href="<?=$rows_sc['URL']?>" target="_blank"><?=$sc_image?></a>
+                    <div class="ss-icons ssicons_<?php echo $rows_sc['id']; ?>">
+                        <a <?php echo $blur_class; ?> <?php if(empty($blur_class)){ ?>href="<?=$rows_sc['URL']?>"<?php } ?> target="_blank" 
+						alt="<?php echo $rows_sc['platform']; ?>" title="<?php echo $rows_sc['platform']; ?>" >
+						<?php if(!empty($blur_class)){ ?>
+						<button class="social-paid-btn socialpaidbtn socl_<?php echo $rows_sc['id']; ?>" 
+						id="<?php echo $rows_sc['id']; ?>" 
+						tokens="<?php echo $rows_sc["tokens"]; ?>" 
+						platform="<?php echo $rows_sc['platform']; ?>" 
+						m_unique_id="<?php echo $_GET['m_unique_id']; ?>" 
+						model_id = "<?php echo $rows_sc['unique_model_id']; ?>"
+						type="button"   >
+
+                                                    <i class="fas fa-database" aria-hidden="true"></i>
+                                                    <span> <?php echo $rows_sc['tokens']  ?></span>
+                                                </button>
+						<?php } ?>
+						<?=$sc_image?>
+						</a>
                     </div>
 					
 						<?php } }
@@ -1611,6 +1647,48 @@ if (mysqli_num_rows($res_ap) > 0) {
   <?php include('includes/footer.php'); ?>
   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+jQuery('.socialpaidbtn').click(function(e){
+	var id= jQuery(this).attr('id');
+	var tokens = jQuery(this).attr('tokens');
+	var platform= jQuery(this).attr('platform');
+	var m_unique_id = jQuery(this).attr('m_unique_id');
+	var model_id = jQuery(this).attr('model_id');
+	
+	<?php if(isset($_SESSION["log_user_id"])){ ?>
+	if (!confirm("Are you Sure want to buy it?")) {
+        e.preventDefault(); // stops the action (e.g. link navigation)
+    }else{
+	jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'social-process.php'?>",
+				data:{id:id,tokens:tokens,platform:platform,m_unique_id:m_unique_id,model_id:model_id,},
+				dataType:'json',
+				success: function(response){ 
+					if(response.msg == 'loginerror'){
+						alert('Please login');
+						window.location='login.php'
+					}else if(response.msg == 'modelerror'){
+						alert('There is no model!!');
+						window.location='single-profile.php?m_unique_id=<?php echo $_GET['m_unique_id']; ?>';
+					}else if(response.msg == 'sufficianterror'){
+						alert('You dont have sufficiant coins in your wallet for buying it.');
+						window.location='single-profile.php?m_unique_id=<?php echo $_GET['m_unique_id']; ?>';
+					}else if(response.msg == 'success'){
+						alert('Social link added successfully in your account.');
+						window.location='single-profile.php?m_unique_id=<?php echo $_GET['m_unique_id']; ?>';
+					}
+
+				}
+			});
+	}
+	<?php } else{ ?>
+		alert('Please login');
+		window.location='login.php'
+	<?php } ?>
+});
+</script>
 
     <script>
 
