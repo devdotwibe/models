@@ -47,7 +47,7 @@ function isUserOnline($userId, $minutes = 5) {
 
 if (!empty($_SESSION['log_user_id'])) {
 
-    updateUserActivity($_SESSION['log_user_id']);
+    // updateUserActivity($_SESSION['log_user_id']);
 
 	isUserOnline($_SESSION['log_user_id'], 1);
 }
