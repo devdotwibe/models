@@ -208,6 +208,17 @@ if(!empty($userDetails['profile_pic'])){
     {
         $followers_count = count($followed_user_ids) - 1;
     }
+
+      $profileUserId = $user_mode_id;
+
+      $sql = "SELECT COUNT(*) as total_views FROM model_user_profile_views WHERE profile_user_id = ?";
+      $stmt = $con->prepare($sql);
+      $stmt->bind_param("i", $profileUserId);
+      $stmt->execute();
+      $stmt->bind_result($total_views);
+      $stmt->fetch();
+      $stmt->close();
+
 ?>
 
 
@@ -363,7 +374,7 @@ if(!empty($userDetails['profile_pic'])){
           <div class="space-y-3">
             <div class="flex justify-between">
               <span class="text-white/70">Profile Views</span>
-              <span class="font-bold text-purple-400">1,247</span>
+              <span class="font-bold text-purple-400"><?php echo $total_views ?></span>
             </div>
             <div class="flex justify-between">
               <span class="text-white/70">Connections</span>
