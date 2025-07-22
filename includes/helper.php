@@ -16,6 +16,31 @@ function h_my_ip_address(){
 	return $ip;
 }	
 
+function updateUserActivity($userId) {
+    $cacheDir = __DIR__ . '/cache/user_activity/';
+    $file = $cacheDir . 'user_' . $userId . '.txt';
+
+    file_put_contents($file, time());
+}
+
+function isUserOnline($userId, $minutes = 5) {
+    $cacheDir = __DIR__ . '/cache/user_activity/';
+    $file = $cacheDir . 'user_' . $userId . '.txt';
+
+    if (!file_exists($file)) {
+        return 'Offline';
+    }
+
+    $lastSeen = (int)file_get_contents($file);
+    $now = time();
+
+    return ($now - $lastSeen <= ($minutes * 60)) ? 'Online' : 'Offline';
+}
+
+if (!empty($_SESSION['log_user_id'])) {
+	
+    updateUserActivity($_SESSION['log_user_id']);
+}
 
 function checkImageExists($relativePath) {
 
