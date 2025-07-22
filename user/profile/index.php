@@ -265,7 +265,12 @@ if(!empty($userDetails['profile_pic'])){
 
                 while ($row = mysqli_fetch_assoc($result)) {
                     if (isUserOnline($row['id']) === 'Online') {
-                        $onlineUserIds[] = $row['id'];
+
+                        if($_SESSION['log_user_id'] != $row['id']){
+
+                          $onlineUserIds[] = $row['id'];
+
+                        }
                     }
                 }
 
