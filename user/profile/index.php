@@ -201,6 +201,13 @@ if(!empty($userDetails['profile_pic'])){
         }
 
     }
+
+    $followers_count = 0;
+
+    if(!empty($followed_user_ids) && count($followed_user_ids) > 0)
+    {
+        $followers_count = count($followed_user_ids) - 1;
+    }
 ?>
 
 
@@ -350,7 +357,8 @@ if(!empty($userDetails['profile_pic'])){
           <?php } ?>
 
         <!-- Quick Stats -->
-        <div class="model-card">
+        <div class="model-card" id="profie_status_section">
+
           <h3 class="font-bold mb-4 gradient-text">Your Stats</h3>
           <div class="space-y-3">
             <div class="flex justify-between">
@@ -359,7 +367,7 @@ if(!empty($userDetails['profile_pic'])){
             </div>
             <div class="flex justify-between">
               <span class="text-white/70">Connections</span>
-              <span class="font-bold text-purple-400">89</span>
+              <span class="font-bold text-purple-400"><?php echo $followers_count?> </span>
             </div>
             <div class="flex justify-between">
               <span class="text-white/70">Messages</span>
