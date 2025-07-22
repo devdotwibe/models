@@ -49,7 +49,7 @@ if (!empty($_SESSION['log_user_id'])) {
 
     updateUserActivity($_SESSION['log_user_id']);
 
-	isUserOnline($_SESSION['log_user_id'], 3);
+	isUserOnline($_SESSION['log_user_id'], 1);
 }
 
 function checkImageExists($relativePath) {
