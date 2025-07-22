@@ -428,7 +428,7 @@ if(!empty($userDetails['profile_pic'])){
 
       <div class="main-feed lg:col-span-3">
 
-        <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">Your Feed</h2>
+        <!-- <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">Your Feed</h2> -->
 
         <!-- Post 1 -->
 
@@ -668,11 +668,11 @@ if(!empty($userDetails['profile_pic'])){
        
 
         <!-- Divider -->
-        <div class="text-center my-8">
+        <!-- <div class="text-center my-8">
           <div class="inline-flex items-center px-6 py-3 glass-effect rounded-full">
             <span class="gradient-text font-semibold">Discover New People</span>
           </div>
-        </div>
+        </div> -->
 
         <!-- Suggested Users -->
         <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">People You May Like</h2>
