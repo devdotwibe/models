@@ -321,7 +321,7 @@ if(!empty($userDetails['profile_pic'])){
 
                   ?>
 
-                  <div class="flex items-center repeat-users">
+                  <div class="flex items-center repeat-users" onclick="window.location.href=<?php echo SITEURL.'/all-models.php?filter=available'?> >">
 
                       <div class="relative">
 
