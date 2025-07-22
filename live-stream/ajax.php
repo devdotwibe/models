@@ -150,7 +150,7 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
             $myfile = fopen('total_user' . $_POST['model_id'] . $_POST['user_id'] . '.txt', "w");
         }
         $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
-        $message = htmlentities(strip_tags($_POST['msg']));
+        $message = htmlentities(string: strip_tags($_POST['msg']));
         if (isset($_POST['tlm_user_name']) && $_POST['tlm_user_name'] == 'streamer') {
             if (preg_match($reg_exUrl, $message, $url)) {
                 $message = preg_replace($reg_exUrl, '<a href="' . $url[0] . '" target="_blank">' . $url[0] . '</a>', $message);
@@ -376,6 +376,49 @@ join model_user ms on ms.id= tb.user_id where is_used=0 and tb.status=1 and mode
                     'data' => $filteredUsers
                 );
             }
+
+            echo json_encode($output);
+            exit;
+        }
+
+
+        if ($_POST['action'] == 'model_send_msg' && isset($_POST['sender_id']) && isset($_POST['reciever_id']) && isset($_POST['msg']) ) {
+
+            $model_id = $_POST['sender_id'];
+
+            $user_id = $_POST['reciever_id'];
+
+            $msg = $_POST['msg'];
+
+            $filename = 'total_user' . $model_id . $user_id . '.txt';
+
+            if (!file_exists($filename)) {
+
+                $myfile = fopen('total_user' . $model_id . $user_id . '.txt', "w");
+            }
+
+            if (!file_exists($filename)) {
+
+                $myfile = fopen($filename, "w");
+
+                fclose($myfile);
+            }
+
+            $date_time = date('h:i A');
+
+           $msg_html = '
+                <div class="message sent">
+                    ' . htmlspecialchars($msg) . '
+                    <div class="message-time">' . $date_time . '</div>
+                </div>
+            ';
+
+            file_put_contents($filename, $msg_html . "\n", FILE_APPEND | LOCK_EX);
+
+            $output = array(
+                'status' => 'ok',
+                'message' => 'Message sent successfully'
+            );
 
             echo json_encode($output);
             exit;

@@ -138,6 +138,12 @@
 			}else $sort_filter = 0;
 			
 			$where = '';
+
+            if (isset($_GET['filter']) && $_GET['filter'] == 'new') {
+
+                $where .= " AND register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
+            }
+
 			if (isset($_POST['filter_submit'])){  
 			
 				if(isset($_POST['f_gender']) && $_POST['f_gender'] != 'any'){
@@ -192,12 +198,34 @@
 			$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' ".$where."  Order by register_date DESC LIMIT $limit OFFSET $offset";
 				
 			}else{
+
+            
+                if (isset($_GET['filter'])) {
+
+                if ($_GET['filter'] == 'new') {
+
+                    $where .= " AND register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
+                    $order = " ORDER BY register_date DESC ";
+                    
+                } elseif ($_GET['filter'] == 'available') {
+
+                    $order = " ORDER BY RAND() ";
+
+                } else {
+
+                       $order = " ORDER BY RAND() ";
+                }
+                } else {
+
+                    $order = " ORDER BY id DESC ";
+                }
 			
 			$sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
             $result_count = mysqli_query($con, $sqls_count);
 			$row_cnt = mysqli_fetch_assoc($result_count);
 			
-			$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
+			$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+
 			}
 			
               $resultd = mysqli_query($con, $sqls);

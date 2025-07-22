@@ -16,6 +16,37 @@ function h_my_ip_address(){
 	return $ip;
 }	
 
+function updateUserActivity($userId) {
+    $cacheDir = __DIR__ . '/cache/user_activity/';
+
+    if (!is_dir($cacheDir)) {
+        mkdir($cacheDir, 0777, true);
+    }
+
+    $file = $cacheDir . 'user_' . $userId . '.txt';
+
+    file_put_contents($file, time());
+}
+
+
+function isUserOnline($userId, $minutes = 5) {
+    $cacheDir = __DIR__ . '/cache/user_activity/';
+    $file = $cacheDir . 'user_' . $userId . '.txt';
+
+    if (!file_exists($file)) {
+        return 'Offline';
+    }
+
+    $lastSeen = (int)file_get_contents($file);
+    $now = time();
+
+    return ($now - $lastSeen <= ($minutes * 60)) ? 'Online' : 'Offline';
+}
+
+if (!empty($_SESSION['log_user_id'])) {
+
+    updateUserActivity($_SESSION['log_user_id']);
+}
 
 function checkImageExists($relativePath) {
 
@@ -148,6 +179,30 @@ function get_data($table,$array,$single=false){
 	$output =  $form_data;
 	return $output;
 }
+
+	function search_user($table, $array = [], $single = false)
+	{
+		$where_clause = '';
+		if (!empty($array)) {
+			$conditions = [];
+			foreach ($array as $field => $value) {
+				$conditions[] = "`$field` LIKE '%$value%'";
+			}
+			$where_clause = implode(' OR ', $conditions);
+		}
+
+		$query = "SELECT * FROM $table";
+		if ($where_clause) {
+			$query .= " WHERE $where_clause";
+		}
+
+		if ($single) {
+			return DB::queryFirstRow($query);
+		} else {
+			return DB::query($query);
+		}
+	}
+
 
 function print_value($table,$array,$show,$default=false,$set_zero=false){
 	$where_clause = '';

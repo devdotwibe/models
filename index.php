@@ -109,22 +109,29 @@ include('includes/helper.php');
                         Discover verified models who offer personalized experiences. From intimate conversations to exclusive content and real meetings - your desires become reality.
                     </p>
 
-                    <!-- Premium Search Section -->
                     <div class="space-y-6">
                         <div class="relative">
+
                             <input
                                 type="text"
                                 id="searchInput"
                                 placeholder="Find your perfect match..."
+
+                                oninput="handleSearchInput(this)"
+
                                 class="w-full px-8 py-5 ultra-glass border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white text-lg shadow-2xl transition duration-300"
                             >
+
                             <button class="absolute right-4 top-1/2 transform -translate-y-1/2 btn-primary text-white px-8 py-3 rounded-xl font-semibold shadow-lg" onclick="handleSearch()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
                                 Discover
                             </button>
 
-                            <!-- Premium Search Suggestions -->
-                            <div id="searchSuggestions" class="search-suggestions">
+                            <div id="searchResults" style="display: none;" class="absolute w-full bg-white rounded-xl mt-2 shadow-lg hidden max-h-60 overflow-y-auto overflow-x-hidden text-black z-[9999]">
+                                <!-- Results appear here dynamically -->
+                            </div>
+
+                            <!-- <div id="searchSuggestions" class="search-suggestions">
                                 <div class="suggestion-item" onclick="selectSuggestion('aria')">
                                     <div class="flex items-center space-x-4">
                                         <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=50&h=50&fit=crop&crop=faces" alt="Aria" class="w-10 h-10 rounded-full">
@@ -149,14 +156,20 @@ include('includes/helper.php');
                                         <span class="text-white/80 font-medium">Search for "blonde models"</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
+
                         </div>
 
                         <div class="flex flex-wrap gap-4">
+
                             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('featured')">✨ Featured</button>
+
                             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('trending')">🔥 Trending</button>
+
                             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('new')">💫 New Models</button>
+
                             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('available')">💋 Available Now</button>
+
                             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('vip')">👑 VIP</button>
                         </div>
                     </div>
@@ -657,6 +670,43 @@ include('includes/helper.php');
         </div>
     </div>
 </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+
+
+        function handleSearchInput(element) {
+            let value = element.value.trim();
+            if (value.length > 0) {
+                $.ajax({
+                    url: 'ajax/search.php',
+                    type: 'POST',
+                    data: { search: value },
+                    success: function (response) {
+                        $('#searchResults').html(response).show();
+                    }
+                });
+            } else {
+                $('#searchResults').hide().html('');
+            }
+        }
+
+        $(document).on('click', function (e) {
+
+            if (!$(e.target).closest('#searchInput, #searchResults').length) {
+                $('#searchResults').hide().html('');
+            }
+        });
+
+        function filterModels(link) {
+   
+            window.location.href = 'all-models.php?filter=' + encodeURIComponent(link);
+            return false;
+        }
+
+    </script>
+
 
     <?php  include('includes/footer.php'); ?>
 

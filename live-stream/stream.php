@@ -188,100 +188,14 @@ $session_id = $_GET['unique_model_id'];
 
                 </div>
 
-                <!-- Chat Area -->
-                <div class="chat-area">
-                    <div class="chat-header">
-                        <div class="chat-user-info">
-                            <div class="user-avatar vip">
-                                👨
-                                <div class="online-indicator public"></div>
-                            </div>
-                            <div class="chat-user-details">
-                                <h4>Alex_VIP</h4>
-                                <div class="chat-user-status">
-                                    <div class="live-dot public"></div>
-                                    <span>Online • VIP Member • Tipped 2,500 TLM today</span>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="user-actions">
-                            <button class="action-btn favorite active" onclick="toggleFavorite()">
-                                ⭐ Favorite
-                            </button>
-                            <button class="action-btn tip-request" onclick="requestTip()">
-                                💰 Request Tip
-                            </button>
-                            <button class="action-btn ban" onclick="banUser()">
-                                ⛔ Ban
-                            </button>
-                        </div>
-                    </div>
 
-                    <div class="chat-messages" id="chatMessages">
-                        <!-- Messages will be populated here -->
-                        <div class="message received">
-                            Hey beautiful! 😍
-                            <div class="message-time">2:45 PM</div>
-                        </div>
+                <div class="chat-area" style="display:none" id="chat_area" style="display:none;">
 
-                        <div class="tip-message">
-                            💰 Alex_VIP tipped 500 TLM! "You're amazing!"
-                        </div>
 
-                        <div class="message received">
-                            Want to go private? I have some special requests 😘
-                            <div class="message-time">2:46 PM</div>
-                        </div>
-
-                        <div class="message sent">
-                            Thank you so much for the tip! 💕 I'd love to chat privately with you!
-                            <div class="message-time">2:47 PM</div>
-                        </div>
-
-                        <div class="message received">
-                            Perfect! How much for 30 minutes private?
-                            <div class="message-time">2:47 PM</div>
-                        </div>
-
-                        <div class="message sent">
-                            30 minutes private is 2000 TLM. We can have so much fun! 🔥
-                            <div class="message-time">2:48 PM</div>
-                        </div>
-
-                        <div class="tip-message">
-                            💰 Alex_VIP tipped 2000 TLM! "Let's go private now!"
-                        </div>
-                    </div>
-
-                    <div class="chat-input">
-                        <!-- Custom Templates -->
-                        <div class="custom-templates">
-                            <div class="template-header">
-                                <div class="template-title">My Templates</div>
-                                <button class="add-template-btn" onclick="openTemplateModal()">+ Add</button>
-                            </div>
-                            <div id="customTemplatesList">
-                                <!-- Custom templates will be added here -->
-                            </div>
-                        </div>
-
-                        <div class="quick-actions">
-                            <div class="quick-action" onclick="insertQuickMessage('Thank you! 💕')">Thank you! 💕</div>
-                            <div class="quick-action" onclick="insertQuickMessage('You\'re so sweet! 😘')">You're so
-                                sweet! 😘</div>
-                            <div class="quick-action" onclick="insertQuickMessage('Let\'s go private! 🔥')">Let's go
-                                private! 🔥</div>
-                            <div class="quick-action" onclick="insertQuickMessage('Love you! ❤️')">Love you! ❤️</div>
-                        </div>
-
-                        <div class="input-row">
-                            <textarea class="message-input" id="messageInput" placeholder="Type your message..."
-                                onkeypress="handleKeyPress(event)" rows="1"></textarea>
-                            <button class="send-btn" onclick="sendMessage()">Send</button>
-                        </div>
-                    </div>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -860,45 +774,7 @@ $session_id = $_GET['unique_model_id'];
             }
         }
 
-        function sendMessage() {
-            const input = document.getElementById('messageInput');
-            const message = input.value.trim();
-
-            if (message) {
-                const conversation = conversations[currentConversation];
-                const newMessage = {
-                    type: 'sent',
-                    content: message,
-                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                };
-
-                conversation.messages.push(newMessage);
-                input.value = '';
-                loadConversation(currentConversation);
-
-                // Simulate user response after a delay
-                setTimeout(() => {
-                    const responses = [
-                        'Thank you beautiful! 💕',
-                        'You\'re so sweet! 😘',
-                        'Love chatting with you! ❤️',
-                        'You always make me smile! 😊',
-                        'Can\'t wait for our private time! 🔥'
-                    ];
-
-                    const response = responses[Math.floor(Math.random() * responses.length)];
-                    const responseMessage = {
-                        type: 'received',
-                        content: response,
-                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                    };
-
-                    conversation.messages.push(responseMessage);
-                    loadConversation(currentConversation);
-                }, 1000 + Math.random() * 2000);
-            }
-        }
-
+    
         function showNotification(message) {
             // Create a simple notification
             const notification = document.createElement('div');
@@ -1457,6 +1333,11 @@ $session_id = $_GET['unique_model_id'];
                 }
         }
 
+        let currentPollingUserId = null;
+
+        let pollingTimeout = null;
+
+        let isTyping = false;
 
         function tlm_get_privatemsg() {
 
@@ -1483,7 +1364,7 @@ $session_id = $_GET['unique_model_id'];
 
                         if ($('#active_user-' + item.id).length === 0) {
                                 var html = `
-                                     <div class="conversation-item" onclick="selectConversation('alex')" id="active_user-${item.id}">
+                                     <div class="conversation-item"  onclick="set_user_chat('${item.id}')"  id="active_user-${item.id}">
                                         <div class="user-avatar vip">
                                             <img src="${item.image_url}" alt="user image">
                                             <div class="online-indicator public" id="alexIndicator"></div>
@@ -1525,8 +1406,203 @@ $session_id = $_GET['unique_model_id'];
 
         function set_user_chat(private_id)
         {
-            console.log(private_id,'set_user_chat');
+            $('.conversation-item').removeClass('active');
+
+             $(`#active_user-${private_id}`).addClass('active');
+
+            clearTimeout(pollingTimeout);
+
+            currentPollingUserId = private_id;
+
+             $.ajax({
+                    url: 'single_user_private_chat.php',
+                    type: 'GET',
+                    data: {
+                    private_id: private_id,
+                },
+                dataType: 'json',
+                
+                success: function(response) {
+
+                    $('#chat_area').html('');
+                    
+                    if(response.status=='ok'){
+
+
+                        var user_data = response.reciever_data;
+
+                        let chat_html = `
+
+                                <div class="chat-header">
+
+                                    <div class="chat-user-info">
+
+                                        <div class="user-avatar vip">
+
+                                             <img src="${user_data.image_url}" alt="user image">
+
+                                            <div class="online-indicator public"></div>
+
+                                        </div>
+
+                                        <div class="chat-user-details">
+
+                                            <h4>${user_data.username}</h4>
+
+                                            <div class="chat-user-status">
+
+                                                <div class="live-dot public"></div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="chat-messages" id="chatMessages">
+                                
+                                </div>
+
+                                <div class="chat-input">
+                            
+                                    <div class="custom-templates">
+                                        <div class="template-header">
+                                            <div class="template-title">My Templates</div>
+                                            <button class="add-template-btn" onclick="openTemplateModal()">+ Add</button>
+                                        </div>
+                                        <div id="customTemplatesList">
+                                
+                                        </div>
+                                    </div>
+
+                                    <div class="quick-actions">
+                                        <div class="quick-action" onclick="insertQuickMessage('Thank you! 💕')">Thank you! 💕</div>
+                                        <div class="quick-action" onclick="insertQuickMessage('You\'re so sweet! 😘')">You're so
+                                            sweet! 😘</div>
+                                        <div class="quick-action" onclick="insertQuickMessage('Let\'s go private! 🔥')">Let's go
+                                            private! 🔥</div>
+                                        <div class="quick-action" onclick="insertQuickMessage('Love you! ❤️')">Love you! ❤️</div>
+                                    </div>
+
+                                    <div class="input-row">
+
+                                        <textarea class="message-input" id="messageInput" placeholder="Type your message..."
+                                            onkeypress="handleKeyPress(event)" rows="1"></textarea>
+
+                                        <button class="send-btn" onclick="sendMessage('${user_data.id}')">Send</button>
+
+                                    </div>
+
+                                </div>
+                        `;
+
+                        $('#chat_area').append(chat_html).show();
+
+                        if(response.message=='list_message')
+                        {
+                            var chart_html_replay = "";
+
+                            var chat_lines = response.lines;
+                            chat_lines.forEach(function (line) {
+                                    chart_html_replay += line;
+                                });
+
+                            $('#chatMessages').append(chart_html_replay).show();
+                        }
+                    }
+                    else{
+                        
+                        alert(response.message);
+                    }
+
+                    pollingTimeout = setTimeout(function () {
+                        if ($(`#active_user-${currentPollingUserId}`).hasClass('active')) {
+                            set_user_chat(currentPollingUserId);
+                        }
+                    }, 5000);
+
+                }
+            });
+            
         }
+
+
+        function sendMessage(reciever_id) {
+
+            let user_id = $('#model_id_chat').val();
+
+            var msg = $('#messageInput').val();
+
+            var tlm_data = {
+                action: 'model_send_msg',
+                sender_id : user_id,
+                reciever_id : reciever_id,
+                msg:msg
+
+            }
+
+            $.ajax({
+                url: 'ajax.php',
+                type: 'POST',
+                data: tlm_data,
+                dataType: 'json',
+
+                success: function(response) {
+
+                    if(response.status=='ok'){
+                    
+                        console.log(response.message);
+                    }
+
+                    else{
+                        alert(response.message);
+                    }
+                }
+            });
+        }
+
+
+        $('#messageInput').on('input', function () {
+
+            const value = $(this).val().trim();
+
+            if (pollingTimeout) {
+                clearTimeout(pollingTimeout);
+                pollingTimeout = null;
+            }
+
+            if (value !== '') {
+             
+                isTyping = true;
+            } else {
+                
+                isTyping = false;
+                pollingTimeout = setTimeout(function () {
+
+                    const activeId = $('.conversation-item.active').attr('id');
+                    if (activeId) {
+
+                        const private_id = activeId.replace('active_user-', '');
+                        set_user_chat(private_id);
+                    }
+
+                }, 5000);
+            }
+        });
+
+
+        // $('#messageInput').on('blur', function () {
+        //     if ($(this).val().trim() === '' && !pollingTimeout) {
+        //         pollingTimeout = setTimeout(function () {
+        //             const activeId = $('.conversation-item.active').attr('id');
+        //             if (activeId) {
+        //                 const private_id = activeId.replace('active_user-', '');
+        //                 set_user_chat(private_id);
+        //             }
+        //         }, 5000);
+        //     }
+        // });
 
         function set_confirm_private_chat(id,type) {
 
