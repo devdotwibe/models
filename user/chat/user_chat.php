@@ -23,16 +23,11 @@ if(isset($_SESSION["log_user_id"])){
         else{
             echo '<script>window.location.href="login.php"</script>';
         }
-        $id=$_GET['id'];
-        if(!$id){
-            echo '<script>window.location.href="'.SITEURL.'chat"</script>';
-        }
-        else if($id==$_SESSION["log_user_id"]){
-            echo '<script>window.location.href="'.SITEURL.'chat"</script>';
-        }
+ 
         $user_data = get_data('model_user',array('id'=>$id),true);
         if(!$user_data){
-            echo '<script>window.location.href="'.SITEURL.'chat"</script>';
+
+            echo '<script>window.location.href="'.SITEURL.'"</script>';
         }
         $uDefaultImage =SITEURL."/assets/images/girl.png";
         if($user_data['gender']=='Male'){
