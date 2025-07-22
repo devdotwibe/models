@@ -131,7 +131,7 @@ include('includes/helper.php');
                                 <!-- Results appear here dynamically -->
                             </div>
 
-                            <div id="searchSuggestions" class="search-suggestions">
+                            <!-- <div id="searchSuggestions" class="search-suggestions">
                                 <div class="suggestion-item" onclick="selectSuggestion('aria')">
                                     <div class="flex items-center space-x-4">
                                         <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=50&h=50&fit=crop&crop=faces" alt="Aria" class="w-10 h-10 rounded-full">
@@ -156,7 +156,8 @@ include('includes/helper.php');
                                         <span class="text-white/80 font-medium">Search for "blonde models"</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
+                            
                         </div>
 
                         <div class="flex flex-wrap gap-4">
