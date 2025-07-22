@@ -251,28 +251,75 @@ if(!empty($userDetails['profile_pic'])){
           <h3 class="font-bold mb-4 gradient-text">Online Now</h3>
           <div class="space-y-3">
             
-            <div class="flex items-center">
-              <div class="relative">
-                <img src="https://randomuser.me/api/portraits/women/25.jpg" alt="User" class="w-12 h-12 rounded-full">
-                <div class="online-dot"></div>
-              </div>
-              <div class="ml-3">
-                <p class="font-medium">Sarah, 26</p>
-                <p class="text-xs text-white/60">2 miles away</p>
-              </div>
-            </div>
+            <?php 
 
-            <div class="flex items-center">
-              <div class="relative">
-                <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="User" class="w-12 h-12 rounded-full">
-                <div class="online-dot"></div>
-              </div>
-              <div class="ml-3">
-                <p class="font-medium">Emma, 23</p>
-                <p class="text-xs text-white/60">1 mile away</p>
-              </div>
-            </div>
+                $offset = 0;
+                $limit = 5; 
 
+                $onlineUserIds = [];
+
+                $order = " ORDER BY id DESC ";
+
+                $where = "";
+
+                $idsQuery = "SELECT id FROM model_user WHERE as_a_model = 'Yes' $where";
+
+                $result = mysqli_query($con, $idsQuery);
+
+                while ($row = mysqli_fetch_assoc($result)) {
+                    if (isUserOnline($row['id']) === 'Online') {
+                        $onlineUserIds[] = $row['id'];
+                    }
+                }
+
+                $idList = implode(',', $onlineUserIds);
+
+                $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $order LIMIT $limit OFFSET $offset";
+
+                $resultd = mysqli_query($con, $sqls);
+
+                if(!empty($resultd) && count($resultd) ) { 
+
+                  foreach($resultd as $user) { 
+
+                  $defaultImage =SITEURL."/assets/images/girl.png";
+
+                  if($user['gender']=='Male'){
+
+                      $defaultImage =SITEURL."/assets/images/profile.jpg";
+                  }
+
+                  if(!empty($user['profile_pic']))
+                  {
+                      if (checkImageExists($user['profile_pic'])) {
+                    
+                          $defaultImage = SITEURL . $user['profile_pic'];
+                      }
+                  }
+            ?>
+              <div class="flex items-center repeat-users">
+
+                  <div class="relative">
+
+                    <img src="<?php echo $defaultImage ?>" alt="User" class="w-12 h-12 rounded-full">
+
+                    <div class="online-dot"></div>
+
+                  </div>
+
+                  <div class="ml-3">
+
+                    <p class="font-medium"><?php echo $user['name']?></p>
+
+                    <p class="text-xs text-white/60"> <?php echo $user['city']?></p>
+
+                  </div>
+
+              </div>
+
+            <?php }  } ?>
+
+    
           </div>
         </div>
 
