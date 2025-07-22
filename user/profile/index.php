@@ -280,7 +280,7 @@ if(!empty($userDetails['profile_pic'])){
 
                 $resultd = [];
 
-                if ($resultd && mysqli_num_rows($resulusers) > 0) {
+                if ($resulusers && mysqli_num_rows($resulusers) > 0) {
                     while ($row = mysqli_fetch_assoc($resulusers)) {
                         $resultd[] = $row;
                     }
