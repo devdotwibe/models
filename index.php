@@ -160,11 +160,16 @@ include('includes/helper.php');
                         </div>
 
                         <div class="flex flex-wrap gap-4">
-                            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('featured')">✨ Featured</button>
-                            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('trending')">🔥 Trending</button>
+
+                            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('random')">✨ Featured</button>
+
+                            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('random')">🔥 Trending</button>
+
                             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('new')">💫 New Models</button>
+
                             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('available')">💋 Available Now</button>
-                            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('vip')">👑 VIP</button>
+
+                            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('random')">👑 VIP</button>
                         </div>
                     </div>
 
@@ -692,6 +697,12 @@ include('includes/helper.php');
                 $('#searchResults').addClass('hidden');
             }
         });
+
+        function filterModels(link) {
+   
+            window.location.href = 'all-models.php?filter=' + encodeURIComponent(link);
+            return false;
+        }
 
     </script>
 
