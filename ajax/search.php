@@ -15,6 +15,10 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
 
             $defaultImage =SITEURL."/assets/images/girl.png";
 
+            if($user['gender']=='Male'){
+                $defaultImage =SITEURL."/assets/images/profile.png";
+            }
+
             if(!empty($user['profile_pic']))
             {
                  if (checkImageExists($user['profile_pic'])) {
