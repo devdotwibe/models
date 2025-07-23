@@ -1852,7 +1852,7 @@ $lang_list = modal_language_list();
   <div id="services-content" class="tab-content">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
       <div class="stat-card">
-        <div class="stat-value gradient-text">$1,250</div>
+        <div class="stat-value gradient-text"><?php echo $totalAmount; ?></div>
         <div class="stat-label">Total Earnings</div>
       </div>
       <div class="stat-card">
