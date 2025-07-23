@@ -199,9 +199,8 @@ $lang_list = modal_language_list();
 </div>
 
 
-<!-- Main Content -->
 <main class="max-w-6xl mx-auto px-4 py-8">
-  <!-- Wallet Section -->
+
   <div class="wallet-card mb-8">
     <div class="flex justify-between items-start mb-4">
       <div>
@@ -224,18 +223,39 @@ $lang_list = modal_language_list();
         </div>
         <div class="text-white/80">Available Tokens</div>
       </div>
+
+      <?php 
+
+        $user_id = $userDetails['id'];
+
+        $total = DB::select("
+            SELECT SUM(amount) as total 
+            FROM model_user_transaction_history 
+            WHERE user_id = ? 
+            AND type IN (?, ?, ?)
+        ", [$user_id, 'user-purchase-image', 'user-purchase-social', 'user-booking-group-show']);
+
+        $totalAmount = $total[0]->total ?? 0;
+      ?>
+
       <div>
         <div class="flex items-center text-3xl font-bold mb-1">
           <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token-large mr-2">
-          37,500
+
+          <?php echo $totalAmount; ?>
+          
         </div>
         <div class="text-white/80">Total Earned</div>
       </div>
+
+
       <div>
         <div class="text-3xl font-bold mb-1">4.9★</div>
         <div class="text-white/80">Rating</div>
       </div>
     </div>
+
+
   </div>
 
   <div class="text-center mb-8">
