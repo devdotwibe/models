@@ -1855,8 +1855,13 @@ $lang_list = modal_language_list();
         <div class="stat-value gradient-text"><?php echo $totalAmount; ?></div>
         <div class="stat-label">Total Earnings</div>
       </div>
+
+      <?php
+      
+          $count_active_user = getActiveUsers($userDetails['id'],$con);
+      ?>
       <div class="stat-card">
-        <div class="stat-value gradient-text">32</div>
+        <div class="stat-value gradient-text"> <?php $count_active_user['count'] ?></div>
         <div class="stat-label">Active Clients</div>
       </div>
       <div class="stat-card">

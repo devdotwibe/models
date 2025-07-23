@@ -81,6 +81,51 @@ if (!empty($_SESSION['log_user_id'])) {
     updateUserActivity($_SESSION['log_user_id']);
 }
 
+	function getActiveUsers($user_id, $con) {
+		
+
+		$userDetails = get_data('model_user',array('id'=>$user_id),true);
+
+		$unique_user_id = $userDetails['unique_id'];
+
+		$activeUserIds = [];
+
+		$sql1 = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = '$unique_user_id'";
+		$result1 = mysqli_query($con, $sql1);
+		while ($row = mysqli_fetch_assoc($result1)) {
+			$activeUserIds[] = $row['unique_model_id'];
+		}
+
+		$sql2 = "SELECT lp.post_author 
+				FROM live_comments lc 
+				JOIN live_posts lp ON lc.comment_post_ID = lp.id 
+				WHERE lc.user_id = '$user_id'";
+		$result2 = mysqli_query($con, $sql2);
+		while ($row = mysqli_fetch_assoc($result2)) {
+			$activeUserIds[] = $row['post_author'];
+		}
+
+		$sql3 = "SELECT model_unique_id FROM user_purchased_image WHERE user_unique_id = '$unique_user_id'";
+		$result3 = mysqli_query($con, $sql3);
+		while ($row = mysqli_fetch_assoc($result3)) {
+			$activeUserIds[] = $row['model_unique_id'];
+		}
+
+		$sql4 = "SELECT model_unique_id FROM user_purchased_social WHERE user_unique_id = '$unique_user_id'";
+		$result4 = mysqli_query($con, $sql4);
+		while ($row = mysqli_fetch_assoc($result4)) {
+			$activeUserIds[] = $row['model_unique_id'];
+		}
+
+		$uniqueActiveUserIds = array_unique($activeUserIds);
+
+		return [
+			'count' => count($uniqueActiveUserIds),
+			'user_ids' => $uniqueActiveUserIds
+		];
+	}
+
+
 function checkImageExists($relativePath) {
 
     $rootPath = $_SERVER['DOCUMENT_ROOT']; 
