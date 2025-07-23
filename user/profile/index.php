@@ -689,7 +689,7 @@ if(!empty($userDetails['profile_pic'])){
 
         <!-- Suggested Users -->
 
-      <?php   if(count($followed_model_unique_ids) > 0 )  { ?>
+      <?php   if($followers_count > 0 )  { ?>
       
 
         <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">People You May Like</h2>
