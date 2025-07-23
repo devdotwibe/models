@@ -325,7 +325,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                         <span id="follow_status">Follow</span>
                                     </button>
 
-                                <?php } ?>
+                                <?php } } ?>
 
                                     <div class="action-dropdown" id="moreActions">
 
