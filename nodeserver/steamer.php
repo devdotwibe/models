@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 $is_logged_in = true;
 $current_user = [
     'id' => 1,
@@ -17,9 +16,8 @@ $playback_url = '';
 $rtmp_url = 'rtmp://creator74.com/live/';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream'])) {
-    $stream_title = htmlspecialchars($_POST['stream_title']);
-    $description = htmlspecialchars($_POST['description']);
-    // $stream_key = md5(uniqid($current_user['email'], true));
+    $stream_title = htmlspecialchars($_POST['stream_title'] ?? '');
+    $description = htmlspecialchars($_POST['description'] ?? '');
     $playback_url = "https://creator74.com/stream-live/{$stream_key}/index.m3u8";
     $stream_created = true;
 }
@@ -30,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream']
 <head>
     <meta charset="UTF-8">
     <title>Create Stream</title>
+    <link href="https://vjs.zencdn.net/8.5.1/video-js.css" rel="stylesheet" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream']
             background: #f2f2f2;
         }
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: auto;
             background: white;
             padding: 25px;
@@ -65,6 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream']
             border-radius: 6px;
             margin-top: 20px;
         }
+        .video-container {
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
@@ -84,22 +86,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream']
             <div class="info-block">
                 <p><strong>RTMP URL:</strong> <code><?php echo $rtmp_url; ?></code></p>
                 <p><strong>Stream Key:</strong> <code><?php echo $stream_key; ?></code></p>
-                <p><strong>Playback URL:</strong> <code><a href="<?php echo $playback_url; ?>"><?php echo $playback_url; ?></a></code></p>
+                <p><strong>Playback URL:</strong> <code><a href="<?php echo $playback_url; ?>" target="_blank"><?php echo $playback_url; ?></a></code></p>
                 <p>Status: 🔴 Offline — Viewers: 0</p>
+            </div>
+
+            <div class="video-container">
+                <video
+                    id="live_stream_player"
+                    class="video-js vjs-default-skin"
+                    controls
+                    autoplay
+                    preload="auto"
+                    width="720"
+                    height="400"
+                    data-setup='{}'>
+                    <source src="<?php echo $playback_url; ?>" type="application/x-mpegURL">
+                    Your browser does not support HLS streaming.
+                </video>
             </div>
         <?php else: ?>
             <form method="POST">
-                <!-- <label for="stream_title">Stream Title:</label>
-                <input type="text" name="stream_title" id="stream_title" required>
-
-                <label for="description">Description:</label>
-                <textarea name="description" id="description" rows="4" required></textarea> -->
-
                 <input type="submit" name="wplsm_submit_stream" value="Create Stream">
             </form>
         <?php endif; ?>
     <?php endif; ?>
 </div>
 
+<script src="https://vjs.zencdn.net/8.5.1/video.min.js"></script>
 </body>
 </html>
