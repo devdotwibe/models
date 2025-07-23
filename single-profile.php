@@ -1894,8 +1894,6 @@ jQuery('.socialpaidbtn').click(function(e){
                     model_id: model_id,
                     user_id: user_id
                 },
-                contentType: false, 
-                processData: false, 
                 success: function (response) {
         
                     $('#follow_status').text('Following');
