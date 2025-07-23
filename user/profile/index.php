@@ -220,9 +220,9 @@ if(!empty($userDetails['profile_pic'])){
 
     $followers_count = 0;
 
-    if(!empty($followed_user_ids) && count($followed_user_ids) > 0)
+    if(!empty($followed_model_unique_ids) && count($followed_model_unique_ids) > 0)
     {
-        $followers_count = count($followed_user_ids) - 1;
+        $followers_count = count($followed_user_ids);
     }
 
       $profileUserId = $user_mode_id;
