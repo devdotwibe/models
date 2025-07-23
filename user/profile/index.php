@@ -781,13 +781,24 @@ if(!empty($userDetails['profile_pic'])){
               <button class="btn-primary text-sm md:text-base" onclick="toggleConnect(this)">Connect</button>
             </div>
 
-            <p class="mb-4 text-sm md:text-base text-white/90">Love dancing and traveling! Looking for adventure buddies 💃✈️</p>
+            <p class="mb-4 text-sm md:text-base text-white/90"> <?php echo $post['post_content'] ?></p>
 
-            <div class="grid grid-cols-3 gap-2 mb-4">
-              <img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=200&h=150&fit=crop" alt="Dancing" class="w-full h-20 md:h-24 object-cover rounded-lg">
-              <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=200&h=150&fit=crop" alt="Travel" class="w-full h-20 md:h-24 object-cover rounded-lg">
-              <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200&h=150&fit=crop" alt="Beach" class="w-full h-20 md:h-24 object-cover rounded-lg">
-            </div>
+            <?php 
+                  $post_image = $post['post_image'] ?? '';
+
+                $imageUrl = "";
+                if (checkImageExists($post_image)) {
+
+                    $imageUrl = SITEURL . $post_image;
+                }
+              
+                if($post['post_mime_type'] == 'Image' && !empty($imageUrl)) { ?>
+              ?>
+
+                <img src="<?php echo $imageUrl?>" alt="Art" class="w-full h-40 md:h-48 object-cover rounded-lg mb-4">
+
+            <?php } ?>
+
 
             <div class="flex justify-between text-xs md:text-sm text-white/60">
               <span>🎯 95% match</span>
