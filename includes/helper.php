@@ -82,20 +82,24 @@ if (!empty($_SESSION['log_user_id'])) {
 }
 
 	function getActiveUsers($user_id, $con) {
-		
 
-		$userDetails = get_data('model_user',array('id'=>$user_id),true);
+		// Get the user's unique ID
+		$userDetails = get_data('model_user', ['id' => $user_id], true);
+		if (!$userDetails || !isset($userDetails['unique_id'])) {
+			return ['count' => 0, 'user_ids' => []];
+		}
 
 		$unique_user_id = $userDetails['unique_id'];
-
 		$activeUserIds = [];
 
+		// 1. Followed Models
 		$sql1 = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = '$unique_user_id'";
 		$result1 = mysqli_query($con, $sql1);
 		while ($row = mysqli_fetch_assoc($result1)) {
 			$activeUserIds[] = $row['unique_model_id'];
 		}
 
+		// 2. Commented on live posts
 		$sql2 = "SELECT lp.post_author 
 				FROM live_comments lc 
 				JOIN live_posts lp ON lc.comment_post_ID = lp.id 
@@ -105,18 +109,21 @@ if (!empty($_SESSION['log_user_id'])) {
 			$activeUserIds[] = $row['post_author'];
 		}
 
+		// 3. Purchased image from model
 		$sql3 = "SELECT model_unique_id FROM user_purchased_image WHERE user_unique_id = '$unique_user_id'";
 		$result3 = mysqli_query($con, $sql3);
 		while ($row = mysqli_fetch_assoc($result3)) {
 			$activeUserIds[] = $row['model_unique_id'];
 		}
 
+		// 4. Purchased social media content from model
 		$sql4 = "SELECT model_unique_id FROM user_purchased_social WHERE user_unique_id = '$unique_user_id'";
 		$result4 = mysqli_query($con, $sql4);
 		while ($row = mysqli_fetch_assoc($result4)) {
 			$activeUserIds[] = $row['model_unique_id'];
 		}
 
+		// Filter unique users (ignore duplicates)
 		$uniqueActiveUserIds = array_unique($activeUserIds);
 
 		return [
@@ -124,6 +131,7 @@ if (!empty($_SESSION['log_user_id'])) {
 			'user_ids' => $uniqueActiveUserIds
 		];
 	}
+
 
 
 function checkImageExists($relativePath) {
