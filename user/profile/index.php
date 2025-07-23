@@ -675,15 +675,14 @@ if(!empty($userDetails['profile_pic'])){
         </div> -->
 
         <!-- Suggested Users -->
-        <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">People You May Like</h2>
 
+      <?php   if(count($followed_model_unique_ids) > 0 )  { ?>
+      
+
+        <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">People You May Like</h2>
 
         <?php 
         
-
-          if(count($followed_model_unique_ids) > 0 )
-          {
-
             $idList = !empty($followed_model_unique_ids) ? implode(',', $followed_model_unique_ids) : '0';
           
             $sqls = "SELECT * FROM model_user 
@@ -761,7 +760,7 @@ if(!empty($userDetails['profile_pic'])){
             </div>
           </div>
 
-        <?php } }  }?>
+        <?php }  } }?>
 
      
 
