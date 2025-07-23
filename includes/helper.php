@@ -55,6 +55,27 @@ function isUserOnline($userId, $minutes = 5) {
     return ($now - $lastSeen <= ($minutes * 60)) ? 'Online' : 'Offline';
 }
 
+function getTotalOnlineUsers($minutes = 5) {
+    $cacheDir = __DIR__ . '/cache/user_activity/';
+    $onlineCount = 0;
+
+    if (!is_dir($cacheDir)) {
+        return 0;
+    }
+
+    $files = glob($cacheDir . 'user_*.txt');
+
+    foreach ($files as $file) {
+        $userId = (int)preg_replace('/[^0-9]/', '', basename($file)); // Extract numeric user ID
+
+        if (isUserOnline($userId, $minutes)) {
+            $onlineCount++;
+        }
+    }
+
+    return $onlineCount;
+}
+
 if (!empty($_SESSION['log_user_id'])) {
 
     updateUserActivity($_SESSION['log_user_id']);

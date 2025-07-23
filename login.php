@@ -50,13 +50,13 @@ if($_SESSION["log_user"]){
                             <div class="mt-4 text-sm text-white/60">
                                 <span class="inline-flex items-center">
                                     <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-                                    <span class="stats-counter" data-target="50000">0</span>
+                                    <span class="stats-counter" data-target="<?php echo getTotalOnlineUsers() ?>"> <?php echo getTotalOnlineUsers() ?> </span>
                                     <span class="ml-1 font-medium">models online now</span>
                                 </span>
                             </div>
                         </div>
 
-                        
+
                         <!-- Login Form -->
                         <form id="loginForm" class="space-y-6" method="post" enctype="multipart/form-data" action="act-login.php">
                             <div>
