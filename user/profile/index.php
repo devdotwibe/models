@@ -793,8 +793,7 @@ if(!empty($userDetails['profile_pic'])){
                 }
               
                 if($post['post_mime_type'] == 'Image' && !empty($imageUrl)) { ?>
-              ?>
-
+              
                 <img src="<?php echo $imageUrl?>" alt="Art" class="w-full h-40 md:h-48 object-cover rounded-lg mb-4">
 
             <?php } ?>
