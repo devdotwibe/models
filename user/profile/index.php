@@ -714,11 +714,24 @@ if(!empty($userDetails['profile_pic'])){
                $suggested_user_ids = array_diff($users_with_post, $followed_user_ids);
 
             if (!empty($suggested_user_ids)) {
-              
+
               $ids_string = implode(',', $suggested_user_ids);
 
-              $users_query = mysqli_query($con, "SELECT * FROM model_user WHERE id IN ($ids_string)");
-              $users = mysqli_fetch_all($users_query, MYSQLI_ASSOC);
+               $post_query = mysqli_query($con, "
+                  SELECT live_posts.*, model_user.name, model_user.gender, model_user.profile_pic 
+                  FROM live_posts 
+                  JOIN model_user ON live_posts.post_author = model_user.id 
+                  WHERE model_user.id IN ($ids_string)
+                  ORDER BY RAND()
+                  LIMIT 2
+              ");
+
+              $posts = mysqli_fetch_all($post_query, MYSQLI_ASSOC);
+
+
+              print_r($posts);
+
+              die();
             }
           }
         
@@ -726,21 +739,22 @@ if(!empty($userDetails['profile_pic'])){
 
        <?php
        
-       if(!empty($users) && count($users) > 0) {
+       if(!empty($posts) && count($posts) > 0) {
        
-          foreach ($users as $user) { 
+          foreach ($posts as $post) { 
+
             
                   $defaultImage =SITEURL."/assets/images/girl.png";
 
-                  if($user['gender']=='Male'){
+                  if($post['gender']=='Male'){
                       $defaultImage =SITEURL."/assets/images/profile.jpg";
                   }
 
-                  if(!empty($user['profile_pic']))
+                  if(!empty($post['profile_pic']))
                   {
-                      if (checkImageExists($user['profile_pic'])) {
+                      if (checkImageExists($post['profile_pic'])) {
                     
-                          $defaultImage = SITEURL . $user['profile_pic'];
+                          $defaultImage = SITEURL . $post['profile_pic'];
                       }
                   }
             ?>
@@ -758,7 +772,7 @@ if(!empty($userDetails['profile_pic'])){
                 </div>
                 <div class="ml-3 md:ml-4">
                   <div class="flex items-center flex-wrap">
-                    <h4 class="font-bold text-base md:text-lg"> <?php echo $user['name'] ?> </h4>
+                    <h4 class="font-bold text-base md:text-lg"> <?php echo $post['name'] ?> </h4>
                     <span class="verified-badge ml-2">✓</span>
                   </div>
                   <p class="text-xs md:text-sm text-white/60">Active now • 3 miles away</p>
