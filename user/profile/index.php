@@ -696,21 +696,26 @@ if(!empty($userDetails['profile_pic'])){
 
         <?php 
         
-            $idList = !empty($followed_model_unique_ids) ? implode(',', $followed_model_unique_ids) : '0';
-          
-            $sqls = "SELECT * FROM model_user 
-              WHERE id NOT IN ($idList) 
-              ORDER BY RAND() 
-              LIMIT 2";
+          $users_with_post = [];
 
-            $result = mysqli_query($con, $sqls);
+          $sql = "
+              SELECT DISTINCT model_user.id AS user_id 
+              FROM live_posts 
+              JOIN model_user ON live_posts.post_author = model_user.id
+          ";
 
-            $users = [];
-            if ($result && mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $users[] = $row;
-                }
-            }
+          $result = mysqli_query($con, $sql);
+          while ($row = mysqli_fetch_assoc($result)) {
+              $users_with_post[] = (int)$row['user_id'];
+          }
+        
+          if (!empty($users_with_post)) {
+
+              $ids_not_follow_ids = array_diff($followed_user_ids, $users_with_post);
+
+              $users_query = mysqli_query($con, "SELECT * FROM model_user WHERE id IN ($ids_string)");
+              $users = mysqli_fetch_all($users_query, MYSQLI_ASSOC);
+          }
         
         ?>
 
