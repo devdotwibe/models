@@ -680,6 +680,10 @@ if(!empty($userDetails['profile_pic'])){
 
         <?php 
         
+
+          if(count($followed_model_unique_ids) > 0 )
+          {
+
             $idList = !empty($followed_model_unique_ids) ? implode(',', $followed_model_unique_ids) : '0';
           
             $sqls = "SELECT * FROM model_user 
@@ -703,22 +707,22 @@ if(!empty($userDetails['profile_pic'])){
        
        if(!empty($users) && count($users) > 0) {
        
-       foreach ($users as $user) { 
-        
-              $defaultImage =SITEURL."/assets/images/girl.png";
+          foreach ($users as $user) { 
+            
+                  $defaultImage =SITEURL."/assets/images/girl.png";
 
-              if($user['gender']=='Male'){
-                  $defaultImage =SITEURL."/assets/images/profile.jpg";
-              }
-
-              if(!empty($user['profile_pic']))
-              {
-                  if (checkImageExists($user['profile_pic'])) {
-                
-                      $defaultImage = SITEURL . $user['profile_pic'];
+                  if($user['gender']=='Male'){
+                      $defaultImage =SITEURL."/assets/images/profile.jpg";
                   }
-              }
-        ?>
+
+                  if(!empty($user['profile_pic']))
+                  {
+                      if (checkImageExists($user['profile_pic'])) {
+                    
+                          $defaultImage = SITEURL . $user['profile_pic'];
+                      }
+                  }
+            ?>
 
           <div class="model-card">
 
@@ -757,7 +761,7 @@ if(!empty($userDetails['profile_pic'])){
             </div>
           </div>
 
-        <?php } } ?>
+        <?php } }  }?>
 
      
 
