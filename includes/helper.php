@@ -68,7 +68,7 @@ function getTotalOnlineUsers($minutes = 5) {
     foreach ($files as $file) {
         $userId = (int)preg_replace('/[^0-9]/', '', basename($file)); // Extract numeric user ID
 
-        if (isUserOnline($userId, $minutes)) {
+        if (isUserOnline($userId, $minutes) === 'Online') {
             $onlineCount++;
         }
     }
