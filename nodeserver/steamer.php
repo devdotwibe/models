@@ -89,11 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream']
             </div>
         <?php else: ?>
             <form method="POST">
-                <label for="stream_title">Stream Title:</label>
+                <!-- <label for="stream_title">Stream Title:</label>
                 <input type="text" name="stream_title" id="stream_title" required>
 
                 <label for="description">Description:</label>
-                <textarea name="description" id="description" rows="4" required></textarea>
+                <textarea name="description" id="description" rows="4" required></textarea> -->
 
                 <input type="submit" name="wplsm_submit_stream" value="Create Stream">
             </form>
