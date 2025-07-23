@@ -10,7 +10,7 @@ $current_user = [
 ];
 
 $stream_created = false;
-$stream_key = '';
+$stream_key = '12345';
 $stream_title = '';
 $description = '';
 $playback_url = '';
@@ -19,7 +19,7 @@ $rtmp_url = 'rtmp://creator74.com/live/';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream'])) {
     $stream_title = htmlspecialchars($_POST['stream_title']);
     $description = htmlspecialchars($_POST['description']);
-    $stream_key = md5(uniqid($current_user['email'], true));
+    // $stream_key = md5(uniqid($current_user['email'], true));
     $playback_url = "https://creator74.com/stream-live/{$stream_key}/index.m3u8";
     $stream_created = true;
 }
