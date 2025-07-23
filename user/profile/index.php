@@ -729,9 +729,9 @@ if(!empty($userDetails['profile_pic'])){
               $posts = mysqli_fetch_all($post_query, MYSQLI_ASSOC);
 
 
-              print_r($posts);
+              // print_r($posts);
 
-              die();
+              // die();
             }
           }
         
