@@ -700,7 +700,6 @@ if(!empty($userDetails['profile_pic'])){
           
             $sqls = "SELECT * FROM model_user 
               WHERE id NOT IN ($idList) 
-              AND as_a_model = 'Yes' 
               ORDER BY RAND() 
               LIMIT 2";
 
