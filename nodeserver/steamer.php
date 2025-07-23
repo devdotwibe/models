@@ -18,7 +18,7 @@ $rtmp_url = 'rtmp://creator74.com/live/';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream'])) {
     $stream_title = htmlspecialchars($_POST['stream_title'] ?? '');
     $description = htmlspecialchars($_POST['description'] ?? '');
-    $playback_url = "https://creator74.com/stream-live/{$stream_key}/index.m3u8";
+    $playback_url = "https://3.6.71.231/video/{$stream_key}/index.m3u8";
     $stream_created = true;
 }
 ?>
