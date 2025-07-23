@@ -301,13 +301,21 @@ if (mysqli_num_rows($res_ap) > 0) {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                                         Message
                                     </button>
-                                    <button class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+
+                                <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] != $_SESSION['log_user_unique_id']) { 
+                                    
+                                        $model_unique_id = $_GET['m_unique_id'];
+
+                                        $user_unique_id = $_SESSION['log_user_unique_id'];
+                                    
+                                    ?>
+
+                                    <button onlick="FollowModel('.'$model_unique_id'.','.$user_unique_id.')" class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                                        Follow
+                                        <span id="follow_status">Follow</span>
                                     </button>
 
-
-                                    
+                                <?php } ?>
 
                                     <div class="action-dropdown" id="moreActions">
 
@@ -1875,6 +1883,31 @@ jQuery('.socialpaidbtn').click(function(e){
                 });
             });
         });
+
+        function FollowModel(model_id,user_id)
+        {
+
+            $.ajax({
+                url: 'follow_model.php', 
+                type: 'POST',
+                data:{
+                    model_id: model_id,
+                    user_id: user_id
+                },
+                contentType: false, 
+                processData: false, 
+                success: function (response) {
+        
+                    $('#follow_status').text('Following');
+                    $('#follow_status').removeClass('bg-gray-500').addClass('bg-blue-500');
+               
+                },
+                error: function (xhr) {
+                  
+                }
+            });
+
+        }
 
         // Initialize Modal Functions
    document.addEventListener('DOMContentLoaded', function() {
