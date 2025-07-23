@@ -711,10 +711,15 @@ if(!empty($userDetails['profile_pic'])){
         
           if (!empty($users_with_post)) {
 
-              $ids_not_follow_ids = array_diff($followed_user_ids, $users_with_post);
+               $suggested_user_ids = array_diff($users_with_post, $followed_user_ids);
+
+            if (!empty($suggested_user_ids)) {
+              
+              $ids_string = implode(',', $suggested_user_ids);
 
               $users_query = mysqli_query($con, "SELECT * FROM model_user WHERE id IN ($ids_string)");
               $users = mysqli_fetch_all($users_query, MYSQLI_ASSOC);
+            }
           }
         
         ?>
