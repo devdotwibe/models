@@ -228,24 +228,24 @@ $lang_list = modal_language_list();
 
         $user_id = $userDetails['id'];
 
-     
-          $sql = "
+              $sql = "
               SELECT SUM(amount) as total 
               FROM model_user_transaction_history 
-              WHERE user_id = ? 
-              AND type IN (?, ?, ?)
+              WHERE user_id = '$user_id' 
+              AND type IN (
+                  'user-purchase-image',
+                  'user-purchase-social',
+                  'user-booking-group-show'
+              )
           ";
 
-          $params = [
-              $user_id,
-              'user-purchase-image',
-              'user-purchase-social',
-              'user-booking-group-show'
-          ];
-          
-          $total = DB::select($sql, $params);
+          $result = mysqli_query($con, $sql);
 
-          $totalAmount = isset($total[0]['total']) ? $total[0]['total'] : 0;
+          $totalAmount = 0;
+          if (mysqli_num_rows($result) > 0) {
+              $row = mysqli_fetch_assoc($result);
+              $totalAmount = $row['total'] ?? 0;
+          }
       ?>
 
       <div>
