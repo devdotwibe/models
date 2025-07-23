@@ -56,15 +56,7 @@ if($_SESSION["log_user"]){
                             </div>
                         </div>
 
-                        <div class="relative mb-8">
-                            <div class="absolute inset-0 flex items-center">
-                                <div class="w-full border-t border-white/20"></div>
-                            </div>
-                            <div class="relative flex justify-center text-sm">
-                                <span class="px-4 bg-transparent text-white/60 font-medium">Or sign in with email</span>
-                            </div>
-                        </div>
-
+                        
                         <!-- Login Form -->
                         <form id="loginForm" class="space-y-6" method="post" enctype="multipart/form-data" action="act-login.php">
                             <div>
