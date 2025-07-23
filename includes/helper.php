@@ -89,6 +89,8 @@ if (!empty($_SESSION['log_user_id'])) {
 			return ['count' => 0, 'user_ids' => []];
 		}
 
+		return ['count' => 0, 'user_ids' => []];
+
 		$unique_user_id = $userDetails['unique_id'];
 		$activeUserIds = [];
 
