@@ -156,7 +156,7 @@ $(document).ready(function(){
             <div class="hidden lg:flex items-center space-x-8">
                 <div class="flex items-center space-x-3 text-sm text-white/80 hover-lift">
                     <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span class="stats-counter text-lg" data-target="50000">0</span>
+                    <span class="stats-counter text-lg" data-target="<?php echo getTotalOnlineUsers() ?>"><?php echo getTotalOnlineUsers() ?></span>
                     <span class="font-medium">+ Online Now</span>
                 </div>
                 <div class="flex items-center space-x-3 text-sm text-white/80 hover-lift">
