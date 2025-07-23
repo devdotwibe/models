@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stream Player</title>
+
+    <!-- Video.js CSS -->
+    <link href="https://vjs.zencdn.net/8.5.1/video-js.css" rel="stylesheet" />
+    
+    <!-- Optional: Custom Styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .wplsm-stream-box {
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wplsm-stream-box">
+        <video
+            id="player_12345_view"
+            class="video-js vjs-default-skin"
+            controls
+            autoplay
+            preload="auto"
+            width="640"
+            height="360"
+            data-setup='{}'>
+            <source src="https://creator74.com/stream-live/12345/index.m3u8" type="application/x-mpegURL">
+            Your browser does not support HLS streaming.
+        </video>
+    </div>
+
+    <script src="https://vjs.zencdn.net/8.5.1/video.min.js"></script>
+
+</body>
+</html>
