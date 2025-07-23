@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$is_logged_in = true;
+$is_logged_in = true; // Simulated login
 $current_user = [
     'id' => 1,
     'username' => 'john_doe',
@@ -9,7 +9,7 @@ $current_user = [
 ];
 
 $stream_created = false;
-$stream_key = '12345'; // Static stream key
+$stream_key = '12345'; // Unique stream key (can be dynamic)
 $rtmp_url = 'rtmp://3.6.71.231/video';
 $playback_url = "https://3.6.71.231/video/{$stream_key}/index.m3u8";
 
@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream']
 <head>
     <meta charset="UTF-8">
     <title>Streamer Dashboard</title>
+    <link href="https://vjs.zencdn.net/8.5.1/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/8.5.1/video.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -30,19 +32,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream']
             background: #f2f2f2;
         }
         .container {
-            max-width: 700px;
+            max-width: 750px;
             margin: auto;
             background: white;
             padding: 25px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.15);
         }
-        input {
+        input, .btn {
             width: 100%;
             padding: 10px;
-            margin: 8px 0 16px;
-            border: 1px solid #ccc;
+            margin-top: 16px;
             border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #0056b3;
         }
         .info-block {
             background: #e9ecef;
@@ -52,19 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream']
         }
         code {
             background: #fff3cd;
-            padding: 2px 6px;
+            padding: 3px 6px;
             border-radius: 4px;
         }
-        .btn {
-            padding: 10px 16px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background: #0056b3;
+        .video-preview {
+            margin-top: 30px;
         }
     </style>
 </head>
@@ -84,9 +87,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream']
                 <p><strong>Stream Key:</strong><br>
                     <code><?php echo $stream_key; ?></code></p>
 
-           
+                <p><strong>HLS Playback URL:</strong><br>
                     <a href="<?php echo $playback_url; ?>" target="_blank"><?php echo $playback_url; ?></a></p>
             </div>
+
+            <div class="video-preview">
+                <h3>🔴 Live Preview</h3>
+                <video
+                    id="live_player"
+                    class="video-js vjs-default-skin"
+                    controls
+                    autoplay
+                    preload="auto"
+                    width="640"
+                    height="360"
+                    data-setup='{}'>
+                    <source src="<?php echo $playback_url; ?>" type="application/x-mpegURL">
+                    Your browser does not support HLS playback.
+                </video>
+            </div>
+
+            <div class="info-block" style="margin-top: 30px;">
+                <h4>📺 Streaming Instructions</h4>
+                <p>Use software like <strong>OBS Studio</strong> to start streaming:</p>
+                <ul>
+                    <li><strong>Stream Type:</strong> Custom</li>
+                    <li><strong>Server:</strong> <code><?php echo $rtmp_url; ?></code></li>
+                    <li><strong>Stream Key:</strong> <code><?php echo $stream_key; ?></code></li>
+                </ul>
+                <p>After starting your stream in OBS, your video will appear in the live preview above.</p>
+            </div>
+
         <?php else: ?>
             <form method="POST">
                 <input type="submit" name="wplsm_submit_stream" class="btn" value="Generate My Stream Info">
