@@ -431,8 +431,21 @@ if(!empty($userDetails['profile_pic'])){
         <!-- <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">Your Feed</h2> -->
 
         <!-- Post 1 -->
+        <?php
 
-        <?php foreach ($posts as $k => $post) { ?>
+            $showLimit = ($followers_count == 0) ? 5 : count($posts);
+            $postCounter = 0;
+        ?>
+
+        <?php foreach ($posts as $k => $post) { 
+          
+              if ($postCounter >= $showLimit) {
+
+                  break;
+              }
+
+              $postCounter++;
+          ?>
 
             <div class="model-card">
             <div class="flex items-center justify-between mb-4">
