@@ -29,6 +29,18 @@ function updateUserActivity($userId) {
 }
 
 
+function checkUserFollow($model_id, $user_id) {
+	
+    $where_clause = " unique_model_id = %s AND unique_user_id = %s AND status = 'Follow' ";
+    $query = "SELECT * FROM model_follow WHERE $where_clause LIMIT 1";
+    
+    $result = DB::queryFirstRow($query, $model_id, $user_id);
+
+    return $result ? true : false;
+}
+
+
+
 function isUserOnline($userId, $minutes = 5) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
     $file = $cacheDir . 'user_' . $userId . '.txt';
