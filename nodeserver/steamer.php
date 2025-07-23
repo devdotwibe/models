@@ -13,7 +13,7 @@ $stream_key = '12345';
 $stream_title = '';
 $description = '';
 $playback_url = '';
-$rtmp_url = 'rtmp://creator74.com/live/';
+$rtmp_url = 'rtmp://3.6.71.231/video/';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wplsm_submit_stream'])) {
     $stream_title = htmlspecialchars($_POST['stream_title'] ?? '');
