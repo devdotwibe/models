@@ -3047,7 +3047,7 @@ $lang_list = modal_language_list();
 
       $(function() {
        
-        // updateEarningsChart();
+        updateEarningsChart();
 
       });
         
@@ -3068,7 +3068,7 @@ $lang_list = modal_language_list();
             const height = value * scaleFactor;
 
             const bar = document.getElementById(`${day.toLowerCase()}_data`);
-            const label = document.getElementById(`${day.toLowerCase()}_label`);
+            // const label = document.getElementById(`${day.toLowerCase()}_label`);
 
             if (bar) bar.style.height = `${height}px`;
             if (label) label.innerText = `${day.slice(0, 3)} (${value})`;
