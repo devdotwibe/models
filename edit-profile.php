@@ -3071,7 +3071,7 @@ $lang_list = modal_language_list();
             // const label = document.getElementById(`${day.toLowerCase()}_label`);
 
             if (bar) bar.style.height = `${height}px`;
-            if (label) label.innerText = `${day.slice(0, 3)} (${value})`;
+            // if (label) label.innerText = `${day.slice(0, 3)} (${value})`;
           });
       }
 
