@@ -89,42 +89,51 @@ if (!empty($_SESSION['log_user_id'])) {
 		}
 
 		$unique_user_id = $userDetails['unique_id'];
-		$activeUserIds = [];
+
+		$interactedUserIds = [];
 
 		$sql1 = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = '$unique_user_id'";
 		$result1 = mysqli_query($con, $sql1);
 		while ($row = mysqli_fetch_assoc($result1)) {
-			$activeUserIds[] = $row['unique_model_id'];
+			$interactedUserIds[] = $row['unique_model_id'];
 		}
 
-		$sql2 = "SELECT lp.post_author 
+		$sql2 = "SELECT DISTINCT lp.post_author 
 				FROM live_comments lc 
 				JOIN live_posts lp ON lc.comment_post_ID = lp.id 
 				WHERE lc.user_id = '$user_id'";
 		$result2 = mysqli_query($con, $sql2);
 		while ($row = mysqli_fetch_assoc($result2)) {
-			$activeUserIds[] = $row['post_author'];
+		
+			$authorId = $row['post_author'];
+			$author = get_data('model_user', ['id' => $authorId], true);
+			if ($author && isset($author['unique_id'])) {
+				$interactedUserIds[] = $author['unique_id'];
+			}
 		}
 
 		$sql3 = "SELECT model_unique_id FROM user_purchased_image WHERE user_unique_id = '$unique_user_id'";
 		$result3 = mysqli_query($con, $sql3);
 		while ($row = mysqli_fetch_assoc($result3)) {
-			$activeUserIds[] = $row['model_unique_id'];
+			$interactedUserIds[] = $row['model_unique_id'];
 		}
 
 		$sql4 = "SELECT model_unique_id FROM user_purchased_social WHERE user_unique_id = '$unique_user_id'";
 		$result4 = mysqli_query($con, $sql4);
 		while ($row = mysqli_fetch_assoc($result4)) {
-			$activeUserIds[] = $row['model_unique_id'];
+			$interactedUserIds[] = $row['model_unique_id'];
 		}
 
-		$uniqueActiveUserIds = array_unique($activeUserIds);
+		$uniqueActiveUserIds = array_unique(array_filter($interactedUserIds, function ($id) use ($unique_user_id) {
+			return $id !== $unique_user_id;
+		}));
 
 		return [
 			'count' => count($uniqueActiveUserIds),
-			'user_ids' => $uniqueActiveUserIds
+			'user_ids' => array_values($uniqueActiveUserIds)
 		];
 	}
+
 
 
 
