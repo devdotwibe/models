@@ -1871,13 +1871,20 @@ $lang_list = modal_language_list();
     </div>
 
     <div class="form-section">
+
       <div class="flex justify-between items-center mb-6">
+
         <h3 class="text-xl font-bold gradient-text">Earnings Overview</h3>
-        <select class="form-select w-auto">
-          <option value="week">This Week</option>
-          <option value="month" selected>This Month</option>
-          <option value="year">This Year</option>
+
+        <select class="form-select w-auto" name="earnings_period" id="earnings_period" onchange="updateEarningsChart()">
+
+            <option value="week">This Week</option>
+            <option value="month" selected>This Month</option>
+            <option value="year">This Year</option>
+
         </select>
+
+
       </div>
       
       <div class="chart-container mb-6">
@@ -3038,6 +3045,34 @@ $lang_list = modal_language_list();
 </script>
 
 <script>
+
+      $(function() {
+       
+        updateEarningsChart();
+
+      });
+        
+
+    function updateEarningsChart() {
+
+        var period = $('#earnings-period').val();
+
+        $.ajax({
+            url: 'get_earnings_data.php',
+            type: 'POST',
+            data: { period: period,
+                action: 'get_earnings_data',
+             },
+            dataType: 'json',
+            success: function(data) {
+              
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX error:', status, error);
+            }
+        });
+    }
+
     jQuery(document).ready(function($) {
       $('#pic_img').on('change', function() {
         const file = this.files[0];
