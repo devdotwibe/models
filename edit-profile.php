@@ -1889,29 +1889,30 @@ $lang_list = modal_language_list();
       
       <div class="chart-container mb-6">
 
-        <div class="chart-bar"></div>
-        <div class="chart-label">Mon</div>
-        
-        <div class="chart-bar"></div>
-        <div class="chart-label">Tue</div>
-        
-        <div class="chart-bar"></div>
-        <div class="chart-label">Wed</div>
+          <div class="chart-bar" id="monday_data"></div>
+          <div class="chart-label" id="monday_label">Mon</div>
+          
+          <div class="chart-bar" id="tuesday_data"></div>
+          <div class="chart-label" id="tuesday_label">Tue</div>
+          
+          <div class="chart-bar" id="wenesday_data"></div>
+          <div class="chart-label" id="wesnesday_label">Wed</div>
 
 
 
-        
-        <div class="chart-bar"></div>
-        <div class="chart-label">Thu</div>
-        
-        <div class="chart-bar"></div>
-        <div class="chart-label">Fri</div>
-        
-        <div class="chart-bar"></div>
-        <div class="chart-label">Sat</div>
-        
-        <div class="chart-bar"></div>
-        <div class="chart-label">Sun</div>
+          
+          <div class="chart-bar" id="thursday_data"></div>
+          <div class="chart-label" id="thursday_label">Thu</div>
+          
+          <div class="chart-bar" id="friday_data"></div>
+          <div class="chart-label" id="friday_label">Fri</div>
+          
+          <div class="chart-bar" id="saturday_data"></div>
+          <div class="chart-label" id="saturday_label">Sat</div>
+          
+          <div class="chart-bar" id="sunday_data"></div>
+          <div class="chart-label" id="sunday_label">Sun</div>
+
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -3053,6 +3054,29 @@ $lang_list = modal_language_list();
       });
         
 
+
+      function renderChart(data) {
+
+          const days = [
+            'Monday', 'Tuesday', 'Wednesday',
+            'Thursday', 'Friday', 'Saturday', 'Sunday'
+          ];
+
+          const maxValue = Math.max(...Object.values(data));
+          const scaleFactor = maxValue > 0 ? 100 / maxValue : 0;
+
+          days.forEach(day => {
+            const value = data[day] || 0;
+            const height = value * scaleFactor;
+
+            const bar = document.getElementById(`${day.toLowerCase()}_data`);
+            const label = document.getElementById(`${day.toLowerCase()}_label`);
+
+            if (bar) bar.style.height = `${height}px`;
+            if (label) label.innerText = `${day.slice(0, 3)} (${value})`;
+          });
+      }
+
     function updateEarningsChart() {
 
         var period = $('#earnings_period').val();
@@ -3066,6 +3090,8 @@ $lang_list = modal_language_list();
             dataType: 'json',
             success: function(data) {
               
+               renderChart(response.data);
+
             },
             error: function(xhr, status, error) {
                 console.error('AJAX error:', status, error);
