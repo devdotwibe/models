@@ -1888,32 +1888,30 @@ $lang_list = modal_language_list();
       </div>
       
       <div class="chart-container mb-6">
-
           <div class="chart-bar" id="monday_data"></div>
           <div class="chart-label" id="monday_label">Mon</div>
-          
+
           <div class="chart-bar" id="tuesday_data"></div>
           <div class="chart-label" id="tuesday_label">Tue</div>
-          
-          <div class="chart-bar" id="wenesday_data"></div>
-          <div class="chart-label" id="wesnesday_label">Wed</div>
 
+          <div class="chart-bar" id="wednesday_data"></div>
+          <div class="chart-label" id="wednesday_label">Wed</div>
 
-
-          
           <div class="chart-bar" id="thursday_data"></div>
           <div class="chart-label" id="thursday_label">Thu</div>
-          
+
           <div class="chart-bar" id="friday_data"></div>
           <div class="chart-label" id="friday_label">Fri</div>
-          
+
           <div class="chart-bar" id="saturday_data"></div>
           <div class="chart-label" id="saturday_label">Sat</div>
-          
+
           <div class="chart-bar" id="sunday_data"></div>
           <div class="chart-label" id="sunday_label">Sun</div>
+    </div>
 
-      </div>
+
+      
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="glass-effect p-4 rounded-lg">
