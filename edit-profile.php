@@ -3047,7 +3047,7 @@ $lang_list = modal_language_list();
 
       $(function() {
        
-        updateEarningsChart();
+        // updateEarningsChart();
 
       });
         
