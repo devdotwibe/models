@@ -3088,7 +3088,7 @@ $lang_list = modal_language_list();
             dataType: 'json',
             success: function(data) {
               
-               renderChart(response.data);
+               renderChart(data.data);
 
             },
             error: function(xhr, status, error) {
