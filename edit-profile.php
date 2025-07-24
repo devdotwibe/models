@@ -3055,7 +3055,7 @@ $lang_list = modal_language_list();
 
     function updateEarningsChart() {
 
-        var period = $('#earnings-period').val();
+        var period = $('#earnings_period').val();
 
         $.ajax({
             url: 'get_earnings_data.php',
