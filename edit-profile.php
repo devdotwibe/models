@@ -1895,12 +1895,22 @@ $lang_list = modal_language_list();
 
 
       
-      
+       <?php
+            
+            $totalAmount_month = getUserMonthlyTransactionAmount($con, $user_id);
+
+            $percentageThisMonth = 0;
+
+          if ($totalAmount > 0) {
+              $percentageThisMonth = ($totalAmount_month / $totalAmount) * 100;
+          }
+          
+        ?>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="glass-effect p-4 rounded-lg">
           <div class="flex justify-between items-center mb-2">
             <h4 class="font-semibold">Top Earning Service</h4>
-            <span class="text-green-400">+15% ↑</span>
+            <span class="text-green-400">+<?php echo $percentageThisMonth ?>% ↑</span>
           </div>
           <div class="flex items-center">
             <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mr-4">
@@ -1908,10 +1918,7 @@ $lang_list = modal_language_list();
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
               </svg>
             </div>
-            <?php
-            
-               $totalAmount_month = getUserMonthlyTransactionAmount($con, $user_id);
-            ?>
+           
             <div>
               <div class="font-bold">Private Video Chat</div>
               <div class="text-sm text-white/60">$<?php echo $totalAmount_month ?> this month</div>
