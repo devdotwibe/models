@@ -1940,8 +1940,8 @@ $lang_list = modal_language_list();
             </div>
 
             <?php 
-                $timeRange = getTopEarningTimeSlot($con, $userId);
-                $topDays = getTopEarningDays($con, $userId);
+                $timeRange = getTopEarningTimeSlot($con, $user_id);
+                $topDays = getTopEarningDays($con, $user_id);
             ?>
             <div>
               <div class="font-bold"><strong><?php echo $timeRange ?></strong></div>
