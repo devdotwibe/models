@@ -215,13 +215,21 @@ if (!empty($_SESSION['log_user_id'])) {
 			$hours[] = $row['hour'];
 		}
 
-		if (count($hours) > 0) {
-			$startHour = str_pad(min($hours), 2, '0', STR_PAD_LEFT) . ":00";
-			$endHour = str_pad(max($hours) + 1, 2, '0', STR_PAD_LEFT) . ":00";
-			return "$startHour - $endHour";
-		}
+		  if (count($hours) > 0) {
+				$startHour = min($hours);
+				$endHour = max($hours) + 1;
+
+				$startFormatted = formatHourTo12H($startHour);
+				$endFormatted = formatHourTo12H($endHour);
+
+				return "$startFormatted - $endFormatted";
+			}
 
 		return "N/A";
+	}
+
+	function formatHourTo12H($hour) {
+		return date("g:i A", strtotime("$hour:00"));
 	}
 
 	function getTopEarningDays($con, $userId) {
