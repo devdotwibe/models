@@ -200,6 +200,11 @@ if (!empty($_SESSION['log_user_id'])) {
 				SUM(amount) AS total
 			FROM model_user_transaction_history
 			WHERE user_id = ?
+			AND type IN (
+				'user-purchase-image',
+				'user-purchase-social',
+				'user-booking-group-show'
+			)
 			GROUP BY HOUR(created_at)
 			ORDER BY total DESC
 			LIMIT 3
@@ -239,6 +244,11 @@ if (!empty($_SESSION['log_user_id'])) {
 				AVG(amount) AS avg_amount
 			FROM model_user_transaction_history
 			WHERE user_id = ?
+			AND type IN (
+				'user-purchase-image',
+				'user-purchase-social',
+				'user-booking-group-show'
+			)
 			GROUP BY DAYNAME(created_at)
 			ORDER BY avg_amount DESC
 			LIMIT 2
