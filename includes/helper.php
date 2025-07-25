@@ -134,6 +134,34 @@ if (!empty($_SESSION['log_user_id'])) {
 		];
 	}
 
+	function getUserTotalTransactionAmount($con, $userId) {
+
+		$sql = "
+			SELECT SUM(amount) as total 
+			FROM model_user_transaction_history 
+			WHERE user_id = ? 
+			AND type IN (
+				'user-purchase-image',
+				'user-purchase-social',
+				'user-booking-group-show'
+			)
+		";
+		
+		$stmt = mysqli_prepare($con, $sql);
+		mysqli_stmt_bind_param($stmt, "s", $userId);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+
+		$totalAmount = 0;
+		if ($result && mysqli_num_rows($result) > 0) {
+			$row = mysqli_fetch_assoc($result);
+			$totalAmount = $row['total'] ?? 0;
+		}
+
+		return $totalAmount;
+	}
+
+
 
 
 
