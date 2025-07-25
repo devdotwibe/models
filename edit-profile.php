@@ -1976,7 +1976,7 @@ $lang_list = modal_language_list();
               </div>
               <div class="flex items-center">
                 <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                <span class="font-bold mr-2">750</span>
+                <span class="font-bold mr-2"><?php if(!empty($extra_details)) echo $extra_details['private_chat_token']; ?></span>
                 <span class="text-sm text-white/60">/hour</span>
               </div>
             </div>
@@ -1988,7 +1988,7 @@ $lang_list = modal_language_list();
               </div>
               <div class="flex items-center">
                 <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                <span class="font-bold mr-2">300</span>
+                <span class="font-bold mr-2"><?php if(!empty($extra_details)) echo $extra_details['group_chat_tocken']; ?></span>
                 <span class="text-sm text-white/60">/hour/person</span>
               </div>
             </div>
