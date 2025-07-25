@@ -1938,9 +1938,14 @@ $lang_list = modal_language_list();
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
+
+            <?php 
+                $timeRange = getTopEarningTimeSlot($con, $userId);
+                $topDays = getTopEarningDays($con, $userId);
+            ?>
             <div>
-              <div class="font-bold">8:00 PM - 11:00 PM</div>
-              <div class="text-sm text-white/60">Friday & Saturday</div>
+              <div class="font-bold"><strong><?php echo $timeRange ?></strong></div>
+              <div class="text-sm text-white/60"> <?php echo implode(" & ", $topDays); ?></div>
             </div>
           </div>
         </div>

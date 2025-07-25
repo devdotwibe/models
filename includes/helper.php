@@ -163,7 +163,7 @@ if (!empty($_SESSION['log_user_id'])) {
 
 
 	function getUserMonthlyTransactionAmount($con, $userId) {
-		
+
 		$sql = "
 			SELECT SUM(amount) as total 
 			FROM model_user_transaction_history 
@@ -192,6 +192,62 @@ if (!empty($_SESSION['log_user_id'])) {
 	}
 
 
+	function getTopEarningTimeSlot($con, $userId) {
+
+		$sql = "
+			SELECT 
+				HOUR(created_at) AS hour,
+				SUM(amount) AS total
+			FROM model_user_transaction_history
+			WHERE user_id = ?
+			GROUP BY HOUR(created_at)
+			ORDER BY total DESC
+			LIMIT 3
+		";
+
+		$stmt = mysqli_prepare($con, $sql);
+		mysqli_stmt_bind_param($stmt, "s", $userId);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+
+		$hours = [];
+		while ($row = mysqli_fetch_assoc($result)) {
+			$hours[] = $row['hour'];
+		}
+
+		if (count($hours) > 0) {
+			$startHour = str_pad(min($hours), 2, '0', STR_PAD_LEFT) . ":00";
+			$endHour = str_pad(max($hours) + 1, 2, '0', STR_PAD_LEFT) . ":00";
+			return "$startHour - $endHour";
+		}
+
+		return "N/A";
+	}
+
+	function getTopEarningDays($con, $userId) {
+		$sql = "
+			SELECT 
+				DAYNAME(created_at) AS day,
+				AVG(amount) AS avg_amount
+			FROM model_user_transaction_history
+			WHERE user_id = ?
+			GROUP BY DAYNAME(created_at)
+			ORDER BY avg_amount DESC
+			LIMIT 2
+		";
+
+		$stmt = mysqli_prepare($con, $sql);
+		mysqli_stmt_bind_param($stmt, "s", $userId);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+
+		$days = [];
+		while ($row = mysqli_fetch_assoc($result)) {
+			$days[] = $row['day'];
+		}
+
+		return $days;
+	}
 
 
 function checkImageExists($relativePath) {
