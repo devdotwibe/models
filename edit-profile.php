@@ -1974,11 +1974,17 @@ $lang_list = modal_language_list();
                 <div class="font-medium">Private Chat</div>
                 <div class="text-sm text-white/60">1-on-1 video chat</div>
               </div>
-              <div class="flex items-center">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                <span class="font-bold mr-2"><?php if(!empty($extra_details)) echo $extra_details['private_chat_token']; ?></span>
-                <span class="text-sm text-white/60">/hour</span>
-              </div>
+
+              <?php if(!empty($extra_details) && !empty($extra_details['private_chat_token']) ) { ?>
+
+                <div class="flex items-center">
+                  <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+                  <span class="font-bold mr-2"><?php if(!empty($extra_details)) echo $extra_details['private_chat_token']; ?></span>
+                  <span class="text-sm text-white/60">/hour</span>
+                </div>
+
+              <?php } ?>
+
             </div>
             
             <div class="flex justify-between items-center">
@@ -1986,11 +1992,17 @@ $lang_list = modal_language_list();
                 <div class="font-medium">Group Chat</div>
                 <div class="text-sm text-white/60">3+ viewers</div>
               </div>
-              <div class="flex items-center">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                <span class="font-bold mr-2"><?php if(!empty($extra_details)) echo $extra_details['group_chat_tocken']; ?></span>
-                <span class="text-sm text-white/60">/hour/person</span>
-              </div>
+
+              <?php if(!empty($extra_details) && !empty($extra_details['group_chat_tocken']) ) { ?>
+
+                <div class="flex items-center">
+                  <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+                  <span class="font-bold mr-2"><?php if(!empty($extra_details)) echo $extra_details['group_chat_tocken']; ?></span>
+                  <span class="text-sm text-white/60">/hour/person</span>
+                </div>
+
+              <?php } ?>
+
             </div>
             
             <div class="flex justify-between items-center">
@@ -2024,11 +2036,17 @@ $lang_list = modal_language_list();
                 <div class="font-medium">Social Meetup</div>
                 <div class="text-sm text-white/60">Local companionship</div>
               </div>
-              <div class="flex items-center">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                <span class="font-bold mr-2">1000</span>
-                <span class="text-sm text-white/60">/hour</span>
-              </div>
+
+              <?php if(!empty($extra_details) && !empty($extra_details['in_overnight']) ) { ?>
+
+                <div class="flex items-center">
+                  <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+                  <span class="font-bold mr-2"><?php if(!empty($extra_details)) echo $extra_details['in_overnight']; ?></span>
+                  <span class="text-sm text-white/60">/hour</span>
+                </div>
+
+              <?php } ?>
+
             </div>
             
             <div class="flex justify-between items-center">
