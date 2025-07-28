@@ -128,6 +128,42 @@
             <div class="profile-grid" id="profileGrid">
 			
 			<?php 
+
+
+            $userDetails = [];
+
+
+            $condtion = "";
+
+            if(isset($_SESSION["log_user_id"])){
+                
+                $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+            }
+
+            $followed_user_ids = [];
+
+            if(!empty($userDetails) && count($userDetails) > 0)
+            {
+                $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
+
+                $followed_model_unique_ids = [];
+
+                $query = "SELECT unique_id FROM model_user WHERE as_a_model = 'Yes'";
+
+                $result = mysqli_query($con, $query);
+
+                if ($result && mysqli_num_rows($result) > 0) {
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $followed_model_unique_ids[] = $row['unique_id'];
+                    }
+                }
+
+                $filteredFollowedIds = filterFollowedModelIdsByPrivacy($con,$followed_model_unique_ids,$userDetails,$privacy_setting);
+
+                $followed_user_ids = array_merge($followed_user_ids, $filteredFollowedIds);
+            }
+
 			$limit = 8; 
 			if(isset($_GET['offset'])){
 			$offset = $_GET['offset'];
@@ -138,6 +174,17 @@
 			}else $sort_filter = 0;
 			
 			$where = '';
+
+            if (!empty($followed_user_ids)) {
+
+                $escaped_ids = array_map(function ($id) use ($con) {
+                    return "'" . mysqli_real_escape_string($con, $id) . "'";
+                }, $followed_user_ids);
+
+                $ids_string = implode(",", $escaped_ids);
+
+                $where .= " AND id IN ($ids_string)";
+            }
 
             if (isset($_GET['filter']) && $_GET['filter'] == 'new') {
 
@@ -194,7 +241,7 @@
 			$sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' "; 
             $result_count = mysqli_query($con, $sqls_count);
 			$row_cnt = mysqli_fetch_assoc($result_count);
-			
+
 			$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' ".$where."  Order by register_date DESC LIMIT $limit OFFSET $offset";
 				
 			}else{
