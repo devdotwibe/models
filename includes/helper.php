@@ -39,6 +39,14 @@ function checkUserFollow($model_id, $user_id) {
     return $result ? true : false;
 }
 
+function getModelPrivacySettings($model_id) {
+    $where_clause = " unique_model_id = %s ";
+    $query = "SELECT * FROM model_privacy_settings WHERE $where_clause LIMIT 1";
+    
+    $result = DB::queryFirstRow($query, $model_id);
+
+    return $result ? $result : null;
+}
 
 
 function isUserOnline($userId, $minutes = 5) {
