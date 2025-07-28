@@ -75,6 +75,11 @@ if (isset($_SESSION["log_user_id"])) {
 
             $field_name = $_POST['field_name'];
 
+            if($field_name == 'age_range')
+            {
+                $value = $_POST['value'];
+            }
+
             $allowed_fields = ['male_to_female', 
                                 'male_to_male',
                                 'female_to_male',
@@ -89,7 +94,7 @@ if (isset($_SESSION["log_user_id"])) {
                                 'appear_offline',
                                 'show_join_date'
                                 ];
-                                
+
             if (!in_array($field_name, $allowed_fields)) {
                 echo json_encode(['status' => 'error', 'message' => 'Invalid field']);
                 exit;
