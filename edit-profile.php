@@ -2283,14 +2283,10 @@ $lang_list = modal_language_list();
             <label class="form-label">Age Range</label>
 
             <div class="flex items-center space-x-4">
-            
-                <span id="age_value_display" class="absolute left-1/2 transform -translate-x-1/2 -top-6 text-xs text-purple-600 font-semibold">
-                  <?php echo $privacy_setting['age_range'] ?? 18 ?>
-                </span>
 
               <span class="text-sm">18</span>
               <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range']??0  ?> >" class="flex-1 accent-purple-500"    oninput="updateAgeDisplay(this)"  onchange="updateSettings(this,'apply_age_range')">
-              <span class="text-sm" >65</span>
+              <span class="text-sm" id="age_value_display">  <?php echo $privacy_setting['age_range'] ?? 18 ?></span>
             </div>
           </div>
         </div>
