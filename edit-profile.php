@@ -2186,6 +2186,10 @@ $lang_list = modal_language_list();
     <div class="form-section">
       <h3 class="text-xl font-bold gradient-text mb-6">🔒 Privacy Options</h3>
       
+      <?php 
+
+              $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
+      ?>
       <div class="space-y-6">
         <!-- Search Control -->
         <div>
@@ -2196,35 +2200,35 @@ $lang_list = modal_language_list();
             <div class="flex justify-between items-center">
               <label class="form-label mb-0">Males looking for Females</label>
               <label class="toggle-switch">
-                <input type="checkbox" value="Y" onchange="updateSettings(this,'male_to_female')">
+                <input type="checkbox" value="Y" <?php if($privacy_setting['male_to_female']) {?> checked <?php } ?> onchange="updateSettings(this,'male_to_female')">
                 <span class="toggle-slider"></span>
               </label>
             </div>
             <div class="flex justify-between items-center">
               <label class="form-label mb-0">Males looking for Males</label>
               <label class="toggle-switch">
-                <input type="checkbox" value="Y"  onchange="updateSettings(this,'male_to_male')" >
+                <input type="checkbox" value="Y" <?php if($privacy_setting['male_to_male']) {?> checked <?php } ?>   onchange="updateSettings(this,'male_to_male')" >
                 <span class="toggle-slider"></span>
               </label>
             </div>
             <div class="flex justify-between items-center">
               <label class="form-label mb-0">Females looking for Males</label>
               <label class="toggle-switch">
-                <input type="checkbox" value="Y" onchange="updateSettings(this,'female_to_male')">
+                <input type="checkbox" value="Y" <?php if($privacy_setting['female_to_male']) {?> checked <?php } ?>  onchange="updateSettings(this,'female_to_male')">
                 <span class="toggle-slider"></span>
               </label>
             </div>
             <div class="flex justify-between items-center">
               <label class="form-label mb-0">Females looking for Females</label>
               <label class="toggle-switch">
-                <input type="checkbox" value="Y" onchange="updateSettings(this,'female_to_female')" >
+                <input type="checkbox" value="Y" <?php if($privacy_setting['female_to_female']) {?> checked <?php } ?> onchange="updateSettings(this,'female_to_female')" >
                 <span class="toggle-slider"></span>
               </label>
             </div>
             <div class="flex justify-between items-center">
               <label class="form-label mb-0">Transgender</label>
               <label class="toggle-switch" >
-                <input type="checkbox" value="Y" onchange="updateSettings(this,'transgender')">
+                <input type="checkbox" value="Y"  <?php if($privacy_setting['transgender']) {?> checked <?php } ?> onchange="updateSettings(this,'transgender')">
                 <span class="toggle-slider"></span>
               </label>
             </div>
