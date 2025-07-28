@@ -147,9 +147,9 @@ function isUserOnline($userId, $minutes = 5) {
 
 	$privacySetting = getModelPrivacySettings($userDetails['unique_id']);
 
-    if (!empty($privacySetting) && $privacySetting['appear_offline'] == 1) {
-        return 'Offline'; 
-    }
+    // if (!empty($privacySetting) && $privacySetting['appear_offline'] == 1) {
+    //     return 'Offline'; 
+    // }
 
     $lastSeen = (int)file_get_contents($file);
     $now = time();
