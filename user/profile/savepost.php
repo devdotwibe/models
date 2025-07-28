@@ -7,6 +7,9 @@ include('../../includes/helper.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
      $required = ['post_title', 'post_content', 'user_id', 'file_type', 'post_type'];
     foreach ($required as $field) {
         if (empty($_POST[$field])) {
