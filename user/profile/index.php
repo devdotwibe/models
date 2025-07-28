@@ -172,9 +172,8 @@ if(!empty($userDetails['profile_pic'])){
     // }
     // else
 
-    print_r($followed_user_ids);
-    
-    if (!empty($followed_user_ids) && count($followed_user_ids) ==0 ) {
+
+    if (!empty($followed_user_ids) && count($followed_user_ids) == 1 ) {
 
             $sql = "
               SELECT DISTINCT model_user.id AS user_id, model_user.gender
