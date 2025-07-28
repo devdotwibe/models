@@ -101,7 +101,7 @@ function checkUserFollow($model_id, $user_id) {
 
 			$privacy_model =  getModelPrivacySettings($row['unique_id']);
 
-			if ($privacy_model['profile_visibility']) {
+			if (!$privacy_model['profile_visibility']) {
 				
 					$allow = false;
 			}
