@@ -201,7 +201,7 @@ if(!empty($userDetails['profile_pic'])){
             }
 
             if ($allow) {
-                $followed_user_ids[] = (int)$row['user_id'];
+                $followed_user_ids[] = (int)$row['id'];
             }
         }
     }
@@ -242,7 +242,7 @@ if(!empty($userDetails['profile_pic'])){
             }
 
             if ($allow) {
-                $followed_user_ids[] = (int)$row['user_id'];
+                $followed_user_ids[] = (int)$row['id'];
             }
         }
     }
