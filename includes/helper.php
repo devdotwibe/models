@@ -39,6 +39,60 @@ function checkUserFollow($model_id, $user_id) {
     return $result ? true : false;
 }
 
+function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $current_user_gender, $privacy)
+{
+    $followed_user_ids = [];
+
+    if (empty($followed_model_unique_ids)) {
+        return $followed_user_ids;
+    }
+
+    $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
+    $types = str_repeat('s', count($followed_model_unique_ids));
+    $query = "SELECT id, gender FROM model_user WHERE unique_id IN ($placeholders)";
+    $stmt = $con->prepare($query);
+
+    if (!$stmt) {
+        die("Prepare failed (fetching numeric ids): " . $con->error);
+    }
+
+    $stmt->bind_param($types, ...$followed_model_unique_ids);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while ($row = $result->fetch_assoc()) {
+        $target_gender = $row['gender'];
+        $allow = false;
+
+        if ($current_user_gender === "Male") {
+            if (
+                ($privacy['male_to_female'] && $target_gender === "Female") ||
+                ($privacy['male_to_male'] && $target_gender === "Male")
+            ) {
+                $allow = true;
+            }
+        } elseif ($current_user_gender === "Female") {
+            if (
+                ($privacy['female_to_male'] && $target_gender === "Male") ||
+                ($privacy['female_to_female'] && $target_gender === "Female")
+            ) {
+                $allow = true;
+            }
+        }
+
+        if ($privacy['transgender'] && $target_gender === "Couple") {
+            $allow = true;
+        }
+
+        if ($allow) {
+            $followed_user_ids[] = (int)$row['id'];
+        }
+    }
+
+    return $followed_user_ids;
+}
+
+
 function getModelPrivacySettings($model_id) {
     $where_clause = " unique_model_id = %s ";
     $query = "SELECT * FROM model_privacy_settings WHERE $where_clause LIMIT 1";
