@@ -39,9 +39,13 @@ function checkUserFollow($model_id, $user_id) {
     return $result ? true : false;
 }
 
-function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $current_user_gender, $privacy)
+function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $userDetails, $privacy)
 {
     $followed_user_ids = [];
+
+	$current_user_gender = $userDetails['gender'];
+
+	$current_user_country = $userDetails['country'];
 
     if (empty($followed_model_unique_ids)) {
         return $followed_user_ids;
@@ -61,7 +65,11 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $curr
     $result = $stmt->get_result();
 
     while ($row = $result->fetch_assoc()) {
+
         $target_gender = $row['gender'];
+
+		$target_country = $row['country'];
+
         $allow = false;
 
         if ($current_user_gender === "Male") {
@@ -83,6 +91,14 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $curr
         if ($privacy['transgender'] && $target_gender === "Couple") {
             $allow = true;
         }
+
+		if ($privacy['country_enable']) {
+
+            if ($target_country !== $current_user_country) {
+                $allow = false;
+            }
+        }
+
 
         if ($allow) {
             $followed_user_ids[] = (int)$row['id'];

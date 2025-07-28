@@ -107,7 +107,7 @@ if(!empty($userDetails['profile_pic'])){
 
      $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
 
-     $filteredFollowedIds = filterFollowedModelIdsByPrivacy($con,$followed_model_unique_ids,$current_user_gender,$privacy_setting);
+     $filteredFollowedIds = filterFollowedModelIdsByPrivacy($con,$followed_model_unique_ids,$userDetails,$privacy_setting);
 
      $followed_user_ids = array_merge($followed_user_ids, $filteredFollowedIds);
     // if (!empty($followed_model_unique_ids)) {
