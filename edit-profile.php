@@ -3130,7 +3130,7 @@ $lang_list = modal_language_list();
 
     function updateSettings(element,field_name)
     {
-        var value = $(element).val();
+        var value = element.checked ? 'Y' : 'N';
 
         $.ajax({
             url: 'get_earnings_data.php',
