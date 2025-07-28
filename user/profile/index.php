@@ -214,6 +214,7 @@ if(!empty($userDetails['profile_pic'])){
             }
     }
 
+    print_f($followed_user_ids);
 
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
 
