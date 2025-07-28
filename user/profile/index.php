@@ -106,7 +106,7 @@ if(!empty($userDetails['profile_pic'])){
     $privacy = $privacy_result->fetch_assoc();
 
 
-    if (!empty($followed_model_unique_ids) && count($followed_model_unique_ids) > 1 && false) {
+    if (!empty($followed_model_unique_ids) && count($followed_model_unique_ids) > 1 ) {
 
         $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
         $types = str_repeat('s', count($followed_model_unique_ids));
@@ -172,8 +172,85 @@ if(!empty($userDetails['profile_pic'])){
         ";
         $result = mysqli_query($con, $sql);
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            $followed_user_ids[] = (int)$row['user_id'];
+        // while ($row = mysqli_fetch_assoc($result)) {
+        //     $followed_user_ids[] = (int)$row['user_id'];
+        // }
+
+        while ($row = $result->fetch_assoc()) {
+
+            $target_gender = $row['gender'];
+            $allow = false;
+
+            if ($current_user_gender === "Male") {
+                if (
+                    ($privacy['male_to_female'] && $target_gender === "Female") ||
+                    ($privacy['male_to_male'] && $target_gender === "Male")
+                ) {
+                    $allow = true;
+                }
+            } elseif ($current_user_gender === "Female") {
+                if (
+                    ($privacy['female_to_male'] && $target_gender === "Male") ||
+                    ($privacy['female_to_female'] && $target_gender === "Female")
+                ) {
+                    $allow = true;
+                }
+            }
+
+            if ($privacy['transgender'] && $target_gender === "Couple") {
+                $allow = true;
+            }
+
+            if ($allow) {
+                $followed_user_ids[] = (int)$row['id'];
+            }
+        }
+    }
+
+    if(empty($followed_user_ids))
+    {
+
+          $sql = "
+            SELECT DISTINCT model_user.id AS user_id 
+            FROM live_posts 
+            JOIN model_user ON live_posts.post_author = model_user.id 
+            ORDER BY RAND() 
+            LIMIT 5
+        ";
+        $result = mysqli_query($con, $sql);
+
+        // while ($row = mysqli_fetch_assoc($result)) {
+        //     $followed_user_ids[] = (int)$row['user_id'];
+        // }
+
+           while ($row = $result->fetch_assoc()) {
+
+            $target_gender = $row['gender'];
+            $allow = false;
+
+            if ($current_user_gender === "Male") {
+                if (
+                    ($privacy['male_to_female'] && $target_gender === "Female") ||
+                    ($privacy['male_to_male'] && $target_gender === "Male")
+                ) {
+                    $allow = true;
+                }
+            } elseif ($current_user_gender === "Female") {
+                if (
+                    ($privacy['female_to_male'] && $target_gender === "Male") ||
+                    ($privacy['female_to_female'] && $target_gender === "Female")
+                ) {
+                    $allow = true;
+                }
+            }
+
+            if ($privacy['transgender'] && $target_gender === "Couple") {
+                $allow = true;
+            }
+
+            if ($allow) {
+                $followed_user_ids[] = (int)$row['id'];
+            }
         }
     }
 
