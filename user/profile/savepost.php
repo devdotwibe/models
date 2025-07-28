@@ -15,6 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $token = trim($_POST['token'] ?? '');
 
+    if (empty($user_id) || empty($post_title) || empty($post_content)) {
+        echo "All fields are required.";
+        exit;
+    }
+
+
     if ($post_type === 'paid' && empty($token)) {
         echo "Token is required for paid posts.";
         exit;
