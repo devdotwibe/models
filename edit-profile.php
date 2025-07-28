@@ -2289,7 +2289,7 @@ $lang_list = modal_language_list();
                 </span>
 
               <span class="text-sm">18</span>
-              <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range']??0  ?> >" class="flex-1 accent-purple-500"  onchange="updateSettings(this,'apply_age_range')">
+              <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range']??0  ?> >" class="flex-1 accent-purple-500"    oninput="updateAgeDisplay(this)"  onchange="updateSettings(this,'apply_age_range')">
               <span class="text-sm" >65</span>
             </div>
           </div>
@@ -2335,7 +2335,7 @@ $lang_list = modal_language_list();
                 <p class="text-sm text-white/60">Control if other users can see when you joined.</p>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" <?php if($privacy_setting['show_join_date']) {?> checked <?php } ?>    oninput="updateAgeDisplay(this)"  onchange="updateSettings(this,'show_join_date')">
+                <input type="checkbox" <?php if($privacy_setting['show_join_date']) {?> checked <?php } ?>   onchange="updateSettings(this,'show_join_date')">
                 <span class="toggle-slider"></span>
               </label>
             </div>
