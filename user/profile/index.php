@@ -107,13 +107,9 @@ if(!empty($userDetails['profile_pic'])){
 
      $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
 
-     $followed_user_ids[] = filterFollowedModelIdsByPrivacy($con,$followed_model_unique_ids,$current_user_gender,$privacy_setting);
+     $filteredFollowedIds = filterFollowedModelIdsByPrivacy($con,$followed_model_unique_ids,$current_user_gender,$privacy_setting);
 
-
-     print_r($followed_user_ids);
-
-     die();
-
+     $followed_user_ids = array_merge($followed_user_ids, $filteredFollowedIds);
     // if (!empty($followed_model_unique_ids)) {
 
     //     $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
