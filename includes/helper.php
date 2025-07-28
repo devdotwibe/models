@@ -92,6 +92,8 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $user
             $allow = true;
         }
 
+		print_r($row['name']);
+
 		if ($privacy['country_enable'] && $row['name'] =='STACIA') {
 
 			print_r($target_country);
