@@ -70,6 +70,10 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $user
 
 		$target_country = $row['country'];
 
+		print_r($row);
+
+		die();
+
         $allow = false;
 
         if ($current_user_gender === "Male") {
@@ -91,10 +95,6 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $user
         if ($privacy['transgender'] && $target_gender === "Couple") {
             $allow = true;
         }
-
-		dd($row['name']);
-
-		die();
 
 		if ($privacy['country_enable'] && $row['name'] =='STACIA') {
 
