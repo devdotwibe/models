@@ -75,7 +75,21 @@ if (isset($_SESSION["log_user_id"])) {
 
             $field_name = $_POST['field_name'];
 
-            $allowed_fields = ['male_to_female', 'male_to_male', 'female_to_male', 'female_to_female', 'transgender'];
+            $allowed_fields = ['male_to_female', 
+                                'male_to_male',
+                                'female_to_male',
+                                'female_to_female',
+                                'transgender',
+                                'country_enable',
+                                'profile_visibility',
+                                'apply_age_range',
+                                'age_range',
+                                'read_receipt',
+                                'show_visit',
+                                'appear_offline',
+                                'show_join_date'
+                                ];
+                                
             if (!in_array($field_name, $allowed_fields)) {
                 echo json_encode(['status' => 'error', 'message' => 'Invalid field']);
                 exit;
