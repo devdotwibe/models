@@ -92,12 +92,12 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $user
             $allow = true;
         }
 
-		// if ($privacy['country_enable']) {
+		if ($privacy['country_enable']) {
 
-        //     if ($target_country !== $current_user_country) {
-        //         $allow = false;
-        //     }
-        // }
+            if ($target_country !== $current_user_country) {
+                $allow = false;
+            }
+        }
 
 
         if ($allow) {
