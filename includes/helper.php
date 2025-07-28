@@ -94,6 +94,10 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $user
 
 		if ($privacy['country_enable']) {
 
+			dd($target_country);
+
+			die();
+
             if ($target_country == $current_user_country) {
                 $allow = false;
             }
