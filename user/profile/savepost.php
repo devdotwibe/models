@@ -6,6 +6,17 @@ include('../../includes/helper.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+
+     $required = ['post_title', 'post_content', 'user_id', 'file_type', 'post_type'];
+    foreach ($required as $field) {
+        if (empty($_POST[$field])) {
+            http_response_code(400);
+            echo json_encode(["status" => "error", "message" => "$field is required"]);
+            exit;
+        }
+    }
+
+    
     $user_id      = $_POST['user_id'] ?? null;
     $post_title   = trim($_POST['post_title'] ?? '');
     $post_content = trim($_POST['post_content'] ?? '');
