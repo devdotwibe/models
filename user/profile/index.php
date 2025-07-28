@@ -90,45 +90,133 @@ if(!empty($userDetails['profile_pic'])){
 
     $followed_user_ids[] = $userDetails['id'];
 
+      $current_user_query = "SELECT gender FROM model_user WHERE unique_id = ?";
+      $current_stmt = $con->prepare($current_user_query);
+      $current_stmt->bind_param("s", $userDetails['unique_id']);
+      $current_stmt->execute();
+      $current_result = $current_stmt->get_result();
+      $current_user = $current_result->fetch_assoc();
+      $current_user_gender = $current_user['gender'];
+
+      $privacy_query = "SELECT * FROM model_privacy_settings WHERE unique_model_id = ?";
+      $privacy_stmt = $con->prepare($privacy_query);
+      $privacy_stmt->bind_param("s", $userDetails['unique_id']);
+      $privacy_stmt->execute();
+      $privacy_result = $privacy_stmt->get_result();
+      $privacy = $privacy_result->fetch_assoc();
 
 
-    if (!empty($followed_model_unique_ids)) {
-        $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
-        $types = str_repeat('s', count($followed_model_unique_ids));
-        $query = "SELECT id FROM model_user WHERE unique_id IN ($placeholders)";
-        $stmt = $con->prepare($query);
+      if (!empty($followed_model_unique_ids)) {
 
-        if (!$stmt) {
-            die("Prepare failed (fetching numeric ids): " . $con->error);
-        }
+          $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
+          $types = str_repeat('s', count($followed_model_unique_ids));
 
-        $stmt->bind_param($types, ...$followed_model_unique_ids);
-        $stmt->execute();
-        $result = $stmt->get_result();
+          $query = "SELECT id, gender FROM model_user WHERE unique_id IN ($placeholders)";
+          $stmt = $con->prepare($query);
 
-        while ($row = $result->fetch_assoc()) {
-            $followed_user_ids[] = (int)$row['id']; 
-        }
+          if (!$stmt) {
+              die("Prepare failed (fetching numeric ids): " . $con->error);
+          }
+
+          $stmt->bind_param($types, ...$followed_model_unique_ids);
+          $stmt->execute();
+          $result = $stmt->get_result();
+
+          while ($row = $result->fetch_assoc()) {
+              $target_gender = $row['gender'];
+              $allow = false;
+
+              if ($current_user_gender === "Male") {
+                  if (
+                      ($privacy['male_to_female'] && $target_gender === "Female") ||
+                      ($privacy['male_to_male'] && $target_gender === "Male")
+                  ) {
+                      $allow = true;
+                  }
+              } elseif ($current_user_gender === "Female") {
+                  if (
+                      ($privacy['female_to_male'] && $target_gender === "Male") ||
+                      ($privacy['female_to_female'] && $target_gender === "Female")
+                  ) {
+                      $allow = true;
+                  }
+              }
+
+              if ($privacy['transgender'] && $target_gender === "Couple") {
+                  $allow = true;
+              }
+
+              if ($allow) {
+                  $followed_user_ids[] = (int)$row['id'];
+              }
+          }
+      }
+    // if (!empty($followed_model_unique_ids)) {
+
+    //     $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
+    //     $types = str_repeat('s', count($followed_model_unique_ids));
+    //     $query = "SELECT id FROM model_user WHERE unique_id IN ($placeholders)";
+    //     $stmt = $con->prepare($query);
+
+    //     if (!$stmt) {
+    //         die("Prepare failed (fetching numeric ids): " . $con->error);
+    //     }
+
+    //     $stmt->bind_param($types, ...$followed_model_unique_ids);
+    //     $stmt->execute();
+    //     $result = $stmt->get_result();
+
+    //     while ($row = $result->fetch_assoc()) {
+    //         $followed_user_ids[] = (int)$row['id']; 
+    //     }
+    // }
+    // else
+
+    print_r($followed_user_ids);
+    
+    if (!empty($followed_user_ids) && count($followed_user_ids) ==0 ) {
+
+            $sql = "
+              SELECT DISTINCT model_user.id AS user_id, model_user.gender
+              FROM live_posts 
+              JOIN model_user ON live_posts.post_author = model_user.id 
+              ORDER BY RAND() 
+              LIMIT 5
+          ";
+            $result = mysqli_query($con, $sql);
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                $target_gender = $row['gender'];
+                $allow = false;
+
+                if ($current_user_gender === "Male") {
+                    if (
+                        ($privacy['male_to_female'] && $target_gender === "Female") ||
+                        ($privacy['male_to_male'] && $target_gender === "Male")
+                    ) {
+                        $allow = true;
+                    }
+                } elseif ($current_user_gender === "Female") {
+                    if (
+                        ($privacy['female_to_male'] && $target_gender === "Male") ||
+                        ($privacy['female_to_female'] && $target_gender === "Female")
+                    ) {
+                        $allow = true;
+                    }
+                }
+
+                if ($privacy['transgender'] && $target_gender === "Couple") {
+                    $allow = true;
+                }
+
+                if ($allow) {
+                    $followed_user_ids[] = (int)$row['id'];
+                }
+            }
     }
-    else
-    {
-
-          $sql = "
-            SELECT DISTINCT model_user.id AS user_id 
-            FROM live_posts 
-            JOIN model_user ON live_posts.post_author = model_user.id 
-            ORDER BY RAND() 
-            LIMIT 5
-        ";
-        $result = mysqli_query($con, $sql);
-
-        while ($row = mysqli_fetch_assoc($result)) {
-            $followed_user_ids[] = (int)$row['user_id'];
-        }
-    }
 
 
-    if (!empty($followed_user_ids)) {
+    if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
 
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
