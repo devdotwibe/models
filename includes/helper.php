@@ -53,7 +53,7 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $user
 
     $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
     $types = str_repeat('s', count($followed_model_unique_ids));
-    $query = "SELECT id, gender FROM model_user WHERE unique_id IN ($placeholders)";
+    $query = "SELECT id, gender,country FROM model_user WHERE unique_id IN ($placeholders)";
     $stmt = $con->prepare($query);
 
     if (!$stmt) {
@@ -69,10 +69,6 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $user
         $target_gender = $row['gender'];
 
 		$target_country = $row['country'];
-
-		print_r($row);
-
-		die();
 
         $allow = false;
 
@@ -98,11 +94,7 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $user
 
 		if ($privacy['country_enable'] && $row['name'] =='STACIA') {
 
-			print_r($target_country);
-
-			die();
-
-            if ($target_country == $current_user_country) {
+            if ($target_country != $current_user_country) {
                 $allow = false;
             }
         }
