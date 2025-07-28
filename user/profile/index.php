@@ -207,10 +207,6 @@ if(!empty($userDetails['profile_pic'])){
         }
     }
 
-    print_r(count($followed_user_ids));
-
-    die();
-
     if(empty($followed_user_ids) && count($followed_user_ids) < 2)
     {
 
@@ -227,7 +223,7 @@ if(!empty($userDetails['profile_pic'])){
         //     $followed_user_ids[] = (int)$row['user_id'];
         // }
 
-           while ($row = $result->fetch_assoc()) {
+           while ($row = $result->mysqli_fetch_assoc($result)) {
 
             $target_gender = $row['gender'];
             $allow = false;
