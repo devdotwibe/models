@@ -2196,35 +2196,35 @@ $lang_list = modal_language_list();
             <div class="flex justify-between items-center">
               <label class="form-label mb-0">Males looking for Females</label>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" value="Y" onchange="updateSettings(this,'male_to_female')">
                 <span class="toggle-slider"></span>
               </label>
             </div>
             <div class="flex justify-between items-center">
               <label class="form-label mb-0">Males looking for Males</label>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" value="Y"  onchange="updateSettings(this,'male_to_male')" >
                 <span class="toggle-slider"></span>
               </label>
             </div>
             <div class="flex justify-between items-center">
               <label class="form-label mb-0">Females looking for Males</label>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" value="Y" onchange="updateSettings(this,'female_to_male')">
                 <span class="toggle-slider"></span>
               </label>
             </div>
             <div class="flex justify-between items-center">
               <label class="form-label mb-0">Females looking for Females</label>
               <label class="toggle-switch">
-                <input type="checkbox">
+                <input type="checkbox" value="Y" onchange="updateSettings(this,'female_to_female')" >
                 <span class="toggle-slider"></span>
               </label>
             </div>
             <div class="flex justify-between items-center">
               <label class="form-label mb-0">Transgender</label>
-              <label class="toggle-switch">
-                <input type="checkbox">
+              <label class="toggle-switch" >
+                <input type="checkbox" value="Y" onchange="updateSettings(this,'transgender')">
                 <span class="toggle-slider"></span>
               </label>
             </div>
@@ -3115,6 +3115,30 @@ $lang_list = modal_language_list();
             type: 'POST',
             data: { period: period,
                 action: 'get_earnings_data',
+             },
+            dataType: 'json',
+            success: function(data) {
+              
+               renderChart(data.data);
+
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX error:', status, error);
+            }
+        });
+    }
+
+    function updateSettings(element,field_name)
+    {
+        var value = $(element).val();
+
+        $.ajax({
+            url: 'get_earnings_data.php',
+            type: 'POST',
+            data: { 
+                value: value,
+                field_name:field_name,
+                action: 'setting_data',
              },
             dataType: 'json',
             success: function(data) {

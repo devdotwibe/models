@@ -7,7 +7,8 @@ if (isset($_SESSION["log_user_id"])) {
     $userDetails = get_data('model_user', ['id' => $_SESSION["log_user_id"]], true);
 
     if ($userDetails) {
-        if (isset($_POST['action']) && isset($_POST['period'])) {
+        
+        if (isset($_POST['action']) &&  $_POST['action'] =='get_earnings_data' && isset($_POST['period'])) {
             $user_id = $userDetails['id'];
             $period = $_POST['period'];
 
@@ -65,6 +66,56 @@ if (isset($_SESSION["log_user_id"])) {
             ]);
             exit;
         }
+
+        if (isset($_POST['action']) &&  $_POST['action'] =='setting_data' && isset($_POST['value']) && isset($_POST['field_name'])) {
+
+            $unique_model_id = $userDetails['unique_id'];
+
+            $value = ($_POST['value'] === 'Y') ? 1 : 0;  
+
+            $field_name = $_POST['field_name'];
+
+            $allowed_fields = ['male_to_female', 'male_to_male', 'female_to_male', 'female_to_female', 'transgender'];
+            if (!in_array($field_name, $allowed_fields)) {
+                echo json_encode(['status' => 'error', 'message' => 'Invalid field']);
+                exit;
+            }
+
+            $checkSql = "SELECT id FROM model_privacy_settings WHERE unique_model_id = ?";
+            $stmt = $con->prepare($checkSql);
+            $stmt->bind_param("s", $unique_model_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $timestamp = date('Y-m-d H:i:s');
+
+            if ($result->num_rows > 0) {
+   
+                $updateSql = "UPDATE model_privacy_settings SET `$field_name` = ?, updated_at = ? WHERE unique_model_id = ?";
+                $updateStmt = $con->prepare($updateSql);
+                $updateStmt->bind_param("iss", $value, $timestamp, $unique_model_id);
+                $updateStmt->execute();
+            } else {
+           
+                $insertSql = "INSERT INTO model_privacy_settings (unique_model_id, `$field_name`, created_at, updated_at)
+                            VALUES (?, ?, ?, ?)";
+                $insertStmt = $con->prepare($insertSql);
+                $insertStmt->bind_param("siss", $unique_model_id, $value, $timestamp, $timestamp);
+                $insertStmt->execute();
+            }
+
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Setting updated successfully',
+                'field' => $field_name,
+                'value' => $value
+            ]);
+            exit;
+        }
+
+
+
+
     } else {
         echo json_encode(['status' => 'error', 'message' => 'User not found.']);
     }
