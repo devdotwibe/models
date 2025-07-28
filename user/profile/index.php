@@ -207,7 +207,7 @@ if(!empty($userDetails['profile_pic'])){
         }
     }
 
-    print_r($followed_user_ids);
+    print_r(count($followed_user_ids));
 
     die();
 
