@@ -39,74 +39,81 @@ function checkUserFollow($model_id, $user_id) {
     return $result ? true : false;
 }
 
-function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $userDetails, $privacy)
-{
-    $followed_user_ids = [];
+	function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $userDetails, $privacy)
+	{
+		$followed_user_ids = [];
 
-	$current_user_gender = $userDetails['gender'];
+		$current_user_gender = $userDetails['gender'];
 
-	$current_user_country = $userDetails['country'];
+		$current_user_country = $userDetails['country'];
 
-    if (empty($followed_model_unique_ids)) {
-        return $followed_user_ids;
-    }
+		if (empty($followed_model_unique_ids)) {
+			return $followed_user_ids;
+		}
 
-    $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
-    $types = str_repeat('s', count($followed_model_unique_ids));
-    $query = "SELECT id, gender,country FROM model_user WHERE unique_id IN ($placeholders)";
-    $stmt = $con->prepare($query);
+		$placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
+		$types = str_repeat('s', count($followed_model_unique_ids));
+		$query = "SELECT id, gender,country FROM model_user WHERE unique_id IN ($placeholders)";
+		$stmt = $con->prepare($query);
 
-    if (!$stmt) {
-        die("Prepare failed (fetching numeric ids): " . $con->error);
-    }
+		if (!$stmt) {
+			die("Prepare failed (fetching numeric ids): " . $con->error);
+		}
 
-    $stmt->bind_param($types, ...$followed_model_unique_ids);
-    $stmt->execute();
-    $result = $stmt->get_result();
+		$stmt->bind_param($types, ...$followed_model_unique_ids);
+		$stmt->execute();
+		$result = $stmt->get_result();
 
-    while ($row = $result->fetch_assoc()) {
+		while ($row = $result->fetch_assoc()) {
 
-        $target_gender = $row['gender'];
+			$target_gender = $row['gender'];
 
-		$target_country = $row['country'];
+			$target_country = $row['country'];
 
-        $allow = false;
+			$allow = false;
 
-        if ($current_user_gender === "Male") {
-            if (
-                ($privacy['male_to_female'] && $target_gender === "Female") ||
-                ($privacy['male_to_male'] && $target_gender === "Male")
-            ) {
-                $allow = true;
-            }
-        } elseif ($current_user_gender === "Female") {
-            if (
-                ($privacy['female_to_male'] && $target_gender === "Male") ||
-                ($privacy['female_to_female'] && $target_gender === "Female")
-            ) {
-                $allow = true;
-            }
-        }
+			if ($current_user_gender === "Male") {
+				if (
+					($privacy['male_to_female'] && $target_gender === "Female") ||
+					($privacy['male_to_male'] && $target_gender === "Male")
+				) {
+					$allow = true;
+				}
+			} elseif ($current_user_gender === "Female") {
+				if (
+					($privacy['female_to_male'] && $target_gender === "Male") ||
+					($privacy['female_to_female'] && $target_gender === "Female")
+				) {
+					$allow = true;
+				}
+			}
 
-        if ($privacy['transgender'] && $target_gender === "Couple") {
-            $allow = true;
-        }
+			if ($privacy['transgender'] && $target_gender === "Couple") {
+				$allow = true;
+			}
 
-		if ($privacy['country_enable']) {
+			if ($privacy['country_enable']) {
 
-            if ($target_country !== $current_user_country) {
-                $allow = false;
-            }
-        }
+				if ($target_country !== $current_user_country) {
+					$allow = false;
+				}
+			}
+
+			$privacy_model =  getModelPrivacySettings($row['unique_id']);
+
+			if ($privacy_model['profile_visibility']) {
+				
+					$allow = false;
+			}
 
 
-        if ($allow) {
-            $followed_user_ids[] = (int)$row['id'];
-        }
-    }
+			if ($allow) {
+				$followed_user_ids[] = (int)$row['id'];
+			}
+		}
 
-    return $followed_user_ids;
-}
+		return $followed_user_ids;
+	}
 
 
 function getModelPrivacySettings($model_id) {
