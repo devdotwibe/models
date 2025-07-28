@@ -2245,7 +2245,7 @@ $lang_list = modal_language_list();
                 <p class="text-sm text-white/60">Hide your profile from people who aren't in Thailand right now.</p>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" value="Y" <?php if($privacy_setting['country_enable']) {?> checked <?php } ?>   onchange="updateSettings(this,'country_enable')"  >
                 <span class="toggle-slider"></span>
               </label>
             </div>
@@ -2262,7 +2262,7 @@ $lang_list = modal_language_list();
                 <p class="text-sm text-white/60">Include your profile in the search results.</p>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" <?php if($privacy_setting['profile_visibility']) {?> checked <?php } ?>   onchange="updateSettings(this,'profile_visibility')" >
                 <span class="toggle-slider"></span>
               </label>
             </div>
@@ -2272,7 +2272,7 @@ $lang_list = modal_language_list();
                 <p class="text-sm text-white/60">Only show my profile to people who match my age range</p>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox"  <?php if($privacy_setting['apply_age_range']) {?> checked <?php } ?>   onchange="updateSettings(this,'apply_age_range')" >
                 <span class="toggle-slider"></span>
               </label>
             </div>
@@ -2282,7 +2282,7 @@ $lang_list = modal_language_list();
             <label class="form-label">Age Range</label>
             <div class="flex items-center space-x-4">
               <span class="text-sm">18</span>
-              <input type="range" min="18" max="65" value="35" class="flex-1 accent-purple-500">
+              <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range']??0  ?> >" class="flex-1 accent-purple-500"  onchange="updateSettings(this,'apply_age_range')">
               <span class="text-sm">35</span>
             </div>
           </div>
@@ -2298,7 +2298,7 @@ $lang_list = modal_language_list();
                 <p class="text-sm text-white/60">Choose if others can know you read the message or not</p>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" <?php if($privacy_setting['read_receipt']) {?> checked <?php } ?>   onchange="updateSettings(this,'read_receipt')" >
                 <span class="toggle-slider"></span>
               </label>
             </div>
@@ -2308,7 +2308,7 @@ $lang_list = modal_language_list();
                 <p class="text-sm text-white/60">When you visit someone's profile they will see that you are looking if this is enabled.</p>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" <?php if($privacy_setting['show_visit']) {?> checked <?php } ?>   onchange="updateSettings(this,'show_visit')" >
                 <span class="toggle-slider"></span>
               </label>
             </div>
@@ -2318,7 +2318,7 @@ $lang_list = modal_language_list();
                 <p class="text-sm text-white/60">When you appear offline your last active time will stop updating.</p>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox">
+                <input type="checkbox" <?php if($privacy_setting['appear_offline']) {?> checked <?php } ?>   onchange="updateSettings(this,'appear_offline')" >
                 <span class="toggle-slider"></span>
               </label>
             </div>
@@ -2328,7 +2328,7 @@ $lang_list = modal_language_list();
                 <p class="text-sm text-white/60">Control if other users can see when you joined.</p>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox">
+                <input type="checkbox" <?php if($privacy_setting['show_join_date']) {?> checked <?php } ?>   onchange="updateSettings(this,'show_join_date')">
                 <span class="toggle-slider"></span>
               </label>
             </div>
