@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post_mime_type = trim($_POST['file_type'] ?? '');
     $post_type = trim($_POST['post_type'] ?? '');
 
-    $token = trim($_POST['token'] ?? '');
+    $token = !empty($_POST['token']) ? $_POST['token'] : null;
 
     if (empty($user_id) || empty($post_title) || empty($post_content)) {
         echo "All fields are required.";
