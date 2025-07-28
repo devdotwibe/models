@@ -164,7 +164,7 @@ if(!empty($userDetails['profile_pic'])){
     {
 
           $sql = "
-            SELECT DISTINCT model_user.id AS user_id 
+            SELECT DISTINCT model_user.id AS user_id, model_user.gender
             FROM live_posts 
             JOIN model_user ON live_posts.post_author = model_user.id 
             ORDER BY RAND() 
@@ -176,8 +176,7 @@ if(!empty($userDetails['profile_pic'])){
         //     $followed_user_ids[] = (int)$row['user_id'];
         // }
 
-        while ($row = $result->fetch_assoc()) {
-
+         while ($row = mysqli_fetch_assoc($result)) {
             $target_gender = $row['gender'];
             $allow = false;
 
@@ -202,29 +201,23 @@ if(!empty($userDetails['profile_pic'])){
             }
 
             if ($allow) {
-                $followed_user_ids[] = (int)$row['id'];
+                $followed_user_ids[] = (int)$row['user_id'];
             }
         }
     }
 
-    if(empty($followed_user_ids) && count($followed_user_ids) < 2)
-    {
-
-          $sql = "
-            SELECT DISTINCT model_user.id AS user_id 
+      if (empty($followed_user_ids) && count($followed_user_ids) < 2) {
+        $sql = "
+            SELECT DISTINCT model_user.id AS user_id, model_user.gender
             FROM live_posts 
             JOIN model_user ON live_posts.post_author = model_user.id 
             ORDER BY RAND() 
             LIMIT 5
         ";
+
         $result = mysqli_query($con, $sql);
 
-        // while ($row = mysqli_fetch_assoc($result)) {
-        //     $followed_user_ids[] = (int)$row['user_id'];
-        // }
-
-           while ($row = $result->mysqli_fetch_assoc($result)) {
-
+        while ($row = mysqli_fetch_assoc($result)) {
             $target_gender = $row['gender'];
             $allow = false;
 
@@ -249,10 +242,11 @@ if(!empty($userDetails['profile_pic'])){
             }
 
             if ($allow) {
-                $followed_user_ids[] = (int)$row['id'];
+                $followed_user_ids[] = (int)$row['user_id'];
             }
         }
     }
+
 
 
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
