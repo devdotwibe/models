@@ -92,7 +92,7 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $user
             $allow = true;
         }
 
-		print_r($row['name']);
+		dd($row['name']);
 
 		die();
 
