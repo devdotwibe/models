@@ -53,7 +53,7 @@ function checkUserFollow($model_id, $user_id) {
 
 		$placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
 		$types = str_repeat('s', count($followed_model_unique_ids));
-		$query = "SELECT id,unique_id,gender,country FROM model_user WHERE unique_id IN ($placeholders)";
+		$query = "SELECT id,unique_id,gender,age,country FROM model_user WHERE unique_id IN ($placeholders)";
 		$stmt = $con->prepare($query);
 
 		if (!$stmt) {
@@ -104,6 +104,15 @@ function checkUserFollow($model_id, $user_id) {
 			if (!$privacy_model['profile_visibility']) {
 				
 					$allow = false;
+			}
+
+			if ($privacy['apply_age_range']) {
+				
+				if($row['age'] > $privacy['age_range'])
+				{
+						$allow = false;
+				}
+				
 			}
 
 
