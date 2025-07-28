@@ -51,6 +51,8 @@ function filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $user
         return $followed_user_ids;
     }
 
+	print_f($followed_model_unique_ids);
+
     $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
     $types = str_repeat('s', count($followed_model_unique_ids));
     $query = "SELECT id, gender FROM model_user WHERE unique_id IN ($placeholders)";
