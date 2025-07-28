@@ -207,7 +207,7 @@ if(!empty($userDetails['profile_pic'])){
         }
     }
 
-    if(empty($followed_model_unique_ids) && count($followed_model_unique_ids) == 0)
+    if(empty($followed_user_ids) && count($followed_user_ids) < 2)
     {
 
           $sql = "
