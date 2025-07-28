@@ -6,20 +6,6 @@ include('../../includes/helper.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-
-     $required = ['post_title', 'post_content', 'user_id', 'file_type', 'post_type'];
-    foreach ($required as $field) {
-        if (empty($_POST[$field])) {
-            http_response_code(400);
-            echo json_encode(["status" => "error", "message" => "$field is required"]);
-            exit;
-        }
-    }
-
-    
     $user_id      = $_POST['user_id'] ?? null;
     $post_title   = trim($_POST['post_title'] ?? '');
     $post_content = trim($_POST['post_content'] ?? '');
@@ -28,12 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $post_type = trim($_POST['post_type'] ?? '');
 
     $token = !empty($_POST['token']) ? $_POST['token'] : null;
-
-    if (empty($user_id) || empty($post_title) || empty($post_content)) {
-        echo "All fields are required.";
-        exit;
-    }
-
 
     if ($post_type === 'paid' && empty($token)) {
         echo "Token is required for paid posts.";
