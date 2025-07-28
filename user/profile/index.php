@@ -106,7 +106,7 @@ if(!empty($userDetails['profile_pic'])){
     $privacy = $privacy_result->fetch_assoc();
 
 
-    if (!empty($followed_model_unique_ids) && count($followed_model_unique_ids) > 1 ) {
+    if (!empty($followed_model_unique_ids) && count($followed_model_unique_ids) > 0 ) {
 
         $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
         $types = str_repeat('s', count($followed_model_unique_ids));
@@ -207,7 +207,7 @@ if(!empty($userDetails['profile_pic'])){
         }
     }
 
-    if(empty($followed_user_ids) && count($followed_user_ids) ==0)
+    if(empty($followed_model_unique_ids) && count($followed_model_unique_ids) == 0)
     {
 
           $sql = "
