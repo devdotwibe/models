@@ -156,7 +156,7 @@ if(!empty($userDetails['profile_pic'])){
             }
 
             if ($allow) {
-                $followed_user_ids[] = (int)$row['id'];
+                $followed_user_ids[] = (int)$row['unique_id'];
             }
         }
     }
@@ -201,7 +201,7 @@ if(!empty($userDetails['profile_pic'])){
             }
 
             if ($allow) {
-                $followed_user_ids[] = (int)$row['id'];
+                $followed_user_ids[] = (int)$row['unique_id'];
             }
         }
     }
@@ -242,7 +242,7 @@ if(!empty($userDetails['profile_pic'])){
             }
 
             if ($allow) {
-                $followed_user_ids[] = (int)$row['id'];
+                $followed_user_ids[] = (int)$row['unique_id'];
             }
         }
     }
