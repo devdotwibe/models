@@ -88,7 +88,9 @@ if(!empty($userDetails['profile_pic'])){
 
     $followed_user_ids = [];
 
-    $followed_user_ids[] = $userDetails['unique_id'];
+    $followed_user_ids[] = $userDetails['id'];
+
+
 
     if (!empty($followed_model_unique_ids)) {
         $placeholders = implode(',', array_fill(0, count($followed_model_unique_ids), '?'));
