@@ -346,33 +346,27 @@ else{
                         <?=$form_data['user_bio']?>
                     </div>
 					<?php } ?>
+					
+					<?php 
+					$hobbies = $userDetails['hobbies']; $hobbies = json_decode($hobbies); 
+					if(!empty($hobbies)){
+					?>
 
                     <div class="features-list">
+					
+					<?php foreach($hobbies as $hbb){ ?>
+					
                         <div class="feature-item">
-                            <div class="feature-icon">📸</div>
-                            <div class="feature-text">Fashion Photography</div>
+						
+                            <div class="feature-text"><?php echo $hbb; ?></div>
+							
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">👗</div>
-                            <div class="feature-text">Runway Shows</div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">🎭</div>
-                            <div class="feature-text">Brand Ambassador</div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">🎬</div>
-                            <div class="feature-text">Commercial Shoots</div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">📱</div>
-                            <div class="feature-text">Social Media Content</div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">🌎</div>
-                            <div class="feature-text">International Availability</div>
-                        </div>
+						
+					<?php } ?>	
+						
                     </div>
+					
+					<?php } ?>
 
                     <div class="ad-actions">
                         <a href="<?= SITEURL ?>single-profile.php?m_unique_id=<?php echo $userDetails['unique_id']; ?>" class="btn-primary action-btn">
