@@ -1,10 +1,10 @@
 <?php
 if ($all_data) {
     foreach ($all_data as $set_data) {
-        if ($set_data['status'] == 0) {
-            $status = '<span class="badge bg-primary text-white">Pending</span>';
+        if (empty($set_data['adv_status'])) {
+            $status = '<span class="badge bg-primary text-white">Active</span>';
         } else {
-            $status = '<span class="badge bg-primary text-white">' . $set_data['status'] . '</span>';
+            $status = '<span class="badge bg-primary text-white">' . $set_data['adv_status'] . '</span>';
         }
         $Campaign = DB::queryFirstRow("SELECT * FROM banners_campaign WHERE banner_id = %s ",$set_data['id'],true);
 
@@ -40,12 +40,12 @@ if ($all_data) {
                     </div>
                     <div class="col-span-2 text-white/70"><?= h_dateFormat($set_data['created_at'], 'd M, Y') ?></div>
                     <div class="col-span-1">
-                        <span class="status-<?php if ($set_data['status'] == 0) { echo 'pending'; }else{ echo $set_data['status'];  }  ?> px-3 py-1 rounded-full text-xs"><?= $status ?></span>
+                        <span class="status-<?php if (empty($set_data['adv_status'])) { echo 'Active'; }else{ echo $set_data['adv_status'];  }  ?> px-3 py-1 rounded-full text-xs"><?= $status ?></span>
                     </div>
                     <div class="col-span-2">
                         <div class="flex space-x-2">
                             <button class="btn-success px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="window.location='<?= SITEURL . 'advertisement/edit.php?id=' . $set_data['id'] ?>'">Edit</button>
-                            <button class="btn-warning px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="window.location='<?= SITEURL . 'advertisement/campaign.php?id=' . $set_data['id'] ?>'">Promote</button>
+                            <?php /*?><button class="btn-warning px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="window.location='<?= SITEURL . 'advertisement/campaign.php?id=' . $set_data['id'] ?>'">Promote</button><?php */ ?>
                             <button class="btn-danger px-3 py-2 rounded-lg text-white text-sm del_<?= $set_data['id'] ?>" onclick="deleteAd(<?php echo $set_data['id']; ?>)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="3 6 5 6 21 6"></polyline>
