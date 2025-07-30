@@ -348,13 +348,16 @@ else{
 					<?php } ?>
 					
 					<?php 
-					$hobbies = $userDetails['hobbies']; $hobbies = json_decode($hobbies); 
-					if(!empty($hobbies)){
+					$hobbies = $userDetails['hobbies']; $hobbies = json_decode($hobbies);
+					$additional_hobbies = $userDetails['additional_hobbies']; $additional_hobbies = json_decode($additional_hobbies);
+					if(!empty($hobbies) || !empty($additional_hobbies)){
 					?>
 
                     <div class="features-list">
 					
-					<?php foreach($hobbies as $hbb){ ?>
+					<?php if(!empty($hobbies)){
+						
+						foreach($hobbies as $hbb){ ?>
 					
                         <div class="feature-item">
 						
@@ -362,7 +365,19 @@ else{
 							
                         </div>
 						
-					<?php } ?>	
+					<?php } } 
+					
+					if(!empty($additional_hobbies)){
+						
+						foreach($additional_hobbies as $add_hbb){ ?>
+					
+                        <div class="feature-item">
+						
+                            <div class="feature-text"><?php echo $add_hbb; ?></div>
+							
+                        </div>
+						
+					<?php } } ?>	
 						
                     </div>
 					

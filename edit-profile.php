@@ -588,6 +588,26 @@ $lang_list = modal_language_list();
 		  <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Shopping" <?php if(!empty($hobbies) && in_array('Shopping',$hobbies)) echo 'checked';  ?> >Shopping
 		  </span>
         </div>
+		
+		<div id="hobbies-container">
+		
+		<?php $additional_hobbies = $userDetails['additional_hobbies'];  
+		if(!empty($additional_hobbies)){
+			$additional_hobbies = json_decode($additional_hobbies);  
+			foreach($additional_hobbies as $hbb){ ?>
+			<div class="hobbies-item">
+			<input type="text" name="additional_hobbies[]" class="add-hobbies-input social-url-input" value="<?php echo $hbb; ?>">	
+			<button class="btn-remove-hb btn-remove-social" onclick="removeHobbies(this)">×</button>
+			</div>
+		<?php 			
+			}
+		}
+		?>
+		
+		
+		</div>
+		<button type="button" class="btn-secondary mt-3" onclick="addHobbies()">+ Add Interests & Hobbies</button>
+		
       </div>
 	<?php $languages = $userDetails['languages'];  ?>
       <!-- Languages -->
@@ -2845,6 +2865,25 @@ $lang_list = modal_language_list();
   }
 
   function removeLanguage(button) {
+    if (button) button.parentElement.remove();
+  }
+  
+    function addHobbies() {
+    const container = document.getElementById('hobbies-container');
+    if (container) {
+		
+        const newHobbies = document.createElement('div');
+        newHobbies.className = 'hobbies-item';
+        newHobbies.innerHTML = `
+            <input type="text" name="additional_hobbies[]" class="add-hobbies-input social-url-input" value="">	
+			<button class="btn-remove-hb btn-remove-social" onclick="removeHobbies(this)">×</button>
+        `;
+        container.appendChild(newHobbies);
+		
+    }
+  }
+
+  function removeHobbies(button) {
     if (button) button.parentElement.remove();
   }
 
