@@ -20,7 +20,7 @@ if (isset($_SESSION['log_user_id'])) {
 	if ($_POST) {
 
 		$user_id = $_SESSION['log_user_id'];
-		$arr = array('name', 'subtitle', 'description', 'category', 'service', 'country', 'state', 'city','terms_conditions');
+		$arr = array('name', 'subtitle', 'description', 'category', 'service', 'country', 'state', 'city','terms_conditions','adv_status');
 		$post_data = array_from_post($arr);
 
 		DB::update('banners', $post_data, "id=%s", $id);
@@ -194,8 +194,28 @@ $serviceArr = array('Providing services', 'Looking for services');
                         </svg>
                         Basic Information
                     </h2>
+					
+					<div class="grid md:grid-cols-2 gap-8 adv-status-row">
+					
+						<div> 
+						
+							<input type="radio" name="adv_status" value="Active" class="form-input adv-status" id="adv_status" <?php if(empty($form_data['adv_status']) || $form_data['adv_status'] == 'Active') echo 'checked'; ?>  >
+						
+							<label>Active</label>
+						
+						</div>
+     
+						<div> 
+						
+							<input type="radio" name="adv_status" value="Inactive" class="form-input adv-status" id="adv_status"  <?php if($form_data['adv_status'] == 'Inactive') echo 'checked'; ?> >
+							
+							<label>Inactive</label>
+							
+						</div>
+						
+					</div>
 
-                    <div class="grid md:grid-cols-2 gap-8">
+                    <div class="mt-8 grid md:grid-cols-2 gap-8">
                         <div>
                             <label class="block text-white font-semibold mb-3">Category *</label>
 							<select name="category" class="form-input w-full px-6 py-4 rounded-xl adv_category" id="adv_category"  required>
