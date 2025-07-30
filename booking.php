@@ -164,9 +164,28 @@ $model_ID = $model_data['id'];
         <!-- Premium Booking Form -->
         <section class="py-12 relative">
             <div class="container mx-auto">
-                <?php /*<form  onsubmit="handleBookingSubmit(event)"> */ ?>
+			
 				<form method="post" class="max-w-6xl mx-auto space-y-8" action="act_model_booking.php" enctype="multipart/form-data" >
-                    <!-- Contact Details Section -->
+				
+				<?php if(isset($_GET['service']) && isset($_GET['token'])){ ?>
+				
+					<div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
+						 
+							<div class="flex items-center mb-8">
+								<h2 class="text-3xl font-bold premium-text heading-font"><?php echo $_GET['service']; ?></h2>
+								
+							</div>
+							<div>
+								<label class="block text-white/80 font-semibold mb-3 text-lg">Tokens <?php echo $_GET['token']; ?></label>
+								
+								</div>
+							
+					</div>
+					
+				<?php } ?>
+					
+					
+					<!-- Contact Details Section -->
                     <div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
 					 
 						<div class="flex items-center mb-8">
@@ -175,17 +194,32 @@ $model_ID = $model_data['id'];
                             </div>
                             <h2 class="text-3xl font-bold premium-text heading-font">Your Contact Details</h2>
                         </div>
+						
+						<?php 
+						if(isset($_GET['service']) && !empty($_GET['service'])){
+							$service = $_GET['service']; 
+						}else{
+							$service = '';
+						} ?>
                         
                         <div class="grid md:grid-cols-3 gap-6">
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Booking Type</label>
                                 <select name="booking_type" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">Select...</option>
-                                    <option value="Premium Experience" class="bg-gray-900">👑 Premium Experience</option>
+                                    
+									<option value="Group Chat" class="bg-gray-900" <?php if($service == 'Group Chat'){ echo 'selected'; } ?> >Group Chat</option>
+									<option value="Private Chat" class="bg-gray-900" <?php if($service == 'Private Chat'){ echo 'selected'; } ?> >Private Chat</option>
+									<option value="Local Meetup" class="bg-gray-900" <?php if($service == 'Local Meetup'){ echo 'selected'; } ?> >Local Meetup</option>
+									<option value="Extended Social" class="bg-gray-900" <?php if($service == 'Extended Social'){ echo 'selected'; } ?> >Extended Social</option>
+									<option value="Overnight Social" class="bg-gray-900" <?php if($service == 'Overnight Social'){ echo 'selected'; } ?> >Overnight Social</option>
+									
+									
+									<?php /*?><option value="Premium Experience" class="bg-gray-900">👑 Premium Experience</option>
                                     <option value="International Tour" class="bg-gray-900">✈️ International Tour</option>
                                     <option value="Exclusive Meeting" class="bg-gray-900">💎 Exclusive Meeting</option>
                                     <option value="VIP Package" class="bg-gray-900">🌟 VIP Package</option>
-                                    <option value="Luxury Companion" class="bg-gray-900">🥂 Luxury Companion</option>
+                                    <option value="Luxury Companion" class="bg-gray-900">🥂 Luxury Companion</option> <?php */ ?>
                                 </select>
                             </div>
                             <div>
