@@ -1088,17 +1088,16 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                     <div class="attribute">
                         <div class="attribute-label">Ethnicity</div>
-                        <div class="attribute-value"><?php echo $extra_details['ethnicity'] ?> </div>
+                        <div class="attribute-value"><?php echo $extra_details['dress_size'] ?> </div>
                     </div>
-             
+               
                 <?php if(!empty($extra_details['body_type']) ){  ?>
 
                     <div class="attribute">
                         <div class="attribute-label">Body Type</div>
                         <div class="attribute-value"><?php echo $extra_details['body_type'] ?> </div>
                     </div>
-            
-                <?php } ?>
+                </div>
 
 
                  <?php if(!empty($extra_details['dress_size']) ){  ?>
@@ -1110,7 +1109,9 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 <?php } ?>
 
+
                 <?php } ?>
+
 
             </div>
             
