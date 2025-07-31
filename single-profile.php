@@ -981,10 +981,36 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <?php echo $rowesdw['user_bio']; ?>
             </div>
             
-            <div class="about-section">
-                <h3 class="about-section-title">Model Type</h3>
-                <p>Fashion Model | Commercial Model | Content Creator</p>
-            </div>
+            <?php if(!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null'){ 
+				    $hobbies = json_decode($rowesdw['hobbies']); 
+
+                    $hobbies_count = count($hobbies);
+				?>
+
+                <div class="about-section">
+                    <h3 class="about-section-title">Model Type</h3>
+
+                    <p>
+                        <?php  foreach($hobbies as $index => $item) { ?>
+
+                            <?php 
+                                if($index == $hobbies_count -1 )
+                                {
+                                     echo $item;
+                                }
+                                else
+                                {
+                                     echo $item . '|' ;
+                                }
+                               
+                                ?>
+
+                        <?php }?>
+                
+                    </p>
+                </div>
+
+            <?php }?>
             
             <div class="about-section">
                 <h3 class="about-section-title">Physical Attributes</h3>
