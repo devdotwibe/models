@@ -1107,7 +1107,7 @@ if (mysqli_num_rows($res_ap) > 0) {
             </div>
             
             <div class="about-section">
-                <h3 class="about-section-title">Experience</h3>
+                <h3 class="about-section-title">Experience <?php echo $rowesdw['country'] ?></h3>
                 <p>5+ years professional modeling experience with top agencies in Los Angeles and New York. Featured in Vogue, Elle, and Cosmopolitan. Runway experience with major fashion brands during Fashion Week events.</p>
             </div>
 
@@ -1156,7 +1156,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                     <h3 class="about-section-title">Location</h3>
                     <p><?php echo implode(', ', $location_parts); ?></p>
                 </div>
-                
+
             <?php } ?>
 
 
