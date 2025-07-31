@@ -1025,11 +1025,20 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                         $feet = $exp_hght[0];
                         $inches = $exp_hght[1];
+
+                        if($extra_details['height_type'] == 'ft' || empty($extra_details['height_type'])){
+
+                            $model_height = $feet."'".$inches .'"';
+                        }
+                        else
+                        {
+                            $model_height = '( '.$extra_details['height'].' cm)';
+                        }
                     ?>
 
                     <div class="attribute">
                         <div class="attribute-label">Height</div>
-                        <div class="attribute-value"><?php echo $feet."'".$inches .'"' ?> (175 cm)</div>
+                        <div class="attribute-value"><?php echo $model_height ?> (175 cm)</div>
                     </div>
 
                 <?php }  ?>
