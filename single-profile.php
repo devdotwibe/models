@@ -1000,7 +1000,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 }
                                 else
                                 {
-                                     echo $item . '|' ;
+                                     echo $item . ' |' ;
                                 }
                                
                                 ?>
