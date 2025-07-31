@@ -1110,6 +1110,8 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 <?php } ?>
 
+                <?php } ?>
+
             </div>
             
             <div class="about-section">
