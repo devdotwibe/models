@@ -1012,13 +1012,28 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             <?php }?>
             
+            <?php $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_GET['m_unique_id']); ?>
+            
             <div class="about-section">
                 <h3 class="about-section-title">Physical Attributes</h3>
                 <div class="attributes-grid">
+
+
+                <?php !empty($extra_details['height']) { 
+
+                		$exp_hght = explode('.',$extra_details['height']);
+
+                        $feet = $exp_hght[0];
+                        $inches = $exp_hght[1];
+                    ?>
+
                     <div class="attribute">
                         <div class="attribute-label">Height</div>
-                        <div class="attribute-value">5'9" (175 cm)</div>
+                        <div class="attribute-value"><?php echo $feet."'".$inches .'"' ?> (175 cm)</div>
                     </div>
+
+                <?php }  ?>
+
                     <div class="attribute">
                         <div class="attribute-label">Weight</div>
                         <div class="attribute-value">125 lbs (57 kg)</div>
