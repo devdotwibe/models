@@ -28,7 +28,7 @@ if($all_data){
                             </div>
                         </div>
                         <button class="btn-primary" onclick="viewProfile(<?php echo $set_data['id']; ?>)">
-                            View Profile
+                            View Details
                         </button>
                     </div>
                 </div>
