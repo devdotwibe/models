@@ -1063,23 +1063,47 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 <?php } ?>
 
+                <?php if(!empty($extra_details['hair_color']) ){  ?>
+
                     <div class="attribute">
                         <div class="attribute-label">Hair Color</div>
-                        <div class="attribute-value">Blonde</div>
+                        <div class="attribute-value"> <?php echo $extra_details['hair_color'] ?></div>
                     </div>
+
+                <?php } ?>
+
+                <?php if(!empty($extra_details['eye_color']) ){  ?>
+
                     <div class="attribute">
                         <div class="attribute-label">Eye Color</div>
-                        <div class="attribute-value">Blue</div>
+
+                        <div class="attribute-value"><?php echo $extra_details['hair_color'] ?> </div>
+
                     </div>
+
+                <?php } ?>
+
+
+                 <?php if(!empty($extra_details['dress_size']) ){  ?>
+
                     <div class="attribute">
                         <div class="attribute-label">Dress Size</div>
-                        <div class="attribute-value">4 US</div>
+                        <div class="attribute-value"><?php echo $extra_details['hair_color'] ?></div>
                     </div>
+
+                <?php } ?>
+
+                <?php if(!empty($extra_details['dress_size']) ){  ?>
+
                     <div class="attribute">
                         <div class="attribute-label">Shoe Size</div>
                         <div class="attribute-value">8 US</div>
                     </div>
                 </div>
+
+                <?php } ?>
+
+                
             </div>
             
             <div class="about-section">
