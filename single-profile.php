@@ -1038,7 +1038,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                     <div class="attribute">
                         <div class="attribute-label">Height</div>
-                        <div class="attribute-value"><?php echo $model_height ?> (175 cm)</div>
+                        <div class="attribute-value"><?php echo $model_height ?></div>
                     </div>
 
                 <?php }  ?>
