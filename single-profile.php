@@ -1083,22 +1083,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 <?php } ?>
 
-                
-                <?php if(!empty($extra_details['ethnicity']) ){  ?>
-
-                    <div class="attribute">
-                        <div class="attribute-label">Ethnicity</div>
-                        <div class="attribute-value"><?php echo $extra_details['dress_size'] ?> </div>
-                    </div>
-               
-                <?php if(!empty($extra_details['body_type']) ){  ?>
-
-                    <div class="attribute">
-                        <div class="attribute-label">Body Type</div>
-                        <div class="attribute-value"><?php echo $extra_details['body_type'] ?> </div>
-                    </div>
-                </div>
-
 
                  <?php if(!empty($extra_details['dress_size']) ){  ?>
 
@@ -1109,17 +1093,12 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 <?php } ?>
 
-
-                <?php } ?>
-
-
             </div>
             
             <div class="about-section">
                 <h3 class="about-section-title">Experience</h3>
                 <p>5+ years professional modeling experience with top agencies in Los Angeles and New York. Featured in Vogue, Elle, and Cosmopolitan. Runway experience with major fashion brands during Fashion Week events.</p>
             </div>
-            
             <?php if(!empty($country_list) && !empty($country_list[0]['name'])){ ?>
             <div class="about-section">
                 <h3 class="about-section-title">Location</h3>
