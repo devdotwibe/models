@@ -1088,7 +1088,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                     <div class="attribute">
                         <div class="attribute-label">Ethnicity</div>
-                        <div class="attribute-value"><?php echo $extra_details['dress_size'] ?> </div>
+                        <div class="attribute-value"><?php echo $extra_details['ethnicity'] ?> </div>
                     </div>
                 </div>
 
