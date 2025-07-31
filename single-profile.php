@@ -1019,7 +1019,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <div class="attributes-grid">
 
 
-                <?php !empty($extra_details['height']) { 
+                <?php if(!empty($extra_details['height']) ){ 
 
                 		$exp_hght = explode('.',$extra_details['height']);
 
