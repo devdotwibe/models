@@ -140,7 +140,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
     $user_mode_id = $userDetails['id']; 
 
-    if ($user_mode_id != $model_id) {
+    if ($user_mode_id != $model_id && !empty($user_mode_id) && !empty($model_id)) {
 
         $checkSql = "SELECT id FROM model_user_profile_views WHERE profile_user_id = ? AND viewer_user_id = ?";
         $stmt = $con->prepare($checkSql);
