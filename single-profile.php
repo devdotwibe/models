@@ -1043,10 +1043,26 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 <?php }  ?>
 
+
+                 <?php if(!empty($extra_details['weight']) ){ 
+
+                        if($extra_details['weight_type'] == 'lbs')
+                        {
+                            $weight = $extra_details['weight'] .' lbs';
+                        }
+                        else
+                        {
+                            $weight = $extra_details['weight'] .' kg';
+                        }
+                    ?>
+
                     <div class="attribute">
                         <div class="attribute-label">Weight</div>
-                        <div class="attribute-value">125 lbs (57 kg)</div>
+                        <div class="attribute-value"> <?php echo $weight ?> </div>
                     </div>
+
+                <?php } ?>
+
                     <div class="attribute">
                         <div class="attribute-label">Hair Color</div>
                         <div class="attribute-value">Blonde</div>
