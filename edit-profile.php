@@ -1007,7 +1007,7 @@ $lang_list = modal_language_list();
 
   <!-- Creator Settings Tab -->
   <div id="creator-content" class="tab-content">
-    <form method="post" action="act-edit-profile.php" enctype="multipart/form-data" >
+    <form method="post" id="creatorSettingsForm" action="act-edit-profile.php" enctype="multipart/form-data" >
     <div class="text-center mb-8">
       <h2 class="text-2xl font-bold gradient-text mb-4">Creator Settings</h2>
       <p class="text-white/70">Customize your creator profile and service offerings</p>
@@ -3047,6 +3047,7 @@ $lang_list = modal_language_list();
         $button.prop('disabled', true);
 
         const form = $('#creatorSettingsForm')[0];
+
         const formData = new FormData(form);
 
         $.ajax({
