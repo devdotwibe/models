@@ -1908,6 +1908,13 @@ jQuery('.socialpaidbtn').click(function(e){
             $('#token_amount').text(token);
         }
 
+        function CloseModal()
+        {
+            $('#success_modal').removeClass('active');
+            
+            $('#token_amount').text(0);
+        }
+
         function TabChange(el,type)
         {
             $('.tab_menu').removeClass('tab-active');
