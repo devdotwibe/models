@@ -541,7 +541,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                                 <input type="hidden" name="m_unique_id" value="<?php echo $_GET['m_unique_id']; ?>">
                                                 <input type="hidden" name="model_id" value="<?php echo $uplds['post_author']; ?>">
                                                 
-                                                <button class="mybtn"  type="button" name="submit" id="puchare_submit" >
+                                                <button class="mybtn"  type="button" name="submit">
 
                                                     <i class="fas fa-database" aria-hidden="true"></i>
                                                     <span> <?php echo $uplds['token']  ?></span>
@@ -1835,7 +1835,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <div class="modal-body" id="modal_success_message">
                 <p>Do you want to unlock this image for <strong><span id="token_amount"> 0</span> tokens</strong>?</p>
                 <div style="margin-top: 20px;">
-                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" onclick="PurchaseImage()">Yes, Unlock</button>
+                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="puchare_submit" >Yes, Unlock</button>
                     <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
                 </div>
                 </div>
