@@ -47,8 +47,8 @@ else{
             if ($currentUrl === "/optimized_services") {
 
                 include('includes/side-bar.php');
-
-                include('includes/profile_header_index.php');
+                
+                include('includes/service_header.php');
 
             } else {
 
