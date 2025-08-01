@@ -320,7 +320,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                 <?php } else { ?>
 
-                                    <button onclick="FollowModel('<?= $model_unique_id ?>', '<?= $user_unique_id ?>')"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+                                    <button onclick="FollowModel('<?= $model_unique_id ?>', '<?= $user_unique_id ?>','follow_status')"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                                         <span id="follow_status">Follow</span>
                                     </button>
@@ -943,8 +943,8 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
                                     <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
                                 </div>
-                                <button class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
-                                    Follow
+                                <button type="button" onclick="FollowModel('<?= $rows_md['unique_id'] ?>', '<?= $user_unique_id ?>','follow_similar')" class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                     <span id="follow_similar">Follow</span>
                                 </button>
                             </div>
                             
@@ -2013,7 +2013,7 @@ jQuery('.socialpaidbtn').click(function(e){
             });
         });
 
-        function FollowModel(model_id,user_id)
+        function FollowModel(model_id,user_id,status)
         {
 
             $.ajax({
@@ -2025,8 +2025,8 @@ jQuery('.socialpaidbtn').click(function(e){
                 },
                 success: function (response) {
         
-                    $('#follow_status').text('Following');
-                    $('#follow_status').removeClass('bg-gray-500').addClass('bg-blue-500');
+                    $(`#${status}`).text('Following');
+                     $(`#${status}`).removeClass('bg-gray-500').addClass('bg-blue-500');
                
                 },
                 error: function (xhr) {
