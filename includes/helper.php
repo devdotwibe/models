@@ -157,6 +157,46 @@ function isUserOnline($userId, $minutes = 5) {
     return ($now - $lastSeen <= ($minutes * 60)) ? 'Online' : 'Offline';
 }
 
+function getUserLastSeenAgo($userId) {
+    $cacheDir = __DIR__ . '/cache/user_activity/';
+    $file = $cacheDir . 'user_' . $userId . '.txt';
+
+    $userDetails = get_data('model_user', ['id' => $userId], true);
+
+    if (!$userDetails) {
+        return 'Few days ago';
+    }
+
+    $privacySetting = getModelPrivacySettings($userDetails['unique_id']);
+    if (!empty($privacySetting) && $privacySetting['appear_offline'] == 1) {
+        return 'Few days ago'; 
+    }
+
+    if (!file_exists($file)) {
+        return 'A few days ago';
+    }
+
+    $lastSeen = (int)file_get_contents($file);
+    $now = time();
+    $diff = $now - $lastSeen;
+
+    if ($diff < 60) {
+        return 'Just now';
+    } elseif ($diff < 3600) {
+        $minutes = floor($diff / 60);
+        return $minutes . ' minute' . ($minutes > 1 ? 's' : '') . ' ago';
+    } elseif ($diff < 86400) {
+        $hours = floor($diff / 3600);
+        return $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
+    } elseif ($diff < 604800) {
+        $days = floor($diff / 86400);
+        return $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
+    } else {
+        return 'Few days ago';
+    }
+}
+
+
 function getTotalOnlineUsers($minutes = 5) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
     $onlineCount = 0;
