@@ -3058,10 +3058,11 @@ $lang_list = modal_language_list();
           data: formData,
           contentType: false,
           processData: false,
+          dataType: 'json',
           success: function (response) {
             
             console.log(response);
-            
+
             if (response.status === 'success') {
 
               $('.progress-fill').css('width', '100%');
