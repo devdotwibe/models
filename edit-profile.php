@@ -40,7 +40,7 @@ $lang_list = modal_language_list();
 }
 </style>
 </head>
-<body class="edit-profilepage advt-page  socialwall-page">
+<body class="enhanced5 edit-profilepage advt-page  socialwall-page">
 
 	<?php  include('includes/side-bar.php'); ?>
 	<?php  include('includes/profile_header_index.php'); ?>
@@ -2532,7 +2532,7 @@ $lang_list = modal_language_list();
   </div>
 
 
-  
+
 
     <?php include('includes/footer.php'); ?>
 <script>
