@@ -6,11 +6,6 @@ if (isset($_SESSION["log_user_id"])) {
 	$userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
 	if ($userDetails) {
 
-
-		echo json_encode(['status' => 'success','message'=>''.$_POST['coins'].' tokens deducted! '.$_POST['file_type'].' unlocked.']);
-
-		die();
-
 		if (isset($_POST['submit'])) {
 			$file_id = $_POST['file_id'];
 			$user_id = $_POST['user_id'];
@@ -73,7 +68,7 @@ if (isset($_SESSION["log_user_id"])) {
 						'created_at' => $date,
 					));
 
-					echo json_encode(['status' => 'success','message'=>''.$_POST['coins'].' tokens deducted! file unlocked.']);
+					echo json_encode(['status' => 'success','message'=>''.$_POST['coins'].' tokens deducted! '.$_POST['file_type'].' unlocked.']);
 
 				} else {
 				
