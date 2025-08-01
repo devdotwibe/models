@@ -907,7 +907,20 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
                         <div class="space-y-4">
                         
-                        <?php $sqls_m = "SELECT * FROM model_user WHERE as_a_model = 'Yes' AND unique_id != '" . $_GET['m_unique_id'] . "'  Order by RAND() DESC LIMIT 3";
+                        <?php 
+                        
+                        $followers_ids = getModelFollowerIds($_SESSION['log_user_unique_id']);
+                        
+
+                        $escaped_ids = array_map('DB::escape', $followers_ids);
+
+                        $followers_not_in = "'" . implode("','", $escaped_ids) . "'";
+
+                        $sqls_m = "SELECT * FROM model_user WHERE as_a_model = 'Yes' AND unique_id != '" . $_GET['m_unique_id'] . "'
+
+                        " . (!empty($followers_ids) ? "AND unique_id NOT IN ($followers_not_in)" : "") . "
+                        
+                        Order by RAND() DESC LIMIT 3";
 
                         $resulmd = mysqli_query($con, $sqls_m);
                         

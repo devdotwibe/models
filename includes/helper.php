@@ -28,6 +28,20 @@ function updateUserActivity($userId) {
     file_put_contents($file, time());
 }
 
+function getModelFollowerIds($model_id) {
+    $query = "SELECT unique_user_id FROM model_follow WHERE unique_model_id = %s AND status = 'Follow'";
+    
+    $results = DB::query($query, $model_id);
+
+    $followerIds = [];
+
+    foreach ($results as $row) {
+        $followerIds[] = $row['unique_user_id'];
+    }
+
+    return $followerIds;
+}
+
 
 function checkUserFollow($model_id, $user_id) {
 	
