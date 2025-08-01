@@ -37,19 +37,30 @@ else{
    
 </head>
 <body class="optim-services">
-	
-	
-	<?php if (isset($_SESSION["log_user_id"])) { ?>
- 
-    <?php  include('includes/side-bar.php'); ?>
 
-    <?php  include('includes/profile_header_index.php'); ?>  
- 
-  <?php } else{ ?>
-  
-	<?php include('includes/header.php'); ?>
-	
-  <?php } ?>
+    <?php
+
+        $currentUrl = $_SERVER['REQUEST_URI'];
+
+        dd($currentUrl);
+
+        die();
+
+        if (isset($_SESSION["log_user_id"])) {
+            
+            if ($currentUrl === "https://models.staging3.dotwibe.com/optimized_services") {
+                include('includes/service_header.php');
+            } else {
+                include('includes/side-bar.php');
+                include('includes/profile_header_index.php');
+            }
+
+        } else {
+
+            include('includes/header.php');
+    } 
+    
+    ?>
 	
 	<main class="max-w-7xl mx-auto px-4 py-5 main-content">
 
