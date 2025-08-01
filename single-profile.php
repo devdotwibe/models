@@ -529,7 +529,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) ) {?>
 
-                                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" onclick="ConformPurchase('<?php echo $uplds['token']  ?>')">
                                         <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
 
                                             <form method="post" action="file-process.php">
@@ -541,7 +541,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                                 <input type="hidden" name="m_unique_id" value="<?php echo $_GET['m_unique_id']; ?>">
                                                 <input type="hidden" name="model_id" value="<?php echo $uplds['post_author']; ?>">
                                                 
-                                                <button class="mybtn"  type="button" onclick="ConformPurchase('<?php echo $uplds['token']  ?>')"  name="submit">
+                                                <button class="mybtn"  type="button" name="submit">
 
                                                     <i class="fas fa-database" aria-hidden="true"></i>
                                                     <span> <?php echo $uplds['token']  ?></span>
