@@ -36,7 +36,7 @@ else{
 	<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
    
 </head>
-<body class="optim-services">
+<body class="optim-services socialwall-page">
 
     <?php
 
