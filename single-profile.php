@@ -1835,7 +1835,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <div class="modal-body" id="modal_success_message">
                 <p>Do you want to unlock this image for <strong><span id="token_amount"> 0</span> tokens</strong>?</p>
                 <div style="margin-top: 20px;">
-                    <button class="btn btn-success" type="button" onclick="PurchaseImage()">Yes, Unlock</button>
+                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" onclick="PurchaseImage()">Yes, Unlock</button>
                     <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
                 </div>
                 </div>
