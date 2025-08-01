@@ -715,8 +715,9 @@ if(!empty($userDetails['profile_pic'])){
                       
                   </div>
 
-                  <button type="button" onclick="AddMessage('<?php echo $k ?>')" class="btn-secondary text-sm md:text-base">Message</button>
+                  <button type="button" onclick="AddMessage('<?php echo $k ?>')" class="btn-secondary text-sm md:text-base whitespace-nowrap">Message</button>
 
+                   
               </div>
 
             </div>
