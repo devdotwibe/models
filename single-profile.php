@@ -1820,7 +1820,7 @@ if (mysqli_num_rows($res_ap) > 0) {
             </div>
 
 
-        <div class="modal-overlay" id="success_modal">
+        <div class="modal-overlay" id="conform_modal">
             <div class="modal">
                 <div class="modal-header">
                 <h2 class="modal-title">Unlock Image</h2>
@@ -1832,12 +1832,31 @@ if (mysqli_num_rows($res_ap) > 0) {
                 </button>
                 </div>
 
-                <div class="modal-body" id="modal_success_message">
+                <div class="modal-body">
                 <p>Do you want to unlock this image for <strong><span id="token_amount"> 0</span> tokens</strong>?</p>
                 <div style="margin-top: 20px;">
                     <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="puchare_submit" >Yes, Unlock</button>
                     <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
                 </div>
+                </div>
+            </div>
+        </div>
+
+         <div class="modal-overlay" id="success_modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Success</h2>
+                    <button class="close-modal" id="closeTipModal" type="button" onclick="SuccessCloseModal()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal_success_message">
+                    
+
+                    <button class="btn btn-primary" type="button" onclick="SuccessCloseModal()">Close</button>
                 </div>
             </div>
         </div>
@@ -1903,7 +1922,7 @@ jQuery('.socialpaidbtn').click(function(e){
 
         function ConformPurchase(token,form_id)
         {
-            $('#success_modal').addClass('active');
+            $('#conform_modal').addClass('active');
 
             $('#token_amount').text(token);
 
@@ -1912,10 +1931,55 @@ jQuery('.socialpaidbtn').click(function(e){
 
         function CloseModal()
         {
-            $('#success_modal').removeClass('active');
+            $('#conform_modal').removeClass('active');
             
             $('#token_amount').text(0);
         }
+
+        function SuccessCloseModal()
+        {
+            $('#success_modal').removeClass('active');
+
+            $('#modal_success_message .success-text').remove();
+        }
+
+    
+        function SubmitPurchase(form_id)
+        {
+
+            const form = $(`#${form_id}`)[0];
+
+            const formData = new FormData(form);
+
+            formData.append('submit', 'submit');
+
+            $.ajax({
+            url: 'file-process.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function (response) {
+                
+                console.log(response);
+
+                if (response.status === 'success') {
+
+                    $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
+
+                    $('#conform_modal').removeClass('active');
+
+                    $('#success_modal').addClass('active');
+
+                }
+            },
+
+            error: function (xhr, status, error) {
+           
+            }
+            });
+    }
 
         function TabChange(el,type)
         {
