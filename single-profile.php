@@ -909,18 +909,25 @@ if (mysqli_num_rows($res_ap) > 0) {
                         
                         <?php 
                         
-                        $followers_ids = getModelFollowerIds($_SESSION['log_user_unique_id']);
-                        
+                       $followers_ids = getModelFollowerIds($_SESSION['log_user_unique_id']);
 
-                        $escaped_ids = array_map('DB::escape', $followers_ids);
+                        $escaped_ids = array_map(function($id) use ($con) {
+                            return mysqli_real_escape_string($con, $id);
+                        }, $followers_ids);
 
-                        $followers_not_in = "'" . implode("','", $escaped_ids) . "'";
+                        $followers_not_in = !empty($escaped_ids) ? "'" . implode("','", $escaped_ids) . "'" : "";
 
-                        $sqls_m = "SELECT * FROM model_user WHERE as_a_model = 'Yes' AND unique_id != '" . $_GET['m_unique_id'] . "'
+                        $current_model_id = mysqli_real_escape_string($con, $_GET['m_unique_id']);
 
-                 
-                        
-                        Order by RAND() DESC LIMIT 3";
+                        $sqls_m = "
+                            SELECT * 
+                            FROM model_user 
+                            WHERE as_a_model = 'Yes' 
+                            AND unique_id != '$current_model_id'
+                            " . (!empty($followers_not_in) ? " AND unique_id NOT IN ($followers_not_in)" : "") . "
+                            ORDER BY RAND() DESC 
+                            LIMIT 3
+                        ";
 
                         $resulmd = mysqli_query($con, $sqls_m);
                         
