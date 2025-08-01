@@ -63,7 +63,7 @@ else{
     
         $model_unique_id = $userDetails['unique_id'];
 
-        $model_bookings = DB::query("SELECT name FROM model_booking WHERE model_unique_id =  %s ", $model_unique_id);
+        $model_bookings = DB::query("SELECT * FROM model_booking WHERE model_unique_id =  %s ", $model_unique_id);
     ?>
 	
 	<main class="max-w-7xl mx-auto px-4 py-5 main-content">
@@ -131,9 +131,9 @@ else{
 
                             $meeting_date = $item['meeting_date']; //Y-m-d format;
 
-                            // $formattedDate = date('M d', strtotime($meeting_date)); 
+                            $formattedDate = date('M d', strtotime($meeting_date)); 
                         ?>
-                        <span class="service-meta text-orange-400"><?php echo $item['model_name'] ?> • <?php echo $item['meeting_time'] ?></span>
+                        <span class="service-meta text-orange-400"><?php echo $booking_for ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
                     </div>
                     </div>
 
