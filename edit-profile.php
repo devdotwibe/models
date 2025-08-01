@@ -30,6 +30,8 @@ $lang_list = modal_language_list();
 <?php  include('includes/head.php'); ?>
 
 <link rel="stylesheet" href="<?=SITEURL?>assets/css/dropzone.min.css" />
+
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
 <style>
 .dropzone {
     border: none !important;
