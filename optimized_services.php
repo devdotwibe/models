@@ -3,26 +3,14 @@
 include('includes/config.php');
 include('includes/helper.php');
 
-if(!isset($_GET['service']) || !isset($_GET['m_id']) || !isset($_GET['type'])){
-	echo '<script>window.history.back();</script>';
-	die;
-}else{
-	//$country_list = DB::query('select id,name,sortname from countries order by name asc');
-}
 if($_SESSION["log_user"]){
 	$userDetails = get_data('model_user',array('id'=>$_SESSION['log_user_id']),true);
+    
 	if(!$userDetails){
 		echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
 		echo "<script>window.location='".SITEURL."/login.php';</script>";
 		die;
 	}
-	
-	if($_SESSION['log_user_unique_id'] == $_GET['m_id']){ ?>
-		<script>alert("Oops!! You can't book your service. Please choose another model...")</script>
-		<?php echo "<script>window.history.back();</script>";
-		die;
-	}
-	
 }
 else{
 	echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
