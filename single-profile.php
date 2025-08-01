@@ -964,7 +964,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
                                     <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
                                 </div>
-                                <button type="button" onclick="FollowModel('<?= $rows_md['unique_id'] ?>', '<?= $user_unique_id ?>','follow_similar-'<?= $user_unique_id ?>)" class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                <button type="button" onclick="FollowModel('<?= $rows_md['unique_id'] ?>', '<?= $user_unique_id ?>','follow_similar-<?= $user_unique_id ?>')" class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
                                      <span id="follow_similar-<?= $user_unique_id ?>">Follow</span>
                                 </button>
                             </div>
