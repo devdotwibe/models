@@ -64,11 +64,6 @@ else{
         $model_unique_id = $userDetails['unique_id'];
 
         $model_bookings = DB::query("SELECT name FROM model_booking WHERE model_unique_id =  %s ", $model_unique_id);
-
-        print_r($model_bookings);
-
-        die();
-
     ?>
 	
 	<main class="max-w-7xl mx-auto px-4 py-5 main-content">
@@ -100,31 +95,38 @@ else{
 
     <div id="services-list" class="space-y-3">
 
-      <!-- Pending Service -->
-      <div class="service-card fade-in-up" data-status="pending" data-type="group">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Client" class="client-avatar border-orange-400">
-              <div>
-                <h3 class="client-name">Alex Johnson</h3>
-                <span class="service-meta text-orange-400">Group Show • Dec 20, 8:00 PM</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 mt-2">
-              <span class="amount-display">$500</span>
-              <span class="status-badge badge-pending">Pending</span>
-            </div>
-          </div>
+    <?php if(!empty($model_bookings) && count($model_bookings) > 0) { ?>
 
-          <div class="flex gap-2 flex-wrap">
-            <button class="btn btn-success" onclick="acceptRequest(this)">Accept</button>
-            <button class="btn btn-danger" onclick="declineRequest(this)">Decline</button>
-            <button class="btn btn-message" onclick="openMessage(this)">Message</button>
-            <button class="btn btn-secondary" onclick="viewDetails(this)">Details</button>
-          </div>
-        </div>
-      </div>
+      <?php foreach($model_bookings as $item) { ?>
+
+            <div class="service-card fade-in-up" data-status="pending" data-type="group">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2">
+                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Client" class="client-avatar border-orange-400">
+                    <div>
+                        <h3 class="client-name">Alex Johnson</h3>
+                        <span class="service-meta text-orange-400">Group Show • Dec 20, 8:00 PM</span>
+                    </div>
+                    </div>
+                    <div class="flex items-center gap-3 mt-2">
+                    <span class="amount-display">$500</span>
+                    <span class="status-badge badge-pending">Pending</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 flex-wrap">
+                    <button class="btn btn-success" onclick="acceptRequest(this)">Accept</button>
+                    <button class="btn btn-danger" onclick="declineRequest(this)">Decline</button>
+                    <button class="btn btn-message" onclick="openMessage(this)">Message</button>
+                    <button class="btn btn-secondary" onclick="viewDetails(this)">Details</button>
+                </div>
+                </div>
+            </div>
+
+      <?php } ?>
+      
+    <?php } ?>
 
  
       <!-- <div class="service-card fade-in-up" data-status="approved" data-type="dating">
