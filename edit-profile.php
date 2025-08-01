@@ -2493,7 +2493,7 @@ $lang_list = modal_language_list();
       <div class="modal">
           <div class="modal-header">
               <h2 class="modal-title">Success</h2>
-              <button class="close-modal" id="closeTipModal">
+              <button class="close-modal" id="closeTipModal" type="button" onclick="CloseModal()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <line x1="18" y1="6" x2="6" y2="18"></line>
                       <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -2503,7 +2503,7 @@ $lang_list = modal_language_list();
           <div class="modal-body" id="modal_success_message">
               
 
-              <button class="btn btn-primary">Send Tip</button>
+              <button class="btn btn-primary" type="button" onclick="CloseModal()">Close</button>
           </div>
       </div>
   </div>
@@ -3113,7 +3113,7 @@ $lang_list = modal_language_list();
                   $('#modal_success_message').prepend('<p class="success-text">Your settings have been saved successfully!</p>');
 
                   $('#success_modal').addClass('active');
-                  
+
                 }, 1000);
               }
           },
@@ -3125,13 +3125,13 @@ $lang_list = modal_language_list();
         });
       }
 
-    $('#closeTipModal').on('click', function () {
 
-      $('#success_modal').removeClass('active');
-      $('#modal_success_message .success-text').remove();
+    function CloseModal()
+    {
+        $('#success_modal').removeClass('active');
+        $('#modal_success_message .success-text').remove();
+    }
 
-    });
-      
   function savePremiumSettings(event) {
     const button = event.target;
     const originalText = button.textContent;
