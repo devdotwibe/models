@@ -3038,32 +3038,41 @@ $lang_list = modal_language_list();
     }, 2000);
   }
 
-  function saveCreatorSettings(event) {
+   function saveCreatorSettings(button) {
 
-    const originalText = $(event).text();
+        const $button = $(button);
+        const originalText = $button.text();
 
-    $(event).text('Saving...');
+        $button.text('Saving...');
+        $button.prop('disabled', true);
+
+        const form = $('#creatorSettingsForm')[0];
+        const formData = new FormData(form);
+
+        $.ajax({
+          url: 'act-edit-profile.php',
+          type: 'POST',
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function (response) {
    
-    $(event).prop('disabled',true);
-    
-    setTimeout(() => {
-      
-      $(event).text(originalText);
+            $('.progress-fill').css('width', '100%');
+            $('.step').addClass('completed').removeClass('active');
 
-      $(event).prop('disabled',false);
+            setTimeout(() => {
+              $button.text(originalText);
+              $button.prop('disabled', false);
+            }, 1000);
+          },
+
+          error: function (xhr, status, error) {
+            $button.text(originalText);
+            $button.prop('disabled', false);
+          }
+        });
+      }
       
-      const progressFill = document.querySelector('.progress-fill');
-      if (progressFill) progressFill.style.width = '100%';
-      
-      document.querySelectorAll('.step').forEach(step => {
-        if (step) {
-            step.classList.add('completed');
-            step.classList.remove('active');
-        }
-      });
-    }, 2000);
-  }
-  
   function savePremiumSettings(event) {
     const button = event.target;
     const originalText = button.textContent;
