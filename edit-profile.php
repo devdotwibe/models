@@ -2478,7 +2478,16 @@ $lang_list = modal_language_list();
   </div>
 
 
-    <div class="modal-overlay" id="success_modal">
+ 
+  <div class="flex justify-center mt-8">
+    <button class="btn-primary text-lg px-8 py-4" onclick="savePremiumSettings()">Save Premium Settings</button>
+  </div>
+</div>
+</main>
+
+
+
+   <div class="modal-overlay" id="success_modal">
       <div class="modal">
           <div class="modal-header">
               <h2 class="modal-title">Send a Tip</h2>
@@ -2523,12 +2532,7 @@ $lang_list = modal_language_list();
   </div>
 
 
-
-  <div class="flex justify-center mt-8">
-    <button class="btn-primary text-lg px-8 py-4" onclick="savePremiumSettings()">Save Premium Settings</button>
-  </div>
-</div>
-</main>
+  
 
     <?php include('includes/footer.php'); ?>
 <script>
