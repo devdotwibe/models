@@ -5,7 +5,7 @@ include('includes/helper.php');
 
 if($_SESSION["log_user"]){
 	$userDetails = get_data('model_user',array('id'=>$_SESSION['log_user_id']),true);
-    
+
 	if(!$userDetails){
 		echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
 		echo "<script>window.location='".SITEURL."/login.php';</script>";
@@ -17,15 +17,7 @@ else{
 	echo "<script>window.location='".SITEURL."/login.php';</script>";
 	die;
 }
-$m_id = $_GET["m_id"];
-$model_data = DB::queryFirstRow("SELECT * FROM model_user WHERE unique_id =  %s ", $m_id);
-if(!$model_data){
-	echo '<script>window.history.back();</script>';
-	die;
-}else{
-$model_name = $model_data['name'];
-$model_ID = $model_data['id'];
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
