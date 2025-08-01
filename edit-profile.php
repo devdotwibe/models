@@ -1846,7 +1846,7 @@ $lang_list = modal_language_list();
     <div class="flex justify-center mt-8">
 			<input type="hidden" name="use_id" value="<?php echo $_SESSION["log_user_id"]; ?>">
 			<input type="hidden" name="model_unique_id" value="<?php echo $userDetails['unique_id']; ?>">
-      <button class="btn-primary text-lg px-8 py-4" type="submit" name="service_submit" onclick="saveCreatorSettings()">Save Creator Settings</button>
+      <button class="btn-primary text-lg px-8 py-4" type="button" name="service_submit" onclick="saveCreatorSettings()">Save Creator Settings</button>
     </div>
 	</form>
   </div>
