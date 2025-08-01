@@ -36,7 +36,7 @@ else{
 	<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
    
 </head>
-<body class="min-h-screen text-white booking-form text-white socialwall-page">
+<body class="optim-services">
 	
 	
 	<?php if (isset($_SESSION["log_user_id"])) { ?>
