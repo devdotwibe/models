@@ -915,10 +915,19 @@ if (mysqli_num_rows($res_ap) > 0) {
                     
                         while($rows_md = mysqli_fetch_assoc($resulmd)) {
                         
-                        if(!empty($rows_md['profile_pic'])){
-                            $profile_pic = SITEURL.$rows_md['profile_pic'];
-                        }else{
-                            $profile_pic = SITEURL.'assets/images/model-gal-no-img.jpg';
+                        $defaultImage =SITEURL."/assets/images/girl.png";
+
+                        if($rows_md['gender']=='Male'){
+
+                            $defaultImage =SITEURL."/assets/images/profile.jpg";
+                        }
+
+                        if(!empty($rows_md['profile_pic']))
+                        {
+                            if (checkImageExists($rows_md['profile_pic'])) {
+                            
+                                $defaultImage = SITEURL . $rows_md['profile_pic'];
+                            }
                         }
                         
                         if(!empty($rows_md['username'])){
@@ -929,7 +938,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         
                         ?>
                             <div class="flex items-center gap-3">
-                                <img src="<?php echo $profile_pic; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                                <img src="<?php echo $defaultImage; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
                                 <div class="flex-1">
                                     <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
                                     <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
