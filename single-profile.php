@@ -1842,7 +1842,7 @@ if (mysqli_num_rows($res_ap) > 0) {
             </div>
         </div>
 
-         <div class="modal-overlay" id="success_modal"  onclick="SuccessBackdropClose(event)">
+         <div class="modal-overlay" id="success_modal">
             <div class="modal">
                 <div class="modal-header">
                     <h2 class="modal-title">Success</h2>
@@ -1918,13 +1918,6 @@ jQuery('.socialpaidbtn').click(function(e){
 </script>
 
     <script>
-
-        function SuccessBackdropClose(event) {
-
-            if (event.target.id === 'success_modal') {
-                SuccessCloseModal();
-            }
-        }
 
 
         function ConformPurchase(token,form_id,type)
@@ -2330,35 +2323,16 @@ jQuery('.socialpaidbtn').click(function(e){
         });
     }
 
-
-
-
-
-
-
-
-    
-    // Close modals when clicking outside
-    const modalOverlays = document.querySelectorAll('.modal-overlay');
+    const modalOverlays = document.querySelectorAll('.modal-overlay:not(#success_modal)');
     modalOverlays.forEach(overlay => {
-        overlay.addEventListener('click', function(e) {
+        overlay.addEventListener('click', function (e) {
             if (e.target === overlay) {
                 overlay.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
         });
-  
     });
 
-
-
-
-
-
-
-
-    
-    // Initialize Tabs
     const tabs = document.querySelectorAll('.tab');
     
     tabs.forEach(tab => {
