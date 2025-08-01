@@ -529,7 +529,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) ) {?>
 
-                                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" onclick="ConformPurchase('<?php echo $uplds['token']  ?>','form_token_<?= $uplds['ID'] ?>')">
+                                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" onclick="ConformPurchase('<?php echo $uplds['token']  ?>','form_token_<?= $uplds['ID'] ?>','Image')">
                                         <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
 
                                             <form method="post" action="file-process.php" id="form_token_<?= $uplds['ID'] ?>">
@@ -603,10 +603,10 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                         <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) ) {?>
 
-                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" onclick="ConformPurchase('<?php echo $uplds['token']  ?>','form_token_<?= $uplds['ID'] ?>','Video')">
                                     <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
 
-                                        <form method="post" action="file-process.php">
+                                        <form method="post" action="file-process.php" id="form_token_<?= $uplds['ID'] ?>">
 
                                             <input type="hidden" name="file_id" value="<?php echo $uplds['ID']; ?>">
                                             <input type="hidden" name="user_id" value="<?php echo $_SESSION['log_user_unique_id']?>">
@@ -615,7 +615,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                             <input type="hidden" name="m_unique_id" value="<?php echo $_GET['m_unique_id']; ?>">
                                             <input type="hidden" name="model_id" value="<?php echo $uplds['post_author']; ?>">
                                             
-                                            <button class="mybtn"  type="submit" name="submit">
+                                            <button class="mybtn"  type="button" name="submit">
 
                                                 <i class="fas fa-database" aria-hidden="true"></i>
                                                 <span> <?php echo $uplds['token']  ?></span>
@@ -1823,7 +1823,7 @@ if (mysqli_num_rows($res_ap) > 0) {
         <div class="modal-overlay" id="conform_modal">
             <div class="modal">
                 <div class="modal-header">
-                <h2 class="modal-title">Unlock Image</h2>
+                <h2 class="modal-title">Unlock <span id="file_type">Image</span></h2>
                 <button class="close-modal" type="button" onclick="CloseModal()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -1920,11 +1920,13 @@ jQuery('.socialpaidbtn').click(function(e){
     <script>
 
 
-        function ConformPurchase(token,form_id)
+        function ConformPurchase(token,form_id,type)
         {
             $('#conform_modal').addClass('active');
 
             $('#token_amount').text(token);
+
+            $('#file_type').text(type);
 
             $('#puchare_submit').attr('onclick', `SubmitPurchase('${form_id}')`);
         }
