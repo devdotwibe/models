@@ -1846,7 +1846,7 @@ $lang_list = modal_language_list();
     <div class="flex justify-center mt-8">
 			<input type="hidden" name="use_id" value="<?php echo $_SESSION["log_user_id"]; ?>">
 			<input type="hidden" name="model_unique_id" value="<?php echo $userDetails['unique_id']; ?>">
-      <button class="btn-primary text-lg px-8 py-4" type="button" name="service_submit" onclick="saveCreatorSettings()">Save Creator Settings</button>
+      <button class="btn-primary text-lg px-8 py-4" type="button" name="service_submit" onclick="saveCreatorSettings(this)">Save Creator Settings</button>
     </div>
 	</form>
   </div>
@@ -3039,15 +3039,18 @@ $lang_list = modal_language_list();
   }
 
   function saveCreatorSettings(event) {
-    const button = event.target;
-    const originalText = button.textContent;
-    button.textContent = 'Saving...';
-    button.disabled = true;
+
+    const originalText = $(event).text();
+
+    $(event).text('Saving...');
+   
+    $(event).prop('disabled',true);
     
     setTimeout(() => {
-      alert('✅ Creator settings saved successfully!');
-      button.textContent = originalText;
-      button.disabled = false;
+      
+      $(event).text(originalText);
+
+      $(event).prop('disabled',false);
       
       const progressFill = document.querySelector('.progress-fill');
       if (progressFill) progressFill.style.width = '100%';
