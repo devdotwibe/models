@@ -131,9 +131,9 @@ else{
 
                             $meeting_date = $item['meeting_date']; //Y-m-d format;
 
-                            $formattedDate = date('M d', strtotime($meeting_date)); 
+                            // $formattedDate = date('M d', strtotime($meeting_date)); 
                         ?>
-                        <span class="service-meta text-orange-400"><?php echo $item['booking_for'] ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
+                        <span class="service-meta text-orange-400"><?php echo $item['booking_for'] ?> • <?php echo $item['meeting_time'] ?></span>
                     </div>
                     </div>
 
