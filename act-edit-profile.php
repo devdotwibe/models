@@ -278,12 +278,8 @@ if ($_POST['submit_name']){
 			
 		}
 		
-		
-				echo '<script>alert("Your Services Successfully Updated");
-			window.location="edit-profile.php"
-			</script>';
-		die;
-		
+		echo json_encode(['status' => 'success']);
+	
 	}/*else if(isset($_POST['submit_pass'])){
 
       $user_id = $_POST['use_id'];
