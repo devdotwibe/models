@@ -2492,7 +2492,7 @@ $lang_list = modal_language_list();
    <div class="modal-overlay" id="success_modal">
       <div class="modal">
           <div class="modal-header">
-              <h2 class="modal-title">Send a Tip</h2>
+              <h2 class="modal-title">Success</h2>
               <button class="close-modal" id="closeTipModal">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -2500,34 +2500,9 @@ $lang_list = modal_language_list();
                   </svg>
               </button>
           </div>
-          
-          <div class="modal-body">
-              <div class="tip-options">
-                  <div class="tip-option">
-                      <div class="tip-amount">$10</div>
-                      <div class="tip-label">Coffee</div>
-                  </div>
-                  <div class="tip-option">
-                      <div class="tip-amount">$25</div>
-                      <div class="tip-label">Lunch</div>
-                  </div>
-                  <div class="tip-option">
-                      <div class="tip-amount">$50</div>
-                      <div class="tip-label">Dinner</div>
-                  </div>
-                  <div class="tip-option">
-                      <div class="tip-amount">$100</div>
-                      <div class="tip-label">VIP</div>
-                  </div>
-              </div>
+          <div class="modal-body" id="modal_success_message">
               
-              <div class="custom-tip">
-                  <span>$</span>
-                  <input type="number" class="custom-tip-input" placeholder="Custom amount" min="1">
-              </div>
-              
-              <textarea class="gift-message" placeholder="Add a personal message (optional)"></textarea>
-              
+
               <button class="btn btn-primary">Send Tip</button>
           </div>
       </div>
@@ -3128,16 +3103,18 @@ $lang_list = modal_language_list();
             console.log(response);
 
             if (response.status === 'success') {
+                $('.progress-fill').css('width', '100%');
+                $('.step').addClass('completed').removeClass('active');
 
-              $('.progress-fill').css('width', '100%');
-              $('.step').addClass('completed').removeClass('active');
+                setTimeout(() => {
+                  $button.text(originalText);
+                  $button.prop('disabled', false);
 
-              setTimeout(() => {
-                $button.text(originalText);
-                $button.prop('disabled', false);
-              }, 1000);
+                  $('#modal_success_message').prepend('<p class="success-text">Your settings have been saved successfully!</p>');
 
-            }
+                  $('#success_modal').addClass('active');
+                }, 1000);
+              }
           },
 
           error: function (xhr, status, error) {
@@ -3146,6 +3123,13 @@ $lang_list = modal_language_list();
           }
         });
       }
+
+    $('#closeTipModal').on('click', function () {
+
+      $('#success_modal').removeClass('active');
+      $('#modal_success_message .success-text').remove();
+      
+    });
       
   function savePremiumSettings(event) {
     const button = event.target;
