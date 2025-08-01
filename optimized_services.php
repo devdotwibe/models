@@ -90,7 +90,6 @@ else{
       <button class="filter-btn" data-filter="international">International</button>
     </div>
 
-    <!-- Services List -->
     <div id="services-list" class="space-y-3">
 
       <!-- Pending Service -->
@@ -119,59 +118,8 @@ else{
         </div>
       </div>
 
-      <!-- Pending Service -->
-      <div class="service-card fade-in-up" data-status="pending" data-type="dating">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Client" class="client-avatar border-orange-400">
-              <div>
-                <h3 class="client-name">Michael Chen</h3>
-                <span class="service-meta text-orange-400">Dating Assignment • Dec 22, 7:00 PM</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 mt-2">
-              <span class="amount-display">$800</span>
-              <span class="status-badge badge-pending">Pending</span>
-            </div>
-          </div>
-
-          <div class="flex gap-2 flex-wrap">
-            <button class="btn btn-success" onclick="acceptRequest(this)">Accept</button>
-            <button class="btn btn-danger" onclick="declineRequest(this)">Decline</button>
-            <button class="btn btn-message" onclick="openMessage(this)">Message</button>
-            <button class="btn btn-secondary" onclick="viewDetails(this)">Details</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Approved Services -->
-      <div class="service-card fade-in-up" data-status="approved" data-type="group">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <img src="https://randomuser.me/api/portraits/men/28.jpg" alt="Client" class="client-avatar border-green-400">
-              <div>
-                <h3 class="client-name">James Rodriguez</h3>
-                <span class="service-meta text-pink-400">Group Show • Today, 9:00 PM</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 mt-2">
-              <span class="amount-display">$400</span>
-              <span class="status-badge badge-approved">Approved</span>
-            </div>
-          </div>
-
-          <div class="flex gap-2 flex-wrap">
-            <button class="btn btn-primary" onclick="prepareSession('james')">Prepare Session</button>
-            <button class="btn btn-message" onclick="openMessage(this)">Message</button>
-            <button class="btn btn-secondary" onclick="viewDetails(this)">Details</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Approved Service -->
-      <div class="service-card fade-in-up" data-status="approved" data-type="dating">
+ 
+      <!-- <div class="service-card fade-in-up" data-status="approved" data-type="dating">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div class="flex-1">
             <div class="flex items-center gap-3 mb-2">
@@ -193,35 +141,13 @@ else{
             <button class="btn btn-secondary" onclick="viewDetails(this)">Details</button>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <!-- Approved Service -->
-      <div class="service-card fade-in-up" data-status="approved" data-type="modeling">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Client" class="client-avatar border-green-400">
-              <div>
-                <h3 class="client-name">David Wilson</h3>
-                <span class="service-meta text-pink-400">Movie/Modeling • Tomorrow, 10:00 AM</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 mt-2">
-              <span class="amount-display">$1,200</span>
-              <span class="status-badge badge-approved">Approved</span>
-            </div>
-          </div>
 
-          <div class="flex gap-2 flex-wrap">
-            <button class="btn btn-primary" onclick="prepareSession('david')">Prepare Session</button>
-            <button class="btn btn-message" onclick="openMessage(this)">Message</button>
-            <button class="btn btn-secondary" onclick="viewDetails(this)">Details</button>
-          </div>
-        </div>
-      </div>
 
       <!-- Completed Service -->
-      <div class="service-card fade-in-up" data-status="completed" data-type="group">
+
+      <!-- <div class="service-card fade-in-up" data-status="completed" data-type="group">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div class="flex-1">
             <div class="flex items-center gap-3 mb-2">
@@ -243,106 +169,11 @@ else{
             <button class="btn btn-message" onclick="openMessage(this)">Message</button>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <!-- Completed Service -->
-      <div class="service-card fade-in-up" data-status="completed" data-type="dating">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <img src="https://randomuser.me/api/portraits/men/61.jpg" alt="Client" class="client-avatar border-indigo-400">
-              <div>
-                <h3 class="client-name">Mark Johnson</h3>
-                <span class="service-meta text-pink-400">Dating Assignment • Dec 12, 7:00 PM</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 mt-2">
-              <span class="amount-display">$800</span>
-              <span class="status-badge badge-completed">Completed</span>
-              <span class="rating-stars">★★★★☆</span>
-            </div>
-          </div>
-
-          <div class="flex gap-2 flex-wrap">
-            <button class="btn btn-secondary" onclick="openReviewModal('Mark Johnson', 'Dating Assignment', '$800', true)">Edit Review</button>
-            <button class="btn btn-message" onclick="openMessage(this)">Message</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- More completed services -->
-      <div class="service-card fade-in-up" data-status="completed" data-type="modeling">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <img src="https://randomuser.me/api/portraits/men/72.jpg" alt="Client" class="client-avatar border-indigo-400">
-              <div>
-                <h3 class="client-name">Carlos Martinez</h3>
-                <span class="service-meta text-pink-400">Modeling Session • Dec 10, 2:00 PM</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 mt-2">
-              <span class="amount-display">$1,500</span>
-              <span class="status-badge badge-completed">Completed</span>
-              <span class="rating-stars">★★★★★</span>
-            </div>
-          </div>
-
-          <div class="flex gap-2 flex-wrap">
-            <button class="btn btn-secondary" onclick="openReviewModal('Carlos Martinez', 'Modeling Session', '$1,500', true)">Edit Review</button>
-            <button class="btn btn-message" onclick="openMessage(this)">Message</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-card fade-in-up" data-status="completed" data-type="group">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <img src="https://randomuser.me/api/portraits/men/84.jpg" alt="Client" class="client-avatar border-indigo-400">
-              <div>
-                <h3 class="client-name">Ryan Thompson</h3>
-                <span class="service-meta text-pink-400">Group Show • Dec 8, 9:00 PM</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 mt-2">
-              <span class="amount-display">$450</span>
-              <span class="status-badge badge-completed">Completed</span>
-              <span class="rating-stars">★★★★☆</span>
-            </div>
-          </div>
-
-          <div class="flex gap-2 flex-wrap">
-            <button class="btn btn-secondary" onclick="openReviewModal('Ryan Thompson', 'Group Show', '$450', true)">Edit Review</button>
-            <button class="btn btn-message" onclick="openMessage(this)">Message</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-card fade-in-up" data-status="completed" data-type="international">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div class="flex-1">
-            <div class="flex items-center gap-3 mb-2">
-              <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="Client" class="client-avatar border-indigo-400">
-              <div>
-                <h3 class="client-name">Ahmed Hassan</h3>
-                <span class="service-meta text-pink-400">International Event • Dec 5, 7:00 PM</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-3 mt-2">
-              <span class="amount-display">$2,200</span>
-              <span class="status-badge badge-completed">Completed</span>
-              <span class="rating-stars">★★★★★</span>
-            </div>
-          </div>
-
-          <div class="flex gap-2 flex-wrap">
-            <button class="btn btn-secondary" onclick="openReviewModal('Ahmed Hassan', 'International Event', '$2,200', true)">Edit Review</button>
-            <button class="btn btn-message" onclick="openMessage(this)">Message</button>
-          </div>
-        </div>
-      </div>
+   
     </div>
+
   </main>
 
   <!-- Mobile Navigation -->
