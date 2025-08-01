@@ -133,7 +133,7 @@ else{
 
                             $formattedDate = date('M d', strtotime($meeting_date)); 
                         ?>
-                        <span class="service-meta text-orange-400"><?php echo $booking_for ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
+                        <span class="service-meta text-orange-400"><?php echo $item['booking_for'] ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
                     </div>
                     </div>
 
@@ -165,7 +165,13 @@ else{
                        }
                     ?>
                     <div class="flex items-center gap-3 mt-2">
-                    <span class="amount-display">$<?php echo $token_amount ?></span>
+
+                    <?php if(!empty($token_amount)) { ?>
+
+                        <span class="amount-display">$<?php echo $token_amount ?></span>
+
+                    <?php }?>
+
                     <span class="status-badge badge-pending">Pending</span>
                     </div>
                 </div>
