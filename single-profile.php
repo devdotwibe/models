@@ -1907,7 +1907,7 @@ jQuery('.socialpaidbtn').click(function(e){
 
             $('#token_amount').text(token);
 
-            $('#puchare_submit').attr(`onclick','SubmitPurchase(`${form_id}`)`);
+            $('#puchare_submit').attr('onclick', `SubmitPurchase('${form_id}')`);
         }
 
         function CloseModal()
