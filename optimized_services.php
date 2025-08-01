@@ -42,16 +42,14 @@ else{
 
         $currentUrl = $_SERVER['REQUEST_URI'];
 
-        echo $currentUrl;
-        exit;
-
-        die();
-
         if (isset($_SESSION["log_user_id"])) {
             
-            if ($currentUrl === "https://models.staging3.dotwibe.com/optimized_services") {
+            if ($currentUrl === "/optimized_services") {
+
                 include('includes/service_header.php');
+
             } else {
+                
                 include('includes/side-bar.php');
                 include('includes/profile_header_index.php');
             }
