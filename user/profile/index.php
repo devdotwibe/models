@@ -700,6 +700,9 @@ if(!empty($userDetails['profile_pic'])){
 
                       <?php } ?>
 
+                    <button type="button" onclick="AddMessage('<?php echo $k ?>')" class="btn-secondary text-sm md:text-base whitespace-nowrap">Message</button>
+
+
 
                     <input type="text" name="comment" id="comment_content_<?php echo $k ?>" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
 
@@ -714,9 +717,6 @@ if(!empty($userDetails['profile_pic'])){
                     <input type="hidden" name="image_url" id="image_url<?php echo $k ?>" value="<?php echo $auther_pic_url ?>">
                       
                   </div>
-
-                  <button type="button" onclick="AddMessage('<?php echo $k ?>')" class="btn-secondary text-sm md:text-base whitespace-nowrap">Message</button>
-
                    
               </div>
 
