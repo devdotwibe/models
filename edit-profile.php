@@ -3113,6 +3113,7 @@ $lang_list = modal_language_list();
                   $('#modal_success_message').prepend('<p class="success-text">Your settings have been saved successfully!</p>');
 
                   $('#success_modal').addClass('active');
+                  
                 }, 1000);
               }
           },
@@ -3128,7 +3129,7 @@ $lang_list = modal_language_list();
 
       $('#success_modal').removeClass('active');
       $('#modal_success_message .success-text').remove();
-      
+
     });
       
   function savePremiumSettings(event) {
