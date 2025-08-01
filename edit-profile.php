@@ -3060,16 +3060,18 @@ $lang_list = modal_language_list();
           processData: false,
           success: function (response) {
    
-             if (response.status === 'success') {
-              
-                $('.progress-fill').css('width', '100%');
-                $('.step').addClass('completed').removeClass('active');
-                      setTimeout(() => {
-                        $button.text(originalText);
-                        $button.prop('disabled', false);
-                      }, 1000);
-                    },
-              }
+            if (response.status === 'success') {
+
+              $('.progress-fill').css('width', '100%');
+              $('.step').addClass('completed').removeClass('active');
+
+              setTimeout(() => {
+                $button.text(originalText);
+                $button.prop('disabled', false);
+              }, 1000);
+
+            }
+          },
 
           error: function (xhr, status, error) {
             $button.text(originalText);
