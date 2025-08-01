@@ -40,7 +40,7 @@ else{
 
     <?php
 
-        $currentUrl = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $currentUrl = $_SERVER['REQUEST_URI'];
 
         echo $currentUrl;
         exit;
