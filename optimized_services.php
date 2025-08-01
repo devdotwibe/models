@@ -126,11 +126,46 @@ else{
                     <img src="<?php echo $defaultImage ?>" alt="Client" class="client-avatar border-orange-400">
                     <div>
                         <h3 class="client-name"><?php echo $item['name'] ?> </h3>
-                        <span class="service-meta text-orange-400">Group Show • Dec 20, 8:00 PM</span>
+
+                        <?php 
+
+                            $meeting_date = $item['meeting_date']; //Y-m-d format;
+
+                            $formattedDate = date('M d', strtotime($meeting_date)); 
+                        ?>
+                        <span class="service-meta text-orange-400"><?php echo $booking_for ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
                     </div>
                     </div>
+
+                    <?php 
+
+                    	$extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $item['user_unique_id']); 
+
+                        $token_amount = "";
+
+                       if( $item['service_name'] =='Group Chat')
+                       {
+                            $token_amount = $extra_details['group_chat_tocken'];
+                       }
+                       elseif( $item['service_name'] =='Overnight Social')
+                       {
+                             $token_amount = $extra_details['in_overnight'];
+                       }
+                       elseif($item['service_name'] =='Extended Social')
+                       {
+                             $token_amount = $extra_details['extended_rate'];
+                       }
+                       elseif($item['service_name'] =='Private Chat')
+                       {
+                             $token_amount = $extra_details['private_chat_token'];
+                       }
+                        elseif($item['service_name'] =='Local Meetup')
+                       {
+                             $token_amount = $extra_details['in_per_hour'];
+                       }
+                    ?>
                     <div class="flex items-center gap-3 mt-2">
-                    <span class="amount-display">$500</span>
+                    <span class="amount-display">$<?php echo $token_amount ?></span>
                     <span class="status-badge badge-pending">Pending</span>
                     </div>
                 </div>
