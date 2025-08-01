@@ -1842,7 +1842,7 @@ if (mysqli_num_rows($res_ap) > 0) {
             </div>
         </div>
 
-         <div class="modal-overlay" id="success_modal">
+         <div class="modal-overlay" id="success_modal"  onclick="SuccessBackdropClose(event)">
             <div class="modal">
                 <div class="modal-header">
                     <h2 class="modal-title">Success</h2>
@@ -1918,6 +1918,13 @@ jQuery('.socialpaidbtn').click(function(e){
 </script>
 
     <script>
+
+        function SuccessBackdropClose(event) {
+
+            if (event.target.id === 'success_modal') {
+                SuccessCloseModal();
+            }
+        }
 
 
         function ConformPurchase(token,form_id,type)
