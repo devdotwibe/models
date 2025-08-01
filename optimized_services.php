@@ -133,7 +133,7 @@ else{
 
                             $formattedDate = date('M d', strtotime($meeting_date)); 
                         ?>
-                        <span class="service-meta text-orange-400"><?php echo $item['booking_for'] ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
+                        <span class="service-meta <?php if($item['status'] ==='Accept') { ?>text-pink-400 <?php } else { ?> text-orange-400 <?php } ?>  "><?php echo $item['booking_for'] ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
                     </div>
                     </div>
 
@@ -172,15 +172,36 @@ else{
 
                     <?php }?>
 
-                    <span class="status-badge badge-pending">Pending</span>
+                    <?php if($item['status'] ==='Accept') { ?>
+
+                        <span class="status-badge badge-pending">Pending</span>
+
+                    <?php } else {  ?>
+
+                          <span class="status-badge badge-approved">Approved</span>
+
+                    <?php } ?>
+
                     </div>
                 </div>
 
                 <div class="flex gap-2 flex-wrap">
+
+                <?php if($item['status'] !='Accept') { ?>
+                 
                     <button class="btn btn-success" onclick="acceptRequest(this)">Accept</button>
                     <button class="btn btn-danger" onclick="declineRequest(this)">Decline</button>
                     <button class="btn btn-message" onclick="openMessage(this)">Message</button>
+
+                <?php } else { ?>
+                    
+                    <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
+                    <button class="btn btn-message" onclick="openMessage(this)">Message</button>
+
+                <?php }?>
+
                     <button class="btn btn-secondary" onclick="viewDetails(this)">Details</button>
+
                 </div>
                 </div>
             </div>
