@@ -97,15 +97,35 @@ else{
 
     <?php if(!empty($model_bookings) && count($model_bookings) > 0) { ?>
 
-      <?php foreach($model_bookings as $item) { ?>
+      <?php foreach($model_bookings as $item) { 
+        
+
+            $bookeduser = DB::queryFirstRow("SELECT name FROM model_user WHERE unique_id =  %s ", $item['user_unique_id']);
+
+            $defaultImage =SITEURL."/assets/images/girl.png";
+
+            if($bookeduser['gender']=='Male'){
+
+                $defaultImage =SITEURL."/assets/images/profile.jpg";
+            }
+
+            if(!empty($bookeduser['profile_pic']))
+            {
+                if (checkImageExists($bookeduser['profile_pic'])) {
+            
+                    $defaultImage = SITEURL . $bookeduser['profile_pic'];
+                }
+            }
+        
+        ?>
 
             <div class="service-card fade-in-up" data-status="pending" data-type="group">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
-                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Client" class="client-avatar border-orange-400">
+                    <img src="<?php echo $defaultImage ?>" alt="Client" class="client-avatar border-orange-400">
                     <div>
-                        <h3 class="client-name">Alex Johnson</h3>
+                        <h3 class="client-name"><?php echo $item['name'] ?> </h3>
                         <span class="service-meta text-orange-400">Group Show • Dec 20, 8:00 PM</span>
                     </div>
                     </div>
@@ -125,7 +145,7 @@ else{
             </div>
 
       <?php } ?>
-      
+
     <?php } ?>
 
  
