@@ -7,7 +7,7 @@ if (isset($_SESSION["log_user_id"])) {
 	if ($userDetails) {
 
 
-		echo json_encode(['status' => 'success','message'=>''.$_POST['coins'].' tokens deducted! file unlocked.']);
+		echo json_encode(['status' => 'success','message'=>''.$_POST['coins'].' tokens deducted! '.$_POST['file_type'].' file unlocked.']);
 
 		die();
 
