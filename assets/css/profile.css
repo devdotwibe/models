@@ -6319,5 +6319,1558 @@ background-image: url(https://images.unsplash.com/photo-1579547945413-497e1b99da
 
 
 
+ .optim-services body {
+
+      font-family: 'Inter', sans-serif;
+
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+
+      color: var(--text-primary);
+
+      min-height: 100vh;
+
+      margin: 0;
+
+      padding: 0;
+
+      overflow-x: hidden;
+
+      font-size: 14px; /* Base font size reduced */
+
+    }
+
+
+
+    /* GLASS MORPHISM EFFECTS */
+
+    .optim-services .glass {
+
+      background: rgba(255, 255, 255, 0.03);
+
+      backdrop-filter: blur(20px);
+
+      -webkit-backdrop-filter: blur(20px);
+
+      border: 1px solid var(--border);
+
+    }
+
+
+
+    /* HEADER STYLES */
+
+    .optim-services .header {
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 50;
+
+      padding: 0.75rem 0;
+
+      border-bottom: 1px solid var(--border);
+
+    }
+
+
+
+    .optim-services .logo {
+
+      height: 2.25rem;
+
+      filter: brightness(1.1);
+
+    }
+
+
+
+    .optim-services .live-indicator {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 0.375rem;
+
+      background: linear-gradient(45deg, var(--danger), #ff6b6b);
+
+      color: white;
+
+      padding: 0.375rem 0.75rem;
+
+      border-radius: 1.25rem;
+
+      font-weight: 700;
+
+      font-size: 0.7rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.05em;
+
+      animation: pulse-glow 2s ease-in-out infinite;
+
+    }
+
+
+
+    .optim-services .live-dot {
+
+      width: 0.375rem;
+
+      height: 0.375rem;
+
+      background: white;
+
+      border-radius: 50%;
+
+      animation: blink 1s ease-in-out infinite;
+
+    }
+
+
+
+    @keyframes pulse-glow {
+
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+
+      50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+
+    }
+
+
+
+    @keyframes blink {
+
+      0%, 100% { opacity: 1; }
+
+      50% { opacity: 0.3; }
+
+    }
+
+
+
+    /* COUNTDOWN CLOCK WIDGET */
+
+    .optim-services .countdown-widget {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 0.5rem;
+
+      background: rgba(255, 255, 255, 0.05);
+
+      border: 1px solid var(--border);
+
+      border-radius: 0.75rem;
+
+      padding: 0.375rem 0.75rem;
+
+      cursor: pointer;
+
+      transition: all 0.3s ease;
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .optim-services .countdown-widget:hover {
+
+      background: rgba(255, 255, 255, 0.08);
+
+      transform: translateY(-1px);
+
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+
+    }
+
+
+
+    .optim-services .countdown-widget::before {
+
+      content: '';
+
+      position: absolute;
+
+      top: 0;
+
+      left: 0;
+
+      right: 0;
+
+      height: 2px;
+
+      background: linear-gradient(90deg, var(--op-primary), var(--secondary), var(--warning));
+
+      animation: gradient-shift 3s ease-in-out infinite;
+
+    }
+
+
+
+    @keyframes gradient-shift {
+
+      0%, 100% { background-position: 0% 50%; }
+
+      50% { background-position: 100% 50%; }
+
+    }
+
+
+
+    .optim-services .countdown-icon {
+
+      width: 20px;
+
+      height: 20px;
+
+      color: var(--secondary);
+
+      animation: tick 1s ease-in-out infinite;
+
+    }
+
+
+
+    @keyframes tick {
+
+      0%, 100% { transform: rotate(0deg); }
+
+      50% { transform: rotate(6deg); }
+
+    }
+
+
+
+    .optim-services .countdown-info {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 0.125rem;
+
+    }
+
+
+
+    .optim-services .countdown-label {
+
+      font-size: 0.65rem;
+
+      color: var(--op-text-muted);
+
+      font-weight: 500;
+
+    }
+
+
+
+    .optim-services .countdown-time {
+
+      font-size: 0.8rem;
+
+      font-weight: 700;
+
+      color: var(--text-primary);
+
+      font-family: 'Inter', monospace;
+
+    }
+
+
+
+    .optim-services .countdown-urgent {
+
+      color: var(--danger);
+
+      animation: pulse-text 1s ease-in-out infinite;
+
+    }
+
+
+
+    .optim-services .countdown-warning {
+
+      color: var(--warning);
+
+    }
+
+
+
+    .optim-services .countdown-normal {
+
+      color: var(--success);
+
+    }
+
+
+
+    @keyframes pulse-text {
+
+      0%, 100% { opacity: 1; }
+
+      50% { opacity: 0.7; }
+
+    }
+
+
+
+    .optim-services .countdown-badge {
+
+      background: var(--op-primary);
+
+      color: white;
+
+      padding: 0.125rem 0.375rem;
+
+      border-radius: 0.75rem;
+
+      font-size: 0.6rem;
+
+      font-weight: 600;
+
+      margin-left: 0.375rem;
+
+    }
+
+
+
+    /* MAIN TABS - MORE PROMINENT */
+
+    .optim-services .main-tabs {
+
+      background: rgba(255, 255, 255, 0.03);
+
+      border: 1px solid var(--border);
+
+      border-radius: 0.75rem;
+
+      padding: 0.375rem;
+
+      margin-bottom: 1.25rem;
+
+      display: flex;
+
+      gap: 0.375rem;
+
+      overflow-x: auto;
+
+    }
+
+
+
+    .optim-services .tab-button {
+
+      background: transparent;
+
+      border: none;
+
+      color: var(--op-text-secondary);
+
+      padding: 0.625rem 1.25rem;
+
+      font-size: 0.875rem;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition: all 0.3s ease;
+
+      border-radius: 0.625rem;
+
+      white-space: nowrap;
+
+      position: relative;
+
+    }
+
+
+
+    .optim-services .tab-button.active {
+
+      background: linear-gradient(45deg, var(--op-primary), var(--op-primary-dark));
+
+      color: white;
+
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+
+    }
+
+
+
+    .optim-services .tab-button:hover:not(.active) {
+
+      background: rgba(255, 255, 255, 0.05);
+
+      color: var(--text-primary);
+
+    }
+
+
+
+    .optim-services .tab-count {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      width: 1.125rem;
+
+      height: 1.125rem;
+
+      border-radius: 50%;
+
+      font-size: 0.6rem;
+
+      margin-left: 0.375rem;
+
+      font-weight: 700;
+
+      background: rgba(255, 255, 255, 0.2);
+
+      color: white;
+
+    }
+
+
+
+    .optim-services .tab-button.active .tab-count {
+
+      background: rgba(255, 255, 255, 0.3);
+
+    }
+
+
+
+    /* FILTERS */
+
+    .optim-services .filters {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 0.375rem;
+
+      margin-bottom: 1.25rem;
+
+    }
+
+
+
+    .optim-services .filter-btn {
+
+      background: rgba(255, 255, 255, 0.05);
+
+      color: var(--op-text-secondary);
+
+      padding: 0.375rem 0.75rem;
+
+      border-radius: 1.25rem;
+
+      border: 1px solid var(--border);
+
+      cursor: pointer;
+
+      font-weight: 500;
+
+      font-size: 0.75rem;
+
+      transition: all 0.3s ease;
+
+    }
+
+
+
+    .optim-services .filter-btn.active,
+
+    .optim-services .filter-btn:hover {
+
+      background: linear-gradient(45deg, var(--op-primary), var(--op-primary-dark));
+
+      color: white;
+
+      border-color: var(--op-primary);
+
+      transform: translateY(-1px);
+
+    }
+
+
+
+    /* SERVICE CARDS */
+
+    .optim-services .service-card {
+
+      background: var(--card-bg);
+
+      border-radius: 0.75rem;
+
+      padding: 1.25rem;
+
+      margin-bottom: 0.875rem;
+
+      border: 1px solid var(--border);
+
+      transition: all 0.3s ease;
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .optim-services .service-card::before {
+
+      content: '';
+
+      position: absolute;
+
+      top: 0;
+
+      left: 0;
+
+      right: 0;
+
+      height: 2px;
+
+      background: linear-gradient(90deg, transparent, var(--op-primary), transparent);
+
+      opacity: 0;
+
+      transition: opacity 0.3s ease;
+
+    }
+
+
+
+    .optim-services .service-card:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+
+      border-color: rgba(99, 102, 241, 0.3);
+
+    }
+
+
+
+    .optim-services .service-card:hover::before {
+
+      opacity: 1;
+
+    }
+
+
+
+    /* Pending card styling */
+
+    .optim-services .service-card[data-status="pending"] {
+
+      border-left: 3px solid var(--pending);
+
+      background: linear-gradient(90deg, rgba(249, 115, 22, 0.05), rgba(255, 255, 255, 0.01));
+
+    }
+
+
+
+    .optim-services .service-card[data-status="pending"]::before {
+
+      background: linear-gradient(90deg, var(--pending), transparent);
+
+      opacity: 1;
+
+    }
+
+
+
+    .optim-services .service-card[data-status="pending"]:hover {
+
+      border-color: var(--pending);
+
+      box-shadow: 0 15px 30px rgba(249, 115, 22, 0.15);
+
+    }
+
+
+
+    /* Approved card styling */
+
+    .optim-services .service-card[data-status="approved"] {
+
+      border-left: 3px solid var(--success);
+
+    }
+
+
+
+    .optim-services .service-card[data-status="approved"]:hover {
+
+      border-color: var(--success);
+
+      box-shadow: 0 15px 30px rgba(16, 185, 129, 0.15);
+
+    }
+
+
+
+    /* Completed card styling */
+
+    .optim-services .service-card[data-status="completed"] {
+
+      border-left: 3px solid var(--op-primary);
+
+    }
+
+
+
+    .optim-services .service-card[data-status="completed"]:hover {
+
+      border-color: var(--op-primary);
+
+      box-shadow: 0 15px 30px rgba(99, 102, 241, 0.15);
+
+    }
+
+
+
+    /* BUTTONS */
+
+    .optim-services .btn {
+
+      padding: 0.625rem 1.125rem;
+
+      border-radius: 0.625rem;
+
+      border: none;
+
+      cursor: pointer;
+
+      font-weight: 600;
+
+      font-size: 0.75rem;
+
+      transition: all 0.3s ease;
+
+      position: relative;
+
+      overflow: hidden;
+
+      text-decoration: none;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 0.375rem;
+
+    }
+
+
+
+    .optim-services .btn::before {
+
+      content: '';
+
+      position: absolute;
+
+      top: 0;
+
+      left: -100%;
+
+      width: 100%;
+
+      height: 100%;
+
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+
+      transition: left 0.5s ease;
+
+    }
+
+
+
+    .optim-services .btn:hover::before {
+
+      left: 100%;
+
+    }
+
+
+
+    .optim-services .btn-primary {
+
+      background: linear-gradient(45deg, var(--op-primary), var(--op-primary-dark));
+
+      color: white;
+
+    }
+
+
+
+    .optim-services .btn-primary:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+
+    }
+
+
+
+    .optim-services .btn-success {
+
+      background: linear-gradient(45deg, var(--success), #34d399);
+
+      color: white;
+
+    }
+
+
+
+    .optim-services .btn-success:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+
+    }
+
+
+
+    .optim-services .btn-danger {
+
+      background: linear-gradient(45deg, var(--danger), #f87171);
+
+      color: white;
+
+    }
+
+
+
+    .optim-services .btn-danger:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+
+    }
+
+
+
+    .optim-services .btn-secondary {
+
+      background: rgba(255, 255, 255, 0.08);
+
+      color: white;
+
+      border: 1px solid var(--border);
+
+    }
+
+
+
+    .optim-services .btn-secondary:hover {
+
+      background: rgba(255, 255, 255, 0.15);
+
+      transform: translateY(-1px);
+
+    }
+
+
+
+    .optim-services .btn-message {
+
+      background: linear-gradient(45deg, #8b5cf6, #a78bfa);
+
+      color: white;
+
+    }
+
+
+
+    .optim-services .btn-message:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+
+    }
+
+
+
+    /* STATUS BADGES */
+
+    .optim-services .status-badge {
+
+      padding: 0.375rem 0.75rem;
+
+      border-radius: 1.25rem;
+
+      font-size: 0.65rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.05em;
+
+    }
+
+
+
+    .optim-services .badge-pending {
+
+      background: linear-gradient(45deg, var(--pending), #fb923c);
+
+      color: white;
+
+    }
+
+
+
+    .optim-services .badge-approved {
+
+      background: linear-gradient(45deg, var(--success), #34d399);
+
+      color: white;
+
+    }
+
+
+
+    .optim-services .badge-completed {
+
+      background: linear-gradient(45deg, var(--op-primary), var(--op-primary-dark));
+
+      color: white;
+
+    }
+
+
+
+    /* MOBILE NAVIGATION */
+
+    .optim-services .mobile-nav {
+
+      position: fixed;
+
+      bottom: 0;
+
+      left: 0;
+
+      right: 0;
+
+      background: rgba(15, 15, 35, 0.95);
+
+      backdrop-filter: blur(20px);
+
+      border-top: 1px solid var(--border);
+
+      padding: 0.75rem 0;
+
+      z-index: 40;
+
+    }
+
+
+
+    .optim-services .mobile-nav-grid {
+
+      display: flex;
+
+      justify-content: space-around;
+
+      max-width: 400px;
+
+      margin: 0 auto;
+
+    }
+
+
+
+    .optim-services .mobile-nav-item {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      padding: 0.375rem;
+
+      color: var(--op-text-secondary);
+
+      transition: all 0.2s ease;
+
+      cursor: pointer;
+
+      border-radius: 0.625rem;
+
+    }
+
+
+
+    .optim-services .mobile-nav-item.active,
+
+    .optim-services .mobile-nav-item:hover {
+
+      color: var(--secondary);
+
+      background: rgba(236, 72, 153, 0.1);
+
+    }
+
+
+
+    /* NOTIFICATION */
+
+    .optim-services .notification {
+
+      position: fixed;
+
+      top: 1.25rem;
+
+      right: 1.25rem;
+
+      background: rgba(15, 15, 35, 0.95);
+
+      backdrop-filter: blur(20px);
+
+      border: 1px solid var(--border);
+
+      border-radius: 0.625rem;
+
+      padding: 0.75rem 1rem;
+
+      color: white;
+
+      font-weight: 600;
+
+      font-size: 0.8rem;
+
+      z-index: 1000;
+
+      transform: translateX(400px);
+
+      transition: transform 0.3s ease;
+
+      max-width: 300px;
+
+    }
+
+
+
+    .optim-services .notification.show {
+
+      transform: translateX(0);
+
+    }
+
+
+
+    .optim-services .notification.success {
+
+      border-color: var(--success);
+
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+
+    }
+
+
+
+    .optim-services .notification.warning {
+
+      border-color: var(--warning);
+
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+
+    }
+
+
+
+    /* REVIEW MODAL */
+
+    .optim-services .modal-overlay {
+
+      position: fixed;
+
+      top: 0;
+
+      left: 0;
+
+      right: 0;
+
+      bottom: 0;
+
+      background: rgba(0, 0, 0, 0.7);
+
+      backdrop-filter: blur(5px);
+
+      z-index: 100;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition: opacity 0.3s ease;
+
+    }
+
+
+
+   .optim-services .modal-overlay.active {
+
+      opacity: 1;
+
+      pointer-events: auto;
+
+    }
+
+
+
+    .optim-services .modal-container {
+
+      background: linear-gradient(145deg, rgba(30, 30, 60, 0.95), rgba(20, 20, 40, 0.95));
+
+      border: 1px solid var(--border);
+
+      border-radius: 0.75rem;
+
+      width: 90%;
+
+      max-width: 500px;
+
+      max-height: 90vh;
+
+      overflow-y: auto;
+
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+
+      transform: translateY(20px);
+
+      transition: transform 0.3s ease;
+
+    }
+
+
+
+    .optim-services .modal-overlay.active .modal-container {
+
+      transform: translateY(0);
+
+    }
+
+
+
+    .optim-services .modal-header {
+
+      padding: 1.25rem;
+
+      border-bottom: 1px solid var(--border);
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+    }
+
+
+
+    .optim-services .modal-title {
+
+      font-size: 1.125rem;
+
+      font-weight: 700;
+
+      background: linear-gradient(135deg, var(--op-primary), var(--secondary));
+
+      -webkit-background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+    }
+
+
+
+    .optim-services .modal-close {
+
+      width: 28px;
+
+      height: 28px;
+
+      border-radius: 50%;
+
+      background: rgba(255, 255, 255, 0.1);
+
+      border: 1px solid var(--border);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      cursor: pointer;
+
+      transition: all 0.2s ease;
+
+    }
+
+
+
+    .optim-services .modal-close:hover {
+
+      background: rgba(255, 255, 255, 0.2);
+
+      transform: rotate(90deg);
+
+    }
+
+
+
+    .optim-services .modal-body {
+
+      padding: 1.25rem;
+
+    }
+
+
+
+    .optim-services .modal-footer {
+
+      padding: 1.25rem;
+
+      border-top: 1px solid var(--border);
+
+      display: flex;
+
+      justify-content: flex-end;
+
+      gap: 0.75rem;
+
+    }
+
+
+
+    /* FORM ELEMENTS */
+
+    .optim-services .form-group {
+
+      margin-bottom: 1.25rem;
+
+    }
+
+
+
+    .optim-services .form-label {
+
+      display: block;
+
+      margin-bottom: 0.375rem;
+
+      font-weight: 500;
+
+      font-size: 0.8rem;
+
+      color: var(--op-text-secondary);
+
+    }
+
+
+
+    .optim-services .form-control {
+
+      width: 100%;
+
+      padding: 0.625rem 0.875rem;
+
+      background: rgba(255, 255, 255, 0.05);
+
+      border: 1px solid var(--op-border);
+
+      border-radius: 0.5rem;
+
+      color: var(--text-primary);
+
+      font-family: 'Inter', sans-serif;
+
+      font-size: 0.8rem;
+
+      transition: all 0.2s ease;
+
+    }
+
+
+
+    .optim-services .form-control:focus {
+
+      outline: none;
+
+      border-color: var(--op-primary);
+
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+
+    }
+
+
+
+    .optim-services textarea.form-control {
+
+      min-height: 100px;
+
+      resize: vertical;
+
+    }
+
+
+
+    /* STAR RATING */
+
+    .optim-services .star-rating {
+
+      display: flex;
+
+      gap: 0.375rem;
+
+      margin-bottom: 0.75rem;
+
+    }
+
+
+
+    .optim-services .star {
+
+      font-size: 1.75rem;
+
+      cursor: pointer;
+
+      color: rgba(255, 255, 255, 0.2);
+
+      transition: all 0.2s ease;
+
+    }
+
+
+
+    .optim-services .star:hover,
+
+    .optim-services .star.active {
+
+      color: #fbbf24;
+
+    }
+
+
+
+    /* Client info styling */
+
+    .optim-services .client-avatar {
+
+      width: 3rem;
+
+      height: 3rem;
+
+      border-radius: 50%;
+
+      object-fit: cover;
+
+      border-width: 2px;
+
+      transition: all 0.3s ease;
+
+    }
+
+
+
+    .optim-services .service-card:hover .client-avatar {
+
+      transform: scale(1.05);
+
+    }
+
+
+
+    .optim-services .client-name {
+
+      font-size: 1rem;
+
+      font-weight: 700;
+
+      margin: 0 0 0.125rem;
+
+    }
+
+
+
+    .optim-services .service-meta {
+
+      font-size: 0.75rem;
+
+      font-weight: 500;
+
+    }
+
+
+
+    .optim-services .amount-display {
+
+      font-size: 1.25rem;
+
+      font-weight: 800;
+
+      background: linear-gradient(45deg, #ffd700, #ffed4e);
+
+      -webkit-background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+    }
+
+
+
+    /* Rating stars */
+
+    .optim-services .rating-stars {
+
+      color: #fbbf24;
+
+      font-size: 0.875rem;
+
+      letter-spacing: -0.05em;
+
+    }
+
+
+
+    /* RESPONSIVE DESIGN */
+
+    @media (max-width: 768px) {
+
+      .optim-services .main-content {
+
+        padding-bottom: 5rem;
+
+      }
+
+
+
+      .optim-services .main-tabs {
+
+        padding: 0.25rem;
+
+        gap: 0.25rem;
+
+      }
+
+
+
+      .optim-services .tab-button {
+
+        padding: 0.5rem 0.875rem;
+
+        font-size: 0.75rem;
+
+      }
+
+
+
+      .optim-services .countdown-widget {
+
+        padding: 0.25rem 0.625rem;
+
+      }
+
+
+
+      .optim-services .countdown-info {
+
+        gap: 0;
+
+      }
+
+
+
+      .optim-services .countdown-label {
+
+        font-size: 0.6rem;
+
+      }
+
+
+
+      .optim-services .countdown-time {
+
+        font-size: 0.7rem;
+
+      }
+
+
+
+      .optim-services .service-card {
+
+        padding: 1rem;
+
+      }
+
+
+
+      .optim-services .client-avatar {
+
+        width: 2.5rem;
+
+        height: 2.5rem;
+
+      }
+
+
+
+      .optim-services .client-name {
+
+        font-size: 0.875rem;
+
+      }
+
+
+
+      .optim-services .service-meta {
+
+        font-size: 0.7rem;
+
+      }
+
+
+
+      .optim-services .amount-display {
+
+        font-size: 1.125rem;
+
+      }
+
+
+
+      .optim-services .btn {
+
+        padding: 0.5rem 0.875rem;
+
+        font-size: 0.7rem;
+
+      }
+
+    }
+
+
+
+    @media (max-width: 640px) {
+
+      .optim-services .countdown-widget {
+
+        flex-direction: column;
+
+        gap: 0.125rem;
+
+        padding: 0.375rem;
+
+      }
+
+
+
+      .optim-services .countdown-info {
+
+        text-align: center;
+
+      }
+
+
+
+      .optim-services .service-card {
+
+        padding: 0.875rem;
+
+      }
+
+
+
+      .optim-services .client-avatar {
+
+        width: 2.25rem;
+
+        height: 2.25rem;
+
+      }
+
+    }
+
+
+
+    @media (min-width: 769px) {
+
+      .optim-services .mobile-nav {
+
+        display: none;
+
+      }
+
+    }
+
+
+
+    /* ANIMATIONS */
+
+    @keyframes fadeInUp {
+
+      from {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+      }
+
+    }
+
+    .optim-services .fade-in-up {
+
+      animation: fadeInUp 0.5s ease-out;
+
+    }
+
+
+.optim-services .op-live{display:none;}
+
 
 
