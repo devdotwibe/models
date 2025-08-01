@@ -619,8 +619,6 @@ if(!empty($userDetails['profile_pic'])){
 
                 </div>
 
-                <button type="button" onclick="AddMessage('<?php echo $k ?>')" class="btn-secondary text-sm md:text-base">Message</button>
-
             </div>
 
               <div class="mt-6 pt-4 border-t border-white/10 " id="comment_<?php echo $k ?>" style="display:none;">
@@ -715,8 +713,9 @@ if(!empty($userDetails['profile_pic'])){
 
                     <input type="hidden" name="image_url" id="image_url<?php echo $k ?>" value="<?php echo $auther_pic_url ?>">
                       
-                    
                   </div>
+
+                  <button type="button" onclick="AddMessage('<?php echo $k ?>')" class="btn-secondary text-sm md:text-base">Message</button>
 
               </div>
 
