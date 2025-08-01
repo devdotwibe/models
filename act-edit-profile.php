@@ -279,10 +279,10 @@ if ($_POST['submit_name']){
 		}
 		
 		
-		echo '<script>alert("Your Services Successfully Updated");
-	window.location="edit-profile.php"
-	</script>';
-	die;
+				echo '<script>alert("Your Services Successfully Updated");
+			window.location="edit-profile.php"
+			</script>';
+		die;
 		
 	}/*else if(isset($_POST['submit_pass'])){
 

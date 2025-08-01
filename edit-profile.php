@@ -3050,6 +3050,8 @@ $lang_list = modal_language_list();
 
         const formData = new FormData(form);
 
+        formData.append('service_submit', 'service_submit');
+
         $.ajax({
           url: 'act-edit-profile.php',
           type: 'POST',
