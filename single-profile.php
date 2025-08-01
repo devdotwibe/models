@@ -1943,6 +1943,8 @@ jQuery('.socialpaidbtn').click(function(e){
             $('#success_modal').removeClass('active');
 
             $('#modal_success_message .success-text').remove();
+
+            window.location.reload();
         }
 
     
