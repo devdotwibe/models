@@ -918,7 +918,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                         $sqls_m = "SELECT * FROM model_user WHERE as_a_model = 'Yes' AND unique_id != '" . $_GET['m_unique_id'] . "'
 
-                        " . (!empty($followers_ids) ? "AND unique_id NOT IN ($followers_not_in)" : "") . "
+                 
                         
                         Order by RAND() DESC LIMIT 3";
 
