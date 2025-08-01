@@ -61,6 +61,15 @@ else{
             include('includes/header.php');
     } 
     
+    $model_unique_id = $userDetails['unique_id'];
+
+    $model_bookings = DB::query("SELECT name FROM model_booking WHERE model_unique_id =  %s ", $model_unique_id);
+
+
+    print_r($model_bookings);
+
+    die();
+    
     ?>
 	
 	<main class="max-w-7xl mx-auto px-4 py-5 main-content">
