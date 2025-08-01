@@ -2513,17 +2513,7 @@ $lang_list = modal_language_list();
 
     <?php include('includes/footer.php'); ?>
 <script>
-
-      
-
-    function ShowSuccessModal()
-    {
-      $('#success_modal').modal('show');
-    }
-
-
-
-
+  
 		function select_hs_country(state) {
 			$("#i-hs-city").html('<option value="">Select</option>');
 			$("#i-hs-state").html('<option value="">Select</option>');

@@ -541,7 +541,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                                 <input type="hidden" name="m_unique_id" value="<?php echo $_GET['m_unique_id']; ?>">
                                                 <input type="hidden" name="model_id" value="<?php echo $uplds['post_author']; ?>">
                                                 
-                                                <button class="mybtn"  type="submit" name="submit">
+                                                <button class="mybtn"  type="button" onclick="ConformPurchase('<?php echo $uplds['token']  ?>')"  name="submit">
 
                                                     <i class="fas fa-database" aria-hidden="true"></i>
                                                     <span> <?php echo $uplds['token']  ?></span>
@@ -1818,6 +1818,29 @@ if (mysqli_num_rows($res_ap) > 0) {
               </div>
 
             </div>
+
+
+    <div class="modal-overlay" id="success_modal" style="display: none;">
+            <div class="modal">
+                <div class="modal-header">
+                <h2 class="modal-title">Unlock Image</h2>
+                <button class="close-modal" type="button" onclick="CloseModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                </div>
+
+                <div class="modal-body" id="modal_success_message">
+                <p>Do you want to unlock this image for <strong><span id="token_amount"> 0</span> tokens</strong>?</p>
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-success" type="button" onclick="PurchaseImage()">Yes, Unlock</button>
+                    <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
+                </div>
+                </div>
+            </div>
+        </div>
 	
 	
   <?php
@@ -1876,6 +1899,14 @@ jQuery('.socialpaidbtn').click(function(e){
 </script>
 
     <script>
+
+
+        function ConformPurchase(token)
+        {
+            $('#success_modal').addClass('active');
+
+            $('#token_amount').text(token);
+        }
 
         function TabChange(el,type)
         {
