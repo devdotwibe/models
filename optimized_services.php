@@ -450,8 +450,8 @@ else{
                     setTimeout(function()
                     {
                           $('#success_modal').removeClass('active');
-                          
-                    },1000);
+
+                    },3000);
                 }
             },
 
