@@ -339,6 +339,12 @@ else{
     </div>
 </main>
 
+
+<?php include('../includes/footer.php'); ?>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>`
+
 <script>
     // Premium JavaScript Functionality
     document.addEventListener('DOMContentLoaded', function() {
