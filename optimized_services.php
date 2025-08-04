@@ -422,7 +422,7 @@ else{
 
               <div class="booking-info">
 
-                <p style="margin-top: 20px;">Your Contact Details</p>
+                <p style="margin-top: 20px;"><strong>Your Contact Details </strong></p>
 
                   <p><strong>Booking Type:</strong> <span id="booking_type"></span></p>
                   <p><strong>Booking For:</strong> <span id="booking_for"></span></p>
@@ -430,7 +430,7 @@ else{
 
               </div>
 
-              <p style="margin-top: 20px;">Instructions</p>
+              <p style="margin-top: 20px;"><strong>Instructions </strong></p>
 
               <p id="booking_description" style="margin-top: 10px;"></p>
 
@@ -454,9 +454,43 @@ else{
 
 
 
-    function showBookingModal()
+    function showBookingModal(element)
     {
-        $('#details_modal').addClass('active');
+        var accept_id = $(element).data('id');
+
+         $.ajax({
+            url: 'act_model_booking.php',
+            type: 'POST',
+            data: {
+              action:'get_book_details',
+              accept_id:accept_id
+            },
+            dataType: 'json',
+            success: function (response) {
+                
+                if (response.status === 'success') {
+
+                    var data = response.data;
+
+                    $('#booking_type').text(data.booking_type);
+                    $('#booking_for').text(data.booking_for);
+                    $('#booking_country').text(data.country);
+                    $('#booking_description').text(data.instructions);
+
+                    $('#booking_date').text(data.meeting_date);
+                    $('#booking_hour').text(data.duration);
+                    $('#booking_time').text(data.meeting_time);
+
+                    $('#details_modal').addClass('active');
+                    
+                }
+            },
+
+            error: function (xhr, status, error) {
+          
+            }
+          });
+
     }
 
     function acceptRequest(element)

@@ -132,4 +132,15 @@ if (isset($_POST['booking_submit'])) {
 
 	}
 
+
+	if (isset($_POST['action']) && $_POST['action'] =='get_book_details') {
+
+			$accept_id = $_POST['accept_id'];
+
+			$bookig_detail = DB::queryFirstRow("SELECT * FROM model_booking WHERE id = %i", $accept_id);
+
+		echo json_encode(['status'=>'success','data'=>$bookig_detail]);
+
+	}
+
 ?>
