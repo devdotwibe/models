@@ -415,8 +415,6 @@ else{
               action:'accept_request',
               accept_id:accept_id
             },
-            // contentType: false,
-            processData: false,
             dataType: 'json',
             success: function (response) {
                 
