@@ -88,10 +88,9 @@ else{
     <div class="filters">
       <button class="filter-btn active" data-filter="all" onclick="FilterTab('all_type',this)">All Types</button>
       <button class="filter-btn" data-filter="group" onclick="FilterTab('Group Chat',this)" >Group Chat</button>
-      <button class="filter-btn" data-filter="dating" onclick="FilterTab('Private Chat',this)">Private Chat</button>
-      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('Local Meetup',this)">Local Meetup</button>
-      <button class="filter-btn" data-filter="international" onclick="FilterTab('Extended Social',this)">Extended Social</button>
-      <button class="filter-btn" data-filter="international" onclick="FilterTab('Overnight Social',this)">Overnight Social</button>
+      <button class="filter-btn" data-filter="dating" onclick="FilterTab('International Tour',this)">International Tour</button>
+      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('Luxury Companion',this)">Luxury Companion</button>
+      <button class="filter-btn" data-filter="international" onclick="FilterTab('premium-experience',this)">premium-experience</button>
     </div>
 
     <div id="services-list" class="space-y-3">
@@ -136,7 +135,7 @@ else{
               }
         ?>
 
-            <div class="service-card fade-in-up <?php echo $staus ?> all_status" data-status="pending" data-type="group">
+            <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['booking_type'] ?> all_status" data-status="pending" data-type="group">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
