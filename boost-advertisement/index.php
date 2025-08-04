@@ -400,7 +400,7 @@ else{
 </style>
 
 </head>
-<body class="ad-enhanced min-h-screen text-white socialwall-page">
+<body class="ad-enhanced enhanced5 min-h-screen text-white socialwall-page">
 
 
 <?php 
