@@ -682,7 +682,7 @@ else{
                             </svg>
                             Preview
                         </button>
-                        <button type="button" class="btn-primary px-8 py-4 rounded-xl font-semibold" onclick="SubmitLaunch()">
+                        <button type="button" class="btn-primary px-8 py-4 rounded-xl font-semibold" onclick="ConformLaunch()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline">
                                 <path d="M5 12l5 5l10-10"></path>
                             </svg>
@@ -731,6 +731,55 @@ else{
         </div>
     </div>
 
+     <div class="modal-overlay" id="conform_modal">
+          <div class="modal">
+              <div class="modal-header">
+              <h2 class="modal-title">Launch Campaign</span></h2>
+
+              <button class="close-modal" type="button" onclick="CloseModal('conform_modal')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+              </button>
+              </div>
+
+              <div class="modal-body">
+
+              <p>Do you want to conform the </span>Launch Campaign</strong>?</p>
+
+                <div style="margin-top: 20px;">
+
+                    <input type="hidden" name="accept_id" id="accept_id" >
+                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="accept_conform_btn" onclick="SubmitLaunch()" >Yes</button>
+                    <button class="btn btn-secondary" type="button" onclick="CloseModal('conform_modal')">Cancel</button>
+                </div>
+
+              </div>
+
+          </div>
+      </div>
+
+
+    <div class="modal-overlay" id="success_modal">
+      <div class="modal">
+          <div class="modal-header">
+              <h2 class="modal-title">Success</h2>
+              <button class="close-modal" id="closeTipModal" type="button" onclick="CloseModal('success_modal')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+              </button>
+          </div>
+          <div class="modal-body" id="modal_success_message">
+              
+
+              <button class="btn btn-primary" type="button" onclick="CloseModal('success_modal')">Close</button>
+          </div>
+      </div>
+    </div>
+
 
 <?php include('../includes/footer.php'); ?>
 
@@ -744,6 +793,11 @@ else{
 
        $(`#${id}`).removeClass('active');
 
+    }
+
+    function ConformLaunch()
+    {
+        $('#conform_modal').addClass('active');
     }
 
     function SubmitLaunch() {
@@ -778,8 +832,13 @@ else{
             dataType: 'json',
             success: function (response) {
                 if (response.status === 'success') {
-                    alert('Boost Advertisement Submitted Successfully!');
-                    // You can also reset the form or redirect
+
+                    $('#conform_modal').removeClass('active');
+
+                    $('#success_modal').addClass('active');
+
+                    $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
+           
                 } else {
                     alert('Something went wrong: ' + response.message);
                 }

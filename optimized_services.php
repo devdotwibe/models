@@ -455,7 +455,7 @@ else{
               <button class="btn btn-primary" type="button" onclick="CloseModal('success_modal')">Close</button>
           </div>
       </div>
-  </div>
+    </div>
 
 
 
