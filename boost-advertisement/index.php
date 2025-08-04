@@ -741,18 +741,15 @@ else{
     // }
 
     function selectQuickSetup(element, goal) {
-        // Remove previous selection
         document.querySelectorAll('.quick-setup').forEach(card => {
             card.classList.remove('selected');
         });
         
-        // Add selection to clicked card
         element.classList.add('selected');
         selectedGoal = goal;
         
-        // Auto-set budget based on goal
         if (goal === 'views') {
-            setBudget(30);
+            setBudget(25);
         } else if (goal === 'engagement') {
             setBudget(50);
         } else if (goal === 'premium') {
@@ -841,9 +838,13 @@ else{
     }
 
     function setBudget(amount) {
+
         dailyBudget = amount;
         document.querySelector('.budget-slider').value = amount;
         document.getElementById('budgetDisplay').textContent = `$${amount}`;
+
+        $('#budget').val(amount);
+
         updateEstimates();
         updateCampaignSummary();
     }
