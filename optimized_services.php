@@ -178,7 +178,7 @@ else{
 
                     <?php } else {  ?>
 
-                        <span class="status-badge badge-pending">Pending</span>
+                        <span class="status-badge badge-pending" id="when_approved_status<?php echo $item['id'] ?>">Pending</span>
 
                     <?php } ?>
 
@@ -194,13 +194,13 @@ else{
 
                 <?php } else { ?>
                     
-                    <button class="btn btn-success" data-id="<?php echo $item['id']; ?>" onclick="acceptRequest(this)">Accept</button>
-                    <button class="btn btn-danger" onclick="declineRequest(this)">Decline</button>
-                    <button class="btn btn-message" onclick="openMessage(this)">Message</button>
+                    <button class="btn btn-success when_aprrove_button<?php echo $item['id'] ?>" data-id="<?php echo $item['id']; ?>" onclick="acceptRequest(this)">Accept</button>
+                    <button class="btn btn-danger when_aprrove_button<?php echo $item['id'] ?>" onclick="declineRequest(this)">Decline</button>
+                    <button class="btn btn-message when_aprrove_button<?php echo $item['id'] ?>" onclick="openMessage(this)">Message</button>
 
                 <?php }?>
 
-                    <button class="btn btn-secondary" onclick="viewDetails(this)">Details</button>
+                    <button class="btn btn-secondary" id="when_aprrove_button<?php echo $item['id'] ?>" onclick="viewDetails(this)">Details</button>
 
                 </div>
                 </div>
@@ -446,6 +446,15 @@ else{
                     $('#conform_modal').removeClass('active');
 
                     $('#success_modal').addClass('active');
+
+                     $(`#when_approved_status${accept_id}`).replaceWith(`<span class="status-badge badge-approved">Approved</span>`);
+
+                     $(`.when_aprrove_button${accept_id}`).remove();
+
+                     $(`#when_aprrove_button${accept_id}`).before(`
+                      <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
+                      <button class="btn btn-message" onclick="openMessage(this)">Message</button>
+                    `);
 
                     setTimeout(function()
                     {
