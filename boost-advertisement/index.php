@@ -493,6 +493,8 @@ else{
                                         <div class="text-sm">Everyone</div>
                                     </div>
 
+                                     <input type="hidden" name="user_unique_id" id="user_unique_id" value="<?php echo $userDetails['unique_id'] ?>">
+
                                      <input type="hidden" name="target_audience[]" id="target_audience" >
 
                                 </div>
@@ -680,7 +682,7 @@ else{
                             </svg>
                             Preview
                         </button>
-                        <button type="submit" class="btn-primary px-8 py-4 rounded-xl font-semibold">
+                        <button type="button" class="btn-primary px-8 py-4 rounded-xl font-semibold" onclick="SubmitLaunch()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline">
                                 <path d="M5 12l5 5l10-10"></path>
                             </svg>
@@ -741,8 +743,54 @@ else{
     {
 
        $(`#${id}`).removeClass('active');
-       
+
     }
+
+    function SubmitLaunch() {
+
+        var target_audience = $('#target_audience').val();
+        var location = $('#location').val();
+        var age_range = $('#age_range').val();
+        var budget = $('#budget').val();
+        var duration = $('#duration').val();
+        var total_amount = $('#total_amount').val();
+        var expected_views_range = $('#expected_views_range').val();
+        var reached_views_range = $('#reached_views_range').val();
+        var user_unique_id = $('#user_unique_id').val();
+        var plan_type = $('#plan_type').val();
+
+        $.ajax({
+            url: 'boost-advertisement/launch_ajax.php',
+            type: 'POST',
+            data: {
+                action:'submit_launch',
+                user_unique_id: user_unique_id,
+                plan_type: plan_type,
+                target_audience: target_audience,
+                location: location,
+                age_range: age_range,
+                budget: budget,
+                duration: duration,
+                total_amount: total_amount,
+                expected_views_range: expected_views_range,
+                reached_views_range: reached_views_range
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.status === 'success') {
+                    alert('Boost Advertisement Submitted Successfully!');
+                    // You can also reset the form or redirect
+                } else {
+                    alert('Something went wrong: ' + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX Error:', error);
+                alert('Failed to submit. Please try again.');
+            }
+        });
+    }
+
     
     document.addEventListener('DOMContentLoaded', function() {
         initializePremiumFeatures();
