@@ -548,14 +548,17 @@ else{
 
                     $('#success_modal').addClass('active');
 
-                     $(`#when_approved_status${accept_id}`).replaceWith(`<span class="status-badge badge-approved">Approved</span>`);
+                    if(response.action =='Accept')
+                    {
+                         $(`#when_approved_status${accept_id}`).replaceWith(`<span class="status-badge badge-approved">Approved</span>`);
 
-                     $(`.when_aprrove_button${accept_id}`).remove();
+                        $(`.when_aprrove_button${accept_id}`).remove();
 
-                     $(`#when_aprrove_button${accept_id}`).before(`
-                      <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
-                      <button class="btn btn-message" onclick="openMessage(this)">Message</button>
-                    `);
+                        $(`#when_aprrove_button${accept_id}`).before(`
+                          <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
+                          <button class="btn btn-message" onclick="openMessage(this)">Message</button>
+                        `);
+                    }
 
                     setTimeout(function()
                     {
