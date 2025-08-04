@@ -422,7 +422,7 @@ else{
 
               <div class="booking-info">
 
-                <h3 style="margin-top: 20px;">Your Contact Details</h3>
+                <p style="margin-top: 20px;">Your Contact Details</p>
 
                   <p><strong>Booking Type:</strong> <span id="booking_type"></span></p>
                   <p><strong>Booking For:</strong> <span id="booking_for"></span></p>
@@ -430,7 +430,7 @@ else{
 
               </div>
 
-              <h3 style="margin-top: 20px;">Instructions</h3>
+              <p style="margin-top: 20px;">Instructions</p>
 
               <p id="booking_description" style="margin-top: 10px;"></p>
 
