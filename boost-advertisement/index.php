@@ -37,7 +37,7 @@ else{
 
 
 </head>
-<body class="boost_adver min-h-screen text-white">
+<body class="boost_adver min-h-screen text-white socialwall-page">
 
 
 <?php 
