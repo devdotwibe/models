@@ -409,14 +409,6 @@ else{
 
   include('../includes/profile_header_index.php');
 
-
-  $user_ids  = BoostedModelIds($con);
-
-    echo "<pre>";
-    print_r($user_ids);
-    echo "</pre>";
-    die();
-
 ?>
 <!-- Premium Particle System -->
 <div class="particles" id="particles"></div>
