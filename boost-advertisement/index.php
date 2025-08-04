@@ -445,6 +445,9 @@ else{
                                         <circle cx="12" cy="12" r="3"></circle>
                                     </svg>
                                 </div>
+
+                                <input type="hidden" name="plan_type" id="plan_type" value="views" >
+
                                 <h3 class="text-xl font-semibold premium-text mb-2">Get More Views</h3>
                                 <p class="text-white/70 text-sm mb-4">Increase visibility and profile visits</p>
                                 <div class="text-green-400 font-bold">$20-50/day</div>
@@ -473,34 +476,40 @@ else{
                             <div>
                                 <label class="block text-white font-semibold mb-3">Who do you want to reach?</label>
                                 <div class="grid grid-cols-2 gap-3">
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleChip(this, 'men')">
+                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'men')">
                                         <div class="text-2xl mb-1">👨</div>
                                         <div class="text-sm">Men</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleChip(this, 'women')">
+                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'women')">
                                         <div class="text-2xl mb-1">👩</div>
                                         <div class="text-sm">Women</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleChip(this, 'couples')">
+                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'couples')">
                                         <div class="text-2xl mb-1">💑</div>
                                         <div class="text-sm">Couples</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleChip(this, 'all')">
+                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'all')">
                                         <div class="text-2xl mb-1">🌈</div>
                                         <div class="text-sm">Everyone</div>
                                     </div>
+
+                                     <input type="hidden" name="target_audience[]" id="target_audience" >
+
                                 </div>
                             </div>
                             
                             <div>
                                 <label class="block text-white font-semibold mb-3">Age Range</label>
                                 <div class="grid grid-cols-3 gap-2">
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '18-25')">18-25</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '26-35')">26-35</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '36-45')">36-45</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '46-55')">46-55</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '55+')">55+</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, 'all-ages')">All Ages</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '18-25')">18-25</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '26-35')">26-35</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '36-45')">36-45</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '46-55')">46-55</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '55+')">55+</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, 'all-ages')">All Ages</div>
+
+                                    <input type="hidden" name="age_range[]" id="age_range" >
+
                                 </div>
                             </div>
                         </div>
@@ -547,6 +556,9 @@ else{
                                             </div>
                                         </div>
                                     </div>
+
+                                    <input type="hidden" name="location" id="location" >
+
                                 </div>
                             </div>
                         </div>
@@ -570,7 +582,7 @@ else{
                                 <label class="text-white font-semibold">Daily Budget</label>
                                 <span class="text-3xl font-bold text-green-400" id="budgetDisplay">$50</span>
                             </div>
-                            <input type="range" class="budget-slider w-full" min="10" max="200" value="50" step="10" oninput="updateBudget(this.value)">
+                            <input type="range" class="budget-slider w-full" min="10" id="budget" max="200" value="50" step="10" oninput="updateBudget(this.value)">
                             <div class="flex justify-between text-white/50 text-sm mt-2">
                                 <span>$10</span>
                                 <span>$200</span>
@@ -618,6 +630,12 @@ else{
                                     <div class="text-xs text-green-400 mt-1">Maximum impact</div>
                                 </div>
                             </div>
+
+                            <input type="hidden" name="duration" id="duration" >
+
+                            <input type="hidden" name="total_amount" id="total_amount" >
+                            <input type="hidden" name="expected_views_range" id="expected_views_range" >
+                            <input type="hidden" name="reached_views_range" id="reached_views_range" >
                         </div>
                     </div>
                     
@@ -692,49 +710,46 @@ else{
     let dailyBudget = 50;
     let selectedLocation = '';
 
-    function initializePremiumFeatures() {
-        // Premium Particle System
-        function createPremiumParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 12 + 's';
-            particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
-            particle.style.opacity = Math.random() * 0.8 + 0.2;
+    // function initializePremiumFeatures() {
+    //     // Premium Particle System
+    //     function createPremiumParticle() {
+    //         const particle = document.createElement('div');
+    //         particle.className = 'particle';
+    //         particle.style.left = Math.random() * 100 + '%';
+    //         particle.style.animationDelay = Math.random() * 12 + 's';
+    //         particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+    //         particle.style.opacity = Math.random() * 0.8 + 0.2;
             
-            const colors = [
-                'rgba(139, 92, 246, 0.8)',
-                'rgba(236, 72, 153, 0.6)',
-                'rgba(6, 182, 212, 0.7)'
-            ];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
+    //         const colors = [
+    //             'rgba(139, 92, 246, 0.8)',
+    //             'rgba(236, 72, 153, 0.6)',
+    //             'rgba(6, 182, 212, 0.7)'
+    //         ];
+    //         const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    //         particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
             
-            document.getElementById('particles').appendChild(particle);
+    //         document.getElementById('particles').appendChild(particle);
             
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.remove();
-                }
-            }, 12000);
-        }
+    //         setTimeout(() => {
+    //             if (particle.parentNode) {
+    //                 particle.remove();
+    //             }
+    //         }, 12000);
+    //     }
 
-        setInterval(createPremiumParticle, 150);
-    }
+    //     setInterval(createPremiumParticle, 150);
+    // }
 
     function selectQuickSetup(element, goal) {
-        // Remove previous selection
         document.querySelectorAll('.quick-setup').forEach(card => {
             card.classList.remove('selected');
         });
         
-        // Add selection to clicked card
         element.classList.add('selected');
         selectedGoal = goal;
         
-        // Auto-set budget based on goal
         if (goal === 'views') {
-            setBudget(30);
+            setBudget(25);
         } else if (goal === 'engagement') {
             setBudget(50);
         } else if (goal === 'premium') {
@@ -744,19 +759,67 @@ else{
         updateEstimates();
     }
 
+    function toggleTarget(element, value) {
+
+        const $input = $('#target_audience');
+
+        let selectedValues = $input.val() ? $input.val().split(',') : [];
+
+        const $el = $(element);
+
+        if ($el.hasClass('selected')) {
+      
+            $el.removeClass('selected');
+            selectedValues = selectedValues.filter(v => v !== value);
+        } else {
+         
+            $el.addClass('selected');
+            if (!selectedValues.includes(value)) {
+                selectedValues.push(value);
+            }
+        }
+
+        $input.val(selectedValues.join(','));
+    }
+
+    function toggleRange(element,value)
+    {
+        const $input = $('#age_range');
+
+        let selectedValues = $input.val() ? $input.val().split(',') : [];
+
+        const $el = $(element);
+
+        if ($el.hasClass('selected')) {
+      
+            $el.removeClass('selected');
+            selectedValues = selectedValues.filter(v => v !== value);
+        } else {
+         
+            $el.addClass('selected');
+            if (!selectedValues.includes(value)) {
+                selectedValues.push(value);
+            }
+        }
+
+        $input.val(selectedValues.join(','));
+    }
+
+
     function toggleChip(element, value) {
         element.classList.toggle('selected');
     }
 
     function selectLocation(element, location) {
-        // Remove previous selection
+  
         element.parentElement.querySelectorAll('.audience-chip').forEach(chip => {
             chip.classList.remove('selected');
         });
         
-        // Add selection to clicked element
         element.classList.add('selected');
         selectedLocation = location;
+
+        $('#location').val(location);
         
         updateEstimates();
     }
@@ -775,9 +838,13 @@ else{
     }
 
     function setBudget(amount) {
+
         dailyBudget = amount;
         document.querySelector('.budget-slider').value = amount;
         document.getElementById('budgetDisplay').textContent = `$${amount}`;
+
+        $('#budget').val(amount);
+
         updateEstimates();
         updateCampaignSummary();
     }
