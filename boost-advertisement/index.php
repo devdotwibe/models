@@ -875,7 +875,7 @@ else{
 
         $('#expected_views_range').val(views);
 
-        $('#reached_views_range').val(views);
+        $('#reached_views_range').val(reach);
     }
 
     function updateCampaignSummary() {
