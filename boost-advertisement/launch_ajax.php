@@ -9,46 +9,53 @@ if (isset($_SESSION["log_user_id"])) {
 
 	if (isset($_POST['action']) && $_POST['action'] == 'submit_launch') {
 
-        $user_unique_id = mysqli_real_escape_string($con, $_POST['user_unique_id']);
-        $plan_type = mysqli_real_escape_string($con, $_POST['plan_type']);
-        $target_audience = mysqli_real_escape_string($con, $_POST['target_audience']);
-        $location = mysqli_real_escape_string($con, $_POST['location']);
-        $age_range = mysqli_real_escape_string($con, $_POST['age_range']);
-        $budget = mysqli_real_escape_string($con, $_POST['budget']);
-        $duration = mysqli_real_escape_string($con, $_POST['duration']);
-        $total_amount = mysqli_real_escape_string($con, $_POST['total_amount']);
-        $expected_views_range = mysqli_real_escape_string($con, $_POST['expected_views_range']);
-        $reached_views_range = mysqli_real_escape_string($con, $_POST['reached_views_range']);
+            $user_unique_id = mysqli_real_escape_string($con, $_POST['user_unique_id']);
+            $plan_type = mysqli_real_escape_string($con, $_POST['plan_type']);
+            $target_audience = mysqli_real_escape_string($con, $_POST['target_audience']);
+            $location = mysqli_real_escape_string($con, $_POST['location']);
+            $age_range = mysqli_real_escape_string($con, $_POST['age_range']);
+            $budget = mysqli_real_escape_string($con, $_POST['budget']);
+            $duration = mysqli_real_escape_string($con, $_POST['duration']);
+            $total_amount = mysqli_real_escape_string($con, $_POST['total_amount']);
+            $expected_views_range = mysqli_real_escape_string($con, $_POST['expected_views_range']);
+            $reached_views_range = mysqli_real_escape_string($con, $_POST['reached_views_range']);
 
-        $query = "INSERT INTO boost_avertisement (
-                    user_unique_id, plan_type, target_audience, location, age_range,
-                    budget, duration, total_amount, expected_views_range, reached_views_range,
-                    created_at, updated_at
-                ) VALUES (
-                    '$user_unique_id', '$plan_type', '$target_audience', '$location', '$age_range',
-                    '$budget', '$duration', '$total_amount', '$expected_views_range', '$reached_views_range',
-                    NOW(), NOW()
-                )";
+        if ($userDetails['balance'] >= $budget) {
 
-        if (mysqli_query($con, $query)) {
+            $query = "INSERT INTO boost_avertisement (
+                        user_unique_id, plan_type, target_audience, location, age_range,
+                        budget, duration, total_amount, expected_views_range, reached_views_range,
+                        created_at, updated_at
+                    ) VALUES (
+                        '$user_unique_id', '$plan_type', '$target_audience', '$location', '$age_range',
+                        '$budget', '$duration', '$total_amount', '$expected_views_range', '$reached_views_range',
+                        NOW(), NOW()
+                    )";
 
-            $coins = $budget;
+            if (mysqli_query($con, $query)) {
 
-            $date = date('Y-m-d H:i:s');
+                $coins = $budget;
 
-            DB::query("UPDATE model_user SET balance=round(balance-%d) WHERE id=%s", $coins, $user_unique_id);
+                $date = date('Y-m-d H:i:s');
 
-            DB::insert('model_user_transaction_history', array(
-                'user_id' => $userDetails['id'],
-                'other_id' => $bookingID,
-                'amount' => $coins,
-                'type' => 'views_boost',
-                'created_at' => $date,
-            ));
+                DB::query("UPDATE model_user SET balance=round(balance-%d) WHERE id=%s", $coins, $user_unique_id);
 
-            echo json_encode(['status' => 'success', 'message' => 'Boost advertisement created successfully']);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Database insert failed', 'error' => mysqli_error($conn)]);
+                DB::insert('model_user_transaction_history', array(
+                    'user_id' => $userDetails['id'],
+                    'other_id' => $bookingID,
+                    'amount' => $coins,
+                    'type' => 'views_boost',
+                    'created_at' => $date,
+                ));
+
+                echo json_encode(['status' => 'success', 'message' => 'Boost advertisement created successfully']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Database insert failed', 'error' => mysqli_error($conn)]);
+            }
+        }
+        else
+        {
+            echo json_encode(['status' => 'success','message'=>'You dont have sufficiant coins in your wallet for buying it.']);
         }
 
     }
