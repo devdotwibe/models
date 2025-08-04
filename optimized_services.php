@@ -463,7 +463,7 @@ else{
                   <p><strong>Booking Time:</strong> <span id="booking_time"></span></p>
 <!-- 
                   <p><strong>Meeting duration:</strong><span id="booking_hour"></span></p> -->
-
+                  
               </div>
 
           </div>
@@ -525,8 +525,8 @@ else{
                     $('#booking_description').text(data.instructions);
 
                     $('#booking_date').text(data.meeting_date);
-                    $('#booking_hour').text(data.duration);
-                    // $('#booking_time').text(data.meeting_time);
+                    // $('#booking_hour').text(data.duration);
+                    $('#booking_time').text(data.meeting_time);
 
                     $('#details_modal').addClass('active');
                     
