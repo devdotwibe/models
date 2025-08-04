@@ -195,7 +195,7 @@ else{
                 <?php } else { ?>
                     
                     <button class="btn btn-success when_aprrove_button<?php echo $item['id'] ?>" data-id="<?php echo $item['id']; ?>" onclick="acceptRequest(this)">Accept</button>
-                    <button class="btn btn-danger when_aprrove_button<?php echo $item['id'] ?>" onclick="declineRequest(this)">Decline</button>
+                    <button class="btn btn-danger when_aprrove_button<?php echo $item['id'] ?>" data-id="<?php echo $item['id']; ?>" onclick="declineRequest(this)">Decline</button>
                     <button class="btn btn-message when_aprrove_button<?php echo $item['id'] ?>" onclick="openMessage(this)">Message</button>
 
                 <?php }?>
@@ -371,12 +371,12 @@ else{
 
               <div class="modal-body">
 
-              <p>Do you want to Accept </span>request</strong>?</p>
+              <p>Do you want to <span id="button_status">Accept</span> </span>request</strong>?</p>
 
                 <div style="margin-top: 20px;">
 
                     <input type="hidden" name="accept_id" id="accept_id" >
-                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" onclick="AcceptConform()" >Yes, Accept</button>
+                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="accept_conform_btn" onclick="AcceptConform('Accept')" >Yes, Accept</button>
                     <button class="btn btn-secondary" type="button" onclick="CloseModal('conform_modal')">Cancel</button>
                 </div>
 
@@ -502,6 +502,23 @@ else{
 
         $('#conform_modal').addClass('active');
 
+        $('#button_status').text('Accept');
+
+        $('#accept_id').val(id);
+
+    }
+
+    function declineRequest(element)
+    {
+      
+        var id = $(element).data('id');
+
+        $('#conform_modal').addClass('active');
+
+        $('#button_status').text('Decline');
+
+       $('#accept_conform_btn').attr('onclick', "AcceptConform('Decline')");
+
         $('#accept_id').val(id);
 
     }
@@ -515,7 +532,8 @@ else{
             type: 'POST',
             data: {
               action:'accept_request',
-              accept_id:accept_id
+              accept_id:accept_id,
+              status:
             },
             dataType: 'json',
             success: function (response) {
