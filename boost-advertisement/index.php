@@ -693,6 +693,43 @@ else{
     </div>
 </main>
 
+    <div class="modal-overlay" id="details_modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Get More Views Details</h2>
+                <button class="close-modal" type="button" onclick="CloseModal('details_modal')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="views-info">
+                    <p><strong>Target Audience:</strong> <span id="target_audience_view"></span></p>
+                    <p><strong>Location:</strong> <span id="location_view"></span></p>
+                    <p><strong>Age Range:</strong> <span id="age_range_view"></span></p>
+                    <p><strong>Budget & Duration:</strong> <span id="budget_duration_view"></span></p>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <p><strong>Campaign Duration:</strong> <span id="campaign_duration_view"></span></p>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <p><strong>Campaign Summary</strong></p>
+                    <p><strong>Total Investment:</strong> <span id="total_investment_view"></span></p>
+                    <p><strong>Expected Views:</strong> <span id="expected_views_view"></span></p>
+                    <p><strong>People Reached:</strong> <span id="people_reached_view"></span></p>
+                    <p><strong>Duration:</strong> <span id="summary_duration_view"></span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
 <?php include('../includes/footer.php'); ?>
 
