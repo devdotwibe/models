@@ -87,9 +87,9 @@ else{
     <!-- Filters -->
     <div class="filters">
       <button class="filter-btn active" data-filter="all" onclick="FilterTab('all_type',this)">All Types</button>
-      <button class="filter-btn" data-filter="group" onclick="FilterTab('Group Chat',this)" >Group Chat</button>
-      <button class="filter-btn" data-filter="dating" onclick="FilterTab('International Tour',this)">International Tour</button>
-      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('Luxury Companion',this)">Luxury Companion</button>
+      <button class="filter-btn" data-filter="group" onclick="FilterTab('Group',this)" >Group Chat</button>
+      <button class="filter-btn" data-filter="dating" onclick="FilterTab('International',this)">International Tour</button>
+      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('Luxury',this)">Luxury Companion</button>
       <button class="filter-btn" data-filter="international" onclick="FilterTab('premium-experience',this)">premium-experience</button>
     </div>
 
