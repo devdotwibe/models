@@ -200,7 +200,7 @@ else{
 
                 <?php }?>
 
-                    <button class="btn btn-secondary" id="when_aprrove_button<?php echo $item['id'] ?>" onclick="showBookingModal(this)">Details</button>
+                    <button class="btn btn-secondary" id="when_aprrove_button<?php echo $item['id'] ?>" onclick="viewDetails(this)">Details</button>
 
                 </div>
                 </div>
@@ -452,12 +452,6 @@ else{
 
    <script>
 
-
-
-    function showBookingModal()
-    {
-        $('#details_modal').addClass('active');
-    }
 
     function acceptRequest(element)
     {
