@@ -132,6 +132,7 @@
 
             $userDetails = [];
 
+            $boosted_user_ids = BoostedModelIds($con);
 
             $condtion = "";
 
@@ -242,7 +243,19 @@
             $result_count = mysqli_query($con, $sqls_count);
 			$row_cnt = mysqli_fetch_assoc($result_count);
 
-			$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' ".$where."  Order by register_date DESC LIMIT $limit OFFSET $offset";
+            $order ="";
+
+            if (!empty($boosted_user_ids)) {
+                
+                $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
+
+                $order = " ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
+            } else {
+                
+                $order = " ORDER BY register_date DESC ";
+            }
+
+			$sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' ".$where."   " . $order . " LIMIT $limit OFFSET $offset";
 				
 			}else{
 
@@ -270,15 +283,44 @@
 
                     $idList = implode(',', $onlineUserIds);
 
-                    $order = " ORDER BY RAND() ";
+                    if (!empty($boosted_user_ids)) {
+                    
+                        $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
+
+                        $order = " ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
+                    } else {
+                        
+                       $order = " ORDER BY RAND() ";
+                    }
 
                 } else {
 
+
+                    if (!empty($boosted_user_ids)) {
+                    
+                        $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
+
+                        $order = " ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
+                    } else {
+                        
                        $order = " ORDER BY RAND() ";
+                    }
+                      
                 }
                 } else {
 
-                    $order = " ORDER BY id DESC ";
+
+                    if (!empty($boosted_user_ids)) {
+                    
+                        $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
+
+                        $order = " ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
+                    } else {
+
+                        $order = " ORDER BY id DESC ";
+                    }
+
+                    
                 }
 
                 if (empty($onlineUserIds)) {
@@ -293,7 +335,14 @@
                 {
                         $idList = implode(',', $onlineUserIds);
                         
-                        $order = " ORDER BY RAND() ";
+                        if (!empty($boosted_user_ids)) {
+                        
+                            $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
+
+                            $order = " ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
+                        } else {
+                            $order = " ORDER BY RAND() ";
+                        }
 
                         $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE id IN ($idList)";
                         $result_count = mysqli_query($con, $sqls_count);
