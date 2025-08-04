@@ -711,7 +711,7 @@ else{
                     <p><strong>Target Audience:</strong> <span id="target_audience_view"></span></p>
                     <p><strong>Location:</strong> <span id="location_view"></span></p>
                     <p><strong>Age Range:</strong> <span id="age_range_view"></span></p>
-                    <p><strong>Budget & Duration:</strong> <span id="budget_duration_view"></span></p>
+                    <p><strong>Budget:</strong> <span id="budget_duration_view"></span></p>
                 </div>
 
                 <div style="margin-top: 20px;">
@@ -924,18 +924,28 @@ else{
     }
 
     function previewCampaign() {
-        if (!selectedGoal) {
-            alert('⚠️ Please select a campaign goal first.');
-            return;
-        }
-        
-        alert('🔍 Campaign Preview:\n\n' +
-              `Goal: ${selectedGoal.charAt(0).toUpperCase() + selectedGoal.slice(1)}\n` +
-              `Daily Budget: $${dailyBudget}\n` +
-              `Duration: ${selectedDuration} day(s)\n` +
-              `Total Investment: $${dailyBudget * selectedDuration}\n` +
-              `Location: ${selectedLocation || 'Not specified'}\n\n` +
-              'Your campaign is ready to launch!');
+      
+        var target_audience = $('#target_audience').val();
+        var location = $('#location').val();
+        var age_range = $('#age_range').val();
+        var budget = $('#budget').val();
+        var duration = $('#duration').val();
+        var total_amount = $('#total_amount').val();
+        var expected_views_range = $('#expected_views_range').val();
+        var reached_views_range = $('#reached_views_range').val();
+
+        // Set values into the modal
+        $('#target_audience_view').text(target_audience);
+        $('#location_view').text(location);
+        $('#age_range_view').text(age_range);
+        $('#budget_duration_view').text(budget);
+        $('#campaign_duration_view').text(duration);
+        $('#total_investment_view').text(total_amount);
+        $('#expected_views_view').text(expected_views_range);
+        $('#people_reached_view').text(reached_views_range);
+        $('#summary_duration_view').text(duration);
+
+        $('#details_modal').addClass('active');
     }
 
     function submitPromotion(event) {
