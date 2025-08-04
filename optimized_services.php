@@ -473,17 +473,23 @@ else{
 
     function FilterTab(tab,element)
     {
-
-    }
-
-    function ServiceTab(tab,element)
-    {
-
         $('.filter-btn').removeClass('active');
 
         $(element).addClass('active');
 
         $('.all_type').hide();
+
+        $(`.${tab}`).show();
+    }
+
+    function ServiceTab(tab,element)
+    {
+
+        $('.tab-button').removeClass('active');
+
+        $(element).addClass('active');
+
+        $('.all_status').hide();
 
         $(`.${tab}`).show();
     }
