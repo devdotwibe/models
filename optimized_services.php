@@ -86,11 +86,12 @@ else{
 
     <!-- Filters -->
     <div class="filters">
-      <button class="filter-btn active" data-filter="all" onclick="FilterTab('all')">All Types</button>
-      <button class="filter-btn" data-filter="group" onclick="FilterTab('group')" >Group Show</button>
-      <button class="filter-btn" data-filter="dating" onclick="FilterTab('all')">Dating</button>
-      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('all')">Modeling</button>
-      <button class="filter-btn" data-filter="international" onclick="FilterTab('all')">International</button>
+      <button class="filter-btn active" data-filter="all" onclick="FilterTab('all_type',this)">All Types</button>
+      <button class="filter-btn" data-filter="group" onclick="FilterTab('Group Chat',this)" >Group Chat</button>
+      <button class="filter-btn" data-filter="dating" onclick="FilterTab('Private Chat',this)">Private Chat</button>
+      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('Local Meetup',this)">Local Meetup</button>
+      <button class="filter-btn" data-filter="international" onclick="FilterTab('Extended Social',this)">Extended Social</button>
+      <button class="filter-btn" data-filter="international" onclick="FilterTab('Overnight Social',this)">Overnight Social</button>
     </div>
 
     <div id="services-list" class="space-y-3">
@@ -470,14 +471,19 @@ else{
 
    <script>
 
+    function FilterTab(tab,element)
+    {
+
+    }
+
     function ServiceTab(tab,element)
     {
 
-        $('.tab-button').removeClass('active');
+        $('.filter-btn').removeClass('active');
 
         $(element).addClass('active');
 
-        $('.all_status').hide();
+        $('.all_type').hide();
 
         $(`.${tab}`).show();
     }
