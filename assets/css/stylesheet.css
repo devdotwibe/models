@@ -9627,8 +9627,8 @@ right: 12px;
         z-index: -1;
     }
 
-    
-    /* .boost_adver .particles {
+    /* Premium Floating Particles */
+    .boost_adver .particles {
         position: fixed;
         top: 0;
         left: 0;
@@ -9902,6 +9902,6 @@ right: 12px;
     .boost_adver .hover-lift:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
-    } */
+    }
 
 }
