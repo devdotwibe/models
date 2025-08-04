@@ -73,7 +73,7 @@ function BoostedModelIds($con) {
 		return $b['total_amount'] <=> $a['total_amount'];
 	});
 
-	$sortedUserIds = array_column($validBoosts, 'user_unique_id');
+	return $sortedUserIds = array_column($validBoosts, 'user_unique_id');
 
 }
 
