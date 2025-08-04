@@ -872,12 +872,18 @@ else{
         
         document.getElementById('estimatedViews').textContent = views;
         document.getElementById('estimatedReach').textContent = reach;
+
+        $('#expected_views_range').val(views);
+
+        $('#reached_views_range').val(views);
     }
 
     function updateCampaignSummary() {
         const totalBudget = dailyBudget * selectedDuration;
         document.getElementById('totalBudget').textContent = '$' + totalBudget;
         document.getElementById('campaignLength').textContent = selectedDuration + (selectedDuration === 1 ? ' Day' : ' Days');
+
+        $('#total_amount').val(totalBudget);
     }
 
     function previewCampaign() {
@@ -921,7 +927,6 @@ else{
         }
     }
 
-    // Initialize estimates on page load
     updateEstimates();
     updateCampaignSummary();
 </script>
