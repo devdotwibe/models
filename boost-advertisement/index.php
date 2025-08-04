@@ -760,7 +760,7 @@ else{
         var plan_type = $('#plan_type').val();
 
         $.ajax({
-            url: 'boost-advertisement/launch_ajax.php',
+            url: 'launch_ajax.php',
             type: 'POST',
             data: {
                 action:'submit_launch',
