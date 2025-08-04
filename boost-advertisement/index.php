@@ -785,7 +785,7 @@ else{
         $input.val(selectedValues.join(','));
     }
 
-    function toggleRange()
+    function toggleRange(element,value)
     {
         const $input = $('#age_range');
 
