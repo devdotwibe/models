@@ -168,7 +168,7 @@ $currentpage = $_SERVER['REQUEST_URI'];
 //if($currentpage == $homepage or $currentpage == 'index.php') { ?>
   
  <!-- Ultra Premium Footer -->
-<footer class="bg-black text-white py-20 border-t border-white/10">
+<footer class="bg-black text-white py-20 border-t border-white/10 footer-div">
     <div class="container mx-auto">
         <div class="grid md:grid-cols-4 gap-12 mb-16">
             <div>
