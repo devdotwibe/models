@@ -437,7 +437,9 @@ else{
               <div class="booking-time-info">
 
                   <p><strong>Booking Date:</strong> <span id="booking_date"></span></p>
-                  <p><strong>Booking Time:</strong> <span id="booking_hour"></span> <span id="booking_time"></span></p>
+                  <p><strong>Booking Time:</strong> <span id="booking_time"></span></p>
+
+                  <p><strong>Meeting duration:</strong><span id="booking_hour"></span></p>
               </div>
 
           </div>
