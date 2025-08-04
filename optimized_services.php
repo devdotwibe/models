@@ -213,7 +213,7 @@ else{
                     <button class="btn btn-message" onclick="openMessage(this)">Message</button>
 
                 <?php } else if($item['status'] ==='Decline') { ?>
-                  
+
 
                 <?php } else { ?>
                     
@@ -461,8 +461,9 @@ else{
 
                   <p><strong>Booking Date:</strong> <span id="booking_date"></span></p>
                   <p><strong>Booking Time:</strong> <span id="booking_time"></span></p>
+<!-- 
+                  <p><strong>Meeting duration:</strong><span id="booking_hour"></span></p> -->
 
-                  <p><strong>Meeting duration:</strong><span id="booking_hour"></span></p>
               </div>
 
           </div>
@@ -525,7 +526,7 @@ else{
 
                     $('#booking_date').text(data.meeting_date);
                     $('#booking_hour').text(data.duration);
-                    $('#booking_time').text(data.meeting_time);
+                    // $('#booking_time').text(data.meeting_time);
 
                     $('#details_modal').addClass('active');
                     
