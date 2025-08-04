@@ -723,7 +723,6 @@ else{
                     <p><strong>Total Investment:</strong> <span id="total_investment_view"></span></p>
                     <p><strong>Expected Views:</strong> <span id="expected_views_view"></span></p>
                     <p><strong>People Reached:</strong> <span id="people_reached_view"></span></p>
-                    <p><strong>Duration:</strong> <span id="summary_duration_view"></span></p>
                 </div>
 
             </div>
@@ -870,6 +869,8 @@ else{
         // Add selection to clicked element
         element.classList.add('selected');
         selectedDuration = parseInt(days);
+
+        $('#duration').val(days);
         
         updateCampaignSummary();
     }
