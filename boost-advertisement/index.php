@@ -692,35 +692,35 @@ else{
     let dailyBudget = 50;
     let selectedLocation = '';
 
-    function initializePremiumFeatures() {
-        // Premium Particle System
-        function createPremiumParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 12 + 's';
-            particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
-            particle.style.opacity = Math.random() * 0.8 + 0.2;
+    // function initializePremiumFeatures() {
+    //     // Premium Particle System
+    //     function createPremiumParticle() {
+    //         const particle = document.createElement('div');
+    //         particle.className = 'particle';
+    //         particle.style.left = Math.random() * 100 + '%';
+    //         particle.style.animationDelay = Math.random() * 12 + 's';
+    //         particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+    //         particle.style.opacity = Math.random() * 0.8 + 0.2;
             
-            const colors = [
-                'rgba(139, 92, 246, 0.8)',
-                'rgba(236, 72, 153, 0.6)',
-                'rgba(6, 182, 212, 0.7)'
-            ];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
+    //         const colors = [
+    //             'rgba(139, 92, 246, 0.8)',
+    //             'rgba(236, 72, 153, 0.6)',
+    //             'rgba(6, 182, 212, 0.7)'
+    //         ];
+    //         const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    //         particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
             
-            document.getElementById('particles').appendChild(particle);
+    //         document.getElementById('particles').appendChild(particle);
             
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.remove();
-                }
-            }, 12000);
-        }
+    //         setTimeout(() => {
+    //             if (particle.parentNode) {
+    //                 particle.remove();
+    //             }
+    //         }, 12000);
+    //     }
 
-        setInterval(createPremiumParticle, 150);
-    }
+    //     setInterval(createPremiumParticle, 150);
+    // }
 
     function selectQuickSetup(element, goal) {
         // Remove previous selection
