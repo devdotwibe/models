@@ -200,7 +200,7 @@ else{
 
                 <?php }?>
 
-                    <button class="btn btn-secondary" id="when_aprrove_button<?php echo $item['id'] ?>" onclick="viewDetails(this)">Details</button>
+                    <button class="btn btn-secondary" id="when_aprrove_button<?php echo $item['id'] ?>" data-id="<?php echo $item['id'] ?>" onclick="showBookingModal(this)">Details</button>
 
                 </div>
                 </div>
@@ -403,6 +403,47 @@ else{
           </div>
       </div>
   </div>
+
+
+
+    <div class="modal-overlay" id="details_modal">
+      <div class="modal">
+          <div class="modal-header">
+              <h2 class="modal-title">Booking Details</h2>
+              <button class="close-modal" type="button" onclick="CloseModal('details_modal')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+              </button>
+          </div>
+
+          <div class="modal-body">
+
+              <div class="booking-info">
+
+                <h3 style="margin-top: 20px;">Your Contact Details</h3>
+
+                  <p><strong>Booking Type:</strong> <span id="booking_type"></span></p>
+                  <p><strong>Booking For:</strong> <span id="booking_for"></span></p>
+                  <p><strong>Country:</strong> <span id="booking_country"></span></p>
+
+              </div>
+
+              <h3 style="margin-top: 20px;">Instructions</h3>
+
+              <p id="booking_description" style="margin-top: 10px;"></p>
+
+              <div class="booking-time-info">
+
+                  <p><strong>Booking Date:</strong> <span id="booking_date"></span></p>
+                  <p><strong>Booking Time:</strong> <span id="booking_hour"></span> <span id="booking_time"></span></p>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
 	
    <?php include('includes/footer.php'); ?>
 
@@ -411,6 +452,12 @@ else{
 
    <script>
 
+
+
+    function showBookingModal()
+    {
+        $('#details_modal').addClass('active');
+    }
 
     function acceptRequest(element)
     {
