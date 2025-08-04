@@ -34,6 +34,8 @@ if (isset($_SESSION["log_user_id"])) {
 
             if (mysqli_query($con, $query)) {
 
+                $boostId = mysqli_insert_id($con);
+
                 $coins = $budget;
 
                 $date = date('Y-m-d H:i:s');
@@ -42,7 +44,7 @@ if (isset($_SESSION["log_user_id"])) {
 
                 DB::insert('model_user_transaction_history', array(
                     'user_id' => $userDetails['id'],
-                    'other_id' => $bookingID,
+                    'other_id' => $boostId,
                     'amount' => $coins,
                     'type' => 'views_boost',
                     'created_at' => $date,
