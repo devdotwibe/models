@@ -501,12 +501,12 @@ else{
                             <div>
                                 <label class="block text-white font-semibold mb-3">Age Range</label>
                                 <div class="grid grid-cols-3 gap-2">
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '18-25')">18-25</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '26-35')">26-35</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '36-45')">36-45</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '46-55')">46-55</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '55+')">55+</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, 'all-ages')">All Ages</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '18-25')">18-25</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '26-35')">26-35</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '36-45')">36-45</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '46-55')">46-55</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '55+')">55+</div>
+                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, 'all-ages')">All Ages</div>
 
                                     <input type="hidden" name="age_range[]" id="age_range" >
 
@@ -765,6 +765,29 @@ else{
     function toggleTarget(element, value) {
 
         const $input = $('#target_audience');
+
+        let selectedValues = $input.val() ? $input.val().split(',') : [];
+
+        const $el = $(element);
+
+        if ($el.hasClass('selected')) {
+      
+            $el.removeClass('selected');
+            selectedValues = selectedValues.filter(v => v !== value);
+        } else {
+         
+            $el.addClass('selected');
+            if (!selectedValues.includes(value)) {
+                selectedValues.push(value);
+            }
+        }
+
+        $input.val(selectedValues.join(','));
+    }
+
+    function toggleRange()
+    {
+        const $input = $('#age_range');
 
         let selectedValues = $input.val() ? $input.val().split(',') : [];
 
