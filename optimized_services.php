@@ -523,7 +523,7 @@ else{
 
     }
 
-    function AcceptConform()
+    function AcceptConform(status)
     {
         var accept_id = $('#accept_id').val();
 
@@ -533,7 +533,7 @@ else{
             data: {
               action:'accept_request',
               accept_id:accept_id,
-              status:
+              status:status,
             },
             dataType: 'json',
             success: function (response) {

@@ -123,8 +123,10 @@ if (isset($_POST['booking_submit'])) {
 
 			$accept_id = $_POST['accept_id'];
 
+			$status =  $_POST['status'];
+
 			  DB::update('model_booking', [
-				'status' => 'Accept'
+				'status' => $status,
 			], 'id = %i', $accept_id);
 
 
