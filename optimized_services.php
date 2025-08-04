@@ -64,6 +64,36 @@ else{
         $model_unique_id = $userDetails['unique_id'];
 
         $model_bookings = DB::query("SELECT * FROM model_booking WHERE model_unique_id =  %s ", $model_unique_id);
+
+        $pending_count = 0;
+
+        $accept_count = 0;
+
+        $completed_count = 0;
+
+        $declined_count = 0;
+
+        foreach($model_bookings as $item) { 
+
+            if ($item['status'] === 'Accept') {
+
+              $accept_count++;
+
+            } else if ($item['status'] === 'Completed') {
+
+                $completed_count++;
+
+            } else if ($item['status'] === 'Decline') {
+
+               $declined_count++;
+
+            } else {
+
+                $pending_count++;
+
+            }
+        }
+
     ?>
 	
 	<main class="max-w-7xl mx-auto px-4 py-5 main-content">
@@ -74,13 +104,13 @@ else{
         All Services
       </button>
       <button class="tab-button"  onclick="ServiceTab('pending_status',this)" data-tab="pending">
-        Pending <span class="tab-count">2</span>
+        Pending <span class="tab-count"><?php echo $pending_count ?></span>
       </button>
       <button class="tab-button" onclick="ServiceTab('approved_status',this)" data-tab="approved">
-        Approved <span class="tab-count">3</span>
+        Approved <span class="tab-count"><?php echo $accept_count ?></span>
       </button>
       <button class="tab-button" onclick="ServiceTab('completed_status',this)" data-tab="completed">
-        Completed <span class="tab-count">5</span>
+        Completed <span class="tab-count"><?php echo $completed_count ?></span>
       </button>
     </div>
 
