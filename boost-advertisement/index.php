@@ -476,24 +476,24 @@ else{
                             <div>
                                 <label class="block text-white font-semibold mb-3">Who do you want to reach?</label>
                                 <div class="grid grid-cols-2 gap-3">
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleChip(this, 'men')">
+                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'men')">
                                         <div class="text-2xl mb-1">👨</div>
                                         <div class="text-sm">Men</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleChip(this, 'women')">
+                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'women')">
                                         <div class="text-2xl mb-1">👩</div>
                                         <div class="text-sm">Women</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleChip(this, 'couples')">
+                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'couples')">
                                         <div class="text-2xl mb-1">💑</div>
                                         <div class="text-sm">Couples</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleChip(this, 'all')">
+                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'all')">
                                         <div class="text-2xl mb-1">🌈</div>
                                         <div class="text-sm">Everyone</div>
                                     </div>
 
-                                     <input type="hidden" name="target_audience" id="target_audience[]" >
+                                     <input type="hidden" name="target_audience[]" id="target_audience" >
 
                                 </div>
                             </div>
@@ -508,7 +508,7 @@ else{
                                     <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '55+')">55+</div>
                                     <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, 'all-ages')">All Ages</div>
 
-                                    <input type="hidden" name="age_range" id="age_range[]" >
+                                    <input type="hidden" name="age_range[]" id="age_range" >
 
                                 </div>
                             </div>
@@ -761,6 +761,30 @@ else{
         
         updateEstimates();
     }
+
+    function toggleTarget(element, value) {
+
+        const $input = $('#target_audience');
+
+        let selectedValues = $input.val() ? $input.val().split(',') : [];
+
+        const $el = $(element);
+
+        if ($el.hasClass('selected')) {
+      
+            $el.removeClass('selected');
+            selectedValues = selectedValues.filter(v => v !== value);
+        } else {
+         
+            $el.addClass('selected');
+            if (!selectedValues.includes(value)) {
+                selectedValues.push(value);
+            }
+        }
+
+        $input.val(selectedValues.join(','));
+    }
+
 
     function toggleChip(element, value) {
         element.classList.toggle('selected');
