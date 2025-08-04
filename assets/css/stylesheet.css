@@ -9585,7 +9585,6 @@ right: 12px;
     }
 
 
-      /* Premium Gradients */
     .boost_adver .gradient-bg {
         background: var(--primary-gradient);
     }
@@ -9628,8 +9627,8 @@ right: 12px;
         z-index: -1;
     }
 
-    /* Premium Floating Particles */
-    .boost_adver .particles {
+    
+    /* .boost_adver .particles {
         position: fixed;
         top: 0;
         left: 0;
@@ -9686,7 +9685,6 @@ right: 12px;
         }
     }
 
-    /* Premium Buttons */
     .boost_adver .btn-primary {
         background: var(--primary-gradient);
         transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -9757,7 +9755,6 @@ right: 12px;
         box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
     }
 
-    /* Premium Typography */
     .boost_adver .premium-text {
         background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
         -webkit-background-clip: text;
@@ -9765,7 +9762,6 @@ right: 12px;
         background-clip: text;
     }
 
-    /* Form Styles */
     .boost_adver .form-input {
         background: rgba(255, 255, 255, 0.02);
         backdrop-filter: blur(40px);
@@ -9787,7 +9783,6 @@ right: 12px;
         color: rgba(255, 255, 255, 0.5);
     }
 
-    /* Budget Slider */
     .boost_adver .budget-slider {
         -webkit-appearance: none;
         appearance: none;
@@ -9818,7 +9813,6 @@ right: 12px;
         box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
     }
 
-    /* Goal Cards */
     .boost_adver .goal-card {
         transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         cursor: pointer;
@@ -9853,7 +9847,6 @@ right: 12px;
         left: 100%;
     }
 
-    /* Audience Targeting */
     .boost_adver .audience-chip {
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -9873,7 +9866,6 @@ right: 12px;
         color: #ffffff;
     }
 
-    /* Quick Setup Cards */
     .boost_adver .quick-setup {
         transition: all 0.4s ease;
         cursor: pointer;
@@ -9891,7 +9883,6 @@ right: 12px;
         background: rgba(139, 92, 246, 0.1);
     }
 
-    /* Responsive Design */
     .boost_adver .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -9904,7 +9895,6 @@ right: 12px;
         }
     }
 
-    /* Hover Effects */
     .boost_adver .hover-lift {
         transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
@@ -9912,6 +9902,6 @@ right: 12px;
     .boost_adver .hover-lift:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
-    }
+    } */
 
 }
