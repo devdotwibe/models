@@ -78,3 +78,8 @@ function h_generate_username($string_name){
 		}
 	}
 }
+
+function calculate_token_cost($token){
+	$cost = round($token / 100,2);
+	return $cost;
+}

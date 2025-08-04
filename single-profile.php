@@ -1190,7 +1190,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 				<?php if($extra_details['group_chat_tocken']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Group Chat</div>
-                        <div class="attribute-value">$50/hr</div>
+                        <div class="attribute-value">$<?php echo calculate_token_cost($extra_details['group_chat_tocken']); ?>/hr</div>
 						<div class="attribute-value">Tokens <?php echo $extra_details['group_chat_tocken']; ?>/min </div>
                         <p>Exclusive private chat sessions where we can discuss anything you'd like.</p>
 
@@ -1204,7 +1204,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 				<?php if($extra_details['private_chat_token']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Private Chat</div>
-                        <div class="attribute-value">$25/day</div>
+                        <div class="attribute-value">$<?php echo calculate_token_cost($extra_details['private_chat_token']); ?>/day</div>
 						<div class="attribute-value">Tokens <?php echo $extra_details['private_chat_token']; ?>/min </div>
                         <p>Priority responses to your messages throughout the day.</p>
 
@@ -1243,6 +1243,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 				<?php if($extra_details['in_per_hour']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Local Meetup</div>
+						<div class="attribute-value">$<?php echo calculate_token_cost($extra_details['in_per_hour']); ?></div>
 						<div class="attribute-value">Tokens <?php echo $extra_details['in_per_hour']; ?>/hr </div>
                         <p>Enjoy a personalized date experience.</p>
 
@@ -1256,6 +1257,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 				<?php if($extra_details['extended_rate']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Extended Social</div>
+						<div class="attribute-value">$<?php echo calculate_token_cost($extra_details['extended_rate']); ?></div>
                         <div class="attribute-value">Tokens <?php echo $extra_details['extended_rate']; ?>/hr </div>
                         <p>Enjoy a personalized date experience.</p>
 
@@ -1269,6 +1271,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 				<?php if($extra_details['in_overnight']){ ?>
                     <div class="attribute">
                         <div class="attribute-label">Overnight Social</div>
+						<div class="attribute-value">$<?php echo calculate_token_cost($extra_details['in_overnight']); ?></div>
                         <div class="attribute-value">Tokens <?php echo $extra_details['in_overnight']; ?>/hr </div>
                         <p>Enjoy a personalized date experience.</p>
 
