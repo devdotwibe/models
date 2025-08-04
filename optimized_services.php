@@ -200,7 +200,7 @@ else{
 
                 <?php }?>
 
-                    <button class="btn btn-secondary" id="when_aprrove_button<?php echo $item['id'] ?>" data-id="<?php echo $item['id'] ?>" onclick="showBookingModal(this)">Details</button>
+                    <button class="btn btn-secondary" id="when_aprrove_button<?php echo $item['id'] ?>" onclick="showBookingModal(this)">Details</button>
 
                 </div>
                 </div>
