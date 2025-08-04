@@ -477,9 +477,9 @@ else{
 
         $(element).addClass('active');
 
-        $('.all_status').fadeout();
+        $('.all_status').hide();
 
-        $(`.${tab}`).fadeIn();
+        $(`.${tab}`).show();
     }
 
     function showBookingModal(element)
