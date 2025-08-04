@@ -736,7 +736,14 @@ else{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>`
 
 <script>
-    // Premium JavaScript Functionality
+
+     function CloseModal(id)
+    {
+
+       $(`#${id}`).removeClass('active');
+       
+    }
+    
     document.addEventListener('DOMContentLoaded', function() {
         initializePremiumFeatures();
     });
