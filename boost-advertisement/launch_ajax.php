@@ -3,6 +3,10 @@ session_start();
 include('../includes/config.php');
 include('../includes/helper.php');
 
+if (isset($_SESSION["log_user_id"])) {
+	$userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
+	if ($userDetails) {
+
 	if (isset($_POST['action']) && $_POST['action'] == 'submit_launch') {
 
         $user_unique_id = mysqli_real_escape_string($con, $_POST['user_unique_id']);
@@ -27,11 +31,35 @@ include('../includes/helper.php');
                 )";
 
         if (mysqli_query($con, $query)) {
+
+            $coins = $budget;
+
+            $date = date('Y-m-d H:i:s');
+
+            DB::query("UPDATE model_user SET balance=round(balance-%d) WHERE id=%s", $coins, $user_unique_id);
+
+            DB::insert('model_user_transaction_history', array(
+                'user_id' => $userDetails['id'],
+                'other_id' => $bookingID,
+                'amount' => $coins,
+                'type' => 'views_boost',
+                'created_at' => $date,
+            ));
+
             echo json_encode(['status' => 'success', 'message' => 'Boost advertisement created successfully']);
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Database insert failed', 'error' => mysqli_error($conn)]);
         }
 
     }
+    
+    } else {
+		echo "<script>alert('Please login');</script>";
+		echo "<script>window.location='login.php'</script>";
+	}
+} else {
+	echo "<script>alert('Please login');</script>";
+	echo "<script>window.location='login.php'</script>";
+}
 
 ?>
