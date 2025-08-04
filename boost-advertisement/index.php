@@ -37,6 +37,15 @@ else{
    
 </head>
 <body class="min-h-screen text-white">
+
+
+<?php 
+
+  include('includes/side-bar.php');
+
+  include('includes/profile_header_index.php');
+
+?>
 <!-- Premium Particle System -->
 <div class="particles" id="particles"></div>
 
