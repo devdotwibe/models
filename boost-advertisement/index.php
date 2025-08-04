@@ -414,6 +414,8 @@ else{
 
   print_r($user_ids);
 
+  die();
+
 ?>
 <!-- Premium Particle System -->
 <div class="particles" id="particles"></div>
