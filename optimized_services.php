@@ -36,7 +36,7 @@ else{
 	<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
    
 </head>
-<body class="optim-services socialwall-page">
+<body class="enhanced5 optim-services socialwall-page">
 
     <?php
 
@@ -371,7 +371,7 @@ else{
 
               <div class="modal-body">
 
-              <p>Do you want to Accept</span>request</strong>?</p>
+              <p>Do you want to Accept </span>request</strong>?</p>
 
                 <div style="margin-top: 20px;">
 
