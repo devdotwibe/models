@@ -814,14 +814,15 @@ else{
     }
 
     function selectLocation(element, location) {
-        // Remove previous selection
+  
         element.parentElement.querySelectorAll('.audience-chip').forEach(chip => {
             chip.classList.remove('selected');
         });
         
-        // Add selection to clicked element
         element.classList.add('selected');
         selectedLocation = location;
+
+        $('#location').val(location);
         
         updateEstimates();
     }
