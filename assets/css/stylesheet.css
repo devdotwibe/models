@@ -9566,7 +9566,7 @@ right: 12px;
 /**************** boost_adver **************/ 
 
 
-    body.boost_adver{
+    /* body.boost_adver{
 
         font-family: 'Inter', sans-serif;
         background: radial-gradient(ellipse at top, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
@@ -9600,10 +9600,9 @@ right: 12px;
     @keyframes gradient-shift {
         0%, 100% { filter: hue-rotate(0deg); }
         50% { filter: hue-rotate(30deg); }
-    }
+    } */
 
-    /* Ultra Advanced Glass Morphism */
-    .boost_adver .ultra-glass {
+    /* .boost_adver .ultra-glass {
         background: rgba(255, 255, 255, 0.02);
         backdrop-filter: blur(40px);
         -webkit-backdrop-filter: blur(40px);
@@ -9627,7 +9626,6 @@ right: 12px;
         z-index: -1;
     }
 
-    /* Premium Floating Particles */
     .boost_adver .particles {
         position: fixed;
         top: 0;
@@ -9807,7 +9805,8 @@ right: 12px;
         width: 24px;
         height: 24px;
         background: var(--primary-gradient);
-        border-radius: 50%;
+        bord
+    Premium Floating Particleser-radius: 50%; */
         cursor: pointer;
         border: none;
         box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
