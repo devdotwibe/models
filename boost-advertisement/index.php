@@ -445,6 +445,9 @@ else{
                                         <circle cx="12" cy="12" r="3"></circle>
                                     </svg>
                                 </div>
+
+                                <input type="hidden" name="plan_type" id="plan_type" value="views" >
+
                                 <h3 class="text-xl font-semibold premium-text mb-2">Get More Views</h3>
                                 <p class="text-white/70 text-sm mb-4">Increase visibility and profile visits</p>
                                 <div class="text-green-400 font-bold">$20-50/day</div>
@@ -489,6 +492,9 @@ else{
                                         <div class="text-2xl mb-1">🌈</div>
                                         <div class="text-sm">Everyone</div>
                                     </div>
+
+                                     <input type="hidden" name="target_audience" id="target_audience[]" >
+
                                 </div>
                             </div>
                             
@@ -501,6 +507,9 @@ else{
                                     <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '46-55')">46-55</div>
                                     <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, '55+')">55+</div>
                                     <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleChip(this, 'all-ages')">All Ages</div>
+
+                                    <input type="hidden" name="age_range" id="age_range[]" >
+
                                 </div>
                             </div>
                         </div>
@@ -547,6 +556,9 @@ else{
                                             </div>
                                         </div>
                                     </div>
+
+                                    <input type="hidden" name="location" id="location" >
+
                                 </div>
                             </div>
                         </div>
@@ -570,7 +582,7 @@ else{
                                 <label class="text-white font-semibold">Daily Budget</label>
                                 <span class="text-3xl font-bold text-green-400" id="budgetDisplay">$50</span>
                             </div>
-                            <input type="range" class="budget-slider w-full" min="10" max="200" value="50" step="10" oninput="updateBudget(this.value)">
+                            <input type="range" class="budget-slider w-full" min="10" id="budget" max="200" value="50" step="10" oninput="updateBudget(this.value)">
                             <div class="flex justify-between text-white/50 text-sm mt-2">
                                 <span>$10</span>
                                 <span>$200</span>
@@ -618,6 +630,12 @@ else{
                                     <div class="text-xs text-green-400 mt-1">Maximum impact</div>
                                 </div>
                             </div>
+
+                            <input type="hidden" name="duration" id="duration" >
+
+                            <input type="hidden" name="total_amount" id="total_amount" >
+                            <input type="hidden" name="expected_views_range" id="expected_views_range" >
+                            <input type="hidden" name="reached_views_range" id="reached_views_range" >
                         </div>
                     </div>
                     
