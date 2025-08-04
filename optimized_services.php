@@ -70,27 +70,27 @@ else{
 
     <!-- PROMINENT Main Tabs -->
     <div class="main-tabs">
-      <button class="tab-button active" data-tab="all">
+      <button class="tab-button active" onclick="ServiceTab('all',this)" data-tab="all">
         All Services
       </button>
-      <button class="tab-button" data-tab="pending">
+      <button class="tab-button"  onclick="ServiceTab('pending',this)" data-tab="pending">
         Pending <span class="tab-count">2</span>
       </button>
-      <button class="tab-button" data-tab="approved">
+      <button class="tab-button" onclick="ServiceTab('approved',this)" data-tab="approved">
         Approved <span class="tab-count">3</span>
       </button>
-      <button class="tab-button" data-tab="completed">
+      <button class="tab-button" onclick="ServiceTab('completed',this)" data-tab="completed">
         Completed <span class="tab-count">5</span>
       </button>
     </div>
 
     <!-- Filters -->
     <div class="filters">
-      <button class="filter-btn active" data-filter="all">All Types</button>
-      <button class="filter-btn" data-filter="group">Group Show</button>
-      <button class="filter-btn" data-filter="dating">Dating</button>
-      <button class="filter-btn" data-filter="modeling">Modeling</button>
-      <button class="filter-btn" data-filter="international">International</button>
+      <button class="filter-btn active" data-filter="all" onclick="FilterTab('all')">All Types</button>
+      <button class="filter-btn" data-filter="group" onclick="FilterTab('group')" >Group Show</button>
+      <button class="filter-btn" data-filter="dating" onclick="FilterTab('all')">Dating</button>
+      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('all')">Modeling</button>
+      <button class="filter-btn" data-filter="international" onclick="FilterTab('all')">International</button>
     </div>
 
     <div id="services-list" class="space-y-3">
@@ -454,7 +454,13 @@ else{
 
    <script>
 
+    function ServiceTab(tab,element)
+    {
 
+        $('.tab-button').removeClass('active');
+
+        $(element).addClass('active');
+    }
 
     function showBookingModal(element)
     {
