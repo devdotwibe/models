@@ -35,9 +35,372 @@ else{
 	<link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
 	<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
 
+    <style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --premium-gold: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --neon-purple: #8b5cf6;
+        --neon-pink: #ec4899;
+        --neon-blue: #06b6d4;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: radial-gradient(ellipse at top, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+        color: #fff;
+        overflow-x: hidden;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
+    }
+
+    .heading-font {
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
+
+    /* Premium Gradients */
+    .gradient-bg {
+        background: var(--primary-gradient);
+    }
+    
+    .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+        0%, 100% { filter: hue-rotate(0deg); }
+        50% { filter: hue-rotate(30deg); }
+    }
+
+    /* Ultra Advanced Glass Morphism */
+    .ultra-glass {
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(40px);
+        -webkit-backdrop-filter: blur(40px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08),
+            0 0 0 1px rgba(139, 92, 246, 0.1);
+        position: relative;
+    }
+
+    .ultra-glass::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+        border-radius: inherit;
+        z-index: -1;
+    }
+
+    /* Premium Floating Particles */
+    .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.8) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float-premium 12s infinite linear;
+        filter: blur(0.5px);
+    }
+
+    .particle:nth-child(2n) {
+        background: radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, transparent 70%);
+        animation-duration: 15s;
+    }
+
+    .particle:nth-child(3n) {
+        background: radial-gradient(circle, rgba(6, 182, 212, 0.7) 0%, transparent 70%);
+        animation-duration: 18s;
+    }
+
+    @keyframes float-premium {
+        0% {
+            opacity: 0;
+            transform: translateY(100vh) translateX(0px) scale(0) rotate(0deg);
+        }
+        10% {
+            opacity: 1;
+            transform: translateY(90vh) translateX(20px) scale(1) rotate(45deg);
+        }
+        90% {   font-family: 'Inter', sans-serif;
+        background: radial-gradient(ellipse at top, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+        color: #fff;
+        overflow-x: hidden;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
+            opacity: 1;
+            transform: translateY(10vh) translateX(200px) scale(1.2) rotate(315deg);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-10vh) translateX(300px) scale(0) rotate(360deg);
+        }
+    }
+
+    /* Premium Buttons */
+    .btn-primary {
+        background: var(--primary-gradient);
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+        overflow: hidden;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+    }
+
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.8s ease;
+    }
+
+    .btn-primary:hover::before {
+        left: 100%;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #5a67d8, #6b46c1);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 
+            0 25px 50px rgba(139, 92, 246, 0.5),
+            0 0 0 1px rgba(139, 92, 246, 0.4),
+            0 0 30px rgba(139, 92, 246, 0.3);
+    }
+
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        font-weight: 500;
+    }
+
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 
+            0 20px 40px rgba(255, 255, 255, 0.15),
+            0 0 0 1px rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-danger {
+        background: linear-gradient(135deg, #ef4444, #f87171);
+        transition: all 0.4s ease;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .btn-danger:hover {
+        background: linear-gradient(135deg, #dc2626, #ef4444);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+    }
+
+    /* Premium Typography */
+    .premium-text {
+        background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Form Styles */
+    .form-input {
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(40px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        color: white;
+    }
+
+    .form-input:focus {
+        box-shadow: 
+            0 0 0 3px rgba(139, 92, 246, 0.3),
+            0 10px 30px rgba(139, 92, 246, 0.15);
+        transform: translateY(-2px) scale(1.01);
+        border-color: rgba(139, 92, 246, 0.5);
+        outline: none;
+    }
+
+    .form-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Budget Slider */
+    .budget-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        outline: none;
+    }
+
+    .budget-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        background: var(--primary-gradient);
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
+    }
+
+    .budget-slider::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        background: var(--primary-gradient);
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
+    }
+
+    /* Goal Cards */
+    .goal-card {
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .goal-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+    }
+
+    .goal-card.selected {
+        border-color: rgba(139, 92, 246, 0.8);
+        background: rgba(139, 92, 246, 0.1);
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+    }
+
+    .goal-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+        transition: left 0.6s ease;
+        z-index: 1;
+    }
+
+    .goal-card:hover::before {
+        left: 100%;
+    }
+
+    /* Audience Targeting */
+    .audience-chip {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .audience-chip:hover {
+        background: rgba(139, 92, 246, 0.2);
+        border-color: rgba(139, 92, 246, 0.5);
+        transform: scale(1.05);
+    }
+
+    .audience-chip.selected {
+        background: rgba(139, 92, 246, 0.3);
+        border-color: rgba(139, 92, 246, 0.8);
+        color: #ffffff;
+    }
+
+    /* Quick Setup Cards */
+    .quick-setup {
+        transition: all 0.4s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .quick-setup:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+    }
+
+    .quick-setup.selected {
+        border-color: rgba(139, 92, 246, 0.8);
+        background: rgba(139, 92, 246, 0.1);
+    }
+
+    /* Responsive Design */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .container { 
+            padding: 0 1rem; 
+        }
+    }
+
+    /* Hover Effects */
+    .hover-lift {
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+    }
+</style>
 
 </head>
-<body class="boost_adver min-h-screen text-white">
+<body class="ad-enhanced min-h-screen text-white socialwall-page">
 
 
 <?php 
@@ -88,34 +451,7 @@ else{
                                 <div class="text-white/50 text-xs">500-1,500 views</div>
                             </div>
                         </div>
-                        
-                        <div class="quick-setup ultra-glass p-6 rounded-2xl border border-white/10" onclick="selectQuickSetup(this, 'engagement')">
-                            <div class="text-center">
-                                <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                    </svg>
-                                </div>
-                                <h3 class="text-xl font-semibold premium-text mb-2">Boost Engagement</h3>
-                                <p class="text-white/70 text-sm mb-4">Get more likes, follows, and messages</p>
-                                <div class="text-green-400 font-bold">$30-80/day</div>
-                                <div class="text-white/50 text-xs">50-200 interactions</div>
-                            </div>
-                        </div>
-                        
-                        <div class="quick-setup ultra-glass p-6 rounded-2xl border border-white/10" onclick="selectQuickSetup(this, 'premium')">
-                            <div class="text-center">
-                                <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                                    </svg>
-                                </div>
-                                <h3 class="text-xl font-semibold premium-text mb-2">Premium Boost</h3>
-                                <p class="text-white/70 text-sm mb-4">Maximum exposure + priority placement</p>
-                                <div class="text-yellow-400 font-bold">$100-200/day</div>
-                                <div class="text-white/50 text-xs">2,000+ views + featured</div>
-                            </div>
-                        </div>
+                    
                     </div>
                 </div>
 
@@ -338,6 +674,12 @@ else{
         </div>
     </div>
 </main>
+
+
+<?php include('../includes/footer.php'); ?>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>`
 
 <script>
     // Premium JavaScript Functionality
