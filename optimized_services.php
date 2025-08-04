@@ -149,7 +149,7 @@ else{
 
                             $formattedDate = date('M d', strtotime($meeting_date)); 
                         ?>
-                        <span class="service-meta <?php if($item['status'] ==='Accept') { ?>text-pink-400 <?php } else { ?> text-orange-400 <?php } ?>  "><?php echo $item['booking_for'] ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
+                        <span class="service-meta <?php if($item['status'] ==='Accept' || $item['status'] =='Decline' ) { ?>text-pink-400 <?php } else { ?> text-orange-400 <?php } ?>  "><?php echo $item['booking_for'] ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
                     </div>
                     </div>
 
@@ -192,6 +192,10 @@ else{
 
                           <span class="status-badge badge-approved">Approved</span>
 
+                    <?php } else if($item['status'] ==='Decline') { ?>
+
+                       <span class="status-badge badge-pending">Rejected</span>
+
                     <?php } else {  ?>
 
                         <span class="status-badge badge-pending" id="when_approved_status<?php echo $item['id'] ?>">Pending</span>
@@ -207,6 +211,9 @@ else{
                  
                     <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
                     <button class="btn btn-message" onclick="openMessage(this)">Message</button>
+
+                <?php } else if($item['status'] ==='Decline') { ?>
+                  
 
                 <?php } else { ?>
                     
