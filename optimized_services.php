@@ -194,7 +194,7 @@ else{
 
                 <?php } else { ?>
                     
-                    <button class="btn btn-success" onclick="acceptRequest(this)">Accept</button>
+                    <button class="btn btn-success" data-id="<?php echo $item['id']; ?>" onclick="acceptRequest(this)">Accept</button>
                     <button class="btn btn-danger" onclick="declineRequest(this)">Decline</button>
                     <button class="btn btn-message" onclick="openMessage(this)">Message</button>
 
@@ -356,9 +356,61 @@ else{
       </div>
     </div>
   </div>
+
+    <div class="modal-overlay" id="conform_modal">
+          <div class="modal">
+              <div class="modal-header">
+              <h2 class="modal-title">Accept</span></h2>
+              <button class="close-modal" type="button" onclick="CloseModal()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+              </button>
+              </div>
+
+              <div class="modal-body">
+
+              <p>Do you want to Accept</span>request</strong>?</p>
+
+                <div style="margin-top: 20px;">
+
+                    <input type="hidden" name="accept_id" id="accept_id" >
+                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="puchare_submit" >Yes, Accept</button>
+                    <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
+                </div>
+
+              </div>
+
+          </div>
+      </div>
 	
    <?php include('includes/footer.php'); ?>
 
     
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+   <script>
+
+
+    function acceptRequest(element)
+    {
+      
+        var id = $(element).data('id');
+
+        $('#conform_modal').addClass('active');
+
+        $('#accept_id').val(id);
+
+    }
+
+
+
+
+
+
+
+   </script>
+
 </body>
 </html>
