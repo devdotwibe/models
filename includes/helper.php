@@ -42,6 +42,41 @@ function getModelFollowerIds($model_id) {
     return $followerIds;
 }
 
+function BoostedModelIds($con) {
+
+	$today = new DateTime();
+
+	$query = "SELECT user_unique_id, created_at, duration, total_amount 
+			FROM boost_avertisement";
+
+	$result = mysqli_query($con, $query);
+
+	$validBoosts = [];
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		$createdAt = new DateTime($row['created_at']);
+		$duration = (int)$row['duration'];
+		
+		$expiryDate = clone $createdAt;
+		$expiryDate->modify("+$duration days");
+
+		if ($today <= $expiryDate) {
+		
+			$validBoosts[] = [
+				'user_unique_id' => $row['user_unique_id'],
+				'total_amount' => (int)$row['total_amount']
+			];
+		}
+	}
+
+	usort($validBoosts, function ($a, $b) {
+		return $b['total_amount'] <=> $a['total_amount'];
+	});
+
+	$sortedUserIds = array_column($validBoosts, 'user_unique_id');
+
+}
+
 
 function checkUserFollow($model_id, $user_id) {
 	
