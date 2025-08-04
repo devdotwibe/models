@@ -590,8 +590,8 @@ else{
                             
                             <!-- Quick Budget Options -->
                             <div class="grid grid-cols-3 gap-3 mt-4">
-                                <button type="button" class="audience-chip p-3 rounded-lg text-center" onclick="setBudget(25)">
-                                    <div class="font-semibold">$25</div>
+                                <button type="button" class="audience-chip p-3 rounded-lg text-center" onclick="setBudget(30)">
+                                    <div class="font-semibold">$30</div>
                                     <div class="text-xs text-white/70">Starter</div>
                                 </button>
                                 <button type="button" class="audience-chip p-3 rounded-lg text-center" onclick="setBudget(50)">
@@ -749,7 +749,7 @@ else{
         selectedGoal = goal;
         
         if (goal === 'views') {
-            setBudget(25);
+            setBudget(30);
         } else if (goal === 'engagement') {
             setBudget(50);
         } else if (goal === 'premium') {
