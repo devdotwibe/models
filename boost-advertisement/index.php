@@ -113,7 +113,7 @@ else{
     }
 
     /* Premium Floating Particles */
-    .particles {
+    .ad-enhanced .particles {
         position: fixed;
         top: 0;
         left: 0;
@@ -124,7 +124,7 @@ else{
         overflow: hidden;
     }
 
-    .particle {
+    .ad-enhanced .particle {
         position: absolute;
         width: 4px;
         height: 4px;
@@ -134,12 +134,12 @@ else{
         filter: blur(0.5px);
     }
 
-    .particle:nth-child(2n) {
+    .ad-enhanced .particle:nth-child(2n) {
         background: radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, transparent 70%);
         animation-duration: 15s;
     }
 
-    .particle:nth-child(3n) {
+    .ad-enhanced .particle:nth-child(3n) {
         background: radial-gradient(circle, rgba(6, 182, 212, 0.7) 0%, transparent 70%);
         animation-duration: 18s;
     }
