@@ -412,9 +412,10 @@ else{
 
   $user_ids  = BoostedModelIds($con);
 
-  print_r($user_ids);
-
-  die();
+    echo "<pre>";
+    print_r($user_ids);
+    echo "</pre>";
+    die();
 
 ?>
 <!-- Premium Particle System -->
