@@ -17,11 +17,15 @@ if (isset($_SESSION['log_user_unique_id'])) {
   } else {
     $error = 'empty';
   }
-} else {
-  $error = 'login';
-
-    echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
 }
+
+
+// else {
+//   $error = 'login';
+
+//     echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
+// }
+
 $showMessgeBtn = 0;
 if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id']) {
   $showMessgeBtn = h_checkMessageShowBtn($_GET['m_unique_id'], $_SESSION['log_user_unique_id']);
@@ -1269,7 +1273,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <p>Enjoy a personalized date experience.</p>
 
                         <?php if($userDetails['as_a_model'] !='Yes') { ?>
-                            
+
                             <a class="btn btn-primary" href='<?=SITEURL?>booking.php?type=meet&service=Overnight Social&token=<?php echo $extra_details['in_overnight']; ?>/hr&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Book Now</a>
 
                          <?php }?>
