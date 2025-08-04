@@ -64,33 +64,63 @@ else{
         $model_unique_id = $userDetails['unique_id'];
 
         $model_bookings = DB::query("SELECT * FROM model_booking WHERE model_unique_id =  %s ", $model_unique_id);
+
+        $pending_count = 0;
+
+        $accept_count = 0;
+
+        $completed_count = 0;
+
+        $declined_count = 0;
+
+        foreach($model_bookings as $item) { 
+
+            if ($item['status'] === 'Accept') {
+
+              $accept_count++;
+
+            } else if ($item['status'] === 'Completed') {
+
+                $completed_count++;
+
+            } else if ($item['status'] === 'Decline') {
+
+               $declined_count++;
+
+            } else {
+
+                $pending_count++;
+
+            }
+        }
+
     ?>
 	
 	<main class="max-w-7xl mx-auto px-4 py-5 main-content">
 
     <!-- PROMINENT Main Tabs -->
     <div class="main-tabs">
-      <button class="tab-button active" data-tab="all">
+      <button class="tab-button active" onclick="ServiceTab('all_status',this)" data-tab="all">
         All Services
       </button>
-      <button class="tab-button" data-tab="pending">
-        Pending <span class="tab-count">2</span>
+      <button class="tab-button"  onclick="ServiceTab('pending_status',this)" data-tab="pending">
+        Pending <span class="tab-count"><?php echo $pending_count ?></span>
       </button>
-      <button class="tab-button" data-tab="approved">
-        Approved <span class="tab-count">3</span>
+      <button class="tab-button" onclick="ServiceTab('approved_status',this)" data-tab="approved">
+        Approved <span class="tab-count"><?php echo $accept_count ?></span>
       </button>
-      <button class="tab-button" data-tab="completed">
-        Completed <span class="tab-count">5</span>
+      <button class="tab-button" onclick="ServiceTab('completed_status',this)" data-tab="completed">
+        Completed <span class="tab-count"><?php echo $completed_count ?></span>
       </button>
     </div>
 
     <!-- Filters -->
     <div class="filters">
-      <button class="filter-btn active" data-filter="all">All Types</button>
-      <button class="filter-btn" data-filter="group">Group Show</button>
-      <button class="filter-btn" data-filter="dating">Dating</button>
-      <button class="filter-btn" data-filter="modeling">Modeling</button>
-      <button class="filter-btn" data-filter="international">International</button>
+      <button class="filter-btn active" data-filter="all" onclick="FilterTab('all_type',this)">All Types</button>
+      <button class="filter-btn" data-filter="group" onclick="FilterTab('Group',this)" >Group Chat</button>
+      <button class="filter-btn" data-filter="dating" onclick="FilterTab('International',this)">International Tour</button>
+      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('Luxury',this)">Luxury Companion</button>
+      <button class="filter-btn" data-filter="international" onclick="FilterTab('premium-experience',this)">premium-experience</button>
     </div>
 
     <div id="services-list" class="space-y-3">
@@ -116,10 +146,26 @@ else{
                     $defaultImage = SITEURL . $bookeduser['profile_pic'];
                 }
             }
-        
+
+              if($item['status'] ==='Accept') { 
+
+                  $staus = "approved_status";
+              }
+              else if($item['status'] ==='Completed')
+              {
+                 $staus = "completed_status";
+              }
+              else if($item['status'] ==='Decline')
+              {
+                 $staus = "decline_status";
+              }
+              else
+              {
+                 $staus = "pending_status";
+              }
         ?>
 
-            <div class="service-card fade-in-up" data-status="pending" data-type="group">
+            <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['booking_type'] ?> all_status all_type" data-status="pending" data-type="group">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
@@ -133,7 +179,7 @@ else{
 
                             $formattedDate = date('M d', strtotime($meeting_date)); 
                         ?>
-                        <span class="service-meta <?php if($item['status'] ==='Accept') { ?>text-pink-400 <?php } else { ?> text-orange-400 <?php } ?>  "><?php echo $item['booking_for'] ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
+                        <span class="service-meta <?php if($item['status'] ==='Accept' || $item['status'] =='Decline' ) { ?>text-pink-400 <?php } else { ?> text-orange-400 <?php } ?>  "><?php echo $item['booking_for'] ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
                     </div>
                     </div>
 
@@ -176,6 +222,10 @@ else{
 
                           <span class="status-badge badge-approved">Approved</span>
 
+                    <?php } else if($item['status'] ==='Decline') { ?>
+
+                       <span class="status-badge badge-pending">Rejected</span>
+
                     <?php } else {  ?>
 
                         <span class="status-badge badge-pending" id="when_approved_status<?php echo $item['id'] ?>">Pending</span>
@@ -191,6 +241,9 @@ else{
                  
                     <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
                     <button class="btn btn-message" onclick="openMessage(this)">Message</button>
+
+                <?php } else if($item['status'] ==='Decline') { ?>
+
 
                 <?php } else { ?>
                     
@@ -438,8 +491,9 @@ else{
 
                   <p><strong>Booking Date:</strong> <span id="booking_date"></span></p>
                   <p><strong>Booking Time:</strong> <span id="booking_time"></span></p>
-
-                  <p><strong>Meeting duration:</strong><span id="booking_hour"></span></p>
+<!-- 
+                  <p><strong>Meeting duration:</strong><span id="booking_hour"></span></p> -->
+                  
               </div>
 
           </div>
@@ -454,7 +508,28 @@ else{
 
    <script>
 
+    function FilterTab(tab,element)
+    {
+        $('.filter-btn').removeClass('active');
 
+        $(element).addClass('active');
+
+        $('.all_type').hide();
+
+        $(`.${tab}`).show();
+    }
+
+    function ServiceTab(tab,element)
+    {
+
+        $('.tab-button').removeClass('active');
+
+        $(element).addClass('active');
+
+        $('.all_status').hide();
+
+        $(`.${tab}`).show();
+    }
 
     function showBookingModal(element)
     {
@@ -480,7 +555,7 @@ else{
                     $('#booking_description').text(data.instructions);
 
                     $('#booking_date').text(data.meeting_date);
-                    $('#booking_hour').text(data.duration);
+                    // $('#booking_hour').text(data.duration);
                     $('#booking_time').text(data.meeting_time);
 
                     $('#details_modal').addClass('active');
@@ -548,14 +623,17 @@ else{
 
                     $('#success_modal').addClass('active');
 
-                     $(`#when_approved_status${accept_id}`).replaceWith(`<span class="status-badge badge-approved">Approved</span>`);
+                    if(response.action =='Accept')
+                    {
+                         $(`#when_approved_status${accept_id}`).replaceWith(`<span class="status-badge badge-approved">Approved</span>`);
 
-                     $(`.when_aprrove_button${accept_id}`).remove();
+                        $(`.when_aprrove_button${accept_id}`).remove();
 
-                     $(`#when_aprrove_button${accept_id}`).before(`
-                      <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
-                      <button class="btn btn-message" onclick="openMessage(this)">Message</button>
-                    `);
+                        $(`#when_aprrove_button${accept_id}`).before(`
+                          <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
+                          <button class="btn btn-message" onclick="openMessage(this)">Message</button>
+                        `);
+                    }
 
                     setTimeout(function()
                     {

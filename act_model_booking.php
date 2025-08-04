@@ -130,7 +130,7 @@ if (isset($_POST['booking_submit'])) {
 			], 'id = %i', $accept_id);
 
 
-		echo json_encode(['status'=>'success','message'=>'Successfully Updated']);
+		echo json_encode(['status'=>'success','message'=>'Successfully Updated','action'=>$status]);
 
 	}
 
