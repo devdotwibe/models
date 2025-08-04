@@ -9563,5 +9563,355 @@ right: 12px;
     margin-inline: 0 !important;
 }
 
+/**************** boost_adver **************/ 
+
+
+    body.boost_adver{
+
+        font-family: 'Inter', sans-serif;
+        background: radial-gradient(ellipse at top, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+        color: #fff;
+        overflow-x: hidden;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
+    }
+
+    .boost_adver .heading-font {
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
+
+
+      /* Premium Gradients */
+    .boost_adver .gradient-bg {
+        background: var(--primary-gradient);
+    }
+    
+    .boost_adver .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+        0%, 100% { filter: hue-rotate(0deg); }
+        50% { filter: hue-rotate(30deg); }
+    }
+
+    /* Ultra Advanced Glass Morphism */
+    .boost_adver .ultra-glass {
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(40px);
+        -webkit-backdrop-filter: blur(40px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08),
+            0 0 0 1px rgba(139, 92, 246, 0.1);
+        position: relative;
+    }
+
+    .boost_adver .ultra-glass::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+        border-radius: inherit;
+        z-index: -1;
+    }
+
+    /* Premium Floating Particles */
+    .boost_adver .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    .boost_adver .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.8) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float-premium 12s infinite linear;
+        filter: blur(0.5px);
+    }
+
+    .boost_adver .particle:nth-child(2n) {
+        background: radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, transparent 70%);
+        animation-duration: 15s;
+    }
+
+    .boost_adver .particle:nth-child(3n) {
+        background: radial-gradient(circle, rgba(6, 182, 212, 0.7) 0%, transparent 70%);
+        animation-duration: 18s;
+    }
+
+    @keyframes float-premium {
+        0% {
+            opacity: 0;
+            transform: translateY(100vh) translateX(0px) scale(0) rotate(0deg);
+        }
+        10% {
+            opacity: 1;
+            transform: translateY(90vh) translateX(20px) scale(1) rotate(45deg);
+        }
+        90% {   font-family: 'Inter', sans-serif;
+        background: radial-gradient(ellipse at top, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+        color: #fff;
+        overflow-x: hidden;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
+            opacity: 1;
+            transform: translateY(10vh) translateX(200px) scale(1.2) rotate(315deg);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-10vh) translateX(300px) scale(0) rotate(360deg);
+        }
+    }
+
+    /* Premium Buttons */
+    .boost_adver .btn-primary {
+        background: var(--primary-gradient);
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+        overflow: hidden;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+    }
+
+    .boost_adver .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.8s ease;
+    }
+
+    .boost_adver .btn-primary:hover::before {
+        left: 100%;
+    }
+
+    .boost_adver .btn-primary:hover {
+        background: linear-gradient(135deg, #5a67d8, #6b46c1);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 
+            0 25px 50px rgba(139, 92, 246, 0.5),
+            0 0 0 1px rgba(139, 92, 246, 0.4),
+            0 0 30px rgba(139, 92, 246, 0.3);
+    }
+
+    .boost_adver .btn-secondary {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        font-weight: 500;
+    }
+
+    .boost_adver .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 
+            0 20px 40px rgba(255, 255, 255, 0.15),
+            0 0 0 1px rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .boost_adver .btn-danger {
+        background: linear-gradient(135deg, #ef4444, #f87171);
+        transition: all 0.4s ease;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .boost_adver .btn-danger:hover {
+        background: linear-gradient(135deg, #dc2626, #ef4444);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+    }
+
+    /* Premium Typography */
+    .boost_adver .premium-text {
+        background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Form Styles */
+    .boost_adver .form-input {
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(40px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        color: white;
+    }
+
+    .boost_adver .form-input:focus {
+        box-shadow: 
+            0 0 0 3px rgba(139, 92, 246, 0.3),
+            0 10px 30px rgba(139, 92, 246, 0.15);
+        transform: translateY(-2px) scale(1.01);
+        border-color: rgba(139, 92, 246, 0.5);
+        outline: none;
+    }
+
+    .boost_adver .form-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Budget Slider */
+    .boost_adver .budget-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        outline: none;
+    }
+
+    .boost_adver .budget-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        background: var(--primary-gradient);
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
+    }
+
+    .boost_adver .budget-slider::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        background: var(--primary-gradient);
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 4px 15px rgba(139, 92, 246, 0.5);
+    }
+
+    /* Goal Cards */
+    .boost_adver .goal-card {
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .boost_adver .goal-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+    }
+
+    .goal-card.selected {
+        border-color: rgba(139, 92, 246, 0.8);
+        background: rgba(139, 92, 246, 0.1);
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+    }
+
+    .boost_adver .goal-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+        transition: left 0.6s ease;
+        z-index: 1;
+    }
+
+    .boost_adver .goal-card:hover::before {
+        left: 100%;
+    }
+
+    /* Audience Targeting */
+    .boost_adver .audience-chip {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .boost_adver .audience-chip:hover {
+        background: rgba(139, 92, 246, 0.2);
+        border-color: rgba(139, 92, 246, 0.5);
+        transform: scale(1.05);
+    }
+
+    .boost_adver .audience-chip.selected {
+        background: rgba(139, 92, 246, 0.3);
+        border-color: rgba(139, 92, 246, 0.8);
+        color: #ffffff;
+    }
+
+    /* Quick Setup Cards */
+    .boost_adver .quick-setup {
+        transition: all 0.4s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .boost_adver .quick-setup:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+    }
+
+    .boost_adver .quick-setup.selected {
+        border-color: rgba(139, 92, 246, 0.8);
+        background: rgba(139, 92, 246, 0.1);
+    }
+
+    /* Responsive Design */
+    .boost_adver .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .boost_adver .container { 
+            padding: 0 1rem; 
+        }
+    }
+
+    /* Hover Effects */
+    .boost_adver .hover-lift {
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .boost_adver .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+    }
 
 }
