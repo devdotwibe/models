@@ -70,16 +70,16 @@ else{
 
     <!-- PROMINENT Main Tabs -->
     <div class="main-tabs">
-      <button class="tab-button active" onclick="ServiceTab('all',this)" data-tab="all">
+      <button class="tab-button active" onclick="ServiceTab('all_status',this)" data-tab="all">
         All Services
       </button>
-      <button class="tab-button"  onclick="ServiceTab('pending',this)" data-tab="pending">
+      <button class="tab-button"  onclick="ServiceTab('pending_status',this)" data-tab="pending">
         Pending <span class="tab-count">2</span>
       </button>
-      <button class="tab-button" onclick="ServiceTab('approved',this)" data-tab="approved">
+      <button class="tab-button" onclick="ServiceTab('approved_status',this)" data-tab="approved">
         Approved <span class="tab-count">3</span>
       </button>
-      <button class="tab-button" onclick="ServiceTab('completed',this)" data-tab="completed">
+      <button class="tab-button" onclick="ServiceTab('completed_status',this)" data-tab="completed">
         Completed <span class="tab-count">5</span>
       </button>
     </div>
@@ -116,10 +116,26 @@ else{
                     $defaultImage = SITEURL . $bookeduser['profile_pic'];
                 }
             }
-        
+
+              if($item['status'] ==='Accept') { 
+
+                  $staus = "approved_status";
+              }
+              else if($item['status'] ==='Completed')
+              {
+                 $staus = "completed_status";
+              }
+              else if($item['status'] ==='Decline')
+              {
+                 $staus = "decline_status";
+              }
+              else
+              {
+                 $staus = "pending_status";
+              }
         ?>
 
-            <div class="service-card fade-in-up" data-status="pending" data-type="group">
+            <div class="service-card fade-in-up <?php echo $staus ?> all_status" data-status="pending" data-type="group">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
@@ -460,6 +476,8 @@ else{
         $('.tab-button').removeClass('active');
 
         $(element).addClass('active');
+
+        $('')
     }
 
     function showBookingModal(element)
