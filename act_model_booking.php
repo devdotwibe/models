@@ -2,6 +2,8 @@
 session_start();
 include('includes/config.php');
 include('includes/helper.php');
+
+
 if (isset($_POST['booking_submit'])) {
 
    $name = $_POST['name'];
@@ -115,4 +117,19 @@ if (isset($_POST['booking_submit'])) {
 
  
 }
+
+
+	if (isset($_POST['action']) && $_POST['action'] =='accept_request') {
+
+			$accept_id = $_POST['accept_id'];
+
+			  DB::update('model_extra_details', [
+				'status' => 'Accept'
+			], 'id = %i', $accept_id);
+
+
+		echo json_encode(['status'=>'success']);
+
+	}
+
 ?>
