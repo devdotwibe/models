@@ -385,7 +385,7 @@ else{
             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white hover:bg-white/10 transition duration-300 border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterNotifications('follow')">
                 Follow Requests
             </button>
-            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white hover:bg-white/10 transition duration-300 border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterNotifications('tips')">
+            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white hover:bg-white/10 transition duration-300 border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterNotifications('tip')">
                 Tips & Payments
             </button>
             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white hover:bg-white/10 transition duration-300 border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterNotifications('system')"> 
@@ -495,7 +495,7 @@ else{
 						?>
 							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> has requested a <strong class="text-pink-400"><?php echo $model_serv; ?></strong> <?=$booking_type?>.
                            <?php /*<span class="text-green-400 font-semibold">$150</span> for 1 hour.<?php */ ?>
-						<?php }else if($rowesdw['notification_type'] == 'tips'){ ?> 
+						<?php }else if($rowesdw['notification_type'] == 'tip'){ ?> 
 							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> sent you a tip of <strong class="text-green-400">$50</strong> with the message:
                             <em class="text-white/60">"Amazing show last night! You're incredible! 🔥"</em>
 						<?php }else if($rowesdw['notification_type'] == 'system'){ ?>
@@ -552,7 +552,7 @@ else{
 								</button>
 							</div>
 							
-						<?php }else if($rowesdw['notification_type'] == 'tips'){ ?>
+						<?php }else if($rowesdw['notification_type'] == 'tip'){ ?>
 							<div class="flex space-x-3">
 								<button class="btn-primary px-6 py-2 rounded-lg text-white font-semibold" onclick="thankUser('mike')">
 									💕 Send Thanks
