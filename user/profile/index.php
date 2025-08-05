@@ -138,7 +138,7 @@ if(!empty($userDetails['profile_pic'])){
               FROM live_posts 
               JOIN model_user ON live_posts.post_author = model_user.id
           ";
-          
+
             $result = mysqli_query($con, $sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
@@ -167,6 +167,8 @@ if(!empty($userDetails['profile_pic'])){
 
                 if ($allow) {
                     $followed_user_ids[] = (int)$row['id'];
+
+                    $followed_user_ids[] = 52;
                 }
             }
 
