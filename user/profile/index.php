@@ -134,39 +134,37 @@ if(!empty($userDetails['profile_pic'])){
     if (!empty($followed_user_ids) && count($followed_user_ids) == 1 ) {
 
             $sql = "
-              SELECT  model_user.id AS user_id, model_user.gender
+              SELECT DISTINCT model_user.id AS user_id, model_user.gender
               FROM live_posts 
               JOIN model_user ON live_posts.post_author = model_user.id 
               ORDER BY RAND() 
-           
+              LIMIT 5
           ";
             $result = mysqli_query($con, $sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
                 $target_gender = $row['gender'];
-                $allow = false;
-
-                if ($current_user_gender === "Male" || $current_user_gender === "male") {
-                    if (
-                        ($privacy['male_to_female'] && ($target_gender === "Female" || $target_gender === "female") ) ||
-                        ($privacy['male_to_male'] && ($target_gender === "Male" || $target_gender === "male" ))
-                    ) {
-                        $allow = true;
-                    }
-                } elseif ($current_user_gender === "Female" || $current_user_gender === "female") {
-                    if (
-                        ($privacy['female_to_male'] && ($target_gender === "Male" || $target_gender === "male")) ||
-                        ($privacy['female_to_female'] && ($target_gender === "Female" || $target_gender === "female"  ))
-                    ) {
-                        $allow = true;
-                    }
-                }
-
-                if ($privacy['transgender'] && $target_gender === "Couple") {
-                    $allow = true;
-                }
-                
                 $allow = true;
+
+                // if ($current_user_gender === "Male" || $current_user_gender === "male") {
+                //     if (
+                //         ($privacy['male_to_female'] && ($target_gender === "Female" || $target_gender === "female") ) ||
+                //         ($privacy['male_to_male'] && ($target_gender === "Male" || $target_gender === "male" ))
+                //     ) {
+                //         $allow = true;
+                //     }
+                // } elseif ($current_user_gender === "Female" || $current_user_gender === "female") {
+                //     if (
+                //         ($privacy['female_to_male'] && ($target_gender === "Male" || $target_gender === "male")) ||
+                //         ($privacy['female_to_female'] && ($target_gender === "Female" || $target_gender === "female"  ))
+                //     ) {
+                //         $allow = true;
+                //     }
+                // }
+
+                // if ($privacy['transgender'] && $target_gender === "Couple") {
+                //     $allow = true;
+                // }
 
                 if ($allow) {
                     $followed_user_ids[] = (int)$row['user_id'];
