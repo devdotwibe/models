@@ -163,7 +163,7 @@ if(!empty($userDetails['profile_pic'])){
                 // }
 
                 // if ($privacy['transgender'] && $target_gender === "Couple") {
-                //     $allow = true;
+                    $allow = true;
                 // }
 
                 if ($allow) {
