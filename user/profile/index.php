@@ -170,6 +170,9 @@ if(!empty($userDetails['profile_pic'])){
                     $followed_user_ids[] = (int)$row['id'];
                 }
             }
+
+            print_r($followed_user_ids);
+            die();
     }
 
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
