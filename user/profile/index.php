@@ -167,8 +167,6 @@ if(!empty($userDetails['profile_pic'])){
 
                 if ($allow) {
                     $followed_user_ids[] = $row['id'];
-
-                    $followed_user_ids[] = 52;
                 }
             }
 
