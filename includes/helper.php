@@ -131,12 +131,12 @@ function BoostedModelIds($con) {
 						}
 					}
 
-					if ($allowBoost) {
-						$validBoosts[] = [
-							'user_unique_id' => $row['user_unique_id'],
-							'total_amount' => (int)$row['total_amount']
-						];
-					}
+					// if ($allowBoost) {
+					// 	$validBoosts[] = [
+					// 		'user_unique_id' => $row['user_unique_id'],
+					// 		'total_amount' => (int)$row['total_amount']
+					// 	];
+					// }
 				}
 			}
 		}
