@@ -144,7 +144,7 @@ if(!empty($userDetails['profile_pic'])){
 
             while ($row = mysqli_fetch_assoc($result)) {
                 $target_gender = $row['gender'];
-                $allow = false;
+                $allow = true;
 
                 // if ($current_user_gender === "Male" || $current_user_gender === "male") {
                 //     if (
