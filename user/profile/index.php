@@ -286,11 +286,11 @@ if(!empty($userDetails['profile_pic'])){
 
 
   <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-4 main-content">
+  <main class="max-w-7xl mx-auto px-4 main-content user-home">
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 py-6">
 
-      <div class="sidebar lg:col-span-1">
+      <div class="sidebar lg:col-span-1 user-home-leftbar">
 
         <div class="model-card text-center">
           <div class="relative inline-block mb-4">
@@ -472,7 +472,7 @@ if(!empty($userDetails['profile_pic'])){
       <!-- Main Feed -->
 
 
-      <div class="main-feed lg:col-span-3">
+      <div class="main-feed lg:col-span-3 user-home-right">
 
         <!-- <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">Your Feed</h2> -->
 

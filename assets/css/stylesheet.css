@@ -7998,12 +7998,16 @@ body.edit-profilepage {
 /* Enhanced Mobile Responsiveness */
 @media (max-width: 640px) {
     .login-page .login-form {
-        max-width: 100%;
-        margin: 0 1rem;
+        /* max-width: 100%; */
+        margin: 0 auto;
+    }
+
+    .login-page .login-container .login-card {
+        padding: 3rem 20px;
     }
 
     .login-page .ultra-glass {
-        padding: 2rem 1.5rem;
+        /* padding: 2rem 1.5rem; */
     }
 
     .login-page .text-4xl {
@@ -8017,7 +8021,7 @@ body.edit-profilepage {
 
 @media (max-width: 480px) {
     .login-page .ultra-glass {
-        padding: 1.5rem 1rem;
+        /* padding: 1.5rem 1rem; */
     }
 
     .login-page .social-btn {
@@ -8025,9 +8029,8 @@ body.edit-profilepage {
         font-size: 0.875rem;
     }
 
-    .login-page input {
-        padding: 0.75rem 1rem;
-    }
+
+
 }
 
 div#formStep1 select {
@@ -9786,6 +9789,15 @@ body.advt-page.my-purpose .scroll-indicator {
         justify-content: center;
     }
 
+    .home-page .home-banner .flex.flex-wrap.gap-4.items-center {
+        justify-content: center;
+    }
+
+        .home-page .home-banner .flex.premium-status.items-center.space-x-8 {
+        justify-content: center;
+        margin-top: 52px; 
+    }
+
 }
 
 
@@ -10150,7 +10162,7 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .footer-div li {
-       margin-bottom: 10px !important;
+        margin-bottom: 10px !important;
         margin-top: 2px !important;
         padding-block: 0 !important;
         line-height: 1;
@@ -10577,38 +10589,65 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
 
-.home-page .home-banner .flex.premium-status.items-center.space-x-8 {
-    justify-content: center;
-    margin-top: 52px;
-}
+    .home-page .home-banner .flex.premium-status.items-center.space-x-8 {
+        justify-content: center;
+        margin-top: 52px;
+    }
 
 
-.home-page .home-banner .flex.flex-wrap.gap-4.items-center {
-    justify-content: center;
-}
+    .home-page .home-banner .flex.flex-wrap.gap-4.items-center {
+        justify-content: center;
+    }
+
     .coppy p {
         font-size: 14px;
         line-height: 22px;
     }
+
     .footer-div li {
         margin-bottom: 0px !important;
         margin-top: 9px !important;
     }
-        .footer-div li a{
-            font-size:14px;
-        }
+
+    .footer-div li a {
+        font-size: 14px;
+    }
 
 
     .footer-div p {
         font-size: 15px;
     }
+
     .footer-div.py-20 {
-    padding-top: 3rem;
+        padding-top: 3rem;
     }
+
     .home-page .ultra-premiumsec h2 {
         font-size: 35px;
         line-height: 46px;
     }
+
+    .login-page input {
+        padding: 16px 15px !important;
+    }
+
+    .login-page .btn-primary {
+        padding: 16px 15px !important;
+        font-size: 12px;
+    }
+
+
+        .login-page #loginForm > div:last-of-type span {
+    font-size: 13px;
+}
+
+  .login-page #loginForm > div:last-of-type a{
+  font-size: 13px;
+}
+
+.login-page #loginForm > div:last-of-type input {
+width:12px
+}
 
 }
 
