@@ -133,12 +133,11 @@ if(!empty($userDetails['profile_pic'])){
     
     if (!empty($followed_user_ids) && count($followed_user_ids) == 1 ) {
 
-            $sql = "
-                SELECT model_user.id AS user_id, model_user.gender
-                FROM live_posts 
-                JOIN model_user ON live_posts.post_author = model_user.id
-            ";
-
+           $sql = "
+              SELECT DISTINCT model_user.id AS user_id, model_user.gender
+              FROM live_posts 
+              JOIN model_user ON live_posts.post_author = model_user.id
+              ";
             $result = mysqli_query($con, $sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
@@ -166,11 +165,12 @@ if(!empty($userDetails['profile_pic'])){
                 // }
 
                 if ($allow) {
-                    $followed_user_ids[] =  $row['user_id'];
+                    $followed_user_ids[] = (int)$row['user_id'];
                 }
             }
 
-           
+            // print_r($followed_user_ids);
+            // die();
     }
 
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
