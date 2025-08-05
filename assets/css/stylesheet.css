@@ -3082,8 +3082,8 @@ textarea:focus {
 }
 
 .user-profile-side-btns>*:first-child {
-    border: 1px solid;
-    border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: 1px solid #44407f;
+    /* border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
 }
 
 /* Responsive Design */
