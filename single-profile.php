@@ -1438,6 +1438,7 @@ if (mysqli_num_rows($res_ap) > 0) {
         </div>
         
         <div class="modal-body">
+		<form id="form_tip" name="form_tip" method="post" >
             <div class="gift-grid">
                 <div class="gift-item">
                     <div class="gift-emoji">🌹</div>
@@ -1467,13 +1468,17 @@ if (mysqli_num_rows($res_ap) > 0) {
                 <div class="gift-item">
                     <div class="gift-emoji">🔥</div>
                     <div class="gift-name">Fire</div>
-                    <div class="gift-price">$15</div>
+                    <div class="gift-price">$15</div> 
                 </div>
             </div>
+			
+			<input type="hidden" name="gift_amt" id="gift_amt" value="">
+			<input type="hidden" name="gift_label" id="gift_label" value=""> 
             
-            <textarea class="gift-message" placeholder="Add a personal message (optional)"></textarea>
+            <textarea class="gift-message giftmsg" id="giftmsg" name="giftmsg" placeholder="Add a personal message (optional)"></textarea>
             
-            <button class="btn btn-primary">Send Gift</button>
+            <button type="button" class="btn btn-primary send_gift_btn">Send Gift</button>
+			</form>
         </div>
     </div>
 </div>
@@ -1524,8 +1529,6 @@ if (mysqli_num_rows($res_ap) > 0) {
             <textarea name="tipmsg" id="tipmsg" class="gift-message" placeholder="Add a personal message (optional)"></textarea>
             
             <button type="button" class="btn btn-primary send_tip_btn">Send Tip</button>
-			
-			<span class="tip_err" style="color:red;"></span>
 			
 			</form>
         </div>
@@ -1954,6 +1957,7 @@ jQuery('.socialpaidbtn').click(function(e){
 	<?php } ?>
 });
 
+//TIP
 jQuery(".tip-option").click(function(){
 	var tip_amt = jQuery(this).find('.tip-amount').text();
 	var tip_label = jQuery(this).find('.tip-label').text();
@@ -1970,8 +1974,48 @@ jQuery('.send_tip_btn').click(function(){
 		alert('Please choose any tip or use custom tip option.');
 	}else{
 		$.ajax({
-            url: '<?=SITEURL."accept-tip.php"?>',
+            url: '<?=SITEURL."send-tip.php"?>',
             data: {tip_amt:tip_amt,tip_label:tip_label,customtip:customtip,tipmsg:tipmsg,
+					m_unique_id:"<?php echo $_GET['m_unique_id']; ?>",model_id:"<?php echo $model_id; ?>"},
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+				console.log(response);
+				
+				if (response.status === 'success') {
+
+                    $('#modal_success_message').prepend('<p class="success-text">'+response.message+'</p>');
+
+                    $('#conform_modal').removeClass('active');
+
+                    $('#success_modal').addClass('active');
+
+                }else{
+					alert(response.message);
+				}
+				
+			}
+		});
+	}
+});
+
+//Gift
+jQuery('.gift-item').click(function(){
+	var gift_amt = jQuery(this).find('.gift-price').text();
+	var gift_label = jQuery(this).find('.gift-name').text();
+	jQuery('#gift_amt').val(gift_amt);
+	jQuery('#gift_label').val(gift_label);   
+});
+jQuery('.send_gift_btn').click(function(){
+	var gift_amt = jQuery('#gift_amt').val();
+	var gift_label = jQuery('#gift_label').val();
+	var giftmsg = jQuery('#giftmsg').val();
+	if(gift_amt == '' && customtip == ''){
+		alert('Please choose any gift option.');
+	}else{
+		$.ajax({
+            url: '<?=SITEURL."send-gift.php"?>',
+            data: {gift_amt:gift_amt,gift_label:gift_label,giftmsg:giftmsg,
 					m_unique_id:"<?php echo $_GET['m_unique_id']; ?>",model_id:"<?php echo $model_id; ?>"},
             type: 'GET',
             dataType: 'json',
