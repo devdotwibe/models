@@ -3,7 +3,7 @@ session_start();
 include('includes/config.php');
 include('includes/helper.php');
 $output = array();
-if (isset($_SESSION["log_user_id"])) {
+/*if (isset($_SESSION["log_user_id"])) {
 	$userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
 	if ($userDetails) {
 		
@@ -83,13 +83,7 @@ if (isset($_SESSION["log_user_id"])) {
 		 
 		 //mail($email_to, $subject, $message, $header)
 
-         /*if (mail($email_to, $subject, $message, $header)) {
-               echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';
-                echo '<script>window.location="login.php"</script>';
-         }else{
-              echo  '<script>alert("Error in Details Sent to Respective Mail id.")</script>';
-                echo '<script>window.location="login.php"</script>';
-         }*/
+         
 		 
 						$output['status'] = 'success';	
 						$output['message'] = 'Tip send successfully';
@@ -110,6 +104,7 @@ if (isset($_SESSION["log_user_id"])) {
 }else {
 	$output['status'] = 'error';
 	$output['message'] = 'Please login';
-}
+}*/
+$output['status'] = 'success';	
 echo json_encode($output);
 ?>
