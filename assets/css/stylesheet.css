@@ -9724,7 +9724,9 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
-
+.user-home-right .model-card>p {
+    padding-bottom: 10px;
+}
 
 
 
