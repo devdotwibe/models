@@ -10079,7 +10079,9 @@ body.advt-page.my-purpose .scroll-indicator {
     .home-page .scroll-reveal.revealed>div>div:first-child {
         margin-bottom: 25px;
     }
-
+.main-content.user-home {
+    padding-bottom: 0;
+}
 }
 
 
@@ -10727,6 +10729,19 @@ body.advt-page.my-purpose .scroll-indicator {
 .socialwall-page .verified-badge {
       margin-bottom: 3px;
 }
+.user-home-right .model-card>p {
+    font-size: 15px;
+}
+
+    .user-home-right .model-card>img {
+        object-fit: contain;
+    }
+
+        .socialwall-page .btn-primary {
+        padding: 8px 9px;
+        font-size: 13px;
+        margin-left: 0px;
+    }
 
 }
 
