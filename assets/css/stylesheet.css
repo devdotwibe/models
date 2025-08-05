@@ -3081,10 +3081,10 @@ textarea:focus {
     left: 50%;
 }
 
-    .user-profile-side-btns> *:first-child {
-        border: 1px solid;
-        border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
+.user-profile-side-btns>*:first-child {
+    border: 1px solid;
+    border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -9800,9 +9800,9 @@ body.advt-page.my-purpose .scroll-indicator {
         justify-content: center;
     }
 
-        .home-page .home-banner .flex.premium-status.items-center.space-x-8 {
+    .home-page .home-banner .flex.premium-status.items-center.space-x-8 {
         justify-content: center;
-        margin-top: 52px; 
+        margin-top: 52px;
     }
 
 }
@@ -9870,25 +9870,26 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
     .user-profile-side-btns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
- .user-profile-side-btns> *:first-child{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 
-    width:48%;
-    margin-right:1%;
-    padding:12px 16px !important;
- }
- .user-profile-side-btns> *:last-child{
-    width:48%;
-    margin-top:0 !important;
-      padding:12px 16px !important;
- }
-.user-home-right .model-card> img{
- 
-}
+    .user-profile-side-btns>*:first-child {
+
+        width: 48%;
+        margin-right: 1%;
+        padding: 12px 16px !important;
+    }
+
+    .user-profile-side-btns>*:last-child {
+        width: 48%;
+        margin-top: 0 !important;
+        padding: 12px 16px !important;
+    }
+
+    .user-home-right .model-card>img {}
 
 }
 
@@ -10666,41 +10667,57 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
 
-        .login-page #loginForm > div:last-of-type span {
-    font-size: 13px;
-}
+    .login-page #loginForm>div:last-of-type span {
+        font-size: 13px;
+    }
 
-  .login-page #loginForm > div:last-of-type a{
-  font-size: 13px;
-}
+    .login-page #loginForm>div:last-of-type a {
+        font-size: 13px;
+    }
 
-.login-page #loginForm > div:last-of-type input {
-width:12px
-}
+    .login-page #loginForm>div:last-of-type input {
+        width: 12px
+    }
 
-.mob-case {
+    .mob-case {
 
-    padding-inline: 14px !important;
-    font-size: 13px !important;
-    padding-block: 15px !important;
-}
+        padding-inline: 14px !important;
+        font-size: 13px !important;
+        padding-block: 15px !important;
+    }
 
-.user-home-right .model-card>div>div div:last-child {
-    margin-left: .40rem !important;
-}
+    /* .user-home-right .model-card>div>div div:last-child {
+        margin-left: .40rem !important;
+    } */
 
-.user-home-right .model-card>div>div img{
+    .user-home-right .model-card>div>div img {
         object-fit: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-}
-.user-home-right .model-card>div> .online-dot{
-bottom: 0px;
-right: 1px;
-}
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 27px;
+        height: 27px;
+    }
+
+    .user-home-right .model-card>div>.online-dot {
+        bottom: 0px;
+        right: 1px;
+    }
+
+    .user-home-right .model-card .socialwall-page .status-online {
+        padding: 4px 7px;
+    }
+
+    .user-home-right .model-card>div h4 {
+        font-size: 14px;
+    }
+
+    .user-home-right .model-card>div>div div:last-child {
+        margin-left: .40rem !important;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
 
 }
 
