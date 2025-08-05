@@ -61,7 +61,8 @@ if (isset($_SESSION["log_user_id"])) {
 								'created_at' => $date,
 							));
 							
-						$email_to = 'shibuster@gmail.com';
+		 //$email_to = $modelDetails['email'];
+		 $email_to = 'shibuster@gmail.com';
          $subject = "Live Model - Tip send from ".ucfirst($userDetails['username']);
 
          $header = "From: Model Project <no-reply@model.com>\r\n";
@@ -81,7 +82,7 @@ if (isset($_SESSION["log_user_id"])) {
           </body>
          </html>';
 		 
-		 //mail($email_to, $subject, $message, $header);
+		 mail($email_to, $subject, $message, $header);
 
          
 		 
