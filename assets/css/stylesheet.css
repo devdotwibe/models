@@ -10653,8 +10653,8 @@ width:12px
 
 .mob-case {
 
-    padding-inline: 14px;
-    font-size: 13px;
+    padding-inline: 14px !important;
+    font-size: 13px !important;
     padding-block: 15px !important;
 }
 
