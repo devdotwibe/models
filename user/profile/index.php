@@ -131,11 +131,6 @@ if(!empty($userDetails['profile_pic'])){
     // }
     // else
     
-
-    print_r(count($followed_user_ids));
-
-    die();
-    
     if (!empty($followed_user_ids) && count($followed_user_ids) == 1 ) {
 
             $sql = "
@@ -151,17 +146,17 @@ if(!empty($userDetails['profile_pic'])){
                 $target_gender = $row['gender'];
                 $allow = false;
 
-                if ($current_user_gender === "Male") {
+                if ($current_user_gender === "Male" || $current_user_gender === "male") {
                     if (
-                        ($privacy['male_to_female'] && $target_gender === "Female") ||
-                        ($privacy['male_to_male'] && $target_gender === "Male")
+                        ($privacy['male_to_female'] && ($target_gender === "Female" || $target_gender === "female") ) ||
+                        ($privacy['male_to_male'] && ($target_gender === "Male" || $target_gender === "male" ))
                     ) {
                         $allow = true;
                     }
-                } elseif ($current_user_gender === "Female") {
+                } elseif ($current_user_gender === "Female" || $current_user_gender === "female") {
                     if (
-                        ($privacy['female_to_male'] && $target_gender === "Male") ||
-                        ($privacy['female_to_female'] && $target_gender === "Female")
+                        ($privacy['female_to_male'] && ($target_gender === "Male" || $target_gender === "male")) ||
+                        ($privacy['female_to_female'] && ($target_gender === "Female" || $target_gender === "female"  ))
                     ) {
                         $allow = true;
                     }
