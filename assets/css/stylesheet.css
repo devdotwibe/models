@@ -10699,10 +10699,10 @@ body.advt-page.my-purpose .scroll-indicator {
         height: 27px;
     }
 
-.user-home-right .model-card>div .online-dot {
-    bottom: -2px !important;
-    right: 1px !important;
-}
+    .user-home-right .model-card>div .online-dot {
+        bottom: -2px !important;
+        right: 1px !important;
+    }
 
     .user-home-right .model-card .socialwall-page .status-online {
         padding: 4px 7px;
@@ -10710,6 +10710,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
     .user-home-right .model-card>div h4 {
         font-size: 14px;
+        margin-bottom: 3px;
     }
 
     .user-home-right .model-card>div>div div:last-child {
@@ -10720,9 +10721,13 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
 
-        .user-profile-side-btns>*:first-child {
+    .user-profile-side-btns>*:first-child {
         margin-right: 3%;
     }
+.socialwall-page .verified-badge {
+      margin-bottom: 3px;
+}
+
 }
 
 @media (max-width: 768px) {
