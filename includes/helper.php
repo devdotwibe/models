@@ -126,7 +126,7 @@ function BoostedModelIds($con) {
 						$boostUser = get_data('model_user', ['unique_id' => $row['user_unique_id']], true);
 
 						if (!$boostUser || $boostUser['country'] != $user_country_id) {
-							
+
 							$allowBoost = false;
 						}
 					}
