@@ -68,7 +68,7 @@ if (isset($_SESSION["log_user_id"])) {
          <html>
           <body style="width:80%;margin:auto;border:3px solid #000;">
           <div style="width: 100%;height: 500px;">
-            <img src="https://thelivemodels.com/assets/wp-content/themes/theagency3/images/default-bg.jpg" style="width: 100%;height: 100%;">
+            <img src="'.SITEURL.'assets/wp-content/themes/theagency3/images/default-bg.jpg" style="width: 100%;height: 100%;">
           </div>
           <div style="padding: 20px;">
           <h2>Dear '.ucfirst($modelDetails['username']).', </h2>
@@ -77,12 +77,12 @@ if (isset($_SESSION["log_user_id"])) {
           </body>
          </html>';
 		 
-		 //mail($email_to, $subject, $message, $header);
+		 mail($email_to, $subject, $message, $header);
 
          
 		 
 						$output['status'] = 'success';	
-						$output['message'] = 'Tip send successfully';
+						$output['message'] = 'Gift send successfully';
 					}else {
 						$output['status'] = 'error';
 						$output['message'] = 'You dont have sufficiant coins in your wallet for buying it.';
