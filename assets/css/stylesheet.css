@@ -9789,6 +9789,10 @@ body.advt-page.my-purpose .scroll-indicator {
         justify-content: center;
     }
 
+    .home-page .home-banner .flex.flex-wrap.gap-4.items-center {
+        justify-content: center;
+    }
+
 }
 
 
