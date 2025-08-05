@@ -166,9 +166,12 @@ if(!empty($userDetails['profile_pic'])){
                 // }
 
                 if ($allow) {
-                    $followed_user_ids[] = (int)$row['id'];
+                    $followed_user_ids[] = $row['id'];
                 }
             }
+
+            print_r($followed_user_ids);
+            die();
     }
 
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
