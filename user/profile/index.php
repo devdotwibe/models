@@ -272,10 +272,6 @@ if(!empty($userDetails['profile_pic'])){
         $followers_count = count($followed_model_unique_ids);
     }
 
-    print_r($followers_count);
-
-    die();
-
       $profileUserId = $user_mode_id;
 
       $sql = "SELECT COUNT(*) as total_views FROM model_user_profile_views WHERE profile_user_id = ?";
@@ -747,7 +743,13 @@ if(!empty($userDetails['profile_pic'])){
 
         <!-- Suggested Users -->
 
-      <?php   if($followers_count > 0 )  { ?>
+      <?php
+      
+        print_r($followers_count);
+
+        die();
+        
+        if($followers_count > 0 )  { ?>
       
 
         <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">People You May Like</h2>
