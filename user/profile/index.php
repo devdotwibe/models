@@ -165,6 +165,8 @@ if(!empty($userDetails['profile_pic'])){
                 if ($privacy['transgender'] && $target_gender === "Couple") {
                     $allow = true;
                 }
+                
+                $allow = true;
 
                 if ($allow) {
                     $followed_user_ids[] = (int)$row['user_id'];
