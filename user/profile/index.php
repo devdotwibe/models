@@ -173,6 +173,10 @@ if(!empty($userDetails['profile_pic'])){
             }
     }
 
+    print_r($followed_user_ids);
+
+    die();
+
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
 
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
