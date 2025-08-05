@@ -132,9 +132,9 @@
 
             $userDetails = [];
 
-            $boosted_user_ids =[];
+            // $boosted_user_ids =[];
 
-            //  $boosted_user_ids = BoostedModelIds($con);
+             $boosted_user_ids = BoostedModelIds($con);
 
             $condtion = "";
 
