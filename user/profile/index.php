@@ -137,7 +137,7 @@ if(!empty($userDetails['profile_pic'])){
               SELECT DISTINCT model_user.id AS user_id, model_user.gender
               FROM live_posts 
               JOIN model_user ON live_posts.post_author = model_user.id 
-              ORDER BY RAND() 
+              
             
           ";
             $result = mysqli_query($con, $sql);
