@@ -10719,6 +10719,10 @@ body.advt-page.my-purpose .scroll-indicator {
         flex-direction: column;
     }
 
+
+        .user-profile-side-btns>*:first-child {
+        margin-right: 3%;
+    }
 }
 
 @media (max-width: 768px) {
