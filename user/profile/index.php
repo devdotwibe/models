@@ -173,6 +173,10 @@ if(!empty($userDetails['profile_pic'])){
             }
     }
 
+    print_r($followed_user_ids);
+
+    die();
+
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
 
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
@@ -743,13 +747,7 @@ if(!empty($userDetails['profile_pic'])){
 
         <!-- Suggested Users -->
 
-      <?php
-      
-        print_r($followers_count);
-
-        die();
-        
-        if($followers_count > 0 )  { ?>
+      <?php   if($followers_count > 0 )  { ?>
       
 
         <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">People You May Like</h2>
