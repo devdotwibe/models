@@ -3081,6 +3081,11 @@ textarea:focus {
     left: 50%;
 }
 
+.user-profile-side-btns>*:first-child {
+      border: 1px solid #44407f;
+    /* border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .socialwall-page .container-padding {
@@ -3102,7 +3107,7 @@ textarea:focus {
     }
 
     .socialwall-page .sidebar {
-        display: none;
+        display: block;
     }
 
     .socialwall-page .main-feed {
@@ -9728,7 +9733,16 @@ body.advt-page.my-purpose .scroll-indicator {
     padding-bottom: 10px;
 }
 
-
+/* .user-profile-side-btns>*:first-child::after{
+    position:absolute;
+    content:"";
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    border:1px solid;
+        border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+} */
 
 
 
@@ -9795,9 +9809,9 @@ body.advt-page.my-purpose .scroll-indicator {
         justify-content: center;
     }
 
-        .home-page .home-banner .flex.premium-status.items-center.space-x-8 {
+    .home-page .home-banner .flex.premium-status.items-center.space-x-8 {
         justify-content: center;
-        margin-top: 52px; 
+        margin-top: 52px;
     }
 
 }
@@ -9862,6 +9876,29 @@ body.advt-page.my-purpose .scroll-indicator {
     section.preminum-sersec {
         padding-top: 40px;
     }
+
+
+    .user-profile-side-btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .user-profile-side-btns>*:first-child {
+
+        width: 48%;
+        margin-right: 1%;
+        padding: 12px 16px !important;
+    }
+
+    .user-profile-side-btns>*:last-child {
+        width: 48%;
+        margin-top: 0 !important;
+        padding: 12px 16px !important;
+    }
+
+    .user-home-right .model-card>img {}
 
 }
 
@@ -10051,7 +10088,9 @@ body.advt-page.my-purpose .scroll-indicator {
     .home-page .scroll-reveal.revealed>div>div:first-child {
         margin-bottom: 25px;
     }
-
+.main-content.user-home {
+    padding-bottom: 0;
+}
 }
 
 
@@ -10639,24 +10678,79 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
 
-        .login-page #loginForm > div:last-of-type span {
-    font-size: 13px;
+    .login-page #loginForm>div:last-of-type span {
+        font-size: 13px;
+    }
+
+    .login-page #loginForm>div:last-of-type a {
+        font-size: 13px;
+    }
+
+    .login-page #loginForm>div:last-of-type input {
+        width: 12px
+    }
+
+    .mob-case {
+
+        padding-inline: 14px !important;
+        font-size: 13px !important;
+        padding-block: 15px !important;
+    }
+
+    /* .user-home-right .model-card>div>div div:last-child {
+        margin-left: .40rem !important;
+    } */
+
+    .user-home-right .model-card>div>div img {
+        object-fit: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 27px;
+        height: 27px;
+    }
+
+    .user-home-right .model-card>div .online-dot {
+        bottom: -2px !important;
+        right: 1px !important;
+    }
+
+    .user-home-right .model-card .socialwall-page .status-online {
+        padding: 4px 7px;
+    }
+
+    .user-home-right .model-card>div h4 {
+        font-size: 14px;
+        margin-bottom: 3px;
+    }
+
+    .user-home-right .model-card>div>div div:last-child {
+        margin-left: .40rem !important;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+
+    .user-profile-side-btns>*:first-child {
+        margin-right: 3%;
+    }
+.socialwall-page .verified-badge {
+      margin-bottom: 3px;
+}
+.user-home-right .model-card>p {
+    font-size: 15px;
 }
 
-  .login-page #loginForm > div:last-of-type a{
-  font-size: 13px;
-}
+    .user-home-right .model-card>img {
+        object-fit: contain;
+    }
 
-.login-page #loginForm > div:last-of-type input {
-width:12px
-}
-
-.mob-case {
-
-    padding-inline: 14px !important;
-    font-size: 13px !important;
-    padding-block: 15px !important;
-}
+        .socialwall-page .btn-primary {
+        padding: 8px 9px;
+        font-size: 13px;
+        margin-left: 0px;
+    }
 
 }
 

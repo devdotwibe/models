@@ -77,6 +77,63 @@ function BoostedModelIds($con) {
 
 }
 
+	function BoostedModelIdsByUser($userDetails, $con) {
+
+		$today = new DateTime();
+		$user_gender = strtolower($userDetails['gender']);
+
+		$user_country_id = $userDetails['country'];
+
+		if($user_gender =='Female' || $user_gender=='female')
+		{
+			$user_gender = 'women';
+		}
+
+		if($user_gender =='male' || $user_gender=='Male')
+		{
+			$user_gender = 'men';
+		}
+
+		if($user_gender =='Couple' || $user_gender=='couple')
+		{
+			$user_gender = 'couples';
+		}
+
+		$query = "SELECT user_unique_id, created_at, duration, total_amount, target_audience 
+				FROM boost_avertisement";
+
+		$result = mysqli_query($con, $query);
+
+		$validBoosts = [];
+
+		while ($row = mysqli_fetch_assoc($result)) {
+			$createdAt = new DateTime($row['created_at']);
+			$duration = (int)$row['duration'];
+
+			$expiryDate = clone $createdAt;
+			$expiryDate->modify("+$duration days");
+
+			if ($today <= $expiryDate) {
+
+				$targetAudience = array_map('trim', explode(',', strtolower($row['target_audience'])));
+
+				if (in_array($user_gender, $targetAudience) || in_array('all', $targetAudience)) {
+					$validBoosts[] = [
+						'user_unique_id' => $row['user_unique_id'],
+						'total_amount' => (int)$row['total_amount']
+					];
+				}
+			}
+		}
+
+		usort($validBoosts, function ($a, $b) {
+			return $b['total_amount'] <=> $a['total_amount'];
+		});
+
+		return array_column($validBoosts, 'user_unique_id');
+	}
+
+
 
 function checkUserFollow($model_id, $user_id) {
 	

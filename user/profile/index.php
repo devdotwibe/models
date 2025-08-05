@@ -320,7 +320,7 @@ if(!empty($userDetails['profile_pic'])){
             <span class="verified-badge">✓ Verified</span>
           </div>
 		<?php } ?>
-          <div class="space-y-2">
+          <div class="space-y-2 user-profile-side-btns">
             <button class="btn-primary w-full" onclick="navigateTo('edit-profile.php')">Edit Profile</button>
             <a class="btn-secondary w-full" href="<?= SITEURL ?>single-profile.php?m_unique_id=<?php echo $userDetails['unique_id']; ?>">View Profile</a>
           </div>

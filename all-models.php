@@ -139,6 +139,8 @@
             if(isset($_SESSION["log_user_id"])){
                 
                 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+
+                $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
             }
 
             $followed_user_ids = [];
