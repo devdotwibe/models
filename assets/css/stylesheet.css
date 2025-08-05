@@ -10699,10 +10699,10 @@ body.advt-page.my-purpose .scroll-indicator {
         height: 27px;
     }
 
-    .user-home-right .model-card>div>.online-dot {
-        bottom: 0px;
-        right: 1px;
-    }
+.user-home-right .model-card>div .online-dot {
+    bottom: -2px !important;
+    right: 1px !important;
+}
 
     .user-home-right .model-card .socialwall-page .status-online {
         padding: 4px 7px;
