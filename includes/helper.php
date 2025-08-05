@@ -118,10 +118,25 @@ function BoostedModelIds($con) {
 				$targetAudience = array_map('trim', explode(',', strtolower($row['target_audience'])));
 
 				if (in_array($user_gender, $targetAudience) || in_array('all', $targetAudience)) {
-					$validBoosts[] = [
-						'user_unique_id' => $row['user_unique_id'],
-						'total_amount' => (int)$row['total_amount']
-					];
+
+					$allowBoost = true;
+
+					if (strtolower($row['location']) === 'national') {
+						
+						$boostUser = get_data('model_user', ['unique_id' => $row['user_unique_id']], true);
+
+						if (!$boostUser || $boostUser['country'] != $user_country_id) {
+							
+							$allowBoost = false;
+						}
+					}
+
+					if ($allowBoost) {
+						$validBoosts[] = [
+							'user_unique_id' => $row['user_unique_id'],
+							'total_amount' => (int)$row['total_amount']
+						];
+					}
 				}
 			}
 		}
