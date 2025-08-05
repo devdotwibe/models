@@ -382,7 +382,8 @@ if (mysqli_num_rows($res_ap) > 0) {
                                         Go Live
                                     </div>
 
-
+								<?php if($userDetails['as_a_model'] =='No') { ?>
+								
                                 <div class="action-item" id="tipBtn" bis_skin_checked="1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <line x1="12" y1="1" x2="12" y2="23"></line>
@@ -402,7 +403,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     Send Gift
                                 </div>
 
-                                
+                                <?php } ?>
 
                                 <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
 
@@ -1491,6 +1492,8 @@ if (mysqli_num_rows($res_ap) > 0) {
         </div>
         
         <div class="modal-body">
+		
+		<form id="form_tip" name="form_tip" method="post" >
             <div class="tip-options">
                 <div class="tip-option">
                     <div class="tip-amount">$10</div>
@@ -1509,15 +1512,22 @@ if (mysqli_num_rows($res_ap) > 0) {
                     <div class="tip-label">VIP</div>
                 </div>
             </div>
+			
+			<input type="hidden" name="tip_amt" id="tip_amt" value="">
+			<input type="hidden" name="tip_label" id="tip_label" value=""> 
             
             <div class="custom-tip">
                 <span>$</span>
-                <input type="number" class="custom-tip-input" placeholder="Custom amount" min="1">
+                <input type="number" class="custom-tip-input" name="customtip" id="customtip" placeholder="Custom amount" min="1">
             </div>
             
-            <textarea class="gift-message" placeholder="Add a personal message (optional)"></textarea>
+            <textarea name="tipmsg" id="tipmsg" class="gift-message" placeholder="Add a personal message (optional)"></textarea>
             
-            <button class="btn btn-primary">Send Tip</button>
+            <button type="button" class="btn btn-primary send_tip_btn">Send Tip</button>
+			
+			<span class="tip_err" style="color:red;"></span>
+			
+			</form>
         </div>
     </div>
 </div>
@@ -1942,6 +1952,47 @@ jQuery('.socialpaidbtn').click(function(e){
 		alert('Please login');
 		window.location='login.php'
 	<?php } ?>
+});
+
+jQuery(".tip-option").click(function(){
+	var tip_amt = jQuery(this).find('.tip-amount').text();
+	var tip_label = jQuery(this).find('.tip-label').text();
+	jQuery('#tip_amt').val(tip_amt);
+	jQuery('#tip_label').val(tip_label);
+});
+
+jQuery('.send_tip_btn').click(function(){
+	var tip_amt = jQuery('#tip_amt').val();
+	var tip_label = jQuery('#tip_label').val();
+	var customtip = jQuery('#customtip').val();
+	var tipmsg = jQuery('#tipmsg').val();
+	if(tip_amt == '' && customtip == ''){
+		alert('Please choose any tip or use custom tip option.');
+	}else{
+		$.ajax({
+            url: '<?=SITEURL."accept-tip.php"?>',
+            data: {tip_amt:tip_amt,tip_label:tip_label,customtip:customtip,tipmsg:tipmsg,
+					m_unique_id:"<?php echo $_GET['m_unique_id']; ?>",model_id:"<?php echo $model_id; ?>"},
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+				console.log(response);
+				
+				if (response.status === 'success') {
+
+                    $('#modal_success_message').prepend('<p class="success-text">'+response.message+'</p>');
+
+                    $('#conform_modal').removeClass('active');
+
+                    $('#success_modal').addClass('active');
+
+                }else{
+					alert(response.message);
+				}
+				
+			}
+		});
+	}
 });
 </script>
 
