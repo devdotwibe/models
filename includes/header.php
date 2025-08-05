@@ -146,8 +146,8 @@ $(document).ready(function(){
 });
 </script> -->
 
-<header class="ultra-glass sticky top-0 z-50 border-b border-white/10">
-    <div class="container mx-auto py-4 flex justify-between items-center">
+<header class="ultra-glass sticky top-0 z-50 border-b border-white/10 header-tag">
+    <div class="container mx-auto py-4 flex justify-between items-center header-a">
         <a href="<?= SITEURL ?>" class="text-2xl font-bold flex items-center group">
             <img src="<?= SITEURL ?>uploads/live-model-logo-new.png" alt="The Live Models" class="h-12 mr-3 group-hover:scale-110 transition duration-500">
         </a>
