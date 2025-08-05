@@ -531,7 +531,7 @@ if(!empty($userDetails['profile_pic'])){
                 <span class="status-online">Connected</span>
             </div>
 
-                <?php echo $post['post_content']; ?>
+              <p>  <?php echo $post['post_content']; ?></p>
 
 
             <!-- <p class="mb-4 text-sm md:text-base text-white/90">Just finished an amazing yoga session! Who wants to join me for a hike this weekend? 🧘‍♀️✨</p> -->
