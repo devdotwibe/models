@@ -29,14 +29,14 @@ function updateUserActivity($userId) {
 }
 
 function getModelFollowerIds($model_id) {
-    $query = "SELECT unique_user_id FROM model_follow WHERE unique_model_id = %s AND status = 'Follow'";
+    $query = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = %s AND status = 'Follow'";
     
     $results = DB::query($query, $model_id);
 
     $followerIds = [];
 
     foreach ($results as $row) {
-        $followerIds[] = $row['unique_user_id'];
+        $followerIds[] = $row['unique_model_id'];
     }
 
     return $followerIds;
