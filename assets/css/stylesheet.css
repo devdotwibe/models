@@ -9733,7 +9733,16 @@ body.advt-page.my-purpose .scroll-indicator {
     padding-bottom: 10px;
 }
 
-
+/* .user-profile-side-btns>*:first-child::after{
+    position:absolute;
+    content:"";
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    border:1px solid;
+        border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+} */
 
 
 
