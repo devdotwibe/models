@@ -9793,6 +9793,11 @@ body.advt-page.my-purpose .scroll-indicator {
         justify-content: center;
     }
 
+        .home-page .home-banner .flex.premium-status.items-center.space-x-8 {
+        justify-content: center;
+        margin-top: 52px; 
+    }
+
 }
 
 
