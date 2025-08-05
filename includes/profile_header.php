@@ -36,8 +36,8 @@
 </div>
 
 <!-- Ultra Premium Header -->
-<header class="ultra-glass sticky-header top-0 z-50 border-b border-white/10">
-    <div class="container mx-auto py-4 px-4 flex justify-between items-center">
+<header class="ultra-glass sticky-header top-0 z-50 border-b border-white/10 header-profile">
+    <div class="container mx-auto py-4 px-4 flex justify-between items-center header-a-pro">
         <a href="#" class="text-2xl font-bold flex items-center group">
             <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-jXeBRuA3MHFzdzWLPiwsY7t7uYmioN.png" alt="The Live Models" class="h-8 sm:h-10 md:h-12 mr-2 md:mr-3 group-hover:scale-110 transition duration-500">
         </a>
