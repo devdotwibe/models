@@ -58,7 +58,10 @@ session_start();
          $_SESSION["user_type"] = $user_type;
          $_SESSION["city"] = $city;
 
-
+        if (isset($_SESSION["login_error"])) {
+            unset($_SESSION["login_error"]);
+        }
+        
          echo "<script> window.location.href = 'user/profile/index.php'; </script>";
       }else{
 
