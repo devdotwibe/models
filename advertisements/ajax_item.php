@@ -5,7 +5,7 @@ if($all_data){
 ?>
 
 
-                <div class="ad-card fade-in" data-category="<?=$set_data['category']?>" data-type="featured">
+                <div class="ad-card fade-in" data-category="<?=$set_data['category']?>" data-type="featured" data-id="<?= $set_data['tb.id'] ?>">
                     <div class="ad-image">
                         <div class="ad-badge badge-featured">🌟 Featured</div>
                         <img src="<?php echo SITEURL.'uploads/banners/'.$set_data['image']; ?>" alt="Social Media Influencer">
