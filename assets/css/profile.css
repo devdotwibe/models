@@ -4989,6 +4989,22 @@ button.btn-secondary.add-intrst {
     padding: 8px 15px;
     font-size: 15px;
 }
+#modalimage_gallery {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+}
+#modalimage_gallery>div{
+    margin:0 !important;
+}
+
+.edit-profile-box2 .gallery1 ul li .dz-remove{
+    display:none;
+}
 
 
 
