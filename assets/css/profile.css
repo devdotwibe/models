@@ -4795,10 +4795,11 @@ body.edit-profilepage {
     margin-bottom: 16px; */
     position: relative;
     display: flex;
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
     flex-wrap: wrap; 
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .edit-profilepage .profile-picture-overlay {
@@ -4816,8 +4817,8 @@ body.edit-profilepage {
     transition: opacity 0.3s ease;
     cursor: pointer; */
     position: absolute;
-    top: 1px;
-    left: 62px;
+    top: 0px;
+    left: 60px;
     right: 0;
     bottom: 0;
     background: rgb(0 0 0 / 79%);
@@ -4848,7 +4849,7 @@ body.edit-profilepage {
 .edit-close{
     border:1px solid white;
     width:fit-content;
-    padding:5px 10px;
+    padding:2px 5px;
 
 }
 .edit-close a:first-child{
