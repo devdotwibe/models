@@ -134,7 +134,7 @@ function BoostedModelIds($con) {
 					if ($allowBoost) {
 						$validBoosts[] = [
 							'user_unique_id' => $row['user_unique_id'],
-							'total_amount' => (float)$row['total_amount']
+							'total_amount' => $row['total_amount']
 						];
 					}
 				}
