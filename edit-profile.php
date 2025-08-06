@@ -3575,64 +3575,65 @@ $lang_list = modal_language_list();
       previewsContainer: "#temporary-preview-container",
       previewTemplate: jQuery('.preview').html(),
       dictDefaultMessage: '<svg class="w-8 h-8 mx-auto text-white/50 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg><p class="text-xs text-white/60">Add Photo</p>',
-      init: function() {
-        this.on("success", function(file, response) {
-          // Check if response is a valid object
+     init: function () {
+        this.on("success", function (file, response) {
           if (typeof response === 'string') {
-            // If it's a string, parse it manually
             response = JSON.parse(response);
           }
-          console.log("Upload success:", response);
-          // Create hidden input element
+
           var hiddenmedia = document.createElement("input");
           hiddenmedia.setAttribute("type", "hidden");
           hiddenmedia.setAttribute("name", "hiddenmedia[]");
           hiddenmedia.setAttribute("class", "hiddenmedia");
           hiddenmedia.setAttribute("value", response.file);
-            $('#temporary-preview-container').show();
 
-            AddjustImage();
-          // Append the hidden input to the file preview element
-          file.previewElement.appendChild(hiddenmedia);
-          // Assuming response contains the file name or path on the server
-          file.serverFileName = response.file; // Store the server file name for later use		
-        });
-        this.on("error", function(file, errorMessage) {
-          console.error("Upload error:", errorMessage);
-        });
-        this.on("removedfile", function(file) {
-          // You can remove hidden input when the file is removed
-          var input = file.previewElement.querySelector("input[name='hiddenmedia[]']");
-          if (input) {
-            input.remove();
+          // Show preview container
+          $('#temporary-preview-container').show();
+
+          // Move preview manually before modalimage_gallery
+          function AddjustImage() {
+            const content = $('#temporary-preview-container').html();
+            $('#modalimage_gallery').before(content);
+            $('#temporary-preview-container').empty().hide();
           }
 
-          // If the file has a server-side name stored (this was set on successful upload)
-          if (file.serverFileName) {
-            // Make an AJAX request to delete the file on the server
-            fetch('dropzone_delete.php', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  fileName: file.serverFileName // Send the file name to the server to delete
+          AddjustImage();
+
+          // Attach delete button event
+          const preview = file.previewElement;
+          const deleteBtn = preview.querySelector('.custom-delete-btn');
+
+          if (deleteBtn) {
+            deleteBtn.addEventListener('click', function () {
+              // Remove the preview
+              preview.remove();
+
+              // Remove the hidden input
+              hiddenmedia.remove();
+
+              // Optional: delete from server if uploaded
+              if (response.file) {
+                fetch('dropzone_delete.php', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ fileName: response.file })
                 })
-              })
-              .then(response => response.json())
-              .then(data => {
-                if (data.status === 'success') {
-                  console.log('File deleted from server');
-                } else {
-                  console.error('Failed to delete the file from server');
-                }
-              })
-              .catch(error => {
-                console.error('Error deleting file from server:', error);
-              });
+                  .then(res => res.json())
+                  .then(data => {
+                    if (data.status === 'success') {
+                      console.log('Deleted from server');
+                    } else {
+                      console.warn('Could not delete from server');
+                    }
+                  })
+                  .catch(err => console.error('Server delete error:', err));
+              }
+            });
           }
 
-
+          // Append hidden input AFTER attaching delete event
+          preview.appendChild(hiddenmedia);
+          file.serverFileName = response.file;
         });
       }
     });
