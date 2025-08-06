@@ -141,10 +141,6 @@
                 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
                 $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
-
-                print_r($boosted_user_ids);
-
-                die();
             }
             else
             {
@@ -259,10 +255,6 @@
                 
                 $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
 
-                print_r($boostedUniqueIdsQuoted);
-
-                die();
-
                   $order = "ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted)";
 
             } else {
@@ -301,6 +293,10 @@
                     if (!empty($boosted_user_ids)) {
                     
                         $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
+
+                              print_r($boostedUniqueIdsQuoted);
+
+                die();
 
                         $order = "ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted)";
                     } else {
