@@ -4859,7 +4859,7 @@ body.edit-profilepage {
     position: absolute;
     top: 0px;
     right: 27px;
-
+    flex-direction: row-reverse;
 
 }
 .edit-close a:first-child{
@@ -4876,7 +4876,7 @@ body.edit-profilepage {
     line-height: 1;
     padding-bottom: 3px;
     background: #00000078;
-    margin-right: 9px;
+  
      cursor:pointer;
 }
 
@@ -4895,6 +4895,7 @@ body.edit-profilepage {
     padding-bottom: 3px;
     background: #00000078;
        cursor:pointer;
+       margin-right: 9px;       
 }
 
 .edit-profilepage .profile-picture-container:hover .profile-picture-overlay {
