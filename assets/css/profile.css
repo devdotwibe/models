@@ -14,7 +14,7 @@
     --menu-text: #333333;
     --menu-border: #e0e0e0;
 
- 
+
 
     --primary: #8b5cf6;
     --primary-light: #a78bfa;
@@ -4796,7 +4796,7 @@ body.edit-profilepage {
     position: relative;
     display: flex;
     /* margin-bottom: 16px; */
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -4830,15 +4830,16 @@ body.edit-profilepage {
     transition: opacity 0.3s ease;
     cursor: pointer;
     width: 8rem;
-    height:8rem;
+    height: 8rem;
 
 }
-.profile-picture-overlay label{
-    cursor:pointer !important;
+
+.profile-picture-overlay label {
+    cursor: pointer !important;
 }
 
 .edit-profile-box1 {
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     max-width: 250px;
     /* display: flex; */
     width: 100%;
@@ -4848,13 +4849,13 @@ body.edit-profilepage {
     align-items: flex-start;
 }
 
-.edit-close{
+.edit-close {
 
-    width:fit-content;
-    padding:2px 5px;
-        display: flex;
+    width: fit-content;
+    padding: 2px 5px;
+    display: flex;
     flex-wrap: wrap;
-     align-items: center;
+    align-items: center;
     justify-content: center;
     position: absolute;
     top: 0px;
@@ -4862,7 +4863,8 @@ body.edit-profilepage {
     flex-direction: row-reverse;
 
 }
-.edit-close a:first-child{
+
+.edit-close a:first-child {
     text-decoration: none;
     color: #ef4444;
     font-size: 14px;
@@ -4875,12 +4877,12 @@ body.edit-profilepage {
     border-radius: 50%;
     line-height: 1;
     padding-bottom: 3px;
-    
-  
-     cursor:pointer;
+
+
+    cursor: pointer;
 }
 
-.edit-close a:last-child{
+.edit-close a:last-child {
     text-decoration: none;
     color: #fff;
     font-size: 12px;
@@ -4893,28 +4895,151 @@ body.edit-profilepage {
     border-radius: 50%;
     line-height: 1;
     padding-bottom: 3px;
-  background:linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
-       cursor:pointer;
-       margin-right: 6px;       
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+    cursor: pointer;
+    margin-right: 6px;
 }
 
-.edit-close a:last-child:hover{
-background: #00000078;
-
-}
-
-.edit-close a:first-child:hover{
-background: #251b2c;
+.edit-close a:last-child:hover {
+    background: #00000078;
 
 }
 
+.edit-close a:first-child:hover {
+    background: #251b2c;
+
+}
+
+.edit-profile-box2 .gallery1 {
+    display: flex !important;
+    justify-content: flex-start;
+}
 
 .edit-profile-box2 .gallery1 ul {
     display: flex !important;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
 }
+
+.edit-profile-box2 .gallery1 ul li {
+    width: 25%;
+        position: relative;
+}
+.dz-error-mark {
+    position: absolute;
+    top: -5px;
+    right:1px;
+    border:2px solid blueviolet;
+    width:17px;
+    height:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:3px;
+    background:red;
+    border-radius:50%;
+    line-height:1px;
+    padding-bottom:6px;
+}
+.dz-error-mark:hover {
+   
+    border:2px solid red;
+    background:blueviolet;
+}
+
+
+.form-section select {
+    width: 100%;
+}
+
+.form-section select option {
+    background: #17213d;
+    /* border: 1px solid #17213d; */
+}
+
+.edit-pro-hob {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin-top: 20px;
+    border: none !important;
+
+}
+
+.edit-pro-hob>div {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    width: fit-content;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+    background: #2f3158 !important;
+}
+
+.edit-pro-hob>div input {
+    border: none !important;
+    width: calc(100% - 0px);
+    padding-right: 25px;
+
+}
+
+.edit-pro-hob>div button {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #573655;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 8px;
+    right: 5px;
+    padding-bottom: 9px !important;
+}
+
+button.btn-secondary.add-intrst {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    width: fit-content !important;
+    overflow: hidden;
+    background: #2f3158;
+    color: #fff;
+    padding: 8px 15px;
+    font-size: 15px;
+}
+#modalimage_gallery {
+    width: fit-content;
+    height: auto;
+    border: 1px dotted #5c5d6c !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 4px;
+    min-height: 0;
+    border-radius: 7px;
+}
+
+#modalimage_gallery>div{
+    margin:0 !important;
+}
+
+.edit-profile-box2 .gallery1 ul li .dz-remove{
+    display:none;
+}
+
+.access-toggle input[type="text"]{
+width:100%;
+max-width:105px;
+margin-left:2px;
+font-size:14px;
+}
+
+
+
+
 
 
 .edit-profilepage .profile-picture-container:hover .profile-picture-overlay {
@@ -4929,7 +5054,7 @@ background: #251b2c;
     color: white;
     border: none;
     border-radius: 50%;
-  width: 29px;
+    width: 29px;
     height: 29px;
     display: flex;
     align-items: center;
