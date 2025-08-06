@@ -4834,10 +4834,24 @@ body.edit-profilepage {
 display: none;
 }
 
+
+
 .profile-picture-overlay label {
     cursor: pointer !important;
 }
 
+.edit-profile-outer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+.edit-profile-box2{
+width:calc(100% - 290px);
+
+
+}
 .edit-profile-box1 {
     /* border: 1px solid yellow; */
     max-width: 250px;
@@ -4867,13 +4881,14 @@ display: none;
 .edit-close a:first-child {
     text-decoration: none;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #00000078;
+justify-content: center;
+    width: 25px;
+    height: 25px;
+    /* border: 1px solid #00000078; */
     border-radius: 50%;
     line-height: 1;
     padding-bottom: 3px;
@@ -4885,28 +4900,31 @@ display: none;
 .edit-close a:last-child {
     text-decoration: none;
     color: #fff;
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #00000078;
+   justify-content: center;
+    width: 25px;
+    height: 25px;
+    /* border: 1px solid #00000078; */
     border-radius: 50%;
     line-height: 1;
     padding-bottom: 3px;
     /* background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%); */
     cursor: pointer;
-    margin-right: 6px;
+    margin-right: 9px;
 }
 
 .edit-close a:last-child:hover {
-    background: #00000078;
+    /* background: #00000078; */
+    color:#059669;
 
 }
 
 .edit-close a:first-child:hover {
-    background: #251b2c;
+    /* background: #251b2c; */
+        color:#cb1616;
 
 }
 
