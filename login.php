@@ -59,6 +59,13 @@ if($_SESSION["log_user"]){
 
                         <!-- Login Form -->
                         <form id="loginForm" class="space-y-6" method="post" enctype="multipart/form-data" action="act-login.php">
+
+                            <?php if(isset($_SESSION["login_error"] )) { ?>
+
+                                <h2><span class="text-danger"><?php echo $_SESSION["login_error"]  ?></span></h2>
+
+                            <?php } ?>
+
                             <div>
                                 <label for="username" class="block text-sm font-semibold text-white/80 mb-2">Username or Email <span class="text-red-400">*</span></label>
                                 <input type="text" id="username" name="username" placeholder="Enter your username or email" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
