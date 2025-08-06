@@ -255,8 +255,7 @@
                 
                 $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
 
-                  $order = "ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted)";
-
+                $order = " ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
             } else {
                 
                 $order = " ORDER BY register_date DESC ";
@@ -294,7 +293,7 @@
                     
                         $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
 
-                        $order = "ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted)";
+                        $order = " ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
                     } else {
                         
                        $order = " ORDER BY RAND() ";
@@ -307,7 +306,7 @@
                     
                         $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
 
-                        $order = "ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted)";
+                        $order = " ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
                     } else {
                         
                        $order = " ORDER BY RAND() ";
@@ -321,12 +320,7 @@
                     
                         $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
 
-                                     print_r($boostedUniqueIdsQuoted);
-
-                die();
-
-                
-                        $order = "ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted)";
+                        $order = " ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
                     } else {
 
                         $order = " ORDER BY id DESC ";
@@ -351,7 +345,7 @@
                         
                             $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
 
-                            $order = "ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted)";
+                            $order = " ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
                         } else {
                             $order = " ORDER BY RAND() ";
                         }
