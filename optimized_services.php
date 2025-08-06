@@ -239,8 +239,10 @@ else{
 
                 <?php if($item['status'] ==='Accept') { ?>
                  
-                    <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
-                    <button class="btn btn-message" onclick="openMessage(this)">Message</button>
+                    <!-- <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
+                    <button class="btn btn-message" onclick="openMessage(this)">Message</button> -->
+
+                  <button class="btn btn-message" data-id="<?php echo $item['id'] ?>" onclick="OpenRequest(this)">Request Complete</button>
 
                 <?php } else if($item['status'] ==='Decline') { ?>
 
@@ -438,6 +440,36 @@ else{
           </div>
       </div>
 
+
+      <div class="modal-overlay" id="request_modal">
+          <div class="modal">
+              <div class="modal-header">
+              <h2 class="modal-title">Accept</span></h2>
+              <button class="close-modal" type="button" onclick="CloseModal('request_modal')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+              </button>
+              </div>
+
+              <div class="modal-body">
+
+              <p>Do you want to <span id="button_status">request to </span> </span>Complete</strong>?</p>
+
+                <div style="margin-top: 20px;">
+
+                    <input type="hidden" name="request_id" id="request_id" >
+
+                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="request_conform_btn" onclick="RequestComplete()" >Yes, Accept</button>
+                    <button class="btn btn-secondary" type="button" onclick="CloseModal('request_modal')">Cancel</button>
+                </div>
+
+              </div>
+
+          </div>
+      </div>
+
     <div class="modal-overlay" id="success_modal">
       <div class="modal">
           <div class="modal-header">
@@ -568,6 +600,55 @@ else{
             }
           });
 
+    }
+
+    function OpenRequest(element)
+    {
+       var id = $(element).data('id');
+
+       $('#request_id').val(id);
+
+        $('#request_modal').removeClass('active');
+
+    }
+
+    function RequestComplete()
+    {
+       var id = $('#request_id').val();
+
+         $.ajax({
+            url: 'act_model_booking.php',
+            type: 'POST',
+            data: {
+              action:'complete_request',
+              request_id:id,
+              status:'requested',
+            },
+            dataType: 'json',
+            success: function (response) {
+                
+                console.log(response);
+
+                if (response.status === 'success') {
+
+                    $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
+
+                    $('#request_modal').removeClass('active');
+
+                    $('#success_modal').addClass('active');
+
+                    setTimeout(function()
+                    {
+                          $('#success_modal').removeClass('active');
+
+                    },3000);
+                }
+            },
+
+            error: function (xhr, status, error) {
+          
+            }
+          });
     }
 
     function acceptRequest(element)
