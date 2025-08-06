@@ -151,8 +151,10 @@ if($_SESSION["log_user"]){
             <div class="form-group" style="margin-bottom: 1rem;">
             <label for="email_input">Email Address</label>
             <input type="email" id="email_input" name="email" class="form-control" placeholder="Enter your email" required>
+
+            <span sytle="display:none" id="email_error">Please enter valid email address</span>
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" type="button" onclick="SubmitForgot()" >Submit</button>
             <button class="btn btn-secondary" type="button" onclick="CloseModal('forgor_modal')">Close</button>
         </form>
         </div>
@@ -166,6 +168,21 @@ if($_SESSION["log_user"]){
     function forgotPassword()
     {
         $('#forgor_modal').addClass('active');
+    }
+
+    function SubmitForgot()
+    {
+        const email = $('#email_input').val();
+
+        if (email && isValidEmail(email)) {
+
+              $('#email_error').hide();
+
+        }
+        else
+        {
+            $('#email_error').show();
+        }
     }
 
     function CloseModal(id)
