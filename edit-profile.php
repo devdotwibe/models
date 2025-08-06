@@ -316,10 +316,12 @@ $lang_list = modal_language_list();
                   } ?>
                   <img src="<?php echo $prof_img; ?>" id="preview_prof_img" alt="Profile" class="w-32 h-32 rounded-full border-4 border-purple-500">
                   <div class="profile-picture-overlay">
+                     <label for="pic_img">
                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2-2H5a2 2 0 01-2-2V9z"></path>
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
+                    </label>
                   </div>
 
                   <div class="edit-close">
