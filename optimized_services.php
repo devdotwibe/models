@@ -237,7 +237,15 @@ else{
 
                     <?php if($item['status'] ==='Accept') { ?>
 
+                       <?php if($item['complete_request'] === 'requested') { ?>
+
+                          <span class="status-badge badge-approved">Complete Requested</span>
+
+                        <?php } else { ?>
+
                           <span class="status-badge badge-approved">Approved</span>
+
+                        <?php } ?>
 
                     <?php } else if($item['status'] ==='Decline') { ?>
 
@@ -259,7 +267,15 @@ else{
                     <!-- <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
                     <button class="btn btn-message" onclick="openMessage(this)">Message</button> -->
 
-                  <button class="btn btn-message" data-id="<?php echo $item['id'] ?>" onclick="OpenRequest(this)">Request Complete</button>
+                  <?php if($item['complete_request'] === 'requested') { ?>
+
+                    <button class="btn btn-message" disabled data-id="<?php echo $item['id'] ?>" onclick="OpenRequest(this)">Request Complete</button>
+
+                  <?php } else { ?>
+
+                    <button class="btn btn-message" data-id="<?php echo $item['id'] ?>" onclick="OpenRequest(this)">Request Complete</button>
+                    
+                  <?php } ?>
 
                 <?php } else if($item['status'] ==='Decline') { ?>
 
