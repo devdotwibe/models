@@ -5011,15 +5011,17 @@ button.btn-secondary.add-intrst {
     font-size: 15px;
 }
 #modalimage_gallery {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #fff;
+    width: fit-content;
+    height: auto;
+    border: 1px dotted #5c5d6c !important;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 0;
-    min-height:0;
+    padding: 4px;
+    min-height: 0;
+    border-radius: 7px;
 }
+
 #modalimage_gallery>div{
     margin:0 !important;
 }
