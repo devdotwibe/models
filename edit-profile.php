@@ -316,27 +316,30 @@ $lang_list = modal_language_list();
                   } ?>
                   <img src="<?php echo $prof_img; ?>" id="preview_prof_img" alt="Profile" class="w-32 h-32 rounded-full border-4 border-purple-500">
                   <div class="profile-picture-overlay">
-                     <label for="pic_img">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2-2H5a2 2 0 01-2-2V9z"></path>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                    </svg>
+                    <label for="pic_img">
+                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2-2H5a2 2 0 01-2-2V9z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      </svg>
                     </label>
                   </div>
 
                   <div class="edit-close">
-                      <a href="#">×</a>
-                     <a href="#">✎ </a>
-                  
-                   
+                    <a href="#">×</a>
+                    <a href="#">
+                      <!-- ✎  -->
+                      <i class="far fa-edit"></i>
+                    </a>
+
+
                   </div>
 
                   <button class="change-photo-btn">
-                    <input  type="file" name="pic_img" style="display:none" id="pic_img" class="vfb-text vfb-medium" accept=".jpg,.jpeg,.png" />
+                    <input type="file" name="pic_img" style="display:none" id="pic_img" class="vfb-text vfb-medium" accept=".jpg,.jpeg,.png" />
                     <label for="pic_img">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                      </svg>
                     </label>
                   </button>
                 </div>
@@ -360,7 +363,7 @@ $lang_list = modal_language_list();
                       foreach ($modal_img_list as $imgs) {
                         if (!empty($imgs['file'])) {
                     ?>
-                          <li id="galblock<?php echo $i; ?>" class="w-32 h-auto">
+                          <li id="galblock<?php echo $i; ?>" class="w-auto h-auto">
                             <div>
                               <div class="dz-preview dz-file-preview">
                                 <img src="<?php echo SITEURL . 'uploads/profile_pic/' . $imgs['file']; ?>" data-dz-thumbnail />
@@ -380,23 +383,23 @@ $lang_list = modal_language_list();
 
                     ?>
 
-                  <div id="temporary-preview-container" style="display: none;"></div>
+                    <div id="temporary-preview-container" style="display: none;"></div>
 
-                  <div id="modalimage_gallery" class="text-center dropzone"></div>
+                    <div id="modalimage_gallery" class="text-center dropzone"></div>
 
                   </ul>
 
                   <div class="preview" style="display:none;">
                     <li>
                       <div>
-                  
+
 
                         <div class="dz-preview dz-file-preview">
                           <img data-dz-thumbnail />
                           <div class="dz-details">
                             <!-- your existing details -->
                           </div>
-                            <button type="button" class="custom-delete-btn" onclick="handleCustomDelete(this)">×</button>
+                          <button type="button" class="custom-delete-btn" onclick="handleCustomDelete(this)">×</button>
                         </div>
                       </div>
                     </li>
@@ -3568,39 +3571,43 @@ $lang_list = modal_language_list();
     // }
 
     function handleCustomDelete(buttonElement) {
-      
-          // Get the preview box (dz-preview)
-          const preview = buttonElement.closest('.dz-preview');
 
-          if (!preview) return;
+      // Get the preview box (dz-preview)
+      const preview = buttonElement.closest('.dz-preview');
 
-          // Remove hidden input if exists
-          const hiddenInput = preview.querySelector("input[name='hiddenmedia[]']");
-          if (hiddenInput) {
-            const fileName = hiddenInput.value;
+      if (!preview) return;
 
-            hiddenInput.remove();
+      // Remove hidden input if exists
+      const hiddenInput = preview.querySelector("input[name='hiddenmedia[]']");
+      if (hiddenInput) {
+        const fileName = hiddenInput.value;
 
-            // Optional: Delete from server
-            fetch('dropzone_delete.php', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ fileName })
+        hiddenInput.remove();
+
+        // Optional: Delete from server
+        fetch('dropzone_delete.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              fileName
             })
-              .then(res => res.json())
-              .then(data => {
-                if (data.status === 'success') {
-                  console.log('Deleted from server');
-                } else {
-                  console.warn('Could not delete from server');
-                }
-              })
-              .catch(err => console.error('Server delete error:', err));
-          }
+          })
+          .then(res => res.json())
+          .then(data => {
+            if (data.status === 'success') {
+              console.log('Deleted from server');
+            } else {
+              console.warn('Could not delete from server');
+            }
+          })
+          .catch(err => console.error('Server delete error:', err));
+      }
 
-          // Remove the preview from the DOM
-          preview.remove();
-        }
+      // Remove the preview from the DOM
+      preview.remove();
+    }
 
 
     const myDropzone = new Dropzone("#modalimage_gallery", {
@@ -3614,8 +3621,8 @@ $lang_list = modal_language_list();
       previewsContainer: "#temporary-preview-container",
       previewTemplate: jQuery('.preview').html(),
       dictDefaultMessage: '<svg class="w-7 h-7 mx-auto text-white/50 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg><p class="text-xs text-white/60">Add Photo</p>',
-     init: function () {
-        this.on("success", function (file, response) {
+      init: function() {
+        this.on("success", function(file, response) {
           if (typeof response === 'string') {
             response = JSON.parse(response);
           }
@@ -3643,7 +3650,7 @@ $lang_list = modal_language_list();
           const deleteBtn = preview.querySelector('.custom-delete-btn');
 
           if (deleteBtn) {
-            deleteBtn.addEventListener('click', function () {
+            deleteBtn.addEventListener('click', function() {
               // Remove the preview
               preview.remove();
 
@@ -3653,10 +3660,14 @@ $lang_list = modal_language_list();
               // Optional: delete from server if uploaded
               if (response.file) {
                 fetch('dropzone_delete.php', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ fileName: response.file })
-                })
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      fileName: response.file
+                    })
+                  })
                   .then(res => res.json())
                   .then(data => {
                     if (data.status === 'success') {

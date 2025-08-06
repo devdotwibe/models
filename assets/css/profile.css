@@ -4818,7 +4818,7 @@ body.edit-profilepage {
     cursor: pointer; */
     position: absolute;
     top: 0px;
-    left: 60px;
+    left: 61px;
     right: 0;
     bottom: 0;
     background: rgb(0 0 0 / 79%);
@@ -4831,13 +4831,27 @@ body.edit-profilepage {
     cursor: pointer;
     width: 8rem;
     height: 8rem;
-
+display: none ;
 }
+
+
 
 .profile-picture-overlay label {
     cursor: pointer !important;
 }
 
+.edit-profile-outer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+.edit-profile-box2{
+width:calc(100% - 290px);
+
+
+}
 .edit-profile-box1 {
     /* border: 1px solid yellow; */
     max-width: 250px;
@@ -4866,14 +4880,15 @@ body.edit-profilepage {
 
 .edit-close a:first-child {
     text-decoration: none;
-    color: #ef4444;
-    font-size: 14px;
+    color: #fff;
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #00000078;
+justify-content: center;
+    width: 25px;
+    height: 25px;
+    /* border: 1px solid #00000078; */
     border-radius: 50%;
     line-height: 1;
     padding-bottom: 3px;
@@ -4885,28 +4900,31 @@ body.edit-profilepage {
 .edit-close a:last-child {
     text-decoration: none;
     color: #fff;
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border: 1px solid #00000078;
+   justify-content: center;
+    width: 25px;
+    height: 25px;
+    /* border: 1px solid #00000078; */
     border-radius: 50%;
     line-height: 1;
     padding-bottom: 3px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%); */
     cursor: pointer;
-    margin-right: 6px;
+    margin-right: 9px;
 }
 
 .edit-close a:last-child:hover {
-    background: #00000078;
+    /* background: #00000078; */
+    color:#059669;
 
 }
 
 .edit-close a:first-child:hover {
-    background: #251b2c;
+    /* background: #251b2c; */
+        color:#cb1616;
 
 }
 
@@ -4926,28 +4944,42 @@ body.edit-profilepage {
 .edit-profile-box2 .gallery1 ul li {
       width: calc(25% - 10px);
         position: relative;
+         height: 100%;
 }
+
+.edit-profile-box2 .gallery1 ul li>div {
+    height: 100%;
+}
+.edit-profile-box2 .gallery1 ul li>div>div {
+    height: 100%;
+}
+.edit-profile-box2 .gallery1 ul li>div>div img {
+    height: 100%;
+    object-fit: cover;
+}
+
 .dz-error-mark {
     position: absolute;
     top: -5px;
     right:1px;
-    border:2px solid blueviolet;
+    border:2px solid #fff;
     width:17px;
     height:17px;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:3px;
-    background:red;
+    /* background:red; */
     border-radius:50%;
     line-height:1px;
     padding-bottom:6px;
     transition: all .3s ease-in-out;
+    color:#fff;
 }
 .dz-error-mark:hover {
    
     border:2px solid red;
-    background:blueviolet;
+    /* background:blueviolet; */
 }
 
 .dz-file-preview{
@@ -4957,15 +4989,15 @@ body.edit-profilepage {
   position: absolute;
     top: -5px;
     right:1px;
-    border:1px solid red;
-    background:blueviolet;
+    border:1px solid white;
+    /* background:blueviolet; */
     width:17px;
     height:17px;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:3px;
-
+color:#fff;
     border-radius:50%;
     line-height:1px;
     padding-bottom:6px;
@@ -4974,8 +5006,7 @@ body.edit-profilepage {
 
 .dz-file-preview .custom-delete-btn:hover {
    
-    border:2px solid blueviolet;
-
+    border:1px solid red;
         background:red;
 }
 
@@ -5012,6 +5043,7 @@ body.edit-profilepage {
     border: none !important;
     width: calc(100% - 0px);
     padding-right: 25px;
+  
 
 }
 
@@ -5064,6 +5096,7 @@ width:100%;
 max-width:90px;
 margin-left:2px;
 font-size:14px;
+      padding-block: 0px;
 }
 .access-toggle input[type="text"]::placeholder{
     font-size:12px;
