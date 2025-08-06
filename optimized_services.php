@@ -239,7 +239,7 @@ else{
 
                        <?php if($item['complete_request'] === 'requested') { ?>
 
-                          <span class="status-badge badge-approved">Complete Requested</span>
+                          <span class="status-badge badge-pending">Complete Requested</span>
 
                         <?php } else { ?>
 
@@ -269,7 +269,6 @@ else{
 
                   <?php if($item['complete_request'] === 'requested') { ?>
 
-                    <button class="btn btn-message" disabled data-id="<?php echo $item['id'] ?>" onclick="OpenRequest(this)">Request Complete</button>
 
                   <?php } else { ?>
 
