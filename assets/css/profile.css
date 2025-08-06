@@ -4949,6 +4949,34 @@ body.edit-profilepage {
     background:blueviolet;
 }
 
+.dz-file-preview{
+    position: relative; 
+}
+.dz-file-preview .custom-delete-btn{
+  position: absolute;
+    top: -5px;
+    right:1px;
+    border:1px solid red;
+    background:blueviolet;
+    width:17px;
+    height:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:3px;
+
+    border-radius:50%;
+    line-height:1px;
+    padding-bottom:6px;
+
+}
+
+.dz-file-preview .custom-delete-btn:hover {
+   
+    border:2px solid blueviolet;
+
+        background:red;
+}
 
 .form-section select {
     width: 100%;
