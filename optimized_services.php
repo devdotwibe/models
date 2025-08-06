@@ -73,13 +73,20 @@ else{
 
         $declined_count = 0;
 
+        $complete_request = 0;
+
         foreach($model_bookings as $item) { 
 
             if ($item['status'] === 'Accept') {
 
               $accept_count++;
 
-            } else if ($item['status'] === 'Completed') {
+            }
+            else if ($item['complete_request'] === 'requested') {
+
+                $complete_request++;
+
+            }  else if ($item['status'] === 'Completed') {
 
                 $completed_count++;
 
@@ -109,6 +116,11 @@ else{
       <button class="tab-button" onclick="ServiceTab('approved_status',this)" data-tab="approved">
         Approved <span class="tab-count"><?php echo $accept_count ?></span>
       </button>
+
+      <button class="tab-button" onclick="ServiceTab('requested',this)" data-tab="requested">
+        Complete Requested <span class="tab-count"><?php echo $complete_request ?></span>
+      </button>
+
       <button class="tab-button" onclick="ServiceTab('completed_status',this)" data-tab="completed">
         Completed <span class="tab-count"><?php echo $completed_count ?></span>
       </button>
@@ -165,7 +177,7 @@ else{
               }
         ?>
 
-            <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['booking_type'] ?> all_status all_type" data-status="pending" data-type="group">
+            <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['booking_type'] ?> <?php echo $item['complete_request'] ?> all_status all_type" data-status="pending" data-type="group">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
@@ -461,7 +473,7 @@ else{
 
                     <input type="hidden" name="request_id" id="request_id" >
 
-                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="request_conform_btn" onclick="RequestComplete()" >Yes, Accept</button>
+                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="request_conform_btn" onclick="RequestComplete()" >Yes</button>
                     <button class="btn btn-secondary" type="button" onclick="CloseModal('request_modal')">Cancel</button>
                 </div>
 
