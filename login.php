@@ -26,7 +26,7 @@ if($_SESSION["log_user"]){
 </head>
 
 
-<body class="login-page min-h-screen bg-animated text-white optim-services">
+<body class="login-page min-h-screen bg-animated text-white optim-services enhanced5">
 
 <?php include('includes/login-header.php'); ?>
 
