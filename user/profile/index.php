@@ -201,7 +201,7 @@ if(!empty($userDetails['profile_pic'])){
         $types = str_repeat('i', count($followed_user_ids));
 
 
-        $sql = "
+       $sql = "
             SELECT 
                 live_posts.*, 
                 model_user.name AS author_name, 
@@ -212,11 +212,10 @@ if(!empty($userDetails['profile_pic'])){
             FROM live_posts
             JOIN model_user ON live_posts.post_author = model_user.id
             WHERE post_author IN ($placeholders)
-            ORDER BY post_date DESC
         ";
 
         if (!empty($priority_ids)) {
-          
+
             $priority_order = implode(',', $priority_ids);
 
             $sql .= " ORDER BY FIELD(post_author, $priority_order) DESC, post_date DESC";
