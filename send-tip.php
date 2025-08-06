@@ -82,7 +82,7 @@ if (isset($_SESSION["log_user_id"])) {
           </body>
          </html>';
 		 
-		 mail($email_to, $subject, $message, $header);
+		// mail($email_to, $subject, $message, $header);
 
          
 		 
