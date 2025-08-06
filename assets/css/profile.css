@@ -4909,6 +4909,14 @@ background: #251b2c;
 }
 
 
+.edit-profile-box1 .gallery1 ul {
+    display: flex !important;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+
 .edit-profilepage .profile-picture-container:hover .profile-picture-overlay {
     opacity: 1;
 }
