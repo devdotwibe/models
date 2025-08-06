@@ -5030,14 +5030,15 @@ color:#fff;
 }
 
 .edit-pro-hob>div {
-    border: 1px solid rgba(255, 255, 255, 0.2);
+
     border-radius: 18px;
     width: fit-content;
     margin-right: 10px;
     margin-bottom: 10px;
     position: relative;
     overflow: hidden;
-    background: #2f3158 !important;
+    background: #593790 !important;
+      border: 1px solid rgba(168, 85, 247, 0.3);
 }
 
 .edit-pro-hob>div input {
@@ -5062,7 +5063,7 @@ min-width: none !important;
 }
 
 button.btn-secondary.add-intrst {
-    border: 1px solid rgba(255, 255, 255, 0.2);
+
     border-radius: 30px;
     width: fit-content !important;
     overflow: hidden;
@@ -5070,6 +5071,8 @@ button.btn-secondary.add-intrst {
     color: #fff;
     padding: 8px 15px;
     font-size: 15px;
+       background: #593790 !important;
+      border: 1px solid rgba(168, 85, 247, 0.3)!important;
 }
 #modalimage_gallery {
     width: fit-content;
