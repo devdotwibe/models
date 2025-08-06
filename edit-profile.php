@@ -347,8 +347,8 @@ $lang_list = modal_language_list();
               </div>
 
               <!-- Additional Photos -->
-              <div class="text-center edit-profile-box2">
-                <div class="gallery1 w-32 h-32 mx-auto border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center cursor-pointer hover:border-purple-500 transition-colors">
+              <div class="text-center edit-profile-box2 border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center cursor-pointer hover:border-purple-500 transition-colors">
+                <div class="gallery1 ">
 
                   <div id="modalimage_gallery" class="text-center dropzone"></div>
                   <ul class="visualizacao sortable dropzone-previews" style="border:1px solid #000">
@@ -359,7 +359,7 @@ $lang_list = modal_language_list();
                       foreach ($modal_img_list as $imgs) {
                         if (!empty($imgs['file'])) {
                     ?>
-                          <li id="galblock<?php echo $i; ?>">
+                          <li id="galblock<?php echo $i; ?>" class="w-32 h-32">
                             <div>
                               <div class="dz-preview dz-file-preview">
                                 <img src="<?php echo SITEURL . 'uploads/profile_pic/' . $imgs['file']; ?>" data-dz-thumbnail />
