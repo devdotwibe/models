@@ -202,7 +202,16 @@ else{
                     <div class="flex items-center gap-3 mb-2">
                     <img src="<?php echo $defaultImage ?>" alt="Client" class="client-avatar border-orange-400">
                     <div>
+
+                      <?php  if($userDetails['as_a_model'] =='Yes') { ?>
+
                         <h3 class="client-name"><?php echo $item['name'] ?> </h3>
+
+                      <?php } else { ?>
+                        
+                         <h3 class="client-name"><?php echo $item['model_name'] ?> </h3>
+
+                      <?php } ?>
 
                         <?php 
 
