@@ -3552,18 +3552,18 @@ $lang_list = modal_language_list();
     Dropzone.autoDiscover = false;
 
     // Manual initialization
-      function AddjustImage()
-    {
+    //   function AddjustImage()
+    // {
 
-      var content = $('#temporary-preview-container').html();
+    //   var content = $('#temporary-preview-container').html();
 
-       $('#modalimage_gallery').before(content);
+    //    $('#modalimage_gallery').before(content);
 
-       $('#temporary-preview-container').html("");
+    //    $('#temporary-preview-container').html("");
 
-       $('#temporary-preview-container').hide();
+    //    $('#temporary-preview-container').hide();
 
-    }
+    // }
     const myDropzone = new Dropzone("#modalimage_gallery", {
       url: "dropzone_upload.php",
       paramName: "file", // The name that will be used in $_FILES["file"]
