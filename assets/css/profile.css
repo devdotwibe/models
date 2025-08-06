@@ -4907,13 +4907,21 @@ background: #00000078;
 background: #251b2c;
 
 }
-
+.edit-profile-box2 .gallery1 {
+       display: flex !important;
+    justify-content: flex-start;
+}
 
 .edit-profile-box2 .gallery1 ul {
     display: flex !important;
+    flex-wrap:wrap;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
+}
+
+.edit-profile-box2 .gallery1 ul li{
+width:25%;
 }
 
 
