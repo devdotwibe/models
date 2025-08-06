@@ -9718,8 +9718,8 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 .home-banner .space-y-6 .relative input {
-    padding-top: 1rem !important;
-    padding-bottom: 2rem !important;
+ padding-top: 1.2rem !important;
+  padding-bottom: 1.2rem !important;
 }
 
 
@@ -10091,6 +10091,12 @@ body.advt-page.my-purpose .scroll-indicator {
 .main-content.user-home {
     padding-bottom: 0;
 }
+.header-ss.hidden{
+
+    display: flex !important;
+    width:auto;
+}
+
 }
 
 
