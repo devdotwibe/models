@@ -4925,8 +4925,29 @@ body.edit-profilepage {
 
 .edit-profile-box2 .gallery1 ul li {
     width: 25%;
+        position: relative;
 }
-
+.dz-error-mark {
+    position: absolute;
+    top: -5px;
+    right:1px;
+    border:2px solid blueviolet;
+    width:17px;
+    height:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:3px;
+    background:red;
+    border-radius:50%;
+    line-height:1px;
+    padding-bottom:6px;
+}
+.dz-error-mark:hover {
+   
+    border:2px solid red;
+    background:blueviolet;
+}
 
 
 .form-section select {
