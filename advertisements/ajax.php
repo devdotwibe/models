@@ -32,7 +32,44 @@ $sort_by = ' order by tb.is_paid desc, tb.id desc';
 $sort_column = $_GET['sort_column'];
 $sort_type = $_GET['sort_type'];
 
-$stringQuery = " select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id ";//where status
+   if(isset($_SESSION["log_user_id"])){
+        
+        $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+
+        $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
+    }
+    else
+    {
+            $boosted_user_ids = BoostedModelIds($con);
+    }
+
+    $in_clause = implode(',', array_fill(0, count($boosted_user_ids), '?'));
+
+    $types_follower = str_repeat('s', count($boosted_user_ids));
+
+    $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
+    $stmt = $con->prepare($followQuery);
+    if (!$stmt) {
+        die("Prepare failed: " . $con->error);
+    }
+    $stmt->bind_param($types_follower, ...$boosted_user_ids);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $filter_follower_ids = [];
+    while ($row = $result->fetch_assoc()) {
+        $filter_follower_ids[] = $row['id'];
+    }
+
+    if (!empty($filter_follower_ids)) {
+    $ordered_ids = implode(',', $filter_follower_ids); // no quotes since IDs are integers
+    $order = " ORDER BY FIELD(tb.user_id, $ordered_ids)";
+    } else {
+        $order = " ORDER BY tb.id DESC"; // fallback order
+    }
+
+
+$stringQuery = " select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id  $order ";//where status
 
 if($_GET['country']){
     $where_clause .= " tb.country='".$_GET['country']."' and";
