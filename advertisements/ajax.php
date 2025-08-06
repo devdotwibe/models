@@ -63,7 +63,7 @@ $sort_type = $_GET['sort_type'];
 
     if (!empty($filter_follower_ids)) {
     $ordered_ids = implode(',', $filter_follower_ids); // no quotes since IDs are integers
-    $order = " ORDER BY FIELD(tb.user_id, $ordered_ids)";
+    $order = " ORDER BY FIELD(tb.user_id, $ordered_ids) DESC";
 
         $sort_by="";
         
@@ -123,5 +123,5 @@ $html= ob_get_clean();
 $output['html'] = $html;
 $output['total_page'] = (int) ceil($total/ $perPage);
 $output['page'] = $page_number;
-echo json_encode($filter_follower_ids);
+echo json_encode($output);
 ?>
