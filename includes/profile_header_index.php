@@ -21,7 +21,7 @@
       </div>
       <div class="flex items-center space-x-4">
         <!-- Desktop Navigation -->
-        <div class="hidden md:flex items-center space-x-4">
+        <div class="hidden md:flex items-center space-x-4 header-ss">
           <button onclick="window.location.href='<?= SITEURL ?>notifications.php'; return false;" class="w-12 h-12 ultra-glass rounded-xl flex items-center justify-center hover:bg-white/10 transition duration-300 relative">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
               <span class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold">7</span>
