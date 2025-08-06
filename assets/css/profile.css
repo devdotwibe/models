@@ -4939,7 +4939,8 @@ width:25%;
     display: inline-flex;
     flex-wrap:wrap;
     justify-content:start;
-    margin-top:20px
+    margin-top:20px;
+    border:none !important;
  
 }
 .edit-pro-hob > div{
@@ -4950,7 +4951,7 @@ width:fit-content;
        margin-bottom:10px;
     position:relative;
     overflow:hidden;
-    backgound:#2f3158 !important;
+    background:#2f3158 !important;
 }
 
 .edit-pro-hob > div input{
