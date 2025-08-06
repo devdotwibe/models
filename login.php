@@ -21,12 +21,12 @@ if($_SESSION["log_user"]){
 
     <?php include('includes/head.php'); ?>
 
-    <link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
+    <link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
 
 </head>
 
 
-<body class="login-page min-h-screen bg-animated text-white socialwall-page">
+<body class="login-page min-h-screen bg-animated text-white optim-services">
 
 <?php include('includes/login-header.php'); ?>
 
