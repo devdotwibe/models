@@ -268,7 +268,11 @@ else{
 
                     <?php }?>
 
-                    <?php if($item['status'] ==='Accept') { ?>
+                    <?php if($item['status'] ==='Completed') { ?>
+
+                      <span class="status-badge badge-approved">Completed</span>
+
+                    <?php }else if($item['status'] ==='Accept') { ?>
 
                        <?php if($item['complete_request'] === 'requested') { ?>
 
@@ -295,7 +299,11 @@ else{
 
                 <div class="flex gap-2 flex-wrap">
 
-                <?php if($item['status'] ==='Accept') { ?>
+                 <?php if($item['status'] ==='Completed') { ?>
+
+
+
+                <?php } else if($item['status'] ==='Accept') { ?>
                  
                     <!-- <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
                     <button class="btn btn-message" onclick="openMessage(this)">Message</button> -->
@@ -750,6 +758,8 @@ else{
                   {
                         $('#success_modal').removeClass('active');
 
+                         window.location.reload();
+
                   },3000);
               }
           },
@@ -788,6 +798,8 @@ else{
                     setTimeout(function()
                     {
                           $('#success_modal').removeClass('active');
+
+                          window.location.reload();
 
                     },3000);
                 }
