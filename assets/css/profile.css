@@ -4831,7 +4831,7 @@ body.edit-profilepage {
     cursor: pointer;
     width: 8rem;
     height: 8rem;
-display: none ;
+    display: none;
 }
 
 
@@ -4847,11 +4847,12 @@ display: none ;
 }
 
 
-.edit-profile-box2{
-width:calc(100% - 290px);
+.edit-profile-box2 {
+    width: calc(100% - 290px);
 
 
 }
+
 .edit-profile-box1 {
     /* border: 1px solid yellow; */
     max-width: 250px;
@@ -4881,11 +4882,11 @@ width:calc(100% - 290px);
 .edit-close a:first-child {
     text-decoration: none;
     color: #fff;
-    font-size:20px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-justify-content: center;
+    justify-content: center;
     width: 25px;
     height: 25px;
     /* border: 1px solid #00000078; */
@@ -4904,27 +4905,27 @@ justify-content: center;
     display: flex;
     align-items: center;
     justify-content: center;
-   justify-content: center;
-  width: 13px;
-  height: 16px;
+    justify-content: center;
+    width: 13px;
+    height: 16px;
     /* border: 1px solid #00000078; */
     border-radius: 50%;
     line-height: 1;
     padding-bottom: 3px;
     /* background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%); */
     cursor: pointer;
-    margin-right: 8px;
+    margin-right: 7px;
 }
 
 .edit-close a:last-child:hover {
     /* background: #00000078; */
-    color:#059669;
+    color: #059669;
 
 }
 
 .edit-close a:first-child:hover {
     /* background: #251b2c; */
-        color:#cb1616;
+    color: #cb1616;
 
 }
 
@@ -4942,17 +4943,19 @@ justify-content: center;
 }
 
 .edit-profile-box2 .gallery1 ul li {
-      width: calc(25% - 10px);
-        position: relative;
-         height: 100%;
+    width: calc(25% - 10px);
+    position: relative;
+    height: 100%;
 }
 
 .edit-profile-box2 .gallery1 ul li>div {
     height: 100%;
 }
+
 .edit-profile-box2 .gallery1 ul li>div>div {
     height: 100%;
 }
+
 .edit-profile-box2 .gallery1 ul li>div>div img {
     height: 100%;
     object-fit: cover;
@@ -4961,54 +4964,56 @@ justify-content: center;
 .dz-error-mark {
     position: absolute;
     top: -5px;
-    right:1px;
-    border:2px solid #fff;
-    width:17px;
-    height:17px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:3px;
+    right: 1px;
+    border: 2px solid #fff;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
     /* background:red; */
-    border-radius:50%;
-    line-height:1px;
-    padding-bottom:6px;
+    border-radius: 50%;
+    line-height: 1px;
+    padding-bottom: 6px;
     transition: all .3s ease-in-out;
-    color:#fff;
+    color: #fff;
 }
+
 .dz-error-mark:hover {
-   
-    border:2px solid red;
-    color:red;
+
+    border: 2px solid red;
+    color: red;
     /* background:blueviolet; */
 }
 
-.dz-file-preview{
-    position: relative; 
+.dz-file-preview {
+    position: relative;
 }
-.dz-file-preview .custom-delete-btn{
-  position: absolute;
+
+.dz-file-preview .custom-delete-btn {
+    position: absolute;
     top: -5px;
-    right:1px;
-    border:1px solid white;
+    right: 1px;
+    border: 1px solid white;
     /* background:blueviolet; */
-    width:17px;
-    height:17px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:3px;
-color:#fff;
-    border-radius:50%;
-    line-height:1px;
-    padding-bottom:6px;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    color: #fff;
+    border-radius: 50%;
+    line-height: 1px;
+    padding-bottom: 6px;
 
 }
 
 .dz-file-preview .custom-delete-btn:hover {
-   
-    border:1px solid red;
-        background:red;
+
+    border: 1px solid red;
+    background: red;
 }
 
 .form-section select {
@@ -5038,14 +5043,14 @@ color:#fff;
     position: relative;
     overflow: hidden;
     background: #593790 !important;
-      border: 1px solid rgba(168, 85, 247, 0.3);
+    border: 1px solid rgba(168, 85, 247, 0.3);
 }
 
 .edit-pro-hob>div input {
     border: none !important;
     width: fit-content !important;
-  padding-right: 30px !important;
-min-width: none !important;
+    padding-right: 30px !important;
+    min-width: none !important;
 }
 
 .edit-pro-hob>div button {
@@ -5071,9 +5076,10 @@ button.btn-secondary.add-intrst {
     color: #fff;
     padding: 8px 15px;
     font-size: 15px;
-       background: #593790 !important;
-      border: 1px solid rgba(168, 85, 247, 0.3)!important;
+    background: #593790 !important;
+    border: 1px solid rgba(168, 85, 247, 0.3) !important;
 }
+
 #modalimage_gallery {
     width: fit-content;
     height: auto;
@@ -5086,28 +5092,33 @@ button.btn-secondary.add-intrst {
     border-radius: 7px;
 }
 
-#modalimage_gallery>div{
-    margin:0 !important;
+#modalimage_gallery>div {
+    margin: 0 !important;
 }
 
-.edit-profile-box2 .gallery1 ul li .dz-remove{
-    display:none;
+.edit-profile-box2 .gallery1 ul li .dz-remove {
+    display: none;
 }
 
-.access-toggle input[type="text"]{
-width:100%;
-max-width:90px;
-margin-left:2px;
-font-size:14px;
-      padding-block: 0px;
-}
-.access-toggle input[type="text"]::placeholder{
-    font-size:12px;
+.access-toggle input[type="text"] {
+    width: 100%;
+    max-width: 90px;
+    margin-left: 2px;
+    font-size: 14px;
+    padding-block: 0px;
 }
 
-.form-section select{
-height:50px !important;
+.access-toggle input[type="text"]::placeholder {
+    font-size: 12px;
 }
+
+.form-section select {
+    height: 50px !important;
+}
+
+
+
+
 
 
 /* old css below....................... */
@@ -8601,6 +8612,32 @@ height:50px !important;
         font-size: 0.7rem;
 
     }
+
+    .edit-pro-pop {
+        display: inline-flex;
+        flex-wrap: wrap;
+    }
+
+    .edit-pro-pop>div {
+        display: inline-flex;
+        width: fit-content;
+        margin-right: 0px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+.edit-profile-box1 {
+  border: 1px solid yellow;
+  max-width: 190px;
+}
+
+    .edit-profile-box2 {
+  width:calc(100% - 220px);
+  /* min-height: 200px; */
+  flex-wrap: wrap;
+}
+.edit-close{
+    right:-8px;
+}
 
 }
 
