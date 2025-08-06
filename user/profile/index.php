@@ -174,6 +174,29 @@ if(!empty($userDetails['profile_pic'])){
 
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
 
+        $boost_follower_unique_ids = BoostedModelIdsByUser($userDetails,$con);
+
+        $in_clause = implode(',', array_fill(0, count($boost_follower_unique_ids), '?'));
+
+        $types_follower = str_repeat('s', count($boost_follower_unique_ids));
+
+        $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
+        $stmt = $con->prepare($followQuery);
+        if (!$stmt) {
+            die("Prepare failed: " . $con->error);
+        }
+        $stmt->bind_param($types_follower, ...$boost_follower_unique_ids);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $filter_follower_ids = [];
+        while ($row = $result->fetch_assoc()) {
+            $filter_follower_ids[] = $row['id'];
+        }
+
+        $priority_ids = array_values(array_intersect($followed_user_ids, $filter_follower_ids));
+        
+
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
 
@@ -191,6 +214,17 @@ if(!empty($userDetails['profile_pic'])){
             WHERE post_author IN ($placeholders)
             ORDER BY post_date DESC
         ";
+
+        if (!empty($priority_ids)) {
+          
+            $priority_order = implode(',', $priority_ids);
+
+            $sql .= " ORDER BY FIELD(post_author, $priority_order) DESC, post_date DESC";
+        } else {
+
+            $sql .= " ORDER BY post_date DESC";
+        }
+
 
         $stmt = $con->prepare($sql);
 
