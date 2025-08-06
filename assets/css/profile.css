@@ -5102,6 +5102,14 @@ font-size:14px;
     font-size:12px;
 }
 
+.form-section select{
+height:50px !important;
+}
+
+
+/* old css below....................... */
+
+
 
 
 
