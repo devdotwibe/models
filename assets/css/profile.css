@@ -4942,6 +4942,7 @@ body.edit-profilepage {
     border-radius:50%;
     line-height:1px;
     padding-bottom:6px;
+    transition: all .3s ease-in-out;
 }
 .dz-error-mark:hover {
    
