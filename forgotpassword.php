@@ -28,7 +28,7 @@ if($_POST){
 //			echo $message;die;
 
          if (mail($email_to, $subject, $message, $header)) {
-               echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';
+
                 echo '<script>window.location="forgotpassword.php"</script>';
          }else{
               echo  '<script>alert("Error in Details Sent to Respective Mail id.")</script>';
