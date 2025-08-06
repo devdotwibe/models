@@ -4818,7 +4818,7 @@ body.edit-profilepage {
     cursor: pointer; */
     position: absolute;
     top: 0px;
-    left: 60px;
+    left: 61px;
     right: 0;
     bottom: 0;
     background: rgb(0 0 0 / 79%);
@@ -4831,7 +4831,7 @@ body.edit-profilepage {
     cursor: pointer;
     width: 8rem;
     height: 8rem;
-
+display: none;
 }
 
 .profile-picture-overlay label {
