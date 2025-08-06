@@ -302,7 +302,7 @@ $lang_list = modal_language_list();
       <!-- Profile Picture - Enhanced -->
       <div class="form-section lg:col-span-2 edit-profile-imageDiv">
         <h3 class="text-xl font-bold gradient-text mb-6">Profile Picture & Gallery</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 edit-profile-outer">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 edit-profile-outer">
           <!-- Main Profile Picture -->
           <div class="text-center edit-profile-box1">
             <div class="profile-picture-container">
