@@ -632,7 +632,7 @@ $lang_list = modal_language_list();
 
 
             </div>
-            <button type="button" class="btn-secondary mt-3" onclick="addHobbies()">+ Add Interests & Hobbies</button>
+            <button type="button" class="btn-secondary mt-3 add-intrst" onclick="addHobbies()">+ Add Interests & Hobbies</button>
 
           </div>
           <?php $languages = $userDetails['languages'];  ?>

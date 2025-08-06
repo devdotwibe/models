@@ -4974,6 +4974,19 @@ width:fit-content;
     padding-bottom:9px !important;
 }
 
+
+.add-intrs {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+       border-radius: 18px;
+width:fit-content; 
+    overflow:hidden;
+    background:#2f3158 !important;
+    color:#fff;
+}
+
+
+
+
 .edit-profilepage .profile-picture-container:hover .profile-picture-overlay {
     opacity: 1;
 }
