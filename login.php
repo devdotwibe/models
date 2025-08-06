@@ -152,7 +152,7 @@ if($_SESSION["log_user"]){
             <label for="email_input">Email Address</label>
             <input type="email" id="email_input" name="email" class="form-control" placeholder="Enter your email" required>
 
-            <span sytle="display:none" id="email_error">Please enter valid email address</span>
+            <span style="display:none" id="email_error">Please enter valid email address</span>
             </div>
             <button class="btn btn-primary" type="button" onclick="SubmitForgot()" >Submit</button>
             <button class="btn btn-secondary" type="button" onclick="CloseModal('forgor_modal')">Close</button>
