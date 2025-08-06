@@ -389,12 +389,14 @@ $lang_list = modal_language_list();
                   <div class="preview" style="display:none;">
                     <li>
                       <div>
+                  
+
                         <div class="dz-preview dz-file-preview">
                           <img data-dz-thumbnail />
-                          <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-                          <!-- <div class="dz-success-mark"><span>✔</span></div> -->
-                          <!-- <div class="dz-error-mark"><span>✘</span></div> -->
-                          <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                          <div class="dz-details">
+                            <!-- your existing details -->
+                          </div>
+                          <button type="button" class="custom-delete-btn">🗑️ Delete</button>
                         </div>
                       </div>
                     </li>
