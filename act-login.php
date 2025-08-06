@@ -61,10 +61,14 @@ session_start();
 
          echo "<script> window.location.href = 'user/profile/index.php'; </script>";
       }else{
-        echo "<script>alert('Incorrect Login Detail');
+
+        $_SESSION["login_error"] = "Incorrect Login Details";
+
+        echo "<script>
+
                  window.location='login.php'
 
-        </script>";
+            </script>";
       }
   }
 ?>
