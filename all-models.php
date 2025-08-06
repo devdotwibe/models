@@ -132,7 +132,7 @@
 
             $userDetails = [];
 
-            $boosted_user_ids = BoostedModelIds($con);
+            $boosted_user_ids =[];
 
             $condtion = "";
 
@@ -141,6 +141,10 @@
                 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
                 $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
+            }
+            else
+            {
+                 $boosted_user_ids = BoostedModelIds($con);
             }
 
             $followed_user_ids = [];

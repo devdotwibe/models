@@ -130,7 +130,7 @@ if(!empty($userDetails['profile_pic'])){
     //     }
     // }
     // else
-
+    
     if (!empty($followed_user_ids) && count($followed_user_ids) == 1 ) {
 
             $sql = "
@@ -144,41 +144,64 @@ if(!empty($userDetails['profile_pic'])){
 
             while ($row = mysqli_fetch_assoc($result)) {
                 $target_gender = $row['gender'];
-                $allow = false;
+                $allow = true;
 
-                if ($current_user_gender === "Male") {
-                    if (
-                        ($privacy['male_to_female'] && $target_gender === "Female") ||
-                        ($privacy['male_to_male'] && $target_gender === "Male")
-                    ) {
-                        $allow = true;
-                    }
-                } elseif ($current_user_gender === "Female") {
-                    if (
-                        ($privacy['female_to_male'] && $target_gender === "Male") ||
-                        ($privacy['female_to_female'] && $target_gender === "Female")
-                    ) {
-                        $allow = true;
-                    }
-                }
+                // if ($current_user_gender === "Male" || $current_user_gender === "male") {
+                //     if (
+                //         ($privacy['male_to_female'] && ($target_gender === "Female" || $target_gender === "female") ) ||
+                //         ($privacy['male_to_male'] && ($target_gender === "Male" || $target_gender === "male" ))
+                //     ) {
+                //         $allow = true;
+                //     }
+                // } elseif ($current_user_gender === "Female" || $current_user_gender === "female") {
+                //     if (
+                //         ($privacy['female_to_male'] && ($target_gender === "Male" || $target_gender === "male")) ||
+                //         ($privacy['female_to_female'] && ($target_gender === "Female" || $target_gender === "female"  ))
+                //     ) {
+                //         $allow = true;
+                //     }
+                // }
 
-                if ($privacy['transgender'] && $target_gender === "Couple") {
-                    $allow = true;
-                }
+                // if ($privacy['transgender'] && $target_gender === "Couple") {
+                //     $allow = true;
+                // }
 
                 if ($allow) {
-                    $followed_user_ids[] = (int)$row['id'];
+                    $followed_user_ids[] = (int)$row['user_id'];
                 }
             }
     }
 
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
 
+        $boost_follower_unique_ids = BoostedModelIdsByUser($userDetails,$con);
+
+        $in_clause = implode(',', array_fill(0, count($boost_follower_unique_ids), '?'));
+
+        $types_follower = str_repeat('s', count($boost_follower_unique_ids));
+
+        $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
+        $stmt = $con->prepare($followQuery);
+        if (!$stmt) {
+            die("Prepare failed: " . $con->error);
+        }
+        $stmt->bind_param($types_follower, ...$boost_follower_unique_ids);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $filter_follower_ids = [];
+        while ($row = $result->fetch_assoc()) {
+            $filter_follower_ids[] = $row['id'];
+        }
+
+        $priority_ids = array_values(array_intersect($followed_user_ids, $filter_follower_ids));
+        
+
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
 
 
-        $sql = "
+       $sql = "
             SELECT 
                 live_posts.*, 
                 model_user.name AS author_name, 
@@ -189,8 +212,18 @@ if(!empty($userDetails['profile_pic'])){
             FROM live_posts
             JOIN model_user ON live_posts.post_author = model_user.id
             WHERE post_author IN ($placeholders)
-            ORDER BY post_date DESC
         ";
+
+        if (!empty($priority_ids)) {
+
+            $priority_order = implode(',', $priority_ids);
+
+            $sql .= " ORDER BY FIELD(post_author, $priority_order) DESC, post_date DESC";
+        } else {
+
+            $sql .= " ORDER BY post_date DESC";
+        }
+
 
         $stmt = $con->prepare($sql);
 

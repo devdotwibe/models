@@ -909,24 +909,48 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <div class="space-y-4">
                         
                         <?php 
-                        
-                       $followers_ids = getModelFollowerIds($_SESSION['log_user_unique_id']);
 
-                        $escaped_ids = array_map(function($id) use ($con) {
-                            return mysqli_real_escape_string($con, $id);
+                        $loggedInUserId = $_SESSION['log_user_id'] ?? null;
+                        $loggedInUniqueId = $_SESSION['log_user_unique_id'] ?? null;
+                        $current_model_id = mysqli_real_escape_string($con, $_GET['m_unique_id']);
+                        
+                       $followers_ids = getModelFollowerIds($loggedInUniqueId);
+
+                        $escaped_followers_ids = array_map(function($id) use ($con) {
+                            return "'" . mysqli_real_escape_string($con, $id) . "'";
                         }, $followers_ids);
 
-                        $followers_not_in = !empty($escaped_ids) ? "'" . implode("','", $escaped_ids) . "'" : "";
+                        $followers_not_in = !empty($escaped_followers_ids) ? implode(',', $escaped_followers_ids) : "";
 
-                        $current_model_id = mysqli_real_escape_string($con, $_GET['m_unique_id']);
+                        $boosted_user_ids = [];
 
-                        $sqls_m = "
+                        if ($loggedInUserId) {
+
+                            $userDetails = get_data('model_user', ['id' => $loggedInUserId], true);
+
+                            if ($userDetails) {
+
+                                $boosted_user_ids = BoostedModelIdsByUser($userDetails, $con);
+                            }
+                        }
+
+                        $escaped_boosted_ids = array_map(function($id) use ($con) {
+                            return "'" . mysqli_real_escape_string($con, $id) . "'";
+                        }, $boosted_user_ids);
+
+                        $boosted_field_order = !empty($escaped_boosted_ids)
+                            ? "FIELD(unique_id, " . implode(',', $escaped_boosted_ids) . ") DESC,"
+                            : "";
+
+                       $sqls_m = "
                             SELECT * 
                             FROM model_user 
                             WHERE as_a_model = 'Yes' 
                             AND unique_id != '$current_model_id'
                             " . (!empty($followers_not_in) ? " AND unique_id NOT IN ($followers_not_in)" : "") . "
-                            ORDER BY RAND() DESC 
+                            ORDER BY 
+                                $boosted_field_order
+                                RAND() DESC
                             LIMIT 3
                         ";
 

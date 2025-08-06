@@ -29,14 +29,14 @@ function updateUserActivity($userId) {
 }
 
 function getModelFollowerIds($model_id) {
-    $query = "SELECT unique_user_id FROM model_follow WHERE unique_model_id = %s AND status = 'Follow'";
+    $query = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = %s AND status = 'Follow'";
     
     $results = DB::query($query, $model_id);
 
     $followerIds = [];
 
     foreach ($results as $row) {
-        $followerIds[] = $row['unique_user_id'];
+        $followerIds[] = $row['unique_model_id'];
     }
 
     return $followerIds;
@@ -118,10 +118,25 @@ function BoostedModelIds($con) {
 				$targetAudience = array_map('trim', explode(',', strtolower($row['target_audience'])));
 
 				if (in_array($user_gender, $targetAudience) || in_array('all', $targetAudience)) {
-					$validBoosts[] = [
-						'user_unique_id' => $row['user_unique_id'],
-						'total_amount' => (int)$row['total_amount']
-					];
+
+					$allowBoost = true;
+
+					if (strtolower($row['location']) === 'national') {
+						
+						$boostUser = get_data('model_user', ['unique_id' => $row['user_unique_id']], true);
+
+						if (!$boostUser || $boostUser['country'] != $user_country_id) {
+
+							$allowBoost = false;
+						}
+					}
+
+					if ($allowBoost) {
+						$validBoosts[] = [
+							'user_unique_id' => $row['user_unique_id'],
+							'total_amount' => $row['total_amount']
+						];
+					}
 				}
 			}
 		}
