@@ -328,7 +328,10 @@ $lang_list = modal_language_list();
                     <a href="#">×</a>
                     <a href="#">
                       <!-- ✎  -->
-                      <i class="far fa-edit"></i>
+                      <!-- <i class="far fa-edit"></i> -->
+
+                    <img src="<?php echo SITEURL.'/assets/images/edt.svg'; ?>" alt="">
+
                     </a>
 
 
@@ -2692,7 +2695,7 @@ $lang_list = modal_language_list();
 
 
       <div class="flex justify-center mt-8">
-        <button class="btn-primary text-lg px-8 py-4" onclick="savePremiumSettings()">Save Premium Settings</button>
+        <button class="btn-primary text-lg px-8 py-2" onclick="savePremiumSettings()">Save Premium Settings</button>
       </div>
     </div>
   </main>
