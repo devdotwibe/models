@@ -62,13 +62,13 @@ $sort_type = $_GET['sort_type'];
     }
 
     if (!empty($filter_follower_ids)) {
-    $ordered_ids = implode(',', $filter_follower_ids); // no quotes since IDs are integers
+    $ordered_ids = implode(',', $filter_follower_ids); 
     $order = " ORDER BY FIELD(tb.user_id, $ordered_ids) DESC";
 
         $sort_by="";
         
     } else {
-        $order = " ORDER BY tb.id DESC"; // fallback order
+        $order = " ORDER BY tb.id DESC"; 
     }
 
 
