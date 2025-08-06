@@ -4937,12 +4937,40 @@ width:25%;
 
 .edit-pro-hob{
     display: inline-flex;
-    border: 1px solid;
+    flex-wrap:wrap;
+    justify-content:start;
+    margin-top:20px
+ 
 }
 .edit-pro-hob > div{
-       border: 1px solid green;
-       border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+       border-radius: 18px;
+width:fit-content;
+       margin-right:10px;
+       margin-bottom:10px;
+    position:relative;
+    overflow:hidden;
+    backgound:#2f3158 !important;
+}
 
+.edit-pro-hob > div input{
+    border:none !important;
+    width:calc(100% - 0px);
+    padding-right:25px;
+    
+}
+.edit-pro-hob > div button{
+    position:absolute;
+    width:20px;
+    height:20px;
+    border:1px solid #573655;
+    border-radius:50% !important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    top:8px;
+    right:5px;
+    padding-bottom:9px !important;
 }
 
 .edit-profilepage .profile-picture-container:hover .profile-picture-overlay {
