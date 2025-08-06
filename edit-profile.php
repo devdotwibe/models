@@ -352,7 +352,6 @@ $lang_list = modal_language_list();
               transition-colors">
                 <div class="gallery1 ">
 
-                  <div id="modalimage_gallery" class="text-center dropzone"></div>
                   <ul class="visualizacao sortable dropzone-previews" style="">
 
                     <?php $modal_img_list = DB::query('select * from model_images where unique_model_id="' . $userDetails['unique_id'] . '" AND file_type = "Image" AND category = "Profile" Order by id DESC');
@@ -369,7 +368,7 @@ $lang_list = modal_language_list();
                                 <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
                                 <!-- <div class="dz-success-mark"><span>✔</span></div> -->
                                 <!-- <div class="dz-error-mark"><span>✘</span></div> -->
-                                <div class="dz-error-mark"><a data-id="<?php echo $i; ?>" img_name="<?php echo $imgs['file']; ?>" class="removeinserted">Remove</a></div>
+                                <div class="dz-error-mark"><a data-id="<?php echo $i; ?>" img_name="<?php echo $imgs['file']; ?>" class="removeinserted">×</a></div>
                                 <div class="dz-error-message"><span data-dz-errormessage></span></div>
                               </div>
                             </div>
@@ -395,6 +394,8 @@ $lang_list = modal_language_list();
                       </div>
                     </li>
                   </div>
+
+                  <div id="modalimage_gallery" class="text-center dropzone"></div>
 
                 </div>
                 <!-- Custom Preview Container -->
