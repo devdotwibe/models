@@ -917,8 +917,8 @@ offset = offset+limit;
 			document.querySelectorAll('.requests').forEach(card => {
 				card.style.display = 'block';
 			});
-		}else if(type == 'tips'){
-			document.querySelectorAll('.tips').forEach(card => {
+		}else if(type == 'tip'){
+			document.querySelectorAll('.tip').forEach(card => {
 				card.style.display = 'block';
 			});
 		}else if(type == 'system'){
