@@ -117,7 +117,7 @@ if (isset($_SESSION["log_user_id"])) {
             <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-jXeBRuA3MHFzdzWLPiwsY7t7uYmioN.png" alt="The Live Models" class="h-12 mr-3 group-hover:scale-110 transition duration-500">
         </a>
         <div class="flex items-center space-x-8">
-            <div class="hidden lg:flex items-center space-x-8">
+            <div class="hidden lg:flex items-center space-x-8 header-ss">
                 <div class="flex items-center space-x-3 text-sm text-white/80 hover-lift">
                     <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                     <span class="stats-counter" data-target="<?php echo getTotalOnlineUsers() ?>"><?php echo getTotalOnlineUsers() ?></span>
