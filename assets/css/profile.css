@@ -5032,9 +5032,12 @@ button.btn-secondary.add-intrst {
 
 .access-toggle input[type="text"]{
 width:100%;
-max-width:105px;
+max-width:90px;
 margin-left:2px;
 font-size:14px;
+}
+.access-toggle input[type="text"]::placeholder{
+    font-size:12px;
 }
 
 
