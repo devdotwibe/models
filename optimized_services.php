@@ -60,10 +60,18 @@ else{
 
             include('includes/header.php');
     } 
-    
+
+
         $model_unique_id = $userDetails['unique_id'];
 
-        $model_bookings = DB::query("SELECT * FROM model_booking WHERE model_unique_id =  %s ", $model_unique_id);
+        if($userDetails['as_a_model'] =='Yes')
+        {
+            $model_bookings = DB::query("SELECT * FROM model_booking WHERE model_unique_id =  %s ", $model_unique_id);
+        }
+        else
+        {
+          $model_bookings = DB::query("SELECT * FROM model_booking WHERE user_unique_id =  %s ", $model_unique_id);
+        }
 
         $pending_count = 0;
 
@@ -142,8 +150,14 @@ else{
 
       <?php foreach($model_bookings as $item) { 
         
-
+          if($userDetails['as_a_model'] =='Yes')
+          {
             $bookeduser = DB::queryFirstRow("SELECT name FROM model_user WHERE unique_id =  %s ", $item['user_unique_id']);
+          }
+          else
+          {
+             $bookeduser = DB::queryFirstRow("SELECT name FROM model_user WHERE unique_id =  %s ", $item['model_unique_id']);
+          }
 
             $defaultImage =SITEURL."/assets/images/girl.png";
 
@@ -202,29 +216,39 @@ else{
 
                     <?php 
 
-                    	$extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $item['user_unique_id']); 
+                      if($userDetails['as_a_model'] =='Yes')
+                      {
+                         	$extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $item['user_unique_id']); 
+                      }
+                      else
+                      {
+                        	$extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $item['model_unique_id']); 
+                      }
+
+                      $modal_detail = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $item['model_unique_id']); 
+                   
 
                         $token_amount = "";
 
                        if( $item['service_name'] =='Group Chat')
                        {
-                            $token_amount = $extra_details['group_chat_tocken'];
+                            $token_amount = $modal_detail['group_chat_tocken'];
                        }
                        elseif( $item['service_name'] =='Overnight Social')
                        {
-                             $token_amount = $extra_details['in_overnight'];
+                             $token_amount = $modal_detail['in_overnight'];
                        }
                        elseif($item['service_name'] =='Extended Social')
                        {
-                             $token_amount = $extra_details['extended_rate'];
+                             $token_amount = $modal_detail['extended_rate'];
                        }
                        elseif($item['service_name'] =='Private Chat')
                        {
-                             $token_amount = $extra_details['private_chat_token'];
+                             $token_amount = $modal_detail['private_chat_token'];
                        }
                         elseif($item['service_name'] =='Local Meetup')
                        {
-                             $token_amount = $extra_details['in_per_hour'];
+                             $token_amount = $modal_detail['in_per_hour'];
                        }
                     ?>
                     <div class="flex items-center gap-3 mt-2">
