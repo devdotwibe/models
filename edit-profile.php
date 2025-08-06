@@ -396,7 +396,7 @@ $lang_list = modal_language_list();
                           <div class="dz-details">
                             <!-- your existing details -->
                           </div>
-                          <button type="button" class="custom-delete-btn">🗑️ Delete</button>
+                            <button type="button" class="custom-delete-btn" onclick="handleCustomDelete(this)">×</button>
                         </div>
                       </div>
                     </li>
@@ -3566,6 +3566,43 @@ $lang_list = modal_language_list();
     //    $('#temporary-preview-container').hide();
 
     // }
+
+    function handleCustomDelete(buttonElement) {
+      
+          // Get the preview box (dz-preview)
+          const preview = buttonElement.closest('.dz-preview');
+
+          if (!preview) return;
+
+          // Remove hidden input if exists
+          const hiddenInput = preview.querySelector("input[name='hiddenmedia[]']");
+          if (hiddenInput) {
+            const fileName = hiddenInput.value;
+
+            hiddenInput.remove();
+
+            // Optional: Delete from server
+            fetch('dropzone_delete.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ fileName })
+            })
+              .then(res => res.json())
+              .then(data => {
+                if (data.status === 'success') {
+                  console.log('Deleted from server');
+                } else {
+                  console.warn('Could not delete from server');
+                }
+              })
+              .catch(err => console.error('Server delete error:', err));
+          }
+
+          // Remove the preview from the DOM
+          preview.remove();
+        }
+
+
     const myDropzone = new Dropzone("#modalimage_gallery", {
       url: "dropzone_upload.php",
       paramName: "file", // The name that will be used in $_FILES["file"]
