@@ -379,8 +379,10 @@ $lang_list = modal_language_list();
                     }
 
                     ?>
-
+                  <div id="modalimage_gallery" class="text-center dropzone"></div>
+                  
                   </ul>
+
                   <div class="preview" style="display:none;">
                     <li>
                       <div>
@@ -394,9 +396,6 @@ $lang_list = modal_language_list();
                       </div>
                     </li>
                   </div>
-
-                  <div id="modalimage_gallery" class="text-center dropzone"></div>
-
                 </div>
                 <!-- Custom Preview Container -->
                 <div id="image-preview-container">
