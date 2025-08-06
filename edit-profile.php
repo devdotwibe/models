@@ -353,7 +353,7 @@ $lang_list = modal_language_list();
                 <div class="gallery1 ">
 
                   <div id="modalimage_gallery" class="text-center dropzone"></div>
-                  <ul class="visualizacao sortable dropzone-previews" style="border:1px solid #000">
+                  <ul class="visualizacao sortable dropzone-previews" style="">
 
                     <?php $modal_img_list = DB::query('select * from model_images where unique_model_id="' . $userDetails['unique_id'] . '" AND file_type = "Image" AND category = "Profile" Order by id DESC');
                     if (!empty($modal_img_list)) {
