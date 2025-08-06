@@ -21,10 +21,12 @@ if($_SESSION["log_user"]){
 
     <?php include('includes/head.php'); ?>
 
+    <link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
+
 </head>
 
 
-<body class="login-page min-h-screen bg-animated text-white">
+<body class="login-page min-h-screen bg-animated text-white socialwall-page">
 
 <?php include('includes/login-header.php'); ?>
 
@@ -132,9 +134,46 @@ if($_SESSION["log_user"]){
     </section>
 </main>
 
+
+<div class="modal-overlay" id="forgor_modal">
+    <div class="modal">
+        <div class="modal-header">
+        <h2 class="modal-title">forgotPassword </h2>
+        <button class="close-modal" id="closeTipModal" type="button" onclick="CloseModal('forgor_modal')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        </div>
+        <div class="modal-body" id="modal_success_message">
+        <form id="email_form">
+            <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="email_input">Email Address</label>
+            <input type="email" id="email_input" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-secondary" type="button" onclick="CloseModal('forgor_modal')">Close</button>
+        </form>
+        </div>
+    </div>
+    </div>
+
 <?php include('includes/footer.php'); ?>
 
 <script>
+
+    function forgotPassword()
+    {
+        $('#forgor_modal').addClass('active');
+    }
+
+    function CloseModal(id)
+    {
+
+       $(`#${id}`).removeClass('active');
+    }
+
     // Ultra Premium JavaScript - OPTIMIZED AND STABLE
     document.addEventListener('DOMContentLoaded', function() {
         initializePremiumFeatures();
@@ -307,14 +346,15 @@ if($_SESSION["log_user"]){
         alert('🔐 Facebook Login - Redirecting to Facebook authentication...');
     }
 
-    function forgotPassword() {
-        const email = prompt('Enter your email address to reset your password:');
-        if (email && isValidEmail(email)) {
-            alert(`📧 Password reset link sent to ${email}. Please check your inbox.`);
-        } else if (email) {
-            alert('Please enter a valid email address.');
-        }
-    }
+    // function forgotPassword() {
+
+    //     const email = prompt('Enter your email address to reset your password:');
+    //     if (email && isValidEmail(email)) {
+    //         alert(`📧 Password reset link sent to ${email}. Please check your inbox.`);
+    //     } else if (email) {
+    //         alert('Please enter a valid email address.');
+    //     }
+    // }
 
     function openSocial(platform) {
         alert(`📱 Social Media - Opening ${platform} page...`);
