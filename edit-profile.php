@@ -3613,7 +3613,7 @@ $lang_list = modal_language_list();
       parallelUploads: 5,
       previewsContainer: "#temporary-preview-container",
       previewTemplate: jQuery('.preview').html(),
-      dictDefaultMessage: '<svg class="w-8 h-8 mx-auto text-white/50 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg><p class="text-xs text-white/60">Add Photo</p>',
+      dictDefaultMessage: '<svg class="w-7 h-7 mx-auto text-white/50 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg><p class="text-xs text-white/60">Add Photo</p>',
      init: function () {
         this.on("success", function (file, response) {
           if (typeof response === 'string') {

@@ -4924,7 +4924,7 @@ body.edit-profilepage {
 }
 
 .edit-profile-box2 .gallery1 ul li {
-    width: 25%;
+      width: calc(25% - 10px);
         position: relative;
 }
 .dz-error-mark {
@@ -4942,6 +4942,7 @@ body.edit-profilepage {
     border-radius:50%;
     line-height:1px;
     padding-bottom:6px;
+    transition: all .3s ease-in-out;
 }
 .dz-error-mark:hover {
    
@@ -4949,6 +4950,34 @@ body.edit-profilepage {
     background:blueviolet;
 }
 
+.dz-file-preview{
+    position: relative; 
+}
+.dz-file-preview .custom-delete-btn{
+  position: absolute;
+    top: -5px;
+    right:1px;
+    border:1px solid red;
+    background:blueviolet;
+    width:17px;
+    height:17px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:3px;
+
+    border-radius:50%;
+    line-height:1px;
+    padding-bottom:6px;
+
+}
+
+.dz-file-preview .custom-delete-btn:hover {
+   
+    border:2px solid blueviolet;
+
+        background:red;
+}
 
 .form-section select {
     width: 100%;
@@ -5032,9 +5061,12 @@ button.btn-secondary.add-intrst {
 
 .access-toggle input[type="text"]{
 width:100%;
-max-width:105px;
+max-width:90px;
 margin-left:2px;
 font-size:14px;
+}
+.access-toggle input[type="text"]::placeholder{
+    font-size:12px;
 }
 
 
