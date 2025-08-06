@@ -127,7 +127,7 @@ else{
       </button>
 
       <button class="tab-button" onclick="ServiceTab('requested',this)" data-tab="requested">
-        Complete Requested <span class="tab-count"><?php echo $complete_request ?></span>
+        Complete Pending <span class="tab-count"><?php echo $complete_request ?></span>
       </button>
 
       <button class="tab-button" onclick="ServiceTab('completed_status',this)" data-tab="completed">
