@@ -147,7 +147,7 @@ if($_SESSION["log_user"]){
         </button>
         </div>
         <div class="modal-body" id="modal_success_message">
-        <form id="email_form">
+        <form id="email_form" action="forgotpassword.php" method="POST">
             <div class="form-group" style="margin-bottom: 1rem;">
             <label for="email_input">Email Address</label>
             <input type="email" id="email_input" name="email" class="form-control" placeholder="Enter your email" required>
@@ -177,6 +177,8 @@ if($_SESSION["log_user"]){
         if (email && isValidEmail(email)) {
 
               $('#email_error').hide();
+
+             $('#email_form').submit();
 
         }
         else
