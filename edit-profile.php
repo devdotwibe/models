@@ -613,7 +613,7 @@ $lang_list = modal_language_list();
               </span>
             </div>
 
-            <div id="hobbies-container edit-pro-hob">
+            <div id="hobbies-container" class=" edit-pro-hob">
 
               <?php $additional_hobbies = $userDetails['additional_hobbies'];
               if (!empty($additional_hobbies)) {
