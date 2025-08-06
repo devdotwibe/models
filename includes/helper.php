@@ -141,9 +141,9 @@ function BoostedModelIds($con) {
 			}
 		}
 
-		// usort($validBoosts, function ($a, $b) {
-		// 	return $b['total_amount'] <=> $a['total_amount'];
-		// });
+		usort($validBoosts, function ($a, $b) {
+			return $b['total_amount'] <=> $a['total_amount'];
+		});
 
 		return array_column($validBoosts, 'user_unique_id');
 	}
