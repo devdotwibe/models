@@ -3552,6 +3552,18 @@ $lang_list = modal_language_list();
     Dropzone.autoDiscover = false;
 
     // Manual initialization
+      function AddjustImage()
+    {
+
+      var content = $('#temporary-preview-container').html();
+
+       $('#modalimage_gallery').before(content);
+
+       $('#temporary-preview-container').html("");
+
+       $('#temporary-preview-container').hide();
+
+    }
     const myDropzone = new Dropzone("#modalimage_gallery", {
       url: "dropzone_upload.php",
       paramName: "file", // The name that will be used in $_FILES["file"]
@@ -3578,6 +3590,8 @@ $lang_list = modal_language_list();
           hiddenmedia.setAttribute("class", "hiddenmedia");
           hiddenmedia.setAttribute("value", response.file);
             $('#temporary-preview-container').show();
+
+            AddjustImage();
           // Append the hidden input to the file preview element
           file.previewElement.appendChild(hiddenmedia);
           // Assuming response contains the file name or path on the server
