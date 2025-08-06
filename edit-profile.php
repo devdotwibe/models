@@ -3577,7 +3577,7 @@ $lang_list = modal_language_list();
           hiddenmedia.setAttribute("name", "hiddenmedia[]");
           hiddenmedia.setAttribute("class", "hiddenmedia");
           hiddenmedia.setAttribute("value", response.file);
-
+            $('#temporary-preview-container').show();
           // Append the hidden input to the file preview element
           file.previewElement.appendChild(hiddenmedia);
           // Assuming response contains the file name or path on the server
