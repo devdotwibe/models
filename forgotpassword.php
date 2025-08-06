@@ -6,11 +6,20 @@ if($_POST){
 	if($email){
 		$get_data = get_data('model_user',array('email'=>$email),true);
 		if($get_data){
-/*			$code =rand(100000,999999);
+			
+		$code =rand(100000,999999);
+
+		/*	
 			$post_data =array(
 				'reset_password'	=> $code,
 			);
 			DB::update('model_user', $post_data, "id=%s", $get_data['id']);*/
+
+			$password_hashed = password_hash($code, PASSWORD_DEFAULT);
+
+			DB::update('model_user', [
+				'password' => $password_hashed
+			], 'id = %i', $get_data['id']);
 			
 			$email_to = $get_data['email'];
 //			$email_to = 'pvsysgroup01@gmail.com';
@@ -23,21 +32,21 @@ if($_POST){
 			$message = $htmlContent;
 			$message = str_replace('{username}', $get_data['username'], $message);
 			$message = str_replace('{name}', $get_data['name'], $message);
-			$message = str_replace('{password}', $get_data['password'], $message);
+			$message = str_replace('{password}', $code, $message);
 			
 //			echo $message;die;
 
          if (mail($email_to, $subject, $message, $header)) {
 
-                echo '<script>window.location="forgotpassword.php"</script>';
+                echo '<script>window.location="login.php"</script>';
          }else{
-              echo  '<script>alert("Error in Details Sent to Respective Mail id.")</script>';
-                echo '<script>window.location="forgotpassword.php"</script>';
+             
+                echo '<script>window.location="login.php"</script>';
          }
 		}
 		else{
-echo "<script>alert('Invalid email-address');
-window.location='forgotpassword.php';
+echo "<script>
+window.location='login.php';
 </script>";
 		}
 		printR($get_data);
