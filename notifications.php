@@ -417,7 +417,7 @@ else{
 				
 				<?php while($rowesdw = mysqli_fetch_assoc($resultd)) {
 					
-					$get_modal = DB::query('select id,name,username,profile_pic,unique_id from model_user where id IN ('.$rowesdw['sender_id'].', '.$rowesdw['receiver_id'].')');
+					$get_modal = DB::query('select id,name,username,profile_pic,unique_id,email from model_user where id IN ('.$rowesdw['sender_id'].', '.$rowesdw['receiver_id'].')');
 					if(!empty($get_modal)){  
 						foreach($get_modal as $md){
 							if($md['id'] == $rowesdw['sender_id']){
@@ -429,6 +429,7 @@ else{
 								 }
 								 $unique_id = $md['unique_id'];
 								 $modal_senderid = $md['id'];
+								 $sender_email = $md['email'];
 							}else if($md['id'] == $rowesdw['receiver_id']){
 								 $unique_rec_id = $md['unique_id'];
 								 $modal_senderid = $md['id'];
@@ -438,13 +439,23 @@ else{
 					}else{
 						$profilepic = 'assets/images/model-gal-no-img.jpg';
 						$modalname = '';
-						$unique_id = ''; $modalid = '';
+						$unique_id = ''; $modalid = ''; $sender_email = '';
 					}
+					
+					//Tip & Gift Data
+					$tg_amount = 0;
+					if($rowesdw['notification_type'] == 'tip' || $rowesdw['notification_type'] == 'gift'){
+						$get_tipgift_data = DB::queryFirstRow('select * from model_user_transaction_history where other_id = '.$rowesdw['notification_id']);
+						if(!empty($get_tipgift_data)){
+							$tg_amount = $get_tipgift_data['amount']/100;
+						}
+					}
+					
 		
 		?>
 
             
-            <div class="notification-card ultra-glass p-6 rounded-2xl border border-white/10 all <?php echo $rowesdw['notification_type'];  ?>">
+            <div class="notification-card ultra-glass p-6 rounded-2xl border border-white/10 all <?php if($rowesdw['notification_type'] == 'gift'){ echo 'tip'; }else echo $rowesdw['notification_type'];  ?>">
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0">
                         <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $profilepic; ?>?w=60&h=60&fit=crop&crop=faces" alt="<?php echo $modalname; ?>." class="w-12 h-12 rounded-full object-cover border-2 border-purple-500">
@@ -496,8 +507,19 @@ else{
 							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> has requested a <strong class="text-pink-400"><?php echo $model_serv; ?></strong> <?=$booking_type?>.
                            <?php /*<span class="text-green-400 font-semibold">$150</span> for 1 hour.<?php */ ?>
 						<?php }else if($rowesdw['notification_type'] == 'tip'){ ?> 
-							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> sent you a tip of <strong class="text-green-400">$50</strong> with the message:
-                            <em class="text-white/60">"Amazing show last night! You're incredible! 🔥"</em>
+							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> sent you a tip of <strong class="text-green-400">$<?php echo $tg_amount; ?></strong> 
+                            
+							<?php if(!empty($rowesdw['message'])){ ?>with the message:
+								<em class="text-white/60">"<?php echo $rowesdw['message']; ?>"</em>
+							<?php } ?>
+							
+						<?php }else if($rowesdw['notification_type'] == 'gift'){ ?> 
+							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> sent you a gift of <strong class="text-green-400">$<?php echo $tg_amount; ?></strong> 
+                            
+							<?php if(!empty($rowesdw['message'])){ ?>with the message:
+								<em class="text-white/60">"<?php echo $rowesdw['message']; ?>"</em>
+							<?php } ?>
+							
 						<?php }else if($rowesdw['notification_type'] == 'system'){ ?>
 							<div class="flex items-center justify-between mb-2">
 								<h3 class="text-lg font-semibold premium-text">🎉 Congratulations!</h3>
@@ -554,9 +576,22 @@ else{
 							
 						<?php }else if($rowesdw['notification_type'] == 'tip'){ ?>
 							<div class="flex space-x-3">
-								<button class="btn-primary px-6 py-2 rounded-lg text-white font-semibold" onclick="thankUser('mike')">
+							<?php if($rowesdw['notification_status'] == 'Pending'){ ?>
+								<button class="btn-primary px-6 py-2 rounded-lg text-white font-semibold" onclick="thankUser(this,<?php echo $rowesdw['notification_id']; ?>,'tip','<?php echo $modalname; ?>','<?php echo $sender_email; ?>')">
 									💕 Send Thanks
 								</button>
+							<?php } ?>
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
+									View Profile
+								</button>
+							</div>
+						<?php }else if($rowesdw['notification_type'] == 'gift'){ ?>
+							<div class="flex space-x-3">
+							<?php if($rowesdw['notification_status'] == 'Pending'){ ?>
+								<button class="btn-primary px-6 py-2 rounded-lg text-white font-semibold" onclick="thankUser(this,<?php echo $rowesdw['notification_id']; ?>,'gift','<?php echo $modalname; ?>','<?php echo $sender_email; ?>')">
+									💕 Send Thanks
+								</button>
+							<?php } ?>
 								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
 									View Profile
 								</button>
@@ -819,8 +854,23 @@ offset = offset+limit;
         alert(`💬 Opening terms discussion with ${userId}...`);
     }
 
-    function thankUser(userId) {
-        alert(`💕 Thank you message sent to ${userId}!`);
+    function thankUser(element,notif_id,type,username,sender_email) {
+		//ajax for Send thank you
+			jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'/ajax/model_sendthankyou.php'?>",
+				data:{notif_id:notif_id,type:type,username:username,sender_email:sender_email},
+				dataType:'json',
+				success: function(response){ 
+					showNotification(`💕 Thank you message sent to ${username}!`, 'success');
+					// Hide the clicked element
+					jQuery(element).hide();
+					
+				}
+			});
+        event.target.closest('.notification-card').style.opacity = '0.5';
+		
+		
     }
 
     function viewProfile(userId) { 
