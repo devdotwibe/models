@@ -5030,6 +5030,16 @@ button.btn-secondary.add-intrst {
     display:none;
 }
 
+.access-toggle input[type="text"]{
+width:100%;
+max-width:105px;
+margin-left:2px;
+font-size:14px;
+}
+
+
+
+
 
 
 .edit-profilepage .profile-picture-container:hover .profile-picture-overlay {
