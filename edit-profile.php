@@ -360,7 +360,7 @@ $lang_list = modal_language_list();
                       foreach ($modal_img_list as $imgs) {
                         if (!empty($imgs['file'])) {
                     ?>
-                          <li id="galblock<?php echo $i; ?>" class="w-32 h-auto">
+                          <li id="galblock<?php echo $i; ?>" class="w-auto h-auto">
                             <div>
                               <div class="dz-preview dz-file-preview">
                                 <img src="<?php echo SITEURL . 'uploads/profile_pic/' . $imgs['file']; ?>" data-dz-thumbnail />

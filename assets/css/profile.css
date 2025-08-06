@@ -4926,7 +4926,20 @@ display: none;
 .edit-profile-box2 .gallery1 ul li {
       width: calc(25% - 10px);
         position: relative;
+         height: 100%;
 }
+
+.edit-profile-box2 .gallery1 ul li>div {
+    height: 100%;
+}
+.edit-profile-box2 .gallery1 ul li>div>div {
+    height: 100%;
+}
+.edit-profile-box2 .gallery1 ul li>div>div img {
+    height: 100%;
+    object-fit: cover;
+}
+
 .dz-error-mark {
     position: absolute;
     top: -5px;
