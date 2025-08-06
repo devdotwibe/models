@@ -608,7 +608,7 @@ else{
 
        $('#request_id').val(id);
 
-        $('#request_modal').removeClass('active');
+        $('#request_modal').addClass('active');
 
     }
 
