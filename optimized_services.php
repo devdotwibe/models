@@ -160,7 +160,11 @@ else{
                 }
             }
 
-              if($item['status'] ==='Accept') { 
+              if(($item['complete_request'] === 'requested'))
+              {
+                $staus = "requested";
+              }
+              else if($item['status'] ==='Accept') { 
 
                   $staus = "approved_status";
               }
@@ -178,7 +182,7 @@ else{
               }
         ?>
 
-            <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['booking_type'] ?> <?php echo $item['complete_request'] ?> all_status all_type" data-status="pending" data-type="group">
+            <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['booking_type'] ?> all_status all_type" data-status="pending" data-type="group">
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
