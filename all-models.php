@@ -294,10 +294,6 @@
                     
                         $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
 
-                              print_r($boostedUniqueIdsQuoted);
-
-                die();
-
                         $order = "ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted)";
                     } else {
                         
@@ -325,6 +321,11 @@
                     
                         $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
 
+                                     print_r($boostedUniqueIdsQuoted);
+
+                die();
+
+                
                         $order = "ORDER BY FIELD(unique_id, $boostedUniqueIdsQuoted)";
                     } else {
 
