@@ -4881,7 +4881,7 @@ width:calc(100% - 290px);
 .edit-close a:first-child {
     text-decoration: none;
     color: #fff;
-    font-size: 18px;
+    font-size:20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4905,15 +4905,15 @@ justify-content: center;
     align-items: center;
     justify-content: center;
    justify-content: center;
-    width: 25px;
-    height: 25px;
+  width: 13px;
+  height: 16px;
     /* border: 1px solid #00000078; */
     border-radius: 50%;
     line-height: 1;
     padding-bottom: 3px;
     /* background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%); */
     cursor: pointer;
-    margin-right: 0px;
+    margin-right: 8px;
 }
 
 .edit-close a:last-child:hover {
