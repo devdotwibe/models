@@ -123,5 +123,5 @@ $html= ob_get_clean();
 $output['html'] = $html;
 $output['total_page'] = (int) ceil($total/ $perPage);
 $output['page'] = $page_number;
-echo json_encode($output);
+echo json_encode($filter_follower_ids);
 ?>
