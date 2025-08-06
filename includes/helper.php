@@ -64,13 +64,13 @@ function BoostedModelIds($con) {
 		
 			$validBoosts[] = [
 				'user_unique_id' => $row['user_unique_id'],
-				'total_amount' => (int)$row['total_amount']
+				'total_amount' => (float)$row['total_amount'] 
 			];
 		}
 	}
 
 	usort($validBoosts, function ($a, $b) {
-		return $b['total_amount'] <=> $a['total_amount'];
+		return $a['total_amount'] <=> $b['total_amount'];
 	});
 
 	return $sortedUserIds = array_column($validBoosts, 'user_unique_id');
@@ -134,7 +134,7 @@ function BoostedModelIds($con) {
 					if ($allowBoost) {
 						$validBoosts[] = [
 							'user_unique_id' => $row['user_unique_id'],
-							'total_amount' => $row['total_amount']
+							'total_amount' =>  (float)$row['total_amount'] 
 						];
 					}
 				}
@@ -142,7 +142,7 @@ function BoostedModelIds($con) {
 		}
 
 		usort($validBoosts, function ($a, $b) {
-			return $b['total_amount'] <=> $a['total_amount'];
+			return $a['total_amount'] <=> $b['total_amount'];
 		});
 
 		return array_column($validBoosts, 'user_unique_id');
