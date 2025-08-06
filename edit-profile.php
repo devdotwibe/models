@@ -325,8 +325,9 @@ $lang_list = modal_language_list();
                   </div>
 
                   <div class="edit-close">
+                     <a href="#">✎ </a>
                     <a href="#">×</a>
-                    <a href="#">✎ </a>
+                   
                   </div>
 
                   <button class="change-photo-btn">

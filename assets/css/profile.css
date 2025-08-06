@@ -4849,27 +4849,52 @@ body.edit-profilepage {
 }
 
 .edit-close{
-    border:1px solid white;
+
     width:fit-content;
     padding:2px 5px;
+        display: flex;
+    flex-wrap: wrap;
+     align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0px;
+    right: 27px;
+
 
 }
 .edit-close a:first-child{
-    text-decoration:none;
-    color:#ef4444;
+    text-decoration: none;
+    color: #ef4444;
     font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #00000078;
+    border-radius: 50%;
+    line-height: 1;
+    padding-bottom: 3px;
+    background: #00000078;
+    margin-right: 9px;
+     cursor:pointer;
 }
 
 .edit-close a:last-child{
-    text-decoration:none;
-    color:#fff;
+    text-decoration: none;
+    color: #fff;
     font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #00000078;
+    border-radius: 50%;
+    line-height: 1;
+    padding-bottom: 3px;
+    background: #00000078;
+       cursor:pointer;
 }
 
 .edit-profilepage .profile-picture-container:hover .profile-picture-overlay {
