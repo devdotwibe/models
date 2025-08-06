@@ -142,9 +142,9 @@
 
                 $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
 
-                // print_r($boosted_user_ids);
+                print_r($boosted_user_ids);
 
-                // die();
+                die();
             }
             else
             {
