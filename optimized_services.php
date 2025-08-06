@@ -77,16 +77,17 @@ else{
 
         foreach($model_bookings as $item) { 
 
-            if ($item['status'] === 'Accept') {
-
-              $accept_count++;
-
-            }
-            else if ($item['complete_request'] === 'requested') {
+         
+           if ($item['complete_request'] === 'requested') {
 
                 $complete_request++;
 
-            }  else if ($item['status'] === 'Completed') {
+            } 
+            elseif ($item['status'] === 'Accept') {
+
+              $accept_count++;
+
+            } else if ($item['status'] === 'Completed') {
 
                 $completed_count++;
 
@@ -572,7 +573,7 @@ else{
 
         $('.all_status').hide();
 
-        $(`.${tab}`).show();
+        $(`.${tab}`).show();  
     }
 
     function showBookingModal(element)
