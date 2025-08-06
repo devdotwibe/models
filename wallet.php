@@ -137,7 +137,10 @@ $activeTab = 'wallet';
         <!-- Balance Card -->
         <div class="balance-card">
             <h2 class="text-xl md:text-2xl font-semibold mb-2">Current Balance</h2>
-            <div class="balance-amount" id="balance"><?php echo $userDetails['balance']; ?></div>
+			<div class="coin-icon-img"><img src="<?=SITEURL?>assets/images/token.png"></div>
+            <div class="balance-amount" id="balance">
+			
+			<?php echo $userDetails['balance']; ?></div>
             <p class="text-gray-300">Coins in your wallet</p>
             <div class="model-only mt-4">
                 <div class="grid grid-cols-2 gap-4 text-center">
@@ -229,15 +232,15 @@ $activeTab = 'wallet';
 					  ?>
 					
                         <div class="purchase-card">
-                            <div class="coin-icon">₹</div>
+                            <div class="coin-icon"><img src="<?=SITEURL?>assets/images/token.png"></div>
                             <h5 class="text-lg font-bold mb-2">Starter Pack</h5>
-                            <div class="text-3xl font-bold mb-2">10 Coins</div>
+                            <div class="text-3xl font-bold mb-2">1,000 Coins</div>
                             <div class="text-gray-400 mb-4">Perfect for beginners</div>
-                            <div class="text-2xl font-bold text-green-400 mb-4">₹10.00</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">$15.00</div>
 							
 							<form method="post" action="payments/index.php">
-							<input type="hidden" name="amount" value="10">
-							<input type="hidden" name="coins" value="10">
+							<input type="hidden" name="amount" value="15">
+							<input type="hidden" name="coins" value="1000">
                             <button class="btn btn-primary w-full" type="submit" name="submit10" <?php /*onclick="purchase(10, 'INR', 10)" */ ?> >
                                 Purchase Now
                             </button>
@@ -245,14 +248,14 @@ $activeTab = 'wallet';
                         </div>
 
                         <div class="purchase-card popular">
-                            <div class="coin-icon">₹</div>
-                            <h5 class="text-lg font-bold mb-2">Popular Pack</h5>
-                            <div class="text-3xl font-bold mb-2">100 Coins</div>
+                            <div class="coin-icon"><img src="<?=SITEURL?>assets/images/token.png"></div>
+                            <h5 class="text-lg font-bold mb-2">Booster Pack</h5>
+                            <div class="text-3xl font-bold mb-2">3,000 Coins</div>
                             <div class="text-gray-400 mb-4">Best value for money</div>
-                            <div class="text-2xl font-bold text-green-400 mb-4">₹100.00</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">$39.00</div>
 							<form method="post" action="payments/index.php">
-							<input type="hidden" name="amount" value="100">
-							<input type="hidden" name="coins" value="100">
+							<input type="hidden" name="amount" value="39">
+							<input type="hidden" name="coins" value="3000">
                             <button class="btn btn-primary w-full" type="submit" name="submit100" <?php /*onclick="purchase(100, 'INR', 100)"*/ ?> >
                                 Purchase Now
                             </button>
@@ -260,14 +263,14 @@ $activeTab = 'wallet';
                         </div>
 
                         <div class="purchase-card">
-                            <div class="coin-icon">₹</div>
-                            <h5 class="text-lg font-bold mb-2">Premium Pack</h5>
-                            <div class="text-3xl font-bold mb-2">500 Coins</div>
+                            <div class="coin-icon"><img src="<?=SITEURL?>assets/images/token.png"></div>
+                            <h5 class="text-lg font-bold mb-2">Pro Pack</h5>
+                            <div class="text-3xl font-bold mb-2">6,750 Coins (+750 Bonus)</div>
                             <div class="text-gray-400 mb-4">For heavy users</div>
-                            <div class="text-2xl font-bold text-green-400 mb-4">₹500.00</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">$79.00</div>
 							<form method="post" action="payments/index.php">
-							<input type="hidden" name="amount" value="500">
-							<input type="hidden" name="coins" value="500">
+							<input type="hidden" name="amount" value="79">
+							<input type="hidden" name="coins" value="6750">
                             <button class="btn btn-primary w-full" type="submit" name="submit500" <?php /*onclick="purchase(500, 'INR', 500)"*/ ?> >
                                 Purchase Now
                             </button>
@@ -275,53 +278,40 @@ $activeTab = 'wallet';
                         </div>
 
                         <div class="purchase-card">
-                            <div class="coin-icon">₹</div>
-                            <h5 class="text-lg font-bold mb-2">Ultimate Pack</h5>
-                            <div class="text-3xl font-bold mb-2">1000 Coins</div>
+                            <div class="coin-icon"><img src="<?=SITEURL?>assets/images/token.png"></div>
+                            <h5 class="text-lg font-bold mb-2">Elite Pack</h5>
+                            <div class="text-3xl font-bold mb-2">14,000 Coins (+2,000 Bonus)</div>
                             <div class="text-gray-400 mb-4">Maximum value</div>
-                            <div class="text-2xl font-bold text-green-400 mb-4">₹1,000.00</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">$159.00</div>
 							<form method="post" action="payments/index.php">
-							<input type="hidden" name="amount" value="1000">
-							<input type="hidden" name="coins" value="1000">
+							<input type="hidden" name="amount" value="159">
+							<input type="hidden" name="coins" value="14000">
                             <button class="btn btn-primary w-full" type="submit" name="submit1000" <?php /*onclick="purchase(1000, 'INR', 1000)" */ ?> >
                                 Purchase Now
                             </button>
                         </div>
 
                         <div class="purchase-card">
-                            <div class="coin-icon">₹</div>
-                            <h5 class="text-lg font-bold mb-2">VIP Pack</h5>
-                            <div class="text-3xl font-bold mb-2">2500 Coins</div>
+                            <div class="coin-icon"><img src="<?=SITEURL?>assets/images/token.png"></div>
+                            <h5 class="text-lg font-bold mb-2">Mega Pack</h5>
+                            <div class="text-3xl font-bold mb-2">22,000 Coins (+4,000 Bonus)</div>
                             <div class="text-gray-400 mb-4">VIP experience</div>
-                            <div class="text-2xl font-bold text-green-400 mb-4">₹2,500.00</div>
+                            <div class="text-2xl font-bold text-green-400 mb-4">$249.00</div>
 							<form method="post" action="payments/index.php">
-							<input type="hidden" name="amount" value="2500">
-							<input type="hidden" name="coins" value="2500">
+							<input type="hidden" name="amount" value="249">
+							<input type="hidden" name="coins" value="22000">
                             <button class="btn btn-primary w-full" type="submit" name="submit2500" <?php /*onclick="purchase(2500, 'INR', 2500)" */ ?> >
                                 Purchase Now
                             </button>
 							</form>
                         </div>
 
-                        <div class="purchase-card">
-                            <div class="coin-icon">₹</div>
-                            <h5 class="text-lg font-bold mb-2">Elite Pack</h5>
-                            <div class="text-3xl font-bold mb-2">5000 Coins</div>
-                            <div class="text-gray-400 mb-4">Elite status</div>
-                            <div class="text-2xl font-bold text-green-400 mb-4">₹5,000.00</div>
-							<form method="post" action="payments/index.php">
-							<input type="hidden" name="amount" value="5000">
-							<input type="hidden" name="coins" value="5000">
-                            <button class="btn btn-primary w-full" type="submit" name="submit5000" <?php /*onclick="purchase(5000, 'INR', 5000)"*/ ?> >
-                                Purchase Now
-                            </button>
-							</form>
-                        </div>
+                        
                     </div>
                 </div>
 
                 <!-- Foreign Users -->
-                <div>
+                <?php /*?><div>
                     <h4 class="text-xl font-semibold mb-4 flex items-center">
                         <span class="mr-2">🌍</span> International Users (USD)
                     </h4>
@@ -335,7 +325,7 @@ $activeTab = 'wallet';
 							<form method="post" action="payments/index.php">
 							<input type="hidden" name="amount" value="0.12">
 							<input type="hidden" name="coins" value="10">
-                            <button class="btn btn-primary w-full" type="submit" name="submit_f0" <?php /*onclick="purchase(10, 'USD', 0.12)"*/ ?> >
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f0" <?php //onclick="purchase(10, 'USD', 0.12)" ?> >
                                 Purchase Now
                             </button>
 							</form>
@@ -350,7 +340,7 @@ $activeTab = 'wallet';
 							<form method="post" action="payments/index.php">
 							<input type="hidden" name="amount" value="1.20">
 							<input type="hidden" name="coins" value="100">
-                            <button class="btn btn-primary w-full" type="submit" name="submit_f5" <?php /*onclick="purchase(100, 'USD', 1.20)"*/ ?> >
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f5" <?php //onclick="purchase(100, 'USD', 1.20)" ?> >
                                 Purchase Now
                             </button>
 							</form>
@@ -365,7 +355,7 @@ $activeTab = 'wallet';
 							<form method="post" action="payments/index.php">
 							<input type="hidden" name="amount" value="6.00">
 							<input type="hidden" name="coins" value="500">
-                            <button class="btn btn-primary w-full" type="submit" name="submit_f9" <?php /*onclick="purchase(500, 'USD', 6.00)"*/ ?> >
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f9" <?php //onclick="purchase(500, 'USD', 6.00)" ?> >
                                 Purchase Now
                             </button>
 							</form>
@@ -380,7 +370,7 @@ $activeTab = 'wallet';
 							<form method="post" action="payments/index.php">
 							<input type="hidden" name="amount" value="12.00">
 							<input type="hidden" name="coins" value="1000">
-                            <button class="btn btn-primary w-full" type="submit" name="submit_f14" <?php /*onclick="purchase(1000, 'USD', 12.00)"*/ ?> >
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f14" <?php //onclick="purchase(1000, 'USD', 12.00)" ?> >
                                 Purchase Now
                             </button>
 							</form>
@@ -395,7 +385,7 @@ $activeTab = 'wallet';
 							<form method="post" action="payments/index.php">
 							<input type="hidden" name="amount" value="30.00">
 							<input type="hidden" name="coins" value="2500">
-                            <button class="btn btn-primary w-full" type="submit" name="submit_f19" <?php /*onclick="purchase(2500, 'USD', 30.00)"*/ ?> >
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f19" <?php //onclick="purchase(2500, 'USD', 30.00)" ?> >
                                 Purchase Now
                             </button>
 							</form>
@@ -410,13 +400,13 @@ $activeTab = 'wallet';
 							<form method="post" action="payments/index.php">
 							<input type="hidden" name="amount" value="60.00">
 							<input type="hidden" name="coins" value="5000">
-                            <button class="btn btn-primary w-full" type="submit" name="submit_f29" <?php /*onclick="purchase(5000, 'USD', 60.00)"*/ ?> >
+                            <button class="btn btn-primary w-full" type="submit" name="submit_f29" <?php //onclick="purchase(5000, 'USD', 60.00)" ?> >
                                 Purchase Now
                             </button>
 							</form>
                         </div>
                     </div>
-                </div>
+                </div> <?php */ ?>
             </div>
 
             <!-- Withdraw Tab -->
