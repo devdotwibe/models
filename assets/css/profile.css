@@ -4925,6 +4925,11 @@ width:25%;
 }
 
 
+
+.form-section select {
+    width: 100%;
+}
+
 .edit-profilepage .profile-picture-container:hover .profile-picture-overlay {
     opacity: 1;
 }
