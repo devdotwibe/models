@@ -347,12 +347,12 @@ $lang_list = modal_language_list();
               </div>
 
               <!-- Additional Photos -->
-              <div class="text-center edit-profile-box2 border-2 border-dashed border-white/30 
+              <div class="text-center p-3 edit-profile-box2 border-2 border-dashed border-white/30 
               rounded-lg flex items-center justify-start cursor-pointer hover:border-purple-500 
               transition-colors">
                 <div class="gallery1 ">
 
-                  <ul class="visualizacao sortable dropzone-previews" style="">
+                  <ul class="visualizacao sortable dropzone-previews">
 
                     <?php $modal_img_list = DB::query('select * from model_images where unique_model_id="' . $userDetails['unique_id'] . '" AND file_type = "Image" AND category = "Profile" Order by id DESC');
                     if (!empty($modal_img_list)) {
@@ -360,7 +360,7 @@ $lang_list = modal_language_list();
                       foreach ($modal_img_list as $imgs) {
                         if (!empty($imgs['file'])) {
                     ?>
-                          <li id="galblock<?php echo $i; ?>" class="w-32 h-32">
+                          <li id="galblock<?php echo $i; ?>" class="w-32 h-auto">
                             <div>
                               <div class="dz-preview dz-file-preview">
                                 <img src="<?php echo SITEURL . 'uploads/profile_pic/' . $imgs['file']; ?>" data-dz-thumbnail />
