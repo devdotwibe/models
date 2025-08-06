@@ -69,7 +69,14 @@ $sort_type = $_GET['sort_type'];
     }
 
 
-$stringQuery = " select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id  $order ";//where status
+// $stringQuery = " select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id ";//where status
+
+$stringQuery = "
+    SELECT tb.*, mu.age 
+    FROM banners tb 
+    JOIN model_user mu ON mu.id = tb.user_id 
+    $order
+";
 
 if($_GET['country']){
     $where_clause .= " tb.country='".$_GET['country']."' and";
