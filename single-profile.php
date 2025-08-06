@@ -909,48 +909,24 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <div class="space-y-4">
                         
                         <?php 
-
-                        $loggedInUserId = $_SESSION['log_user_id'] ?? null;
-                        $loggedInUniqueId = $_SESSION['log_user_unique_id'] ?? null;
-                        $current_model_id = mysqli_real_escape_string($con, $_GET['m_unique_id']);
                         
-                       $followers_ids = getModelFollowerIds($loggedInUniqueId);
+                       $followers_ids = getModelFollowerIds($_SESSION['log_user_unique_id']);
 
-                        $escaped_followers_ids = array_map(function($id) use ($con) {
-                            return "'" . mysqli_real_escape_string($con, $id) . "'";
+                        $escaped_ids = array_map(function($id) use ($con) {
+                            return mysqli_real_escape_string($con, $id);
                         }, $followers_ids);
 
-                        $followers_not_in = !empty($escaped_followers_ids) ? implode(',', $escaped_followers_ids) : "";
+                        $followers_not_in = !empty($escaped_ids) ? "'" . implode("','", $escaped_ids) . "'" : "";
 
-                        $boosted_user_ids = [];
+                        $current_model_id = mysqli_real_escape_string($con, $_GET['m_unique_id']);
 
-                        if ($loggedInUserId) {
-
-                            $userDetails = get_data('model_user', ['id' => $loggedInUserId], true);
-
-                            if ($userDetails) {
-
-                                $boosted_user_ids = BoostedModelIdsByUser($userDetails, $con);
-                            }
-                        }
-
-                        $escaped_boosted_ids = array_map(function($id) use ($con) {
-                            return "'" . mysqli_real_escape_string($con, $id) . "'";
-                        }, $boosted_user_ids);
-
-                        $boosted_field_order = !empty($escaped_boosted_ids)
-                            ? "FIELD(unique_id, " . implode(',', $escaped_boosted_ids) . ") DESC,"
-                            : "";
-
-                       $sqls_m = "
+                        $sqls_m = "
                             SELECT * 
                             FROM model_user 
                             WHERE as_a_model = 'Yes' 
                             AND unique_id != '$current_model_id'
                             " . (!empty($followers_not_in) ? " AND unique_id NOT IN ($followers_not_in)" : "") . "
-                            ORDER BY 
-                                $boosted_field_order
-                                RAND() DESC
+                            ORDER BY RAND() DESC 
                             LIMIT 3
                         ";
 
@@ -1210,7 +1186,7 @@ if (mysqli_num_rows($res_ap) > 0) {
         <div class="modal-body">
 		<?php if(!empty($extra_details) && !empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes'){ ?>
             <div class="about-section">
-                <h3 class="about-section-title">Chat Services</h3>
+                <h3 class="about-section-title">Streaming Services</h3>
                 <div class="attributes-grid">
 				<?php if($extra_details['group_chat_tocken']){ ?>
                     <div class="attribute">
@@ -1263,7 +1239,7 @@ if (mysqli_num_rows($res_ap) > 0) {
             </div> <?php */  ?>
             <?php if(!empty($extra_details) && !empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ ?>
             <div class="about-section">
-                <h3 class="about-section-title">Meet Services</h3>
+                <h3 class="about-section-title">Dating</h3>
                 <div class="attributes-grid">
 				<?php if($extra_details['in_per_hour']){ ?>
                     <div class="attribute">
