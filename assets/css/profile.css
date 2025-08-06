@@ -4833,6 +4833,18 @@ body.edit-profilepage {
 
 }
 
+
+.edit-profile-box1 {
+    border: 1px solid yellow;
+    max-width: 250px;
+    /* display: flex; */
+    width: 100%;
+    flex-direction: column;
+    position: relative;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
 .edit-close{
     border:1px solid white;
     width:fit-content;
