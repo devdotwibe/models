@@ -4930,6 +4930,21 @@ width:25%;
     width: 100%;
 }
 
+.form-section select option {
+    background: #17213d;
+    /* border: 1px solid #17213d; */
+}
+
+.hobbies-container.edit-pro-hob{
+    display: inline-flex;
+    border: 1px solid;
+}
+.hobbies-container.edit-pro-hob > div{
+       border: 1px solid green;
+       border-radius: 15px;
+       
+}
+
 .edit-profilepage .profile-picture-container:hover .profile-picture-overlay {
     opacity: 1;
 }
