@@ -4858,7 +4858,7 @@ body.edit-profilepage {
     justify-content: center;
     position: absolute;
     top: 0px;
-    right: 27px;
+    right: 17px;
     flex-direction: row-reverse;
 
 }
@@ -4883,7 +4883,7 @@ body.edit-profilepage {
 .edit-close a:last-child{
     text-decoration: none;
     color: #fff;
-    font-size: 14px;
+    font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4895,7 +4895,7 @@ body.edit-profilepage {
     padding-bottom: 3px;
     background: #00000078;
        cursor:pointer;
-       margin-right: 9px;       
+       margin-right: 6px;       
 }
 
 .edit-profilepage .profile-picture-container:hover .profile-picture-overlay {
@@ -4905,13 +4905,13 @@ body.edit-profilepage {
 .change-photo-btn {
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 73px;
     background: #667eea;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+  width: 29px;
+    height: 29px;
     display: flex;
     align-items: center;
     justify-content: center;
