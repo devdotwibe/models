@@ -159,4 +159,19 @@ if (isset($_POST['booking_submit'])) {
 
 	}
 
+	if (isset($_POST['action']) && $_POST['action'] =='complete_accept') {
+
+			$complete_id = $_POST['complete_id'];
+
+			$status = $_POST['status'];
+
+				  DB::update('model_booking', [
+					'complete_request' => $status,
+					'status' => 'Completed',
+				], 'id = %i', $complete_id);
+
+		echo json_encode(['status'=>'success','message'=>'Complete Accepted Successfully']);
+
+	}
+
 ?>
