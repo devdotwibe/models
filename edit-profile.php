@@ -402,7 +402,7 @@ $lang_list = modal_language_list();
                   <!-- Previews will be moved here -->
                 </div>
                 <?php /*<input type="file" name="gallery_photo_1" id="gallery_photo_1" class="gallery_photo"  accept=".jpg,.jpeg,.png" /> */ ?>
-                <p class="text-white/80 text-sm mt-2 font-medium">Gallery Photo</p>
+                <!-- <p class="text-white/80 text-sm mt-2 font-medium">Gallery Photo</p> -->
               </div>
 
               <?php /*?><div class="text-center">
