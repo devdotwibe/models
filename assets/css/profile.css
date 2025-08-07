@@ -8929,10 +8929,14 @@ width:100%;
 #services-content .form-section .glass-effect{
 padding:12px !important;
 }
-#services-content .glass-effect>div:last-child div:first-child{
+#services-content .glass-effect>div:last-child>div:first-child{
 width:32px;
 height:32px
 }
+/* #services-content .glass-effect>div:last-child div:last-child{
+width:auto;
+
+} */
 #services-content .glass-effect>div:last-child div:last-child strong{
 font-size: 15px;
 }
