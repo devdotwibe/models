@@ -2597,7 +2597,7 @@ $lang_list = modal_language_list();
           <!-- Advanced Search Filters -->
           <div>
             <h4 class="text-lg font-semibold mb-4">🔍 Advanced Search Filters</h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 advans-fit">
               <div>
                 <label class="form-label">Height Range</label>
                 <div class="flex items-center space-x-4">
@@ -2643,7 +2643,7 @@ $lang_list = modal_language_list();
           <div>
             <h4 class="text-lg font-semibold mb-4">🧪 Experimental Features</h4>
             <div class="space-y-4">
-              <div class="flex justify-between items-center">
+              <div class="flex justify-between items-center exprt">
                 <div>
                   <label class="form-label mb-0">🤖 Auto Message Likes</label>
                   <p class="text-sm text-white/60">Automatically send a message to people when you like them in browse.</p>
