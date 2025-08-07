@@ -4707,6 +4707,7 @@ body.edit-profilepage {
     border-radius: 8px;
     padding: 4px;
     margin-bottom: 12px;
+        height: 50px;
 }
 
 .edit-profilepage .unit-option {
@@ -4718,7 +4719,7 @@ body.edit-profilepage {
     transition: all 0.3s ease;
     font-size: 14px;
     font-weight: 500;
-    height: 50px;
+
   align-items: center;
   justify-content: center;
   display: flex;
