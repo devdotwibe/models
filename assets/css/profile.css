@@ -4582,6 +4582,9 @@ body.edit-profilepage {
     text-align: center;
     width: 24px;
 }
+.toggle-switch.advance-tog-page {
+  width: 100px;
+}
 
 .edit-profilepage .notification-badge {
     background: #ec4899;
