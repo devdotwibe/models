@@ -8614,7 +8614,7 @@ button.btn-secondary.add-intrst {
     }
 
     .edit-pro-pop {
-        display: inline-flex;
+        display: inline-flex !important;
         flex-wrap: wrap;
     }
 
@@ -8626,7 +8626,6 @@ button.btn-secondary.add-intrst {
         flex-wrap: wrap;
     }
 .edit-profile-box1 {
-  border: 1px solid yellow;
   max-width: 190px;
 }
 
@@ -8639,7 +8638,17 @@ button.btn-secondary.add-intrst {
     right:-8px;
 }
 
+.edit-pro-pop > div div:first-child{
+  font-size: 1.4rem;
+  line-height: 2.25rem;
+  margin-right: 6px;
 }
+
+
+
+
+}
+
 
 
 
@@ -8680,6 +8689,21 @@ button.btn-secondary.add-intrst {
         height: 2.25rem;
 
     }
+
+}
+
+
+@media (max-width: 600px) {
+
+.edit-profile-box1 {
+  margin: 0 auto;
+}
+
+    .edit-profile-box2 {
+  width:100%;
+  min-height: 200px;
+  flex-wrap: wrap;
+}
 
 }
 
@@ -8728,4 +8752,28 @@ button.btn-secondary.add-intrst {
 
 .optim-services .op-live {
     display: none;
+}
+
+@media (max-width:420px){
+
+.edit-first-header{
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.edit-first-header > *:first-child {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.edit-first-header > *:last-child {
+max-width:130px; 
+ width: 100%;
+  margin-bottom: 0px;
+}
+
+.edit-first-header > *:first-child h2{
+margin-bottom:1px!important; 
+}
+
 }

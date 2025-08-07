@@ -206,8 +206,8 @@ $lang_list = modal_language_list();
 
   <main class="max-w-6xl mx-auto px-4 py-8">
 
-    <div class="wallet-card mb-8">
-      <div class="flex justify-between items-start mb-4">
+    <div class="wallet-card mb-8 ">
+      <div class="flex justify-between items-start mb-4 edit-first-header">
         <div>
           <h2 class="text-2xl font-bold mb-2">Creator Wallet</h2>
           <p class="text-white/80">Manage your earnings and withdrawals</p>
