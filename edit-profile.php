@@ -2187,7 +2187,7 @@ $lang_list = modal_language_list();
         </div>
       </div>
 
-      <div class="form-section">
+      <div class="form-section service-last-form">
         <h3 class="text-xl font-bold gradient-text mb-6">Active Services</h3>
 
         <div class="token-info flex items-center mb-6">
@@ -2195,7 +2195,7 @@ $lang_list = modal_language_list();
           <span>You currently have <b>2,500 TLM tokens</b> available for withdrawal. <a href="#" class="text-purple-400 underline" onclick="openWithdrawModal()">Withdraw to bank account</a></span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 service-last-form-boxes">
           <!-- Chat Services -->
           <div class="glass-effect p-6 rounded-xl">
             <div class="flex justify-between items-center mb-4">
