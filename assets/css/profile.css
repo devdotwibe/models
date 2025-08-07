@@ -8794,6 +8794,9 @@ padding: 20px 15px !important;
     .edit-profile-box2 .gallery1 ul li {
   width:100%;
 }
+  .edit-profilepage .step {
+    font-size: 12px;
+  }
 
 }
 
