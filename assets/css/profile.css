@@ -4451,17 +4451,7 @@ body.edit-profilepage {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     margin-bottom: 16px;
-    /* overflow: hidden; */
-    overflow: visible;
-  max-height: 100%;
-}
-.edit-profilepage .collapsible-content {
-    max-height: 100%;
-  overflow: visible;
-    /* max-height: 0;
-    overflow: hidden; */
-    transition: max-height 0.3s ease;
-    padding: 0 16px;
+    overflow: hidden;
 }
 
 .edit-profilepage .collapsible-header {
@@ -4478,7 +4468,12 @@ body.edit-profilepage {
     background: rgba(255, 255, 255, 0.1);
 }
 
-
+.edit-profilepage .collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 16px;
+}
 
 .edit-profilepage .collapsible-content.open {
     max-height: 2000px;
@@ -4686,8 +4681,6 @@ body.edit-profilepage {
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 16px;
-    max-height: 600px;
-  overflow-y: auto;
 }
 
 .edit-profilepage .confidential-badge {
@@ -4707,7 +4700,6 @@ body.edit-profilepage {
     border-radius: 8px;
     padding: 4px;
     margin-bottom: 12px;
-        height: 50px;
 }
 
 .edit-profilepage .unit-option {
@@ -4719,7 +4711,7 @@ body.edit-profilepage {
     transition: all 0.3s ease;
     font-size: 14px;
     font-weight: 500;
-
+    height: 50px;
   align-items: center;
   justify-content: center;
   display: flex;
