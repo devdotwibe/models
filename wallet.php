@@ -880,6 +880,8 @@ $('#search-form').submit(function(e){
         };
 
         // Lazy loading for images
+
+        
         const lazyLoad = () => {
             const images = document.querySelectorAll('img[data-src]');
             const imageObserver = new IntersectionObserver((entries, observer) => {
