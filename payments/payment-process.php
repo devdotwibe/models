@@ -2,27 +2,15 @@
 session_start();
 include('../includes/config.php');
 include('../includes/helper.php');
-?>
-<?php
+
 if(isset($_SESSION["log_user_id"])){
 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 if($userDetails){
 	$date = date('Y-m-d H:i:s');
- $data = [ 
-         
-         'payment_id' => $_POST['razorpay_payment_id'],
-         'amount' => $_SESSION["pay_amount"],
-         'product_id' => $_SESSION["pay_coins"],
-         'username' => $_SESSION["log_user"],
-         'email' => $_SESSION["log_user_email"],
-         'user_id' => $_SESSION["log_user_unique_id"],
-        ];
-        // echo '<pre>';
-        // print_r($data);
-        // echo '</pre>';
-        // echo $data["razorpay_payment_id"];
-
-		 
+	
+	$payment_status = $_POST['payment_status'];
+	$payment_id = $_POST['payment_id'];
+ 
 
        	$query1 = "INSERT INTO model_user_payment(`unique_id`, `user_name`, `user_email`, `payment_id`, `payment_amount`, `coins`,`created_date`, `status`) VALUES ('".$_SESSION["log_user_unique_id"]."','".$_SESSION["log_user"]."','".$_SESSION["log_user_email"]."','".$payment_id."','".$_SESSION["pay_amount"]."','".$_SESSION["pay_coins"]."','".$date."','Success')";
 
@@ -43,7 +31,6 @@ if($userDetails){
 
 
         if (mysqli_query($con,$query1) && mysqli_query($con,$query2)) {
-			$payment_id = $_POST['razorpay_payment_id'];
 			$post_data = array(
 				'balance'=>round($userDetails['balance']+$_SESSION["pay_coins"])
 			);
@@ -59,7 +46,7 @@ if($userDetails){
         	echo "<script>window.location='success.php'</script>";
         	unset($_SESSION["pay_amount"]);
         	unset($_SESSION["pay_coins"]);
-        }
+        } 
 	}
 	else{
 		echo "<script>alert('Please login');</script>";
