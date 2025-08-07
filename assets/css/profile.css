@@ -8858,8 +8858,13 @@ display:block !important;
 .collapsible-header h2 {
   font-size: 18px;
   width: calc(100% - 30px);
-  border: 1px solid aliceblue;
 line-height: 26px;
+}
+.edit-profilepage .adult-section{
+    padding: 6px;
+}
+.edit-profilepage .confidential-section label{
+font-size: 14px;
 }
 
 }
