@@ -1256,7 +1256,7 @@ $lang_list = modal_language_list();
               <div class="mt-4">
                 <label class="form-label">Available Days</label>
                 <p class="help-text">Select the days you're available for social meetups</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3 edit-allldays">
                   <div class="checkbox-option">
                     <input type="checkbox" id="mon" name="social_availability[]" value="Monday" <?php if (!empty($social_availability) && in_array('Monday', $social_availability)) echo 'checked'; ?>>
                     <label for="mon">Monday</label>

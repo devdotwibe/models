@@ -8832,6 +8832,26 @@ max-width:130px;
 margin-bottom:1px!important; 
 }
 
+.edit-profilepage .checkbox-option label {
+ 
+  font-size: 15px;
+  word-wrap: anywhere;
+}
+
+
+
+
+.edit-profilepage .checkbox-option{
+/* gap: 6px;
+  padding: 8px; */
+width: 100% !important;
+  margin-bottom: 10px;
+}
+
+.edit-allldays{
+display:block !important;
+}
+
 }
 
 
