@@ -4945,15 +4945,15 @@ body.edit-profilepage {
 .edit-profile-box2 .gallery1 ul li {
     width: calc(25% - 10px);
     position: relative;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .edit-profile-box2 .gallery1 ul li>div {
-    height: 100%;
+    /* height: 100%; */
 }
 
 .edit-profile-box2 .gallery1 ul li>div>div {
-    height: 100%;
+    /* height: 100%; */
 }
 
 .edit-profile-box2 .gallery1 ul li>div>div img {
@@ -8498,6 +8498,39 @@ button.btn-secondary.add-intrst {
 }
 
 
+/* ANIMATIONS */
+
+@keyframes fadeInUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+.optim-services .fade-in-up {
+
+    animation: fadeInUp 0.5s ease-out;
+
+}
+
+
+.optim-services .op-live {
+    display: none;
+}
+
 
 /* RESPONSIVE DESIGN */
 
@@ -8631,8 +8664,9 @@ button.btn-secondary.add-intrst {
 
     .edit-profile-box2 {
   width:calc(100% - 220px);
-  /* min-height: 200px; */
-  flex-wrap: wrap;
+padding: 20px 15px !important;
+    align-items: flex-start !important;
+    width: fit-content !important;
 }
 .edit-close{
     right:-8px;
@@ -8645,10 +8679,15 @@ button.btn-secondary.add-intrst {
 }
 
 
-
-
+.change-photo-btn {
+  right: 45px;
 }
 
+.edit-profile-box2 .gallery1 ul li {
+  width: calc(50% - 10px);
+}
+
+}
 
 
 
@@ -8704,54 +8743,19 @@ button.btn-secondary.add-intrst {
   min-height: 200px;
   flex-wrap: wrap;
 }
+    .edit-profile-box2 .gallery1 ul li {
+  width: calc(100% - 0px);
+}
 
 }
 
 
 
-@media (min-width: 769px) {
-
-    .optim-services .mobile-nav {
-
-        display: none;
-
-    }
-
-}
 
 
 
-/* ANIMATIONS */
+@media(max-width:575px){
 
-@keyframes fadeInUp {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(20px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-
-    }
-
-}
-
-.optim-services .fade-in-up {
-
-    animation: fadeInUp 0.5s ease-out;
-
-}
-
-
-.optim-services .op-live {
-    display: none;
 }
 
 @media (max-width:420px){
@@ -8775,5 +8779,18 @@ max-width:130px;
 .edit-first-header > *:first-child h2{
 margin-bottom:1px!important; 
 }
+
+}
+
+
+
+
+@media (min-width: 769px) {
+
+    .optim-services .mobile-nav {
+
+        display: none;
+
+    }
 
 }
