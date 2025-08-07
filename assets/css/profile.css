@@ -8667,7 +8667,7 @@ button.btn-secondary.add-intrst {
   width:calc(100% - 220px);
 padding: 20px 15px !important;
     align-items: flex-start !important;
-    width: fit-content !important;
+
 }
 .edit-close{
     right:-8px;
@@ -8686,6 +8686,7 @@ padding: 20px 15px !important;
 
 .edit-profile-box2 .gallery1 ul li {
   width: calc(50% - 10px);
+  margin-bottom: 15px;
 }
 
 }
@@ -8739,13 +8740,24 @@ padding: 20px 15px !important;
   margin: 0 auto;
 }
 
+.edit-profile-box1 {
+  max-width: 100%;
+}
+
     .edit-profile-box2 {
+  width:100%;
+padding: 20px 15px !important;
+    align-items: flex-start !important;
+
+}
+
+    /* .edit-profile-box2 {
   width:100%;
   min-height: auto;
   flex-wrap: wrap;
-}
+} */
     .edit-profile-box2 .gallery1 ul li {
-  width: calc(100% - 0px);
+  width:100%;
 }
 
 }
