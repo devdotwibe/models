@@ -211,10 +211,9 @@ $activeTab = 'wallet';
                     Purchase Token Packages
                 </h3>
                 
-                <!-- Indian Users -->
                 <div class="mb-8">
                     <h4 class="text-xl font-semibold mb-4 flex items-center">
-                        <span class="mr-2">🇮🇳</span> Indian Users (INR)
+                        <?php /*?><span class="mr-2">USD</span><?php */ ?> Users (USD)
                     </h4>
                     <div class="purchase-grid">
 					
@@ -238,7 +237,7 @@ $activeTab = 'wallet';
                             <div class="text-gray-400 mb-4">Perfect for beginners</div>
                             <div class="text-2xl font-bold text-green-400 mb-4">$15.00</div>
 							
-							<form method="post" action="payments/index.php">
+							<form method="post" action="payments/purchase.php">
 							<input type="hidden" name="amount" value="15">
 							<input type="hidden" name="coins" value="1000">
                             <button class="btn btn-primary w-full" type="submit" name="submit10" <?php /*onclick="purchase(10, 'INR', 10)" */ ?> >
@@ -253,7 +252,7 @@ $activeTab = 'wallet';
                             <div class="text-3xl font-bold mb-2">3,000 Coins</div>
                             <div class="text-gray-400 mb-4">Best value for money</div>
                             <div class="text-2xl font-bold text-green-400 mb-4">$39.00</div>
-							<form method="post" action="payments/index.php">
+							<form method="post" action="payments/purchase.php">
 							<input type="hidden" name="amount" value="39">
 							<input type="hidden" name="coins" value="3000">
                             <button class="btn btn-primary w-full" type="submit" name="submit100" <?php /*onclick="purchase(100, 'INR', 100)"*/ ?> >
@@ -268,7 +267,7 @@ $activeTab = 'wallet';
                             <div class="text-3xl font-bold mb-2">6,750 Coins (+750 Bonus)</div>
                             <div class="text-gray-400 mb-4">For heavy users</div>
                             <div class="text-2xl font-bold text-green-400 mb-4">$79.00</div>
-							<form method="post" action="payments/index.php">
+							<form method="post" action="payments/purchase.php">
 							<input type="hidden" name="amount" value="79">
 							<input type="hidden" name="coins" value="6750">
                             <button class="btn btn-primary w-full" type="submit" name="submit500" <?php /*onclick="purchase(500, 'INR', 500)"*/ ?> >
@@ -283,7 +282,7 @@ $activeTab = 'wallet';
                             <div class="text-3xl font-bold mb-2">14,000 Coins (+2,000 Bonus)</div>
                             <div class="text-gray-400 mb-4">Maximum value</div>
                             <div class="text-2xl font-bold text-green-400 mb-4">$159.00</div>
-							<form method="post" action="payments/index.php">
+							<form method="post" action="payments/purchase.php">
 							<input type="hidden" name="amount" value="159">
 							<input type="hidden" name="coins" value="14000">
                             <button class="btn btn-primary w-full" type="submit" name="submit1000" <?php /*onclick="purchase(1000, 'INR', 1000)" */ ?> >
@@ -297,7 +296,7 @@ $activeTab = 'wallet';
                             <div class="text-3xl font-bold mb-2">22,000 Coins (+4,000 Bonus)</div>
                             <div class="text-gray-400 mb-4">VIP experience</div>
                             <div class="text-2xl font-bold text-green-400 mb-4">$249.00</div>
-							<form method="post" action="payments/index.php">
+							<form method="post" action="payments/purchase.php">
 							<input type="hidden" name="amount" value="249">
 							<input type="hidden" name="coins" value="22000">
                             <button class="btn btn-primary w-full" type="submit" name="submit2500" <?php /*onclick="purchase(2500, 'INR', 2500)" */ ?> >
@@ -880,8 +879,6 @@ $('#search-form').submit(function(e){
         };
 
         // Lazy loading for images
-
-        
         const lazyLoad = () => {
             const images = document.querySelectorAll('img[data-src]');
             const imageObserver = new IntersectionObserver((entries, observer) => {
