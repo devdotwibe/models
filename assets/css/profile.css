@@ -8910,6 +8910,33 @@ line-height: 26px;
 font-size: 14px;
 }
 
+#services-content .form-section>div  {
+display:flex;
+flex-wrap:wrap;
+
+}
+
+#services-content .form-section>div select{
+width:100%;
+
+}
+#services-content .form-section > div h3 {
+  width: 100%;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#services-content .form-section .glass-effect{
+padding:12px !important;
+}
+#services-content .glass-effect>div:last-child div:first-child{
+width:32px;
+height:32px
+}
+#services-content .glass-effect>div:last-child div:last-child strong{
+font-size: 15px;
+}
+
 }
 
 
