@@ -2587,7 +2587,7 @@ $lang_list = modal_language_list();
                 <h4 class="text-lg font-semibold text-purple-400">📬 Message Priority</h4>
                 <p class="text-sm text-white/70">Your messages will appear at the top of recipients inboxes - ahead of free members messages. This greatly increases your chance of a reply.</p>
               </div>
-              <label class="toggle-switch">
+              <label class="toggle-switch advance-tog-page">
                 <input type="checkbox" checked>
                 <span class="toggle-slider"></span>
               </label>
