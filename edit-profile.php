@@ -2332,7 +2332,7 @@ $lang_list = modal_language_list();
         <h3 class="text-xl font-bold gradient-text mb-6">Upcoming Bookings</h3>
 
         <div class="overflow-x-auto">
-          <table class="w-full">
+          <table class="w-full edit-table">
             <thead>
               <tr class="text-left border-b border-white/10">
                 <th class="pb-3 font-medium text-white/70">Date & Time</th>
