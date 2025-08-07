@@ -4152,6 +4152,7 @@ body.edit-profilepage {
     color: white;
     width: 100%;
     transition: all 0.3s ease;
+    height:50px;
 }
 
 .edit-profilepage .form-input:focus {
@@ -4168,6 +4169,7 @@ body.edit-profilepage {
     color: white;
     width: 100%;
     cursor: pointer;
+    height:50px;
 }
 
 .edit-profilepage .form-label {
@@ -4309,6 +4311,7 @@ body.edit-profilepage {
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    height:50px;
 }
 
 .edit-profilepage .radio-option:hover {
@@ -4336,6 +4339,7 @@ body.edit-profilepage {
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    height:50px;
 }
 
 .edit-profilepage .checkbox-option:hover {
@@ -4707,6 +4711,10 @@ body.edit-profilepage {
     transition: all 0.3s ease;
     font-size: 14px;
     font-weight: 500;
+    height: 50px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .edit-profilepage .unit-option.active {
@@ -8540,7 +8548,12 @@ button.btn-secondary.add-intrst {
 .paid_token.social-platform-input:focus {
 box-shadow:none !important
 }
-
+.govt_id_proof {
+  margin-bottom: 6px;
+}
+.idproof-section img {
+  border-radius: 8px;
+}
 
 /* RESPONSIVE DESIGN */
 
