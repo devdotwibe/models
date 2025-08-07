@@ -5076,9 +5076,10 @@ button.btn-secondary.add-intrst {
     background: #2f3158;
     color: #fff;
     padding: 8px 15px;
-    font-size: 15px;
+    font-size: 14px;
     background: #593790 !important;
     border: 1px solid rgba(168, 85, 247, 0.3) !important;
+    margin-top: 0 !important;
 }
 
 #modalimage_gallery {
@@ -8533,6 +8534,14 @@ button.btn-secondary.add-intrst {
 }
 
 
+.paid_token.social-platform-input:focus:focus-visible {
+  outline: none !important;
+}
+.paid_token.social-platform-input:focus {
+box-shadow:none !important
+}
+
+
 /* RESPONSIVE DESIGN */
 
 @media (max-width: 768px) {
@@ -8688,6 +8697,18 @@ padding: 20px 15px !important;
   width: calc(50% - 10px);
   margin-bottom: 15px;
 }
+
+.edit-profilepage .language-item{
+    flex-wrap:wrap;
+}
+
+.edit-profilepage .btn-remove-social{
+    margin-left: auto;
+}
+
+  .edit-profilepage .social-controls {
+    flex-wrap: wrap;
+  }
 
 }
 
