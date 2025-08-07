@@ -8855,6 +8855,13 @@ width: 100% !important;
 display:block !important;
 }
 
+.collapsible-header h2 {
+  font-size: 18px;
+  width: calc(100% - 30px);
+  border: 1px solid aliceblue;
+line-height: 26px;
+}
+
 }
 
 
