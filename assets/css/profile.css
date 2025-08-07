@@ -8941,10 +8941,30 @@ width:auto;
 font-size: 15px;
 }
 
-.service-last-form-boxes {
-    
+.service-last-form-boxes .glass-effect .space-y-4>div {
+font-size: 16px;
+  border: 1px solid #d28057;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
+.service-last-form-boxes .glass-effect .space-y-4>div>div:first-child{
+width: 100%;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}
+.service-last-form-boxes .glass-effect .space-y-4>div>div:last-child{
+    width:100%;
+    /* border-bottom: 1px solid grey; */
+}
+
+.service-last-form-boxes .glass-effect h4{
+font-size:16px;
+line-height: 20px;
+}
 }
 
 
