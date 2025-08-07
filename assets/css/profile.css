@@ -4849,7 +4849,7 @@ body.edit-profilepage {
 
 .edit-profile-box2 {
     width: calc(100% - 290px);
-
+align-items: flex-start !important;
 
 }
 
