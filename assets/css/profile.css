@@ -4562,6 +4562,7 @@ body.edit-profilepage {
 .edit-profilepage .chart-container {
     height: 200px;
     position: relative;
+    margin-bottom: 40px;
 }
 
 .edit-profilepage .chart-bar {
@@ -8928,6 +8929,7 @@ width:100%;
 
 #services-content .form-section .glass-effect{
 padding:12px !important;
+width: 100%;
 }
 #services-content .glass-effect>div:last-child>div:first-child{
 width:32px;
