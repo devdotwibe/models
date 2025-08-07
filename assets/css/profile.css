@@ -8787,6 +8787,10 @@ padding: 20px 15px !important;
 
 
 @media(max-width:575px){
+  .enhanced5 #basic-content .btn-primary , .enhanced5 #creator-content .btn-primary,
+   .enhanced5 #services-content .btn-primary ,.enhanced5 #premium-content .btn-primary{
+    margin: 0 auto;
+}
 
 }
 
