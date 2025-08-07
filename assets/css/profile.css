@@ -8981,11 +8981,30 @@ line-height: 20px;
 .msg-priority {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 0 !important;
 }
 
 .msg-priority div {
   width:100%;
   margin-bottom: 10px;
+}
+
+#premium-content .form-label{
+    width: calc(100% - 60px);
+}
+
+.mmsge-priva>div>div{
+    width: calc(100% - 60px);
+}
+.lock-pri>div>div{
+    width: calc(100% - 60px);
+}
+
+.profit-vis>div>div{
+    width: calc(100% - 60px);
+}
+.age-range{
+    width:90%;
 }
 
 }

@@ -2473,7 +2473,7 @@ $lang_list = modal_language_list();
           <!-- Location Privacy -->
           <div>
             <h4 class="text-lg font-semibold mb-4">Location Privacy</h4>
-            <div class="space-y-4">
+            <div class="space-y-4 lock-pri">
               <div class="flex justify-between items-center">
                 <div>
                   <label class="form-label mb-0">🇹🇭 Thailand Users Only</label>
@@ -2490,7 +2490,7 @@ $lang_list = modal_language_list();
           <!-- Profile Visibility -->
           <div>
             <h4 class="text-lg font-semibold mb-4">Profile Visibility</h4>
-            <div class="space-y-4">
+            <div class="space-y-4 profit-vis">
               <div class="flex justify-between items-center">
                 <div>
                   <label class="form-label mb-0">👑 Show Me in Search</label>
@@ -2517,7 +2517,7 @@ $lang_list = modal_language_list();
 
               <label class="form-label">Age Range</label>
 
-              <div class="flex items-center space-x-4">
+              <div class="flex items-center space-x-4 age-range">
 
                 <span class="text-sm">18</span>
                 <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range'] ?? 18  ?>" class="flex-1 accent-purple-500" oninput="updateAgeDisplay(this)" onchange="updateSettings(this,'age_range')">
@@ -2529,7 +2529,7 @@ $lang_list = modal_language_list();
           <!-- Message Privacy -->
           <div>
             <h4 class="text-lg font-semibold mb-4">Message Privacy</h4>
-            <div class="space-y-4">
+            <div class="space-y-4 mmsge-priva">
               <div class="flex justify-between items-center">
                 <div>
                   <label class="form-label mb-0">📧 Send Read Receipts</label>
