@@ -2582,7 +2582,7 @@ $lang_list = modal_language_list();
         <div class="space-y-6">
           <!-- Message Priority -->
           <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
-            <div class="flex justify-between items-center mb-4">
+            <div class="flex justify-between items-center mb-4 msg-priority">
               <div>
                 <h4 class="text-lg font-semibold text-purple-400">📬 Message Priority</h4>
                 <p class="text-sm text-white/70">Your messages will appear at the top of recipients inboxes - ahead of free members messages. This greatly increases your chance of a reply.</p>

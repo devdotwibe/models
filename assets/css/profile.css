@@ -4583,9 +4583,16 @@ body.edit-profilepage {
     width: 24px;
 }
 .toggle-switch.advance-tog-page {
-  width: 100px;
+  width: 50px;
+}
+.msg-priority {
+  display: flex;
+  flex-wrap: wrap;
 }
 
+.msg-priority div {
+  width: calc(100% - 60px);
+}
 .edit-profilepage .notification-badge {
     background: #ec4899;
     color: white;
@@ -8970,6 +8977,17 @@ width: 100%;
 font-size:16px;
 line-height: 20px;
 }
+
+.msg-priority {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.msg-priority div {
+  width:100%;
+  margin-bottom: 10px;
+}
+
 }
 
 
