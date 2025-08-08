@@ -233,6 +233,10 @@ if(!empty($userDetails['profile_pic'])){
             die("Prepare failed (fetching posts): " . $con->error);
         }
 
+              echo "ttst";
+
+    die();
+
         $stmt->bind_param($types, ...$followed_user_ids);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -298,10 +302,6 @@ if(!empty($userDetails['profile_pic'])){
         }
 
     }
-
-      echo "ttst";
-
-    die();
 
     $followers_count = 0;
 
