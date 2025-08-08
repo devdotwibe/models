@@ -2537,7 +2537,7 @@ $lang_list = modal_language_list();
 
                   if($age_range == 65)
                   {
-                    $age_range = $$age_range.'+';
+                    $age_range = $age_range.'+';
                   }
 
                 ?>
