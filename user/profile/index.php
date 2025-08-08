@@ -299,17 +299,16 @@ if(!empty($userDetails['profile_pic'])){
 
     }
 
+      echo "ttst";
+
+    die();
+
     $followers_count = 0;
 
     if(!empty($followed_model_unique_ids) && count($followed_model_unique_ids) > 0)
     {
         $followers_count = count($followed_model_unique_ids);
     }
-
-          
-  echo "ttst";
-
-    die();
 
       $profileUserId = $user_mode_id;
 
