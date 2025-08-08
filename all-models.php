@@ -364,6 +364,10 @@
 
                 if (mysqli_num_rows($resultd) > 0) { 
 				
+                            echo "test";
+
+                die();
+                
 				while($rowesdw = mysqli_fetch_assoc($resultd)) {
 
                      $unique_id = $rowesdw['unique_id'];
@@ -380,10 +384,6 @@
 						 $modalname = $rowesdw['name'];
 					 }
 
-                        echo "test";
-
-                die();
-                
 					 $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
 				?>
 			
