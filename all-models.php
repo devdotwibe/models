@@ -240,13 +240,13 @@
 				if(isset($_POST['f_weight']) && !empty(($_POST['f_weight']))){ 
 					$where .= ' AND md.weight_in_kg >= '.$_POST['f_weight'].' AND md.weight_in_kg <= '.($_POST['f_weight']+1);
 				}
+
+			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
 			
-                         echo "test";
+                    echo "test";
 
                 die();
                 
-			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
-			
 			}else if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
 				
 			$sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' "; 
