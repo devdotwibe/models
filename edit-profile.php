@@ -3470,7 +3470,18 @@ $lang_list = modal_language_list();
     function updateAgeDisplay(rangeInput) {
 
       const display = document.getElementById('age_value_display');
-      display.innerText = rangeInput.value;
+      const inputvalue = rangeInput.value;
+
+     let inputValue = rangeInput.value;
+
+      if (inputValue == 65) {
+
+        display.textContent = inputValue + '+';
+
+      } else {
+        
+        display.textContent = inputValue;
+      }
 
       const percent = (rangeInput.value - rangeInput.min) / (rangeInput.max - rangeInput.min);
       display.style.left = `calc(${percent * 100}% - 10px)`;
