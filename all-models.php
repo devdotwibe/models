@@ -362,12 +362,12 @@
 			
               $resultd = mysqli_query($con, $sqls);
 
-                if (mysqli_num_rows($resultd) > 0) { 
-				
-                            echo "test";
+                        echo "test";
 
                 die();
-                
+
+                if (mysqli_num_rows($resultd) > 0) { 
+				
 				while($rowesdw = mysqli_fetch_assoc($resultd)) {
 
                      $unique_id = $rowesdw['unique_id'];
