@@ -219,21 +219,26 @@
 					}
 				}
 			
-				if($_POST['f_body_type'] != 'any'){
-					$where .= ' AND md.body_type = "'.$_POST['f_body_type'].'"';
-				}
-				if($_POST['f_ethnicity'] != 'any'){
-					$where .= ' AND md.ethnicity = "'.$_POST['f_ethnicity'].'"';
-				}
-				if($_POST['f_hair_color'] != 'any'){
-					$where .= ' AND md.hair_color = "'.$_POST['f_hair_color'].'"';
-				}
-				if($_POST['f_eye_color'] != 'any'){
-					$where .= ' AND md.eye_color = "'.$_POST['f_eye_color'].'"';
-				}
-				if($_POST['f_language'] != 'any'){
-					$where .= ' AND mu.english_ability = "'.$_POST['f_language'].'"';
-				}
+				if (isset($_POST['f_body_type']) && $_POST['f_body_type'] != 'any') {
+                    $where .= ' AND md.body_type = "' . $_POST['f_body_type'] . '"';
+                }
+
+                if (isset($_POST['f_ethnicity']) && $_POST['f_ethnicity'] != 'any') {
+                    $where .= ' AND md.ethnicity = "' . $_POST['f_ethnicity'] . '"';
+                }
+
+                if (isset($_POST['f_hair_color']) && $_POST['f_hair_color'] != 'any') {
+                    $where .= ' AND md.hair_color = "' . $_POST['f_hair_color'] . '"';
+                }
+
+                if (isset($_POST['f_eye_color']) && $_POST['f_eye_color'] != 'any') {
+                    $where .= ' AND md.eye_color = "' . $_POST['f_eye_color'] . '"';
+                }
+
+                if (isset($_POST['f_language']) && $_POST['f_language'] != 'any') {
+                    $where .= ' AND mu.english_ability = "' . $_POST['f_language'] . '"';
+                }
+                
 				if(isset($_POST['f_height']) && !empty(($_POST['f_height']))){ 
 					$where .= ' AND md.height_in_cm >= '.$_POST['f_height'].' AND md.height_in_cm <= '.($_POST['f_height']+1);
 				}
@@ -360,10 +365,6 @@
 
 			}
 			
-                        echo $sqls;
-
-                die();
-
               $resultd = mysqli_query($con, $sqls);
 
                 if (mysqli_num_rows($resultd) > 0) { 
