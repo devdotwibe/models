@@ -180,28 +180,29 @@ if(!empty($userDetails['profile_pic'])){
    
         $boost_follower_unique_ids = BoostedModelIdsByUser($userDetails,$con);
 
-        $in_clause = implode(',', array_fill(0, count($boost_follower_unique_ids), '?'));
+        if (!empty($boost_follower_unique_ids)) {
 
-        $types_follower = str_repeat('s', count($boost_follower_unique_ids));
+            $in_clause = implode(',', array_fill(0, count($boost_follower_unique_ids), '?'));
+            $types_follower = str_repeat('s', count($boost_follower_unique_ids));
 
-        $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
+            $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
+            $stmt = $con->prepare($followQuery);
 
-        $stmt = $con->prepare($followQuery);
-        if (!$stmt) {
-            die("Prepare failed: " . $con->error);
-        }
+            if (!$stmt) {
+                die("Prepare failed: " . $con->error);
+            }
 
-        $boost_follower_unique_ids = array_map('strval', $boost_follower_unique_ids);
+            $boost_follower_unique_ids = array_map('strval', $boost_follower_unique_ids);
 
-        $stmt->bind_param($types_follower, ...$boost_follower_unique_ids);
-        $stmt->execute();
+            $stmt->bind_param($types_follower, ...$boost_follower_unique_ids);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $filter_follower_ids[] = $row['id'];
+            }
 
-    
-        $filter_follower_ids = [];
-        while ($row = $result->fetch_assoc()) {
-            $filter_follower_ids[] = $row['id'];
+            $stmt->close();
         }
 
         $priority_ids = array_values(array_intersect($followed_user_ids, $filter_follower_ids));
