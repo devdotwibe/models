@@ -2471,7 +2471,17 @@ $lang_list = modal_language_list();
           </div>
 
           <!-- Location Privacy -->
-          <div>
+         
+        </div>
+      </div>
+
+      <!-- Premium Features -->
+      <div class="form-section">
+        <h3 class="text-xl font-bold gradient-text mb-6">👑 Premium Features</h3>
+
+        <div class="space-y-6">
+
+         <div>
             <h4 class="text-lg font-semibold mb-4">Location Privacy</h4>
             <div class="space-y-4 lock-pri">
               <div class="flex justify-between items-center">
@@ -2572,14 +2582,7 @@ $lang_list = modal_language_list();
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Premium Features -->
-      <div class="form-section">
-        <h3 class="text-xl font-bold gradient-text mb-6">👑 Premium Features</h3>
-
-        <div class="space-y-6">
+          
           <!-- Message Priority -->
           <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
             <div class="flex justify-between items-center mb-4 msg-priority">
