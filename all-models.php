@@ -190,7 +190,7 @@
 
                 $ids_string = implode(",", $escaped_ids);
 
-                $where .= " AND id IN ($ids_string)";
+                $where .= " AND mu.id IN ($ids_string)";
             }
 
             if (isset($_GET['filter']) && $_GET['filter'] == 'new') {
