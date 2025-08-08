@@ -201,7 +201,10 @@ if(!empty($userDetails['profile_pic'])){
 
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
+        
+      echo "ttst";
 
+    die();
 
        $sql = "
             SELECT 
@@ -233,9 +236,6 @@ if(!empty($userDetails['profile_pic'])){
             die("Prepare failed (fetching posts): " . $con->error);
         }
 
-              echo "ttst";
-
-    die();
 
         $stmt->bind_param($types, ...$followed_user_ids);
         $stmt->execute();
