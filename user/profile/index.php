@@ -186,6 +186,10 @@ if(!empty($userDetails['profile_pic'])){
 
         $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
 
+                                    echo "ttst";
+
+    die();
+    
         $stmt = $con->prepare($followQuery);
         if (!$stmt) {
             die("Prepare failed: " . $con->error);
@@ -193,10 +197,7 @@ if(!empty($userDetails['profile_pic'])){
         $stmt->bind_param($types_follower, ...$boost_follower_unique_ids);
         $stmt->execute();
 
-                                echo "ttst";
-
-    die();
-    
+  
         $result = $stmt->get_result();
 
     
