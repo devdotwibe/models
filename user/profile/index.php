@@ -177,6 +177,10 @@ if(!empty($userDetails['profile_pic'])){
    
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
 
+               echo "ttst";
+
+    die();
+    
         $boost_follower_unique_ids = BoostedModelIdsByUser($userDetails,$con);
 
         $in_clause = implode(',', array_fill(0, count($boost_follower_unique_ids), '?'));
@@ -199,10 +203,6 @@ if(!empty($userDetails['profile_pic'])){
 
         $priority_ids = array_values(array_intersect($followed_user_ids, $filter_follower_ids));
         
-             echo "ttst";
-
-    die();
-
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
 
