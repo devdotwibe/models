@@ -2530,8 +2530,19 @@ $lang_list = modal_language_list();
               <div class="flex items-center space-x-4 age-range">
 
                 <span class="text-sm">18</span>
+
+                <?php 
+
+                  $age_range = $privacy_setting['age_range'] ??18;
+
+                  if($age_range ==65)
+                  {
+                    $$age_range = $$age_range.'+';
+                  }
+
+                ?>
                 <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range'] ?? 18  ?>" class="flex-1 accent-purple-500" oninput="updateAgeDisplay(this)" onchange="updateSettings(this,'age_range')">
-                <span class="text-sm" id="age_value_display"> <?php echo $privacy_setting['age_range'] ?? 18 ?></span>
+                <span class="text-sm" id="age_value_display"> <?php echo $age_range ?></span>
               </div>
             </div>
           </div>
@@ -2582,7 +2593,7 @@ $lang_list = modal_language_list();
               </div>
             </div>
           </div>
-          
+
           <!-- Message Priority -->
           <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
             <div class="flex justify-between items-center mb-4 msg-priority">
