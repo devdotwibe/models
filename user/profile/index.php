@@ -130,6 +130,10 @@ if(!empty($userDetails['profile_pic'])){
     //     }
     // }
     // else
+
+    echo "ttst";
+
+    die();
     
     if (!empty($followed_user_ids) && count($followed_user_ids) == 1 ) {
 
