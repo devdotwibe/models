@@ -952,7 +952,7 @@ function showNotification(message, type = 'info') {
             ageRange.addEventListener('input', function() {
                 const value = parseInt(this.value);
                 document.getElementById('ageMinValue').textContent = '18';
-                document.getElementById('ageMaxValue').textContent = value >= 69 ? '69+' : value.toString();
+                document.getElementById('ageMaxValue').textContent = value >= 65 ? '65+' : value.toString();
             });
         }
 
