@@ -203,10 +203,6 @@
 				if(isset($_POST['f_gender']) && $_POST['f_gender'] != 'any'){
 					$where .= ' AND mu.gender = "'.$_POST['f_gender'].'"';
 				}
-
-                       echo "test";
-
-                die();
 				if(isset($_POST['f_age'])){
 					if($_POST['f_age'] == 65) $where .= ' AND age >= '.$_POST['f_age'];
 					else $where .= ' AND mu.age = '.$_POST['f_age'];
@@ -245,6 +241,10 @@
 					$where .= ' AND md.weight_in_kg >= '.$_POST['f_weight'].' AND md.weight_in_kg <= '.($_POST['f_weight']+1);
 				}
 			
+                         echo "test";
+
+                die();
+                
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
 			
 			}else if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
