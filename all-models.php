@@ -238,7 +238,7 @@
                 if (isset($_POST['f_language']) && $_POST['f_language'] != 'any') {
                     $where .= ' AND mu.english_ability = "' . $_POST['f_language'] . '"';
                 }
-                
+
 				if(isset($_POST['f_height']) && !empty(($_POST['f_height']))){ 
 					$where .= ' AND md.height_in_cm >= '.$_POST['f_height'].' AND md.height_in_cm <= '.($_POST['f_height']+1);
 				}
@@ -364,7 +364,11 @@
 
 
 			}
-			
+
+            echo $sqls;
+
+            die();
+
               $resultd = mysqli_query($con, $sqls);
 
                 if (mysqli_num_rows($resultd) > 0) { 
