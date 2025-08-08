@@ -131,10 +131,8 @@ if(!empty($userDetails['profile_pic'])){
     // }
     // else
 
-    echo "ttst";
-
-    die();
-    
+  
+  
     if (!empty($followed_user_ids) && count($followed_user_ids) == 1 ) {
 
             $sql = "
@@ -317,7 +315,10 @@ if(!empty($userDetails['profile_pic'])){
       $stmt->bind_result($total_views);
       $stmt->fetch();
       $stmt->close();
+      
+  echo "ttst";
 
+    die();
 ?>
 
 
