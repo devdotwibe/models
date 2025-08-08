@@ -180,6 +180,8 @@ if(!empty($userDetails['profile_pic'])){
    
         $boost_follower_unique_ids = BoostedModelIdsByUser($userDetails,$con);
 
+        $filter_follower_ids = [];
+        
         if (!empty($boost_follower_unique_ids)) {
 
             $in_clause = implode(',', array_fill(0, count($boost_follower_unique_ids), '?'));
