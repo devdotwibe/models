@@ -2535,9 +2535,9 @@ $lang_list = modal_language_list();
 
                   $age_range = $privacy_setting['age_range'] ??18;
 
-                  if($age_range ==65)
+                  if($age_range == 65)
                   {
-                    $$age_range = $$age_range.'+';
+                    $age_range = $$age_range.'+';
                   }
 
                 ?>
