@@ -204,7 +204,7 @@
 					$where .= ' AND mu.gender = "'.$_POST['f_gender'].'"';
 				}
 				if(isset($_POST['f_age'])){
-					if($_POST['f_age'] == 69) $where .= ' AND age >= '.$_POST['f_age'];
+					if($_POST['f_age'] == 65) $where .= ' AND age >= '.$_POST['f_age'];
 					else $where .= ' AND mu.age = '.$_POST['f_age'];
 				}
 				if(isset($_POST['f_location']) && !empty($_POST['f_location'])){
