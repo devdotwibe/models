@@ -360,10 +360,10 @@
 
 			}
 			
-                        echo "test";
+                        echo $sqls;
 
                 die();
-                
+
               $resultd = mysqli_query($con, $sqls);
 
                 if (mysqli_num_rows($resultd) > 0) { 
