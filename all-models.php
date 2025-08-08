@@ -199,6 +199,10 @@
             }
 
 			if (isset($_POST['filter_submit'])){  
+
+                echo "test";
+
+                die();
 			
 				if(isset($_POST['f_gender']) && $_POST['f_gender'] != 'any'){
 					$where .= ' AND mu.gender = "'.$_POST['f_gender'].'"';
