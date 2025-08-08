@@ -201,7 +201,11 @@
 			if (isset($_POST['filter_submit'])){  
 
 				if(isset($_POST['f_gender']) && $_POST['f_gender'] != 'any'){
-					$where .= ' AND mu.gender = "'.$_POST['f_gender'].'"';
+                    
+					// $where .= ' AND mu.gender = "'.$_POST['f_gender'].'"';
+
+                    $where .= " AND mu.gender = '" . mysqli_real_escape_string($con, $_POST['f_gender']) . "'";
+
 				}
 				if(isset($_POST['f_age'])){
 					if($_POST['f_age'] == 65) $where .= ' AND age >= '.$_POST['f_age'];
@@ -364,10 +368,6 @@
 
 
 			}
-
-            echo $sqls;
-
-            die();
 
               $resultd = mysqli_query($con, $sqls);
 
