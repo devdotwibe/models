@@ -306,6 +306,11 @@ if(!empty($userDetails['profile_pic'])){
         $followers_count = count($followed_model_unique_ids);
     }
 
+          
+  echo "ttst";
+
+    die();
+
       $profileUserId = $user_mode_id;
 
       $sql = "SELECT COUNT(*) as total_views FROM model_user_profile_views WHERE profile_user_id = ?";
@@ -315,10 +320,7 @@ if(!empty($userDetails['profile_pic'])){
       $stmt->bind_result($total_views);
       $stmt->fetch();
       $stmt->close();
-      
-  echo "ttst";
 
-    die();
 ?>
 
 
