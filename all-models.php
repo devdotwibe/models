@@ -501,8 +501,8 @@
                     <label class="filter-label">Age Range</label>
                     <div class="range-container">
                         <span class="range-value" id="ageMinValue">18</span>
-                        <input type="range" class="range-slider" min="18" max="69" value="18" id="ageRange" name="f_age" value="<?php if(isset($_POST['f_age'])) echo $_POST['f_age']; ?>" >
-                        <span class="range-value" id="ageMaxValue">69+</span>
+                        <input type="range" class="range-slider" min="18" max="65" value="18" id="ageRange" name="f_age" value="<?php if(isset($_POST['f_age'])) echo $_POST['f_age']; ?>" >
+                        <span class="range-value" id="ageMaxValue">65+</span>
                     </div>
                 </div>
 
