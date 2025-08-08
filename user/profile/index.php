@@ -190,6 +190,9 @@ if(!empty($userDetails['profile_pic'])){
         if (!$stmt) {
             die("Prepare failed: " . $con->error);
         }
+
+        $boost_follower_unique_ids = array_map('strval', $boost_follower_unique_ids);
+
         $stmt->bind_param($types_follower, ...$boost_follower_unique_ids);
         $stmt->execute();
 
