@@ -360,10 +360,6 @@
 
 			}
 			
-               echo "test";
-
-                die();
-                
               $resultd = mysqli_query($con, $sqls);
 
                 if (mysqli_num_rows($resultd) > 0) { 
@@ -383,6 +379,11 @@
 					 }else{
 						 $modalname = $rowesdw['name'];
 					 }
+
+                        echo "test";
+
+                die();
+                
 					 $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
 				?>
 			
