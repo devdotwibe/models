@@ -177,12 +177,13 @@ if(!empty($userDetails['profile_pic'])){
    
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
 
-               echo "ttst";
+   
+        $boost_follower_unique_ids = BoostedModelIdsByUser($userDetails,$con);
+
+                    echo "ttst";
 
     die();
     
-        $boost_follower_unique_ids = BoostedModelIdsByUser($userDetails,$con);
-
         $in_clause = implode(',', array_fill(0, count($boost_follower_unique_ids), '?'));
 
         $types_follower = str_repeat('s', count($boost_follower_unique_ids));
