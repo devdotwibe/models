@@ -205,6 +205,10 @@ if(!empty($userDetails['profile_pic'])){
             $stmt->close();
         }
 
+        echo "test"
+
+        die();
+
         $priority_ids = array_values(array_intersect($followed_user_ids, $filter_follower_ids));
         
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
