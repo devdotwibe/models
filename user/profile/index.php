@@ -192,12 +192,14 @@ if(!empty($userDetails['profile_pic'])){
         }
         $stmt->bind_param($types_follower, ...$boost_follower_unique_ids);
         $stmt->execute();
-        $result = $stmt->get_result();
 
-                            echo "ttst";
+                                echo "ttst";
 
     die();
+    
+        $result = $stmt->get_result();
 
+    
         $filter_follower_ids = [];
         while ($row = $result->fetch_assoc()) {
             $filter_follower_ids[] = $row['id'];
