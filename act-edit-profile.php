@@ -218,7 +218,7 @@ if ($_POST['submit_name']){
 		}*/
 		
 		
-		$arr_proof = array('live_cam','private_chat_token','group_chat_tocken','group_show','gs_min_member','gs_token_price','work_escort','in_per_hour','extended_rate','in_overnight','d_a_address','International_tours','daily_rate','weekly_rate','monthly_rate','travel_destination','video_pictures','modeling','adult_content','hourly_rate','overnight_rate','weekend_rate','adult_content_rate','live_show_rate','professional_rate','professional_service','choose_document','height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
+		$arr_proof = array('live_cam','private_chat_token','group_chat_tocken','group_show','gs_min_member','gs_token_price','work_escort','in_per_hour','extended_rate','in_overnight','d_a_address','International_tours','daily_rate','weekly_rate','monthly_rate','travel_destination','video_pictures','modeling','all_30day_access','all_30day_access_price','adult_content','hourly_rate','overnight_rate','weekend_rate','adult_content_rate','live_show_rate','professional_rate','professional_service','choose_document','height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
 		$post_data_extra = array_from_post($arr_proof);
 		$post_data_extra['unique_model_id'] = $model_unique_id;
 		if($_POST['height_type'] == 'ft'){
