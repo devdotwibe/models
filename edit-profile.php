@@ -3356,6 +3356,8 @@ $lang_list = modal_language_list();
     {
         switchTab('creator');
 
+        $('#conform_broad_cast').removeClass('active');
+
         $('#creator-content').show();
     }
      
