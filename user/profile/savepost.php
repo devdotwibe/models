@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             if($userDetails['balance'] >= $model_data['all_30day_access_price']){
 
                                 $coins = $model_data['all_30day_access_price'];
-                                $sql = "INSERT INTO `user_all_access`(`model_id`, `user_id`, `start_date`, `end_date`, `status`) VALUES ('".$_GET['model_id']."','".$_GET['user_id']."','".date("Y-m-d")."','".date('Y-m-d', strtotime("+30 days"))."','1')";
+                                $sql = "INSERT INTO `user_all_access`(`model_id`, `user_id`, `start_date`, `end_date`, `status`) VALUES ('".$_POST['model_id']."','".$userDetails['unique_id']."','".date("Y-m-d")."','".date('Y-m-d', strtotime("+30 days"))."','1')";
 
                                 DB::query($sql);
                                 DB::query("UPDATE model_user SET balance=round(%d+balance) WHERE id=%s", $coins, $modelDetails['id']);
