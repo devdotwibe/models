@@ -2247,7 +2247,8 @@ jQuery('.send_gift_btn').click(function(){
                     if (response.status === 'success') {
 
                         // StoryCloseModal();
-
+                        $('#filePreview_div_story').hide();
+                        
                         $('#story_description').val('');
                         $('#story_image').val('');
 
