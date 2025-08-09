@@ -6,8 +6,6 @@ include('../../includes/helper.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-
-
     if(isset($_POST['action']) && $_POST['action'] =='post_submit' )
     {
         $user_id      = $_POST['user_id'] ?? null;
@@ -139,8 +137,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+}
 
     if (isset($_POST['action']) && $_POST['action'] == 'get_stories') {
+
         $user_id = $_POST['user_id'] ?? null;
 
         if ($user_id) {
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "SELECT * FROM model_user_story WHERE user_id = %i ORDER BY created_date DESC",
                 $user_id
             );
-            
+
             echo json_encode([
                 "status" => "success",
                 "data"   => $stores
@@ -165,6 +165,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-} else {
-    echo "Invalid request.";
-}
+
