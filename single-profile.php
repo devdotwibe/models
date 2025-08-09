@@ -1931,7 +1931,7 @@ if (mysqli_num_rows($res_ap) > 0) {
          <div class="modal-overlay" id="success_modal">
             <div class="modal">
                 <div class="modal-header">
-                    <h2 class="modal-title">Success</h2>
+                    <h2 class="modal-title"><span id="message_status">Success</span></h2>
                     <button class="close-modal" id="closeTipModal" type="button" onclick="SuccessCloseModal()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -2292,9 +2292,25 @@ jQuery('.send_gift_btn').click(function(){
                         
                         $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
 
+                        $('#message_status').text('Success');
+
                         $('#success_modal').addClass('active');
 
                     }
+
+                    if (response.status === 'error') {
+
+                        $('#conform_all_access').removeClass('active');
+
+                        $('#message_status').append(`<img src="<?php echo SITEURL; ?>assets/images/warning.png">`);
+                        
+                        $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
+
+                        $('#success_modal').addClass('active');
+
+                    }
+
+                    
                 }
             });
 
@@ -2444,6 +2460,7 @@ jQuery('.send_gift_btn').click(function(){
                 if (response.status === 'success') {
 
                     $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
+                    $('#message_status').text('Success');
 
                     $('#conform_modal').removeClass('active');
 
