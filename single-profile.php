@@ -2162,9 +2162,14 @@ jQuery('.send_gift_btn').click(function(){
                 return;
             }
 
+            var user_id = $('#user_id').val();
+
             var formData = new FormData();
+
             formData.append('story_description', description);
             formData.append('story_image', story_image);
+
+            formData.append('user_id', user_id);
 
             formData.append('action','story_submit');
 
@@ -2420,7 +2425,9 @@ jQuery('.send_gift_btn').click(function(){
             $('#createPostForm').on('submit', function (e) {
                 e.preventDefault();
 
-                var formData = new FormData(this); 
+                var formData = new FormData(this);
+                
+                formData.append('action','post_submit');
 
                 $.ajax({
                     url: 'user/profile/savepost.php', 
