@@ -1493,6 +1493,30 @@ $lang_list = modal_language_list();
               </div>
             </div>
 
+            <div class="mb-6">
+              <div class="question-text">Are you need to give All 30 Days Access?</div>
+              <div class="radio-group mt-3">
+                <div class="radio-option">
+                  <input type="radio" id="access-yes" <?php if($extra_details['all_30day_access'] =='Yes'){ ?> checked <?php } ?> name="all_30day_access" value="Yes" >
+                  <label for="access-yes">Yes</label>
+                </div>
+                <div class="radio-option">
+                  <input type="radio" id="access-no" <?php if($extra_details['all_30day_access'] =='No'){ ?> checked <?php } ?> name="all_30day_access" value="No" >
+                  <label for="access-no">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+
+                <label class="form-label">All 30 Days access coins?</label>
+
+                <input type="number" class="form-input" name="professional_rate" value="<?php if (!empty($extra_details)) echo $extra_details['all_30day_access_price']; ?>" placeholder="e.g., 5000" min="1">
+              
+              </div>
+            </div>
+
             <div id="modeling-options" class="conditional-section <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
                                                                     echo 'show';
                                                                   } ?> ">
