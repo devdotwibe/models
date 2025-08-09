@@ -299,7 +299,7 @@ $lang_list = modal_language_list();
     </div>
 
     <!-- Basic Profile Tab -->
-    <div id="basic-content" <?php if($userDetails['as_a_model'] !='Yes') {  ?> style="display: none;" <?php }?> class="tab-content active">
+    <div id="basic-content" class="tab-content active">
 
       <form method="post" action="act-edit-profile.php" enctype="multipart/form-data">
 
@@ -1061,7 +1061,7 @@ $lang_list = modal_language_list();
     </div>
 
     <!-- Creator Settings Tab -->
-    <div id="creator-content" class="tab-content">
+    <div id="creator-content" class="tab-content"  <?php if($userDetails['as_a_model'] !='Yes') {  ?> style="display: none;" <?php }?> >
       <form method="post" id="creatorSettingsForm" action="act-edit-profile.php" enctype="multipart/form-data">
         <div class="text-center mb-8">
           <h2 class="text-2xl font-bold gradient-text mb-4">Creator Settings</h2>
