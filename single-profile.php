@@ -72,6 +72,31 @@ if (mysqli_num_rows($res_ap) > 0) {
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<style>
+
+    .plus-btn {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .plus-btn:hover {
+        background-color: #0056b3;
+        
+    }
+</style>
 <script>
     function like(postid, userid) {
 
@@ -248,8 +273,11 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 <img src="<?php echo SITEURL; ?>assets/images/model-gal-no-img.jpg" alt="<?php echo $rowesdw['name']; ?>" class="profile-avatar">
 
                             <?php } ?>
+                            
+                            <button class="plus-btn" type="button" title="Add Image">+</button>
 
-                    </div>
+                    </div>  
+
                     <div class="flex-1 profile-wrapp1">
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div>
