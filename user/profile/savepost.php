@@ -139,6 +139,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+
+    if (isset($_POST['action']) && $_POST['action'] == 'get_stories') {
+        $user_id = $_POST['user_id'] ?? null;
+
+        if ($user_id) {
+    
+            $stores = DB::query("SELECT * FROM model_user_story WHERE user_id = %i", $user_id);
+
+            echo json_encode([
+                "status" => "success",
+                "data"   => $stores
+            ]);
+        } else {
+            echo json_encode([
+                "status"  => "error",
+                "message" => "User ID is required"
+            ]);
+        }
+    }
+ 
+
+
+
 } else {
     echo "Invalid request.";
 }

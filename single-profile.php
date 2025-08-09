@@ -2138,12 +2138,40 @@ jQuery('.send_gift_btn').click(function(){
         {
 
              $('#add_story_modal').addClass('active');
+
+             FetchStories();
         }
 
         function StoryCloseModal()
         {
             $('#add_story_modal').removeClass('active');
             
+        }
+
+        function FetchStories()
+        {
+
+            var user_id = $('#user_id').val();
+            
+            $.ajax({
+
+            url: 'user/profile/savepost.php',
+
+            data:{
+
+                user_id :user_id,
+                action:'get_stories',
+            }
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+
+				if (response.status === 'success') {
+
+
+                }
+			}
+		});
         }
 
         function SubmitStory() {
