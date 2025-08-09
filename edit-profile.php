@@ -267,13 +267,30 @@ $lang_list = modal_language_list();
         <button class="tab-button active" onclick="switchTab('basic')" id="basic-tab">
           Basic Profile
         </button>
-        <button class="tab-button" onclick="switchTab('creator')" id="creator-tab">
-          Creator Settings
-        </button>
-        <button class="tab-button" onclick="switchTab('services')" id="services-tab">
-          Creator Services
-          <span class="ml-2 text-xs bg-green-500 text-white px-2 py-1 rounded-full">✓ Active</span>
-        </button>
+
+         <?php if($userDetails['as_a_model'] =='Yes') {  ?>
+
+          <button class="tab-button" onclick="switchTab('creator')" id="creator-tab">
+            Creator Settings
+          </button>
+
+        <?php } else { ?>
+
+            <button class="tab-button" onclick="switchTab('creator')" id="creator-tab">
+              Creator Settings
+            </button>
+
+          <?php } ?>
+
+        <?php if($userDetails['as_a_model'] =='Yes') {  ?>
+
+          <button class="tab-button" onclick="switchTab('services')" id="services-tab">
+            Creator Services
+            <span class="ml-2 text-xs bg-green-500 text-white px-2 py-1 rounded-full">✓ Active</span>
+          </button>
+
+        <?php }?>
+
         <button class="tab-button" onclick="switchTab('premium')" id="premium-tab">
           Premium & Privacy
           <span class="ml-2 text-xs bg-purple-500 text-white px-2 py-1 rounded-full">NEW</span>
@@ -282,7 +299,7 @@ $lang_list = modal_language_list();
     </div>
 
     <!-- Basic Profile Tab -->
-    <div id="basic-content" class="tab-content active">
+    <div id="basic-content" <?php if($userDetails['as_a_model'] !='Yes') {  ?> style="display: none;" <?php }?> class="tab-content active">
 
       <form method="post" action="act-edit-profile.php" enctype="multipart/form-data">
 
