@@ -2292,6 +2292,7 @@ jQuery('.send_gift_btn').click(function(){
                         
                         $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
 
+                        $('#message_status').html("");
                         $('#message_status').text('Success');
 
                         $('#success_modal').addClass('active');
@@ -2302,7 +2303,9 @@ jQuery('.send_gift_btn').click(function(){
 
                         $('#conform_all_access').removeClass('active');
 
-                        $('#message_status').append(`<img src="<?php echo SITEURL; ?>assets/images/warning.png">`);
+                        $('#message_status').append('<img src="<?php echo SITEURL; ?>assets/images/warning.png" alt="Warning Icon">');
+
+                        $('#message_status').html("");
                         
                         $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
 
@@ -2460,6 +2463,7 @@ jQuery('.send_gift_btn').click(function(){
                 if (response.status === 'success') {
 
                     $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
+                    $('#message_status').html("");
                     $('#message_status').text('Success');
 
                     $('#conform_modal').removeClass('active');
