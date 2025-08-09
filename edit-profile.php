@@ -2768,9 +2768,13 @@ $lang_list = modal_language_list();
       </div>
       <div class="modal-body" id="">
         <p>Do you want to become a broadcaster?</p>
+
         <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
-          <button class="btn btn-success" type="button" onclick="confirmBroadcaster()">Yes</button>
+
+          <button class="btn btn-primary" type="button" onclick="confirmBroadcaster()">Yes</button>
+
           <button class="btn btn-secondary" type="button" onclick="ConformCloseModal()">No</button>
+
         </div>
       </div>
     </div>
