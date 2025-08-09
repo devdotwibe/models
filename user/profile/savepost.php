@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
         }
 
-        $stmt = $con->prepare("INSERT INTO model_user_story (user_id,files,message,created_date) VALUES (?, ?, ?, ?, NOW())");
+        $stmt = $con->prepare("INSERT INTO model_user_story (user_id,files,message,created_date) VALUES (?, ?, ?, NOW())");
 
         $stmt->bind_param("iss", $user_id, $image_path, $story_description);
 
