@@ -438,7 +438,14 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                 <?php } ?>
 
-                                <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] != $_SESSION['log_user_unique_id']) {  ?>
+                                <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] != $_SESSION['log_user_unique_id']) { 
+                                    
+                                           $sql_ap = "SELECT * FROM model_extra_details WHERE unique_model_id = '".$_GET['m_unique_id']."'";
+
+                                           $model_data = DB::queryFirstRow($sql_ap);
+
+                                        if($model_data['all_30day_access'] == 'Yes') {
+                                    ?>
 
                                     <div onclick="ConformAllAccess()" class="action-item" id="all_access_30" bis_skin_checked="1" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -448,7 +455,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                         All Access (30 Days)
                                     </div>
 
-                                <?php } ?>
+                                <?php } } ?>
 
                                 <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
 
