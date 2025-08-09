@@ -2911,7 +2911,11 @@ $lang_list = modal_language_list();
       sections.forEach((sectionId, index) => {
         const section = document.getElementById(sectionId);
         if (section) {
-          const inputs = section.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked, input[type="text"][value!=""], input[type="number"][value!=""], select[value!=""]');
+          // const inputs = section.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked, input[type="text"][value!=""], input[type="number"][value!=""], select[value!=""]');
+
+          const inputs = section.querySelectorAll(
+            'input[type="radio"]:checked, input[type="checkbox"]:checked, input[type="text"], input[type="number"], select'
+          );
           let hasValues = false;
 
           inputs.forEach(input => {
