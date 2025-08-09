@@ -275,7 +275,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             <?php } ?>
                             
-                            <button class="plus-btn" type="button" title="Add Image">+</button>
+                            <button class="plus-btn" type="button" onclick="AddStoty()" title="Add Image">+</button>
 
                     </div>  
 
@@ -1930,6 +1930,47 @@ if (mysqli_num_rows($res_ap) > 0) {
                 </div>
             </div>
         </div>
+
+
+        <div class="modal-overlay" id="add_story_modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Add Story</h2>
+                    <button class="close-modal" type="button" onclick="CloseModal()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="addStoryForm" enctype="multipart/form-data">
+                        <!-- Description -->
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="story_description">Description</label>
+                            <textarea id="story_description" name="story_description" rows="3" 
+                                    class="form-control" placeholder="Enter your story description"></textarea>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label for="story_image">Upload Image</label>
+                            <input type="file" id="story_image" name="story_image" 
+                                accept="image/*" class="form-control">
+                        </div>
+
+                        <!-- Buttons -->
+                        <div style="margin-top: 20px; display: flex; gap: 10px;">
+                            <button class="btn btn-primary" type="submit">Submit Story</button>
+                            <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 	
 	
   <?php
@@ -2070,6 +2111,13 @@ jQuery('.send_gift_btn').click(function(){
 </script>
 
     <script>
+
+
+        function AddStoty()
+        {
+
+             $('#add_story_modal').addClass('active');
+        }
 
 
         function ConformPurchase(token,form_id,type)
