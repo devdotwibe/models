@@ -268,7 +268,11 @@ $lang_list = modal_language_list();
           Basic Profile
         </button>
 
-         <?php if($userDetails['as_a_model'] =='Yes') {  ?>
+         <?php 
+
+            $is_user_have_extra = isUserHaveExtraDetail($userDetails['unique_id'],$con);
+
+            if($userDetails['as_a_model'] =='Yes' || $is_user_have_extra  ) {  ?>
 
           <button class="tab-button" onclick="switchTab('creator')" id="creator-tab">
             Creator Settings
@@ -282,7 +286,7 @@ $lang_list = modal_language_list();
 
           <?php } ?>
 
-        <?php if($userDetails['as_a_model'] =='Yes') {  ?>
+        <?php if($userDetails['as_a_model'] =='Yes' || $is_user_have_extra ) {  ?>
 
           <button class="tab-button" onclick="switchTab('services')" id="services-tab">
             Creator Services
@@ -718,7 +722,7 @@ $lang_list = modal_language_list();
           ?>
 
           <!-- Social Links - Enhanced -->
-          <div class="form-section lg:col-span-2" <?php if ($userDetails['as_a_model'] != 'Yes') echo 'style="display:none;"'; ?>>
+          <div class="form-section lg:col-span-2" <?php if ($userDetails['as_a_model'] != 'Yes' && !$is_user_have_extra ) echo 'style="display:none;"'; ?> >
             <h3 class="text-xl font-bold gradient-text mb-6">Social Links & Platforms</h3>
             <p class="text-white/70 text-sm mb-4">Connect your social media accounts and specify if they're free to view or paid content</p>
             <div id="social-links-container">

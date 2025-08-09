@@ -42,6 +42,22 @@ function getModelFollowerIds($model_id) {
     return $followerIds;
 }
 
+	function isUserHaveExtraDetail($uni_id,$con)
+	{
+		$check_sql = "SELECT COUNT(*) AS count FROM model_extra_details WHERE unique_model_id = '".$uni_id."'";
+		$result = mysqli_query($con, $check_sql);
+		$row = mysqli_fetch_assoc($result);
+
+		if ($row['count'] > 0) {
+
+			return true;
+
+		} else {
+			
+			return false;
+		}
+	}
+
 function BoostedModelIds($con) {
 
 	$today = new DateTime();
