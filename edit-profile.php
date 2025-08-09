@@ -2753,7 +2753,7 @@ $lang_list = modal_language_list();
   </div>
 
 
-    <div class="modal-overlay" id="conform_broad_cast" style="display:none;">
+    <div class="modal-overlay" id="conform_broad_cast" >
     <div class="modal">
       <div class="modal-header">
         <h2 class="modal-title">Confirmation</h2>
