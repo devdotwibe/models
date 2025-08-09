@@ -1512,7 +1512,7 @@ $lang_list = modal_language_list();
 
                 <label class="form-label">All 30 Days access coins?</label>
 
-                <input type="number" class="form-input" name="professional_rate" value="<?php if (!empty($extra_details)) echo $extra_details['all_30day_access_price']; ?>" placeholder="e.g., 5000" min="1">
+                <input type="number" class="form-input" name="all_30day_access_price" value="<?php if (!empty($extra_details)) echo $extra_details['all_30day_access_price']; ?>" placeholder="e.g., 5000" min="1">
               
               </div>
             </div>
