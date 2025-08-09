@@ -2185,8 +2185,7 @@ jQuery('.send_gift_btn').click(function(){
 
                     if (response.status === 'success') {
 
-                        alert("Story submitted successfully!");
-                        CloseModal();
+                        StoryCloseModal();
 
                         $('#story_description').val('');
                         $('#story_image').val('');
