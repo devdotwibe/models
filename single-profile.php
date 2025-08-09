@@ -434,14 +434,17 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                 <?php } ?>
 
+                                <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] != $_SESSION['log_user_unique_id']) {  ?>
 
-                                <div onclick="ConformAllAccess()" class="action-item" id="all_access_30" bis_skin_checked="1" >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <circle cx="12" cy="12" r="4"></circle>
-                                    </svg>
-                                    All Access (30 Days)
-                                </div>
+                                    <div onclick="ConformAllAccess()" class="action-item" id="all_access_30" bis_skin_checked="1" >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <circle cx="12" cy="12" r="4"></circle>
+                                        </svg>
+                                        All Access (30 Days)
+                                    </div>
+
+                                <?php } ?>
 
                                 <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
 
