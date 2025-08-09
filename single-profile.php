@@ -2152,26 +2152,26 @@ jQuery('.send_gift_btn').click(function(){
         {
 
             var user_id = $('#user_id').val();
-            
+
             $.ajax({
 
-            url: 'user/profile/savepost.php',
+                url: 'user/profile/savepost.php',
 
-            data:{
+                data:{
 
-                user_id :user_id,
-                action:'get_stories',
-            }
-            type: 'GET',
-            dataType: 'json',
-            success: function (response) {
-
-				if (response.status === 'success') {
-
-
+                    user_id :user_id,
+                    action:'get_stories',
                 }
-			}
-		});
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+
+                    if (response.status === 'success') {
+
+
+                    }
+                }
+            });
         }
 
         function SubmitStory() {
