@@ -139,9 +139,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-    if (isset($_POST['action']) && $_POST['action'] == 'get_stories') {
+    if (isset($_GET['action']) && $_GET['action'] == 'get_stories') {
 
-        $user_id = $_POST['user_id'] ?? null;
+        $user_id = $_GET['user_id'] ?? null;
 
         if ($user_id) {
     
