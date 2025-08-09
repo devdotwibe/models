@@ -722,7 +722,7 @@ $lang_list = modal_language_list();
           ?>
 
           <!-- Social Links - Enhanced -->
-          <div class="form-section lg:col-span-2" <?php if ($userDetails['as_a_model'] != 'Yes' && !$is_user_have_extra ) echo 'style="display:none;"'; ?> >
+          <div class="form-section lg:col-span-2" <?php if ($userDetails['as_a_model'] != 'Yes') echo 'style="display:none;"'; ?> >
             <h3 class="text-xl font-bold gradient-text mb-6">Social Links & Platforms</h3>
             <p class="text-white/70 text-sm mb-4">Connect your social media accounts and specify if they're free to view or paid content</p>
             <div id="social-links-container">
@@ -1065,7 +1065,7 @@ $lang_list = modal_language_list();
     </div>
 
     <!-- Creator Settings Tab -->
-    <div id="creator-content" class="tab-content"  <?php if($userDetails['as_a_model'] !='Yes') {  ?> style="display: none;" <?php }?> >
+    <div id="creator-content" class="tab-content"  <?php if($userDetails['as_a_model'] !='Yes' && !$is_user_have_extra ) {  ?> style="display: none;" <?php }?> >
       <form method="post" id="creatorSettingsForm" action="act-edit-profile.php" enctype="multipart/form-data">
         <div class="text-center mb-8">
           <h2 class="text-2xl font-bold gradient-text mb-4">Creator Settings</h2>
