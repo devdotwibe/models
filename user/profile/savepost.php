@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $file_size = $_FILES["story_image"]["size"];
                 $file_tmp  = $_FILES["story_image"]["tmp_name"];
-                $filename  = uniqid() . '_' . basename($_FILES["post_image"]["name"]);
+                $filename  = uniqid() . '_' . basename($_FILES["story_image"]["name"]);
                 $target_file = $upload_folder_relative . $filename;
 
 
