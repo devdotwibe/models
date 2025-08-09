@@ -190,7 +190,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                 echo json_encode([
                                     "status" => "error",
-                                    "message" => "Oops !! You have unsufficient coin to get all access. Please recharge your wallet. "
+                                    "message" => "Oops !! You have unsufficient coin to get all access. Please recharge your wallet. ",
+                                    "userDetails"=>$userDetails['balance'],
+                                     "model_data"=>$model_data['all_30day_access_price'],
                                 ]);
                             }   
                         }
