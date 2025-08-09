@@ -2161,7 +2161,7 @@ jQuery('.send_gift_btn').click(function(){
 
                     user_id :user_id,
                     action:'get_stories',
-                }
+                },
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
