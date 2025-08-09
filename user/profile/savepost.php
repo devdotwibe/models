@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 // echo '<script>window.location.href="wallet.php";</script>';
 
                                 echo json_encode([
-                                    "status" => "success",
+                                    "status" => "error",
                                     "message" => "Oops !! You have unsufficient coin to get all access. Please recharge your wallet. "
                                 ]);
                             }   
@@ -200,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             // echo '<script>window.history.back();</script>';
 
                             echo json_encode([
-                                "status" => "success",
+                                "status" => "error",
                                 "message" => "Sorry!! Model has no coin to get all access. "
                             ]);
                         }   
@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         // echo '<script>window.history.back();</script>';
 
                         echo json_encode([
-                            "status" => "success",
+                            "status" => "error",
                             "message" => "There is no model. "
                         ]);
                     }
@@ -221,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // echo '<script>window.history.back();</script>';
 
                     echo json_encode([
-                        "status" => "success",
+                        "status" => "error",
                         "message" => "Something went wrong. please try again later. "
                     ]);
                 }
