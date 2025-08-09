@@ -2190,7 +2190,7 @@ jQuery('.send_gift_btn').click(function(){
 
                                         <p class="text-white text-sm">${story.message || ''}</p>
 
-                                        <span class="text-gray-400 text-xs">${story.created_date}</span>
+                                        <span class="text-gray-400 text-xs" style="display:none;">${story.created_date}</span>
 
                                     </div>
                                 `;
@@ -2248,7 +2248,7 @@ jQuery('.send_gift_btn').click(function(){
 
                         // StoryCloseModal();
                         $('#filePreview_div_story').hide();
-                        
+
                         $('#story_description').val('');
                         $('#story_image').val('');
 
