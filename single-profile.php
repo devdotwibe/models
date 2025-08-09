@@ -2168,9 +2168,11 @@ jQuery('.send_gift_btn').click(function(){
                 preview.style.display = 'none';
             }
 
-            $('#filePreview_story').after(`<button class="remove-btn absolute top-0 right-0" onclick="removePreview(this)">×</button>`);
+            $('#filePreview_story').after(`<button class="remove-btn absolute top-0 right-0" onclick="removePreviewStory(this)">×</button>`);
 
             $('#filePreview_div_story').show();
+
+            $('#story_image').hide();
         }
 
 
@@ -2328,6 +2330,17 @@ jQuery('.send_gift_btn').click(function(){
         {
              $('.post_type_sec').show();
 
+        }
+
+        function removePreviewStory(el)
+        {
+            $(el).remove();
+
+            $('#filePreview_story').attr('src',"");
+
+            $('#filePreview_div_story').hide();
+
+            $('#story_image').show();
         }
 
         function removePreview(el)
