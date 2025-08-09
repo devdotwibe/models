@@ -2771,7 +2771,7 @@ $lang_list = modal_language_list();
 
         <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
 
-          <button class="btn btn-primary" type="button" onclick="confirmBroadcaster()">Yes</button>
+          <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" onclick="confirmBroadcaster()">Yes</button>
 
           <button class="btn btn-secondary" type="button" onclick="ConformCloseModal()">No</button>
 
