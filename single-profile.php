@@ -75,7 +75,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 <style>
 
     .plus-btn {
-        position: absolute;
+        position: relative;
         bottom: 5px;
         right: 5px;
         background-color: #007bff;
@@ -90,11 +90,12 @@ if (mysqli_num_rows($res_ap) > 0) {
         display: flex;
         align-items: center;
         justify-content: center;
+        float:right;
     }
 
     .plus-btn:hover {
         background-color: #0056b3;
-        
+
     }
 </style>
 <script>
