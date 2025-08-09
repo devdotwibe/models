@@ -1989,6 +1989,11 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                         </div>
                     </form>
+
+
+                    <div id="stories_container" class="mt-4"></div>
+
+
                 </div>
             </div>
         </div>
@@ -2168,7 +2173,35 @@ jQuery('.send_gift_btn').click(function(){
 
                     if (response.status === 'success') {
 
+                        var stories = response.data;
 
+                        var container = $('#stories_container');
+
+                        container.empty();
+
+                        if (stories.length > 0) {
+
+                            stories.forEach(function (story) {
+
+                                var storyHtml = `
+                                    <div class="story-item" style="margin-bottom:15px;">
+
+                                        <img src="${story.image_url}" alt="Story Image" class="w-32 h-32 object-cover rounded-xl mb-2">
+
+                                        <p class="text-white text-sm">${story.message || ''}</p>
+
+                                        <span class="text-gray-400 text-xs">${story.created_date}</span>
+
+                                    </div>
+                                `;
+                                container.append(storyHtml);
+                            });
+
+                        } else {
+                            container.html('<p class="text-gray-400">No stories yet.</p>');
+                        }
+                    } else {
+                        console.error('Failed to fetch stories:', response);
                     }
                 }
             });
@@ -2213,10 +2246,12 @@ jQuery('.send_gift_btn').click(function(){
 
                     if (response.status === 'success') {
 
-                        StoryCloseModal();
+                        // StoryCloseModal();
 
                         $('#story_description').val('');
                         $('#story_image').val('');
+
+                        FetchStories();
 
                     }
                 },
