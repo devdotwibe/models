@@ -155,9 +155,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     $modelDetails = get_data('model_user',array('unique_id'=>$_POST['model_id']),true);
 
-                    $userDetails = get_data('model_user',array('unique_id'=>$_POST['model_id']),true);
+                    $userDetails = get_data('model_user',array('unique_id'=>$_POST['user_id']),true);
 
-                    $sql_ap = "SELECT * FROM model_extra_details WHERE unique_model_id = '".$_POST['user_id']."'";
+                    $sql_ap = "SELECT * FROM model_extra_details WHERE unique_model_id = '".$_POST['model_id']."'";
 
                     $model_data = DB::queryFirstRow($sql_ap);
 
