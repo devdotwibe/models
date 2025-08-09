@@ -1953,6 +1953,8 @@ if (mysqli_num_rows($res_ap) > 0) {
                             <label for="story_description">Description</label>
                             <textarea id="story_description" name="story_description" rows="3" 
                                     class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" placeholder="Enter your story description"></textarea>
+                       
+                        <span id="error_story_description" style="display: none;"></span>
                         </div>
 
                         <div class="form-group" style="margin-bottom: 15px;">
@@ -1968,6 +1970,8 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             <input type="file" id="story_image" name="story_image" onchange="ImageShowStory(this)" style="display: none;"
                                 accept="image/*" class="form-control">
+
+                            <span id="error_story_image" style="display: none;"></span>
 
                             <div class="relative inline-block" style="display:none" id="filePreview_div_story">
                                 
@@ -2141,6 +2145,56 @@ jQuery('.send_gift_btn').click(function(){
             $('#add_story_modal').removeClass('active');
             
         }
+
+        function SubmitStory() {
+
+            var description = $('#story_description').val();
+            var story_image = $('#story_image')[0].files[0]; 
+
+            if (!description.trim()) {
+                
+                $('#error_story_description').text('Please enter a description').show();
+                return;
+            }
+            if (!story_image) {
+            
+                $('#error_story_description').text('Please select an image.').show();
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append('story_description', description);
+            formData.append('story_image', story_image);
+
+            formData.append('action','story_submit');
+
+            $.ajax({
+                url: 'user/profile/savepost.php',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response);
+
+                    if (response.status === 'success') {
+
+                        alert("Story submitted successfully!");
+                        CloseModal();
+
+                        $('#story_description').val('');
+                        $('#story_image').val('');
+
+                    }
+                },
+                error: function(xhr) {
+                    alert("An error occurred while submitting the post.");
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
 
         function ImageShowStory(input) {
 
