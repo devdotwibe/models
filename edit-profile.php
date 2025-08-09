@@ -286,7 +286,7 @@ $lang_list = modal_language_list();
 
           <?php } ?>
 
-        <?php if($userDetails['as_a_model'] =='Yes' || $is_user_have_extra ) {  ?>
+        <?php if($userDetails['as_a_model'] =='Yes') {  ?>
 
           <button class="tab-button" onclick="switchTab('services')" id="services-tab">
             Creator Services
