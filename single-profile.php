@@ -2305,7 +2305,7 @@ jQuery('.send_gift_btn').click(function(){
 
                         $('#message_status').html("");
 
-                        $('#message_status').append('<img src="<?php echo SITEURL; ?>assets/images/warning.png" alt="Warning Icon">');
+                        $('#message_status').append('<img style="width:45px;" src="<?php echo SITEURL; ?>assets/images/warning.png" alt="Warning Icon"> Alert');
 
                         $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
 
