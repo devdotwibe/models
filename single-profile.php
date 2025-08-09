@@ -1966,7 +1966,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             </label>
 
-                            <input type="file" id="story_image" name="story_image" 
+                            <input type="file" id="story_image" name="story_image" style="display: none;"
                                 accept="image/*" class="form-control">
                         </div>
 
