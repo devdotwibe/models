@@ -145,8 +145,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($user_id) {
     
-            $stores = DB::query("SELECT * FROM model_user_story WHERE user_id = %i", $user_id);
-
+           $stores = DB::query(
+                "SELECT * FROM model_user_story WHERE user_id = %i ORDER BY created_date DESC",
+                $user_id
+            );
+            
             echo json_encode([
                 "status" => "success",
                 "data"   => $stores
