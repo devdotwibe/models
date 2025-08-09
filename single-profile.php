@@ -434,6 +434,15 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                 <?php } ?>
 
+
+                                <div onclick="ConformAllAccess()" class="action-item" id="all_access_30" bis_skin_checked="1" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <circle cx="12" cy="12" r="4"></circle>
+                                    </svg>
+                                    All Access (30 Days)
+                                </div>
+
                                 <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
 
                                     <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1997,6 +2006,38 @@ if (mysqli_num_rows($res_ap) > 0) {
                 </div>
             </div>
         </div>
+
+
+        <div class="modal-overlay" id="conform_all_access">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Confirmation</h2>
+                    <button class="close-modal" type="button" onclick="CloseModalAccess()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        Are you sure to continue? Once you click, the amount will be deducted from your account 
+                        and your 30 days will be counted from today. If you agree, please click on 
+                        <strong>Pay and Continue</strong>.
+                    </p>
+                    <div style="margin-top: 20px;">
+                        <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" id="puchare_submit">
+                            Pay and Continue
+                        </button>
+                        <button class="btn btn-secondary" type="button" onclick="CloseModalAccess()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 	
 	
   <?php
@@ -2138,6 +2179,17 @@ jQuery('.send_gift_btn').click(function(){
 
     <script>
 
+
+        function ConformAllAccess()
+        {
+            $('#conform_all_access').addClass('active');
+
+        }
+
+        function CloseModalAccess()
+        {
+            $('#conform_all_access').removeClass('active');
+        }
 
         function AddStoty()
         {
