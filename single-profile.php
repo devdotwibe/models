@@ -275,7 +275,11 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             <?php } ?>
                             
-                            <button class="plus-btn" type="button" onclick="AddStoty()" title="Add Image">+</button>
+                            <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] == $_SESSION['log_user_unique_id']) {  ?>
+
+                                <button class="plus-btn" type="button" onclick="AddStoty()" title="Add Image">+</button>
+
+                            <?php } ?>
 
                     </div>  
 
