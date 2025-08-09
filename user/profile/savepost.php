@@ -150,6 +150,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $user_id
             );
 
+            foreach($stores as $item)
+            {
+                $item->image_url =  SITEURL . $item->files;
+            }
+
             echo json_encode([
                 "status" => "success",
                 "data"   => $stores
