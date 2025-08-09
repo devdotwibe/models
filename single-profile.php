@@ -2286,7 +2286,15 @@ jQuery('.send_gift_btn').click(function(){
                 dataType: 'json',
                 success: function (response) {
 
-                    
+                    if (response.status === 'success') {
+
+                        $('#conform_all_access').removeClass('active');
+                        
+                        $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
+
+                        $('#success_modal').addClass('active');
+
+                    }
                 }
             });
 
