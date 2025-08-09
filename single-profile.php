@@ -1936,7 +1936,7 @@ if (mysqli_num_rows($res_ap) > 0) {
             <div class="modal">
                 <div class="modal-header">
                     <h2 class="modal-title">Add Story</h2>
-                    <button class="close-modal" type="button" onclick="CloseModal()">
+                    <button class="close-modal" type="button" onclick="StoryCloseModal()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1948,24 +1948,31 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 <div class="modal-body">
                     <form id="addStoryForm" enctype="multipart/form-data">
-                        <!-- Description -->
+                
                         <div class="form-group" style="margin-bottom: 15px;">
                             <label for="story_description">Description</label>
                             <textarea id="story_description" name="story_description" rows="3" 
-                                    class="form-control" placeholder="Enter your story description"></textarea>
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base" placeholder="Enter your story description"></textarea>
                         </div>
 
-                        <!-- Image Upload -->
                         <div class="form-group" style="margin-bottom: 15px;">
-                            <label for="story_image">Upload Image</label>
+                            <label for="story_image" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5">
+
+                                </circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+
+                                Upload
+
+                            </label>
+
                             <input type="file" id="story_image" name="story_image" 
                                 accept="image/*" class="form-control">
                         </div>
 
-                        <!-- Buttons -->
                         <div style="margin-top: 20px; display: flex; gap: 10px;">
                             <button class="btn btn-primary" type="submit">Submit Story</button>
-                            <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
+                            <button class="btn btn-secondary" type="button" onclick="StoryCloseModal()">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -2117,6 +2124,12 @@ jQuery('.send_gift_btn').click(function(){
         {
 
              $('#add_story_modal').addClass('active');
+        }
+
+        function StoryCloseModal()
+        {
+            $('#add_story_modal').removeClass('active');
+            
         }
 
 
