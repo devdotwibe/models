@@ -1966,13 +1966,23 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             </label>
 
-                            <input type="file" id="story_image" name="story_image" style="display: none;"
+                            <input type="file" id="story_image" name="story_image" onchange="ImageShow(this)" style="display: none;"
                                 accept="image/*" class="form-control">
+
+                            <div class="relative inline-block" style="display:none" id="filePreview_div_story">
+                                
+                                <img id="filePreview_story" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
+
+                            </div>
+
                         </div>
 
                         <div style="margin-top: 20px; display: flex; gap: 10px;">
-                            <button class="btn btn-primary" type="submit">Submit Story</button>
+
+                            <button class="btn btn-primary" type="button" onclick="SubmitStory()">Submit Story</button>
+
                             <button class="btn btn-secondary" type="button" onclick="StoryCloseModal()">Cancel</button>
+
                         </div>
                     </form>
                 </div>
@@ -2130,6 +2140,37 @@ jQuery('.send_gift_btn').click(function(){
         {
             $('#add_story_modal').removeClass('active');
             
+        }
+
+        function ImageShowStory(input) {
+
+            const file = input.files[0];
+
+            const preview = document.getElementById('filePreview_story');
+            const fileType = file.type;
+
+            if (!file) {
+                preview.style.display = 'none';
+                return;
+            }
+
+            if (fileType.startsWith('image/')) {
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+
+            }else {
+
+                preview.style.display = 'none';
+            }
+
+            $('#filePreview_story').after(`<button class="remove-btn absolute top-0 right-0" onclick="removePreview(this)">×</button>`);
+
+            $('#filePreview_div_story').show();
         }
 
 
