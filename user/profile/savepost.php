@@ -137,6 +137,97 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+
+    if(isset($_POST['action']) && $_POST['action'] =='pay_access' )
+    {
+        $user_id      = $_POST['user_id'] ?? null;
+
+        $model_id      = $_POST['model_id'] ?? null;
+
+     
+        if($_POST['model_id'] == $_POST['user_id']){
+
+			echo '<script>alert("You cant get all access your own profile.");</script>';
+			echo '<script>window.history.back();</script>';
+		}
+
+                if($_POST['model_id'] && $_POST['user_id']){
+
+                    $modelDetails = get_data('model_user',array('unique_id'=>$_POST['model_id']),true);
+
+                    $userDetails = get_data('model_user',array('unique_id'=>$_POST['model_id']),true);
+
+                    $sql_ap = "SELECT * FROM model_extra_details WHERE unique_model_id = '".$_POST['user_id']."'";
+
+                    $model_data = DB::queryFirstRow($sql_ap);
+
+                    if($modelDetails&&$model_data){
+
+                        if($model_data['all_30day_access_price']>0){
+
+                            if($userDetails['balance'] >= $model_data['all_30day_access_price']){
+
+                                $coins = $model_data['all_30day_access_price'];
+                                $sql = "INSERT INTO `user_all_access`(`model_id`, `user_id`, `start_date`, `end_date`, `status`) VALUES ('".$_GET['model_id']."','".$_GET['user_id']."','".date("Y-m-d")."','".date('Y-m-d', strtotime("+30 days"))."','1')";
+
+                                DB::query($sql);
+                                DB::query("UPDATE model_user SET balance=round(%d+balance) WHERE id=%s", $coins, $modelDetails['id']);
+                        
+                                DB::query("UPDATE model_user SET balance=round(balance-%d) WHERE id=%s", $coins, $userDetails['id']);
+
+                                    // echo '<script>alert("You have successfully subscribe 30 days all access. It will reflect at your profile within 2-3 hour.");</script>';
+                                    // echo '<script>window.history.back();</script>';	
+
+                                    echo json_encode([
+                                        "status" => "success",
+                                        "message" => "You have successfully subscribe 30 days all access. It will reflect at your profile within 2-3 hour."
+                                    ]);
+                            }
+
+                            else{
+                                // echo '<script>alert("Oops !! You have unsufficient coin to get all access. Please recharge your wallet. ");</script>';
+                                // echo '<script>window.location.href="wallet.php";</script>';
+
+                                echo json_encode([
+                                    "status" => "success",
+                                    "message" => "Oops !! You have unsufficient coin to get all access. Please recharge your wallet. "
+                                ]);
+                            }   
+                        }
+                        else{
+
+                            // echo '<script>alert("Sorry!! Model has no coin to get all access.");</script>';
+                            // echo '<script>window.history.back();</script>';
+
+                            echo json_encode([
+                                "status" => "success",
+                                "message" => "Sorry!! Model has no coin to get all access. "
+                            ]);
+                        }   
+                    }
+                    else{
+                        // echo '<script>alert("There is no model.");</script>';
+                        // echo '<script>window.history.back();</script>';
+
+                        echo json_encode([
+                            "status" => "success",
+                            "message" => "There is no model. "
+                        ]);
+                    }
+                    
+                }
+                else{
+                    // echo '<script>alert("Something went wrong. please try again later.");</script>';
+                    // echo '<script>window.history.back();</script>';
+
+                    echo json_encode([
+                        "status" => "success",
+                        "message" => "Something went wrong. please try again later. "
+                    ]);
+                }
+
+    }
+
 }
 
     if (isset($_GET['action']) && $_GET['action'] == 'get_stories') {

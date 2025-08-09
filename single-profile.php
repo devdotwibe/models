@@ -2036,7 +2036,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         <strong>Pay and Continue</strong>.
                     </p>
                     <div style="margin-top: 20px;">
-                        <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" id="puchare_submit">
+                        <button class="btn-primary px-7 sm:px-3 py-6 text-white" onclick="PayAccess()" type="button" id="puchare_submit">
                             Pay and Continue
                         </button>
                         <button class="btn btn-secondary" type="button" onclick="CloseModalAccess()">Cancel</button>
@@ -2264,6 +2264,32 @@ jQuery('.send_gift_btn').click(function(){
                     }
                 }
             });
+        }
+
+        function PayAccess()
+        {
+            var user_id = "<?php echo $_SESSION["log_user_id"] ?>";
+
+            var model_id = "<?php echo $_GET["m_unique_id"] ?>";
+
+            $.ajax({
+
+                url: 'user/profile/savepost.php',
+
+                data:{
+
+                    user_id :user_id,
+                    model_id:model_id,
+                    action:'pay_access',
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function (response) {
+
+                    
+                }
+            });
+
         }
 
         function SubmitStory() {
