@@ -256,6 +256,10 @@
 				}
 
 
+                echo 'tetst';
+
+                die();
+
                 $unique_id_List = implode(',', $premium_filterids);
 
                 echo $unique_id_List;
