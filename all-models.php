@@ -837,8 +837,7 @@ $(document).on('click', function(e) {
 // Handle Profile Actions
 function handleProfileAction(button, action, modelid) {
     // Add visual feedback
-      console.log(button);
-    const $button = $(button)
+    const $button = button instanceof jQuery ? button : $(button);
 
     console.log($button);
 
