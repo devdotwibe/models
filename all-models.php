@@ -134,13 +134,7 @@
 
             $boosted_user_ids =[];
 
-            $premium_filterids =[];
-
-            $premium_filterids = PermiumFilterids($con);
-
             $condtion = "";
-
-            $exclude_message_alreadyIds= [];
 
             if(isset($_SESSION["log_user_id"])){
                 
@@ -259,9 +253,7 @@
 				}
 
 
-            $unique_id_List = "'" . implode("','", $premium_filterids) . "'";
-
-            $where .= " AND mu.unique_id IN ($unique_id_List)";
+            $where .= " AND md.status =='Published'";
 
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
 		
