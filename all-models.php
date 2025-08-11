@@ -343,9 +343,11 @@
                       
                     $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
 
-                    $result_count = mysqli_query($con, $sqls_count);
 
                           echo $result_count;
+                          
+                    $result_count = mysqli_query($con, $sqls_count);
+
 
                         die();
 
