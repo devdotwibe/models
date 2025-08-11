@@ -260,7 +260,7 @@
                 {
                     $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
 
-                    if($privacy_setting['verified_photos'])
+                    if($privacy_setting['verified_photos'] && isset($_POST['verified_photos']) && !empty($_POST['verified_photos']) )
                     {   
                         $where .= " AND md.status = 'Published'";
                     }
@@ -269,7 +269,7 @@
 
                     $excludeIds = "'" . implode("','", $getActiveUsers['user_ids']) . "'";
 
-                    if($privacy_setting['exclude_message_already'])
+                    if($privacy_setting['exclude_message_already'] && isset($_POST['exclude_message_already']) && !empty($_POST['exclude_message_already']))
                     {   
                         $where .= " AND mu.unique_id NOT IN ($excludeIds)";
                     }
