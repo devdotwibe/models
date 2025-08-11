@@ -2716,7 +2716,7 @@ $lang_list = modal_language_list();
 
               <div class="mt-4">
                 <label class="form-label">Auto Message Template</label>
-                <textarea class="form-input" rows="3" onchange="updateSettings(this,'message_template')" name="message_template" placeholder="The following message will be sent when you like someone from browse...">Okay wow... you just raised the bar here! My chat keeps disappearing like it's shy or something, but I'm definitely not! 😊</textarea>
+                <textarea class="form-input" rows="3" onchange="updateSettings(this,'message_template')" name="message_template" placeholder="The following message will be sent when you like someone from browse..."><?php echo $privacy_setting['message_template'] ?></textarea>
                 <p class="help-text">If username appears in the message it will be replaced with their username</p>
               </div>
             </div>
