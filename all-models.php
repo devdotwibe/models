@@ -171,6 +171,10 @@
                 $followed_user_ids = array_merge($followed_user_ids, $filteredFollowedIds);
             }
 
+            echo "tset";
+
+            die();
+            
 			$limit = 8; 
 			if(isset($_GET['offset'])){
 			$offset = $_GET['offset'];
