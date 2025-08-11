@@ -841,6 +841,8 @@ function ActionBtn(element,action)
             $(element).css('transform', 'scale(1)');
         }, 200);
 
+        const modelid = $(element).attr('modelid');
+
      const $card = $(element).closest('.profile-card');
     const profileName = $(element).find('.profile-name').text().split(',')[0];
 
