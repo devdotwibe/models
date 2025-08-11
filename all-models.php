@@ -136,7 +136,7 @@
 
             $premium_filterids =[];
 
-            $boosted_user_ids = PermiumFilterids($con);
+            $premium_filterids = PermiumFilterids($con);
 
             $condtion = "";
 
@@ -347,20 +347,24 @@
                       
                     // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
 
-                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.as_a_model = 'Yes' " . $where;
+                    $unique_id_List = implode(',', $premium_filterids);
+
+                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.as_a_model = 'Yes' WHERE mu.unique_id IN ($unique_id_List) " . $where;
                                                             
                     $result_count = mysqli_query($con, $sqls_count);
 
                     $row_cnt = mysqli_fetch_assoc($result_count);
                 
-                    $sqls = "SELECT * FROM model_user mu WHERE as_a_model = 'Yes' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                    $sqls = "SELECT * FROM model_user mu WHERE as_a_model = 'Yes' WHERE mu.unique_id IN ($unique_id_List) " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
 
                     
                 }
                 else
                 {
                         $idList = implode(',', $onlineUserIds);
-                        
+
+                        $unique_id_List = implode(',', $premium_filterids);
+
                         if (!empty($boosted_user_ids)) {
                         
                             $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
@@ -370,12 +374,12 @@
                             $order = " ORDER BY RAND() ";
                         }
 
-                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList)";
+                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList) WHERE mu.unique_id IN ($unique_id_List)";
                         $result_count = mysqli_query($con, $sqls_count);
                         
                         $row_cnt = mysqli_fetch_assoc($result_count);
                         
-                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList) $order LIMIT $limit OFFSET $offset";
+                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList) WHERE mu.unique_id IN ($unique_id_List) $order LIMIT $limit OFFSET $offset";
 
                 }
 
