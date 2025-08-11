@@ -153,6 +153,9 @@
 
             $followed_user_ids = [];
 
+            $user_have_preminum =false;
+
+
             if(!empty($userDetails) && count($userDetails) > 0)
             {
                 $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
@@ -228,35 +231,38 @@
 					}
 				}
 			
-				if (isset($_POST['f_body_type']) && $_POST['f_body_type'] != 'any') {
-                    $where .= ' AND md.body_type = "' . $_POST['f_body_type'] . '"';
+                if($user_have_preminum)
+                {
+                    if (isset($_POST['f_body_type']) && $_POST['f_body_type'] != 'any') {
+                        $where .= ' AND md.body_type = "' . $_POST['f_body_type'] . '"';
+                    }
+
+                    if (isset($_POST['f_ethnicity']) && $_POST['f_ethnicity'] != 'any') {
+                        $where .= ' AND md.ethnicity = "' . $_POST['f_ethnicity'] . '"';
+                    }
+
+                    if (isset($_POST['f_hair_color']) && $_POST['f_hair_color'] != 'any') {
+                        $where .= ' AND md.hair_color = "' . $_POST['f_hair_color'] . '"';
+                    }
+
+                    if (isset($_POST['f_eye_color']) && $_POST['f_eye_color'] != 'any') {
+                        $where .= ' AND md.eye_color = "' . $_POST['f_eye_color'] . '"';
+                    }
+
+                    if (isset($_POST['f_language']) && $_POST['f_language'] != 'any') {
+                        $where .= ' AND mu.english_ability = "' . $_POST['f_language'] . '"';
+                    }
+
+                    if(isset($_POST['f_height']) && !empty(($_POST['f_height']))){ 
+                        $where .= ' AND md.height_in_cm >= '.$_POST['f_height'].' AND md.height_in_cm <= '.($_POST['f_height']+1);
+                    }
+                    if(isset($_POST['f_weight']) && !empty(($_POST['f_weight']))){ 
+                        $where .= ' AND md.weight_in_kg >= '.$_POST['f_weight'].' AND md.weight_in_kg <= '.($_POST['f_weight']+1);
+                    }   
                 }
 
-                if (isset($_POST['f_ethnicity']) && $_POST['f_ethnicity'] != 'any') {
-                    $where .= ' AND md.ethnicity = "' . $_POST['f_ethnicity'] . '"';
-                }
 
-                if (isset($_POST['f_hair_color']) && $_POST['f_hair_color'] != 'any') {
-                    $where .= ' AND md.hair_color = "' . $_POST['f_hair_color'] . '"';
-                }
-
-                if (isset($_POST['f_eye_color']) && $_POST['f_eye_color'] != 'any') {
-                    $where .= ' AND md.eye_color = "' . $_POST['f_eye_color'] . '"';
-                }
-
-                if (isset($_POST['f_language']) && $_POST['f_language'] != 'any') {
-                    $where .= ' AND mu.english_ability = "' . $_POST['f_language'] . '"';
-                }
-
-				if(isset($_POST['f_height']) && !empty(($_POST['f_height']))){ 
-					$where .= ' AND md.height_in_cm >= '.$_POST['f_height'].' AND md.height_in_cm <= '.($_POST['f_height']+1);
-				}
-				if(isset($_POST['f_weight']) && !empty(($_POST['f_weight']))){ 
-					$where .= ' AND md.weight_in_kg >= '.$_POST['f_weight'].' AND md.weight_in_kg <= '.($_POST['f_weight']+1);
-				}
-
-
-                if(!empty($userDetails) && count($userDetails) > 0)
+                if(!empty($userDetails) && count($userDetails) > 0 && $user_have_preminum)
                 {
                     $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
 
@@ -647,7 +653,7 @@
             </div>
 
             <!-- Premium Filters -->
-            <div class="filter-section">
+            <div class="filter-section" <?php if(!$user_have_preminum) {?>style="opacity:0.2" <?php }?> >
                 <h3 class="filter-section-title">
                     <i class="fas fa-crown"></i>
                     Premium Filters
