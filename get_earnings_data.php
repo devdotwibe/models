@@ -114,17 +114,41 @@ if (isset($_SESSION["log_user_id"])) {
 
             if ($result->num_rows > 0) {
    
-                $updateSql = "UPDATE model_privacy_settings SET `$field_name` = ?, updated_at = ? WHERE unique_model_id = ?";
-                $updateStmt = $con->prepare($updateSql);
-                $updateStmt->bind_param("iss", $value, $timestamp, $unique_model_id);
-                $updateStmt->execute();
+                if( $field_name == 'message_template')
+                {
+                    $updateSql = "UPDATE model_privacy_settings SET `$field_name` = ?, updated_at = ? WHERE unique_model_id = ?";
+                    $updateStmt = $con->prepare($updateSql);
+                    $updateStmt->bind_param("sss", $value, $timestamp, $unique_model_id);
+                    $updateStmt->execute();
+                }
+                else
+                {
+                    $updateSql = "UPDATE model_privacy_settings SET `$field_name` = ?, updated_at = ? WHERE unique_model_id = ?";
+                    $updateStmt = $con->prepare($updateSql);
+                    $updateStmt->bind_param("iss", $value, $timestamp, $unique_model_id);
+                    $updateStmt->execute();
+
+                }
+        
             } else {
            
-                $insertSql = "INSERT INTO model_privacy_settings (unique_model_id, `$field_name`, created_at, updated_at)
+                if( $field_name == 'message_template')
+                {
+                    $insertSql = "INSERT INTO model_privacy_settings (unique_model_id, `$field_name`, created_at, updated_at)
                             VALUES (?, ?, ?, ?)";
-                $insertStmt = $con->prepare($insertSql);
-                $insertStmt->bind_param("siss", $unique_model_id, $value, $timestamp, $timestamp);
-                $insertStmt->execute();
+                    $insertStmt = $con->prepare($insertSql);
+                    $insertStmt->bind_param("ssss", $unique_model_id, $value, $timestamp, $timestamp);
+                    $insertStmt->execute();
+                }
+                else
+                {
+                    $insertSql = "INSERT INTO model_privacy_settings (unique_model_id, `$field_name`, created_at, updated_at)
+                            VALUES (?, ?, ?, ?)";
+                    $insertStmt = $con->prepare($insertSql);
+                    $insertStmt->bind_param("siss", $unique_model_id, $value, $timestamp, $timestamp);
+                    $insertStmt->execute();
+                }
+     
             }
 
             echo json_encode([
