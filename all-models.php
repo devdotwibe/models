@@ -840,7 +840,7 @@ function handleProfileAction(button, action, modelid) {
 
     button.css('transform', 'scale(1.2)');
     setTimeout(() => {
-        $button.css('transform', 'scale(1)');
+        button.css('transform', 'scale(1)');
     }, 200);
 
     const $card = button.closest('.profile-card');
