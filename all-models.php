@@ -837,7 +837,7 @@
 </div>
 
 
-  <div class="modal-overlay" id="success_modal" style="display:none;">
+  <div class="modal-overlay" id="success_modal" style="display:block;">
     <div class="modal">
       <div class="modal-header">
         <h2 class="modal-title">Success</h2>
@@ -941,7 +941,7 @@ function ActionBtn(element,action)
 
 
                         console.log(response);
-                    if(response.status =='success')
+                    if(response.status =="success")
                     {
 
                         $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
