@@ -116,6 +116,11 @@ function BoostedModelIds($con) {
 		 return array_column($validPreminumids, 'user_unique_id');
 	}
 
+	function ExcludeMessageIds($con)
+	{
+		
+	}
+
 	function BoostedModelIdsByUser($userDetails, $con) {
 
 		$today = new DateTime();

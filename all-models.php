@@ -140,11 +140,14 @@
 
             $condtion = "";
 
+            $exclude_message_alreadyIds= [];
+
             if(isset($_SESSION["log_user_id"])){
                 
                 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
                 $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
+
             }
             else
             {
@@ -258,8 +261,9 @@
 
             $unique_id_List = "'" . implode("','", $premium_filterids) . "'";
 
+            $where .=  'AND mu.unique_id IN ($unique_id_List)';
        
-			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' AND mu.unique_id IN ($unique_id_List) ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
+			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
 		
 
 			}else if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
