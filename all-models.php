@@ -153,7 +153,7 @@
 
             $followed_user_ids = [];
 
-            $user_have_preminum =false;
+            $user_have_preminum =true;
 
 
             if(!empty($userDetails) && count($userDetails) > 0)
