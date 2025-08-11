@@ -967,8 +967,9 @@ function ActionBtn(element,action)
                         console.log(response);
                     if(response.status =="success")
                     {
+                        $('#message_pag').remove();
 
-                        $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
+                        $('#modal_success_message').prepend(`<p id="message_pag" class="success-text">${response.message}</p>`);
 
                         $('#success_modal').addClass('active');
 
