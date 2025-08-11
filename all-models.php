@@ -938,7 +938,7 @@ function ActionBtn(element,action)
 				dataType:'json',
 				success: function(response){ 
 
-                    if(response.status)
+                    if(response.status =='success')
                     {
 
                         $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
