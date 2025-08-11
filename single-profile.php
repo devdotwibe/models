@@ -502,7 +502,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
     <!-- Profile Bio & Stats -->
     <div class="container mx-auto py-6 sm:py-8 px-4 md:px-0">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 single-profile">
             <div class="md:col-span-2">
 			<?php if(!empty($rowesdw['user_bio']) || !empty($rowesdw['hobbies'])){ ?>
                 <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
