@@ -258,13 +258,13 @@
 
             $unique_id_List = implode(',', $premium_filterids);
 
-            echo $unique_id_List;
+       
+			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' WHERE mu.unique_id IN ($unique_id_List) ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
+		
+                 echo $sqls;
 
             die();
 
-        
-			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' WHERE mu.unique_id IN ($unique_id_List) ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
-		
 			}else if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
 				
 			$sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' "; 
