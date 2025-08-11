@@ -2693,6 +2693,8 @@ $lang_list = modal_language_list();
                   <option value="college" <?php if ($privacy_setting['education_level'] =='college') { ?> selected <?php } ?> > College</option>
                   <option value="university" <?php if ($privacy_setting['education_level'] =='university') { ?> selected <?php } ?> >University</option>
                   <option value="graduate"  <?php if ($privacy_setting['education_level'] =='graduate') { ?> selected <?php } ?>>Graduate Degree</option>
+                  <option value="masters" <?php if ($privacy_setting['education_level'] =='masters') { ?> selected <?php } ?>>Masters</option>
+                  <option value="phd" <?php if ($privacy_setting['education_level'] =='phd') { ?> selected <?php } ?> >PhD</option>
                 </select>
               </div>
             </div>

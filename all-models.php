@@ -768,6 +768,30 @@
                     </select>
                 </div>
 
+                <div class="filter-group">
+                    <label class="filter-label">No Children</label>
+                    <select class="filter-select" name="children_preference" id="noChildrenFilter">
+                        <option value="">Any</option>
+                        <option value="no-children" <?php if (isset($_POST['children_preference'])  && $_POST['children_preference'] =='no-children') { ?> selected <?php } ?> >No Children</option>
+                        <option value="wants-children" <?php if (isset($_POST['children_preference'])  && $_POST['children_preference'] =='wants-children') { ?> selected <?php } ?> >Wants Children</option>
+                        <option value="has-children" <?php if (isset($_POST['children_preference'])  && $_POST['children_preference'] =='has-children') { ?> selected <?php } ?> >Has Children</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Education</label>
+                    <select class="filter-select" id="educationFilter" name="education_level">
+                        <option value="any">Any</option>
+                        <option value="high-school" <?php if ( isset($_POST['education_level'])  && $_POST['education_level'] =='high-school') { ?> selected <?php } ?> >High School</option>
+                        <option value="college" <?php if (isset($_POST['education_level'])  && $_POST['education_level'] =='college') { ?> selected <?php } ?> > College</option>
+                        <option value="university" <?php if (isset($_POST['education_level'])  && $_POST['education_level'] =='university') { ?> selected <?php } ?> >University</option>
+                        <option value="graduate"  <?php if (isset($_POST['education_level'])  && $_POST['education_level'] =='graduate') { ?> selected <?php } ?>>Graduate Degree</option>
+                        <option value="masters" <?php if (isset($_POST['education_level'])  && $_POST['education_level'] =='masters') { ?> selected <?php } ?>>Masters</option>
+                        <option value="phd" <?php if (isset($_POST['education_level'])  && $_POST['education_level'] =='phd') { ?> selected <?php } ?> >PhD</option>
+
+                    </select>
+                </div>
+
                 <?php /*?><div class="filter-group">
                     <label class="filter-label">No Children</label>
                     <select class="filter-select" id="noChildrenFilter">
