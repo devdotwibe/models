@@ -2702,7 +2702,8 @@ $lang_list = modal_language_list();
           <div>
             <h4 class="text-lg font-semibold mb-4">🧪 Experimental Features</h4>
             <div class="space-y-4">
-              <div class="flex justify-between items-center exprt">
+              
+              <!-- <div class="flex justify-between items-center exprt">
                 <div>
                   <label class="form-label mb-0">🤖 Auto Message Likes</label>
                   <p class="text-sm text-white/60">Automatically send a message to people when you like them in browse.</p>
@@ -2711,7 +2712,7 @@ $lang_list = modal_language_list();
                   <input type="checkbox">
                   <span class="toggle-slider"></span>
                 </label>
-              </div>
+              </div> -->
 
               <div class="mt-4">
                 <label class="form-label">Auto Message Template</label>
