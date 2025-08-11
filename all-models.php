@@ -653,7 +653,7 @@
             </div>
 
             <!-- Premium Filters -->
-            <div class="filter-section" <?php if(!$user_have_preminum) {?>style="opacity:0.2" <?php }?> >
+            <div class="filter-section" <?php if(!$user_have_preminum) {?>style="opacity:0.2; pointer-events: none; user-select: none;" <?php }?> >
                 <h3 class="filter-section-title">
                     <i class="fas fa-crown"></i>
                     Premium Filters
