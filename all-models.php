@@ -480,10 +480,10 @@
 						  <i class="fas fa-user-plus"></i>
 						</button>
 					<?php } ?>
-                        <button class="action-btn like" title="Like" onclick="ActionBtn(this,'Like')" modelid="<?php echo $rowesdw['id']; ?>" >
+                        <button class="action-btn like" title="Like" onclick="ActionBtn(this,'like')" modelid="<?php echo $rowesdw['id']; ?>" >
                             <i class="fas fa-heart"></i>
                         </button>
-                        <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'Pass')" modelid="<?php echo $rowesdw['id']; ?>" >
+                        <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>" >
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -835,6 +835,12 @@ offset = offset+limit;
 
 function ActionBtn(element,action)
 {
+
+     $(element).css('transform', 'scale(1.2)');
+        setTimeout(() => {
+            $(element).css('transform', 'scale(1)');
+        }, 200);
+
      const $card = $(element).closest('.profile-card');
     const profileName = $(element).find('.profile-name').text().split(',')[0];
 
