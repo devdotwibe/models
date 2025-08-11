@@ -869,7 +869,11 @@ function ActionBtn(element,action)
 				data:{modelid:modelid},
 				dataType:'json',
 				success: function(response){ 
-					showNotification(`You liked ${profileName}!`, 'success');
+
+                    if(response.success)
+                    {
+					    showNotification(`You liked ${profileName}!`, 'success');
+                    }
 				}
 			});
 			
