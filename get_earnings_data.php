@@ -92,7 +92,10 @@ if (isset($_SESSION["log_user_id"])) {
                                 'read_receipt',
                                 'show_visit',
                                 'appear_offline',
-                                'show_join_date'
+                                'show_join_date',
+                                'verified_photos',
+                                'exclude_message_already',
+                                'show_liked'
                                 ];
 
             if (!in_array($field_name, $allowed_fields)) {
