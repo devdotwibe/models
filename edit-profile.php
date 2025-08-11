@@ -1497,17 +1497,17 @@ $lang_list = modal_language_list();
               <div class="question-text">Are you need to give All 30 Days Access?</div>
               <div class="radio-group mt-3">
                 <div class="radio-option">
-                  <input type="radio" id="access-yes" <?php if($extra_details['all_30day_access'] =='Yes'){ ?> checked <?php } ?> name="all_30day_access" value="Yes" >
+                  <input type="radio" id="access-yes" onchange="AccessChange(this)" <?php if($extra_details['all_30day_access'] =='Yes'){ ?> checked <?php } ?> name="all_30day_access" value="Yes" >
                   <label for="access-yes">Yes</label>
                 </div>
                 <div class="radio-option">
-                  <input type="radio" id="access-no" <?php if($extra_details['all_30day_access'] =='No'){ ?> checked <?php } ?> name="all_30day_access" value="No" >
+                  <input type="radio" id="access-no" onchange="AccessChange(this)" <?php if($extra_details['all_30day_access'] =='No'){ ?> checked <?php } ?> name="all_30day_access" value="No" >
                   <label for="access-no">No</label>
                 </div>
               </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 all_access_coin" <?php if($extra_details['all_30day_access'] =='No'){ ?> Style="display:none;" <?php } ?> >
               <div>
 
                 <label class="form-label">All 30 Days access coins?</label>
@@ -3373,6 +3373,21 @@ $lang_list = modal_language_list();
         button.textContent = 'Withdraw';
         button.disabled = false;
       }, 2000);
+    }
+
+    function AccessChange(element)
+    {
+        var ischecked = $(element).ischecked().val('Yes');
+
+        if(ischecked)
+        {
+
+            $('.all_access_coin').show();
+          
+        }
+        {
+            $('.all_access_coin').hide();
+        }
     }
 
     function CreateSetting()
