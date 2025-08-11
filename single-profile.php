@@ -455,7 +455,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                         if($model_data['all_30day_access'] == 'Yes' && !$isuser_have_access) {
                                     ?>
 
-                                    <div onclick="ConformAllAccess()" class="action-item" id="all_access_30" bis_skin_checked="1" >
+                                    <div onclick="ConformAllAccess('<?php echo $model_data['all_30day_access_price'] ?>')" class="action-item" id="all_access_30" bis_skin_checked="1" >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <circle cx="12" cy="12" r="4"></circle>
@@ -2046,7 +2046,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 <div class="modal-body">
                     <p>
-                        Are you sure to continue? Once you click, the amount will be deducted from your account 
+                        Are you sure to continue? Once you click, the amount  <strong><span id="amountValue"></span></strong>  will be deducted from your account 
                         and your 30 days will be counted from today. If you agree, please click on 
                         <strong>Pay and Continue</strong>.
                     </p>
@@ -2202,8 +2202,11 @@ jQuery('.send_gift_btn').click(function(){
     <script>
 
 
-        function ConformAllAccess()
+        function ConformAllAccess(amount)
         {
+
+            $('#amountValue').val(amount);
+            
             $('#conform_all_access').addClass('active');
 
         }
