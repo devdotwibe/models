@@ -835,8 +835,8 @@ offset = offset+limit;
 
 function ActionBtn(element,action)
 {
-     const $card = element.closest('.profile-card');
-    const profileName = element.find('.profile-name').text().split(',')[0];
+     const $card = $(element).closest('.profile-card');
+    const profileName = $(element).find('.profile-name').text().split(',')[0];
 
     switch (action) {
         case 'connect':
