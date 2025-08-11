@@ -8801,6 +8801,12 @@ button.btn-secondary.add-intrst {
         flex-wrap: wrap;
     }
 
+.enhanced5 .modal-body>div{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
 }
 
 
@@ -9044,6 +9050,11 @@ width:auto;
     .exprt p {
         width: calc(100% - 60px);
     }
+
+    .enhanced5 .modal-body>div .btn-primary {
+    padding: 8px 12px;
+    font-size: 12px;
+}
 
 }
 

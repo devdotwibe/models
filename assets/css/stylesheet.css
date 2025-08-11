@@ -10058,6 +10058,7 @@ body.advt-page.my-purpose .scroll-indicator {
     .enhanced5 .profile-info {
         height: auto !important;
         padding-top: 40px !important;
+        padding-bottom: 40px;
     }
 
     .enhanced5 .profile-header {

@@ -1921,7 +1921,7 @@ if (mysqli_num_rows($res_ap) > 0) {
             </div>
 
 
-        <div class="modal-overlay" id="conform_modal">
+        <div class="modal-overlay single-profile-modal" id="conform_modal">
             <div class="modal">
                 <div class="modal-header">
                 <h2 class="modal-title">Unlock <span id="file_type">Image</span></h2>
