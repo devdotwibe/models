@@ -10780,6 +10780,21 @@ body.advt-page.my-purpose .scroll-indicator {
         font-size: 12px;
     }
 
+    .profile-info .profile-flex-wrapp {
+  margin: 0 auto;
+}
+
+    .profile-info .profile-flex-wrapp .profile-avatar-container {
+  margin: 0 auto;
+}
+.profile-info .profile-flex-wrapp  .profile-wrapp1>div>div{
+display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
 }
 
 @media (max-width: 768px) {
