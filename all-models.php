@@ -1195,10 +1195,12 @@ function showNotification(message, type = 'info') {
                 toggle.addEventListener('click', function() {
                     this.classList.toggle('active');
 
+                    console.log(name,'active');
+
                    if (this.classList.contains('active')) {
-                        $(`${name}`).val('Yes');
+                        $(`#${name}`).val('Yes');
                     } else {
-                        $(`${name}`).val('No');
+                        $(`#${name}`).val('No');
                     }
                 });
             }
