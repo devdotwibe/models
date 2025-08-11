@@ -1189,6 +1189,8 @@ function showNotification(message, type = 'info') {
 
         // Toggle Switch Functionality
         function setupToggle(toggle,name) {
+
+            console.log(name,'namenamename');
             if (toggle) {
                 toggle.addEventListener('click', function() {
                     this.classList.toggle('active');
