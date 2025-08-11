@@ -372,13 +372,14 @@
                         $row_cnt = mysqli_fetch_assoc($result_count);
                         $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $order LIMIT $limit OFFSET $offset";
 
-                        echo $sqls;
-
-                    die();
                 }
 
 
 			}
+
+                  echo $sqls;
+
+                    die();
             
               $resultd = mysqli_query($con, $sqls);
 
