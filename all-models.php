@@ -347,7 +347,7 @@
                                                             
                     $result_count = mysqli_query($con, $sqls_count);
 
-                    echo "test"
+                    echo "test";
                     die();
 
                     $row_cnt = mysqli_fetch_assoc($result_count);
