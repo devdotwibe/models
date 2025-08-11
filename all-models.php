@@ -134,6 +134,10 @@
 
             $boosted_user_ids =[];
 
+            $premium_filterids =[];
+
+            $boosted_user_ids = PermiumFilterids($con);
+
             $condtion = "";
 
             if(isset($_SESSION["log_user_id"])){
@@ -370,6 +374,7 @@
                         $result_count = mysqli_query($con, $sqls_count);
                         
                         $row_cnt = mysqli_fetch_assoc($result_count);
+                        
                         $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList) $order LIMIT $limit OFFSET $offset";
 
                 }

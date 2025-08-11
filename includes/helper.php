@@ -93,6 +93,29 @@ function BoostedModelIds($con) {
 
 }
 
+	function PermiumFilterids($con) {
+
+		$query = "SELECT unique_model_id, verified_photos 
+				FROM model_privacy_settings";
+
+		$result = mysqli_query($con, $query);
+
+		$validPreminumids = [];
+
+		while ($row = mysqli_fetch_assoc($result)) {
+
+			if($row['verified_photos'])
+			{
+				$validPreminumids[] = [
+					'user_unique_id' => $row['user_unique_id']
+				];
+			}
+			
+		}
+		
+		return $sortedUserIds = array_column($validPreminumids, 'user_unique_id');
+	}
+
 	function BoostedModelIdsByUser($userDetails, $con) {
 
 		$today = new DateTime();
