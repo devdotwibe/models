@@ -825,12 +825,14 @@ $(document).on('click', function(e) {
     if (btn.length) {
         const action = btn.hasClass('connect') ? 'connect' :
                        btn.hasClass('like') ? 'like' : 'pass';
-		var modelid = btn.attr('modelid'); 
-		var model_uniq_id = btn.attr('model_uniq_id'); 
-		var model_like = btn.attr('model_like'); 
-		if(modelid != ''){
-			handleProfileAction(btn, action, modelid);
-		}
+        const modelid = btn.attr('modelid'); 
+        // You have these but not used in function. Keep if needed.
+        // const model_uniq_id = btn.attr('model_uniq_id'); 
+        // const model_like = btn.attr('model_like'); 
+        
+        if (modelid && modelid.trim() !== '') {
+            handleProfileAction(btn, action, modelid);
+        }
     }
 });
 
@@ -838,10 +840,12 @@ $(document).on('click', function(e) {
 function handleProfileAction(button, action, modelid) {
 
 
-    button.css('transform', 'scale(1.2)');
+     button.css('transform', 'scale(1.2)');
+     
     setTimeout(() => {
         button.css('transform', 'scale(1)');
     }, 200);
+
 
     const $card = button.closest('.profile-card');
     const profileName = $card.find('.profile-name').text().split(',')[0];
