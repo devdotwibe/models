@@ -836,10 +836,10 @@ $(document).on('click', function(e) {
 // Handle Profile Actions
 function handleProfileAction($button, action, modelid) {
     // Add visual feedback
-    $button.css('transform', 'scale(1.2)');
-        setTimeout(() => {
-            $button.css('transform', 'scale(1)');
-        }, 200);
+    // $button.css('transform', 'scale(1.2)');
+    //     setTimeout(() => {
+    //         $button.css('transform', 'scale(1)');
+    //     }, 200);
 
     const $card = $button.closest('.profile-card');
     const profileName = $card.find('.profile-name').text().split(',')[0];
