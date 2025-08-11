@@ -574,6 +574,17 @@
                     <span class="premium-badge">Premium</span>
                 </h3>
 
+                <div class="filter-group">
+                    <div class="toggle-container">
+                        <span class="filter-label">Verified Photos Only</span>
+                        <div class="toggle-switch active" id="verifiedToggle"></div>
+                    </div>
+                    <div class="toggle-container">
+                        <span class="filter-label">Exclude Messaged</span>
+                        <div class="toggle-switch" id="excludeMessagedToggle"></div>
+                    </div>
+                </div>
+
                 <div class="filter-group f-g1">
                     <label class="filter-label">Height</label>
                     <div class="range-container">
