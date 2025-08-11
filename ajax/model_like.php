@@ -19,6 +19,10 @@ if(isset($_SESSION['log_user_id'])) {
 
 // $output['suc']= 'success';
 
+            $model_detail = get_data('model_user', ['id' => $modelid], true);
+
+            $privacy_setting =  getModelPrivacySettings($model_detail['unique_id']);
+
             $checkSql = "SELECT id FROM user_model_likes WHERE user_id = ?";
 
             $field_name = 'like';
@@ -50,7 +54,7 @@ if(isset($_SESSION['log_user_id'])) {
 
             echo json_encode([
                 'status' => 'success',
-                'message' => 'User liked successfully',
+                'message' =>  $privacy_setting['message_template']??'User liked successfully',
             ]);
             exit;
 
