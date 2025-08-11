@@ -251,7 +251,7 @@
 					$where .= ' AND md.weight_in_kg >= '.$_POST['f_weight'].' AND md.weight_in_kg <= '.($_POST['f_weight']+1);
 				}
 
-			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
+			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
 		
 			}else if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
 				
@@ -366,11 +366,11 @@
                             $order = " ORDER BY RAND() ";
                         }
 
-                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE id IN ($idList)";
+                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList)";
                         $result_count = mysqli_query($con, $sqls_count);
                         
                         $row_cnt = mysqli_fetch_assoc($result_count);
-                        $sqls = "SELECT * FROM model_user mu WHERE id IN ($idList) $order LIMIT $limit OFFSET $offset";
+                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList) $order LIMIT $limit OFFSET $offset";
 
                 }
 
