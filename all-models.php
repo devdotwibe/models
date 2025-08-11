@@ -661,7 +661,9 @@
                         <?php  if($privacy_setting['verified_photos']) { ?>
                             <div class="toggle-container">
                                 <span class="filter-label">Verified Photos Only</span>
-                                <div class="toggle-switch active" id="verifiedToggle"></div>
+                                <div class="toggle-switch" id="verifiedToggle"></div>
+
+                                <input type="hidden" value="" name="verified_photos" id="verified_photos">
                             </div>
 
                         <?php }?>
@@ -671,6 +673,9 @@
                             <div class="toggle-container">
                                 <span class="filter-label">Exclude Messaged</span>
                                 <div class="toggle-switch" id="excludeMessagedToggle"></div>
+
+                                <input type="hidden" value="" name="exclude_message_already" id="exclude_message_already">
+
                             </div>
 
                         <?php }?>
@@ -1183,16 +1188,22 @@ function showNotification(message, type = 'info') {
         }
 
         // Toggle Switch Functionality
-        function setupToggle(toggle) {
+        function setupToggle(toggle,name) {
             if (toggle) {
                 toggle.addEventListener('click', function() {
                     this.classList.toggle('active');
+
+                   if (this.classList.contains('active')) {
+                        $(`${name}`).val('Yes');
+                    } else {
+                        $(`${name}`).val('No');
+                    }
                 });
             }
         }
 
-        setupToggle(verifiedToggle);
-        setupToggle(excludeMessagedToggle);
+        setupToggle(verifiedToggle,'verified_photos');
+        setupToggle(excludeMessagedToggle,'exclude_message_already');
 
         // Member Type Filter Buttons
         memberTypeButtons.forEach(button => {
