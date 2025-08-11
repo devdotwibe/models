@@ -107,13 +107,13 @@ function BoostedModelIds($con) {
 			if($row['verified_photos'])
 			{
 				$validPreminumids[] = [
-					'user_unique_id' => $row['user_unique_id']
+					'user_unique_id' => $row['unique_model_id']
 				];
 			}
 			
 		}
-		
-		return $sortedUserIds = array_column($validPreminumids, 'user_unique_id');
+
+		 return array_column($validPreminumids, 'user_unique_id');
 	}
 
 	function BoostedModelIdsByUser($userDetails, $con) {
