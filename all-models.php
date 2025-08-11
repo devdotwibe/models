@@ -171,10 +171,7 @@
                 $followed_user_ids = array_merge($followed_user_ids, $filteredFollowedIds);
             }
 
-            echo "tset";
-
-            die();
-            
+       
 			$limit = 8; 
 			if(isset($_GET['offset'])){
 			$offset = $_GET['offset'];
@@ -253,6 +250,10 @@
 				if(isset($_POST['f_weight']) && !empty(($_POST['f_weight']))){ 
 					$where .= ' AND md.weight_in_kg >= '.$_POST['f_weight'].' AND md.weight_in_kg <= '.($_POST['f_weight']+1);
 				}
+
+            echo "tset";
+
+            die();
 
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
 		
