@@ -835,8 +835,10 @@ $(document).on('click', function(e) {
 });
 
 // Handle Profile Actions
-function handleProfileAction($button, action, modelid) {
+function handleProfileAction(button, action, modelid) {
     // Add visual feedback
+    const $button = $(button)
+    
     $button.css('transform', 'scale(1.2)');
     setTimeout(() => {
         $button.css('transform', 'scale(1)');
