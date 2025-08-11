@@ -2046,13 +2046,13 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                 <div class="modal-body">
                     <p>
-                        Are you sure to continue? Once you click, the amount  <strong><span id="amountValue"></span></strong>  will be deducted from your account 
+                        Are you sure to continue? Once you click, the amount  <strong><span id="amountValue"></span>₹</strong>  will be deducted from your account 
                         and your 30 days will be counted from today. If you agree, please click on 
                         <strong>Pay and Continue</strong>.
                     </p>
                     <div style="margin-top: 20px;">
                         <button class="btn-primary px-7 sm:px-3 py-6 text-white" onclick="PayAccess()" type="button" id="puchare_submit">
-                            Pay and Continue
+                            <strong><span id="amountValue_pay"></span>₹</strong> Pay and Continue
                         </button>
                         <button class="btn btn-secondary" type="button" onclick="CloseModalAccess()">Cancel</button>
                     </div>
@@ -2206,6 +2206,8 @@ jQuery('.send_gift_btn').click(function(){
         {
 
             $('#amountValue').text(amount);
+
+            $('#amountValue_pay').text(amount);
 
             $('#conform_all_access').addClass('active');
 
