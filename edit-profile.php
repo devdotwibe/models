@@ -2687,7 +2687,7 @@ $lang_list = modal_language_list();
               </div>
               <div>
                 <label class="form-label">Education Level</label>
-                <select class="form-select" name="education_level" onchange="updateSettings(this,'education_level') >
+                <select class="form-select" name="education_level" onchange="updateSettings(this,'education_level')" >
                   <option value="">Any</option>
                   <option value="high-school" <?php if ($privacy_setting['education_level'] =='high-school') { ?> selected <?php } ?> >High School</option>
                   <option value="college" <?php if ($privacy_setting['education_level'] =='college') { ?> selected <?php } ?> > College</option>
