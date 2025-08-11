@@ -255,7 +255,11 @@
 					$where .= ' AND md.weight_in_kg >= '.$_POST['f_weight'].' AND md.weight_in_kg <= '.($_POST['f_weight']+1);
 				}
 
-			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
+
+                $unique_id_List = implode(',', $premium_filterids);
+
+
+			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' WHERE mu.unique_id IN ($unique_id_List) ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
 		
 			}else if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
 				
@@ -347,32 +351,20 @@
                       
                     // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
 
-                    $unique_id_List = implode(',', $premium_filterids);
-
-                        echo $unique_id_List;
-
-                        die();
-
-                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.as_a_model = 'Yes' WHERE mu.unique_id IN ($unique_id_List) " . $where;
+                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.as_a_model = 'Yes' " . $where;
                                                             
                     $result_count = mysqli_query($con, $sqls_count);
 
                     $row_cnt = mysqli_fetch_assoc($result_count);
                 
-                    $sqls = "SELECT * FROM model_user mu WHERE as_a_model = 'Yes' WHERE mu.unique_id IN ($unique_id_List) " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                    $sqls = "SELECT * FROM model_user mu WHERE as_a_model = 'Yes' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
 
                     
                 }
                 else
                 {
                         $idList = implode(',', $onlineUserIds);
-
-                        $unique_id_List = implode(',', $premium_filterids);
-
-                        echo $unique_id_List;
-
-                        die();
-
+                        
                         if (!empty($boosted_user_ids)) {
                         
                             $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
@@ -382,21 +374,17 @@
                             $order = " ORDER BY RAND() ";
                         }
 
-                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList) WHERE mu.unique_id IN ($unique_id_List)";
+                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList)";
                         $result_count = mysqli_query($con, $sqls_count);
                         
                         $row_cnt = mysqli_fetch_assoc($result_count);
                         
-                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList) WHERE mu.unique_id IN ($unique_id_List) $order LIMIT $limit OFFSET $offset";
+                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList) $order LIMIT $limit OFFSET $offset";
 
                 }
 
 
 			}
-
-                echo $sqls;
-
-                die();
 
               $resultd = mysqli_query($con, $sqls);
 
