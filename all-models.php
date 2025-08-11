@@ -253,7 +253,7 @@
 				}
 
 
-            $where .= " AND md.status =='Published'";
+            $where .= " AND md.status = 'Published'";
 
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
 		
