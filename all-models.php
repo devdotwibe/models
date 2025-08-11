@@ -870,7 +870,7 @@ function ActionBtn(element,action)
 				dataType:'json',
 				success: function(response){ 
 
-                    if(response.success)
+                    if(response.status)
                     {
 					    showNotification(`You liked ${profileName}!`, 'success');
                     }
