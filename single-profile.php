@@ -53,6 +53,14 @@ if (mysqli_num_rows($res_ap) > 0) {
 //   if ($status == '1' && $end_date != date("Y-m-d") || $end_date > date("Y-m-d")) {
 //     echo '<script>window.location.href="single-profile-all-access.php?m_unique_id=' . $_GET['m_unique_id'] . '"</script>';
 //   }
+
+    $isuser_have_access = false;
+
+    if ($status == '1' && $end_date != date("Y-m-d") || $end_date > date("Y-m-d")) {
+
+        $isuser_have_access = true;
+        // echo '<script>window.location.href="single-profile-all-access.php?m_unique_id=' . $_GET['m_unique_id'] . '"</script>';
+    }
 }
 
 ?>
@@ -444,7 +452,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                            $model_data = DB::queryFirstRow($sql_ap);
 
-                                        if($model_data['all_30day_access'] == 'Yes') {
+                                        if($model_data['all_30day_access'] == 'Yes' && !$isuser_have_access) {
                                     ?>
 
                                     <div onclick="ConformAllAccess()" class="action-item" id="all_access_30" bis_skin_checked="1" >
