@@ -480,9 +480,33 @@
 						  <i class="fas fa-user-plus"></i>
 						</button>
 					<?php } ?>
-                        <button class="action-btn like" title="Like" onclick="ActionBtn(this,'like')" modelid="<?php echo $rowesdw['id']; ?>" >
+
+                    <?php if (isset($_SESSION['log_user_id'])) { 
+                        
+                     
+                            $user_liked_row = DB::queryFirstRow("SELECT id FROM user_model_likes WHERE user_id = %s LIMIT 1", $_SESSION['log_user_id']);
+
+                            $user_liked = false;
+
+                            if (!empty($user_liked_row)) {
+                                $user_liked = true;
+                            }
+                        ?>
+
+                        <button class="action-btn like" title="Like" <?php if($user_liked) { ?> style="transform: scale(1); color: var(--secondary);" <?php } ?> onclick="ActionBtn(this,'like')" modelid="<?php echo $rowesdw['id']; ?>" >
                             <i class="fas fa-heart"></i>
                         </button>
+
+                    <?php } else{ ?>
+
+                        <button class="action-btn like" title="Like" <?php if($user_liked) { ?> style="transform: scale(1); color: var(--secondary);" <?php } ?> onclick="ActionBtn(this,'like')" modelid="<?php echo $rowesdw['id']; ?>" >
+                            <i class="fas fa-heart"></i>
+                        </button>
+
+                    <?php } ?>
+
+
+
                         <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>" >
                             <i class="fas fa-times"></i>
                         </button>
