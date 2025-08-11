@@ -3377,9 +3377,9 @@ $lang_list = modal_language_list();
 
     function AccessChange(element)
     {
-        var ischecked = $(element).ischecked().val('Yes');
+          var ischecked = $(element).is(":checked");
 
-        if(ischecked)
+        if(ischecked =='Yes')
         {
 
             $('.all_access_coin').show();
