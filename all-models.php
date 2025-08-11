@@ -341,12 +341,10 @@
                 if (empty($onlineUserIds)) {
 
                       
-                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
+                    // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
 
-                          echo $sqls_count;
-
-                        die();
-
+                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.as_a_model = 'Yes' " . $where;
+                                                            
                     $result_count = mysqli_query($con, $sqls_count);
 
                     $row_cnt = mysqli_fetch_assoc($result_count);
