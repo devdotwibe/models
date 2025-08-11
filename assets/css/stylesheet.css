@@ -10796,7 +10796,8 @@ display: flex;
 }
 
 .profile-info .profile-flex-wrapp  .profile-wrapp1>div>div:last-child button{
-    width:100%
+    width:100%;
+    margin-bottom: 10px;
 }
 .enhanced5 .action-dropdown{
     width:100%;
@@ -10808,6 +10809,15 @@ display: flex;
   text-align: center;
   display: flex;
 }
+  .profile-info .profile-flex-wrapp .profile-wrapp1 > div > div div {
+    margin-bottom:18px !important
+    
+}
+
+ .enhanced5 .profile-info {
+
+    padding-bottom: 12px;
+  }
 
 }
 
