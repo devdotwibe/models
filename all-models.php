@@ -251,10 +251,6 @@
 					$where .= ' AND md.weight_in_kg >= '.$_POST['f_weight'].' AND md.weight_in_kg <= '.($_POST['f_weight']+1);
 				}
 
-            echo "tset";
-
-            die();
-
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by id DESC LIMIT $limit OFFSET $offset";
 		
 			}else if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
@@ -340,6 +336,9 @@
                         $order = " ORDER BY id DESC ";
                     }
 
+                       echo "tset";
+
+                        die();
                     
                 }
 
