@@ -939,6 +939,8 @@ function ActionBtn(element,action)
 				dataType:'json',
 				success: function(response){ 
 
+
+                        console.log(response);
                     if(response.status =='success')
                     {
 
