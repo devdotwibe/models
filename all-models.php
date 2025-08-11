@@ -484,7 +484,11 @@
                     <?php if (isset($_SESSION['log_user_id'])) { 
                         
                      
-                            $user_liked_row = DB::queryFirstRow("SELECT id FROM user_model_likes WHERE user_id = %s LIMIT 1", $_SESSION['log_user_id']);
+                            $user_liked_row = DB::queryFirstRow(
+                                                "SELECT id FROM user_model_likes WHERE user_id = %s AND model_id = %s LIMIT 1", 
+                                                $_SESSION['log_user_id'], 
+                                                $rowesdw['id']
+                                            );
 
                             $user_liked = false;
 
