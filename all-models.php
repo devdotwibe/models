@@ -256,7 +256,6 @@
 
 
                 if(!empty($userDetails) && count($userDetails) > 0)
-
                 {
                     $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
 
@@ -265,15 +264,19 @@
                         $where .= " AND md.status = 'Published'";
                     }
 
+                    $getActiveUsers = getActiveUsers($userDetails['id'],$con);
+
+                    $excludeIds = "'" . implode("','", $getActiveUsers['user_ids']) . "'";
+
+                    if($privacy_setting['exclude_message_already'])
+                    {   
+                        $where .= " AND mu.unique_id NOT IN ($excludeIds)";
+                    }
+
                 }
 
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
 		
-
-                 echo $sqls;
-
-                die();
-                
 			}else if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
 				
 			$sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' "; 
