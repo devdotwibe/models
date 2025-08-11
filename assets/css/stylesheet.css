@@ -14,7 +14,7 @@
     --menu-text: #333333;
     --menu-border: #e0e0e0;
     --primary: #8b5cf6;
-    --primary-light: #a78bfa; 
+    --primary-light: #a78bfa;
     --primary-dark: #7c3aed;
     --secondary: #ec4899;
     --secondary-light: #f472b6;
@@ -3082,7 +3082,7 @@ textarea:focus {
 }
 
 .user-profile-side-btns>*:first-child {
-      border: 1px solid #44407f;
+    border: 1px solid #44407f;
     /* border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
 }
 
@@ -9718,8 +9718,8 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 .home-banner .space-y-6 .relative input {
- padding-top: 1.2rem !important;
-  padding-bottom: 1.2rem !important;
+    padding-top: 1.2rem !important;
+    padding-bottom: 1.2rem !important;
 }
 
 
@@ -10089,14 +10089,16 @@ body.advt-page.my-purpose .scroll-indicator {
     .home-page .scroll-reveal.revealed>div>div:first-child {
         margin-bottom: 25px;
     }
-.main-content.user-home {
-    padding-bottom: 0;
-}
-.header-ss.hidden{
 
-    display: flex !important;
-    width:auto;
-}
+    .main-content.user-home {
+        padding-bottom: 0;
+    }
+
+    .header-ss.hidden {
+
+        display: flex !important;
+        width: auto;
+    }
 
 }
 
@@ -10742,21 +10744,40 @@ body.advt-page.my-purpose .scroll-indicator {
     .user-profile-side-btns>*:first-child {
         margin-right: 3%;
     }
-.socialwall-page .verified-badge {
-      margin-bottom: 3px;
-}
-.user-home-right .model-card>p {
-    font-size: 15px;
-}
+
+    .socialwall-page .verified-badge {
+        margin-bottom: 3px;
+    }
+
+    .user-home-right .model-card>p {
+        font-size: 15px;
+    }
 
     .user-home-right .model-card>img {
         object-fit: contain;
     }
 
-        .socialwall-page .btn-primary {
+    .socialwall-page .btn-primary {
         padding: 8px 9px;
         font-size: 13px;
         margin-left: 0px;
+    }
+
+    .single-profile>div:first-child p {
+        font-size: 14px;
+    }
+
+    .single-profile>div:first-child .media-overlay {
+        padding-block: 8px;
+    }
+
+    .single-profile>div:first-child .media-overlay>div {
+        flex-wrap: wrap;
+    }
+
+    .single-profile>div:first-child .media-overlay>div .text-sm,
+    .single-profile>div:first-child .media-overlay>div .ml-1 {
+        font-size: 12px;
     }
 
 }
