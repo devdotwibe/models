@@ -2702,7 +2702,7 @@ $lang_list = modal_language_list();
           <div>
             <h4 class="text-lg font-semibold mb-4">🧪 Experimental Features</h4>
             <div class="space-y-4">
-              
+
               <!-- <div class="flex justify-between items-center exprt">
                 <div>
                   <label class="form-label mb-0">🤖 Auto Message Likes</label>
@@ -2729,21 +2729,21 @@ $lang_list = modal_language_list();
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Verified Photos Only</label>
                 <label class="toggle-switch">
-                  <input type="checkbox" checked>
+                  <input type="checkbox"  name="verified_photos" <?php if ($privacy_setting['verified_photos']) { ?> checked <?php } ?>  onchange="updateSettings(this,'verified_photos')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Exclude messaged already</label>
                 <label class="toggle-switch">
-                  <input type="checkbox">
+                  <input type="checkbox" name="exclude_message_already"  <?php if ($privacy_setting['exclude_message_already']) { ?> checked <?php } ?>  onchange="updateSettings(this,'exclude_message_already')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Show only who liked me</label>
                 <label class="toggle-switch">
-                  <input type="checkbox">
+                  <input type="checkbox" name="show_liked"  <?php if ($privacy_setting['show_liked']) { ?> checked <?php } ?>  onchange="updateSettings(this,'show_liked')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
