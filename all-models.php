@@ -256,7 +256,7 @@
 				}
 
 
-                echo $premium_filterids;
+                print_r( $premium_filterids);
 
                 die();
 
