@@ -10795,6 +10795,20 @@ display: flex;
   justify-content: center;
 }
 
+.profile-info .profile-flex-wrapp  .profile-wrapp1>div>div:last-child button{
+    width:100%
+}
+.enhanced5 .action-dropdown{
+    width:100%;
+}
+
+ .enhanced5 .profile-wrapp1 .btn-secondary {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  display: flex;
+}
+
 }
 
 @media (max-width: 768px) {
