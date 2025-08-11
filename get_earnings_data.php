@@ -75,7 +75,7 @@ if (isset($_SESSION["log_user_id"])) {
 
             $field_name = $_POST['field_name'];
 
-            if($field_name == 'age_range')
+            if($field_name == 'age_range' || $field_name == 'message_template' )
             {
                 $value = $_POST['value'];
             }
