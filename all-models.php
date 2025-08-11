@@ -142,6 +142,8 @@
 
                 $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
 
+                $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
+
             }
             else
             {
@@ -253,7 +255,17 @@
 				}
 
 
-            $where .= " AND md.status = 'Published'";
+                if(!empty($userDetails) && count($userDetails) > 0)
+
+                {
+                    $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
+
+                    if($privacy_setting['verified_photos'])
+                    {   
+                        $where .= " AND md.status = 'Published'";
+                    }
+
+                }
 
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
 		
