@@ -282,7 +282,7 @@
 
                 if ($_GET['filter'] == 'new') {
 
-                    $where .= " AND mu.register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
+                    $where .= " AND register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
                     $order = " ORDER BY register_date DESC ";
 
                 } elseif ($_GET['filter'] == 'available') {
@@ -340,15 +340,14 @@
 
                 if (empty($onlineUserIds)) {
 
-            
+                         echo $where;
+
+                        die();
+                        
                     $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
                     $result_count = mysqli_query($con, $sqls_count);
                     $row_cnt = mysqli_fetch_assoc($result_count);
                 
-                       echo "tset";
-
-                        die();
-                        
                     $sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
                 }
                 else
