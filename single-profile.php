@@ -2205,8 +2205,8 @@ jQuery('.send_gift_btn').click(function(){
         function ConformAllAccess(amount)
         {
 
-            $('#amountValue').val(amount);
-            
+            $('#amountValue').text(amount);
+
             $('#conform_all_access').addClass('active');
 
         }
