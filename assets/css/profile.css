@@ -6329,6 +6329,7 @@ button.btn-secondary.add-intrst {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    padding-top: 20px;
 }
 
 /* Profile specific styles */
@@ -6484,7 +6485,9 @@ button.btn-secondary.add-intrst {
     transform: translateY(-3px);
 }
 
-
+.enhanced5 .profile-wrapp1 .btn-secondary{
+height: 100%;
+} 
 
 
 
