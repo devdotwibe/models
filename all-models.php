@@ -343,10 +343,12 @@
                       
                     $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
 
-                       echo $where;
+                    $result_count = mysqli_query($con, $sqls_count);
+
+                          echo $result_count;
 
                         die();
-                    $result_count = mysqli_query($con, $sqls_count);
+
                     $row_cnt = mysqli_fetch_assoc($result_count);
                 
                     $sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
