@@ -349,6 +349,10 @@
 
                     $unique_id_List = implode(',', $premium_filterids);
 
+                        echo $unique_id_List;
+
+                        die();
+
                     $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.as_a_model = 'Yes' WHERE mu.unique_id IN ($unique_id_List) " . $where;
                                                             
                     $result_count = mysqli_query($con, $sqls_count);
