@@ -859,7 +859,7 @@ function ActionBtn(element,action)
 			
             break;
         case 'like':
-            $button.css('color', 'var(--secondary)');
+            $(element).css('color', 'var(--secondary)');
             //ajax for increase like count
 			jQuery.ajax({
 				type: 'GET',
