@@ -365,6 +365,10 @@
 
                         $unique_id_List = implode(',', $premium_filterids);
 
+                        echo $unique_id_List;
+
+                        die();
+
                         if (!empty($boosted_user_ids)) {
                         
                             $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
