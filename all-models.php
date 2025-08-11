@@ -476,14 +476,14 @@
                         </button>
 					<?php } else{ ?>
 						<!-- Button to open modal -->
-						<button type="button" class="action-btn connect" modelid="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						<button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" data-bs-toggle="modal" data-bs-target="#exampleModal">
 						  <i class="fas fa-user-plus"></i>
 						</button>
 					<?php } ?>
-                        <button class="action-btn like" title="Like" modelid="<?php echo $rowesdw['id']; ?>" >
+                        <button class="action-btn like" title="Like" onclick="ActionBtn(this,'Like')" modelid="<?php echo $rowesdw['id']; ?>" >
                             <i class="fas fa-heart"></i>
                         </button>
-                        <button class="action-btn pass" title="Pass" modelid="<?php echo $rowesdw['id']; ?>" >
+                        <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'Pass')" modelid="<?php echo $rowesdw['id']; ?>" >
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
@@ -820,19 +820,61 @@ offset = offset+limit;
 
 <script>
 
-$(document).on('click', function(e) {
-    const $btn = $(e.target).closest('.action-btn');
-    if ($btn.length) {
-        const action = $btn.hasClass('connect') ? 'connect' :
-                       $btn.hasClass('like') ? 'like' : 'pass';
-        const modelid = $btn.attr('modelid'); 
+// $(document).on('click', function(e) {
+//     const $btn = $(e.target).closest('.action-btn');
+//     if ($btn.length) {
+//         const action = $btn.hasClass('connect') ? 'connect' :
+//                        $btn.hasClass('like') ? 'like' : 'pass';
+//         const modelid = $btn.attr('modelid'); 
         
-        if (modelid && modelid.trim() !== '') {
-            handleProfileAction($btn, action, modelid);
-        }
-    }
-});
+//         if (modelid && modelid.trim() !== '') {
+//             handleProfileAction($btn, action, modelid);
+//         }
+//     }
+// });
 
+function ActionBtn(element,action)
+{
+     const $card = element.closest('.profile-card');
+    const profileName = element.find('.profile-name').text().split(',')[0];
+
+    switch (action) {
+        case 'connect':
+            
+			jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'/ajax/model_followrequest.php'?>",
+				data:{modelid:modelid,notification_type:'follow'},
+				dataType:'json',
+				success: function(response){ 
+					showNotification(`Connection request sent to ${profileName}!`, 'success');
+				}
+			});
+			
+            break;
+        case 'like':
+            $button.css('color', 'var(--secondary)');
+            //ajax for increase like count
+			jQuery.ajax({
+				type: 'GET',
+				url : "<?=SITEURL.'/ajax/model_like.php'?>",
+				data:{modelid:modelid},
+				dataType:'json',
+				success: function(response){ 
+					showNotification(`You liked ${profileName}!`, 'success');
+				}
+			});
+			
+            break;
+        case 'pass':
+            $card.css('opacity', '0.5');
+            setTimeout(() => {
+                $card.css('display', 'none');
+            }, 300);
+            showNotification(`${profileName} has been hidden`, 'info');
+            break;
+    }
+}
 // Handle Profile Actions
 function handleProfileAction($button, action, modelid) {
     // Add visual feedback
