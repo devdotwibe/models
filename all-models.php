@@ -837,7 +837,7 @@
 </div>
 
 
-  <div class="modal-overlay" id="success_modal">
+  <div class="modal-overlay" id="success_modal" style="display:none;">
     <div class="modal">
       <div class="modal-header">
         <h2 class="modal-title">Success</h2>
