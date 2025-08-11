@@ -50,9 +50,9 @@ if (mysqli_num_rows($res_ap) > 0) {
     }
   }
 
-  if ($status == '1' && $end_date != date("Y-m-d") || $end_date > date("Y-m-d")) {
-    echo '<script>window.location.href="single-profile-all-access.php?m_unique_id=' . $_GET['m_unique_id'] . '"</script>';
-  }
+//   if ($status == '1' && $end_date != date("Y-m-d") || $end_date > date("Y-m-d")) {
+//     echo '<script>window.location.href="single-profile-all-access.php?m_unique_id=' . $_GET['m_unique_id'] . '"</script>';
+//   }
 }
 
 ?>
