@@ -260,7 +260,7 @@
                 {
                     $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
 
-                    if($privacy_setting['verified_photos'] && isset($_POST['verified_photos']) && !empty($_POST['verified_photos']) )
+                    if($privacy_setting['verified_photos'] && isset($_POST['verified_photos']) && !empty($_POST['verified_photos'] && $_POST['verified_photos']=='Yes') )
                     {   
                         $where .= " AND md.status = 'Published'";
                     }
