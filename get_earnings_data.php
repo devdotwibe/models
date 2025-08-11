@@ -95,7 +95,8 @@ if (isset($_SESSION["log_user_id"])) {
                                 'show_join_date',
                                 'verified_photos',
                                 'exclude_message_already',
-                                'show_liked'
+                                'show_liked',
+                                'message_template'
                                 ];
 
             if (!in_array($field_name, $allowed_fields)) {

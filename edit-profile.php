@@ -2716,7 +2716,7 @@ $lang_list = modal_language_list();
 
               <div class="mt-4">
                 <label class="form-label">Auto Message Template</label>
-                <textarea class="form-input" rows="3" placeholder="The following message will be sent when you like someone from browse...">Okay wow... you just raised the bar here! My chat keeps disappearing like it's shy or something, but I'm definitely not! 😊</textarea>
+                <textarea class="form-input" rows="3" onchange="updateSettings(this,'message_template')" name="message_template" placeholder="The following message will be sent when you like someone from browse...">Okay wow... you just raised the bar here! My chat keeps disappearing like it's shy or something, but I'm definitely not! 😊</textarea>
                 <p class="help-text">If username appears in the message it will be replaced with their username</p>
               </div>
             </div>
@@ -3597,7 +3597,7 @@ $lang_list = modal_language_list();
     function updateSettings(element, field_name) {
       var value = element.checked ? 'Y' : 'N';
 
-      if (field_name == 'age_range') {
+      if (field_name == 'age_range' || field_name == 'message_template') {
         value = $(element).val();
       }
 
