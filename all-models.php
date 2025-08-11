@@ -261,8 +261,8 @@
 
             $unique_id_List = "'" . implode("','", $premium_filterids) . "'";
 
-            $where .=  'AND mu.unique_id IN ($unique_id_List)';
-       
+            $where .= " AND mu.unique_id IN ($unique_id_List)";
+
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
 		
 
