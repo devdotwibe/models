@@ -3462,16 +3462,18 @@ $lang_list = modal_language_list();
     }
 
     function savePremiumSettings(event) {
-      const button = event.target;
-      const originalText = button.textContent;
-      button.textContent = 'Saving...';
-      button.disabled = true;
 
-      setTimeout(() => {
-        alert('✅ Premium & Privacy settings saved successfully!');
-        button.textContent = originalText;
-        button.disabled = false;
-      }, 1500);
+      showNotification('Privacy Settings Updated');
+      // const button = event.target;
+      // const originalText = button.textContent;
+      // button.textContent = 'Saving...';
+      // button.disabled = true;
+
+      // setTimeout(() => {
+      //   alert('✅ Premium & Privacy settings saved successfully!');
+      //   button.textContent = originalText;
+      //   button.disabled = false;
+      // }, 1500);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
