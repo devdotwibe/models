@@ -654,16 +654,29 @@
                     <span class="premium-badge">Premium</span>
                 </h3>
 
-                <div class="filter-group">
-                    <div class="toggle-container">
-                        <span class="filter-label">Verified Photos Only</span>
-                        <div class="toggle-switch active" id="verifiedToggle"></div>
+                <?php  if($privacy_setting['verified_photos'] || $privacy_setting['exclude_message_already']) { ?>
+
+                    <div class="filter-group">
+
+                        <?php  if($privacy_setting['verified_photos']) { ?>
+                            <div class="toggle-container">
+                                <span class="filter-label">Verified Photos Only</span>
+                                <div class="toggle-switch active" id="verifiedToggle"></div>
+                            </div>
+
+                        <?php }?>
+
+                        <?php  if($privacy_setting['exclude_message_already']) {?>
+
+                            <div class="toggle-container">
+                                <span class="filter-label">Exclude Messaged</span>
+                                <div class="toggle-switch" id="excludeMessagedToggle"></div>
+                            </div>
+
+                        <?php }?>
                     </div>
-                    <div class="toggle-container">
-                        <span class="filter-label">Exclude Messaged</span>
-                        <div class="toggle-switch" id="excludeMessagedToggle"></div>
-                    </div>
-                </div>
+
+                <?php } ?>
 
                 <div class="filter-group f-g1">
                     <label class="filter-label">Height</label>
