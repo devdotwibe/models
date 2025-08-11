@@ -3612,7 +3612,10 @@ $lang_list = modal_language_list();
         dataType: 'json',
         success: function(data) {
 
-          renderChart(data.data);
+           if (field_name != 'age_range' && field_name != 'message_template') {
+
+              renderChart(data.data);
+           }
 
           showNotification('Privacy Settings Updated');
 
