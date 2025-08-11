@@ -338,11 +338,12 @@
 
                 }
 
-                     echo "tset";
-
-                        die();
                 if (empty($onlineUserIds)) {
 
+                      echo "tset";
+
+                        die();
+                        
                     $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
                     $result_count = mysqli_query($con, $sqls_count);
                     $row_cnt = mysqli_fetch_assoc($result_count);
