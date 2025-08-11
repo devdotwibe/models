@@ -256,7 +256,7 @@
 				}
 
 
-                echo 'tetst';
+                echo $premium_filterids;
 
                 die();
 
