@@ -3612,7 +3612,7 @@ $lang_list = modal_language_list();
         dataType: 'json',
         success: function(data) {
 
-           if (field_name != 'age_range' && field_name != 'message_template') {
+           if (field_name =='age_range') {
 
               renderChart(data.data);
            }
