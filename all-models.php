@@ -837,8 +837,8 @@
 </div>
 
 
-  <div class="modal-overlay" id="success_modal" style="display:block;">
-    <div class="modal">
+  <div class="modal-overlay" id="success_modal" >
+    <div class="modal" style="display:block;">
       <div class="modal-header">
         <h2 class="modal-title">Success</h2>
         <button class="close-modal" id="closeTipModal" type="button" onclick="CloseModal()">
