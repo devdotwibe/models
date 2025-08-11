@@ -273,6 +273,25 @@
                         $where .= " AND mu.unique_id NOT IN ($excludeIds)";
                     }
 
+                    $user_liked_rows = DB::query(
+                        "SELECT model_id FROM user_model_likes WHERE user_id = %s", 
+                        $_SESSION['log_user_id']
+                    );
+
+                    $RowLikedModelIds = [];
+
+                    foreach ($user_liked_rows as $item) {
+                        $RowLikedModelIds[] = $item['model_id'];
+                    }
+
+                    if (!empty($RowLikedModelIds)) {
+                        $LikedIds = "'" . implode("','", $RowLikedModelIds) . "'";
+                        
+                        if ($privacy_setting['show_liked']) {   
+                            $where .= " AND mu.id IN ($LikedIds)";
+                        }
+                    }
+
                 }
 
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id WHERE mu.as_a_model = 'Yes' ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
