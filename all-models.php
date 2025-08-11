@@ -350,6 +350,10 @@
                     $row_cnt = mysqli_fetch_assoc($result_count);
                 
                     $sqls = "SELECT * FROM model_user mu WHERE as_a_model = 'Yes' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+
+                    echo $sqls;
+
+                    die();
                 }
                 else
                 {
