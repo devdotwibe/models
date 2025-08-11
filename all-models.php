@@ -821,32 +821,29 @@ offset = offset+limit;
 <script>
 
 $(document).on('click', function(e) {
-    const $btn = $(e.target).closest('.action-btn');
-    if ($btn.length) {
-        const action = $btn.hasClass('connect') ? 'connect' :
-                       $btn.hasClass('like') ? 'like' : 'pass';
-		var modelid = $btn.attr('modelid'); 
-		var model_uniq_id = $btn.attr('model_uniq_id'); 
-		var model_like = $btn.attr('model_like'); 
+    const btn = $(e.target).closest('.action-btn');
+    if (btn.length) {
+        const action = btn.hasClass('connect') ? 'connect' :
+                       btn.hasClass('like') ? 'like' : 'pass';
+		var modelid = btn.attr('modelid'); 
+		var model_uniq_id = btn.attr('model_uniq_id'); 
+		var model_like = btn.attr('model_like'); 
 		if(modelid != ''){
-			handleProfileAction($btn, action, modelid);
+			handleProfileAction(btn, action, modelid);
 		}
     }
 });
 
 // Handle Profile Actions
 function handleProfileAction(button, action, modelid) {
-    // Add visual feedback
-    const $button = button instanceof jQuery ? button : $(button);
 
-    console.log($button);
 
-    $button.css('transform', 'scale(1.2)');
+    button.css('transform', 'scale(1.2)');
     setTimeout(() => {
         $button.css('transform', 'scale(1)');
     }, 200);
 
-    const $card = $button.closest('.profile-card');
+    const $card = button.closest('.profile-card');
     const profileName = $card.find('.profile-name').text().split(',')[0];
 
     switch (action) {
@@ -865,7 +862,7 @@ function handleProfileAction(button, action, modelid) {
 			
             break;
         case 'like':
-            $button.css('color', 'var(--secondary)');
+            button.css('color', 'var(--secondary)');
             //ajax for increase like count
 			jQuery.ajax({
 				type: 'GET',
