@@ -340,14 +340,15 @@
 
                 if (empty($onlineUserIds)) {
 
-                         echo "tset";
-
-                        die();
-
+            
                     $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
                     $result_count = mysqli_query($con, $sqls_count);
                     $row_cnt = mysqli_fetch_assoc($result_count);
                 
+                       echo "tset";
+
+                        die();
+                        
                     $sqls = "SELECT * FROM model_user WHERE as_a_model = 'Yes' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
                 }
                 else
