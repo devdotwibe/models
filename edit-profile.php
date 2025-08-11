@@ -2678,21 +2678,21 @@ $lang_list = modal_language_list();
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
                 <label class="form-label">Children Preference</label>
-                <select class="form-select">
+                <select class="form-select" name="children_preference" onchange="updateSettings(this,'children_preference')">
                   <option value="">Any</option>
-                  <option value="no-children">No Children</option>
-                  <option value="wants-children">Wants Children</option>
-                  <option value="has-children">Has Children</option>
+                  <option value="no-children" <?php if ($privacy_setting['children_preference'] =='no-children') { ?> selected <?php } ?> >No Children</option>
+                  <option value="wants-children" <?php if ($privacy_setting['children_preference'] =='wants-children') { ?> selected <?php } ?> >Wants Children</option>
+                  <option value="has-children" <?php if ($privacy_setting['children_preference'] =='has-children') { ?> selected <?php } ?> >Has Children</option>
                 </select>
               </div>
               <div>
                 <label class="form-label">Education Level</label>
-                <select class="form-select">
+                <select class="form-select" name="education_level" onchange="updateSettings(this,'education_level') >
                   <option value="">Any</option>
-                  <option value="high-school">High School</option>
-                  <option value="college">College</option>
-                  <option value="university">University</option>
-                  <option value="graduate">Graduate Degree</option>
+                  <option value="high-school" <?php if ($privacy_setting['education_level'] =='high-school') { ?> selected <?php } ?> >High School</option>
+                  <option value="college" <?php if ($privacy_setting['education_level'] =='college') { ?> selected <?php } ?> > College</option>
+                  <option value="university" <?php if ($privacy_setting['education_level'] =='university') { ?> selected <?php } ?> >University</option>
+                  <option value="graduate"  <?php if ($privacy_setting['education_level'] =='graduate') { ?> selected <?php } ?>>Graduate Degree</option>
                 </select>
               </div>
             </div>
@@ -3597,7 +3597,7 @@ $lang_list = modal_language_list();
     function updateSettings(element, field_name) {
       var value = element.checked ? 'Y' : 'N';
 
-      if (field_name == 'age_range' || field_name == 'message_template') {
+      if (field_name == 'age_range' || field_name == 'message_template' || field_name=='education_level' || field_name=='children_preference' ) {
         value = $(element).val();
       }
 

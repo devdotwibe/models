@@ -75,7 +75,7 @@ if (isset($_SESSION["log_user_id"])) {
 
             $field_name = $_POST['field_name'];
 
-            if($field_name == 'age_range' || $field_name == 'message_template' )
+            if($field_name == 'age_range' || $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' )
             {
                 $value = $_POST['value'];
             }
@@ -96,7 +96,9 @@ if (isset($_SESSION["log_user_id"])) {
                                 'verified_photos',
                                 'exclude_message_already',
                                 'show_liked',
-                                'message_template'
+                                'message_template',
+                                'children_preference',
+                                'education_level'
                                 ];
 
             if (!in_array($field_name, $allowed_fields)) {
@@ -114,7 +116,7 @@ if (isset($_SESSION["log_user_id"])) {
 
             if ($result->num_rows > 0) {
    
-                if( $field_name == 'message_template')
+                if( $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level')
                 {
                     $updateSql = "UPDATE model_privacy_settings SET `$field_name` = ?, updated_at = ? WHERE unique_model_id = ?";
                     $updateStmt = $con->prepare($updateSql);
@@ -132,7 +134,7 @@ if (isset($_SESSION["log_user_id"])) {
         
             } else {
            
-                if( $field_name == 'message_template')
+                if( $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level')
                 {
                     $insertSql = "INSERT INTO model_privacy_settings (unique_model_id, `$field_name`, created_at, updated_at)
                             VALUES (?, ?, ?, ?)";
