@@ -79,6 +79,23 @@
 
     <?php include('includes/header.php'); ?>
 
+    <?php 
+
+        $user_have_preminum =false;
+
+          if(isset($_SESSION["log_user_id"])){
+                
+            $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+
+            $result = CheckPremiumAccess($userDetails['id']);
+
+            if ($result && $result['active']) {
+
+                $user_have_preminum = true;
+            }
+        }
+
+    ?>
 <!-- Header -->
     <header class="header">
         <div class="container">
@@ -113,11 +130,16 @@
                             <div class="sort-option" data-sort="price">Price: Low to High</div>
                         </div>
                     </div>
-                    
-                    <button class="premium-btn" type="button" onclick="ShowPremium()">
-                        <i class="fas fa-crown"></i>
-                        Go Premium
-                    </button>
+                  
+                    <?php if($user_have_preminum) { ?>
+
+                        <button class="premium-btn" type="button" onclick="ShowPremium()">
+                            <i class="fas fa-crown"></i>
+                            Go Premium
+                        </button>
+                        
+                    <?php } ?>
+
                 </div>
             </div>
         </div>
@@ -137,19 +159,10 @@
 
             $condtion = "";
 
-             $user_have_preminum =false;
-
             if(isset($_SESSION["log_user_id"])){
                 
                 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
-                $result = CheckPremiumAccess($userDetails['id']);
-
-                if ($result && $result['active']) {
-
-                   $user_have_preminum = true;
-                }
-                
                 $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
 
                 $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
