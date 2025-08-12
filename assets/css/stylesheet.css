@@ -8417,18 +8417,19 @@ div#formStep1 input {
     position: relative;
 
     overflow: hidden;
-display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
-.premium-wallet .purchase-card  form {
-  margin-top: auto ;
-  
+.premium-wallet .purchase-card form {
+    margin-top: auto;
+
 }
-.premium-wallet .purchase-card  form button{
-    display:flex;
-align-items:center;
-justify-content:center;
+
+.premium-wallet .purchase-card form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -8460,9 +8461,8 @@ justify-content:center;
 
     position: absolute;
 
-    top: 12px;
-
-    right: -30px;
+    top: 34px;
+    right: -36px;
 
     background: var(--warning);
 
@@ -10044,10 +10044,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
-@media (max-width: 768px) {
-
-
-}
+@media (max-width: 768px) {}
 
 /* ---------------------------------------------------- */
 
@@ -10142,6 +10139,7 @@ body.advt-page.my-purpose .scroll-indicator {
         display: flex !important;
         width: auto;
     }
+
     .enhanced5 .profile-info {
         height: 279px !important;
 
@@ -10160,20 +10158,21 @@ body.advt-page.my-purpose .scroll-indicator {
         font-size: 2.5rem;
     }
 
-    .premium-wallet .purchase-grid{
-        grid-template-columns: repeat(auto-fit, minmax(212px,1fr));
+    .premium-wallet .purchase-grid {
+        grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
     }
 
-.purchase-card .text-3xl{
-    font-size:25px;
-}
-.purchase-card .text-2xl {
-    font-size:22px;
-}
+    .purchase-card .text-3xl {
+        font-size: 25px;
+    }
 
-.purchase-card .text-gray-400 {
-    font-size:15px;
-}
+    .purchase-card .text-2xl {
+        font-size: 22px;
+    }
+
+    .purchase-card .text-gray-400 {
+        font-size: 15px;
+    }
 
 }
 
@@ -10323,7 +10322,8 @@ body.advt-page.my-purpose .scroll-indicator {
     .withdraw-div .glass-card .text-center>div {
         font-size: 28px
     }
-    .premium-wallet .purchase-grid{
+
+    .premium-wallet .purchase-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -10959,7 +10959,7 @@ body.advt-page.my-purpose .scroll-indicator {
         justify-content: center;
         padding: 2px !important;
         margin-left: 0 !important;
-    margin-right: 8px !important;
+        margin-right: 8px !important;
     }
 
     .header-desk-inner button svg {
@@ -10971,16 +10971,17 @@ body.advt-page.my-purpose .scroll-indicator {
         padding: 2px;
         width: 1rem;
         height: 1rem;
-        top:-0.5rem;
+        top: -0.5rem;
     }
 
- 
-    .header-desk-outer>div:last-child{
+
+    .header-desk-outer>div:last-child {
         margin-left: 0 !important;
     }
-    .header-desk-outer > div:last-child img{
-        width:2.25rem;
-        height:2.25rem;
+
+    .header-desk-outer>div:last-child img {
+        width: 2.25rem;
+        height: 2.25rem;
     }
 
 }
