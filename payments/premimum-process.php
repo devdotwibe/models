@@ -52,11 +52,20 @@ if($userDetails){
                         $plan_status = $_SESSION["plan_status"];
                         $plan_type = $_SESSION["plan_type"];
 
-                          DB::insert("INSERT INTO premium_users (user_id, plan_type, amount, plan_status, created_at, updated_at) VALUES (%i, %s, %i, %s, %s, %s)",
-                            $userDetails['id'], $plan_type, $amount, $plan_status, $date, $date);
+                        // DB::insert("INSERT INTO premium_users (user_id, plan_type, amount, plan_status, created_at, updated_at) VALUES (%i, %s, %i, %s, %s, %s)",
+                        // $userDetails['id'], $plan_type, $amount, $plan_status, $date, $date);
+
+                        DB::insert('premium_users',[
+                            'user_id'    => $userDetails['id'],
+                            'plan_type'  => $plan_type,
+                            'amount'     => $amount,
+                            'plan_status'=> $plan_status,
+                            'created_at' => $date,
+                            'updated_at' => $date,
+                        ]);
 
                         $insertedPremiumUserId = DB::insertId();
-                        
+
                         DB::insert('model_user_transaction_history', [
 							'user_id'    => $userDetails['id'],
 							'other_id'   => $insertedPremiumUserId,
