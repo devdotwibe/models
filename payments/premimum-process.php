@@ -10,6 +10,10 @@ if($userDetails){
 	
 	$payment_status = $_POST['payment_status'];
 	$payment_id = $_POST['payment_id'];
+
+    echo "tweat";
+
+    die();
  
 
        	// $query1 = "INSERT INTO model_user_payment(`unique_id`, `user_name`, `user_email`, `payment_id`, `payment_amount`, `coins`,`created_date`, `status`) VALUES ('".$_SESSION["log_user_unique_id"]."','".$_SESSION["log_user"]."','".$_SESSION["log_user_email"]."','".$payment_id."','".$_SESSION["pay_amount"]."','".$_SESSION["pay_coins"]."','".$date."','Success')";
