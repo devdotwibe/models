@@ -8263,33 +8263,38 @@ div#formStep1 input {
 }
 
 
-.withdraw-div .glass-card .text-center{
-text-align:left
+.withdraw-div .glass-card .text-center {
+    text-align: left
 }
 
-#withdraw>h3{
-  margin-top:50px !important; 
-  font-size:35px;
-  line-height: normal;
+#withdraw>h3 {
+    margin-top: 50px !important;
+    font-size: 35px;
+    line-height: normal;
 }
 
-.withdraw-div form button{
-  display:flex;
-  align-itemms:center;
-  justify-content:center;
-  
-}
-.wallet-header-h1 h1{
-  line-height:normal;
-  margin-top:25px;
-  margin-bottom: 5px !important;
+.withdraw-div form button {
+    display: flex;
+    align-itemms: center;
+    justify-content: center;
+
 }
 
-
-.wallet-tabs-outer{
-
-  margin-bottom:35px;
+.wallet-header-h1 h1 {
+    line-height: normal;
+    margin-top: 25px;
+    margin-bottom: 5px !important;
 }
+
+.withdraw-div form .form-input {
+    background: #19233e;
+}
+
+.wallet-tabs-outer {
+
+    margin-bottom: 35px;
+}
+
 .premium-wallet .tab-btn:hover:not(.active) {
 
     background: rgba(255, 255, 255, 0.1);
@@ -8356,10 +8361,10 @@ text-align:left
 
 }
 
-.balance-card .coin-icon-img img{
-max-height: 500px;
- margin: 16px auto;
-object-fit: cover;
+.balance-card .coin-icon-img img {
+    max-height: 500px;
+    margin: 16px auto;
+    object-fit: cover;
 }
 
 
@@ -9845,6 +9850,10 @@ body.advt-page.my-purpose .scroll-indicator {
         margin-top: 52px;
     }
 
+    .balance-card .coin-icon-img img {
+        max-height: 375px;
+    }
+
 }
 
 
@@ -9934,9 +9943,11 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
-/* @media (max-width: 1023px) {
+@media (max-width: 991px) {
 
-} */
+
+    
+}
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .container {
@@ -10812,43 +10823,45 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .profile-info .profile-flex-wrapp {
-  margin: 0 auto;
-}
+        margin: 0 auto;
+    }
 
     .profile-info .profile-flex-wrapp .profile-avatar-container {
-  margin: 0 auto;
-}
-.profile-info .profile-flex-wrapp  .profile-wrapp1>div>div{
-display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
+        margin: 0 auto;
+    }
 
-.profile-info .profile-flex-wrapp  .profile-wrapp1>div>div:last-child button{
-    width:100%;
-    margin-bottom: 10px;
-}
-.enhanced5 .action-dropdown{
-    width:100%;
-}
+    .profile-info .profile-flex-wrapp .profile-wrapp1>div>div {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
 
- .enhanced5 .profile-wrapp1 .btn-secondary {
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  display: flex;
-}
-  .profile-info .profile-flex-wrapp .profile-wrapp1 > div > div div {
-    margin-bottom:18px !important
-    
-}
+    .profile-info .profile-flex-wrapp .profile-wrapp1>div>div:last-child button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
- .enhanced5 .profile-info {
+    .enhanced5 .action-dropdown {
+        width: 100%;
+    }
 
-    padding-bottom: 12px;
-  }
+    .enhanced5 .profile-wrapp1 .btn-secondary {
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        display: flex;
+    }
+
+    .profile-info .profile-flex-wrapp .profile-wrapp1>div>div div {
+        margin-bottom: 18px !important
+    }
+
+    .enhanced5 .profile-info {
+
+        padding-bottom: 12px;
+    }
 
 }
 
