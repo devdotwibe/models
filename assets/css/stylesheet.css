@@ -9943,11 +9943,7 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
-@media (max-width: 991px) {
-
-
-    
-}
+@media (max-width: 991px) {}
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .container {
@@ -9956,7 +9952,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 }
 
-/* ------------------------------------------------ */
+
 
 @media (max-width: 900px) {
     /* .enhanced5 .profile-avatar {
@@ -10038,7 +10034,6 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
-
 @media (max-width: 768px) {
 
     .enhanced5 .profile-info {
@@ -10046,6 +10041,18 @@ body.advt-page.my-purpose .scroll-indicator {
 
     }
 
+    .boost_adver .container {
+        padding: 0 1rem;
+    }
+
+
+    .wallet-header-h1 h1 {
+        font-size: 35px;
+    }
+
+    .premium-wallet .balance-amount {
+        font-size: 2.5rem;
+    }
 }
 
 /* ---------------------------------------------------- */
@@ -10263,6 +10270,32 @@ body.advt-page.my-purpose .scroll-indicator {
     .coppy p {
         font-size: 15px;
     }
+
+
+        .wallet-header-h1 h1 {
+        font-size: 28px;
+    }
+
+    .wallet-header-h1 p {
+        font-size: 16px
+    }
+
+    .balance-card .coin-icon-img img {
+        max-height: 260px;
+    }
+     .premium-wallet .balance-amount {
+    font-size: 2rem;
+  }
+
+#withdraw > h3 {
+
+  font-size: 28px;
+
+}
+
+.withdraw-div .glass-card .text-center>div{
+    font-size:28px
+}
 
 }
 
@@ -10863,10 +10896,4 @@ body.advt-page.my-purpose .scroll-indicator {
         padding-bottom: 12px;
     }
 
-}
-
-@media (max-width: 768px) {
-    .boost_adver .container {
-        padding: 0 1rem;
-    }
 }
