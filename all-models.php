@@ -879,7 +879,7 @@
 
     $settings = mysqli_fetch_assoc($getSettings);
 
-    $discountPriceShow=true;
+    $discountPriceShow=false;
 
     $updatedAt = $settings['updated_at']; 
 
