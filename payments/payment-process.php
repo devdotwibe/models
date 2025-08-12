@@ -32,12 +32,14 @@ if($userDetails){
 
 
         if (mysqli_query($con,$query1) && mysqli_query($con,$query2) || true) {
-			
+
+			 $insertedPaymentId = mysqli_insert_id($con);
+
 			DB::query("UPDATE model_user SET balance=round(balance+%d) WHERE id=%s", $_SESSION["pay_coins"], $userDetails['id']);
 
 			DB::insert('model_user_transaction_history', array(
 				'user_id' => $userDetails['id'],
-				'other_id' => $payment_id,
+				'other_id' => $insertedPaymentId,
 				'amount' => $_SESSION["pay_coins"],
 				'type' => 'coin_parchase',
 				'created_at' => $date,
