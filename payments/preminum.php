@@ -12,13 +12,15 @@ $stripeSecret = $_ENV['STRIPE_SECRET_KEY'];
 $stripekey = $_ENV['STRIPE_KEY'];
 
 
+
+session_start();
+
+
       $plan_type = $POST['plan_type'];
 
             print_r( $plan_type);
 
             die();
-
-session_start();
 include('../includes/config.php');
 ?>
 <!DOCTYPE html>
