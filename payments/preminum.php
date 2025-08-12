@@ -87,6 +87,8 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 
             $plan_status = $_POST['plan_status'];
 
+            $plan_type =  $_POST['plan_type'];
+
             $plan_text = $plan_status == 'basic' ? 'Basic Premium' : 'Diamond Elite';
             ?>
             <div class="purchase-payment-h3">
