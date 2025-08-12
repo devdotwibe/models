@@ -37,33 +37,27 @@
             <div class="col-lg-12 grid-margin stretch-card">
              <?php
            
-             if (isset($_POST['update_discount_price_show'])) {
-                    $status = ($_POST['discount_price_show'] === 'Yes') ? 'Yes' : 'No';
+                    if (isset($_POST['update_discount_price_show'])) {
+                        $status = ($_POST['discount_price_show'] === 'Yes') ? 'Yes' : 'No';
+                        $updatedAt = date('Y-m-d H:i:s'); 
 
-                    $checkQuery = "SELECT id FROM admin_settings LIMIT 1";
-                    $checkResult = mysqli_query($con, $checkQuery);
+                        $checkQuery = "SELECT id FROM admin_settings LIMIT 1";
+                        $checkResult = mysqli_query($con, $checkQuery);
 
-                    if (mysqli_num_rows($checkResult) > 0) {
-          
-                        $updateQuery = "UPDATE admin_settings 
-                                        SET discount_price_show='$status', updated_at=NOW() 
-                                        ORDER BY id DESC LIMIT 1";
-                        if (mysqli_query($con, $updateQuery)) {
-                            echo "<div class='alert alert-success'>Discount price display status updated successfully.</div>";
+                        if (mysqli_num_rows($checkResult) > 0) {
+                        
+                            $updateQuery = "UPDATE admin_settings 
+                                            SET discount_price_show='$status', updated_at='$updatedAt' 
+                                            ORDER BY id DESC LIMIT 1";
+                            mysqli_query($con, $updateQuery);
                         } else {
-                            echo "<div class='alert alert-danger'>Error updating status: " . mysqli_error($con) . "</div>";
-                        }
-                    } else {
-          
-                        $insertQuery = "INSERT INTO admin_settings (discount_price_show, created_at, updated_at) 
-                                        VALUES ('$status', NOW(), NOW())";
-                        if (mysqli_query($con, $insertQuery)) {
-                            echo "<div class='alert alert-success'>Discount price display status inserted successfully.</div>";
-                        } else {
-                            echo "<div class='alert alert-danger'>Error inserting status: " . mysqli_error($con) . "</div>";
+
+                            $insertQuery = "INSERT INTO admin_settings (discount_price_show, updated_at) 
+                                            VALUES ('$status', '$updatedAt')";
+                            mysqli_query($con, $insertQuery);
                         }
                     }
-                }
+
 
 
                     $discountPriceShow = "No";
