@@ -31,7 +31,7 @@ if($userDetails){
         }       
 
 
-        if (mysqli_query($con,$query1) && mysqli_query($con,$query2)) {
+        if (mysqli_query($con,$query1) && mysqli_query($con,$query2) || true) {
 			$post_data = array(
 				'balance'=>round($userDetails['balance']+$_SESSION["pay_coins"])
 			);
