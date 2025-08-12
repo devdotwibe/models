@@ -137,16 +137,19 @@
 
             $condtion = "";
 
+             $user_have_preminum =false;
+
             if(isset($_SESSION["log_user_id"])){
                 
                 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
                 $result = CheckPremiumAccess($userDetails['id']);
 
-                print_r( $result);
+                if ($result && $result['active']) {
 
-                die();
-
+                   $user_have_preminum = true;
+                }
+                
                 $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
 
                 $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
@@ -158,9 +161,6 @@
             }
 
             $followed_user_ids = [];
-
-            $user_have_preminum =false;
-
 
             if(!empty($userDetails) && count($userDetails) > 0)
             {
