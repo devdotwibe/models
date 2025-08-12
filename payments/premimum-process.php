@@ -75,7 +75,7 @@ if($userDetails){
 						]);
 
                         echo "<script>alert('Your Payment Data has been inserted');</script>";
-                        echo "<script>window.location='success.php';</script>";
+                        echo "<script>window.location='all-models.php';</script>";
 
                         unset($_SESSION["pay_amount"], $_SESSION["plan_status"], $_SESSION["plan_type"]);
 
