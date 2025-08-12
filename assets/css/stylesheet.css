@@ -8713,7 +8713,7 @@ body.model-mode .model-only {
     }
 
     .premium-wallet .tab-btn {
-      padding: 9px 7px;
+        padding: 9px 7px;
         font-size: 12px;
     }
 
@@ -10272,7 +10272,7 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
 
-        .wallet-header-h1 h1 {
+    .wallet-header-h1 h1 {
         font-size: 28px;
     }
 
@@ -10283,19 +10283,20 @@ body.advt-page.my-purpose .scroll-indicator {
     .balance-card .coin-icon-img img {
         max-height: 260px;
     }
-     .premium-wallet .balance-amount {
-    font-size: 2rem;
-  }
 
-#withdraw > h3 {
+    .premium-wallet .balance-amount {
+        font-size: 2rem;
+    }
 
-  font-size: 28px;
+    #withdraw>h3 {
 
-}
+        font-size: 28px;
 
-.withdraw-div .glass-card .text-center>div{
-    font-size:28px
-}
+    }
+
+    .withdraw-div .glass-card .text-center>div {
+        font-size: 28px
+    }
 
 }
 
@@ -10896,44 +10897,50 @@ body.advt-page.my-purpose .scroll-indicator {
         padding-bottom: 12px;
     }
 
-     .balance-card .coin-icon-img img {
-    max-height: 210px;
-  }
-   .premium-wallet .balance-amount {
-    font-size: 1.75rem;
-  }
-  #withdraw > h3 {
-    font-size: 22px;
-  }
+    .balance-card .coin-icon-img img {
+        max-height: 210px;
+    }
+
+    .premium-wallet .balance-amount {
+        font-size: 1.75rem;
+    }
+
+    #withdraw>h3 {
+        font-size: 22px;
+    }
 
     .wallet-header-h1 h1 {
-    font-size: 22px;
-  }
+        font-size: 22px;
+    }
 
- .wallet-header-h1 p {
-    font-size: 15px;
-    line-height: 22px;
-  }
+    .wallet-header-h1 p {
+        font-size: 15px;
+        line-height: 22px;
+    }
 
+    .header-desk-inner {
+        margin-right: 13px;
+    }
 
-  .header-desk-inner button{
-    width:2rem;
-    height: 2rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px !important;
-  }
-  .header-desk-inner button svg{
-    width: 19px;
-}
+    .header-desk-inner button {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2px !important;
+    }
 
- .header-desk-inner button span {
-    font-size: 10px;
-   padding:2px;
-   width:1rem;
-   height:1rem;
-  }
+    .header-desk-inner button svg {
+        width: 19px;
+    }
+
+    .header-desk-inner button span {
+        font-size: 10px;
+        padding: 2px;
+        width: 1rem;
+        height: 1rem;
+    }
 
 }
