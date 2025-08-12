@@ -48,8 +48,8 @@ if($userDetails){
 						// 	$userDetails['id']
 						// );
 
-                    <?php
 
+    
 try {
     // Make sure session is started before accessing session vars
     if (session_status() == PHP_SESSION_NONE) {
