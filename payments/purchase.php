@@ -17,9 +17,14 @@ $stripeSecret = $_ENV['STRIPE_SECRET_KEY'];
 <html>
 <head>
   <title>PHP Razorpay Payment Gateway Integration Example</title>
+
+    <?php include('includes/head.php'); ?>
+	
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+
+
 <?php 
 require_once('stripe-php/init.php');
 $stripe = new \Stripe\StripeClient($stripeSecret);
