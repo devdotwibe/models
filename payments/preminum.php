@@ -88,7 +88,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 
             $plan_type = $POST['plan_type'];
 
-            echo $plan_status;
+            echo $plan_type;
 
             die();
 
