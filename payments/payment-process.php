@@ -33,7 +33,7 @@ if($userDetails){
 
         if (mysqli_query($con, $query1)) {
 
-				 $insertedPaymentId = mysqli_insert_id($con); 
+				$insertedPaymentId = mysqli_insert_id($con);
 
 				$sql = "SELECT * FROM model_user_wallet WHERE user_unique_id = '".$_SESSION["log_user_unique_id"]."'";
 				$result = mysqli_query($con, $sql);
