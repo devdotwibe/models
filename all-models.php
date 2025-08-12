@@ -880,10 +880,6 @@
     $settings = mysqli_fetch_assoc($getSettings);
 
     $updatedAt = $settings['updated_at']; 
-
-    print_r ($updatedAt); 
-
-    die();
 ?>
 
 <div class="popup-overlay" id="premium-modal">
@@ -891,7 +887,7 @@
         <button class="close-btn" onclick="closePremiumModal()">&times;</button>
         
         <div class="top-icons">
-            <div class="top-icon">🚀</div>
+            <div class="top-icon">🚀 <?php echo $updatedAt ?></div>
             <div class="top-icon">⭐</div>
             <div class="top-icon">💎</div>
         </div>
