@@ -66,12 +66,26 @@
                 }
 
 
-                $discountPriceShow = "No";
-                $getSettings = mysqli_query($con, "SELECT discount_price_show FROM admin_settings ORDER BY id DESC LIMIT 1");
-                if ($getSettings && mysqli_num_rows($getSettings) > 0) {
-                    $row = mysqli_fetch_assoc($getSettings);
-                    $discountPriceShow = $row['discount_price_show'];
-                }
+                    $discountPriceShow = "No";
+
+                    $updated_at = null;
+
+                    $getSettings = mysqli_query($con, "SELECT discount_price_show, updated_at FROM admin_settings ORDER BY id DESC LIMIT 1");
+                    if ($getSettings && mysqli_num_rows($getSettings) > 0) {
+                        $row = mysqli_fetch_assoc($getSettings);
+                        $discountPriceShow = $row['discount_price_show'];
+                        $updated_at = $row['updated_at'];
+                    }
+
+                    if ($updated_at) {
+
+                        $timeDiff = time() - strtotime($updated_at);
+                        if ($timeDiff > 86400) { 
+                            $discountPriceShow = "No";
+                        }
+                    }
+
+
                 ?>
 
                 <div class="card">
