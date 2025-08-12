@@ -9883,6 +9883,9 @@ body.advt-page.my-purpose .scroll-indicator {
 #bank form button{
     margin-top:0 !important;
       margin-inline: 0px;
+      display:flex;
+      align-items:center;
+      justify-content: center;
 }
 
 
