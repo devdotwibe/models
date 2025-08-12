@@ -879,7 +879,17 @@
 
     $settings = mysqli_fetch_assoc($getSettings);
 
+    $discountPriceShow=true;
+
     $updatedAt = $settings['updated_at']; 
+
+        if ($updatedAt) {
+            $timeDiff = time() - strtotime($updatedAt);
+            if ($timeDiff > 86400) {
+
+                $discountPriceShow = false;
+            }
+        }
 ?>
 
 <div class="popup-overlay" id="premium-modal">
@@ -906,9 +916,13 @@
             <span class="fire-emoji">🔥</span> MASSIVE SAVINGS INSIDE - DON'T MISS OUT! <span class="fire-emoji">🔥</span>
         </div>
 
-        <div class="countdown-timer">
-            ⏰ LIMITED TIME: <span id="countdown">23:59:45</span> REMAINING!
-        </div>
+        <?php if($discountPriceShow) { ?>
+
+            <div class="countdown-timer">
+                ⏰ LIMITED TIME: <span id="countdown">23:59:45</span> REMAINING!
+            </div>
+            
+        <?php }?>
 
         <div class="billing-toggle">
             <div class="toggle-container">
