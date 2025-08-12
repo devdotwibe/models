@@ -255,7 +255,7 @@ cardCvcElement.mount('#card-element-cvv');
 	  if(stats){
 		 try {
 		  // Use fetch instead of jQuery.ajax so you can use await
-		  const res = await fetch("<?=SITEURL.'payments/get_clientsecret.php'?>?grand_unit_price=" + amount);
+		  const res = await fetch("<?=SITEURL.'payments/get_clientsecret.php'?>?grand_unit_price="=<?php echo $amount ?>"&coins="<?php echo $coins ?>);
 		  const response = await res.json();
 
 		  if (response.status === 'success' && response.message !== '') {
@@ -277,7 +277,7 @@ cardCvcElement.mount('#card-element-cvv');
 			  jQuery('.show_err_msg_div').html('<div class="alert-succ alert show_err_msg">Payment succeeded</div>');
 			  jQuery('.payment_status').val('Payment succeeded: ' + paymentIntent.id);
 			  jQuery('.payment_id').val(paymentIntent.id);
-			  jQuery('#purchaseform').submit();
+			//   jQuery('#purchaseform').submit();
 			}
 		  } else {
 			alert(response.message);

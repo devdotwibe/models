@@ -17,7 +17,10 @@ if (isset($_SESSION["log_user_id"])) {
 	$userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
 	if ($userDetails) {
 		$grand_unit_price = $_GET['grand_unit_price'];
-		if(!empty($grand_unit_price)){
+
+		$coins = $_GET['coins'];
+
+		if(!empty($grand_unit_price) && !empty($coins)){
 		require_once('stripe-php/init.php');
 		$stripe = new \Stripe\StripeClient($stripeSecret);
 			try {
@@ -27,9 +30,24 @@ if (isset($_SESSION["log_user_id"])) {
 				   'automatic_payment_methods' => ['enabled' => true],
 				]);
 
+                $date = date('Y-m-d H:i:s');
+
+                DB::query("UPDATE model_user SET balance=round(balance+%d) WHERE id=%s", $coins, $userDetails['id']);
+
+                DB::insert('model_user_transaction_history', array(
+                    'user_id' => $userDetails['id'],
+                    'other_id' => $paymentIntent->client_secret,
+                    'amount' => $coins,
+                    'type' => 'token_purchase',
+                    'created_at' => $date,
+                ));
+
 				//echo json_encode(['clientSecret' => $paymentIntent->client_secret]);
 				$output['status'] = 'success';	
 				$output['message'] = $paymentIntent->client_secret;
+
+				$output['payment_detail'] = $paymentIntent;
+
 			} catch (\Stripe\Exception\ApiErrorException $e) {
 				$error = [
 					'error' => $e->getMessage(),
