@@ -9860,32 +9860,35 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
-    #bank .form-row,
-    #bank .form-group {
-        margin-top: 0 !important;
-        gap: 0; 
-       
-    }
-    #bank .form-group {
+#bank .form-row,
+#bank .form-group {
+    margin-top: 0 !important;
+    gap: 0;
+
+}
+
+#bank .form-group {
     margin-bottom: 20px;
-        margin-right: 8px;
+    margin-right: 8px;
 }
-#bank .form-group:nth-child(even){
-    margin-right:0
+
+#bank .form-group:nth-child(even) {
+    margin-right: 0
 }
 
 
-  #bank .form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+#bank .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
 }
-#bank form button{
-    margin-top:0 !important;
-      margin-inline: 0px;
-      display:flex;
-      align-items:center;
-      justify-content: center;
+
+#bank form button {
+    margin-top: 0 !important;
+    margin-inline: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -10274,19 +10277,20 @@ body.advt-page.my-purpose .scroll-indicator {
     #bank .form-row,
     #bank .form-group {
         margin-top: 0 !important;
-        gap: 15px; 
+        gap: 15px;
     }
+
     #bank .form-group {
-    margin-bottom: 20px;
-      
-}
+        margin-bottom: 20px;
+
+    }
 
 
-#bank .form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+    #bank .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
 
-}
+    }
 
 }
 
@@ -10455,10 +10459,10 @@ body.advt-page.my-purpose .scroll-indicator {
         gap: 0;
     }
 
-        #bank .form-group {
-    margin-bottom: 20px;
-       
-}
+    #bank .form-group {
+        margin-bottom: 20px;
+
+    }
 }
 
 
@@ -11147,9 +11151,19 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     #bank form button {
-        padding: 20px 24px;
+        padding: 16px 16px;
         margin-top: 20px;
     }
+
+    #bank .form-row {
+        display: grid;
+        grid-template-columns: 1fr;
+
+    }
+        #bank .form-group{
+            margin-right: 0;
+        }
+
 }
 
 
