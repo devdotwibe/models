@@ -23,7 +23,7 @@ if($userDetails){
              
             $wallet_coins = $row1['wallet_coins'];
 
-           $Total_coins = (int)$_SESSION["pay_coins"] + (int)$row1['wallet_coins'];
+           $Total_coins = $_SESSION["pay_coins"] + $row1['wallet_coins'];
 
             $query2 = "UPDATE `model_user_wallet` SET `wallet_coins` = '".$Total_coins."' WHERE `model_user_wallet`.`user_unique_id` = '".$_SESSION["log_user_unique_id"]."'";
         }else{
