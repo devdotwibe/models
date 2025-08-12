@@ -117,7 +117,7 @@ $activeTab = 'wallet';
 	
 	<div class="container mx-auto px-4 py-8 max-w-6xl relative z-10">
         <!-- Header -->
-        <div class="text-center mb-8">
+        <div class="text-center mb-8 wallet-header-h1">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                 Premium Digital Wallet
             </h1>
@@ -157,7 +157,7 @@ $activeTab = 'wallet';
         </div>
 
         <!-- Tab Navigation -->
-        <div class="glass-card p-6">
+        <div class="glass-card p-6 wallet-tabs-outer">
             <div class="tab-nav">
                 <button class="tab-btn <?php if($user_type == 'user'){ ?> active <?php } ?> " onclick="switchTab('buy')" data-tab="buy">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -414,7 +414,7 @@ $activeTab = 'wallet';
                     Withdraw Earnings
                 </h3>
                 
-                <div class="max-w-2xl mx-auto">
+                <div class="max-w-2xl mx-auto withdraw-div">
                     <div class="glass-card p-6 mb-6">
                         <h4 class="text-xl font-semibold mb-4">Available for Withdrawal</h4>
                         <div class="text-center">

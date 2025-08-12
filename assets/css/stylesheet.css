@@ -8258,12 +8258,38 @@ div#formStep1 input {
 
     color: white;
 
-    transform: translateY(-2px);
+    /* transform: translateY(-2px); */
 
 }
 
 
+.withdraw-div .glass-card .text-center{
+text-align:left
+}
 
+#withdraw>h3{
+  margin-top:50px !important; 
+  font-size:35px;
+  line-height: normal;
+}
+
+.withdraw-div form button{
+  display:flex;
+  align-itemms:center;
+  justify-content:center;
+  
+}
+.wallet-header-h1 h1{
+  line-height:normal;
+  margin-top:25px;
+  margin-bottom: 5px !important;
+}
+
+
+.wallet-tabs-outer{
+
+  margin-bottom:35px;
+}
 .premium-wallet .tab-btn:hover:not(.active) {
 
     background: rgba(255, 255, 255, 0.1);
