@@ -31,25 +31,40 @@ if($userDetails){
         }       
 
 
-        if (mysqli_query($con,$query1) && mysqli_query($con,$query2) || true) {
+        if (mysqli_query($con, $query1)) {
 
-			 $insertedPaymentId = mysqli_insert_id($con);
+				 $insertedPaymentId = mysqli_insert_id($con); 
 
-			DB::query("UPDATE model_user SET balance=round(balance+%d) WHERE id=%s", $_SESSION["pay_coins"], $userDetails['id']);
+				$sql = "SELECT * FROM model_user_wallet WHERE user_unique_id = '".$_SESSION["log_user_unique_id"]."'";
+				$result = mysqli_query($con, $sql);
 
-			DB::insert('model_user_transaction_history', array(
-				'user_id' => $userDetails['id'],
-				'other_id' => $insertedPaymentId,
-				'amount' => $_SESSION["pay_coins"],
-				'type' => 'coin_parchase',
-				'created_at' => $date,
-			));
+				if (mysqli_num_rows($result) > 0) {
 
-        	echo "<script>alert('Your Payment Data will be inserted');</script>";
-        	echo "<script>window.location='success.php'</script>";
-        	unset($_SESSION["pay_amount"]);
-        	unset($_SESSION["pay_coins"]);
-        }
+					if (mysqli_query($con, $query2)) {
+						
+						DB::query(
+							"UPDATE model_user SET balance = ROUND(balance + %d) WHERE id = %s",
+							$_SESSION["pay_coins"],
+							$userDetails['id']
+						);
+
+						DB::insert('model_user_transaction_history', [
+							'user_id'    => $userDetails['id'],
+							'other_id'   => $insertedPaymentId, 
+							'amount'     => $_SESSION["pay_coins"],
+							'type'       => 'coin_purchase',
+							'created_at' => $date,
+						]);
+
+						echo "<script>alert('Your Payment Data has been inserted');</script>";
+						echo "<script>window.location='success.php'</script>";
+
+						unset($_SESSION["pay_amount"], $_SESSION["pay_coins"]);
+
+					} else {
+						echo "Error in wallet update: " . mysqli_error($con);
+					}
+			}
 		else{
         	echo "<script>alert('Your Payment Data will not be inserted');</script>";
         	echo "<script>window.location='success.php'</script>";
