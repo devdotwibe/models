@@ -15,14 +15,15 @@ if($userDetails){
        	$query1 = "INSERT INTO model_user_payment(`unique_id`, `user_name`, `user_email`, `payment_id`, `payment_amount`, `coins`,`created_date`, `status`) VALUES ('".$_SESSION["log_user_unique_id"]."','".$_SESSION["log_user"]."','".$_SESSION["log_user_email"]."','".$payment_id."','".$_SESSION["pay_amount"]."','".$_SESSION["pay_coins"]."','".$date."','Success')";
 
         $sql = "SELECT * FROM model_user_wallet WHERE user_unique_id = '".$_SESSION["log_user_unique_id"]."'";
-        $result = mysqli_query($con,$sql);
+        $result = mysqli_query($con, $sql);
 
-          if (mysqli_num_rows($result) > 0) {
+          if (mysqli_num_rows(result: $result) > 0) {
 
             $row1 = mysqli_fetch_assoc($result);
              
             $wallet_coins = $row1['wallet_coins'];
-            $Total_coins =  $_SESSION["pay_coins"] + $row1['wallet_coins'];
+
+           $Total_coins = (int)$_SESSION["pay_coins"] + (int)$row1['wallet_coins'];
 
             $query2 = "UPDATE `model_user_wallet` SET `wallet_coins` = '".$Total_coins."' WHERE `model_user_wallet`.`user_unique_id` = '".$_SESSION["log_user_unique_id"]."'";
         }else{
@@ -35,6 +36,14 @@ if($userDetails){
 				'balance'=>round($userDetails['balance']+$_SESSION["pay_coins"])
 			);
 			DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
+
+			DB::insert('model_user_transaction_history', array(
+				'user_id' => $query1['id'],
+				'other_id' => $payment_id,
+				'amount' =>  $_SESSION["pay_coins"],
+				'type' => 'coin_parchase',
+				'created_at' => $date,
+			));
 	
         	echo "<script>alert('Your Payment Data will be inserted');</script>";
         	echo "<script>window.location='success.php'</script>";

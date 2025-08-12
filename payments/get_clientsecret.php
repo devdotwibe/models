@@ -29,24 +29,9 @@ if (isset($_SESSION["log_user_id"])) {
 					'currency' => 'usd', 
 				   'automatic_payment_methods' => ['enabled' => true],
 				]);
-
-                $date = date('Y-m-d H:i:s');
-
-                DB::query("UPDATE model_user SET balance=round(balance+%d) WHERE id=%s", $coins, $userDetails['id']);
-
-                DB::insert('model_user_transaction_history', array(
-                    'user_id' => $userDetails['id'],
-                    'other_id' => $paymentIntent->client_secret,
-                    'amount' => $coins,
-                    'type' => 'token_purchase',
-                    'created_at' => $date,
-                ));
-
 				//echo json_encode(['clientSecret' => $paymentIntent->client_secret]);
 				$output['status'] = 'success';	
 				$output['message'] = $paymentIntent->client_secret;
-
-				$output['payment_detail'] = $paymentIntent;
 
 			} catch (\Stripe\Exception\ApiErrorException $e) {
 				$error = [
