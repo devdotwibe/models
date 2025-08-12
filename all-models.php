@@ -1169,6 +1169,55 @@ offset = offset+limit;
 <script>
 
 
+        const premiumAmounts = <?php echo json_encode($premium_amounts); ?>;
+
+        function upgradeAccount(plan_type, plan_status) {
+
+   
+            let key = '';
+            if (plan_status === 'basic') {
+                key = 'basic_with_discount';
+                if (plan_type === 'annual') {
+                    key = 'basic_with_discount_yearly';
+                }
+            } else if (plan_status === 'diamond') {
+                key = 'diamond_with_discount';
+                if (plan_type === 'annual') {
+                    key = 'diamond_with_discount_yearly';
+                }
+            }
+
+            const amount = premiumAmounts[key];
+
+            const form = document.createElement('form');
+            form.method = 'POST'; 
+            form.action = 'payments/preminum.php'; 
+
+            const inputPlanType = document.createElement('input');
+            inputPlanType.type = 'hidden';
+            inputPlanType.name = 'plan_type';
+            inputPlanType.value = plan_type;
+            form.appendChild(inputPlanType);
+
+            const inputPlanStatus = document.createElement('input');
+            inputPlanStatus.type = 'hidden';
+            inputPlanStatus.name = 'plan_status';
+            inputPlanStatus.value = plan_status;
+            form.appendChild(inputPlanStatus);
+
+            const inputAmount = document.createElement('input');
+            inputAmount.type = 'hidden';
+            inputAmount.name = 'amount';
+            inputAmount.value = amount;
+            form.appendChild(inputAmount);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+
+
+
 $(document).ready(function() {
     
   $('.toggle-option').on('click', function() {
