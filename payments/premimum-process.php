@@ -11,11 +11,6 @@ if($userDetails){
 	$payment_status = $_POST['payment_status'];
 	$payment_id = $_POST['payment_id'];
 
-    echo "tweat";
-
-    die();
- 
-
        	// $query1 = "INSERT INTO model_user_payment(`unique_id`, `user_name`, `user_email`, `payment_id`, `payment_amount`, `coins`,`created_date`, `status`) VALUES ('".$_SESSION["log_user_unique_id"]."','".$_SESSION["log_user"]."','".$_SESSION["log_user_email"]."','".$payment_id."','".$_SESSION["pay_amount"]."','".$_SESSION["pay_coins"]."','".$date."','Success')";
 
         // $sql = "SELECT * FROM model_user_wallet WHERE user_unique_id = '".$_SESSION["log_user_unique_id"]."'";
@@ -53,11 +48,9 @@ if($userDetails){
 						// 	$userDetails['id']
 						// );
 
-                        $amount =  $_SESSION["pay_amount"];
-
-                        $plan_status =  $_SESSION["plan_status"];
-
-                        $plan_type =   $_SESSION["plan_type"];
+                        $amount = $_SESSION["pay_amount"];
+                        $plan_status = $_SESSION["plan_status"];
+                        $plan_type = $_SESSION["plan_type"];
 
                         $insertedPremiumUserId = DB::table('premium_users')->insertGetId([
                             'user_id'    => $userDetails['id'],
@@ -67,20 +60,18 @@ if($userDetails){
                             'updated_at' => $date,
                         ]);
 
+                        DB::table('model_user_transaction_history')->insert([
+                            'user_id'    => $userDetails['id'],
+                            'other_id'   => $insertedPremiumUserId,
+                            'amount'     => $amount,
+                            'type'       => 'premium-purchase',
+                            'created_at' => $date,
+                        ]);
 
-						DB::insert('model_user_transaction_history', [
-							'user_id'    => $userDetails['id'],
-							'other_id'   => $insertedPremiumUserId, 
-							'amount'     => $_SESSION["pay_amount"],
-							'type'       => 'preminum-parchase',
-							'created_at' => $date,
-						]);
+                        echo "<script>alert('Your Payment Data has been inserted');</script>";
+                        echo "<script>window.location='success.php';</script>";
 
-						echo "<script>alert('Your Payment Data has been inserted');</script>";
-						echo "<script>window.location='success.php'</script>";
-
-						unset($_SESSION["pay_amount"], 
-                        $_SESSION["plan_status"],$_SESSION["plan_type"]);
+                        unset($_SESSION["pay_amount"], $_SESSION["plan_status"], $_SESSION["plan_type"]);
 
 					// } else {
 					// 	echo "Error in wallet update: " . mysqli_error($con);
