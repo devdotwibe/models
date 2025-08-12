@@ -9,6 +9,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $stripeSecret = $_ENV['STRIPE_SECRET_KEY']; 
 
+$stripekey = $_ENV['STRIPE_KEY'];
 
 	session_start();
 	include('../includes/config.php');
@@ -153,7 +154,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 
 <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 <script>
-var stripeKey = 'pk_test_51NpPnnEu2dN0F4bnRBhXoWW2XfitXbcyR1Oj4oUrobYdpYYQV1IMQBY3UJTjAwTqosizH3A0tQ5S28voaHGfCH3H002ACBgegA';  
+var stripeKey = <?php echo json_encode($stripekey); ?>; 
 var stripe = Stripe(stripeKey);
 
 var elements = stripe.elements();
