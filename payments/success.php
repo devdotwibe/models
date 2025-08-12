@@ -9,7 +9,7 @@
 <article class="bg-secondary mb-3">  
 <div class="card-body text-center">
 <h4 class="text-white">Thank you for payment<br></h4>
-<a href="https://thelivemodels.com/">Go back to home</a>
+<a href="<?php echo SITEURL.'/wallet.php' ?>">Go back to home</a>
 <br>
 
 </div>
