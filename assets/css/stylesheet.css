@@ -9841,10 +9841,7 @@ body.advt-page.my-purpose .scroll-indicator {
     padding: 10px;
 }
 
-#purchaseform .form-group:nth-last-of-type(n-1) {
-    width: 100%;
-    border: 1px solid red;
-}
+
 
 
 
@@ -9856,6 +9853,9 @@ body.advt-page.my-purpose .scroll-indicator {
 #purchaseform .form-group:last-of-type {
     width: 100%;
     /* border:1px solid blue; */
+}
+.purchase-payment-h3{
+    color:#fff;
 }
 
 
@@ -11083,6 +11083,10 @@ body.advt-page.my-purpose .scroll-indicator {
 
     .premium-wallet .transaction-item>div:first-child .text-sm {
         font-size: 12px;
+    }
+
+    #bank form button{
+        padding:12px 24px;
     }
 }
 

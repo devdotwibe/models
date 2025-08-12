@@ -88,7 +88,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 		$coins = $_POST['coins'];
 	} 
 ?>
-	<div>
+	<div class="purchase-payment-h3">
 		<h3 class="head_pay">Payment Confirmation Page</h3>
 	</div>
 <form action="payment-process.php" method="POST" name="purchaseform" id="purchaseform">
