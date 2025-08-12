@@ -873,6 +873,125 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
+<div class="popup-overlay" id="premium-modal">
+    <div class="popup-container">
+        <button class="close-btn" onclick="closePremiumModal()">&times;</button>
+        
+        <div class="top-icons">
+            <div class="top-icon">🚀</div>
+            <div class="top-icon">⭐</div>
+            <div class="top-icon">💎</div>
+        </div>
+
+        <div class="header">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
+            <h2 class="title">Unlock Elite Access</h2>
+            <p class="subtitle">Join premium members and dominate the streaming experience</p>
+        </div>
+
+        <div class="first-time-alert">
+            <span class="fire-emoji">🔥</span> FIRST-TIME USER EXCLUSIVE: $39 & $149 Limited Time Deal - Expires in 24 Hours of Joining! <span class="fire-emoji">🔥</span>
+        </div>
+
+        <div class="promo-banner">
+            <span class="fire-emoji">🔥</span> MASSIVE SAVINGS INSIDE - DON'T MISS OUT! <span class="fire-emoji">🔥</span>
+        </div>
+
+        <div class="countdown-timer">
+            ⏰ LIMITED TIME: <span id="countdown">23:59:45</span> REMAINING!
+        </div>
+
+        <div class="billing-toggle">
+            <div class="toggle-container">
+                <div class="toggle-option active" data-billing="monthly">Monthly</div>
+                <div class="toggle-option" data-billing="annual">
+                    Annual
+                    <span class="savings-badge">SAVE BIG!</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="hot-deal">🔥 HOT!</div>
+                <div class="member-badge premium-member-badge">PRO</div>
+                <div class="badge premium-badge">PREMIUM</div>
+                <div class="plan-name">Basic Premium</div>
+                <div class="price-container">
+                    <div class="original-price" data-monthly-orig="49" data-annual-orig="588">$49</div>
+                    <div class="price" data-monthly="39" data-annual="449">$39</div>
+                    <div class="price-period" data-monthly-period="per month" data-annual-period="per year">per month</div>
+                    <div class="savings-text" data-monthly-save="" data-annual-save="Save $139/year!">Save $10/month!</div>
+                    <div class="bonus-tokens">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                        <span data-monthly-tokens="500" data-annual-tokens="1,000">+ 500 TLM tokens</span>
+                    </div>
+                </div>
+                <button class="cta-button cta-primary" onclick="upgradeAccount('monthly')">Grab This Deal!</button>
+            </div>
+
+            <div class="pricing-card elite">
+                <div class="hot-deal">💎 ELITE!</div>
+                <div class="member-badge elite-member-badge">VIP</div>
+                <div class="badge elite-badge">DIAMOND ELITE</div>
+                <div class="plan-name">Diamond Elite</div>
+                <div class="price-container">
+                    <div class="original-price" data-monthly-orig="199" data-annual-orig="2388">$199</div>
+                    <div class="price" data-monthly="149" data-annual="1999">$149</div>
+                    <div class="price-period" data-monthly-period="per month" data-annual-period="per year">per month</div>
+                    <div class="savings-text" data-monthly-save="" data-annual-save="Save $389/year!">Save $50/month!</div>
+                    <div class="bonus-tokens">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                        <span data-monthly-tokens="2,000" data-annual-tokens="5,000">+ 2,000 TLM tokens</span>
+                    </div>
+                </div>
+                <button class="cta-button cta-elite" onclick="upgradeAccount('annual')">Claim Diamond Status!</button>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <div class="features-grid">
+                <div class="feature-column">
+                    <h4>Basic Premium</h4>
+                    <ul class="feature-list">
+                        <li>Unlimited chat with models</li>
+                        <li>Ad-free streaming experience</li>
+                        <li>HD video quality</li>
+                        <li>Advanced search & filters</li>
+                        <li>Profile visibility boost</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-column">
+                    <h4 class="elite-title">Diamond Elite Exclusive</h4>
+                    <ul class="feature-list elite-features">
+                        <li>Everything in Basic Premium</li>
+                        <li>Unlimited chat in live streaming</li>
+                        <li>Top priority in creator inbox</li>
+                        <li>VIP-only exclusive content</li>
+                        <li>Diamond Elite status badge</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="token-packages-section">
+            <div class="token-packages-title">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                Explore Token Packages
+            </div>
+            <div class="token-packages-subtitle">
+                Get extra TLM tokens for premium interactions, gifts, and exclusive content access
+            </div>
+            <button class="token-packages-btn" onclick="exploreTokens()">
+                🎁 Browse Token Deals
+            </button>
+            <div class="token-expires">⏰ Special token offers expire soon!</div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Modal structure -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
