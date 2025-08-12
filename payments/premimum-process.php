@@ -52,15 +52,17 @@ if($userDetails){
                         $plan_status = $_SESSION["plan_status"];
                         $plan_type = $_SESSION["plan_type"];
 
+                        // Insert into premium_users and get inserted ID
                         $insertedPremiumUserId = DB::table('premium_users')->insertGetId([
                             'user_id'    => $userDetails['id'],
                             'plan_type'  => $plan_type,
-                            'amount'    =>$amount,
+                            'amount'     => $amount,
                             'plan_status'=> $plan_status,
                             'created_at' => $date,
                             'updated_at' => $date,
                         ]);
 
+                        // Insert into transaction history
                         DB::table('model_user_transaction_history')->insert([
                             'user_id'    => $userDetails['id'],
                             'other_id'   => $insertedPremiumUserId,
@@ -68,6 +70,9 @@ if($userDetails){
                             'type'       => 'premium-purchase',
                             'created_at' => $date,
                         ]);
+
+                        // Optionally, unset session vars after use
+                        unset($_SESSION["pay_amount"], $_SESSION["plan_status"], $_SESSION["plan_type"]);
 
                         echo "<script>alert('Your Payment Data has been inserted');</script>";
                         echo "<script>window.location='success.php';</script>";
