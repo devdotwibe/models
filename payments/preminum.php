@@ -14,7 +14,7 @@ $stripekey = $_ENV['STRIPE_KEY'];
 
       $plan_type = $POST['plan_type'];
 
-            echo $plan_type;
+            print_r( $plan_type);
 
             die();
 
