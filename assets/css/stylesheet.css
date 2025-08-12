@@ -9792,6 +9792,73 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
+#purchaseform {
+  width: 90%;
+  margin: 0 auto;
+  border: 1px solid #e1e1e1;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.1);
+}
+
+#purchaseform .form-group {
+  margin-bottom: 1rem;
+  border: 1px solid red;
+  display: inline-block;
+  width: 48%;
+margin-right: 1%;
+  margin-left: 1%;
+}
+
+#purchaseform hr {
+  display: block;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+#purchaseform .form-group:nth-child(even) {
+  margin-right: 0;
+}
+
+#purchaseform p {
+  font-weight: bold;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+#purchaseform hr {
+ display:none;
+}
+
+
+.card-number-div {
+border: 1px solid #ced4da;
+  border-radius: 5px;
+  padding: 10px;
+}
+#purchaseform .form-group:nth-last-of-type(n-1){
+width:100%;
+border:1px solid red;
+}
+
+
+
+#purchaseform .form-group:nth-last-of-type(2) {
+  width: 100%;
+  /* border: 1px solid red; */
+}
+
+#purchaseform .form-group:last-of-type{
+width:100%;
+/* border:1px solid blue; */
+}
+
+
+
 
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
