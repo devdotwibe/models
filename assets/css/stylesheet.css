@@ -10930,6 +10930,8 @@ body.advt-page.my-purpose .scroll-indicator {
         align-items: center;
         justify-content: center;
         padding: 2px !important;
+        margin-left: 0 !important;
+    margin-right: 8px !important;
     }
 
     .header-desk-inner button svg {
@@ -10941,6 +10943,14 @@ body.advt-page.my-purpose .scroll-indicator {
         padding: 2px;
         width: 1rem;
         height: 1rem;
+    }
+
+    .header-desk-outer .relative{
+        width:1rem;
+        height:1rem;
+    }
+    .header-desk-outer>div:last-child{
+        margin-left: 0 !important;
     }
 
 }
