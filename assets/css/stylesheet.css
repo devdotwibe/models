@@ -8713,7 +8713,7 @@ body.model-mode .model-only {
     }
 
     .premium-wallet .tab-btn {
-        padding: 12px 8px;
+      padding: 9px 7px;
         font-size: 12px;
     }
 
@@ -10896,4 +10896,22 @@ body.advt-page.my-purpose .scroll-indicator {
         padding-bottom: 12px;
     }
 
+     .balance-card .coin-icon-img img {
+    max-height: 210px;
+  }
+   .premium-wallet .balance-amount {
+    font-size: 1.75rem;
+  }
+  #withdraw > h3 {
+    font-size: 22px;
+  }
+
+    .wallet-header-h1 h1 {
+    font-size: 22px;
+  }
+
+ .wallet-header-h1 p {
+    font-size: 15px;
+    line-height: 22px;
+  }
 }
