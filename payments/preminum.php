@@ -11,16 +11,8 @@ $stripeSecret = $_ENV['STRIPE_SECRET_KEY'];
 
 $stripekey = $_ENV['STRIPE_KEY'];
 
-
-
 session_start();
 
-
-      $plan_type = $POST['plan_type'];
-
-            print_r( $plan_type);
-
-            die();
 include('../includes/config.php');
 ?>
 <!DOCTYPE html>
@@ -89,6 +81,13 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
     <div class="container">
         <?php
 
+
+      $plan_type = $POST['plan_type'];
+
+            print_r( $plan_type);
+
+            die();
+            
         if (isset($_POST['plan_type']) && isset($_POST['plan_status']) && isset($_POST['amount'])) {
 
             $amount = $_POST['amount'];
