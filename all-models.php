@@ -880,6 +880,10 @@
     $settings = mysqli_fetch_assoc($getSettings);
 
     $updatedAt = $settings['updated_at']; 
+
+    echo $updatedAt; 
+
+    die();
 ?>
 
 <div class="popup-overlay" id="premium-modal">
