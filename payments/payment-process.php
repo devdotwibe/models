@@ -32,11 +32,7 @@ if($userDetails){
 
 
         if (mysqli_query($con,$query1) && mysqli_query($con,$query2) || true) {
-
-			$post_data = array(
-				'balance'=>round($userDetails['balance']+$_SESSION["pay_coins"])
-			);
-	
+			
 			DB::query("UPDATE model_user SET balance=round(balance+%d) WHERE id=%s", $_SESSION["pay_coins"], $userDetails['id']);
 
 			DB::insert('model_user_transaction_history', array(
