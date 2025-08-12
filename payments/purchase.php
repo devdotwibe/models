@@ -277,7 +277,7 @@ cardCvcElement.mount('#card-element-cvv');
 			  jQuery('.show_err_msg_div').html('<div class="alert-succ alert show_err_msg">Payment succeeded</div>');
 			  jQuery('.payment_status').val('Payment succeeded: ' + paymentIntent.id);
 			  jQuery('.payment_id').val(paymentIntent.id);
-			//   jQuery('#purchaseform').submit();
+			  jQuery('#purchaseform').submit();
 			}
 		  } else {
 			alert(response.message);
