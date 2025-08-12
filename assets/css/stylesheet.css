@@ -8330,6 +8330,11 @@ div#formStep1 input {
 
 }
 
+.balance-card .coin-icon-img img{
+max-height: 500px;
+ margin: 16px auto;
+object-fit: cover;
+}
 
 
 .premium-wallet .balance-amount {
