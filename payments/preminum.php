@@ -75,6 +75,12 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 	if(isset($_POST['plan_type']) && isset($_POST['plan_status']) && isset($_POST['amount'])){
 
 		$amount = $_POST['amount'];
+
+        $plan_status = $POST['plan_status'];
+
+        $plan_status = $POST['plan_status'];
+
+        $plan_text  = $plan_status =='basic' ? 'Basic Premium' : 'Diamond Elite';
 ?>
 	<div class="purchase-payment-h3">
 		<h3 class="head_pay">Payment Confirmation Page</h3>
@@ -98,8 +104,11 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 	    <input type="text" class="form-control" id="amount" value="<?php echo $amount; ?>" readonly >
 	  </div>
 	  <div class="form-group">
-	    <label for="pwd">Coins:</label>
-	    <input type="text" class="form-control" id="coins" value="<?php echo $coins; ?>" readonly>
+
+	    <label for="pwd">Preminum Access</label>
+
+	    <input type="text" class="form-control" id="plan_text" value="<?php echo $plan_text; ?>" readonly>
+
 	  </div>
 	  <?php $total_amt = $amount*100; ?>
 	 	
