@@ -885,7 +885,7 @@
 
         if ($updatedAt) {
             $timeDiff = time() - strtotime($updatedAt);
-            if ($timeDiff > 86400) {
+            if ($timeDiff > 86400 && $settings['status']=='No') {
 
                 $discountPriceShow = false;
             }
@@ -961,7 +961,7 @@
                 <div class="badge premium-badge">PREMIUM</div>
                 <div class="plan-name">Basic Premium</div>
                 <div class="price-container">
-                    <?php if ($discountPriceShow === 'Yes') { ?>
+                    <?php if ($discountPriceShow) { ?>
                         <div class="original-price" 
                             data-monthly-orig="<?php echo $premium_amounts['basic_without_discount']; ?>" 
                             data-annual-orig="<?php echo $premium_amounts['basic_without_discount_yearly']; ?>">
@@ -1010,7 +1010,7 @@
                 <div class="badge elite-badge">DIAMOND ELITE</div>
                 <div class="plan-name">Diamond Elite</div>
                 <div class="price-container">
-                    <?php if ($discountPriceShow === 'Yes') { ?>
+                    <?php if ($discountPriceShow) { ?>
                         <div class="original-price" 
                             data-monthly-orig="<?php echo $premium_amounts['diamond_without_discount']; ?>" 
                             data-annual-orig="<?php echo $premium_amounts['diamond_without_discount_yearly']; ?>">
