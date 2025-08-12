@@ -8425,7 +8425,11 @@ display: flex;
   margin-top: auto ;
   
 }
-
+.premium-wallet .purchase-card  form button{
+    display:flex;
+align-items:center;
+justify-content:center;
+}
 
 
 .premium-wallet .purchase-card:hover {
@@ -10042,23 +10046,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 @media (max-width: 768px) {
 
-    .enhanced5 .profile-info {
-        height: 279px !important;
 
-    }
-
-    .boost_adver .container {
-        padding: 0 1rem;
-    }
-
-
-    .wallet-header-h1 h1 {
-        font-size: 35px;
-    }
-
-    .premium-wallet .balance-amount {
-        font-size: 2.5rem;
-    }
 }
 
 /* ---------------------------------------------------- */
@@ -10154,7 +10142,27 @@ body.advt-page.my-purpose .scroll-indicator {
         display: flex !important;
         width: auto;
     }
+    .enhanced5 .profile-info {
+        height: 279px !important;
 
+    }
+
+    .boost_adver .container {
+        padding: 0 1rem;
+    }
+
+
+    .wallet-header-h1 h1 {
+        font-size: 35px;
+    }
+
+    .premium-wallet .balance-amount {
+        font-size: 2.5rem;
+    }
+
+    .premium-wallet .purchase-grid{
+        grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    }
 }
 
 
@@ -10303,7 +10311,9 @@ body.advt-page.my-purpose .scroll-indicator {
     .withdraw-div .glass-card .text-center>div {
         font-size: 28px
     }
-
+    .premium-wallet .purchase-grid{
+        grid-template-columns: 1fr;
+    }
 }
 
 
