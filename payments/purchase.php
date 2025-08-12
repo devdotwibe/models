@@ -255,7 +255,8 @@ cardCvcElement.mount('#card-element-cvv');
 	  if(stats){
 		 try {
 		  // Use fetch instead of jQuery.ajax so you can use await
-		  const res = await fetch("<?=SITEURL.'payments/get_clientsecret.php'?>?grand_unit_price='<?php echo $amount ?>'");
+		  
+		  const res = await fetch(`<?= SITEURL ?>payments/get_clientsecret.php?grand_unit_price=<?= $amount ?>`);
 		  const response = await res.json();
 
 		  if (response.status === 'success' && response.message !== '') {
