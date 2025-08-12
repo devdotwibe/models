@@ -38,7 +38,7 @@ if($userDetails){
 			DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
 
 			DB::insert('model_user_transaction_history', array(
-				'user_id' => $query1['id'],
+				'user_id' => $userDetails['id'],
 				'other_id' => $payment_id,
 				'amount' =>  $_SESSION["pay_coins"],
 				'type' => 'coin_parchase',
