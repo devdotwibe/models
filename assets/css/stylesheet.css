@@ -8417,7 +8417,13 @@ div#formStep1 input {
     position: relative;
 
     overflow: hidden;
+display: flex;
+  flex-direction: column;
+}
 
+.premium-wallet .purchase-card  form {
+  margin-top: auto ;
+  
 }
 
 
@@ -10943,7 +10949,7 @@ body.advt-page.my-purpose .scroll-indicator {
         padding: 2px;
         width: 1rem;
         height: 1rem;
-        top:-.5rem;
+        top:-0.5rem;
     }
 
  
