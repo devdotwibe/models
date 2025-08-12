@@ -60,7 +60,7 @@
                         <h4 class="card-title">Discount Price Visibility</h4>
                         <form method="post">
                             <div class="form-group">
-                                <label><b>Show Discount Price on Frontend?</b></label>
+                                <label><b>Show Discount Price ?</b></label>
                                 <select name="discount_price_show" class="form-control" required>
                                     <option value="Yes" <?php if ($discountPriceShow === "Yes") echo "selected"; ?>>Yes</option>
                                     <option value="No" <?php if ($discountPriceShow === "No") echo "selected"; ?>>No</option>
