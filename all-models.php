@@ -975,7 +975,7 @@
                         data-annual-period="per year">
                         per month
                     </div>
-                    <div class="savings-text" 
+                    <div class="savings-text show" 
                         data-monthly-save="Save $<?php echo $basic_monthly_savings; ?>/month!" 
                         data-annual-save="Save $<?php echo $basic_annual_savings; ?>/year!">
                         Save $<?php echo $basic_monthly_savings; ?>/month!
@@ -1010,7 +1010,7 @@
                         data-annual-period="per year">
                         per month
                     </div>
-                    <div class="savings-text" 
+                    <div class="savings-text show" 
                         data-monthly-save="Save $<?php echo $diamond_monthly_savings; ?>/month!" 
                         data-annual-save="Save $<?php echo $diamond_annual_savings; ?>/year!">
                         Save $<?php echo $diamond_monthly_savings; ?>/month!
