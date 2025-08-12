@@ -9,6 +9,10 @@ $dotenv->load();
 
 $stripeSecret = $_ENV['STRIPE_SECRET_KEY'];
 
+echo json_encode($stripeSecret);
+
+
+die();
 
 session_start();
 include('../includes/config.php');
