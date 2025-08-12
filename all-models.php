@@ -131,13 +131,13 @@
                         </div>
                     </div>
                   
-                    <?php if($user_have_preminum) { ?>
+                    <?php if(!$user_have_preminum) { ?>
 
                         <button class="premium-btn" type="button" onclick="ShowPremium()">
                             <i class="fas fa-crown"></i>
                             Go Premium
                         </button>
-                        
+
                     <?php } ?>
 
                 </div>
