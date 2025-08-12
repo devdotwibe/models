@@ -92,7 +92,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
             <div class="purchase-payment-h3">
                 <h3 class="head_pay">Payment Confirmation Page</h3>
             </div>
-            <form action="premimum-process.php" method="POST" name="preminum_form" id="preminum_form">
+            <form action="premimum-process.php" method="POST" name="purchaseform" id="purchaseform">
                 <p class="">User Details: </p>
                 <hr>
                 <div class="form-group">
@@ -298,7 +298,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
                             jQuery('.show_err_msg_div').html('<div class="alert-succ alert show_err_msg">Payment succeeded</div>');
                             jQuery('.payment_status').val('Payment succeeded: ' + paymentIntent.id);
                             jQuery('.payment_id').val(paymentIntent.id);
-                            jQuery('#preminum_form').submit();
+                            jQuery('#purchaseform').submit();
                         }
                     } else {
                         alert(response.message);
