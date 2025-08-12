@@ -108,6 +108,16 @@ require_once 'constant.php';
               <span class="menu-title">All Refunded Coins</span>
             </a>
           </li>
+
+          <hr><p>Admin Settings</p><hr>
+
+          <li class="nav-item">
+            <a class="nav-link" href="admin_setting.php">
+              <i class="ti-layout-list-post menu-icon"></i>
+              <span class="menu-title">Settings</span>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- partial -->
