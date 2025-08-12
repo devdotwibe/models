@@ -143,7 +143,7 @@
 
                 $result = CheckPremiumAccess($userDetails['id']);
 
-                echo $result;
+                print_r( $result);
 
                 die();
 
