@@ -48,41 +48,65 @@ if($userDetails){
 						// 	$userDetails['id']
 						// );
 
-                        try {
+                    <?php
 
-                        $amount = $_SESSION["pay_amount"];
-                        $plan_status = $_SESSION["plan_status"];
-                        $plan_type = $_SESSION["plan_type"];
+try {
+    // Make sure session is started before accessing session vars
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
-                        // Insert into premium_users and get inserted ID
-                        $insertedPremiumUserId = DB::table('premium_users')->insertGetId([
-                            'user_id'    => $userDetails['id'],
-                            'plan_type'  => $plan_type,
-                            'amount'     => $amount,
-                            'plan_status'=> $plan_status,
-                            'created_at' => $date,
-                            'updated_at' => $date,
-                        ]);
+    // Validate these variables exist before use
+    if (!isset($_SESSION["pay_amount"], $_SESSION["plan_status"], $_SESSION["plan_type"])) {
+        throw new Exception("Session payment data missing.");
+    }
 
-                        // Insert into transaction history
-                        DB::table('model_user_transaction_history')->insert([
-                            'user_id'    => $userDetails['id'],
-                            'other_id'   => $insertedPremiumUserId,
-                            'amount'     => $amount,
-                            'type'       => 'premium-purchase',
-                            'created_at' => $date,
-                        ]);
+    // Also validate $userDetails and $date exist and are valid
+    if (!isset($userDetails['id'])) {
+        throw new Exception("User details missing.");
+    }
 
-                        // Optionally, unset session vars after use
-                        unset($_SESSION["pay_amount"], $_SESSION["plan_status"], $_SESSION["plan_type"]);
-                        
+    // Set $date if not already set
+    if (!isset($date)) {
+        $date = date('Y-m-d H:i:s');
+    }
 
-                        echo "<script>alert('Your Payment Data has been inserted');</script>";
-                        echo "<script>window.location='success.php';</script>";
+    $amount = $_SESSION["pay_amount"];
+    $plan_status = $_SESSION["plan_status"];
+    $plan_type = $_SESSION["plan_type"];
 
-                        } catch (\Exception $e) {
-                            dd($e->getMessage());
-                        }
+    // Insert into premium_users and get inserted ID
+    $insertedPremiumUserId = DB::table('premium_users')->insertGetId([
+        'user_id'    => $userDetails['id'],
+        'plan_type'  => $plan_type,
+        'amount'     => $amount,
+        'plan_status'=> $plan_status,
+        'created_at' => $date,
+        'updated_at' => $date,
+    ]);
+
+    // Insert into transaction history
+    DB::table('model_user_transaction_history')->insert([
+        'user_id'    => $userDetails['id'],
+        'other_id'   => $insertedPremiumUserId,
+        'amount'     => $amount,
+        'type'       => 'premium-purchase',
+        'created_at' => $date,
+    ]);
+
+    // Unset session vars
+    unset($_SESSION["pay_amount"], $_SESSION["plan_status"], $_SESSION["plan_type"]);
+
+    echo "<script>alert('Your Payment Data has been inserted');</script>";
+    echo "<script>window.location='success.php';</script>";
+
+} catch (\Exception $e) {
+    // Use Laravel's dd helper or just echo error for debugging
+    echo "Error: " . $e->getMessage();
+    // Or if you want to stop execution
+    // dd($e->getMessage());
+}
+
 
 					// } else {
 					// 	echo "Error in wallet update: " . mysqli_error($con);
