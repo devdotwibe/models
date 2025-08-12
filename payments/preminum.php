@@ -81,20 +81,11 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
     <div class="container">
         <?php
 
-
-      $plan_type = $_POST['plan_type'];
-
-            print_r( $plan_type);
-
-            die();
-            
         if (isset($_POST['plan_type']) && isset($_POST['plan_status']) && isset($_POST['amount'])) {
 
             $amount = $_POST['amount'];
 
             $plan_status = $_POST['plan_status'];
-
-      
 
             $plan_text = $plan_status == 'basic' ? 'Basic Premium' : 'Diamond Elite';
             ?>
