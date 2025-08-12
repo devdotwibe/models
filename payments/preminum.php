@@ -11,6 +11,13 @@ $stripeSecret = $_ENV['STRIPE_SECRET_KEY'];
 
 $stripekey = $_ENV['STRIPE_KEY'];
 
+
+      $plan_type = $POST['plan_type'];
+
+            echo $plan_type;
+
+            die();
+
 session_start();
 include('../includes/config.php');
 ?>
@@ -86,11 +93,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 
             $plan_status = $POST['plan_status'];
 
-            $plan_type = $POST['plan_type'];
-
-            echo $plan_type;
-
-            die();
+      
 
             $plan_text = $plan_status == 'basic' ? 'Basic Premium' : 'Diamond Elite';
             ?>
