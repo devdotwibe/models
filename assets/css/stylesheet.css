@@ -10399,6 +10399,11 @@ body.advt-page.my-purpose .scroll-indicator {
     .premium-wallet .purchase-card form button {
         padding: 12px 24px;
     }
+
+.advt-page .pagination{
+    flex-wrap: wrap;
+}
+
 }
 
 
