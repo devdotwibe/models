@@ -32,19 +32,21 @@ if($userDetails){
 
 
         if (mysqli_query($con,$query1) && mysqli_query($con,$query2) || true) {
+
 			$post_data = array(
 				'balance'=>round($userDetails['balance']+$_SESSION["pay_coins"])
 			);
-			DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
+	
+			DB::query("UPDATE model_user SET balance=round(balance+%d) WHERE id=%s", $_SESSION["pay_coins"], $userDetails['id']);
 
 			DB::insert('model_user_transaction_history', array(
 				'user_id' => $userDetails['id'],
 				'other_id' => $payment_id,
-				'amount' =>  $_SESSION["pay_coins"],
+				'amount' => $_SESSION["pay_coins"],
 				'type' => 'coin_parchase',
 				'created_at' => $date,
 			));
-	
+
         	echo "<script>alert('Your Payment Data will be inserted');</script>";
         	echo "<script>window.location='success.php'</script>";
         	unset($_SESSION["pay_amount"]);
