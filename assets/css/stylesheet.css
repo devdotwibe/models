@@ -9828,7 +9828,7 @@ body.advt-page.my-purpose .scroll-indicator {
     font-weight: bold;
     margin-right: 1%;
     margin-left: 1%;
-    color: #fff !important;
+    color: #fff;
   margin-bottom: 10px;
 }
 
@@ -9856,10 +9856,15 @@ body.advt-page.my-purpose .scroll-indicator {
     width: 100%;
     /* border:1px solid blue; */
 }
-
-.purchase-payment-h3 {
-    color: #fff;
+.head_pay {
+  font-size: 30px;
+    color: #fff !important;
 }
+
+#purchaseform .form-group label{
+    color:#fff;
+}
+
 
 
 /* form for banking........................... */
@@ -9932,14 +9937,6 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
-.head_pay {
-  font-size: 30px;
-  color: #fff;
-}
-
-#purchaseform .form-group label{
-    color:#fff;
-}
 
 
 
