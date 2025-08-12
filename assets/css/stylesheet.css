@@ -10952,5 +10952,9 @@ body.advt-page.my-purpose .scroll-indicator {
     .header-desk-outer>div:last-child{
         margin-left: 0 !important;
     }
+    .header-desk-outer > div:last-child img{
+        width:2.25rem;
+        height:2.25rem;
+    }
 
 }
