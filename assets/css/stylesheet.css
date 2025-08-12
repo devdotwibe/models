@@ -10161,8 +10161,20 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .premium-wallet .purchase-grid{
-        grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+        grid-template-columns: repeat(auto-fit, minmax(212px,1fr));
     }
+
+.purchase-card .text-3xl{
+    font-size:25px;
+}
+.purchase-card .text-2xl {
+    font-size:22px;
+}
+
+.purchase-card .text-gray-400 {
+    font-size:15px;
+}
+
 }
 
 
