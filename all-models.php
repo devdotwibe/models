@@ -1080,7 +1080,7 @@ offset = offset+limit;
 
 function ShowPremium()
 {
-    $('#premium-modal'),addClass('show');
+    $('#premium-modal').addClass('show');
 }
 
 function closePremiumModal()
