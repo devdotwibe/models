@@ -890,6 +890,24 @@
                 $discountPriceShow = false;
             }
         }
+
+        $premium_amounts = [ 
+            'basic_with_discount' => 39,
+            'basic_without_discount' => 49,
+            'diamond_with_discount' => 149,
+            'diamond_without_discount' => 199,
+            'basic_with_discount_yearly' => 449,
+            'basic_without_discount_yearly' => 588,
+            'diamond_with_discount_yearly' => 1999,
+            'diamond_without_discount_yearly' => 2388,
+        ];
+
+        $basic_monthly_savings = $premium_amounts['basic_without_discount'] - $premium_amounts['basic_with_discount']; 
+        $basic_annual_savings = $premium_amounts['basic_without_discount_yearly'] - $premium_amounts['basic_with_discount_yearly']; 
+
+        $diamond_monthly_savings = $premium_amounts['diamond_without_discount'] - $premium_amounts['diamond_with_discount'];
+        $diamond_annual_savings = $premium_amounts['diamond_without_discount_yearly'] - $premium_amounts['diamond_with_discount_yearly'];
+
 ?>
 
 <div class="popup-overlay" id="premium-modal">
@@ -934,42 +952,74 @@
             </div>
         </div>
 
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <div class="hot-deal">🔥 HOT!</div>
-                <div class="member-badge premium-member-badge">PRO</div>
-                <div class="badge premium-badge">PREMIUM</div>
-                <div class="plan-name">Basic Premium</div>
-                <div class="price-container">
-                    <div class="original-price" data-monthly-orig="49" data-annual-orig="588">$49</div>
-                    <div class="price" data-monthly="39" data-annual="449">$39</div>
-                    <div class="price-period" data-monthly-period="per month" data-annual-period="per year">per month</div>
-                    <div class="savings-text" data-monthly-save="" data-annual-save="Save $139/year!">Save $10/month!</div>
-                    <div class="bonus-tokens">
-                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
-                        <span data-monthly-tokens="500" data-annual-tokens="1,000">+ 500 TLM tokens</span>
-                    </div>
+        <!-- Basic Premium -->
+        <div class="pricing-card">
+            <div class="hot-deal">🔥 HOT!</div>
+            <div class="member-badge premium-member-badge">PRO</div>
+            <div class="badge premium-badge">PREMIUM</div>
+            <div class="plan-name">Basic Premium</div>
+            <div class="price-container">
+                <div class="original-price" 
+                    data-monthly-orig="<?php echo $premium_amounts['basic_without_discount']; ?>" 
+                    data-annual-orig="<?php echo $premium_amounts['basic_without_discount_yearly']; ?>">
+                    $<?php echo $premium_amounts['basic_without_discount']; ?>
                 </div>
-                <button class="cta-button cta-primary" onclick="upgradeAccount('monthly')">Grab This Deal!</button>
+                <div class="price" 
+                    data-monthly="<?php echo $premium_amounts['basic_with_discount']; ?>" 
+                    data-annual="<?php echo $premium_amounts['basic_with_discount_yearly']; ?>">
+                    $<?php echo $premium_amounts['basic_with_discount']; ?>
+                </div>
+                <div class="price-period" 
+                    data-monthly-period="per month" 
+                    data-annual-period="per year">
+                    per month
+                </div>
+                <div class="savings-text" 
+                    data-monthly-save="Save $<?php echo $basic_monthly_savings; ?>/month!" 
+                    data-annual-save="Save $<?php echo $basic_annual_savings; ?>/year!">
+                    Save $<?php echo $basic_monthly_savings; ?>/month!
+                </div>
+                <div class="bonus-tokens">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                    <span data-monthly-tokens="500" data-annual-tokens="1000">+ 500 TLM tokens</span>
+                </div>
             </div>
+            <button class="cta-button cta-primary" onclick="upgradeAccount('monthly', 'basic')">Grab This Deal!</button>
+        </div>
 
-            <div class="pricing-card elite">
-                <div class="hot-deal">💎 ELITE!</div>
-                <div class="member-badge elite-member-badge">VIP</div>
-                <div class="badge elite-badge">DIAMOND ELITE</div>
-                <div class="plan-name">Diamond Elite</div>
-                <div class="price-container">
-                    <div class="original-price" data-monthly-orig="199" data-annual-orig="2388">$199</div>
-                    <div class="price" data-monthly="149" data-annual="1999">$149</div>
-                    <div class="price-period" data-monthly-period="per month" data-annual-period="per year">per month</div>
-                    <div class="savings-text" data-monthly-save="" data-annual-save="Save $389/year!">Save $50/month!</div>
-                    <div class="bonus-tokens">
-                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
-                        <span data-monthly-tokens="2,000" data-annual-tokens="5,000">+ 2,000 TLM tokens</span>
-                    </div>
+        <!-- Diamond Elite -->
+        <div class="pricing-card elite">
+            <div class="hot-deal">💎 ELITE!</div>
+            <div class="member-badge elite-member-badge">VIP</div>
+            <div class="badge elite-badge">DIAMOND ELITE</div>
+            <div class="plan-name">Diamond Elite</div>
+            <div class="price-container">
+                <div class="original-price" 
+                    data-monthly-orig="<?php echo $premium_amounts['diamond_without_discount']; ?>" 
+                    data-annual-orig="<?php echo $premium_amounts['diamond_without_discount_yearly']; ?>">
+                    $<?php echo $premium_amounts['diamond_without_discount']; ?>
                 </div>
-                <button class="cta-button cta-elite" onclick="upgradeAccount('annual')">Claim Diamond Status!</button>
+                <div class="price" 
+                    data-monthly="<?php echo $premium_amounts['diamond_with_discount']; ?>" 
+                    data-annual="<?php echo $premium_amounts['diamond_with_discount_yearly']; ?>">
+                    $<?php echo $premium_amounts['diamond_with_discount']; ?>
+                </div>
+                <div class="price-period" 
+                    data-monthly-period="per month" 
+                    data-annual-period="per year">
+                    per month
+                </div>
+                <div class="savings-text" 
+                    data-monthly-save="Save $<?php echo $diamond_monthly_savings; ?>/month!" 
+                    data-annual-save="Save $<?php echo $diamond_annual_savings; ?>/year!">
+                    Save $<?php echo $diamond_monthly_savings; ?>/month!
+                </div>
+                <div class="bonus-tokens">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                    <span data-monthly-tokens="2000" data-annual-tokens="5000">+ 2,000 TLM tokens</span>
+                </div>
             </div>
+            <button class="cta-button cta-elite" onclick="upgradeAccount('monthly', 'diamond')">Claim Diamond Status!</button>
         </div>
 
         <div class="features-section">
@@ -1086,6 +1136,47 @@ offset = offset+limit;
 <?php } ?>
 
 <script>
+
+
+$(document).ready(function() {
+    
+  $('.toggle-option').on('click', function() {
+  
+    $('.toggle-option').removeClass('active');
+    $(this).addClass('active');
+
+    const billingType = $(this).data('billing');
+
+    $('.pricing-card').each(function() {
+      const $card = $(this);
+
+      const $originalPriceEl = $card.find('.original-price');
+      const $priceEl = $card.find('.price');
+      const $pricePeriodEl = $card.find('.price-period');
+      const $savingsTextEl = $card.find('.savings-text');
+      const $bonusTokensSpan = $card.find('.bonus-tokens span');
+      const $btn = $card.find('button.cta-button');
+
+      $originalPriceEl.text(`$${$originalPriceEl.data(`${billingType}-orig`)}`);
+      $priceEl.text(`$${$priceEl.data(billingType)}`);
+
+      $pricePeriodEl.text($pricePeriodEl.data(`${billingType}-period`));
+
+      $savingsTextEl.text($savingsTextEl.data(`${billingType}-save`));
+
+      const tokens = $bonusTokensSpan.data(`${billingType}-tokens`);
+      $bonusTokensSpan.text(`+ ${tokens} TLM tokens`);
+
+      if ($btn.length) {
+        const planType = $card.hasClass('elite') ? 'diamond' : 'basic';
+        $btn.attr('onclick', `upgradeAccount('${billingType}', '${planType}')`);
+      }
+    });
+  });
+
+  $('.toggle-option.active').click();
+});
+
 
 // $(document).on('click', function(e) {
 //     const $btn = $(e.target).closest('.action-btn');
