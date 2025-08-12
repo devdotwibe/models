@@ -881,7 +881,7 @@
 
     $updatedAt = $settings['updated_at']; 
 
-    echo $updatedAt; 
+    print_r ($updatedAt); 
 
     die();
 ?>
