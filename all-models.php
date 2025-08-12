@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     
-                    <button class="premium-btn">
+                    <button class="premium-btn" type="button" onclick="ShowPremium()">
                         <i class="fas fa-crown"></i>
                         Go Premium
                     </button>
@@ -1076,6 +1076,17 @@ offset = offset+limit;
 //         }
 //     }
 // });
+
+
+function ShowPremium()
+{
+    $('#premium-modal').addClass('show');
+}
+
+function closePremiumModal()
+{
+    $('#premium-modal').removeClass('show');
+}
 
 function ActionBtn(element,action)
 {
