@@ -9860,6 +9860,8 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
+/* form for banking........................... */
+
 #bank .form-row,
 #bank .form-group {
     margin-top: 0 !important;
@@ -9890,6 +9892,45 @@ body.advt-page.my-purpose .scroll-indicator {
     align-items: center;
     justify-content: center;
 }
+
+
+
+/* form for banking end ........................... */
+
+
+#tax .form-row,
+#tax .form-group {
+    margin-top: 0 !important;
+    gap: 0;
+
+}
+
+#tax .form-group {
+    margin-bottom: 20px;
+    margin-right: 8px;
+}
+
+
+#tax form button {
+    margin-top: 0 !important;
+    margin-inline: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tax .form-group {
+    margin-bottom: 20px;
+    margin-right: 8px;
+}
+
+#tax .form-group:nth-child(even) {
+    margin-right: 0
+}
+
+
+
+
 
 
 
@@ -10292,6 +10333,12 @@ body.advt-page.my-purpose .scroll-indicator {
 
     }
 
+    #tax .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+    }
+
 }
 
 
@@ -10461,8 +10508,13 @@ body.advt-page.my-purpose .scroll-indicator {
 
     #bank .form-group {
         margin-bottom: 20px;
-
     }
+
+  
+
+
+
+
 }
 
 
@@ -11155,14 +11207,17 @@ body.advt-page.my-purpose .scroll-indicator {
         margin-top: 20px;
     }
 
-    #bank .form-row {
+    #bank .form-row ,  #tax .form-row {
         display: grid;
         grid-template-columns: 1fr;
 
     }
-        #bank .form-group{
-            margin-right: 0;
-        }
+
+    #bank .form-group ,  #tax .form-row  {
+        margin-right: 0;
+    }
+
+
 
 }
 
