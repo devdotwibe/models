@@ -16,6 +16,39 @@ function h_my_ip_address(){
 	return $ip;
 }	
 
+
+	function CheckPremiumAccess($userId) {
+		
+		$latestPremium = DB::queryFirstRow("SELECT * FROM premium_users WHERE user_id = %i ORDER BY created_at DESC LIMIT 1", $userId);
+
+		if (!$latestPremium) {
+	
+			return false;
+		}
+
+		$createdAt = strtotime($latestPremium['created_at']);
+		$now = time();
+
+		if ($latestPremium['plan_type'] === 'monthly') {
+			$expiry = strtotime('+1 month', $createdAt);
+		} elseif ($latestPremium['plan_type'] === 'annual') {
+			$expiry = strtotime('+1 year', $createdAt);
+		} else {
+	
+			return false;
+		}
+
+		if ($now < $expiry) {
+		
+			return [
+				'plan_status' => $latestPremium['plan_status'],
+				'active' => true
+			];
+		}
+		return false;
+	}
+
+
 function updateUserActivity($userId) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
 
