@@ -1088,25 +1088,31 @@ offset = offset+limit;
 
     const updatedAt = new Date("<?php echo $updatedAt; ?>").getTime();
 
+    // Add 24 hours (in ms) to updatedAt to get countdown target
+    const countdownTarget = updatedAt + (24 * 60 * 60 * 1000);
+
     function updateCountdown() {
         const now = new Date().getTime();
-        const timeLeft = updatedAt - now;
+        const timeLeft = countdownTarget - now;
 
         if (timeLeft <= 0) {
             document.getElementById('countdown').textContent = "00:00:00";
             return;
         }
 
-        const hours = Math.floor((timeLeft / (1000 * 60 * 60)));
+        const hours = Math.floor(timeLeft / (1000 * 60 * 60));
         const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-        document.getElementById('countdown').textContent = 
-            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('countdown').textContent =
+            `${hours.toString().padStart(2, '0')}:` +
+            `${minutes.toString().padStart(2, '0')}:` +
+            `${seconds.toString().padStart(2, '0')}`;
     }
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
+
 
 function ShowPremium()
 {
