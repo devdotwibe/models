@@ -887,7 +887,7 @@
         <button class="close-btn" onclick="closePremiumModal()">&times;</button>
         
         <div class="top-icons">
-            <div class="top-icon">🚀 <?php echo $updatedAt ?></div>
+            <div class="top-icon">🚀</div>
             <div class="top-icon">⭐</div>
             <div class="top-icon">💎</div>
         </div>
