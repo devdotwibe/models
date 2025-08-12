@@ -9821,13 +9821,15 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 #purchaseform .form-group:nth-child(even) {
-    margin-right: 0;
+    /* margin-right: 0; */
 }
 
 #purchaseform p {
     font-weight: bold;
     margin-right: 1%;
     margin-left: 1%;
+    color: #fff;
+  margin-bottom: 10px;
 }
 
 #purchaseform hr {
@@ -9930,7 +9932,14 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
+.head_pay {
+  font-size: 30px;
+  color: #fff;
+}
 
+#purchaseform .form-group label{
+    color:#fff;
+}
 
 
 
@@ -11202,7 +11211,7 @@ body.advt-page.my-purpose .scroll-indicator {
         gap: 0;
     }
 
-    #bank form button {
+    #bank form button , #tax form button {
         padding: 16px 16px;
         margin-top: 20px;
     }
