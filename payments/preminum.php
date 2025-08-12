@@ -72,27 +72,9 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 <div class="container">
 <?php 
 
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
-    die();
+	if(isset($_POST['plan_type']) && isset($_POST['plan_status']) && isset($_POST['amount'])){
 
-	if(isset($_POST['submit10'])){
 		$amount = $_POST['amount'];
-		$coins = $_POST['coins'];
-	}else if(isset($_POST['submit100'])){
-		$amount = $_POST['amount'];
-		$coins = $_POST['coins'];
-	}else if(isset($_POST['submit500'])){
-		$amount = $_POST['amount'];
-		$coins = $_POST['coins'];
-	}else if(isset($_POST['submit1000'])){
-		$amount = $_POST['amount'];
-		$coins = $_POST['coins'];
-	}else if(isset($_POST['submit2500'])){
-		$amount = $_POST['amount'];
-		$coins = $_POST['coins'];
-	} 
 ?>
 	<div class="purchase-payment-h3">
 		<h3 class="head_pay">Payment Confirmation Page</h3>
@@ -155,6 +137,12 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 	  ?>
 	</form>
 </div> 
+
+<?php } else { 
+	
+	echo '<script>window.loaction.redirectback()</script>';
+}
+?>
 <!--container.//-->
 
 <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
