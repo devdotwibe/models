@@ -11084,9 +11084,13 @@ body.advt-page.my-purpose .scroll-indicator {
     .premium-wallet .transaction-item>div:first-child .text-sm {
         font-size: 12px;
     }
+   #bank .form-row , #bank .form-group{
+  margin-top: 0 !important;
+}
 
     #bank form button{
-        padding:12px 24px;
+        padding:20px 24px;
+        margin-top:20px;
     }
 }
 
