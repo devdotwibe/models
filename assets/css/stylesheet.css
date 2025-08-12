@@ -9860,6 +9860,31 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
+    #bank .form-row,
+    #bank .form-group {
+        margin-top: 0 !important;
+        gap: 0; 
+       
+    }
+    #bank .form-group {
+    margin-bottom: 20px;
+        margin-right: 8px;
+}
+#bank .form-group:nth-child(even){
+    margin-right:0
+}
+
+
+  #bank .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
+#bank form button{
+    margin-top:0 !important;
+      margin-inline: 0px;
+}
+
 
 
 @media (max-width: 1540px) {
@@ -10113,9 +10138,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
-@media (max-width: 768px) {}
 
-/* ---------------------------------------------------- */
 
 @media (max-width: 767px) {
 
@@ -10244,11 +10267,28 @@ body.advt-page.my-purpose .scroll-indicator {
         font-size: 15px;
     }
 
+
+    #bank .form-row,
+    #bank .form-group {
+        margin-top: 0 !important;
+        gap: 15px; 
+    }
+    #bank .form-group {
+    margin-bottom: 20px;
+      
+}
+
+
+#bank .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
+
 }
 
 
 
-/* ---------------------------------------------------- */
 
 @media (max-width: 575px) {
 
@@ -10405,6 +10445,17 @@ body.advt-page.my-purpose .scroll-indicator {
         flex-wrap: wrap;
     }
 
+
+    #bank .form-row,
+    #bank .form-group {
+        margin-top: 0 !important;
+        gap: 0;
+    }
+
+        #bank .form-group {
+    margin-bottom: 20px;
+       
+}
 }
 
 
