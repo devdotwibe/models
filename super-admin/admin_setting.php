@@ -35,134 +35,62 @@
         <div class="content-wrapper">
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">All Models</h4>
-                  <!-- <p class="card-description">
-                    Add class <code>.table-striped</code>
-                  </p> -->
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>
-                            S. no.
-                          </th>
-                          <th>
-                            Name
-                          </th>
-                          <th>
-                            Email
-                          </th>
-                          <th>
-                            Phone
-                          </th>
-                          <th>
-                            Subject
-                          </th>
-                          <th>
-                            Message
-                          </th>
-                          <th>
-                            Create Date
-                          </th>
-                          <th>
-                            Responds
-                          </th>
+             <?php
+           
+             if (isset($_POST['update_discount_price_show'])) {
+                    $status = ($_POST['discount_price_show'] === 'Yes') ? 'Yes' : 'No';
 
-                        </tr>
-                      </thead>
-                      <tbody>
+                    $checkQuery = "SELECT id FROM admin_settings LIMIT 1";
+                    $checkResult = mysqli_query($con, $checkQuery);
+
+                    if (mysqli_num_rows($checkResult) > 0) {
+          
+                        $updateQuery = "UPDATE admin_settings 
+                                        SET discount_price_show='$status', updated_at=NOW() 
+                                        ORDER BY id DESC LIMIT 1";
+                        if (mysqli_query($con, $updateQuery)) {
+                            echo "<div class='alert alert-success'>Discount price display status updated successfully.</div>";
+                        } else {
+                            echo "<div class='alert alert-danger'>Error updating status: " . mysqli_error($con) . "</div>";
+                        }
+                    } else {
+          
+                        $insertQuery = "INSERT INTO admin_settings (discount_price_show, created_at, updated_at) 
+                                        VALUES ('$status', NOW(), NOW())";
+                        if (mysqli_query($con, $insertQuery)) {
+                            echo "<div class='alert alert-success'>Discount price display status inserted successfully.</div>";
+                        } else {
+                            echo "<div class='alert alert-danger'>Error inserting status: " . mysqli_error($con) . "</div>";
+                        }
+                    }
+                }
 
 
-                        <?php
-                          $sqls = "SELECT * FROM contac_us WHERE user_unique_id = '' Order by id DESC";
-                            $resultd = mysqli_query($con, $sqls);
-                            $count = 1;
-                              if (mysqli_num_rows($resultd) > 0) {
-                                while ($rowesdw = mysqli_fetch_assoc($resultd)){
-                              
-                        ?>
-                        <form method="post" >
-                        <tr>
-                          <td>
-                            <?php echo $count; ?>
-                          </td>
-                
-                          <td>
-                            <?php echo $rowesdw['name']; ?>
-                          </td>
-                          <td>
-                            <?php echo $rowesdw['email']; ?>
-                          </td>
-                          <td>
-                            <?php echo $rowesdw['phone']; ?>
-                          </td>
-                          <td>
-                            <?php echo $rowesdw['subject']; ?>
-                          </td>
-                          <td>
-                            <?php echo $rowesdw['message']; ?>
-                          </td>
-                          <td>
-                            <?php echo $rowesdw['created_at']; ?>
-                          </td>
-                          <td>
-                            <span style="cursor:pointer;"  class="btn btn-success" data-toggle="modal" data-target="#exampleModalmail<?php echo $rowesdw['id']; ?>">Reply</span>
-                          </td>
-                          </form>
+                $discountPriceShow = "No";
+                $getSettings = mysqli_query($con, "SELECT discount_price_show FROM admin_settings ORDER BY id DESC LIMIT 1");
+                if ($getSettings && mysqli_num_rows($getSettings) > 0) {
+                    $row = mysqli_fetch_assoc($getSettings);
+                    $discountPriceShow = $row['discount_price_show'];
+                }
+                ?>
 
-                          <!-- model- togle -->
-			             <div class="modal fade" id="exampleModalmail<?php echo $rowesdw['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"      aria-hidden="true">
-			              <div class="modal-dialog" role="document">
-			                <div class="modal-content">
-			                  <div class="modal-header">
-			                    <h5 class="modal-title" id="exampleModalLabel">Responds</h5>
-			                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			                      <span aria-hidden="true">&times;</span>
-			                    </button>
-			                  </div>
-			                    <div class="modal-body">
-			                      <form method="post" action="query-reply.php">
-			                        <input type="hidden" name="query_id" value="<?php echo $rowesdw['id']; ?>">
-			                        <input type="hidden" name="email" value="<?php echo $rowesdw['email']; ?>">
-			                       <div class="form-group">
-			                         <label for="subject"><b>Subject:</b></label>
-			                          <input type="text" name="subject" class="form-control" placeholder="Enter subject" id="subject">
-			                       </div>
-			                        <div class="form-group">
-			                         <label for="message"><b>Message:</b></label>
-			                          <textarea type="text" name="message" class="form-control" placeholder="Enter message" id="message"></textarea>
-			                        </div>
-			                  <div class="modal-footer">
-			                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-			                    <button type="submit" name="reply" class="btn btn-primary">Reply</button>
-			                  </div>
-			                    </form>
-			                  </div>
-			                </div>
-			              </div>
-			            </div>
-
-                        </tr>
-                        <?php
-                          $count++;
-                          }
-                          } else {
-                            echo "Currently dont have contact query.";
-                          }
-                        ?>
-                      </tbody>
-                    </table>
-                  </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Discount Price Visibility</h4>
+                        <form method="post">
+                            <div class="form-group">
+                                <label><b>Show Discount Price ?</b></label>
+                                <select name="discount_price_show" class="form-control" required>
+                                    <option value="Yes" <?php if ($discountPriceShow === "Yes") echo "selected"; ?>>Yes</option>
+                                    <option value="No" <?php if ($discountPriceShow === "No") echo "selected"; ?>>No</option>
+                                </select>
+                            </div>
+                            <button type="submit" name="update_discount_price_show" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
                 </div>
-              </div>
+
             </div>
-
-
-            
-
-            
            
           </div>
         </div>
