@@ -10945,10 +10945,7 @@ body.advt-page.my-purpose .scroll-indicator {
         height: 1rem;
     }
 
-    .header-desk-outer .relative{
-        width:1rem;
-        height:1rem;
-    }
+ 
     .header-desk-outer>div:last-child{
         margin-left: 0 !important;
     }
