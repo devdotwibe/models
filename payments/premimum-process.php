@@ -52,15 +52,10 @@ if($userDetails){
                         $plan_status = $_SESSION["plan_status"];
                         $plan_type = $_SESSION["plan_type"];
 
-                        echo "Amount: " . htmlspecialchars($amount) . "<br>";
-                        echo "Plan Status: " . htmlspecialchars($plan_status) . "<br>";
-                        echo "Plan Type: " . htmlspecialchars($plan_type) . "<br>";
-
-                        die();
-
                         $insertedPremiumUserId = DB::table('premium_users')->insertGetId([
                             'user_id'    => $userDetails['id'],
                             'plan_type'  => $plan_type,
+                            'amount'    =>$amount,
                             'plan_status'=> $plan_status,
                             'created_at' => $date,
                             'updated_at' => $date,
