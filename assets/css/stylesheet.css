@@ -11063,7 +11063,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
     .premium-wallet .transaction-item>div:first-child {
         width: calc(100% - 30px);
-
+        gap: 7px;
     }
 
     .premium-wallet .transaction-item>div:first-child>div:first-child {
@@ -11072,10 +11072,31 @@ body.advt-page.my-purpose .scroll-indicator {
         height: 2rem;
     }
 
-    .premium-wallet .transaction-item>div:first-child>div:first-child .font-semibold {
+    .premium-wallet .transaction-item>div:first-child .font-semibold {
         font-size: 12px;
     }
-     .premium-wallet .transaction-item>div:first-child>div:first-child .text-sm {
+
+    .premium-wallet .transaction-item>div:first-child .text-sm {
         font-size: 12px;
     }
+}
+
+
+
+@media (max-width: 380px) {
+
+    .premium-wallet .transaction-item>div:first-child>div:first-child {
+
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+     .premium-wallet .transaction-item>div:first-child>div:first-child svg {
+  width: 15px;
+  height: 15px;
+}
+ .premium-wallet .transaction-item {
+    padding: 10px;
+  }
+
 }
