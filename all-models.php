@@ -1088,7 +1088,6 @@ offset = offset+limit;
 
     const updatedAt = new Date("<?php echo $updatedAt; ?>").getTime();
 
-    // Add 24 hours (in ms) to updatedAt to get countdown target
     const countdownTarget = updatedAt + (24 * 60 * 60 * 1000);
 
     function updateCountdown() {
