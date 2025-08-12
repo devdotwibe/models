@@ -17,10 +17,7 @@ if (isset($_SESSION["log_user_id"])) {
 	$userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
 	if ($userDetails) {
 		$grand_unit_price = $_GET['grand_unit_price'];
-
-		$coins = $_GET['coins'];
-
-		if(!empty($grand_unit_price) && !empty($coins)){
+		if(!empty($grand_unit_price)){
 		require_once('stripe-php/init.php');
 		$stripe = new \Stripe\StripeClient($stripeSecret);
 			try {
@@ -29,10 +26,10 @@ if (isset($_SESSION["log_user_id"])) {
 					'currency' => 'usd', 
 				   'automatic_payment_methods' => ['enabled' => true],
 				]);
+
 				//echo json_encode(['clientSecret' => $paymentIntent->client_secret]);
 				$output['status'] = 'success';	
 				$output['message'] = $paymentIntent->client_secret;
-
 			} catch (\Stripe\Exception\ApiErrorException $e) {
 				$error = [
 					'error' => $e->getMessage(),
