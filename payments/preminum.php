@@ -92,7 +92,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
             <div class="purchase-payment-h3">
                 <h3 class="head_pay">Payment Confirmation Page</h3>
             </div>
-            <form action="payment-process.php" method="POST" name="preminum_form" id="preminum_form">
+            <form action="premimum-process.php" method="POST" name="preminum_form" id="preminum_form">
                 <p class="">User Details: </p>
                 <hr>
                 <div class="form-group">
