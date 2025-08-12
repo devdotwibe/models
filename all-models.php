@@ -885,7 +885,7 @@
 
         if ($updatedAt) {
             $timeDiff = time() - strtotime($updatedAt);
-            if ($timeDiff > 86400) {
+            if ($timeDiff > 86400 && $settings['status']=='No') {
 
                 $discountPriceShow = false;
             }
