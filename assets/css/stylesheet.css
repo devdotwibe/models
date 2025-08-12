@@ -10914,4 +10914,14 @@ body.advt-page.my-purpose .scroll-indicator {
     font-size: 15px;
     line-height: 22px;
   }
+
+
+  .header-desk-inner button{
+    width:2rem;
+    height: 2rem;
+  }
+  .header-desk-inner button svg{
+    width: 19px;
+}
+
 }
