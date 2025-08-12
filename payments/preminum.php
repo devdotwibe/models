@@ -168,7 +168,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
     <script>
-        var stripeKey = '<?php echo $stripeSecret ?>';
+       var stripeKey = '<?php echo $stripeSecret ?>';
         var stripe = Stripe(stripeKey);
 
         var elements = stripe.elements();
