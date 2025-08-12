@@ -29,7 +29,7 @@ if($userDetails){
         }else{
         	$query2 = "INSERT INTO `model_user_wallet`(`user_unique_id`, `user_email`, `wallet_amount`, `wallet_coins`, `wallet_status`) VALUES ('".$_SESSION["log_user_unique_id"]."','".$_SESSION["log_user_email"]."','".$_SESSION["pay_amount"]."','".$_SESSION["pay_coins"]."','1')";
         }       
-		echo 'sdfsdf'; die();
+
 
         if (mysqli_query($con, $query1)) {
 
@@ -41,16 +41,18 @@ if($userDetails){
 				if (mysqli_num_rows($result) > 0) {
 
 					if (mysqli_query($con, $query2)) {
-						
+
+						// Update user balance
 						DB::query(
 							"UPDATE model_user SET balance = ROUND(balance + %d) WHERE id = %s",
 							$_SESSION["pay_coins"],
 							$userDetails['id']
 						);
 
+						// Insert transaction history using insertedPaymentId
 						DB::insert('model_user_transaction_history', [
 							'user_id'    => $userDetails['id'],
-							'other_id'   => $insertedPaymentId, 
+							'other_id'   => $insertedPaymentId, // now using ID from $query1 insert
 							'amount'     => $_SESSION["pay_coins"],
 							'type'       => 'coin_purchase',
 							'created_at' => $date,
@@ -64,6 +66,10 @@ if($userDetails){
 					} else {
 						echo "Error in wallet update: " . mysqli_error($con);
 					}
+				}
+				else {
+					echo "Error in wallet update: " . mysqli_error($con);
+				}
 			}
 		else{
         	echo "<script>alert('Your Payment Data will not be inserted');</script>";
