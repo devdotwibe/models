@@ -9807,9 +9807,9 @@ body.advt-page.my-purpose .scroll-indicator {
 
 #purchaseform .form-group {
   margin-bottom: 1rem;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: inline-block;
-  width: 48%;
+  width: 48% !important;
 margin-right: 1%;
   margin-left: 1%;
 }
