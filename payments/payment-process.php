@@ -54,7 +54,7 @@ if($userDetails){
 							'user_id'    => $userDetails['id'],
 							'other_id'   => $insertedPaymentId, // now using ID from $query1 insert
 							'amount'     => $_SESSION["pay_coins"],
-							'type'       => 'coin_purchase',
+							'type'       => 'coin-purchase',
 							'created_at' => $date,
 						]);
 
