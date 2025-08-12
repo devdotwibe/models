@@ -88,6 +88,10 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 
             $plan_type = $POST['plan_type'];
 
+            echo $plan_status;
+
+            die();
+
             $plan_text = $plan_status == 'basic' ? 'Basic Premium' : 'Diamond Elite';
             ?>
             <div class="purchase-payment-h3">
@@ -170,7 +174,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
     <script>
         var stripeKey = <?php echo json_encode($stripekey); ?>;
-        
+
         var stripe = Stripe(stripeKey);
 
         var elements = stripe.elements();
