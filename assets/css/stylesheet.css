@@ -10919,9 +10919,21 @@ body.advt-page.my-purpose .scroll-indicator {
   .header-desk-inner button{
     width:2rem;
     height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px !important;
   }
   .header-desk-inner button svg{
     width: 19px;
 }
+
+ .header-desk-inner button span {
+    font-size: 10px;
+   padding:2px;
+   width:1rem;
+   height:1rem;
+  }
 
 }
