@@ -9798,7 +9798,8 @@ body.advt-page.my-purpose .scroll-indicator {
     border: 1px solid #e1e1e1;
     padding: 20px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.02);
+    /* background: rgba(255, 255, 255, 0.02); */
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.06);
