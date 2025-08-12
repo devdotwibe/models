@@ -130,7 +130,7 @@
 			
 			<?php 
 
-
+            
             $userDetails = [];
 
             $boosted_user_ids =[];
@@ -140,6 +140,12 @@
             if(isset($_SESSION["log_user_id"])){
                 
                 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+
+                $result = CheckPremiumAccess($userDetails['id']);
+
+                echo $result;
+
+                die();
 
                 $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
 
