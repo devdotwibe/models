@@ -8267,7 +8267,7 @@ div#formStep1 input {
     text-align: left
 }
 
-#withdraw>h3 {
+.wallet-tabs-outer .tab-content h3 {
     margin-top: 50px !important;
     font-size: 35px;
     line-height: normal;
@@ -10163,7 +10163,8 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .purchase-card .text-3xl {
-        font-size: 25px;
+      font-size: 22px;
+    line-height: 30px;
     }
 
     .purchase-card .text-2xl {
@@ -10313,7 +10314,7 @@ body.advt-page.my-purpose .scroll-indicator {
         font-size: 2rem;
     }
 
-    #withdraw>h3 {
+   .wallet-tabs-outer .tab-content h3 {
 
         font-size: 28px;
 
@@ -10325,6 +10326,10 @@ body.advt-page.my-purpose .scroll-indicator {
 
     .premium-wallet .purchase-grid {
         grid-template-columns: 1fr;
+    }
+
+    .premium-wallet .purchase-card form button{
+        padding: 12px 24px;
     }
 }
 
@@ -10933,7 +10938,7 @@ body.advt-page.my-purpose .scroll-indicator {
         font-size: 1.75rem;
     }
 
-    #withdraw>h3 {
+.wallet-tabs-outer .tab-content h3 {
         font-size: 22px;
     }
 
