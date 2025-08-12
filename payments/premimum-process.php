@@ -48,6 +48,8 @@ if($userDetails){
 						// 	$userDetails['id']
 						// );
 
+                        try {
+
                         $amount = $_SESSION["pay_amount"];
                         $plan_status = $_SESSION["plan_status"];
                         $plan_type = $_SESSION["plan_type"];
@@ -73,11 +75,14 @@ if($userDetails){
 
                         // Optionally, unset session vars after use
                         unset($_SESSION["pay_amount"], $_SESSION["plan_status"], $_SESSION["plan_type"]);
+                        
 
                         echo "<script>alert('Your Payment Data has been inserted');</script>";
                         echo "<script>window.location='success.php';</script>";
 
-                        unset($_SESSION["pay_amount"], $_SESSION["plan_status"], $_SESSION["plan_type"]);
+                        } catch (\Exception $e) {
+                            dd($e->getMessage());
+                        }
 
 					// } else {
 					// 	echo "Error in wallet update: " . mysqli_error($con);
