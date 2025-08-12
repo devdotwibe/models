@@ -9828,7 +9828,7 @@ body.advt-page.my-purpose .scroll-indicator {
     font-weight: bold;
     margin-right: 1%;
     margin-left: 1%;
-    color: #fff;
+    color: #fff !important;
   margin-bottom: 10px;
 }
 
