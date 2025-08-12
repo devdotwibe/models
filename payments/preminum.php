@@ -82,7 +82,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
         <?php
 
 
-      $plan_type = $POST['plan_type'];
+      $plan_type = $_POST['plan_type'];
 
             print_r( $plan_type);
 
@@ -92,7 +92,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 
             $amount = $_POST['amount'];
 
-            $plan_status = $POST['plan_status'];
+            $plan_status = $_POST['plan_status'];
 
       
 
