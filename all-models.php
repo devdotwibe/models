@@ -873,6 +873,19 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
+<?php 
+
+    $getSettings = mysqli_query($con, "SELECT discount_price_show, updated_at FROM admin_settings ORDER BY id DESC LIMIT 1");
+
+    $settings = mysqli_fetch_assoc($getSettings);
+
+    $updatedAt = $settings['updated_at']; 
+
+    echo $updatedAt; 
+
+    die();
+?>
+
 <div class="popup-overlay" id="premium-modal">
     <div class="popup-container">
         <button class="close-btn" onclick="closePremiumModal()">&times;</button>
@@ -1077,23 +1090,26 @@ offset = offset+limit;
 //     }
 // });
 
+    const updatedAt = new Date("<?php echo $updatedAt; ?>").getTime();
+
     function updateCountdown() {
-        const countdownElement = document.getElementById('countdown');
         const now = new Date().getTime();
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        tomorrow.setHours(0, 0, 0, 0);
-        const timeLeft = tomorrow.getTime() - now;
-        
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const timeLeft = updatedAt - now;
+
+        if (timeLeft <= 0) {
+            document.getElementById('countdown').textContent = "00:00:00";
+            return;
+        }
+
+        const hours = Math.floor((timeLeft / (1000 * 60 * 60)));
         const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-        
-        countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        document.getElementById('countdown').textContent = 
+            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
-    
+
     setInterval(updateCountdown, 1000);
-    
     updateCountdown();
 
 function ShowPremium()
