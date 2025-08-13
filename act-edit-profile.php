@@ -106,6 +106,36 @@ if ($_POST['submit_name']){
 		echo '<script>alert("'.$error.'");</script>';
 	}
 	
+	//Physical attributes save
+		$arr_proof = array();
+		$arr_proof = array('height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
+		$post_data_extra = array_from_post($arr_proof);
+		$post_data_extra['unique_model_id'] = $unique_id;
+		if($_POST['height_type'] == 'ft'){
+			$post_data_extra['height'] = $_POST['feet'].'.'.$_POST['inches'];
+			$post_data_extra['height_in_cm'] = ($_POST['feet'] * 30.48) + ($_POST['inches'] * 2.54);
+		}else{
+			$post_data_extra['height'] = $_POST['height_cm'];
+			$post_data_extra['height_in_cm'] = $_POST['height_cm'];
+		}
+		if($_POST['weight_type'] == 'lbs'){
+			$post_data_extra['weight_in_kg'] = $_POST['weight'] * 0.45359237;
+		}else{
+			$post_data_extra['weight_in_kg'] = $_POST['weight'];
+		}
+		$model_extra_list = DB::query('select id from model_extra_details where unique_model_id="'.$unique_id.'"');
+		if(empty($model_extra_list)){
+			
+		//	DB::insert('model_extra_details', $post_data_extra); 
+		//	$created_id = DB::insertId();
+			
+		}else{
+			
+		//	DB::update('model_extra_details', $post_data_extra, "unique_model_id=%s", $unique_id);
+			
+		}
+		
+	
 	//Profile upload
 		$use_id = $_SESSION["log_user_id"];
 
@@ -158,81 +188,21 @@ if ($_POST['submit_name']){
 			}
 		}
 		
-	  //Gallery 1
-	  /*if (isset($_FILES["gallery_photo_1"]) && !empty($_FILES["gallery_photo_1"]['name'])) {
-		  $target_file2 = $target_dir_profile . basename($_FILES["gallery_photo_1"]["name"]);
-		  $target_profile = "uploads/profile_pic/" . basename($_FILES["gallery_photo_1"]["name"]);
-
-		  if (move_uploaded_file($_FILES["gallery_photo_1"]["tmp_name"], $target_file2)){ 
-			$sql = "UPDATE model_user SET gallery_photo_1 = '".$target_profile."' WHERE id = '".$use_id."'";
-			if(mysqli_query($con, $sql)){
-				
-			}
-		  }
-	  }
-	  //Gallery 2
-	  if (isset($_FILES["gallery_photo_2"]) && !empty($_FILES["gallery_photo_2"]['name'])) {
-		  $target_file3 = $target_dir_profile . basename($_FILES["gallery_photo_2"]["name"]);
-		  $target_profile = "uploads/profile_pic/" . basename($_FILES["gallery_photo_2"]["name"]);
-
-		  if (move_uploaded_file($_FILES["gallery_photo_2"]["tmp_name"], $target_file3)){
-			$sql = "UPDATE model_user SET gallery_photo_2 = '".$target_profile."' WHERE id = '".$use_id."'";
-			if(mysqli_query($con, $sql)){
-				
-			}
-		  }
-	  }*/
-	//End
-	
+		
 	
 	echo '<script>alert("Your Profile Successfully Updated");
 	window.location="edit-profile.php"
-	</script>';
+	</script>'; 
+
 	die;
     }else if(isset($_POST['service_submit'])){
 		$model_unique_id = $_POST['model_unique_id']; 
-		/*$service_chat_list = DB::query('select offer_live_session from model_service_chat where model_unique_id="'.$model_unique_id.'"');
-			$arr_chat = array('model_unique_id','offer_live_session','instagram','snapchat','private_chat_token','group_chat_tocken'); 
-			$post_data_chat = array_from_post($arr_chat); 
-		if(empty($service_chat_list)){
-			
-			DB::insert('model_service_chat', $post_data_chat); 
-			$created_id = DB::insertId();
-			
-		}else{
-			
-			DB::update('model_service_chat', $post_data_chat, "model_unique_id=%s", $model_unique_id);
-		}
-		$service_meet_list = DB::query('select offer_service from model_service_meet where model_unique_id="'.$model_unique_id.'"');
-			$arr_meet = array('model_unique_id','offer_service','local_meet_rate','extended_rate','overnight_rate','preferred_meet_location'); 
-			$post_data_meet = array_from_post($arr_meet);
-		if(empty($service_meet_list)){
-			
-			DB::insert('model_service_meet', $post_data_meet); 
-			$created_id = DB::insertId();
-			
-		}else{
-			
-			DB::update('model_service_meet', $post_data_meet, "model_unique_id=%s", $model_unique_id);
-			
-		}*/
 		
-		
-		$arr_proof = array('live_cam','private_chat_token','group_chat_tocken','group_show','gs_min_member','gs_token_price','work_escort','in_per_hour','extended_rate','in_overnight','d_a_address','International_tours','daily_rate','weekly_rate','monthly_rate','travel_destination','video_pictures','modeling','all_30day_access','all_30day_access_price','adult_content','hourly_rate','overnight_rate','weekend_rate','adult_content_rate','live_show_rate','professional_rate','professional_service','choose_document','height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
+		$arr_proof = array();
+		$arr_proof = array('live_cam','private_chat_token','group_chat_tocken','group_show','gs_min_member','gs_token_price','work_escort','in_per_hour','extended_rate','in_overnight','d_a_address','International_tours','daily_rate','weekly_rate','monthly_rate','travel_destination','video_pictures','modeling','all_30day_access','all_30day_access_price','adult_content','hourly_rate','overnight_rate','weekend_rate','adult_content_rate','live_show_rate','professional_rate','professional_service','choose_document');
 		$post_data_extra = array_from_post($arr_proof);
 		$post_data_extra['unique_model_id'] = $model_unique_id;
-		if($_POST['height_type'] == 'ft'){
-			$post_data_extra['height'] = $_POST['feet'].'.'.$_POST['inches'];
-			$post_data_extra['height_in_cm'] = ($_POST['feet'] * 30.48) + ($_POST['inches'] * 2.54);
-		}else{
-			$post_data_extra['height'] = $_POST['height_cm'];
-			$post_data_extra['height_in_cm'] = $_POST['height_cm'];
-		}
-		if($_POST['weight_type'] == 'lbs'){
-			$post_data_extra['weight_in_kg'] = $_POST['weight'] * 0.45359237;
-		}else{
-			$post_data_extra['weight_in_kg'] = $_POST['weight'];
-		}
+		
 		if(!empty($_POST['social_availability'])){
 			$post_data_extra['social_availability'] = json_encode($_POST['social_availability']);
 		}
