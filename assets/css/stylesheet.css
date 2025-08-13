@@ -10351,8 +10351,11 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .home-page .modal-content{
-    width:90%;
+    width:80%;
 
+}
+.home-page .modal-content img{
+    max-height: 350px;
 }
 
 }
