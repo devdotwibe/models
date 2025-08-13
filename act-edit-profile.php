@@ -107,7 +107,7 @@ if ($_POST['submit_name']){
 	}
 	
 	//Physical attributes save
-	/*	$arr_proof = array();
+		$arr_proof = array();
 		$arr_proof = array('height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
 		$post_data_extra = array_from_post($arr_proof);
 		$post_data_extra['unique_model_id'] = $unique_id;
@@ -123,7 +123,7 @@ if ($_POST['submit_name']){
 		}else{
 			$post_data_extra['weight_in_kg'] = $_POST['weight'];
 		}
-		$model_extra_list = DB::query('select id from model_extra_details where unique_model_id="'.$unique_id.'"');
+		/*$model_extra_list = DB::query('select id from model_extra_details where unique_model_id="'.$unique_id.'"');
 		if(empty($model_extra_list)){
 			
 			DB::insert('model_extra_details', $post_data_extra); 
