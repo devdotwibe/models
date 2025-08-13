@@ -8149,7 +8149,7 @@ div#formStep1 input {
 .premium-wallet .btn-primary {
 
     background: linear-gradient(135deg, var(--primary), var(--secondary));
-
+    height: 50px;
     color: white;
 
 }
@@ -8604,7 +8604,7 @@ div#formStep1 input {
 
 
 .premium-wallet .form-input option {
-  background: #25304a;
+    background: #25304a;
 }
 
 .premium-wallet .form-input:focus {
@@ -9833,7 +9833,7 @@ body.advt-page.my-purpose .scroll-indicator {
     margin-right: 1%;
     margin-left: 1%;
     color: #fff;
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 #purchaseform hr {
@@ -9860,13 +9860,14 @@ body.advt-page.my-purpose .scroll-indicator {
     width: 100%;
     /* border:1px solid blue; */
 }
+
 .head_pay {
-  font-size: 30px;
+    font-size: 30px;
     color: #fff !important;
 }
 
-#purchaseform .form-group label{
-    color:#fff;
+#purchaseform .form-group label {
+    color: #fff;
 }
 
 
@@ -10520,7 +10521,7 @@ body.advt-page.my-purpose .scroll-indicator {
         margin-bottom: 20px;
     }
 
-  
+
 
 
 
@@ -11212,18 +11213,21 @@ body.advt-page.my-purpose .scroll-indicator {
         gap: 0;
     }
 
-    #bank form button , #tax form button {
+    #bank form button,
+    #tax form button {
         padding: 16px 16px;
         margin-top: 20px;
     }
 
-    #bank .form-row ,  #tax .form-row {
+    #bank .form-row,
+    #tax .form-row {
         display: grid;
         grid-template-columns: 1fr;
 
     }
 
-    #bank .form-group ,  #tax .form-row  {
+    #bank .form-group,
+    #tax .form-row {
         margin-right: 0;
     }
 
