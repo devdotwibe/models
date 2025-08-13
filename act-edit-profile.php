@@ -126,8 +126,8 @@ if ($_POST['submit_name']){
 		$model_extra_list = DB::query('select id from model_extra_details where unique_model_id="'.$unique_id.'"');
 		if(empty($model_extra_list)){
 			
-		//	DB::insert('model_extra_details', $post_data_extra); 
-		//	$created_id = DB::insertId();
+			DB::insert('model_extra_details', $post_data_extra); 
+			$created_id_extra = DB::insertId();
 			
 		}else{
 			
