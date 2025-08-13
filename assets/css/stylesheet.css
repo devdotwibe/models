@@ -8850,6 +8850,7 @@ body.model-mode .model-only {
     width: 23%;
     margin-right: 2.6%;
     padding: 10px;
+    margin-bottom: 2.6%;
 
 }
 
@@ -9941,6 +9942,13 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
+.ultra-premiumsec .ul-premiumdiv button:last-child{
+
+border: 1px solid rgba(255, 255, 255, 0.06);
+box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.1);
+
+}
+
 
 
 
@@ -9972,6 +9980,7 @@ body.advt-page.my-purpose .scroll-indicator {
     .home-page .discover-sec .model-card {
         width: 24.2%;
         margin-right: 1%;
+        margin-bottom:1%
     }
 
 }
@@ -10027,6 +10036,7 @@ body.advt-page.my-purpose .scroll-indicator {
     .home-page .discover-sec .model-card {
         width: 49%;
         margin-right: 2%;
+        margin-bottom: 2%;
     }
 
     .home-page .discover-sec .model-card:nth-child(2n) {
@@ -10036,7 +10046,8 @@ body.advt-page.my-purpose .scroll-indicator {
     .exp-grid .ultra-glass {
         width: 49%;
         margin-right: 2%;
-        margin-bottom: 20px;
+        /* margin-bottom: 20px; */
+        margin-bottom: 2%;
     }
 
     .exp-grid .ultra-glass:nth-child(2n) {
