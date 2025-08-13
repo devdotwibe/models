@@ -131,7 +131,7 @@ if ($_POST['submit_name']){
 			
 		}else{
 			
-		//	DB::update('model_extra_details', $post_data_extra, "unique_model_id=%s", $unique_id);
+			DB::update('model_extra_details', $post_data_extra, "unique_model_id=%s", $unique_id);
 			
 		}
 		
