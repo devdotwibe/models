@@ -8603,6 +8603,9 @@ div#formStep1 input {
 }
 
 
+.premium-wallet .form-input option {
+  background: #25304a;
+}
 
 .premium-wallet .form-input:focus {
 
