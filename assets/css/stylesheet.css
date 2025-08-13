@@ -10522,6 +10522,13 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
 
+.home-page .modal-content{
+    width:100%;
+padding:20px;
+}
+.home-page .modal-content h3{
+    font-size:30px
+}
 
 
 
@@ -11231,7 +11238,13 @@ body.advt-page.my-purpose .scroll-indicator {
         margin-right: 0;
     }
 
-
+.home-page .modal-content{
+    width:100%;
+padding:10px;
+}
+.home-page .modal-content h3{
+    font-size:25px
+}
 
 }
 
