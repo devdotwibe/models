@@ -9942,13 +9942,28 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
-.ultra-premiumsec .ul-premiumdiv button:last-child{
+.ultra-premiumsec .ul-premiumdiv button:last-child {
 
-border: 1px solid rgba(255, 255, 255, 0.06);
-box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.1);
 
 }
 
+
+.icon-text-div {
+
+    border: 1px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: fit-content;
+    margin: 0 auto;
+}
+.icon-text-div img{
+    width:85px;
+    object-fit:cover;
+}
 
 
 
@@ -9980,7 +9995,7 @@ box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.
     .home-page .discover-sec .model-card {
         width: 24.2%;
         margin-right: 1%;
-        margin-bottom:1%
+        margin-bottom: 1%
     }
 
 }
@@ -10361,13 +10376,14 @@ box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.
 
     }
 
-    .home-page .modal-content{
-    width:80%;
+    .home-page .modal-content {
+        width: 80%;
 
-}
-.home-page .modal-content img{
-    max-height: 350px;
-}
+    }
+
+    .home-page .modal-content img {
+        max-height: 350px;
+    }
 
 }
 
@@ -10541,13 +10557,14 @@ box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.
     }
 
 
-.home-page .modal-content{
-    width:100%;
-padding:20px;
-}
-.home-page .modal-content h3{
-    font-size:30px
-}
+    .home-page .modal-content {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .home-page .modal-content h3 {
+        font-size: 30px
+    }
 
 
 
@@ -11257,13 +11274,14 @@ padding:20px;
         margin-right: 0;
     }
 
-.home-page .modal-content{
-    width:100%;
-padding:10px;
-}
-.home-page .modal-content h3{
-    font-size:25px
-}
+    .home-page .modal-content {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .home-page .modal-content h3 {
+        font-size: 25px
+    }
 
 }
 
