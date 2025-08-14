@@ -2471,6 +2471,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <?php
 
         $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
+		
+		$premium_check = CheckPremiumAccess($userDetails['id']);
         ?>
         <div class="space-y-6">
           <!-- Search Control -->
@@ -2656,23 +2658,23 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div>
 
           <!-- Advanced Search Filters -->
-          <div>
+          <div class="<?php if($premium_check == false){ echo 'premiumcheck'; } ?>" >
             <h4 class="text-lg font-semibold mb-4">🔍 Advanced Search Filters</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 advans-fit">
               <div>
                 <label class="form-label">Height Range</label>
                 <div class="flex items-center space-x-4">
                   <span class="text-sm">120cm</span>
-                  <input type="range" min="120" max="200" value="170" class="flex-1 accent-purple-500">
-                  <span class="text-sm">200cm</span>
+                  <input type="range" min="120" max="200" value="<?php echo $privacy_setting['height_range'] ?? 170  ?>" class="flex-1 accent-purple-500" oninput="updateHeightDisplay(this)" onchange="updateSettings(this,'height_range')">
+                  <span class="text-sm"><span id="height_value_display"><?php echo $privacy_setting['height_range'] ?? 120  ?></span>cm</span>
                 </div>
               </div>
               <div>
                 <label class="form-label">Weight Range</label>
                 <div class="flex items-center space-x-4">
                   <span class="text-sm">30kg</span>
-                  <input type="range" min="30" max="150" value="60" class="flex-1 accent-purple-500">
-                  <span class="text-sm">60kg</span>
+                  <input type="range" min="30" max="150" value="<?php echo $privacy_setting['weight_range'] ?? 60  ?>" class="flex-1 accent-purple-500" oninput="updateWeightDisplay(this)" onchange="updateSettings(this,'weight_range')">
+                  <span class="text-sm"><span id="weight_value_display"><?php echo $privacy_setting['weight_range'] ?? 60  ?></span>kg</span>
                 </div>
               </div>
             </div>
@@ -2809,6 +2811,26 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           <button class="btn btn-secondary" type="button" onclick="ConformCloseModal()">No</button>
 
         </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="premium_modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Access Restricted!</h2>
+        <button class="close-modal" id="closeTipModal" type="button" onclick="ClosePremiumModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+
+		<p class="premiumtext">You are not a premium member.</p>
+
+        <button class="btn btn-primary" type="button" onclick="ClosePremiumModal()">Close</button>
       </div>
     </div>
   </div>
@@ -3464,6 +3486,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       $('#success_modal').removeClass('active');
       $('#modal_success_message .success-text').remove();
     }
+	
+	function  ClosePremiumModal() {
+      $('#premium_modal').removeClass('active');
+    }
 
     function savePremiumSettings(event) {
 
@@ -3599,11 +3625,37 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       const percent = (rangeInput.value - rangeInput.min) / (rangeInput.max - rangeInput.min);
       display.style.left = `calc(${percent * 100}% - 10px)`;
     }
+	
+	function updateHeightDisplay(rangeInput) {
+
+      const display = document.getElementById('height_value_display');
+      const inputvalue = rangeInput.value;
+
+     let inputValue = rangeInput.value;
+       
+        display.textContent = inputValue;
+
+      const percent = (rangeInput.value - rangeInput.min) / (rangeInput.max - rangeInput.min);
+      display.style.left = `calc(${percent * 100}% - 10px)`;
+    }
+	
+	function updateWeightDisplay(rangeInput) {
+
+      const display = document.getElementById('weight_value_display');
+      const inputvalue = rangeInput.value;
+
+     let inputValue = rangeInput.value;
+       
+        display.textContent = inputValue;
+
+      const percent = (rangeInput.value - rangeInput.min) / (rangeInput.max - rangeInput.min);
+      display.style.left = `calc(${percent * 100}% - 10px)`;
+    }
 
     function updateSettings(element, field_name) {
       var value = element.checked ? 'Y' : 'N';
 
-      if (field_name == 'age_range' || field_name == 'message_template' || field_name=='education_level' || field_name=='children_preference' ) {
+      if (field_name == 'age_range' || field_name == 'message_template' || field_name=='education_level' || field_name=='children_preference' || field_name == 'height_range' || field_name == 'weight_range' ) {
         value = $(element).val();
       }
 
@@ -3914,6 +3966,21 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     });
   </script>
+  <script>  
+	//Premium checking
+	jQuery('.premiumcheck').click(function(e) { 
+		e.preventDefault();
+		e.stopPropagation();
+		$('#premium_modal').addClass('active');
+	});
+  </script>
+  
+  <style>
+  .premiumcheck input[type="range"],.premiumcheck select {
+		pointer-events: none;
+		opacity: 0.5; /* Optional: make it look disabled */
+	}
+  </style>
 
 </body>
 
