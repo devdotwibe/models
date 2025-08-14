@@ -669,7 +669,7 @@
                     </div>
                 </div>
 
-                <?php /*?><div class="filter-group">
+                <div class="filter-group">
                     <label class="filter-label">Online Status</label>
                     <select class="filter-select" id="onlineStatusFilter">
                         <option value="now" selected>Online Now</option>
@@ -679,14 +679,10 @@
                     </select>
                 </div> 
 
-                <div class="filter-group">
+                <?php /*?><div class="filter-group">
                     <div class="toggle-container">
                         <span class="filter-label">Verified Photos Only</span>
                         <div class="toggle-switch active" id="verifiedToggle"></div>
-                    </div>
-                    <div class="toggle-container">
-                        <span class="filter-label">Exclude Messaged</span>
-                        <div class="toggle-switch" id="excludeMessagedToggle"></div>
                     </div>
                 </div><?php */ ?>
 
@@ -911,6 +907,14 @@
                         <option value="yes">Yes</option>
                     </select>
                 </div><?php */ ?>
+				
+				<div class="filter-group">
+                    <div class="toggle-container">
+                        <span class="filter-label">Exclude Messaged</span>
+                        <div class="toggle-switch" id="excludeMessagedToggle"></div>
+                    </div>
+                </div>
+				
             </div>
 
             <!-- Filter Actions -->
