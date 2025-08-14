@@ -164,8 +164,19 @@
                 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
                 $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
+				
+				$premium_check = CheckPremiumAccess($userDetails['id']);
+				
+                $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']); 
+				
+				if(!empty($premium_check) && !empty($privacy_setting)){
+					
+					$privacy_user_ids = PrivacyModelIdsByUser($userDetails,$con,$privacy_setting['children_preference'],$privacy_setting['height_range'],$privacy_setting['weight_range'],$privacy_setting['education_level']);
+				
+				}else{
+					$privacy_user_ids = '';
+				}
 
-                $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
 
             }
             else
@@ -410,11 +421,34 @@
                     if (!empty($boosted_user_ids)) {
                     
                         $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
+						
+						if(!empty($privacy_user_ids)){
+					
+							$privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'"; 
+							
+							$order = " ORDER BY FIELD(mu.unique_id, $boostedUniqueIdsQuoted) OR FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
+							
+						}else{
 
-                        $order = " ORDER BY FIELD(mu.unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
+							$order = " ORDER BY FIELD(mu.unique_id, $boostedUniqueIdsQuoted) DESC, RAND() "; 
+						
+						}
+						
                     } else {
+						
+						if(!empty($privacy_user_ids)){
+					
+							$privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'"; 
+							
+							$order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
+							
+						}else{
 
-                        $order = " ORDER BY mu.id DESC ";
+							$order = " ORDER BY mu.id DESC ";
+						
+						}
+
+                        
                     }
 
                 }

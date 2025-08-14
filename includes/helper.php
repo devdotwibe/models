@@ -225,7 +225,25 @@ function BoostedModelIds($con) {
 		return array_column($validBoosts, 'user_unique_id');
 	}
 
+function PrivacyModelIdsByUser($userDetails, $con, $children_preference, $height_range, $weight_range, $education_level) {
+	
+	$query = "SELECT id,unique_model_id 
+				FROM model_privacy_settings WHERE children_preference='".$children_preference."' OR height_range='".$height_range."' OR weight_range='".$weight_range."' OR education_level='".$education_level."'";
 
+		$result = mysqli_query($con, $query);
+
+		$validmatches = [];
+
+		while ($row = mysqli_fetch_assoc($result)) {
+			
+			$validmatches[] = [
+							'unique_model_id' => $row['unique_model_id'],
+						];
+			
+		}
+	
+	return array_column($validmatches, 'unique_model_id');
+}
 
 function checkUserFollow($model_id, $user_id) {
 	
