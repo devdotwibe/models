@@ -629,6 +629,7 @@
 			
         </div>
     </main>
+	
 
 <!-- Filter Modal -->
     <div class="filter-modal-overlay" id="filterModalOverlay"></div>
@@ -714,8 +715,16 @@
             </div>
 
             <!-- Premium Filters -->
-            <div class="filter-section" <?php if(!$user_have_preminum) {?>style="opacity:0.2; pointer-events: none; user-select: none;" <?php }?> >
-                <h3 class="filter-section-title">
+            <div class="filter-section <?php if(!$user_have_preminum) { echo 'premiumcheck'; } ?>" <?php /*if(!$user_have_preminum) {?>style="opacity:0.5; pointer-events: none; user-select: none;" <?php } */ ?> >
+                
+				<div class="premiumcheck-msg premiumcheck_msg" style="display:none;">
+				
+				<div class="premium-msg-head"><h3>Access Restricted!</h3></div>
+				<div class="premium-msg-txt">You are not a premium member.</div>
+				
+				</div>
+				
+				<h3 class="filter-section-title">
                     <i class="fas fa-crown"></i>
                     Premium Filters
                     <span class="premium-badge">Premium</span>
@@ -1187,6 +1196,8 @@
       </div>
     </div>
   </div>
+  
+    
 
 <?php if (!isset($_POST['filter_submit'])){ ?>
 <script>
@@ -1921,6 +1932,22 @@ function showNotification(message, type = 'info') {
             imageObserver.observe(img);
         });
     </script>
+	
+	<script>  
+	//Premium checking
+	jQuery('.premiumcheck').click(function(e) { 
+		e.preventDefault();
+		e.stopPropagation();
+		$('.premiumcheck_msg').show();
+	});
+	
+  </script>
+  <style>
+  .premiumcheck input[type="range"],.premiumcheck select {
+		pointer-events: none;
+		opacity: 0.5; /* Optional: make it look disabled */
+	}
+  </style>
 
        
   </body>
