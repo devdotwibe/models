@@ -1949,7 +1949,7 @@ function showNotification(message, type = 'info') {
 	
   </script>
   <style>
-  .premiumcheck input[type="range"],.premiumcheck select {
+  .premiumcheck input[type="range"],.premiumcheck select,.premiumcheck .toggle-switch {
 		pointer-events: none;
 		opacity: 0.5; /* Optional: make it look disabled */
 	}
