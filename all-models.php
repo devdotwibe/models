@@ -897,12 +897,12 @@
                     </select>
                 </div><?php */ ?>
 				
-				<?php  if($privacy_setting['verified_photos'] || $privacy_setting['exclude_message_already']) { ?>
+				<?php  //if($privacy_setting['verified_photos'] || $privacy_setting['exclude_message_already']) { ?>
 
                     <div class="filter-group">
 
 
-                        <?php  if($privacy_setting['exclude_message_already']) {?>
+                        <?php  //if($privacy_setting['exclude_message_already']) {?>
 
                             <div class="toggle-container">
                                 <span class="filter-label">Exclude Messaged</span>
@@ -912,10 +912,10 @@
 
                             </div>
 
-                        <?php }?>
+                        <?php //}?>
                     </div>
 
-                <?php } ?>
+                <?php //} ?>
 				
             </div>
 
