@@ -9926,6 +9926,9 @@ padding-inline: 10px;
 .card-number-div > div>div iframe:focus-visible{
     outline:none !important
 }
+.card-number-div > div>div iframe form{
+    color:#fff !important;
+}
 
 /* form for banking........................... */
 
