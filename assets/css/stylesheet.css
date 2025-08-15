@@ -10634,7 +10634,18 @@ transform: translateY(-6px);
     }
 
 
+#purchaseform>.form-group {
+    flex: 100%;
+}
 
+#purchaseform .btnAction.paymentsub_btn {
+    width: 100%;
+}
+
+#purchaseform {
+    width: 90%;
+
+}
 
 }
 
@@ -10643,6 +10654,11 @@ transform: translateY(-6px);
 
 
 @media (max-width: 480px) {
+
+    #purchaseform {
+    width: 100%;
+
+}
 
     body header .btn-primary {
         padding: 10px 15px !important;
