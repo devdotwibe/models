@@ -150,7 +150,8 @@ $activeTab = 'wallet';
                         <p class="text-gray-300">Coins in your wallet</p>
                     </div>
                 </div>
-                <?php echo $userDetails['balance']; ?>
+
+               
                 <div class="model-only mt-4">
                     <div class="grid grid-cols-2 gap-4 text-center">
                         <div>
