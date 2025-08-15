@@ -9979,6 +9979,7 @@ body.advt-page.my-purpose .scroll-indicator {
     justify-content: flex-start;
     flex-direction: column;
     gap: 0px;
+    margin-top: -10px;
     /* padding: 20px 0; */
 }
 
