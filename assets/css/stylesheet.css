@@ -9952,7 +9952,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 .icon-text-div {
 
-    border: 1px solid green;
+    /* border: 1px solid green; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -9960,32 +9960,47 @@ body.advt-page.my-purpose .scroll-indicator {
     width: fit-content;
     margin: 0 auto;
 }
-.icon-text-div .balance-amount{
-    font-size:2rem;
+
+.icon-text-div .balance-amount {
+    font-size: 2rem;
 }
 
-.icon-text-div img{
-     width:55px;
+.icon-text-div img {
+    width: 55px;
+    margin-top: auto;
 }
-.wallet-balance-outer{
 
-    width:calc(100% - 60px);
+.wallet-balance-outer {
+
+    width: calc(100% - 60px);
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    gap: 10px;
+    gap: 0px;
     /* padding: 20px 0; */
 }
 
-.wallet-balance-div{
-    width:fit-content;
+.wallet-balance-div {
+    width: fit-content;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: flex-start;
     gap: 8px;
+    padding-top: 12px;
 
 }
+
+.wallet-balance-div span {
+    font-size: 1.7rem;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.balance-card p {
+    max-width: 300px;
+}
+
 
 
 @media (max-width: 1540px) {
@@ -10351,7 +10366,7 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .premium-wallet .balance-amount {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     .premium-wallet .purchase-grid {
@@ -11302,6 +11317,20 @@ body.advt-page.my-purpose .scroll-indicator {
     .home-page .modal-content h3 {
         font-size: 25px
     }
+
+    .wallet-balance-outer {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+    }
+    .icon-text-div{
+        gap:0;
+    }
+      .balance-card .coin-icon-img img{
+        margin:0;
+        width: 78px;
+      }
 
 }
 
