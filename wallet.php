@@ -144,13 +144,13 @@ $activeTab = 'wallet';
                             <div class="balance-amount" id="balance">
                             </div>
                         </div>
-                    </div>
-                    <!-- <?php echo $userDetails['balance']; ?> -->
 
-                    <p class="text-gray-300">Coins in your wallet</p>
-                     
+                        <!-- <?php echo $userDetails['balance']; ?> -->
+
+                        <p class="text-gray-300">Coins in your wallet</p>
+                    </div>
                 </div>
-                 <?php echo $userDetails['balance']; ?>
+                <?php echo $userDetails['balance']; ?>
                 <div class="model-only mt-4">
                     <div class="grid grid-cols-2 gap-4 text-center">
                         <div>
