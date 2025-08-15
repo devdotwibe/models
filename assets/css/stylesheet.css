@@ -11338,6 +11338,8 @@ margin-top: -8px;
         justify-content: center;
         flex-direction: column;
         width: 100%;
+      margin-top: 0;
+
     }
 
     .icon-text-div {
@@ -11358,7 +11360,7 @@ margin-top: -8px;
     }
 
     .wallet-balance-outer p {
-        margin-top: 6px;
+        margin-top: 0;
     }
 
 }
