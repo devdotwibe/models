@@ -10000,8 +10000,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 .balance-card p {
     max-width: 300px;
-    padding-left: 0 !important;
-    margin-left: 0 !important;
+margin-top: -8px;
     width: 100%;
     text-align: left;
 }
