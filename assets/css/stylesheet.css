@@ -9812,7 +9812,7 @@ body.advt-page.my-purpose .scroll-indicator {
     gap: 1rem;
 }
 
-#purchaseform .form-group {
+#purchaseform>.form-group {
     margin-bottom: 1rem;
     flex: 1 1 calc(50% - 1rem);
     box-sizing: border-box;
@@ -9825,7 +9825,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
-#purchaseform p {
+#purchaseform>p {
     font-weight: bold;
     margin-bottom: 1rem;
     color: #fff;
@@ -9852,13 +9852,13 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
-#purchaseform .form-group:nth-last-of-type(2) {
+#purchaseform>.form-group:nth-last-of-type(2) {
     width: 100%;
     /* border: 1px solid red; */
 }
 
-#purchaseform .form-group:last-of-type {
-    width: 100%;
+#purchaseform>.form-group:last-of-type {
+   flex-basis: 100%;
     /* border:1px solid blue; */
 }
 
@@ -9871,6 +9871,25 @@ body.advt-page.my-purpose .scroll-indicator {
     color: #fff;
 }
 
+#purchaseform .btnAction.paymentsub_btn{
+    width:fit-content;
+    color:#fff !important;
+  border:1px solid transparent;
+  padding:15px 50px;
+  height:50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:16px;
+  font-weight:600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition:all .3s ease-in-out;
+}
+#purchaseform .btnAction.paymentsub_btn:hover{
+      transform: translateY(-6px);
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+    box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.1);
+}
 
 
 /* form for banking........................... */
