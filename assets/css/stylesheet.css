@@ -11209,6 +11209,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
     .premium-wallet .balance-amount {
         font-size: 1.75rem;
+        margin-bottom: 0;
     }
 
     .wallet-tabs-outer .tab-content h3 {
@@ -11347,6 +11348,10 @@ body.advt-page.my-purpose .scroll-indicator {
     .coin-icon-img {
         margin-top: 12px;
         margin-bottom: 2px;
+    }
+
+    .wallet-balance-outer p{
+        margin-top:6px;
     }
 
 }
