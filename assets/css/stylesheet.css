@@ -9838,7 +9838,7 @@ transform: translateY(-6px);
     margin-bottom: 1rem;
     color: #fff;
     flex-basis: 100%;
-    border-bottom: 1px solid #ededed;
+    border-bottom: 1px solid #7b85ca;
   padding-bottom: 8px;
 }
 
@@ -9851,7 +9851,7 @@ transform: translateY(-6px);
 
 
 .card-number-div {
-    border: 1px solid #ced4da;
+    border: 1px solid #7b85ca;
     border-radius: 5px;
     padding: 10px;
 }
