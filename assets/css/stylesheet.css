@@ -11317,6 +11317,13 @@ body.advt-page.my-purpose .scroll-indicator {
     .home-page .modal-content h3 {
         font-size: 25px
     }
+    .wallet-balance-div{
+        align-items: center;
+    }
+
+.wallet-balance-div span{
+    margin-bottom:0;
+}
 
     .wallet-balance-outer {
         align-items: center;
@@ -11324,13 +11331,23 @@ body.advt-page.my-purpose .scroll-indicator {
         flex-direction: column;
         width: 100%;
     }
-    .icon-text-div{
-        gap:0;
+
+    .icon-text-div {
+        gap: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
-      .balance-card .coin-icon-img img{
-        margin:0;
+
+    .balance-card .coin-icon-img img {
+        margin: 0;
         width: 78px;
-      }
+    }
+
+    .coin-icon-img {
+        margin-top: 12px;
+        margin-bottom: 2px;
+    }
 
 }
 
