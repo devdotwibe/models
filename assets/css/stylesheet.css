@@ -9914,14 +9914,14 @@ transform: translateY(-6px);
 .card-number-div > div {
   flex: 1 1 calc(33% - 1rem);
   border: 1px solid #7b85ca;
-
+padding-inline: 10px;
   height: 50px;
   border-radius: 7px;
   font-size: 16px;
 }
-.card-number-div > div>div{
+/* .card-number-div > div>div{
   padding: 4px 12px !important;
-}
+} */
 
 
 /* form for banking........................... */
