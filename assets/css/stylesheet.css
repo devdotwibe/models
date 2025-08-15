@@ -10067,7 +10067,10 @@ padding-inline: 10px;
     text-align: left;
 }
 
-
+#purchaseform>.form-group:nth-last-of-type(2) {
+    width: 100%;
+    margin-bottom: 0;
+}
 
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
@@ -10485,7 +10488,20 @@ padding-inline: 10px;
     .home-page .modal-content img {
         max-height: 350px;
     }
+    .card-number-div > div {
+    flex: 1 1 calc(50% - 1rem);
+       margin-bottom: .7rem;
+    }
 
+.card-number-div > div:last-child{
+    margin-bottom: 0!important;
+}
+
+
+.card-number-div{
+    padding-inline: 0;
+    padding-block: 0;
+}
 }
 
 
