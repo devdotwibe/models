@@ -9988,7 +9988,7 @@ body.advt-page.my-purpose .scroll-indicator {
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
-    padding-top: 6px;
+    padding-top:0;
     width: 100%;
 }
 
