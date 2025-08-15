@@ -9802,39 +9802,37 @@ body.advt-page.my-purpose .scroll-indicator {
     border: 1px solid #e1e1e1;
     padding: 20px;
     border-radius: 10px;
-    /* background: rgba(255, 255, 255, 0.02); */
     background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 #purchaseform .form-group {
     margin-bottom: 1rem;
-    /* border: 1px solid red; */
-    display: inline-block;
-    width: 48% !important;
-    margin-right: 1%;
-    margin-left: 1%;
+    flex: 1 1 calc(50% - 1rem);
+    box-sizing: border-box;
 }
 
 #purchaseform hr {
-    display: block;
-    margin-right: 1%;
-    margin-left: 1%;
+    flex-basis: 100%;
+    /* margin-block: .5rem; */
 }
 
-#purchaseform .form-group:nth-child(even) {
-    /* margin-right: 0; */
-}
+/* #purchaseform .form-group:nth-child(even) {
+    margin-right: 0;
+} */
 
 #purchaseform p {
     font-weight: bold;
-    margin-right: 1%;
-    margin-left: 1%;
+    margin-bottom: 1rem;
     color: #fff;
-    margin-bottom: 10px;
+    flex-basis: 100%;
+     /* margin-block: .5rem; */
 }
 
 #purchaseform hr {
@@ -9989,7 +9987,7 @@ body.advt-page.my-purpose .scroll-indicator {
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
-    padding-top:0;
+    padding-top: 0;
     width: 100%;
 }
 
@@ -10001,7 +9999,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 .balance-card p {
     max-width: 300px;
-margin-top: -6px;
+    margin-top: -6px;
     width: 100%;
     text-align: left;
 }
@@ -11338,7 +11336,7 @@ margin-top: -6px;
         justify-content: center;
         flex-direction: column;
         width: 100%;
-      margin-top: 0;
+        margin-top: 0;
 
     }
 

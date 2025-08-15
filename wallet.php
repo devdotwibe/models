@@ -145,7 +145,7 @@ $activeTab = 'wallet';
                             </div>
                         </div>
 
-                        <!-- <?php echo $userDetails['balance']; ?> -->
+                  <!-- <?php echo $userDetails['balance']; ?>  -->
 
                         <p class="text-gray-300">Coins in your wallet</p>
                     </div>
