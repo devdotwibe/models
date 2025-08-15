@@ -9963,10 +9963,11 @@ body.advt-page.my-purpose .scroll-indicator {
 
 .icon-text-div .balance-amount {
     font-size: 2rem;
+    margin-bottom: 0;
 }
 
 .icon-text-div img {
-    width: 55px;
+    width: 85px;
     margin-top: auto;
 }
 
@@ -9984,21 +9985,25 @@ body.advt-page.my-purpose .scroll-indicator {
 .wallet-balance-div {
     width: fit-content;
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     justify-content: flex-start;
     gap: 8px;
-    padding-top: 12px;
-
+    padding-top: 6px;
+    width: 100%;
 }
 
 .wallet-balance-div span {
     font-size: 1.7rem;
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 0;
 }
 
 .balance-card p {
     max-width: 300px;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    width: 100%;
+    text-align: left;
 }
 
 
@@ -11318,14 +11323,15 @@ body.advt-page.my-purpose .scroll-indicator {
     .home-page .modal-content h3 {
         font-size: 25px
     }
-    .wallet-balance-div{
+
+    .wallet-balance-div {
         align-items: center;
         padding-top: 3px;
     }
 
-.wallet-balance-div span{
-    margin-bottom:0;
-}
+    .wallet-balance-div span {
+        margin-bottom: 0;
+    }
 
     .wallet-balance-outer {
         align-items: center;
@@ -11351,8 +11357,8 @@ body.advt-page.my-purpose .scroll-indicator {
         margin-bottom: 2px;
     }
 
-    .wallet-balance-outer p{
-        margin-top:6px;
+    .wallet-balance-outer p {
+        margin-top: 6px;
     }
 
 }
