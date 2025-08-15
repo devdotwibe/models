@@ -138,13 +138,17 @@ $activeTab = 'wallet';
                 <h2 class="text-xl md:text-2xl font-semibold mb-2">Current Balance</h2>
                 <div class="icon-text-div">
                     <div class="coin-icon-img"><img src="<?= SITEURL ?>assets/images/token.png"></div>
-                    <div class="balance-amount" id="balance">
-                    </div>
-                    
-                </div>
-                <?php echo $userDetails['balance']; ?>
+                    <div class="wallet-balance-outer">
+                        <div class="wallet-balance-div">
+                            <span class="text-2xl font-bold text-green-400">₹</span>
+                            <div class="balance-amount" id="balance"></div>
+                        </div>
 
-                <p class="text-gray-300">Coins in your wallet</p>
+                        <p class="text-gray-300">Coins in your wallet</p>
+                    </div>
+                </div>
+                <?php /* echo $userDetails['balance']; */ ?>
+
                 <div class="model-only mt-4">
                     <div class="grid grid-cols-2 gap-4 text-center">
                         <div>
