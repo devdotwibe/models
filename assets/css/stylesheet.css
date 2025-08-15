@@ -9810,6 +9810,14 @@ body.advt-page.my-purpose .scroll-indicator {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    margin-bottom: 50px;
+    transform: all 0.3s ease-in-out;
+}
+
+#purchaseform:hover{
+transform: translateY(-6px);
+  background: transparent;
+    box-shadow: 0 20px 60px rgba(139, 92, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.1);
 }
 
 #purchaseform>.form-group {
