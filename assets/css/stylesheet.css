@@ -11320,6 +11320,7 @@ body.advt-page.my-purpose .scroll-indicator {
     }
     .wallet-balance-div{
         align-items: center;
+        padding-top: 3px;
     }
 
 .wallet-balance-div span{
