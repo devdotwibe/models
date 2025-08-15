@@ -9797,7 +9797,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 #purchaseform {
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
     border: 1px solid #e1e1e1;
     padding: 20px;
@@ -9823,21 +9823,23 @@ body.advt-page.my-purpose .scroll-indicator {
     /* margin-block: .5rem; */
 }
 
-/* #purchaseform .form-group:nth-child(even) {
-    margin-right: 0;
-} */
+
 
 #purchaseform p {
     font-weight: bold;
     margin-bottom: 1rem;
     color: #fff;
     flex-basis: 100%;
-     /* margin-block: .5rem; */
+    border-bottom: 1px solid #ededed;
+  padding-bottom: 8px;
 }
 
-/* #purchaseform hr {
+#purchaseform hr {
     display: none;
-} */
+}
+ #purchaseform .form-group input{
+  height:50px;
+}
 
 
 .card-number-div {
