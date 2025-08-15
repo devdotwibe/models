@@ -9926,12 +9926,12 @@ padding-inline: 10px;
 .card-number-div > div>div iframe:focus-visible{
     outline:none !important
 }
-.card-number-div > div>div iframe form.ElementsApp{
-
-}
 
 .card-number-div .form.ElementsApp.is-complete {
     color:#fff !important;
+}
+.ElementsApp, .ElementsApp .InputElement{
+    height: 50px !important;
 }
 
 /* form for banking........................... */
