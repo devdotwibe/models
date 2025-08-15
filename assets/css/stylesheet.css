@@ -10646,7 +10646,9 @@ transform: translateY(-6px);
     width: 90%;
 
 }
-
+.head_pay {
+ font-size: 28px;
+}
 }
 
 
@@ -10657,7 +10659,9 @@ transform: translateY(-6px);
 
     #purchaseform {
     width: 100%;
-
+}
+.head_pay {
+    font-size: 20px;
 }
 
     body header .btn-primary {
