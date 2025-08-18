@@ -263,6 +263,44 @@ foreach ($f_country_list as $val) {
 	<?php //include('include/adv_footer.php'); ?>
 	<?php include('../includes/footer.php'); ?>
 	 <script>
+
+
+        function LikeAdvertise(adver_id)
+        {
+            $.ajax({
+
+                type: 'GET',
+                url: "<?= SITEURL . 'ajax/adver_like.php' ?>",
+                data: {
+                    adver_id: adver_id
+                },
+                dataType: 'json',
+                success: function(response) {
+
+                    if (response.status == "success") {
+                      
+                        showNotification(response.message,'success');
+                    }
+                }
+            });
+
+        }
+
+        function showNotification(message, type = 'info') {
+
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${
+                    type === 'success' ? 'bg-green-500' : 
+                    type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+                }`;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
         // Enhanced JavaScript functionality
         let currentView = 'grid';
         let currentFilter = 'all';

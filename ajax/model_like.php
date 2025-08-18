@@ -10,15 +10,6 @@ if(isset($_SESSION['log_user_id'])) {
 
     $modelid = $_GET['modelid'];
 
-// $get_like = DB::query('select like_count from model_user where id='.$modelid);
-
-// $post_data = array();
-// $post_data['like_count'] = $get_like[0]['like_count']+1;
-
-// DB::update('model_user', $post_data, "id=%s", $modelid);
-
-// $output['suc']= 'success';
-
             $model_detail = get_data('model_user', ['id' => $modelid], true);
 
             $privacy_setting =  getModelPrivacySettings($model_detail['unique_id']);
