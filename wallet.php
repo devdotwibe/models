@@ -708,7 +708,7 @@ $activeTab = 'wallet';
 <script>
     // Global state
     let currentMode = 'user';
-    let currentBalance = 84250;
+    let currentBalance = <?= $userDetails['balance'] ?>;
     let transactions = [];
 
     // Initialize app
