@@ -9875,10 +9875,12 @@ transform: translateY(-6px);
    flex-basis: 100%;
     /* border:1px solid blue; */
 }
-
+.purchase-payment-h3 {
+  margin-top: 50px;
+}
 .head_pay {
     /* font-size: 30px; */
-margin-top: 50px;
+
 }
 
 #purchaseform .form-group label {
