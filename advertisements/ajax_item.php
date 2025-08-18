@@ -39,7 +39,8 @@ if($all_data){
 
                             <div class="stat-item">
 
-                                    <span onclick="LikeAdvertise('<?php echo $set_data['id'] ?>')" >❤️</span>
+                                    <span onclick="LikeAdvertise('<?php echo $set_data['id'] ?>')" ><li class="fas fa-heart"></li> ❤️</span>
+                                    
                                     <span>267 likes</span>
                             </div>
 
