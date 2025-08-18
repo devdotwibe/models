@@ -55,18 +55,26 @@ if (isset($_SESSION["log_user_id"])) {
     //Bank data
 
     if ($_POST && isset($_POST['bankdata_sub'])) {
-        $arr_bnk = array('account_name', 'bank_name', 'account_number', 'ifsc_code', 'upi_id');
+
+        $arr_bnk = array('account_name', 'bank_name', 'account_number', 'ifsc_code');
+
         $post_data_bnk = array_from_post($arr_bnk);
+
         $get_bankdata = DB::query('select * from users_bankdetail where user_id = ' . $userDetails["id"]);
+
         if (empty($get_bankdata)) {
+
             $post_data_bnk['user_id'] = $userDetails["id"];
             $post_data_bnk['status'] = 1;
             $post_data_bnk['created_date'] = date('Y-m-d H:i:s');
 
             DB::insert('users_bankdetail', $post_data_bnk);
+
             $created_id = DB::insertId();
+
             echo '<script>alert("Bank details added successfully.");</script>';
         } else {
+
             DB::update('users_bankdetail', $post_data_bnk, "user_id=%s", $userDetails["id"]);
             echo '<script>alert("Bank details updated successfully.");</script>';
         }
