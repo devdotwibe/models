@@ -102,7 +102,7 @@ include('includes/helper.php');
             <div class="header-content">
                 <h1 class="logo">Live Models</h1>
 
-                <div class="header-actions">
+                <div class="header-actions"> 
                     <button class="header-btn active" title="Grid View" id="gridViewBtn">
                         <i class="fas fa-th-large"></i>
                     </button>
