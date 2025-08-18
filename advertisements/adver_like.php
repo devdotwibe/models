@@ -8,7 +8,7 @@ if(isset($_SESSION['log_user_id'])) {
 
     $user_id = $_SESSION['log_user_id'];
 
-    $adver_id = $_GET['adver_id'];
+    $adver_id = $_POST['adver_id'];
 
             $field_name = 'like';
 
