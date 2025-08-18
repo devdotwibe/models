@@ -538,13 +538,14 @@ $activeTab = 'wallet';
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="form-label">UPI ID (Optional)</label>
-                                <input type="text" class="form-input" placeholder="your-upi@bank" name="upi_id" value="<?php if (isset($_POST['upi_id'])) {
-                                                                                                                            echo $_POST['upi_id'];
-                                                                                                                        } else echo $checkbankdetail['upi_id'] ?>">
-                            </div>
-
+                            <?php /*
+                                <div class="form-group">
+                                    <label class="form-label">UPI ID (Optional)</label>
+                                    <input type="text" class="form-input" placeholder="your-upi@bank" name="upi_id" value="<?php if (isset($_POST['upi_id'])) {
+                                                                                                                                echo $_POST['upi_id'];
+                                                                                                                            } else echo $checkbankdetail['upi_id'] ?>">
+                                </div>
+                            */?>
 
                             <button type="submit" name="bankdata_sub" class="btn btn-primary w-full">
                                 Save Bank Details
