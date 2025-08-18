@@ -72,7 +72,7 @@ $sort_type = $_GET['sort_type'];
     //     $order = " ORDER BY tb.id DESC"; 
     // }
 
-       $order = " ORDER BY tb.id DESC"; 
+       $order = " ORDER BY mu.id DESC"; 
 
 
 // $stringQuery = " select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id ";//where status
