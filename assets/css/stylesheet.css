@@ -9885,7 +9885,7 @@ transform: translateY(-6px);
 }
 
 #purchaseform .btnAction.paymentsub_btn{
-    width:fit-content;
+    width:100%;
     color:#fff !important;
   border:1px solid transparent;
   padding:15px 50px;
@@ -9899,7 +9899,7 @@ transform: translateY(-6px);
     transition:all .3s ease-in-out;
     margin: 0 auto;
     border-radius: 10px;
-    background: linear-gradient(135deg, var(--primary), #ec4899);
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
 }
 #purchaseform .btnAction.paymentsub_btn:hover{
       transform: translateY(-6px);
