@@ -270,7 +270,7 @@ foreach ($f_country_list as $val) {
             $.ajax({
 
                 type: 'GET',
-                url: "<?= SITEURL . '/ajax/adver_like.php' ?>",
+                url: "<?= SITEURL . 'ajax/adver_like.php' ?>",
                 data: {
                     adver_id: adver_id
                 },
