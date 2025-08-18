@@ -671,7 +671,8 @@ include('includes/helper.php');
 
             </div>
 
-                   <div class="profile-grid profile-list" id="profileGrid">
+            <div class="profile-grid profile-list" id="profileList" style="display:none;">
+
                 <?php
 
 
