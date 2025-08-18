@@ -10148,7 +10148,7 @@ align-items: center;
     position: relative;
     padding-top: 0;
     overflow: hidden;
-    width: 50%;
+    width: 45%;
 }
 
 .premimum-model1 .profile-grid.profile-list .profile-image-container img {
@@ -10158,7 +10158,7 @@ align-items: center;
     object-fit: cover;
     border-radius: 16px 0 0 0px;
     transform: none;
-    max-height: 300px;
+    max-height: 330px;
 
 }
 
