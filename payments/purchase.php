@@ -18,7 +18,7 @@ include('../includes/config.php');
 <html>
 
 <head>
-	<title>PHP Razorpay Payment Gateway Integration Example</title>
+	<title>Payment Confirmation Page - Live Models</title>
 
 	<?php include('../includes/head.php'); ?>
 
