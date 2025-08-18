@@ -47,35 +47,30 @@
                       <thead>
                         <tr>
                           <th>
-                            S. no.
+                           Account Holder Name
                           </th>
                           <th>
-                            Unique id
+                            Bank Name
                           </th>
                           <th>
-                            Username
+                            Account Number
                           </th>
                           <th>
-                            Email
-                          </th>
-                          <th>
-                            Country
-                          </th>
-                          <th>
-                            Register Date
-                          </th>
-                          <th>
-                            View Profile
-                          </th>
-                          <th>
-                            Action
+                            IFSC Code
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                  
-                   
+                
                         <tr>
+                        
+                            <td><?php echo $bank_detail['account_name'] ?></td>
+
+                            <td><?php echo $bank_detail['bank_name'] ?></td>
+
+                            <td><?php echo $bank_detail['account_number'] ?></td>
+                            
+                            <td><?php echo $bank_detail['ifsc_code'] ?></td>
                       
                         </tr>
                      
