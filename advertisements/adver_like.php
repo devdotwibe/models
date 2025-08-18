@@ -10,9 +10,9 @@ if(isset($_SESSION['log_user_id'])) {
 
     $adver_id = $_POST['adver_id'];
 
-            $field_name = 'liked';
+    $value = $_POST['value'];
 
-            $value = 'Yes';
+            $field_name = 'liked';
 
             $timestamp = date('Y-m-d H:i:s');
 
@@ -25,9 +25,9 @@ if(isset($_SESSION['log_user_id'])) {
 
             if ($result->num_rows > 0) {
      
-                $updateSql = "UPDATE avertisement_like SET `$field_name` = ?, WHERE adver_id = ? AND user_id = ?";
+                $updateSql = "UPDATE avertisement_like SET  WHERE adver_id = ? AND user_id = ?";
                 $updateStmt = $con->prepare($updateSql);
-                $updateStmt->bind_param("sii", $value, $adver_id, $user_id);
+                $updateStmt->bind_param("ii",  $adver_id, $user_id);
                 $updateStmt->execute();
             } else {
             

@@ -43,7 +43,7 @@ if($all_data){
 
                             <div class="stat-item">
 
-                                    <span onclick="LikeAdvertise('<?php echo $set_data['id'] ?>')" id="like_adver_<?php echo $set_data['id'] ?>"> <?php if($is_user_liked) { ?> ❤️ <?php } else { ?>  <li class="fas fa-heart"></li> <?php } ?>  </span>
+                                    <span  <?php if($is_user_liked) { ?> onclick="LikeAdvertise('<?php echo $set_data['id'] ?>','No')"  <?php } else { ?>  onclick="LikeAdvertise('<?php echo $set_data['id'] ?>','Yes')"  <?php } ?> id="like_adver_<?php echo $set_data['id'] ?>"> <?php if($is_user_liked) { ?> ❤️ <?php } else { ?>  <li class="fas fa-heart"></li> <?php } ?>  </span>
                                     
                                     <span>  <span id="like_adver_count_<?php echo $set_data['id'] ?>"><?php echo $adver_liked ?></span> likes</span>
                             </div>

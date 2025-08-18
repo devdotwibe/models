@@ -265,22 +265,33 @@ foreach ($f_country_list as $val) {
 	 <script>
 
 
-        function LikeAdvertise(adver_id)
+        function LikeAdvertise(adver_id,value)
         {
             $.ajax({
 
                 type: 'POST',
                 url: "<?= SITEURL . 'advertisements/adver_like.php' ?>",
                 data: {
-                    adver_id: adver_id
+                    adver_id: adver_id,
+                    value:value
                 },
                 dataType: 'json',
                 success: function(response) {
 
+                    if (value === 'Yes') {
+                        $(`#like_adver_${adver_id}`)
+                            .attr('onclick', `LikeAdvertise(${adver_id}, 'No')`);
+                          
+                    } else {
+                        $(`#like_adver_${adver_id}`)
+                            .attr('onclick', `LikeAdvertise(${adver_id}, 'Yes')`);
+                          ;
+                    }
+
                     $(`#like_adver_${adver_id}`).text('❤️');
 
                     var count = parseInt($(`#like_adver_count_${adver_id}`).text(), 10) || 0;
-                    
+
                     $(`#like_adver_count_${adver_id}`).text(count + 1);
 
                     if (response.status == "success") {
