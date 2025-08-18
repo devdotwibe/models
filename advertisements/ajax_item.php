@@ -1,6 +1,9 @@
 <?php
 if($all_data){
 	foreach($all_data as $set_data){
+
+        $adver_views = AdverViews($set_data['id']);
+
 		$message  = limit_text($set_data['description'],15);
 ?>
 
@@ -16,7 +19,7 @@ if($all_data){
                         <div class="ad-stats">
                             <div class="stat-item">
                                 <span>👁️</span>
-                                <span>3,890 views</span>
+                                <span><?php echo $adver_views??0 ?> views</span>
                             </div>
                             <div class="stat-item">
                                 <span>❤️</span>
