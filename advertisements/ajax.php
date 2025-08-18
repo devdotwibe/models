@@ -69,8 +69,9 @@ $sort_type = $_GET['sort_type'];
     }
 
     if (!empty($filter_follower_ids)) {
-    $ordered_ids = implode(',', array: $filter_follower_ids); 
-    $order = " ORDER BY FIELD(tb.user_id, $ordered_ids) DESC";
+
+        $ordered_ids = implode(',', array: $filter_follower_ids); 
+        $order = " ORDER BY FIELD(tb.user_id, $ordered_ids) DESC";
 
         $sort_by="";
         
@@ -89,6 +90,7 @@ $stringQuery = "
     SELECT tb.*, mu.age 
     FROM banners tb 
     JOIN model_user mu ON mu.id = tb.user_id 
+    $order
 ";
 
 
