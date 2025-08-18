@@ -10118,6 +10118,50 @@ padding-inline: 10px;
 
 
 
+/* all models.....list view css...................... */
+
+.profile-grid.profile-list{
+
+    display:flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+
+}
+
+.profile-grid.profile-list .profile-card{
+    width:100%;
+    display: flex;
+  flex-wrap: wrap;
+}
+
+
+.profile-grid.profile-list .premimum-model1 .profile-image-container{
+position: relative;
+  max-width: 370px;
+  padding-top: 0;
+  overflow: hidden;
+  width:100%;
+}
+.profile-grid.profile-list .premimum-model1 .profile-image-container img {
+    position:relative;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.profile-grid.profile-list .premimum-model1 .profile-actions{
+    width:100%;
+}
+
+
+
+/* all models.....list view css...................... */
+
+
+
+
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
 
