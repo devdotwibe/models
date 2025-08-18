@@ -2035,7 +2035,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             <div class="collapsible-content">
               
               <div class="mb-6">
-                <div class="question-text">Are you need to give All 30 Days Access?</div>
+                <div class="question-text">Do you want to provide 30 days exclusive access to all content?</div>
                 <div class="radio-group mt-3">
                   <div class="radio-option">
                     <input type="radio" id="access-yes" onchange="AccessChange(this)" checked="" name="all_30day_access" value="Yes">
