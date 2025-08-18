@@ -1357,6 +1357,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           <div class="step" onclick="scrollToSection('meet-services')">Meet Services</div>
           <div class="step" onclick="scrollToSection('content-creation')">Content Creation</div>
           <div class="step" onclick="scrollToSection('professional-work')">Professional Work</div>
+          <div class="step" onclick="scrollToSection('30_days_access')">30 Days Access</div>
+          
           <?php /*?><div class="step" onclick="scrollToSection('physical-attributes')">Physical Attributes</div><?php */ ?>
           <div class="step" onclick="scrollToSection('govt-id-proof')">Govt Id Proof</div>
         </div>
@@ -1772,30 +1774,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               </div>
             </div>
 
-            <div class="mb-6">
-              <div class="question-text">Are you need to give All 30 Days Access?</div>
-              <div class="radio-group mt-3">
-                <div class="radio-option">
-                  <input type="radio" id="access-yes" onchange="AccessChange(this)" <?php if($extra_details['all_30day_access'] =='Yes'){ ?> checked <?php } ?> name="all_30day_access" value="Yes" >
-                  <label for="access-yes">Yes</label>
-                </div>
-                <div class="radio-option">
-                  <input type="radio" id="access-no" onchange="AccessChange(this)" <?php if($extra_details['all_30day_access'] =='No'){ ?> checked <?php } ?> name="all_30day_access" value="No" >
-                  <label for="access-no">No</label>
-                </div>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 all_access_coin" <?php if($extra_details['all_30day_access'] =='No'){ ?> Style="display:none;" <?php } ?> >
-              <div>
-
-                <label class="form-label">All 30 Days access coins?</label>
-
-                <input type="number" class="form-input" name="all_30day_access_price" value="<?php if (!empty($extra_details)) echo $extra_details['all_30day_access_price']; ?>" placeholder="e.g., 5000" min="1">
-              
-              </div>
-            </div>
-
+         
             <div id="modeling-options" class="conditional-section <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
                                                                     echo 'show';
                                                                   } ?> ">
@@ -2041,7 +2020,46 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div>
         </div>
 
-        
+
+        <div id="30_days_access" class="collapsible-section">
+
+            <div class="collapsible-header" onclick="toggleCollapsible(this)">
+
+              <h2 class="text-xl font-bold"> 30 Days Access</h2>
+
+              <svg class="w-6 h-6 collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+
+            <div class="collapsible-content">
+              
+              <div class="mb-6">
+                <div class="question-text">Are you need to give All 30 Days Access?</div>
+                <div class="radio-group mt-3">
+                  <div class="radio-option">
+                    <input type="radio" id="access-yes" onchange="AccessChange(this)" checked="" name="all_30day_access" value="Yes">
+                    <label for="access-yes">Yes</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="access-no" onchange="AccessChange(this)" name="all_30day_access" value="No">
+                    <label for="access-no">No</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 all_access_coin">
+                <div>
+
+                  <label class="form-label">All 30 Days access coins?</label>
+
+                  <input type="number" class="form-input" name="all_30day_access_price" value="100" placeholder="e.g., 5000" min="1">
+                
+                </div>
+              </div>
+
+            </div>
+        </div>
 
         <!-- Govt ID Proof Attributes -->
         <div id="govt-id-proof" class="collapsible-section">
@@ -2960,7 +2978,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     function updateProgress() {
       let completedSections = 0;
       const totalSections = 5;
-      const sections = ['chat-services', 'meet-services', 'content-creation', 'professional-work', 'physical-attributes'];
+      const sections = ['chat-services', 'meet-services', 'content-creation', 'professional-work','30_days_access', 'physical-attributes'];
       const steps = document.querySelectorAll('.step');
 
       sections.forEach((sectionId, index) => {
@@ -3012,7 +3030,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         }
 
         document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
-        const stepIndex = ['chat-services', 'meet-services', 'content-creation', 'professional-work', 'physical-attributes'].indexOf(sectionId);
+        const stepIndex = ['chat-services', 'meet-services', 'content-creation', 'professional-work','30_days_access', 'physical-attributes'].indexOf(sectionId);
         if (stepIndex !== -1) {
           const currentStep = document.querySelectorAll('.step')[stepIndex];
           if (currentStep) currentStep.classList.add('active');
