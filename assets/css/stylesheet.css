@@ -10130,7 +10130,7 @@ padding-inline: 10px;
 
 
     .head_pay{
-        font-size: 2.5rem;
+        font-size: 2.5rem !important;
     }
 }
 
@@ -10187,7 +10187,7 @@ padding-inline: 10px;
 
     
     .head_pay{
-        font-size: 2.25rem;
+        /* font-size: 2.25rem; */
     }
 }
 
