@@ -9847,6 +9847,11 @@ transform: translateY(-6px);
 }
  #purchaseform .form-group input{
   height:50px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  transition: all 0.3s ease;
 }
 
 
