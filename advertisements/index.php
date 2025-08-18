@@ -279,9 +279,9 @@ foreach ($f_country_list as $val) {
 
                     $(`#like_adver_${adver_id}`).text('❤️');
 
-                    var count = $(`#like_adver_count_${adver_id}`).text();
-
-                    $(`#like_adver_count_${adver_id}`).text(count+1);
+                    var count = parseInt($(`#like_adver_count_${adver_id}`).text(), 10) || 0;
+                    
+                    $(`#like_adver_count_${adver_id}`).text(count + 1);
 
                     if (response.status == "success") {
                       
