@@ -1922,9 +1922,10 @@ include('includes/helper.php');
 
                 $('#gridViewBtn').addClass('active');
 
-                $('#profileGrid').hide();
 
-                $('#profileList').show();
+                $('#profileList').hide();
+
+                $('#profileGrid').show();
             }
             else
             {
@@ -1933,9 +1934,10 @@ include('includes/helper.php');
 
                 $('#menuBtn').addClass('active');
 
-                $('#profileList').hide();
+                $('#profileGrid').hide();
 
-                $('#profileGrid').show();
+                $('#profileList').show();
+
             }
         }
 
