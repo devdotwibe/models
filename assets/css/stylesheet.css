@@ -9882,6 +9882,9 @@ transform: translateY(-6px);
 
 #purchaseform .form-group label {
     color: #fff;
+    font-weight: 600 !important;
+  font-family: 'Inter', sans-serif !important;
+  letter-spacing: .5px;
 }
 
 #purchaseform .btnAction.paymentsub_btn{
@@ -9900,6 +9903,7 @@ transform: translateY(-6px);
     margin: 0 auto;
     border-radius: 10px;
     background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    text-transform: uppercase;
 }
 #purchaseform .btnAction.paymentsub_btn:hover{
       transform: translateY(-6px);
