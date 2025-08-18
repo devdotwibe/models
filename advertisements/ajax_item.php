@@ -1,10 +1,13 @@
 <?php
 if($all_data){
+
 	foreach($all_data as $set_data){
 
         $adver_views = AdverViews($set_data['id']);
 
 		$message  = limit_text($set_data['description'],15);
+
+        $is_user_preminum = CheckPremiumAccess($set_data['user_id']);
 ?>
 
 
@@ -12,9 +15,16 @@ if($all_data){
                     
                     <div class="ad-image">
 
+                    <?php if($is_user_preminum) { ?>
 
-                        <div class="ad-badge badge-featured" <?php echo $set_data['category'] ?> >🌟 Featured</div>
 
+                        <div class="ad-badge badge-premium">👑 Premium</div>
+
+                    <?php } else { ?>
+
+                        <div class="ad-badge badge-featured">🌟 Featured</div>
+
+                    <?php } ?>
 
                         <img src="<?php echo SITEURL.'uploads/banners/'.$set_data['image']; ?>" alt="Social Media Influencer">
                     </div>
