@@ -25,6 +25,7 @@ if (isset($_SESSION["log_user_id"])) {
 
     //create withdraw data
     if ($_POST && isset($_POST['req_withdraw'])) {
+        
         $arr = array('coins', 'withdrawal_method');
         $post_data = array_from_post($arr);
         $post_data['amount'] = round($post_data['coins'] / $per_amount, 2);
@@ -447,7 +448,7 @@ $activeTab = 'wallet';
                             <div class="form-group">
                                 <label class="form-label">Withdrawal Amount</label>
 
-                                <input type="number" oninput="validateInput(this)" class="form-input" placeholder="Enter amount" name="coins" value="<?= $userDetails['balance'] ?>" data-min="1000" data-max="<?= $userDetails['balance'] ?>" >
+                                <input type="number" oninput="validateInput(this)" class="form-input" id="withdrawal_amount" placeholder="Enter amount" name="coins" value="<?= $userDetails['balance'] ?>" data-min="1000" data-max="<?= $userDetails['balance'] ?>" >
 
                                 <span id="amount_error" class="text-danger" style="display: none;"> </span>
 
@@ -471,6 +472,11 @@ $activeTab = 'wallet';
                                             } else { ?>submit<?php } ?>" name="req_withdraw" class="btn btn-success w-full" <?php if ($check_request) { ?> onclick="rejectWithdraw()" <?php } ?>>
                                 Request Withdrawal
                             </button>
+
+                            <button type="button" name="req_withdraw" class="btn btn-success w-full" <?php if ($check_request) { ?> onclick="rejectWithdraw()" <?php } else { ?>  onclick="RequestWithdraw()"  <?php } ?> >
+                                Request Withdrawal
+                            </button>
+
                         </form>
                     </div>
                 </div>
@@ -662,6 +668,44 @@ $activeTab = 'wallet';
     <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
     <script>
+
+
+        function RequestWithdraw()
+        {
+
+            var withdrawal_amount = $('#withdrawal_amount').val();
+
+             $.ajax({
+                type: 'POST',
+                url: "act-wallet.php",
+                data: {
+
+                    coin:withdrawal_amount,
+                    action:'submit_withdrawal',
+                },
+                dataType: 'json',
+                success: function(response) {
+
+                     if (response.status === 'success') {
+                       
+                        showNotification(response.message, 'success');
+
+                        setTimeout(function()
+                        {
+                            location.reload();
+                            
+                        },3000);
+                        
+
+                    } else {
+
+                         showNotification(response.message, 'error');
+                    }
+                }
+            });
+
+
+        }
 
         function validateInput(el) {
             const min = parseInt(el.dataset.min, 10);
