@@ -33,10 +33,12 @@ $serviceArr = array('Providing services', 'Looking for services');
     <?php if (isset($_SESSION["log_user_id"])) { ?>
 	<?php  include('../includes/side-bar.php'); ?>
 	<?php  include('../includes/profile_header_index.php'); ?>
-	<?php } else{ ?>
-    <?php //include('include/adv_header.php'); ?>
-	<?php include('../includes/header.php'); ?>
-	<?php } ?>
+	<?php } else{ 
+        
+        header("Location: " . SITEURL . "/login");
+        exit;
+    } ?>
+   
 
     <?php /*?><div class="container">
         <div class="login-signup" style="padding-top:10px;">
