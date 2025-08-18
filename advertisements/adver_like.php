@@ -25,7 +25,7 @@ if(isset($_SESSION['log_user_id'])) {
 
             if ($result->num_rows > 0) {
      
-                $updateSql = "UPDATE avertisement_like SET `$field_name` = ?, WHERE adver_id = ? AND user_id = ?";
+                $updateSql = "UPDATE avertisement_like SET `$field_name` = ? WHERE adver_id = ? AND user_id = ?";
                 $updateStmt = $con->prepare($updateSql);
                 $updateStmt->bind_param("sii", $value, $adver_id, $user_id);
                 $updateStmt->execute();
