@@ -447,7 +447,7 @@ $activeTab = 'wallet';
                             <div class="form-group">
                                 <label class="form-label">Withdrawal Amount</label>
 
-                                <input type="number" oninput="ValidataInput()" class="form-input" placeholder="Enter amount" name="coins" value="<?= $userDetails['balance'] ?>" data-min="1000" data-max="<?= $userDetails['balance'] ?>" >
+                                <input type="number" oninput="validateInput(this)" class="form-input" placeholder="Enter amount" name="coins" value="<?= $userDetails['balance'] ?>" data-min="1000" data-max="<?= $userDetails['balance'] ?>" >
 
                                 <span id="amount_error" class="text-danger" style="display: none;"> </span>
 
@@ -667,7 +667,7 @@ $activeTab = 'wallet';
             const min = parseInt(el.dataset.min, 10);
             const max = parseInt(el.dataset.max, 10);
             const value = parseInt(el.value, 10);
-            
+
             const errorSpan = document.getElementById("amount_error");
 
             if (isNaN(value)) {
