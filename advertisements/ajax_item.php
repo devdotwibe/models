@@ -36,10 +36,13 @@ if($all_data){
                                 <span>👁️</span>
                                 <span><?php echo $adver_views??0 ?> views</span>
                             </div>
+
                             <div class="stat-item">
-                                <span>❤️</span>
-                                <span>267 likes</span>
+
+                                    <span onclick="LikeAdvertise('<?php echo $set_data['id'] ?>')" >❤️</span>
+                                    <span>267 likes</span>
                             </div>
+
                             <div class="stat-item">
                                 <span>⭐</span>
                                 <span>4.8 rating</span>

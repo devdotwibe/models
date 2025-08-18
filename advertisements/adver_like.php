@@ -1,0 +1,47 @@
+<?php 
+session_start(); 
+include('../includes/config.php');
+include('../includes/helper.php');
+$output = array();
+
+if(isset($_SESSION['log_user_id'])) {
+
+    $user_id = $_SESSION['log_user_id'];
+
+    $adver_id = $_GET['adver_id'];
+
+            $field_name = 'like';
+
+            $value = 'Yes';
+
+            $timestamp = date('Y-m-d H:i:s');
+
+            $checkSql = "SELECT id FROM avertisement_like WHERE adver_id = ? AND user_id = ?";
+
+            $stmt = $con->prepare($checkSql);
+            $stmt->bind_param("ii", $adver_id, $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+     
+                $updateSql = "UPDATE avertisement_like SET `$field_name` = ?, updated_at = ? WHERE adver_id = ? AND user_id = ?";
+                $updateStmt = $con->prepare($updateSql);
+                $updateStmt->bind_param("ssii", $value, $timestamp, $adver_id, $user_id);
+                $updateStmt->execute();
+            } else {
+            
+                $insertSql = "INSERT INTO avertisement_like (adver_id, user_id, `$field_name`, created_at, updated_at) VALUES (?, ?, ?, ?, ?)";
+                $insertStmt = $con->prepare($insertSql);
+                $insertStmt->bind_param("iisss", $adver_id, $user_id, $value, $timestamp, $timestamp);
+                $insertStmt->execute();
+            }
+
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'User liked successfully',
+            ]);
+            exit;
+
+        }
+?>
