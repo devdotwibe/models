@@ -21,7 +21,7 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
 
                 if ($user_mode_id != $model_id && !empty($user_mode_id) && !empty($model_id)) {
 
-                    $checkSql = "SELECT id FROM avertisement_view WHERE adver_user_id = ? AND viewer_user_id = ?";
+                    $checkSql = "SELECT id FROM avertisement_view WHERE adver_id = ? AND viewer_user_id = ?";
                     $stmt = $con->prepare($checkSql);
                     $stmt->bind_param("ii", $model_id, $user_mode_id);
                     $stmt->execute();
@@ -30,7 +30,7 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
                     if ($stmt->num_rows == 0) {
                         $stmt->close();
 
-                        $insertSql = "INSERT INTO avertisement_view (adver_user_id, viewer_user_id, viewed_at) VALUES (?, ?, ?)";
+                        $insertSql = "INSERT INTO avertisement_view (adver_id, viewer_user_id, viewed_at) VALUES (?, ?, ?)";
                         $stmt = $con->prepare($insertSql);
 
                         $currentDatetime = date('Y-m-d H:i:s');

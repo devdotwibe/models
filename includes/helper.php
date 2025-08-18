@@ -350,6 +350,15 @@ function getModelPrivacySettings($model_id) {
     return $result ? $result : null;
 }
 
+	function AdverViews($adver_id)
+	{
+		$query = "SELECT COUNT(*) AS total FROM avertisement_view WHERE adver_id = %i";
+		$result = DB::queryFirstField($query, $adver_id);
+
+		return (int)$result;
+	}
+
+
 
 function isUserOnline($userId, $minutes = 5) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
