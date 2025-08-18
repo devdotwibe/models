@@ -109,13 +109,13 @@ $limited = " limit $offset, ".$perPage;
 $where_clause = rtrim($where_clause,'and');
 if($where_clause){
     //echo $stringQuery." where ".$where_clause." ".$sort_by.$limited;
-    $all_data = DB::query($stringQuery." where ".$where_clause." ".$sort_by.$limited .$order);
-    $total = $output['total'] = DB::numRows($stringQuery." and ".$where_clause .$order);
+    $all_data = DB::query($stringQuery." where ".$where_clause." ".$sort_by.$limited );
+    $total = $output['total'] = DB::numRows($stringQuery." and ".$where_clause );
 	
 	$output['total_page_all'] = $stringQuery." and ".$where_clause;
 }
 else{
-    $all_data = DB::query($stringQuery." ".$sort_by.$limited .$order);
+    $all_data = DB::query($stringQuery." ".$sort_by.$limited );
     $total = $output['total'] = DB::numRows($stringQuery);
 	
 	$output['total_page_all'] = $stringQuery;
