@@ -34,7 +34,7 @@ include('includes/helper.php');
 
             $post_data['amount'] = round($coin / $per_amount, 2);
 
-            $post_data['coin'] = $coin;
+            $post_data['coins'] = $coin;
 
             $post_data['transaction_fee'] = 5;
 
