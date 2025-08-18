@@ -25,13 +25,13 @@ if(isset($_SESSION['log_user_id'])) {
 
             if ($result->num_rows > 0) {
      
-                $updateSql = "UPDATE avertisement_like SET `$field_name` = ?, updated_at = ? WHERE adver_id = ? AND user_id = ?";
+                $updateSql = "UPDATE avertisement_like SET `$field_name` = ?, WHERE adver_id = ? AND user_id = ?";
                 $updateStmt = $con->prepare($updateSql);
                 $updateStmt->bind_param("ssii", $value, $timestamp, $adver_id, $user_id);
                 $updateStmt->execute();
             } else {
             
-                $insertSql = "INSERT INTO avertisement_like (adver_id, user_id, `$field_name`, created_at, updated_at) VALUES (?, ?, ?, ?, ?)";
+                $insertSql = "INSERT INTO avertisement_like (adver_id, user_id, `$field_name`, created_at) VALUES (?, ?, ?, ?, ?)";
                 $insertStmt = $con->prepare($insertSql);
                 $insertStmt->bind_param("iisss", $adver_id, $user_id, $value, $timestamp, $timestamp);
                 $insertStmt->execute();
