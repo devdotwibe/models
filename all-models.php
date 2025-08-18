@@ -568,6 +568,8 @@ include('includes/helper.php');
 
                         $is_user_preminum = CheckPremiumAccess($rowesdw['id']);
 
+                        $is_user_new = IsNewUser($rowesdw['id']);
+
                         $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
                 ?>
 
@@ -578,6 +580,12 @@ include('includes/helper.php');
                                     <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
                                     <div class="profile-badges">
                                         <span class="profile-badge badge-live">Live</span>
+
+                                        <?php if($is_user_new) { ?>
+
+                                             <span class="profile-badge badge-new">New</span>
+
+                                        <?php } ?>
 
                                         <?php if($is_user_preminum) { ?>
 
@@ -1100,6 +1108,8 @@ include('includes/helper.php');
 
                         $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
 
+                        $is_user_new = IsNewUser($rowesdw['id']);
+
                         $is_user_preminum = CheckPremiumAccess($rowesdw['id']);
                 ?>
 
@@ -1112,6 +1122,12 @@ include('includes/helper.php');
 
 
                                         <span class="profile-badge badge-live">Live</span>
+
+                                        <?php if($is_user_new) { ?>
+
+                                             <span class="profile-badge badge-new">New</span>
+
+                                        <?php } ?>
 
                                         <?php if($is_user_preminum) { ?>
 

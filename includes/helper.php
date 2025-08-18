@@ -368,6 +368,21 @@ function getModelPrivacySettings($model_id) {
 		return $count > 0;
 	}
 
+	function IsNewUser($user_id)
+	{
+		$query = "
+			SELECT id 
+			FROM model_user 
+			WHERE id = %i 
+			AND register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)
+		";
+
+		$result = DB::queryFirstRow($query, $user_id);
+
+		return $result ? true : false;
+	}
+
+
 	function AdverLikedCount($adver_id)
 	{
 		$query = "SELECT COUNT(*) 
