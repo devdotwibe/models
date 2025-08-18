@@ -15,11 +15,13 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
             {
                 $adver_id =  $id;
 
+                $model_id = $form_data['user_id'];
+
                 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
                 $user_mode_id = $userDetails['id']; 
 
-                if ($user_mode_id != $adver_id && !empty($user_mode_id) && !empty($adver_id)) {
+                if ($user_mode_id != $adver_id && !empty($user_mode_id) && !empty($adver_id) && $model_id != $user_mode_id) {
 
                     $checkSql = "SELECT id FROM avertisement_view WHERE adver_id = ? AND viewer_user_id = ?";
                     $stmt = $con->prepare($checkSql);
