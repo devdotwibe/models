@@ -90,6 +90,8 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 	} 
 ?>
 	<div class="purchase-payment-h3">
+<img src="<?= SITEURL ?>assets/images/token.png">
+
 		<h3 class="head_pay text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Payment Confirmation Page</h3>
 	</div>
 <form action="payment-process.php" method="POST" name="purchaseform" id="purchaseform">

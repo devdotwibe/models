@@ -9883,7 +9883,7 @@ margin-top: 50px;
 
 #purchaseform .form-group label {
     color: #fff;
-    font-weight: 600 !important;
+    /* font-weight: 600 !important; */
   font-family: 'Inter', sans-serif !important;
   letter-spacing: .5px;
 }
@@ -10099,6 +10099,12 @@ padding-inline: 10px;
 #purchaseform>.form-group:nth-last-of-type(2) {
     width: 100%;
     margin-bottom: 0;
+}
+
+.purchase-payment-h3>img{
+    width: 85px;
+    margin:0 auto;
+    display: flex;
 }
 
 @media (max-width: 1540px) {
