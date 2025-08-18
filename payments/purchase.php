@@ -96,8 +96,9 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 			$coins = $_POST['coins'];
 		}
 		?>
+
 		<div class="purchase-payment-h3">
-			<img src="<?= SITEURL ?>assets/images/token.png">
+			 <img src="<?= SITEURL ?>uploads/live-model-logo-new.png" alt="The Live Models" class="group-hover:scale-110 transition duration-500">
 
 			<h3 class="head_pay text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Payment Confirmation Page</h3>
 		</div>

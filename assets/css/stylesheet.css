@@ -9834,13 +9834,14 @@ transform: translateY(-6px);
 
 
 #purchaseform>p {
-    font-weight: bold;
+    /* font-weight: bold; */
     margin-bottom: 1rem;
     color: #fff;
     flex-basis: 100%;
     /* border-bottom: 1px solid #7b85ca; */
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 18px;
 }
 
 #purchaseform hr {
