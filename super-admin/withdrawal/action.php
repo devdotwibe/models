@@ -33,7 +33,7 @@ $stringQuery = "SELECT tb.* FROM ".$table_name." tb
 					'user_id' => $check_data['user_id'],
 					'other_id' =>$check_data['tb.id'],
 					'amount' =>  $check_data['coins'],
-					'type' => 'withdrawal-coins',
+					'type' => 'Withdrawal-coins',
 					'created_at' => $date,
 				));
 			}
