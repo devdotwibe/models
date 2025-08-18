@@ -1914,32 +1914,19 @@ include('includes/helper.php');
 
     <script>
 
-        function ChangeView(value)
-        {
-            if(value =='grid')
-            {
-                $('#menuBtn').removeClass('active');
+      function ChangeView(value) {
+        $('#gridViewBtn, #menuBtn').removeClass('active');
+        $('#profileGrid, #profileList').hide();
 
-                $('#gridViewBtn').addClass('active');
-
-
-                $('#profileList').hide();
-
-                $('#profileGrid').show();
-            }
-            else
-            {
-
-                $('#gridViewBtn').removeClass('active');
-
-                $('#menuBtn').addClass('active');
-
-                $('#profileGrid').hide();
-
-                $('#profileList').show();
-
-            }
+        if (value === 'grid') {
+            $('#gridViewBtn').addClass('active');
+            $('#profileGrid').show();
+        } else {
+            $('#menuBtn').addClass('active');
+            $('#profileList').show();
         }
+    }
+
 
 
         const premiumAmounts = <?php echo json_encode($premium_amounts); ?>;
