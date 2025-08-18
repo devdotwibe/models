@@ -182,6 +182,10 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 					'::placeholder': {
 						color: '#CFD7E0',
 					},
+					':-webkit-autofill': {
+						color: '#fff', // force text color
+						backgroundColor: 'transparent', // remove yellow autofill bg
+					},
 				},
 			}
 		});
@@ -199,6 +203,10 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 
 					'::placeholder': {
 						color: '#CFD7E0',
+					},
+					':-webkit-autofill': {
+						color: '#fff', // force text color
+						backgroundColor: 'transparent', // remove yellow autofill bg
 					},
 				},
 			}
@@ -218,9 +226,18 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 					'::placeholder': {
 						color: '#CFD7E0',
 					},
+					':-webkit-autofill': {
+						color: '#fff', // force text color
+						backgroundColor: 'transparent', // remove yellow autofill bg
+					},
 				},
 			}
 		});
+
+
+
+
+
 		cardCvcElement.mount('#card-element-cvv');
 
 		cardNumberElement.on('change', function(event) {
