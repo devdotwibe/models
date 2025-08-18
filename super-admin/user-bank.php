@@ -36,11 +36,12 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">All Models</h4>
-                  <?php 
-                  
-                    $bank_detail = DB::queryFirstrow("SELECT * FROM users_bankdetail where user_id=" . $_GET['user_id']);
-                  
-                  ?>
+                    <?php 
+            
+                        $userId = isset($_GET['user_id']) ? (int) $_GET['user_id'] : 0;
+
+                        $bank_detail = DB::queryFirstRow("SELECT * FROM users_bankdetail WHERE user_id = %i", $userId);
+                    ?>
             
                   <div class="table-responsive">
                     <table class="table table-striped">
