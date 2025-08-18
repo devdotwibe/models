@@ -277,6 +277,8 @@ foreach ($f_country_list as $val) {
                 dataType: 'json',
                 success: function(response) {
 
+                    $(`#like_adver_${adver_id}`).text(❤️);
+
                     if (response.status == "success") {
                       
                         showNotification(response.message,'success');
