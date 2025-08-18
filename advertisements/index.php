@@ -276,27 +276,23 @@ foreach ($f_country_list as $val) {
                     value:value
                 },
                 dataType: 'json',
-                success: function(response) {
+                 success: function(response) {
 
-                    if (value === 'Yes') {
-                        $(`#like_adver_${adver_id}`)
-                            .attr('onclick', `LikeAdvertise(${adver_id}, 'No')`);
-                          
-                    } else {
-                        $(`#like_adver_${adver_id}`)
-                            .attr('onclick', `LikeAdvertise(${adver_id}, 'Yes')`);
-                          ;
-                    }
+                    if (response.status === "success") {
+                        if (value === 'Yes') {
+                            $(`#like_adver_${adver_id}`)
+                                .attr('onclick', `LikeAdvertise(${adver_id}, 'No')`)
+                                .text('❤️');
+                        } else {
+                            $(`#like_adver_${adver_id}`)
+                                .attr('onclick', `LikeAdvertise(${adver_id}, 'Yes')`)
+                                .text('🤍'); 
+                        }
+                        var count = parseInt($(`#like_adver_count_${adver_id}`).text(), 10) || 0;
+                        count = (value === 'Yes') ? count + 1 : Math.max(0, count - 1);
+                        $(`#like_adver_count_${adver_id}`).text(count);
 
-                    $(`#like_adver_${adver_id}`).text('❤️');
-
-                    var count = parseInt($(`#like_adver_count_${adver_id}`).text(), 10) || 0;
-
-                    $(`#like_adver_count_${adver_id}`).text(count + 1);
-
-                    if (response.status == "success") {
-                      
-                        showNotification(response.message,'success');
+                        showNotification(response.message, 'success');
                     }
                 }
             });
