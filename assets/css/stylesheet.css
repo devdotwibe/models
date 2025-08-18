@@ -10120,7 +10120,7 @@ padding-inline: 10px;
 
 /* all models.....list view css...................... */
 
-.profile-grid.profile-list{
+.premimum-model1 .profile-grid.profile-list{
 
     display:flex;
     flex-wrap: wrap;
@@ -10129,21 +10129,21 @@ padding-inline: 10px;
 
 }
 
-.profile-grid.profile-list .profile-card{
+.premimum-model1 .profile-grid.profile-list .profile-card{
     width:100%;
     display: flex;
   flex-wrap: wrap;
 }
 
 
-.profile-grid.profile-list .premimum-model1 .profile-image-container{
+.premimum-model1 .profile-grid.profile-list .premimum-model1 .profile-image-container{
 position: relative;
   max-width: 370px;
   padding-top: 0;
   overflow: hidden;
   width:100%;
 }
-.profile-grid.profile-list .premimum-model1 .profile-image-container img {
+.premimum-model1 .profile-grid.profile-list .premimum-model1 .profile-image-container img {
     position:relative;
     width: 100%;
     height: auto;
@@ -10151,7 +10151,7 @@ position: relative;
     border-radius: 16px;
 }
 
-.profile-grid.profile-list .premimum-model1 .profile-actions{
+.premimum-model1 .profile-grid.profile-list .premimum-model1 .profile-actions{
     width:100%;
 }
 
