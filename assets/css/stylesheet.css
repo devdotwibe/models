@@ -9797,7 +9797,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 #purchaseform {
-    width: 80%;
+    width: 62%;
     margin: 0 auto;
     border: 1px solid #e1e1e1;
     padding: 20px;
@@ -9899,7 +9899,7 @@ transform: translateY(-6px);
     transition:all .3s ease-in-out;
     margin: 0 auto;
     border-radius: 10px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(135deg, var(--primary), #ec4899);
 }
 #purchaseform .btnAction.paymentsub_btn:hover{
       transform: translateY(-6px);
