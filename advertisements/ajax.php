@@ -44,39 +44,35 @@ $sort_type = $_GET['sort_type'];
     }
 
 
-    // $in_clause = implode(',', array_fill(0, count($boosted_user_ids), '?'));
+    $in_clause = implode(',', array_fill(0, count($boosted_user_ids), '?'));
 
-    // $types_follower = str_repeat('s', count($boosted_user_ids));
+    $types_follower = str_repeat('s', count($boosted_user_ids));
 
-    // $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
-    // $stmt = $con->prepare($followQuery);
-    // if (!$stmt) {
-    //     die("Prepare failed: " . $con->error);
-    // }
-    // $stmt->bind_param($types_follower, ...$boosted_user_ids);
-    // $stmt->execute();
-    // $result = $stmt->get_result();
+    $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
+    $stmt = $con->prepare($followQuery);
+    if (!$stmt) {
+        die("Prepare failed: " . $con->error);
+    }
+    $stmt->bind_param($types_follower, ...$boosted_user_ids);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $filter_follower_ids = [];
-    // while ($row = $result->fetch_assoc()) {
-    //     $filter_follower_ids[] = $row['id'];
-    // }
+    while ($row = $result->fetch_assoc()) {
+        $filter_follower_ids[] = $row['id'];
+    }
 
-    // if (!empty($filter_follower_ids)) {
-    // $ordered_ids = implode(',', $filter_follower_ids); 
-    // $order = " ORDER BY FIELD(tb.user_id, $ordered_ids) DESC";
+    if (!empty($filter_follower_ids)) {
+    $ordered_ids = implode(',', $filter_follower_ids); 
+    $order = " ORDER BY FIELD(tb.user_id, $ordered_ids) DESC";
 
-    //     $sort_by="";
+        $sort_by="";
         
-    // } else {
-    //     $order = " ORDER BY tb.id DESC"; 
-    // }
+    } else {
+        $order = " ORDER BY tb.id DESC"; 
+    }
 
-       $order = " ORDER BY mu.id DESC";
 
-        $order = "";
-
-       
     // $allowedOrders = ['mu.id ASC', 'mu.id DESC', 'mu.age ASC', 'mu.age DESC'];
 
     // $order = in_array($_GET['order'] ?? 'mu.id DESC', $allowedOrders) ?  'mu.id DESC' : 'mu.id DESC';
@@ -87,7 +83,6 @@ $stringQuery = "
     SELECT tb.*, mu.age 
     FROM banners tb 
     JOIN model_user mu ON mu.id = tb.user_id 
-    $order
 ";
 
 echo $stringQuery;
@@ -114,13 +109,13 @@ $limited = " limit $offset, ".$perPage;
 $where_clause = rtrim($where_clause,'and');
 if($where_clause){
     //echo $stringQuery." where ".$where_clause." ".$sort_by.$limited;
-    $all_data = DB::query($stringQuery." where ".$where_clause." ".$sort_by.$limited);
-    $total = $output['total'] = DB::numRows($stringQuery." and ".$where_clause);
+    $all_data = DB::query($stringQuery." where ".$where_clause." ".$sort_by.$limited .$order);
+    $total = $output['total'] = DB::numRows($stringQuery." and ".$where_clause .$order);
 	
 	$output['total_page_all'] = $stringQuery." and ".$where_clause;
 }
 else{
-    $all_data = DB::query($stringQuery." ".$sort_by.$limited);
+    $all_data = DB::query($stringQuery." ".$sort_by.$limited .$order);
     $total = $output['total'] = DB::numRows($stringQuery);
 	
 	$output['total_page_all'] = $stringQuery;
