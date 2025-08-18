@@ -10109,6 +10109,14 @@ padding-inline: 10px;
     display: flex;
 }
 
+
+.error.errormsg.cardnumber_error
+ {
+    color: #e53030;
+}
+
+
+
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
 
