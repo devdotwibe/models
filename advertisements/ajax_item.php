@@ -45,7 +45,7 @@ if($all_data){
 
                                     <span onclick="LikeAdvertise('<?php echo $set_data['id'] ?>')" id="like_adver_<?php echo $set_data['id'] ?>"> <?php if($is_user_liked) { ?> ❤️ <?php } else { ?>  <li class="fas fa-heart"></li> <?php } ?>  </span>
                                     
-                                    <span><?php echo $adver_liked ?> likes</span>
+                                    <span>  <span id="like_adver_count_<?php echo $set_data['id'] ?>"><?php echo $adver_liked ?></span> likes</span>
                             </div>
 
                             <div class="stat-item">
