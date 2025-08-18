@@ -467,12 +467,6 @@ $activeTab = 'wallet';
                                 </div>
                             */?>
 
-                            <button type="<?php if ($check_request) {
-                                                echo 'button';
-                                            } else { ?>submit<?php } ?>" name="req_withdraw" class="btn btn-success w-full" <?php if ($check_request) { ?> onclick="rejectWithdraw()" <?php } ?>>
-                                Request Withdrawal
-                            </button>
-
                             <button type="button" name="req_withdraw" class="btn btn-success w-full" <?php if ($check_request) { ?> onclick="rejectWithdraw()" <?php } else { ?>  onclick="RequestWithdraw()"  <?php } ?> >
                                 Request Withdrawal
                             </button>
