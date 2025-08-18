@@ -132,7 +132,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 										</div>
 		<div class="form-group">
 		
-		<button type="button" class="btn btnAction paymentsub_btn" id="btn-payment" >
+		<button type="button" class="btn btnAction paymentsub_btn w-full" id="btn-payment" >
 												<span id="button-text">Submit</span>
 												<div class="spinner-border" role="status" style="display:none;">
 												  <span class="visually-hidden">Loading...</span>
