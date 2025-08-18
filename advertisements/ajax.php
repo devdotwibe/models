@@ -72,7 +72,7 @@ $sort_type = $_GET['sort_type'];
     //     $order = " ORDER BY tb.id DESC"; 
     // }
 
-       $order = "ORDER BY mu.id DESC"; 
+       $order = " ORDER BY mu.id DESC";
 
     // $allowedOrders = ['mu.id ASC', 'mu.id DESC', 'mu.age ASC', 'mu.age DESC'];
 
