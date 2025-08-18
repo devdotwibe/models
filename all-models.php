@@ -566,6 +566,8 @@ include('includes/helper.php');
                             $modalname = $rowesdw['name'];
                         }
 
+                        $is_user_preminum = CheckPremiumAccess($rowesdw['id']);
+
                         $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
                 ?>
 
@@ -586,7 +588,7 @@ include('includes/helper.php');
                                         <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
                                             <span class="profile-badge badge-verified">Verified</span>
                                         <?php } ?>
-                                        
+
                                     </div>
                                 </a>
                             </div>
