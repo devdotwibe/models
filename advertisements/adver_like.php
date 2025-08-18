@@ -10,7 +10,7 @@ if(isset($_SESSION['log_user_id'])) {
 
     $adver_id = $_POST['adver_id'];
 
-            $field_name = 'like';
+            $field_name = 'liked';
 
             $value = 'Yes';
 

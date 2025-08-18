@@ -8,6 +8,10 @@ if($all_data){
 		$message  = limit_text($set_data['description'],15);
 
         $is_user_preminum = CheckPremiumAccess($set_data['user_id']);
+
+        $adver_liked = AdverLikedCount($set_data['id']);
+
+        $is_user_liked = AdverLiked($set_data['id'],$_SESSION['log_user_id']);
 ?>
 
 
@@ -39,9 +43,9 @@ if($all_data){
 
                             <div class="stat-item">
 
-                                    <span onclick="LikeAdvertise('<?php echo $set_data['id'] ?>')" ><li class="fas fa-heart"></li> ❤️</span>
+                                    <span onclick="LikeAdvertise('<?php echo $set_data['id'] ?>')" id="like_adver_<?php echo $set_data['id'] ?>"> <?php if($is_user_liked) { ?> ❤️ <?php } else { ?>  <li class="fas fa-heart"></li> <?php } ?>  </span>
                                     
-                                    <span>267 likes</span>
+                                    <span><?php echo $adver_liked ?> likes</span>
                             </div>
 
                             <div class="stat-item">

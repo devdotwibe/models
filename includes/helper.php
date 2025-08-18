@@ -358,7 +358,26 @@ function getModelPrivacySettings($model_id) {
 		return (int)$result;
 	}
 
+	function AdverLiked($adver_id, $user_id)
+	{
+		$query = "SELECT COUNT(*) 
+				FROM avertisement_like 
+				WHERE adver_id = %i AND liked = %s AND user_id = %i";
+		
+		$count = DB::queryFirstField($query, $adver_id, 'Yes', $user_id);
+		return $count > 0;
+	}
 
+	function AdverLikedCount($adver_id)
+	{
+		$query = "SELECT COUNT(*) 
+				FROM avertisement_like 
+				WHERE adver_id = %i AND liked = %s";
+		
+		$count = DB::queryFirstField($query, $adver_id, 'Yes');
+		
+		return (int)$count;
+	}
 
 function isUserOnline($userId, $minutes = 5) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
