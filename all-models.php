@@ -103,10 +103,10 @@ include('includes/helper.php');
                 <h1 class="logo">Live Models</h1>
 
                 <div class="header-actions"> 
-                    <button class="header-btn active" title="Grid View" id="gridViewBtn">
+                    <button class="header-btn active" title="Grid View" id="gridViewBtn" onclick="ChangeView('grid')">
                         <i class="fas fa-th-large"></i>
                     </button>
-                    <button class="header-btn" title="Menu" id="menuBtn">
+                    <button class="header-btn" title="Menu" id="menuBtn" onclick="ChangeView('menu')">
                         <i class="fas fa-bars"></i>
                     </button>
                     <button class="header-btn" title="Advanced Filters" id="filterBtn">
@@ -1913,6 +1913,33 @@ include('includes/helper.php');
     <?php } ?>
 
     <script>
+
+        function ChangeView(value)
+        {
+            if(value =='grid')
+            {
+                $('#menuBtn').removeClass('active');
+
+                $('#gridViewBtn').addClass('active');
+
+                $('#profileGrid').hide();
+
+                $('#profileList').show();
+            }
+            else
+            {
+
+                $('#gridViewBtn').removeClass('active');
+
+                $('#menuBtn').addClass('active');
+
+                $('#profileList').hide();
+
+                $('#profileGrid').show();
+            }
+        }
+
+
         const premiumAmounts = <?php echo json_encode($premium_amounts); ?>;
 
         function upgradeAccount(plan_type, plan_status) {
