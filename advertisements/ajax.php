@@ -62,15 +62,15 @@ $sort_type = $_GET['sort_type'];
     //     $filter_follower_ids[] = $row['id'];
     // }
 
-    if (!empty($filter_follower_ids)) {
-    $ordered_ids = implode(',', $filter_follower_ids); 
-    $order = " ORDER BY FIELD(tb.user_id, $ordered_ids) DESC";
+    // if (!empty($filter_follower_ids)) {
+    // $ordered_ids = implode(',', $filter_follower_ids); 
+    // $order = " ORDER BY FIELD(tb.user_id, $ordered_ids) DESC";
 
-        $sort_by="";
+    //     $sort_by="";
         
-    } else {
-        $order = " ORDER BY tb.id DESC"; 
-    }
+    // } else {
+    //     $order = " ORDER BY tb.id DESC"; 
+    // }
 
 
 // $stringQuery = " select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id ";//where status
