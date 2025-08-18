@@ -72,11 +72,11 @@ $sort_type = $_GET['sort_type'];
     //     $order = " ORDER BY tb.id DESC"; 
     // }
 
-    //    $order = " ORDER BY mu.id DESC"; 
+       $order = "ORDER BY mu.id DESC"; 
 
-    $allowedOrders = ['mu.id ASC', 'mu.id DESC', 'mu.age ASC', 'mu.age DESC'];
+    // $allowedOrders = ['mu.id ASC', 'mu.id DESC', 'mu.age ASC', 'mu.age DESC'];
 
-    $order = in_array($_GET['order'] ?? 'mu.id DESC', $allowedOrders) ?  'mu.id DESC' : 'mu.id DESC';
+    // $order = in_array($_GET['order'] ?? 'mu.id DESC', $allowedOrders) ?  'mu.id DESC' : 'mu.id DESC';
 
 // $stringQuery = " select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id ";//where status
 
