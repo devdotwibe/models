@@ -448,7 +448,7 @@ $activeTab = 'wallet';
                             <div class="form-group">
                                 <label class="form-label">Withdrawal Amount</label>
 
-                                <input type="number" oninput="validateInput(this)" class="form-input" id="withdrawal_amount" placeholder="Enter amount" name="coins" value="<?= $userDetails['balance'] ?>" data-min="1000" data-max="<?= $userDetails['balance'] ?>" >
+                                <input type="number" oninput="validateInput(this)" class="form-input" id="withdrawal_amount" placeholder="Enter amount" name="coins" value="1000" data-min="1000" data-max="<?= $userDetails['balance'] ?>" >
 
                                 <span id="amount_error" class="text-danger" style="display: none;"> </span>
 
