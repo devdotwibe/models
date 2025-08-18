@@ -44,15 +44,15 @@ $sort_type = $_GET['sort_type'];
     }
 
 
-    // $in_clause = implode(',', array_fill(0, count($boosted_user_ids), '?'));
+    $in_clause = implode(',', array_fill(0, count($boosted_user_ids), '?'));
 
-    // $types_follower = str_repeat('s', count($boosted_user_ids));
+    $types_follower = str_repeat('s', count($boosted_user_ids));
 
-    // $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
-    // $stmt = $con->prepare($followQuery);
-    // if (!$stmt) {
-    //     die("Prepare failed: " . $con->error);
-    // }
+    $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
+    $stmt = $con->prepare($followQuery);
+    if (!$stmt) {
+        die("Prepare failed: " . $con->error);
+    }
     // $stmt->bind_param($types_follower, ...$boosted_user_ids);
     // $stmt->execute();
     // $result = $stmt->get_result();
@@ -85,7 +85,6 @@ $stringQuery = "
     JOIN model_user mu ON mu.id = tb.user_id 
 ";
 
-echo $stringQuery;
 
 die();
 
