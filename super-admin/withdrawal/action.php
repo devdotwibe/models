@@ -24,7 +24,18 @@ $stringQuery = "SELECT tb.* FROM ".$table_name." tb
 			}
 			DB::update($table_name, $post_data, "id=%s", $id);
 			if($type=='accept'){
+
+				$date = date('Y-m-d H:i:s');
+
 				DB::query("UPDATE model_user SET balance=round(balance-%d) WHERE id=%s", $check_data['coins'], $check_data['user_id']);
+
+				DB::insert('model_user_transaction_history', array(
+					'user_id' => $check_data['user_id'],
+					'other_id' =>$check_data['tb.id'],
+					'amount' =>  $check_data['coins'],
+					'type' => 'withdrawal-coins',
+					'created_at' => $date,
+				));
 			}
 		$output = array('status'=>'ok','message'=>'');
 			
