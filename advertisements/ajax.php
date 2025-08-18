@@ -76,7 +76,7 @@ $sort_type = $_GET['sort_type'];
         $sort_by="";
         
     } else {
-        
+
         $order = " ORDER BY tb.user_id DESC"; 
 
         $sort_by="";
@@ -96,7 +96,6 @@ $stringQuery = "
     $order
 ";
 
-echo $stringQuery; die();
 
 if($_GET['country']){
     $where_clause .= " tb.country='".$_GET['country']."' and";
