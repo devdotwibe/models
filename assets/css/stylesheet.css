@@ -9811,7 +9811,7 @@ body.advt-page.my-purpose .scroll-indicator {
     flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 50px;
-    transform: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 #purchaseform:hover{
