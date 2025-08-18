@@ -38,7 +38,7 @@
                   <h4 class="card-title">All Models</h4>
                   <?php 
                   
-                    $bank_detail = DB::queryFirstrow("SELECT * FROM users_bankdetail where user_id=" . $GET['user_id']);
+                    $bank_detail = DB::queryFirstrow("SELECT * FROM users_bankdetail where user_id=" . $_GET['user_id']);
                   
                   ?>
             
