@@ -10,6 +10,40 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
 		$form_data = DB::queryFirstRow("select tb.*,mu.age,mu.user_bio,mu.user_current_status from banners tb join model_user mu on mu.id=tb.user_id		
 		 where tb.id='".$id."' ");
 		if($form_data){
+
+            if(!empty($_SESSION["log_user_id"]))
+            {
+                $model_id =  $id;
+
+                $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+
+                $user_mode_id = $userDetails['id']; 
+
+                if ($user_mode_id != $model_id && !empty($user_mode_id) && !empty($model_id)) {
+
+                    $checkSql = "SELECT id FROM avertisement_view WHERE adver_user_id = ? AND viewer_user_id = ?";
+                    $stmt = $con->prepare($checkSql);
+                    $stmt->bind_param("ii", $model_id, $user_mode_id);
+                    $stmt->execute();
+                    $stmt->store_result();
+
+                    if ($stmt->num_rows == 0) {
+                        $stmt->close();
+
+                        $insertSql = "INSERT INTO avertisement_view (adver_user_id, viewer_user_id, viewed_at) VALUES (?, ?, ?)";
+                        $stmt = $con->prepare($insertSql);
+
+                        $currentDatetime = date('Y-m-d H:i:s');
+                        $stmt->bind_param("iis", $model_id, $user_mode_id, $currentDatetime);
+
+                        $stmt->execute();
+                        $stmt->close();
+                    } else {
+                        $stmt->close();
+                    }
+                }
+            }
+
 		}
 		else{
 			header("Location: ".SITEURL."advertisements");
