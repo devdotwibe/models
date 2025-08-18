@@ -10280,7 +10280,18 @@ padding-inline: 10px;
 }
 
 
-@media (max-width: 991px) {}
+@media (max-width: 991px) {
+
+
+        .head_pay {
+        font-size: 2.25rem !important;
+    }
+
+    #purchaseform {
+    width: 75%;
+
+    }
+}
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .container {
@@ -10547,6 +10558,13 @@ padding-inline: 10px;
     padding-inline: 0;
     padding-block: 0;
 }
+
+    .head_pay {
+        font-size: 2rem !important;
+    }
+#purchaseform {
+    width: 90%;
+}
 }
 
 
@@ -10744,6 +10762,10 @@ padding-inline: 10px;
 .head_pay {
  font-size: 28px;
 }
+
+
+
+
 }
 
 
