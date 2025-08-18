@@ -106,7 +106,10 @@
                             ?>
                           </td>
                           <td>
-                          	<a href="https://models.staging3.dotwibe.com/single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">View Profile</a>
+
+                          	<a href="<?php echo SITE_URL.'/single-profile.php?m_unique_id='.$rowesdw['unique_id']; ?>">View Bank Detail</a>
+
+                          	<a href="<?php echo SITE_URL.'/single-profile.php?m_unique_id='.$rowesdw['unique_id']; ?>">View Profile</a>
                           </td>
                           <td>
                            
