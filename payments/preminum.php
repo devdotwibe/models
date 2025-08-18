@@ -19,7 +19,7 @@ include('../includes/config.php');
 <html>
 
 <head>
-    <title>Get Premium</title>
+    <title>Payment Confirmation Page - Live Models</title>
 
     <?php include('../includes/head.php'); ?>
 
