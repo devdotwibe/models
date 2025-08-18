@@ -93,6 +93,7 @@ $stringQuery = "
     $order
 ";
 
+$stringQuery; die();
 
 if($_GET['country']){
     $where_clause .= " tb.country='".$_GET['country']."' and";
