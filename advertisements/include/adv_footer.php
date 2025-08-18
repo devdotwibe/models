@@ -60,7 +60,7 @@
         </div>
 
         <div class="border-t border-white/10 pt-8 text-center">
-            <p class="text-white/40 text-lg">&copy; 2024 Live Models. All rights reserved. Must be 18+ to use this service.</p>
+            <p class="text-white/40 text-lg">&copy; <?php echo date('Y')?> Live Models. All rights reserved. Must be 18+ to use this service.</p>
         </div>
     </div>
 </footer>
