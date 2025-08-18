@@ -74,6 +74,9 @@ $sort_type = $_GET['sort_type'];
 
        $order = " ORDER BY mu.id DESC";
 
+        $order = "";
+
+       
     // $allowedOrders = ['mu.id ASC', 'mu.id DESC', 'mu.age ASC', 'mu.age DESC'];
 
     // $order = in_array($_GET['order'] ?? 'mu.id DESC', $allowedOrders) ?  'mu.id DESC' : 'mu.id DESC';
