@@ -10136,22 +10136,24 @@ padding-inline: 10px;
 }
 
 
-.premimum-model1 .profile-grid.profile-list .premimum-model1 .profile-image-container{
+.premimum-model1 .profile-grid.profile-list .profile-image-container{
 position: relative;
   max-width: 370px;
   padding-top: 0;
   overflow: hidden;
   width:100%;
 }
-.premimum-model1 .profile-grid.profile-list .premimum-model1 .profile-image-container img {
+.premimum-model1 .profile-grid.profile-list .profile-image-container img {
     position:relative;
     width: 100%;
     height: auto;
     object-fit: cover;
     border-radius: 16px;
+    transform: none;
+    
 }
 
-.premimum-model1 .profile-grid.profile-list .premimum-model1 .profile-actions{
+.premimum-model1 .profile-grid.profile-list .profile-actions{
     width:100%;
 }
 
