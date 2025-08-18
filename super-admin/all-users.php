@@ -107,9 +107,9 @@
                           </td>
                           <td>
 
-                          	<a href="<?php echo SITE_URL.'/single-profile.php?m_unique_id='.$rowesdw['unique_id']; ?>">View Bank Detail</a>
+                          	<a href="<?php echo SITEURL.'/single-profile.php?m_unique_id='.$rowesdw['unique_id']; ?>">View Bank Detail</a>
 
-                          	<a href="<?php echo SITE_URL.'/single-profile.php?m_unique_id='.$rowesdw['unique_id']; ?>">View Profile</a>
+                          	<a href="<?php echo SITEURL.'/single-profile.php?m_unique_id='.$rowesdw['unique_id']; ?>">View Profile</a>
                           </td>
                           <td>
                            
