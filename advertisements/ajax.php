@@ -43,9 +43,7 @@ $sort_type = $_GET['sort_type'];
             $boosted_user_ids = BoostedModelIds($con);
     }
 
-    print_r($boosted_user_ids);
-
-    die();
+    $boosted_user_ids = [];
 
     $in_clause = implode(',', array_fill(0, count($boosted_user_ids), '?'));
 
