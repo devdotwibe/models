@@ -9904,6 +9904,7 @@ margin-top: 50px;
     border-radius: 10px;
     background: linear-gradient(135deg, #8b5cf6, #ec4899);
     text-transform: uppercase;
+    background-clip: padding-box !important;
 }
 #purchaseform .btnAction.paymentsub_btn:hover{
       transform: translateY(-6px);
