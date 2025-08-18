@@ -446,18 +446,25 @@ $activeTab = 'wallet';
                         <form action="" method="post" class="space-y-6  edit-form" role="form" enctype="multipart/form-data" <?php /*onsubmit="handleWithdraw(event)" */ ?>>
                             <div class="form-group">
                                 <label class="form-label">Withdrawal Amount</label>
-                                <input type="number" class="form-input" placeholder="Enter amount" name="coins" value="<?= $userDetails['balance'] ?>" min="1000" max="<?= $userDetails['balance'] ?>" required>
+
+                                <input type="number" oninput="ValidataInput()" class="form-input" placeholder="Enter amount" name="coins" value="<?= $userDetails['balance'] ?>" data-min="1000" data-max="<?= $userDetails['balance'] ?>" >
+
+                                <span id="amount_error" class="text-danger" style="display: none;"> </span>
+
                             </div>
 
-                            <div class="form-group">
-                                <label class="form-label">Withdrawal Method</label>
-                                <select class="form-input" name="withdrawal_method" required>
-                                    <option value="">Select method</option>
-                                    <option value="bank">Bank Transfer</option>
-                                    <option value="upi">UPI</option>
-                                    <option value="paypal">PayPal</option>
-                                </select>
-                            </div>
+
+                            <?php /*
+                                <div class="form-group">
+                                    <label class="form-label">Withdrawal Method</label>
+                                    <select class="form-input" name="withdrawal_method" required>
+                                        <option value="">Select method</option>
+                                        <option value="bank">Bank Transfer</option>
+                                        <option value="upi">UPI</option>
+                                        <option value="paypal">PayPal</option>
+                                    </select>
+                                </div>
+                            */?>
 
                             <button type="<?php if ($check_request) {
                                                 echo 'button';
@@ -655,6 +662,29 @@ $activeTab = 'wallet';
     <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
     <script>
+
+        function validateInput(el) {
+            const min = parseInt(el.dataset.min, 10);
+            const max = parseInt(el.dataset.max, 10);
+            const value = parseInt(el.value, 10);
+            
+            const errorSpan = document.getElementById("amount_error");
+
+            if (isNaN(value)) {
+                errorSpan.style.display = "block";
+                errorSpan.textContent = "Please enter a valid number.";
+                return;
+            }
+
+            if (value < min || value > max) {
+                errorSpan.style.display = "block";
+                errorSpan.textContent = `Amount must be between ${min} and ${max}.`;
+            } else {
+                errorSpan.style.display = "none";
+                errorSpan.textContent = "";
+            }
+        }
+
         var currentPage = 1;
         $('#transactionList').html('<div class="text-center p-3"><h5 class="m-0">Loading..</h5></div>');
 
