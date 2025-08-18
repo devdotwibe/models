@@ -373,6 +373,33 @@ function isUserOnline($userId, $minutes = 5) {
     return ($now - $lastSeen <= ($minutes * 60)) ? 'Online' : 'Offline';
 }
 
+function isUserOnlineStatusCheck($userId, $minutes) {
+    $cacheDir = __DIR__ . '/cache/user_activity/';
+    $file = $cacheDir . 'user_' . $userId . '.txt';
+
+    if (!file_exists($file)) {
+        return 'notlogged';
+    }
+
+	$userDetails = get_data('model_user', ['id' => $userId], true);
+
+	$privacySetting = getModelPrivacySettings($userDetails['unique_id']);
+
+    if (!empty($privacySetting) && $privacySetting['appear_offline'] == 1) {
+        return 'notlogged'; 
+    }
+
+    $lastSeen = (int)file_get_contents($file);
+    $now = time();
+
+	if($minutes != 'any'){
+		return ($now - $lastSeen <= ($minutes * 60)) ? 'logged' : 'notlogged';
+	}else{
+		if (!file_exists($file)) return 'notlogged';
+		else return 'logged';
+	}
+}
+
 function getUserLastSeenAgo($userId) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
     $file = $cacheDir . 'user_' . $userId . '.txt';

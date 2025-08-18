@@ -124,7 +124,7 @@
                         </button>
                         <div class="sort-options" id="sortOptions">
                             <div class="sort-option" data-sort="newest"><a href="<?=SITEURL?>/all-models.php?sort=newest">Newest First</a></div>
-                            <div class="sort-option" data-sort="online">Online Now</div>
+                            <div class="sort-option" data-sort="online"><a href="<?=SITEURL?>/all-models.php?sort=online">Online Now</a></div>
                             <div class="sort-option" data-sort="popular">Most Popular</div>
                             <div class="sort-option" data-sort="distance">Distance</div>
                             <div class="sort-option" data-sort="price">Price: Low to High</div>
@@ -260,6 +260,58 @@
 						
 					}
 				}
+				
+				if(isset($_POST['onlineStatus']) && !empty($_POST['onlineStatus'])){
+					$onlineStatus = $_POST['onlineStatus'];
+					$onlineUserIds = array();
+					$idsQuery_filter = "SELECT id FROM model_user mu WHERE as_a_model = 'Yes'";
+
+                    $result_online = mysqli_query($con, $idsQuery_filter);
+					
+					$idList = '';
+					if($onlineStatus == 'now'){
+						
+						while ($row = mysqli_fetch_assoc($result_online)) {
+							if (isUserOnline($row['id']) === 'Online') {
+								$onlineUserIds[] = $row['id'];
+							}
+						}
+
+                    $idList = implode(',', $onlineUserIds);
+						
+					}else if($onlineStatus == 'today'){
+						
+						while ($row = mysqli_fetch_assoc($result_online)) {
+							if (isUserOnlineStatusCheck($row['id'],1440) === 'logged') {
+								$onlineUserIds[] = $row['id'];
+							}
+						}
+
+                    $idList = implode(',', $onlineUserIds); 
+					
+					}else if($onlineStatus == 'week'){
+						
+						while ($row = mysqli_fetch_assoc($result_online)) {
+							if (isUserOnlineStatusCheck($row['id'],(7 * 24 * 60)) === 'logged') {
+								$onlineUserIds[] = $row['id'];
+							}
+						}
+
+                    $idList = implode(',', $onlineUserIds);
+					
+					}else if($onlineStatus == 'anytime'){
+						
+						while ($row = mysqli_fetch_assoc($result_online)) {
+							if (isUserOnlineStatusCheck($row['id'],'any') === 'logged') {
+								$onlineUserIds[] = $row['id'];
+							}
+						}
+
+                    $idList = implode(',', $onlineUserIds);
+						
+					}
+					if(!empty($idList)) $where .= " AND mu.id IN ($idList)";
+				}
 			
                 if($user_have_preminum)
                 {
@@ -337,13 +389,10 @@
                         }
                     }
 
-                }
+                } 
 
 			$sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id JOIN model_privacy_settings pu ON pu.unique_model_id = mu.unique_id  WHERE mu.as_a_model = 'Yes' ".$where."  Order by mu.id DESC LIMIT $limit OFFSET $offset";
                 
-                // echo $sqls;
-
-                // die();
 
 			}else if(isset($_GET['sort']) && $_GET['sort'] == 'newest'){
 				
@@ -364,6 +413,48 @@
             }
 
 			$sqls = "SELECT * FROM model_user mu WHERE as_a_model = 'Yes' ".$where."   " . $order . " LIMIT $limit OFFSET $offset";
+				
+			}else if(isset($_GET['sort']) && $_GET['sort'] == 'online'){
+				
+				$onlineUserIds = array(); $not_onlineUserIds = array();
+				$idsQuery = "SELECT id FROM model_user mu WHERE as_a_model = 'Yes' ";
+
+                    $result = mysqli_query($con, $idsQuery); 
+
+                    while ($row = mysqli_fetch_assoc($result)) { 
+                        if (isUserOnline($row['id']) === 'Online') { 
+                            $onlineUserIds[] = $row['id'];
+                        }else{
+							$not_onlineUserIds[] = $row['id'];
+						}
+                    }
+
+                    $idList = implode(',', $onlineUserIds);  
+					$not_idList = implode(',', $not_onlineUserIds);  
+					
+					if(!empty($idList)) $allIds = $idList.','.$not_idList;
+					else $allIds = $not_idList;
+					//echo $allIds.'<br/>';
+
+				$order ="";
+
+				if (!empty($boosted_user_ids)) {
+					
+					$boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
+
+					$order = " ORDER BY FIELD(mu.id, $allIds) OR FIELD(mu.unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
+				} else { 
+					
+					$order = " ORDER BY FIELD(mu.id, $allIds) ";
+				}
+				
+				$sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($allIds)"; 
+				$result_count = mysqli_query($con, $sqls_count);
+				$row_cnt = mysqli_fetch_assoc($result_count);
+				
+				
+				$sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($allIds) $order LIMIT $limit OFFSET $offset";
+				
 				
 			}else{
 
@@ -671,11 +762,11 @@
 
                 <div class="filter-group">
                     <label class="filter-label">Online Status</label>
-                    <select class="filter-select" id="onlineStatusFilter">
-                        <option value="now" selected>Online Now</option>
-                        <option value="today">Today</option>
-                        <option value="week">This Week</option>
-                        <option value="anytime">Anytime</option>
+                    <select class="filter-select" id="onlineStatusFilter" name="onlineStatus">
+                        <option value="now"  <?php if(!isset($_POST['onlineStatus']) || (isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'now')) { echo 'selected'; } ?> >Online Now</option>
+                        <option value="today" <?php if((isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'today')){ echo 'selected'; } ?> >Today</option>
+                        <option value="week" <?php if((isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'week')){ echo 'selected'; } ?> >This Week</option>
+                        <option value="anytime" <?php if((isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'anytime')){ echo 'selected'; } ?> >Anytime</option>
                     </select>
                 </div> 
 
