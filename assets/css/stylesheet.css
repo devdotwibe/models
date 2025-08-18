@@ -9871,8 +9871,8 @@ transform: translateY(-6px);
 }
 
 .head_pay {
-    font-size: 30px;
-    color: #fff !important;
+    /* font-size: 30px; */
+
 }
 
 #purchaseform .form-group label {
