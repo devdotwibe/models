@@ -11763,12 +11763,12 @@ body.advt-page.my-purpose .scroll-indicator {
         }
 
 .premimum-model1 .header-btn {
-        width: 39px;
-    height: 39px;
+        width: 39px !important;
+    height: 39px !important;
 }
 
 .premimum-model1 .header-actions{
-        gap: 0.5rem;
+        gap: 0.5rem !important;
 }
 .sort-dropdown{
 
@@ -11776,7 +11776,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 .premimum-model1 .sort-btn{
     
-    min-width: 127px;
+    min-width: 127px !important;
 }
 
 }
