@@ -10038,6 +10038,12 @@ width:auto;
         .sort-dropdown {
             padding: 16px;
         }
+
+
+        .premimum-model1 .filter-modal-actions .modal-btn {
+                font-size: 0.75rem;
+                    padding-inline: 9px;
+        }
     }
 
     /* Loading Animation */
