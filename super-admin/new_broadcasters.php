@@ -83,7 +83,9 @@
                       </thead>
                       <tbody>
                         <?php
-                          $sqls = "SELECT model_user.unique_id ,model_user.username,model_user.email, model_extra_details.id,model_extra_details.unique_model_id, model_extra_details.live_cam , model_extra_details.group_show, model_extra_details.work_escort,model_extra_details.International_tours,model_extra_details.video_pictures,model_extra_details.modeling,model_extra_details.modeling_porn_assignment,model_extra_details.status,model_extra_details.govt_id_proof,model_extra_details.bust_size,model_extra_details.cup_size,model_extra_details.waist_size,model_extra_details.ethnicity,model_extra_details.height,model_extra_details.weight,model_extra_details.eye_color,model_extra_details.hair_color,model_extra_details.in_per_hour,model_extra_details.in_overnight,model_extra_details.out_per_hour,model_extra_details.out_overnight,model_extra_details.body_type,model_extra_details.dress_size FROM model_user INNER JOIN model_extra_details ON model_user.unique_id = model_extra_details.unique_model_id ORDER BY model_extra_details.id DESC";
+                          $sqls = "SELECT model_user.unique_id ,model_user.username,model_user.email, model_extra_details.*
+						  FROM model_user 
+						  INNER JOIN model_extra_details ON model_user.unique_id = model_extra_details.unique_model_id ORDER BY model_extra_details.id DESC";
 
                             $resultd = mysqli_query($con, $sqls);
                               if (mysqli_num_rows($resultd) > 0) {
@@ -123,7 +125,58 @@
                           </td>
                           <td>
                             <?php //echo $rowesdw['modeling_porn_assignment']; ?>
-							<?php echo $rowesdw['modeling']; ?>
+							<?php echo $rowesdw['modeling']; 
+							
+							if($rowesdw['modeling'] == 'Yes'){ ?>
+								
+								<ul>
+                                <li>Adult Content: <b><?php echo $rowesdw['adult_content']; ?></b></li>
+								<?php if($rowesdw['adult_content'] == 'Yes'){ 
+									if(!empty($rowesdw['escort_services'])){
+										$escort_services = json_decode($rowesdw['escort_services']);
+								?>
+								<li>Escort: <b><ul><?php foreach($escort_services as $esc){
+											echo '<li>'.$esc.'</li>';
+								} ?></ul></b></li>
+									<?php } 
+									if(!empty($rowesdw['intimate_services'])){
+										$intimate_services = json_decode($rowesdw['intimate_services']);
+									?>
+								<li>Intimate Services: <ul><?php foreach($intimate_services as $val){
+											echo '<li>'.$val.'</li>';
+								} ?></ul></li>
+									<?php } ?>
+								<li>Hourly Rate: <b><?php echo $rowesdw['hourly_rate']; ?></b></li>
+								<li>Overnight Rate: <b><?php echo $rowesdw['overnight_rate']; ?></b></li>
+								<li>Weekend Rate: <b><?php echo $rowesdw['weekend_rates']; ?></b></li>
+								<?php if(!empty($rowesdw['adult_content_types'])){
+										$adult_content_types = json_decode($rowesdw['adult_content_types']); ?>
+								<li>Adult Content Types: <b><ul><?php foreach($adult_content_types as $val){
+											echo '<li>'.$val.'</li>';
+								} ?></ul></b></li>
+								<?php } ?>
+								<li>Adult Content Rate: <b><?php echo $rowesdw['adult_content_rate']; ?></b></li>
+								<li>Live Show Rate: <b><?php echo $rowesdw['live_show_rate']; ?></b></li>
+								<?php if(!empty($rowesdw['work_availability'])){
+										$work_availability = json_decode($rowesdw['work_availability']); ?>
+								<li>Availability for Professional Work: <ul><?php foreach($work_availability as $val){
+											echo '<li>'.$val.'</li>';
+								} ?></ul></b></li>
+								<?php } ?>
+								<?php if(!empty($rowesdw['content_types'])){
+										$content_types = json_decode($rowesdw['content_types']); ?>
+								<li>Professional Content Types: <b><ul><?php foreach($content_types as $val){
+											echo '<li>'.$val.'</li>';
+								} ?></ul></b></li>
+								<?php } ?>
+								<li>Expected Rate per Professional Session: <b><?php echo $rowesdw['professional_rate']; ?></b></li>
+								<li>Additional Professional Services: <b><?php echo $rowesdw['professional_service']; ?></b></li>
+								<?php } ?>
+								</ul>
+								
+							<?php }
+							
+							?>
                           </td>
                           <td>
 						  <?php  $hght = '';
