@@ -10168,6 +10168,11 @@ body.advt-page.my-purpose .scroll-indicator {
     position: relative;
     z-index: 10;
     width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .premimum-model1 .profile-grid.profile-list .profile-actions {
@@ -10181,8 +10186,24 @@ body.advt-page.my-purpose .scroll-indicator {
 .premimum-model1 .load-more {
         margin-bottom: 20px;
 }
+.profile-name {
+    display: block;
+    width: 100%;
+    float: left;
+}
+.profile-location {
+     display: flex !important
+;
+    width: 100%;
+    float: left;
+    text-align: left;
+    align-items: stretch !important;
+    justify-content: flex-start;
+}
 
-
+.profile-location i.fas.fa-map-marker-alt {
+    line-height: 24px;
+}
 
 /* all models.....list view css...................... */
 
