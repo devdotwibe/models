@@ -10730,20 +10730,20 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 }
 
-  @media (max-width: 600px)  {
+@media (max-width: 600px) {
 
-        .premimum-model1 .profile-grid {
-            grid-template-columns: repeat(1, 1fr) !important;
-        
-            gap: 1.5rem !important;
-        }
+    .premimum-model1 .profile-grid {
+        grid-template-columns: repeat(1, 1fr) !important;
 
-        .premimum-model1 .profile-grid .profile-card {
-            margin: 0 auto;
-            width: 80%;
-        }
-
+        gap: 1.5rem !important;
     }
+
+    .premimum-model1 .profile-grid .profile-card {
+        margin: 0 auto;
+        width: 80%;
+    }
+
+}
 
 
 @media (max-width: 575px) {
@@ -11727,6 +11727,15 @@ body.advt-page.my-purpose .scroll-indicator {
         width: 98%;
     }
 
+    .premimum-model1 .profile-grid .profile-card {
+
+        width: 95%;
+    }
+
+    .premimum-model1 .profile-grid .profile-card {
+
+        width: 100%;
+    }
 }
 
 
