@@ -10218,6 +10218,18 @@ body.advt-page.my-purpose .scroll-indicator {
 /* all models.....list view css...................... */
 
 
+/* all moldel in the grid view style start......................... */
+
+
+.enhanced5 .profile-grid .profile-info>*:last-child{
+    margin-bottom:0;
+    padding-bottom:0;
+}
+
+
+/* all mobile in the grid view end style..................... */
+
+
 
 
 @media (max-width: 1540px) {
@@ -10690,7 +10702,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 .premimum-model1 .main-content {
-padding-top: calc(3.5rem - 10px) !important;
+padding-top: calc(3.5rem - 6px) !important;
 }
 }
 
