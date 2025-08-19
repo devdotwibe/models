@@ -35,10 +35,12 @@ include('includes/helper.php');
                     The Live Models – Terms of Service (TOS)
                 </h1>
                 <p class="text-gray-300 text-lg">
-					<b>Effective Date:</b> 20 August 2025 
-					<b>Platform:</b> The Live Models ("TLM") 
-					<b>Contact:</b> <a href="mailto:legal@thelivemodels.com">legal@thelivemodels.com</a> | <a href="mailto:privacy@thelivemodels.com">privacy@thelivemodels.com</a> </p>
-            </div>
+				 <ul>
+					<li><b>Effective Date:</b> 20 August 2025 </li>
+					<li><b>Platform:</b> The Live Models ("TLM") </li>
+					<li><b>Contact:</b> <a href="mailto:legal@thelivemodels.com">legal@thelivemodels.com</a> | <a href="mailto:privacy@thelivemodels.com">privacy@thelivemodels.com</a></li> </p>
+                 </ul>
+			</div>
 			
 			
 			<div class="glass-card p-6 common-pages">
