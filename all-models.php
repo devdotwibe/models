@@ -125,9 +125,9 @@ include('includes/helper.php');
                         <div class="sort-options" id="sortOptions">
                             <div class="sort-option" data-sort="newest"><a href="<?= SITEURL ?>/all-models.php?sort=newest">Newest First</a></div>
                             <div class="sort-option" data-sort="online"><a href="<?= SITEURL ?>/all-models.php?sort=online">Online Now</a></div>
-                            <div class="sort-option" data-sort="popular">Most Popular</div>
+                           <?php /*?> <div class="sort-option" data-sort="popular">Most Popular</div>
                             <div class="sort-option" data-sort="distance">Distance</div>
-                            <div class="sort-option" data-sort="price">Price: Low to High</div>
+                            <div class="sort-option" data-sort="price">Price: Low to High</div><?php */ ?>
                         </div>
                     </div>
 
