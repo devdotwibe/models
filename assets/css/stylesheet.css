@@ -10253,6 +10253,10 @@ body.advt-page.my-purpose .scroll-indicator {
 /* all mobile in the grid view end style..................... */
 
 
+.premimum-model1 .filter-group select option{
+    background: #18181f;
+}
+
 
 
 @media (max-width: 1540px) {
