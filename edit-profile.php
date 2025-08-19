@@ -3427,7 +3427,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     function processWithdrawal(event) {
       const amountInput = document.getElementById('withdraw-amount');
-      if (!amountInput) return;
+	  var status = true;
+      if (!amountInput){
+		  status = false;
+		  return;
+	  }
 
       const amount = parseFloat(amountInput.value);
 	  
@@ -3435,15 +3439,20 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         const max = parseInt(amountInput.dataset.max, 10);
 	  
       if (!amount || amount < min) {
-        alert('Minimum withdrawal amount is 100 TLM tokens');
+        //alert('Minimum withdrawal amount is 100 TLM tokens');
+		showNotification('Minimum withdrawal amount is 100 TLM tokens', 'error');
+		status = false;
         return;
       }
       // Assuming current balance is 2500 for this example
       if (amount > max) {
-        alert('Insufficient balance');
+       // alert('Insufficient balance');
+	   showNotification('Insufficient balance', 'error');
+		status = false;
         return;
       }
 
+	if(status == true){
      // const button = event.target;
 	  const button = document.getElementById('withdraw_btn');
       button.textContent = 'Processing...';
@@ -3481,7 +3490,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                     }
                 }
             });
-
+	}
       /*setTimeout(() => {
         alert('✅ Withdrawal request submitted successfully! You will receive your funds within 2-3 business days.');
         closeWithdrawModal();
