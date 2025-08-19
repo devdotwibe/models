@@ -10964,6 +10964,10 @@ body.advt-page.my-purpose .scroll-indicator {
         display:none;
     }
 
+.header-desk-outer div:last-child{
+        display:none;
+}
+
 }
 
 
