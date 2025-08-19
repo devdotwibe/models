@@ -10690,7 +10690,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 .premimum-model1 .main-content {
-  padding: 3.5rem 0;
+padding-top: calc(3.5rem - 10px) !important;
 }
 }
 
