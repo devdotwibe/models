@@ -11736,6 +11736,12 @@ body.advt-page.my-purpose .scroll-indicator {
 
         width: 100%;
     }
+
+        .premimum-model1 .filter-modal-actions .modal-btn {
+                font-size: 0.75rem !important;
+                    padding-inline: 9px !important;
+        }
+
 }
 
 
