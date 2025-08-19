@@ -10238,6 +10238,16 @@ body.advt-page.my-purpose .scroll-indicator {
   height:auto;
 }
 
+.premimum-model1 .profile-grid .profile-actions {
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--border);
+  align-items: center;
+  gap: 25px;
+}
+
 /* all mobile in the grid view end style..................... */
 
 
