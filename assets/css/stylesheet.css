@@ -10886,7 +10886,19 @@ body.advt-page.my-purpose .scroll-indicator {
         font-size: 28px;
     }
 
+  .premimum-model1 .profile-grid.profile-list .profile-card {
+    width: 90%;
+  }
 
+  .premimum-model1 .profile-grid.profile-list .profile-image-container {
+  width: 100%;
+}
+.premimum-model1 .profile-grid.profile-list .profile-info{
+
+    width: 100%;
+    height: auto !important;
+    padding-block: 33px !important;
+}
 
 
 }
