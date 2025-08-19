@@ -1746,6 +1746,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         </div><?php */ ?>
           </div>
         </div>
+		
+		<?php 
+		
+		//Code for checking number of followers
+		$followers_array = DB::query('select unique_model_id from model_follow where unique_user_id="' . $userDetails['unique_id'] . '"  AND status = "Follow" ');
+
+		?>
 
         <!-- Professional Work -->
         <div id="professional-work" class="collapsible-section">
@@ -1755,7 +1762,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </div>
-          <div class="collapsible-content">
+          <div class="collapsible-content <?php if(empty($followers_array) || count($followers_array) < 1000){ echo 'access_restricted'; } ?>">
             <div class="private-section mb-6">
               <div class="private-badge">🔒 Private & Confidential</div>
               <p class="text-sm">This information is kept strictly confidential and used only for professional matching with appropriate opportunities.</p>
@@ -1765,15 +1772,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <div class="question-text">Are you interested in professional modeling opportunities?</div>
               <div class="radio-group mt-3">
                 <div class="radio-option">
-                  <input type="radio" id="modeling-yes" name="modeling" value="Yes" <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
-                                                                                      echo 'checked';
-                                                                                    } ?> onchange="toggleConditionalSection('modeling-options', true)">
+                  <input type="radio" id="modeling-yes" name="modeling" value="Yes" <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') { echo 'checked'; } ?> 
+				  <?php if(!empty($followers_array) && count($followers_array) >= 1000){ ?> onchange="toggleConditionalSection('modeling-options', true)" <?php } ?> >
                   <label for="modeling-yes">Yes</label>
                 </div>
                 <div class="radio-option">
-                  <input type="radio" id="modeling-no" name="modeling" value="No" <?php if ((!empty($extra_details['modeling']) && $extra_details['modeling'] == 'No') || empty($extra_details['modeling'])) {
-                                                                                    echo 'checked';
-                                                                                  } ?> onchange="toggleConditionalSection('modeling-options', false)">
+                  <input type="radio" id="modeling-no" name="modeling" value="No" <?php if ((!empty($extra_details['modeling']) && $extra_details['modeling'] == 'No') || empty($extra_details['modeling'])) { echo 'checked'; } ?>
+				  <?php if(!empty($followers_array) && count($followers_array) >= 1000){ ?> onchange="toggleConditionalSection('modeling-options', false)" <?php } ?> >  
                   <label for="modeling-no">No</label>
                 </div>
               </div>
@@ -1790,15 +1795,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <p class="help-text">This includes lingerie, swimwear, artistic nude, and adult-oriented content</p>
                   <div class="radio-group mt-3">
                     <div class="radio-option">
-                      <input type="radio" id="adult-yes" name="adult_content" value="Yes" <?php if (!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes') {
-                                                                                            echo 'checked';
-                                                                                          } ?> onchange="toggleConditionalSection('adult-services', true)">
+                      <input type="radio" id="adult-yes" name="adult_content" value="Yes" <?php if (!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes') { echo 'checked'; } ?> 
+					  <?php if(!empty($followers_array) && count($followers_array) >= 1000){ ?> onchange="toggleConditionalSection('adult-services', true)" <?php } ?> >
                       <label for="adult-yes">Yes, I'm comfortable</label>
                     </div>
                     <div class="radio-option">
-                      <input type="radio" id="adult-no" name="adult_content" value="No" <?php if ((!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'No') || empty($extra_details['adult_content'])) {
-                                                                                          echo 'checked';
-                                                                                        } ?> onchange="toggleConditionalSection('adult-services', false)">
+                      <input type="radio" id="adult-no" name="adult_content" value="No" <?php if ((!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'No') || empty($extra_details['adult_content'])) { echo 'checked'; } ?> 
+					  <?php if(!empty($followers_array) && count($followers_array) >= 1000){ ?> onchange="toggleConditionalSection('adult-services', false)" <?php } ?> > 
                       <label for="adult-no">No, only non-adult content</label>
                     </div>
                   </div>
@@ -2857,6 +2860,26 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       </div>
     </div>
   </div>
+  
+  <div class="modal-overlay" id="follow_modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Access Restricted!</h2>
+        <button class="close-modal" id="closeTipModal" type="button" onclick="ClosefollowModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+
+		<p class="premiumtext">Can't access to this tab once the creator reaches 1000 followers.</p>
+
+        <button class="btn btn-primary" type="button" onclick="ClosefollowModal()">Close</button>
+      </div>
+    </div>
+  </div>
 
 
   <?php include('includes/footer.php'); ?>
@@ -3587,6 +3610,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 	function  ClosePremiumModal() {
       $('#premium_modal').removeClass('active');
     }
+	
+	function  ClosefollowModal() {
+      $('#follow_modal').removeClass('active');
+    }
 
     function savePremiumSettings(event) {
 
@@ -4070,10 +4097,21 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 		e.stopPropagation();
 		$('#premium_modal').addClass('active');
 	});
+	
+	jQuery('.access_restricted').click(function(e) { 
+		e.preventDefault();
+		e.stopPropagation();
+		$('#follow_modal').addClass('active');
+	});
   </script>
   
   <style>
   .premiumcheck input[type="range"],.premiumcheck select {
+		pointer-events: none;
+		opacity: 0.5; /* Optional: make it look disabled */
+	}
+   .access_restricted input,.access_restricted select,
+   .access_restricted input[type="radio"],.access_restricted textarea,.access_restricted input[type="checkbox"] {
 		pointer-events: none;
 		opacity: 0.5; /* Optional: make it look disabled */
 	}
