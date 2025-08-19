@@ -9894,7 +9894,7 @@ width:auto;
 @media(max-width:600px){
 
       .premimum-model1 .profile-grid {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1, 1fr) !important;;
         gap:1rem;
       }
  
