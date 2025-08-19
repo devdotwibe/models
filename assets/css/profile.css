@@ -3639,6 +3639,7 @@ body.premimum-model1::before {
 /* Profile Grid */
 .premimum-model1 .main-content {
     padding: 2rem 0;
+    padding-bottom: 3.5rem;
 }
 
 .premimum-model1 .profile-grid {

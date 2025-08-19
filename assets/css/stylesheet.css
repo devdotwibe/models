@@ -10142,6 +10142,8 @@ body.advt-page.my-purpose .scroll-indicator {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    max-height: 400px;
+  height: inherit;
 }
 
 
@@ -10150,6 +10152,8 @@ body.advt-page.my-purpose .scroll-indicator {
     padding-top: 0;
     overflow: hidden;
     width: 50%;
+    width: 50%;
+  height: calc(100% - 90px);
 }
 
 .premimum-model1 .profile-grid.profile-list .profile-image-container img {
@@ -10172,7 +10176,8 @@ body.advt-page.my-purpose .scroll-indicator {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+   flex-direction: column;
+  height: calc(100% - 90px);
 }
 
 .premimum-model1 .profile-grid.profile-list .profile-actions {
@@ -10181,6 +10186,7 @@ body.advt-page.my-purpose .scroll-indicator {
     align-items: center;
     justify-content: center;
     gap: 36px;
+    height: 90px;
 }
 
 .premimum-model1 .load-more {
