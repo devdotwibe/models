@@ -2854,6 +2854,10 @@ textarea:focus {
     animation: pulse 2s infinite;
 }
 
+.user-home-leftbar .model-card.text-center .online-dot {
+       right: 12px;
+}
+
 @keyframes pulse {
 
     0%,
