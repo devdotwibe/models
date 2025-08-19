@@ -10165,17 +10165,17 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 .premimum-model1 .profile-grid.profile-list .profile-info {
-  position: relative;
-  z-index: 10;
-  width: 50%;
+    position: relative;
+    z-index: 10;
+    width: 50%;
 }
 
 .premimum-model1 .profile-grid.profile-list .profile-actions {
-   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 36px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
 }
 
 
@@ -10221,6 +10221,15 @@ body.advt-page.my-purpose .scroll-indicator {
 
 }
 
+
+@media(max-width:1200px){
+
+.premimum-model1 .profile-grid.profile-list .profile-card {
+    width: 80%;
+}
+
+
+}
 
 @media (max-width: 1240px) {
 
@@ -10452,10 +10461,6 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 }
-
-
-
-
 
 
 
