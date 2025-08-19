@@ -11762,7 +11762,18 @@ body.advt-page.my-purpose .scroll-indicator {
                     padding-inline: 9px !important;
         }
 
+.premimum-model1 .header-btn {
+        width: 39px;
+    height: 39px;
 }
+
+.premimum-model1 .header-actions{
+        gap: 0.5rem;
+}
+
+}
+
+
 
 
 
