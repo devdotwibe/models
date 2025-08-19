@@ -11770,6 +11770,14 @@ body.advt-page.my-purpose .scroll-indicator {
 .premimum-model1 .header-actions{
         gap: 0.5rem;
 }
+.sort-dropdown{
+
+}
+
+.premimum-model1 .sort-btn{
+    
+    min-width: 127px;
+}
 
 }
 
