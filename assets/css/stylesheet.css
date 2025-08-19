@@ -10262,6 +10262,17 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
+.sort-options{
+        min-width: 180px !important;
+}
+.sort-options a{
+    text-decoration:none;
+    color:#fff;
+}
+.sort-option:hover{
+    background:var(--bg-primary);
+}
+
 
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
