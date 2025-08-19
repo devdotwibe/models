@@ -10262,6 +10262,17 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
+.sort-options{
+        min-width: 180px !important;
+}
+.sort-options a{
+    text-decoration:none;
+    color:#fff;
+}
+.sort-option:hover{
+    background:var(--bg-primary);
+}
+
 
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
@@ -11762,7 +11773,26 @@ body.advt-page.my-purpose .scroll-indicator {
                     padding-inline: 9px !important;
         }
 
+.premimum-model1 .header-btn {
+        width: 39px !important;
+    height: 39px !important;
 }
+
+.premimum-model1 .header-actions{
+        gap: 0.5rem !important;
+}
+.sort-dropdown{
+
+}
+
+.premimum-model1 .sort-btn{
+    
+    min-width: 127px !important;
+}
+
+}
+
+
 
 
 
