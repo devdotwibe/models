@@ -10153,7 +10153,7 @@ body.advt-page.my-purpose .scroll-indicator {
     overflow: hidden;
     width: 50%;
     width: 50%;
-  /* height: calc(100% - 90px); */
+    /* height: calc(100% - 90px); */
 }
 
 .premimum-model1 .profile-grid.profile-list .profile-image-container img {
@@ -10176,8 +10176,8 @@ body.advt-page.my-purpose .scroll-indicator {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-   flex-direction: column;
-  /* height: calc(100% - 90px); */
+    flex-direction: column;
+    /* height: calc(100% - 90px); */
 }
 
 .premimum-model1 .profile-grid.profile-list .profile-actions {
@@ -10190,15 +10190,17 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 .premimum-model1 .load-more {
-        margin-bottom: 20px;
+    margin-bottom: 20px;
 }
+
 .profile-name {
     display: block;
     width: 100%;
     float: left;
 }
+
 .profile-location {
-     display: flex !important;
+    display: flex !important;
     width: 100%;
     float: left;
     text-align: left;
@@ -10210,9 +10212,9 @@ body.advt-page.my-purpose .scroll-indicator {
     line-height: 24px;
 }
 
-.premimum-model1 .profile-grid.profile-list .profile-info >*:last-child{
-    margin-bottom:0;
-    padding-bottom:0;
+.premimum-model1 .profile-grid.profile-list .profile-info>*:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* all models.....list view css...................... */
@@ -10221,31 +10223,31 @@ body.advt-page.my-purpose .scroll-indicator {
 /* all moldel in the grid view style start......................... */
 
 
-.enhanced5 .profile-grid .profile-info>*:last-child{
-    margin-bottom:0;
-    padding-bottom:0;
+.enhanced5 .profile-grid .profile-info>*:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
-.premimum-model1 .profile-grid .profile-image-container{
+.premimum-model1 .profile-grid .profile-image-container {
     padding-top: 0;
 }
 
-.premimum-model1 .profile-grid .profile-card img{
-    max-height:370px;
-    object-fit:cover;
+.premimum-model1 .profile-grid .profile-card img {
+    max-height: 370px;
+    object-fit: cover;
     position: relative !important;
-  top: unset;
-  height:auto;
+    top: unset;
+    height: auto;
 }
 
 .premimum-model1 .profile-grid .profile-actions {
-  display: flex;
-  justify-content: center;
-  padding: 1.25rem 1.5rem;
-  background: rgba(0, 0, 0, 0.2);
-  border-top: 1px solid var(--border);
-  align-items: center;
-  gap: 25px;
+    display: flex;
+    justify-content: center;
+    padding: 1.25rem 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid var(--border);
+    align-items: center;
+    gap: 25px;
 }
 
 /* all mobile in the grid view end style..................... */
@@ -10290,11 +10292,11 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
-@media(max-width:1200px){
+@media(max-width:1200px) {
 
-.premimum-model1 .profile-grid.profile-list .profile-card {
-    width: 80%;
-}
+    .premimum-model1 .profile-grid.profile-list .profile-card {
+        width: 80%;
+    }
 
 
 }
@@ -10462,9 +10464,9 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
     .enhanced5 .profile-info {
-    
+
         /* height: 381px !important; */
-      
+
     }
 
 
@@ -10716,15 +10718,16 @@ body.advt-page.my-purpose .scroll-indicator {
     #purchaseform {
         width: 90%;
     }
-.premimum-model1 .profile-grid.profile-list .profile-card {
-    width: 100%;
-}
+
+    .premimum-model1 .profile-grid.profile-list .profile-card {
+        width: 100%;
+    }
 
 
 
-.premimum-model1 .main-content {
-padding-top: calc(3.5rem - 6px) !important;
-}
+    .premimum-model1 .main-content {
+        padding-top: calc(3.5rem - 6px) !important;
+    }
 }
 
 
@@ -10924,19 +10927,20 @@ padding-top: calc(3.5rem - 6px) !important;
         font-size: 28px;
     }
 
-  .premimum-model1 .profile-grid.profile-list .profile-card {
-    width: 90%;
-  }
+    .premimum-model1 .profile-grid.profile-list .profile-card {
+        width: 90%;
+    }
 
-  .premimum-model1 .profile-grid.profile-list .profile-image-container {
-  width: 100%;
-}
-.premimum-model1 .profile-grid.profile-list .profile-info{
+    .premimum-model1 .profile-grid.profile-list .profile-image-container {
+        width: 100%;
+    }
 
-    width: 100%;
-    height: auto !important;
-    padding-block: 33px !important;
-}
+    .premimum-model1 .profile-grid.profile-list .profile-info {
+
+        width: 100%;
+        height: auto !important;
+        padding-block: 33px !important;
+    }
 
 
 }
@@ -11706,9 +11710,9 @@ padding-top: calc(3.5rem - 6px) !important;
         margin-bottom: .7rem;
     }
 
-      .premimum-model1 .profile-grid.profile-list .profile-card {
-    width: 98%;
-  }
+    .premimum-model1 .profile-grid.profile-list .profile-card {
+        width: 98%;
+    }
 
 }
 
