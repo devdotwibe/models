@@ -3520,7 +3520,7 @@ body.premimum-model1::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 0;
+    padding: 0.75rem 18px;
 }
 
 .premimum-model1 .toggle-switch {
@@ -10038,6 +10038,8 @@ width:auto;
         .sort-dropdown {
             padding: 16px;
         }
+
+
     }
 
     /* Loading Animation */

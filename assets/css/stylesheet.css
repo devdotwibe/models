@@ -2854,6 +2854,10 @@ textarea:focus {
     animation: pulse 2s infinite;
 }
 
+.user-home-leftbar .model-card.text-center .online-dot {
+       right: 12px;
+}
+
 @keyframes pulse {
 
     0%,
@@ -10253,6 +10257,10 @@ body.advt-page.my-purpose .scroll-indicator {
 /* all mobile in the grid view end style..................... */
 
 
+.premimum-model1 .filter-group select option{
+    background: #18181f;
+}
+
 
 
 @media (max-width: 1540px) {
@@ -10956,6 +10964,18 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
 
+    .header-desk-inner button:nth-child(2), .header-desk-inner button:nth-child(3){
+        display:none;
+    }
+
+.header-desk-outer div:last-child{
+        display:none;
+}
+
+   .header-desk-inner button:nth-child(1){
+    margin-right: 10px;
+}
+
 }
 
 
@@ -11602,7 +11622,7 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .header-desk-inner button svg {
-        width: 19px;
+        width: 25px;
     }
 
     .header-desk-inner button span {
@@ -11736,6 +11756,12 @@ body.advt-page.my-purpose .scroll-indicator {
 
         width: 100%;
     }
+
+        .premimum-model1 .filter-modal-actions .modal-btn {
+                font-size: 0.75rem !important;
+                    padding-inline: 9px !important;
+        }
+
 }
 
 
