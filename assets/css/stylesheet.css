@@ -10211,6 +10211,11 @@ body.advt-page.my-purpose .scroll-indicator {
     line-height: 24px;
 }
 
+.premimum-model1 .profile-grid.profile-list .profile-info >*:last-child{
+    margin-bottom:0;
+    padding-bottom:0;
+}
+
 /* all models.....list view css...................... */
 
 
