@@ -453,6 +453,14 @@ $activeTab = 'wallet';
                                 <span id="amount_error" class="text-danger" style="display: none;"> </span>
 
                             </div>
+							
+							<div>
+							
+								<label class="form-label">USD Equivalent</label>
+							
+								<input type="text" id="withdraw-usd" class="form-input" readonly placeholder="$0.00" value="$<?php echo number_format((1000*0.1), 2, '.', ''); ?>">
+							
+							</div>
 
 
                             <?php /*
@@ -701,7 +709,7 @@ $activeTab = 'wallet';
 
         }
 
-        function validateInput(el) {
+        function validateInput(el) { 
             const min = parseInt(el.dataset.min, 10);
             const max = parseInt(el.dataset.max, 10);
             const value = parseInt(el.value, 10);
@@ -713,6 +721,14 @@ $activeTab = 'wallet';
                 errorSpan.textContent = "Please enter a valid number.";
                 return;
             }
+			
+			
+				  const usdInput = document.getElementById('withdraw-usd');
+				  if (value && usdInput) {
+					const amount = parseFloat(value) || 0;
+					const usdValue = (amount * 0.1).toFixed(2); // 1 token = $0.10
+					usdInput.value = `$${usdValue}`;
+				  }
 
             if (value < min || value > max) {
                 errorSpan.style.display = "block";

@@ -170,7 +170,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             <span>Available Balance:</span>
             <div class="flex items-center">
               <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
-              <span class="font-bold text-xl">2,500</span>
+              <span class="font-bold text-xl"><?= number_format($userDetails['balance'],2) ?></span>
             </div>
           </div>
         </div>
@@ -178,16 +178,19 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <div class="space-y-4">
           <div>
             <label class="form-label">Withdraw Amount (TLM Tokens)</label>
-            <input type="number" id="withdraw-amount" class="form-input" placeholder="Enter amount" max="2500" min="100" oninput="updateWithdrawUSD()">
+            <input type="number" id="withdraw-amount" class="form-input" placeholder="Enter amount" name="coins" value="100" data-max="<?= $userDetails['balance'] ?>" data-min="100" oninput="updateWithdrawUSD(this)">
             <p class="help-text">Minimum withdrawal: 100 TLM tokens</p>
+			
+			<span id="amount_error" class="text-danger" style="display: none;"> </span>
+			
           </div>
 
           <div>
             <label class="form-label">USD Equivalent</label>
-            <input type="text" id="withdraw-usd" class="form-input" readonly placeholder="$0.00">
+            <input type="text" id="withdraw-usd" class="form-input" readonly placeholder="$0.00" value="$<?php echo number_format((100*0.1), 2, '.', ''); ?>" >
           </div>
 
-          <div>
+          <?php /*?><div>
             <label class="form-label">Withdrawal Method</label>
             <select class="form-select">
               <option value="">Select method</option>
@@ -195,13 +198,15 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <option value="paypal">PayPal</option>
               <option value="crypto">Cryptocurrency</option>
             </select>
-          </div>
+          </div><?php */ ?>
         </div>
       </div>
+	  
+	  <?php $check_request = get_data('users_withdrow_request', array('user_id' => $userDetails["id"], 'status' => '0'), true); ?>
 
       <div class="flex space-x-4">
         <button class="btn-secondary flex-1" onclick="closeWithdrawModal()">Cancel</button>
-        <button class="btn-withdraw flex-1" onclick="processWithdrawal()">Withdraw</button>
+        <button class="btn-withdraw flex-1" id="withdraw_btn" <?php if ($check_request) { ?> onclick="rejectWithdraw()" <?php } else { ?>  onclick="processWithdrawal()"  <?php } ?> >Withdraw</button>
       </div>
     </div>
   </div>
@@ -3383,7 +3388,20 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       if (withdrawUsdInput) withdrawUsdInput.value = '';
     }
 
-    function updateWithdrawUSD() {
+    function updateWithdrawUSD(el) {
+		
+		const min = parseInt(el.dataset.min, 10);
+        const max = parseInt(el.dataset.max, 10);
+        const value = parseInt(el.value, 10);
+		
+		const errorSpan = document.getElementById("amount_error");
+
+            if (isNaN(value)) {
+                errorSpan.style.display = "block";
+                errorSpan.textContent = "Please enter a valid number.";
+                return;
+            }
+		
       const amountInput = document.getElementById('withdraw-amount');
       const usdInput = document.getElementById('withdraw-usd');
       if (amountInput && usdInput) {
@@ -3391,6 +3409,20 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         const usdValue = (amount * 0.1).toFixed(2); // 1 token = $0.10
         usdInput.value = `$${usdValue}`;
       }
+	  
+	  if (value < min || value > max) {
+                errorSpan.style.display = "block";
+                errorSpan.textContent = `Amount must be between ${min} and ${max}.`;
+            } else {
+                errorSpan.style.display = "none";
+                errorSpan.textContent = "";
+            }
+	  
+    }
+	
+	function rejectWithdraw() {
+        event.preventDefault();
+        showNotification('You already sent request. Please wait for pending request', 'error');
     }
 
     function processWithdrawal(event) {
@@ -3398,26 +3430,64 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       if (!amountInput) return;
 
       const amount = parseFloat(amountInput.value);
-      if (!amount || amount < 100) {
+	  
+	    const min = parseInt(amountInput.dataset.min, 10);
+        const max = parseInt(amountInput.dataset.max, 10);
+	  
+      if (!amount || amount < min) {
         alert('Minimum withdrawal amount is 100 TLM tokens');
         return;
       }
       // Assuming current balance is 2500 for this example
-      if (amount > 2500) {
+      if (amount > max) {
         alert('Insufficient balance');
         return;
       }
 
-      const button = event.target;
+     // const button = event.target;
+	  const button = document.getElementById('withdraw_btn');
       button.textContent = 'Processing...';
       button.disabled = true;
+	  
+	  $.ajax({
+                type: 'POST',
+                url: "act-wallet.php",
+                data: {
 
-      setTimeout(() => {
+                    coin:amount,
+                    action:'submit_withdrawal',
+                },
+                dataType: 'json',
+                success: function(response) {
+
+                     if (response.status === 'success') {
+                       
+                        
+
+                        setTimeout(function()
+                        {
+							showNotification(response.message, 'success');
+                            //alert('✅ Withdrawal request submitted successfully! You will receive your funds within 2-3 business days.');
+							closeWithdrawModal();
+							button.textContent = 'Withdraw';
+							button.disabled = false;
+                            
+                        },3000);
+                        
+
+                    } else {
+
+                         showNotification(response.message, 'error');
+                    }
+                }
+            });
+
+      /*setTimeout(() => {
         alert('✅ Withdrawal request submitted successfully! You will receive your funds within 2-3 business days.');
         closeWithdrawModal();
         button.textContent = 'Withdraw';
         button.disabled = false;
-      }, 2000);
+      }, 2000); */
     }
 
     function AccessChange(element)
