@@ -10960,6 +10960,10 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
 
+    .header-desk-inner button:nth-child(2), .header-desk-inner button:nth-child(3){
+        display:none;
+    }
+
 }
 
 
