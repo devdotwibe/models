@@ -10233,8 +10233,9 @@ body.advt-page.my-purpose .scroll-indicator {
 .premimum-model1 .profile-grid .profile-card img{
     max-height:370px;
     object-fit:cover;
-    position: relative;
+    position: relative !important;
   top: unset;
+  height:auto;
 }
 
 /* all mobile in the grid view end style..................... */
