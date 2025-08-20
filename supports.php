@@ -843,13 +843,17 @@ if ($userDetails) {
                                 <h3 class="font-semibold text-lg gradient-text mb-2">All Categories</h3>
                                 <p class="text-white/60">Browse all questions</p>
                             </div>
-                            <div class="faq-category glass-effect" onclick="filterFAQs('platform')">
-                                <h3 class="font-semibold text-lg gradient-text mb-2">Platform Features</h3>
-                                <p class="text-white/60">Chat, Watch, Meet, Travel</p>
+                            <div class="faq-category glass-effect" onclick="filterFAQs('about')">
+                                <h3 class="font-semibold text-lg gradient-text mb-2">About TLM</h3>
+                                <p class="text-white/60">About The Live Models</p>
                             </div>
                             <div class="faq-category glass-effect" onclick="filterFAQs('account')">
                                 <h3 class="font-semibold text-lg gradient-text mb-2">Account & Verification</h3>
                                 <p class="text-white/60">Registration, ID verification</p>
+                            </div>
+							<div class="faq-category glass-effect" onclick="filterFAQs('platform')">
+                                <h3 class="font-semibold text-lg gradient-text mb-2">Platform Features</h3>
+                                <p class="text-white/60">Chat, Watch, Meet, Travel</p>
                             </div>
                             <div class="faq-category glass-effect" onclick="filterFAQs('payments')">
                                 <h3 class="font-semibold text-lg gradient-text mb-2">Tokens & Payments</h3>
@@ -859,62 +863,97 @@ if ($userDetails) {
                                 <h3 class="font-semibold text-lg gradient-text mb-2">Safety & Privacy</h3>
                                 <p class="text-white/60">Security, blocking, reporting</p>
                             </div>
+							
+							<div class="faq-category glass-effect" onclick="filterFAQs('legal')">
+                                <h3 class="font-semibold text-lg gradient-text mb-2">Legal & Compliance</h3>
+                                <p class="text-white/60"></p>
+                            </div>
+							
+							<div class="faq-category glass-effect" onclick="filterFAQs('technical')">
+                                <h3 class="font-semibold text-lg gradient-text mb-2">Technical Support</h3>
+                                <p class="text-white/60"></p>
+                            </div>
+							
                             <div class="faq-category glass-effect" onclick="filterFAQs('creator')">
                                 <h3 class="font-semibold text-lg gradient-text mb-2">Creator Features</h3>
                                 <p class="text-white/60">Content, streaming, earnings</p>
                             </div>
+							
+							<div class="faq-category glass-effect" onclick="filterFAQs('advertising')">
+                                <h3 class="font-semibold text-lg gradient-text mb-2">Premium, Boosts & Advertising</h3>
+                                <p class="text-white/60"></p>
+                            </div>
+							<div class="faq-category glass-effect" onclick="filterFAQs('disputes')">
+                                <h3 class="font-semibold text-lg gradient-text mb-2">Disputes & Complaints</h3>
+                                <p class="text-white/60"></p>
+                            </div>
+							<div class="faq-category glass-effect" onclick="filterFAQs('security')">
+                                <h3 class="font-semibold text-lg gradient-text mb-2">Security & Trust</h3>
+                                <p class="text-white/60"></p>
+                            </div>
+							
+							
                         </div>
                         
                         <div id="faq-list">
                             <!-- Platform Features FAQs -->
-                            <div class="faq-item glass-effect" data-category="platform">
+                            <div class="faq-item glass-effect" data-category="about">
                                 <div class="faq-question" onclick="toggleFAQ(this)">
                                     <span class="font-semibold">What is The Live Models (TLM)?</span>
                                     <i class="fas fa-chevron-down transition-transform"></i>
                                 </div>
                                 <div class="faq-answer">
-                                    The Live Models is a global dating and social networking platform where adults can connect with people worldwide through four core features: Chat (send messages and connect instantly), Watch (enjoy live streams, videos, and exclusive content), Meet (request or accept invitations for lawful social meet-ups), and Travel (connect with others to plan safe, lawful travel experiences).
+                                    <p>The Live Models is a <b>global dating and social networking platform</b> where adults can connect with people worldwide through four core features:</p> 
+									<ul style="list-style-type: disc;">
+									<li>Chat – Send messages and connect instantly. </li>
+
+									<li>Watch – Enjoy live streams, videos, and exclusive content from creators. </li>
+
+									<li>Meet – Request or accept invitations for lawful, social meet-ups. </li>
+
+									<li>Travel – Connect with others to plan safe, lawful travel experiences.</li> 
+									</ul>
                                 </div>
                             </div>
 
-                            <div class="faq-item glass-effect" data-category="platform">
+                            <div class="faq-item glass-effect" data-category="about">
                                 <div class="faq-question" onclick="toggleFAQ(this)">
                                     <span class="font-semibold">Is TLM an escort or adult website?</span>
                                     <i class="fas fa-chevron-down transition-transform"></i>
                                 </div>
                                 <div class="faq-answer">
-                                    No. TLM is not an escort agency or adult services provider. It is a UGC (user-generated content) social platform. Creators and users decide how they interact. All offline activities are voluntary and personal, not arranged by TLM.
+                                    No. TLM is <b>not</b> an escort agency or adult services provider. It is a <b>UGC (user-generated content) social platform</b>. Creators and users decide how they interact. All offline activities are <b>voluntary and personal</b>, not arranged by TLM. 
                                 </div>
                             </div>
-
-                            <div class="faq-item glass-effect" data-category="platform">
+							
+                            <div class="faq-item glass-effect" data-category="about">
                                 <div class="faq-question" onclick="toggleFAQ(this)">
-                                    <span class="font-semibold">How do Meet Requests work?</span>
+                                    <span class="font-semibold">Where is TLM based?</span>
                                     <i class="fas fa-chevron-down transition-transform"></i>
                                 </div>
                                 <div class="faq-answer">
-                                    A user sends a Meet Request through the platform. The recipient can accept, decline, or ignore. TLM does not arrange or guarantee meetings; all arrangements are personal.
+                                    TLM is a <b>New Zealand–registered company</b> with a global user base.
                                 </div>
                             </div>
-
-                            <div class="faq-item glass-effect" data-category="platform">
+							
+							<div class="faq-item glass-effect" data-category="about">
                                 <div class="faq-question" onclick="toggleFAQ(this)">
-                                    <span class="font-semibold">How do Travel Requests work?</span>
+                                    <span class="font-semibold">Is the platform free to use?</span>
                                     <i class="fas fa-chevron-down transition-transform"></i>
                                 </div>
                                 <div class="faq-answer">
-                                    Users can connect for travel planning, companionship during lawful travel, or social exploration. We strongly recommend only meeting in safe, public places. TLM does not act as a travel agent or broker.
+                                    Yes. Creating an account and using basic features is free. Certain premium features, creator content, and meet/travel requests may require <b>Tokens</b>. 
                                 </div>
                             </div>
-
-                            <!-- Account & Verification FAQs -->
+							
+							<!-- Account & Verification FAQs -->
                             <div class="faq-item glass-effect" data-category="account">
                                 <div class="faq-question" onclick="toggleFAQ(this)">
                                     <span class="font-semibold">Who can join TLM?</span>
                                     <i class="fas fa-chevron-down transition-transform"></i>
                                 </div>
                                 <div class="faq-answer">
-                                    TLM is strictly for adults (18+). Users must comply with our Terms of Service and Community Guidelines.
+                                    TLM is strictly for <b>adults (18+)</b>. Users must comply with our Terms of Service and Community Guidelines.
                                 </div>
                             </div>
 
@@ -924,8 +963,12 @@ if ($userDetails) {
                                     <i class="fas fa-chevron-down transition-transform"></i>
                                 </div>
                                 <div class="faq-answer">
-                                    All users must verify their email address by entering the one-time code (OTP) sent to them. Creators must submit a valid government-issued ID to access paid features (posting paid content, live streaming, Meet/Travel requests).
-                                </div>
+								<ul style="list-style-type: disc;">
+                                    <li>All users: must verify their email address by entering the one-time code (OTP) sent to them.</li> 
+
+									<li>Creators: must submit a valid government-issued ID to access paid features (posting paid content, live streaming, Meet/Travel requests). </li>
+                                </ul>
+								</div>
                             </div>
 
                             <div class="faq-item glass-effect" data-category="account">
@@ -937,6 +980,24 @@ if ($userDetails) {
                                     Verification protects our community by ensuring that only real, legal adults can monetize their content. It prevents fraud, impersonation, and underage access.
                                 </div>
                             </div>
+							
+							<div class="faq-item glass-effect" data-category="account">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <span class="font-semibold">How often is re-verification required?</span>
+                                    <i class="fas fa-chevron-down transition-transform"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>We may require re-verification in case of: </p>
+									<ul style="list-style-type: disc;">
+									<li>Device or location changes that appear risky </li>
+
+									<li>Expired or invalid identification </li>
+
+									<li>Reported safety or compliance concerns </li>
+									</ul>
+                                </div>
+                            </div>
+
 
                             <div class="faq-item glass-effect" data-category="account">
                                 <div class="faq-question" onclick="toggleFAQ(this)">
@@ -944,9 +1005,80 @@ if ($userDetails) {
                                     <i class="fas fa-chevron-down transition-transform"></i>
                                 </div>
                                 <div class="faq-answer">
-                                    If your documents don't meet the requirements or cannot be verified, we will notify you via email. You may re-submit corrected documents. Accounts with repeated failed attempts may be restricted.
+                                    If your documents don’t meet the requirements or cannot be verified, we will notify you via email. You may re-submit corrected documents. Accounts with repeated failed attempts may be restricted.
                                 </div>
                             </div>
+							
+							<div class="faq-item glass-effect" data-category="platform">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <span class="font-semibold">What can I do on TLM?</span>
+                                    <i class="fas fa-chevron-down transition-transform"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    <p>Users can:</p> 
+									<ul style="list-style-type: disc;">
+									<li>Create a profile </li>
+
+									<li>Chat with global members </li>
+
+									<li>Watch livestreams or exclusive content </li>
+
+									<li>Send Meet/Travel requests (verified users only) </li>
+
+									<li>Purchase tokens to unlock premium features </li>
+									</ul>
+                                </div>
+                            </div>
+							
+							<div class="faq-item glass-effect" data-category="platform">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <span class="font-semibold">How do Meet Requests work?</span>
+                                    <i class="fas fa-chevron-down transition-transform"></i>
+                                </div>
+                                <div class="faq-answer">
+								<ul style="list-style-type: disc;">
+								
+                                    <li>A user sends a Meet Request through the platform. </li>
+
+									<li>The recipient can accept, decline, or ignore. </li>
+
+									<li>TLM does not arrange or guarantee meetings; all arrangements are personal. </li>
+									</ul>
+                                </div>
+                            </div>
+							<div class="faq-item glass-effect" data-category="platform">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <span class="font-semibold">How do Travel Requests work?</span>
+                                    <i class="fas fa-chevron-down transition-transform"></i>
+                                </div>
+                                <div class="faq-answer">
+								<ul style="list-style-type: disc;">
+                                    <li>Users can connect for travel planning, companionship during lawful travel, or social exploration.</li> 
+
+									<li>We strongly recommend only meeting in safe, public places.</li> 
+
+									<li>TLM does not act as a travel agent or broker. </li>
+									</ul>
+                                </div>
+                            </div>
+							<div class="faq-item glass-effect" data-category="platform">
+                                <div class="faq-question" onclick="toggleFAQ(this)">
+                                    <span class="font-semibold">Can I live stream as a user?</span>
+                                    <i class="fas fa-chevron-down transition-transform"></i>
+                                </div>
+                                <div class="faq-answer">
+                                    Only verified creators can host live streams. Regular users can <b>watch, chat, or send tokens</b> during streams.
+                                </div>
+                            </div>
+							
+							
+							
+							
+
+                            
+
+                            
+                            
 
                             <!-- Payments FAQs -->
                             <div class="faq-item glass-effect" data-category="payments">
@@ -1051,15 +1183,7 @@ if ($userDetails) {
                                 </div>
                             </div>
 
-                            <div class="faq-item glass-effect" data-category="creator">
-                                <div class="faq-question" onclick="toggleFAQ(this)">
-                                    <span class="font-semibold">Can I live stream as a user?</span>
-                                    <i class="fas fa-chevron-down transition-transform"></i>
-                                </div>
-                                <div class="faq-answer">
-                                    Only verified creators can host live streams. Regular users can watch, chat, or send tokens during streams.
-                                </div>
-                            </div>
+                            
 
                             <div class="faq-item glass-effect" data-category="creator">
                                 <div class="faq-question" onclick="toggleFAQ(this)">
@@ -1072,15 +1196,7 @@ if ($userDetails) {
                             </div>
 
                             <!-- Additional FAQs -->
-                            <div class="faq-item glass-effect" data-category="platform">
-                                <div class="faq-question" onclick="toggleFAQ(this)">
-                                    <span class="font-semibold">Is the platform free to use?</span>
-                                    <i class="fas fa-chevron-down transition-transform"></i>
-                                </div>
-                                <div class="faq-answer">
-                                    Yes. Creating an account and using basic features is free. Certain premium features, creator content, and meet/travel requests may require Tokens.
-                                </div>
-                            </div>
+                            
 
                             <div class="faq-item glass-effect" data-category="platform">
                                 <div class="faq-question" onclick="toggleFAQ(this)">
@@ -1212,26 +1328,8 @@ if ($userDetails) {
                                 </div>
                             </div>
 
-                            <div class="faq-item glass-effect" data-category="platform">
-                                <div class="faq-question" onclick="toggleFAQ(this)">
-                                    <span class="font-semibold">Where is TLM based?</span>
-                                    <i class="fas fa-chevron-down transition-transform"></i>
-                                </div>
-                                <div class="faq-answer">
-                                    TLM is a New Zealand–registered company with a global user base.
-                                </div>
-                            </div>
 
-                            <div class="faq-item glass-effect" data-category="account">
-                                <div class="faq-question" onclick="toggleFAQ(this)">
-                                    <span class="font-semibold">How often is re-verification required?</span>
-                                    <i class="fas fa-chevron-down transition-transform"></i>
-                                </div>
-                                <div class="faq-answer">
-                                    We may require re-verification in case of device or location changes that appear risky, expired or invalid identification, or reported safety or compliance concerns.
-                                </div>
-                            </div>
-
+                            
                             <div class="faq-item glass-effect" data-category="payments">
                                 <div class="faq-question" onclick="toggleFAQ(this)">
                                     <span class="font-semibold">Can I request a refund if I'm unhappy with a Creator's content?</span>
