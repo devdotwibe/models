@@ -314,7 +314,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     <!-- Basic Profile Tab -->
     <div id="basic-content" class="tab-content active">
 
-      <form method="post" action="act-edit-profile.php" enctype="multipart/form-data">
+      <form method="post" id="basicProfileForm" action="act-edit-profile.php" enctype="multipart/form-data">
 
         <!-- Profile Completion -->
         <div class="profile-completion">
@@ -367,7 +367,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                   </div>
 
-                  <button class="change-photo-btn">
+                  <button type="button" class="change-photo-btn">
                     <input type="file" name="pic_img" style="display:none" id="pic_img" class="vfb-text vfb-medium" accept=".jpg,.jpeg,.png" />
                     <label for="pic_img">
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -490,15 +490,15 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 <label class="form-label">Gender *</label>
                 <div class="radio-group">
                   <div class="radio-option">
-                    <input type="radio" name="gender" id="m" value="Male" <?php if ($userDetails['gender'] == 'Male' || empty($userDetails['gender'])) echo 'checked';  ?>>
+                    <input type="radio" name="gender" id="m" value="Male" <?php if ($userDetails['gender'] == 'Male' || $userDetails['gender'] == 'male' || empty($userDetails['gender'])) echo 'checked';  ?>>
                     <label for="m">Male</label>
                   </div>
                   <div class="radio-option">
-                    <input type="radio" name="gender" id="f" value="Female" <?php if ($userDetails['gender'] == 'Female') echo 'checked';  ?>>
+                    <input type="radio" name="gender" id="f" value="Female" <?php if ($userDetails['gender'] == 'Female' || $userDetails['gender'] == 'female') echo 'checked';  ?>>
                     <label for="f">Female</label>
                   </div>
                   <div class="radio-option">
-                    <input type="radio" name="gender" id="t" value="Transgender" <?php if ($userDetails['gender'] == 'Transgender') echo 'checked';  ?>>
+                    <input type="radio" name="gender" id="t" value="Transgender" <?php if ($userDetails['gender'] == 'Transgender' || $userDetails['gender'] == 'other') echo 'checked';  ?>>
                     <label for="t">Transgender</label>
                   </div>
                 </div>
@@ -540,7 +540,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             <div class="space-y-4">
               <div>
                 <label class="form-label">Country *</label>
-                <select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-control" id="country-select" required>
+                <select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-control"  required>
                   <option value="">Select your country</option>
                   <?php
                   foreach ($country_list as $val) {
@@ -553,12 +553,12 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
               </div>
               <div>
-                <label class="form-label">State/Province *</label>
-                <select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-select" id="state-select" required></select>
+                <label class="form-label">State/Province *</label> 
+                <select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-select"  required></select>
               </div>
               <div>
                 <label class="form-label">City *</label>
-                <select name="city" id="i-hs-city" class="form-select" id="city-select" required></select>
+                <select name="city" id="i-hs-city" class="form-select"  required></select>
               </div>
               <div>
                 <label class="form-label">Willing to Travel</label>
@@ -1344,7 +1344,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <div class="flex justify-end mt-8">
           <input type="hidden" name="username" value="<?php echo $userDetails['username']; ?>" required />
           <input type="hidden" value="<?php echo $userDetails['email']; ?>" name="email" required />
-          <button type="submit" class="btn-primary" name="submit_name" onclick="updateProfileCompletion()" value="Save Changes">Save Changes</button>
+          <button type="button" class="btn-primary" name="submit_name" onclick="updateProfileCompletionNew(this)" value="Save Changes">Save Changes</button>
         </div>
       </form>
     </div>
@@ -3294,7 +3294,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       if (button) button.parentElement.remove();
     }
 
-    function updateProfileCompletion() {
+    function updateProfileCompletion(button) {
       let completedFields = 0;
       let totalFields = 0;
 
@@ -3357,6 +3357,75 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         }
       }
     }
+	
+	function updateProfileCompletionNew(button) {
+		
+		let completedFields = 0;
+      let totalFields = 0;
+
+      const basicFields = ['#uname', '#dob-input', '#age-display'];
+      basicFields.forEach(selector => {
+        totalFields++;
+        const field = document.querySelector(selector);
+        if (field && field.value) completedFields++;
+      });
+	  totalFields += 3;    
+      const country = document.getElementById('i-hs-country');
+      const state = document.getElementById('i-hs-state');
+	  const city = document.getElementById('i-hs-city');
+      if (country && country.value) completedFields++;
+	  if (state && state.value) completedFields++;
+      if (city && city.value) completedFields++;
+	  
+		if(totalFields == completedFields){
+			  const $button = $(button);
+			  const originalText = $button.text();
+
+			  $button.text('Saving...');
+			  $button.prop('disabled', true);
+
+			  const form = $('#basicProfileForm')[0];
+
+			  const formData = new FormData(form);
+
+			  formData.append('submit_name', 'submit_name');
+
+			  $.ajax({
+				url: 'act-edit-profile.php',
+				type: 'POST',
+				data: formData,
+				contentType: false,
+				processData: false,
+				dataType: 'json',
+				success: function(response) {
+
+				  console.log(response);
+
+				  if (response.status === 'success') {
+					$('.progress-fill').css('width', '100%');
+					$('.step').addClass('completed').removeClass('active');
+
+					setTimeout(() => {
+					  $button.text(originalText);
+					  $button.prop('disabled', false);
+
+					  $('#modal_success_message').prepend('<p class="success-text">Your settings have been saved successfully!</p>');
+
+					  $('#success_modal').addClass('active');
+
+					}, 1000);
+				  }
+				},
+
+				error: function(xhr, status, error) {
+				  $button.text(originalText);
+				  $button.prop('disabled', false);
+				}
+			  });
+		}else{
+			showNotification('Please fill required fields', 'error');
+		}
+	}
 
     function openBuyTokensModal() {
       const modal = document.getElementById('buy-tokens-modal');

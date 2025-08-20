@@ -103,7 +103,8 @@ if ($_POST['submit_name']){
 	
 	DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
 	if($error){
-		echo '<script>alert("'.$error.'");</script>';
+		//echo '<script>alert("'.$error.'");</script>';
+		echo json_encode(['status' => 'Error in saving']);
 	}
 	
 	//Physical attributes save
@@ -119,7 +120,8 @@ if ($_POST['submit_name']){
 			$post_data_extra['height_in_cm'] = $_POST['height_cm'];
 		}
 		if($_POST['weight_type'] == 'lbs'){
-			$post_data_extra['weight_in_kg'] = $_POST['weight'] * 0.45359237;
+			if(!empty($_POST['weight'])) $post_data_extra['weight_in_kg'] = $_POST['weight'] * 0.45359237;
+			else $post_data_extra['weight_in_kg'] = 0;
 		}else{
 			$post_data_extra['weight_in_kg'] = $_POST['weight'];
 		}
@@ -154,14 +156,16 @@ if ($_POST['submit_name']){
            // echo '<script>alert("Your Profile Picture Successfully Updated");
             // window.location="edit-profile.php"</script>';
           }else{
-            echo '<script>alert("Profile Picture Not Updated.\nPlease try again later.");
-             window.location="edit-profile.php"</script>';
+           /* echo '<script>alert("Profile Picture Not Updated.\nPlease try again later.");
+             window.location="edit-profile.php"</script>'; */
+			 echo json_encode(['status' => 'Profile Picture Not Updated.\nPlease try again later.']);
           }  
 
       }else{
-          echo '<script>alert("Error in Image uploading");
+          /*echo '<script>alert("Error in Image uploading");
              window.location="edit-profile.php"
-            </script>';
+            </script>'; */
+			echo json_encode(['status' => 'Error in Image uploading']);
       }
 	  }
 	  
@@ -190,9 +194,10 @@ if ($_POST['submit_name']){
 		
 		
 	
-	echo '<script>alert("Your Profile Successfully Updated");
+	/*echo '<script>alert("Your Profile Successfully Updated");
 	window.location="edit-profile.php"
-	</script>'; 
+	</script>'; */
+	echo json_encode(['status' => 'success']);
 
 	die;
     }else if(isset($_POST['service_submit'])){
