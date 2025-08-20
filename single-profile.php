@@ -2614,6 +2614,8 @@ jQuery('.send_gift_btn').click(function(){
             $('#post_image_label').show();
 
             $('.token_sec').hide();
+
+            $('#post_image').val('');
         }
 
 
