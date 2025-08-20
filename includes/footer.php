@@ -212,17 +212,17 @@ $currentpage = $_SERVER['REQUEST_URI'];
             <div>
                 <h4 class="font-bold mb-6 text-xl premium-text">Support</h4>
                 <ul class="space-y-4 text-white/60 text-lg">
-                    <li><a href="<?= SITEURL ?>/contact-support.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /* onclick="openSupport()" */ ?> >Contact Support</a></li>
-                    <li><a href="<?= SITEURL ?>/verification-help.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openVerificationHelp()" */ ?> >Verification Help</a></li>
+                    <li><a href="<?= SITEURL ?>contact-support.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /* onclick="openSupport()" */ ?> >Contact Support</a></li>
+                    <li><a href="<?= SITEURL ?>verification-help.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openVerificationHelp()" */ ?> >Verification Help</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4 class="font-bold mb-6 text-xl premium-text">Legal</h4>
                 <ul class="space-y-4 text-white/60 text-lg">
-                    <li><a href="<?= SITEURL ?>/tls-tom.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openTerms()" */ ?> >Terms of Service</a></li>
-                    <li><a href="<?= SITEURL ?>/privacy-policy.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openPrivacy()" */ ?> >Privacy Policy</a></li>
-                    <li><a href="<?= SITEURL ?>/verification-policy.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openVerificationPolicy()" */ ?> >Verification Policy</a></li>
+                    <li><a href="<?= SITEURL ?>tls-tom.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openTerms()" */ ?> >Terms of Service</a></li>
+                    <li><a href="<?= SITEURL ?>privacy-policy.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openPrivacy()" */ ?> >Privacy Policy</a></li>
+                    <li><a href="<?= SITEURL ?>verification-policy.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openVerificationPolicy()" */ ?> >Verification Policy</a></li>
                 </ul>
             </div>
         </div>
