@@ -64,11 +64,11 @@ if($userDetails){
 						unset($_SESSION["pay_amount"], $_SESSION["pay_coins"]);
 
 					} else {
-						echo "Error in wallet update: " . mysqli_error($con);
+						echo "Error in wallet update 1: " . mysqli_error($con);
 					}
 				}
 				else {
-					echo "Error in wallet update: " . mysqli_error($con);
+					echo "Error in wallet update 2: " . mysqli_error($con);
 				}
 			}
 		else{
