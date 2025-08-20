@@ -474,8 +474,10 @@ $activeTab = 'wallet';
                                     </select>
                                 </div>
                             */?>
+							
+							<?php if ($check_request) { echo '<div class="rejectmsg" style="color:red;">You already sent request. Please wait for pending request</div>'; } ?>
 
-                            <button type="button" name="req_withdraw" class="btn btn-success w-full" <?php if ($check_request) { ?> onclick="rejectWithdraw()" <?php } else { ?>  onclick="RequestWithdraw()"  <?php } ?> >
+                            <button type="button" name="req_withdraw" class="btn btn-success w-full" <?php if ($check_request) { ?> onclick="rejectWithdraw()" disabled <?php } else { ?>  onclick="RequestWithdraw()"  <?php } ?> >
                                 Request Withdrawal
                             </button>
 
