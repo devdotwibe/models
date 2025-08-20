@@ -35,10 +35,10 @@ if($userDetails){
 
 				$insertedPaymentId = mysqli_insert_id($con);
 
-				$sql = "SELECT * FROM model_user_wallet WHERE user_unique_id = '".$_SESSION["log_user_unique_id"]."'";
-				$result = mysqli_query($con, $sql);
+				//$sql = "SELECT * FROM model_user_wallet WHERE user_unique_id = '".$_SESSION["log_user_unique_id"]."'";
+				//$result = mysqli_query($con, $sql);
 
-				if (mysqli_num_rows($result) > 0) {
+				//if (mysqli_num_rows($result) > 0) {
 
 					if (mysqli_query($con, $query2)) {
 
@@ -66,10 +66,10 @@ if($userDetails){
 					} else {
 						echo "Error in wallet update 1: " . mysqli_error($con);
 					}
-				}
+				/*}
 				else {
 					echo "Error in wallet update 2: " . mysqli_error($con);
-				}
+				}*/
 			}
 		else{
         	echo "<script>alert('Your Payment Data will not be inserted');</script>";
