@@ -1301,6 +1301,8 @@ if ($userDetails) {
             </div>
         </div>
     </div>
+	
+	<?php include('includes/footer.php'); ?>
 
     <!-- New Ticket Modal -->
     <!-- Enhanced New Ticket Modal with professional features -->
