@@ -175,7 +175,7 @@ $activeTab = 'wallet';
             <!-- Tab Navigation -->
             <div class="glass-card p-6 wallet-tabs-outer">
                 <div class="tab-nav">
-                    <button class="tab-btn <?php if ($user_type == 'user') { ?> active <?php } ?> " onclick="switchTab('buy')" data-tab="buy">
+                    <button class="tab-btn <?php /*if ($user_type == 'user') { ?> active <?php }*/ ?> active " onclick="switchTab('buy')" data-tab="buy">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="8" cy="21" r="1"></circle>
                             <circle cx="19" cy="21" r="1"></circle>
@@ -184,7 +184,7 @@ $activeTab = 'wallet';
                         Buy Tokens
                     </button>
 
-                    <button class="tab-btn <?php if ($user_type == 'user') { ?> model-only <?php } else  echo ' active '; ?>" onclick="switchTab('withdraw')" data-tab="withdraw">
+                    <button class="tab-btn <?php if ($user_type == 'user') { ?> model-only <?php } /*else  echo ' active '; */ ?>" onclick="switchTab('withdraw')" data-tab="withdraw">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="12" y1="1" x2="12" y2="23"></line>
                             <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
@@ -222,7 +222,7 @@ $activeTab = 'wallet';
                 </div>
 
                 <!-- Buy Tokens Tab -->
-                <div id="buy" class="tab-content <?php if ($user_type == 'user') { ?> active <?php } ?>">
+                <div id="buy" class="tab-content <?php /* if ($user_type == 'user') { ?> active <?php } */ ?> active ">
                     <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                         Purchase Token Packages
                     </h3>
@@ -425,7 +425,7 @@ $activeTab = 'wallet';
                 </div>
 
                 <!-- Withdraw Tab -->
-                <div id="withdraw" class="tab-content <?php if ($user_type == 'model') { ?> active <?php } ?>">
+                <div id="withdraw" class="tab-content <?php /*if ($user_type == 'model') { ?> active <?php } */ ?>">
                     <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                         Withdraw Earnings
                     </h3>
