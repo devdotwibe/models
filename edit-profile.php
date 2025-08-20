@@ -203,10 +203,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       </div>
 	  
 	  <?php $check_request = get_data('users_withdrow_request', array('user_id' => $userDetails["id"], 'status' => '0'), true); ?>
-
+	  <?php if ($check_request) { echo '<div class="rejectmsg" style="color:red;">You already sent request. Please wait for pending request</div>'; } ?>
       <div class="flex space-x-4">
         <button class="btn-secondary flex-1" onclick="closeWithdrawModal()">Cancel</button>
-        <button class="btn-withdraw flex-1" id="withdraw_btn" <?php if ($check_request) { ?> onclick="rejectWithdraw()" <?php } else { ?>  onclick="processWithdrawal()"  <?php } ?> >Withdraw</button>
+        <button class="btn-withdraw flex-1" id="withdraw_btn" <?php if ($check_request) { ?> onclick="rejectWithdraw()" disabled <?php } else { ?>  onclick="processWithdrawal()"  <?php } ?> >Withdraw</button>
+		
       </div>
     </div>
   </div>
