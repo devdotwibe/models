@@ -44,18 +44,9 @@ if ($_POST['submit_name']){
 	$post_data['english_ability'] = $english_ability;
 	$post_data['languages'] = json_encode($lang_array); 
 
-	DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
-	if($error){
-		//echo '<script>alert("'.$error.'");</script>';
-		echo json_encode(['status' => 'Error in saving']);
-	}
-	echo json_encode(['status' => 'success']); exit;
-
-
-	
 	
 	//Social icons 
-	$platform = $_POST['platform'];
+	/*$platform = $_POST['platform'];
 	$URL = $_POST['URL'];
 	$status = $_POST['status'];
 	$public = $_POST['public'];
@@ -91,7 +82,16 @@ if ($_POST['submit_name']){
 			$sql_delete = "DELETE FROM `model_social_link` WHERE unique_model_id = '".$userDetails['unique_id']."' AND platform NOT IN (".$string_paltform.")";
 			mysqli_query($con,$sql_delete);
 		}
+	} */
+	
+	DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
+	if($error){
+		//echo '<script>alert("'.$error.'");</script>';
+		echo json_encode(['status' => 'Error in saving']);
 	}
+	echo json_encode(['status' => 'success']); exit;
+
+
 	
 
 	$error = '';
