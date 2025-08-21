@@ -77,7 +77,7 @@ if ($_POST['submit_name']){
 			$string_paltform .= "'".$sc."',";
 		}
 		// Trim last comma
-		$string_paltform = rtrim($string_paltform, ',');
+		$string_paltform = rtrim($string_paltform, ','); print_r($string_paltform); exit;
 		if(!empty($string_paltform)){
 			$sql_delete = "DELETE FROM `model_social_link` WHERE unique_model_id = '".$userDetails['unique_id']."' AND platform NOT IN (".$string_paltform.")";
 			mysqli_query($con,$sql_delete);
