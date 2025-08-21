@@ -567,13 +567,13 @@ else{
 									<?php if($status == 'Accept'){ echo 'Accepted on '.date('d/m/Y',strtotime($changed_date)); }else{ ?>✓ Accept <?php } ?>
 								</button>
 
-                                <?php if($status != 'Accept') ?>
+                                <?php if($status != 'Accept') { ?>
 
                                     <button id="dec_<?php echo $loop_count; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($status == 'Decline') echo 'disabled'; ?>  onclick="declineRequest(<?php echo $booking_id; ?>,<?php echo $loop_count; ?>)">
                                         <?php if($status == 'Decline'){ echo 'Declined on '.date('d/m/Y',strtotime($changed_date)); }else{ ?>✗ Decline <?php } ?>
                                     </button>
-                                    
-                                <?php }?>
+
+                                <?php } ?>
 
 								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
 									View Profile
