@@ -20,6 +20,8 @@ if (isset($_SESSION['log_user_id'])) {
 
   $followes_count = getModelFollowersCount($unique_id);
 
+  $following_count = getModelFolloweringCount($unique_id);
+
 ?>
  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
@@ -53,7 +55,7 @@ if (isset($_SESSION['log_user_id'])) {
         <div class="menu-stat-label">Followers</div>
       </div>
       <div class="menu-stat">
-        <div class="menu-stat-value">0</div>
+        <div class="menu-stat-value"> <?php echo $following_count ?></div>
         <div class="menu-stat-label">Following</div>
       </div>
     </div>
