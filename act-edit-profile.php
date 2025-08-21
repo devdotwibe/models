@@ -17,6 +17,16 @@ if ($_POST['submit_name']){
 	//$post_data['age'] = h_get_age($dob);
 	
 	$unique_id = $_POST['unique_id'];
+
+	DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
+	if($error){
+		//echo '<script>alert("'.$error.'");</script>';
+		echo json_encode(['status' => 'Error in saving']);
+	}
+	echo json_encode(['status' => 'success']); exit;
+
+
+	
 	
 	$post_data['hobbies'] = json_encode($_POST['hobbies']);
 	
