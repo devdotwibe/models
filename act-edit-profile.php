@@ -26,14 +26,6 @@ if ($_POST['submit_name']){
 		$post_data['additional_hobbies'] = '';
 	}
 
-	DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
-	if($error){
-		//echo '<script>alert("'.$error.'");</script>';
-		echo json_encode(['status' => 'Error in saving']);
-	}
-	echo json_encode(['status' => 'success']); exit;
-
-
 	
 	
 	$lang_array = array();
@@ -51,6 +43,16 @@ if ($_POST['submit_name']){
 	}
 	$post_data['english_ability'] = $english_ability;
 	$post_data['languages'] = json_encode($lang_array); 
+
+	DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
+	if($error){
+		//echo '<script>alert("'.$error.'");</script>';
+		echo json_encode(['status' => 'Error in saving']);
+	}
+	echo json_encode(['status' => 'success']); exit;
+
+
+	
 	
 	//Social icons 
 	$platform = $_POST['platform'];
