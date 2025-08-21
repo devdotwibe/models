@@ -63,16 +63,18 @@ if ($_POST['submit_name']){
 				
 			}else{
 				$sc_data = array();
+				if(!empty($paid_token[$cnt])) $paid_token_val = $paid_token[$cnt];
+				else $paid_token_val = 0;
 					$sc_data['unique_model_id'] = $unique_id;
 					$sc_data['platform'] = $sc;
 					$sc_data['URL'] = $URL[$cnt];
 					$sc_data['status'] = $status[$cnt];
-					$sc_data['tokens'] = $paid_token[$cnt];
+					$sc_data['tokens'] = $paid_token_val;
 					$sc_data['public'] = $public[$cnt];
-					//DB::insert('model_social_link', $sc_data); 
-					//$created_id_s = DB::insertId();
-					$que = "INSERT INTO `model_social_link` (`unique_model_id`, `platform`, `URL`, `status`, `tokens`, `public`) VALUES ('".$unique_id."', '".$sc."', '".$URL[$cnt]."', '".$status[$cnt]."', ".$paid_token[$cnt].", '".$public[$cnt]."');";
-					echo json_encode(['status' => $que]); exit;
+					DB::insert('model_social_link', $sc_data); 
+					$created_id_s = DB::insertId();
+					//$que = "INSERT INTO `model_social_link` (`unique_model_id`, `platform`, `URL`, `status`, `tokens`, `public`) VALUES ('".$unique_id."', '".$sc."', '".$URL[$cnt]."', '".$status[$cnt]."', ".$paid_token[$cnt].", '".$public[$cnt]."');";
+					//echo json_encode(['status' => $que]); exit;
 					 /* if(mysqli_query($con,$que)){
 						  
 					  }else{
