@@ -61,6 +61,18 @@ function updateUserActivity($userId) {
     file_put_contents($file, time());
 }
 
+function getModelFollowersCount($model_id) {
+	
+    $query = "SELECT COUNT(*) 
+              FROM model_follow 
+              WHERE unique_user_id = %s 
+                AND status = 'Follow'";
+    
+    $count = DB::queryFirstField($query, $model_id);
+    return (int)$count; 
+}
+
+
 function getModelFollowerIds($model_id) {
     $query = "SELECT unique_model_id FROM model_follow WHERE unique_user_id = %s AND status = 'Follow'";
     
@@ -411,7 +423,7 @@ function getModelPrivacySettings($model_id) {
 				WHERE receiver_id = %i";
 		
 		$count = DB::queryFirstField($query, $user_id);
-		
+
 		return (int)$count;
 	}
 
