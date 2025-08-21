@@ -478,12 +478,13 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     </svg> -->
 
                                     <div class="all-link-btn">
+
                                         <img src="<?=SITEURL?>assets/images/all-links.svg" />
+                                        
                                     </div>
 
                                     All my links
                                 </div>
-
 
 
                                     </div>
