@@ -18,6 +18,14 @@ if ($_POST['submit_name']){
 	
 	$unique_id = $_POST['unique_id'];
 
+	$post_data['hobbies'] = json_encode($_POST['hobbies']);
+	
+	if(isset($_POST['additional_hobbies']) && !empty($_POST['additional_hobbies'])){
+		$post_data['additional_hobbies'] = json_encode($_POST['additional_hobbies']);
+	}else{
+		$post_data['additional_hobbies'] = '';
+	}
+
 	DB::update('model_user', $post_data, "id=%s", $userDetails['id']);
 	if($error){
 		//echo '<script>alert("'.$error.'");</script>';
@@ -27,14 +35,6 @@ if ($_POST['submit_name']){
 
 
 	
-	
-	$post_data['hobbies'] = json_encode($_POST['hobbies']);
-	
-	if(isset($_POST['additional_hobbies']) && !empty($_POST['additional_hobbies'])){
-		$post_data['additional_hobbies'] = json_encode($_POST['additional_hobbies']);
-	}else{
-		$post_data['additional_hobbies'] = '';
-	}
 	
 	$lang_array = array();
 	$modal_lang = $_POST['modal_lang'];
