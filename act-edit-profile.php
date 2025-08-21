@@ -73,14 +73,7 @@ if ($_POST['submit_name']){
 					$sc_data['public'] = $public[$cnt];
 					DB::insert('model_social_link', $sc_data); 
 					$created_id_s = DB::insertId();
-					//$que = "INSERT INTO `model_social_link` (`unique_model_id`, `platform`, `URL`, `status`, `tokens`, `public`) VALUES ('".$unique_id."', '".$sc."', '".$URL[$cnt]."', '".$status[$cnt]."', ".$paid_token[$cnt].", '".$public[$cnt]."');";
-					//echo json_encode(['status' => $que]); exit;
-					 /* if(mysqli_query($con,$que)){
-						  
-					  }else{
-						echo json_encode(['status' => mysqli_error($con)]); exit;
-						 // print_r("MySQL Error: " . mysqli_error($con)); exit;
-					  }*/
+					
 			}
 			
 			$cnt++;
@@ -89,8 +82,8 @@ if ($_POST['submit_name']){
 		// Trim last comma
 		$string_paltform = rtrim($string_paltform, ','); 
 		if(!empty($string_paltform)){
-			//$sql_delete = "DELETE FROM `model_social_link` WHERE unique_model_id = '".$userDetails['unique_id']."' AND platform NOT IN (".$string_paltform.")";
-			//mysqli_query($con,$sql_delete);
+			$sql_delete = "DELETE FROM `model_social_link` WHERE unique_model_id = '".$userDetails['unique_id']."' AND platform NOT IN (".$string_paltform.")";
+			mysqli_query($con,$sql_delete);
 		}
 	} 
 	
