@@ -109,7 +109,7 @@ if ($_POST['submit_name']){
 		//echo '<script>alert("'.$error.'");</script>';
 		echo json_encode(['status' => 'Error in saving']);
 	}
-	
+	echo json_encode(['status' => 'success']); exit;
 	//Physical attributes save
 		$arr_proof = array();
 		$arr_proof = array('height_type','weight_type','weight','hair_color','eye_color','ethnicity','body_type','dress_size','bust_size','waist_size','cup_size');
@@ -140,7 +140,7 @@ if ($_POST['submit_name']){
 			
 		}
 		
-	echo json_encode(['status' => 'success']); exit;
+	
 	//Profile upload
 		$use_id = $_SESSION["log_user_id"];
 
