@@ -4061,12 +4061,14 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           hiddenmedia.setAttribute("class", "hiddenmedia");
           hiddenmedia.setAttribute("value", response.file);
 
-          // Show preview container
           $('#temporary-preview-container').show();
 
-          // Move preview manually before modalimage_gallery
           function AddjustImage() {
+
+            $('#temporary-preview-container').append(hiddenmedia);
+
             const content = $('#temporary-preview-container').html();
+
             $('#modalimage_gallery').before(content);
             $('#temporary-preview-container').empty().hide();
           }
@@ -4074,8 +4076,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           AddjustImage();
 
           const preview = file.previewElement;
-
-          $('#modalimage_gallery').before(hiddenmedia);
 
           const deleteBtn = preview.querySelector('.custom-delete-btn');
 
