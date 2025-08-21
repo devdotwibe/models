@@ -390,7 +390,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                   <ul class="visualizacao sortable dropzone-previews">
 
-                    <?php $modal_img_list = DB::query('select * from model_images where unique_model_id="' . $userDetails['unique_id'] . '" AND file_type = "Image" AND category = "Profile" Order by id DESC');
+                    <?php $modal_img_list = DB::query('select * from model_images where unique_model_id="' . $userDetails['unique_id'] . '" AND file_type = "Image" AND category = "Profile" Order by id ASC');
                     if (!empty($modal_img_list)) {
                       $i = 1;
                       foreach ($modal_img_list as $imgs) {
