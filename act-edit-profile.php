@@ -140,7 +140,7 @@ if ($_POST['submit_name']){
 			
 		}
 		
-	
+	echo json_encode(['status' => 'success']); exit;
 	//Profile upload
 		$use_id = $_SESSION["log_user_id"];
 
