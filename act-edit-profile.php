@@ -52,7 +52,7 @@ if ($_POST['submit_name']){
 	$public = $_POST['public'];
 	$socialid = $_POST['socialid'];
 	$paid_token = $_POST['paid_token'];
-	if(!empty($platform)){ echo json_encode(['status' => 'test']); exit
+	if(!empty($platform)){ echo json_encode(['status' => 'test']); exit;
 		$cnt = 0; $string_paltform = '';
 		foreach($platform as $sc){
 			if(!empty($socialid[$cnt])){
