@@ -889,7 +889,7 @@ if(!empty($userDetails['profile_pic'])){
                     <h4 class="font-bold text-base md:text-lg"> <?php echo $post['name'] ?> </h4>
                     <span class="verified-badge ml-2">✓</span>
                   </div>
-                  <p class="text-xs md:text-sm text-white/60">Active now • 3 miles away</p>
+                  <p class="text-xs md:text-sm text-white/60">Active now •</p>
                 </div>
               </div>
               <button class="btn-primary text-sm md:text-base" onclick="toggleConnect(this)">Connect</button>
