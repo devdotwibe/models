@@ -500,6 +500,38 @@ function isUserOnlineStatusCheck($userId, $minutes) {
 	}
 }
 
+	function getPostUploadTime($post_id)
+	{
+
+		$query = "SELECT post_date FROM live_posts WHERE ID = %i";
+		$upload_time_str = DB::queryFirstField($query, $post_id);
+
+		if (!$upload_time_str) {
+			return "";
+		}
+
+		$upload_time = strtotime($upload_time_str);
+		$now = time();
+
+		$diff = $now - $upload_time;
+
+		if ($diff < 60) {
+			return 'Just now';
+		} elseif ($diff < 3600) {
+			$minutes = floor($diff / 60);
+			return $minutes . ' minute' . ($minutes > 1 ? 's' : '') . ' ago';
+		} elseif ($diff < 86400) {
+			$hours = floor($diff / 3600);
+			return $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
+		} elseif ($diff < 604800) {
+			$days = floor($diff / 86400);
+			return $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
+		} else {
+			return date("M d, Y", $upload_time);
+		}
+	}
+
+
 function getUserLastSeenAgo($userId) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
     $file = $cacheDir . 'user_' . $userId . '.txt';

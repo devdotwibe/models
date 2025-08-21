@@ -560,9 +560,9 @@ if(!empty($userDetails['profile_pic'])){
 
                 <?php
                 
-                  $post_user_id = $post['user_id'];
+                  $post_upload_id = $post['ID'];
 
-                   $psot_user_status =  getUserLastSeenAgo($post_user_id);
+                   $psot_user_status =  getPostUploadTime($post_upload_id);
 
                 ?>
                 <div class="ml-3 md:ml-4">
