@@ -2,7 +2,10 @@
 				$prof_img = SITEURL.$get_modal_user[0]['profile_pic'];
 			} else{
 				$prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
-			} ?>
+			} 
+      
+    $notify_count = NotificationCount($get_modal_user[0]['id']);
+?>
 
   <!-- Header -->
   <header class="glass-effect sticky top-0 z-50 border-b border-white/10">
