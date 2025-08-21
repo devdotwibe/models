@@ -586,7 +586,7 @@ if(!empty($userDetails['profile_pic'])){
 
                 <?php if($isconnected) { ?>
 
-                  <span class="status-online">Connected <?php echo $modelDetails['unique_id'] ?>  <?php echo $userDetails['unique_id'] ?> </span>
+                  <span class="status-online">Connected</span>
 
                 <?php } ?>
 
