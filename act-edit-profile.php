@@ -46,7 +46,7 @@ if ($_POST['submit_name']){
 
 	
 	//Social icons 
-	/*$platform = $_POST['platform'];
+	$platform = $_POST['platform'];
 	$URL = $_POST['URL'];
 	$status = $_POST['status'];
 	$public = $_POST['public'];
@@ -82,7 +82,7 @@ if ($_POST['submit_name']){
 			$sql_delete = "DELETE FROM `model_social_link` WHERE unique_model_id = '".$userDetails['unique_id']."' AND platform NOT IN (".$string_paltform.")";
 			mysqli_query($con,$sql_delete);
 		}
-	} */
+	} 
 	
 
 	$error = '';
