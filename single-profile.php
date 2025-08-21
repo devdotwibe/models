@@ -565,6 +565,8 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                 $blur_class="style='filter: blur(10px);'";
                         }
+
+                        $post_likes = PostLikesCount($uplds['ID']);
 				?>
                     <!-- Media Item Image -->
                     <div class="media-item images_tab all_items_tab">
@@ -584,9 +586,9 @@ if (mysqli_num_rows($res_ap) > 0) {
                                          </span>
                                         <span class="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                            <span class="ml-1">48</span>
+                                            <span class="ml-1"><?php echo $post_likes ?></span>
                                         </span>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -637,6 +639,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                      $blur_class="style='filter: blur(10px);'";
                                 }
 
+                            $post_likes = PostLikesCount($uplds['ID']);
                             
                         ?>
 
@@ -661,7 +664,8 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                         <span class="flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                            <span class="ml-1">88</span>
+                                           <span class="ml-1"><?php echo $post_likes ?></span>
+                                            
                                         </span>
                                       
                                     </div>
