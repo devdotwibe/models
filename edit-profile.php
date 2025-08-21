@@ -4065,7 +4065,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
           function AddjustImage() {
 
-            $('#temporary-preview-container').append(hiddenmedia);
+            $('#temporary-preview-container').find('.dz-processing').append(hiddenInput);
 
             const content = $('#temporary-preview-container').html();
 
