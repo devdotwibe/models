@@ -49,7 +49,7 @@ if (isset($_SESSION['log_user_id'])) {
 
     <div class="menu-stats">
       <div class="menu-stat">
-        <div class="menu-stat-value">2</div>
+        <div class="menu-stat-value"> <?php echo $followes_count ?></div>
         <div class="menu-stat-label">Followers</div>
       </div>
       <div class="menu-stat">
