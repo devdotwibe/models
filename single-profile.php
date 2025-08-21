@@ -8,6 +8,8 @@ if (isset($_SESSION['log_user_unique_id'])) {
 
  $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
+  $modelDetails = get_data('model_user',array('unique_id'=>$_GET['m_unique_id']),true);
+
   if ($getUserData) {
     if (empty($getUserData['i_username'])) {
       $error = 'empty';
@@ -899,7 +901,11 @@ if (mysqli_num_rows($res_ap) > 0) {
                     <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
                         <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
                         <ul class="space-y-4">
-                            <li class="flex items-center gap-3">
+
+
+                         <?php if ($_SESSION["log_user_unique_id"] != $session_id) { ?>
+                                   
+                            <li class="flex items-center gap-3" onclick="window.location='<?= SITEURL ?>user/chat/user_chat.php?id=<?= $modelDetails['id'] ?>'" >
                                 <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                                 </div>
@@ -908,6 +914,8 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     <div class="text-xs sm:text-sm text-white/60">Private messaging</div>
                                 </div>
                             </li>
+
+                        <?php } ?>
 
 
                             <?php
