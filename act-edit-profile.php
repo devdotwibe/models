@@ -52,7 +52,7 @@ if ($_POST['submit_name']){
 	$public = $_POST['public'];
 	$socialid = $_POST['socialid'];
 	$paid_token = $_POST['paid_token'];
-	if(!empty($platform)){ echo json_encode(['status' => 'test']); exit;
+	if(!empty($platform)){ 
 		$cnt = 0; $string_paltform = '';
 		foreach($platform as $sc){
 			if(!empty($socialid[$cnt])){
@@ -74,9 +74,10 @@ if ($_POST['submit_name']){
 					$que = "INSERT INTO `model_social_link` (`unique_model_id`, `platform`, `URL`, `status`, `tokens`, `public`) VALUES ('".$unique_id."', '".$sc."', '".$URL[$cnt]."', '".$status[$cnt]."', ".$paid_token[$cnt].", '".$public[$cnt]."');";
   
 					  if(mysqli_query($con,$que)){
-						  print_r("MySQL Error: " . mysqli_error($con)); exit;
+						  
 					  }else{
-						  print_r("MySQL Error: " . mysqli_error($con)); exit;
+						echo json_encode(['status' => mysqli_error($con)]); exit;
+						 // print_r("MySQL Error: " . mysqli_error($con)); exit;
 					  }
 			}
 			
