@@ -923,24 +923,14 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     } else if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') {
                                     ?>
 
-                                <li class="flex items-center gap-3">
+                                <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
-                                        <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
-
-                                            <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
-                                        </form>
-                                        
+                                        <button type="button" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
+                                       
                                     </div>
                                     <div>
-                                        <div class="font-semibold text-sm sm:text-base">Watch
-
-                                        <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
-
-                                            <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
-                                        </form>
-
-                                        </div>
+                                        <div class="font-semibold text-sm sm:text-base">Watch</div>
                                         <div class="text-xs sm:text-sm text-white/60">Live streams & content</div>
                                     </div>
                                 </li>
@@ -951,24 +941,16 @@ if (mysqli_num_rows($res_ap) > 0) {
                             <?php
                                     if ($_SESSION["log_user_unique_id"] == $session_id) {?>
                                 
-                                <li class="flex items-center gap-3">
+                                <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
+
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
-                                        <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
-
-                                            <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
-                                        </form>
-                                        
+                                        <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
+                
                                     </div>
+
                                     <div>
-                                        <div class="font-semibold text-sm sm:text-base">Go live
-
-                                        <form style="display:inline-block" method="post" action="<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>">
-
-                                            <button type="submit" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
-                                        </form>
-
-                                        </div>
+                                        <div class="font-semibold text-sm sm:text-base">Go live</div>
                                         <div class="text-xs sm:text-sm text-white/60">Live streams & content</div>
                                     </div>
                                 </li>
