@@ -69,8 +69,8 @@ if ($_POST['submit_name']){
 					$sc_data['status'] = $status[$cnt];
 					$sc_data['public'] = $public[$cnt];
 					$sc_data['tokens'] = $paid_token[$cnt];
-					DB::insert('model_social_link', $sc_data); 
-					$created_id = DB::insertId();
+					//DB::insert('model_social_link', $sc_data); 
+					//$created_id = DB::insertId();
 			}
 			
 			$cnt++;
@@ -79,8 +79,8 @@ if ($_POST['submit_name']){
 		// Trim last comma
 		$string_paltform = rtrim($string_paltform, ','); print_r($platform); exit;
 		if(!empty($string_paltform)){
-			$sql_delete = "DELETE FROM `model_social_link` WHERE unique_model_id = '".$userDetails['unique_id']."' AND platform NOT IN (".$string_paltform.")";
-			mysqli_query($con,$sql_delete);
+			//$sql_delete = "DELETE FROM `model_social_link` WHERE unique_model_id = '".$userDetails['unique_id']."' AND platform NOT IN (".$string_paltform.")";
+			//mysqli_query($con,$sql_delete);
 		}
 	} 
 	
