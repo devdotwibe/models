@@ -754,6 +754,9 @@ if(!empty($userDetails['profile_pic'])){
 
                     <div class="flex items-center comnt_user_<?php echo $k ?>">
 
+                     <?php  if($userDetails['id'] != $post['user_id']) { ?>
+
+                      
                      <?php
 
                           $auther_pic_url ="";
@@ -768,9 +771,6 @@ if(!empty($userDetails['profile_pic'])){
                           <img src="<?php echo $auther_pic_url ?>" alt="Your profile" class="w-8 md:w-10 h-8 md:h-10 rounded-full">
 
                       <?php } ?>
-
-
-                    <?php  if($userDetails['id'] != $post['user_id']) { ?>
 
                       <input type="text" name="comment" id="comment_content_<?php echo $k ?>" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
 
