@@ -477,7 +477,7 @@ if(!empty($userDetails['profile_pic'])){
         <!-- Quick Stats -->
         <div class="model-card" id="profie_status_section">
 
-          <h3 class="font-bold mb-4 gradient-text">Your Stats</h3>
+          <h3 class="font-bold mb-4 gradient-text">Your Status</h3>
           <div class="space-y-3">
             <div class="flex justify-between">
               <span class="text-white/70">Profile Views</span>
