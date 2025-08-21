@@ -733,7 +733,11 @@ offset = offset+limit;
 				dataType:'json',
 				success: function(response){ 
 					showNotification(`✅ Service request accepted! You'll be connected shortly.`, 'success');
-					jQuery('#acc_'+loopcount).attr('disabled',true);
+
+                    // if(response.type != 'Accept')
+                    // {
+					//     jQuery('#acc_'+loopcount).attr('disabled',true);
+                    // }
 					let today = new Date();
 					// Format the date as d/m/Y
 					let day = ('0' + today.getDate()).slice(-2);    // Day
