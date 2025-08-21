@@ -770,9 +770,9 @@ if(!empty($userDetails['profile_pic'])){
                       <?php } ?>
 
 
-                    <input type="text" name="comment" id="comment_content_<?php echo $k ?>" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
-
                     <?php  if($userDetails['id'] != $post['user_id']) { ?>
+
+                      <input type="text" name="comment" id="comment_content_<?php echo $k ?>" placeholder="Write a comment..." class="ml-3 glass-effect rounded-full py-2 px-4 flex-1 text-sm bg-transparent border border-white/20 focus:border-purple-500 focus:outline-none">
 
                       <button type="button" onclick="AddMessage('<?php echo $k ?>')" class="btn-secondary text-sm md:text-base whitespace-nowrap">Message</button>
 
