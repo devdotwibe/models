@@ -742,8 +742,13 @@ offset = offset+limit;
 				    // Combine into d/m/Y format
 				    let formattedDate = day + '/' + month + '/' + year;
 					jQuery('#acc_'+loopcount).text('Accepted on '+formattedDate);
-					jQuery('#dec_'+loopcount).attr('disabled',false);
-					jQuery('#dec_'+loopcount).text('✗ Decline');
+
+                    jQuery('#dec_'+loopcount).remove();
+
+					// jQuery('#dec_'+loopcount).attr('disabled',false);
+
+					// jQuery('#dec_'+loopcount).text('✗ Decline');
+
 				}
 			});
 		
