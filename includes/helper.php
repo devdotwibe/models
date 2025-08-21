@@ -404,6 +404,17 @@ function getModelPrivacySettings($model_id) {
 		return (int)$count; 
 	}
 
+	function NotificationCount($user_id)
+	{
+		$query = "SELECT COUNT(*) 
+				FROM all_notifications 
+				WHERE receiver_id = %i";
+		
+		$count = DB::queryFirstField($query, $user_id);
+		
+		return (int)$count;
+	}
+
 function isUserOnline($userId, $minutes = 5) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
     $file = $cacheDir . 'user_' . $userId . '.txt';
