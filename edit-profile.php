@@ -4073,8 +4073,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
           AddjustImage();
 
-          // Attach delete button event
           const preview = file.previewElement;
+
+          $('#modalimage_gallery').before(hiddenmedia);
+
           const deleteBtn = preview.querySelector('.custom-delete-btn');
 
           if (deleteBtn) {
@@ -4109,8 +4111,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             });
           }
 
-          // Append hidden input AFTER attaching delete event
-          preview.appendChild(hiddenmedia);
+          // preview.appendChild(hiddenmedia);
+
           file.serverFileName = response.file;
         });
       }
