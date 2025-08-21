@@ -74,7 +74,7 @@ if ($_POST['submit_name']){
 					$que = "INSERT INTO `model_social_link` (`unique_model_id`, `platform`, `URL`, `status`, `tokens`, `public`) VALUES ('".$unique_id."', '".$sc."', '".$URL[$cnt]."', '".$status[$cnt]."', ".$paid_token[$cnt].", '".$public[$cnt]."');";
   
 					  if(mysqli_query($con,$que)){
-						  
+						  print_r("MySQL Error: " . mysqli_error($con)); exit;
 					  }else{
 						  print_r("MySQL Error: " . mysqli_error($con)); exit;
 					  }
