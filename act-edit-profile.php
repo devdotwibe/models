@@ -69,8 +69,8 @@ if ($_POST['submit_name']){
 					$sc_data['status'] = $status[$cnt];
 					$sc_data['tokens'] = $paid_token[$cnt];
 					$sc_data['public'] = $public[$cnt];
-					DB::insert('model_social_link', $sc_data); 
-					$created_id_s = DB::insertId();
+					//DB::insert('model_social_link', $sc_data); 
+					//$created_id_s = DB::insertId();
 			}
 			
 			$cnt++;
