@@ -98,6 +98,19 @@ function getModelFollowerIds($model_id) {
     return $followerIds;
 }
 
+	function isUserFollow($model_id, $user_id) {
+		$query = "SELECT COUNT(*) 
+				FROM model_follow 
+				WHERE unique_model_id = %i 
+					AND unique_user_id = %i 
+					AND status = 'Follow'";
+		
+		$count = DB::queryFirstField($query, $model_id, $user_id);
+
+		return ($count > 0);
+	}
+
+
 	function isUserHaveExtraDetail($uni_id,$con)
 	{
 		$check_sql = "SELECT COUNT(*) AS count FROM model_extra_details WHERE unique_model_id = '".$uni_id."'";

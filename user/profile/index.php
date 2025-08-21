@@ -573,7 +573,23 @@ if(!empty($userDetails['profile_pic'])){
                     <p class="text-xs md:text-sm text-white/60"><?php echo $psot_user_status ?> •</p>
                 </div>
                 </div>
-                <span class="status-online">Connected</span>
+
+                <?php
+                
+                   $post_user_id = $post['user_id'];
+
+                  $modelDetails = get_data('model_user',array('id'=>$post_user_id),true);
+
+                  $isconnected =  isUserFollow($modelDetails['unique_id'],$userDetails['unique_id']); 
+
+                ?>
+
+                <?php if($isconnected) { ?>
+
+                  <span class="status-online">Connected</span>
+
+                <?php } ?>
+
             </div>
 
               <p>  <?php echo $post['post_content']; ?></p>
