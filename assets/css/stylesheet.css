@@ -10868,6 +10868,13 @@ margin: 0 auto;
 .search-section .search-form form > *:nth-last-child(-n+2) {
   margin-bottom: 0 !important;
 }
+
+.search-section .search-form form > *:nth-child(3),
+.search-section .search-form form > *:nth-child(4) {
+  margin-bottom: 0 !important;
+}
+
+
 }
 
 @media (max-width: 600px) {
