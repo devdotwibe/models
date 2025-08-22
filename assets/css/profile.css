@@ -3522,6 +3522,9 @@ body.premimum-model1::before {
     align-items: center;
     padding: 0.75rem 18px;
 }
+.premimum-model1 .toggle-container > span{
+    margin-bottom:0;
+}
 
 .premimum-model1 .toggle-switch {
     position: relative;
@@ -3658,7 +3661,13 @@ body.premimum-model1::before {
     position: relative;
     backdrop-filter: blur(var(--blur));
     -webkit-backdrop-filter: blur(var(--blur));
+
 }
+.premimum-model1 .profile-grid.profile-columns .profile-card {
+    display: flex;
+  flex-direction: column;
+}
+
 
 .premimum-model1 .profile-card:hover {
     transform: translateY(-8px);

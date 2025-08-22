@@ -933,7 +933,7 @@ if(!empty($userDetails['profile_pic'])){
   </main>
 
   <!-- Mobile Navigation -->
-  <nav class="mobile-nav md:hidden">
+  <nav class="mobile-nav md:hidden footer-mobile-menus">
     <div class="flex justify-around">
       <div class="mobile-nav-item active">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">

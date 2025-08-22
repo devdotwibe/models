@@ -1557,8 +1557,13 @@ textarea:focus {
 /* Expanded View */
 .advt-page .ads-expanded {
     display: none;
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 2rem;
+    flex-wrap:wrap;
+}
+
+.advt-page .ads-expanded .ad-card {
+    width: 48%;
 }
 
 .advt-page .ads-expanded.active {
@@ -3539,7 +3544,7 @@ body.premimum-model1::before {
     letter-spacing: 0.025em;
 
 }
-
+/* .premimum-model1 .toggle-container */
 
 
 .premimum-model1 .premium-btn:hover {
@@ -4577,7 +4582,7 @@ body.premimum-model1::before {
 
     color: var(--text-primary);
     text-decoration: none;
-
+    word-break: break-all;
 }
 
 
@@ -10252,7 +10257,9 @@ body.advt-page.my-purpose .scroll-indicator {
     border-top: 1px solid var(--border);
     align-items: center;
     gap: 25px;
+    margin-top: auto;
 }
+
 
 /* all mobile in the grid view end style..................... */
 
@@ -10747,6 +10754,16 @@ body.advt-page.my-purpose .scroll-indicator {
     .premimum-model1 .main-content {
         padding-top: calc(3.5rem - 6px) !important;
     }
+
+
+    .header-desk-outer div:last-child {
+        display: none;
+    }
+
+    .header-desk-inner button:nth-child(2), .header-desk-inner button:nth-child(3) {
+        display: none;
+    }
+
 }
 
 @media (max-width: 600px) {

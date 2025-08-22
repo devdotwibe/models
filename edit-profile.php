@@ -365,7 +365,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                   <?php if($have_pic) { ?>
 
-                        <a href="#">×</a>
+                        <a  onclick="DeleteImage()">×</a>
                         
                         <a  onclick="editProfileImage()">
                           <img src="<?php echo SITEURL.'/assets/images/edt.svg'; ?>" alt="">
@@ -2898,6 +2898,33 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   </div>
 
 
+    <div class="modal-overlay" id="conform_remove_profile_pic">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 class="modal-title">Confirm Profile Image Removal</h2>
+          <button class="close-modal" id="closeRemoveProfilePicModal" type="button" onclick="ConformCloseModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete your profile image?</p>
+
+          <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
+            <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" onclick="confirmRemoveProfilePic()">Yes, Remove</button>
+
+            <button class="btn btn-secondary" type="button" onclick="ConformCloseModal()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
   <?php include('includes/footer.php'); ?>
   <script>
     function select_hs_country(state) {
@@ -2943,6 +2970,43 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   </script>
 
   <script>
+
+    function ConformCloseModal()
+    {
+      $('#conform_remove_profile_pic').removeClass('active');
+    }
+
+    function DeleteImage()
+    {
+        $('#conform_remove_profile_pic').addClass('active');
+    }
+
+    function confirmRemoveProfilePic()
+    {
+        $.ajax({
+            url: '<?= SITEURL . 'ajax/upload_image.php' ?>',
+            type: 'post',
+            data: {
+              action: 'remove_profile_pic'
+            },
+            dataType: 'json',
+
+            success: function(res) {
+
+              if(res.status == 'success')
+              {
+                $('#preview_prof_img').attr('src','<?= SITEURL ?>assets/images/user.png');
+
+                $('#conform_remove_profile_pic').removeClass('active');
+
+              }
+              else
+              {
+                alert('Error removing profile image. Please try again.');
+              }
+            }
+          })
+    }
 
 
     function editProfileImage()
@@ -3383,21 +3447,43 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 	function updateProfileCompletionNew(button) {
 		
 		let completedFields = 0;
-      let totalFields = 0;
+    let totalFields = 0;
 
-      const basicFields = ['#uname', '#dob-input', '#age-display'];
-      basicFields.forEach(selector => {
+    let missingFields = [];
+
+    const basicFields = [
+        { selector: '#uname', label: 'Username' },
+        { selector: '#dob-input', label: 'Date of Birth' },
+        { selector: '#age-display', label: 'Age' }
+    ];
+
+    basicFields.forEach(fieldData => {
         totalFields++;
-        const field = document.querySelector(selector);
-        if (field && field.value) completedFields++;
+        const field = document.querySelector(fieldData.selector);
+        if (field && field.value.trim()) {
+            completedFields++;
+        } else {
+            missingFields.push(fieldData.label);
+        }
+    });
+
+    const extraFields = [
+        { id: 'i-hs-country', label: 'Country' },
+        { id: 'i-hs-state', label: 'State' },
+        { id: 'i-hs-city', label: 'City' }
+    ];
+
+
+	  totalFields += extraFields.length;
+
+      extraFields.forEach(fieldData => {
+          const field = document.getElementById(fieldData.id);
+          if (field && field.value.trim()) {
+              completedFields++;
+          } else {
+              missingFields.push(fieldData.label);
+          }
       });
-	  totalFields += 3;    
-      const country = document.getElementById('i-hs-country');
-      const state = document.getElementById('i-hs-state');
-	  const city = document.getElementById('i-hs-city');
-      if (country && country.value) completedFields++;
-	  if (state && state.value) completedFields++;
-      if (city && city.value) completedFields++;
 	  
 		if(totalFields == completedFields){
 			  const $button = $(button);
@@ -3444,8 +3530,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 				  $button.prop('disabled', false);
 				}
 			  });
+        
 		}else{
-			showNotification('Please fill required fields', 'error');
+
+			  showNotification('Please fill required fields: ' + missingFields.join(', '), 'error');
+
 		}
 	}
 
@@ -3937,18 +4026,59 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       }
 
     jQuery(document).ready(function($) {
+
+
       $('#pic_img').on('change', function() {
-        const file = this.files[0];
+        
+          const file = this.files[0];
 
-        if (file) {
-          const reader = new FileReader();
+          if (file) {
+            const reader = new FileReader();
 
-          reader.onload = function(e) {
-            $('#preview_prof_img').attr('src', e.target.result).show();
+            reader.onload = function(e) {
+              $('#preview_prof_img').attr('src', e.target.result).show();
+            }
+
+            reader.readAsDataURL(file);
+
+              let formData = new FormData();
+
+              formData.append("pic_img", file);
+
+              formData.append("action",'upload_profile_pic');
+
+              $.ajax({
+
+                  url: "ajax/upload_image.php",
+                  type: "POST",
+                  data: formData,
+                  processData: false, 
+                  contentType: false,  
+                  success: function(response) {
+
+                       let res = JSON.parse(response);
+
+                      if (res.status === 'success') {
+
+                          $('#pic_img').val("");
+
+                          showNotification('Profile image updated successfully', 'success');
+
+                      } else {
+
+                          showNotification('Error uploading image', 'error');
+                      }
+
+                  },
+
+                  error: function(xhr, status, error) {
+                 
+                  }
+
+
+              });
           }
 
-          reader.readAsDataURL(file);
-        }
       });
 
 
