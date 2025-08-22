@@ -3937,18 +3937,55 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       }
 
     jQuery(document).ready(function($) {
+
+
       $('#pic_img').on('change', function() {
-        const file = this.files[0];
+        
+          const file = this.files[0];
 
-        if (file) {
-          const reader = new FileReader();
+          if (file) {
+            const reader = new FileReader();
 
-          reader.onload = function(e) {
-            $('#preview_prof_img').attr('src', e.target.result).show();
+            reader.onload = function(e) {
+              $('#preview_prof_img').attr('src', e.target.result).show();
+            }
+
+            reader.readAsDataURL(file);
+
+              let formData = new FormData();
+
+              formData.append("pic_img", file);
+
+              $.ajax({
+
+                  url: "ajax/upload_image.php",
+                  type: "POST",
+                  data: formData,
+                  processData: false, 
+                  contentType: false,  
+                  success: function(response) {
+
+                      if (response.status === 'success') {
+
+                          $('#pic_img').val("");
+
+                          showNotification('Profile image updated successfully', 'success');
+
+                      } else {
+
+                          showNotification('Error uploading image', 'error');
+                      }
+
+                  },
+
+                  error: function(xhr, status, error) {
+                 
+                  }
+
+
+              });
           }
 
-          reader.readAsDataURL(file);
-        }
       });
 
 
