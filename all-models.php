@@ -635,7 +635,7 @@ include('includes/helper.php');
                             <div class="profile-actions">
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                 <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                 <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                     
@@ -1181,7 +1181,7 @@ include('includes/helper.php');
                             <div class="profile-actions">
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                    <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } else { ?>

@@ -65,15 +65,29 @@ $resultd = mysqli_query($con, $sqls);
 						$user_bio  = limit_text(strip_tags($rowesdw['user_bio']),15).'...';
                         $html .= '<p class="profile-bio">'.$user_bio.'</p>';
 						 } 
+
+                     if (isset($_SESSION['log_user_id'])) { 
+
+                        $action = '<button class="action-btn connect" title="Connect"  onclick="ActionBtn(this, \'connect\')"  modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
+                                        <i class="fas fa-user-plus"></i>
+                                    </button>';
+                     }else {
+
+
+                        $action .= '<button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+                                        <i class="fas fa-user-plus"></i>
+                                    </button>';
+                     }
+
                     $html .= '</div>
                     <div class="profile-actions">
-                        <button class="action-btn connect" title="Connect" modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
-                            <i class="fas fa-user-plus"></i>
-                        </button>
-                        <button class="action-btn like" title="Like" modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
+
+                        '.$action.'
+                        
+                        <button class="action-btn like"  onclick="ActionBtn(this, \'like\')"  title="Like" modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
                             <i class="fas fa-heart"></i>
                         </button>
-                        <button class="action-btn pass" title="Pass" modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
+                        <button class="action-btn pass"   onclick="ActionBtn(this, \'pass\')"  title="Pass" modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
