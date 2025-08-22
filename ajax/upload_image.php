@@ -1,35 +1,31 @@
-	
 <?php 
+
 session_start(); 
 include('../includes/config.php');
 include('../includes/helper.php');
 
-      $use_id = $_SESSION["log_user_id"];
+$use_id = $_SESSION["log_user_id"];
+$target_dir_profile = "../uploads/profile_pic/"; 
 
-      $target_dir_profile = "../uploads/profile_pic/"; 
+$response = ['status' => 'error', 'message' => 'Sorry, there was an error uploading your file.'];
 
-	  if (isset($_FILES["pic_img"]) && !empty($_FILES["pic_img"]['name'])) {
+if (isset($_FILES["pic_img"]) && !empty($_FILES["pic_img"]['name'])) {
 
-        echo json_encode(['status' => $use_id]);
+    $target_file1 = $target_dir_profile . basename($_FILES["pic_img"]["name"]);
+    $target_profile = "uploads/profile_pic/" . basename($_FILES["pic_img"]["name"]);
 
-        $target_file1 = $target_dir_profile . basename($_FILES["pic_img"]["name"]);
+    if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)) {
 
-        $target_profile = "../uploads/profile_pic/" . basename($_FILES["pic_img"]["name"]);
+        $sql = "UPDATE model_user SET profile_pic = '".$target_profile."' WHERE id = '".$use_id."'";
 
-                if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
+        if (mysqli_query($con, $sql)) {
+            $response = ['status' => 'success', 'message' => 'Profile updated successfully', 'path' => $target_profile];
+        } else {
+            $response = ['status' => 'error', 'message' => 'DB update failed'];
+        }
+    } else {
+        $response = ['status' => 'error', 'message' => 'File upload failed'];
+    }
+}
 
-                    $sql = "UPDATE model_user SET profile_pic = '".$target_profile."' WHERE id = '".$use_id."'";
-                
-                    if(mysqli_query($con, $sql)){
-        
-                         echo json_encode(['status' => 'success']);
-
-                    }else{
-            
-                        echo json_encode(['status' => 'success']);
-                    }  
-                }
-      }
-
-     echo json_encode(['status' => 'Sorry, there was an error uploading your file.']);
-?>
+echo json_encode($response);
