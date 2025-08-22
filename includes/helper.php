@@ -65,7 +65,7 @@ function getModelFollowersCount($model_id) {
 
     $query = "SELECT COUNT(*) 
               FROM model_follow 
-              WHERE unique_user_id = %s 
+              WHERE unique_model_id = %s 
                 AND status = 'Follow'";
     
     $count = DB::queryFirstField($query, $model_id);
@@ -77,7 +77,7 @@ function getModelFolloweringCount($model_id) {
 	
     $query = "SELECT COUNT(*) 
               FROM model_follow 
-              WHERE unique_model_id = %s 
+              WHERE unique_user_id = %s 
                 AND status = 'Follow'";
     
     $count = DB::queryFirstField($query, $model_id);

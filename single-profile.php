@@ -1030,7 +1030,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                             $modalname = $rows_md['name'];
                         }
                         
-                         $user_unique_id = $_SESSION['log_user_unique_id'];
+                         $user_unique_id = $rows_md['id'];
                         ?>
                             <div class="flex items-center gap-3">
                                 <img src="<?php echo $defaultImage; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
