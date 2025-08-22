@@ -3661,6 +3661,8 @@ body.premimum-model1::before {
     position: relative;
     backdrop-filter: blur(var(--blur));
     -webkit-backdrop-filter: blur(var(--blur));
+    display: flex;
+  flex-direction: column;
 }
 
 .premimum-model1 .profile-card:hover {

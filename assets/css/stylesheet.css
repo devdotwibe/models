@@ -10252,7 +10252,9 @@ body.advt-page.my-purpose .scroll-indicator {
     border-top: 1px solid var(--border);
     align-items: center;
     gap: 25px;
+    margin-top: auto;
 }
+
 
 /* all mobile in the grid view end style..................... */
 
