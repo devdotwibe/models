@@ -3965,7 +3965,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   contentType: false,  
                   success: function(response) {
 
-                      if (response.status === 'success') {
+                       let res = JSON.parse(response);
+
+                      if (res.status === 'success') {
 
                           $('#pic_img').val("");
 
