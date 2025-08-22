@@ -2689,7 +2689,7 @@ jQuery('.send_gift_btn').click(function(){
 
             $.ajax({
                 url: "<?= SITEURL . '/ajax/model_followrequest.php' ?>",
-                type: 'POST',
+                type: 'GET',
                 data:{
                     modelid: model_id,
                     notification_type: 'follow',
