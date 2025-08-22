@@ -6,10 +6,7 @@ include('../includes/helper.php');
 
       $use_id = $_SESSION["log_user_id"];
 
-      $target_dir_profile = "uploads/profile_pic/"; 
-
-
-      
+      $target_dir_profile = "../uploads/profile_pic/"; 
 
 	  if (isset($_FILES["pic_img"]) && !empty($_FILES["pic_img"]['name'])) {
 
