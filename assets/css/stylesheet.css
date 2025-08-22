@@ -10519,6 +10519,14 @@ margin-bottom: 0;
 
     .user-home-right .model-card>img {}
 
+    .advt-page .page-header h1 {
+  font-size: 3rem;
+  line-height: 54px;
+    }
+    .advt-page .page-header p {
+  font-size: 1.2rem;
+    }
+
 }
 
 
