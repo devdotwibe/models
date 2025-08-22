@@ -11080,6 +11080,10 @@ margin: 0 auto;
   gap: 15px;
 }
 
+.advt-page .ad-badge{
+    z-index: 99;
+}
+
 }
 
 
