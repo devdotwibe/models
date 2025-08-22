@@ -1,4 +1,4 @@
-<?php if(!empty($get_modal_user[0]['profile_pic']) && file_exists($get_modal_user[0]['profile_pic'])){
+<?php if(!empty($get_modal_user[0]['profile_pic'])){
 
 				$prof_img = SITEURL.$get_modal_user[0]['profile_pic'];
 			} else{
