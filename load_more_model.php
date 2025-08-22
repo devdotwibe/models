@@ -74,7 +74,7 @@ $resultd = mysqli_query($con, $sqls);
                      }else {
 
 
-                        $action .= '<button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+                        $action = '<button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>';
                      }
