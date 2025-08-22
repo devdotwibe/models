@@ -1793,7 +1793,7 @@ textarea:focus {
 
     .advt-page .view-controls {
         flex-direction: column;
-        align-items: stretch;
+      align-items: flex-start;
     }
 
     .advt-page .content-filter {
@@ -11902,6 +11902,9 @@ margin: 0 auto;
     font-size: .85rem;
     padding: 0.75rem 1rem;
 }
+ .advt-page .view-controls{
+    align-items: stretch;
+ }
 
 }
 
