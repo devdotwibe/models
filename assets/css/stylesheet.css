@@ -10848,16 +10848,22 @@ margin: 0 auto;
 }
 .search-section .search-form form > * {
   width: 48%;
-  margin-bottom: 2%;
+ margin-bottom: 2%;
+  margin-left: 0 !important;
+  margin-right: 2%;
 }
 
 .search-section .search-form form {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   gap: 0;
   align-items: center;
 }
+.search-section .search-form form > *:nth-child(2n){
+      margin-right: 0%;
+}
+
 .search-section .search-form form > *:nth-last-child(-n+2) {
   margin-bottom: 0;
 }
