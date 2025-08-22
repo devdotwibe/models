@@ -4,8 +4,15 @@ include('includes/config.php');
 include('includes/helper.php');
 $usern = $_SESSION["log_user"];
 $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
-
+$user_have_preminum = false;
 if ($userDetails) {
+	    $result = CheckPremiumAccess($userDetails['id']);
+
+        if ($result && $result['active']) {
+
+            $user_have_preminum = true;
+        }
+		
 } else {
   echo '<script>window.location.href="login.php"</script>';
 }
@@ -1772,126 +1779,233 @@ if ($userDetails) {
     <?php include('includes/header.php'); ?>
 	<?php } ?>
 
+<?php
+
+    $getSettings = mysqli_query($con, "SELECT discount_price_show, updated_at FROM admin_settings ORDER BY id DESC LIMIT 1");
+
+    $settings = mysqli_fetch_assoc($getSettings);
+
+    $discountPriceShow = true;
+
+    $updatedAt = $settings['updated_at'];
+
+    if ($updatedAt) {
+        $timeDiff = time() - strtotime($updatedAt);
+        if ($timeDiff > 86400 && $settings['status'] == 'No') {
+
+            $discountPriceShow = false;
+        }
+    }
+
+    $premium_amounts = [
+        'basic_with_discount' => 39,
+        'basic_without_discount' => 49,
+        'diamond_with_discount' => 149,
+        'diamond_without_discount' => 199,
+        'basic_with_discount_yearly' => 449,
+        'basic_without_discount_yearly' => 588,
+        'diamond_with_discount_yearly' => 1999,
+        'diamond_without_discount_yearly' => 2388,
+    ];
+
+    $basic_monthly_savings = $premium_amounts['basic_without_discount'] - $premium_amounts['basic_with_discount'];
+    $basic_annual_savings = $premium_amounts['basic_without_discount_yearly'] - $premium_amounts['basic_with_discount_yearly'];
+
+    $diamond_monthly_savings = $premium_amounts['diamond_without_discount'] - $premium_amounts['diamond_with_discount'];
+    $diamond_annual_savings = $premium_amounts['diamond_without_discount_yearly'] - $premium_amounts['diamond_with_discount_yearly'];
+
+    ?>
 <!-- NEW ENHANCED Premium Modal with PSYCHOLOGICAL PRESSURE -->
 <div class="popup-overlay" id="premium-modal">
-    <div class="popup-container">
-        <button class="close-btn" onclick="closePremiumModal()">&times;</button>
-        
-        <div class="top-icons">
-            <div class="top-icon">🚀</div>
-            <div class="top-icon">⭐</div>
-            <div class="top-icon">💎</div>
-        </div>
+        <div class="popup-container">
+            <button class="close-btn" onclick="closePremiumModal()">&times;</button>
 
-        <div class="header">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
-            <h2 class="title">Unlock Elite Access</h2>
-            <p class="subtitle">Join premium members and dominate the streaming experience</p>
-        </div>
-
-        <div class="first-time-alert">
-            <span class="fire-emoji">🔥</span> FIRST-TIME USER EXCLUSIVE: $39 & $149 Limited Time Deal - Expires in 24 Hours of Joining! <span class="fire-emoji">🔥</span>
-        </div>
-
-        <div class="promo-banner">
-            <span class="fire-emoji">🔥</span> MASSIVE SAVINGS INSIDE - DON'T MISS OUT! <span class="fire-emoji">🔥</span>
-        </div>
-
-        <div class="countdown-timer">
-            ⏰ LIMITED TIME: <span id="countdown">23:59:45</span> REMAINING!
-        </div>
-
-        <div class="billing-toggle">
-            <div class="toggle-container">
-                <div class="toggle-option active" data-billing="monthly">Monthly</div>
-                <div class="toggle-option" data-billing="annual">
-                    Annual
-                    <span class="savings-badge">SAVE BIG!</span>
-                </div>
+            <div class="top-icons">
+                <div class="top-icon">🚀</div>
+                <div class="top-icon">⭐</div>
+                <div class="top-icon">💎</div>
             </div>
-        </div>
 
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <div class="hot-deal">🔥 HOT!</div>
-                <div class="member-badge premium-member-badge">PRO</div>
-                <div class="badge premium-badge">PREMIUM</div>
-                <div class="plan-name">Basic Premium</div>
-                <div class="price-container">
-                    <div class="original-price" data-monthly-orig="49" data-annual-orig="588">$49</div>
-                    <div class="price" data-monthly="39" data-annual="449">$39</div>
-                    <div class="price-period" data-monthly-period="per month" data-annual-period="per year">per month</div>
-                    <div class="savings-text" data-monthly-save="" data-annual-save="Save $139/year!">Save $10/month!</div>
-                    <div class="bonus-tokens">
-                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
-                        <span data-monthly-tokens="500" data-annual-tokens="1,000">+ 500 TLM tokens</span>
+            <div class="header">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
+                <h2 class="title">Unlock Elite Access</h2>
+                <p class="subtitle">Join premium members and dominate the streaming experience</p>
+            </div>
+
+            <div class="first-time-alert">
+                <span class="fire-emoji">🔥</span> FIRST-TIME USER EXCLUSIVE: $39 & $149 Limited Time Deal - Expires in 24 Hours of Joining! <span class="fire-emoji">🔥</span>
+            </div>
+
+            <div class="promo-banner">
+                <span class="fire-emoji">🔥</span> MASSIVE SAVINGS INSIDE - DON'T MISS OUT! <span class="fire-emoji">🔥</span>
+            </div>
+
+            <?php if ($discountPriceShow) { ?>
+
+                <div class="countdown-timer">
+                    ⏰ LIMITED TIME: <span id="countdown">23:59:45</span> REMAINING!
+                </div>
+
+            <?php } ?>
+
+            <div class="billing-toggle">
+                <div class="toggle-container">
+                    <div class="toggle-option active" data-billing="monthly">Monthly</div>
+                    <div class="toggle-option" data-billing="annual">
+                        Annual
+                        <span class="savings-badge">SAVE BIG!</span>
                     </div>
                 </div>
-                <button class="cta-button cta-primary" onclick="upgradeAccount('monthly')">Grab This Deal!</button>
             </div>
 
-            <div class="pricing-card elite">
-                <div class="hot-deal">💎 ELITE!</div>
-                <div class="member-badge elite-member-badge">VIP</div>
-                <div class="badge elite-badge">DIAMOND ELITE</div>
-                <div class="plan-name">Diamond Elite</div>
-                <div class="price-container">
-                    <div class="original-price" data-monthly-orig="199" data-annual-orig="2388">$199</div>
-                    <div class="price" data-monthly="149" data-annual="1999">$149</div>
-                    <div class="price-period" data-monthly-period="per month" data-annual-period="per year">per month</div>
-                    <div class="savings-text" data-monthly-save="" data-annual-save="Save $389/year!">Save $50/month!</div>
-                    <div class="bonus-tokens">
-                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
-                        <span data-monthly-tokens="2,000" data-annual-tokens="5,000">+ 2,000 TLM tokens</span>
+
+            <div class="pricing-grid">
+
+                <div class="pricing-card">
+                    <div class="hot-deal">🔥 HOT!</div>
+                    <div class="member-badge premium-member-badge">PRO</div>
+                    <div class="badge premium-badge">PREMIUM</div>
+                    <div class="plan-name">Basic Premium</div>
+                    <div class="price-container">
+                        <?php if ($discountPriceShow) { ?>
+                            <div class="original-price"
+                                data-monthly-orig="<?php echo $premium_amounts['basic_without_discount']; ?>"
+                                data-annual-orig="<?php echo $premium_amounts['basic_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['basic_without_discount']; ?>
+                            </div>
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['basic_with_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['basic_with_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['basic_with_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                            <div class="savings-text show"
+                                data-monthly-save="Save $<?php echo $basic_monthly_savings; ?>/month!"
+                                data-annual-save="Save $<?php echo $basic_annual_savings; ?>/year!">
+                                Save $<?php echo $basic_monthly_savings; ?>/month!
+                            </div>
+                        <?php } else { ?>
+
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['basic_without_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['basic_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['basic_without_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                        <?php } ?>
+                        <div class="bonus-tokens">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                            <span data-monthly-tokens="500" data-annual-tokens="1000">+ 500 TLM tokens</span>
+                        </div>
+                    </div>
+                    <button class="cta-button cta-primary" onclick="upgradeAccount('monthly', 'basic')">Grab This Deal!</button>
+                </div>
+
+                <!-- Diamond Elite -->
+                <div class="pricing-card elite">
+                    <div class="hot-deal">💎 ELITE!</div>
+                    <div class="member-badge elite-member-badge">VIP</div>
+                    <div class="badge elite-badge">DIAMOND ELITE</div>
+                    <div class="plan-name">Diamond Elite</div>
+                    <div class="price-container">
+                        <?php if ($discountPriceShow) { ?>
+                            <div class="original-price"
+                                data-monthly-orig="<?php echo $premium_amounts['diamond_without_discount']; ?>"
+                                data-annual-orig="<?php echo $premium_amounts['diamond_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['diamond_without_discount']; ?>
+                            </div>
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['diamond_with_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['diamond_with_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['diamond_with_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                            <div class="savings-text show"
+                                data-monthly-save="Save $<?php echo $diamond_monthly_savings; ?>/month!"
+                                data-annual-save="Save $<?php echo $diamond_annual_savings; ?>/year!">
+                                Save $<?php echo $diamond_monthly_savings; ?>/month!
+                            </div>
+                        <?php } else { ?>
+
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['diamond_without_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['diamond_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['diamond_without_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                        <?php } ?>
+                        <div class="bonus-tokens">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                            <span data-monthly-tokens="2000" data-annual-tokens="5000">+ 2,000 TLM tokens</span>
+                        </div>
+                    </div>
+                    <button class="cta-button cta-elite" onclick="upgradeAccount('monthly', 'diamond')">Claim Diamond Status!</button>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <div class="features-grid">
+                    <div class="feature-column">
+                        <h4>Basic Premium</h4>
+                        <ul class="feature-list">
+                            <li>Unlimited chat with models</li>
+                            <li>Ad-free streaming experience</li>
+                            <li>HD video quality</li>
+                            <li>Advanced search & filters</li>
+                            <li>Profile visibility boost</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-column">
+                        <h4 class="elite-title">Diamond Elite Exclusive</h4>
+                        <ul class="feature-list elite-features">
+                            <li>Everything in Basic Premium</li>
+                            <li>Unlimited chat in live streaming</li>
+                            <li>Top priority in creator inbox</li>
+                            <li>VIP-only exclusive content</li>
+                            <li>Diamond Elite status badge</li>
+                        </ul>
                     </div>
                 </div>
-                <button class="cta-button cta-elite" onclick="upgradeAccount('annual')">Claim Diamond Status!</button>
             </div>
-        </div>
 
-        <div class="features-section">
-            <div class="features-grid">
-                <div class="feature-column">
-                    <h4>Basic Premium</h4>
-                    <ul class="feature-list">
-                        <li>Unlimited chat with models</li>
-                        <li>Ad-free streaming experience</li>
-                        <li>HD video quality</li>
-                        <li>Advanced search & filters</li>
-                        <li>Profile visibility boost</li>
-                    </ul>
+            <div class="token-packages-section">
+                <div class="token-packages-title">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                    Explore Token Packages
                 </div>
-                
-                <div class="feature-column">
-                    <h4 class="elite-title">Diamond Elite Exclusive</h4>
-                    <ul class="feature-list elite-features">
-                        <li>Everything in Basic Premium</li>
-                        <li>Unlimited chat in live streaming</li>
-                        <li>Top priority in creator inbox</li>
-                        <li>VIP-only exclusive content</li>
-                        <li>Diamond Elite status badge</li>
-                    </ul>
+                <div class="token-packages-subtitle">
+                    Get extra TLM tokens for premium interactions, gifts, and exclusive content access
                 </div>
+                <button class="token-packages-btn" onclick="exploreTokens()">
+                    🎁 Browse Token Deals
+                </button>
+                <div class="token-expires">⏰ Special token offers expire soon!</div>
             </div>
-        </div>
-
-        <div class="token-packages-section">
-            <div class="token-packages-title">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
-                Explore Token Packages
-            </div>
-            <div class="token-packages-subtitle">
-                Get extra TLM tokens for premium interactions, gifts, and exclusive content access
-            </div>
-            <button class="token-packages-btn" onclick="exploreTokens()">
-                🎁 Browse Token Deals
-            </button>
-            <div class="token-expires">⏰ Special token offers expire soon!</div>
         </div>
     </div>
-</div>
 
+<?php 
+//Code for checking likes you
+$liked_you_array = DB::query("select user_id from user_model_likes where model_id=" . $userDetails['id'] . "  AND user_model_likes.like='Yes' ");
 
+?>
 
 <!-- Page Title -->
 <div class="page-title">
@@ -1906,20 +2020,40 @@ if ($userDetails) {
 <!-- Main Activity Dropdown -->
 <div class="dropdown">
     <button class="dropdown-button" onclick="toggleDropdown()">
-        <span id="current-section">❤️ Liked You (12)</span>
+        <span id="current-section">❤️ Liked You (<?php echo count($liked_you_array); ?>)</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polyline points="6,9 12,15 18,9"></polyline>
         </svg>
     </button>
     <div class="dropdown-content" id="dropdown-menu">
-        <div class="dropdown-item" onclick="selectSection('❤️ Liked You (12)')">
-            <span>❤️ Liked You (12)</span>
+        <div class="dropdown-item" onclick="<?php if (!$user_have_preminum) { ?>selectSection('❤️ Liked You (12)')<?php } ?>">
+            <span>❤️ Liked You (<?php echo count($liked_you_array); ?>)</span>
+			<?php if (!$user_have_preminum) { ?>
             <span class="premium-lock">🔒 Premium</span>
+			<?php } ?>
         </div>
-        <div class="dropdown-item" onclick="selectSection('👀 Viewed Your Profile (8)')">
+        <div class="dropdown-item" onclick="<?php if (!$user_have_preminum) { ?>selectSection('👀 Viewed Your Profile (8)')<?php } ?>">
             <span>👀 Viewed Your Profile (8)</span>
+			<?php if (!$user_have_preminum) { ?>
             <span class="premium-lock">🔒 Premium</span>
+			<?php } ?>
         </div>
+		<div class="dropdown-item" onclick="selectSection('💬 Group Chat (5)')">
+            <span>💬 Group Chat (5)</span>
+        </div>
+		<div class="dropdown-item" onclick="selectSection('💬 Private Chat (5)')">
+            <span>💬 Private Chat (5)</span>
+        </div>
+		<div class="dropdown-item" onclick="selectSection('📺 Local Meetup (3)')">
+            <span>📺 Local Meetup (3)</span>
+        </div>
+		<div class="dropdown-item" onclick="selectSection('📺 Extended Social (3)')">
+            <span>📺 Extended Social (3)</span>
+        </div>
+		<div class="dropdown-item" onclick="selectSection('📺 Overnight Social (3)')">
+            <span>📺 Overnight Social (3)</span>
+        </div>
+		<?php /*?>
         <div class="dropdown-item" onclick="selectSection('💬 Chat Requests (5)')">
             <span>💬 Chat Requests (5)</span>
         </div>
@@ -1933,10 +2067,12 @@ if ($userDetails) {
         <div class="dropdown-item" onclick="selectSection('✈️ Travel Requests (7)')">
             <span>✈️ Travel Requests (7)</span>
             <span class="premium-lock">🔒 Premium</span>
-        </div>
-        <div class="dropdown-item" onclick="selectSection('🎯 My Matches (15)')">
+        </div><?php */ ?>
+        <div class="dropdown-item" onclick="<?php if (!$user_have_preminum) { ?>selectSection('🎯 My Matches (15)')<?php } ?>">
             <span>🎯 My Matches (15)</span>
+			<?php if (!$user_have_preminum) { ?>
             <span class="premium-lock">🔒 Premium</span>
+			<?php } ?>
         </div>
         <div class="dropdown-item" onclick="selectSection('💖 You Liked (23)')">
             <span>💖 You Liked (23)</span>
@@ -1981,189 +2117,130 @@ if ($userDetails) {
 
 <!-- Models Grid -->
 <div class="models-grid">
-    <!-- Model Card 1 -->
-    <div class="model-card" data-premium="false" onclick="showPremiumModal()">
-        <div style="position: relative;">
-            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=500&fit=crop&crop=faces" alt="Model" class="model-image">
-            <div class="status-indicator status-online"></div>
-            <div class="verified-badge">✓ Verified</div>
-        </div>
-        <div class="model-info">
-            <div class="model-name">
-                <span>Aria M.</span>
-                <span style="font-size: 16px; color: rgba(255,255,255,0.8);">24</span>
-            </div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 6px;">32 • F • Chiang Rai • 1141km</div>
-            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">Just Now • 👑 Premium</div>
-            <button class="upgrade-btn" onclick="event.stopPropagation(); showPremiumModal();">👑 Upgrade to Premium</button>
-            <div class="action-buttons">
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">✕</button>
-                <button class="action-btn heart" onclick="event.stopPropagation(); showPremiumModal();">♡</button>
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">👤</button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Model Card 2 -->
-    <div class="model-card" data-premium="true" onclick="showPremiumModal()">
-        <div style="position: relative;">
-            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=500&fit=crop&crop=faces" alt="Model" class="model-image">
-            <div class="status-indicator status-online"></div>
-            <div class="verified-badge">✓ Verified</div>
-        </div>
-        <div class="model-info">
-            <div class="model-name">
-                <span>Phoenix R.</span>
-                <span style="font-size: 16px; color: rgba(255,255,255,0.8);">26</span>
-            </div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 6px;">28 • F • Pattaya • 102km</div>
-            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">16 Seconds Ago</div>
-            <button class="upgrade-btn" onclick="event.stopPropagation(); showPremiumModal();">👑 Upgrade to Premium</button>
-            <div class="action-buttons">
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">✕</button>
-                <button class="action-btn heart" onclick="event.stopPropagation(); showPremiumModal();">♡</button>
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">👤</button>
-            </div>
-        </div>
-    </div>
+<?php if(!empty($liked_you_array)){
+	$liked_you_ids = array();
+	foreach($liked_you_array as $lk_you){
+		$liked_you_ids[] = $lk_you['user_id'];
+	}
+		$idList = implode(',', $liked_you_ids);
+		$sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList)";
+		$resultd = mysqli_query($con, $sqls); 
+		if (mysqli_num_rows($resultd) > 0) {
+			
+			while ($rowesdw = mysqli_fetch_assoc($resultd)) {
 
-    <!-- Model Card 3 -->
-    <div class="model-card" data-premium="false" onclick="showPremiumModal()">
-        <div style="position: relative;">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&crop=faces" alt="Model" class="model-image">
-            <div class="status-indicator status-online"></div>
-            <div class="verified-badge">✓ Verified</div>
-        </div>
-        <div class="model-info">
-            <div class="model-name">
-                <span>Nova S.</span>
-                <span style="font-size: 16px; color: rgba(255,255,255,0.8);">23</span>
-            </div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 6px;">22 • F • Pattaya • 102km</div>
-            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">1 Minute Ago</div>
-            <button class="upgrade-btn" onclick="event.stopPropagation(); showPremiumModal();">👑 Upgrade to Premium</button>
-            <div class="action-buttons">
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">✕</button>
-                <button class="action-btn heart" onclick="event.stopPropagation(); showPremiumModal();">♡</button>
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">👤</button>
-            </div>
-        </div>
-    </div>
+                        $unique_id = $rowesdw['unique_id'];
 
-    <!-- Model Card 4 -->
-    <div class="model-card" data-premium="true" onclick="showPremiumModal()">
-        <div style="position: relative;">
-            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?w=400&h=500&fit=crop&crop=faces" alt="Model" class="model-image">
-            <div class="status-indicator status-online"></div>
-            <div class="verified-badge">✓ Verified</div>
-        </div>
-        <div class="model-info">
-            <div class="model-name">
-                <span>Zara C.</span>
-                <span style="font-size: 16px; color: rgba(255,255,255,0.8);">25</span>
-            </div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 6px;">22 • F • Myanaung • 748km</div>
-            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">1 Minute Ago</div>
-            <button class="upgrade-btn" onclick="event.stopPropagation(); showPremiumModal();">👑 Upgrade to Premium</button>
-            <div class="action-buttons">
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">✕</button>
-                <button class="action-btn heart" onclick="event.stopPropagation(); showPremiumModal();">♡</button>
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">👤</button>
-            </div>
-        </div>
-    </div>
+                        if (!empty($rowesdw['profile_pic'])) {
+                            $profile_pic = SITEURL . $rowesdw['profile_pic'];
+                        } else {
+                            $profile_pic = SITEURL . 'assets/images/model-gal-no-img.jpg';
+                        }
 
-    <!-- Model Card 5 -->
-    <div class="model-card" data-premium="false" onclick="showPremiumModal()">
-        <div style="position: relative;">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=500&fit=crop&crop=faces" alt="Model" class="model-image">
-            <div class="status-indicator status-online"></div>
-            <div class="verified-badge">✓ Verified</div>
-        </div>
-        <div class="model-info">
-            <div class="model-name">
-                <span>Luna K.</span>
-                <span style="font-size: 16px; color: rgba(255,255,255,0.8);">22</span>
-            </div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 6px;">22 • F • Rawai • 704km</div>
-            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">1 Minute Ago</div>
-            <button class="upgrade-btn" onclick="event.stopPropagation(); showPremiumModal();">👑 Upgrade to Premium</button>
-            <div class="action-buttons">
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">✕</button>
-                <button class="action-btn heart" onclick="event.stopPropagation(); showPremiumModal();">♡</button>
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">👤</button>
-            </div>
-        </div>
-    </div>
+                        if (!empty($rowesdw['username'])) {
+                            $modalname = $rowesdw['username'];
+                        } else {
+                            $modalname = $rowesdw['name'];
+                        }
 
-    <!-- Model Card 6 -->
-    <div class="model-card" data-premium="false" onclick="showPremiumModal()">
-        <div style="position: relative;">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=faces" alt="Model" class="model-image">
-            <div class="status-indicator status-online"></div>
-            <div class="verified-badge">✓ Verified</div>
-        </div>
-        <div class="model-info">
-            <div class="model-name">
-                <span>Maya T.</span>
-                <span style="font-size: 16px; color: rgba(255,255,255,0.8);">24</span>
-            </div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 6px;">24 • F • 19km</div>
-            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">1 Minute Ago • 👑 Premium</div>
-            <button class="upgrade-btn" onclick="event.stopPropagation(); showPremiumModal();">👑 Upgrade to Premium</button>
-            <div class="action-buttons">
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">✕</button>
-                <button class="action-btn heart" onclick="event.stopPropagation(); showPremiumModal();">♡</button>
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">👤</button>
-            </div>
-        </div>
-    </div>
+                        $is_user_preminum = CheckPremiumAccess($rowesdw['id']);
 
-    <!-- Model Card 7 -->
-    <div class="model-card" data-premium="true" onclick="showPremiumModal()">
-        <div style="position: relative;">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop&crop=faces" alt="Model" class="model-image">
-            <div class="status-indicator status-online"></div>
-            <div class="verified-badge">✓ Verified</div>
-        </div>
-        <div class="model-info">
-            <div class="model-name">
-                <span>Bella R.</span>
-                <span style="font-size: 16px; color: rgba(255,255,255,0.8);">27</span>
-            </div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 6px;">27 • F • Patong • 696km</div>
-            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">2 Minutes Ago</div>
-            <button class="upgrade-btn" onclick="event.stopPropagation(); showPremiumModal();">👑 Upgrade to Premium</button>
-            <div class="action-buttons">
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">✕</button>
-                <button class="action-btn heart" onclick="event.stopPropagation(); showPremiumModal();">♡</button>
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">👤</button>
-            </div>
-        </div>
-    </div>
+                        $is_user_new = IsNewUser($rowesdw['id']);
 
-    <!-- Model Card 8 -->
-    <div class="model-card" data-premium="false" onclick="showPremiumModal()">
+                        $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
+                ?>
+		
+				<!-- Model Card 1 -->
+    <div class="model-card" data-premium="false" onclick="<?php if (!$user_have_preminum) { ?>showPremiumModal()<?php } ?>">
         <div style="position: relative;">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=500&fit=crop&crop=faces" alt="Model" class="model-image">
+            <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="Model" class="model-image">
             <div class="status-indicator status-online"></div>
-            <div class="verified-badge">✓ Verified</div>
+            <div class="verified-badge">
+			
+				<span class="profile-badge badge-live">Live</span>
+
+                                        <?php if($is_user_new) { ?>
+
+                                             <span class="profile-badge badge-new">New</span>
+
+                                        <?php } ?>
+
+                                        <?php if($is_user_preminum) { ?>
+
+                                             <span class="profile-badge badge-premium">Premium</span>
+
+                                        <?php } ?>
+
+                                        <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
+                                            <span class="profile-badge badge-verified">Verified</span>
+                                        <?php } ?>
+			
+			</div>
         </div>
-        <div class="model-info">
+        
+		
+		<div class="model-info">
             <div class="model-name">
-                <span>Sophia L.</span>
-                <span style="font-size: 16px; color: rgba(255,255,255,0.8);">23</span>
+                <span><?php echo ucfirst($modalname); ?></span>
+                <span style="font-size: 16px; color: rgba(255,255,255,0.8);">
+				<?php if (!empty($rowesdw['age'])) {
+                                            echo ', ' . $rowesdw['age'];
+                                        } ?></span>
             </div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 6px;">23 • F • Patong • 696km</div>
-            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">3 Minutes Ago</div>
+			<?php if (!empty($rowesdw['city']) || !empty($rowesdw['country'])) { ?>
+            <div style="font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 6px;">
+			
+			<?php $modelcity = $rowesdw['city'];
+                                    $cities = DB::queryFirstRow("SELECT name FROM cities WHERE id =  %s ", $rowesdw['city']);
+                                    if (!empty($cities)) {
+                                        $modelcity = $cities['name'];
+                                    }
+                                    $modelcountry = $rowesdw['country'];
+                                    $countries = DB::queryFirstRow("SELECT name FROM countries WHERE id =  %s ", $rowesdw['country']);
+                                    if (!empty($countries)) {
+                                        $modelcountry = $countries['name'];
+                                    } 
+			echo $modelcity; 
+			if (!empty($modelcity) && !empty($modelcountry)) { ?> • <?php } ?> <?php echo $modelcountry; ?>
+									
+			</div>
+			<?php } ?>
+            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">Just Now • <?php if ($user_have_preminum) { ?> 👑 Premium<?php } ?></div>
+			<?php if (!$user_have_preminum) { ?>
             <button class="upgrade-btn" onclick="event.stopPropagation(); showPremiumModal();">👑 Upgrade to Premium</button>
-            <div class="action-buttons">
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">✕</button>
-                <button class="action-btn heart" onclick="event.stopPropagation(); showPremiumModal();">♡</button>
-                <button class="action-btn" onclick="event.stopPropagation(); showPremiumModal();">👤</button>
+			<?php } ?>
+            
+			
+			<div class="action-buttons">
+                <button class="action-btn" onclick="event.stopPropagation(); <?php if (!$user_have_preminum) { ?>showPremiumModal();<?php } ?>" >✕</button>
+                <button class="action-btn heart" onclick="event.stopPropagation(); <?php if (!$user_have_preminum) { ?>showPremiumModal();<?php } ?>" >♡</button>
+                <button class="action-btn" onclick="event.stopPropagation(); <?php if (!$user_have_preminum) { ?>showPremiumModal();<?php } ?>" >👤</button>
             </div>
+			
+			
         </div>
+		
+		
+		
     </div>
+		
+		
+		
+		
+		<?php
+			}
+		}
+	
+	
+}else{
+	
+	echo 'Not found any liked members.';
+	
+} ?>
+
+
+    
 </div>
 
 <?php include('includes/footer.php'); ?>
