@@ -376,7 +376,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                   </div>
 
-                  <button type="button" class="change-photo-btn" <?php if($have_pic) { ?> style="display:none" <?php } ?> >
+                  <button type="button" id="pic_img_btn" class="change-photo-btn" <?php if($have_pic) { ?> style="display:none" <?php } ?> >
                     <input type="file" name="pic_img" style="display:none" id="pic_img" class="vfb-text vfb-medium" accept=".jpg,.jpeg,.png" />
 
 
@@ -2947,7 +2947,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     function editProfileImage()
     {
-        $('#pic_img').show();
+        $('#pic_img_btn').fadeToggle();
     }
 
     let currentWeightUnit = 'lbs';
