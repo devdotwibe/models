@@ -729,7 +729,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             }
 
-            $sql_img = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Image' AND  Order by id DESC";
+            $sql_img = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Image' Order by id DESC";
 
             $result_img = mysqli_query($con, $sql_img);
 
@@ -743,7 +743,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
 
 
-            $sql_vdo = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Video' AND  Order by id DESC";
+            $sql_vdo = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Video' Order by id DESC";
 
             $result_vdo = mysqli_query($con, $sql_vdo);
 
