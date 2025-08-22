@@ -547,9 +547,14 @@ else{
                                 <?php if($followstatus == 'Follow'){ echo 'Accepted on '.date('d/m/Y',strtotime($followdate)); }else{ ?>✓ Accept <?php } ?>
                             </button>
 						
-                            <button id="dec_<?php echo $unique_id; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($followstatus == 'Unfollow') echo 'disabled'; ?> onclick="declineFollow('<?php echo $unique_id; ?>','<?php echo $unique_rec_id; ?>','<?php echo $modalname; ?>')">
-                                <?php if($followstatus == 'Unfollow'){ echo 'Declined on '.date('d/m/Y',strtotime($followdate)); }else{ ?>✗ Decline <?php } ?>
-                            </button>
+                            <?php if($followstatus != 'Follow') { ?>
+
+                                <button id="dec_<?php echo $unique_id; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($followstatus == 'Unfollow') echo 'disabled'; ?> onclick="declineFollow('<?php echo $unique_id; ?>','<?php echo $unique_rec_id; ?>','<?php echo $modalname; ?>')">
+                                    <?php if($followstatus == 'Unfollow'){ echo 'Declined on '.date('d/m/Y',strtotime($followdate)); }else{ ?>✗ Decline <?php } ?>
+                                </button>
+
+                            <?php } ?>
+
                             <button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
                                 View Profile
                             </button>
