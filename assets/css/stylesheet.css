@@ -11073,6 +11073,13 @@ margin: 0 auto;
   width: 100%;
 }
 
+
+.advt-page .ads-expanded .ad-card .ad-content .ad-stats{
+   justify-content: flex-start;
+    flex-wrap: wrap;
+  gap: 15px;
+}
+
 }
 
 
@@ -11874,6 +11881,13 @@ margin: 0 auto;
 .premimum-model1 .sort-btn{
     
     min-width: 127px !important;
+}
+
+
+.advt-page .ads-expanded .ad-card .ad-content .ad-stats{
+   justify-content: flex-start;
+    flex-wrap: wrap;
+  gap: 15px;
 }
 
 }
