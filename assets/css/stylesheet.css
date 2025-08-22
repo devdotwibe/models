@@ -1562,9 +1562,8 @@ textarea:focus {
     flex-wrap:wrap;
 }
 
-.advt-page .ads-expanded .ad-card {
-    width: 48%;
-}
+
+
 
 .advt-page .ads-expanded.active {
     display: flex;
@@ -10278,6 +10277,37 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 .sort-option:hover{
     background:var(--bg-primary);
+}
+
+
+
+
+
+.advt-page .ads-expanded .ad-card {
+    width: 48%;
+    display: flex;
+  flex-wrap: wrap;
+}
+
+.advt-page .ads-expanded .ad-card .ad-image{
+    height: auto !important;
+    width:50%;
+}
+
+.advt-page .ads-expanded .ad-card .ad-content{
+        width:50%;
+        flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+}
+.advt-page .ads-expanded .ad-card .ad-content .btn-primary{
+    margin-top:auto;
+}
+
+.advt-page .ads-expanded .ad-card .ad-content .ad-stats{
+    justify-content: center;
+    flex-wrap: wrap;
+  gap: 15px;
 }
 
 
