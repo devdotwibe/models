@@ -66,18 +66,18 @@ $resultd = mysqli_query($con, $sqls);
                         $html .= '<p class="profile-bio">'.$user_bio.'</p>';
 						 } 
 
-                     if (isset($_SESSION['log_user_id'])) { 
+                    //  if (isset($_SESSION['log_user_id'])) { 
 
-                        $action = '<button class="action-btn connect" title="Connect"  onclick="ActionBtn(this, \'connect\')"  modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
-                                        <i class="fas fa-user-plus"></i>
-                                    </button>';
-                     }else {
+                    //     $action = '<button class="action-btn connect" title="Connect"  onclick="ActionBtn(this, \'connect\')"  modelid="'.$rowesdw['id'].'" model_uniq_id="'.$rowesdw['unique_id'].'">
+                    //                     <i class="fas fa-user-plus"></i>
+                    //                 </button>';
+                    //  }else {
 
 
-                        $action = '<button class="action-btn connect" title="Connect"  modelid="'.$rowesdw['id'].'" >
-                                        <i class="fas fa-user-plus"></i>
-                                    </button>';
-                     }
+                    //     $action = '<button class="action-btn connect" title="Connect"  modelid="'.$rowesdw['id'].'" >
+                    //                     <i class="fas fa-user-plus"></i>
+                    //                 </button>';
+                    //  }
 
                     $html .= '</div>
                     <div class="profile-actions">
