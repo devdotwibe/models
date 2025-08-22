@@ -1,21 +1,24 @@
 <?php if(!empty($get_modal_user[0]['profile_pic'])){
 
-				$prof_img = SITEURL.$get_modal_user[0]['profile_pic'];
-			} else{
-				$prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
-			} 
-    
-      // if(!empty($userDetails['profile_pic'])){
-
-			// 	$prof_img = SITEURL.$userDetails['profile_pic'];
-
+			// 	$prof_img = SITEURL.$get_modal_user[0]['profile_pic'];
 			// } else{
-
 			// 	$prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
 			// } 
-
+      
+              
     $notify_count = NotificationCount($get_modal_user[0]['id']);
 
+       $auther_pic_url ="";
+
+        $profile_pic = $get_modal_user[0]['profile_pic'] ?? '';
+
+        if (checkImageExists($profile_pic)) {
+
+          $auther_pic_url = SITEURL . $profile_pic;
+
+        }
+
+      }
 ?>
 
   <!-- Header -->
@@ -57,7 +60,7 @@
 
         <!-- Profile Image -->
         <div class="relative">
-          <img src="<?php echo $prof_img; ?>" alt="Profile" class="w-10 h-10 rounded-full border-2 border-purple-500">
+          <img src="<?php echo $auther_pic_url; ?>" alt="Profile" class="w-10 h-10 rounded-full border-2 border-purple-500">
           <div class="online-dot"></div>
         </div>
       </div>
