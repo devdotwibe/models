@@ -1557,8 +1557,13 @@ textarea:focus {
 /* Expanded View */
 .advt-page .ads-expanded {
     display: none;
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 2rem;
+    flex-wrap:wrap;
+}
+
+.advt-page .ads-expanded .ad-card {
+    width: 48%;
 }
 
 .advt-page .ads-expanded.active {
