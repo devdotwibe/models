@@ -4020,7 +4020,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
               formData.append("pic_img", file);
 
-              formData.append("action", upload_profile_pic);
+              formData.append("action",'upload_profile_pic');
 
               $.ajax({
 
