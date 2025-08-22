@@ -4156,6 +4156,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       // Get the preview box (dz-preview)
       const preview = buttonElement.closest('.dz-preview');
 
+      const previewout = buttonElement.closest('.dz-processing');
+
       if (!preview) return;
 
       // Remove hidden input if exists
@@ -4188,6 +4190,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
       // Remove the preview from the DOM
       preview.remove();
+      previewout.remove();
     }
 
 
