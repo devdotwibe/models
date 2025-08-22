@@ -340,8 +340,15 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <div class="text-center edit-profile-box1">
                 <div class="profile-picture-container">
                   <?php if (!empty($userDetails['profile_pic'])) {
+
+                    $have_pic = true;
+
                     $prof_img = SITEURL . $userDetails['profile_pic'];
+
                   } else {
+
+                     $have_pic = false;
+
                     $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
                   } ?>
                   <img src="<?php echo $prof_img; ?>" id="preview_prof_img" alt="Profile" class="w-32 h-32 rounded-full border-4 border-purple-500">
@@ -355,25 +362,33 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   </div>
 
                   <div class="edit-close">
-                    <a href="#">×</a>
-                    <a href="#">
-                      <!-- ✎  -->
-                      <!-- <i class="far fa-edit"></i> -->
 
-                    <img src="<?php echo SITEURL.'/assets/images/edt.svg'; ?>" alt="">
+                  <?php if($have_pic) { ?>
 
-                    </a>
+                        <a href="#">×</a>
+                        
+                        <a  onclick="editProfileImage()">
+                          <img src="<?php echo SITEURL.'/assets/images/edt.svg'; ?>" alt="">
 
+                        </a>
+
+                  <?php } ?>
 
                   </div>
 
                   <button type="button" class="change-photo-btn">
                     <input type="file" name="pic_img" style="display:none" id="pic_img" class="vfb-text vfb-medium" accept=".jpg,.jpeg,.png" />
-                    <label for="pic_img">
+
+
+                    <label for="pic_img" <?php if($have_pic) { ?> style="display:none" <?php } ?> >
+
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                       </svg>
+
                     </label>
+
+
                   </button>
                 </div>
                 <p class="text-white/80 text-sm mt-2 font-medium">Main Profile</p>
@@ -2928,6 +2943,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   </script>
 
   <script>
+
+
+    function editProfileImage()
+    {
+        $('#pic_img').show();
+    }
+
     let currentWeightUnit = 'lbs';
     let currentHeightUnit = 'ft';
     let socialLinkCounter = 5;
