@@ -451,11 +451,12 @@ function getModelPrivacySettings($model_id) {
 		return (int)$count;
 	}
 
-	function ModelFileCount($unique_model_id, $type) {
+	function PostTypeCount($unique_model_id, $type) {
+
 		$query = "SELECT COUNT(*) 
-				FROM model_images 
-				WHERE unique_model_id = %s 
-				AND file_type = %s";
+				FROM live_posts 
+				WHERE post_author = %s 
+				AND post_mime_type = %s";
 		
 		$count = DB::queryFirstField($query, $unique_model_id, $type);
 		return (int)$count;

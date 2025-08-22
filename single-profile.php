@@ -729,31 +729,35 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             }
 
-            $sql_img = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Image' AND category = 'Profile' Order by id DESC";
+            $num1 = PostTypeCount( $rowesdw['id'],'Image');
+            $num2 =  PostTypeCount( $rowesdw['id'],'Video');
+    
 
-            $result_img = mysqli_query($con, $sql_img);
+            // $sql_img = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Image' AND category = 'Profile' Order by id DESC";
 
-            if (mysqli_num_rows($result_img) > 0) {
+            // $result_img = mysqli_query($con, $sql_img);
 
-              $row_img = mysqli_fetch_assoc($result_img);
+            // if (mysqli_num_rows($result_img) > 0) {
 
-              $num1 = $row_img['COUNT(file_type)'];
+            //   $row_img = mysqli_fetch_assoc($result_img);
 
-            }
+            //   $num1 = $row_img['COUNT(file_type)'];
+
+            // }
 
 
 
-            $sql_vdo = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Video' AND category = 'Profile' Order by id DESC";
+            // $sql_vdo = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Video' AND category = 'Profile' Order by id DESC";
 
-            $result_vdo = mysqli_query($con, $sql_vdo);
+            // $result_vdo = mysqli_query($con, $sql_vdo);
 
-            if (mysqli_num_rows($result_vdo) > 0) {
+            // if (mysqli_num_rows($result_vdo) > 0) {
 
-              $row_vdo = mysqli_fetch_assoc($result_vdo);
+            //   $row_vdo = mysqli_fetch_assoc($result_vdo);
 
-              $num2 = $row_vdo['COUNT(file_type)'];
+            //   $num2 = $row_vdo['COUNT(file_type)'];
 
-            }
+            // }
 
 
 
