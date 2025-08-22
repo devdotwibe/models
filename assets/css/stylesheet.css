@@ -3179,6 +3179,7 @@ textarea:focus {
     width: 100%;
     padding: 1rem;
     border-radius: 12px;
+    margin-top: auto;
 }
 
 .advt-page .ads-grid .ad-card .ad-card3 {
@@ -10311,6 +10312,14 @@ body.advt-page.my-purpose .scroll-indicator {
   gap: 15px;
 }
 
+
+.advt-page .ads-grid .ad-card .ad-content {
+  padding: 2rem;
+  height: calc(100% - 250px);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
 
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
