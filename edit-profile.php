@@ -365,7 +365,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                   <?php if($have_pic) { ?>
 
-                        <a href="#">×</a>
+                        <a  onclick="DeleteImage()">×</a>
                         
                         <a  onclick="editProfileImage()">
                           <img src="<?php echo SITEURL.'/assets/images/edt.svg'; ?>" alt="">
@@ -2898,6 +2898,33 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   </div>
 
 
+    <div class="modal-overlay" id="conform_remove_profile_pic">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 class="modal-title">Confirm Profile Image Removal</h2>
+          <button class="close-modal" id="closeRemoveProfilePicModal" type="button" onclick="ConformCloseModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete your profile image?</p>
+
+          <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
+            <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" onclick="confirmRemoveProfilePic()">Yes, Remove</button>
+
+            <button class="btn btn-secondary" type="button" onclick="ConformCloseModal()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
   <?php include('includes/footer.php'); ?>
   <script>
     function select_hs_country(state) {
@@ -2943,6 +2970,43 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   </script>
 
   <script>
+
+    function ConformCloseModal()
+    {
+      $('#conform_remove_profile_pic').removeClass('active');
+    }
+
+    function DeleteImage()
+    {
+        $('#conform_remove_profile_pic').addClass('active');
+    }
+
+    function confirmRemoveProfilePic()
+    {
+        $.ajax({
+            url: '<?= SITEURL . 'ajax/upload_image.php' ?>',
+            type: 'post',
+            data: {
+              action: 'remove_profile_pic'
+            },
+            dataType: 'json',
+
+            success: function(res) {
+
+              if(res.status == 'success')
+              {
+                $('#profile_image').attr('src','<?= SITEURL ?>assets/images/user.png');
+
+                $('#conform_remove_profile_pic').removeClass('active');
+                
+              }
+              else
+              {
+                alert('Error removing profile image. Please try again.');
+              }
+            }
+          })
+    }
 
 
     function editProfileImage()
@@ -3955,6 +4019,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               let formData = new FormData();
 
               formData.append("pic_img", file);
+
+              formData.append("action", upload_profile_pic);
 
               $.ajax({
 
