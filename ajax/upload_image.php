@@ -17,7 +17,7 @@ include('../includes/helper.php');
 
         $target_file1 = $target_dir_profile . basename($_FILES["pic_img"]["name"]);
 
-        $target_profile = "uploads/profile_pic/" . basename($_FILES["pic_img"]["name"]);
+        $target_profile = "../uploads/profile_pic/" . basename($_FILES["pic_img"]["name"]);
 
                 if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
 
