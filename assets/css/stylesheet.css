@@ -11970,6 +11970,13 @@ margin: 0 auto;
     align-items: stretch;
  }
 
+ .search-section .search-form form > * {
+  width: 100%;
+ margin-bottom: 2%;
+  margin-left: 0 !important;
+  margin-right: 0%;
+}
+
 }
 
 
