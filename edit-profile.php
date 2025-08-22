@@ -2995,10 +2995,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
               if(res.status == 'success')
               {
-                $('#profile_image').attr('src','<?= SITEURL ?>assets/images/user.png');
+                $('#preview_prof_img').attr('src','<?= SITEURL ?>assets/images/user.png');
 
                 $('#conform_remove_profile_pic').removeClass('active');
-                
+
               }
               else
               {
