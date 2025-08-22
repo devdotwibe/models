@@ -10315,7 +10315,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 .advt-page .ads-grid .ad-card .ad-content {
   padding: 2rem;
-  /* height: calc(100% - 250px); */
+  height: calc(100% - 240px);
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
