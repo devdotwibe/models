@@ -10321,6 +10321,24 @@ body.advt-page.my-purpose .scroll-indicator {
   flex-wrap: wrap;
 }
 
+.search-section .search-form form{
+display: flex;
+flex-wrap:wrap;
+/* justify-content: space-between; */
+gap:1%;
+  align-items: center;
+}
+
+.search-section .search-form form >*{
+    width:24%;
+/* border:1px solid red; */
+}
+.search-section .search-form form select option{
+    background:#272d43;
+}
+
+
+
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
 
