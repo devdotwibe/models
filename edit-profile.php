@@ -3530,7 +3530,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 				  $button.prop('disabled', false);
 				}
 			  });
-        
+
 		}else{
 
 			  showNotification('Please fill required fields: ' + missingFields.join(', '), 'error');
@@ -3779,7 +3779,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     function ConformCloseModal() {
 
-      $('#conform_broad_cast').removeClass('active');
+      $('#conform_remove_profile_pic').removeClass('active');
     }
 
 
