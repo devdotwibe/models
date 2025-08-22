@@ -11109,6 +11109,10 @@ margin: 0 auto;
   gap: 15px;
 }
 
+.advt-page .ads-grid .ad-card .ad-content{
+    height: auto;
+}
+
 }
 
 
