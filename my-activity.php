@@ -2167,7 +2167,7 @@ if ($userDetails) {
 </div>
 
 <?php include('includes/footer.php'); ?>
-
+<?php /*?>
 <!-- Bottom Navigation -->
 <nav class="bottom-nav">
     <a href="#" class="nav-item">
@@ -2187,7 +2187,7 @@ if ($userDetails) {
         <div class="nav-icon">👤</div>
         <span>Profile</span>
     </a>
-</nav>
+</nav> <?php */ ?>
 
 <script>
     // User state management
