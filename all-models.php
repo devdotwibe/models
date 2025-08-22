@@ -150,7 +150,7 @@ include('includes/helper.php');
         <div class="container">
 
 
-            <div class="profile-grid" id="profileGrid">
+            <div class="profile-grid profile-columns" id="profileGrid">
                 <?php
 
 

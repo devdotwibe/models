@@ -3661,9 +3661,13 @@ body.premimum-model1::before {
     position: relative;
     backdrop-filter: blur(var(--blur));
     -webkit-backdrop-filter: blur(var(--blur));
+
+}
+.premimum-model1 .profile-grid.profile-columns .profile-card {
     display: flex;
   flex-direction: column;
 }
+
 
 .premimum-model1 .profile-card:hover {
     transform: translateY(-8px);
