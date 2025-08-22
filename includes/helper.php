@@ -451,14 +451,13 @@ function getModelPrivacySettings($model_id) {
 		return (int)$count;
 	}
 
-	function ModelFileCount($unique_model_id,$type) {
-
+	function ModelFileCount($unique_model_id, $type) {
 		$query = "SELECT COUNT(*) 
 				FROM model_images 
 				WHERE unique_model_id = %s 
-				AND file_type = $type";
+				AND file_type = %s";
 		
-		$count = DB::queryFirstField($query, $unique_model_id);
+		$count = DB::queryFirstField($query, $unique_model_id, $type);
 		return (int)$count;
 	}
 
