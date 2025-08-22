@@ -10335,7 +10335,6 @@ margin-bottom: 0;
 }
 .search-section .search-form form >*{
     width:24%;
-/* border:1px solid red; */
 }
 .search-section .search-form form select option{
     background:#272d43;
@@ -10847,10 +10846,21 @@ margin: 0 auto;
 
   width: 98%;
 }
-.advt-page .ads-expanded .ad-card .ad-content .btn-primary{
-
+.search-section .search-form form > * {
+  width: 48%;
+  margin-bottom: 2%;
 }
 
+.search-section .search-form form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0;
+  align-items: center;
+}
+.search-section .search-form form > *:nth-last-child(-n+2) {
+  margin-bottom: 0;
+}
 }
 
 @media (max-width: 600px) {
