@@ -431,7 +431,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                     ?>
 
-                    <div id="modalimage_gallery" class="text-center dropzone"></div>
+                    <div id="temporary-preview-container" style="display: none;"></div>
 
                   </ul>
 
@@ -451,6 +451,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                     </li>
                   </div>
                 </div>
+
+                <div id="modalimage_gallery" class="text-center dropzone"></div>
+
                 <!-- Custom Preview Container -->
                 <div id="image-preview-container">
                   <!-- Previews will be moved here -->
@@ -4189,9 +4192,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
 
     const myDropzone = new Dropzone("#modalimage_gallery", {
-
-      $('#modalimage_gallery').append('<div id="temporary-preview-container" style="display: none;"></div>');
-
       url: "dropzone_upload.php",
       paramName: "file", // The name that will be used in $_FILES["file"]
       maxFilesize: 5, // in MB
@@ -4223,8 +4223,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             const content = $('#temporary-preview-container').html();
 
             $('#modalimage_gallery').before(content);
-
-            $('#temporary-preview-container').remove();
+            $('#temporary-preview-container').empty().hide();
           }
 
           AddjustImage();
