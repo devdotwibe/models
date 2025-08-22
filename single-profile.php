@@ -2696,7 +2696,7 @@ jQuery('.send_gift_btn').click(function(){
                 },
                 success: function (response) {
         
-                    // $(`#${status}`).text('Following');
+                    $(`#${status}`).text('Follow Requested');
                     //  $(`#${status}`).removeClass('bg-gray-500').addClass('bg-blue-500');
 
                     showNotification(`Connection request sent to ${profileName}!`, 'success');
