@@ -513,10 +513,28 @@ if (mysqli_num_rows($res_ap) > 0) {
                     <h2 class="text-xl font-bold mb-4 premium-text">About Me</h2>
                     <p class="text-white/80 mb-4"><?php echo $rowesdw['user_bio']; ?></p>
 				<?php } ?>
-				<?php if(!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null'){ 
-				$hobbies = json_decode($rowesdw['hobbies']); 
+				<?php if( (!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null' ) ||  (!empty($rowesdw['additional_hobbies']) && $rowesdw['additional_hobbies'] != 'null') ){ 
+
+                  $hobbies = [];
+
+                    if (!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null') {
+                        $decodedHobbies = json_decode($rowesdw['hobbies'], true);
+                        if (is_array($decodedHobbies)) {
+                            $hobbies = array_merge($hobbies, $decodedHobbies);
+                        }
+                    }
+
+                    if (!empty($rowesdw['additional_hobbies']) && $rowesdw['additional_hobbies'] != 'null') {
+                        $decodedAdditional = json_decode($rowesdw['additional_hobbies'], true);
+                        if (is_array($decodedAdditional)) {
+                            $hobbies = array_merge($hobbies, $decodedAdditional);
+                        }
+                    }
+
+                    if (!empty($hobbies)) {
 				?>
                     <div class="flex flex-wrap gap-2 hobbies-sec">
+
 					<?php foreach($hobbies as $hb){ ?>
 					
                         <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm"><?php echo $hb; ?></span>
@@ -524,8 +542,11 @@ if (mysqli_num_rows($res_ap) > 0) {
 					<?php } ?>
 					
                     </div>
-				<?php } ?>
+
+				<?php } } ?>
+
                 </div>
+
 			<?php } ?>
 			
 			<?php 
