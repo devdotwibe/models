@@ -145,11 +145,7 @@ foreach ($f_country_list as $val) {
 			?>
 					
 					<form method="get" id="search-form" class="mb-2" onSubmit="submit_search(1);return false;">
-						<input type="hidden" id="selpagesize" value="6" />
-						<input type="hidden" name="pages" id="i-page" value="1" />
-						<input type="hidden" name="total_item" id="i-total-page" value="0" />
-						<input type="hidden" name="sort_column" id="hdnSortColumn" value="" />
-						<input type="hidden" name="sort_type" id="hdnSortOrder" value="" />
+					
 						
 						<?php 
 						
@@ -193,6 +189,15 @@ foreach ($f_country_list as $val) {
 
 						
 						<button type="submit" class="btn-primary" <?php /* onclick="performSearch()" */ ?> > 🔍 Search</button>
+
+
+	<input type="hidden" id="selpagesize" value="6" />
+						<input type="hidden" name="pages" id="i-page" value="1" />
+						<input type="hidden" name="total_item" id="i-total-page" value="0" />
+						<input type="hidden" name="sort_column" id="hdnSortColumn" value="" />
+						<input type="hidden" name="sort_type" id="hdnSortOrder" value="" />
+
+
 					</form>
 						
                     </div>

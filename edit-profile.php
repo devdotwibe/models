@@ -433,8 +433,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                     <div id="temporary-preview-container" style="display: none;"></div>
 
-                    <div id="modalimage_gallery" class="text-center dropzone"></div>
-
                   </ul>
 
                   <div class="preview" style="display:none;">
@@ -453,6 +451,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                     </li>
                   </div>
                 </div>
+
+                <div id="modalimage_gallery" class="text-center dropzone"></div>
+
                 <!-- Custom Preview Container -->
                 <div id="image-preview-container">
                   <!-- Previews will be moved here -->
@@ -3530,7 +3531,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 				  $button.prop('disabled', false);
 				}
 			  });
-        
+
 		}else{
 
 			  showNotification('Please fill required fields: ' + missingFields.join(', '), 'error');
@@ -3779,7 +3780,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     function ConformCloseModal() {
 
-      $('#conform_broad_cast').removeClass('active');
+      $('#conform_remove_profile_pic').removeClass('active');
     }
 
 
@@ -4155,6 +4156,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       // Get the preview box (dz-preview)
       const preview = buttonElement.closest('.dz-preview');
 
+      const previewout = buttonElement.closest('.dz-processing');
+
       if (!preview) return;
 
       // Remove hidden input if exists
@@ -4187,6 +4190,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
       // Remove the preview from the DOM
       preview.remove();
+      previewout.remove();
     }
 
 
