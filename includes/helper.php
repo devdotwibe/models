@@ -451,6 +451,18 @@ function getModelPrivacySettings($model_id) {
 		return (int)$count;
 	}
 
+	function ModelFileCount($unique_model_id,$type) {
+
+		$query = "SELECT COUNT(*) 
+				FROM model_images 
+				WHERE unique_model_id = %s 
+				AND file_type = $type";
+		
+		$count = DB::queryFirstField($query, $unique_model_id);
+		return (int)$count;
+	}
+
+
 function isUserOnline($userId, $minutes = 5) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
     $file = $cacheDir . 'user_' . $userId . '.txt';
