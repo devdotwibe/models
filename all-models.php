@@ -634,12 +634,14 @@ include('includes/helper.php');
                             </div>
                             <div class="profile-actions">
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
-                                    <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+
+                                 <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
+                                    
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
-                                    <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                   <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } ?>
@@ -1178,12 +1180,13 @@ include('includes/helper.php');
                             </div>
                             <div class="profile-actions">
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
-                                    <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+
+                                    <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
-                                    <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } ?>
