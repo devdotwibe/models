@@ -2614,6 +2614,8 @@ jQuery('.send_gift_btn').click(function(){
             $('#filePreview_div_story').hide();
 
             $('#story_image').show();
+
+            $('#filePreview_story').val("");
         }
 
         function removePreview(el)
