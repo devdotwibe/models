@@ -4577,7 +4577,7 @@ body.premimum-model1::before {
 
     color: var(--text-primary);
     text-decoration: none;
-
+    word-break: break-all;
 }
 
 
