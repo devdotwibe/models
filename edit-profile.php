@@ -431,8 +431,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                     ?>
 
-                    <div id="temporary-preview-container" style="display: none;"></div>
-
                     <div id="modalimage_gallery" class="text-center dropzone"></div>
 
                   </ul>
@@ -4191,6 +4189,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
 
     const myDropzone = new Dropzone("#modalimage_gallery", {
+
+      $('#modalimage_gallery').append('<div id="temporary-preview-container" style="display: none;"></div>');
+
       url: "dropzone_upload.php",
       paramName: "file", // The name that will be used in $_FILES["file"]
       maxFilesize: 5, // in MB
@@ -4222,7 +4223,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             const content = $('#temporary-preview-container').html();
 
             $('#modalimage_gallery').before(content);
-            $('#temporary-preview-container').empty().hide();
+
+            $('#temporary-preview-container').remove();
           }
 
           AddjustImage();
