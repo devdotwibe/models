@@ -10302,6 +10302,7 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 .advt-page .ads-expanded .ad-card .ad-content .btn-primary{
     margin-top:auto;
+    padding: 1rem;
 }
 
 .advt-page .ads-expanded .ad-card .ad-content .ad-stats{
@@ -10815,7 +10816,9 @@ margin: 0 auto;
 
   width: 98%;
 }
+.advt-page .ads-expanded .ad-card .ad-content .btn-primary{
 
+}
 
 }
 
