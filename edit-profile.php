@@ -3447,21 +3447,43 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 	function updateProfileCompletionNew(button) {
 		
 		let completedFields = 0;
-      let totalFields = 0;
+    let totalFields = 0;
 
-      const basicFields = ['#uname', '#dob-input', '#age-display'];
-      basicFields.forEach(selector => {
+    let missingFields = [];
+
+    const basicFields = [
+        { selector: '#uname', label: 'Username' },
+        { selector: '#dob-input', label: 'Date of Birth' },
+        { selector: '#age-display', label: 'Age' }
+    ];
+
+    basicFields.forEach(fieldData => {
         totalFields++;
-        const field = document.querySelector(selector);
-        if (field && field.value) completedFields++;
+        const field = document.querySelector(fieldData.selector);
+        if (field && field.value.trim()) {
+            completedFields++;
+        } else {
+            missingFields.push(fieldData.label);
+        }
+    });
+
+    const extraFields = [
+        { id: 'i-hs-country', label: 'Country' },
+        { id: 'i-hs-state', label: 'State' },
+        { id: 'i-hs-city', label: 'City' }
+    ];
+
+
+	  totalFields += extraFields.length;
+
+      extraFields.forEach(fieldData => {
+          const field = document.getElementById(fieldData.id);
+          if (field && field.value.trim()) {
+              completedFields++;
+          } else {
+              missingFields.push(fieldData.label);
+          }
       });
-	  totalFields += 3;    
-      const country = document.getElementById('i-hs-country');
-      const state = document.getElementById('i-hs-state');
-	  const city = document.getElementById('i-hs-city');
-      if (country && country.value) completedFields++;
-	  if (state && state.value) completedFields++;
-      if (city && city.value) completedFields++;
 	  
 		if(totalFields == completedFields){
 			  const $button = $(button);
@@ -3508,8 +3530,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 				  $button.prop('disabled', false);
 				}
 			  });
+        
 		}else{
-			showNotification('Please fill required fields', 'error');
+
+			  showNotification('Please fill required fields: ' + missingFields.join(', '), 'error');
+
 		}
 	}
 
