@@ -10502,6 +10502,20 @@ body.advt-page.my-purpose .scroll-indicator {
         width: 75%;
 
     }
+
+
+.advt-page .ads-expanded {
+margin: 0 auto;
+  width: 80%;
+}
+
+.advt-page .ads-expanded .ad-card {
+  width: 100%;
+
+}
+
+
+
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -10583,7 +10597,10 @@ body.advt-page.my-purpose .scroll-indicator {
     .image-center-profile {
         font-size: 13px;
     }
-
+.advt-page .ads-expanded {
+margin: 0 auto;
+  width: 90%;
+}
 
 
 }
@@ -10793,6 +10810,12 @@ body.advt-page.my-purpose .scroll-indicator {
     .header-desk-inner button:nth-child(2), .header-desk-inner button:nth-child(3) {
         display: none;
     }
+
+.advt-page .ads-expanded {
+
+  width: 98%;
+}
+
 
 }
 
@@ -11032,6 +11055,22 @@ body.advt-page.my-purpose .scroll-indicator {
 
    .header-desk-inner button:nth-child(1){
     margin-right: 10px;
+}
+
+.advt-page .ads-expanded .ad-card {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.advt-page .ads-expanded .ad-card .ad-image {
+  height: auto !important;
+  width: 100%;
+}
+
+.advt-page .ads-expanded .ad-card .ad-content {
+  width: 100%;
 }
 
 }
