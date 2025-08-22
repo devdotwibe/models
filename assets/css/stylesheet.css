@@ -10315,7 +10315,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 .advt-page .ads-grid .ad-card .ad-content {
   padding: 2rem;
-  height: calc(100% - 250px);
+  /* height: calc(100% - 250px); */
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -10890,6 +10890,13 @@ margin: 0 auto;
 }
   .advt-page .ads-grid {
     grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .ads-grid .ad-content .ad-stats {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
   }
 
 }
