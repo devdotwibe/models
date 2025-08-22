@@ -10329,6 +10329,10 @@ gap:1%;
   align-items: center;
 }
 
+
+.search-section .search-form .form-grid{
+margin-bottom: 0;
+}
 .search-section .search-form form >*{
     width:24%;
 /* border:1px solid red; */
