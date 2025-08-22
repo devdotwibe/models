@@ -11077,7 +11077,7 @@ margin: 0 auto;
 }
 
 .advt-page .ads-expanded .ad-card .ad-image {
-  height: auto !important;
+  height: 250px !important;
   width: 100%;
 }
 
@@ -11098,6 +11098,15 @@ margin: 0 auto;
 
 .advt-page .view-toggle{
     justify-content: inherit;
+}
+
+
+.ads-grid .ad-content .ad-stats {
+
+  align-items: flex-start;
+
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 }
