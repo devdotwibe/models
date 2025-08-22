@@ -9,6 +9,8 @@ include('../includes/helper.php');
       $target_dir_profile = "uploads/profile_pic/"; 
 
 
+      echo json_encode(['status' => 'success']);
+      
 	  if (isset($_FILES["pic_img"]) && !empty($_FILES["pic_img"]['name'])) {
 
 
@@ -23,7 +25,7 @@ include('../includes/helper.php');
                     if(mysqli_query($con, $sql)){
         
                          echo json_encode(['status' => 'success']);
-                         
+
                     }else{
             
                         echo json_encode(['status' => 'success']);
