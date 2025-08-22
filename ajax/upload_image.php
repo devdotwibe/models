@@ -10,7 +10,7 @@ include('../includes/helper.php');
 
 	  if (isset($_FILES["pic_img"]) && !empty($_FILES["pic_img"]['name'])) {
 
-        echo json_encode(['status' => 'have file']);
+        echo json_encode(['status' => $use_id]);
 
         $target_file1 = $target_dir_profile . basename($_FILES["pic_img"]["name"]);
 
