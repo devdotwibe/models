@@ -729,34 +729,32 @@ if (mysqli_num_rows($res_ap) > 0) {
 
             }
 
-            // $sql_img = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Image' Order by id DESC";
+            $sql_img = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Image' AND category = 'Profile' Order by id DESC";
 
-            // $result_img = mysqli_query($con, $sql_img);
+            $result_img = mysqli_query($con, $sql_img);
 
-            // if (mysqli_num_rows($result_img) > 0) {
+            if (mysqli_num_rows($result_img) > 0) {
 
-            //   $row_img = mysqli_fetch_assoc($result_img);
+              $row_img = mysqli_fetch_assoc($result_img);
 
-            //   $num1 = $row_img['COUNT(file_type)'];
+              $num1 = $row_img['COUNT(file_type)'];
 
-            // }
-
-            $num1 = ModelFileCount($_GET['m_unique_id'], 'Image');
+            }
 
 
-            // $sql_vdo = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Video' Order by id DESC";
 
-            // $result_vdo = mysqli_query($con, $sql_vdo);
+            $sql_vdo = "SELECT COUNT(file_type) FROM model_images WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND file_type = 'Video' AND category = 'Profile' Order by id DESC";
 
-            // if (mysqli_num_rows($result_vdo) > 0) {
+            $result_vdo = mysqli_query($con, $sql_vdo);
 
-            //   $row_vdo = mysqli_fetch_assoc($result_vdo);
+            if (mysqli_num_rows($result_vdo) > 0) {
 
-            //   $num2 = $row_vdo['COUNT(file_type)'];
+              $row_vdo = mysqli_fetch_assoc($result_vdo);
 
-            // }
+              $num2 = $row_vdo['COUNT(file_type)'];
 
-            $num2 = ModelFileCount($_GET['m_unique_id'], 'Video');
+            }
+
 
 
             $sql_flow = "SELECT COUNT(status) FROM model_follow WHERE unique_model_id = '" . $_GET['m_unique_id'] . "' AND status = 'Follow' Order by id DESC";
