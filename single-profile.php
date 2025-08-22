@@ -1038,7 +1038,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                     <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
                                     <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
                                 </div>
-                                <button type="button" onclick="FollowModel('<?= $rows_md['unique_id'] ?>', '<?= $user_unique_id ?>','follow_similar-<?= $user_unique_id ?>')" class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                <button type="button" onclick="FollowModel('<?= $rows_md['id'] ?>', '<?= $rows_md['username'] ?>')" class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
                                      <span id="follow_similar-<?= $user_unique_id ?>">Follow</span>
                                 </button>
                             </div>
@@ -2684,20 +2684,22 @@ jQuery('.send_gift_btn').click(function(){
             });
         });
 
-        function FollowModel(model_id,user_id,status)
+        function FollowModel(model_id,profileName)
         {
 
             $.ajax({
-                url: 'follow_model.php', 
+                url: "<?= SITEURL . '/ajax/model_followrequest.php' ?>",
                 type: 'POST',
                 data:{
-                    model_id: model_id,
-                    user_id: user_id
+                    modelid: model_id,
+                    notification_type: 'follow',
                 },
                 success: function (response) {
         
-                    $(`#${status}`).text('Following');
-                     $(`#${status}`).removeClass('bg-gray-500').addClass('bg-blue-500');
+                    // $(`#${status}`).text('Following');
+                    //  $(`#${status}`).removeClass('bg-gray-500').addClass('bg-blue-500');
+
+                    showNotification(`Connection request sent to ${profileName}!`, 'success');
                
                 },
                 error: function (xhr) {
