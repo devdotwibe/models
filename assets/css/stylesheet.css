@@ -10352,6 +10352,19 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
+.simple-pagination .current {
+    box-shadow:none ;
+}
+.simple-pagination span{
+   
+    background:linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    /* background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important; */
+    color:#fff !important;
+      border-image: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+  border-image-slice: 1;
+}
+
+
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
 
@@ -12297,8 +12310,8 @@ body.advt-page.my-purpose .scroll-indicator {
 
     .advt-page .ads-expanded .ad-card .ad-content .btn-primary {
         margin-top: auto;
-        padding: 0.7rem;
-        font-size: 12px;
+              padding: 0.6rem;
+        font-size: 11px;
     }
 
     .advt-page .ads-expanded .ad-card .ad-content {
