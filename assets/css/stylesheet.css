@@ -10354,6 +10354,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 .simple-pagination .current {
     box-shadow:none !important ;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important; 
 }
 .simple-pagination span,.simple-pagination a{
    
@@ -10362,6 +10363,7 @@ body.advt-page.my-purpose .scroll-indicator {
     color:#fff !important;
       /* border-image: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important; */
   border-image-slice: 1;
+  border:none !important;
 }
 .simple-pagination span:hover , .simple-pagination a:hover{
 background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important; 
