@@ -11999,7 +11999,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
    .premimum-model1 .profile-grid.profile-list .profile-image-container {
         width: 47%;
-                height: calc(100% - 90px);
+                height: calc(100% - 75px);
     }
 
     .premimum-model1 .profile-grid.profile-list .profile-info {
@@ -12012,7 +12012,8 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 .premimum-model1 .profile-grid.profile-list .profile-actions{
-    height:90px;
+    height:75px;
+    gap:27px;
 }
 
     .premimum-model1 .profile-grid.profile-list .profile-info .profile-name a {
@@ -12034,6 +12035,12 @@ body.advt-page.my-purpose .scroll-indicator {
     border-radius: 50px;
     font-size: 0.5rem;
     }
+
+
+.premimum-model1 .profile-grid.profile-list .profile-actions .action-btn {
+    width: 40px;
+    height: 40px;
+}
 
 
     .premimum-model1 .profile-grid .profile-card {
