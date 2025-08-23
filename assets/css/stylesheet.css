@@ -11250,8 +11250,13 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
+.advt-page .ads-expanded .ad-card .ad-content .btn-primary {
+    margin-top: auto;
+    padding: 0.8rem;
+}
+
     .advt-page .ads-expanded .ad-card .ad-content .ad-description{
-        font-size:15px;
+        font-size:14px;
         line-height:22px
     }
 
