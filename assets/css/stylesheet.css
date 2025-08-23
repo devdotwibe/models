@@ -12029,6 +12029,13 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
 
+      .premimum-model1 .profile-grid.profile-list .profile-image-container .profile-badge {
+    padding: 0.3rem 0.5rem;
+    border-radius: 50px;
+    font-size: 0.5rem;
+    }
+
+
     .premimum-model1 .profile-grid .profile-card {
 
         width:100%;
