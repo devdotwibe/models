@@ -14317,6 +14317,7 @@ padding: 10px;
  .model-info>div:nth-child(2){
     font-size:13px !important;
     line-height:17px !important;
+    width: 100%;
   }
     .model-info>div:nth-child(3){
     font-size:13px !important;
@@ -14348,7 +14349,7 @@ padding: 10px;
   gap: 5px;
 animation: none;
     box-shadow: none;
-    flex-direction: column;
+    flex-direction: column !important;
 }
 
     .activity-page .profile-badge.badge-live {
