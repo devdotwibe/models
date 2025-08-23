@@ -12228,10 +12228,14 @@ body.advt-page.my-purpose .scroll-indicator {
 
        .premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile > *{
         background:none;
+                height: 29px;
         /* color:none;
         box-shadow:none */
        }
 
+       .profile-columns .profile-badges.profile-badges-mobile > *>span{
+        margin:0;
+       }
 }
 
 
