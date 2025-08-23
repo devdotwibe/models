@@ -11218,14 +11218,14 @@ body.advt-page.my-purpose .scroll-indicator {
     opacity: 1;
 }
 
-.activity-page .premium-text {
+/* .activity-page .premium-text {
     color: #ffd700;
     font-size: 16px;
     font-weight: 800;
     text-align: center;
     margin-bottom: 16px;
     text-shadow: 0 2px 15px rgba(255, 215, 0, 0.6);
-}
+} */
 
 .activity-page .premium-btn {
     background: linear-gradient(135deg, #ffd700, #ffed4e);
