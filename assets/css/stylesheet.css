@@ -10347,6 +10347,10 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
+   .premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile{
+    display:none;
+   }
+
 
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
