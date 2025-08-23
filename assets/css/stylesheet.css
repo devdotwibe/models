@@ -10986,8 +10986,9 @@ body.advt-page.my-purpose .scroll-indicator {
     }
     
     .advt-page .ads-grid .ad-card .ad-content {
-        height: auto;
+        /* height: auto; */
             padding: 1rem;
+                height: calc(100% - 240px);
     }
 
     .advt-page .ad-title {
@@ -12220,7 +12221,7 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .advt-page .ads-grid .ad-card .ad-content {
-        padding: 1.25rem;
+        padding: .8rem;
     }
 
     .advt-page .page-header p {
@@ -12303,6 +12304,38 @@ body.advt-page.my-purpose .scroll-indicator {
     .advt-page .ads-expanded .ad-card .ad-content {
         padding: 1rem;
     }
+
+.advt-page .ads-grid .ad-card .btn-primary {
+        padding: .7rem .7rem;
+        margin-top: auto;
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+        .advt-page .ad-description {
+        font-size: 13px;
+    }
+
+    .advt-page .ad-image {
+    height: 210px;
+    }
+    .advt-page .ads-grid .ad-card .ad-content {
+
+    height: calc(100% - 203px);
+    }
+
+        .advt-page .ad-title {
+        font-size: 1rem;
+   
+        word-break: break-all;
+    }
+
+        .ads-grid .ad-content .ad-stats {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 7px;
+        flex-direction: column;
+    }
+
 }
 
 
