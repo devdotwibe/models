@@ -12900,6 +12900,10 @@ padding: 6px;
   flex-wrap: wrap;
 }
 
+.activity-page .model-card{
+    padding:0;
+}
+
 }
 
 
