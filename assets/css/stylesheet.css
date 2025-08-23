@@ -13252,6 +13252,20 @@ padding: 10px;
 
 
 
+.profile-grid.profile-columns .profile-badge.badge-live {
+    font-size: 10px;
+    padding: 5px 10px;
+}
+
+.profile-grid.profile-columns .profile-badge.badge-premium{
+    font-size: 10px;
+    padding: 5px 10px;  
+}
+
+.profile-grid.profile-columns .profile-badge.badge-verified{
+ font-size: 10px;
+    padding: 5px 10px;  
+}
 }
 
 
