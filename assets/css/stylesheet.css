@@ -12223,7 +12223,6 @@ body.advt-page.my-purpose .scroll-indicator {
         justify-content: flex-start;
         gap: 6px;
         flex-wrap: wrap;
-        display: none;
         flex-direction: row;
     }
 
