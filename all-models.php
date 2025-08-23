@@ -102,7 +102,7 @@ include('includes/helper.php');
             <div class="header-content">
                 <h1 class="logo">Live Models</h1>
 
-                <div class="header-actions"> 
+                <div class="header-actions">
                     <button class="header-btn active" title="Grid View" id="gridViewBtn" onclick="ChangeView('grid')">
                         <i class="fas fa-th-large"></i>
                     </button>
@@ -125,7 +125,7 @@ include('includes/helper.php');
                         <div class="sort-options" id="sortOptions">
                             <div class="sort-option" data-sort="newest"><a href="<?= SITEURL ?>/all-models.php?sort=newest">Newest First</a></div>
                             <div class="sort-option" data-sort="online"><a href="<?= SITEURL ?>/all-models.php?sort=online">Online Now</a></div>
-                           <?php /*?> <div class="sort-option" data-sort="popular">Most Popular</div>
+                            <?php /*?> <div class="sort-option" data-sort="popular">Most Popular</div>
                             <div class="sort-option" data-sort="distance">Distance</div>
                             <div class="sort-option" data-sort="price">Price: Low to High</div><?php */ ?>
                         </div>
@@ -581,15 +581,15 @@ include('includes/helper.php');
                                     <div class="profile-badges">
                                         <span class="profile-badge badge-live">Live</span>
 
-                                        <?php if($is_user_new) { ?>
+                                        <?php if ($is_user_new) { ?>
 
-                                             <span class="profile-badge badge-new">New</span>
+                                            <span class="profile-badge badge-new">New</span>
 
                                         <?php } ?>
 
-                                        <?php if($is_user_preminum) { ?>
+                                        <?php if ($is_user_preminum) { ?>
 
-                                             <span class="profile-badge badge-premium">Premium</span>
+                                            <span class="profile-badge badge-premium">Premium</span>
 
                                         <?php } ?>
 
@@ -635,13 +635,13 @@ include('includes/helper.php');
                             <div class="profile-actions">
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                 <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
-                                    
+
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
-                                   <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } ?>
@@ -681,23 +681,23 @@ include('includes/helper.php');
                                 </button>
                             </div>
                         </div>
-						
-                          <div class="profile-card">
+
+                        <div class="profile-card">
                             <div class="profile-image-container">
                                 <a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
                                     <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
                                     <div class="profile-badges">
                                         <span class="profile-badge badge-live">Live</span>
 
-                                        <?php if($is_user_new) { ?>
+                                        <?php if ($is_user_new) { ?>
 
-                                             <span class="profile-badge badge-new">New</span>
+                                            <span class="profile-badge badge-new">New</span>
 
                                         <?php } ?>
 
-                                        <?php if($is_user_preminum) { ?>
+                                        <?php if ($is_user_preminum) { ?>
 
-                                             <span class="profile-badge badge-premium">Premium</span>
+                                            <span class="profile-badge badge-premium">Premium</span>
 
                                         <?php } ?>
 
@@ -743,13 +743,13 @@ include('includes/helper.php');
                             <div class="profile-actions">
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                 <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
-                                    
+
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
-                                   <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } ?>
@@ -792,22 +792,23 @@ include('includes/helper.php');
 
 
 
-                          <div class="profile-card">
+                        <div class="profile-card">
                             <div class="profile-image-container">
                                 <a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
                                     <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
+                                   
                                     <div class="profile-badges">
                                         <span class="profile-badge badge-live">Live</span>
 
-                                        <?php if($is_user_new) { ?>
+                                        <?php if ($is_user_new) { ?>
 
-                                             <span class="profile-badge badge-new">New</span>
+                                            <span class="profile-badge badge-new">New</span>
 
                                         <?php } ?>
 
-                                        <?php if($is_user_preminum) { ?>
+                                        <?php if ($is_user_preminum) { ?>
 
-                                             <span class="profile-badge badge-premium">Premium</span>
+                                            <span class="profile-badge badge-premium">Premium</span>
 
                                         <?php } ?>
 
@@ -816,6 +817,28 @@ include('includes/helper.php');
                                         <?php } ?>
 
                                     </div>
+
+                                    <div class="profile-badges profile-badges-mobile">
+                                        <span class="profile-badge badge-live"><span class="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></span></span>
+
+                                        <?php if ($is_user_new) { ?>
+
+                                            <span class="profile-badge badge-new">New</span>
+
+                                        <?php } ?>
+
+                                        <?php if ($is_user_preminum) { ?>
+
+                                            <span class="profile-badge badge-premium">👑</span>
+
+                                        <?php } ?>
+
+                                        <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
+                                            <span class="profile-badge badge-verified"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
+                                        <?php } ?>
+
+                                    </div>
+
                                 </a>
                             </div>
                             <div class="profile-info">
@@ -853,13 +876,13 @@ include('includes/helper.php');
                             <div class="profile-actions">
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                 <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
-                                    
+
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
-                                   <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } ?>
@@ -899,7 +922,7 @@ include('includes/helper.php');
                                 </button>
                             </div>
                         </div>
-						
+
 
                     <?php } ?>
 
@@ -1339,20 +1362,21 @@ include('includes/helper.php');
                             <div class="profile-image-container">
                                 <a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
                                     <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
+
                                     <div class="profile-badges">
 
 
                                         <span class="profile-badge badge-live">Live</span>
 
-                                        <?php if($is_user_new) { ?>
+                                        <?php if ($is_user_new) { ?>
 
-                                             <span class="profile-badge badge-new">New</span>
+                                            <span class="profile-badge badge-new">New</span>
 
                                         <?php } ?>
 
-                                        <?php if($is_user_preminum) { ?>
+                                        <?php if ($is_user_preminum) { ?>
 
-                                             <span class="profile-badge badge-premium">Premium</span>
+                                            <span class="profile-badge badge-premium">Premium</span>
 
                                         <?php } ?>
 
@@ -1361,6 +1385,10 @@ include('includes/helper.php');
                                         <?php } ?>
 
                                     </div>
+
+                                  
+
+
                                 </a>
                             </div>
                             <div class="profile-info">
@@ -2173,19 +2201,18 @@ include('includes/helper.php');
     <?php } ?>
 
     <script>
+        function ChangeView(value) {
+            $('#gridViewBtn, #menuBtn').removeClass('active');
+            $('#profileGrid, #profileList').hide();
 
-      function ChangeView(value) {
-        $('#gridViewBtn, #menuBtn').removeClass('active');
-        $('#profileGrid, #profileList').hide();
-
-        if (value === 'grid') {
-            $('#gridViewBtn').addClass('active');
-            $('#profileGrid').show();
-        } else {
-            $('#menuBtn').addClass('active');
-            $('#profileList').show();
+            if (value === 'grid') {
+                $('#gridViewBtn').addClass('active');
+                $('#profileGrid').show();
+            } else {
+                $('#menuBtn').addClass('active');
+                $('#profileList').show();
+            }
         }
-    }
 
 
 
