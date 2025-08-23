@@ -12342,6 +12342,11 @@ body.advt-page.my-purpose .scroll-indicator {
         flex-direction: column;
     }
 
+        .advt-page .ad-badge {
+           font-size: 11px;
+        left: inherit;
+    }
+
 }
 
 
