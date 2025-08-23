@@ -10941,7 +10941,7 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .advt-page .ads-grid {
-        gap:5px;
+        gap:7px;
     }
 
     .premimum-model1 .profile-grid.profile-columns .profile-card {
@@ -10980,8 +10980,31 @@ body.advt-page.my-purpose .scroll-indicator {
     .premimum-model1 .profile-grid.profile-columns .action-btn i {
         font-size: 15px;
     }
+    .ads-grid .ad-content .ad-stats {
+     
+        gap: 5px;
+    }
+    
+    .advt-page .ads-grid .ad-card .ad-content {
+        height: auto;
+            padding: 1rem;
+    }
 
-    .premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile .profile-badge {}
+    .advt-page .ad-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    }
+
+.advt-page .ad-description {
+
+    font-size:14px;
+}
+
+.advt-page .ads-grid .ad-card .btn-primary {
+
+    padding: .8rem 1rem;
+}
 
 }
 
@@ -11284,9 +11307,7 @@ body.advt-page.my-purpose .scroll-indicator {
         gap: 15px;
     }
 
-    .advt-page .ads-grid .ad-card .ad-content {
-        height: auto;
-    }
+
 
 }
 
