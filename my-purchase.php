@@ -203,6 +203,8 @@
 						 $url = $row['file'];
 						 $url_ext = $row['file'];
 
+             $post_id = $row['id'];
+
              $url = 'assets/images/model-gal-no-img.jpg';
 
 						 if (checkImageExists($url_ext)) {
@@ -227,7 +229,7 @@
 				<?php if($file_type == 'Image'){ ?>
 
                     <!-- Premium Purchase Card 1 - Photo -->
-                    <div class="card-premium animate-fade-in-up" data-type="photo" data-model="aria" data-price="25" data-date="2024-12-15" style="animation-delay: 0.1s">
+                    <div class="card-premium animate-fade-in-up" data-post-id="<?php echo $post_id ?>" data-type="photo" data-model="aria" data-price="25" data-date="2024-12-15" style="animation-delay: 0.1s">
                         <div class="image-premium relative">
                             <img src="<?php echo SITEURL.$url; ?>" alt="<?php echo $image_text; ?>" class="w-full h-48 sm:h-64 object-cover">
                             <div class="absolute top-3 sm:top-4 left-3 sm:left-4 badge-premium">
