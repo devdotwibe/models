@@ -2530,7 +2530,9 @@ jQuery('.send_gift_btn').click(function(){
 
                 if (response.status === 'buynow') {
 
-                    $('#modal_success_message').prepend(`<a herf="wallet.php">Buy Now Coins</a>`);
+                      $('#modal_success_message').prepend(`
+                        <button id="buyNowBtn" class="btn btn-primary">Buy Now</button>
+                    `);
 
                     $('#message_status').html("");
 
@@ -2540,6 +2542,10 @@ jQuery('.send_gift_btn').click(function(){
 
                     $('#success_modal').addClass('active');
 
+                    $('#buyNowBtn').on('click', function () {
+                        
+                            window.location.href = "/wallet.php";
+                    });
                 }
             },
 
