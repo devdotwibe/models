@@ -12867,7 +12867,7 @@ body.advt-page.my-purpose .scroll-indicator {
     .activity-page .model-info {
 padding: 10px;
  
-  padding-bottom: 14px;
+  padding-bottom: 20px;
 }
 .activity-page .action-buttons {
   display: flex;
@@ -14314,6 +14314,41 @@ padding: 10px;
   }
   
 
+ .model-info>div:nth-child(2){
+    font-size:13px !important;
+    line-height:17px !important;
+  }
+    .model-info>div:nth-child(3){
+    font-size:13px !important;
+    line-height:17px !important;
+  }
+
+    .activity-page .model-image {
+    height: 180px;
+  }
+
+    .activity-page .model-info {
+    height: calc(100% - 180px);
+    }
+
+.activity-page .status-online .verified-badge {
+    margin-bottom: 3px;
+    display: flex;
+    flex-direction: column;
+ 
+  }
+
+  .activity-page .profile-badge.badge-premium {
+    padding-inline: 6px;
+    border-radius: 10px;
+  }
+
+   .activity-page .profile-badge.badge-verified{
+    padding-inline: 6px;
+    border-radius: 10px;
+  }
+
+  
 }
 
 
