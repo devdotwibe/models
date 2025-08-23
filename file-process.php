@@ -20,7 +20,7 @@ if (isset($_SESSION["log_user_id"])) {
 			//get model
 			$modelDetails = get_data('model_user', array('id' => $model_id), true);
 			if ($modelDetails) {
-				echo '<script>alert("Are you Sure want to buy it.");</script>';
+				// echo '<script>alert("Are you Sure want to buy it.");</script>';
 				//printR($_POST);die;
 
 				$sql_fwa = "SELECT * FROM model_user_wallet WHERE user_unique_id = '" . $user_id . "'";
