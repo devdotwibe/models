@@ -68,11 +68,11 @@ if (isset($_SESSION["log_user_id"])) {
 						'created_at' => $date,
 					));
 
-					echo json_encode(['status' => 'success','message'=>''.$_POST['coins'].' tokens deducted! '.$_POST['file_type'].' unlocked.']);
+					echo json_encode(['status' => 'buynow','message'=>''.$_POST['coins'].' tokens deducted! '.$_POST['file_type'].' unlocked.']);
 
 				} else {
 				
-					echo json_encode(['status' => 'success','message'=>'You dont have sufficiant coins in your wallet for buying it.']);
+					echo json_encode(['status' => 'buynow','message'=>'You dont have sufficiant coins in your wallet for buying it.']);
 				}
 			}//modal condition
 			else {

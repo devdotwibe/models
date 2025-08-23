@@ -2516,13 +2516,25 @@ jQuery('.send_gift_btn').click(function(){
             dataType: 'json',
             success: function (response) {
                 
-                console.log(response);
-
                 if (response.status === 'success') {
 
                     $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
                     $('#message_status').html("");
                     $('#message_status').text('Success');
+
+                    $('#conform_modal').removeClass('active');
+
+                    $('#success_modal').addClass('active');
+
+                }
+
+                if (response.status === 'buynow') {
+
+                    $('#modal_success_message').prepend(`<a herf="wallet.php">Buy Now Coins</a>`);
+
+                    $('#message_status').html("");
+
+                    $('#message_status').text('Insufficiant Coins');
 
                     $('#conform_modal').removeClass('active');
 
