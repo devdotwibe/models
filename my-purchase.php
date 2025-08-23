@@ -196,12 +196,12 @@
 					   $model_unique_id = $rowesdw['model_unique_id'];
 						$file_downloads = $rowesdw['file_downloads'];
 
-					  $sql = "SELECT * FROM model_images WHERE id = '".$file_id."'";
+					  $sql = "SELECT * FROM live_posts WHERE id = '".$file_id."'";
 					  $result = mysqli_query($con, $sql);
 					  if (mysqli_num_rows($result) > 0) {
 						while($row = mysqli_fetch_assoc($result)) {
-						 $url = $row['file'];
-						 $url_ext = $row['file'];
+						 $url = $row['post_image'];
+						 $url_ext = $row['post_image'];
 
              $post_id = $row['id'];
 
