@@ -2086,13 +2086,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
             </div>
         </div>
-        
+
       <?php } ?>
 
         <!-- Govt ID Proof Attributes -->
         <div id="govt-id-proof" class="collapsible-section">
           <div class="collapsible-header" onclick="toggleCollapsible(this)">
-            <h2 class="text-xl font-bold">👤 Govt Id Proof</h2>
+            <h2 class="text-xl font-bold">👤 ID proof</h2>
             <svg class="w-6 h-6 collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
