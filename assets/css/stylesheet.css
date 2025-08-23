@@ -14329,6 +14329,7 @@ padding: 10px;
 
     .activity-page .model-info {
     height: calc(100% - 180px);
+    padding-bottom: 16px;
     }
 
 
