@@ -11232,16 +11232,16 @@ body.advt-page.my-purpose .scroll-indicator {
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-        flex-direction: column;
+        /* flex-direction: row; */
     }
 
     .advt-page .ads-expanded .ad-card .ad-image {
-        height: 250px !important;
-        width: 100%;
+        height: auto;
+        width: 45%;
     }
 
     .advt-page .ads-expanded .ad-card .ad-content {
-        width: 100%;
+        width: 55%;
     }
 
 
