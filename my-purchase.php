@@ -202,8 +202,13 @@
 						while($row = mysqli_fetch_assoc($result)) {
 						 $url = $row['file'];
 						 $url_ext = $row['file'];
-						 if (!file_exists($url)) {
-							$url = 'assets/images/model-gal-no-img.jpg';
+
+             $url = 'assets/images/model-gal-no-img.jpg';
+
+						 if (checkImageExists($url_ext)) {
+
+							  $url = $url_ext;
+              
 						 }
 
 						  $image_text = $row['image_text'];
