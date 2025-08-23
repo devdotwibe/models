@@ -196,6 +196,8 @@
 					   $model_unique_id = $rowesdw['model_unique_id'];
 						$file_downloads = $rowesdw['file_downloads'];
 
+            $purchase_amount = $rowesdw['file_coins'];
+
 					  $sql = "SELECT * FROM live_posts WHERE id = '".$file_id."'";
 					  $result = mysqli_query($con, $sql);
 					  if (mysqli_num_rows($result) > 0) {
@@ -264,7 +266,7 @@
                                 </div>
                                 <div class="flex justify-between text-xs sm:text-sm">
                                     <span class="text-white/70">Price:</span>
-                                    <span class="text-green-400 font-bold">$25.00</span>
+                                    <span class="text-green-400 font-bold">$ <?php echo $purchase_amount ?></span>
                                 </div>
                                 <div class="flex justify-between text-xs sm:text-sm">
                                     <span class="text-white/70">Resolution:</span>
@@ -348,7 +350,7 @@
                                 </div>
                                 <div class="flex justify-between text-xs sm:text-sm">
                                     <span class="text-white/70">Price:</span>
-                                    <span class="text-green-400 font-bold">$45.00</span>
+                                    <span class="text-green-400 font-bold">$ <?php echo $purchase_amount ?></span>
                                 </div>
                                 <div class="flex justify-between text-xs sm:text-sm">
                                     <span class="text-white/70">Duration:</span>
