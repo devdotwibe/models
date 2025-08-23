@@ -10944,6 +10944,36 @@ body.advt-page.my-purpose .scroll-indicator {
     width: 100%;
 }
 
+  .premimum-model1 .profile-grid.profile-columns .profile-info {
+    padding: .6rem;
+}
+
+  .premimum-model1 .profile-grid.profile-columns .profile-name a{
+  font-weight: 600;
+        font-size: 17px;
+}
+
+  .premimum-model1 .profile-grid.profile-columns .profile-location {
+        font-size: 15px;
+    }
+  .premimum-model1 .profile-grid.profile-columns .profile-bio {
+         font-size: 15px;
+    }
+
+  .premimum-model1 .profile-grid.profile-columns .profile-actions{
+
+        gap: 12px;
+     padding: 1.2rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .premimum-model1 .profile-grid.profile-columns  .action-btn {
+    width: 42px;
+    height: 42px;
+}
+.premimum-model1 .profile-grid.profile-columns  .action-btn i{
+    font-size:15px;
+ }
 
 
 }
@@ -11175,36 +11205,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
-  .premimum-model1 .profile-grid.profile-columns .profile-info {
-    padding: .6rem;
-}
 
-  .premimum-model1 .profile-grid.profile-columns .profile-name a{
-  font-weight: 600;
-        font-size: 17px;
-}
-
-  .premimum-model1 .profile-grid.profile-columns .profile-location {
-        font-size: 15px;
-    }
-  .premimum-model1 .profile-grid.profile-columns .profile-bio {
-         font-size: 15px;
-    }
-
-  .premimum-model1 .profile-grid.profile-columns .profile-actions{
-
-        gap: 12px;
-     padding: 1.2rem 1rem;
-    flex-wrap: wrap;
-  }
-
-  .premimum-model1 .profile-grid.profile-columns  .action-btn {
-    width: 42px;
-    height: 42px;
-}
-.premimum-model1 .profile-grid.profile-columns  .action-btn i{
-    font-size:15px;
- }
 
 
     .header-desk-inner button:nth-child(2),
