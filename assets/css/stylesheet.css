@@ -12865,8 +12865,9 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .activity-page .model-info {
-padding: 6px;
-  padding-top: 10px;
+padding: 10px;
+ 
+  padding-bottom: 14px;
 }
 .activity-page .action-buttons {
   display: flex;
