@@ -210,6 +210,7 @@
 							  $url = $url_ext;
               
 						 }
+             	  $url = $url_ext;
 
 						  $image_text = $row['image_text'];
 						}
