@@ -12215,6 +12215,13 @@ flex-wrap:wrap;
       .premimum-model1 .profile-grid.profile-columns .action-btn i{
         font-size:12px
       }
+
+    /* .premimum-model1 .profile-grid.profile-columns .profile-badges {
+        display: flex;
+        flex-direction: row;
+    } */
+
+
 }
 
 
