@@ -11987,6 +11987,49 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
+  .activity-page .verified-badge {
+
+  background: transparent;
+  color: white;
+  padding: 8px 0px;
+  border-radius: 18px;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+animation: none;
+    box-shadow: none;
+    flex-direction: column !important;
+}
+
+    .activity-page .profile-badge.badge-live {
+  background: #763bce;
+    padding-inline: 10px;
+    padding-block: 3px;
+    border-radius: 15px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+  .activity-page .profile-badge.badge-premium {
+    padding-inline: 6px;
+    padding-block: 3px;
+    border-radius: 15px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+  }
+
+   .activity-page .profile-badge.badge-verified{
+    padding-inline: 6px;
+    padding-block: 3px;
+    border-radius: 15px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+  }
 
 
 
