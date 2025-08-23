@@ -1382,7 +1382,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           <div class="step" onclick="scrollToSection('30_days_access')">30 Days Access</div>
           
           <?php /*?><div class="step" onclick="scrollToSection('physical-attributes')">Physical Attributes</div><?php */ ?>
-          <div class="step" onclick="scrollToSection('govt-id-proof')">Govt Id Proof</div>
+          <div class="step" onclick="scrollToSection('govt-id-proof')"> ID proof</div>
         </div>
         <div class="progress-bar">
           <div class="progress-fill"></div>
@@ -2045,6 +2045,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div>
         </div>
 
+      <?php if($userDetails['as_a_model'] =='Yes') { ?>
 
         <div id="30_days_access" class="collapsible-section">
 
@@ -2085,6 +2086,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
             </div>
         </div>
+        
+      <?php } ?>
 
         <!-- Govt ID Proof Attributes -->
         <div id="govt-id-proof" class="collapsible-section">
