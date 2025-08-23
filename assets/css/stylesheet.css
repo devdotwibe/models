@@ -14331,12 +14331,7 @@ padding: 10px;
     height: calc(100% - 180px);
     }
 
-.activity-page .status-online .verified-badge {
-    margin-bottom: 3px;
-    display: flex;
-    flex-direction: column;
- 
-  }
+
 
 
   .activity-page .verified-badge {
@@ -14350,8 +14345,9 @@ padding: 10px;
   display: flex;
   align-items: flex-start;
   gap: 5px;
-  animation: verified-glow 3s infinite;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+animation: none;
+    box-shadow: none;
+    flex-direction: column;
 }
 
     .activity-page .profile-badge.badge-live {
