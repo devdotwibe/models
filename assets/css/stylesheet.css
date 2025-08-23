@@ -11991,18 +11991,62 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .premimum-model1 .profile-grid.profile-list .profile-card {
-        width: 98%;
+        width: 100%;
     }
+
+
+
+
+   .premimum-model1 .profile-grid.profile-list .profile-image-container {
+        width: 47%;
+                height: calc(100% - 90px);
+    }
+
+    .premimum-model1 .profile-grid.profile-list .profile-info {
+
+        width: 53%;
+        height: auto !important;
+        padding-block: 12px !important;
+        padding-inline: 12px;
+    }
+
+
+.premimum-model1 .profile-grid.profile-list .profile-actions{
+    height:90px;
+}
+
+    .premimum-model1 .profile-grid.profile-list .profile-info .profile-name a {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .premimum-model1 .profile-grid.profile-list .profile-info .profile-location {
+        font-size: 14px;
+    }
+
+    .premimum-model1 .profile-grid.profile-list .profile-info .profile-bio {
+         font-size: 14px;
+    }
+
 
     .premimum-model1 .profile-grid .profile-card {
 
-        width: 95%;
+        width:100%;
     }
 
     .premimum-model1 .profile-grid .profile-card {
 
         width: 100%;
     }
+
+
+
+
+
+
+
+
+
 
     .premimum-model1 .filter-modal-actions .modal-btn {
         font-size: 0.75rem !important;
