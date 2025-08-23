@@ -10348,7 +10348,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 .premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile {
-    display: none;
+    /* display: none; */
 }
 
 
@@ -14163,7 +14163,7 @@ padding: 10px;
         flex-direction: row;
     } */
     .premimum-model1 .profile-grid.profile-columns .profile-badges {
-        display: none;
+        /* display: none; */
 
     }
 
