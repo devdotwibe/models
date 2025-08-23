@@ -819,7 +819,7 @@ include('includes/helper.php');
                                     </div>
 
                                     <div class="profile-badges profile-badges-mobile">
-                                        <span class="profile-badge badge-live"><span class="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></span></span>
+                                        <span class="profile-badge badge-live"><span style="display: flex;" class="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></span></span>
 
                                         <?php if ($is_user_new) { ?>
 
