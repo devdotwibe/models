@@ -10363,6 +10363,9 @@ body.advt-page.my-purpose .scroll-indicator {
       /* border-image: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important; */
   border-image-slice: 1;
 }
+.simple-pagination span:hover , .simple-pagination a:hover{
+background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important; 
+}
 
 
 @media (max-width: 1540px) {
