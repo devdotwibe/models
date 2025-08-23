@@ -12175,10 +12175,17 @@ body.advt-page.my-purpose .scroll-indicator {
         padding: 1.25rem;
     }
 
-    .premimum-model1 .profile-grid.profile-columns .profile-name a{
+  .premimum-model1 .profile-grid.profile-columns .profile-name a{
+  font-weight: 600;
+        font-size: 15px;
+}
 
+  .premimum-model1 .profile-grid.profile-columns .profile-location {
+        font-size: 13px;
     }
-
+  .premimum-model1 .profile-grid.profile-columns .profile-bio {
+         font-size: 13px;
+    }
 }
 
 
