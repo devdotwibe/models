@@ -10975,7 +10975,7 @@ body.advt-page.my-purpose .scroll-indicator {
     font-size:15px;
  }
    .premimum-model1 .profile-grid.profile-columns .profile-badges{
-    display:none;
+    display:block;
    }
 
   .premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile{
@@ -10984,8 +10984,11 @@ align-items:flex-start;
 justify-content:flex-start;
 gap:6px;
 flex-wrap:wrap;
+   display:none;
 }
+ .premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile .profile-badge{
 
+ }
 
 }
 
@@ -12197,6 +12200,17 @@ flex-wrap:wrap;
   .premimum-model1 .profile-grid.profile-columns .profile-bio {
          font-size: 13px;
     }
+
+.premimum-model1 .profile-grid.profile-columns .profile-actions{
+            padding: 1.2rem .5rem;
+}
+    .premimum-model1 .profile-grid.profile-columns .action-btn {
+        width: 29px;
+        height: 29px;
+    }
+      .premimum-model1 .profile-grid.profile-columns .action-btn i{
+        font-size:12px
+      }
 }
 
 
