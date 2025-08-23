@@ -10996,6 +10996,7 @@ body.advt-page.my-purpose .scroll-indicator {
     border: 2px solid rgba(139, 92, 246, 0.2);
     cursor: pointer;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    height: auto;
 }
 
 .activity-page .model-card::before {
@@ -12875,6 +12876,7 @@ padding: 6px;
   gap: 10px;
   flex-wrap: wrap;
   padding-top: 13px;
+  margin-top: auto;
 }
 
 .activity-page .action-btn{
@@ -14288,7 +14290,23 @@ padding: 6px;
             padding: 16px;
         }
 
+  .activity-page .action-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
 
+  .activity-page .model-info {
+    padding: 10px;
+  }
+
+  .activity-page .model-info {
+    padding: 10px;
+    height: calc(100% - 220px);
+    flex-wrap: wrap;
+    display: flex;
+  }
+  
 
 }
 
