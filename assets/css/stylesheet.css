@@ -10347,9 +10347,9 @@ body.advt-page.my-purpose .scroll-indicator {
 }
 
 
-   .premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile{
-    display:none;
-   }
+.premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile {
+    display: none;
+}
 
 
 @media (max-width: 1540px) {
@@ -10941,7 +10941,7 @@ body.advt-page.my-purpose .scroll-indicator {
     }
 
     .advt-page .ads-grid {
-        grid-template-columns: 1fr !important;
+        gap:5px;
     }
 
     .premimum-model1 .profile-grid.profile-columns .profile-card {
@@ -11242,22 +11242,23 @@ body.advt-page.my-purpose .scroll-indicator {
 
     .advt-page .ads-expanded .ad-card .ad-content {
         width: 55%;
-                padding: 1rem 1rem;
+        padding: 1rem 1rem;
     }
-    .advt-page .ads-expanded .ad-card .ad-content .ad-title{
-    font-size:17px;
-    font-weight:600;
-}
+
+    .advt-page .ads-expanded .ad-card .ad-content .ad-title {
+        font-size: 17px;
+        font-weight: 600;
+    }
 
 
-.advt-page .ads-expanded .ad-card .ad-content .btn-primary {
-    margin-top: auto;
-    padding: 0.8rem;
-}
+    .advt-page .ads-expanded .ad-card .ad-content .btn-primary {
+        margin-top: auto;
+        padding: 0.8rem;
+    }
 
-    .advt-page .ads-expanded .ad-card .ad-content .ad-description{
-        font-size:14px;
-        line-height:22px
+    .advt-page .ads-expanded .ad-card .ad-content .ad-description {
+        font-size: 14px;
+        line-height: 22px
     }
 
     .advt-page .ads-expanded .ad-card .ad-content .ad-stats {
@@ -12161,8 +12162,17 @@ body.advt-page.my-purpose .scroll-indicator {
     .advt-page .ads-expanded .ad-card .ad-content .ad-stats {
         justify-content: flex-start;
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 10px;
     }
+
+    .advt-page .ads-expanded .ad-card .ad-content .stat-item{
+    font-size:12px;
+}
+
+    .advt-page .ads-expanded .ad-card .ad-content .ad-badge{
+        left:inherit;
+    }
+
 
     .advt-page .view-btn {
         font-size: .85rem;
@@ -12245,19 +12255,33 @@ body.advt-page.my-purpose .scroll-indicator {
         flex-direction: row;
     }
 
-       .premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile > *{
-        background:none;
-                height: 29px;
+    .premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile>* {
+        background: none;
+        height: 29px;
         /* color:none;
         box-shadow:none */
-             display: flex;
-             align-items: center;
-             justify-content:center;
-       }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-       .profile-columns .profile-badges.profile-badges-mobile > *>span{
-        margin:0;
-       }
+    .profile-columns .profile-badges.profile-badges-mobile>*>span {
+        margin: 0;
+    }
+
+        .advt-page .ads-expanded .ad-card .ad-content .ad-title {
+        font-size: 15px;
+        }
+
+    .advt-page .ads-expanded .ad-card .ad-content .btn-primary {
+        margin-top: auto;
+        padding: 0.7rem;
+        font-size: 12px;
+    }
+
+    .advt-page .ads-expanded .ad-card .ad-content {
+        padding: 1rem;
+    }
 }
 
 
