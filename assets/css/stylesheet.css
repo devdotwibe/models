@@ -10926,9 +10926,9 @@ body.advt-page.my-purpose .scroll-indicator {
 @media (max-width: 600px) {
 
     .premimum-model1 .profile-grid {
-        grid-template-columns: repeat(1, 1fr) !important;
+        grid-template-columns: repeat(2, 1fr) !important;
 
-        gap: 1.5rem !important;
+        gap: 0.5rem !important;
     }
 
     .premimum-model1 .profile-grid .profile-card {
@@ -10939,6 +10939,13 @@ body.advt-page.my-purpose .scroll-indicator {
     .advt-page .ads-grid {
         grid-template-columns: 1fr !important;
     }
+
+.premimum-model1 .profile-grid.profile-columns .profile-card {
+    width: 100%;
+}
+
+
+
 }
 
 
@@ -11164,6 +11171,40 @@ body.advt-page.my-purpose .scroll-indicator {
     .premimum-model1 .profile-grid.profile-list .profile-info .profile-bio {
          font-size: 15px;
     }
+
+
+
+
+  .premimum-model1 .profile-grid.profile-columns .profile-info {
+    padding: .6rem;
+}
+
+  .premimum-model1 .profile-grid.profile-columns .profile-name a{
+  font-weight: 600;
+        font-size: 17px;
+}
+
+  .premimum-model1 .profile-grid.profile-columns .profile-location {
+        font-size: 15px;
+    }
+  .premimum-model1 .profile-grid.profile-columns .profile-bio {
+         font-size: 15px;
+    }
+
+  .premimum-model1 .profile-grid.profile-columns .profile-actions{
+
+        gap: 12px;
+     padding: 1.2rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .premimum-model1 .profile-grid.profile-columns  .action-btn {
+    width: 42px;
+    height: 42px;
+}
+.premimum-model1 .profile-grid.profile-columns  .action-btn i{
+    font-size:15px;
+ }
 
 
     .header-desk-inner button:nth-child(2),
@@ -12043,6 +12084,11 @@ body.advt-page.my-purpose .scroll-indicator {
     height: 40px;
 }
 
+.premimum-model1 .profile-grid.profile-list .action-btn i{
+    font-size:15px;
+ }
+
+
 
     .premimum-model1 .profile-grid .profile-card {
 
@@ -12126,6 +12172,10 @@ body.advt-page.my-purpose .scroll-indicator {
     .advt-page .ads-expanded .ad-card .ad-content {
 
         padding: 1.25rem;
+    }
+
+    .premimum-model1 .profile-grid.profile-columns .profile-name a{
+
     }
 
 }
