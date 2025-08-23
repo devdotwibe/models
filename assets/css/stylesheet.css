@@ -10975,7 +10975,7 @@ body.advt-page.my-purpose .scroll-indicator {
     font-size:15px;
  }
    .premimum-model1 .profile-grid.profile-columns .profile-badges{
-    display:block;
+    /* display:block; */
    }
 
   .premimum-model1 .profile-grid.profile-columns .profile-badges.profile-badges-mobile{
@@ -12113,6 +12113,10 @@ flex-wrap:wrap;
     .premimum-model1 .profile-grid .profile-card {
 
         width: 100%;
+    }
+
+    .premimum-model1 .profile-grid.profile-columns .profile-image-container img{
+        max-height:260px
     }
 
 
