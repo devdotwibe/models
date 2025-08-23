@@ -12304,6 +12304,11 @@ body.advt-page.my-purpose .scroll-indicator {
     .advt-page .ads-expanded .ad-card .ad-content {
         padding: 1rem;
     }
+    .advt-page .ads-expanded .ad-card .ad-content .ad-description {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
 
 .advt-page .ads-grid .ad-card .btn-primary {
         padding: .7rem .7rem;
@@ -12313,6 +12318,7 @@ body.advt-page.my-purpose .scroll-indicator {
     }
         .advt-page .ad-description {
         font-size: 13px;
+          line-height: 20px;
     }
 
     .advt-page .ad-image {
