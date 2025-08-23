@@ -11242,8 +11242,18 @@ body.advt-page.my-purpose .scroll-indicator {
 
     .advt-page .ads-expanded .ad-card .ad-content {
         width: 55%;
+                padding: 1rem 1rem;
     }
+    .advt-page .ads-expanded .ad-card .ad-content .ad-title{
+    font-size:17px;
+    font-weight:600;
+}
 
+
+    .advt-page .ads-expanded .ad-card .ad-content .ad-description{
+        font-size:15px;
+        line-height:22px
+    }
 
     .advt-page .ads-expanded .ad-card .ad-content .ad-stats {
         justify-content: flex-start;
