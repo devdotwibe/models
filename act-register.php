@@ -3,9 +3,6 @@
 	include('includes/config.php');
 	include('includes/helper.php');
 
-    echo 'test';
-    die();
-
 ?>
 <style type="text/css">
         body {
@@ -130,6 +127,10 @@
   
 
 if (isset($_POST['vfb-submit'])) {
+
+
+        echo 'test';
+    die();
 
    $user_name = $_POST['username'];
    $name = $_POST['name'];
