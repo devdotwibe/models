@@ -145,6 +145,7 @@ if (isset($_POST['vfb-submit'])) {
 		$as_a_model = 'No';
 	}
 
+  $token = md5(uniqid(rand(), true)); 
 
   $sql_u = "SELECT * FROM model_user WHERE username='$user_name'"; 
     $sql_e = "SELECT * FROM model_user WHERE email='$email'"; 
@@ -159,7 +160,6 @@ if (isset($_POST['vfb-submit'])) {
     }else{
 
    
-
     $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
  	// $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`as_a_model`,`user_bio`,`services`) 
@@ -167,20 +167,29 @@ if (isset($_POST['vfb-submit'])) {
 
     $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`user_bio`,`services`) 
 
-	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."','".$user_bio."', '".$services."')";
+	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."','".$user_bio."', '".$services."', 0, '".$token."')";
+
+    $verify_link = "https://models.staging3.dotwibe.com/verify.php?email=".$email."&token=".$token;
 
 
     if(mysqli_query($con,$que)){
       
       	 $email_to = $email;
-         
+
          $subject = "Mail Verification for Model Project";
 
-         $header = "From: Model Project <prashant.systos@gmail.com>\r\n";
-         $header .= "MIME-version:1.0\r\n";
-         $header .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        $header = "From: Model Project <prashant.systos@gmail.com>\r\n";
+        $header .= "MIME-version:1.0\r\n";
+        $header .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+        $verify_link = "https://models.staging3.dotwibe.com/verify.php?email=".$email."&token=".$token;
+
+
          $htmlContent = file_get_contents("mail/registration-mail.php");
-         $message = $htmlContent;
+
+          $message = str_replace("{{VERIFY_LINK}}", $verify_link, $htmlContent);
+
+        //  $message = $htmlContent;
 
          if (mail($email_to, $subject, $message, $header)) {
                echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';

@@ -267,7 +267,9 @@
 
 
                                         <div style="line-height: 26px;">
-                                            <a href="https://thelivemodels.com/login.php" style="color: #ffffff; text-decoration: none;">Sign In</a>
+
+                                              <a href="{{VERIFY_LINK}}" style="color: #ffffff; text-decoration: none;">Verify Email</a>
+                                              
                                         </div>
                                     </td>
                                 </tr>
