@@ -3,9 +3,9 @@
 	include('includes/config.php');
 	include('includes/helper.php');
 
-      dd('test');
-
+    echo 'test';
     die();
+
 ?>
 <style type="text/css">
         body {
