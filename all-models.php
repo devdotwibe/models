@@ -799,7 +799,7 @@ include('includes/helper.php');
                     if (isset($_POST['onlineStatus']) && !empty($_POST['onlineStatus'])) {
                         $onlineStatus = $_POST['onlineStatus'];
                         $onlineUserIds = array();
-                        $idsQuery_filter = "SELECT id FROM model_user mu WHERE as_a_model = 'Yes'";
+                        $idsQuery_filter = "SELECT id FROM model_user mu WHERE mu.verified = '1'";
 
                         $result_online = mysqli_query($con, $idsQuery_filter);
 
@@ -917,10 +917,10 @@ include('includes/helper.php');
                         }
                     }
 
-                    $sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id JOIN model_privacy_settings pu ON pu.unique_model_id = mu.unique_id  WHERE mu.as_a_model = 'Yes' " . $where . "  Order by mu.id DESC LIMIT $limit OFFSET $offset";
+                    $sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id JOIN model_privacy_settings pu ON pu.unique_model_id = mu.unique_id  WHERE mu.verified = '1' " . $where . "  Order by mu.id DESC LIMIT $limit OFFSET $offset";
                 } else if (isset($_GET['sort']) && $_GET['sort'] == 'newest') {
 
-                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ";
+                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE verified = '1' ";
                     $result_count = mysqli_query($con, $sqls_count);
                     $row_cnt = mysqli_fetch_assoc($result_count);
 
@@ -936,12 +936,12 @@ include('includes/helper.php');
                         $order = " ORDER BY mu.register_date DESC ";
                     }
 
-                    $sqls = "SELECT * FROM model_user mu WHERE as_a_model = 'Yes' " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
+                    $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1' " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
                 } else if (isset($_GET['sort']) && $_GET['sort'] == 'online') {
 
                     $onlineUserIds = array();
                     $not_onlineUserIds = array();
-                    $idsQuery = "SELECT id FROM model_user mu WHERE as_a_model = 'Yes' ";
+                    $idsQuery = "SELECT id FROM model_user mu WHERE mu.verified = '1' ";
 
                     $result = mysqli_query($con, $idsQuery);
 
@@ -991,7 +991,7 @@ include('includes/helper.php');
                             $order = " ORDER BY mu.register_date DESC ";
                         } elseif ($_GET['filter'] == 'available') {
 
-                            $idsQuery = "SELECT id FROM model_user mu WHERE as_a_model = 'Yes' $where";
+                            $idsQuery = "SELECT id FROM model_user mu WHERE mu.verified = '1' $where";
 
                             $result = mysqli_query($con, $idsQuery);
 
@@ -1060,13 +1060,13 @@ include('includes/helper.php');
 
                         // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
 
-                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.as_a_model = 'Yes' " . $where;
+                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.verified = '1' " . $where;
 
                         $result_count = mysqli_query($con, $sqls_count);
 
                         $row_cnt = mysqli_fetch_assoc($result_count);
 
-                        $sqls = "SELECT * FROM model_user mu WHERE as_a_model = 'Yes' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                        $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
                     } else {
                         $idList = implode(',', $onlineUserIds);
 
