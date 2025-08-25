@@ -155,15 +155,11 @@ if (isset($_POST['vfb-submit'])) {
     $res_u = mysqli_query($con, $sql_u);
     $res_e = mysqli_query($con, $sql_e); 
    if (mysqli_num_rows($res_u) > 0) { 
-
         echo  '<script>alert("Sorry... username already taken")</script>';
-
-        echo '<script>window.location="login.php"</script>';
-
+        
+                echo '<script>window.location="login.php"</script>';
     }else if(mysqli_num_rows($res_e) > 0){
-
       echo  '<script>alert("Sorry... email already taken")</script>';
-
                 echo '<script>window.location="login.php"</script>';  
     }else{
 
@@ -199,13 +195,9 @@ if (isset($_POST['vfb-submit'])) {
         //  $message = $htmlContent;
 
          if (mail($email_to, $subject, $message, $header)) {
-
-            //    echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';
-
-                echo "<script>ShowLogin();</script>";
-
+               echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';
+                echo '<script>window.location="login.php"</script>';
          }else{
-
               echo  '<script>alert("Error in Details Sent to Respective Mail id.")</script>';
                 echo '<script>window.location="login.php"</script>';
          }
