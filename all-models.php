@@ -160,6 +160,14 @@ include('includes/helper.php');
 
                 $condtion = "";
 
+                  $basic_filed_users = GetUsersWithBasicFilled();
+
+                $basicList = implode(',', $basic_filed_users);
+
+                 print_r($basicList);
+
+                die();
+
                 if (isset($_SESSION["log_user_id"])) {
 
                     $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
@@ -703,10 +711,6 @@ include('includes/helper.php');
                 $basic_filed_users = GetUsersWithBasicFilled();
 
                 $basicList = implode(',', $basic_filed_users);
-
-                echo $basicList;
-
-                die();
 
                 $condtion = "";
 
