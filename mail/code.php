@@ -1,5 +1,5 @@
 <?php
-$path = __DIR__ . '../assets/images/logo-live.jpg';
+$path = __DIR__ . './assets/images/logo-live.jpg';
 $base64 = '';
 
 // Check if the image file exists
