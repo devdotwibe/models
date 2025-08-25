@@ -195,8 +195,12 @@ if (isset($_POST['vfb-submit'])) {
         //  $message = $htmlContent;
 
          if (mail($email_to, $subject, $message, $header)) {
-               echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';
-                echo '<script>window.location="login.php"</script>';
+
+            //    echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';
+
+                // echo '<script>window.location="login.php"</script>';
+
+                 echo "<script>ShowLogin();</script>";
          }else{
               echo  '<script>alert("Error in Details Sent to Respective Mail id.")</script>';
                 echo '<script>window.location="login.php"</script>';
