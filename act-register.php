@@ -174,7 +174,7 @@ if (isset($_POST['vfb-submit'])) {
 	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."','".$user_bio."', '".$services."', 0, '".$token."')";
 
 
-    if(mysqli_query(mysql: $con,$que)){
+    if(mysqli_query($con,$que)){
       
       	 $email_to = $email;
 
