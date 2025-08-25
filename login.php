@@ -178,7 +178,7 @@ if($_SESSION["log_user"]){
 
                 <p>Your registration was successful! You can now login to your account.</p>
 
-                <a class="btn btn-primary" onclick="CloseModal('verify_modal')" >Ok</a>
+                <a class="btn btn-primary" onclick="CloseModal('success_modal')" >Ok</a>
 
             </div>
         </div>
