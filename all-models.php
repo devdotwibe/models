@@ -160,13 +160,9 @@ include('includes/helper.php');
 
                 $condtion = "";
 
-                  $basic_filed_users = GetUsersWithBasicFilled();
+                $basic_filed_users = GetUsersWithBasicFilled();
 
                 $basicList = implode(',', $basic_filed_users);
-
-                 print_r($basicList);
-
-                die();
 
                 if (isset($_SESSION["log_user_id"])) {
 
