@@ -45,6 +45,349 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     .dropzone .dz-preview .dz-remove {
       color: #000;
     }
+
+     .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: overlayFadeIn 0.8s ease-out;
+        }
+
+        @keyframes overlayFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .conversion-modal {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(40px);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 48px 40px;
+            box-shadow: 
+                0 32px 64px rgba(0, 0, 0, 0.4),
+                0 16px 32px rgba(139, 69, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: modalSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, 
+                transparent 0deg,
+                rgba(139, 69, 255, 0.3) 90deg,
+                rgba(236, 72, 153, 0.3) 180deg,
+                rgba(59, 130, 246, 0.3) 270deg,
+                transparent 360deg);
+            animation: rotateGlow 8s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .floating-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #8b45ff, #ec4899);
+            border-radius: 50%;
+            animation: floatParticle 6s ease-in-out infinite;
+        }
+
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        .exclusive-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #8b45ff, #ec4899);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(139, 69, 255, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(139, 69, 255, 0.5); }
+        }
+
+        .badge-shimmer {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .main-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #8b45ff 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            text-align: center;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { filter: drop-shadow(0 0 10px rgba(139, 69, 255, 0.3)); }
+            to { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.5)); }
+        }
+
+        .sub-headline {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 32px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            animation: benefitSlideIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .benefit-item:nth-child(1) { animation-delay: 0.2s; }
+        .benefit-item:nth-child(2) { animation-delay: 0.4s; }
+        .benefit-item:nth-child(3) { animation-delay: 0.6s; }
+        .benefit-item:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes benefitSlideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .benefit-item:hover {
+            background: rgba(139, 69, 255, 0.1);
+            border-color: rgba(139, 69, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 69, 255, 0.2);
+        }
+
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #8b45ff, #ec4899);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .benefit-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .social-proof {
+            text-align: center;
+            margin-bottom: 32px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .proof-number {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8b45ff, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .proof-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .urgency-text {
+            text-align: center;
+            color: #fbbf24;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            animation: urgencyPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes urgencyPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, #8b45ff 0%, #ec4899 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 32px rgba(139, 69, 255, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(139, 69, 255, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .button-shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: buttonShine 3s ease-in-out infinite;
+        }
+
+        @keyframes buttonShine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .conversion-modal {
+                width: 95%;
+                padding: 32px 24px;
+            }
+            
+            .main-headline {
+                font-size: 32px;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
   </style>
 </head>
 
