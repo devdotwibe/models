@@ -125,6 +125,12 @@
 
 if (isset($_POST['vfb-submit'])) {
 
+
+
+    dd('test');
+
+    die();
+    
    $user_name = $_POST['username'];
    $name = $_POST['name'];
    $email = $_POST['email'];
@@ -163,9 +169,6 @@ if (isset($_POST['vfb-submit'])) {
     $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
 
-    dd('test');
-
-    die();
  	// $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`as_a_model`,`user_bio`,`services`) 
 	// VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."', '".$as_a_model."', '".$user_bio."', '".$services."')";
 
