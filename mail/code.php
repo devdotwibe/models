@@ -1,12 +1,12 @@
 <?php
-$path = __DIR__ . '/assets/images/logo-live.jpg';
+$imageUrl = 'https://models.staging3.dotwibe.com/assets/images/logo-live.jpg';
 $base64 = '';
 
-// Check if the image file exists
-if (file_exists($path)) {
-    $type = pathinfo($path, PATHINFO_EXTENSION);
-    $data = file_get_contents($path);
-    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+// Fetch image from URL
+$imageData = @file_get_contents($imageUrl);
+if ($imageData !== false) {
+    $type = pathinfo($imageUrl, PATHINFO_EXTENSION);
+    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
 }
 ?>
 
@@ -14,7 +14,6 @@ if (file_exists($path)) {
     <?php if ($base64): ?>
         <img src="<?php echo $base64; ?>" alt="Logo" />
     <?php else: ?>
-        <!-- Fallback if image is missing -->
         <span>Logo not available</span>
     <?php endif; ?>
 </td>
