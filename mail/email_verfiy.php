@@ -16,19 +16,7 @@
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <?php
-
-            $path = '../assets/images/logo-live.jpg';
-
-            $type = pathinfo($path, PATHINFO_EXTENSION);
-            $data = file_get_contents($path);
-            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-        ?>
-
-        <td align="right">
-            <img src="<?php echo $base64; ?>" alt="Logo" />
-        </td>
-
+        <td  align="right"><img src="https://models.staging3.dotwibe.com/assets/images/logo-live.jpg" /></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
