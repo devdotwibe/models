@@ -16,7 +16,7 @@
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td  align="right"><img src="" /></td>
+        <td  align="right"><img src="https://models.staging3.dotwibe.com/assets/images/logo-live.jpg" /></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
