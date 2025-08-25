@@ -128,10 +128,6 @@
 
 if (isset($_POST['vfb-submit'])) {
 
-
-        echo 'test';
-    die();
-
    $user_name = $_POST['username'];
    $name = $_POST['name'];
    $email = $_POST['email'];
@@ -153,6 +149,10 @@ if (isset($_POST['vfb-submit'])) {
 	}
 
   $token = md5(uniqid(rand(), true)); 
+
+
+     echo $token;
+    die();
 
   $sql_u = "SELECT * FROM model_user WHERE username='$user_name'"; 
     $sql_e = "SELECT * FROM model_user WHERE email='$email'"; 
