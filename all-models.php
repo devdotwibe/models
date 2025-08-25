@@ -700,6 +700,10 @@ include('includes/helper.php');
 
                 $boosted_user_ids = [];
 
+                $basic_filed_users = GetUsersWithBasicFilled();
+
+                $basicList = implode(',', $basic_filed_users);
+
                 $condtion = "";
 
                 if (isset($_SESSION["log_user_id"])) {
@@ -729,7 +733,7 @@ include('includes/helper.php');
 
                     $followed_model_unique_ids = [];
 
-                    $query = "SELECT unique_id FROM model_user WHERE as_a_model = 'Yes'";
+                    $query = "SELECT unique_id FROM model_user WHERE verified = '1'";
 
                     $result = mysqli_query($con, $query);
 
@@ -770,7 +774,7 @@ include('includes/helper.php');
 
                 if (isset($_GET['filter']) && $_GET['filter'] == 'new') {
 
-                    $where .= " AND register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
+                    $where .= " AND mu.register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
                 }
 
                 if (isset($_POST['filter_submit'])) {
@@ -936,7 +940,7 @@ include('includes/helper.php');
                         $order = " ORDER BY mu.register_date DESC ";
                     }
 
-                    $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1' " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
+                    $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList) " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
                 } else if (isset($_GET['sort']) && $_GET['sort'] == 'online') {
 
                     $onlineUserIds = array();
@@ -977,7 +981,7 @@ include('includes/helper.php');
                     $row_cnt = mysqli_fetch_assoc($result_count);
 
 
-                    $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($allIds) $order LIMIT $limit OFFSET $offset";
+                    $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($allIds)  AND mu.id  IN ($basicList) $order LIMIT $limit OFFSET $offset";
                 } else {
 
 
@@ -1066,7 +1070,7 @@ include('includes/helper.php');
 
                         $row_cnt = mysqli_fetch_assoc($result_count);
 
-                        $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1' " . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                        $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
                     } else {
                         $idList = implode(',', $onlineUserIds);
 
@@ -1084,7 +1088,7 @@ include('includes/helper.php');
 
                         $row_cnt = mysqli_fetch_assoc($result_count);
 
-                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList) $order LIMIT $limit OFFSET $offset";
+                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
                     }
                 }
 
