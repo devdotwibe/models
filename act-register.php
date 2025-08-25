@@ -123,14 +123,12 @@
 <?php 
 
 
-if (isset($_POST['vfb-submit'])) {
-
-
-
     dd('test');
 
     die();
-    
+
+if (isset($_POST['vfb-submit'])) {
+
    $user_name = $_POST['username'];
    $name = $_POST['name'];
    $email = $_POST['email'];
