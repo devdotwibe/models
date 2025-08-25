@@ -5,7 +5,9 @@
 
 
     if(isset($_GET['email']) && isset($_GET['token'])){
+
         $email = mysqli_real_escape_string($con, $_GET['email']);
+        
         $token = mysqli_real_escape_string($con, $_GET['token']);
 
         $sql = "SELECT * FROM model_user WHERE email='$email' AND verify_token='$token' AND verified=0 LIMIT 1";
