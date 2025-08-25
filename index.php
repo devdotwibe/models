@@ -687,7 +687,7 @@ include('includes/helper.php');
                 </button>
             </div>
             <div class="modal-body" id="modal_success_message">
-                <p>Your registration was successful! You can now <a href="login.php">login</a> to your account.</p>
+                <p>Your registration was successful! You can now <a  class="btn btn-primary" href="login.php">login</a> to your account.</p>
                 <button class="btn btn-primary" type="button" onclick="CloseModal('success_modal')">OK</button>
             </div>
         </div>
