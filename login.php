@@ -213,8 +213,12 @@ if($_SESSION["log_user"]){
     <?php if($_GET['reg'] == 'success') { ?>
         
         document.addEventListener('DOMContentLoaded', function() {
-            ShowLogin();
-        })
+          
+            if (!sessionStorage.getItem('regSuccessShown')) {
+                ShowLogin(); 
+                sessionStorage.setItem('regSuccessShown', '1');
+            }
+        });
 
     <?php } ?>
 
