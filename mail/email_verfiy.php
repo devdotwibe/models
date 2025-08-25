@@ -17,7 +17,9 @@
       </tr>
       <tr>
         <?php
-            $path = __DIR__ . '/assets/images/logo-live.jpg';
+
+            $path = '/assets/images/logo-live.jpg';
+            
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
