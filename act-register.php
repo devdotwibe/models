@@ -150,10 +150,6 @@ if (isset($_POST['vfb-submit'])) {
 
   $token = md5(uniqid(rand(), true)); 
 
-
-     echo $token;
-    die();
-
   $sql_u = "SELECT * FROM model_user WHERE username='$user_name'"; 
     $sql_e = "SELECT * FROM model_user WHERE email='$email'"; 
     $res_u = mysqli_query($con, $sql_u);
@@ -173,7 +169,7 @@ if (isset($_POST['vfb-submit'])) {
  	// $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`as_a_model`,`user_bio`,`services`) 
 	// VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."', '".$as_a_model."', '".$user_bio."', '".$services."')";
 
-    $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`user_bio`,`services`) 
+    $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`user_bio`,`services`,``verified`,`verify_token`) 
 
 	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."','".$user_bio."', '".$services."', 0, '".$token."')";
 
