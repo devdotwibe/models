@@ -302,7 +302,7 @@ include('includes/helper.php');
                                     </label>
                                 </div>
 
-                                <div id="creatorFields" class="hidden space-y-5">
+                                <!-- <div id="creatorFields" class="hidden space-y-5">
                                     <select name="services" class="w-full px-6 py-4 rounded-xl ultra-glass text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10">
                                         <option value="" class="bg-gray-900">Select Your Services</option>
                                         <option value="Chat Only" class="bg-gray-900">💬 Chat Only</option>
@@ -311,7 +311,7 @@ include('includes/helper.php');
                                         <option value="Premium Experience" class="bg-gray-900">👑 Premium Experience</option>
                                     </select>
                                     <textarea name="user_bio" placeholder="Tell potential matches about yourself..." class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-28 resize-none shadow-lg transition duration-300 border border-white/10"></textarea>
-                                </div>
+                                </div> -->
 
                                 <button type="submit" name="vfb-submit"  value="submit" class="create-profilebtn w-full btn-primary text-white font-bold py-4 rounded-xl transition duration-300 relative overflow-hidden text-lg">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>
