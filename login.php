@@ -225,7 +225,11 @@ if($_SESSION["log_user"]){
     <?php if($_GET['email'] == 'verified') { ?>
     
         document.addEventListener('DOMContentLoaded', function() {
-            Verifed();
+
+            if (!sessionStorage.getItem('emailVerifedShown')) {
+                Verifed(); 
+                sessionStorage.setItem('emailVerifedShown', '1');
+            }
         })
 
     <?php } ?>
