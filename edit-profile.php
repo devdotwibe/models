@@ -387,7 +387,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 grid-template-columns: 1fr;
             }
         }
-        
+
   </style>
 </head>
 
@@ -3204,7 +3204,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     </div>
   </div> -->
 
-  <div class="overlay" id="conform_broad_cast">
+  <div class="overlay" id="conform_broad_cast" style="display:none;">
 
         <div class="conversion-modal">
             <div class="modal-glow"></div>
@@ -3247,7 +3247,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             
             <div class="urgency-text">⏰ Limited spots available - Join the exclusive waitlist now</div>
             
-            <button class="cta-button">
+            <button class="cta-button" onclick="confirmBroadcaster()">
                 Start Earning Today
                 <div class="button-shine"></div>
             </button>
@@ -4113,14 +4113,14 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     function CreateSetting()
     {
-        $('#conform_broad_cast').addClass('active');
+        $('#conform_broad_cast').show();
     }
 
     function confirmBroadcaster()
     {
         switchTab('creator');
 
-        $('#conform_broad_cast').removeClass('active');
+        $('#conform_broad_cast').hide();
 
         $('#creator-content').show();
     }
