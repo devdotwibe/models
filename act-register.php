@@ -2,6 +2,10 @@
     session_start(); 
 	include('includes/config.php');
 	include('includes/helper.php');
+
+      dd('test');
+
+    die();
 ?>
 <style type="text/css">
         body {
@@ -123,9 +127,7 @@
 <?php 
 
 
-    dd('test');
-
-    die();
+  
 
 if (isset($_POST['vfb-submit'])) {
 
