@@ -169,12 +169,12 @@ if (isset($_POST['vfb-submit'])) {
  	// $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`as_a_model`,`user_bio`,`services`) 
 	// VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."', '".$as_a_model."', '".$user_bio."', '".$services."')";
 
-    $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`user_bio`,`services`,``verified`,`verify_token`) 
+    $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`user_bio`,`services`,`verified`,`verify_token`) 
 
 	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."','".$user_bio."', '".$services."', 0, '".$token."')";
 
 
-    if(mysqli_query($con,$que)){
+    if(mysqli_query(mysql: $con,$que)){
       
       	 $email_to = $email;
 
