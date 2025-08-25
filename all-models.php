@@ -704,6 +704,10 @@ include('includes/helper.php');
 
                 $basicList = implode(',', $basic_filed_users);
 
+                echo $basicList;
+
+                die();
+
                 $condtion = "";
 
                 if (isset($_SESSION["log_user_id"])) {
