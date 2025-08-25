@@ -16,19 +16,9 @@
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <?php
-            $imageUrl = 'https://models.staging3.dotwibe.com/assets/images/logo-live.jpg';
-            $base64 = '';
-
-            $imageData = @file_get_contents($imageUrl);
-            if ($imageData !== false) {
-                $type = pathinfo($imageUrl, PATHINFO_EXTENSION);
-                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
-            }
-        ?>
-
+ 
         <td align="right">
-            <img src="<?php echo $base64; ?>" alt="Logo" />
+            <img src="{{IMG_LINK}}" alt="Logo" />
         </td>
 
       </tr>

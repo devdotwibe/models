@@ -190,8 +190,19 @@ if (isset($_POST['vfb-submit'])) {
 
          $htmlContent = file_get_contents("mail/email_verfiy.php");
 
-          $message = str_replace("{{VERIFY_LINK}}", $verify_link, $htmlContent);
+        $imageUrl = 'https://models.staging3.dotwibe.com/assets/images/logo-live.jpg';
+        
+        $base64 = '';
 
+        $imageData = @file_get_contents($imageUrl);
+        if ($imageData !== false) {
+            $type = pathinfo($imageUrl, PATHINFO_EXTENSION);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
+        }
+
+        $message = str_replace("{{IMG_LINK}}", $base64, $htmlContent);
+        $message = str_replace("{{VERIFY_LINK}}", $verify_link, $message);
+        
         //  $message = $htmlContent;
 
          if (mail($email_to, $subject, $message, $header)) {
