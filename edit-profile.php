@@ -624,7 +624,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
             $is_user_have_extra = isUserHaveExtraDetail($userDetails['unique_id'],$con);
 
-            if($userDetails['as_a_model'] =='Yes' || $is_user_have_extra  ) {  ?>
+            if( $is_user_have_extra  ) {  ?>
 
           <button class="tab-button" onclick="switchTab('creator')" id="creator-tab">
             Creator Settings
