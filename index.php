@@ -8,7 +8,10 @@ include('includes/helper.php');
     <title>Chat, Watch & Meet top Models | The Live Models transparent</title>
     <meta name="description" content="The live model is one of the world's leading professional networks for models and escorts. Chat watch and meet with your favorite models from the comfort of your home.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
+
 <?php include('includes/head.php'); ?>
+
+    <link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
 
     <style>
 
@@ -76,7 +79,7 @@ include('includes/helper.php');
       }
     </style>
   </head>
-  <body class="min-h-screen bg-animated text-white home-page socialwall-page">
+  <body class="min-h-screen bg-animated text-white home-page socialwall-page optim-services enhanced5">
   <!-- Premium Particle System -->
   <div class="particles" id="particles"></div>
     <!-- Ultra Premium Header -->
