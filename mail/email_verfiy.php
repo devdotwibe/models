@@ -35,7 +35,7 @@
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td  align="left" style="color:#fff; font-size:25px">Thank you and Verification</td>
+        <td  align="left" style="color:#fff; font-size:25px">You Are <span style="color: #5caad2;">Successfully Register.</td>
       </tr>
       <tr>
         <td>&nbsp;</td>
@@ -50,16 +50,39 @@
   </tr>
   <tr>
     <td><table width="650" border="0" align="center" cellpadding="0" cellspacing="0">
-      <tr>
-        <td>&nbsp;</td>
-      </tr>
-      <tr>
-        <td  align="left" style="color:#fff; font-size:14px; line-height:22px; font-family:Arial, Helvetica, sans-serif">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-      </tr>
-    </table></td>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td  align="left" style="color:#fff; font-size:14px; line-height:22px; font-family:Arial, Helvetica, sans-serif">Thanks for registering with us. now you can explore the new models and influencers. Now you can able to add coins in account and then you will free to see all images from model's.  </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td align="center">
+            <table border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#5caad2" style="border-radius:4px;">
+                <tr>
+                <td height="12" style="font-size:12px; line-height:12px;">&nbsp;</td>
+                </tr>
+                <tr>
+                <td align="center" style="padding: 0 25px; font-size:16px; font-family:Arial, Helvetica, sans-serif; font-weight:bold;">
+                        <a href="{{VERIFY_LINK}}" style="color:#ffffff; text-decoration:none; display:inline-block;">
+                        Verify Email
+                        </a>
+                </td>
+                </tr>
+                <tr>
+                <td height="12" style="font-size:12px; line-height:12px;">&nbsp;</td>
+                </tr>
+            </table>
+            </td>
+        </tr>
+
+
+        </table>
+    </td>
   </tr>
   <tr>
     <td>&nbsp;</td>

@@ -185,7 +185,7 @@ if (isset($_POST['vfb-submit'])) {
         $verify_link = "https://models.staging3.dotwibe.com/verify.php?email=".$email."&token=".$token;
 
 
-         $htmlContent = file_get_contents("mail/registration-mail.php");
+         $htmlContent = file_get_contents("mail/email_verfit.php");
 
           $message = str_replace("{{VERIFY_LINK}}", $verify_link, $htmlContent);
 
