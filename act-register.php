@@ -209,7 +209,17 @@ if (isset($_POST['vfb-submit'])) {
 
             //    echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';
 
-                echo '<script>window.location="login.php?reg=success"</script>';
+            //  echo  '<script>sessionStorage.setItem('regSuccessShown', '1')</script>';
+            
+            //     echo '<script>window.location="login.php?reg=success"</script>';
+
+            // Set sessionStorage and redirect
+
+                echo '<script>
+                    sessionStorage.setItem("regSuccessShown", "0");
+                    window.location = "login.php?reg=success";
+                </script>';
+
 
          }else{
               echo  '<script>alert("Error in Details Sent to Respective Mail id.")</script>';
