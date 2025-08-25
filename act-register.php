@@ -202,7 +202,7 @@ if (isset($_POST['vfb-submit'])) {
 
             //    echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';
 
-                echo '<script>window.location="login.php?register=success"</script>';
+                echo "<script>ShowLogin();</script>";
 
          }else{
 

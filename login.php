@@ -161,9 +161,61 @@ if($_SESSION["log_user"]){
     </div>
     </div>
 
+
+    <div class="modal-overlay" id="forgor_modal">
+        <div class="modal">
+            <div class="modal-header">
+            <h2 class="modal-title">forgotPassword </h2>
+            <button class="close-modal" id="closeTipModal" type="button" onclick="CloseModal('forgor_modal')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            </div>
+            <div class="modal-body" id="modal_success_message">
+            <form id="email_form" action="forgotpassword.php" method="POST">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                <label for="email_input">Email Address</label>
+                <input type="email" id="email_input" name="email" class="form-control" placeholder="Enter your email" required>
+
+                <span style="display:none" id="email_error">Please enter valid email address</span>
+                </div>
+                <button class="btn btn-primary" type="button" onclick="SubmitForgot()" >Submit</button>
+                <button class="btn btn-secondary" type="button" onclick="CloseModal('forgor_modal')">Close</button>
+            </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-overlay" id="success_modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Registration Successful</h2>
+                <button class="close-modal" type="button" onclick="CloseModal('success_modal')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modal_success_message">
+                <p>Your registration was successful! You can now <a href="login.php">login</a> to your account.</p>
+                <button class="btn btn-primary" type="button" onclick="CloseModal('success_modal')">OK</button>
+            </div>
+        </div>
+    </div>
+
+
 <?php include('includes/footer.php'); ?>
 
 <script>
+
+    function ShowLogin()
+    {
+        $('#success_modal').addClass('active');
+    }
 
     function forgotPassword()
     {
