@@ -93,6 +93,7 @@ $stringQuery = "
     SELECT tb.*, mu.age 
     FROM banners tb 
     JOIN model_user mu ON mu.id = tb.user_id 
+    WHERE mu.verified = '1'
     $order
 ";
 
