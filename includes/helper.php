@@ -417,6 +417,56 @@ function getModelPrivacySettings($model_id) {
 
 		return $result ? true : false;
 	}
+	function IsUserBasicFilled($user_id)
+	{
+		$query = "
+			SELECT name, dob, age, gender, country, city, travel_preference
+			FROM model_user
+			WHERE id = %i
+		";
+
+		$user = DB::queryFirstRow($query, $user_id);
+
+		if (!$user) {
+
+			return false;
+		}
+
+		$requiredFields = ['name', 'dob', 'age', 'gender', 'country', 'city', 'travel_preference'];
+
+		foreach ($requiredFields as $field) {
+			if (empty($user[$field])) {
+				return false; 
+			}
+		}
+
+		return true; 
+	}
+
+	function GetUsersWithBasicFilled()
+	{
+		$query = "
+			SELECT id
+			FROM model_user
+			WHERE 
+				name IS NOT NULL AND name != '' AND
+				dob IS NOT NULL AND dob != '' AND
+				age IS NOT NULL AND age != '' AND
+				gender IS NOT NULL AND gender != '' AND
+				country IS NOT NULL AND country != '' AND
+				city IS NOT NULL AND city != '' AND
+				travel_preference IS NOT NULL AND travel_preference != ''
+		";
+
+		$users = DB::query($query);
+
+		$userIds = array_map(function($user) {
+			return $user['id'];
+		}, $users);
+
+		return $userIds;
+	}
+
 
 
 	function AdverLikedCount($adver_id)
