@@ -162,13 +162,18 @@ if (isset($_POST['vfb-submit'])) {
 
     $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
- 	$que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`as_a_model`,`user_bio`,`services`) 
-	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."', '".$as_a_model."', '".$user_bio."', '".$services."')";
+ 	// $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`as_a_model`,`user_bio`,`services`) 
+	// VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."', '".$as_a_model."', '".$user_bio."', '".$services."')";
+
+    $que = "INSERT INTO `model_user` (`unique_id`, `name`, `username`, `email`, `password`, `country`,`gender`,`user_bio`,`services`) 
+
+	VALUES ('".$uni_id."', '".$name."', '".$user_name."', '".$email."', '".$password_hashed."', '".$country."', '".$gender."','".$user_bio."', '".$services."')";
 
 
     if(mysqli_query($con,$que)){
       
       	 $email_to = $email;
+         
          $subject = "Mail Verification for Model Project";
 
          $header = "From: Model Project <prashant.systos@gmail.com>\r\n";
