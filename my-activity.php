@@ -307,10 +307,82 @@ if ($userDetails) {
             </div>
         </div>
     </div>
+	
+	
+<?php /*?>
+    <!-- Modal structure -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Follow Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    Please login <a href="<?php echo SITEURL . 'login.php'; ?>">here</a>.
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-overlay" id="success_modal">
+        <div class="modal" style="display:block; height:auto;">
+            <div class="modal-header">
+                <h2 class="modal-title">Success</h2>
+                <button class="close-modal" id="closeTipModal" type="button" onclick="CloseModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modal_success_message">
+
+
+                <button class="btn btn-primary" type="button" onclick="CloseModal()">Close</button>
+            </div>
+        </div>
+    </div> <?php */ ?>
 
 <?php 
 //Code for checking likes you
 $liked_you_array = DB::query("select user_id from user_model_likes where model_id=" . $userDetails['id'] . "  AND user_model_likes.like='Yes' ");
+
+//Code for checking likes you
+$viewer_array = DB::query("select viewer_user_id from model_user_profile_views where profile_user_id=" . $userDetails['id']);
+
+//Code for checking likes me
+$liked_me_array = DB::query("select model_id from user_model_likes where user_id=" . $userDetails['id'] . "  AND user_model_likes.like='Yes' ");
+
+//Code for checking likes me
+$viewer_me_array = DB::query("select profile_user_id from model_user_profile_views where viewer_user_id=" . $userDetails['id']);
+
+//Code for booked services
+$group_chat_count = 0; $private_chat_count = 0; 
+$local_meetup_count = 0; $extended_social_count = 0; 
+$overnight_social_count = 0;
+$service_group = mysqli_query($con, "select service_name,COUNT(DISTINCT model_unique_id) AS service_count from model_booking where user_unique_id='".$_SESSION['log_user_unique_id']."' GROUP BY service_name");
+if (mysqli_num_rows($service_group) > 0) {
+	while ($row_serv = mysqli_fetch_assoc($service_group)) {
+		$service_name = $row_serv['service_name'];
+		if($service_name == 'Group Chat'){
+			$group_chat_count = $row_serv['service_count'];
+		}else if($service_name == 'Private Chat'){
+			$private_chat_count = $row_serv['service_count'];
+		}else if($service_name == 'Local Meetup'){
+			$local_meetup_count = $row_serv['service_count'];
+		} else if($service_name == 'Extended Social'){
+			$extended_social_count = $row_serv['service_count'];
+		} else if($service_name == 'Overnight Social'){
+			$overnight_social_count = $row_serv['service_count'];
+		} 
+	}
+} 
 
 ?>
 
@@ -333,32 +405,32 @@ $liked_you_array = DB::query("select user_id from user_model_likes where model_i
         </svg>
     </button>
     <div class="dropdown-content" id="dropdown-menu">
-        <div class="dropdown-item" onclick="<?php if (!$user_have_preminum) { ?>selectSection('❤️ Liked You (12)')<?php } ?>">
+        <div class="dropdown-item" onclick="<?php if (!$user_have_preminum) { ?>selectSection('❤️ Liked You (12)')<?php }else{ ?> getSelectedResult('likedyou','❤️ Liked You (<?php echo count($liked_you_array); ?>)') <?php } ?>">
             <span>❤️ Liked You (<?php echo count($liked_you_array); ?>)</span>
 			<?php if (!$user_have_preminum) { ?>
             <span class="premium-lock">🔒 Premium</span>
 			<?php } ?>
         </div>
-        <div class="dropdown-item" onclick="<?php if (!$user_have_preminum) { ?>selectSection('👀 Viewed Your Profile (8)')<?php } ?>">
-            <span>👀 Viewed Your Profile (8)</span>
+        <div class="dropdown-item" onclick="<?php if (!$user_have_preminum) { ?>selectSection('👀 Viewed Your Profile (8)')<?php }else{ ?>getSelectedResult('viewedyou','👀 Viewed Your Profile (<?php echo count($viewer_array); ?>)')<?php }  ?>">
+            <span>👀 Viewed Your Profile (<?php echo count($viewer_array); ?>)</span> 
 			<?php if (!$user_have_preminum) { ?>
             <span class="premium-lock">🔒 Premium</span>
 			<?php } ?>
         </div>
-		<div class="dropdown-item" onclick="selectSection('💬 Group Chat (5)')">
-            <span>💬 Group Chat (5)</span>
+		<div class="dropdown-item" onclick="getSelectedResult('group_chat','💬 Group Chat (<?php echo $group_chat_count; ?>)')">
+            <span>💬 Group Chat (<?php echo $group_chat_count; ?>)</span>
         </div>
-		<div class="dropdown-item" onclick="selectSection('💬 Private Chat (5)')">
-            <span>💬 Private Chat (5)</span>
+		<div class="dropdown-item" onclick="getSelectedResult('private_chat','💬 Private Chat (<?php echo $private_chat_count; ?>)')"> 
+            <span>💬 Private Chat (<?php echo $private_chat; ?>)</span>
         </div>
-		<div class="dropdown-item" onclick="selectSection('📺 Local Meetup (3)')">
-            <span>📺 Local Meetup (3)</span>
+		<div class="dropdown-item" onclick="getSelectedResult('local_meetup','📺 Local Meetup (<?php echo $local_meetup_count; ?>)')">
+            <span>📺 Local Meetup (<?php echo $local_meetup_count; ?>)</span>
         </div>
-		<div class="dropdown-item" onclick="selectSection('📺 Extended Social (3)')">
-            <span>📺 Extended Social (3)</span>
+		<div class="dropdown-item" onclick="getSelectedResult('extended_social','📺 Extended Social (<?php echo $extended_social_count; ?>)')">
+            <span>📺 Extended Social (<?php echo $extended_social_count; ?>)</span>
         </div>
-		<div class="dropdown-item" onclick="selectSection('📺 Overnight Social (3)')">
-            <span>📺 Overnight Social (3)</span>
+		<div class="dropdown-item" onclick="getSelectedResult('overnight_social','📺 Overnight Social (<?php echo $overnight_social_count; ?>)')">
+            <span>📺 Overnight Social (<?php echo $overnight_social_count; ?>)</span>
         </div>
 		<?php /*?>
         <div class="dropdown-item" onclick="selectSection('💬 Chat Requests (5)')">
@@ -374,22 +446,22 @@ $liked_you_array = DB::query("select user_id from user_model_likes where model_i
         <div class="dropdown-item" onclick="selectSection('✈️ Travel Requests (7)')">
             <span>✈️ Travel Requests (7)</span>
             <span class="premium-lock">🔒 Premium</span>
-        </div><?php */ ?>
+        </div>
         <div class="dropdown-item" onclick="<?php if (!$user_have_preminum) { ?>selectSection('🎯 My Matches (15)')<?php } ?>">
             <span>🎯 My Matches (15)</span>
 			<?php if (!$user_have_preminum) { ?>
             <span class="premium-lock">🔒 Premium</span>
 			<?php } ?>
+        </div><?php */ ?>
+        <div class="dropdown-item" onclick="getSelectedResult('likedme','💖 You Liked (<?php echo count($liked_me_array); ?>)')">
+            <span>💖 You Liked (<?php echo count($liked_me_array); ?>)</span>
         </div>
-        <div class="dropdown-item" onclick="selectSection('💖 You Liked (23)')">
-            <span>💖 You Liked (23)</span>
+        <div class="dropdown-item" onclick="getSelectedResult('viewedme','👁️ You Viewed (<?php echo count($viewer_me_array); ?>)')">
+            <span>👁️ You Viewed (<?php echo count($viewer_me_array); ?>)</span>
         </div>
-        <div class="dropdown-item" onclick="selectSection('👁️ You Viewed (45)')">
-            <span>👁️ You Viewed (45)</span>
-        </div>
-        <div class="dropdown-item" onclick="selectSection('📩 You Contacted (15)')">
+        <?php /* ?><div class="dropdown-item" onclick="selectSection('📩 You Contacted (15)')">
             <span>📩 You Contacted (15)</span>
-        </div>
+        </div><?php */ ?>
     </div>
 </div>
 
@@ -397,7 +469,7 @@ $liked_you_array = DB::query("select user_id from user_model_likes where model_i
 <div class="search-container">
     <input type="text" class="search-bar" placeholder="🔍 Search by Name or City">
 </div>
-
+<?php /*?>
 <!-- Secondary Filters -->
 <div class="secondary-filters-row">
     <button class="secondary-filter-btn active">Recently Active</button>
@@ -420,10 +492,10 @@ $liked_you_array = DB::query("select user_id from user_model_likes where model_i
         <option>Premium First</option>
         <option>Most Popular</option>
     </select>
-</div>
+</div><?php */?>
 
 <!-- Models Grid -->
-<div class="models-grid">
+<div class="models-grid" id="activity_result">
 
 <?php if(!empty($liked_you_array)){
 	$liked_you_ids = array();
@@ -492,7 +564,7 @@ $liked_you_array = DB::query("select user_id from user_model_likes where model_i
                 <span><?php echo ucfirst($modalname); ?></span>
                 <span style="font-size: 16px; color: rgba(255,255,255,0.8);">
 				<?php if (!empty($rowesdw['age'])) {
-                                            echo ', ' . $rowesdw['age'];
+                                            echo $rowesdw['age'];
                                         } ?></span>
             </div>
 			<?php if (!empty($rowesdw['city']) || !empty($rowesdw['country'])) { ?>
@@ -520,9 +592,9 @@ $liked_you_array = DB::query("select user_id from user_model_likes where model_i
             
 			
 			<div class="action-buttons">
-                <button class="action-btn" onclick="event.stopPropagation(); <?php if (!$user_have_preminum) { ?>showPremiumModal();<?php } ?>" >✕</button>
-                <button class="action-btn heart" onclick="event.stopPropagation(); <?php if (!$user_have_preminum) { ?>showPremiumModal();<?php } ?>" >♡</button>
-                <button class="action-btn" onclick="event.stopPropagation(); <?php if (!$user_have_preminum) { ?>showPremiumModal();<?php } ?>" >👤</button>
+                <button class="action-btn" onclick="<?php if (!$user_have_preminum) { ?>event.stopPropagation(); showPremiumModal();<?php } else{ ?>ActionBtn(this,'pass')<?php }  ?>"  modelid="<?php echo $rowesdw['id']; ?>" >✕</button>
+                <button class="action-btn heart" onclick="<?php if (!$user_have_preminum) { ?>event.stopPropagation(); showPremiumModal();<?php } else{ ?>ActionBtn(this,'like')<?php }  ?>"   modelid="<?php echo $rowesdw['id']; ?>" >♡</button>
+                <button class="action-btn" onclick="<?php if (!$user_have_preminum) { ?>event.stopPropagation();  showPremiumModal();<?php } else{ ?>ActionBtn(this,'connect')<?php } ?>"   modelid="<?php echo $rowesdw['id']; ?>" >👤</button>
             </div>
 			
 			
@@ -551,6 +623,10 @@ $liked_you_array = DB::query("select user_id from user_model_likes where model_i
 </div>
 
 <?php include('includes/footer.php'); ?>
+ <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <?php /*?>
 <!-- Bottom Navigation -->
 <nav class="bottom-nav">
@@ -707,6 +783,30 @@ $liked_you_array = DB::query("select user_id from user_model_likes where model_i
         document.getElementById("current-section").innerText = sectionText;
         document.getElementById("dropdown-menu").classList.remove("show");
     }
+	
+	function getSelectedResult(type,sectionText){
+		if(type != ''){
+		jQuery.ajax({
+                    type: 'GET',
+                    url: "<?= SITEURL . 'ajax/myactivity_listing.php' ?>",
+                    data: {
+                        type: type,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.status == 'success'){
+							jQuery('#activity_result').html(response.message);
+						}else{
+							jQuery('#activity_result').html(response.message);
+						}
+                        
+                    }
+                });
+				
+				document.getElementById("current-section").innerText = sectionText;
+        document.getElementById("dropdown-menu").classList.remove("show");
+		}
+	}
 
     function showPremiumModal() {
         document.getElementById("premium-modal").classList.add("show");
@@ -896,6 +996,79 @@ Use tokens for:
         }
     `;
     document.head.appendChild(style);
+</script>
+
+<script>
+function ActionBtn(element, action) {
+
+            $(element).css('transform', 'scale(1.2)');
+            setTimeout(() => {
+                $(element).css('transform', 'scale(1)');
+            }, 200);
+
+            const modelid = $(element).attr('modelid');
+
+            const $card = $(element).closest('.profile-card');
+            const profileName = $(element).find('.profile-name').text().split(',')[0];
+
+            switch (action) {
+                case 'connect':
+
+                    jQuery.ajax({
+                        type: 'GET',
+                        url: "<?= SITEURL . '/ajax/model_followrequest.php' ?>",
+                        data: {
+                            modelid: modelid,
+                            notification_type: 'follow'
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            showNotification(`Connection request sent to ${profileName}!`, 'success');
+                        }
+                    });
+
+                    break;
+                case 'like':
+                    $(element).css('color', 'var(--secondary)');
+                    //ajax for increase like count
+                    jQuery.ajax({
+                        type: 'GET',
+                        url: "<?= SITEURL . '/ajax/model_like.php' ?>",
+                        data: {
+                            modelid: modelid
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+
+
+                            console.log(response);
+                            if (response.status == "success") {
+                                $('#message_pag').remove();
+
+                                $('#modal_success_message').prepend(`<p id="message_pag" class="success-text">${response.message}</p>`);
+
+                                $('#success_modal').addClass('active');
+
+                                setTimeout(() => {
+
+                                    $('#success_modal').removeClass('active');
+
+                                }, 3000);
+                                // showNotification(`You liked ${profileName}!`, 'success');
+                            }
+                        }
+                    });
+
+                    break;
+                case 'pass':
+                    $card.css('opacity', '0.5');
+                    setTimeout(() => {
+                        $card.css('display', 'none');
+                    }, 300);
+                    showNotification(`${profileName} has been hidden`, 'info');
+                    break;
+            }
+        }
 </script>
 </body>
 </html>
