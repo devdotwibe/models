@@ -155,10 +155,15 @@ if (isset($_POST['vfb-submit'])) {
     $res_u = mysqli_query($con, $sql_u);
     $res_e = mysqli_query($con, $sql_e); 
    if (mysqli_num_rows($res_u) > 0) { 
-        echo  '<script>alert("Sorry... username already taken")</script>';
-                echo '<script>window.location="login.php"</script>';
+
+        // echo  '<script>alert("Sorry... username already taken")</script>';
+
+        echo '<script>window.location="login.php?register=success"</script>';
+
     }else if(mysqli_num_rows($res_e) > 0){
+
       echo  '<script>alert("Sorry... email already taken")</script>';
+      
                 echo '<script>window.location="login.php"</script>';  
     }else{
 
