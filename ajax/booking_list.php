@@ -38,18 +38,16 @@ include('../includes/helper.php');
 
                     // $model_bookings[$key]['profile_pic'] = $user_info ? $user_info['profile_pic'] : '';
 
-                  if (!empty($booking['created_at'])) {
+                  if (!empty($booking['meeting_date'])) {
 
-                        $timestamp = strtotime($booking['created_at']);
+                        $timestamp = strtotime($booking['meeting_date']);
 
-                        $model_bookings[$key]['created_date'] = date('M j, Y', $timestamp);
-
-                        $model_bookings[$key]['created_time'] = date('g:i A', $timestamp);
+                        $model_bookings[$key]['meeting_date'] = date('M j, Y', $timestamp);
 
                     } else {
 
-                        $model_bookings[$key]['created_date'] = '';
-                        $model_bookings[$key]['created_time'] = '';
+                        $model_bookings[$key]['meeting_date'] = '';
+                
                     }
                 }
 
