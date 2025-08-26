@@ -36,7 +36,7 @@ if (isset($_SESSION['log_user_id'])) {
     <div class="p-6 flex flex-col items-center">
 
       <img alt="Profile" class="w-20 h-20 rounded-full">
-      <h3 class="text-xl font-bold mt-3"><?php echo $modalname; ?></h3>
+      <h3 class="text-xl font-bold mt-3"></h3>
 
 
 
