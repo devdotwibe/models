@@ -33,10 +33,7 @@ $serviceArr = array('Providing services', 'Looking for services');
     <?php if (isset($_SESSION["log_user_id"])) { ?>
         <?php  include('../includes/side-bar.php'); ?>
         <?php  include('../includes/profile_header_index.php'); ?>
-	<?php } else{ 
-        
-        echo '<script>window.location.href="login.php"</script>';
-    } ?>
+	<?php } ?>
    
 
     <?php /*?><div class="container">
