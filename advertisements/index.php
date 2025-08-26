@@ -35,8 +35,7 @@ $serviceArr = array('Providing services', 'Looking for services');
         <?php  include('../includes/profile_header_index.php'); ?>
 	<?php } else{ 
         
-        header("Location: " . SITEURL . "/login");
-        exit;
+        echo '<script>window.location.href="login.php"</script>';
     } ?>
    
 
