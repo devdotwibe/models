@@ -727,7 +727,7 @@ else{
             <div class="modal-body">
 
                 <div class="views-info">
-                    <p><strong>Advertisement Name:</strong>  <?php echo $adDetail['name'] ?></p>
+                    <p><strong>Advertisement Name:</strong>  <?php echo $adDetails['name'] ?></p>
                     <p><strong>Target Audience:</strong> <span id="target_audience_view"></span></p>
                     <p><strong>Location:</strong> <span id="location_view"></span></p>
                     <p><strong>Age Range:</strong> <span id="age_range_view"></span></p>
