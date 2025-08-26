@@ -3349,6 +3349,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
 
   <?php include('includes/footer.php'); ?>
+
+  <link href="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
+  <script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
+
   <script>
     function select_hs_country(state) {
       $("#i-hs-city").html('<option value="">Select</option>');
@@ -3394,8 +3398,23 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
   <script>
 
+  function rebindpagination() {
 
-  <?php $total_booking = 20; ?>
+      $("#list-paginations").pagination('destroy');
+      $("#list-paginations").pagination({
+        pages: $("#i-total-page").val(),
+        displayedPages: 5,
+        edges: 0,
+        cssStyle: 'light-theme',
+        hrefTextPrefix: 'javascript:;',
+        currentPage: currentPage,
+        onPageClick: function (pageNum, e) {
+          submit_search(pageNum);
+          currentPage = pageNum;
+        }
+        
+      });
+  }
 
   $(function () {
 
