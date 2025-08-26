@@ -16,12 +16,14 @@ if (!empty($_SESSION['log_user_id'])) {
     }
 }
 
-  echo "test"; die();
   $notify_count = NotificationCount($log_user_id);
 
   $followes_count = getModelFollowersCount($unique_id);
 
   $following_count = getModelFolloweringCount($unique_id);
+
+
+  echo "test"; die();
 
 ?>
  <div class="sidebar-overlay" id="sidebarOverlay"></div>
