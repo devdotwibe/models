@@ -24,7 +24,6 @@ if (isset($_SESSION['log_user_id'])) {
   
 ?>
 
-  <?php echo "test" ; die(); ?>
 
     <div class="p-6 flex flex-col items-center" onclick="window.location.href='<?= SITEURL ?>/user/profile/index.php'">
 
