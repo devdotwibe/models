@@ -6,7 +6,7 @@ include('../includes/helper.php');
 
     if(isset($_SESSION['log_user_id'])){
 
-        if (isset($_GET['fetch_booking_list']) && $_GET['action'] === 'fetch_booking_list') {
+        if (isset($_GET['action']) && $_GET['action'] === 'fetch_booking_list') {
 
 
             $user_unique_id = isset($_GET['user_id']) ? $_GET['user_id'] : '';
