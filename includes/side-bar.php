@@ -10,10 +10,6 @@ if (isset($_SESSION['log_user_id'])) {
 	$as_a_model = $get_modal_user[0]['as_a_model'];
 	$unique_id = $get_modal_user[0]['unique_id'];
 
-  echo "test";
-
-  die();
-  
 }else{ 
 	$log_user_id = 0; 
 	$get_modal_user = array(); 
