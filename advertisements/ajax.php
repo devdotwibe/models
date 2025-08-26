@@ -70,8 +70,6 @@ $sort_type = $_GET['sort_type'];
 
     }
 
-    print_r($filter_follower_ids); die(); 
-
     if (!empty($filter_follower_ids)) {
 
         $ordered_ids = implode(',',  $filter_follower_ids); 
