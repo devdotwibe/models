@@ -61,16 +61,6 @@ if (isset($_SESSION['log_user_id'])) {
     </div>
 
 
-    <div class="menu-stats">
-      <div class="menu-stat">
-        <div class="menu-stat-value"> <?php echo $followes_count ?></div>
-        <div class="menu-stat-label">Followers</div>
-      </div>
-      <div class="menu-stat">
-        <div class="menu-stat-value"> <?php echo $following_count ?></div>
-        <div class="menu-stat-label">Following</div>
-      </div>
-    </div>
 
 
     <div class="menu-item" onclick="navigateTo('user/profile/index.php')">
