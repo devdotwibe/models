@@ -46,9 +46,9 @@ if($as_a_model != 'Yes'){
 
 <body class="min-h-screen text-white profile-advts advt-page  socialwall-page">
    
-   <?php  include('../includes/side-bar.php'); ?>
+     <?php  include('../includes/side-bar.php'); ?>
 	<?php  include('../includes/profile_header_index.php'); 
-
+        echo "test" ; die();
     ?>  
 	
 <main class="py-12">
