@@ -22,13 +22,14 @@ if (isset($_SESSION['log_user_id'])) {
 
   $following_count = 0;
 
+  echo "test" ; die();
 ?>
  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
   <div class="sidebar-menu" id="sidebarMenu">
 
   <?php echo "test" ; die(); ?>
-  
+
     <div class="p-6 flex flex-col items-center" onclick="window.location.href='<?= SITEURL ?>/user/profile/index.php'">
 
       <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $get_modal_user[0]['profile_pic']; ?>" alt="Profile" class="w-20 h-20 rounded-full">
