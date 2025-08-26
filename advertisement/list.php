@@ -9,9 +9,9 @@ if (isset($_SESSION['log_user_id'])) {
 }else{ 
 	$as_a_model = '';
 }
-if($as_a_model != 'Yes'){
-	header("Location: login.php");
-}
+// if($as_a_model != 'Yes'){
+// 	header("Location: login.php");
+// }
 ?>
 	
 <!DOCTYPE html>
