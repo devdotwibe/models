@@ -17,7 +17,7 @@ include('../includes/helper.php');
                 $model_bookings = DB::query(
                     "SELECT * 
                     FROM model_booking 
-                    WHERE user_unique_id = %s 
+                    WHERE model_unique_id = %s 
                     ORDER BY id DESC 
                     LIMIT %i OFFSET %i", 
                     $user_unique_id, $perPage, $offset
@@ -26,7 +26,7 @@ include('../includes/helper.php');
                 $totalRows = DB::queryFirstField(
                     "SELECT COUNT(*) 
                     FROM model_booking 
-                    WHERE user_unique_id = %s", 
+                    WHERE model_unique_id = %s", 
                     $user_unique_id
                 );
 
