@@ -38,7 +38,7 @@ $sort_type = $_GET['sort_type'];
 
         $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
 
-        echo $boosted_user_ids; die();
+        print_r($boosted_user_ids); die();
     }
     else
     {
