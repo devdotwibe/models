@@ -43,6 +43,8 @@ if($as_a_model != 'Yes'){
 </style>
 </head>
 
+<?php echo "tet" ; die(); ?>
+
 <body class="min-h-screen text-white profile-advts advt-page  socialwall-page">
    
    <?php echo "test" die();  include('../includes/side-bar.php'); ?>
