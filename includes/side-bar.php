@@ -25,6 +25,9 @@ if (isset($_SESSION['log_user_id'])) {
 ?>
 
 
+  <div class="sidebar-menu" id="sidebarMenu">
+
+
     <div class="p-6 flex flex-col items-center" onclick="window.location.href='<?= SITEURL ?>/user/profile/index.php'">
 
       <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $get_modal_user[0]['profile_pic']; ?>" alt="Profile" class="w-20 h-20 rounded-full">
