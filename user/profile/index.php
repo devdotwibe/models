@@ -989,6 +989,9 @@ if(!empty($userDetails['profile_pic'])){
 
   <?php include('../../includes/footer.php'); ?>
 
+   <link href="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
+   <script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
+
   <script>
 
     $(document).ready(function () {
