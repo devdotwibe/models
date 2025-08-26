@@ -42,25 +42,12 @@ if ($all_data) {
                     <div class="col-span-1">
                         <span class="status-<?php if (empty($set_data['adv_status'])) { echo 'Active'; }else{ echo $set_data['adv_status'];  }  ?> px-3 py-1 rounded-full text-xs"><?= $status ?></span>
                     </div>
-
-                    <div class="col-span-2">
-                        <div class="flex space-x-2">
-                            <button class="btn-success px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="editAd(5)">Edit</button>
-                            <button class="btn-warning px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="promoteAd(5)">Promote</button>
-                            <button class="btn-danger px-3 py-2 rounded-lg text-white text-sm" onclick="deleteAd(5)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
                     
                     <div class="col-span-2">
                         <div class="flex space-x-2">
                             <button class="btn-success px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="window.location='<?= SITEURL . 'advertisement/edit.php?id=' . $set_data['id'] ?>'">Edit</button>
                             <button class="btn-success px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="window.location='<?= SITEURL . 'advertisements/view.php?id=' . $set_data['id'] ?>'">View</button>
-                            <?php /*?><button class="btn-warning px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="window.location='<?= SITEURL . 'advertisement/campaign.php?id=' . $set_data['id'] ?>'">Promote</button><?php */ ?>
+                            <button class="btn-warning px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="window.location='<?= SITEURL . 'advertisement/campaign.php?id=' . $set_data['id'] ?>'">Promote</button>
                             <button class="btn-danger px-3 py-2 rounded-lg text-white text-sm del_<?= $set_data['id'] ?>" onclick="deleteAd(<?php echo $set_data['id']; ?>)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="3 6 5 6 21 6"></polyline>
