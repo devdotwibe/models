@@ -70,9 +70,9 @@ $sort_type = $_GET['sort_type'];
 
     // }
 
-    print_r($boosted_ad_ids); die();
-    
     if (!empty($boosted_ad_ids)) {
+
+        $boosted_ad_ids = array_map('intval', $boosted_ad_ids);
 
         $ordered_ids = implode(',',  $boosted_ad_ids); 
 

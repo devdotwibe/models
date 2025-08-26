@@ -131,7 +131,7 @@ function BoostedModelIds($con) {
 
 	$today = new DateTime();
 
-	$query = "SELECT user_unique_id, created_at, duration, total_amount 
+	$query = "SELECT user_unique_id, created_at, duration, total_amount,ad_id 
 			FROM boost_avertisement";
 
 	$result = mysqli_query($con, $query);
