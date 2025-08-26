@@ -39,6 +39,8 @@ include('../includes/helper.php');
                     'total_page' => $totalPages,
                     'page' => $page
                 ];
+
+            echo json_encode($response);
         }
        
         echo json_encode([]);
