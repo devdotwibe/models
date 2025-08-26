@@ -3,7 +3,6 @@ session_start();
 include('../includes/config.php');
 if (isset($_SESSION['log_user_id'])) {
 	$log_user_id = $_SESSION['log_user_id'];
-
 	$get_modal_user = DB::query('select as_a_model from model_user where id='.$log_user_id); 
 	$as_a_model = $get_modal_user[0]['as_a_model'];
 }else{ 
@@ -45,15 +44,9 @@ if($as_a_model != 'Yes'){
 </head>
 
 <body class="min-h-screen text-white profile-advts advt-page  socialwall-page">
-   
-	<?php  include('../includes/profile_header_index.php');
-    
-    
 
-       echo $as_a_model;
-
-    die();
-    ?>
+    <?php  include('../includes/side-bar.php'); ?>
+	<?php  include('../includes/profile_header_index.php'); ?>
 	
 <main class="py-12">
     <div class="container mx-auto">
