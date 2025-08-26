@@ -17,11 +17,10 @@ if (isset($_SESSION['log_user_id'])) {
 	$unique_id = '';
 }
 
-    echo "test";
 
-  die();
+  // $notify_count = NotificationCount($log_user_id);
 
-  $notify_count = NotificationCount($log_user_id);
+  $notify_count = 0;
 
   $followes_count = getModelFollowersCount($unique_id);
 
