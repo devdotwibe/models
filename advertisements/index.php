@@ -136,7 +136,9 @@ foreach ($f_country_list as $val) {
 
             <?php 
 			
-			$total_adv = DB::queryFirstrow("SELECT COUNT(*) AS total FROM banners where user_id=".$_SESSION['log_user_id']);
+			// $total_adv = DB::queryFirstrow("SELECT COUNT(*) AS total FROM banners where user_id=".$_SESSION['log_user_id']);
+
+            $total_adv = [];
 			
 			?>
 					
