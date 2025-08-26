@@ -40,9 +40,11 @@ include('../includes/helper.php');
                     'page' => $page
                 ];
 
-            echo json_encode($response);
+           echo json_encode($response);
+            exit;
         }
        
-        echo json_encode([]);
+          echo json_encode([]);
+          exit;
     }
 ?>
