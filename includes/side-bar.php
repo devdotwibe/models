@@ -1,8 +1,8 @@
 <?php 
 if (isset($_SESSION['log_user_id'])) {
 
-	// $log_user_id = $_SESSION['log_user_id'];
-	// $get_modal_user = DB::query('select * from model_user where id='.$log_user_id);
+	$log_user_id = $_SESSION['log_user_id'];
+	$get_modal_user = DB::query('select * from model_user where id='.$log_user_id);
 	// if(!empty($get_modal_user[0]['username'])){
 	// 	$modalname = ucfirst($get_modal_user[0]['username']);
 	// }else{
