@@ -11,6 +11,22 @@ if($_SESSION["log_user"]){
 		echo "<script>window.location='".SITEURL."/login.php';</script>";
 		die;
 	}
+    elseif($_GET['id'] != '' && isset($_GET['id']) )
+    {
+        $adDetails = get_data('banners',array('id'=>$_GET['id'],'user_id'=>$_SESSION['log_user_id']),true);
+
+        if(!$adDetails){
+
+            echo '<script>alert("Advertisement not found. Going to advertisement list....")</script>';
+            echo "<script>window.location='".SITEURL."/advertisement/list.php';</script>";
+            die;
+        }
+    }
+    else
+    {
+        echo "<script>window.location='".SITEURL."/advertisement/list.php';</script>";
+        die;
+    }
 }
 else{
 	echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
@@ -710,6 +726,9 @@ else{
             <div class="modal-body">
 
                 <div class="views-info">
+                    
+                    <h3> <?php echo $adDetails['name'] ?></h3>
+
                     <p><strong>Target Audience:</strong> <span id="target_audience_view"></span></p>
                     <p><strong>Location:</strong> <span id="location_view"></span></p>
                     <p><strong>Age Range:</strong> <span id="age_range_view"></span></p>
