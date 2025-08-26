@@ -37,8 +37,6 @@ $sort_type = $_GET['sort_type'];
         $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
         $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
-
-        print_r($boosted_user_ids); die();
     }
     else
     {
@@ -69,6 +67,8 @@ $sort_type = $_GET['sort_type'];
         }
 
     }
+
+    print_r($filter_follower_ids); die(); 
 
     if (!empty($filter_follower_ids)) {
 
