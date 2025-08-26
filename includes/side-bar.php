@@ -16,6 +16,8 @@ if (isset($_SESSION['log_user_id'])) {
 	$as_a_model = '';
 	$unique_id = '';
 }
+
+echo "test" die();
 ?>
 
 
