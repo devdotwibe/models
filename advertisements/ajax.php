@@ -54,6 +54,8 @@ $sort_type = $_GET['sort_type'];
 
         $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
 
+        $stmt = $con->prepare($followQuery);
+
         if (!$stmt) {
             die("Prepare failed: " . $con->error);
         }
