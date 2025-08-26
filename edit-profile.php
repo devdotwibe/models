@@ -2864,11 +2864,12 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
             </tbody>
 
-              <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
-                <div id="pagination-container"></div>
-              </div>
-
           </table>
+
+            <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
+              <div id="pagination-container"></div>
+            </div>
+            
         </div>
       </div>
     </div>
@@ -3412,7 +3413,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           submit_search(pageNum);
           currentPage = pageNum;
         }
-        
+
       });
   }
 
