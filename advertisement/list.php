@@ -22,14 +22,7 @@ if($as_a_model != 'Yes'){
 <title>Advertisement Management - The Live Models</title>
 <meta name="description" content="Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences.">
 <script src="https://cdn.tailwindcss.com"></script>
-<?php  include('../includes/head.php');
-
-
-       echo $as_a_model;
-
-    die();
-    
-    ?>
+<?php  include('../includes/head.php'); ?>
 
 
 <style>
@@ -54,7 +47,14 @@ if($as_a_model != 'Yes'){
 <body class="min-h-screen text-white profile-advts advt-page  socialwall-page">
    
    <?php  include('../includes/side-bar.php'); ?>
-	<?php  include('../includes/profile_header_index.php'); ?>
+	<?php  include('../includes/profile_header_index.php');
+    
+    
+
+       echo $as_a_model;
+
+    die();
+    ?>
 	
 <main class="py-12">
     <div class="container mx-auto">
