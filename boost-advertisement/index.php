@@ -18,19 +18,19 @@ if($_SESSION["log_user"]){
         if(!$adDetails){
 
             echo '<script>alert("Advertisement not found. Going to advertisement list....")</script>';
-            echo "<script>window.location='".SITEURL."/advertisement/list.php';</script>";
+            echo "<script>window.location='".SITEURL."advertisement/list.php';</script>";
             die;
         }
     }
     else
     {
-        echo "<script>window.location='".SITEURL."/advertisement/list.php';</script>";
+        echo "<script>window.location='".SITEURL."advertisement/list.php';</script>";
         die;
     }
 }
 else{
 	echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
-	echo "<script>window.location='".SITEURL."/login.php';</script>";
+	echo "<script>window.location='".SITEURL."login.php';</script>";
 	die;
 }
 
