@@ -813,6 +813,12 @@ if(!empty($userDetails['profile_pic'])){
 
         <?php }  ?>
 
+        <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
+
+            <div id="pagination-container"></div>
+
+        </div>
+
        
 
         <!-- Divider -->
@@ -983,8 +989,28 @@ if(!empty($userDetails['profile_pic'])){
 
   <?php include('../../includes/footer.php'); ?>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
+  <script>
+
+      var itemsPerPage = <?php echo $itemsPerPage; ?>;
+      var totalPosts   = <?php echo $total_posts; ?>;
+      var currentPage  = <?php echo $page; ?>;
+
+      if ($("#pagination-container").data("pagination-initialized") !== true) {
+          $("#pagination-container").pagination({
+              items: totalPosts,
+              itemsOnPage: itemsPerPage,
+              currentPage: currentPage,
+              cssStyle: "light-theme",
+              onPageClick: function (pageNumber) {
+                  // Reload page with ?page=pageNumber
+                  window.location.href = "?page=" + pageNumber;
+              }
+          });
+          $("#pagination-container").data("pagination-initialized", true);
+      }
+
+  </script>
 
   
 
