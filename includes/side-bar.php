@@ -57,6 +57,13 @@ if (isset($_SESSION['log_user_id'])) {
       </div>
     </div>
 
+
+       <?php
+    
+     echo "test";
+
+  die();
+  ?>
     <div class="menu-stats">
       <div class="menu-stat">
         <div class="menu-stat-value"> <?php echo $followes_count ?></div>
@@ -83,12 +90,6 @@ if (isset($_SESSION['log_user_id'])) {
       Edit profile details
     </div>
 
-       <?php
-    
-     echo "test";
-
-  die();
-  ?>
 
     <div class="menu-item" onclick="navigateTo('single-profile.php?m_unique_id=<?php echo $unique_id; ?>')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
