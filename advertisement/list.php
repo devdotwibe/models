@@ -1,7 +1,7 @@
 <?php 
 session_start(); 
 include('../includes/config.php');
-include('includes/helper.php');
+include('../includes/helper.php');
 if (isset($_SESSION['log_user_id'])) {
 	$log_user_id = $_SESSION['log_user_id'];
 	$get_modal_user = DB::query('select as_a_model from model_user where id='.$log_user_id); 
