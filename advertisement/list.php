@@ -4,12 +4,13 @@ include('../includes/config.php');
 if (isset($_SESSION['log_user_id'])) {
 	$log_user_id = $_SESSION['log_user_id'];
 
-    echo "test";
+	$get_modal_user = DB::query('select as_a_model from model_user where id='.$log_user_id); 
+	$as_a_model = $get_modal_user[0]['as_a_model'];
+
+        echo $as_a_model;
 
     die();
     
-	$get_modal_user = DB::query('select as_a_model from model_user where id='.$log_user_id); 
-	$as_a_model = $get_modal_user[0]['as_a_model'];
 }else{ 
 	$as_a_model = '';
 }
