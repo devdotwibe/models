@@ -513,6 +513,7 @@ else{
 
                                      <input type="hidden" name="target_audience[]" id="target_audience" >
 
+                                     <input type="hidden" name="ad_id" id="ad_id" value="<?php echo $adDetails['id'] ?>">
                                 </div>
                             </div>
                             
@@ -726,9 +727,7 @@ else{
             <div class="modal-body">
 
                 <div class="views-info">
-                    
-                    <h3> <?php echo $adDetails['name'] ?></h3>
-
+                    <p><strong>Advertisement Name:</strong>  <?php echo $adDetail['name'] ?></p>
                     <p><strong>Target Audience:</strong> <span id="target_audience_view"></span></p>
                     <p><strong>Location:</strong> <span id="location_view"></span></p>
                     <p><strong>Age Range:</strong> <span id="age_range_view"></span></p>
@@ -831,6 +830,7 @@ else{
         var reached_views_range = $('#reached_views_range').val();
         var user_unique_id = $('#user_unique_id').val();
         var plan_type = $('#plan_type').val();
+        var ad_id = $('#ad_id').val();
 
         $.ajax({
             url: 'launch_ajax.php',
@@ -846,7 +846,8 @@ else{
                 duration: duration,
                 total_amount: total_amount,
                 expected_views_range: expected_views_range,
-                reached_views_range: reached_views_range
+                reached_views_range: reached_views_range,
+                ad_id: ad_id
             },
             dataType: 'json',
             success: function (response) {

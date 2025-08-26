@@ -20,15 +20,18 @@ if (isset($_SESSION["log_user_id"])) {
             $expected_views_range = mysqli_real_escape_string($con, $_POST['expected_views_range']);
             $reached_views_range = mysqli_real_escape_string($con, $_POST['reached_views_range']);
 
+            $ad_id = mysqli_real_escape_string($con, $_POST['ad_id']);
+            
+
         if ($userDetails['balance'] >= $budget) {
 
             $query = "INSERT INTO boost_avertisement (
                         user_unique_id, plan_type, target_audience, location, age_range,
-                        budget, duration, total_amount, expected_views_range, reached_views_range,
+                        budget, duration, total_amount, expected_views_range, reached_views_range,ad_id,
                         created_at, updated_at
                     ) VALUES (
                         '$user_unique_id', '$plan_type', '$target_audience', '$location', '$age_range',
-                        '$budget', '$duration', '$total_amount', '$expected_views_range', '$reached_views_range',
+                        '$budget', '$duration', '$total_amount', '$expected_views_range', '$reached_views_range',$ad_id,
                         NOW(), NOW()
                     )";
 
