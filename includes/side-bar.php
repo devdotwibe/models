@@ -16,10 +16,4 @@ if (isset($_SESSION['log_user_id'])) {
 	$unique_id = '';
 }
 
-  $notify_count = 0;
-
-  $$followes_count = 0;
-
-  $following_count = 0;
-  
 ?>
