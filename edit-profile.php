@@ -2862,8 +2862,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
             <tbody id="list_bookings">
 
-                <h3>Loading...</h3>
-
             </tbody>
 
               <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
