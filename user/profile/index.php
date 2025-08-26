@@ -992,23 +992,24 @@ if(!empty($userDetails['profile_pic'])){
 
   <script>
 
-      var itemsPerPage = <?php echo $itemsPerPage; ?>;
-      var totalPosts   = <?php echo $total_posts; ?>;
-      var currentPage  = <?php echo $page; ?>;
+    $(document).ready(function () {
+        var itemsPerPage = <?php echo $itemsPerPage; ?>;
+        var totalPosts   = <?php echo $total_posts; ?>;
+        var currentPage  = <?php echo $page; ?>;
 
-      if ($("#pagination-container").data("pagination-initialized") !== true) {
-          $("#pagination-container").pagination({
-              items: totalPosts,
-              itemsOnPage: itemsPerPage,
-              currentPage: currentPage,
-              cssStyle: "light-theme",
-              onPageClick: function (pageNumber) {
-                  // Reload page with ?page=pageNumber
-                  window.location.href = "?page=" + pageNumber;
-              }
-          });
-          $("#pagination-container").data("pagination-initialized", true);
-      }
+        if ($("#pagination-container").data("pagination-initialized") !== true) {
+            $("#pagination-container").pagination({
+                items: totalPosts,
+                itemsOnPage: itemsPerPage,
+                currentPage: currentPage,
+                cssStyle: "light-theme",
+                onPageClick: function (pageNumber) {
+                    window.location.href = "?page=" + pageNumber;
+                }
+            });
+            $("#pagination-container").data("pagination-initialized", true);
+        }
+    });
 
   </script>
 
