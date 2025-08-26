@@ -3418,7 +3418,65 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               dataType: "json",
               success: function (response) {
             
-                  $("#list_bookings").html(response.html);
+                  var booking_list = '';
+
+                  if (response.status === 'success') {
+
+                      if (response.data.length > 0) {
+
+                          $.each(response.data, function (index, booking) {
+
+                              booking_list += `
+
+                                 <tr class="border-b border-white/5">
+
+                                    <td class="py-4">
+
+                                      <div class="font-medium">Jun 7, 2025</div>
+
+                                      <div class="text-sm text-white/60">7:30 PM</div>
+                                      
+                                    </td>
+
+                                    <td class="py-4">
+                                      <div class="font-medium">Social Meetup</div>
+                                      <div class="text-sm text-white/60">Dinner</div>
+                                    </td>
+                                    <td class="py-4">
+                                      <div class="flex items-center">
+                                        <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Client" class="w-8 h-8 rounded-full mr-2">
+                                        <span>Michael T.</span>
+                                      </div>
+                                    </td>
+                                    <td class="py-4">
+                                      <div class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm inline-block">Pending</div>
+                                    </td>
+                                    <td class="py-4">
+                                      <div class="flex items-center font-medium">
+                                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+                                        3000
+                                      </div>
+                                      <div class="text-sm text-white/60">Estimated</div>
+                                    </td>
+                                    <td class="py-4">
+                                      <div class="flex space-x-2">
+                                        <button class="px-3 py-1 bg-green-500/20 hover:bg-green-500/30 text-green-400 rounded-lg text-sm">Accept</button>
+                                        <button class="px-3 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg text-sm">Decline</button>
+                                      </div>
+                                    </td>
+                                  </tr>
+                              `;
+                          });
+
+                      } else {
+                          booking_list = '<p>No bookings found.</p>';
+                      }
+                  } else {
+
+                      booking_list = '<p>Error loading bookings. Please try again.</p>';
+                  }
+
+                  $("#list_bookings").html(booking_list);
 
                   if ($("#pagination-container").data("pagination-initialized") !== true) {
                       $("#pagination-container").pagination({
