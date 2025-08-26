@@ -21,12 +21,11 @@ if (isset($_SESSION['log_user_id'])) {
 
   $followes_count = getModelFollowersCount($unique_id);
 
-  $following_count = getModelFolloweringCount($unique_id);
-
-
-  echo "test";
+    echo "test";
 
   die();
+  
+  $following_count = getModelFolloweringCount($unique_id);
 
 ?>
  <div class="sidebar-overlay" id="sidebarOverlay"></div>
