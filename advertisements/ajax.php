@@ -36,50 +36,51 @@ $sort_type = $_GET['sort_type'];
         
         $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
-        $boosted_user_ids = BoostedModelIdsByUser($userDetails,$con);
+        $boosted_ad_ids = BoostedModelIdsByUser($userDetails,$con);
     }
     else
     {
-            $boosted_user_ids = BoostedModelIds($con);
+            $boosted_ad_ids = BoostedModelIds($con);
     }
 
 
-    $filter_follower_ids = [];
+    // $filter_follower_ids = [];
 
-    if (!empty($boosted_user_ids)) {
+    // if (!empty($boosted_user_ids)) {
 
-        $in_clause = implode(',', array_fill(0, count($boosted_user_ids), '?'));
+    //     $in_clause = implode(',', array_fill(0, count($boosted_user_ids), '?'));
 
-        $types_follower = str_repeat('s', count($boosted_user_ids));
+    //     $types_follower = str_repeat('s', count($boosted_user_ids));
 
-        $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
+    //     $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
 
-        $stmt = $con->prepare($followQuery);
+    //     $stmt = $con->prepare($followQuery);
 
-        if (!$stmt) {
-            die("Prepare failed: " . $con->error);
-        }
-        $stmt->bind_param($types_follower, ...$boosted_user_ids);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    //     if (!$stmt) {
+    //         die("Prepare failed: " . $con->error);
+    //     }
+    //     $stmt->bind_param($types_follower, ...$boosted_user_ids);
+    //     $stmt->execute();
+    //     $result = $stmt->get_result();
 
       
-        while ($row = $result->fetch_assoc()) {
-            $filter_follower_ids[] = $row['id'];
-        }
+    //     while ($row = $result->fetch_assoc()) {
+    //         $filter_follower_ids[] = $row['id'];
+    //     }
 
-    }
+    // }
 
-    if (!empty($filter_follower_ids)) {
+    if (!empty($boosted_ad_ids)) {
 
-        $ordered_ids = implode(',',  $filter_follower_ids); 
-        $order = " ORDER BY FIELD(tb.user_id, $ordered_ids) DESC";
+        $ordered_ids = implode(',',  $boosted_ad_ids); 
+
+        $order = " ORDER BY FIELD(tb.id, $ordered_ids) DESC";
 
         $sort_by="";
         
     } else {
 
-        $order = " ORDER BY tb.user_id DESC"; 
+        $order = " ORDER BY tb.id DESC"; 
 
         $sort_by="";
     }

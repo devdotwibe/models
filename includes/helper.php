@@ -148,7 +148,7 @@ function BoostedModelIds($con) {
 		if ($today <= $expiryDate) {
 		
 			$validBoosts[] = [
-				'user_unique_id' => $row['user_unique_id'],
+				'ad_id' => $row['ad_id'],
 				'total_amount' => (float)$row['total_amount'] 
 			];
 		}
@@ -158,7 +158,7 @@ function BoostedModelIds($con) {
 		return $a['total_amount'] <=> $b['total_amount'];
 	});
 
-	return $sortedUserIds = array_column($validBoosts, 'user_unique_id');
+	return $sortedUserIds = array_column($validBoosts, 'ad_id');
 
 }
 
@@ -246,7 +246,7 @@ function BoostedModelIds($con) {
 
 					if ($allowBoost) {
 						$validBoosts[] = [
-							'user_unique_id' => $row['user_unique_id'],
+							'ad_id' => $row['ad_id'],
 							'total_amount' =>  (float)$row['total_amount'] 
 						];
 					}
@@ -258,7 +258,7 @@ function BoostedModelIds($con) {
 			return $a['total_amount'] <=> $b['total_amount'];
 		});
 
-		return array_column($validBoosts, 'user_unique_id');
+		return array_column($validBoosts, 'ad_id');
 	}
 
 function PrivacyModelIdsByUser($userDetails, $con, $children_preference, $height_range, $weight_range, $education_level) {
