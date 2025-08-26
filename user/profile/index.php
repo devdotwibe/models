@@ -989,7 +989,6 @@ if(!empty($userDetails['profile_pic'])){
 
   <?php include('../../includes/footer.php'); ?>
 
-
   <script>
 
     $(document).ready(function () {
