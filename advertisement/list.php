@@ -6,11 +6,6 @@ if (isset($_SESSION['log_user_id'])) {
 
 	$get_modal_user = DB::query('select as_a_model from model_user where id='.$log_user_id); 
 	$as_a_model = $get_modal_user[0]['as_a_model'];
-
-        echo $as_a_model;
-
-    die();
-    
 }else{ 
 	$as_a_model = '';
 }
@@ -27,7 +22,14 @@ if($as_a_model != 'Yes'){
 <title>Advertisement Management - The Live Models</title>
 <meta name="description" content="Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences.">
 <script src="https://cdn.tailwindcss.com"></script>
-<?php  include('../includes/head.php'); ?>
+<?php  include('../includes/head.php');
+
+
+       echo $as_a_model;
+
+    die();
+    
+    ?>
 
 
 <style>
