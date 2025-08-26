@@ -634,10 +634,7 @@ include('includes/helper.php');
 
                 <?php
 
-
                 $userDetails = [];
-
-                $boosted_user_ids = [];
 
                 $basic_filed_users = GetUsersWithBasicFilled();
 
@@ -649,8 +646,6 @@ include('includes/helper.php');
 
                     $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
 
-                    $boosted_user_ids = BoostedModelIdsByUser($userDetails, $con);
-
                     $premium_check = CheckPremiumAccess($userDetails['id']);
 
                     $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
@@ -661,8 +656,6 @@ include('includes/helper.php');
                     } else {
                         $privacy_user_ids = '';
                     }
-                } else {
-                    $boosted_user_ids = BoostedModelIds($con);
                 }
 
                 $followed_user_ids = [];
@@ -869,17 +862,8 @@ include('includes/helper.php');
 
                     $order = "";
 
-                    if (!empty($boosted_user_ids)) {
-
-                        $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
-
-                        $order = " ORDER BY FIELD(mu.unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
-                    } else {
-
-                        $order = " ORDER BY mu.register_date DESC ";
-                    }
-
                     $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList) " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
+
                 } else if (isset($_GET['sort']) && $_GET['sort'] == 'online') {
 
                     $onlineUserIds = array();
@@ -902,18 +886,6 @@ include('includes/helper.php');
                     if (!empty($idList)) $allIds = $idList . ',' . $not_idList;
                     else $allIds = $not_idList;
                     //echo $allIds.'<br/>';
-
-                    $order = "";
-
-                    if (!empty($boosted_user_ids)) {
-
-                        $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
-
-                        $order = " ORDER BY FIELD(mu.id, $allIds) OR FIELD(mu.unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
-                    } else {
-
-                        $order = " ORDER BY FIELD(mu.id, $allIds) ";
-                    }
 
                     $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($allIds)";
                     $result_count = mysqli_query($con, $sqls_count);
@@ -946,47 +918,15 @@ include('includes/helper.php');
 
                             $idList = implode(',', $onlineUserIds);
 
-                            if (!empty($boosted_user_ids)) {
-
-                                $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
-
-                                $order = " ORDER BY FIELD(mu.unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
-                            } else {
-
-                                $order = " ORDER BY RAND() ";
-                            }
+                     
                         } else {
 
 
-                            if (!empty($boosted_user_ids)) {
-
-                                $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
-
-                                $order = " ORDER BY FIELD(mu.unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
-                            } else {
-
-                                $order = " ORDER BY RAND() ";
-                            }
+                            $order = " ORDER BY mu.id DESC ";
                         }
                     } else {
 
-
-                        if (!empty($boosted_user_ids)) {
-
-                            $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
-
-                            if (!empty($privacy_user_ids)) {
-
-                                $privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'";
-
-                                $order = " ORDER BY FIELD(mu.unique_id, $boostedUniqueIdsQuoted) OR FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
-                            } else {
-
-                                $order = " ORDER BY FIELD(mu.unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
-                            }
-                        } else {
-
-                            if (!empty($privacy_user_ids)) {
+                        if (!empty($privacy_user_ids)) {
 
                                 $privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'";
 
@@ -995,7 +935,7 @@ include('includes/helper.php');
 
                                 $order = " ORDER BY mu.id DESC ";
                             }
-                        }
+                
                     }
 
                     if (empty($onlineUserIds)) {
@@ -1010,17 +950,10 @@ include('includes/helper.php');
                         $row_cnt = mysqli_fetch_assoc($result_count);
 
                         $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+
                     } else {
+
                         $idList = implode(',', $onlineUserIds);
-
-                        if (!empty($boosted_user_ids)) {
-
-                            $boostedUniqueIdsQuoted = "'" . implode("','", $boosted_user_ids) . "'";
-
-                            $order = " ORDER BY FIELD(mu.unique_id, $boostedUniqueIdsQuoted) DESC, RAND() ";
-                        } else {
-                            $order = " ORDER BY RAND() ";
-                        }
 
                         $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList)";
                         $result_count = mysqli_query($con, $sqls_count);
