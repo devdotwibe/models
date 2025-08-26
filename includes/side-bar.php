@@ -2,7 +2,7 @@
 if (isset($_SESSION['log_user_id'])) {
 
 
-echo "test" die();
+echo "test"; die();
 
 	$log_user_id = $_SESSION['log_user_id'];
 	$get_modal_user = DB::query('select * from model_user where id='.$log_user_id);
