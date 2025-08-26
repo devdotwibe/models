@@ -1928,7 +1928,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 </div>
               </div>
 
-              <?php $social_availability = json_decode($extra_details['social_availability']); ?>
+              <?php $social_availability = json_decode($extra_details['social_availability']); 
+			  $availability_time_slot = json_decode($extra_details['availability_time_slot']);  
+			  ?>
 
               <div class="mt-4">
 			    <p class="help-text">Where you prefer to meet for social activities</p>
@@ -1938,30 +1940,93 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <div class="checkbox-option">
                     <input type="checkbox" id="mon" name="social_availability[]" value="Monday" <?php if (!empty($social_availability) && in_array('Monday', $social_availability)) echo 'checked'; ?>>
                     <label for="mon">Monday</label>
+					
+					<div class="mon_time_section" <?php if (!empty($social_availability) && in_array('Monday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
+					
+					<input type="time" class="form-input time_pick" name="Mondayfrom" value="<?php echo $availability_time_slot->Monday[0]; ?>">
+					
+					<input type="time" class="form-input time_pick" name="Mondayto"  value="<?php echo $availability_time_slot->Monday[1]; ?>">
+					
+					</div>
+					
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="tue" name="social_availability[]" value="Tuesday" <?php if (!empty($social_availability) && in_array('Tuesday', $social_availability)) echo 'checked'; ?>>
                     <label for="tue">Tuesday</label>
+					
+					<div class="tue_time_section" <?php if (!empty($social_availability) && in_array('Tuesday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
+					
+					<input type="time" class="form-input time_pick" name="Tuesdayfrom" value="<?php echo $availability_time_slot->Tuesday[0]; ?>">
+					
+					<input type="time" class="form-input time_pick" name="Tuesdayto"  value="<?php echo $availability_time_slot->Tuesday[1]; ?>">
+					
+					</div>
+					
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="wed" name="social_availability[]" value="Wednesday" <?php if (!empty($social_availability) && in_array('Wednesday', $social_availability)) echo 'checked'; ?>>
                     <label for="wed">Wednesday</label>
+					
+					<div class="wed_time_section" <?php if (!empty($social_availability) && in_array('Wednesday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
+					
+					<input type="time" class="form-input time_pick" name="Wednesdayfrom" value="<?php echo $availability_time_slot->Wednesday[0]; ?>">
+					
+					<input type="time" class="form-input time_pick" name="Wednesdayto"  value="<?php echo $availability_time_slot->Wednesday[1]; ?>">
+					
+					</div>
+					
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="thu" name="social_availability[]" value="Thursday" <?php if (!empty($social_availability) && in_array('Thursday', $social_availability)) echo 'checked'; ?>>
                     <label for="thu">Thursday</label>
+					
+					<div class="thu_time_section" <?php if (!empty($social_availability) && in_array('Thursday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
+					
+					<input type="time" class="form-input time_pick" name="Thursdayfrom" value="<?php echo $availability_time_slot->Thursday[0]; ?>">
+					
+					<input type="time" class="form-input time_pick" name="Thursdayto"  value="<?php echo $availability_time_slot->Thursday[1]; ?>">
+					
+					</div>
+					
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="fri" name="social_availability[]" value="Friday" <?php if (!empty($social_availability) && in_array('Friday', $social_availability)) echo 'checked'; ?>>
                     <label for="fri">Friday</label>
+					
+					<div class="fri_time_section" <?php if (!empty($social_availability) && in_array('Friday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
+					
+					<input type="time" class="form-input time_pick" name="Fridayfrom" value="<?php echo $availability_time_slot->Friday[0]; ?>">
+					
+					<input type="time" class="form-input time_pick" name="Fridayto"  value="<?php echo $availability_time_slot->Friday[1]; ?>">
+					
+					</div>
+					
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="sat" name="social_availability[]" value="Saturday" <?php if (!empty($social_availability) && in_array('Saturday', $social_availability)) echo 'checked'; ?>>
                     <label for="sat">Saturday</label>
+					
+					<div class="sat_time_section" <?php if (!empty($social_availability) && in_array('Saturday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
+					
+					<input type="time" class="form-input time_pick" name="Saturdayfrom" value="<?php echo $availability_time_slot->Saturday[0]; ?>">
+					
+					<input type="time" class="form-input time_pick" name="Saturdayto"  value="<?php echo $availability_time_slot->Saturday[1]; ?>">
+					
+					</div>
+					
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="sun" name="social_availability[]" value="Sunday" <?php if (!empty($social_availability) && in_array('Sunday', $social_availability)) echo 'checked'; ?>>
                     <label for="sun">Sunday</label>
+					
+					<div class="sun_time_section" <?php if (!empty($social_availability) && in_array('Sunday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
+					
+					<input type="time" class="form-input time_pick" name="Sundayfrom" value="<?php echo $availability_time_slot->Sunday[0]; ?>">
+					
+					<input type="time" class="form-input time_pick" name="Sundayto"  value="<?php echo $availability_time_slot->Sunday[1]; ?>">
+					
+					</div>
+					
                   </div>
                 </div>
               </div>
@@ -4754,6 +4819,27 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 		opacity: 0.5; /* Optional: make it look disabled */
 	}
   </style>
+  
+  <script>
+  
+  // jQuery code
+	jQuery(document).ready(function() {
+		// Select all checkboxes with name 'social_availability[]'
+		jQuery('input[name="social_availability[]"]').on('change', function() {
+			if (jQuery(this).is(':checked')) {
+				//console.log(jQuery(this).val() + ' is checked');
+				jQuery('.'+jQuery(this).attr('id')+'_time_section').show();
+				
+				
+			} else {
+				//console.log(jQuery(this).val() + ' is unchecked');
+				jQuery('.'+jQuery(this).attr('id')+'_time_section').hide();
+				jQuery('.'+jQuery(this).attr('id')+'_time_section .time_pick').val('');
+			}
+		});
+	});
+  
+  </script>
 
 </body>
 

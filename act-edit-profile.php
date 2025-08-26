@@ -216,6 +216,33 @@ if ($_POST['submit_name']){
 		
 		if(!empty($_POST['social_availability'])){
 			$post_data_extra['social_availability'] = json_encode($_POST['social_availability']);
+			
+			$availability_time_slot = array();
+			foreach($_POST['social_availability'] as $avail){
+				if($avail == 'Monday'){
+					$availability_time_slot['Monday'] = array($_POST['Mondayfrom'],$_POST['Mondayto']);
+				}
+				if($avail == 'Tuesday'){
+					$availability_time_slot['Tuesday'] = array($_POST['Tuesdayfrom'],$_POST['Tuesdayto']);
+				}
+				if($avail == 'Wednesday'){
+					$availability_time_slot['Wednesday'] = array($_POST['Wednesdayfrom'],$_POST['Wednesdayto']);
+				}
+				if($avail == 'Thursday'){
+					$availability_time_slot['Thursday'] = array($_POST['Thursdayfrom'],$_POST['Thursdayto']);
+				}
+				if($avail == 'Friday'){
+					$availability_time_slot['Friday'] = array($_POST['Fridayfrom'],$_POST['Fridayto']);
+				}
+				if($avail == 'Saturday'){
+					$availability_time_slot['Saturday'] = array($_POST['Saturdayfrom'],$_POST['Saturdayto']);
+				}
+				if($avail == 'Sunday'){
+					$availability_time_slot['Sunday'] = array($_POST['Sundayfrom'],$_POST['Sundayto']);
+				}
+			}
+			$post_data_extra['availability_time_slot'] = json_encode($availability_time_slot);
+			
 		}
 		if(!empty($_POST['travel_months'])){
 			$post_data_extra['travel_months'] = json_encode($_POST['travel_months']);
