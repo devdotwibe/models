@@ -3399,11 +3399,16 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
   $(function () {
 
+      loadData(1);
+  });
+
+
+    function loadData(page = 1) {
+
       var itemsPerPage = 10;
 
       var user_id = '<?php echo $userDetails['unique_id'] ?>';
 
-      function loadData(page = 1) {
           $.ajax({
               url: "<?php echo SITEURL.'ajax/booking_list.php'?>",
               type: "GET",
@@ -3502,9 +3507,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           });
       }
 
-      loadData(1);
-  });
-
 
     function AcceptConform(status,accept_id)
     {
@@ -3520,8 +3522,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             dataType: 'json',
             success: function (response) {
                 
-                console.log(response);
-
                 if (response.status === 'success') {
 
                     loadData(1);
