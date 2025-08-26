@@ -3449,7 +3449,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     </td>
 
                                     <td class="py-4">
-                                      <div class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm inline-block"> ${booking.status}</div>
+                                      <div class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm inline-block"> ${booking.status??"Pending"}</div>
                                     </td>
 
 
