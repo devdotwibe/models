@@ -11,7 +11,7 @@ if (isset($_POST['booking_submit'])) {
    $user_unique_id = $_POST['user_unique_id'];
    $model_name = $_POST['model_name'];
    $meeting_date = $_POST['meeting_date'];
-   $booking_type = $_POST['booking_type'];
+   //$booking_type = $_POST['booking_type'];
    $booking_for = $_POST['booking_for'];
    $country = $_POST['country'];
    $instructions = $_POST['instructions'];
@@ -24,7 +24,7 @@ if (isset($_POST['booking_submit'])) {
 
  	//$que = "INSERT INTO `model_booking` (`model_unique_id`, `name`, `phone`, `email`, `age`, `model_name`,`duration`,`meeting_date`,`meeting_time`,`address`,`city`,`state`,`zip_code`,`country`,`instructions`) VALUES ('".$name."', '".$phone."', '".$email."', '".$age."', '".$model_name."', '".$duration."', '".$meeting_date."','".$meeting_time."','".$address."','".$city."','".$state."','".$zip_code."','".$country."','".$instructions."')";
 
-	$arr = array('model_unique_id','user_unique_id','name','model_name','meeting_date','country','instructions','booking_type','booking_for','service_name','main_service'); 
+	$arr = array('model_unique_id','user_unique_id','name','model_name','meeting_date','country','instructions','booking_for','service_name','main_service');  //,'booking_type'
 	$post_data = array_from_post($arr);
 	
 	$post_data['phone'] = '';

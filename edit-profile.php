@@ -1735,7 +1735,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <div id="chat-services" class="collapsible-section">
 
           <div class="collapsible-header" onclick="toggleCollapsible(this)">
-            <h2 class="text-xl font-bold">💬 Chat & Communication Services</h2>
+            <h2 class="text-xl font-bold">💬 Live Streaming</h2>
             <svg class="w-6 h-6 collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
@@ -1806,15 +1806,15 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 <?php /*mt-4 */ ?>">
                 <div>
-                  <label class="form-label">TLM Tokens per Minute (Private Chat)</label>
+                  <label class="form-label">TLM Tokens per Minute (Private Stream)</label>
                   <input type="number" class="form-input" name="private_chat_token" value="<?php if (!empty($extra_details)) echo $extra_details['private_chat_token']; ?>" placeholder="e.g., 50" min="1">
-                  <p class="help-text">Set your rate for private video chats</p>
+                  <p class="help-text">Set your rate for private 1-on-1 video chats</p>
                 </div>
-                <div>
+                <?php /*?><div>
                   <label class="form-label">TLM Tokens per Minute (Group Chat)</label>
                   <input type="number" class="form-input" name="group_chat_tocken" value="<?php if (!empty($extra_details)) echo $extra_details['group_chat_tocken']; ?>" placeholder="e.g., 20" min="1">
                   <p class="help-text">Set your rate for group video sessions</p>
-                </div>
+                </div> <?php */ ?>
               </div>
             </div>
 
@@ -1863,7 +1863,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <!-- Meet Services Category -->
         <div id="meet-services" class="collapsible-section">
           <div class="collapsible-header" onclick="toggleCollapsible(this)">
-            <h2 class="text-xl font-bold">👥 Meet & Social Services</h2>
+            <h2 class="text-xl font-bold">👥 Social Meetups</h2>
             <svg class="w-6 h-6 collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
@@ -1871,8 +1871,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           <div class="collapsible-content">
             <!-- Social Companionship -->
             <div class="mb-6">
-              <div class="question-text">Would you like to offer social companionship services?</div>
-              <p class="help-text">Provide friendly companionship for social events, dinners, or casual meetups</p>
+              <div class="question-text">Would you like to offer social meetup services?</div>
+              <p class="help-text">Provide friendly hangouts and casual meetups</p>
               <div class="radio-group mt-3">
                 <div class="radio-option">
                   <input type="radio" id="companion-yes" name="work_escort" value="Yes" <?php if (!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes') {
@@ -1887,6 +1887,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <label for="companion-no">Not interested</label>
                 </div>
               </div>
+			  
+			  
+			  
             </div>
 
             <div id="companion-options" class="conditional-section <?php if (!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes') {
@@ -1901,16 +1904,23 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 <div>
                   <label class="form-label">Extended Social Rate (TLM tokens per hour)</label>
                   <input type="number" class="form-input" name="extended_rate" value="<?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?>" placeholder="e.g., 1500" min="1">
-                  <p class="help-text">Rate for longer social engagements</p>
+                  <p class="help-text">Rate for longer social engagements after the first hour</p>
                 </div>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div>
-                  <label class="form-label">Overnight Social Rate (TLM tokens)</label>
+                  <label class="form-label">Extended Evening Rate (TLM tokens)</label>
                   <input type="number" class="form-input" name="in_overnight" value="<?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?>" placeholder="e.g., 8000" min="1">
-                  <p class="help-text">Rate for overnight social companionship</p>
+                  <p class="help-text">Rate for evening social or casual meetups (8 hours)</p>
                 </div>
+				
+				<div>
+                  <label class="form-label">Full-day Social Rate (TLM tokens)</label>
+                  <input type="number" class="form-input" name="fullday_social" value="<?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?>" placeholder="e.g., 8000" min="1">
+                  <p class="help-text">Rate for full-day sessions (24 hours) (8 hours)</p>
+                </div>
+				
                 <div>
                   <label class="form-label">Preferred Meeting Location</label>
                   <input type="text" class="form-input" name="d_a_address" value="<?php if (!empty($extra_details)) echo $extra_details['d_a_address']; ?>" placeholder="e.g., Coffee shops, restaurants, events">
@@ -1921,6 +1931,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <?php $social_availability = json_decode($extra_details['social_availability']); ?>
 
               <div class="mt-4">
+			    <p class="help-text">Where you prefer to meet for social activities</p>
                 <label class="form-label">Available Days</label>
                 <p class="help-text">Select the days you're available for social meetups</p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3 edit-allldays">
@@ -1958,8 +1969,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
             <!-- Travel Companionship -->
             <div class="mt-8 mb-6">
-              <div class="question-text">Would you like to offer travel companionship?</div>
-              <p class="help-text">Accompany clients on trips, vacations, or business travel as a social companion</p>
+			
+			<h2 class="text-xl font-bold">👥 Travel Experiences</h2>
+			
+              <div class="question-text">Would you like to offer travel experiences?</div>
+              <p class="help-text">Accompany others on trips, vacations, or business travel </p>
               <div class="radio-group mt-3">
                 <div class="radio-option">
                   <input type="radio" id="travel-yes" name="International_tours" value="Yes" <?php if (!empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes') {
@@ -1982,7 +1996,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <?php $travel_months = json_decode($extra_details['travel_months']); ?>
               <div>
                 <label class="form-label">Available Months for Travel</label>
-                <p class="help-text">Select months when you're available for travel companionship</p>
+                <p class="help-text">Select months when you're available for travel experiences</p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3">
                   <div class="checkbox-option">
                     <input type="checkbox" id="jan" name="travel_months[]" value="January" <?php if (!empty($travel_months) && in_array('January', $travel_months)) echo 'checked'; ?>>
@@ -2039,7 +2053,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 <div>
                   <label class="form-label">Daily Rate (TLM tokens)</label>
                   <input type="number" class="form-input" name="daily_rate" value="<?php if (!empty($extra_details)) echo $extra_details['daily_rate']; ?>" placeholder="e.g., 5000" min="1">
-                  <p class="help-text">Rate per day for travel companionship</p>
+                  <p class="help-text">Rate per day for travel experiences</p>
                 </div>
                 <div>
                   <label class="form-label">Weekly Rate (TLM tokens)</label>

@@ -7,6 +7,16 @@ if (isset($_SESSION['log_user_unique_id'])) {
   $getUserData = get_data('model_social_link', array('unique_model_id' => $_SESSION['log_user_unique_id']), true);
 
  $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+ $user_have_preminum = false;
+ if ($userDetails) {
+	    $result = CheckPremiumAccess($userDetails['id']);
+
+        if ($result && $result['active']) {
+
+            $user_have_preminum = true;
+        }
+		
+}
 
   $modelDetails = get_data('model_user',array('unique_id'=>$_GET['m_unique_id']),true);
 
@@ -108,6 +118,395 @@ if (mysqli_num_rows($res_ap) > 0) {
 
     }
 </style>
+<style>
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .popup {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 24px;
+            width: 100%;
+            max-width: 400px;
+            max-height: 90vh;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: popupEnter 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            overflow-y: auto;
+        }
+
+        @keyframes popupEnter {
+            0% { 
+                opacity: 0; 
+                transform: scale(0.85) translateY(30px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) translateY(0); 
+            }
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .popup-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #8b5cf6, #a855f7, #ec4899);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .service-info {
+            flex: 1;
+        }
+
+        .service-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .service-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.4;
+        }
+
+        .service-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .service-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-free {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-premium {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .status-exclusive {
+            background: rgba(6, 182, 212, 0.2);
+            color: #06b6d4;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .action-button {
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+            background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+        }
+
+        .action-button:hover::before {
+            left: 100%;
+        }
+
+        .badge {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: help;
+        }
+
+        .badge::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .badge::after {
+            content: '';
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .badge:hover::before,
+        .badge:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .badge-verified {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            border: 1px solid #34d399;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .badge-premium {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            border-radius: 50%;
+            border: 1px solid #fcd34d;
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+        }
+
+        .badge-diamond {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            width: 22px;
+            height: 22px;
+            clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+            border: none;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+        }
+
+        .badge-business {
+            background: linear-gradient(135deg, #1e40af, #1d4ed8);
+            border-radius: 6px;
+            border: 1px solid #60a5fa;
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .disclaimer {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .disclaimer-text {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.4;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .popup {
+                margin: 8px;
+                padding: 20px;
+                max-width: calc(100vw - 16px);
+                border-radius: 20px;
+            }
+            
+            .popup-title {
+                font-size: 20px;
+            }
+            
+            .service-header {
+                gap: 12px;
+            }
+            
+            .service-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+            
+            .service-name {
+                font-size: 16px;
+            }
+            
+            .service-description {
+                font-size: 13px;
+            }
+        }
+
+        /* Tablet and larger */
+        @media (min-width: 768px) {
+            .popup {
+                max-width: 500px;
+                padding: 32px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .service-card {
+                padding: 24px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .popup {
+                max-width: 600px;
+            }
+        }
+    </style>
 <script>
     function like(postid, userid) {
 
@@ -1266,7 +1665,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 <div class="modal-overlay" id="servicesModalOverlay">
     <div class="modal">
         <div class="modal-header">
-            <h2 class="modal-title">Premium Services</h2>
+            <h2 class="modal-title">Creator Services</h2>
             <button class="close-modal" id="closeServicesModal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -1275,7 +1674,153 @@ if (mysqli_num_rows($res_ap) > 0) {
             </button>
         </div>
 		
-		<?php 
+		<div class="modal-body">
+		<div class="services-grid">
+		<?php if(!empty($extra_details) && !empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes'){ ?>
+            <?php if($extra_details['private_chat_token']){ ?>
+				<!-- Chat Service -->
+                <div class="service-card" <?php /*onclick="handleService('chat')" */ ?>>
+                    <div class="service-header">
+                        <div class="service-icon">💬</div>
+                        <div class="service-info">
+                            <div class="service-name">Chat</div>
+                            <div class="service-description">Direct messaging and conversation</div>
+                        </div>
+                    </div>
+                    <div class="service-badges">
+                        <div class="badge badge-verified" data-tooltip="Verified Users">✓</div>
+                    </div>
+                    <div class="service-status">
+                        <div class="status-badge status-free">Free</div>
+                    </div>
+					<?php if($userDetails['as_a_model'] !='Yes') { ?>
+
+					<a class="action-button btn btn-primary" href='<?=SITEURL?>booking.php?type=chat&service=Chat&token=<?php echo $extra_details['private_chat_token']; ?>/min&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Start Chatting</a>
+
+                    <?php }?>
+                </div>
+
+                <!-- Streaming Service -->
+                <div class="service-card" <?php /*onclick="handleService('streaming')" */ ?>>
+                    <div class="service-header">
+                        <div class="service-icon">📹</div>
+                        <div class="service-info">
+                            <div class="service-name">Live Stream</div>
+                            <div class="service-description">Watch live content and interact</div>
+                        </div>
+                    </div>
+                    <div class="service-badges">
+                        <div class="badge badge-verified" data-tooltip="Verified Users">✓</div>
+                    </div>
+                    <div class="service-status">
+                        <div class="status-badge status-free">Free</div>
+                    </div>
+					
+					
+					<?php if($userDetails['as_a_model'] !='Yes') { ?>
+
+					<a class="action-button btn btn-primary" href='<?=SITEURL?>booking.php?type=chat&service=Live Stream&token=<?php echo $extra_details['private_chat_token']; ?>/min&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Watch Live</a>
+
+                    <?php }?>
+					
+					
+                </div>
+				
+			<?php } ?>
+				
+		<?php } ?>
+		
+		<?php if(!empty($extra_details) && !empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ ?>
+			<?php if($extra_details['in_per_hour']){ ?>
+                <!-- Meetup Service -->
+                <div class="service-card" onclick="<?php if (!$user_have_preminum) { ?>handleService('meetup')<?php } ?>">
+                    <div class="service-header">
+                        <div class="service-icon">☕</div>
+                        <div class="service-info">
+                            <div class="service-name">Meetup</div>
+                            <div class="service-description">In-person meetings and hangouts</div>
+                        </div>
+                    </div>
+                    <div class="service-badges">
+                        <div class="badge badge-premium" data-tooltip="Premium Users">⭐</div>
+                        <div class="badge badge-diamond" data-tooltip="Diamond Elite">💎</div>
+                    </div>
+                    <div class="service-status">
+                        <div class="status-badge status-premium">Premium</div>
+                    </div>
+										
+					<?php if($userDetails['as_a_model'] !='Yes') { ?>
+
+                    <a class="action-button btn btn-primary" href='<?=SITEURL?>booking.php?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>/hr&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Request Meetup</a>
+
+                    <?php }?>
+					
+                </div>
+				
+			<?php } ?>
+				
+		<?php } ?>
+		
+		<?php if(!empty($extra_details) && !empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ ?>
+			<?php if($extra_details['daily_rate']){ ?>
+
+                <!-- Travel Service -->
+                <div class="service-card" onclick="<?php if (!$user_have_preminum) { ?>handleService('travel')<?php } ?>">
+                    <div class="service-header">
+                        <div class="service-icon">✈️</div>
+                        <div class="service-info">
+                            <div class="service-name">Travel</div>
+                            <div class="service-description">Travel together and explore</div>
+                        </div>
+                    </div>
+                    <div class="service-badges">
+                        <div class="badge badge-diamond" data-tooltip="Diamond Elite Only">💎</div>
+                    </div>
+                    <div class="service-status">
+                        <div class="status-badge status-exclusive">Exclusive</div>
+                    </div>
+					
+					<?php if($userDetails['as_a_model'] !='Yes') { ?>
+
+                    <a class="action-button btn btn-primary" href='<?=SITEURL?>booking.php?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>/hr&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Plan Adventure</a>
+
+                    <?php }?>
+					
+                </div>
+				
+			<?php } ?>
+			
+		<?php } ?>
+
+                <!-- Collaboration Service -->
+                <div class="service-card" onclick="handleService('collaboration')">
+                    <div class="service-header">
+                        <div class="service-icon">🤝</div>
+                        <div class="service-info">
+                            <div class="service-name">Collaborate</div>
+                            <div class="service-description">Professional work partnerships</div>
+                        </div>
+                    </div>
+                    <div class="service-badges">
+                        <div class="badge badge-business" data-tooltip="Business Users">💼</div>
+                        <div class="badge badge-diamond" data-tooltip="Diamond Elite">💎</div>
+                    </div>
+                    <div class="service-status">
+                        <div class="status-badge status-exclusive">By Quote</div>
+                    </div>
+                    <button class="action-button">Get Quote</button>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <div class="disclaimer-text">
+                    Professional services only • Subject to Terms of Service • No adult content permitted
+                </div>
+            </div>
+		
+		</div>
+		
+		<?php /*
 		//$serv_chats = DB::queryFirstRow('select * from model_service_chat where model_unique_id="'.$_GET['m_unique_id'].'"');
 		//$serv_meets = DB::queryFirstRow('select * from model_service_meet where model_unique_id="'.$_GET['m_unique_id'].'"');
 		$extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_GET['m_unique_id']);
@@ -1318,23 +1863,6 @@ if (mysqli_num_rows($res_ap) > 0) {
             </div>
 		<?php } ?>
             
-            <?php /*?><div class="about-section">
-                <h3 class="about-section-title">Watch/Stream Services</h3>
-                <div class="attributes-grid">
-                    <div class="attribute">
-                        <div class="attribute-label">Live Video Stream</div>
-                        <div class="attribute-value">$100</div>
-                        <p>Private live stream just for you.</p>
-                        <button class="btn btn-primary">Watch Now</button>
-                    </div>
-                    <div class="attribute">
-                        <div class="attribute-label">Group Interactive Stream</div>
-                        <div class="attribute-value">$30</div>
-                        <p>Join my exclusive group streams with interactive features.</p>
-                        <button class="btn btn-primary">Join Now</button>
-                    </div>
-                </div>
-            </div> <?php */  ?>
             <?php if(!empty($extra_details) && !empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ ?>
             <div class="about-section">
                 <h3 class="about-section-title">Dating</h3>
@@ -1384,7 +1912,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                 </div>
             </div>
 			<?php } ?>
-        </div>
+        </div> <?php */ ?>
     </div>
 </div>
 
@@ -3076,7 +3604,124 @@ jQuery('.send_gift_btn').click(function(){
     });
 });
     </script>
+<script>
+        function closePopup() {
+            document.querySelector('.popup-overlay').style.animation = 'fadeOut 0.3s ease forwards';
+            setTimeout(() => {
+                // In real app: close modal or redirect
+                alert('Popup closed');
+            }, 300);
+        }
 
+        function handleService(serviceType) {
+            const serviceMessages = {
+                'chat': 'Opening chat interface...',
+                'streaming': 'Connecting to live stream...',
+                'meetup': 'This service requires premium membership. Upgrade to access in-person meetups.',
+                'travel': 'This exclusive service is available for Diamond Elite members only.',
+                'collaboration': 'Professional collaboration inquiries will be reviewed. Expect a response within 24 hours.'
+            };
+
+            const freeServices = ['chat', 'streaming'];
+            
+            if (freeServices.includes(serviceType)) {
+                alert(serviceMessages[serviceType]);
+                // In real app: redirect to service
+            } else {
+                showUpgradeModal(serviceType, serviceMessages[serviceType]);
+            }
+        }
+
+        function showUpgradeModal(serviceType, message) {
+            const modal = document.createElement('div');
+            modal.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.9);
+                    backdrop-filter: blur(10px);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1001;
+                    animation: fadeIn 0.3s ease;
+                ">
+                    <div style="
+                        background: rgba(26, 26, 46, 0.95);
+                        backdrop-filter: blur(20px);
+                        border-radius: 20px;
+                        padding: 32px;
+                        max-width: 400px;
+                        width: 90%;
+                        text-align: center;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        animation: slideUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+                    ">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🔒</div>
+                        <h3 style="color: white; font-size: 24px; font-weight: 700; margin-bottom: 16px;">
+                            Upgrade Required
+                        </h3>
+                        <p style="color: rgba(255, 255, 255, 0.8); font-size: 16px; line-height: 1.5; margin-bottom: 24px;">
+                            ${message}
+                        </p>
+                        <div style="display: flex; gap: 12px; flex-direction: column;">
+                            <button onclick="this.closest('div').remove()" style="
+                                width: 100%;
+                                padding: 14px;
+                                background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+                                border: none;
+                                border-radius: 12px;
+                                color: white;
+                                font-size: 16px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                            ">
+                                Upgrade Now
+                            </button>
+                            <button onclick="this.closest('div').remove()" style="
+                                width: 100%;
+                                padding: 12px;
+                                background: transparent;
+                                border: 1px solid rgba(255, 255, 255, 0.2);
+                                border-radius: 12px;
+                                color: rgba(255, 255, 255, 0.7);
+                                font-size: 14px;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                            ">
+                                Maybe Later
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideUp {
+                    from { opacity: 0; transform: translateY(30px) scale(0.9); }
+                    to { opacity: 1; transform: translateY(0) scale(1); }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(modal);
+        }
+
+        // Close popup when clicking outside
+        document.querySelector('.popup-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+    </script>
   
 </body>
 

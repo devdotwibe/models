@@ -203,7 +203,7 @@ $model_ID = $model_data['id'];
 						} ?>
                         
                         <div class="grid md:grid-cols-3 gap-6">
-                            <div>
+                            <?php /*?><div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Booking Type</label>
                                 <select name="booking_type" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">Select...</option>
@@ -215,13 +215,8 @@ $model_ID = $model_data['id'];
 									<option value="Overnight Social" class="bg-gray-900" <?php if($service == 'Overnight Social'){ echo 'selected'; } ?> >Overnight Social</option>
 									
 									
-									<?php /*?><option value="Premium Experience" class="bg-gray-900">👑 Premium Experience</option>
-                                    <option value="International Tour" class="bg-gray-900">✈️ International Tour</option>
-                                    <option value="Exclusive Meeting" class="bg-gray-900">💎 Exclusive Meeting</option>
-                                    <option value="VIP Package" class="bg-gray-900">🌟 VIP Package</option>
-                                    <option value="Luxury Companion" class="bg-gray-900">🥂 Luxury Companion</option> <?php */ ?>
                                 </select>
-                            </div>
+                            </div> <?php */ ?>
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Booking For</label>
                                 <select name="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
