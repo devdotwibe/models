@@ -212,7 +212,7 @@ function BoostedModelIds($con) {
 			$user_gender = 'couples';
 		}
 
-		$query = "SELECT user_unique_id, created_at, duration, total_amount, target_audience 
+		$query = "SELECT user_unique_id, created_at, duration, total_amount, target_audience,ad_id 
 				FROM boost_avertisement";
 
 		$result = mysqli_query($con, $query);
