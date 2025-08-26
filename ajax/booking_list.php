@@ -32,11 +32,11 @@ include('../includes/helper.php');
 
                 foreach($model_bookings as $key => $booking) {
 
-                    $user_info = DB::queryFirstRow("SELECT username, profile_pic FROM model_user WHERE user_unique_id = %s", $booking['user_unique_id']);
+                    // $user_info = DB::queryFirstRow("SELECT username, profile_pic FROM model_user WHERE user_unique_id = %s", $booking['user_unique_id']);
 
-                    $model_bookings[$key]['username'] = $user_info ? $user_info['username'] : 'Unknown';
+                    // $model_bookings[$key]['username'] = $user_info ? $user_info['username'] : 'Unknown';
 
-                    $model_bookings[$key]['profile_pic'] = $user_info ? $user_info['profile_pic'] : '';
+                    // $model_bookings[$key]['profile_pic'] = $user_info ? $user_info['profile_pic'] : '';
 
                   if (!empty($booking['created_at'])) {
 
@@ -45,7 +45,7 @@ include('../includes/helper.php');
                         $model_bookings[$key]['created_date'] = date('M j, Y', $timestamp);
 
                         $model_bookings[$key]['created_time'] = date('g:i A', $timestamp);
-                        
+
                     } else {
 
                         $model_bookings[$key]['created_date'] = '';
