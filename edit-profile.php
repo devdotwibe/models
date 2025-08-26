@@ -3403,7 +3403,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
       var itemsPerPage = 10;
 
-      var user_id = '<?php echo $userDetails['id'] ?>';
+      var user_id = '<?php echo $userDetails['unique_id'] ?>';
 
       function loadData(page = 1) {
           $.ajax({
@@ -3412,7 +3412,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               data: { page: page,
 
                 user_id:user_id,
-                limit: itemsPerPage
+                limit: itemsPerPage,
+                action: 'fetch_booking_list',
                },
               dataType: "json",
               success: function (response) {
