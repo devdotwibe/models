@@ -38,6 +38,23 @@ include('../includes/helper.php');
 
                     // $model_bookings[$key]['profile_pic'] = $user_info ? $user_info['profile_pic'] : '';
 
+                  $bookeduser = DB::queryFirstRow("SELECT name FROM model_user WHERE unique_id =  %s ", $booking['user_unique_id']);
+
+                    $defaultImage =SITEURL."/assets/images/girl.png";
+
+                    if($bookeduser['gender']=='Male'){
+
+                        $defaultImage =SITEURL."/assets/images/profile.jpg";
+                    }
+
+                    if(!empty($bookeduser['profile_pic']))
+                    {
+                        if (checkImageExists($bookeduser['profile_pic'])) {
+                    
+                            $defaultImage = SITEURL . $bookeduser['profile_pic'];
+                        }
+                    }
+
                   if (!empty($booking['meeting_date'])) {
 
                         $timestamp = strtotime($booking['meeting_date']);
@@ -49,6 +66,9 @@ include('../includes/helper.php');
                         $model_bookings[$key]['meeting_date'] = '';
                 
                     }
+
+                    $model_bookings[$key]['user_profile_pic'] = $defaultImage;
+                
                 }
 
                 $totalPages = ceil($totalRows / $perPage);

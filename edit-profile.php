@@ -3439,18 +3439,22 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     </td>
 
                                     <td class="py-4">
-                                      <div class="font-medium">Social Meetup</div>
-                                      <div class="text-sm text-white/60">Dinner</div>
+                                      <div class="font-medium">${booking.service_name} </div>
+                                      <div class="text-sm text-white/60">${booking.main_service}</div>
                                     </td>
+
                                     <td class="py-4">
                                       <div class="flex items-center">
-                                        <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Client" class="w-8 h-8 rounded-full mr-2">
+                                        <img src="${booking.user_profile_pic}" alt="Client" class="w-8 h-8 rounded-full mr-2">
                                         <span>Michael T.</span>
                                       </div>
                                     </td>
+
                                     <td class="py-4">
-                                      <div class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm inline-block">Pending</div>
+                                      <div class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm inline-block"> ${booking.status}</div>
                                     </td>
+
+
                                     <td class="py-4">
                                       <div class="flex items-center font-medium">
                                         <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
@@ -3458,12 +3462,19 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                       </div>
                                       <div class="text-sm text-white/60">Estimated</div>
                                     </td>
+
                                     <td class="py-4">
+
                                       <div class="flex space-x-2">
-                                        <button class="px-3 py-1 bg-green-500/20 hover:bg-green-500/30 text-green-400 rounded-lg text-sm">Accept</button>
-                                        <button class="px-3 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg text-sm">Decline</button>
+
+                                        <button type="button" onclick="AcceptConform('Accept','${booking.id}')" class="px-3 py-1 bg-green-500/20 hover:bg-green-500/30 text-green-400 rounded-lg text-sm">Accept</button>
+
+                                        <button type="button" onclick="AcceptConform('Decline','${booking.id}')" class="px-3 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg text-sm">Decline</button>
+
                                       </div>
+
                                     </td>
+
                                   </tr>
                               `;
                           });
@@ -3495,6 +3506,36 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
       loadData(1);
   });
+
+
+    function AcceptConform(status,accept_id)
+    {
+  
+          $.ajax({
+            url: 'act_model_booking.php',
+            type: 'POST',
+            data: {
+              action:'accept_request',
+              accept_id:accept_id,
+              status:status,
+            },
+            dataType: 'json',
+            success: function (response) {
+                
+                console.log(response);
+
+                if (response.status === 'success') {
+
+                    loadData(1);
+                }
+            },
+
+            error: function (xhr, status, error) {
+          
+            }
+          });
+
+    }
 
 
     function ConformCloseModal()
