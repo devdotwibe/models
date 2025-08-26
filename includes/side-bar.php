@@ -14,6 +14,8 @@ if (isset($_SESSION['log_user_id'])) {
 	$get_modal_user = array(); 
 	$as_a_model = '';
 	$unique_id = '';
+
+  $modalname="";
 }
 
 ?>
