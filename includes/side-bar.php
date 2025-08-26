@@ -41,14 +41,17 @@ if (isset($_SESSION['log_user_id'])) {
 
     <div class="p-6 flex flex-col items-center" onclick="window.location.href='<?= SITEURL ?>/user/profile/index.php'">
 
-  <?php echo "test";
+
+
+      <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $get_modal_user[0]['profile_pic']; ?>" alt="Profile" class="w-20 h-20 rounded-full">
+      <h3 class="text-xl font-bold mt-3"><?php echo $modalname; ?></h3>
+
+        <?php echo "test";
 
   die();
 
 ?>
 
-      <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $get_modal_user[0]['profile_pic']; ?>" alt="Profile" class="w-20 h-20 rounded-full">
-      <h3 class="text-xl font-bold mt-3"><?php echo $modalname; ?></h3>
       <div class="flex items-center mt-2">
         <div class="flex items-center mr-4">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
