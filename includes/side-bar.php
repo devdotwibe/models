@@ -48,6 +48,14 @@ if (isset($_SESSION['log_user_id'])) {
           </svg>
           <span>0</span>
         </div>
+
+
+       <?php
+    
+     echo "test";
+
+  die();
+  ?>
         <div class="flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
             <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
@@ -58,12 +66,6 @@ if (isset($_SESSION['log_user_id'])) {
     </div>
 
 
-       <?php
-    
-     echo "test";
-
-  die();
-  ?>
     <div class="menu-stats">
       <div class="menu-stat">
         <div class="menu-stat-value"> <?php echo $followes_count ?></div>
