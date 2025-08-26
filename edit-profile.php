@@ -3432,7 +3432,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                                     <td class="py-4">
 
-                                      <div class="font-medium">Jun 7, 2025</div>
+                                      <div class="font-medium">${booking.meeting_date} </div>
 
                                       <div class="text-sm text-white/60"> ${booking.meeting_date} </div>
 
