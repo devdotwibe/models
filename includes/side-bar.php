@@ -16,11 +16,11 @@ if (isset($_SESSION['log_user_id'])) {
 	$unique_id = '';
 }
 
-  $notify_count = NotificationCount($log_user_id);
+  $notify_count = 0;
 
-  $followes_count = getModelFollowersCount($unique_id);
+  $$followes_count = 0;
 
-  $following_count = getModelFolloweringCount($unique_id);
+  $following_count = 0;
 
 ?>
  <div class="sidebar-overlay" id="sidebarOverlay"></div>
