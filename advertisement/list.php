@@ -22,6 +22,9 @@ if (isset($_SESSION['log_user_id'])) {
 <title>Advertisement Management - The Live Models</title>
 <meta name="description" content="Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences.">
 <script src="https://cdn.tailwindcss.com"></script>
+
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
+
 <?php  include('../includes/head.php'); ?>
 
 
