@@ -30,9 +30,6 @@ if (isset($_SESSION['log_user_id'])) {
 
   $following_count = 0;
 
-  echo "test";
-
-  die();
 ?>
  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
@@ -114,7 +111,12 @@ if (isset($_SESSION['log_user_id'])) {
       Wallet
     </div>
 	
-	<?php if (isset($_SESSION['log_user_id']) && $as_a_model == 'No') { ?>
+	<?php if (isset($_SESSION['log_user_id']) && $as_a_model == 'No') { 
+    
+    
+  echo "test";
+
+  die();?>
 	
 	<div class="menu-item" onclick="navigateTo('my-purchase.php')">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
