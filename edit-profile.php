@@ -2844,6 +2844,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       </div>
 
       <div class="form-section">
+
         <h3 class="text-xl font-bold gradient-text mb-6">Upcoming Bookings</h3>
 
         <div class="overflow-x-auto">
@@ -2858,74 +2859,22 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 <th class="pb-3 font-medium text-white/70">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              <tr class="border-b border-white/5">
-                <td class="py-4">
-                  <div class="font-medium">Jun 5, 2025</div>
-                  <div class="text-sm text-white/60">8:00 PM</div>
-                </td>
-                <td class="py-4">
-                  <div class="font-medium">Private Chat</div>
-                  <div class="text-sm text-white/60">30 min</div>
-                </td>
-                <td class="py-4">
-                  <div class="flex items-center">
-                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Client" class="w-8 h-8 rounded-full mr-2">
-                    <span>Alex M.</span>
-                  </div>
-                </td>
-                <td class="py-4">
-                  <div class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm inline-block">Confirmed</div>
-                </td>
-                <td class="py-4">
-                  <div class="flex items-center font-medium">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                    375
-                  </div>
-                  <div class="text-sm text-white/60">Estimated</div>
-                </td>
-                <td class="py-4">
-                  <button class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-lg text-sm">Details</button>
-                </td>
-              </tr>
-              <tr class="border-b border-white/5">
-                <td class="py-4">
-                  <div class="font-medium">Jun 7, 2025</div>
-                  <div class="text-sm text-white/60">7:30 PM</div>
-                </td>
-                <td class="py-4">
-                  <div class="font-medium">Social Meetup</div>
-                  <div class="text-sm text-white/60">Dinner</div>
-                </td>
-                <td class="py-4">
-                  <div class="flex items-center">
-                    <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Client" class="w-8 h-8 rounded-full mr-2">
-                    <span>Michael T.</span>
-                  </div>
-                </td>
-                <td class="py-4">
-                  <div class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm inline-block">Pending</div>
-                </td>
-                <td class="py-4">
-                  <div class="flex items-center font-medium">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                    3000
-                  </div>
-                  <div class="text-sm text-white/60">Estimated</div>
-                </td>
-                <td class="py-4">
-                  <div class="flex space-x-2">
-                    <button class="px-3 py-1 bg-green-500/20 hover:bg-green-500/30 text-green-400 rounded-lg text-sm">Accept</button>
-                    <button class="px-3 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg text-sm">Decline</button>
-                  </div>
-                </td>
-              </tr>
+
+            <tbody id="list_bookings">
+
+                <h3>Loading...</h3>
+
             </tbody>
+
+              <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
+                <div id="pagination-container"></div>
+              </div>
+
           </table>
         </div>
       </div>
     </div>
-    <!-- Premium & Privacy Tab -->
+
     <div id="premium-content" class="tab-content">
       <div class="text-center mb-8">
         <h2 class="text-2xl font-bold gradient-text mb-4">Premium & Privacy Settings</h2>
@@ -3446,6 +3395,48 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   </script>
 
   <script>
+
+
+  <?php $total_booking = 20; ?>
+
+  $(function () {
+
+      var itemsPerPage = 10;
+
+      var user_id = '<?php echo $userDetails['id'] ?>';
+
+      function loadData(page = 1) {
+          $.ajax({
+              url: "<?php echo SITEURL.'ajax/booking_list.php'?>",
+              type: "GET",
+              data: { page: page,
+
+                user_id:user_id,
+                limit: itemsPerPage
+               },
+              dataType: "json",
+              success: function (response) {
+            
+                  $("#list_bookings").html(response.html);
+
+                  if ($("#pagination-container").data("pagination-initialized") !== true) {
+                      $("#pagination-container").pagination({
+                          items: '<?php echo $total_booking ?>',
+                          itemsOnPage: itemsPerPage,
+                          cssStyle: "light-theme",
+                          onPageClick: function (pageNumber) {
+                              loadData(pageNumber);
+                          }
+                      });
+                      $("#pagination-container").data("pagination-initialized", true);
+                  }
+              }
+          });
+      }
+
+      loadData(1);
+  });
+
 
     function ConformCloseModal()
     {
