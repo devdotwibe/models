@@ -23,9 +23,6 @@ if (isset($_SESSION['log_user_id'])) {
   $following_count = 0;
   
 ?>
- <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-  <div class="sidebar-menu" id="sidebarMenu">
 
   <?php echo "test" ; die(); ?>
 
