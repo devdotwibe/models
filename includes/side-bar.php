@@ -23,6 +23,7 @@ if (isset($_SESSION['log_user_id'])) {
   $following_count = 0;
   
 ?>
+ <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 
     <div class="p-6 flex flex-col items-center" onclick="window.location.href='<?= SITEURL ?>/user/profile/index.php'">
