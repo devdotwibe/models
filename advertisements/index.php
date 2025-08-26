@@ -134,12 +134,16 @@ foreach ($f_country_list as $val) {
                 <div class="search-form">
                     <div class="form-grid">
 
-            <?php 
 			
-			// $total_adv = DB::queryFirstrow("SELECT COUNT(*) AS total FROM banners where user_id=".$_SESSION['log_user_id']);
+              <?php if (isset($_SESSION["log_user_id"])) { 
 
-            $total_adv = [];
-			
+			    $total_adv = DB::queryFirstrow("SELECT COUNT(*) AS total FROM banners where user_id=".$_SESSION['log_user_id']);
+
+              }
+              else
+              { 
+                 $total_adv = [];
+              }
 			?>
 					
 					<form method="get" id="search-form" class="mb-2" onSubmit="submit_search(1);return false;">
