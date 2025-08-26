@@ -2,14 +2,16 @@
 if (isset($_SESSION['log_user_id'])) {
 
 	$log_user_id = $_SESSION['log_user_id'];
-	$get_modal_user = DB::query('select * from model_user where id='.$log_user_id);
-	// if(!empty($get_modal_user[0]['username'])){
-	// 	$modalname = ucfirst($get_modal_user[0]['username']);
-	// }else{
-	// 	$modalname = ucfirst($get_modal_user[0]['name']);
-	// }
-	// $as_a_model = $get_modal_user[0]['as_a_model'];
-	// $unique_id = $get_modal_user[0]['unique_id'];
+
+  $get_modal_user = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+
+	if(!empty($get_modal_user['username'])){
+		$modalname = ucfirst($get_modal_user['username']);
+	}else{
+		$modalname = ucfirst($get_modal_user['name']);
+	}
+	$as_a_model = $get_modal_user['as_a_model'];
+	$unique_id = $get_modal_user['unique_id'];
 
 
 }else{ 
