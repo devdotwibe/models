@@ -212,6 +212,24 @@ if(!empty($userDetails['profile_pic'])){
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
 
+
+        $itemsPerPage = 5;
+
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+        if ($page < 1) $page = 1;
+
+        $offset = ($page - 1) * $itemsPerPage;
+
+        $count_sql = "SELECT COUNT(*) as total 
+                      FROM live_posts 
+                      WHERE post_author IN ($placeholders)";
+        $count_stmt = $con->prepare($count_sql);
+        $count_stmt->bind_param($types, ...$followed_user_ids);
+        $count_stmt->execute();
+        $count_result = $count_stmt->get_result();
+        $total_posts = $count_result->fetch_assoc()['total'];
+
        $sql = "
             SELECT 
                 live_posts.*, 
@@ -235,6 +253,8 @@ if(!empty($userDetails['profile_pic'])){
             $sql .= " ORDER BY post_date DESC";
         }
 
+        $sql .= " LIMIT ? OFFSET ?";
+
 
         $stmt = $con->prepare($sql);
 
@@ -243,8 +263,16 @@ if(!empty($userDetails['profile_pic'])){
         }
 
 
-        $stmt->bind_param($types, ...$followed_user_ids);
+        // $stmt->bind_param($types, ...$followed_user_ids);
+
+        $bind_values = array_merge($followed_user_ids, [$itemsPerPage, $offset]);
+        
+        $types .= "ii";
+
+        $stmt->bind_param($types, ...$bind_values);
+
         $stmt->execute();
+
         $result = $stmt->get_result();
 
         while ($row = $result->fetch_assoc()) {
@@ -522,20 +550,9 @@ if(!empty($userDetails['profile_pic'])){
         <!-- <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">Your Feed</h2> -->
 
         <!-- Post 1 -->
-        <?php
-
-            $showLimit = ($followers_count == 0) ? 5 : count($posts);
-            $postCounter = 0;
-        ?>
-
+     
         <?php foreach ($posts as $k => $post) { 
-          
-              if ($postCounter >= $showLimit) {
-
-                  break;
-              }
-
-              $postCounter++;
+       
           ?>
 
             <div class="model-card">
