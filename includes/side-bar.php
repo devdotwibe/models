@@ -23,6 +23,11 @@ if (isset($_SESSION['log_user_id'])) {
 
   $following_count = getModelFolloweringCount($unique_id);
 
+
+  echo "test";
+
+  die();
+
 ?>
  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
