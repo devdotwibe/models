@@ -89,13 +89,40 @@ $sort_type = $_GET['sort_type'];
 
 // $stringQuery = " select tb.*,mu.age from banners tb join model_user mu on mu.id=tb.user_id ";//where status
 
-$stringQuery = "
-    SELECT tb.*, mu.age 
-    FROM banners tb 
-    JOIN model_user mu ON mu.id = tb.user_id 
-    WHERE mu.verified = '1'
-    $order
-";
+
+// $stringQuery = "
+//     SELECT tb.*, mu.age 
+//     FROM banners tb 
+//     JOIN model_user mu ON mu.id = tb.user_id 
+//     WHERE mu.verified = '1' AND mu.id IN ($basicList)
+//     $order
+// ";
+
+    $basic_filed_users = GetUsersWithBasicFilled();
+
+    if (!empty($basic_filed_users)) {
+
+        $basic_filed_users = array_map('intval', $basic_filed_users);
+        $basicList = implode(',', $basic_filed_users);
+
+        $stringQuery = "
+            SELECT tb.*, mu.age 
+            FROM banners tb 
+            JOIN model_user mu ON mu.id = tb.user_id 
+            WHERE mu.verified = '1' 
+            AND mu.id IN ($basicList)
+            $order
+        ";
+    } else {
+   
+        $stringQuery = "
+            SELECT tb.*, mu.age 
+            FROM banners tb 
+            JOIN model_user mu ON mu.id = tb.user_id 
+            WHERE 1 = 0 $order
+        "; 
+
+    }
 
 
 if($_GET['country']){
