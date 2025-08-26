@@ -32,16 +32,16 @@ if (isset($_SESSION['log_user_id'])) {
 
 ?>
 
+
+ <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="sidebar-menu" id="sidebarMenu">
+
          <?php echo "test";
 
   die();
 
 ?>
- <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-  <div class="sidebar-menu" id="sidebarMenu">
-
-
 
     <div class="p-6 flex flex-col items-center" onclick="window.location.href='<?= SITEURL ?>/user/profile/index.php'">
 
