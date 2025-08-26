@@ -436,7 +436,7 @@ else{
                         Choose Your Goal
                     </h2>
                     
-                    <div class="grid md:grid-cols-3 gap-6">
+                    <div class="grid md:grid-cols-3 gap-6" aria-disabled="true">
                         <div class="quick-setup ultra-glass p-6 rounded-2xl border border-white/10" onclick="selectQuickSetup(this, 'views')">
                             <div class="text-center">
                                 <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
