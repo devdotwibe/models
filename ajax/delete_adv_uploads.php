@@ -20,20 +20,21 @@ $adv_type = $_GET['adv_type'];
 
 				$additional_vd = '';
 
+				$image = '';
+
 				foreach($video as $add_vd){	
+
+					$image = $add_vd;
 
 					if($add_vd != $upl_name){
 
 						$additional_vd .= $add_vd.'|';
 					}
 				}
-				if(!empty($additional_vd)){
 
-					$joe_id = DB::update('banners', array('video' => rtrim($additional_vd, "|")), "id=%s", $adv_id);
-				}
-
+				$joe_id = DB::update('banners', array('video' => rtrim($additional_vd, "|")), "id=%s", $adv_id);
+				
 			 	$output['status'] = 'success';
-            	$output['type']   = $additional_vd;
 
 			}
 			}else if($adv_type == 'image'){

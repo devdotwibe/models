@@ -23,6 +23,21 @@ if (isset($_SESSION['log_user_id'])) {
 		$arr = array('name', 'subtitle', 'description', 'category', 'service', 'country', 'state', 'city','terms_conditions','adv_status');
 		$post_data = array_from_post($arr);
 
+        if(isset($_POST['city']) && $_POST['city'] =='other' && isset($_POST['add_city']) && $_POST['add_city'] != '')
+        {
+            $add_city = $_POST['add_city'];
+
+            $state = $_POST['state'];
+
+            $city_id = GetCityId($add_city,$state);
+
+            if($city_id != 'exist')
+            {
+                $post_data['city'] = $city_id;
+
+            }
+        }
+
 		DB::update('banners', $post_data, "id=%s", $id);
 
 		$error = '';
@@ -322,9 +337,20 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                         <div>
                             <label class="block text-white font-semibold mb-3">City *</label>
-							<select name="city" id="i-hs-city" class="form-input w-full px-6 py-4 rounded-xl adv_city" id="adv_city" required ></select>
+							<select name="city" id="i-hs-city" class="form-input w-full px-6 py-4 rounded-xl adv_city" onchange="AddCity(this)" id="adv_city" required ></select>
                             <span class="err_adv_city" style="color:red;"></span>
                         </div>
+
+                        <div style="display:none"   id="add_city_div">
+
+                            <label class="block text-white font-semibold mb-3">Add City *</label>
+
+                            <input type="text" name="add_city" id="add_city" class="form-input w-full px-6 py-4 rounded-xl" placeholder="Enter your city name" >
+
+                            <span class="err_add_city" id="err_add_city" style="color:red; display:none;" >The city name is already exist in the state</span>
+
+                        </div>
+
                     </div>
 
                     
@@ -612,6 +638,25 @@ $serviceArr = array('Providing services', 'Looking for services');
 	</script>
 
 	<script>
+
+        function AddCity(el)
+        {
+            var value = $(el).val();
+
+            console.log(value);
+
+            if(value =='other')
+            {
+                $('#add_city_div').show();
+            }
+            else
+            {
+                $('#add_city_div').hide();
+
+                $('#add_city').val("");
+            }
+        }
+
 		function select_hs_country(state) {
 			$("#i-hs-city").html('<option value="">Select</option>');
 			$("#i-hs-state").html('<option value="">Select</option>');
@@ -646,7 +691,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 				},
 				dataType: 'json',
 				success: function(res) {
-					$("#i-hs-city").html('<option value="">Select</option>' + res.list);
+                    $("#i-hs-city").html('<option value="">Select</option>' + res.list + '<option value="other">Other</option>');
 				}
 			})
 		}
@@ -787,20 +832,78 @@ $serviceArr = array('Providing services', 'Looking for services');
 			}
 			
 			if(currentStep == 2){
-				if(jQuery('.adv_country').val() == ''){
+
+                var city = $('#i-hs-city').val();
+
+                var add_city = $('#add_city').val();
+
+                var state = $('#i-hs-state').val();
+
+                if(city == "other" && add_city != '' && state != '')
+                {   
+                     $.ajax({
+                            url: '<?= SITEURL . 'ajax/check_city.php' ?>',
+                            type: "POST",
+                            data: { city: add_city, state: state },
+                            dataType: 'json',
+                            success: function(response) {
+
+                                 allow_next = false;
+
+                                 console.log(response);
+
+                               if (response.message === "exist") {
+                                    $('#err_add_city').show();
+                                } else {
+
+                                    $('#err_add_city').hide();
+
+                                    document.getElementById(`formStep${currentStep}`).classList.add('hidden');
+                                    document.getElementById(`step${currentStep}`).classList.remove('active');
+                                    document.getElementById(`step${currentStep}`).classList.add('completed');
+
+                                    // Show next step
+                                    currentStep++;
+                                    document.getElementById(`formStep${currentStep}`).classList.remove('hidden');
+                                    document.getElementById(`step${currentStep}`).classList.add('active');
+
+                                    // Update buttons
+                                    document.getElementById('backBtn').classList.remove('hidden');
+
+                                    if (currentStep === 3) {
+                                        document.getElementById('nextBtn').classList.add('hidden');
+                                        document.getElementById('submitBtn').classList.remove('hidden');
+                                    }
+                                }
+                            },
+                            error: function() {
+                            
+                            }
+                    });
+
+                    return;
+                }
+                else
+                {
+                     $('#err_add_city').hide();
+
+                    if(jQuery('.adv_country').val() == ''){
 					jQuery('.adv_country').addClass('invalid');
 					allow_next = false;
-				}else jQuery('.adv_country').removeClass('invalid');
+                    }else jQuery('.adv_country').removeClass('invalid');
+                    
+                    if(jQuery('.adv_state').val() == ''){
+                        jQuery('.adv_state').addClass('invalid');
+                        allow_next = false;
+                    }else jQuery('.adv_state').removeClass('invalid');
+                    
+                    if(jQuery('.adv_city').val() == ''){
+                        jQuery('.adv_city').addClass('invalid');
+                        allow_next = false;
+                    }else jQuery('.adv_city').removeClass('invalid');
+                }
+
 				
-				if(jQuery('.adv_state').val() == ''){
-					jQuery('.adv_state').addClass('invalid');
-					allow_next = false;
-				}else jQuery('.adv_state').removeClass('invalid');
-				
-				if(jQuery('.adv_city').val() == ''){
-					jQuery('.adv_city').addClass('invalid');
-					allow_next = false;
-				}else jQuery('.adv_city').removeClass('invalid');
 			}
 			
 			if(allow_next){
