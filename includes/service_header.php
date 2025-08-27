@@ -1,3 +1,16 @@
+
+    <?php
+
+        $prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
+
+          if(!empty($get_modal_user[0]['profile_pic']))
+          {
+              if (checkImageExists($get_modal_user[0]['profile_pic'])) {
+            
+                  $prof_img = SITEURL . $get_modal_user[0]['profile_pic'];
+              }
+          }
+    ?>
 <header class="header glass">
     <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
       <div class="flex items-center gap-3">
@@ -22,7 +35,7 @@
           LIVE
         </div>
         <div class="relative">
-          <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Profile" class="w-8 h-8 rounded-full border-2 border-indigo-500">
+          <img src="<?= $prof_img ?>" alt="Profile" class="w-8 h-8 rounded-full border-2 border-indigo-500">
           <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
         </div>
       </div>
