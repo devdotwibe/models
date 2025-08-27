@@ -20,214 +20,7 @@ if ($userDetails) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 	<?php include('includes/head.php'); ?>
     <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
-            --premium-gold: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #fff2a1 100%);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: radial-gradient(ellipse at top, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
-            color: #fff;
-            overflow-x: hidden;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-
-        .heading-font {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        /* Premium Gradients */
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 3s ease-in-out infinite;
-        }
-
-        @keyframes gradient-shift {
-            0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(30deg); }
-        }
-
-        /* Ultra Advanced Glass Morphism */
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .ultra-glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08),
-                0 0 0 1px rgba(139, 92, 246, 0.1);
-            position: relative;
-        }
-
-        .ultra-glass::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
-            border-radius: inherit;
-            z-index: -1;
-        }
-
-        /* Premium Floating Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.8) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float-premium 12s infinite linear;
-            filter: blur(0.5px);
-        }
-
-        .particle:nth-child(2n) {
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, transparent 70%);
-            animation-duration: 15s;
-        }
-
-        .particle:nth-child(3n) {
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.7) 0%, transparent 70%);
-            animation-duration: 18s;
-        }
-
-        @keyframes float-premium {
-            0% {
-                opacity: 0;
-                transform: translateY(100vh) translateX(0px) scale(0) rotate(0deg);
-            }
-            10% {
-                opacity: 1;
-                transform: translateY(90vh) translateX(20px) scale(1) rotate(45deg);
-            }
-            90% {
-                opacity: 1;
-                transform: translateY(10vh) translateX(-20px) scale(1) rotate(315deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-10vh) translateX(0px) scale(0) rotate(360deg);
-            }
-        }
-
-        /* Ultra Premium Buttons */
-        .btn-primary {
-            background: var(--primary-gradient);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            font-size: 0.875rem;
-            padding: 12px 24px;
-            border-radius: 12px;
-            color: white;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: left 0.8s ease;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #5a67d8, #6b46c1);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 
-                0 25px 50px rgba(139, 92, 246, 0.5),
-                0 0 0 1px rgba(139, 92, 246, 0.4),
-                0 0 30px rgba(139, 92, 246, 0.3);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            font-weight: 500;
-            padding: 12px 24px;
-            border-radius: 12px;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 
-                0 20px 40px rgba(255, 255, 255, 0.15),
-                0 0 0 1px rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Premium Text Effects */
-        .premium-text {
-            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .text-glow {
-            text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
-            animation: text-pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes text-pulse {
-            0%, 100% { text-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
-            50% { text-shadow: 0 0 30px rgba(139, 92, 246, 0.8); }
-        }
+      
 
         /* Layout Styles */
         .container {
@@ -750,10 +543,15 @@ if ($userDetails) {
   <div class="particles" id="particles"></div>
     <!-- Ultra Premium Header -->
     <?php if (isset($_SESSION["log_user_id"])) { ?>
-	<?php  include('includes/side-bar.php'); ?>
-	<?php  include('includes/profile_header_index.php'); ?>
+
+        <?php  include('includes/side-bar.php'); ?>
+
+        <?php  include('includes/profile_header_index.php'); ?>
+
 	<?php } else{ ?>
-    <?php include('includes/header.php'); ?>
+
+        <?php include('includes/header.php'); ?>
+
 	<?php } ?>
 
     <div class="container">
