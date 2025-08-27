@@ -83,7 +83,7 @@ if($userDetails){
 
 						$_SESSION["payment_done"] = "Payment Successfully Completed";
 
-						echo "<script>window.location='wallet.php'</script>";
+							echo "<script>window.location='all-models.php'</script>";
 
 					// } else {
 					// 	echo "Error in wallet update: " . mysqli_error($con);
