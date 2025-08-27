@@ -3924,7 +3924,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         dob.setHours(0,0,0,0);
         today.setHours(0,0,0,0);
 
-          $('#dob_error').hdie().text('');
+          $('#dob_error').hide().text('');
 
         if (dob > today) {
 
