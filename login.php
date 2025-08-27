@@ -62,27 +62,9 @@ if($_SESSION["log_user"]){
                         <!-- Login Form -->
                         <form id="loginForm" class="space-y-6" method="post" enctype="multipart/form-data" action="act-login.php">
 
-                            <?php if(isset($_SESSION["user_name_exist"] )) { ?>
+                            <?php if(isset($_SESSION["login_error"] )) { ?>
 
-                                <h2><span class="text-danger"><?php echo $_SESSION["user_name_exist"]  ?></span></h2>
-
-                            <?php } ?>
-
-                             <?php if(isset($_SESSION["email_exist"] )) { ?>
-
-                                <h2><span class="text-danger"><?php echo $_SESSION["email_exist"]  ?></span></h2>
-
-                            <?php } ?>
-
-                             <?php if(isset($_SESSION["email_error"] )) { ?>
-
-                                <h2><span class="text-danger"><?php echo $_SESSION["email_error"]  ?></span></h2>
-
-                            <?php } ?>
-
-                             <?php if(isset($_SESSION["not_registred"] )) { ?>
-
-                                <h2><span class="text-danger"><?php echo $_SESSION["not_registred"]  ?></span></h2>
+                                <h2><span class="text-danger"><?php echo $_SESSION["login_error"]  ?></span></h2>
 
                             <?php } ?>
 

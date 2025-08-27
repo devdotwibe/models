@@ -175,13 +175,13 @@ if (isset($_POST['vfb-submit'])) {
 
         $_SESSION["user_name_exist"] = "Sorry... username already taken";
         
-        echo '<script>window.location="login.php"</script>';
+        echo '<script>window.history.back();</script>';
                 
     }else if(mysqli_num_rows($res_e) > 0){
 
       $_SESSION["email_exist"] = "Sorry... email already taken";
 
-                echo '<script>window.location="login.php"</script>';  
+                echo '<script>window.history.back();</script>';
     }else{
 
 
@@ -262,17 +262,15 @@ if (isset($_POST['vfb-submit'])) {
 
                $_SESSION["email_error"] = "Error in Details Sent to Respective Mail id.";
 
-                echo '<script>window.location="login.php"</script>';
+               echo '<script>window.history.back();</script>';
          }
 
     }
     else{
 
-      echo '<script>alert("You have Not Registered")</script>';
+      $_SESSION["not_registred"] = "You have Not Registered.";
 
-      $_SESSION["not_registred"] = "Error in Details Sent to Respective Mail id.";
-
-      echo '<script>window.location="register.php"</script>';
+       echo '<script>window.history.back();</script>';
     }
 
  } 
