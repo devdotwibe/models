@@ -133,6 +133,10 @@ $serviceArr = array('Providing services', 'Looking for services');
 	<title>Create Advertisement - The Live Models</title>
 	<?php include('../includes/head.php'); ?>
 	<link rel="stylesheet" href="<?=SITEURL?>assets/css/dropzone.min.css" />
+
+
+    <link rel='stylesheet' href='<?= SITEURL ?>assets/css/profile.css?v=<?= time() ?>' type='text/css' media='all' />
+    
 	<style>
 	.dropzone {
 		border: none !important;
