@@ -113,9 +113,12 @@ $activeTab = 'wallet';
 
     <?php include('includes/head.php'); ?>
 
+
+  <link rel='stylesheet' href='<?= SITEURL ?>assets/css/profile.css?v=<?= time() ?>' type='text/css' media='all' />
+
 </head>
 
-<body id="app" class="advt-page  socialwall-page">
+<body id="app" class="advt-page  socialwall-page enhanced5">
 
     <div class="premium-wallet">
 
@@ -992,21 +995,21 @@ $activeTab = 'wallet';
         showNotification('Tax information saved successfully!', 'success');
     }
 
-    // Notification system
-    function showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${
-                type === 'success' ? 'bg-green-500' : 
-                type === 'error' ? 'bg-red-500' : 'bg-blue-500'
-            }`;
-        notification.textContent = message;
+    // // Notification system
+    // function showNotification(message, type = 'info') {
+    //     const notification = document.createElement('div');
+    //     notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${
+    //             type === 'success' ? 'bg-green-500' : 
+    //             type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+    //         }`;
+    //     notification.textContent = message;
 
-        document.body.appendChild(notification);
+    //     document.body.appendChild(notification);
 
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
-    }
+    //     setTimeout(() => {
+    //         notification.remove();
+    //     }, 3000);
+    // }
 
     // Performance optimizations
     const debounce = (func, wait) => {
