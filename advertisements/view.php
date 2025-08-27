@@ -287,7 +287,7 @@ else{
 
                                 if($video_count > 0 ){ 
 
-                                    foreach($video as $add_vd) {  ?>
+                                    foreach($video as $add_vd) {  if(!empty($add_vd)) { ?>
                                 
                                         <div>
 
@@ -299,7 +299,7 @@ else{
 
                                         </div>
 
-                        <?php }  }  } else $video_count = 0; ?>
+                        <?php } } }  } else $video_count = 0; ?>
                             
                             <?php if(!empty($form_data['image'])){ ?>
 
@@ -323,7 +323,7 @@ else{
                                             <img src="<?php echo SITEURL.'uploads/banners/'.$add_img; ?>" >
                                     
                                         </div>
-                                        
+
                                 <?php $add_cnt++; }  } } } ?>
 						
 						
