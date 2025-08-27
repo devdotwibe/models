@@ -9313,6 +9313,732 @@ button.btn-secondary.add-intrst {
 
     }
 
+      /*---tlv-----------creare-ad--------------------------------------------------------- */
+
+
+
+
+
+    .creare-ad body {
+
+        font-family: 'Inter', sans-serif;
+
+        background: radial-gradient(ellipse at top, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+
+        color: #fff;
+
+        overflow-x: hidden;
+
+        line-height: 1.6;
+
+        -webkit-font-smoothing: antialiased;
+
+        -moz-osx-font-smoothing: grayscale;
+
+        min-height: 100vh;
+
+    }
+
+
+
+    .creare-ad .heading-font {
+
+        font-family: 'Playfair Display', serif;
+
+        font-weight: 600;
+
+        letter-spacing: -0.02em;
+
+    }
+
+
+
+    /* Premium Gradients */
+
+    .creare-ad.gradient-bg {
+
+        background: var(--primary-gradient);
+
+    }
+
+
+
+    .creare-ad .gradient-text {
+
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
+
+        -webkit-background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+
+        background-clip: text;
+
+        animation: gradient-shift 3s ease-in-out infinite;
+
+    }
+
+
+
+    @keyframes gradient-shift {
+
+        0%, 100% { filter: hue-rotate(0deg); }
+
+        50% { filter: hue-rotate(30deg); }
+
+    }
+
+
+
+    /* Ultra Advanced Glass Morphism */
+
+    .creare-ad .ultra-glass {
+
+        background: rgba(255, 255, 255, 0.02);
+
+        backdrop-filter: blur(40px);
+
+        -webkit-backdrop-filter: blur(40px);
+
+        border: 1px solid rgba(255, 255, 255, 0.06);
+
+        box-shadow:
+
+            0 20px 60px rgba(0, 0, 0, 0.4),
+
+            inset 0 1px 0 rgba(255, 255, 255, 0.08),
+
+            0 0 0 1px rgba(139, 92, 246, 0.1);
+
+        position: relative;
+
+    }
+
+
+
+    .creare-ad .ultra-glass::before {
+
+        content: '';
+
+        position: absolute;
+
+        top: 0;
+
+        left: 0;
+
+        right: 0;
+
+        bottom: 0;
+
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+
+        border-radius: inherit;
+
+        z-index: -1;
+
+    }
+
+
+
+    /* Premium Floating Particles */
+
+    .creare-ad .particles {
+
+        position: fixed;
+
+        top: 0;
+
+        left: 0;
+
+        width: 100%;
+
+        height: 100%;
+
+        pointer-events: none;
+
+        z-index: 1;
+
+        overflow: hidden;
+
+    }
+
+
+
+    .creare-ad .particle {
+
+        position: absolute;
+
+        width: 4px;
+
+        height: 4px;
+
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.8) 0%, transparent 70%);
+
+        border-radius: 50%;
+
+        animation: float-premium 12s infinite linear;
+
+        filter: blur(0.5px);
+
+    }
+
+
+
+    .creare-ad .particle:nth-child(2n) {
+
+        background: radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, transparent 70%);
+
+        animation-duration: 15s;
+
+    }
+
+
+
+    .creare-ad .particle:nth-child(3n) {
+
+        background: radial-gradient(circle, rgba(6, 182, 212, 0.7) 0%, transparent 70%);
+
+        animation-duration: 18s;
+
+    }
+
+
+
+    @keyframes float-premium {
+
+        0% {
+
+            opacity: 0;
+
+            transform: translateY(100vh) translateX(0px) scale(0) rotate(0deg);
+
+        }
+
+        10% {
+
+            opacity: 1;
+
+            transform: translateY(90vh) translateX(20px) scale(1) rotate(45deg);
+
+        }
+
+        90% {
+
+            opacity: 1;
+
+            transform: translateY(10vh) translateX(200px) scale(1.2) rotate(315deg);
+
+        }
+
+        100% {
+
+            opacity: 0;
+
+            transform: translateY(-10vh) translateX(300px) scale(0) rotate(360deg);
+
+        }
+
+    }
+
+
+
+    /* Premium Buttons */
+
+    .creare-ad .btn-primary {
+
+        background: var(--primary-gradient);
+
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+
+        position: relative;
+
+        overflow: hidden;
+
+        border: none;
+
+        cursor: pointer;
+
+        font-weight: 600;
+
+        letter-spacing: 0.5px;
+
+        text-transform: uppercase;
+
+        font-size: 0.875rem;
+
+    }
+
+
+
+    .creare-ad .btn-primary::before {
+
+        content: '';
+
+        position: absolute;
+
+        top: 0;
+
+        left: -100%;
+
+        width: 100%;
+
+        height: 100%;
+
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+
+        transition: left 0.8s ease;
+
+    }
+
+
+
+    .creare-ad .btn-primary:hover::before {
+
+        left: 100%;
+
+    }
+
+
+
+    .creare-ad .btn-primary:hover {
+
+        background: linear-gradient(135deg, #5a67d8, #6b46c1);
+
+        transform: translateY(-3px) scale(1.02);
+
+        box-shadow:
+
+            0 25px 50px rgba(139, 92, 246, 0.5),
+
+            0 0 0 1px rgba(139, 92, 246, 0.4),
+
+            0 0 30px rgba(139, 92, 246, 0.3);
+
+    }
+
+
+
+    .creare-ad .btn-secondary {
+
+        background: rgba(255, 255, 255, 0.06);
+
+        border: 1px solid rgba(255, 255, 255, 0.15);
+
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+
+        position: relative;
+
+        overflow: hidden;
+
+        cursor: pointer;
+
+        font-weight: 500;
+
+    }
+
+
+
+    .creare-ad .btn-secondary:hover {
+
+        background: rgba(255, 255, 255, 0.12);
+
+        transform: translateY(-3px) scale(1.02);
+
+        box-shadow:
+
+            0 20px 40px rgba(255, 255, 255, 0.15),
+
+            0 0 0 1px rgba(255, 255, 255, 0.2);
+
+        border-color: rgba(255, 255, 255, 0.3);
+
+    }
+
+
+
+    .creare-ad .btn-danger {
+
+        background: linear-gradient(135deg, #ef4444, #f87171);
+
+        transition: all 0.4s ease;
+
+        border: none;
+
+        cursor: pointer;
+
+        font-weight: 600;
+
+    }
+
+
+
+    .creare-ad .btn-danger:hover {
+
+        background: linear-gradient(135deg, #dc2626, #ef4444);
+
+        transform: translateY(-2px);
+
+        box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+
+    }
+
+
+
+    /* Premium Typography */
+
+    .creare-ad .premium-text {
+
+        background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+
+        -webkit-background-clip: text;
+
+        -webkit-text-fill-color: transparent;
+
+        background-clip: text;
+
+    }
+
+
+
+    /* Form Styles */
+
+    .creare-ad .form-input {
+
+        background: rgba(255, 255, 255, 0.02);
+
+        backdrop-filter: blur(40px);
+
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+        color: white;
+
+    }
+
+
+
+    .creare-ad .form-input:focus {
+
+        box-shadow:
+
+            0 0 0 3px rgba(139, 92, 246, 0.3),
+
+            0 10px 30px rgba(139, 92, 246, 0.15);
+
+        transform: translateY(-2px) scale(1.01);
+
+        border-color: rgba(139, 92, 246, 0.5);
+
+        outline: none;
+
+    }
+
+
+
+    .creare-ad .form-input::placeholder {
+
+        color: rgba(255, 255, 255, 0.5);
+
+    }
+
+
+
+    /* File Upload Styles */
+
+    .creare-ad .upload-area {
+
+        border: 2px dashed rgba(255, 255, 255, 0.2);
+
+        transition: all 0.4s ease;
+
+        position: relative;
+
+        overflow: hidden;
+
+    }
+
+
+
+    .creare-ad .upload-area:hover {
+
+        border-color: rgba(139, 92, 246, 0.5);
+
+        background: rgba(139, 92, 246, 0.05);
+
+    }
+
+
+
+    .creare-ad .upload-area.dragover {
+
+        border-color: rgba(139, 92, 246, 0.8);
+
+        background: rgba(139, 92, 246, 0.1);
+
+        transform: scale(1.02);
+
+    }
+
+
+
+    /* Media Preview Styles */
+
+    .creare-ad .media-preview {
+
+        position: relative;
+
+        overflow: hidden;
+
+        border-radius: 12px;
+
+        transition: all 0.3s ease;
+
+    }
+
+
+
+    .creare-ad .media-preview:hover {
+
+        transform: scale(1.05);
+
+        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+
+    }
+
+
+
+    .creare-ad .media-preview .remove-btn {
+
+        position: absolute;
+
+        top: 8px;
+
+        right: 8px;
+
+        background: rgba(239, 68, 68, 0.9);
+
+        backdrop-filter: blur(10px);
+
+        border: none;
+
+        border-radius: 50%;
+
+        width: 32px;
+
+        height: 32px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        cursor: pointer;
+
+        transition: all 0.3s ease;
+
+        opacity: 0;
+
+    }
+
+
+
+    .creare-ad .media-preview:hover .remove-btn {
+
+        opacity: 1;
+
+    }
+
+
+
+    .creare-ad .media-preview .remove-btn:hover {
+
+        background: rgba(239, 68, 68, 1);
+
+        transform: scale(1.1);
+
+    }
+
+
+
+    /* Progress Bar */
+
+    .creare-ad .progress-bar {
+
+        background: rgba(255, 255, 255, 0.1);
+
+        border-radius: 10px;
+
+        overflow: hidden;
+
+        height: 8px;
+
+    }
+
+
+
+   .creare-ad .progress-fill {
+
+        background: var(--primary-gradient);
+
+        height: 100%;
+
+        transition: width 0.3s ease;
+
+        border-radius: 10px;
+
+    }
+
+
+
+    /* Responsive Design */
+
+    .creare-ad .container {
+
+        max-width: 1200px;
+
+        margin: 0 auto;
+
+        padding: 0 2rem;
+
+    }
+
+
+
+    @media (max-width: 768px) {
+
+        .creare-ad .container {
+
+            padding: 0 1rem;
+
+        }
+
+    }
+
+
+
+    /* Hover Effects */
+
+    .creare-ad .hover-lift {
+
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+    }
+
+
+
+    .creare-ad .hover-lift:hover {
+
+        transform: translateY(-5px);
+
+        box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+
+    }
+
+
+
+    /* Step Indicator */
+
+    .creare-ad .step-indicator {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        margin-bottom: 2rem;
+
+    }
+
+
+
+    .creare-ad .step {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        width: 40px;
+
+        height: 40px;
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.1);
+
+        color: rgba(255, 255, 255, 0.5);
+
+        font-weight: 600;
+
+        margin: 0 1rem;
+
+        position: relative;
+
+    }
+
+
+
+    .creare-ad .step.active {
+
+        background: var(--primary-gradient);
+
+        color: white;
+
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+
+    }
+
+
+
+    .creare-ad .step.completed {
+
+        background: linear-gradient(135deg, #10b981, #34d399);
+
+        color: white;
+
+    }
+
+
+
+    .creare-ad .step::after {
+
+        content: '';
+
+        position: absolute;
+
+        top: 50%;
+
+        left: 100%;
+
+        width: 2rem;
+
+        height: 2px;
+
+        background: rgba(255, 255, 255, 0.2);
+
+        transform: translateY(-50%);
+
+    }
+
+
+
+    .creare-ad .step:last-child::after {
+
+        display: none;
+
+    }
+
+
+
+    .creare-ad .step.completed::after {
+
+        background: linear-gradient(135deg, #10b981, #34d399);
+
+    }
+
 
 /* ANIMATIONS */
 
