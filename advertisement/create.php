@@ -642,9 +642,8 @@ $serviceArr = array('Providing services', 'Looking for services');
                             data: { city: add_city, state: state },
                             dataType: 'json',
                             success: function(response) {
-
-
-                                console.log('figfikdg',response.message);
+                                
+                                 allow_next = false;
 
                                 if (response.message == "exist") {
 
