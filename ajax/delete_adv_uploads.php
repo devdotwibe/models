@@ -33,7 +33,7 @@ $adv_type = $_GET['adv_type'];
 				}
 
 			 	$output['status'] = 'success';
-            	$output['type']   = $additional_vd;
+            	$output['type']   = $joe_id;
 
 			}
 			}else if($adv_type == 'image'){
