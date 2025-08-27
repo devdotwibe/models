@@ -1285,7 +1285,7 @@ let selectedFiles_video = [];
         })
         .then(response => response.json())
         .then(data => {
-          if (data.status === 'success' || true) {
+          if (data.status === 'success') {
             console.log('File deleted from server');
 			
 			//Remove from DB 
