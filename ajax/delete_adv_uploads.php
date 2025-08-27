@@ -20,7 +20,11 @@ $adv_type = $_GET['adv_type'];
 
 				$additional_vd = '';
 
+				$image = '';
+
 				foreach($video as $add_vd){	
+
+					$image = $add_vd;
 
 					if($add_vd != $upl_name){
 
@@ -33,7 +37,8 @@ $adv_type = $_GET['adv_type'];
 				}
 
 			 	$output['status'] = 'success';
-            	$output['type']   = $joe_id;
+            	$output['image']   = $image;
+				$output['upl_name']   = $upl_name;
 
 			}
 			}else if($adv_type == 'image'){
