@@ -3465,7 +3465,12 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     $(function() {
         $("#dob-input").datepicker({
-            dateFormat: "dd-mm-yyyy",            
+              dateFormat: 'yy-mm-dd',
+              minDate: 0,
+              maxDate: null,
+              changeMonth: true,
+              changeYear: true,
+              showButtonPanel: true,      
         });
     });
 
