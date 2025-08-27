@@ -648,6 +648,8 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                                  allow_next = false;
 
+                                 console.log(response);
+
                                 if (response.message == "exist") {
 
                                     $('#err_add_city').show();
