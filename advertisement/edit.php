@@ -979,21 +979,21 @@ let selectedFiles_video = [];
             <video src="${videoData.url}" class="w-full h-48 object-cover rounded-xl" controls></video>
 			<div class="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
                 ${formatFileSize(videoData.file.size)}
-            </div>`;
-          /*  <button type="button" class="remove-btn" onclick="removeVideo('${videoData.id}')">
+            </div>
+            <button type="button" class="remove-btn" onclick="removeVideo('${videoData.id}')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
             
-        `; */
+        `;
 
         grid.appendChild(previewDiv);
     }
 
     function removePhoto(id) {
-        uploadedPhotos = uploadedPhotos.filter(photo => photo.id !== id);
+        uploadedPhotos = uploadedPhotos.filter(photo => photo.id != id);
         refreshPhotoGrid();
     }
 	
