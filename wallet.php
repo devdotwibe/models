@@ -1040,7 +1040,7 @@ $activeTab = 'wallet';
     // Initialize lazy loading
     document.addEventListener('DOMContentLoaded', lazyLoad);
 </script>
-
+<?php print_r($f_country_list); ?>
 <script>
 // PHP array converted to JavaScript
   var countryData = <?php echo json_encode($f_country_list); ?>; console.log(countryData);
