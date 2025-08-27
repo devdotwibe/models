@@ -786,15 +786,21 @@ $serviceArr = array('Providing services', 'Looking for services');
                 selectedFiles_img.push(file); 
 
                 displayPhotoPreview(photoData);
+
+                console.log(uploadedPhotos);
+
+                const dataTransfer = new DataTransfer();
+
+               selectedFiles_img.forEach(f => dataTransfer.items.add(f));
+                
+               document.getElementById('photoInput').files = dataTransfer.files;
+                
+                console.log(dataTransfer.files);
             };
             reader.readAsDataURL(file);
         });
 		
-		console.log(uploadedPhotos);
-		const dataTransfer = new DataTransfer();
-		selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
-        
-		document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
+	
 		
     }
 
