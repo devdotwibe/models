@@ -596,7 +596,7 @@ $activeTab = 'wallet';
                                 } else if (!empty($taxdetail['country'])) {
                                     $country = $taxdetail['country'];
                                 }
-								$wallet_label = ''; $wallet_sm_text = '';  print_r($f_country_list);
+								$wallet_label = ''; $wallet_sm_text = '';  
                                 ?>
                                 <select class="form-input wallet_country" name="country" required >
                                     <option value="">Select country</option>
@@ -1043,7 +1043,7 @@ $activeTab = 'wallet';
 
 <script>
 // PHP array converted to JavaScript
-  var countryData = <?php echo json_encode($f_country_list); ?>;
+  var countryData = <?php echo json_encode($f_country_list); ?>; console.log(countryData);
 jQuery(document).ready(function() {
   jQuery('.wallet_country').on('change', function() {
     let selectedCountry = jQuery(this).val();
