@@ -650,37 +650,36 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                                  console.log(response);
 
-                                if (response.message == "exist") {
-
+                               if (response.message === "exist") {
                                     $('#err_add_city').show();
-
-                                    allow_next = false;
-
                                 } else {
-                            
 
                                     $('#err_add_city').hide();
 
-                                  if(jQuery('.adv_country').val() == ''){
-                                    jQuery('.adv_country').addClass('invalid');
-                                    allow_next = false;
-                                    }else jQuery('.adv_country').removeClass('invalid');
-                                    
-                                    if(jQuery('.adv_state').val() == ''){
-                                        jQuery('.adv_state').addClass('invalid');
-                                        allow_next = false;
-                                    }else jQuery('.adv_state').removeClass('invalid');
-                                    
-                                    if(jQuery('.adv_city').val() == ''){
-                                        jQuery('.adv_city').addClass('invalid');
-                                        allow_next = false;
-                                    }else jQuery('.adv_city').removeClass('invalid');
+                                    document.getElementById(`formStep${currentStep}`).classList.add('hidden');
+                                    document.getElementById(`step${currentStep}`).classList.remove('active');
+                                    document.getElementById(`step${currentStep}`).classList.add('completed');
+
+                                    // Show next step
+                                    currentStep++;
+                                    document.getElementById(`formStep${currentStep}`).classList.remove('hidden');
+                                    document.getElementById(`step${currentStep}`).classList.add('active');
+
+                                    // Update buttons
+                                    document.getElementById('backBtn').classList.remove('hidden');
+
+                                    if (currentStep === 3) {
+                                        document.getElementById('nextBtn').classList.add('hidden');
+                                        document.getElementById('submitBtn').classList.remove('hidden');
+                                    }
                                 }
                             },
                             error: function() {
                             
                             }
                     });
+
+                    return;
                 }
                 else
                 {
@@ -706,23 +705,23 @@ $serviceArr = array('Providing services', 'Looking for services');
 			}
 			
 			if(allow_next){
-            // Hide current step
-            document.getElementById(`formStep${currentStep}`).classList.add('hidden');
-            document.getElementById(`step${currentStep}`).classList.remove('active');
-            document.getElementById(`step${currentStep}`).classList.add('completed');
+                // Hide current step
+                document.getElementById(`formStep${currentStep}`).classList.add('hidden');
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                document.getElementById(`step${currentStep}`).classList.add('completed');
 
-            // Show next step
-            currentStep++;
-            document.getElementById(`formStep${currentStep}`).classList.remove('hidden');
-            document.getElementById(`step${currentStep}`).classList.add('active');
+                // Show next step
+                currentStep++;
+                document.getElementById(`formStep${currentStep}`).classList.remove('hidden');
+                document.getElementById(`step${currentStep}`).classList.add('active');
 
-            // Update buttons
-            document.getElementById('backBtn').classList.remove('hidden');
+                // Update buttons
+                document.getElementById('backBtn').classList.remove('hidden');
 
-            if (currentStep === 3) {
-                document.getElementById('nextBtn').classList.add('hidden');
-                document.getElementById('submitBtn').classList.remove('hidden');
-            }
+                if (currentStep === 3) {
+                    document.getElementById('nextBtn').classList.add('hidden');
+                    document.getElementById('submitBtn').classList.remove('hidden');
+                }
 			
 			}
 			
