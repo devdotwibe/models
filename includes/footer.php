@@ -165,9 +165,34 @@ $homeurl = '/index.php';
 $homepage = "/";
 $currentpage = $_SERVER['REQUEST_URI'];
 
+
 //if($currentpage == $homepage or $currentpage == 'index.php') { ?>
   
  <!-- Ultra Premium Footer -->
+
+    <div class="modal-overlay" id="payment_done" style="display:none;">
+            <div class="modal">
+                <div class="modal-header">
+                <h2 class="modal-title text-green-600">Payment Successful 🎉</h2>
+                <button class="close-modal" id="closeTipModal" type="button" onclick="paymentclose()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+                        stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                </div>
+                <div class="modal-body" id="">
+                <p class="text-lg text-gray-700 mb-4">
+                    Your payment was processed successfully. Thank you for your purchase!  
+                </p>
+
+                <button class="btn btn-primary" type="button" onclick="paymentclose()">Close</button>
+                </div>
+            </div>
+    </div>
+
 <footer class="bg-black text-white py-20 border-t border-white/10 footer-div">
     <div class="container mx-auto">
         <div class="grid md:grid-cols-4 gap-12 mb-16">
@@ -670,6 +695,20 @@ document.addEventListener('keyup', (e) => {
         //alert('Screenshots disabled!');
     }
 });
+
+function OpenPayment()
+{
+    $('#payment_done').show();
+
+    $('#payment_done').addClass('active');
+}
+
+function paymentclose()
+{
+    $('#payment_done').hide();
+
+      $('#payment_done').removeClass('active');
+}
 
 /** TO DISABLE PRINTS WHIT CTRL+P **/
 document.addEventListener('keydown', (e) => {
