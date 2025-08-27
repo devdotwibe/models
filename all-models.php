@@ -83,7 +83,7 @@ include('includes/helper.php');
 
 
 
-<body class="premimum-model1 enhanced5">
+<body class="premimum-model1 enhanced5 socialwall-page">
 
     <?php if (isset($_SESSION["log_user_id"])) { ?>
     
