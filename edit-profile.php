@@ -37,7 +37,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
   <link rel='stylesheet' href='<?= SITEURL ?>assets/css/profile.css?v=<?= time() ?>' type='text/css' media='all' />
 
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel='stylesheet' href='<?= SITEURL ?>assets/css/jquery-ui.min.js?v=<?= time() ?>' type='text/css' media='all' />
 
   <style>
     .dropzone {
@@ -3457,6 +3457,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
   <link href="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
   <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
+
+  <script type="text/javascript" src="<?= SITEURL ?>assets/js/jquery-ui.min.js"></script>
+
 
   <script>
 
