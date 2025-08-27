@@ -285,9 +285,20 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                         <div>
                             <label class="block text-white font-semibold mb-3">City *</label>
-							<select name="city" id="i-hs-city" class="form-input w-full px-6 py-4 rounded-xl adv_city" id="adv_city" required ></select>
+							<select name="city" id="i-hs-city" class="form-input w-full px-6 py-4 rounded-xl adv_city" onchnage="AddCity(this)" id="adv_city" required ></select>
                             <span class="err_adv_city" style="color:red;"></span>
                         </div>
+
+                         <div style="display:none" id="add_city_div">
+
+                            <label class="block text-white font-semibold mb-3">Add City</label>
+
+                            <input type="text" name="add_city" id="add_city" class="form-input w-full px-6 py-4 rounded-xl" >
+
+                            <span class="err_adv_city" style="color:red;"></span>
+
+                        </div>
+
                     </div>
 
                     
@@ -414,6 +425,22 @@ $serviceArr = array('Providing services', 'Looking for services');
         }
     </style>
 	<script>  
+
+    function AddCity(el)
+    {
+        var value = $(el).val();
+
+        if(value =='other')
+        {
+              $('#add_city_div').hide();
+        }
+        else
+        {
+            $('#add_city_div').hide();
+
+            $('#add_city').val("");
+        }
+    }
 	
   const imageInput_addt = document.getElementById('imageInput_addt');
   const preview_addt = document.getElementById('preview_addt');
