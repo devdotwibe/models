@@ -7,6 +7,8 @@ $m_link = SITEURL . 'user/transaction-history/';
 $table_name = "users_withdrow_request";
 $per_amount = 50;
 
+$f_country_list_json = DB::query('select id,name,sortname,abbreviation,full_form from countries where abbreviation!="" order by name asc');
+
 if (isset($_SESSION["log_user_id"])) {
     $usern = $_SESSION["log_user"];
     $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
@@ -1041,10 +1043,9 @@ $activeTab = 'wallet';
     document.addEventListener('DOMContentLoaded', lazyLoad);
 </script>
 
-<?php $f_country_list_json = DB::query('select id,name,sortname,abbreviation,full_form from countries where abbreviation!="" order by name asc'); ?>
 <script>
 // PHP array converted to JavaScript
-  var countryData = <?php echo json_encode($f_country_list_json, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>; console.log(countryData);
+  var countryData = <?php echo json_encode($f_country_list_json); ?>; console.log(countryData);
 jQuery(document).ready(function() { 
   jQuery('.wallet_country').on('change', function() {
     let selectedCountry = jQuery(this).val();
