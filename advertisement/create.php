@@ -125,7 +125,11 @@ $serviceArr = array('Providing services', 'Looking for services');
 
 <head>
 	<title>Create Advertisement - The Live Models</title>
+
 	<?php include('../includes/head.php'); ?>
+
+     <?php  include('../includes/profile_header_index.php'); ?>
+
 	<style>
 		.thumbnail {
 			background: #FFF;
