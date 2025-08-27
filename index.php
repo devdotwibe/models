@@ -285,6 +285,25 @@ include('includes/helper.php');
 
                                 <?php } ?>
 
+                                <?php
+                                    
+                                    if (isset($_SESSION["user_name_exist"])) {
+                                        unset($_SESSION["user_name_exist"]);
+                                    }
+
+                                    if (isset($_SESSION["email_exist"])) {
+                                        unset($_SESSION["email_exist"]);
+                                    }
+
+                                    if (isset($_SESSION["email_error"])) {
+                                        unset($_SESSION["email_error"]);
+                                    }
+
+                                    if (isset($_SESSION["not_registred"])) {
+                                        unset($_SESSION["not_registred"]);
+                                    }
+                                ?>
+
                                 <input type="text" name="name" placeholder="Full Name" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
                                 <input type="text" name="username" placeholder="Username" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
                                 <input type="email" name="email" placeholder="Email Address" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
