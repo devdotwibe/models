@@ -849,7 +849,7 @@ let selectedFiles_video = [];
     }
 
     function removeVideo(id) {
-        uploadedVideos = uploadedVideos.filter(video => video.id !== id);
+        uploadedVideos = uploadedVideos.filter(video => video.id != id);
         refreshVideoGrid();
     }
 
