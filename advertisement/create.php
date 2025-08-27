@@ -856,11 +856,6 @@ let selectedFiles_video = [];
     function refreshPhotoGrid() { 
         const grid = document.getElementById('photoPreviewGrid');
         grid.innerHTML = '';
-
-        console.log('rtet',uploadedPhotos);
-
-        console.log('length',uploadedPhotos.length);
-
         if (uploadedPhotos.length === 0) {
             grid.classList.add('hidden');
         } else {
