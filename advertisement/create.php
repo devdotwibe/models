@@ -782,6 +782,9 @@ $serviceArr = array('Providing services', 'Looking for services');
                 };
 
                 uploadedPhotos.push(photoData);
+
+                selectedFiles_img.push(file); 
+
                 displayPhotoPreview(photoData);
             };
             reader.readAsDataURL(file);
@@ -790,6 +793,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 		console.log(uploadedPhotos);
 		const dataTransfer = new DataTransfer();
 		selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
+        
 		document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
 		
     }
