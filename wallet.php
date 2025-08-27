@@ -682,6 +682,39 @@ $activeTab = 'wallet';
 
     <?php include('includes/footer.php'); ?>
 
+<script>
+// PHP array converted to JavaScript
+  var countryData = <?php echo json_encode($f_country_list); ?>; console.log(countryData);
+jQuery(document).ready(function() {
+  jQuery('.wallet_country').on('change', function() {
+    let selectedCountry = jQuery(this).val();
+    
+	var abbreviation = getAbbreviationById(selectedCountry);
+    
+	var full_form = getFull_formById(selectedCountry);
+    
+	jQuery('label.wallet_label').html(abbreviation);
+	jQuery('.wallet_sm_text').html(full_form);   console.log(selectedCountry+' - '+abbreviation+' - '+full_form);
+	
+    
+  });
+});
+
+function getAbbreviationById(id) {
+  var country = countryData.find(function(item) {
+    return item.id == id;
+  });
+
+  return country ? country.abbreviation : null;
+}
+function getFull_formById(id) {
+  var country = countryData.find(function(item) {
+    return item.id == id;
+  });
+
+  return country ? country.full_form : null;
+}
+</script>
 
     <link href="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
     <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
@@ -1040,37 +1073,4 @@ $activeTab = 'wallet';
     // Initialize lazy loading
     document.addEventListener('DOMContentLoaded', lazyLoad);
 </script>
-<?php print_r($f_country_list); ?>
-<script>
-// PHP array converted to JavaScript
-  var countryData = <?php echo json_encode($f_country_list); ?>; console.log(countryData);
-jQuery(document).ready(function() {
-  jQuery('.wallet_country').on('change', function() {
-    let selectedCountry = jQuery(this).val();
-    
-	var abbreviation = getAbbreviationById(selectedCountry);
-    
-	var full_form = getFull_formById(selectedCountry);
-    
-	jQuery('label.wallet_label').html(abbreviation);
-	jQuery('.wallet_sm_text').html(full_form);   console.log(selectedCountry+' - '+abbreviation+' - '+full_form);
-	
-    
-  });
-});
 
-function getAbbreviationById(id) {
-  var country = countryData.find(function(item) {
-    return item.id == id;
-  });
-
-  return country ? country.abbreviation : null;
-}
-function getFull_formById(id) {
-  var country = countryData.find(function(item) {
-    return item.id == id;
-  });
-
-  return country ? country.full_form : null;
-}
-</script>
