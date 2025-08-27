@@ -1053,7 +1053,6 @@ $activeTab = 'wallet';
     <?php endforeach; ?>
   ];
 
-  console.log('TEST '+countryData);
 
 jQuery(document).ready(function() { 
   jQuery('.wallet_country').on('change', function() {
