@@ -74,10 +74,16 @@ if($userDetails){
 							'created_at' => $date,
 						]);
 
-                        echo "<script>alert('Your Payment Data has been inserted');</script>";
-                        echo "<script>window.location='all-models.php';</script>";
-
                         unset($_SESSION["pay_amount"], $_SESSION["plan_status"], $_SESSION["plan_type"]);
+
+						if (isset($_SESSION["payment_done"])) {
+
+							unset($_SESSION["payment_done"]);
+						}
+
+						$_SESSION["payment_done"] = "Payment Successfully Completed";
+
+						echo '<script>window.loaction.redirectback()</script>';
 
 					// } else {
 					// 	echo "Error in wallet update: " . mysqli_error($con);

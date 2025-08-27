@@ -72,13 +72,23 @@ if($userDetails){
 				}*/
 			}
 		else{
-        	echo "<script>alert('Your Payment Data will not be inserted');</script>";
-        	echo "<script>window.location='success.php'</script>";
-        	unset($_SESSION["pay_amount"]);
+
+			unset($_SESSION["pay_amount"]);
         	unset($_SESSION["pay_coins"]);
+
+			if (isset($_SESSION["payment_done"])) {
+
+				unset($_SESSION["payment_done"]);
+			}
+
+			$_SESSION["payment_done"] = "Payment Successfully Completed";
+
+        	echo '<script>window.loaction.redirectback()</script>';
+        	
         } 
 	}
 	else{
+
 		echo "<script>alert('Please login');</script>";
 		echo "<script>window.location='login.php'</script>";
 	}
