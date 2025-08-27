@@ -3463,16 +3463,16 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
   <script>
 
-    $(function() {
-        $("#dob-input").datepicker({
-              dateFormat: 'yy-mm-dd',
-              minDate: 0,
-              maxDate: null,
-              changeMonth: true,
-              changeYear: true,
-              showButtonPanel: true,      
-        });
-    });
+    // $(function() {
+    //     $("#dob-input").datepicker({
+    //           dateFormat: 'yy-mm-dd',
+    //           minDate: 0,
+    //           maxDate: null,
+    //           changeMonth: true,
+    //           changeYear: true,
+    //           showButtonPanel: true,      
+    //     });
+    // });
 
 
     function select_hs_country(state) {
