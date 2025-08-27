@@ -38,6 +38,9 @@ if(!$model_data){
 $model_name = $model_data['name'];
 $model_ID = $model_data['id'];
 }
+
+$extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $m_id);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -175,10 +178,53 @@ $model_ID = $model_data['id'];
 								<h2 class="text-3xl font-bold premium-text heading-font"><?php echo $_GET['service']; ?></h2>
 								
 							</div>
+							
+							
+							<?php if($_GET['service'] == 'Meetup'){ ?>
+							
 							<div>
-								<label class="block text-white/80 font-semibold mb-3 text-lg">Tokens <?php echo $_GET['token']; ?></label>
+								<label class="block text-white/80 font-semibold mb-3 text-lg">Tokens <?php //echo $_GET['token']; ?></label>
 								
-								</div>
+							</div> 
+							
+							<div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Local Meetup Rate: <?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?>/hr</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Extended Social Rate: <?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?>/hr</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Extended Evening Rate: <?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?>/8hrs</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Full-day Social Rate: <?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?>/d</div>
+							</div>
+							
+							<div>
+								<label class="block text-white/80 font-semibold mb-3 text-lg">Available Days</label>
+								
+							</div>
+								
+							<?php } ?>
+							
+							<?php if($_GET['service'] == 'Travel'){ ?>
+							
+							<div>
+								<label class="block text-white/80 font-semibold mb-3 text-lg">Tokens <?php //echo $_GET['token']; ?></label>
+								
+							</div> 
+							
+							<div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Daily Rate: <?php if (!empty($extra_details)) echo $extra_details['daily_rate']; ?>/hr</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Weekly Rate: <?php if (!empty($extra_details)) echo $extra_details['weekly_rate']; ?>/hr</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Monthly Rate: <?php if (!empty($extra_details)) echo $extra_details['monthly_rate']; ?>/8hrs</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Preferred Travel Destinations: <?php if (!empty($extra_details)) echo $extra_details['travel_destination']; ?>/d</div>
+							</div>
+							
+							<div>
+								<label class="block text-white/80 font-semibold mb-3 text-lg">Available Months for Travel</label>
+								
+							</div>
+							
+							<div>
+							<?php $travel_months = json_decode($extra_details['travel_months']); ?>
+							</div>
+								
+							<?php } ?>
 							
 					</div>
 					
