@@ -36,9 +36,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   <link rel="stylesheet" href="<?= SITEURL ?>assets/css/dropzone.min.css" />
 
   <link rel='stylesheet' href='<?= SITEURL ?>assets/css/profile.css?v=<?= time() ?>' type='text/css' media='all' />
-
-  <link rel='stylesheet' href='<?= SITEURL ?>assets/css/jquery-ui.min.js?v=<?= time() ?>' type='text/css' media='all' />
-
   <style>
     .dropzone {
       border: none !important;
@@ -909,7 +906,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <label class="form-label">Date of Birth *</label>
-                  <input type="text" id="dob-input" class="form-input dob" name="dob" value="<?= $userDetails['dob'] ?>" readonly onchange="calculateAge()" data-date-format="dd-mm-yyyy" autocomplete="off" required>
+                  <input type="date" id="dob-input" class="form-input dob" name="dob" value="<?= $userDetails['dob'] ?>"  onchange="calculateAge()" data-date-format="dd-mm-yyyy" autocomplete="off" required>
                 </div>
                 <div>
                   <label class="form-label">Age *</label>
@@ -3458,24 +3455,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   <link href="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
   <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
-  <script type="text/javascript" src="<?= SITEURL ?>assets/js/jquery-ui.min.js"></script>
-
-
   <script>
-
-    $(function() {
-        $("#dob-input").datepicker({
-            dateFormat: 'yyyy-mm-dd',   
-            defaultDate: 0,         
-            maxDate: 0,   
-            changeMonth: true,
-            changeYear: true,
-            showButtonPanel: true
-        });
-    });
-
-
-
     function select_hs_country(state) {
       $("#i-hs-city").html('<option value="">Select</option>');
       $("#i-hs-state").html('<option value="">Select</option>');
@@ -3912,22 +3892,56 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       }
     }
 
+    // function calculateAge() {
+    //   const dobInput = document.getElementById('dob-input');
+    //   const ageDisplay = document.getElementById('age-display');
+
+    //   if (dobInput && dobInput.value && ageDisplay) {
+    //     const dob = new Date(dobInput.value);
+    //     const today = new Date();
+    //     let age = today.getFullYear() - dob.getFullYear();
+    //     const monthDiff = today.getMonth() - dob.getMonth();
+
+    //     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+    //       age--;
+    //     }
+    //     ageDisplay.value = age;
+    //   }
+    // }
+
     function calculateAge() {
+
       const dobInput = document.getElementById('dob-input');
       const ageDisplay = document.getElementById('age-display');
 
       if (dobInput && dobInput.value && ageDisplay) {
         const dob = new Date(dobInput.value);
         const today = new Date();
+
+        // Reset hours for correct comparison
+        dob.setHours(0,0,0,0);
+        today.setHours(0,0,0,0);
+
+        // Block future DOB
+        if (dob > today) {
+          alert("Future dates are not allowed.");
+          dobInput.value = "";
+          ageDisplay.value = "";
+          return;
+        }
+
         let age = today.getFullYear() - dob.getFullYear();
         const monthDiff = today.getMonth() - dob.getMonth();
+        const dayDiff = today.getDate() - dob.getDate();
 
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
           age--;
         }
+
         ageDisplay.value = age;
       }
     }
+
 
     function updateCities() {
       const countrySelect = document.getElementById('country-select');
