@@ -842,9 +842,16 @@ let selectedFiles_video = [];
     }
 
     function removePhoto(id) {
-        // uploadedPhotos = uploadedPhotos.filter(photo => photo.id !== id);
+
+        uploadedPhotos = uploadedPhotos.filter(photo => photo.id !== id);
         refreshPhotoGrid();
         $(`#${id}`).remove();
+
+        console.log(uploadedPhotos);
+
+        console.log(selectedFiles_img);
+
+
         
     }
 
