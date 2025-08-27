@@ -762,11 +762,14 @@ $serviceArr = array('Providing services', 'Looking for services');
         grid.classList.remove('hidden');
 
         const previewDiv = document.createElement('div');
+
+        previewDiv.id= `${photoData.id}`;
+
         previewDiv.className = 'media-preview relative';
         previewDiv.innerHTML = `
 
             <img src="${photoData.url}" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
-            
+
              <button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -839,8 +842,10 @@ let selectedFiles_video = [];
     }
 
     function removePhoto(id) {
-        uploadedPhotos = uploadedPhotos.filter(photo => photo.id !== id);
+        // uploadedPhotos = uploadedPhotos.filter(photo => photo.id !== id);
         refreshPhotoGrid();
+        $(`#${id}`).remove();
+        
     }
 
     function removeVideo(id) {
