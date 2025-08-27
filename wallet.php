@@ -1053,7 +1053,7 @@ jQuery(document).ready(function() {
 	var full_form = getFull_formById(selectedCountry);
     
 	jQuery('label.wallet_label').html(abbreviation);
-	jQuery('.wallet_sm_text').html(full_form);
+	jQuery('.wallet_sm_text').html(full_form);   console.log(selectedCountry+' - '+abbreviation+' - '+full_form);
 	
     
   });
