@@ -1047,8 +1047,8 @@ $activeTab = 'wallet';
     <?php foreach($f_country_list as $country): ?>
       {
         id: <?= $country['id'] ?>,
-        name: "<?= addslashes($country['name']) ?>",
-        abbreviation: `<?= addslashes($country['abbreviation']) ?>`
+        abbreviation: `<?= addslashes($country['abbreviation']) ?>`,
+		full_form: `<?= addslashes($country['full_form']) ?>`
       },
     <?php endforeach; ?>
   ];
@@ -1063,7 +1063,7 @@ jQuery(document).ready(function() {
 	var full_form = getFull_formById(selectedCountry);
     
 	jQuery('label.wallet_label').html(abbreviation);
-	jQuery('.wallet_sm_text').html(full_form);   console.log(selectedCountry+' - '+abbreviation+' - '+full_form);
+	jQuery('p.wallet_sm_text').html(full_form);   
 	
     
   });
