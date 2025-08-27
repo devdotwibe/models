@@ -13,7 +13,8 @@ session_start();
       
       $count1 =0;
 
-      $sql1 = "SELECT * FROM model_user WHERE username = '".$userid."'";
+      $sql1 = "SELECT * FROM model_user WHERE username = '".$userid."' OR email = '".$userid."'";
+
       $result1 = mysqli_query($con,$sql1);
 
        if ($result1 && $result1->num_rows > 0) {
