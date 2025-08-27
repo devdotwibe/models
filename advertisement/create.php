@@ -844,15 +844,8 @@ let selectedFiles_video = [];
     function removePhoto(id) {
 
         uploadedPhotos = uploadedPhotos.filter(photo => photo.id !== id);
+
         refreshPhotoGrid();
-        $(`#${id}`).remove();
-
-        console.log(uploadedPhotos);
-
-        console.log(selectedFiles_img);
-
-
-        
     }
 
     function removeVideo(id) {
@@ -863,6 +856,10 @@ let selectedFiles_video = [];
     function refreshPhotoGrid() { 
         const grid = document.getElementById('photoPreviewGrid');
         grid.innerHTML = '';
+
+        console.log('rtet',uploadedPhotos);
+
+        console.log('length',uploadedPhotos.length);
 
         if (uploadedPhotos.length === 0) {
             grid.classList.add('hidden');
