@@ -148,6 +148,23 @@ if (isset($_POST['vfb-submit'])) {
 		$as_a_model = 'No';
 	}
 
+    if (isset($_SESSION["user_name_exist"])) {
+        unset($_SESSION["user_name_exist"]);
+    }
+
+    if (isset($_SESSION["email_exist"])) {
+        unset($_SESSION["email_exist"]);
+    }
+
+    if (isset($_SESSION["email_error"])) {
+        unset($_SESSION["email_error"]);
+    }
+
+    if (isset($_SESSION["not_registred"])) {
+        unset($_SESSION["not_registred"]);
+    }
+
+
   $token = md5(uniqid(rand(), true)); 
 
   $sql_u = "SELECT * FROM model_user WHERE username='$user_name'"; 
