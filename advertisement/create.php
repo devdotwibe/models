@@ -430,9 +430,11 @@ $serviceArr = array('Providing services', 'Looking for services');
     {
         var value = $(el).val();
 
+        console.log(value);
+
         if(value =='other')
         {
-              $('#add_city_div').hide();
+              $('#add_city_div').show();
         }
         else
         {
