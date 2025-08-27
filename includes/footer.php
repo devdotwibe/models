@@ -696,6 +696,16 @@ document.addEventListener('keyup', (e) => {
     }
 });
 
+<?php if(isset($_SESSION["payment_done"] )) { ?>
+
+        document.addEventListener("DOMContentLoaded", function() {
+            OpenPayment();
+        });
+
+    <?php unset($_SESSION["payment_done"]); ?>
+
+<?php } ?>
+
 function OpenPayment()
 {
     $('#payment_done').show();
