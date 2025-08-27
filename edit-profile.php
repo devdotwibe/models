@@ -909,7 +909,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <label class="form-label">Date of Birth *</label>
-                  <input type="text" id="dob-input" class="form-input dob" name="dob" value="<?= $userDetails['dob'] ?>" readonly  max="<?= date('Y-m-d') ?>" onchange="calculateAge()" data-date-format="dd-mm-yyyy" autocomplete="off" required>
+                  <input type="text" id="dob-input" class="form-input dob" name="dob" value="<?= $userDetails['dob'] ?>" readonly onchange="calculateAge()" data-date-format="dd-mm-yyyy" autocomplete="off" required>
                 </div>
                 <div>
                   <label class="form-label">Age *</label>
