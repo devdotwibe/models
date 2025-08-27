@@ -103,10 +103,13 @@ if($_SESSION["log_user"]){
                         
                         <!-- Sign Up Link -->
                         <div class="mt-8 text-center">
+
                             <p class="text-white/60 text-sm mb-4">
                                 Don't have an account? 
-                                <a href="index.html#signup" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-semibold premium-link">Create Account</a>
+
+                                <a href="<?= SITEURL ?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-semibold premium-link">Create Account</a>
                             </p>
+
                             <p class="text-white/50 text-xs">
                                 By signing in, you agree to our <a href="#" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium premium-link" onclick="openTerms()">Terms</a> and <a href="#" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium premium-link" onclick="openPrivacy()">Privacy Policy</a>
                             </p>
