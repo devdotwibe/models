@@ -251,6 +251,9 @@ else{
                 <span class="separator">/</span>
                 <a href="<?= SITEURL ?>/advertisements/">Advertisements</a>
                 <span class="separator">/</span>
+
+                <?= print_r($form_data); ?>
+                
                 <span><?php echo $form_data['name']; ?></span>
             </div>
 
