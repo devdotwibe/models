@@ -596,7 +596,7 @@ $activeTab = 'wallet';
                                 } else if (!empty($taxdetail['country'])) {
                                     $country = $taxdetail['country'];
                                 }
-								$wallet_label = ''; $wallet_sm_text = ''; 
+								$wallet_label = ''; $wallet_sm_text = '';  print_r($f_country_list);
                                 ?>
                                 <select class="form-input wallet_country" name="country" required >
                                     <option value="">Select country</option>
