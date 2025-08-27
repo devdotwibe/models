@@ -502,6 +502,8 @@ if(!empty($userDetails['profile_pic'])){
                   </div>
 
                   <?php } ?>
+
+                  <button class="btn-primary w-full" onclick="window.location.href='<?php echo SITEURL.'/all-models.php?filter=available'?>" >View all</button>
                   
               </div>
 
