@@ -83,7 +83,7 @@ if (isset($_SESSION["log_user_id"])) {
 
     //Tax info
     if ($_POST && isset($_POST['tax_submit'])) {
-        $arr_tax = array('country', 'pan_number', 'aadhaar_number', 'annual_income');
+        $arr_tax = array('country', 'pan_number', 'annual_income'); //, 'aadhaar_number'
         $post_data_tax = array_from_post($arr_tax);
         if (empty($taxdetail)) {
             $post_data_tax['user_id'] = $userDetails["id"];
@@ -589,40 +589,55 @@ $activeTab = 'wallet';
                         <form action="" method="post" class="space-y-6" role="form" enctype="multipart/form-data" <?php /* onsubmit="handleTaxInfo(event)" */ ?>>
                             <div class="form-group">
                                 <label class="form-label">Tax Residency Country</label>
-                                <?php $f_country_list = DB::query('select id,name,sortname from countries order by name asc');
+                                <?php $f_country_list = DB::query('select id,name,sortname,abbreviation,full_form from countries where abbreviation!="" order by name asc');
                                 $country = '';
                                 if (isset($_POST['country'])) {
                                     $country = $_POST['country'];
                                 } else if (!empty($taxdetail['country'])) {
                                     $country = $taxdetail['country'];
                                 }
-
+								$wallet_label = ''; $wallet_sm_text = ''; 
                                 ?>
-                                <select class="form-input" name="country" required>
+                                <select class="form-input wallet_country" name="country" required >
                                     <option value="">Select country</option>
 
                                     <?php foreach ($f_country_list as $val) { ?>
 
-                                        <option value="<?= $val['id'] ?>" <?= $country == $val['id'] ? 'selected' : '' ?>><?= $val['name'] ?></option>
+                                        <option value="<?= $val['id'] ?>" <?php if((!empty($country) && $country== $val['id']) || (empty($country) && $val['id'] == 231)){ echo 'selected'; } ?>><?= $val['name'] ?></option>
 
-                                    <?php } ?>
+                                    <?php 
+									
+										if(!empty($country) && $country== $val['id']){ 
+											$wallet_label = $val['abbreviation'];
+											$wallet_sm_text = $val['full_form'];
+										}
+										
+									
+									} ?>
 
                                 </select>
                             </div>
+							
+							<?php 
+							
+							
+							?>
 
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label class="form-label">PAN Number</label>
+                                    <label class="form-label wallet_label">
+									<?php if(!empty($wallet_label)) { echo $wallet_label; } else echo 'SSN'; ?></label>
                                     <input type="text" class="form-input" name="pan_number" value="<?php if (isset($_POST['pan_number'])) {
                                                                                                         echo $_POST['pan_number'];
                                                                                                     } else echo $taxdetail['pan_number']; ?>" placeholder="ABCDE1234F" required>
-                                </div>
-                                <div class="form-group">
+									<p class="wallet_sm_text help-text"><?php if(!empty($wallet_sm_text)) { echo $wallet_sm_text; }  ?></p>
+								</div>
+                                <?php /*?><div class="form-group">
                                     <label class="form-label">Aadhaar Number</label>
                                     <input type="text" class="form-input" name="aadhaar_number" value="<?php if (isset($_POST['aadhaar_number'])) {
                                                                                                             echo $_POST['aadhaar_number'];
                                                                                                         } else echo $taxdetail['aadhaar_number']; ?>" placeholder="1234 5678 9012">
-                                </div>
+                                </div><?php */ ?>
                             </div>
 
                             <?php
@@ -1024,4 +1039,38 @@ $activeTab = 'wallet';
 
     // Initialize lazy loading
     document.addEventListener('DOMContentLoaded', lazyLoad);
+</script>
+
+<script>
+// PHP array converted to JavaScript
+  var countryData = <?php echo json_encode($f_country_list); ?>;
+jQuery(document).ready(function() {
+  jQuery('.wallet_country').on('change', function() {
+    let selectedCountry = jQuery(this).val();
+    
+	var abbreviation = getAbbreviationById(selectedCountry);
+    
+	var full_form = getFull_formById(selectedCountry);
+    
+	jQuery('label.wallet_label').html(abbreviation);
+	jQuery('.wallet_sm_text').html(full_form);
+	
+    
+  });
+});
+
+function getAbbreviationById(id) {
+  var country = countryData.find(function(item) {
+    return item.id == id;
+  });
+
+  return country ? country.abbreviation : null;
+}
+function getFull_formById(id) {
+  var country = countryData.find(function(item) {
+    return item.id == id;
+  });
+
+  return country ? country.full_form : null;
+}
 </script>
