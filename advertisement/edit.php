@@ -691,7 +691,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 				},
 				dataType: 'json',
 				success: function(res) {
-					$("#i-hs-city").html('<option value="">Select</option>' + res.list);
+                    $("#i-hs-city").html('<option value="">Select</option>' + res.list + '<option value="other">Other</option>');
 				}
 			})
 		}
