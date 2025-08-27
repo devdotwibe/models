@@ -71,6 +71,14 @@ include('includes/helper.php');
             }
         }
     </script>
+
+    <style>
+
+        #sidebarMenu {
+        z-index: 9999 !important;
+    }
+
+    </style>
 </head>
 
 
