@@ -136,7 +136,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 
 
     <link rel='stylesheet' href='<?= SITEURL ?>assets/css/profile.css?v=<?= time() ?>' type='text/css' media='all' />
-    
+
 	<style>
 	.dropzone {
 		border: none !important;
@@ -879,9 +879,23 @@ $serviceArr = array('Providing services', 'Looking for services');
                     id: Date.now() + Math.random()
                 };
 
-                uploadedPhotos.push(photoData);
+                 uploadedPhotos.push(photoData);
+
+                selectedFiles_img.push(file); 
+
                 displayPhotoPreview(photoData);
+
+                console.log(uploadedPhotos);
+
+                const dataTransfer = new DataTransfer();
+
+               selectedFiles_img.forEach(f => dataTransfer.items.add(f));
+                
+               document.getElementById('photoInput').files = dataTransfer.files;
+                
+                console.log(dataTransfer.files);
             };
+
             reader.readAsDataURL(file);
         });
 		
@@ -899,14 +913,14 @@ $serviceArr = array('Providing services', 'Looking for services');
         const previewDiv = document.createElement('div');
         previewDiv.className = 'media-preview relative';
         previewDiv.innerHTML = `
-            <img src="${photoData.url}" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">`;
-          /*  `<button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
+            <img src="${photoData.url}" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
+          <button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-        `;*/
+        `;
 
         grid.appendChild(previewDiv);
     }
@@ -938,14 +952,20 @@ let selectedFiles_video = [];
                 };
 
                 uploadedVideos.push(videoData);
+
+                selectedFiles_video.push(file); 
+
                 displayVideoPreview(videoData);
+
+                const dataTransfer = new DataTransfer();
+
+                selectedFiles_video.forEach(f => dataTransfer.items.add(f));
+
+                document.getElementById('videoInput').files = dataTransfer.files; //console.log(dataTransfer.files);
             };
             reader.readAsDataURL(file);
         });
 		
-		const dataTransfer = new DataTransfer();
-		selectedFiles_video.forEach(file => dataTransfer.items.add(file)); 
-		document.getElementById('videoInput').files = dataTransfer.files; //console.log(dataTransfer.files);
 		
     }
 
