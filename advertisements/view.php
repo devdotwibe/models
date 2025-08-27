@@ -252,8 +252,6 @@ else{
                 <a href="<?= SITEURL ?>/advertisements/">Advertisements</a>
                 <span class="separator">/</span>
 
-                <?= print_r($form_data); ?>
-                
                 <span><?php echo $form_data['name']; ?></span>
             </div>
 
@@ -279,77 +277,60 @@ else{
 						<?php
 						} */ ?>
 						
-						
 						<div class="owl-carousel" >
 						
-						<?php if(!empty($form_data['video'])){ 
-						$video = explode('|',$form_data['video']);
-						$video_count = count($video);
-						foreach($video as $add_vd){
-						?>
-						<div>
-						<video class="video-ci" controls  >
-						<source src="<?php echo SITEURL.'uploads/banners/'.$add_vd; ?>" type="video/mp4">
-						</video>
-						</div>
-						<?php } }else $video_count = 0; ?>
-						<?php if(!empty($form_data['image'])){ ?>
-						<div>
-							<img src="<?php echo SITEURL.'uploads/banners/'.$form_data['image']; ?>" >
-					
-						  </div>
-						  
-						<?php } $add_cnt = 0; if(!empty($form_data['additionalimages'])){ 
-							$additionalimages = explode('|',$form_data['additionalimages']);
-							foreach($additionalimages as $add_img){
-								if(!empty($add_img)){
-						?>
-						
-						<div>
-							<img src="<?php echo SITEURL.'uploads/banners/'.$add_img; ?>" >
-					
-						  </div>
-						
-						
-								<?php $add_cnt++; } } } ?>
-						
-						
-						</div>
-						
-						
+                            <?php if(!empty($form_data['video'])){ 
 
+                                $video = explode('|',$form_data['video']);
 
-                    <?php /*?><div class="thumbnail-grid">
-						<?php
-						if(!empty($form_data['video'])){
-						?>
-						<div class="thumbnail active" onclick="changeImage(0)">
-                            <img src="/placeholder.svg?height=100&width=100" alt="Aria Moonlight Thumbnail 1">
-                        </div>
-						<div class="thumbnail" onclick="changeImage(1)">
-                            <img src="<?php echo SITEURL.'uploads/banners/'.$form_data['image']; ?>" alt="<?php echo $form_data['name']; ?>">
-                        </div>
-						<?php $j = 2;
-						}
-						else{
-						?>
-                        <div class="thumbnail active" onclick="changeImage(0)">
-                            <img src="<?php echo SITEURL.'uploads/banners/'.$form_data['image']; ?>" alt="<?php echo $form_data['name']; ?>">
-                        </div>
-						<?php $j = 1; } ?>
+                                $video_count = count($video);
+
+                                if($video_count > 0 ){ 
+
+                                    foreach($video as $add_vd) {  ?>
+                                
+                                        <div>
+
+                                            <video class="video-ci" controls  >
+
+                                                <source src="<?php echo SITEURL.'uploads/banners/'.$add_vd; ?>" type="video/mp4">
+
+                                            </video>
+
+                                        </div>
+
+                        <?php }  }  } else $video_count = 0; ?>
+                            
+                            <?php if(!empty($form_data['image'])){ ?>
+
+                            <div>
+                                <img src="<?php echo SITEURL.'uploads/banners/'.$form_data['image']; ?>" >
+                        
+                            </div>
+                            
+                            <?php } $add_cnt = 0; if(!empty($form_data['additionalimages'])){ 
+
+                                $additionalimages = explode('|',$form_data['additionalimages']);
+
+                                if($additionalimages > 0)
+                                {
+
+                                foreach($additionalimages as $add_img){
+
+                                    if(!empty($add_img)){  ?>
+
+                                        <div>
+                                            <img src="<?php echo SITEURL.'uploads/banners/'.$add_img; ?>" >
+                                    
+                                        </div>
+                                        
+                                <?php $add_cnt++; }  } } } ?>
 						
-                        <?php if(!empty($form_data['additionalimages'])){ 
-							$additionalimages = explode('|',$form_data['additionalimages']);
-							foreach($additionalimages as $add_img){
-						?>
 						
-						<div class="thumbnail" onclick="changeImage(<?php echo $j; ?>)">
-                            <img src="<?php echo SITEURL.'uploads/banners/'.$add_img; ?>" alt="<?php echo $add_img; ?>">
-                        </div>
+						</div>
 						
-							<?php $j++; } } ?>
-                    </div> <?php */ ?>
                 </div>
+
 				</div>
 
                 <!-- Ad Content -->
