@@ -4357,7 +4357,7 @@ body.edit-profilepage {
 }
 
 
-.edit-profilepage .checkbox-option > div {
+.edit-profilepage .conditional-section.show .checkbox-option > div {
   position: absolute;
   top: 110%;
   display: flex !important;
@@ -4368,7 +4368,7 @@ body.edit-profilepage {
   justify-content: space-between;
 }
 
-.edit-profilepage .checkbox-option>div input{
+.edit-profilepage  .conditional-section.show .checkbox-option>div input{
     width: 48% !important;
 }
 

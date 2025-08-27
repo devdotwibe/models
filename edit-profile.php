@@ -20,7 +20,7 @@ $activeTab = 'basic';
 
 $lang_list = modal_language_list();
 
-$extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_SESSION['log_user_unique_id']); 
+$extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_SESSION['log_user_unique_id']);
 ?>
 
 <!DOCTYPE html>
@@ -46,348 +46,416 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       color: #000;
     }
 
-     .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: overlayFadeIn 0.8s ease-out;
-        }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: overlayFadeIn 0.8s ease-out;
+    }
 
-        @keyframes overlayFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    @keyframes overlayFadeIn {
+      from {
+        opacity: 0;
+      }
 
-        .conversion-modal {
-            position: relative;
-            width: 90%;
-            max-width: 600px;
-            background: linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.1) 0%,
-                rgba(255, 255, 255, 0.05) 50%,
-                rgba(255, 255, 255, 0.02) 100%);
-            backdrop-filter: blur(40px);
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 48px 40px;
-            box-shadow: 
-                0 32px 64px rgba(0, 0, 0, 0.4),
-                0 16px 32px rgba(139, 69, 255, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            animation: modalSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-        }
+      to {
+        opacity: 1;
+      }
+    }
 
-        @keyframes modalSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(100px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
+    .conversion-modal {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      background: linear-gradient(135deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.05) 50%,
+          rgba(255, 255, 255, 0.02) 100%);
+      backdrop-filter: blur(40px);
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 48px 40px;
+      box-shadow:
+        0 32px 64px rgba(0, 0, 0, 0.4),
+        0 16px 32px rgba(139, 69, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      animation: modalSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
 
-        .modal-glow {
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, 
-                transparent 0deg,
-                rgba(139, 69, 255, 0.3) 90deg,
-                rgba(236, 72, 153, 0.3) 180deg,
-                rgba(59, 130, 246, 0.3) 270deg,
-                transparent 360deg);
-            animation: rotateGlow 8s linear infinite;
-            z-index: -1;
-        }
+    @keyframes modalSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(100px) scale(0.9);
+      }
 
-        @keyframes rotateGlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
 
-        .floating-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
+    .modal-glow {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg,
+          transparent 0deg,
+          rgba(139, 69, 255, 0.3) 90deg,
+          rgba(236, 72, 153, 0.3) 180deg,
+          rgba(59, 130, 246, 0.3) 270deg,
+          transparent 360deg);
+      animation: rotateGlow 8s linear infinite;
+      z-index: -1;
+    }
 
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: linear-gradient(45deg, #8b45ff, #ec4899);
-            border-radius: 50%;
-            animation: floatParticle 6s ease-in-out infinite;
-        }
+    @keyframes rotateGlow {
+      from {
+        transform: rotate(0deg);
+      }
 
-        @keyframes floatParticle {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
-        }
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-        .exclusive-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #8b45ff, #ec4899);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
-            animation: badgePulse 2s ease-in-out infinite;
-        }
+    .floating-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-        @keyframes badgePulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(139, 69, 255, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(139, 69, 255, 0.5); }
-        }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: linear-gradient(45deg, #8b45ff, #ec4899);
+      border-radius: 50%;
+      animation: floatParticle 6s ease-in-out infinite;
+    }
 
-        .badge-shimmer {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shimmer 3s ease-in-out infinite;
-        }
+    @keyframes floatParticle {
 
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.3;
+      }
 
-        .main-headline {
-            font-family: 'Playfair Display', serif;
-            font-size: 42px;
-            font-weight: 700;
-            line-height: 1.2;
-            background: linear-gradient(135deg, #ffffff 0%, #8b45ff 50%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 16px;
-            text-align: center;
-            animation: textGlow 3s ease-in-out infinite alternate;
-        }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 1;
+      }
+    }
 
-        @keyframes textGlow {
-            from { filter: drop-shadow(0 0 10px rgba(139, 69, 255, 0.3)); }
-            to { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.5)); }
-        }
+    .exclusive-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #8b45ff, #ec4899);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      animation: badgePulse 2s ease-in-out infinite;
+    }
 
-        .sub-headline {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            margin-bottom: 32px;
-            line-height: 1.6;
-            font-weight: 400;
-        }
+    @keyframes badgePulse {
 
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 32px;
-        }
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(139, 69, 255, 0.3);
+      }
 
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            animation: benefitSlideIn 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateX(-20px);
-        }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(139, 69, 255, 0.5);
+      }
+    }
 
-        .benefit-item:nth-child(1) { animation-delay: 0.2s; }
-        .benefit-item:nth-child(2) { animation-delay: 0.4s; }
-        .benefit-item:nth-child(3) { animation-delay: 0.6s; }
-        .benefit-item:nth-child(4) { animation-delay: 0.8s; }
+    .badge-shimmer {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 3s ease-in-out infinite;
+    }
 
-        @keyframes benefitSlideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+    @keyframes shimmer {
+      0% {
+        left: -100%;
+      }
 
-        .benefit-item:hover {
-            background: rgba(139, 69, 255, 0.1);
-            border-color: rgba(139, 69, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(139, 69, 255, 0.2);
-        }
+      100% {
+        left: 100%;
+      }
+    }
 
-        .benefit-icon {
-            width: 24px;
-            height: 24px;
-            background: linear-gradient(135deg, #8b45ff, #ec4899);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            flex-shrink: 0;
-        }
+    .main-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #ffffff 0%, #8b45ff 50%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+      text-align: center;
+      animation: textGlow 3s ease-in-out infinite alternate;
+    }
 
-        .benefit-text {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-            font-weight: 500;
-        }
+    @keyframes textGlow {
+      from {
+        filter: drop-shadow(0 0 10px rgba(139, 69, 255, 0.3));
+      }
 
-        .social-proof {
-            text-align: center;
-            margin-bottom: 32px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
+      to {
+        filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.5));
+      }
+    }
 
-        .proof-number {
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #8b45ff, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-            animation: countUp 2s ease-out;
-        }
+    .sub-headline {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      margin-bottom: 32px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
 
-        @keyframes countUp {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
 
-        .proof-text {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-        }
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      animation: benefitSlideIn 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateX(-20px);
+    }
 
-        .urgency-text {
-            text-align: center;
-            color: #fbbf24;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            animation: urgencyPulse 2s ease-in-out infinite;
-        }
+    .benefit-item:nth-child(1) {
+      animation-delay: 0.2s;
+    }
 
-        @keyframes urgencyPulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
+    .benefit-item:nth-child(2) {
+      animation-delay: 0.4s;
+    }
 
-        .cta-button {
-            width: 100%;
-            padding: 18px 32px;
-            background: linear-gradient(135deg, #8b45ff 0%, #ec4899 100%);
-            color: white;
-            border: none;
-            border-radius: 16px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 8px 32px rgba(139, 69, 255, 0.4);
-        }
+    .benefit-item:nth-child(3) {
+      animation-delay: 0.6s;
+    }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(139, 69, 255, 0.6);
-        }
+    .benefit-item:nth-child(4) {
+      animation-delay: 0.8s;
+    }
 
-        .cta-button:active {
-            transform: translateY(0);
-        }
+    @keyframes benefitSlideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
 
-        .button-shine {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: buttonShine 3s ease-in-out infinite;
-        }
+    .benefit-item:hover {
+      background: rgba(139, 69, 255, 0.1);
+      border-color: rgba(139, 69, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(139, 69, 255, 0.2);
+    }
 
-        @keyframes buttonShine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
+    .benefit-icon {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, #8b45ff, #ec4899);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
 
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            color: rgba(255, 255, 255, 0.7);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            transition: all 0.3s ease;
-        }
+    .benefit-text {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      font-weight: 500;
+    }
 
-        .close-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
+    .social-proof {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-        @media (max-width: 768px) {
-            .conversion-modal {
-                width: 95%;
-                padding: 32px 24px;
-            }
-            
-            .main-headline {
-                font-size: 32px;
-            }
-            
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+    .proof-number {
+      font-size: 32px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #8b45ff, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      animation: countUp 2s ease-out;
+    }
 
+    @keyframes countUp {
+      from {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .proof-text {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+    }
+
+    .urgency-text {
+      text-align: center;
+      color: #fbbf24;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      animation: urgencyPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes urgencyPulse {
+
+      0%,
+      100% {
+        opacity: 0.7;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 18px 32px;
+      background: linear-gradient(135deg, #8b45ff 0%, #ec4899 100%);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 8px 32px rgba(139, 69, 255, 0.4);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(139, 69, 255, 0.6);
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+    }
+
+    .button-shine {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: buttonShine 3s ease-in-out infinite;
+    }
+
+    @keyframes buttonShine {
+      0% {
+        left: -100%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .conversion-modal {
+        width: 95%;
+        padding: 32px 24px;
+      }
+
+      .main-headline {
+        font-size: 32px;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -513,7 +581,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             <span>Available Balance:</span>
             <div class="flex items-center">
               <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
-              <span class="font-bold text-xl"><?= number_format($userDetails['balance'],2) ?></span>
+              <span class="font-bold text-xl"><?= number_format($userDetails['balance'], 2) ?></span>
             </div>
           </div>
         </div>
@@ -523,14 +591,14 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             <label class="form-label">Withdraw Amount (TLM Tokens)</label>
             <input type="number" id="withdraw-amount" class="form-input" placeholder="Enter amount" name="coins" value="100" data-max="<?= $userDetails['balance'] ?>" data-min="100" oninput="updateWithdrawUSD(this)">
             <p class="help-text">Minimum withdrawal: 100 TLM tokens</p>
-			
-			<span id="amount_error" class="text-danger" style="display: none;"> </span>
-			
+
+            <span id="amount_error" class="text-danger" style="display: none;"> </span>
+
           </div>
 
           <div>
             <label class="form-label">USD Equivalent</label>
-            <input type="text" id="withdraw-usd" class="form-input" readonly placeholder="$0.00" value="$<?php echo number_format((100*0.1), 2, '.', ''); ?>" >
+            <input type="text" id="withdraw-usd" class="form-input" readonly placeholder="$0.00" value="$<?php echo number_format((100 * 0.1), 2, '.', ''); ?>">
           </div>
 
           <?php /*?><div>
@@ -544,13 +612,15 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div><?php */ ?>
         </div>
       </div>
-	  
-	  <?php $check_request = get_data('users_withdrow_request', array('user_id' => $userDetails["id"], 'status' => '0'), true); ?>
-	  <?php if ($check_request) { echo '<div class="rejectmsg" style="color:red;">You already sent request. Please wait for pending request</div>'; } ?>
+
+      <?php $check_request = get_data('users_withdrow_request', array('user_id' => $userDetails["id"], 'status' => '0'), true); ?>
+      <?php if ($check_request) {
+        echo '<div class="rejectmsg" style="color:red;">You already sent request. Please wait for pending request</div>';
+      } ?>
       <div class="flex space-x-4">
         <button class="btn-secondary flex-1" onclick="closeWithdrawModal()">Cancel</button>
-        <button class="btn-withdraw flex-1" id="withdraw_btn" <?php if ($check_request) { ?> onclick="rejectWithdraw()" disabled <?php } else { ?>  onclick="processWithdrawal()"  <?php } ?> >Withdraw</button>
-		
+        <button class="btn-withdraw flex-1" id="withdraw_btn" <?php if ($check_request) { ?> onclick="rejectWithdraw()" disabled <?php } else { ?> onclick="processWithdrawal()" <?php } ?>>Withdraw</button>
+
       </div>
     </div>
   </div>
@@ -620,11 +690,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           Basic Profile
         </button>
 
-         <?php 
+        <?php
 
-            $is_user_have_extra = isUserHaveExtraDetail($userDetails['unique_id'],$con);
+        $is_user_have_extra = isUserHaveExtraDetail($userDetails['unique_id'], $con);
 
-            if( $is_user_have_extra  ) {  ?>
+        if ($is_user_have_extra) {  ?>
 
           <button class="tab-button" onclick="switchTab('creator')" id="creator-tab">
             Creator Settings
@@ -632,20 +702,20 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
         <?php } else { ?>
 
-            <button class="tab-button" onclick="CreateSetting()" id="creator-tab">
-              Creator Settings
-            </button>
+          <button class="tab-button" onclick="CreateSetting()" id="creator-tab">
+            Creator Settings
+          </button>
 
-          <?php } ?>
+        <?php } ?>
 
-        <?php if($userDetails['as_a_model'] =='Yes') {  ?>
+        <?php if ($userDetails['as_a_model'] == 'Yes') {  ?>
 
           <button class="tab-button" onclick="switchTab('services')" id="services-tab">
             Creator Services
             <span class="ml-2 text-xs bg-green-500 text-white px-2 py-1 rounded-full">✓ Active</span>
           </button>
 
-        <?php }?>
+        <?php } ?>
 
         <button class="tab-button" onclick="switchTab('premium')" id="premium-tab">
           Premium & Privacy
@@ -687,10 +757,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                     $have_pic = true;
 
                     $prof_img = SITEURL . $userDetails['profile_pic'];
-
                   } else {
 
-                     $have_pic = false;
+                    $have_pic = false;
 
                     $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
                   } ?>
@@ -706,24 +775,24 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                   <div class="edit-close">
 
-                  <?php if($have_pic) { ?>
+                    <?php if ($have_pic) { ?>
 
-                        <a  onclick="DeleteImage()">×</a>
-                        
-                        <a  onclick="editProfileImage()">
-                          <img src="<?php echo SITEURL.'/assets/images/edt.svg'; ?>" alt="">
+                      <a onclick="DeleteImage()">×</a>
 
-                        </a>
+                      <a onclick="editProfileImage()">
+                        <img src="<?php echo SITEURL . '/assets/images/edt.svg'; ?>" alt="">
 
-                  <?php } ?>
+                      </a>
+
+                    <?php } ?>
 
                   </div>
 
-                  <button type="button" id="pic_img_btn" class="change-photo-btn" <?php if($have_pic) { ?> style="display:none" <?php } ?> >
+                  <button type="button" id="pic_img_btn" class="change-photo-btn" <?php if ($have_pic) { ?> style="display:none" <?php } ?>>
                     <input type="file" name="pic_img" style="display:none" id="pic_img" class="vfb-text vfb-medium" accept=".jpg,.jpeg,.png" />
 
 
-                    <label for="pic_img"  >
+                    <label for="pic_img">
 
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -899,7 +968,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             <div class="space-y-4">
               <div>
                 <label class="form-label">Country *</label>
-                <select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-control"  required>
+                <select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-control" required>
                   <option value="">Select your country</option>
                   <?php
                   foreach ($country_list as $val) {
@@ -912,12 +981,12 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
               </div>
               <div>
-                <label class="form-label">State/Province *</label> 
-                <select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-select"  required></select>
+                <label class="form-label">State/Province *</label>
+                <select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-select" required></select>
               </div>
               <div>
                 <label class="form-label">City *</label>
-                <select name="city" id="i-hs-city" class="form-select"  required></select>
+                <select name="city" id="i-hs-city" class="form-select" required></select>
               </div>
               <div>
                 <label class="form-label">Willing to Travel</label>
@@ -938,12 +1007,12 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               </div>
             </div>
           </div>
-		  
-		  
-		  <!-- Physical Attributes -->
-		<div class="interests-section lg:col-span-2">
+
+
+          <!-- Physical Attributes -->
+          <div class="interests-section lg:col-span-2">
             <h3 class="text-xl font-bold text-purple-400 mb-4">👤 Physical Attributes</h3>
-            <div class="private-section mb-6"> 
+            <div class="private-section mb-6">
               <p class="text-white/70 text-sm mb-4">🔒 Private Matching Information</p>
               <p class="text-white/70 text-sm mb-4">This information is kept private and used only for matching preferences. It will not be displayed publicly.</p>
             </div>
@@ -1210,10 +1279,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 </div>
               </div>
             </div>
-        </div>
-		  
-		  
-		  
+          </div>
+
+
+
           <?php $hobbies = $userDetails['hobbies'];
           $hobbies = json_decode($hobbies);  ?>
           <!-- Interests & Hobbies -->
@@ -1366,7 +1435,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           ?>
 
           <!-- Social Links - Enhanced -->
-          <div class="form-section lg:col-span-2" <?php if ($userDetails['as_a_model'] != 'Yes') echo 'style="display:none;"'; ?> >
+          <div class="form-section lg:col-span-2" <?php if ($userDetails['as_a_model'] != 'Yes') echo 'style="display:none;"'; ?>>
             <h3 class="text-xl font-bold gradient-text mb-6">Social Links & Platforms</h3>
             <p class="text-white/70 text-sm mb-4">Connect your social media accounts and specify if they're free to view or paid content</p>
             <div id="social-links-container">
@@ -1709,7 +1778,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     </div>
 
     <!-- Creator Settings Tab -->
-    <div id="creator-content" class="tab-content"  <?php if($userDetails['as_a_model'] !='Yes' && !$is_user_have_extra ) {  ?> style="display: none;" <?php }?> >
+    <div id="creator-content" class="tab-content" <?php if ($userDetails['as_a_model'] != 'Yes' && !$is_user_have_extra) {  ?> style="display: none;" <?php } ?>>
       <form method="post" id="creatorSettingsForm" action="act-edit-profile.php" enctype="multipart/form-data">
         <div class="text-center mb-8">
           <h2 class="text-2xl font-bold gradient-text mb-4">Creator Settings</h2>
@@ -1723,7 +1792,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           <div class="step" onclick="scrollToSection('content-creation')">Content Creation</div>
           <div class="step" onclick="scrollToSection('professional-work')">Professional Work</div>
           <div class="step" onclick="scrollToSection('30_days_access')">30 Days Access</div>
-          
+
           <?php /*?><div class="step" onclick="scrollToSection('physical-attributes')">Physical Attributes</div><?php */ ?>
           <div class="step" onclick="scrollToSection('govt-id-proof')"> ID proof</div>
         </div>
@@ -1746,7 +1815,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <span>TLM tokens are our platform's currency. Users purchase tokens and spend them to access your services. You earn 70% of all token revenue.</span>
             </div>
 
-            
+
             <?php //$serv_chats = DB::queryFirstRow('select * from model_service_chat where model_unique_id="'.$userDetails['unique_id'].'"'); 
             ?>
 
@@ -1887,9 +1956,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <label for="companion-no">Not interested</label>
                 </div>
               </div>
-			  
-			  
-			  
+
+
+
             </div>
 
             <div id="companion-options" class="conditional-section <?php if (!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes') {
@@ -1914,13 +1983,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <input type="number" class="form-input" name="in_overnight" value="<?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?>" placeholder="e.g., 8000" min="1">
                   <p class="help-text">Rate for evening social or casual meetups (8 hours)</p>
                 </div>
-				
-				<div>
+
+                <div>
                   <label class="form-label">Full-day Social Rate (TLM tokens)</label>
                   <input type="number" class="form-input" name="fullday_social" value="<?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?>" placeholder="e.g., 8000" min="1">
                   <p class="help-text">Rate for full-day sessions (24 hours) (8 hours)</p>
                 </div>
-				
+
                 <div>
                   <label class="form-label">Preferred Meeting Location</label>
                   <input type="text" class="form-input" name="d_a_address" value="<?php if (!empty($extra_details)) echo $extra_details['d_a_address']; ?>" placeholder="e.g., Coffee shops, restaurants, events">
@@ -1928,105 +1997,105 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 </div>
               </div>
 
-              <?php $social_availability = json_decode($extra_details['social_availability']); 
-			  $availability_time_slot = json_decode($extra_details['availability_time_slot']);  
-			  ?>
+              <?php $social_availability = json_decode($extra_details['social_availability']);
+              $availability_time_slot = json_decode($extra_details['availability_time_slot']);
+              ?>
 
               <div class="mt-4">
-			    <p class="help-text">Where you prefer to meet for social activities</p>
+                <p class="help-text">Where you prefer to meet for social activities</p>
                 <label class="form-label">Available Days</label>
                 <p class="help-text">Select the days you're available for social meetups</p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3 edit-allldays">
                   <div class="checkbox-option">
                     <input type="checkbox" id="mon" name="social_availability[]" value="Monday" <?php if (!empty($social_availability) && in_array('Monday', $social_availability)) echo 'checked'; ?>>
                     <label for="mon">Monday</label>
-					
-					<div class="mon_time_section" <?php if (!empty($social_availability) && in_array('Monday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
-					
-					<input type="time" class="form-input time_pick" name="Mondayfrom" value="<?php echo $availability_time_slot->Monday[0]; ?>">
-					
-					<input type="time" class="form-input time_pick" name="Mondayto"  value="<?php echo $availability_time_slot->Monday[1]; ?>">
-					
-					</div>
-					
+
+                    <div class="mon_time_section" <?php if (!empty($social_availability) && in_array('Monday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
+
+                      <input type="time" class="form-input time_pick" name="Mondayfrom" value="<?php echo $availability_time_slot->Monday[0]; ?>">
+
+                      <input type="time" class="form-input time_pick" name="Mondayto" value="<?php echo $availability_time_slot->Monday[1]; ?>">
+
+                    </div>
+
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="tue" name="social_availability[]" value="Tuesday" <?php if (!empty($social_availability) && in_array('Tuesday', $social_availability)) echo 'checked'; ?>>
                     <label for="tue">Tuesday</label>
-					
-					<div class="tue_time_section" <?php if (!empty($social_availability) && in_array('Tuesday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
-					
-					<input type="time" class="form-input time_pick" name="Tuesdayfrom" value="<?php echo $availability_time_slot->Tuesday[0]; ?>">
-					
-					<input type="time" class="form-input time_pick" name="Tuesdayto"  value="<?php echo $availability_time_slot->Tuesday[1]; ?>">
-					
-					</div>
-					
+
+                    <div class="tue_time_section" <?php if (!empty($social_availability) && in_array('Tuesday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
+
+                      <input type="time" class="form-input time_pick" name="Tuesdayfrom" value="<?php echo $availability_time_slot->Tuesday[0]; ?>">
+
+                      <input type="time" class="form-input time_pick" name="Tuesdayto" value="<?php echo $availability_time_slot->Tuesday[1]; ?>">
+
+                    </div>
+
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="wed" name="social_availability[]" value="Wednesday" <?php if (!empty($social_availability) && in_array('Wednesday', $social_availability)) echo 'checked'; ?>>
                     <label for="wed">Wednesday</label>
-					
-					<div class="wed_time_section" <?php if (!empty($social_availability) && in_array('Wednesday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
-					
-					<input type="time" class="form-input time_pick" name="Wednesdayfrom" value="<?php echo $availability_time_slot->Wednesday[0]; ?>">
-					
-					<input type="time" class="form-input time_pick" name="Wednesdayto"  value="<?php echo $availability_time_slot->Wednesday[1]; ?>">
-					
-					</div>
-					
+
+                    <div class="wed_time_section" <?php if (!empty($social_availability) && in_array('Wednesday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
+
+                      <input type="time" class="form-input time_pick" name="Wednesdayfrom" value="<?php echo $availability_time_slot->Wednesday[0]; ?>">
+
+                      <input type="time" class="form-input time_pick" name="Wednesdayto" value="<?php echo $availability_time_slot->Wednesday[1]; ?>">
+
+                    </div>
+
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="thu" name="social_availability[]" value="Thursday" <?php if (!empty($social_availability) && in_array('Thursday', $social_availability)) echo 'checked'; ?>>
                     <label for="thu">Thursday</label>
-					
-					<div class="thu_time_section" <?php if (!empty($social_availability) && in_array('Thursday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
-					
-					<input type="time" class="form-input time_pick" name="Thursdayfrom" value="<?php echo $availability_time_slot->Thursday[0]; ?>">
-					
-					<input type="time" class="form-input time_pick" name="Thursdayto"  value="<?php echo $availability_time_slot->Thursday[1]; ?>">
-					
-					</div>
-					
+
+                    <div class="thu_time_section" <?php if (!empty($social_availability) && in_array('Thursday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
+
+                      <input type="time" class="form-input time_pick" name="Thursdayfrom" value="<?php echo $availability_time_slot->Thursday[0]; ?>">
+
+                      <input type="time" class="form-input time_pick" name="Thursdayto" value="<?php echo $availability_time_slot->Thursday[1]; ?>">
+
+                    </div>
+
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="fri" name="social_availability[]" value="Friday" <?php if (!empty($social_availability) && in_array('Friday', $social_availability)) echo 'checked'; ?>>
                     <label for="fri">Friday</label>
-					
-					<div class="fri_time_section" <?php if (!empty($social_availability) && in_array('Friday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
-					
-					<input type="time" class="form-input time_pick" name="Fridayfrom" value="<?php echo $availability_time_slot->Friday[0]; ?>">
-					
-					<input type="time" class="form-input time_pick" name="Fridayto"  value="<?php echo $availability_time_slot->Friday[1]; ?>">
-					
-					</div>
-					
+
+                    <div class="fri_time_section" <?php if (!empty($social_availability) && in_array('Friday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
+
+                      <input type="time" class="form-input time_pick" name="Fridayfrom" value="<?php echo $availability_time_slot->Friday[0]; ?>">
+
+                      <input type="time" class="form-input time_pick" name="Fridayto" value="<?php echo $availability_time_slot->Friday[1]; ?>">
+
+                    </div>
+
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="sat" name="social_availability[]" value="Saturday" <?php if (!empty($social_availability) && in_array('Saturday', $social_availability)) echo 'checked'; ?>>
                     <label for="sat">Saturday</label>
-					
-					<div class="sat_time_section" <?php if (!empty($social_availability) && in_array('Saturday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
-					
-					<input type="time" class="form-input time_pick" name="Saturdayfrom" value="<?php echo $availability_time_slot->Saturday[0]; ?>">
-					
-					<input type="time" class="form-input time_pick" name="Saturdayto"  value="<?php echo $availability_time_slot->Saturday[1]; ?>">
-					
-					</div>
-					
+
+                    <div class="sat_time_section" <?php if (!empty($social_availability) && in_array('Saturday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
+
+                      <input type="time" class="form-input time_pick" name="Saturdayfrom" value="<?php echo $availability_time_slot->Saturday[0]; ?>">
+
+                      <input type="time" class="form-input time_pick" name="Saturdayto" value="<?php echo $availability_time_slot->Saturday[1]; ?>">
+
+                    </div>
+
                   </div>
                   <div class="checkbox-option">
                     <input type="checkbox" id="sun" name="social_availability[]" value="Sunday" <?php if (!empty($social_availability) && in_array('Sunday', $social_availability)) echo 'checked'; ?>>
                     <label for="sun">Sunday</label>
-					
-					<div class="sun_time_section" <?php if (!empty($social_availability) && in_array('Sunday', $social_availability)) { ?> style="display:block;" <?php } else{ ?> style="display:none;" <?php } ?> >
-					
-					<input type="time" class="form-input time_pick" name="Sundayfrom" value="<?php echo $availability_time_slot->Sunday[0]; ?>">
-					
-					<input type="time" class="form-input time_pick" name="Sundayto"  value="<?php echo $availability_time_slot->Sunday[1]; ?>">
-					
-					</div>
-					
+
+                    <div class="sun_time_section" <?php if (!empty($social_availability) && in_array('Sunday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
+
+                      <input type="time" class="form-input time_pick" name="Sundayfrom" value="<?php echo $availability_time_slot->Sunday[0]; ?>">
+
+                      <input type="time" class="form-input time_pick" name="Sundayto" value="<?php echo $availability_time_slot->Sunday[1]; ?>">
+
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -2034,9 +2103,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
             <!-- Travel Companionship -->
             <div class="mt-8 mb-6">
-			
-			<h2 class="text-xl font-bold">👥 Travel Experiences</h2>
-			
+
+              <h2 class="text-xl font-bold">👥 Travel Experiences</h2>
+
               <div class="question-text">Would you like to offer travel experiences?</div>
               <p class="help-text">Accompany others on trips, vacations, or business travel </p>
               <div class="radio-group mt-3">
@@ -2185,13 +2254,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         </div><?php */ ?>
           </div>
         </div>
-		
-		<?php 
-		
-		//Code for checking number of followers
-		$followers_array = DB::query('select unique_model_id from model_follow where unique_user_id="' . $userDetails['unique_id'] . '"  AND status = "Follow" ');
 
-		?>
+        <?php
+
+        //Code for checking number of followers
+        $followers_array = DB::query('select unique_model_id from model_follow where unique_user_id="' . $userDetails['unique_id'] . '"  AND status = "Follow" ');
+
+        ?>
 
         <!-- Professional Work -->
         <div id="professional-work" class="collapsible-section">
@@ -2201,7 +2270,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </div>
-          <div class="collapsible-content <?php if(empty($followers_array) || count($followers_array) < 1000){ echo 'access_restricted'; } ?>">
+          <div class="collapsible-content <?php if (empty($followers_array) || count($followers_array) < 1000) {
+                                            echo 'access_restricted';
+                                          } ?>">
             <div class="private-section mb-6">
               <div class="private-badge">🔒 Private & Confidential</div>
               <p class="text-sm">This information is kept strictly confidential and used only for professional matching with appropriate opportunities.</p>
@@ -2211,19 +2282,23 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <div class="question-text">Are you interested in professional modeling opportunities?</div>
               <div class="radio-group mt-3">
                 <div class="radio-option">
-                  <input type="radio" id="modeling-yes" name="modeling" value="Yes" <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') { echo 'checked'; } ?> 
-				  <?php if(!empty($followers_array) && count($followers_array) >= 1000){ ?> onchange="toggleConditionalSection('modeling-options', true)" <?php } ?> >
+                  <input type="radio" id="modeling-yes" name="modeling" value="Yes" <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
+                                                                                      echo 'checked';
+                                                                                    } ?>
+                    <?php if (!empty($followers_array) && count($followers_array) >= 1000) { ?> onchange="toggleConditionalSection('modeling-options', true)" <?php } ?>>
                   <label for="modeling-yes">Yes</label>
                 </div>
                 <div class="radio-option">
-                  <input type="radio" id="modeling-no" name="modeling" value="No" <?php if ((!empty($extra_details['modeling']) && $extra_details['modeling'] == 'No') || empty($extra_details['modeling'])) { echo 'checked'; } ?>
-				  <?php if(!empty($followers_array) && count($followers_array) >= 1000){ ?> onchange="toggleConditionalSection('modeling-options', false)" <?php } ?> >  
+                  <input type="radio" id="modeling-no" name="modeling" value="No" <?php if ((!empty($extra_details['modeling']) && $extra_details['modeling'] == 'No') || empty($extra_details['modeling'])) {
+                                                                                    echo 'checked';
+                                                                                  } ?>
+                    <?php if (!empty($followers_array) && count($followers_array) >= 1000) { ?> onchange="toggleConditionalSection('modeling-options', false)" <?php } ?>>
                   <label for="modeling-no">No</label>
                 </div>
               </div>
             </div>
 
-         
+
             <div id="modeling-options" class="conditional-section <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
                                                                     echo 'show';
                                                                   } ?> ">
@@ -2234,13 +2309,17 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <p class="help-text">This includes lingerie, swimwear, artistic nude, and adult-oriented content</p>
                   <div class="radio-group mt-3">
                     <div class="radio-option">
-                      <input type="radio" id="adult-yes" name="adult_content" value="Yes" <?php if (!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes') { echo 'checked'; } ?> 
-					  <?php if(!empty($followers_array) && count($followers_array) >= 1000){ ?> onchange="toggleConditionalSection('adult-services', true)" <?php } ?> >
+                      <input type="radio" id="adult-yes" name="adult_content" value="Yes" <?php if (!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes') {
+                                                                                            echo 'checked';
+                                                                                          } ?>
+                        <?php if (!empty($followers_array) && count($followers_array) >= 1000) { ?> onchange="toggleConditionalSection('adult-services', true)" <?php } ?>>
                       <label for="adult-yes">Yes, I'm comfortable</label>
                     </div>
                     <div class="radio-option">
-                      <input type="radio" id="adult-no" name="adult_content" value="No" <?php if ((!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'No') || empty($extra_details['adult_content'])) { echo 'checked'; } ?> 
-					  <?php if(!empty($followers_array) && count($followers_array) >= 1000){ ?> onchange="toggleConditionalSection('adult-services', false)" <?php } ?> > 
+                      <input type="radio" id="adult-no" name="adult_content" value="No" <?php if ((!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'No') || empty($extra_details['adult_content'])) {
+                                                                                          echo 'checked';
+                                                                                        } ?>
+                        <?php if (!empty($followers_array) && count($followers_array) >= 1000) { ?> onchange="toggleConditionalSection('adult-services', false)" <?php } ?>>
                       <label for="adult-no">No, only non-adult content</label>
                     </div>
                   </div>
@@ -2467,9 +2546,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div>
         </div>
 
-      <?php if($userDetails['as_a_model'] =='Yes') { ?>
+        <?php if ($userDetails['as_a_model'] == 'Yes') { ?>
 
-        <div id="30_days_access" class="collapsible-section">
+          <div id="30_days_access" class="collapsible-section">
 
             <div class="collapsible-header" onclick="toggleCollapsible(this)">
 
@@ -2481,7 +2560,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             </div>
 
             <div class="collapsible-content">
-              
+
               <div class="mb-6">
                 <div class="question-text">Do you want to provide 30 days exclusive access to all content?</div>
                 <div class="radio-group mt-3">
@@ -2502,14 +2581,14 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <label class="form-label">All 30 Days access coins?</label>
 
                   <input type="number" class="form-input" name="all_30day_access_price" value="100" placeholder="e.g., 5000" min="1">
-                
+
                 </div>
               </div>
 
             </div>
-        </div>
+          </div>
 
-      <?php } ?>
+        <?php } ?>
 
         <!-- Govt ID Proof Attributes -->
         <div id="govt-id-proof" class="collapsible-section">
@@ -2866,10 +2945,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
           </table>
 
-            <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
-              <div id="pagination-container"></div>
-            </div>
-            
+          <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
+            <div id="pagination-container"></div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -2887,8 +2966,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <?php
 
         $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
-		
-		$premium_check = CheckPremiumAccess($userDetails['id']);
+
+        $premium_check = CheckPremiumAccess($userDetails['id']);
         ?>
         <div class="space-y-6">
           <!-- Search Control -->
@@ -2936,7 +3015,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div>
 
           <!-- Location Privacy -->
-         
+
         </div>
       </div>
 
@@ -2946,7 +3025,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
         <div class="space-y-6">
 
-         <div>
+          <div>
             <h4 class="text-lg font-semibold mb-4">Location Privacy</h4>
             <div class="space-y-4 lock-pri">
               <div class="flex justify-between items-center">
@@ -2996,14 +3075,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                 <span class="text-sm">18</span>
 
-                <?php 
+                <?php
 
-                  $age_range = $privacy_setting['age_range'] ??18;
+                $age_range = $privacy_setting['age_range'] ?? 18;
 
-                  if($age_range == 65)
-                  {
-                    $age_range = $age_range.'+';
-                  }
+                if ($age_range == 65) {
+                  $age_range = $age_range . '+';
+                }
 
                 ?>
                 <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range'] ?? 18  ?>" class="flex-1 accent-purple-500" oninput="updateAgeDisplay(this)" onchange="updateSettings(this,'age_range')">
@@ -3074,7 +3152,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div>
 
           <!-- Advanced Search Filters -->
-          <div class="<?php if($premium_check == false){ echo 'premiumcheck'; } ?>" >
+          <div class="<?php if ($premium_check == false) {
+                        echo 'premiumcheck';
+                      } ?>">
             <h4 class="text-lg font-semibold mb-4">🔍 Advanced Search Filters</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 advans-fit">
               <div>
@@ -3100,21 +3180,21 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 <label class="form-label">Children Preference</label>
                 <select class="form-select" name="children_preference" onchange="updateSettings(this,'children_preference')">
                   <option value="">Any</option>
-                  <option value="no-children" <?php if ($privacy_setting['children_preference'] =='no-children') { ?> selected <?php } ?> >No Children</option>
-                  <option value="wants-children" <?php if ($privacy_setting['children_preference'] =='wants-children') { ?> selected <?php } ?> >Wants Children</option>
-                  <option value="has-children" <?php if ($privacy_setting['children_preference'] =='has-children') { ?> selected <?php } ?> >Has Children</option>
+                  <option value="no-children" <?php if ($privacy_setting['children_preference'] == 'no-children') { ?> selected <?php } ?>>No Children</option>
+                  <option value="wants-children" <?php if ($privacy_setting['children_preference'] == 'wants-children') { ?> selected <?php } ?>>Wants Children</option>
+                  <option value="has-children" <?php if ($privacy_setting['children_preference'] == 'has-children') { ?> selected <?php } ?>>Has Children</option>
                 </select>
               </div>
               <div>
                 <label class="form-label">Education Level</label>
-                <select class="form-select" name="education_level" onchange="updateSettings(this,'education_level')" >
+                <select class="form-select" name="education_level" onchange="updateSettings(this,'education_level')">
                   <option value="">Any</option>
-                  <option value="high-school" <?php if ($privacy_setting['education_level'] =='high-school') { ?> selected <?php } ?> >High School</option>
-                  <option value="college" <?php if ($privacy_setting['education_level'] =='college') { ?> selected <?php } ?> > College</option>
-                  <option value="university" <?php if ($privacy_setting['education_level'] =='university') { ?> selected <?php } ?> >University</option>
-                  <option value="graduate"  <?php if ($privacy_setting['education_level'] =='graduate') { ?> selected <?php } ?>>Graduate Degree</option>
-                  <option value="masters" <?php if ($privacy_setting['education_level'] =='masters') { ?> selected <?php } ?>>Masters</option>
-                  <option value="phd" <?php if ($privacy_setting['education_level'] =='phd') { ?> selected <?php } ?> >PhD</option>
+                  <option value="high-school" <?php if ($privacy_setting['education_level'] == 'high-school') { ?> selected <?php } ?>>High School</option>
+                  <option value="college" <?php if ($privacy_setting['education_level'] == 'college') { ?> selected <?php } ?>> College</option>
+                  <option value="university" <?php if ($privacy_setting['education_level'] == 'university') { ?> selected <?php } ?>>University</option>
+                  <option value="graduate" <?php if ($privacy_setting['education_level'] == 'graduate') { ?> selected <?php } ?>>Graduate Degree</option>
+                  <option value="masters" <?php if ($privacy_setting['education_level'] == 'masters') { ?> selected <?php } ?>>Masters</option>
+                  <option value="phd" <?php if ($privacy_setting['education_level'] == 'phd') { ?> selected <?php } ?>>PhD</option>
                 </select>
               </div>
             </div>
@@ -3151,21 +3231,21 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Verified Photos Only</label>
                 <label class="toggle-switch">
-                  <input type="checkbox"  name="verified_photos" <?php if ($privacy_setting['verified_photos']) { ?> checked <?php } ?>  onchange="updateSettings(this,'verified_photos')">
+                  <input type="checkbox" name="verified_photos" <?php if ($privacy_setting['verified_photos']) { ?> checked <?php } ?> onchange="updateSettings(this,'verified_photos')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Exclude messaged already</label>
                 <label class="toggle-switch">
-                  <input type="checkbox" name="exclude_message_already"  <?php if ($privacy_setting['exclude_message_already']) { ?> checked <?php } ?>  onchange="updateSettings(this,'exclude_message_already')">
+                  <input type="checkbox" name="exclude_message_already" <?php if ($privacy_setting['exclude_message_already']) { ?> checked <?php } ?> onchange="updateSettings(this,'exclude_message_already')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Show only who liked me</label>
                 <label class="toggle-switch">
-                  <input type="checkbox" name="show_liked"  <?php if ($privacy_setting['show_liked']) { ?> checked <?php } ?>  onchange="updateSettings(this,'show_liked')">
+                  <input type="checkbox" name="show_liked" <?php if ($privacy_setting['show_liked']) { ?> checked <?php } ?> onchange="updateSettings(this,'show_liked')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3203,7 +3283,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     </div>
   </div>
 
-<!-- 
+  <!-- 
     <div class="modal-overlay" id="conform_broad_cast" >
     <div class="modal">
       <div class="modal-header">
@@ -3233,54 +3313,75 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
   <div class="overlay" id="conform_broad_cast" style="display:none;">
 
-        <div class="conversion-modal">
-            <div class="modal-glow"></div>
-            <div class="floating-particles"><div class="particle" style="left: 18.2547%; top: 97.2752%; animation-delay: 0.758057s; animation-duration: 3.44526s;"></div><div class="particle" style="left: 91.6393%; top: 83.4679%; animation-delay: 1.28966s; animation-duration: 3.4241s;"></div><div class="particle" style="left: 35.5306%; top: 14.1456%; animation-delay: 1.85406s; animation-duration: 3.74743s;"></div><div class="particle" style="left: 23.8738%; top: 15.3707%; animation-delay: 0.519636s; animation-duration: 5.54065s;"></div><div class="particle" style="left: 39.8741%; top: 30.5484%; animation-delay: 3.81024s; animation-duration: 3.06694s;"></div><div class="particle" style="left: 42.1726%; top: 80.4956%; animation-delay: 4.80411s; animation-duration: 5.78949s;"></div><div class="particle" style="left: 22.2514%; top: 64.663%; animation-delay: 2.75652s; animation-duration: 5.11737s;"></div><div class="particle" style="left: 31.7404%; top: 25.8371%; animation-delay: 3.89204s; animation-duration: 5.42569s;"></div><div class="particle" style="left: 44.2852%; top: 93.2209%; animation-delay: 4.37857s; animation-duration: 3.6246s;"></div><div class="particle" style="left: 93.6433%; top: 9.80162%; animation-delay: 4.62046s; animation-duration: 3.23969s;"></div><div class="particle" style="left: 22.5348%; top: 68.3247%; animation-delay: 4.82203s; animation-duration: 4.54965s;"></div><div class="particle" style="left: 39.099%; top: 34.0638%; animation-delay: 5.32289s; animation-duration: 4.81376s;"></div><div class="particle" style="left: 56.2962%; top: 44.955%; animation-delay: 5.94527s; animation-duration: 5.43335s;"></div><div class="particle" style="left: 15.9162%; top: 64.8279%; animation-delay: 5.03373s; animation-duration: 3.7528s;"></div><div class="particle" style="left: 87.3145%; top: 13.1004%; animation-delay: 1.2866s; animation-duration: 3.49423s;"></div><div class="particle" style="left: 8.69738%; top: 34.3764%; animation-delay: 0.716626s; animation-duration: 5.06387s;"></div><div class="particle" style="left: 78.0713%; top: 53.6845%; animation-delay: 5.15081s; animation-duration: 3.76071s;"></div><div class="particle" style="left: 48.7227%; top: 7.12273%; animation-delay: 5.24971s; animation-duration: 5.56117s;"></div><div class="particle" style="left: 70.0328%; top: 35.1872%; animation-delay: 5.79461s; animation-duration: 5.15832s;"></div><div class="particle" style="left: 62.4816%; top: 7.0639%; animation-delay: 5.22198s; animation-duration: 4.75093s;"></div></div>
-            
-            <button class="close-btn" onclick="confirmBroadcaster()"> ×</button>
-            
-            <div class="exclusive-badge">
-                <span>🔥</span>
-                <span>EXCLUSIVE INVITATION</span>
-                <div class="badge-shimmer"></div>
-            </div>
-            
-            <h1 class="main-headline">Transform Your Life Into Your Business</h1>
-            <p class="sub-headline">Join an elite community of creators who've discovered the secret to unlimited freedom and success</p>
-            
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <div class="benefit-icon">⚡</div>
-                    <div class="benefit-text">Complete Creative Freedom</div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">🌟</div>
-                    <div class="benefit-text">Be Your Own Boss</div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">🚀</div>
-                    <div class="benefit-text">Unlimited Growth Potential</div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">💎</div>
-                    <div class="benefit-text">Premium Support System</div>
-                </div>
-            </div>
-            
-            <div class="social-proof">
-                <div class="proof-number">50,000+</div>
-                <div class="proof-text">Successful creators have already transformed their lives</div>
-            </div>
-            
-            <div class="urgency-text">⏰ Limited spots available - Join the exclusive waitlist now</div>
-            
-            <button class="cta-button" onclick="confirmBroadcaster()">
-                Start Earning Today
-                <div class="button-shine"></div>
-            </button>
+    <div class="conversion-modal">
+      <div class="modal-glow"></div>
+      <div class="floating-particles">
+        <div class="particle" style="left: 18.2547%; top: 97.2752%; animation-delay: 0.758057s; animation-duration: 3.44526s;"></div>
+        <div class="particle" style="left: 91.6393%; top: 83.4679%; animation-delay: 1.28966s; animation-duration: 3.4241s;"></div>
+        <div class="particle" style="left: 35.5306%; top: 14.1456%; animation-delay: 1.85406s; animation-duration: 3.74743s;"></div>
+        <div class="particle" style="left: 23.8738%; top: 15.3707%; animation-delay: 0.519636s; animation-duration: 5.54065s;"></div>
+        <div class="particle" style="left: 39.8741%; top: 30.5484%; animation-delay: 3.81024s; animation-duration: 3.06694s;"></div>
+        <div class="particle" style="left: 42.1726%; top: 80.4956%; animation-delay: 4.80411s; animation-duration: 5.78949s;"></div>
+        <div class="particle" style="left: 22.2514%; top: 64.663%; animation-delay: 2.75652s; animation-duration: 5.11737s;"></div>
+        <div class="particle" style="left: 31.7404%; top: 25.8371%; animation-delay: 3.89204s; animation-duration: 5.42569s;"></div>
+        <div class="particle" style="left: 44.2852%; top: 93.2209%; animation-delay: 4.37857s; animation-duration: 3.6246s;"></div>
+        <div class="particle" style="left: 93.6433%; top: 9.80162%; animation-delay: 4.62046s; animation-duration: 3.23969s;"></div>
+        <div class="particle" style="left: 22.5348%; top: 68.3247%; animation-delay: 4.82203s; animation-duration: 4.54965s;"></div>
+        <div class="particle" style="left: 39.099%; top: 34.0638%; animation-delay: 5.32289s; animation-duration: 4.81376s;"></div>
+        <div class="particle" style="left: 56.2962%; top: 44.955%; animation-delay: 5.94527s; animation-duration: 5.43335s;"></div>
+        <div class="particle" style="left: 15.9162%; top: 64.8279%; animation-delay: 5.03373s; animation-duration: 3.7528s;"></div>
+        <div class="particle" style="left: 87.3145%; top: 13.1004%; animation-delay: 1.2866s; animation-duration: 3.49423s;"></div>
+        <div class="particle" style="left: 8.69738%; top: 34.3764%; animation-delay: 0.716626s; animation-duration: 5.06387s;"></div>
+        <div class="particle" style="left: 78.0713%; top: 53.6845%; animation-delay: 5.15081s; animation-duration: 3.76071s;"></div>
+        <div class="particle" style="left: 48.7227%; top: 7.12273%; animation-delay: 5.24971s; animation-duration: 5.56117s;"></div>
+        <div class="particle" style="left: 70.0328%; top: 35.1872%; animation-delay: 5.79461s; animation-duration: 5.15832s;"></div>
+        <div class="particle" style="left: 62.4816%; top: 7.0639%; animation-delay: 5.22198s; animation-duration: 4.75093s;"></div>
+      </div>
+
+      <button class="close-btn" onclick="confirmBroadcaster()"> ×</button>
+
+      <div class="exclusive-badge">
+        <span>🔥</span>
+        <span>EXCLUSIVE INVITATION</span>
+        <div class="badge-shimmer"></div>
+      </div>
+
+      <h1 class="main-headline">Transform Your Life Into Your Business</h1>
+      <p class="sub-headline">Join an elite community of creators who've discovered the secret to unlimited freedom and success</p>
+
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon">⚡</div>
+          <div class="benefit-text">Complete Creative Freedom</div>
         </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🌟</div>
+          <div class="benefit-text">Be Your Own Boss</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🚀</div>
+          <div class="benefit-text">Unlimited Growth Potential</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">💎</div>
+          <div class="benefit-text">Premium Support System</div>
+        </div>
+      </div>
+
+      <div class="social-proof">
+        <div class="proof-number">50,000+</div>
+        <div class="proof-text">Successful creators have already transformed their lives</div>
+      </div>
+
+      <div class="urgency-text">⏰ Limited spots available - Join the exclusive waitlist now</div>
+
+      <button class="cta-button" onclick="confirmBroadcaster()">
+        Start Earning Today
+        <div class="button-shine"></div>
+      </button>
     </div>
-  
+  </div>
+
   <div class="modal-overlay" id="premium_modal">
     <div class="modal">
       <div class="modal-header">
@@ -3294,13 +3395,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       </div>
       <div class="modal-body">
 
-		<p class="premiumtext">You are not a premium member.</p>
+        <p class="premiumtext">You are not a premium member.</p>
 
         <button class="btn btn-primary" type="button" onclick="ClosePremiumModal()">Close</button>
       </div>
     </div>
   </div>
-  
+
   <div class="modal-overlay" id="follow_modal">
     <div class="modal">
       <div class="modal-header">
@@ -3314,7 +3415,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       </div>
       <div class="modal-body">
 
-		<p class="premiumtext">Can't access to this tab once the creator reaches 1000 followers.</p>
+        <p class="premiumtext">Can't access to this tab once the creator reaches 1000 followers.</p>
 
         <button class="btn btn-primary" type="button" onclick="ClosefollowModal()">Close</button>
       </div>
@@ -3322,37 +3423,37 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   </div>
 
 
-    <div class="modal-overlay" id="conform_remove_profile_pic">
-      <div class="modal">
-        <div class="modal-header">
-          <h2 class="modal-title">Confirm Profile Image Removal</h2>
-          <button class="close-modal" id="closeRemoveProfilePicModal" type="button" onclick="ConformCloseModal()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete your profile image?</p>
+  <div class="modal-overlay" id="conform_remove_profile_pic">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirm Profile Image Removal</h2>
+        <button class="close-modal" id="closeRemoveProfilePicModal" type="button" onclick="ConformCloseModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete your profile image?</p>
 
-          <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
-            <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" onclick="confirmRemoveProfilePic()">Yes, Remove</button>
+        <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
+          <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" onclick="confirmRemoveProfilePic()">Yes, Remove</button>
 
-            <button class="btn btn-secondary" type="button" onclick="ConformCloseModal()">Cancel</button>
-          </div>
+          <button class="btn btn-secondary" type="button" onclick="ConformCloseModal()">Cancel</button>
         </div>
       </div>
     </div>
+  </div>
 
 
 
   <?php include('includes/footer.php'); ?>
 
-  <link href="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
-  <script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
+  <link href="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
+  <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
   <script>
     function select_hs_country(state) {
@@ -3398,8 +3499,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   </script>
 
   <script>
-
-  function rebindpagination() {
+    function rebindpagination() {
 
       $("#list-paginations").pagination('destroy');
       $("#list-paginations").pagination({
@@ -3409,18 +3509,18 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         cssStyle: 'light-theme',
         hrefTextPrefix: 'javascript:;',
         currentPage: currentPage,
-        onPageClick: function (pageNum, e) {
+        onPageClick: function(pageNum, e) {
           submit_search(pageNum);
           currentPage = pageNum;
         }
 
       });
-  }
+    }
 
-  $(function () {
+    $(function() {
 
       loadData(1);
-  });
+    });
 
 
     function loadData(page = 1) {
@@ -3429,27 +3529,28 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
       var user_id = '<?php echo $userDetails['unique_id'] ?>';
 
-          $.ajax({
-              url: "<?php echo SITEURL.'ajax/booking_list.php'?>",
-              type: "GET",
-              data: { page: page,
+      $.ajax({
+        url: "<?php echo SITEURL . 'ajax/booking_list.php' ?>",
+        type: "GET",
+        data: {
+          page: page,
 
-                user_id:user_id,
-                limit: itemsPerPage,
-                action: 'fetch_booking_list',
-               },
-              dataType: "json",
-              success: function (response) {
-            
-                  var booking_list = '';
+          user_id: user_id,
+          limit: itemsPerPage,
+          action: 'fetch_booking_list',
+        },
+        dataType: "json",
+        success: function(response) {
 
-                  if (response.status === 'success') {
+          var booking_list = '';
 
-                      if (response.data.length > 0) {
+          if (response.status === 'success') {
 
-                          $.each(response.data, function (index, booking) {
+            if (response.data.length > 0) {
 
-                              booking_list += `
+              $.each(response.data, function(index, booking) {
+
+                booking_list += `
 
                                  <tr class="border-b border-white/5">
 
@@ -3500,103 +3601,95 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                                   </tr>
                               `;
-                          });
+              });
 
-                      } else {
-                          booking_list = '<p>No bookings found.</p>';
-                      }
-                  } else {
-
-                      booking_list = '<p>Error loading bookings. Please try again.</p>';
-                  }
-
-                  $("#list_bookings").html(booking_list);
-
-                  if ($("#pagination-container").data("pagination-initialized") !== true) {
-                      $("#pagination-container").pagination({
-                          items: '<?php echo $total_booking ?>',
-                          itemsOnPage: itemsPerPage,
-                          cssStyle: "light-theme",
-                          onPageClick: function (pageNumber) {
-                              loadData(pageNumber);
-                          }
-                      });
-                      $("#pagination-container").data("pagination-initialized", true);
-                  }
-              }
-          });
-      }
-
-
-    function AcceptConform(status,accept_id)
-    {
-  
-          $.ajax({
-            url: 'act_model_booking.php',
-            type: 'POST',
-            data: {
-              action:'accept_request',
-              accept_id:accept_id,
-              status:status,
-            },
-            dataType: 'json',
-            success: function (response) {
-                
-                if (response.status === 'success') {
-
-                    loadData(1);
-                }
-            },
-
-            error: function (xhr, status, error) {
-          
+            } else {
+              booking_list = '<p>No bookings found.</p>';
             }
-          });
+          } else {
+
+            booking_list = '<p>Error loading bookings. Please try again.</p>';
+          }
+
+          $("#list_bookings").html(booking_list);
+
+          if ($("#pagination-container").data("pagination-initialized") !== true) {
+            $("#pagination-container").pagination({
+              items: '<?php echo $total_booking ?>',
+              itemsOnPage: itemsPerPage,
+              cssStyle: "light-theme",
+              onPageClick: function(pageNumber) {
+                loadData(pageNumber);
+              }
+            });
+            $("#pagination-container").data("pagination-initialized", true);
+          }
+        }
+      });
+    }
+
+
+    function AcceptConform(status, accept_id) {
+
+      $.ajax({
+        url: 'act_model_booking.php',
+        type: 'POST',
+        data: {
+          action: 'accept_request',
+          accept_id: accept_id,
+          status: status,
+        },
+        dataType: 'json',
+        success: function(response) {
+
+          if (response.status === 'success') {
+
+            loadData(1);
+          }
+        },
+
+        error: function(xhr, status, error) {
+
+        }
+      });
 
     }
 
 
-    function ConformCloseModal()
-    {
+    function ConformCloseModal() {
       $('#conform_remove_profile_pic').removeClass('active');
     }
 
-    function DeleteImage()
-    {
-        $('#conform_remove_profile_pic').addClass('active');
+    function DeleteImage() {
+      $('#conform_remove_profile_pic').addClass('active');
     }
 
-    function confirmRemoveProfilePic()
-    {
-        $.ajax({
-            url: '<?= SITEURL . 'ajax/upload_image.php' ?>',
-            type: 'post',
-            data: {
-              action: 'remove_profile_pic'
-            },
-            dataType: 'json',
+    function confirmRemoveProfilePic() {
+      $.ajax({
+        url: '<?= SITEURL . 'ajax/upload_image.php' ?>',
+        type: 'post',
+        data: {
+          action: 'remove_profile_pic'
+        },
+        dataType: 'json',
 
-            success: function(res) {
+        success: function(res) {
 
-              if(res.status == 'success')
-              {
-                $('#preview_prof_img').attr('src','<?= SITEURL ?>assets/images/user.png');
+          if (res.status == 'success') {
+            $('#preview_prof_img').attr('src', '<?= SITEURL ?>assets/images/user.png');
 
-                $('#conform_remove_profile_pic').removeClass('active');
+            $('#conform_remove_profile_pic').removeClass('active');
 
-              }
-              else
-              {
-                alert('Error removing profile image. Please try again.');
-              }
-            }
-          })
+          } else {
+            alert('Error removing profile image. Please try again.');
+          }
+        }
+      })
     }
 
 
-    function editProfileImage()
-    {
-        $('#pic_img_btn').fadeToggle();
+    function editProfileImage() {
+      $('#pic_img_btn').fadeToggle();
     }
 
     let currentWeightUnit = 'lbs';
@@ -3678,7 +3771,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     function updateProgress() {
       let completedSections = 0;
       const totalSections = 5;
-      const sections = ['chat-services', 'meet-services', 'content-creation', 'professional-work','30_days_access', 'physical-attributes'];
+      const sections = ['chat-services', 'meet-services', 'content-creation', 'professional-work', '30_days_access', 'physical-attributes'];
       const steps = document.querySelectorAll('.step');
 
       sections.forEach((sectionId, index) => {
@@ -3730,7 +3823,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         }
 
         document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
-        const stepIndex = ['chat-services', 'meet-services', 'content-creation', 'professional-work','30_days_access', 'physical-attributes'].indexOf(sectionId);
+        const stepIndex = ['chat-services', 'meet-services', 'content-creation', 'professional-work', '30_days_access', 'physical-attributes'].indexOf(sectionId);
         if (stepIndex !== -1) {
           const currentStep = document.querySelectorAll('.step')[stepIndex];
           if (currentStep) currentStep.classList.add('active');
@@ -4028,100 +4121,116 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         }
       }
     }
-	
-	function updateProfileCompletionNew(button) {
-		
-		let completedFields = 0;
-    let totalFields = 0;
 
-    let missingFields = [];
+    function updateProfileCompletionNew(button) {
 
-    const basicFields = [
-        { selector: '#uname', label: 'Username' },
-        { selector: '#dob-input', label: 'Date of Birth' },
-        { selector: '#age-display', label: 'Age' }
-    ];
+      let completedFields = 0;
+      let totalFields = 0;
 
-    basicFields.forEach(fieldData => {
+      let missingFields = [];
+
+      const basicFields = [{
+          selector: '#uname',
+          label: 'Username'
+        },
+        {
+          selector: '#dob-input',
+          label: 'Date of Birth'
+        },
+        {
+          selector: '#age-display',
+          label: 'Age'
+        }
+      ];
+
+      basicFields.forEach(fieldData => {
         totalFields++;
         const field = document.querySelector(fieldData.selector);
         if (field && field.value.trim()) {
-            completedFields++;
+          completedFields++;
         } else {
-            missingFields.push(fieldData.label);
+          missingFields.push(fieldData.label);
         }
-    });
+      });
 
-    const extraFields = [
-        { id: 'i-hs-country', label: 'Country' },
-        { id: 'i-hs-state', label: 'State' },
-        { id: 'i-hs-city', label: 'City' }
-    ];
+      const extraFields = [{
+          id: 'i-hs-country',
+          label: 'Country'
+        },
+        {
+          id: 'i-hs-state',
+          label: 'State'
+        },
+        {
+          id: 'i-hs-city',
+          label: 'City'
+        }
+      ];
 
 
-	  totalFields += extraFields.length;
+      totalFields += extraFields.length;
 
       extraFields.forEach(fieldData => {
-          const field = document.getElementById(fieldData.id);
-          if (field && field.value.trim()) {
-              completedFields++;
-          } else {
-              missingFields.push(fieldData.label);
-          }
+        const field = document.getElementById(fieldData.id);
+        if (field && field.value.trim()) {
+          completedFields++;
+        } else {
+          missingFields.push(fieldData.label);
+        }
       });
-	  
-		if(totalFields == completedFields){
-			  const $button = $(button);
-			  const originalText = $button.text();
 
-			  $button.text('Saving...');
-			  $button.prop('disabled', true);
+      if (totalFields == completedFields) {
+        const $button = $(button);
+        const originalText = $button.text();
 
-			  const form = $('#basicProfileForm')[0];
+        $button.text('Saving...');
+        $button.prop('disabled', true);
 
-			  const formData = new FormData(form);
+        const form = $('#basicProfileForm')[0];
 
-			  formData.append('submit_name', 'submit_name');
+        const formData = new FormData(form);
 
-			  $.ajax({
-				url: 'act-edit-profile.php',
-				type: 'POST',
-				data: formData,
-				contentType: false,
-				processData: false,
-				dataType: 'json',
-				success: function(response) {
+        formData.append('submit_name', 'submit_name');
 
-				  console.log(response);
+        $.ajax({
+          url: 'act-edit-profile.php',
+          type: 'POST',
+          data: formData,
+          contentType: false,
+          processData: false,
+          dataType: 'json',
+          success: function(response) {
 
-				  if (response.status === 'success') {
-					$('.progress-fill').css('width', '100%');
-					$('.step').addClass('completed').removeClass('active');
+            console.log(response);
 
-					setTimeout(() => {
-					  $button.text(originalText);
-					  $button.prop('disabled', false);
+            if (response.status === 'success') {
+              $('.progress-fill').css('width', '100%');
+              $('.step').addClass('completed').removeClass('active');
 
-					  $('#modal_success_message').prepend('<p class="success-text">Your settings have been saved successfully!</p>');
+              setTimeout(() => {
+                $button.text(originalText);
+                $button.prop('disabled', false);
 
-					  $('#success_modal').addClass('active');
+                $('#modal_success_message').prepend('<p class="success-text">Your settings have been saved successfully!</p>');
 
-					}, 1000);
-				  }
-				},
+                $('#success_modal').addClass('active');
 
-				error: function(xhr, status, error) {
-				  $button.text(originalText);
-				  $button.prop('disabled', false);
-				}
-			  });
+              }, 1000);
+            }
+          },
 
-		}else{
+          error: function(xhr, status, error) {
+            $button.text(originalText);
+            $button.prop('disabled', false);
+          }
+        });
 
-			  showNotification('Please fill required fields: ' + missingFields.join(', '), 'error');
+      } else {
 
-		}
-	}
+        showNotification('Please fill required fields: ' + missingFields.join(', '), 'error');
+
+      }
+    }
 
     function openBuyTokensModal() {
       const modal = document.getElementById('buy-tokens-modal');
@@ -4178,19 +4287,19 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     }
 
     function updateWithdrawUSD(el) {
-		
-		const min = parseInt(el.dataset.min, 10);
-        const max = parseInt(el.dataset.max, 10);
-        const value = parseInt(el.value, 10);
-		
-		const errorSpan = document.getElementById("amount_error");
 
-            if (isNaN(value)) {
-                errorSpan.style.display = "block";
-                errorSpan.textContent = "Please enter a valid number.";
-                return;
-            }
-		
+      const min = parseInt(el.dataset.min, 10);
+      const max = parseInt(el.dataset.max, 10);
+      const value = parseInt(el.value, 10);
+
+      const errorSpan = document.getElementById("amount_error");
+
+      if (isNaN(value)) {
+        errorSpan.style.display = "block";
+        errorSpan.textContent = "Please enter a valid number.";
+        return;
+      }
+
       const amountInput = document.getElementById('withdraw-amount');
       const usdInput = document.getElementById('withdraw-usd');
       if (amountInput && usdInput) {
@@ -4198,88 +4307,87 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         const usdValue = (amount * 0.1).toFixed(2); // 1 token = $0.10
         usdInput.value = `$${usdValue}`;
       }
-	  
-	  if (value < min || value > max) {
-                errorSpan.style.display = "block";
-                errorSpan.textContent = `Amount must be between ${min} and ${max}.`;
-            } else {
-                errorSpan.style.display = "none";
-                errorSpan.textContent = "";
-            }
-	  
+
+      if (value < min || value > max) {
+        errorSpan.style.display = "block";
+        errorSpan.textContent = `Amount must be between ${min} and ${max}.`;
+      } else {
+        errorSpan.style.display = "none";
+        errorSpan.textContent = "";
+      }
+
     }
-	
-	function rejectWithdraw() {
-        event.preventDefault();
-        showNotification('You already sent request. Please wait for pending request', 'error');
+
+    function rejectWithdraw() {
+      event.preventDefault();
+      showNotification('You already sent request. Please wait for pending request', 'error');
     }
 
     function processWithdrawal(event) {
       const amountInput = document.getElementById('withdraw-amount');
-	  var status = true;
-      if (!amountInput){
-		  status = false;
-		  return;
-	  }
+      var status = true;
+      if (!amountInput) {
+        status = false;
+        return;
+      }
 
       const amount = parseFloat(amountInput.value);
-	  
-	    const min = parseInt(amountInput.dataset.min, 10);
-        const max = parseInt(amountInput.dataset.max, 10);
-	  
+
+      const min = parseInt(amountInput.dataset.min, 10);
+      const max = parseInt(amountInput.dataset.max, 10);
+
       if (!amount || amount < min) {
         //alert('Minimum withdrawal amount is 100 TLM tokens');
-		showNotification('Minimum withdrawal amount is 100 TLM tokens', 'error');
-		status = false;
+        showNotification('Minimum withdrawal amount is 100 TLM tokens', 'error');
+        status = false;
         return;
       }
       // Assuming current balance is 2500 for this example
       if (amount > max) {
-       // alert('Insufficient balance');
-	   showNotification('Insufficient balance', 'error');
-		status = false;
+        // alert('Insufficient balance');
+        showNotification('Insufficient balance', 'error');
+        status = false;
         return;
       }
 
-	if(status == true){
-     // const button = event.target;
-	  const button = document.getElementById('withdraw_btn');
-      button.textContent = 'Processing...';
-      button.disabled = true;
-	  
-	  $.ajax({
-                type: 'POST',
-                url: "act-wallet.php",
-                data: {
+      if (status == true) {
+        // const button = event.target;
+        const button = document.getElementById('withdraw_btn');
+        button.textContent = 'Processing...';
+        button.disabled = true;
 
-                    coin:amount,
-                    action:'submit_withdrawal',
-                },
-                dataType: 'json',
-                success: function(response) {
+        $.ajax({
+          type: 'POST',
+          url: "act-wallet.php",
+          data: {
 
-                     if (response.status === 'success') {
-                       
-                        
+            coin: amount,
+            action: 'submit_withdrawal',
+          },
+          dataType: 'json',
+          success: function(response) {
 
-                        setTimeout(function()
-                        {
-							showNotification(response.message, 'success');
-                            //alert('✅ Withdrawal request submitted successfully! You will receive your funds within 2-3 business days.');
-							closeWithdrawModal();
-							button.textContent = 'Withdraw';
-							button.disabled = false;
-                            
-                        },3000);
-                        
+            if (response.status === 'success') {
 
-                    } else {
 
-                         showNotification(response.message, 'error');
-                    }
-                }
-            });
-	}
+
+              setTimeout(function() {
+                showNotification(response.message, 'success');
+                //alert('✅ Withdrawal request submitted successfully! You will receive your funds within 2-3 business days.');
+                closeWithdrawModal();
+                button.textContent = 'Withdraw';
+                button.disabled = false;
+
+              }, 3000);
+
+
+            } else {
+
+              showNotification(response.message, 'error');
+            }
+          }
+        });
+      }
       /*setTimeout(() => {
         alert('✅ Withdrawal request submitted successfully! You will receive your funds within 2-3 business days.');
         closeWithdrawModal();
@@ -4288,31 +4396,28 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       }, 2000); */
     }
 
-    function AccessChange(element)
-    {
-        var value = $(element).val(); 
+    function AccessChange(element) {
+      var value = $(element).val();
 
-        if (value === 'Yes') {
-            $('.all_access_coin').show();
-        } else {
-            $('.all_access_coin').hide();
-        }
+      if (value === 'Yes') {
+        $('.all_access_coin').show();
+      } else {
+        $('.all_access_coin').hide();
+      }
     }
 
-    function CreateSetting()
-    {
-        $('#conform_broad_cast').show();
+    function CreateSetting() {
+      $('#conform_broad_cast').show();
     }
 
-    function confirmBroadcaster()
-    {
-        switchTab('creator');
+    function confirmBroadcaster() {
+      switchTab('creator');
 
-        $('#conform_broad_cast').hide();
+      $('#conform_broad_cast').hide();
 
-        $('#creator-content').show();
+      $('#creator-content').show();
     }
-     
+
 
     function saveCreatorSettings(button) {
 
@@ -4372,12 +4477,12 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       $('#success_modal').removeClass('active');
       $('#modal_success_message .success-text').remove();
     }
-	
-	function  ClosePremiumModal() {
+
+    function ClosePremiumModal() {
       $('#premium_modal').removeClass('active');
     }
-	
-	function  ClosefollowModal() {
+
+    function ClosefollowModal() {
       $('#follow_modal').removeClass('active');
     }
 
@@ -4501,42 +4606,42 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       const display = document.getElementById('age_value_display');
       const inputvalue = rangeInput.value;
 
-     let inputValue = rangeInput.value;
+      let inputValue = rangeInput.value;
 
       if (inputValue == 65) {
 
         display.textContent = inputValue + '+';
 
       } else {
-        
+
         display.textContent = inputValue;
       }
 
       const percent = (rangeInput.value - rangeInput.min) / (rangeInput.max - rangeInput.min);
       display.style.left = `calc(${percent * 100}% - 10px)`;
     }
-	
-	function updateHeightDisplay(rangeInput) {
+
+    function updateHeightDisplay(rangeInput) {
 
       const display = document.getElementById('height_value_display');
       const inputvalue = rangeInput.value;
 
-     let inputValue = rangeInput.value;
-       
-        display.textContent = inputValue;
+      let inputValue = rangeInput.value;
+
+      display.textContent = inputValue;
 
       const percent = (rangeInput.value - rangeInput.min) / (rangeInput.max - rangeInput.min);
       display.style.left = `calc(${percent * 100}% - 10px)`;
     }
-	
-	function updateWeightDisplay(rangeInput) {
+
+    function updateWeightDisplay(rangeInput) {
 
       const display = document.getElementById('weight_value_display');
       const inputvalue = rangeInput.value;
 
-     let inputValue = rangeInput.value;
-       
-        display.textContent = inputValue;
+      let inputValue = rangeInput.value;
+
+      display.textContent = inputValue;
 
       const percent = (rangeInput.value - rangeInput.min) / (rangeInput.max - rangeInput.min);
       display.style.left = `calc(${percent * 100}% - 10px)`;
@@ -4545,7 +4650,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     function updateSettings(element, field_name) {
       var value = element.checked ? 'Y' : 'N';
 
-      if (field_name == 'age_range' || field_name == 'message_template' || field_name=='education_level' || field_name=='children_preference' || field_name == 'height_range' || field_name == 'weight_range' ) {
+      if (field_name == 'age_range' || field_name == 'message_template' || field_name == 'education_level' || field_name == 'children_preference' || field_name == 'height_range' || field_name == 'weight_range') {
         value = $(element).val();
       }
 
@@ -4560,10 +4665,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         dataType: 'json',
         success: function(data) {
 
-           if (field_name =='age_range') {
+          if (field_name == 'age_range') {
 
-              renderChart(data.data);
-           }
+            renderChart(data.data);
+          }
 
           showNotification('Privacy Settings Updated');
 
@@ -4575,8 +4680,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     }
 
     function showNotification(message, type = 'info') {
-          const notification = document.createElement('div');
-          notification.style.cssText = `
+      const notification = document.createElement('div');
+      notification.style.cssText = `
               position: fixed;
               top: 20px;
               right: 20px;
@@ -4590,79 +4695,79 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               transform: translateX(100%);
               transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           `;
-          notification.textContent = message;
-          
-          document.body.appendChild(notification);
-          
-          // Show notification
-          setTimeout(() => {
-              notification.style.transform = 'translateX(0)';
-          }, 100);
-          
-          // Hide notification
-          setTimeout(() => {
-              notification.style.transform = 'translateX(100%)';
-              setTimeout(() => {
-                  if (notification.parentNode) {
-                      notification.parentNode.removeChild(notification);
-                  }
-              }, 300);
-          }, 3000);
-      }
+      notification.textContent = message;
+
+      document.body.appendChild(notification);
+
+      // Show notification
+      setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+      }, 100);
+
+      // Hide notification
+      setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }, 3000);
+    }
 
     jQuery(document).ready(function($) {
 
 
       $('#pic_img').on('change', function() {
-        
-          const file = this.files[0];
 
-          if (file) {
-            const reader = new FileReader();
+        const file = this.files[0];
 
-            reader.onload = function(e) {
-              $('#preview_prof_img').attr('src', e.target.result).show();
+        if (file) {
+          const reader = new FileReader();
+
+          reader.onload = function(e) {
+            $('#preview_prof_img').attr('src', e.target.result).show();
+          }
+
+          reader.readAsDataURL(file);
+
+          let formData = new FormData();
+
+          formData.append("pic_img", file);
+
+          formData.append("action", 'upload_profile_pic');
+
+          $.ajax({
+
+            url: "ajax/upload_image.php",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+
+              let res = JSON.parse(response);
+
+              if (res.status === 'success') {
+
+                $('#pic_img').val("");
+
+                showNotification('Profile image updated successfully', 'success');
+
+              } else {
+
+                showNotification('Error uploading image', 'error');
+              }
+
+            },
+
+            error: function(xhr, status, error) {
+
             }
 
-            reader.readAsDataURL(file);
 
-              let formData = new FormData();
-
-              formData.append("pic_img", file);
-
-              formData.append("action",'upload_profile_pic');
-
-              $.ajax({
-
-                  url: "ajax/upload_image.php",
-                  type: "POST",
-                  data: formData,
-                  processData: false, 
-                  contentType: false,  
-                  success: function(response) {
-
-                       let res = JSON.parse(response);
-
-                      if (res.status === 'success') {
-
-                          $('#pic_img').val("");
-
-                          showNotification('Profile image updated successfully', 'success');
-
-                      } else {
-
-                          showNotification('Error uploading image', 'error');
-                      }
-
-                  },
-
-                  error: function(xhr, status, error) {
-                 
-                  }
-
-
-              });
-          }
+          });
+        }
 
       });
 
@@ -4902,52 +5007,57 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     });
   </script>
-  <script>  
-	//Premium checking
-	jQuery('.premiumcheck').click(function(e) { 
-		e.preventDefault();
-		e.stopPropagation();
-		$('#premium_modal').addClass('active');
-	});
-	
-	jQuery('.access_restricted').click(function(e) { 
-		e.preventDefault();
-		e.stopPropagation();
-		$('#follow_modal').addClass('active');
-	});
-  </script>
-  
-  <style>
-  .premiumcheck input[type="range"],.premiumcheck select {
-		pointer-events: none;
-		opacity: 0.5; /* Optional: make it look disabled */
-	}
-   .access_restricted input,.access_restricted select,
-   .access_restricted input[type="radio"],.access_restricted textarea,.access_restricted input[type="checkbox"] {
-		pointer-events: none;
-		opacity: 0.5; /* Optional: make it look disabled */
-	}
-  </style>
-  
   <script>
-  
-  // jQuery code
-	jQuery(document).ready(function() {
-		// Select all checkboxes with name 'social_availability[]'
-		jQuery('input[name="social_availability[]"]').on('change', function() {
-			if (jQuery(this).is(':checked')) {
-				//console.log(jQuery(this).val() + ' is checked');
-				jQuery('.'+jQuery(this).attr('id')+'_time_section').show();
-				
-				
-			} else {
-				//console.log(jQuery(this).val() + ' is unchecked');
-				jQuery('.'+jQuery(this).attr('id')+'_time_section').hide();
-				jQuery('.'+jQuery(this).attr('id')+'_time_section .time_pick').val('');
-			}
-		});
-	});
-  
+    //Premium checking
+    jQuery('.premiumcheck').click(function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $('#premium_modal').addClass('active');
+    });
+
+    jQuery('.access_restricted').click(function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $('#follow_modal').addClass('active');
+    });
+  </script>
+
+  <style>
+    .premiumcheck input[type="range"],
+    .premiumcheck select {
+      pointer-events: none;
+      opacity: 0.5;
+      /* Optional: make it look disabled */
+    }
+
+    .access_restricted input,
+    .access_restricted select,
+    .access_restricted input[type="radio"],
+    .access_restricted textarea,
+    .access_restricted input[type="checkbox"] {
+      pointer-events: none;
+      opacity: 0.5;
+      /* Optional: make it look disabled */
+    }
+  </style>
+
+  <script>
+    // jQuery code
+    jQuery(document).ready(function() {
+      // Select all checkboxes with name 'social_availability[]'
+      jQuery('input[name="social_availability[]"]').on('change', function() {
+        if (jQuery(this).is(':checked')) {
+          //console.log(jQuery(this).val() + ' is checked');
+          jQuery('.' + jQuery(this).attr('id') + '_time_section').show();
+
+
+        } else {
+          //console.log(jQuery(this).val() + ' is unchecked');
+          jQuery('.' + jQuery(this).attr('id') + '_time_section').hide();
+          jQuery('.' + jQuery(this).attr('id') + '_time_section .time_pick').val('');
+        }
+      });
+    });
   </script>
 
 </body>
