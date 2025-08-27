@@ -992,11 +992,11 @@ let selectedFiles_video = [];
 				progress = 100;
 				}
 				
-			// 	if(progress >= 100){
-			// 	setTimeout(() => {
-            //         event.target.submit();
-            //     }, 1000);
-			// } 
+				if(progress >= 100){
+				setTimeout(() => {
+                    event.target.submit();
+                }, 1000);
+			} 
 			})
 			.catch(error => {
 				console.error('Upload failed:', error);
