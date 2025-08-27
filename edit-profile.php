@@ -1295,10 +1295,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             <h3 class="text-xl font-bold text-purple-400 mb-4">Interests & Hobbies</h3>
             <p class="text-white/70 text-sm mb-4">Select your interests to help clients find you based on shared hobbies</p>
             <div class="flex flex-wrap gap-2">
-              <span class="interest-tag <?php if ((!empty($hobbies) && in_array('Travel', $hobbies)) || empty($hobbies)) echo 'selected';  ?>" onclick="toggleInterest(this)">
+              <span class="interest-tag <?php if ((!empty($hobbies) && in_array('Travel', $hobbies)) ) echo 'selected';  ?>" onclick="toggleInterest(this)">
                 <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Travel" <?php if ((!empty($hobbies) && in_array('Travel', $hobbies)) || empty($hobbies)) echo 'checked';  ?>>Travel
               </span>
-              <span class="interest-tag <?php if ((!empty($hobbies) && in_array('Dancing', $hobbies)) || empty($hobbies)) echo 'selected';  ?>" onclick="toggleInterest(this)">
+              <span class="interest-tag <?php if ((!empty($hobbies) && in_array('Dancing', $hobbies)) ) echo 'selected';  ?>" onclick="toggleInterest(this)">
                 <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Dancing" <?php if ((!empty($hobbies) && in_array('Dancing', $hobbies)) || empty($hobbies)) echo 'checked';  ?>>Dancing
               </span>
               <span class="interest-tag <?php if (!empty($hobbies) && in_array('Photography', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
