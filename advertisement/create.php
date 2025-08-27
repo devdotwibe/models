@@ -5,7 +5,7 @@ include('../includes/helper.php');
 
 if (isset($_SESSION['log_user_id'])) {
 	//create post data
-	if ($_POST && !isset($_SESSION["city_exist"]) ){  
+	if ($_POST){  
 
 		$user_id = $_SESSION['log_user_id'];
 		$arr = array('name', 'subtitle', 'description', 'category','service', 'country', 'state', 'city','terms_conditions');
@@ -24,49 +24,38 @@ if (isset($_SESSION['log_user_id'])) {
             {
                 $post_data['city'] = $city_id;
 
-                if (isset($_SESSION["city_exist"])) {
-
-                    unset($_SESSION["city_exist"]);
-                }
             }
-            else
-            {
-                 $_SESSION["city_exist"] = "The city name is already exist in the state";
-            }
-
         }
 
-        if (!isset($_SESSION["city_exist"]) ){  
+            $post_data['user_id'] = $user_id;
+            $post_data['created_at'] = date('Y-m-d H:i:s');
 
-                $post_data['user_id'] = $user_id;
-                $post_data['created_at'] = date('Y-m-d H:i:s');
+            DB::insert('banners', $post_data); 
+            $created_id = DB::insertId();
 
-                DB::insert('banners', $post_data); 
-                $created_id = DB::insertId();
-
-                $error = '';
-                
-                if(isset($_POST['save_image_file'])){
-                    $additional_img = '';
-                    $exp_file_img = explode('|',$_POST['save_image_file']);
-                    $joe_id = DB::update('banners', array('image' => $exp_file_img[0]), "id=%s", $created_id);
-                    if(count($exp_file_img) > 1){
-                        for ($i = 1; $i < count($exp_file_img); $i++) {
-                            $additional_img .= $exp_file_img[$i].'|';
-                        }
-                        $joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
+            $error = '';
+            
+            if(isset($_POST['save_image_file'])){
+                $additional_img = '';
+                $exp_file_img = explode('|',$_POST['save_image_file']);
+                $joe_id = DB::update('banners', array('image' => $exp_file_img[0]), "id=%s", $created_id);
+                if(count($exp_file_img) > 1){
+                    for ($i = 1; $i < count($exp_file_img); $i++) {
+                        $additional_img .= $exp_file_img[$i].'|';
                     }
+                    $joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
                 }
-                if(isset($_POST['save_video_file'])){
-                    $joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $created_id);
-                }
+            }
+            if(isset($_POST['save_video_file'])){
+                $joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $created_id);
+            }
 
-                if ($error) {
-                    echo '<script>alert("' . $error . '");</script>';
-                }
-                
-                echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
-        }
+            if ($error) {
+                echo '<script>alert("' . $error . '");</script>';
+            }
+            
+            echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
+        
 		
 	}
 
@@ -115,20 +104,11 @@ $serviceArr = array('Providing services', 'Looking for services');
             <p class="text-lg text-white/70 max-w-2xl mx-auto">Showcase your services and attract more clients with a premium advertisement</p>
         </div>
 
-        <?php if(isset($_SESSION["city_exist"] ))  
-                {
-                    $city_error_exist = true;
-                }
-                else
-                {
-                     $city_error_exist = false;
-                }
-            
-        ?>
+    
         <div class="step-indicator">
-            <div class="step <?php if(!$city_error_exist) { ?> active <?php } ?>" id="step1">1</div>
+            <div class="step active" id="step1">1</div>
             <div class="step" id="step2">2</div>
-            <div class="step <?php if($city_error_exist) { ?> active <?php } ?>" id="step3">3</div>
+            <div class="step" id="step3">3</div>
         </div>
 
         <!-- Form Container -->
@@ -137,7 +117,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 			<form action="" method="post" class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" onsubmit="submitForm(event)" role="form" enctype="multipart/form-data" >
 
                 <!-- Step 1: Basic Information -->
-                <div id="formStep1" class="form-step <?php if($city_error_exist) { ?> hidden <?php } ?>">
+                <div id="formStep1" class="form-step">
                     <h2 class="text-2xl font-bold premium-text mb-8 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-indigo-400">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -216,7 +196,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                 </div>
 
                 <!-- Step 2: Location & Pricing -->
-                <div id="formStep2" class="form-step <?php if(!$city_error_exist) { ?> hidden <?php } ?>">
+                <div id="formStep2" class="form-step hidden">
                     <h2 class="text-2xl font-bold premium-text mb-8 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-indigo-400">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -256,13 +236,13 @@ $serviceArr = array('Providing services', 'Looking for services');
                             <span class="err_adv_city" style="color:red;"></span>
                         </div>
 
-                         <div <?php if(!$city_error_exist) { ?> style="display:none" <?php } ?>  id="add_city_div">
+                         <div style="display:none"   id="add_city_div">
 
                             <label class="block text-white font-semibold mb-3">Add City *</label>
 
                             <input type="text" name="add_city" id="add_city" class="form-input w-full px-6 py-4 rounded-xl" placeholder="Enter your city name" >
 
-                            <span class="err_add_city" style="color:red;"><?php echo $_SESSION["city_exist"]  ?></span>
+                            <span class="err_add_city" style="color:red;" style="display:none;">The city name is already exist in the state</span>
 
                         </div>
 
@@ -647,20 +627,73 @@ $serviceArr = array('Providing services', 'Looking for services');
 			}
 			
 			if(currentStep == 2){
-				if(jQuery('.adv_country').val() == ''){
+
+                var city = $('#i-hs-city').val();
+
+                var add_city = $('#add_city').val();
+
+                var state = $('#i-hs-state').val();
+
+                if(city == "other" && add_city != '' && state != '')
+                {   
+                     $.ajax({
+                            url: '<?= SITEURL . 'ajax/check_city.php' ?>',
+                            type: "POST",
+                            data: { city: add_city, state: state },
+                            dataType: 'json',
+                            success: function(response) {
+
+                                if (response.message === "exist") {
+
+                                    $('#err_add_city').show();
+
+                                } else {
+                            
+
+                                    $('#err_add_city').hide();
+
+                                  if(jQuery('.adv_country').val() == ''){
+                                    jQuery('.adv_country').addClass('invalid');
+                                    allow_next = false;
+                                    }else jQuery('.adv_country').removeClass('invalid');
+                                    
+                                    if(jQuery('.adv_state').val() == ''){
+                                        jQuery('.adv_state').addClass('invalid');
+                                        allow_next = false;
+                                    }else jQuery('.adv_state').removeClass('invalid');
+                                    
+                                    if(jQuery('.adv_city').val() == ''){
+                                        jQuery('.adv_city').addClass('invalid');
+                                        allow_next = false;
+                                    }else jQuery('.adv_city').removeClass('invalid');
+                                }
+                            },
+                            error: function() {
+                            
+                            }
+                    });
+                }
+                else
+                {
+                     $('#err_add_city').hide();
+
+                    if(jQuery('.adv_country').val() == ''){
 					jQuery('.adv_country').addClass('invalid');
 					allow_next = false;
-				}else jQuery('.adv_country').removeClass('invalid');
+                    }else jQuery('.adv_country').removeClass('invalid');
+                    
+                    if(jQuery('.adv_state').val() == ''){
+                        jQuery('.adv_state').addClass('invalid');
+                        allow_next = false;
+                    }else jQuery('.adv_state').removeClass('invalid');
+                    
+                    if(jQuery('.adv_city').val() == ''){
+                        jQuery('.adv_city').addClass('invalid');
+                        allow_next = false;
+                    }else jQuery('.adv_city').removeClass('invalid');
+                }
+
 				
-				if(jQuery('.adv_state').val() == ''){
-					jQuery('.adv_state').addClass('invalid');
-					allow_next = false;
-				}else jQuery('.adv_state').removeClass('invalid');
-				
-				if(jQuery('.adv_city').val() == ''){
-					jQuery('.adv_city').addClass('invalid');
-					allow_next = false;
-				}else jQuery('.adv_city').removeClass('invalid');
 			}
 			
 			if(allow_next){
