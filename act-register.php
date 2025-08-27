@@ -155,14 +155,34 @@ if (isset($_POST['vfb-submit'])) {
     $res_u = mysqli_query($con, $sql_u);
     $res_e = mysqli_query($con, $sql_e); 
    if (mysqli_num_rows($res_u) > 0) { 
-        echo  '<script>alert("Sorry... username already taken")</script>';
+
+        $_SESSION["user_name_exist"] = "Sorry... username already taken";
         
-                echo '<script>window.location="login.php"</script>';
+        echo '<script>window.location="login.php"</script>';
+                
     }else if(mysqli_num_rows($res_e) > 0){
-      echo  '<script>alert("Sorry... email already taken")</script>';
+
+      $_SESSION["email_exist"] = "Sorry... email already taken";
+
                 echo '<script>window.location="login.php"</script>';  
     }else{
 
+
+        if (isset($_SESSION["user_name_exist"])) {
+            unset($_SESSION["user_name_exist"]);
+        }
+
+        if (isset($_SESSION["email_exist"])) {
+            unset($_SESSION["email_exist"]);
+        }
+
+        if (isset($_SESSION["email_error"])) {
+            unset($_SESSION["email_error"]);
+        }
+
+        if (isset($_SESSION["not_registred"])) {
+            unset($_SESSION["not_registred"]);
+        }
    
     $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
@@ -222,13 +242,19 @@ if (isset($_POST['vfb-submit'])) {
 
 
          }else{
-              echo  '<script>alert("Error in Details Sent to Respective Mail id.")</script>';
+
+               $_SESSION["email_error"] = "Error in Details Sent to Respective Mail id.";
+
                 echo '<script>window.location="login.php"</script>';
          }
 
     }
     else{
+
       echo '<script>alert("You have Not Registered")</script>';
+
+      $_SESSION["not_registred"] = "Error in Details Sent to Respective Mail id.";
+
       echo '<script>window.location="register.php"</script>';
     }
 
