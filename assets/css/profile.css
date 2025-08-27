@@ -4353,9 +4353,12 @@ body.edit-profilepage {
     border: 1px solid rgba(255, 255, 255, 0.1);
     height: 50px;
     position: relative;
-    margin-bottom: 50px;
+   
 }
-
+#companion-options .checkbox-option{
+ margin-bottom: 50px;
+   position: relative;
+}
 
 .edit-profilepage .conditional-section.show .checkbox-option > div {
   position: absolute;
