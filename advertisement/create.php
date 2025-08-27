@@ -125,10 +125,9 @@ $serviceArr = array('Providing services', 'Looking for services');
 
 <head>
 	<title>Create Advertisement - The Live Models</title>
-
 	<?php include('../includes/head.php'); ?>
 
-     <?php  include('../includes/profile_header_index.php'); ?>
+    <link rel='stylesheet' href='<?= SITEURL ?>assets/css/profile.css?v=<?= time() ?>' type='text/css' media='all' />
 
 	<style>
 		.thumbnail {
