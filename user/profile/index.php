@@ -481,7 +481,7 @@ if(!empty($userDetails['profile_pic'])){
 
                   ?>
 
-                <div class="flex items-center repeat-users" onclick="window.location.href='<?php echo SITEURL.'/single-profile.php?m_unique_id='.$user['unique_id'] ?>'">
+                <div class="flex items-center repeat-users" onclick="window.location.href='<?php echo SITEURL.'single-profile.php?m_unique_id='.$user['unique_id'] ?>'">
 
                       <div class="relative">
 
