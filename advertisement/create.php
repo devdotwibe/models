@@ -329,10 +329,10 @@ $serviceArr = array('Providing services', 'Looking for services');
 							
                         </div>
 
-                        <!-- Photo Preview Grid -->
                         <div id="photoPreviewGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 hidden">
-                            <!-- Photo previews will be inserted here -->
+                            
                         </div>
+
                     </div>
 
                     <!-- Video Upload Section -->
@@ -717,6 +717,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 
   let selectedFiles_img = [];
     function handlePhotoUpload(event) {
+        
         const files = Array.from(event.target.files);
 		
 		selectedFiles_img = selectedFiles_img.concat(files);
@@ -763,14 +764,16 @@ $serviceArr = array('Providing services', 'Looking for services');
         const previewDiv = document.createElement('div');
         previewDiv.className = 'media-preview relative';
         previewDiv.innerHTML = `
-            <img src="${photoData.url}" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">`;
-            /* `<button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
+
+            <img src="${photoData.url}" alt="Photo preview" class="w-full h-32 object-cover rounded-xl">
+            
+             <button type="button" class="remove-btn" onclick="removePhoto('${photoData.id}')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
-        `;*/
+        `;
 
         grid.appendChild(previewDiv);
     }
