@@ -8,7 +8,7 @@
               
     $notify_count = NotificationCount($get_modal_user[0]['id']);
 
-       $auther_pic_url ="";
+       $auther_pic_url = SITEURL.'assets/images/model-gal-no-img.jpg';
 
         $profile_pic = $get_modal_user[0]['profile_pic'] ?? '';
 
