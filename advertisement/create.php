@@ -643,7 +643,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                             dataType: 'json',
                             success: function(response) {
 
-                                if (response.message === "exist") {
+                                if (response.message == "exist") {
 
                                     $('#err_add_city').show();
 
