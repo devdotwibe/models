@@ -591,7 +591,6 @@ $activeTab = 'wallet';
                                 <label class="form-label">Tax Residency Country</label>
                                 <?php $f_country_list = DB::query('select id,name,sortname,abbreviation,full_form from countries where abbreviation!="" order by name asc');
                                 
-								$f_country_list_json = json_encode($f_country_list);
 								$country = '';
                                 if (isset($_POST['country'])) {
                                     $country = $_POST['country'];
@@ -1043,9 +1042,19 @@ $activeTab = 'wallet';
     document.addEventListener('DOMContentLoaded', lazyLoad);
 </script>
 
-<script>
-// PHP array converted to JavaScript
-  var countryData = <?php  echo $f_country_list_json; ?>; console.log(countryData);
+<script> 
+  var countryData = [
+    <?php foreach($f_country_list as $country): ?>
+      {
+        id: <?= $country['id'] ?>,
+        name: "<?= addslashes($country['name']) ?>",
+        abbreviation: `<?= addslashes($country['abbreviation']) ?>`
+      },
+    <?php endforeach; ?>
+  ];
+
+  console.log('TEST '+countryData);
+
 jQuery(document).ready(function() { 
   jQuery('.wallet_country').on('change', function() {
     let selectedCountry = jQuery(this).val();
