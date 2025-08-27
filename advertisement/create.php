@@ -242,7 +242,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                             <input type="text" name="add_city" id="add_city" class="form-input w-full px-6 py-4 rounded-xl" placeholder="Enter your city name" >
 
-                            <span class="err_add_city" style="color:red; display:none;" >The city name is already exist in the state</span>
+                            <span class="err_add_city" id="err_add_city" style="color:red; display:none;" >The city name is already exist in the state</span>
 
                         </div>
 
