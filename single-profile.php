@@ -1679,7 +1679,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 		<?php if(!empty($extra_details) && !empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes'){ ?>
             <?php if($extra_details['private_chat_token']){ ?>
 				<!-- Chat Service -->
-                <div class="service-card" <?php /*onclick="handleService('chat')" */ ?>>
+                <?php /*?><div class="service-card" >
                     <div class="service-header">
                         <div class="service-icon">💬</div>
                         <div class="service-info">
@@ -1698,7 +1698,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 					<a class="action-button btn btn-primary" href='<?=SITEURL?>booking.php?type=chat&service=Chat&token=<?php echo $extra_details['private_chat_token']; ?>/min&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Start Chatting</a>
 
                     <?php }?>
-                </div>
+                </div> <?php */ ?>
 
                 <!-- Streaming Service -->
                 <div class="service-card" <?php /*onclick="handleService('streaming')" */ ?>>
@@ -1751,7 +1751,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 										
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" href='<?=SITEURL?>booking.php?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>/hr&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Request Meetup</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?> href='<?=SITEURL?>booking.php?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>/hr&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Request Meetup</a>
 
                     <?php }?>
 					
@@ -1782,7 +1782,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 					
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" href='<?=SITEURL?>booking.php?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>/hr&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Plan Adventure</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?>  href='<?=SITEURL?>booking.php?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>/hr&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
 
                     <?php }?>
 					
