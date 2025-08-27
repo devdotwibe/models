@@ -3025,7 +3025,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       </div>
 
       <!-- Premium Features -->
-      <div class="form-section">
+      <div class="form-section <?php if ($premium_check == false) {  echo 'premiumcheck';   } ?>">
         <h3 class="text-xl font-bold gradient-text mb-6">👑 Premium Features</h3>
 
         <div class="space-y-6">
@@ -3047,7 +3047,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div>
 
           <!-- Profile Visibility -->
-          <div>
+          <div class="<?php if ($premium_check == false) {  echo 'premiumcheck';   } ?>">
             <h4 class="text-lg font-semibold mb-4">Profile Visibility</h4>
             <div class="space-y-4 profit-vis">
               <div class="flex justify-between items-center">
@@ -3096,7 +3096,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div>
 
           <!-- Message Privacy -->
-          <div>
+          <div class="<?php if ($premium_check == false) {  echo 'premiumcheck';   } ?>">
+
             <h4 class="text-lg font-semibold mb-4">Message Privacy</h4>
             <div class="space-y-4 mmsge-priva">
               <div class="flex justify-between items-center">
@@ -3143,7 +3144,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div>
 
           <!-- Message Priority -->
-          <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 <?php if ($premium_check == false) {  echo 'premiumcheck';   } ?>">
             <div class="flex justify-between items-center mb-4 msg-priority">
               <div>
                 <h4 class="text-lg font-semibold text-purple-400">📬 Message Priority</h4>
@@ -3157,9 +3158,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           </div>
 
           <!-- Advanced Search Filters -->
-          <div class="<?php if ($premium_check == false) {
-                        echo 'premiumcheck';
-                      } ?>">
+          <div class="<?php if ($premium_check == false) {  echo 'premiumcheck';   } ?>">
+                       
             <h4 class="text-lg font-semibold mb-4">🔍 Advanced Search Filters</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 advans-fit">
               <div>
