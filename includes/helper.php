@@ -72,6 +72,25 @@ function getModelFollowersCount($model_id) {
     return (int)$count; 
 }
 
+	function GetCityId($new_city_name,$state)
+	{
+		$check = DB::queryFirstRow(
+			"SELECT id FROM cities WHERE state_id=%i AND name=%s",
+			$state, 
+			$new_city_name
+		);
+
+		if ($check) {
+			return "exist";
+		}
+
+		DB::insert('cities', [
+			'name'     => $new_city_name,
+			'state_id' => $state
+		]);
+
+		return DB::insertId();
+	}
 
 function getModelFolloweringCount($model_id) {
 	

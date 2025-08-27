@@ -5,110 +5,68 @@ include('../includes/helper.php');
 
 if (isset($_SESSION['log_user_id'])) {
 	//create post data
-	if ($_POST) {  
+	if ($_POST && !isset($_SESSION["city_exist"]) ){  
 
 		$user_id = $_SESSION['log_user_id'];
 		$arr = array('name', 'subtitle', 'description', 'category','service', 'country', 'state', 'city','terms_conditions');
 		$post_data = array_from_post($arr);
 		//$post_data = array_from_get($arr);
-		$post_data['user_id'] = $user_id;
-		$post_data['created_at'] = date('Y-m-d H:i:s');
 
-		DB::insert('banners', $post_data); 
-		$created_id = DB::insertId();
+        if(isset($_POST['city']) && $_POST['city'] =='other' && isset($_POST['add_city']) && $_POST['add_city'] != '')
+        {
+            $add_city = $_POST['add_city'];
 
-		$error = '';
-		
-		if(isset($_POST['save_image_file'])){
-			$additional_img = '';
-			$exp_file_img = explode('|',$_POST['save_image_file']);
-			$joe_id = DB::update('banners', array('image' => $exp_file_img[0]), "id=%s", $created_id);
-			if(count($exp_file_img) > 1){
-				for ($i = 1; $i < count($exp_file_img); $i++) {
-					$additional_img .= $exp_file_img[$i].'|';
-				}
-				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
-			}
-		}
-		if(isset($_POST['save_video_file'])){
-			$joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $created_id);
-		}
-		
-		/*if (isset($_FILES["files"])) {
-			$totalFiles = count($_FILES['files']['name']);
-			$additional_img = '';
-			$target_dir_profile = "../uploads/banners/";
-			
-				$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][0]);
-				$target_profile = basename($_FILES["files"]["name"][0]);
-				if (move_uploaded_file($_FILES["files"]["tmp_name"][0], $target_file1)) {
-					$joe_id = DB::update('banners', array('image' => $target_profile), "id=%s", $created_id);
-				} 
-			if($totalFiles > 1){
-				for ($i = 1; $i < $totalFiles; $i++) {
-					$target_file1 = $target_dir_profile . basename($_FILES["files"]["name"][$i]);
-					$target_profile = basename($_FILES["files"]["name"][$i]);
-					if (move_uploaded_file($_FILES["files"]["tmp_name"][$i], $target_file1)) {
-						$additional_img .= $target_profile.'|';
-					}
-				}
-				if(!empty($additional_img)){ 
-					$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
-				}
-			}
-			
-			
-		}
-		
-		if (isset($_FILES["video_file"])) {
-			$totalFiles_v = count($_FILES['video_file']['name']);
-			$additional_vd = '';
-			$target_dir_profile = "../uploads/banners/";
-				for ($i = 0; $i < $totalFiles_v; $i++) {
-					$target_file1 = $target_dir_profile . basename($_FILES["video_file"]["name"][$i]);
-					$target_profile = basename($_FILES["video_file"]["name"][$i]);
-					if (move_uploaded_file($_FILES["video_file"]["tmp_name"][$i], $target_file1)) {
-						$additional_vd .= $target_profile.'|';
-					}
-				}
-				if(!empty($additional_vd)){ 
-					$joe_id = DB::update('banners', array('video' => rtrim($additional_vd, "|")), "id=%s", $created_id);
-				}
-		}
+            $state = $_POST['state'];
 
-		if ($_FILES["video_file"]["name"]) {
-			$target_dir_profile = "../uploads/banners/";
-			$target_file1 = $target_dir_profile . basename($_FILES["video_file"]["name"]);
-			$target_profile = basename($_FILES["video_file"]["name"]);
-			if (move_uploaded_file($_FILES["video_file"]["tmp_name"], $target_file1)) {
-				$joe_id = DB::update('banners', array('video' => $target_profile), "id=%s", $created_id);
-			} else {
-				$error .= '. Video Not Updated';
-			}
-		}
-		
-		if (isset($_FILES["additionalimages"])) {
-			$totalFiles = count($_FILES['additionalimages']['name']);
-			$additional_img = '';
-			$target_dir_profile = "../uploads/banners/";
-			for ($i = 0; $i < $totalFiles; $i++) {
-				$target_file1 = $target_dir_profile . basename($_FILES["additionalimages"]["name"][$i]);
-				$target_profile = basename($_FILES["additionalimages"]["name"][$i]);
-				if (move_uploaded_file($_FILES["additionalimages"]["tmp_name"][$i], $target_file1)) {
-					$additional_img .= $target_profile.'|';
-				}
-			}
-			if(!empty($additional_img)){ 
-				$joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
-			}
-		}*/
+            $city_id = GetCityId($add_city,$state);
 
-		if ($error) {
-			echo '<script>alert("' . $error . '");</script>';
-		}
-		
-		echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
-		
+            if($city_id != 'exist')
+            {
+                $post_data['city'] = $city_id;
+
+                if (isset($_SESSION["city_exist"])) {
+
+                    unset($_SESSION["city_exist"]);
+                }
+            }
+            else
+            {
+                 $_SESSION["city_exist"] = "The city name is already exist in the state";
+            }
+
+        }
+
+        if (!isset($_SESSION["city_exist"]) ){  
+
+                $post_data['user_id'] = $user_id;
+                $post_data['created_at'] = date('Y-m-d H:i:s');
+
+                DB::insert('banners', $post_data); 
+                $created_id = DB::insertId();
+
+                $error = '';
+                
+                if(isset($_POST['save_image_file'])){
+                    $additional_img = '';
+                    $exp_file_img = explode('|',$_POST['save_image_file']);
+                    $joe_id = DB::update('banners', array('image' => $exp_file_img[0]), "id=%s", $created_id);
+                    if(count($exp_file_img) > 1){
+                        for ($i = 1; $i < count($exp_file_img); $i++) {
+                            $additional_img .= $exp_file_img[$i].'|';
+                        }
+                        $joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
+                    }
+                }
+                if(isset($_POST['save_video_file'])){
+                    $joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $created_id);
+                }
+
+                if ($error) {
+                    echo '<script>alert("' . $error . '");</script>';
+                }
+                
+                echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
+        }
 		
 	}
 
@@ -157,11 +115,20 @@ $serviceArr = array('Providing services', 'Looking for services');
             <p class="text-lg text-white/70 max-w-2xl mx-auto">Showcase your services and attract more clients with a premium advertisement</p>
         </div>
 
-        <!-- Step Indicator -->
+        <?php if(isset($_SESSION["city_exist"] ))  
+                {
+                    $city_error_exist = true;
+                }
+                else
+                {
+                     $city_error_exist = false;
+                }
+            
+        ?>
         <div class="step-indicator">
-            <div class="step active" id="step1">1</div>
+            <div class="step <?php if(!$city_error_exist) { ?> active <?php } ?>" id="step1">1</div>
             <div class="step" id="step2">2</div>
-            <div class="step" id="step3">3</div>
+            <div class="step <?php if($city_error_exist) { ?> active <?php } ?>" id="step3">3</div>
         </div>
 
         <!-- Form Container -->
@@ -170,7 +137,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 			<form action="" method="post" class="ultra-glass p-8 md:p-12 rounded-3xl shadow-2xl" onsubmit="submitForm(event)" role="form" enctype="multipart/form-data" >
 
                 <!-- Step 1: Basic Information -->
-                <div id="formStep1" class="form-step">
+                <div id="formStep1" class="form-step <?php if($city_error_exist) { ?> hidden <?php } ?>">
                     <h2 class="text-2xl font-bold premium-text mb-8 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-indigo-400">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -249,7 +216,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                 </div>
 
                 <!-- Step 2: Location & Pricing -->
-                <div id="formStep2" class="form-step hidden">
+                <div id="formStep2" class="form-step <?php if(!$city_error_exist) { ?> hidden <?php } ?>">
                     <h2 class="text-2xl font-bold premium-text mb-8 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-indigo-400">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -289,13 +256,13 @@ $serviceArr = array('Providing services', 'Looking for services');
                             <span class="err_adv_city" style="color:red;"></span>
                         </div>
 
-                         <div style="display:none" id="add_city_div">
+                         <div <?php if(!$city_error_exist) { ?> style="display:none" <?php } ?>  id="add_city_div">
 
-                            <label class="block text-white font-semibold mb-3">Add City</label>
+                            <label class="block text-white font-semibold mb-3">Add City *</label>
 
-                            <input type="text" name="add_city" id="add_city" class="form-input w-full px-6 py-4 rounded-xl" >
+                            <input type="text" name="add_city" id="add_city" class="form-input w-full px-6 py-4 rounded-xl" placeholder="Enter your city name" >
 
-                            <span class="err_adv_city" style="color:red;"></span>
+                            <span class="err_add_city" style="color:red;"><?php echo $_SESSION["city_exist"]  ?></span>
 
                         </div>
 
