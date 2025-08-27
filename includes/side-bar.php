@@ -33,6 +33,7 @@ if (isset($_SESSION['log_user_id'])) {
     <div class="p-6 flex flex-col items-center" onclick="window.location.href='<?= SITEURL ?>/user/profile/index.php'">
 
       <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $get_modal_user[0]['profile_pic']; ?>" alt="Profile" class="w-20 h-20 rounded-full">
+      
       <h3 class="text-xl font-bold mt-3"><?php echo $modalname; ?></h3>
       <div class="flex items-center mt-2">
         <div class="flex items-center mr-4">

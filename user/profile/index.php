@@ -367,12 +367,19 @@ if(!empty($userDetails['profile_pic'])){
 
         <div class="model-card text-center">
           <div class="relative inline-block mb-4">
-		  
-		  <?php if(!empty($userDetails['profile_pic'])){
-				$prof_img = SITEURL.$userDetails['profile_pic'];
-			} else{
-				$prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
-			} ?>
+            
+            <?php
+
+                $prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
+
+                  if(!empty($userDetails['profile_pic']))
+                  {
+                      if (checkImageExists($userDetails['profile_pic'])) {
+                    
+                          $prof_img = SITEURL . $userDetails['profile_pic'];
+                      }
+                  }
+            ?>
 		  
             <img src="<?php echo $prof_img; ?>" alt="Your profile" class="w-20 h-20 rounded-full mx-auto border-3 border-purple-500">
             <div class="online-dot"></div>
