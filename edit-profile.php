@@ -36,6 +36,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   <link rel="stylesheet" href="<?= SITEURL ?>assets/css/dropzone.min.css" />
 
   <link rel='stylesheet' href='<?= SITEURL ?>assets/css/profile.css?v=<?= time() ?>' type='text/css' media='all' />
+
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
   <style>
     .dropzone {
       border: none !important;
@@ -906,7 +909,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <label class="form-label">Date of Birth *</label>
-                  <input type="date" id="dob-input" class="form-input dob" name="dob" value="<?= $userDetails['dob'] ?>" readonly  max="<?= date('Y-m-d') ?>" onchange="calculateAge()" data-date-format="dd-mm-yyyy" autocomplete="off" required>
+                  <input type="text" id="dob-input" class="form-input dob" name="dob" value="<?= $userDetails['dob'] ?>" readonly  max="<?= date('Y-m-d') ?>" onchange="calculateAge()" data-date-format="dd-mm-yyyy" autocomplete="off" required>
                 </div>
                 <div>
                   <label class="form-label">Age *</label>
@@ -3456,6 +3459,17 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
   <script>
+
+    $(function() {
+        $("#dob-input").datepicker({
+            dateFormat: "dd-mm-yy",  
+            changeMonth: true,
+            changeYear: true, 
+            maxDate: 0              
+        });
+    });
+
+
     function select_hs_country(state) {
       $("#i-hs-city").html('<option value="">Select</option>');
       $("#i-hs-state").html('<option value="">Select</option>');
