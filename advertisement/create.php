@@ -944,6 +944,8 @@ let selectedFiles_video = [];
 		
 		//uploading Image files
 
+        console.log('files_img',files_img);
+
 		if (files_img.length > 0) {
 			// Create a new FormData object
 			var formData = new FormData();
@@ -980,11 +982,11 @@ let selectedFiles_video = [];
 				progress = 100;
 				}
 				
-				if(progress >= 100){
-				setTimeout(() => {
-                    event.target.submit();
-                }, 1000);
-			} 
+			// 	if(progress >= 100){
+			// 	setTimeout(() => {
+            //         event.target.submit();
+            //     }, 1000);
+			// } 
 			})
 			.catch(error => {
 				console.error('Upload failed:', error);
