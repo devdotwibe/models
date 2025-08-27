@@ -12,6 +12,9 @@ if (isset($_SESSION['log_user_id'])) {
 // if($as_a_model != 'Yes'){
 // 	header("Location: login.php");
 // }
+
+
+    $category_list = adv_category_list();
 ?>
 	
 <!DOCTYPE html>
@@ -81,10 +84,13 @@ if (isset($_SESSION['log_user_id'])) {
             <div class="flex space-x-4">
                 <select class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
                     <option value="all">All Categories</option>
-                    <option value="live-cam">Live Cam</option>
-                    <option value="premium">Premium Content</option>
-                    <option value="meet-greet">Meet & Greet</option>
-                    <option value="custom">Custom Services</option>
+
+                    <?php foreach($category_list as $item) {  ?>
+
+                        <option value="<?= $item ?>"><?= $item ?> </option>
+
+                    <?php } ?>
+                    
                 </select>
                 <select class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
                     <option value="all">All Status</option>
