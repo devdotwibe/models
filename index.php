@@ -423,7 +423,7 @@ include('includes/helper.php');
                                 <p class="text-white/70">Access premium tools for enhanced communication, privacy controls, and personalized experiences</p>
                             </div>
                         </div>
-                        <button class="btn-primary px-12 py-4 text-white rounded-xl font-bold text-lg shadow-2xl" onclick="upgradeToVIP()">
+                        <button type="button" class="btn-primary px-12 py-4 text-white rounded-xl font-bold text-lg shadow-2xl" onclick="ShowExplore()">
                             Explore Premium Features
                         </button>
                     </div>
@@ -707,7 +707,7 @@ include('includes/helper.php');
     <div class="modal-overlay" id="success_modal">
         <div class="modal">
             <div class="modal-header">
-                <h2 class="modal-title">Registration Successful</h2>
+                <h2 class="modal-title">Explore Premium Features</h2>
                 <button class="close-modal" type="button" onclick="CloseModal('success_modal')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -717,7 +717,7 @@ include('includes/helper.php');
             </div>
             <div class="modal-body" id="modal_success_message">
 
-                <p>Your registration was successful! You can now login to your account.</p>
+                <p>👑 Premium Features - Exploring advanced platform capabilities...</p>
 
                 <a class="btn btn-primary" onclick="CloseModal('success_modal')" >Ok</a>
 
@@ -730,7 +730,7 @@ include('includes/helper.php');
 
     <script>
 
-        function ShowLogin()
+        function ShowExplore()
         {
             $('#success_modal').addClass('active');
         }
