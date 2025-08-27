@@ -18,9 +18,12 @@ include('../includes/helper.php');
 
             echo json_encode(['message'=>'exist']);
 
+            exit;
+
         } else {
             
              echo json_encode(['message'=>'not exist']);
+             exit;
         }
     }
 ?>
