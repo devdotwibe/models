@@ -113,7 +113,7 @@ include('includes/helper.php');
                     </p>
 
                     <div class="space-y-6">
-                        <div class="relative">
+                        <div class="relative homebtn">
 
                             <input
                                 type="text"
@@ -311,7 +311,7 @@ include('includes/helper.php');
 
 								<input type="hidden" name="user_type" id="user_type" class="user_type" value="user">
 
-                                <div class="relative">
+                                <div class="relative ">
                                     <input type="password" id="passwordInput" name="password" placeholder="Password" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
                                     <button type="button" id="togglePassword" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white transition duration-300" onclick="togglePasswordVisibility()">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
