@@ -285,7 +285,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                         <div>
                             <label class="block text-white font-semibold mb-3">City *</label>
-							<select name="city" id="i-hs-city" class="form-input w-full px-6 py-4 rounded-xl adv_city" onchnage="AddCity(this)" id="adv_city" required ></select>
+							<select name="city" id="i-hs-city" class="form-input w-full px-6 py-4 rounded-xl adv_city" onchange="AddCity(this)" id="adv_city" required ></select>
                             <span class="err_adv_city" style="color:red;"></span>
                         </div>
 
