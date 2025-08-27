@@ -12034,6 +12034,12 @@ animation: none;
 
 
 
+  .advt-page select option{
+background:#171c34;
+  }
+
+
+
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
 
