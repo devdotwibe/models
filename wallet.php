@@ -817,34 +817,34 @@ $activeTab = 'wallet';
     let transactions = [];
 
     // Initialize app
-    document.addEventListener('DOMContentLoaded', function() {
-        initParticles();
-        updateBalance();
-        updateMode();
-    });
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     initParticles();
+    //     updateBalance();
+    //     updateMode();
+    // });
 
-    // Particle system
-    function initParticles() {
-        const particlesContainer = document.getElementById('particles');
+    // // Particle system
+    // function initParticles() {
+    //     const particlesContainer = document.getElementById('particles');
 
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 8 + 's';
-            particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+    //     function createParticle() {
+    //         const particle = document.createElement('div');
+    //         particle.className = 'particle';
+    //         particle.style.left = Math.random() * 100 + '%';
+    //         particle.style.animationDelay = Math.random() * 8 + 's';
+    //         particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
 
-            particlesContainer.appendChild(particle);
+    //         particlesContainer.appendChild(particle);
 
-            setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.remove();
-                }
-            }, 8000);
-        }
+    //         setTimeout(() => {
+    //             if (particle.parentNode) {
+    //                 particle.remove();
+    //             }
+    //         }, 8000);
+    //     }
 
-        setInterval(createParticle, 200);
-    }
+    //     setInterval(createParticle, 200);
+    // }
 
     // Mode switching
     function switchMode(mode) {
