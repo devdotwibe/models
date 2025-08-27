@@ -684,7 +684,7 @@ $activeTab = 'wallet';
 
 <script>
 // PHP array converted to JavaScript
-  var countryData = <?php echo json_encode($f_country_list); ?>; console.log(countryData);
+  var countryData = <?php echo json_encode($f_country_list, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>; console.log(countryData);
 jQuery(document).ready(function() {
   jQuery('.wallet_country').on('change', function() {
     let selectedCountry = jQuery(this).val();
