@@ -855,14 +855,22 @@ let selectedFiles_video = [];
                 };
 
                 uploadedVideos.push(videoData);
+
+                selectedFiles_video.push(file); 
+
                 displayVideoPreview(videoData);
+
+                const dataTransfer = new DataTransfer();
+
+                selectedFiles_video.forEach(f => dataTransfer.items.add(f));
+
+                document.getElementById('videoInput').files = dataTransfer.files; //console.log(dataTransfer.files);
+
             };
             reader.readAsDataURL(file);
         });
 		
-		const dataTransfer = new DataTransfer();
-		selectedFiles_video.forEach(file => dataTransfer.items.add(file)); 
-		document.getElementById('videoInput').files = dataTransfer.files; //console.log(dataTransfer.files);
+		
 		
     }
 
