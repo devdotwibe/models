@@ -276,58 +276,151 @@ else{
 						<img id="mainImage" src="<?php echo SITEURL.'uploads/banners/'.$form_data['image']; ?>" alt="<?php echo $form_data['name']; ?>" />
 						<?php
 						} */ ?>
+
+                        <?php 
+
+                            $items = [];
+
+                            if (!empty($form_data['video'])) { 
+                                $video = explode('|', $form_data['video']);
+                                foreach ($video as $add_vd) {
+                                    if (!empty($add_vd)) {
+                                        $items[] = [
+                                            'type' => 'video',
+                                            'src'  => SITEURL.'uploads/banners/'.$add_vd
+                                        ];
+                                    }
+                                }
+                            }
+
+                            if (!empty($form_data['image'])) {
+                                $items[] = [
+                                    'type' => 'image',
+                                    'src'  => SITEURL.'uploads/banners/'.$form_data['image']
+                                ];
+                            }
+
+                            if (!empty($form_data['additionalimages'])) {
+
+                                $additionalimages = explode('|', $form_data['additionalimages']);
+                                foreach ($additionalimages as $add_img) {
+                                    if (!empty($add_img)) {
+                                        $items[] = [
+                                            'type' => 'image',
+                                            'src'  => SITEURL.'uploads/banners/'.$add_img
+                                        ];
+                                    }
+                                }
+                            }
+
+                            $total_count = count($items);
+                        ?>
 						
-						<div class="owl-carousel" >
-						
-                            <?php if(!empty($form_data['video'])){ 
 
-                                $video = explode('|',$form_data['video']);
+                        <?php if ($total_count > 1) {  ?>
 
-                                $video_count = count($video);
-
-                                if($video_count > 0 ){ 
-
-                                    foreach($video as $add_vd) {  ?>
-                                
-                                        <div>
-
-                                            <video class="video-ci" controls  >
-
-                                                <source src="<?php echo SITEURL.'uploads/banners/'.$add_vd; ?>" type="video/mp4">
-
-                                            </video>
-
-                                        </div>
-
-                        <?php }  }  } else $video_count = 0; ?>
+                            <div class="owl-carousel" >
                             
-                            <?php if(!empty($form_data['image'])){ ?>
+                                <?php if(!empty($form_data['video'])){ 
 
-                            <div>
-                                <img src="<?php echo SITEURL.'uploads/banners/'.$form_data['image']; ?>" >
-                        
-                            </div>
-                            
-                            <?php } $add_cnt = 0; if(!empty($form_data['additionalimages'])){ 
+                                    $video = explode('|',$form_data['video']);
 
-                                $additionalimages = explode('|',$form_data['additionalimages']);
+                                    $video_count = count($video);
 
-                                if($additionalimages > 0)
-                                {
+                                    if($video_count > 0 ){ 
 
-                                foreach($additionalimages as $add_img){
-
-                                    if(!empty($add_img)){  ?>
-
-                                        <div>
-                                            <img src="<?php echo SITEURL.'uploads/banners/'.$add_img; ?>" >
+                                        foreach($video as $add_vd) {  if(!empty($add_vd)) { ?>
                                     
-                                        </div>
+                                            <div>
+
+                                                <video class="video-ci" controls  >
+
+                                                    <source src="<?php echo SITEURL.'uploads/banners/'.$add_vd; ?>" type="video/mp4">
+
+                                                </video>
+
+                                            </div>
+
+                            <?php } } }  } else $video_count = 0; ?>
+                                
+                                <?php if(!empty($form_data['image'])){ ?>
+
+                                <div>
+                                    <img src="<?php echo SITEURL.'uploads/banners/'.$form_data['image']; ?>" >
+                            
+                                </div>
+                                
+                                <?php } $add_cnt = 0; if(!empty($form_data['additionalimages'])){ 
+
+                                    $additionalimages = explode('|',$form_data['additionalimages']);
+
+                                    if($additionalimages > 0)
+                                    {
+
+                                    foreach($additionalimages as $add_img){
+
+                                        if(!empty($add_img)){  ?>
+
+                                            <div>
+                                                <img src="<?php echo SITEURL.'uploads/banners/'.$add_img; ?>" >
                                         
-                                <?php $add_cnt++; }  } } } ?>
-						
-						
-						</div>
+                                            </div>
+
+                                    <?php $add_cnt++; }  } } } ?>
+                            
+                            
+                            </div>
+                        <?php } else if( $total_count == 1) { ?>
+
+
+                              <?php if(!empty($form_data['video'])){ 
+
+                                    $video = explode('|',$form_data['video']);
+
+                                    $video_count = count($video);
+
+                                    if($video_count > 0 ){ 
+
+                                        foreach($video as $add_vd) {  if(!empty($add_vd)) { ?>
+                                    
+                                            <div>
+
+                                                <video class="video-ci" controls  >
+
+                                                    <source src="<?php echo SITEURL.'uploads/banners/'.$add_vd; ?>" type="video/mp4">
+
+                                                </video>
+
+                                            </div>
+
+                            <?php } } }  } else $video_count = 0; ?>
+                                
+                                <?php if(!empty($form_data['image'])){ ?>
+
+                                <div>
+                                    <img src="<?php echo SITEURL.'uploads/banners/'.$form_data['image']; ?>" >
+                            
+                                </div>
+                                
+                                <?php } $add_cnt = 0; if(!empty($form_data['additionalimages'])){ 
+
+                                    $additionalimages = explode('|',$form_data['additionalimages']);
+
+                                    if($additionalimages > 0)
+                                    {
+
+                                    foreach($additionalimages as $add_img){
+
+                                        if(!empty($add_img)){  ?>
+
+                                            <div>
+                                                <img src="<?php echo SITEURL.'uploads/banners/'.$add_img; ?>" >
+                                        
+                                            </div>
+
+                                    <?php $add_cnt++; }  } } } ?>
+
+                        <?php } ?>
 						
                 </div>
 
