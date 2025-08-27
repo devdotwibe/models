@@ -503,7 +503,7 @@ if(!empty($userDetails['profile_pic'])){
 
                   <?php } ?>
 
-                  <button type="button" class="btn-primary w-full" onclick="window.location.href='<?= SITEURL ?>/all-models.php?filter=available'" > View all</button>
+                  <button type="button" class="btn-primary w-full" onclick="window.location.href='<?= SITEURL ?>all-models.php?filter=available'" > View all</button>
                   
               </div>
 
