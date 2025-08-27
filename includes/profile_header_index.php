@@ -31,7 +31,7 @@
           <span></span>
           <span></span>
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center" onclick="window.location.href='<?= SITEURL ?>/user/profile/index.php'">
           <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2rqoMgilFSKGHIOncdCmYHiKATfRw2.png" alt="The Live Models" class="h-10 mr-3">
           <h1 class="logo-text text-2xl font-bold gradient-text heading-font">The Live Models</h1>
         </div>
