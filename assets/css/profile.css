@@ -4352,6 +4352,7 @@ body.edit-profilepage {
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
     height: 50px;
+    position: relative;
     margin-bottom: 50px;
 }
 
