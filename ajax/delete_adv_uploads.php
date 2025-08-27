@@ -31,14 +31,10 @@ $adv_type = $_GET['adv_type'];
 						$additional_vd .= $add_vd.'|';
 					}
 				}
-				if(!empty($additional_vd)){
 
-					$joe_id = DB::update('banners', array('video' => rtrim($additional_vd, "|")), "id=%s", $adv_id);
-				}
-
+				$joe_id = DB::update('banners', array('video' => rtrim($additional_vd, "|")), "id=%s", $adv_id);
+				
 			 	$output['status'] = 'success';
-            	$output['image']   = $image;
-				$output['upl_name']   = $upl_name;
 
 			}
 			}else if($adv_type == 'image'){
