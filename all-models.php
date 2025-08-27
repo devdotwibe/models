@@ -77,7 +77,18 @@ include('includes/helper.php');
 
 <body class="premimum-model1 enhanced5">
 
-    <?php include('includes/header.php'); ?>
+    <?php if (isset($_SESSION["log_user_id"])) { ?>
+    
+        <?php  include('includes/side-bar.php'); ?>
+
+        <?php  include('includes/profile_header_index.php'); ?>  
+    
+    <?php } else{ ?>
+    
+        <?php include('includes/header.php'); ?>
+        
+    <?php } ?>
+    
 
     <?php
 
