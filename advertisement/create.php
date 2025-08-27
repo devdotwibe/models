@@ -602,8 +602,11 @@ $serviceArr = array('Providing services', 'Looking for services');
     }
 
     function nextStep() {
+
+        let allow_next = true;
+
         if (currentStep < 3) { 
-			var allow_next = true;
+
 			if(currentStep == 1){
 				if(jQuery('.adv_category').val() == ''){
 					jQuery('.adv_category').addClass('invalid');
@@ -642,7 +645,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                             data: { city: add_city, state: state },
                             dataType: 'json',
                             success: function(response) {
-                                
+
                                  allow_next = false;
 
                                 if (response.message == "exist") {
