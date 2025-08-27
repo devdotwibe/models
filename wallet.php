@@ -681,40 +681,7 @@ $activeTab = 'wallet';
     </div>
 
     <?php include('includes/footer.php'); ?>
-<?php $f_country_list_json = DB::query('select id,name,sortname,abbreviation,full_form from countries where abbreviation!="" order by name asc'); ?>
-<script>
-// PHP array converted to JavaScript
-  var countryData = <?php echo json_encode($f_country_list_json, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>; console.log(countryData);
-jQuery(document).ready(function() { 
-  jQuery('.wallet_country').on('change', function() {
-    let selectedCountry = jQuery(this).val();
-    
-	var abbreviation = getAbbreviationById(selectedCountry);
-    
-	var full_form = getFull_formById(selectedCountry);
-    
-	jQuery('label.wallet_label').html(abbreviation);
-	jQuery('.wallet_sm_text').html(full_form);   console.log(selectedCountry+' - '+abbreviation+' - '+full_form);
-	
-    
-  });
-});
 
-function getAbbreviationById(id) {
-  var country = countryData.find(function(item) {
-    return item.id == id;
-  });
-
-  return country ? country.abbreviation : null;
-}
-function getFull_formById(id) {
-  var country = countryData.find(function(item) {
-    return item.id == id;
-  });
-
-  return country ? country.full_form : null;
-}
-</script>
 
     <link href="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
     <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
@@ -1074,3 +1041,37 @@ function getFull_formById(id) {
     document.addEventListener('DOMContentLoaded', lazyLoad);
 </script>
 
+<?php $f_country_list_json = DB::query('select id,name,sortname,abbreviation,full_form from countries where abbreviation!="" order by name asc'); ?>
+<script>
+// PHP array converted to JavaScript
+  var countryData = <?php echo json_encode($f_country_list_json, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>; console.log(countryData);
+jQuery(document).ready(function() { 
+  jQuery('.wallet_country').on('change', function() {
+    let selectedCountry = jQuery(this).val();
+    
+	var abbreviation = getAbbreviationById(selectedCountry);
+    
+	var full_form = getFull_formById(selectedCountry);
+    
+	jQuery('label.wallet_label').html(abbreviation);
+	jQuery('.wallet_sm_text').html(full_form);   console.log(selectedCountry+' - '+abbreviation+' - '+full_form);
+	
+    
+  });
+});
+
+function getAbbreviationById(id) {
+  var country = countryData.find(function(item) {
+    return item.id == id;
+  });
+
+  return country ? country.abbreviation : null;
+}
+function getFull_formById(id) {
+  var country = countryData.find(function(item) {
+    return item.id == id;
+  });
+
+  return country ? country.full_form : null;
+}
+</script>
