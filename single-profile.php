@@ -743,7 +743,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                             <div class="flex flex-wrap gap-2 sm:gap-3 mt-2 md:mt-0">
 
-                                    <button class="btn-primary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base" id="openServicesBtn" onclick="window.location.href='<?php echo SITEURL.'chat-app.php'; ?>" >
+                                    <button type="button" class="btn-primary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base" id="openServicesBtn" onclick="window.location.href='<?php echo SITEURL . 'chat-app.php'; ?>'">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                                         Message
