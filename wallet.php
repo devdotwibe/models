@@ -681,11 +681,11 @@ $activeTab = 'wallet';
     </div>
 
     <?php include('includes/footer.php'); ?>
-
+<?php $f_country_list_json = DB::query('select id,name,sortname,abbreviation,full_form from countries where abbreviation!="" order by name asc'); ?>
 <script>
 // PHP array converted to JavaScript
-  //var countryData = <?php echo json_encode($f_country_list, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>; console.log(countryData);
-jQuery(document).ready(function() { alert(1)
+  var countryData = <?php echo json_encode($f_country_list_json, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>; console.log(countryData);
+jQuery(document).ready(function() { 
   jQuery('.wallet_country').on('change', function() {
     let selectedCountry = jQuery(this).val();
     
