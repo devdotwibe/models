@@ -997,7 +997,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         $post_likes = PostLikesCount($uplds['ID']);
 				?>
                     <!-- Media Item Image -->
-                    <div class="media-item images_tab all_items_tab">
+                    <div class="media-item images_tab all_items_tab <?php if($uplds['post_type'] =='paid') { ?> exclusive_tab <?php } ?> ">
 
                         <img src="<?php echo $imageUrl ?>" <?php echo $blur_class ?> alt="<?php echo ucfirst($uplds['post_image']); ?>">
 
@@ -1072,7 +1072,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         ?>
 
                     <!-- Media Item Video -->
-                    <div class="media-item videos_tab all_items_tab">
+                    <div class="media-item videos_tab all_items_tab <?php if($uplds['post_type'] =='paid') { ?> exclusive_tab <?php } ?> ">
                         <div class="w-full h-full bg-gray-800 flex items-center justify-center" <?php echo $blur_class ?> >
                             <video class="video-ci" controls  >
 								<source src="<?php echo $videoUrl ?>" type="video/mp4">
@@ -3199,6 +3199,10 @@ jQuery('.send_gift_btn').click(function(){
             else if(type == 'video')
             {
                 $('.videos_tab').show();
+            }
+            else if(type=='exclusive')
+            {
+                 $('.exclusive_tab').show();
             }
         }
 
