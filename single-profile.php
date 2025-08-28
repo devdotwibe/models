@@ -58,7 +58,9 @@ if (mysqli_num_rows($res_ap) > 0) {
   if ($status == '1' && $end_date == date("Y-m-d") || $end_date < date("Y-m-d")) {
     $sql_us = "UPDATE `user_all_access` SET `status` = '0' WHERE model_id = '" . $_GET['m_unique_id'] . "' AND user_id = '" . $_SESSION['log_user_unique_id'] . "'";
     if (mysqli_query($con, $sql_us)) {
-      echo '<script>alert("Your 30 days access has expired. please renew it.")</script>';
+
+    //   echo '<script>alert("Your 30 days access has expired. please renew it.")</script>';
+
     }
   }
 
