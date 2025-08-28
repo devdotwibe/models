@@ -82,7 +82,9 @@ if (isset($_SESSION['log_user_id'])) {
             </div>
             
             <div class="flex space-x-4">
-                <select class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
+
+                <select onchange="FilterAdver(this)" class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
+
                     <option value="all">All Categories</option>
 
                     <?php foreach($category_list as $item) {  ?>
@@ -92,6 +94,7 @@ if (isset($_SESSION['log_user_id'])) {
                     <?php } ?>
                     
                 </select>
+
                 <select class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
                     <option value="all">All Status</option>
                     <option value="active">Active</option>
@@ -204,6 +207,19 @@ if (isset($_SESSION['log_user_id'])) {
 <script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
 <script>
+
+ function FilterAdver(el)
+ {
+
+    var value = $(el).val();
+
+    var pageno = $('#pagination-container .current').text();
+
+    loadData(pageno);
+ }
+
+
+
 $(document).ready(function () {
     var itemsPerPage = 10;
 
