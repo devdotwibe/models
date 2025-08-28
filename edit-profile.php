@@ -4455,11 +4455,12 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     }
 
     function confirmBroadcaster() {
-      switchTab('creator');
+
+      switchTab('basic');
 
       $('#conform_broad_cast').hide();
 
-      $('#creator-content').show();
+      $('#creator-content').hide();
     }
 
 

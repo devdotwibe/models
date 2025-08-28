@@ -58,7 +58,11 @@ if (mysqli_num_rows($res_ap) > 0) {
   if ($status == '1' && $end_date == date("Y-m-d") || $end_date < date("Y-m-d")) {
     $sql_us = "UPDATE `user_all_access` SET `status` = '0' WHERE model_id = '" . $_GET['m_unique_id'] . "' AND user_id = '" . $_SESSION['log_user_unique_id'] . "'";
     if (mysqli_query($con, $sql_us)) {
-      echo '<script>alert("Your 30 days access has expired. please renew it.")</script>';
+
+    //   echo '<script>alert("Your 30 days access has expired. please renew it.")</script>';
+
+        echo '<script>window._showExpire = true;</script>';
+
     }
   }
 
@@ -983,7 +987,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                         $blur_class="";
 
-                        if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids))
+                        if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) && !$isuser_have_access)
                         {
                             $imageUrl = "";
 
@@ -1017,7 +1021,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                 </div>
                             </div>
 
-                            <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) ) {?>
+                            <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) &&  !$isuser_have_access ) {?>
 
                                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" onclick="ConformPurchase('<?php echo $uplds['token']  ?>','form_token_<?= $uplds['ID'] ?>','Image')">
                                         <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
@@ -1056,7 +1060,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                 $blur_class="";
 
-                                if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) )
+                                if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) && !$isuser_have_access )
                                 {
                                     $videoUrl = "";
 
@@ -1097,7 +1101,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                             </div>
 
 
-                        <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) ) {?>
+                        <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) && !$isuser_have_access) {?>
 
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" onclick="ConformPurchase('<?php echo $uplds['token']  ?>','form_token_<?= $uplds['ID'] ?>','Video')">
                                     <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
@@ -2627,6 +2631,67 @@ if (mysqli_num_rows($res_ap) > 0) {
             </div>
         </div>
 
+        <div class="modal-overlay" id="conform_all_access">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Confirmation</h2>
+                    <button class="close-modal" type="button" onclick="CloseModalAccess()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        Are you sure to continue? Once you click, the amount  <strong><span id="amountValue"></span>₹</strong>  will be deducted from your account 
+                        and your 30 days will be counted from today. If you agree, please click on 
+                        <strong>Pay and Continue</strong>.
+                    </p>
+                    <div style="margin-top: 20px;">
+                        <button class="btn-primary px-7 sm:px-3 py-6 text-white" onclick="PayAccess()" type="button" id="puchare_submit">
+                            <strong><span id="amountValue_pay"></span>₹</strong> Pay and Continue
+                        </button>
+                        <button class="btn btn-secondary" type="button" onclick="CloseModalAccess()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="access_expired">
+
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Access Expired</h2>
+                    <button class="close-modal" type="button" onclick="exipireModal()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        Your <strong>30 days access</strong> has expired.  
+                        Please <strong>renew</strong> to continue using the service.
+                    </p>
+                    <div style="margin-top: 20px;">
+                        <button class="btn-primary px-7 sm:px-3 py-6 text-white" onclick="ConformAllAccess('<?php echo $model_data['all_30day_access_price'] ?>')" type="button" id="renew_submit">
+                            Renew Now
+                        </button>
+                        <button class="btn btn-secondary" type="button" onclick="exipireModal()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 	
 	
   <?php
@@ -2768,9 +2833,38 @@ jQuery('.send_gift_btn').click(function(){
 
     <script>
 
+        if (window._showExpire) {
+        if (typeof ShowExpire === 'function') {
+            ShowExpire();
+        } else {
+            var _tryExpire = setInterval(function(){
+            if (typeof ShowExpire === 'function') {
+                ShowExpire();
+                clearInterval(_tryExpire);
+            }
+            }, 50);
+        }
+        delete window._showExpire;
+        }
+
+
+        function ShowExpire()
+        {
+
+            $('#access_expired').addClass('active');
+
+        }
+
+        function exipireModal()
+        {
+            window.location.reload();
+        }
+
 
         function ConformAllAccess(amount)
         {
+
+            $('#access_expired').removeClass('active');
 
             $('#amountValue').text(amount);
 
