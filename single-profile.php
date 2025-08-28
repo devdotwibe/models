@@ -3402,7 +3402,7 @@ jQuery('.send_gift_btn').click(function(){
                             {
                                 window.location.reload();
                                 
-                            },2000);
+                            },3000);
 
                         }
                         else
