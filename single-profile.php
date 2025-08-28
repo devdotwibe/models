@@ -98,6 +98,9 @@ if (mysqli_num_rows($res_ap) > 0) {
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
 <style>
 
     .plus-btn {
@@ -588,19 +591,20 @@ body .owl-carousel .owl-nav.disabled {
     display: block;
   }
 </style>
+
   <script>
-  jQuery(document).ready(function($) {
-    $('.owl-carousel').owlCarousel({
-      items: 1,         
-      loop: true,      
-      margin: 10,
-      nav: true,        
-      dots: true,       
-      autoplay: true,
-	  autoplayTimeout: 5000,     
-    smartSpeed: 500,
+    jQuery(document).ready(function($) {
+        $('.owl-carousel').owlCarousel({
+        items: 1,         
+        loop: true,      
+        margin: 10,
+        nav: true,        
+        dots: true,       
+        autoplay: true,
+        autoplayTimeout: 5000,     
+        smartSpeed: 500,
+        });
     });
-  });
 </script>
 
 
