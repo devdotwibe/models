@@ -61,6 +61,8 @@ if (mysqli_num_rows($res_ap) > 0) {
 
     //   echo '<script>alert("Your 30 days access has expired. please renew it.")</script>';
 
+      echo '<script>ShowExpire();</script>';
+
     }
   }
 
@@ -2629,6 +2631,67 @@ if (mysqli_num_rows($res_ap) > 0) {
             </div>
         </div>
 
+        <div class="modal-overlay" id="conform_all_access">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Confirmation</h2>
+                    <button class="close-modal" type="button" onclick="CloseModalAccess()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        Are you sure to continue? Once you click, the amount  <strong><span id="amountValue"></span>₹</strong>  will be deducted from your account 
+                        and your 30 days will be counted from today. If you agree, please click on 
+                        <strong>Pay and Continue</strong>.
+                    </p>
+                    <div style="margin-top: 20px;">
+                        <button class="btn-primary px-7 sm:px-3 py-6 text-white" onclick="PayAccess()" type="button" id="puchare_submit">
+                            <strong><span id="amountValue_pay"></span>₹</strong> Pay and Continue
+                        </button>
+                        <button class="btn btn-secondary" type="button" onclick="CloseModalAccess()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="access_expired">
+
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Access Expired</h2>
+                    <button class="close-modal" type="button" onclick="exipireModal()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        Your <strong>30 days access</strong> has expired.  
+                        Please <strong>renew</strong> to continue using the service.
+                    </p>
+                    <div style="margin-top: 20px;">
+                        <button class="btn-primary px-7 sm:px-3 py-6 text-white" onclick="ConformAllAccess('<?php echo $model_data['all_30day_access_price'] ?>')" type="button" id="renew_submit">
+                            Renew Now
+                        </button>
+                        <button class="btn btn-secondary" type="button" onclick="exipireModal()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 	
 	
   <?php
@@ -2769,6 +2832,18 @@ jQuery('.send_gift_btn').click(function(){
 </script>
 
     <script>
+
+        function ShowExpire()
+        {
+
+            $('#access_expired').addClass('active');
+            
+        }
+
+        function exipireModal()
+        {
+            window.location.reload();
+        }
 
 
         function ConformAllAccess(amount)
