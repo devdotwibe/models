@@ -2864,6 +2864,8 @@ jQuery('.send_gift_btn').click(function(){
         function ConformAllAccess(amount)
         {
 
+            $('#access_expired').removeClass('active');
+
             $('#amountValue').text(amount);
 
             $('#amountValue_pay').text(amount);
