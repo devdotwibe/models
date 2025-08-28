@@ -221,7 +221,12 @@ if (isset($_SESSION['log_user_id'])) {
 
 
 $(document).ready(function () {
-    var itemsPerPage = 10;
+
+    loadData(1);
+});
+
+
+    let itemsPerPage = 10;
 
     function loadData(page = 1) {
         $.ajax({
@@ -250,8 +255,6 @@ $(document).ready(function () {
         });
     }
 
-    loadData(1); // initial load
-});
 </script>
 
 <script>
