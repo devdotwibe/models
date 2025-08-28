@@ -368,6 +368,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     required
                                     min=""
                                 >
+
+
+                                <span id="end_date_error"  style="display: none; color:red;"> </span>
                             </div>
 							
 							<div>
@@ -446,7 +449,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     required
                                 >
 
-                                <span id="end_date_error"  style="display: none; color:red;"> </span>
 							</div>
 							<div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">No of hours need to meet</label>
@@ -502,7 +504,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 let toDate   = $('#meeting_date_to').val();
 
                 $('#end_date_error').hide().text('');
-                
+
                 if (!fromDate || !toDate) {
                     $('#token_no').text('');
                     return;
