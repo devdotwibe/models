@@ -61,7 +61,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
     //   echo '<script>alert("Your 30 days access has expired. please renew it.")</script>';
 
-      echo '<script>ShowExpire();</script>';
+        echo '<script>window._showExpire = true;</script>';
 
     }
   }
@@ -2833,11 +2833,26 @@ jQuery('.send_gift_btn').click(function(){
 
     <script>
 
+        if (window._showExpire) {
+        if (typeof ShowExpire === 'function') {
+            ShowExpire();
+        } else {
+            var _tryExpire = setInterval(function(){
+            if (typeof ShowExpire === 'function') {
+                ShowExpire();
+                clearInterval(_tryExpire);
+            }
+            }, 50);
+        }
+        delete window._showExpire;
+        }
+
+
         function ShowExpire()
         {
 
             $('#access_expired').addClass('active');
-            
+
         }
 
         function exipireModal()
