@@ -107,7 +107,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                             </div>
 						<?php } ?>
                             <div class="premium-text font-bold text-lg mb-2"><?php echo $userDetails['name']; ?></div>
-                            <div class="flex items-center justify-center mb-2">
+                            <?php /*?><div class="flex items-center justify-center mb-2">
                                 <span class="status-online w-3 h-3 rounded-full mr-2"></span>
                                 <span class="text-sm text-white/60">Online</span>
                             </div>
@@ -129,7 +129,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 								if(!empty($user_city) && !empty($model_city)) echo ' AND ';
 								if(!empty($model_city)) echo 'THE MODEL IS IN CITY '.$model_city;
 								?>
-							</div>
+							</div><?php */?>
 						</div>
 
                         <!-- Connection Arrow -->
@@ -151,13 +151,14 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                             </div>
 						<?php } ?>
                             <div class="premium-text font-bold text-lg mb-2"><?php echo $model_data['name']; ?></div>
-                            <div class="flex items-center justify-center mb-2">
+                            <?php /*?><div class="flex items-center justify-center mb-2">
                                 <span class="status-online w-3 h-3 rounded-full mr-2"></span>
                                 <span class="text-sm text-white/60">Available</span>
-                            </div>
+                            </div><?php */ ?>
+							<?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
                             <div class="verified-badge text-white px-3 py-1 rounded-full text-xs font-semibold">
                                 ✓ Verified Model
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -337,7 +338,29 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                             </div>
                             <h2 class="text-3xl font-bold premium-text heading-font">When do you want to see me?</h2>
                         </div>
-                        
+                        <?php if($_GET['service'] == 'Travel'){ ?>
+						<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            <div class="md:col-span-2">
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">From</label>
+                                <input name="meeting_date"
+                                    type="date" 
+                                    class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
+                                    required
+                                    min=""
+                                >
+                            </div>
+							<div class="md:col-span-2">
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">To</label>
+                                <input name="meeting_date_to"
+                                    type="date" 
+                                    class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
+                                    required
+                                    min=""
+                                >
+                            </div>
+							
+						</div>
+						<?php } else{ ?>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                             <div class="md:col-span-2">
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Date</label>
@@ -390,6 +413,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                 </label>
                             </div>
                         </div>
+						
+						<?php } ?>
+						
                     </div>
 
                     

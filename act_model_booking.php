@@ -11,14 +11,19 @@ if (isset($_POST['booking_submit'])) {
    $user_unique_id = $_POST['user_unique_id'];
    $model_name = $_POST['model_name'];
    $meeting_date = $_POST['meeting_date'];
+   
+   if(isset($_POST['meeting_date_to'])) $meeting_date_to = $_POST['meeting_date_to'];
+   
    //$booking_type = $_POST['booking_type'];
    $booking_for = $_POST['booking_for'];
    $country = $_POST['country'];
    $instructions = $_POST['instructions'];
+   if(isset($_POST['meeting_hrs'])){
    $meeting_hrs = $_POST['meeting_hrs'];
    $meeting_min = $_POST['meeting_min'];
    $meeting_g = $_POST['meeting_g'];
    $meeting_time = $meeting_hrs.':'.$meeting_min.' '.$meeting_g;
+   }else $meeting_time = '';
    $model_ID = $_POST['model_ID'];
    $model_unique_id = $_POST['model_unique_id'];
 
@@ -31,7 +36,8 @@ if (isset($_POST['booking_submit'])) {
 	$post_data['email'] = '';
 	$post_data['age'] = '';
 	$post_data['duration'] = '';
-	$post_data['meeting_time'] = $meeting_time;
+	if(isset($_POST['meeting_hrs'])) $post_data['meeting_time'] = $meeting_time;
+	if(isset($_POST['meeting_date_to'])) $post_data['meeting_date_to'] = $meeting_date_to;
 	$post_data['address'] = '';
 	$post_data['city'] = '';
 	$post_data['state'] = '';
