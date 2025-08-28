@@ -59,7 +59,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 	<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
    
 </head>
-<body class="min-h-screen text-white booking-form text-white socialwall-page">
+<body class="min-h-screen text-white booking-form text-white socialwall-page enhanced5">
 	
 	
 	<?php if (isset($_SESSION["log_user_id"])) { ?>
