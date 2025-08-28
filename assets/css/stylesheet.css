@@ -12049,34 +12049,34 @@ position:absolute !important;
 
 
 
-#list_advertisements {
+/* #list_advertisements {
   padding-inline: 30px;
-  /* border: 1px solid red; */
+ 
   width: 100%;
   overflow-x: auto;
-}
+} */
 
-#list_advertisements .table-row .col-span-1 {
+/* #list_advertisements .table-row .col-span-1 {
   grid-column: span 1 / span 1;
   max-width: 60px !important;
   width: 100%;
   display: flex;
     align-items: center;
-  /* background: red; */
+
   align-items: flex-start;
   justify-content: center;
-}
+} */
 
-#list_advertisements .table-row .col-span-1 :first-child{
+/* #list_advertisements .table-row .col-span-1 :first-child{
   justify-content: flex-start;
 
-}
+} */
 /* #list_advertisements .table-row>div:last-child{
     display: flex;
     flex-wrap: wrap;
 } */
 #list_advertisements .table-row>div .grid-cols-12 div:last-child>*{
-    /* padding-inline: .60rem !important; */
+   
     padding-left: .60rem !important;
     padding-right: .60rem !important;
 }
