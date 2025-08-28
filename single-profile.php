@@ -854,7 +854,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                            $model_data = DB::queryFirstRow($sql_ap);
 
-                                        if($model_data['all_30day_access'] == 'Yes') {
+                                        if($model_data['all_30day_access'] == 'Yes' && !$isuser_have_access) {
                                     ?>
 
                                     <div onclick="ConformAllAccess('<?php echo $model_data['all_30day_access_price'] ?>')" class="action-item" id="all_access_30" bis_skin_checked="1" >
@@ -983,7 +983,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                         $blur_class="";
 
-                        if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids))
+                        if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) && !$isuser_have_access)
                         {
                             $imageUrl = "";
 
@@ -1056,7 +1056,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                 $blur_class="";
 
-                                if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) )
+                                if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) && !$isuser_have_access )
                                 {
                                     $videoUrl = "";
 
