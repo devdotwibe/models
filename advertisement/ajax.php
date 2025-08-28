@@ -55,8 +55,21 @@ if(isset($_SESSION['log_user_id'])){
 	$limited = " limit $offset, ".$perPage;
 	$where_clause = rtrim($where_clause,'and');
 	if($where_clause){
-		$all_data = DB::query($stringQuery." and ".$where_clause." ".$sort_by.$limited,...$params) ;
-		$total = $output['total'] = DB::numRows($stringQuery." and ".$where_clause);
+
+
+		// $all_data = DB::query($stringQuery." and ".$where_clause." ".$sort_by.$limited,...$params) ;
+
+		$all_data = DB::query(
+			$stringQuery . $where_clause . " " . $sort_by . " " . $limited,
+			...$params
+		);
+
+		$total = DB::queryFirstField(
+			"SELECT COUNT(*) FROM live_posts " . $where_clause,
+			...$params
+		);
+
+		// $total = $output['total'] = DB::numRows($stringQuery." and ".$where_clause);
 	}
 	else{
 		$all_data = DB::query($stringQuery." ".$sort_by.$limited);
