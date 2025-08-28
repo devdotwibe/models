@@ -22,7 +22,7 @@ if(isset($_SESSION['log_user_id'])){
 	}
 	$list_data = $perPage;
 
-	$category = isset($_GET['category']) ? (int) $_GET['category'] : 0;
+	$category = isset($_GET['category']) ?  $_GET['category'] : "";
 	
 	$name = '';
 	if(isset($_GET['q'])){ $name = $_GET['q']; }
