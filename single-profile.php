@@ -2050,7 +2050,7 @@ body .owl-carousel .owl-nav.disabled {
 					
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-					<a class="action-button btn btn-primary" href='<?=SITEURL?>booking.php?type=chat&service=Live Stream&token=<?php echo $extra_details['private_chat_token']; ?>/min&m_id=<?php echo $_GET["m_unique_id"]; ?>' >Watch Live</a>
+					<a class="action-button btn btn-primary" href='<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>' >Watch Live</a>
 
                     <?php }?>
 					
