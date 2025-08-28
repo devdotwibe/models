@@ -854,7 +854,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                            $model_data = DB::queryFirstRow($sql_ap);
 
-                                        if($model_data['all_30day_access'] == 'Yes' && !$isuser_have_access) {
+                                        if($model_data['all_30day_access'] == 'Yes') {
                                     ?>
 
                                     <div onclick="ConformAllAccess('<?php echo $model_data['all_30day_access_price'] ?>')" class="action-item" id="all_access_30" bis_skin_checked="1" >
