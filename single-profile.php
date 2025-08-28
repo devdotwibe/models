@@ -2749,7 +2749,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                 currentPage: currentPage,
                 cssStyle: "light-theme",
                 onPageClick: function (pageNumber) {
-                    window.location.href = "?page=" + pageNumber;
+                    window.location.href = "&page=" + pageNumber;
                 }
             });
             $("#pagination-container").data("pagination-initialized", true);
