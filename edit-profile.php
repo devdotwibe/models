@@ -4654,44 +4654,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           });
       }
 
-      function renderChart(data) {
-        
-        const chartContainer = document.querySelector(".chart-container");
-        chartContainer.innerHTML = "";
-
-        const values = Object.values(data);
-        const maxValue = Math.max(...values);
-        const scaleFactor = maxValue > 0 ? 100 / maxValue : 0;
-
-        Object.keys(data).forEach(key => {
-            const value = data[key] || 0;
-            const height = value * scaleFactor;
-
-            // wrapper for each bar + label
-            const item = document.createElement("div");
-            item.className = "chart-item";
-            item.style.display = "inline-flex";
-            item.style.flexDirection = "column";
-            item.style.alignItems = "center";
-            item.style.margin = "0 4px";
-
-            const bar = document.createElement("div");
-            bar.className = "chart-bar";
-            bar.style.height = `${height}px`;
-            bar.style.width = "20px";   // adjust width for spacing
-            bar.title = `${key}: ${value}`;
-
-            const label = document.createElement("div");
-            label.className = "chart-label";
-            label.innerText = key;
-
-            item.appendChild(bar);
-            item.appendChild(label);
-            chartContainer.appendChild(item);
-        });
-    }
-
-
     function updateEarningsChart() {
 
       var period = $('#earnings_period').val();
