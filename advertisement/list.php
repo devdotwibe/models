@@ -213,7 +213,7 @@ if (isset($_SESSION['log_user_id'])) {
 
     var value = $(el).val();
 
-    var pageno = $('#pagination-container .current').text();
+    var pageno = $('#pagination-container .active .current').text();
 
     loadData(pageno);
  }
