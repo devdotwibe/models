@@ -12046,6 +12046,29 @@ position:absolute !important;
 }
 
 
+
+
+
+#list_advertisements {
+  padding-inline: 30px;
+  border: 1px solid red;
+  width: 100%;
+  overflow-x: auto;
+}
+
+#list_advertisements .table-row .col-span-1 {
+  grid-column: span 1 / span 1;
+  max-width: 60px !important;
+  width: 100%;
+  display: flex;
+    align-items: center;
+  background: red;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+
+
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
 
