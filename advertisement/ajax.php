@@ -26,6 +26,8 @@ if(isset($_SESSION['log_user_id'])){
 	$list_data = $perPage;
 
 	$category =  $_GET['category'];
+
+	$status =  $_GET['status'];
 	
 	$name = '';
 	if(isset($_GET['q'])){ $name = $_GET['q']; }
@@ -38,6 +40,11 @@ if(isset($_SESSION['log_user_id'])){
 	if (!empty($category)) {
 		$where_clause = " and tb.category = %s ";
 		$params[] = $category;
+	}
+
+	if (!empty($status)) {
+		$where_clause = " and tb.adv_status = %s ";
+		$params[] = $status;
 	}
 
 	$sort_by = ' ORDER BY tb.id desc ';
