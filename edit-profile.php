@@ -4624,38 +4624,38 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     // }
 
 
-    // function renderChart(data) {
+    function renderChart(data) {
 
-    //       const chartContainer = document.querySelector(".chart-container");
+          const chartContainer = document.querySelector(".chart-container");
 
-    //       chartContainer.innerHTML = "";
+          chartContainer.innerHTML = "";
 
-    //       const values = Object.values(data);
+          const values = Object.values(data);
 
-    //       const maxValue = Math.max(...values);
+          const maxValue = Math.max(...values);
 
-    //       const scaleFactor = maxValue > 0 ? 100 / maxValue : 0;
+          const scaleFactor = maxValue > 0 ? 100 / maxValue : 0;
 
-    //       Object.keys(data).forEach(key => {
-    //           const value = data[key] || 0;
-    //           const height = value * scaleFactor;
+          Object.keys(data).forEach(key => {
+              const value = data[key] || 0;
+              const height = value * scaleFactor;
 
-    //           const bar = document.createElement("div");
-    //           bar.className = "chart-bar";
-    //           bar.style.height = `${height}px`;
-    //           bar.title = `${key}: ${value}`;
+              const bar = document.createElement("div");
+              bar.className = "chart-bar";
+              bar.style.height = `${height}px`;
+              bar.title = `${key}: ${value}`;
 
-    //           const label = document.createElement("div");
-    //           label.className = "chart-label";
-    //           label.innerText = key;
+              const label = document.createElement("div");
+              label.className = "chart-label";
+              label.innerText = key;
 
-    //           chartContainer.appendChild(bar);
-    //           chartContainer.appendChild(label);
-    //       });
-    //   }
+              chartContainer.appendChild(bar);
+              chartContainer.appendChild(label);
+          });
+      }
 
       function renderChart(data) {
-
+        
         const chartContainer = document.querySelector(".chart-container");
         chartContainer.innerHTML = "";
 
