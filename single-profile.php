@@ -3398,7 +3398,11 @@ jQuery('.send_gift_btn').click(function(){
 
                             $('.token_sec').hide();
 
-                            window.location.reload();
+                            setTimeout(function()
+                            {
+                                window.location.reload();
+                                
+                            },2000);
 
                         }
                         else
