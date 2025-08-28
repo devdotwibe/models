@@ -2736,8 +2736,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 <script>
 
 
-   $(document).ready(function () {
-
+    $(document).ready(function () {
         var itemsPerPage = <?php echo $itemsPerPage; ?>;
         var totalPosts   = <?php echo $total_posts; ?>;
         var currentPage  = <?php echo $page; ?>;
@@ -2749,12 +2748,16 @@ if (mysqli_num_rows($res_ap) > 0) {
                 currentPage: currentPage,
                 cssStyle: "light-theme",
                 onPageClick: function (pageNumber) {
-                    window.location.href = "&page=" + pageNumber;
+                    // Get current URL params
+                    var url = new URL(window.location.href);
+                    url.searchParams.set("page", pageNumber); 
+                    window.location.href = url.toString();
                 }
             });
             $("#pagination-container").data("pagination-initialized", true);
         }
     });
+
 
 
 jQuery('.socialpaidbtn').click(function(e){
