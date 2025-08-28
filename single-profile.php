@@ -3380,7 +3380,7 @@ jQuery('.send_gift_btn').click(function(){
                                    
                             $('#modal_success_message .success-text').remove();
 
-                            $('#success_modal').removeClass('active');
+                            $('#success_modal').addClass('active');
 
                             $('#modal_success_message').prepend(`<p class="success-text">Post Uploaded Successfully</p>`);
 
