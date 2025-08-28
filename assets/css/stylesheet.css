@@ -12066,11 +12066,16 @@ position:absolute !important;
   align-items: flex-start;
   justify-content: center;
 }
+
+#list_advertisements .table-row .col-span-1 :first-child{
+  justify-content: flex-start;
+
+}
 /* #list_advertisements .table-row>div:last-child{
     display: flex;
     flex-wrap: wrap;
 } */
-#list_advertisements .table-row>div div:last-child>*{
+#list_advertisements .table-row>div>div div:last-child>*{
     padding-inline: .60rem !important;
 }
 
