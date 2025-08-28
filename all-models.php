@@ -637,6 +637,27 @@ include('includes/helper.php');
                                 <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>">
                                     <i class="fas fa-times"></i>
                                 </button>
+
+                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
+
+                                    <a href="<?=SITEURL?>chat-app.php?modelid=<?php echo $rowesdw['id']; ?>" 
+
+                                        class="action-btn chat" title="Chat">
+
+                                        <i class="fas fa-comment-dots"></i>
+                                    </a>
+
+                                <?php } else { ?>
+
+                                    <a href="<?=SITEURL?>login.php" 
+
+                                        class="action-btn chat" title="Chat">
+
+                                        <i class="fas fa-comment-dots"></i>
+                                    </a>
+
+                                <?php } ?>
+                                
                             </div>
                         </div>
 
