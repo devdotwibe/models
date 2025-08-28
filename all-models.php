@@ -633,12 +633,7 @@ include('includes/helper.php');
                                 <?php } ?>
 
 
-
-                                <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>">
-                                    <i class="fas fa-times"></i>
-                                </button>
-
-                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
+                                <?php if (isset($_SESSION['log_user_id'])) { ?>
 
                                     <a href="<?=SITEURL?>chat-app.php?modelid=<?php echo $rowesdw['id']; ?>" 
 
@@ -657,7 +652,13 @@ include('includes/helper.php');
                                     </a>
 
                                 <?php } ?>
-                                
+
+                                <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <i class="fas fa-times"></i>
+                                </button>
+
+                               
+
                             </div>
                         </div>
 
@@ -1139,12 +1140,6 @@ include('includes/helper.php');
                                 <?php } ?>
 
 
-
-                                <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>">
-                                    <i class="fas fa-times"></i>
-                                </button>
-
-
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
                                     <a href="<?=SITEURL?>chat-app.php?modelid=<?php echo $rowesdw['id']; ?>" 
@@ -1164,6 +1159,11 @@ include('includes/helper.php');
                                     </a>
 
                                 <?php } ?>
+
+
+                                <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <i class="fas fa-times"></i>
+                                </button>
 
                             </div>
                         </div>
