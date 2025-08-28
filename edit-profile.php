@@ -2125,9 +2125,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           <div class="collapsible-content">
 
             <div class="mt-8 mb-6">
-
-              <h2 class="text-xl font-bold">👥 Travel Experiences</h2>
-
+              
               <div class="question-text">Would you like to offer travel experiences?</div>
               <p class="help-text">Accompany others on trips, vacations, or business travel </p>
               <div class="radio-group mt-3">
