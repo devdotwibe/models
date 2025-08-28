@@ -337,7 +337,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                             </div>
 							<?php if($_GET['service'] == 'Travel'){ ?>
+
 							<h2 class="text-3xl font-bold premium-text heading-font">Select travel date</h2>
+
+                            <h3 class="text-3xl font-bold premium-text heading-font">token <span id="token_no"></span> </h3>
+
 							<?php } else{ ?>
                             <h2 class="text-3xl font-bold premium-text heading-font">When do you want to see me?</h2>
 							<?php } ?>
