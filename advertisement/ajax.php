@@ -36,7 +36,7 @@ if(isset($_SESSION['log_user_id'])){
 
 
 	if (!empty($category)) {
-		$where_clause = " WHERE tb.category = %s ";
+		$where_clause = " and tb.category = %s ";
 		$params[] = $category;
 	}
 
