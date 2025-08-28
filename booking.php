@@ -445,6 +445,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                     required
                                 >
+
+                                <span id="end_date_error"  style="display: none; color:red;"> </span>
 							</div>
 							<div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">No of hours need to meet</label>
@@ -499,6 +501,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 let fromDate = $('#meeting_date_from').val();
                 let toDate   = $('#meeting_date_to').val();
 
+                $('#end_date_error').hide().text('');
+                
                 if (!fromDate || !toDate) {
                     $('#token_no').text('');
                     return;
@@ -508,8 +512,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 let end   = new Date(toDate);
 
                 if (end < start) {
-                    alert("End date must be after start date");
+
+                    // alert("End date must be after start date");
+
+                    $('#end_date_error').show().text('End date must be after start date');
+
                     $('#token_no').text('');
+
                     return;
                 }
 
