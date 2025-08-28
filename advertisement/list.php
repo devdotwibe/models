@@ -215,22 +215,20 @@ if (isset($_SESSION['log_user_id'])) {
 
     var pageno = $('#pagination-container .active .current').text();
 
-    loadData(pageno);
+      loadData(pageno, value);
  }
 
 
 
 $(document).ready(function () {
-
+    
     loadData(1);
 });
 
 
     let itemsPerPage = 10;
 
-    function loadData(page = 1) {
-
-        var category = $('#category_id');
+    function loadData(page = 1, category = '') {
 
         $.ajax({
             url: "<?php echo SITEURL.'advertisement/ajax.php'?>",
