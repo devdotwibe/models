@@ -12070,7 +12070,7 @@ position:absolute !important;
     display: flex;
     flex-wrap: wrap;
 } */
-#list_advertisements .table-row>div:last-child>*{
+#list_advertisements .table-row>div div:last-child>*{
     padding-inline: .60rem !important;
 }
 
