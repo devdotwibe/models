@@ -193,13 +193,26 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Extended Evening Rate: <?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?>/8hrs</div>
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Full-day Social Rate: <?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?>/d</div>
 							</div>
-							
+							<?php $social_availability = json_decode($extra_details['social_availability']);
+							if(!empty($social_availability)){
+							  $availability_time_slot = json_decode($extra_details['availability_time_slot']);
+							  ?>
 							<div>
 								<label class="block text-white/80 font-semibold mb-3 text-lg">Available Days</label>
-								
+								<ul class="avail-list">
+								<?php foreach($social_availability as $avail){ 
+
+									echo '<li>'.$avail;
+									if(!empty($availability_time_slot) && !empty($availability_time_slot->$avail) && !empty($availability_time_slot->$avail[0])){
+										echo ' - '.$availability_time_slot->$avail[0].' : '.$availability_time_slot->$avail[1];
+									}
+									echo '</li>';
+
+								} ?>
+								</ul>
 							</div>
 								
-							<?php } ?>
+							<?php }  } ?>
 							
 							<?php if($_GET['service'] == 'Travel'){ ?>
 							
@@ -214,15 +227,21 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Monthly Rate: <?php if (!empty($extra_details)) echo $extra_details['monthly_rate']; ?>/8hrs</div>
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Preferred Travel Destinations: <?php if (!empty($extra_details)) echo $extra_details['travel_destination']; ?>/d</div>
 							</div>
-							
+							<?php $travel_months = json_decode($extra_details['travel_months']); 
+							if(!empty($travel_months)){
+							?>
 							<div>
 								<label class="block text-white/80 font-semibold mb-3 text-lg">Available Months for Travel</label>
-								
+								<ul class="avail-list">
+								<?php foreach($travel_months as $avail){ 
+
+									echo '<li>'.$avail.'</li>';
+
+								} ?>
+								</ul>
 							</div>
 							
-							<div>
-							<?php $travel_months = json_decode($extra_details['travel_months']); ?>
-							</div>
+							<?php } ?>
 								
 							<?php } ?>
 							
