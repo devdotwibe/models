@@ -29,6 +29,8 @@ if (isset($_SESSION['log_user_unique_id'])) {
   } else {
     $error = 'empty';
   }
+
+    $is_model = $userDetails['as_a_model'] =='Yes' ? true : false;
 }
 
 
@@ -1311,11 +1313,11 @@ if (mysqli_num_rows($res_ap) > 0) {
                                         </div>
                                     </div>
 
-                                <div class="flex flex-col text-white text-sm sm:text-base post_type_sec" style="display:none;">
+                                <div class="flex flex-col text-white text-sm sm:text-base <?php if($is_model){ ?>post_type_sec <?php }?>" style="display:none;">
                                         <label class="mb-2">Post Type:</label>
                                         <div class="flex flex-col gap-2">
                                             <label class="flex items-center gap-2 cursor-pointer">
-                                                <input type="radio" name="post_type" value="free" onchange="PostType(this)" class="accent-indigo-500">
+                                                <input type="radio" name="post_type" value="free" <?php if(!$is_model){ ?> checked <?php } ?>  onchange="PostType(this)" class="accent-indigo-500">
                                                 <span>Free</span>
                                             </label>
                                             <label class="flex items-center gap-2 cursor-pointer">
@@ -1323,7 +1325,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                                 <span>Paid</span>
                                             </label>
                                         </div>
-                                    </div>
+                                </div>
 
                                 </div>
 
