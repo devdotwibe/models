@@ -2731,6 +2731,8 @@ if (mysqli_num_rows($res_ap) > 0) {
   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<link href="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
+
 <script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
 <script>
@@ -2748,7 +2750,6 @@ if (mysqli_num_rows($res_ap) > 0) {
                 currentPage: currentPage,
                 cssStyle: "light-theme",
                 onPageClick: function (pageNumber) {
-                    // Get current URL params
                     var url = new URL(window.location.href);
                     url.searchParams.set("page", pageNumber); 
                     window.location.href = url.toString();
