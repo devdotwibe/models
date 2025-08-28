@@ -29,8 +29,6 @@ if (isset($_SESSION['log_user_unique_id'])) {
   } else {
     $error = 'empty';
   }
-
-    $is_model = $userDetails['as_a_model'] =='Yes' ? true : false;
 }
 
 
@@ -60,11 +58,7 @@ if (mysqli_num_rows($res_ap) > 0) {
   if ($status == '1' && $end_date == date("Y-m-d") || $end_date < date("Y-m-d")) {
     $sql_us = "UPDATE `user_all_access` SET `status` = '0' WHERE model_id = '" . $_GET['m_unique_id'] . "' AND user_id = '" . $_SESSION['log_user_unique_id'] . "'";
     if (mysqli_query($con, $sql_us)) {
-
-    //   echo '<script>alert("Your 30 days access has expired. please renew it.")</script>';
-
-        echo '<script>window._showExpire = true;</script>';
-
+      echo '<script>alert("Your 30 days access has expired. please renew it.")</script>';
     }
   }
 
@@ -97,9 +91,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 <style>
 
@@ -516,98 +507,45 @@ if (mysqli_num_rows($res_ap) > 0) {
             }
         }
     </style>
+<script>
+    function like(postid, userid) {
 
-  <style type="text/css">
-  	
-body .owl-carousel.owl-loading {
-    opacity: 1;
-    display: block;
-    text-align: center;
-}
-.framebox{
-    width: 95%;
-    margin: auto;
-    padding-top: 10px;
-}
-.owl-prev,.owl-next{
-font-size: 30px;
-/*background: rgb(166, 166, 255);*/
-color: white;
-border: 0;
-margin: 7px;
-}
+      if (userid == 0) {
+        alert("Create Account First");
+      } else {
 
-.owl-prev:hover,.owl-next:hover,.owl-prev:focus,.owl-next:focus{
-    outline: none;
-}
-.owl-item {
-    border-radius: 4px;
+        //alert("uid-" +userid  );
 
-}
-a.item {
-    /*display: flex;*/
-    align-items: center;
-    justify-content: center;
-    font-size: 50px;
-    color: #f00;
-    cursor: pointer;
-    text-align: center;
-    /*padding: 78px 30px;*/
-}
-.sml_tst{
-  font-size: 14px;
-  color: #ffffff;
-}
-.owl-carousel.owl-drag .owl-item{
-  text-align: center;
-}
-.item:hover{
-    text-decoration-line: none;
-}
-.owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled {
-    display: block;
-    margin-top: 10px;
-}
-body .owl-carousel .owl-dots, 
-body .owl-carousel .owl-nav {
-    display: block;
-    margin-top: 10px;
-    text-align: center;
-}
-body .owl-carousel .owl-dots.disabled, 
-body .owl-carousel .owl-nav.disabled {
-    display: block;
-}
-.owl-dot{
-    display: none;
-}
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("likebody" + postid).innerHTML = this.responseText;
+          }
+        };
+        xmlhttp.open("GET", "get-like.php?q=" + postid + "&uid=" + userid, true);
+        xmlhttp.send();
+
+      }
 
 
-  </style>
-  <style>
-  .owl-carousel img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-</style>
+
+    }
+  </script>
 
   <script>
-    jQuery(document).ready(function($) {
-        $('.owl-carousel').owlCarousel({
-        items: 1,         
-        loop: true,      
-        margin: 10,
-        nav: true,        
-        dots: true,       
-        autoplay: true,
-        autoplayTimeout: 5000,     
-        smartSpeed: 500,
-        });
-    });
-</script>
+    function share() {
+      var dummy = document.createElement('input'),
+        text = window.location.href;
 
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand('copy');
+      document.body.removeChild(dummy);
 
+      alert("Link Copyied To Clipboard Now Share Profile Anywhere");
+    }
+  </script>
 </head>
 
 <body class="enhanced5 min-h-screen bg-animated text-white socialwall-page">
@@ -701,26 +639,7 @@ body .owl-carousel .owl-nav.disabled {
 		}
 	}
 
-    $itemsPerPage = 15;
-
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
-    if ($page < 1) $page = 1;
-
-    $offset = ($page - 1) * $itemsPerPage;
-
-    $total_posts = DB::queryFirstField('SELECT COUNT(*) FROM live_posts WHERE post_author = %s', $model_id);
-
-    $model_posts = DB::query(
-        'SELECT * FROM live_posts 
-        WHERE post_author = %s 
-        ORDER BY id DESC 
-        LIMIT %d OFFSET %d',
-        $model_id,
-        $itemsPerPage,
-        $offset
-    );
-
+    $model_posts =  DB::query('select * from live_posts where post_author="'.$model_id.'" Order by id DESC');
 
     $user_purchased_ids = DB::query('select * from user_purchased_image where user_unique_id="'.$_SESSION['log_user_unique_id'].'" AND model_unique_id="'.$_GET['m_unique_id'].'" Order by id DESC');
 
@@ -743,8 +662,6 @@ body .owl-carousel .owl-nav.disabled {
         <div class="container mx-auto relative z-10">
             <div class="profile-info pt-32 sm:pt-40 md:pt-48 pb-6 px-4 md:px-0">
                 <div class="profile-flex-wrapp flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
-
-
                     <div class="profile-avatar-container">
  
                             <?php
@@ -754,33 +671,14 @@ body .owl-carousel .owl-nav.disabled {
 
                                   $modal_img_list_array[] = SITEURL . $profile_pic; 
 								  
-								//   $randomKey = array_rand($modal_img_list_array);
-								//   $randomImage = $modal_img_list_array[$randomKey];
-
-                                $count_image = count($modal_img_list_array);
-
-                                if($count_image > 1 )
-                                {
+								  $randomKey = array_rand($modal_img_list_array);
+								  $randomImage = $modal_img_list_array[$randomKey];
 
                               ?>
-                                    <div class="owl-carousel">
 
-                                        <?php foreach($modal_img_list_array as $item) {  ?>
+                                <img src="<?php echo $randomImage; ?>" alt="Profile Pic<?php //echo $rowesdw['name']; ?>" class="profile-avatar">
 
-                                             <img src="<?php echo $item; ?>" alt="Profile Pic" class="profile-avatar">
-
-                                        <?php } ?>
-
-                                    </div>
-
-                              <?php } else { ?>
-
-                                    <img src="<?php echo $modal_img_list_array[0]; ?>" alt="Profile Pic<?php //echo $rowesdw['name']; ?>" class="profile-avatar">
-
-                              <?php } ?> 
-
-
-                            <?php } else{ ?>
+                            <?php }else{ ?>
 
                                 <img src="<?php echo SITEURL; ?>assets/images/model-gal-no-img.jpg" alt="<?php echo $rowesdw['name']; ?>" class="profile-avatar">
 
@@ -1085,7 +983,7 @@ body .owl-carousel .owl-nav.disabled {
 
                         $blur_class="";
 
-                        if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) && !$isuser_have_access)
+                        if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids))
                         {
                             $imageUrl = "";
 
@@ -1095,7 +993,7 @@ body .owl-carousel .owl-nav.disabled {
                         $post_likes = PostLikesCount($uplds['ID']);
 				?>
                     <!-- Media Item Image -->
-                    <div class="media-item images_tab all_items_tab <?php if($uplds['post_type'] =='paid') { ?> exclusive_tab <?php } ?> ">
+                    <div class="media-item images_tab all_items_tab">
 
                         <img src="<?php echo $imageUrl ?>" <?php echo $blur_class ?> alt="<?php echo ucfirst($uplds['post_image']); ?>">
 
@@ -1119,7 +1017,7 @@ body .owl-carousel .owl-nav.disabled {
                                 </div>
                             </div>
 
-                            <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) &&  !$isuser_have_access ) {?>
+                            <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) ) {?>
 
                                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" onclick="ConformPurchase('<?php echo $uplds['token']  ?>','form_token_<?= $uplds['ID'] ?>','Image')">
                                         <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
@@ -1158,7 +1056,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                 $blur_class="";
 
-                                if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) && !$isuser_have_access )
+                                if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) )
                                 {
                                     $videoUrl = "";
 
@@ -1170,7 +1068,7 @@ body .owl-carousel .owl-nav.disabled {
                         ?>
 
                     <!-- Media Item Video -->
-                    <div class="media-item videos_tab all_items_tab <?php if($uplds['post_type'] =='paid') { ?> exclusive_tab <?php } ?> ">
+                    <div class="media-item videos_tab all_items_tab">
                         <div class="w-full h-full bg-gray-800 flex items-center justify-center" <?php echo $blur_class ?> >
                             <video class="video-ci" controls  >
 								<source src="<?php echo $videoUrl ?>" type="video/mp4">
@@ -1199,7 +1097,7 @@ body .owl-carousel .owl-nav.disabled {
                             </div>
 
 
-                        <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) && !$isuser_have_access) {?>
+                        <?php if($uplds['post_type'] =='paid' && $user_mode_id != $uplds['post_author'] && !in_array($uplds['ID'], $puschased_post_ids) ) {?>
 
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" onclick="ConformPurchase('<?php echo $uplds['token']  ?>','form_token_<?= $uplds['ID'] ?>','Video')">
                                     <div class="token-btn inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-indigo-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md cursor-pointer hover:from-indigo-700 hover:to-indigo-600 gap-2">
@@ -1233,12 +1131,7 @@ body .owl-carousel .owl-nav.disabled {
 				
                 </div>
 
-                    <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
-
-                        <div id="pagination-container"></div>
-
-                    </div>
-        
+				
 			  <?php } ?>
 				
             </div>
@@ -1390,11 +1283,11 @@ body .owl-carousel .owl-nav.disabled {
                                         </div>
                                     </div>
 
-                                <div class="flex flex-col text-white text-sm sm:text-base <?php if($is_model){ ?>post_type_sec <?php }?>" style="display:none;">
+                                <div class="flex flex-col text-white text-sm sm:text-base post_type_sec" style="display:none;">
                                         <label class="mb-2">Post Type:</label>
                                         <div class="flex flex-col gap-2">
                                             <label class="flex items-center gap-2 cursor-pointer">
-                                                <input type="radio" name="post_type" value="free" <?php if(!$is_model){ ?> checked <?php } ?>  onchange="PostType(this)" class="accent-indigo-500">
+                                                <input type="radio" name="post_type" value="free" onchange="PostType(this)" class="accent-indigo-500">
                                                 <span>Free</span>
                                             </label>
                                             <label class="flex items-center gap-2 cursor-pointer">
@@ -1402,7 +1295,7 @@ body .owl-carousel .owl-nav.disabled {
                                                 <span>Paid</span>
                                             </label>
                                         </div>
-                                </div>
+                                    </div>
 
                                 </div>
 
@@ -1768,6 +1661,230 @@ body .owl-carousel .owl-nav.disabled {
         </div>
     </div>
 </div>
+
+<!--  Premium popup   --->
+
+<?php
+
+    $getSettings = mysqli_query($con, "SELECT discount_price_show, updated_at FROM admin_settings ORDER BY id DESC LIMIT 1");
+
+    $settings = mysqli_fetch_assoc($getSettings);
+
+    $discountPriceShow = true;
+
+    $updatedAt = $settings['updated_at'];
+
+    if ($updatedAt) {
+        $timeDiff = time() - strtotime($updatedAt);
+        if ($timeDiff > 86400 && $settings['status'] == 'No') {
+
+            $discountPriceShow = false;
+        }
+    }
+
+    $premium_amounts = [
+        'basic_with_discount' => 39,
+        'basic_without_discount' => 49,
+        'diamond_with_discount' => 149,
+        'diamond_without_discount' => 199,
+        'basic_with_discount_yearly' => 449,
+        'basic_without_discount_yearly' => 588,
+        'diamond_with_discount_yearly' => 1999,
+        'diamond_without_discount_yearly' => 2388,
+    ];
+
+    $basic_monthly_savings = $premium_amounts['basic_without_discount'] - $premium_amounts['basic_with_discount'];
+    $basic_annual_savings = $premium_amounts['basic_without_discount_yearly'] - $premium_amounts['basic_with_discount_yearly'];
+
+    $diamond_monthly_savings = $premium_amounts['diamond_without_discount'] - $premium_amounts['diamond_with_discount'];
+    $diamond_annual_savings = $premium_amounts['diamond_without_discount_yearly'] - $premium_amounts['diamond_with_discount_yearly'];
+
+    ?>
+
+    <div class="popup-overlay" id="premium-modal">
+        <div class="popup-container">
+            <button class="close-btn" onclick="closePremiumModal()">&times;</button>
+
+            <div class="top-icons">
+                <div class="top-icon">🚀</div>
+                <div class="top-icon">⭐</div>
+                <div class="top-icon">💎</div>
+            </div>
+
+            <div class="header">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
+                <h2 class="title">Unlock Elite Access</h2>
+                <p class="subtitle">Join premium members and dominate the streaming experience</p>
+            </div>
+
+            <div class="first-time-alert">
+                <span class="fire-emoji">🔥</span> FIRST-TIME USER EXCLUSIVE: $39 & $149 Limited Time Deal - Expires in 24 Hours of Joining! <span class="fire-emoji">🔥</span>
+            </div>
+
+            <div class="promo-banner">
+                <span class="fire-emoji">🔥</span> MASSIVE SAVINGS INSIDE - DON'T MISS OUT! <span class="fire-emoji">🔥</span>
+            </div>
+
+            <?php if ($discountPriceShow) { ?>
+
+                <div class="countdown-timer">
+                    ⏰ LIMITED TIME: <span id="countdown">23:59:45</span> REMAINING!
+                </div>
+
+            <?php } ?>
+
+            <div class="billing-toggle">
+                <div class="toggle-container">
+                    <div class="toggle-option active" data-billing="monthly">Monthly</div>
+                    <div class="toggle-option" data-billing="annual">
+                        Annual
+                        <span class="savings-badge">SAVE BIG!</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="pricing-grid">
+
+                <div class="pricing-card">
+                    <div class="hot-deal">🔥 HOT!</div>
+                    <div class="member-badge premium-member-badge">PRO</div>
+                    <div class="badge premium-badge">PREMIUM</div>
+                    <div class="plan-name">Basic Premium</div>
+                    <div class="price-container">
+                        <?php if ($discountPriceShow) { ?>
+                            <div class="original-price"
+                                data-monthly-orig="<?php echo $premium_amounts['basic_without_discount']; ?>"
+                                data-annual-orig="<?php echo $premium_amounts['basic_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['basic_without_discount']; ?>
+                            </div>
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['basic_with_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['basic_with_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['basic_with_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                            <div class="savings-text show"
+                                data-monthly-save="Save $<?php echo $basic_monthly_savings; ?>/month!"
+                                data-annual-save="Save $<?php echo $basic_annual_savings; ?>/year!">
+                                Save $<?php echo $basic_monthly_savings; ?>/month!
+                            </div>
+                        <?php } else { ?>
+
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['basic_without_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['basic_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['basic_without_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                        <?php } ?>
+                        <div class="bonus-tokens">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                            <span data-monthly-tokens="500" data-annual-tokens="1000">+ 500 TLM tokens</span>
+                        </div>
+                    </div>
+                    <button class="cta-button cta-primary" onclick="upgradeAccount('monthly', 'basic')">Grab This Deal!</button>
+                </div>
+
+                <!-- Diamond Elite -->
+                <div class="pricing-card elite">
+                    <div class="hot-deal">💎 ELITE!</div>
+                    <div class="member-badge elite-member-badge">VIP</div>
+                    <div class="badge elite-badge">DIAMOND ELITE</div>
+                    <div class="plan-name">Diamond Elite</div>
+                    <div class="price-container">
+                        <?php if ($discountPriceShow) { ?>
+                            <div class="original-price"
+                                data-monthly-orig="<?php echo $premium_amounts['diamond_without_discount']; ?>"
+                                data-annual-orig="<?php echo $premium_amounts['diamond_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['diamond_without_discount']; ?>
+                            </div>
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['diamond_with_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['diamond_with_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['diamond_with_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                            <div class="savings-text show"
+                                data-monthly-save="Save $<?php echo $diamond_monthly_savings; ?>/month!"
+                                data-annual-save="Save $<?php echo $diamond_annual_savings; ?>/year!">
+                                Save $<?php echo $diamond_monthly_savings; ?>/month!
+                            </div>
+                        <?php } else { ?>
+
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['diamond_without_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['diamond_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['diamond_without_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                        <?php } ?>
+                        <div class="bonus-tokens">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                            <span data-monthly-tokens="2000" data-annual-tokens="5000">+ 2,000 TLM tokens</span>
+                        </div>
+                    </div>
+                    <button class="cta-button cta-elite" onclick="upgradeAccount('monthly', 'diamond')">Claim Diamond Status!</button>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <div class="features-grid">
+                    <div class="feature-column">
+                        <h4>Basic Premium</h4>
+                        <ul class="feature-list">
+                            <li>Unlimited chat with models</li>
+                            <li>Ad-free streaming experience</li>
+                            <li>HD video quality</li>
+                            <li>Advanced search & filters</li>
+                            <li>Profile visibility boost</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-column">
+                        <h4 class="elite-title">Diamond Elite Exclusive</h4>
+                        <ul class="feature-list elite-features">
+                            <li>Everything in Basic Premium</li>
+                            <li>Unlimited chat in live streaming</li>
+                            <li>Top priority in creator inbox</li>
+                            <li>VIP-only exclusive content</li>
+                            <li>Diamond Elite status badge</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="token-packages-section">
+                <div class="token-packages-title">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                    Explore Token Packages
+                </div>
+                <div class="token-packages-subtitle">
+                    Get extra TLM tokens for premium interactions, gifts, and exclusive content access
+                </div>
+                <button class="token-packages-btn" onclick="exploreTokens()">
+                    🎁 Browse Token Deals
+                </button>
+                <div class="token-expires">⏰ Special token offers expire soon!</div>
+            </div>
+        </div>
+    </div>
 
 <!-- Services Modal -->
 <div class="modal-overlay" id="servicesModalOverlay">
@@ -2734,67 +2851,6 @@ body .owl-carousel .owl-nav.disabled {
             </div>
         </div>
 
-        <div class="modal-overlay" id="conform_all_access">
-            <div class="modal">
-                <div class="modal-header">
-                    <h2 class="modal-title">Confirmation</h2>
-                    <button class="close-modal" type="button" onclick="CloseModalAccess()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <p>
-                        Are you sure to continue? Once you click, the amount  <strong><span id="amountValue"></span>₹</strong>  will be deducted from your account 
-                        and your 30 days will be counted from today. If you agree, please click on 
-                        <strong>Pay and Continue</strong>.
-                    </p>
-                    <div style="margin-top: 20px;">
-                        <button class="btn-primary px-7 sm:px-3 py-6 text-white" onclick="PayAccess()" type="button" id="puchare_submit">
-                            <strong><span id="amountValue_pay"></span>₹</strong> Pay and Continue
-                        </button>
-                        <button class="btn btn-secondary" type="button" onclick="CloseModalAccess()">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-overlay" id="access_expired">
-
-            <div class="modal">
-                <div class="modal-header">
-                    <h2 class="modal-title">Access Expired</h2>
-                    <button class="close-modal" type="button" onclick="exipireModal()">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <p>
-                        Your <strong>30 days access</strong> has expired.  
-                        Please <strong>renew</strong> to continue using the service.
-                    </p>
-                    <div style="margin-top: 20px;">
-                        <button class="btn-primary px-7 sm:px-3 py-6 text-white" onclick="ConformAllAccess('<?php echo $model_data['all_30day_access_price'] ?>')" type="button" id="renew_submit">
-                            Renew Now
-                        </button>
-                        <button class="btn btn-secondary" type="button" onclick="exipireModal()">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
 	
 	
   <?php
@@ -2810,36 +2866,7 @@ body .owl-carousel .owl-nav.disabled {
   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<link href="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
-
-<script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
-
 <script>
-
-
-    $(document).ready(function () {
-        var itemsPerPage = <?php echo $itemsPerPage; ?>;
-        var totalPosts   = <?php echo $total_posts; ?>;
-        var currentPage  = <?php echo $page; ?>;
-
-        if ($("#pagination-container").data("pagination-initialized") !== true) {
-            $("#pagination-container").pagination({
-                items: totalPosts,
-                itemsOnPage: itemsPerPage,
-                currentPage: currentPage,
-                cssStyle: "light-theme",
-                onPageClick: function (pageNumber) {
-                    var url = new URL(window.location.href);
-                    url.searchParams.set("page", pageNumber); 
-                    window.location.href = url.toString();
-                }
-            });
-            $("#pagination-container").data("pagination-initialized", true);
-        }
-    });
-
-
-
 jQuery('.socialpaidbtn').click(function(e){
 	var id= jQuery(this).attr('id');
 	var tokens = jQuery(this).attr('tokens');
@@ -2965,38 +2992,9 @@ jQuery('.send_gift_btn').click(function(){
 
     <script>
 
-        if (window._showExpire) {
-        if (typeof ShowExpire === 'function') {
-            ShowExpire();
-        } else {
-            var _tryExpire = setInterval(function(){
-            if (typeof ShowExpire === 'function') {
-                ShowExpire();
-                clearInterval(_tryExpire);
-            }
-            }, 50);
-        }
-        delete window._showExpire;
-        }
-
-
-        function ShowExpire()
-        {
-
-            $('#access_expired').addClass('active');
-
-        }
-
-        function exipireModal()
-        {
-            window.location.reload();
-        }
-
 
         function ConformAllAccess(amount)
         {
-
-            $('#access_expired').removeClass('active');
 
             $('#amountValue').text(amount);
 
@@ -3332,10 +3330,6 @@ jQuery('.send_gift_btn').click(function(){
             {
                 $('.videos_tab').show();
             }
-            else if(type=='exclusive')
-            {
-                 $('.exclusive_tab').show();
-            }
         }
 
         function ImageShow(input) {
@@ -3455,12 +3449,7 @@ jQuery('.send_gift_btn').click(function(){
 
                        if (response.trim() === 'success') {
                                    
-                            $('#modal_success_message .success-text').remove();
-
-                            $('#success_modal').addClass('active');
-
-                            $('#modal_success_message').prepend(`<p class="success-text">Post Uploaded Successfully</p>`);
-
+                            alert("Post submitted successfully!");
                             $('#createPostForm')[0].reset();
 
                             $('#filePreview').attr('src',"");
@@ -3475,11 +3464,7 @@ jQuery('.send_gift_btn').click(function(){
 
                             $('.token_sec').hide();
 
-                            setTimeout(function()
-                            {
-                                window.location.reload();
-                                
-                            },3000);
+                            window.location.reload();
 
                         }
                         else
@@ -3873,88 +3858,111 @@ jQuery('.send_gift_btn').click(function(){
         }
 
         function showUpgradeModal(serviceType, message) {
-            const modal = document.createElement('div');
-            modal.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0, 0, 0, 0.9);
-                    backdrop-filter: blur(10px);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 1001;
-                    animation: fadeIn 0.3s ease;
-                ">
-                    <div style="
-                        background: rgba(26, 26, 46, 0.95);
-                        backdrop-filter: blur(20px);
-                        border-radius: 20px;
-                        padding: 32px;
-                        max-width: 400px;
-                        width: 90%;
-                        text-align: center;
-                        border: 1px solid rgba(255, 255, 255, 0.1);
-                        animation: slideUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    const modalOverlay = document.createElement('div');
+    modalOverlay.className = 'upgrade-modal-overlay';
+    modalOverlay.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            animation: fadeIn 0.3s ease;
+        ">
+            <div style="
+                background: rgba(26, 26, 46, 0.95);
+                backdrop-filter: blur(20px);
+                border-radius: 20px;
+                padding: 32px;
+                max-width: 400px;
+                width: 90%;
+                text-align: center;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                animation: slideUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            ">
+                <div style="font-size: 48px; margin-bottom: 16px;">🔒</div>
+                <h3 style="color: white; font-size: 24px; font-weight: 700; margin-bottom: 16px;">
+                    Upgrade Required
+                </h3>
+                <p style="color: rgba(255, 255, 255, 0.8); font-size: 16px; line-height: 1.5; margin-bottom: 24px;">
+                    ${message}
+                </p>
+                <div style="display: flex; gap: 12px; flex-direction: column;">
+                    <button id="upgrade-now" style="
+                        width: 100%;
+                        padding: 14px;
+                        background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+                        border: none;
+                        border-radius: 12px;
+                        color: white;
+                        font-size: 16px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
                     ">
-                        <div style="font-size: 48px; margin-bottom: 16px;">🔒</div>
-                        <h3 style="color: white; font-size: 24px; font-weight: 700; margin-bottom: 16px;">
-                            Upgrade Required
-                        </h3>
-                        <p style="color: rgba(255, 255, 255, 0.8); font-size: 16px; line-height: 1.5; margin-bottom: 24px;">
-                            ${message}
-                        </p>
-                        <div style="display: flex; gap: 12px; flex-direction: column;">
-                            <button onclick="this.closest('div').remove()" style="
-                                width: 100%;
-                                padding: 14px;
-                                background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
-                                border: none;
-                                border-radius: 12px;
-                                color: white;
-                                font-size: 16px;
-                                font-weight: 600;
-                                cursor: pointer;
-                                transition: all 0.3s ease;
-                            ">
-                                Upgrade Now
-                            </button>
-                            <button onclick="this.closest('div').remove()" style="
-                                width: 100%;
-                                padding: 12px;
-                                background: transparent;
-                                border: 1px solid rgba(255, 255, 255, 0.2);
-                                border-radius: 12px;
-                                color: rgba(255, 255, 255, 0.7);
-                                font-size: 14px;
-                                cursor: pointer;
-                                transition: all 0.3s ease;
-                            ">
-                                Maybe Later
-                            </button>
-                        </div>
-                    </div>
+                        Upgrade Now
+                    </button>
+                    <button id="maybe-later" style="
+                        width: 100%;
+                        padding: 12px;
+                        background: transparent;
+                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        border-radius: 12px;
+                        color: rgba(255, 255, 255, 0.7);
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    ">
+                        Maybe Later
+                    </button>
                 </div>
-            `;
+            </div>
+        </div>
+    `;
 
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeIn {
-                    from { opacity: 0; }
-                    to { opacity: 1; }
-                }
-                @keyframes slideUp {
-                    from { opacity: 0; transform: translateY(30px) scale(0.9); }
-                    to { opacity: 1; transform: translateY(0) scale(1); }
-                }
-            `;
-            document.head.appendChild(style);
-            document.body.appendChild(modal);
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+    `;
+    document.head.appendChild(style);
 
+    // Append modal
+    document.body.appendChild(modalOverlay);
+
+    // Add event listeners to close buttons
+    modalOverlay.querySelector('#maybe-later').addEventListener('click', () => {
+        document.body.removeChild(modalOverlay);
+    });
+
+    modalOverlay.querySelector('#upgrade-now').addEventListener('click', () => {
+        // You can trigger a redirect or custom logic here
+        // For now, just close the modal
+        document.body.removeChild(modalOverlay);
+		
+		jQuery('#premium-modal').addClass('show');
+		//closeModal('servicesModalOverlay');
+		jQuery('#servicesModalOverlay').removeClass('active');
+		
+    });
+}
+		//Close prenium popup
+		function closePremiumModal() {
+            jQuery('#premium-modal').removeClass('show');
+        }
         // Close popup when clicking outside
         document.querySelector('.popup-overlay').addEventListener('click', function(e) {
             if (e.target === this) {
