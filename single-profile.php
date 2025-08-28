@@ -3378,7 +3378,12 @@ jQuery('.send_gift_btn').click(function(){
 
                        if (response.trim() === 'success') {
                                    
-                            alert("Post submitted successfully!");
+                            $('#modal_success_message .success-text').remove();
+
+                            $('#success_modal').removeClass('active');
+
+                            $('#modal_success_message').prepend(`<p class="success-text">Post Uploaded Successfully</p>`);
+
                             $('#createPostForm')[0].reset();
 
                             $('#filePreview').attr('src',"");
