@@ -517,7 +517,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                     // alert("End date must be after start date");
 
-                    $('#end_date_error').show().text('End date must be after start date');
+                    $('#end_date_error').show().text('From date must be after To date');
 
                     $('#token_no').text('');
 
