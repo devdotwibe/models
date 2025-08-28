@@ -85,7 +85,7 @@ if (isset($_SESSION['log_user_id'])) {
 
                 <select onchange="FilterAdver()" id="category_id" class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
 
-                    <option value="all">All Categories</option>
+                    <option value="">All Categories</option>
 
                     <?php foreach($category_list as $item) {  ?>
 
