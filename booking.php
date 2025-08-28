@@ -350,7 +350,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 						<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                             <div class="md:col-span-2">
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">From</label>
-                                <input name="meeting_date"
+                                <input name="meeting_date" onchange="CalculateDate()"
+
+                                    id="meeting_date_from"
                                     type="date" 
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                     required
@@ -359,7 +361,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                             </div>
 							<div class="md:col-span-2">
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">To</label>
-                                <input name="meeting_date_to"
+                                <input name="meeting_date_to"  onchange="CalculateDate()"
+                                    id="meeting_date_to"
                                     type="date" 
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                     required
@@ -486,6 +489,58 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
    <?php include('includes/footer.php'); ?>
 
     <script>
+
+
+        function CalculateDate() {
+
+                let fromDate = $('#meeting_date_from').val();
+                let toDate   = $('#meeting_date_to').val();
+
+                if (!fromDate || !toDate) {
+                    $('#token_no').text('');
+                    return;
+                }
+
+                let start = new Date(fromDate);
+                let end   = new Date(toDate);
+
+                if (end < start) {
+                    alert("End date must be after start date");
+                    $('#token_no').text('');
+                    return;
+                }
+
+                let diffTime = end - start;
+                let days = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+                let dailyRate   = parseFloat("<?php echo !empty($extra_details) ? $extra_details['daily_rate'] : 0; ?>");
+                let weeklyRate  = parseFloat("<?php echo !empty($extra_details) ? $extra_details['weekly_rate'] : 0; ?>");
+                let monthlyRate = parseFloat("<?php echo !empty($extra_details) ? $extra_details['monthly_rate'] : 0; ?>");
+
+                let total = 0;
+
+                if (days < 7) {
+                    total = days * dailyRate;
+                } 
+                else if (days < 30) {
+                    let weeks = Math.floor(days / 7);
+                    let remainingDays = days % 7;
+                    total = (weeks * weeklyRate) + (remainingDays * dailyRate);
+                } 
+                else {
+                    let months = Math.floor(days / 30);
+                    let remainingAfterMonths = days % 30;
+
+                    let weeks = Math.floor(remainingAfterMonths / 7);
+                    let remainingDays = remainingAfterMonths % 7;
+
+                    total = (months * monthlyRate) + (weeks * weeklyRate) + (remainingDays * dailyRate);
+                }
+
+                $('#token_no').text(total);
+            }    
+            
+            
         // Initialize premium features
         document.addEventListener('DOMContentLoaded', function() {
             initializePremiumFeatures();
