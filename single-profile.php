@@ -29,6 +29,8 @@ if (isset($_SESSION['log_user_unique_id'])) {
   } else {
     $error = 'empty';
   }
+
+    $is_model = $userDetails['as_a_model'] =='Yes' ? true : false;
 }
 
 
@@ -643,7 +645,26 @@ if (mysqli_num_rows($res_ap) > 0) {
 		}
 	}
 
-    $model_posts =  DB::query('select * from live_posts where post_author="'.$model_id.'" Order by id DESC');
+    $itemsPerPage = 15;
+
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+    if ($page < 1) $page = 1;
+
+    $offset = ($page - 1) * $itemsPerPage;
+
+    $total_posts = DB::queryFirstField('SELECT COUNT(*) FROM live_posts WHERE post_author = %s', $model_id);
+
+    $model_posts = DB::query(
+        'SELECT * FROM live_posts 
+        WHERE post_author = %s 
+        ORDER BY id DESC 
+        LIMIT %d OFFSET %d',
+        $model_id,
+        $itemsPerPage,
+        $offset
+    );
+
 
     $user_purchased_ids = DB::query('select * from user_purchased_image where user_unique_id="'.$_SESSION['log_user_unique_id'].'" AND model_unique_id="'.$_GET['m_unique_id'].'" Order by id DESC');
 
@@ -997,7 +1018,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         $post_likes = PostLikesCount($uplds['ID']);
 				?>
                     <!-- Media Item Image -->
-                    <div class="media-item images_tab all_items_tab">
+                    <div class="media-item images_tab all_items_tab <?php if($uplds['post_type'] =='paid') { ?> exclusive_tab <?php } ?> ">
 
                         <img src="<?php echo $imageUrl ?>" <?php echo $blur_class ?> alt="<?php echo ucfirst($uplds['post_image']); ?>">
 
@@ -1072,7 +1093,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                         ?>
 
                     <!-- Media Item Video -->
-                    <div class="media-item videos_tab all_items_tab">
+                    <div class="media-item videos_tab all_items_tab <?php if($uplds['post_type'] =='paid') { ?> exclusive_tab <?php } ?> ">
                         <div class="w-full h-full bg-gray-800 flex items-center justify-center" <?php echo $blur_class ?> >
                             <video class="video-ci" controls  >
 								<source src="<?php echo $videoUrl ?>" type="video/mp4">
@@ -1135,7 +1156,12 @@ if (mysqli_num_rows($res_ap) > 0) {
 				
                 </div>
 
-				
+                    <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
+
+                        <div id="pagination-container"></div>
+
+                    </div>
+        
 			  <?php } ?>
 				
             </div>
@@ -1287,11 +1313,11 @@ if (mysqli_num_rows($res_ap) > 0) {
                                         </div>
                                     </div>
 
-                                <div class="flex flex-col text-white text-sm sm:text-base post_type_sec" style="display:none;">
+                                <div class="flex flex-col text-white text-sm sm:text-base <?php if($is_model){ ?>post_type_sec <?php }?>" style="display:none;">
                                         <label class="mb-2">Post Type:</label>
                                         <div class="flex flex-col gap-2">
                                             <label class="flex items-center gap-2 cursor-pointer">
-                                                <input type="radio" name="post_type" value="free" onchange="PostType(this)" class="accent-indigo-500">
+                                                <input type="radio" name="post_type" value="free" <?php if(!$is_model){ ?> checked <?php } ?>  onchange="PostType(this)" class="accent-indigo-500">
                                                 <span>Free</span>
                                             </label>
                                             <label class="flex items-center gap-2 cursor-pointer">
@@ -1299,7 +1325,7 @@ if (mysqli_num_rows($res_ap) > 0) {
                                                 <span>Paid</span>
                                             </label>
                                         </div>
-                                    </div>
+                                </div>
 
                                 </div>
 
@@ -2707,7 +2733,36 @@ if (mysqli_num_rows($res_ap) > 0) {
   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<link href="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
+
+<script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
+
 <script>
+
+
+    $(document).ready(function () {
+        var itemsPerPage = <?php echo $itemsPerPage; ?>;
+        var totalPosts   = <?php echo $total_posts; ?>;
+        var currentPage  = <?php echo $page; ?>;
+
+        if ($("#pagination-container").data("pagination-initialized") !== true) {
+            $("#pagination-container").pagination({
+                items: totalPosts,
+                itemsOnPage: itemsPerPage,
+                currentPage: currentPage,
+                cssStyle: "light-theme",
+                onPageClick: function (pageNumber) {
+                    var url = new URL(window.location.href);
+                    url.searchParams.set("page", pageNumber); 
+                    window.location.href = url.toString();
+                }
+            });
+            $("#pagination-container").data("pagination-initialized", true);
+        }
+    });
+
+
+
 jQuery('.socialpaidbtn').click(function(e){
 	var id= jQuery(this).attr('id');
 	var tokens = jQuery(this).attr('tokens');
@@ -3200,6 +3255,10 @@ jQuery('.send_gift_btn').click(function(){
             {
                 $('.videos_tab').show();
             }
+            else if(type=='exclusive')
+            {
+                 $('.exclusive_tab').show();
+            }
         }
 
         function ImageShow(input) {
@@ -3319,7 +3378,12 @@ jQuery('.send_gift_btn').click(function(){
 
                        if (response.trim() === 'success') {
                                    
-                            alert("Post submitted successfully!");
+                            $('#modal_success_message .success-text').remove();
+
+                            $('#success_modal').addClass('active');
+
+                            $('#modal_success_message').prepend(`<p class="success-text">Post Uploaded Successfully</p>`);
+
                             $('#createPostForm')[0].reset();
 
                             $('#filePreview').attr('src',"");
@@ -3334,7 +3398,11 @@ jQuery('.send_gift_btn').click(function(){
 
                             $('.token_sec').hide();
 
-                            window.location.reload();
+                            setTimeout(function()
+                            {
+                                window.location.reload();
+                                
+                            },3000);
 
                         }
                         else

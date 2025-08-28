@@ -1794,6 +1794,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <div class="step-indicator">
           <div class="step active" onclick="scrollToSection('chat-services')">Chat Services</div>
           <div class="step" onclick="scrollToSection('meet-services')">Meet Services</div>
+          <div class="step" onclick="scrollToSection('travel_experiance_tab')">Travel Experiences</div>
           <div class="step" onclick="scrollToSection('content-creation')">Content Creation</div>
           <div class="step" onclick="scrollToSection('professional-work')">Professional Work</div>
           <div class="step" onclick="scrollToSection('30_days_access')">30 Days Access</div>
@@ -2106,11 +2107,25 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               </div>
             </div>
 
-            <!-- Travel Companionship -->
+          </div>
+        </div>
+
+
+
+           <!-- Meet Services Category -->
+        <div id="travel_experiance_tab" class="collapsible-section">
+
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h2 class="text-xl font-bold">👥 Travel Experiences</h2>
+            <svg class="w-6 h-6 collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+
+          <div class="collapsible-content">
+
             <div class="mt-8 mb-6">
-
-              <h2 class="text-xl font-bold">👥 Travel Experiences</h2>
-
+              
               <div class="question-text">Would you like to offer travel experiences?</div>
               <p class="help-text">Accompany others on trips, vacations, or business travel </p>
               <div class="radio-group mt-3">
@@ -3776,7 +3791,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     function updateProgress() {
       let completedSections = 0;
       const totalSections = 5;
-      const sections = ['chat-services', 'meet-services', 'content-creation', 'professional-work', '30_days_access', 'physical-attributes'];
+      const sections = ['chat-services', 'meet-services','travel_experiance_tab', 'content-creation', 'professional-work', '30_days_access', 'physical-attributes'];
       const steps = document.querySelectorAll('.step');
 
       sections.forEach((sectionId, index) => {
@@ -3828,7 +3843,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         }
 
         document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
-        const stepIndex = ['chat-services', 'meet-services', 'content-creation', 'professional-work', '30_days_access', 'physical-attributes'].indexOf(sectionId);
+        const stepIndex = ['chat-services', 'meet-services','travel_experiance_tab', 'content-creation', 'professional-work', '30_days_access', 'physical-attributes'].indexOf(sectionId);
         if (stepIndex !== -1) {
           const currentStep = document.querySelectorAll('.step')[stepIndex];
           if (currentStep) currentStep.classList.add('active');
@@ -4601,27 +4616,58 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
 
 
+    // function renderChart(data) {
+
+    //   const days = [
+    //     'Monday', 'Tuesday', 'Wednesday',
+    //     'Thursday', 'Friday', 'Saturday', 'Sunday'
+    //   ];
+
+    //   const maxValue = Math.max(...Object.values(data));
+    //   const scaleFactor = maxValue > 0 ? 100 / maxValue : 0;
+
+    //   days.forEach(day => {
+    //     const value = data[day] || 0;
+    //     const height = value * scaleFactor;
+
+    //     const bar = document.getElementById(`${day.toLowerCase()}_data`);
+    //     // const label = document.getElementById(`${day.toLowerCase()}_label`);
+
+    //     if (bar) bar.style.height = `${height}px`;
+    //     // if (label) label.innerText = `${day.slice(0, 3)} (${value})`;
+    //   });
+    // }
+
+
     function renderChart(data) {
 
-      const days = [
-        'Monday', 'Tuesday', 'Wednesday',
-        'Thursday', 'Friday', 'Saturday', 'Sunday'
-      ];
+          const chartContainer = document.querySelector(".chart-container");
 
-      const maxValue = Math.max(...Object.values(data));
-      const scaleFactor = maxValue > 0 ? 100 / maxValue : 0;
+          chartContainer.innerHTML = "";
 
-      days.forEach(day => {
-        const value = data[day] || 0;
-        const height = value * scaleFactor;
+          const values = Object.values(data);
 
-        const bar = document.getElementById(`${day.toLowerCase()}_data`);
-        // const label = document.getElementById(`${day.toLowerCase()}_label`);
+          const maxValue = Math.max(...values);
 
-        if (bar) bar.style.height = `${height}px`;
-        // if (label) label.innerText = `${day.slice(0, 3)} (${value})`;
-      });
-    }
+          const scaleFactor = maxValue > 0 ? 100 / maxValue : 0;
+
+          Object.keys(data).forEach(key => {
+              const value = data[key] || 0;
+              const height = value * scaleFactor;
+
+              const bar = document.createElement("div");
+              bar.className = "chart-bar";
+              bar.style.height = `${height}px`;
+              bar.title = `${key}: ${value}`;
+
+              const label = document.createElement("div");
+              label.className = "chart-label";
+              label.innerText = key;
+
+              chartContainer.appendChild(bar);
+              chartContainer.appendChild(label);
+          });
+      }
 
     function updateEarningsChart() {
 
