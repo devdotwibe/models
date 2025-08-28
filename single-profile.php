@@ -643,7 +643,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 		}
 	}
 
-    $itemsPerPage = 25;
+    $itemsPerPage = 5;
 
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
