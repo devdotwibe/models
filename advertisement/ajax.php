@@ -53,12 +53,14 @@ if(isset($_SESSION['log_user_id'])){
 	$stringQuery = "SELECT * FROM ".$table_name." tb where user_id=".$user_id;
 
 	$limited = " limit $offset, ".$perPage;
-	$where_clause = rtrim($where_clause,'and');
+
+	// $where_clause = rtrim($where_clause,'and');
+
 	if($where_clause){
 		// $all_data = DB::query($stringQuery." and ".$where_clause." ".$sort_by.$limited);
 
 		$all_data = DB::query(
-			$stringQuery . $where_clause . " " . $sort_by . " " . $limited,
+			$stringQuery . " " . $where_clause . " " . $sort_by . " " . $limited,
 			...$params
 		);
 
