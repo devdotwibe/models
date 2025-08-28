@@ -12049,12 +12049,12 @@ position:absolute !important;
 
 
 
-/* #list_advertisements {
+#list_advertisements {
   padding-inline: 30px;
  
   width: 100%;
   overflow-x: auto;
-} */
+}
 
 /* #list_advertisements .table-row .col-span-1 {
   grid-column: span 1 / span 1;
