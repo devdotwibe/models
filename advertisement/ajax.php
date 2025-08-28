@@ -21,12 +21,20 @@ if(isset($_SESSION['log_user_id'])){
 		$page_number = $page;
 	}
 	$list_data = $perPage;
+
+	$category = $_GET['category'];
 	
 	$name = '';
 	if(isset($_GET['q'])){ $name = $_GET['q']; }
 	if($name){
 		$url .= 'q='.$name.'&';
 		$where_clause .= " (lower(name) like '%".strtolower($name)."%' ) and";
+	}
+
+
+	if(!empty($category))
+	{
+		$where_clause .= "WHERE category = $category  and";
 	}
 
 	$sort_by = ' ORDER BY tb.id desc ';

@@ -83,7 +83,7 @@ if (isset($_SESSION['log_user_id'])) {
             
             <div class="flex space-x-4">
 
-                <select onchange="FilterAdver(this)" class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
+                <select onchange="FilterAdver(this)" id="category_id" class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
 
                     <option value="all">All Categories</option>
 
@@ -229,10 +229,18 @@ $(document).ready(function () {
     let itemsPerPage = 10;
 
     function loadData(page = 1) {
+
+        var category = $('#category_id');
+
         $.ajax({
             url: "<?php echo SITEURL.'advertisement/ajax.php'?>",
             type: "GET",
-            data: { page: page, limit: itemsPerPage },
+
+            data: { 
+                    page: page,
+                    limit: itemsPerPage,
+                    category : category
+                },
             dataType: "json",
             success: function (response) {
                 // Display results
