@@ -474,6 +474,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 						<input type="hidden" name="name" value="<?php echo $userDetails['name']; ?>">
 						<input type="hidden" name="service_name" value="<?php echo $_GET['service']; ?>">
 						<input type="hidden" name="main_service" value="<?php echo $_GET['type']; ?>">
+                        <input type="hidden" name="token_cost" id="token_cost">
+
+                        
 					
                         <button name="booking_submit" type="submit" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>
@@ -538,6 +541,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 }
 
                 $('#token_no').text(total);
+
+                $('#token_cost').val(total);
             }    
             
             
