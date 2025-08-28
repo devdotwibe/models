@@ -8,7 +8,10 @@ $output['result']= 'ok';
 if(isset($_SESSION['log_user_id'])){
 	$user_id = $_SESSION['log_user_id'];
 	$output['total'] = 0;
-	$where_clause = '';
+
+	$where_clause = "";
+	$params = [];
+
 	$perPage = $_GET['limit'];
 
 	$list_data = $perPage;
@@ -22,7 +25,7 @@ if(isset($_SESSION['log_user_id'])){
 	}
 	$list_data = $perPage;
 
-	$category =  $_GET['category'];
+	$category = isset($_GET['category']) ? trim($_GET['category']) : '';
 	
 	$name = '';
 	if(isset($_GET['q'])){ $name = $_GET['q']; }
@@ -31,10 +34,10 @@ if(isset($_SESSION['log_user_id'])){
 		$where_clause .= " (lower(name) like '%".strtolower($name)."%' ) and";
 	}
 
+	if (!empty($category)) {
 
-	if(!empty($category))
-	{
-		  $where_clause = " WHERE category = " . $category . " ";
+		$where_clause = " WHERE category = %s ";
+		$params[] = $category;
 	}
 
 	$sort_by = ' ORDER BY tb.id desc ';
@@ -52,7 +55,7 @@ if(isset($_SESSION['log_user_id'])){
 	$limited = " limit $offset, ".$perPage;
 	$where_clause = rtrim($where_clause,'and');
 	if($where_clause){
-		$all_data = DB::query($stringQuery." and ".$where_clause." ".$sort_by.$limited);
+		$all_data = DB::query($stringQuery." and ".$where_clause." ".$sort_by.$limited,...$params) ;
 		$total = $output['total'] = DB::numRows($stringQuery." and ".$where_clause);
 	}
 	else{
