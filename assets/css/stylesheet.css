@@ -12066,6 +12066,13 @@ position:absolute !important;
   align-items: flex-start;
   justify-content: center;
 }
+/* #list_advertisements .table-row>div:last-child{
+    display: flex;
+    flex-wrap: wrap;
+} */
+#list_advertisements .table-row>div:last-child>*{
+    padding-inline: .60rem !important;
+}
 
 
 
