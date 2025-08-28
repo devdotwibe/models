@@ -3358,7 +3358,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <div class="particle" style="left: 62.4816%; top: 7.0639%; animation-delay: 5.22198s; animation-duration: 4.75093s;"></div>
       </div>
 
-      <button class="close-btn" onclick="confirmBroadcaster()"> ×</button>
+      <button class="close-btn" onclick="CloseCrreator()"> ×</button>
 
       <div class="exclusive-badge">
         <span>🔥</span>
@@ -4471,12 +4471,22 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     function confirmBroadcaster() {
 
+      switchTab('creator');
+
+      $('#conform_broad_cast').hide();
+
+      $('#creator-content').show();
+    }
+
+    function CloseCrreator() {
+
       switchTab('basic');
 
       $('#conform_broad_cast').hide();
 
       $('#creator-content').hide();
     }
+
 
 
     function saveCreatorSettings(button) {
