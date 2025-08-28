@@ -340,10 +340,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
 							<h2 class="text-3xl font-bold premium-text heading-font">Select travel date</h2>
 
-                            <h3 class="text-3xl font-bold premium-text heading-font">token <span id="token_no"></span> </h3>
+                            <h3 class="text-3xl font-bold premium-text heading-font" style="margin-left: auto;">token <span id="token_no"></span> </h3>
 
 							<?php } else{ ?>
-                            <h2 class="text-3xl font-bold premium-text heading-font">When do you want to see me?</h2>
+                            <h2 class="text-3xl font-bold premium-text heading-font"  >When do you want to see me?</h2>
 							<?php } ?>
                         </div>
                         <?php if($_GET['service'] == 'Travel'){ ?>
