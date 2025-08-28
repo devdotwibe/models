@@ -22,7 +22,7 @@ if(isset($_SESSION['log_user_id'])){
 	}
 	$list_data = $perPage;
 
-	$category = $_GET['category'];
+	$category = isset($_GET['category']) ? (int) $_GET['category'] : 0;
 	
 	$name = '';
 	if(isset($_GET['q'])){ $name = $_GET['q']; }
@@ -34,7 +34,7 @@ if(isset($_SESSION['log_user_id'])){
 
 	if(!empty($category))
 	{
-		$where_clause .= "WHERE category = $category  and";
+		  $where_clause = " WHERE category = " . $category . " ";
 	}
 
 	$sort_by = ' ORDER BY tb.id desc ';
