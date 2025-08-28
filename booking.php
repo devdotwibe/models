@@ -192,7 +192,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Local Meetup Rate: <?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?>/hr</div>
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Extended Social Rate: <?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?>/hr</div>
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Extended Evening Rate: <?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?>/8hrs</div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Full-day Social Rate: <?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?>/d</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Full-day Social Rate: <?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?>/day</div>
 							</div>
 							<?php $social_availability = json_decode($extra_details['social_availability']);
 							if(!empty($social_availability)){
@@ -223,10 +223,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 							</div> 
 							
 							<div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Daily Rate: <?php if (!empty($extra_details)) echo $extra_details['daily_rate']; ?>/hr</div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Weekly Rate: <?php if (!empty($extra_details)) echo $extra_details['weekly_rate']; ?>/hr</div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Monthly Rate: <?php if (!empty($extra_details)) echo $extra_details['monthly_rate']; ?>/8hrs</div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Preferred Travel Destinations: <?php if (!empty($extra_details)) echo $extra_details['travel_destination']; ?>/d</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Daily Rate: <?php if (!empty($extra_details)) echo $extra_details['daily_rate']; ?>/day</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Weekly Rate: <?php if (!empty($extra_details)) echo $extra_details['weekly_rate']; ?>/week</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Monthly Rate: <?php if (!empty($extra_details)) echo $extra_details['monthly_rate']; ?>/mon</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Preferred Travel Destinations: <?php if (!empty($extra_details)) echo $extra_details['travel_destination']; ?></div>
 							</div>
 							<?php $travel_months = json_decode($extra_details['travel_months']); 
 							if(!empty($travel_months)){
@@ -336,7 +336,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                             <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                             </div>
+							<?php if($_GET['service'] == 'Travel'){ ?>
+							<h2 class="text-3xl font-bold premium-text heading-font">Select travel date</h2>
+							<?php } else{ ?>
                             <h2 class="text-3xl font-bold premium-text heading-font">When do you want to see me?</h2>
+							<?php } ?>
                         </div>
                         <?php if($_GET['service'] == 'Travel'){ ?>
 						<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -358,6 +362,15 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     min=""
                                 >
                             </div>
+							
+							<div>
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Travel location</label>
+								<input name="destination"
+                                    type="text" 
+                                    class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
+                                    required
+                                >
+							</div>
 							
 						</div>
 						<?php } else{ ?>
@@ -399,6 +412,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     <option value="45" class="bg-gray-900">45</option>
                                 </select>
                             </div>
+							
+							
                         </div>
                         
                         <div class="mt-6">
@@ -413,6 +428,28 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                 </label>
                             </div>
                         </div>
+						
+						
+							<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+							<div>
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Destination</label>
+								<input name="destination"
+                                    type="text" 
+                                    class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
+                                    required
+                                >
+							</div>
+							<div>
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">No of hours need to meet</label>
+                                <select name="no_of_hrs_meet" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                    <option value="" class="bg-gray-900">Hours</option>
+                                    <?php for($i = 1;$i <=24; $i++){ ?>
+									<option value="<?php echo $i; ?>" class="bg-gray-900"><?php echo $i; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+							</div>
+							
 						
 						<?php } ?>
 						
