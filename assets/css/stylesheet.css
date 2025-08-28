@@ -12075,8 +12075,10 @@ position:absolute !important;
     display: flex;
     flex-wrap: wrap;
 } */
-#list_advertisements .table-row>div>div div:last-child>*{
-    padding-inline: .60rem !important;
+#list_advertisements .table-row>div .grid-cols-12 div:last-child>*{
+    /* padding-inline: .60rem !important; */
+    padding-left: .60rem !important;
+    padding-right: .60rem !important;
 }
 
 
