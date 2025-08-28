@@ -21,6 +21,10 @@ $activeTab = 'basic';
 $lang_list = modal_language_list();
 
 $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_SESSION['log_user_unique_id']);
+
+  $country_id = $userDetails['country'];
+
+  $country_name = DB::queryFirstRow("SELECT * FROM countries WHERE id = %s ", $country_id);
 ?>
 
 <!DOCTYPE html>
@@ -3050,8 +3054,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             <div class="space-y-4 lock-pri">
               <div class="flex justify-between items-center">
                 <div>
-                  <label class="form-label mb-0">🇹🇭 Thailand Users Only</label>
-                  <p class="text-sm text-white/60">Hide your profile from people who aren't in Thailand right now.</p>
+                  <label class="form-label mb-0"> <?php echo $country_name ?> Users Only</label>
+                  <p class="text-sm text-white/60">Hide your profile from people who aren't in <?php echo $country_name ?> right now.</p>
                 </div>
                 <label class="toggle-switch">
                   <input type="checkbox" value="Y" <?php if ($privacy_setting['country_enable']) { ?> checked <?php } ?> onchange="updateSettings(this,'country_enable')">
