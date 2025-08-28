@@ -643,7 +643,26 @@ if (mysqli_num_rows($res_ap) > 0) {
 		}
 	}
 
-    $model_posts =  DB::query('select * from live_posts where post_author="'.$model_id.'" Order by id DESC');
+    $itemsPerPage = 10;
+
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+    if ($page < 1) $page = 1;
+
+    $offset = ($page - 1) * $itemsPerPage;
+
+    $total_posts = DB::queryFirstField('SELECT COUNT(*) FROM live_posts WHERE post_author = %s', $model_id);
+
+    $model_posts = DB::query(
+        'SELECT * FROM live_posts 
+        WHERE post_author = %s 
+        ORDER BY id DESC 
+        LIMIT %d OFFSET %d',
+        $model_id,
+        $itemsPerPage,
+        $offset
+    );
+
 
     $user_purchased_ids = DB::query('select * from user_purchased_image where user_unique_id="'.$_SESSION['log_user_unique_id'].'" AND model_unique_id="'.$_GET['m_unique_id'].'" Order by id DESC');
 
@@ -1135,7 +1154,12 @@ if (mysqli_num_rows($res_ap) > 0) {
 				
                 </div>
 
-				
+                    <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
+
+                        <div id="pagination-container"></div>
+
+                    </div>
+        
 			  <?php } ?>
 				
             </div>
@@ -2707,7 +2731,32 @@ if (mysqli_num_rows($res_ap) > 0) {
   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
+
 <script>
+
+
+   $(document).ready(function () {
+
+        var itemsPerPage = <?php echo $itemsPerPage; ?>;
+        var totalPosts   = <?php echo $total_posts; ?>;
+        var currentPage  = <?php echo $page; ?>;
+
+        if ($("#pagination-container").data("pagination-initialized") !== true) {
+            $("#pagination-container").pagination({
+                items: totalPosts,
+                itemsOnPage: itemsPerPage,
+                currentPage: currentPage,
+                cssStyle: "light-theme",
+                onPageClick: function (pageNumber) {
+                    window.location.href = "?page=" + pageNumber;
+                }
+            });
+            $("#pagination-container").data("pagination-initialized", true);
+        }
+    });
+
+
 jQuery('.socialpaidbtn').click(function(e){
 	var id= jQuery(this).attr('id');
 	var tokens = jQuery(this).attr('tokens');
