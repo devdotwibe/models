@@ -513,45 +513,97 @@ if (mysqli_num_rows($res_ap) > 0) {
             }
         }
     </style>
-<script>
-    function like(postid, userid) {
 
-      if (userid == 0) {
-        alert("Create Account First");
-      } else {
+  <style type="text/css">
+  	
+body .owl-carousel.owl-loading {
+    opacity: 1;
+    display: block;
+    text-align: center;
+}
+.framebox{
+    width: 95%;
+    margin: auto;
+    padding-top: 10px;
+}
+.owl-prev,.owl-next{
+font-size: 30px;
+/*background: rgb(166, 166, 255);*/
+color: white;
+border: 0;
+margin: 7px;
+}
 
-        //alert("uid-" +userid  );
+.owl-prev:hover,.owl-next:hover,.owl-prev:focus,.owl-next:focus{
+    outline: none;
+}
+.owl-item {
+    border-radius: 4px;
 
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("likebody" + postid).innerHTML = this.responseText;
-          }
-        };
-        xmlhttp.open("GET", "get-like.php?q=" + postid + "&uid=" + userid, true);
-        xmlhttp.send();
+}
+a.item {
+    /*display: flex;*/
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: #f00;
+    cursor: pointer;
+    text-align: center;
+    /*padding: 78px 30px;*/
+}
+.sml_tst{
+  font-size: 14px;
+  color: #ffffff;
+}
+.owl-carousel.owl-drag .owl-item{
+  text-align: center;
+}
+.item:hover{
+    text-decoration-line: none;
+}
+.owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled {
+    display: block;
+    margin-top: 10px;
+}
+body .owl-carousel .owl-dots, 
+body .owl-carousel .owl-nav {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+}
+body .owl-carousel .owl-dots.disabled, 
+body .owl-carousel .owl-nav.disabled {
+    display: block;
+}
+.owl-dot{
+    display: none;
+}
 
-      }
 
-
-
-    }
-  </script>
-
+  </style>
+  <style>
+  .owl-carousel img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
   <script>
-    function share() {
-      var dummy = document.createElement('input'),
-        text = window.location.href;
+  jQuery(document).ready(function($) {
+    $('.owl-carousel').owlCarousel({
+      items: 1,         
+      loop: true,      
+      margin: 10,
+      nav: true,        
+      dots: true,       
+      autoplay: true,
+	  autoplayTimeout: 5000,     
+    smartSpeed: 500,
+    });
+  });
+</script>
 
-      document.body.appendChild(dummy);
-      dummy.value = text;
-      dummy.select();
-      document.execCommand('copy');
-      document.body.removeChild(dummy);
 
-      alert("Link Copyied To Clipboard Now Share Profile Anywhere");
-    }
-  </script>
 </head>
 
 <body class="enhanced5 min-h-screen bg-animated text-white socialwall-page">
@@ -687,6 +739,8 @@ if (mysqli_num_rows($res_ap) > 0) {
         <div class="container mx-auto relative z-10">
             <div class="profile-info pt-32 sm:pt-40 md:pt-48 pb-6 px-4 md:px-0">
                 <div class="profile-flex-wrapp flex flex-col md:flex-row items-start md:items-end gap-4 md:gap-6">
+
+
                     <div class="profile-avatar-container">
  
                             <?php
@@ -696,14 +750,33 @@ if (mysqli_num_rows($res_ap) > 0) {
 
                                   $modal_img_list_array[] = SITEURL . $profile_pic; 
 								  
-								  $randomKey = array_rand($modal_img_list_array);
-								  $randomImage = $modal_img_list_array[$randomKey];
+								//   $randomKey = array_rand($modal_img_list_array);
+								//   $randomImage = $modal_img_list_array[$randomKey];
+
+                                $count_image = count($modal_img_list_array);
+
+                                if($count_image > 1 )
+                                {
 
                               ?>
+                                    <div class="owl-carousel">
 
-                                <img src="<?php echo $randomImage; ?>" alt="Profile Pic<?php //echo $rowesdw['name']; ?>" class="profile-avatar">
+                                        <?php foreach($modal_img_list_array as $item) {  ?>
 
-                            <?php }else{ ?>
+                                             <img src="<?php echo $item; ?>" alt="Profile Pic" class="profile-avatar">
+
+                                        <?php } ?>
+
+                                    </div>
+
+                              <?php } else { ?>
+
+                                    <img src="<?php echo $modal_img_list_array[0]; ?>" alt="Profile Pic<?php //echo $rowesdw['name']; ?>" class="profile-avatar">
+
+                              <?php } ?> 
+
+
+                            <?php } else{ ?>
 
                                 <img src="<?php echo SITEURL; ?>assets/images/model-gal-no-img.jpg" alt="<?php echo $rowesdw['name']; ?>" class="profile-avatar">
 

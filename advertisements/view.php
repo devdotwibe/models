@@ -69,7 +69,7 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $form_data['name']; ?> - Premium Fashion Model | Live Models</title>
+    <title><?php echo $form_data['name']; ?>Advertisements | Live Models</title>
     <meta name="description" content="View details about Aria Moonlight, elite fashion model and influencer specializing in luxury brands and high-end campaigns.">
     <link rel="stylesheet" href="<?php echo SITEURL; ?>assets/css/stylesheet.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
