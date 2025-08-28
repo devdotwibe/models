@@ -4601,27 +4601,58 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
 
 
+    // function renderChart(data) {
+
+    //   const days = [
+    //     'Monday', 'Tuesday', 'Wednesday',
+    //     'Thursday', 'Friday', 'Saturday', 'Sunday'
+    //   ];
+
+    //   const maxValue = Math.max(...Object.values(data));
+    //   const scaleFactor = maxValue > 0 ? 100 / maxValue : 0;
+
+    //   days.forEach(day => {
+    //     const value = data[day] || 0;
+    //     const height = value * scaleFactor;
+
+    //     const bar = document.getElementById(`${day.toLowerCase()}_data`);
+    //     // const label = document.getElementById(`${day.toLowerCase()}_label`);
+
+    //     if (bar) bar.style.height = `${height}px`;
+    //     // if (label) label.innerText = `${day.slice(0, 3)} (${value})`;
+    //   });
+    // }
+
+
     function renderChart(data) {
 
-      const days = [
-        'Monday', 'Tuesday', 'Wednesday',
-        'Thursday', 'Friday', 'Saturday', 'Sunday'
-      ];
+          const chartContainer = document.querySelector(".chart-container");
 
-      const maxValue = Math.max(...Object.values(data));
-      const scaleFactor = maxValue > 0 ? 100 / maxValue : 0;
+          chartContainer.innerHTML = "";
 
-      days.forEach(day => {
-        const value = data[day] || 0;
-        const height = value * scaleFactor;
+          const values = Object.values(data);
 
-        const bar = document.getElementById(`${day.toLowerCase()}_data`);
-        // const label = document.getElementById(`${day.toLowerCase()}_label`);
+          const maxValue = Math.max(...values);
 
-        if (bar) bar.style.height = `${height}px`;
-        // if (label) label.innerText = `${day.slice(0, 3)} (${value})`;
-      });
-    }
+          const scaleFactor = maxValue > 0 ? 100 / maxValue : 0;
+
+          Object.keys(data).forEach(key => {
+              const value = data[key] || 0;
+              const height = value * scaleFactor;
+
+              const bar = document.createElement("div");
+              bar.className = "chart-bar";
+              bar.style.height = `${height}px`;
+              bar.title = `${key}: ${value}`;
+
+              const label = document.createElement("div");
+              label.className = "chart-label";
+              label.innerText = key;
+
+              chartContainer.appendChild(bar);
+              chartContainer.appendChild(label);
+          });
+      }
 
     function updateEarningsChart() {
 

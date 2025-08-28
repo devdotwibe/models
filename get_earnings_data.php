@@ -8,19 +8,12 @@ if (isset($_SESSION["log_user_id"])) {
 
     if ($userDetails) {
         
-        if (isset($_POST['action']) &&  $_POST['action'] =='get_earnings_data' && isset($_POST['period'])) {
+       if (isset($_POST['action']) && $_POST['action'] == 'get_earnings_data' && isset($_POST['period'])) {
+
             $user_id = $userDetails['id'];
             $period = $_POST['period'];
 
-            $data = [
-                'Monday' => 0,
-                'Tuesday' => 0,
-                'Wednesday' => 0,
-                'Thursday' => 0,
-                'Friday' => 0,
-                'Saturday' => 0,
-                'Sunday' => 0
-            ];
+            $data = [];
 
             $sql = "
                 SELECT amount, created_at 
@@ -38,23 +31,54 @@ if (isset($_SESSION["log_user_id"])) {
             $currentMonth = date('m');
 
             if ($period == 'week') {
-          
                 $monday = date('Y-m-d', strtotime('monday this week'));
                 $sunday = date('Y-m-d', strtotime('sunday this week'));
                 $sql .= " AND DATE(created_at) BETWEEN '$monday' AND '$sunday'";
+
+                $data = [
+                    'Monday' => 0,
+                    'Tuesday' => 0,
+                    'Wednesday' => 0,
+                    'Thursday' => 0,
+                    'Friday' => 0,
+                    'Saturday' => 0,
+                    'Sunday' => 0
+                ];
             } elseif ($period == 'month') {
                 $sql .= " AND YEAR(created_at) = '$currentYear' AND MONTH(created_at) = '$currentMonth'";
+
+                $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $currentMonth, $currentYear);
+                for ($i = 1; $i <= $daysInMonth; $i++) {
+                    $data[$i] = 0;
+                }
             } elseif ($period == 'year') {
                 $sql .= " AND YEAR(created_at) = '$currentYear'";
+
+                // init months
+                $months = [
+                    'Jan','Feb','Mar','Apr','May','Jun',
+                    'Jul','Aug','Sep','Oct','Nov','Dec'
+                ];
+                foreach ($months as $m) {
+                    $data[$m] = 0;
+                }
             }
 
             $result = mysqli_query($con, $sql);
 
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $dayOfWeek = date('l', strtotime($row['created_at']));
-                    if (isset($data[$dayOfWeek])) {
+                    if ($period == 'week') {
+                        $dayOfWeek = date('l', strtotime($row['created_at']));
                         $data[$dayOfWeek] += (float)$row['amount'];
+                    } elseif ($period == 'month') {
+                        $day = (int)date('j', strtotime($row['created_at']));
+                        $data[$day] += (float)$row['amount'];
+                    } elseif ($period == 'year') {
+                        $monthIndex = (int)date('n', strtotime($row['created_at'])) - 1;
+                        $months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                        $monthName = $months[$monthIndex];
+                        $data[$monthName] += (float)$row['amount'];
                     }
                 }
             }
