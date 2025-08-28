@@ -1,23 +1,19 @@
-<?php if(!empty($get_modal_user[0]['profile_pic'])){
+<?php
 
-			// 	$prof_img = SITEURL.$get_modal_user[0]['profile_pic'];
-			// } else{
-			// 	$prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
-			// } 
-      
-              
-    $notify_count = NotificationCount($get_modal_user[0]['id']);
+    $auther_pic_url = SITEURL.'assets/images/model-gal-no-img.jpg';
 
-       $auther_pic_url = SITEURL.'assets/images/model-gal-no-img.jpg';
+      if(!empty($get_modal_user[0]['profile_pic'])){
+    
+        $notify_count = NotificationCount($get_modal_user[0]['id']);
 
-        $profile_pic = $get_modal_user[0]['profile_pic'] ?? '';
+          $auther_pic_url = SITEURL.'assets/images/model-gal-no-img.jpg';
 
-        if (checkImageExists($profile_pic)) {
+            $profile_pic = $get_modal_user[0]['profile_pic'] ?? '';
 
-          $auther_pic_url = SITEURL . $profile_pic;
+            if (checkImageExists($profile_pic)) {
 
-        }
-
+              $auther_pic_url = SITEURL . $profile_pic;
+            }
       }
 ?>
 
