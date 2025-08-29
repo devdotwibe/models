@@ -117,6 +117,7 @@ if (isset($_SESSION["log_user_id"])) {
                                 'show_visit',
                                 'appear_offline',
                                 'show_join_date',
+                                'priority_message',
                                 'verified_photos',
                                 'exclude_message_already',
                                 'show_liked',
