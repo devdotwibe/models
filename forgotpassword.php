@@ -21,20 +21,39 @@ if($_POST){
 				'password' => $password_hashed
 			], 'id = %i', $get_data['id']);
 			
+
 			$email_to = $get_data['email'];
-//			$email_to = 'pvsysgroup01@gmail.com';
+
 			$subject = "Mail Verification for Model Project";
-			
+
 			$header = "From: Forgot Password <prashant.systos@gmail.com>\r\n";
 			$header .= "MIME-version:1.0\r\n";
 			$header .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-			$htmlContent = file_get_contents("mail/forgotpassword-mail.php");
+
+
+			$htmlContent = file_get_contents("mail/email_verfiy.php");
+
+			$htmlContent = file_get_contents("mail/forgotmail.php");
+
+			$imageUrl = 'https://models.staging3.dotwibe.com/assets/images/logo-live.jpg';
+			
+			$base64 = '';
+
+			$imageData = @file_get_contents($imageUrl);
+			if ($imageData !== false) {
+				$type = pathinfo($imageUrl, PATHINFO_EXTENSION);
+				$base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
+			}
+
 			$message = $htmlContent;
+
 			$message = str_replace('{username}', $get_data['username'], $message);
 			$message = str_replace('{name}', $get_data['name'], $message);
 			$message = str_replace('{password}', $code, $message);
+
+			$message = str_replace("{{IMG_LINK}}", $base64, $message);
+			$message = str_replace("{{VERIFY_LINK}}", $verify_link, $message);
 			
-//			echo $message;die;
 
          if (mail($email_to, $subject, $message, $header)) {
 
