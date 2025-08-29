@@ -12092,6 +12092,13 @@ overflow-x: auto !important;
 .premium-table > div {
   padding-inline: 0 !important;
 } */
+.premium-table.advertisement-table>div>div>*:first-child{
+
+       max-width: 50px !important;
+    width:100%;
+    background: blue; 
+}
+
 
 #list_advertisements {
     padding-inline: 30px;
@@ -12108,10 +12115,23 @@ overflow-x: auto !important;
 }
 
 
+#list_advertisements>div>div>*:first-child{
+    max-width: 50px !important;
+    width:100%;
+    /* background: blue; */
+}
+
+#list_advertisements > div > div > :nth-child(2) {
+  max-width: 55px !important;
+  width: 100%;
+  /* background: blue; */
+}
+
 #list_advertisements>div>div>*:last-child {
     display: flex !important;
     flex-wrap: wrap;
     background-color: #00d2ff;
+    min-width: 243px !important;
 }
 
 #list_advertisements>div>div>*:last-child>*{
