@@ -4874,7 +4874,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     }
 
     function ClosePremiumModal() {
-      $('#premium_modal').removeClass('active');
+      $('#premium_modal').removeClass('show');
     }
 
     function ClosefollowModal() {
@@ -5441,7 +5441,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
         e.stopPropagation();
 
-        $('#premium_modal').addClass('active');
+        $('#premium_modal').addClass('show');
 
       });
 
