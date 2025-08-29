@@ -107,7 +107,7 @@ $output['result']= 'ok';
 
 					$ids = implode(',', $adver_ids);
 
-					$result = DB::query("SELECT FROM banners WHERE id IN ($ids)");
+					$result = DB::query("SELECT * FROM banners WHERE id IN ($ids)");
 
 					foreach($result as $item)
 					{
