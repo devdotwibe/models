@@ -517,19 +517,19 @@ else{
                             <div>
                                 <label class="block text-white font-semibold mb-3">Who do you want to reach?</label>
                                 <div class="grid grid-cols-2 gap-3">
-                                    <div class="audience-chip p-3 rounded-xl text-center" <?php echo in_array('men', $target_values) ? 'selected' : ''; ?>onclick="toggleTarget(this, 'men')">
+                                    <div class="audience-chip p-3 rounded-xl text-center <?php echo in_array('men', $target_values) ? 'selected' : ''; ?>" onclick="toggleTarget(this, 'men')">
                                         <div class="text-2xl mb-1">👨</div>
                                         <div class="text-sm">Men</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center"  <?php echo in_array('women', $target_values) ? 'selected' : ''; ?> onclick="toggleTarget(this, 'women')">
+                                    <div class="audience-chip p-3 rounded-xl text-center<?php echo in_array('women', $target_values) ? 'selected' : ''; ?>"   onclick="toggleTarget(this, 'women')">
                                         <div class="text-2xl mb-1">👩</div>
                                         <div class="text-sm">Women</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center"  <?php echo in_array('couples', $target_values) ? 'selected' : ''; ?> onclick="toggleTarget(this, 'couples')">
+                                    <div class="audience-chip p-3 rounded-xl text-center <?php echo in_array('couples', $target_values) ? 'selected' : ''; ?>"  onclick="toggleTarget(this, 'couples')">
                                         <div class="text-2xl mb-1">💑</div>
                                         <div class="text-sm">Couples</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center"  <?php echo in_array('all', $target_values) ? 'selected' : ''; ?> onclick="toggleTarget(this, 'all')">
+                                    <div class="audience-chip p-3 rounded-xl text-center <?php echo in_array('all', $target_values) ? 'selected' : ''; ?>" onclick="toggleTarget(this, 'all')" > 
                                         <div class="text-2xl mb-1">🌈</div>
                                         <div class="text-sm">Everyone</div>
                                     </div>
@@ -586,7 +586,7 @@ else{
                             <div>
                                 <label class="block text-white font-semibold mb-3">Reach</label>
                                 <div class="space-y-3">
-                                    <div class="audience-chip p-4 rounded-xl" onclick="selectLocation(this, 'local')" <?if ($location =='local') {?> selected <?php } ?> >
+                                    <div class="audience-chip p-4 rounded-xl  <?if ($location =='local') {?> selected <?php } ?>" onclick="selectLocation(this, 'local')" >
                                         <div class="flex items-center">
                                             <div class="text-2xl mr-3">🏙️</div>
                                             <div>
@@ -595,7 +595,7 @@ else{
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="audience-chip p-4 rounded-xl" onclick="selectLocation(this, 'national')" <?if ($location =='national') {?> selected <?php } ?> >
+                                    <div class="audience-chip p-4 rounded-xl  <?if ($location =='national') {?> selected <?php } ?> " onclick="selectLocation(this, 'national')">
                                         <div class="flex items-center">
                                             <div class="text-2xl mr-3">🇺🇸</div>
                                             <div>
@@ -604,7 +604,7 @@ else{
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="audience-chip p-4 rounded-xl" onclick="selectLocation(this, 'international')"  <?if ($location =='international') {?> selected <?php } ?> >
+                                    <div class="audience-chip p-4 rounded-xl <?if ($location =='international') {?> selected <?php } ?>" onclick="selectLocation(this, 'international')"  >
                                         <div class="flex items-center">
                                             <div class="text-2xl mr-3">🌍</div>
                                             <div>
