@@ -40,90 +40,6 @@ $serviceArr = array('Providing services', 'Looking for services');
 	<?php } ?>
    
 
-    <?php /*?><div class="container">
-        <div class="login-signup" style="padding-top:10px;">
-            <form method="get" id="search-form" class="mb-2" onSubmit="submit_search(1);return false;">
-                <input type="hidden" id="selpagesize" value="20" />
-                <input type="hidden" name="pages" id="i-page" value="1" />
-                <input type="hidden" name="total_item" id="i-total-page" value="0" />
-                <input type="hidden" name="sort_column" id="hdnSortColumn" value="" />
-                <input type="hidden" name="sort_type" id="hdnSortOrder" value="" />
-                <div class="row">
-                    <div class="col-md-3 mb-2">
-                        <select name="category" class="form-control" onchange="submitSelect()">
-                            <option value="">Category</option>
-                            <option value="all">All</option>
-                            <?php
-                            foreach ($category_list as $val) {
-                            ?>
-                                <option value="<?= $val ?>"><?= $val ?></option>
-                            <?php
-                            }
-                            ?>
-                        </select>
-                    </div>
-<div class="col-md-3 mb-2">
-<select name="service" class="form-control" onchange="submitSelect()" >
-<option value="">I Am</option>
-<option value="">All</option>
-<?php
-foreach ($serviceArr as $val) {
-?>
-<option value="<?= $val ?>"><?= $val ?></option>
-<?php
-}
-?>
-</select>
-</div>
-
-<div class="col-md-3 mb-2">
-<select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-control" >
-<option value="" data-id="">Country</option>
-<option value="" >All</option>
-<?php
-if ($f_country_list) {
-foreach ($f_country_list as $val) {
-?>
-<option value="<?= $val['id'] ?>"><?= $val['name'] ?></option>
-<?php
-}
-}
-
-?>
-</select>
-</div>
-
-<div class="col-md-3 mb-2">
-    <select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-control"></select>
-</div>
-<div class="col-md-3 mb-2">
-<select name="city" id="i-hs-city" onchange="submitSelect()" class="form-control"></select>
-</div>
-
-
-
-
-
-                </div>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-
-            <div class="row" id="result-data">
-            </div>
-            <div class="row" style="margin-top:10px">
-                <div class="col-md-6"></div>
-                <div class="col-md-6">
-                    <ul class="pagination pull-right" style="margin:0" id="list-paginations"></ul>
-                </div>
-            </div>
-
-
-
-        </div>
-    </div>
-	<?php */ ?>
-	
-	
 	<!-- Main Content -->
     <main class="main">
         <div class="container">
@@ -141,33 +57,33 @@ foreach ($f_country_list as $val) {
 			
               <?php if (isset($_SESSION["log_user_id"])) { 
 
-			    $total_adv = DB::queryFirstrow("SELECT COUNT(*) AS total FROM banners where user_id=".$_SESSION['log_user_id']);
+                    $total_adv = DB::queryFirstrow("SELECT COUNT(*) AS total FROM banners where user_id=".$_SESSION['log_user_id']);
 
-              }
-              else
-              { 
-                 $total_adv = [];
-              }
-			?>
+                }
+                else
+                { 
+                    $total_adv = [];
+                }
+                ?>
 					
 					<form method="get" id="search-form" class="mb-2" onSubmit="submit_search(1);return false;">
 					
-						
-						<?php 
-						
-						$string_category = DB::query('select category from banners GROUP BY category order by category asc');
-						
-						?>
+		
 					
-						<select name="category" id="categoryFilter" class="form-control" onchange="submitSelect()">
+						<select name="category" id="categoryFilter" class="form-control">
+
                             <option value="">All Categories</option>
+
                             <?php
-                            foreach ($string_category as $val) {
+
+                                foreach ($category_list as $val) {
+                                ?>
+                                    <option value="<?= $val?>"><?= $val ?></option>
+
+                                <?php
+                                }
                             ?>
-                                <option value="<?= $val['category'] ?>"><?= $val['category'] ?></option>
-                            <?php
-                            }
-                            ?>
+                            
                         </select>
 
                         <input type="text" class="form-control" placeholder="Search models..." id="searchInput">
@@ -179,6 +95,7 @@ foreach ($f_country_list as $val) {
 						?>
 						
 						<select name="country" id="i-hs-country" onChange="select_hs_country('')" class="form-control" >
+
 							<option value="" data-id="">Country</option>
 							<option value="" >All</option>
 							<?php
@@ -194,10 +111,10 @@ foreach ($f_country_list as $val) {
 						</select>
 
 						
-						<button type="submit" class="btn-primary" <?php /* onclick="performSearch()" */ ?> > 🔍 Search</button>
+						<button type="button" onclick="submitSelect()" class="btn-primary"  <?php /* onclick="performSearch()" */ ?> > 🔍 Search</button>
 
 
-	<input type="hidden" id="selpagesize" value="6" />
+	                    <input type="hidden" id="selpagesize" value="6" />
 						<input type="hidden" name="pages" id="i-page" value="1" />
 						<input type="hidden" name="total_item" id="i-total-page" value="0" />
 						<input type="hidden" name="sort_column" id="hdnSortColumn" value="" />
@@ -558,8 +475,11 @@ foreach ($f_country_list as $val) {
         $('#gridView').html('<div class="text-center p-3"><h5 class="m-0">Loading..</h5></div>');
 
         function submit_search(pageNum) { 
+
             perPage = $("#selpagesize").val();
+
             var data = $('#search-form').serialize() + '&page=' + pageNum + '&data_list=' + perPage;
+            
             $.ajax({
                 type: 'GET',
                 url: "<?php echo $m_link . 'ajax.php' ?>",
@@ -595,14 +515,19 @@ foreach ($f_country_list as $val) {
         }
 
         submit_search(1);
+
         $('#search-form').submit(function(e) {
             e.preventDefault();
         });
 
         function submitSelect() {
-            setTimeout(function() {
-                submit_search(1);
-            }, 500);
+
+
+
+            // setTimeout(function() {
+            //     submit_search(1);
+            // }, 500);
+
         }
     </script>
 
