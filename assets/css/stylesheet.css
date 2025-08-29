@@ -12100,11 +12100,11 @@ overflow-x: auto !important;
 
 
 #list_advertisements>div {
-    border: 1px solid red !important;
+    /* border: 1px solid red !important; */
 }
 
 #list_advertisements>div>div {
-    background: blue;
+    /* background: blue; */
 }
 
 
