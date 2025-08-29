@@ -302,6 +302,9 @@ if (isset($_SESSION['log_user_id'])) {
 
                     if (res.status === 'success') {
 
+                        loadData(1);
+
+                        ConformCloseModal();
 
                         showNotification('Advertisement delted successfully', 'success');
 
