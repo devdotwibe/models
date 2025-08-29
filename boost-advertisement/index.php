@@ -738,15 +738,15 @@ else{
                                 <div class="text-sm text-white/70">Total Investment</div>
                             </div>
                             <div>
-                                <div class="text-2xl font-bold text-blue-400" id="estimatedViews">500-1,000</div>
+                                <div class="text-2xl font-bold text-blue-400" id="estimatedViews"><?= $expected_views_range ?></div>
                                 <div class="text-sm text-white/70">Expected Views</div>
                             </div>
                             <div>
-                                <div class="text-2xl font-bold text-purple-400" id="estimatedReach">1,000-2,000</div>
+                                <div class="text-2xl font-bold text-purple-400" id="estimatedReach"><?= $reached_views_range ?></div>
                                 <div class="text-sm text-white/70">People Reached</div>
                             </div>
                             <div>
-                                <div class="text-2xl font-bold text-pink-400" id="campaignLength">1 Day</div>
+                                <div class="text-2xl font-bold text-pink-400" id="campaignLength"><?= $duration ?> Day</div>
                                 <div class="text-sm text-white/70">Duration</div>
                             </div>
                         </div>
