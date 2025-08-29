@@ -39,8 +39,7 @@ if($_POST){
 
 			
 			$rootPath = $_SERVER['DOCUMENT_ROOT']; 
-
-    		$imagePath = $rootPath . '/' . ltrim('assets/images/logo-live.jpg', '/');
+			$imagePath = $rootPath . '/' . ltrim('assets/images/logo-live.jpg', '/');
 
 			$base64 = '';
 
