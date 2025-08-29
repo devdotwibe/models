@@ -178,7 +178,7 @@ include('includes/helper.php');
         }
         
         /* Luxury Basic Premium with golden star burst effects */
-        .premium-basic {
+        .premium-basic-user {
             background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706, #b45309);
             border-radius: 50%;
             border: 4px solid #fcd34d;
@@ -190,7 +190,7 @@ include('includes/helper.php');
                 inset 0 -4px 0 rgba(0, 0, 0, 0.4);
         }
         
-        .premium-basic::before {
+        .premium-basic-user::before {
             content: '';
             position: absolute;
             inset: -8px;
@@ -200,7 +200,7 @@ include('includes/helper.php');
             animation: premiumPrisma 3s ease-in-out infinite;
         }
         
-        .premium-basic::after {
+        .premium-basic-user::after {
             content: '';
             position: absolute;
             inset: -20px;
@@ -211,7 +211,7 @@ include('includes/helper.php');
         }
         
         /* Ultra-luxury Diamond Elite with crystal faceting and prismatic effects */
-        .diamond-elite {
+        .diamond-elite-user {
             background: linear-gradient(135deg, #06b6d4, #0891b2, #0e7490, #155e75);
             width: 68px;
             height: 68px;
@@ -226,7 +226,7 @@ include('includes/helper.php');
                 inset 0 -8px 0 rgba(0, 0, 0, 0.5);
         }
         
-        .diamond-elite::before {
+        .diamond-elite-user::before {
             content: '';
             position: absolute;
             inset: -12px;
@@ -238,7 +238,7 @@ include('includes/helper.php');
             animation: diamondPrisma 2.5s ease-in-out infinite;
         }
         
-        .diamond-elite::after {
+        .diamond-elite-user::after {
             content: '';
             position: absolute;
             inset: -30px;
@@ -248,7 +248,7 @@ include('includes/helper.php');
             animation: diamondAura 3s linear infinite;
         }
         
-        .diamond-elite span {
+        .diamond-elite-user span {
             transform: none;
             font-size: 32px;
             text-shadow: 
@@ -485,9 +485,13 @@ include('includes/helper.php');
 
         $result = CheckPremiumAccess($userDetails['id']);
 
+        $preminum_plan = "";
+
         if ($result && $result['active']) {
 
             $user_have_preminum = true;
+
+            $preminum_plan = $result['plan_status'];
         }
     }
 
@@ -905,7 +909,19 @@ include('includes/helper.php');
 
                         $is_user_new = IsNewUser($rowesdw['id']);
 
-                        $is_user_preminum = CheckPremiumAccess($rowesdw['id']);
+                        $result = CheckPremiumAccess($rowesdw['id']);
+
+                          $preminum_plan = "";
+
+                           $user_have_preminum = false;
+
+                        if ($result && $result['active']) {
+
+                            $user_have_preminum = true;
+
+                            $preminum_plan = $result['plan_status'];
+                        }
+
                 ?>
 
                         <!-- Profile Card 1 -->
@@ -924,7 +940,15 @@ include('includes/helper.php');
 
                                         <?php if ($is_user_preminum) { ?>
 
-                                            <span class="profile-badge badge-premium">Premium</span>
+                                            <?php if($preminum_plan =='basic') { ?>
+
+                                            <span class="profile-badge badge-premium"><div class="badge premium-basic-user">⭐</div> Premium</span>
+
+                                            <?php } else { ?>
+
+                                                 <span class="profile-badge badge-premium"><div class="badge diamond-elite-user"><span>💎</span></div> Premium</span>
+
+                                            <?php } ?>
 
                                         <?php } ?>
 
