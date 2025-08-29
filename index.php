@@ -258,7 +258,7 @@ include('includes/helper.php');
                                 </button>
                             </div> -->
 
-                            <form id="signupForm" class="space-y-5" method="post" enctype="multipart/form-data" action="act-register.php">
+                            <form id="signupForm" class="space-y-5" method="post" enctype="multipart/form-data" onsubmit="SubmitForm()" action="act-register.php">
 
 
                                 <?php if(isset($_SESSION["user_name_exist"] )) { ?>
@@ -305,7 +305,15 @@ include('includes/helper.php');
                                 ?>
 
                                 <input type="text" name="name" placeholder="Full Name" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
-                                <input type="text" name="username" placeholder="Username" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
+
+                                 <div>
+
+                                    <input type="text" name="username" placeholder="Username" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
+
+                                      <div id="error_username" class="text-red-500 text-sm mt-1"></div>
+
+                                 </div>
+
                                 <input type="email" name="email" placeholder="Email Address" class="w-full px-6 py-4 rounded-xl ultra-glass text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
 
 
@@ -729,6 +737,21 @@ include('includes/helper.php');
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
+
+        function SubmitForm() {
+
+            let username = $("#username").val().trim();
+            let errorEl  = $("#error_username");
+            errorEl.text("");
+
+            if (/\s/.test(username)) {
+                errorEl.text("❌ Username must not contain spaces.");
+                return false;
+            }
+
+            return true; 
+        }
+
 
         function ShowExplore()
         {
