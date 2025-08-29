@@ -504,16 +504,33 @@ $serviceArr = array('Providing services', 'Looking for services');
                     $('.search-total').html(response.total);
                     $('#i-total-page').val(response.total_page);
                     currentPage = response.page;
-                    rebindpagination();
+
+                    rebindpagination(response.total);
                 }
             });
         }
 
-        function rebindpagination() {
+        // function rebindpagination(totalItems) {
+        //     $("#list-paginations").pagination('destroy');
+        //     $("#list-paginations").pagination({
+        //        items: '<?php echo $total_adv['total']; ?>',
+        //         displayedPages: 5,
+        //         edges: 0,
+        //         cssStyle: 'light-theme',
+        //         hrefTextPrefix: 'javascript:;',
+        //         currentPage: currentPage,
+        //         onPageClick: function(pageNum, e) {
+        //             submit_search(pageNum);
+        //             currentPage = pageNum;
+        //         }
+        //     });
+        // }
+
+        function rebindpagination(totalItems) {
+
             $("#list-paginations").pagination('destroy');
             $("#list-paginations").pagination({
-               // pages: $("#i-total-page").val(),
-               items: '<?php echo $total_adv['total']; ?>',
+                items: totalItems,           
                 displayedPages: 5,
                 edges: 0,
                 cssStyle: 'light-theme',
