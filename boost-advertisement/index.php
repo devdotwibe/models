@@ -941,7 +941,7 @@ else{
             }
         }
 
-        if(update =='update')
+        if(status =='update')
         {
             $('#lauch_title').text('Update Launch Campaign');
 
