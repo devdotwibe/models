@@ -51,7 +51,7 @@ if (isset($_SESSION['log_user_id'])) {
 </head>
 
 
-<body class="min-h-screen text-white profile-advts advt-page  socialwall-page">
+<body class="min-h-screen text-white profile-advts advt-page  socialwall-page enhanced5">
    
    <?php  include('../includes/side-bar.php'); ?>
 	<?php  include('../includes/profile_header_index.php'); 
