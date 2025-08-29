@@ -3411,7 +3411,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       </button>
     </div>
   </div>
-
+<!-- 
   <div class="modal-overlay" id="premium_modal">
     <div class="modal">
       <div class="modal-header">
@@ -3430,7 +3430,234 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <button class="btn btn-primary" type="button" onclick="ClosePremiumModal()">Close</button>
       </div>
     </div>
-  </div>
+  </div> -->
+
+
+
+  
+<?php
+
+    $getSettings = mysqli_query($con, "SELECT discount_price_show, updated_at FROM admin_settings ORDER BY id DESC LIMIT 1");
+
+    $settings = mysqli_fetch_assoc($getSettings);
+
+    $discountPriceShow = true;
+
+    $updatedAt = $settings['updated_at'];
+
+    if ($updatedAt) {
+        $timeDiff = time() - strtotime($updatedAt);
+        if ($timeDiff > 86400 && $settings['status'] == 'No') {
+
+            $discountPriceShow = false;
+        }
+    }
+
+    $premium_amounts = [
+        'basic_with_discount' => 39,
+        'basic_without_discount' => 49,
+        'diamond_with_discount' => 149,
+        'diamond_without_discount' => 199,
+        'basic_with_discount_yearly' => 449,
+        'basic_without_discount_yearly' => 588,
+        'diamond_with_discount_yearly' => 1999,
+        'diamond_without_discount_yearly' => 2388,
+    ];
+
+    $basic_monthly_savings = $premium_amounts['basic_without_discount'] - $premium_amounts['basic_with_discount'];
+    $basic_annual_savings = $premium_amounts['basic_without_discount_yearly'] - $premium_amounts['basic_with_discount_yearly'];
+
+    $diamond_monthly_savings = $premium_amounts['diamond_without_discount'] - $premium_amounts['diamond_with_discount'];
+    $diamond_annual_savings = $premium_amounts['diamond_without_discount_yearly'] - $premium_amounts['diamond_with_discount_yearly'];
+
+    ?>
+
+    <div class="popup-overlay" id="premium_modal">
+        <div class="popup-container">
+            <button class="close-btn" onclick="closePremiumModal()">&times;</button>
+
+            <div class="top-icons">
+                <div class="top-icon">🚀</div>
+                <div class="top-icon">⭐</div>
+                <div class="top-icon">💎</div>
+            </div>
+
+            <div class="header">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
+                <h2 class="title">Unlock Elite Access</h2>
+                <p class="subtitle">Join premium members and dominate the streaming experience</p>
+            </div>
+
+            <div class="first-time-alert">
+                <span class="fire-emoji">🔥</span> FIRST-TIME USER EXCLUSIVE: $39 & $149 Limited Time Deal - Expires in 24 Hours of Joining! <span class="fire-emoji">🔥</span>
+            </div>
+
+            <div class="promo-banner">
+                <span class="fire-emoji">🔥</span> MASSIVE SAVINGS INSIDE - DON'T MISS OUT! <span class="fire-emoji">🔥</span>
+            </div>
+
+            <?php if ($discountPriceShow) { ?>
+
+                <div class="countdown-timer">
+                    ⏰ LIMITED TIME: <span id="countdown">23:59:45</span> REMAINING!
+                </div>
+
+            <?php } ?>
+
+            <div class="billing-toggle">
+                <div class="toggle-container">
+                    <div class="toggle-option active" data-billing="monthly">Monthly</div>
+                    <div class="toggle-option" data-billing="annual">
+                        Annual
+                        <span class="savings-badge">SAVE BIG!</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="pricing-grid">
+
+                <div class="pricing-card">
+                    <div class="hot-deal">🔥 HOT!</div>
+                    <div class="member-badge premium-member-badge">PRO</div>
+                    <div class="badge premium-badge">PREMIUM</div>
+                    <div class="plan-name">Basic Premium</div>
+                    <div class="price-container">
+                        <?php if ($discountPriceShow) { ?>
+                            <div class="original-price"
+                                data-monthly-orig="<?php echo $premium_amounts['basic_without_discount']; ?>"
+                                data-annual-orig="<?php echo $premium_amounts['basic_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['basic_without_discount']; ?>
+                            </div>
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['basic_with_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['basic_with_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['basic_with_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                            <div class="savings-text show"
+                                data-monthly-save="Save $<?php echo $basic_monthly_savings; ?>/month!"
+                                data-annual-save="Save $<?php echo $basic_annual_savings; ?>/year!">
+                                Save $<?php echo $basic_monthly_savings; ?>/month!
+                            </div>
+                        <?php } else { ?>
+
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['basic_without_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['basic_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['basic_without_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                        <?php } ?>
+                        <div class="bonus-tokens">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                            <span data-monthly-tokens="500" data-annual-tokens="1000">+ 500 TLM tokens</span>
+                        </div>
+                    </div>
+                    <button class="cta-button cta-primary" onclick="upgradeAccount('monthly', 'basic')">Grab This Deal!</button>
+                </div>
+
+                <!-- Diamond Elite -->
+                <div class="pricing-card elite">
+                    <div class="hot-deal">💎 ELITE!</div>
+                    <div class="member-badge elite-member-badge">VIP</div>
+                    <div class="badge elite-badge">DIAMOND ELITE</div>
+                    <div class="plan-name">Diamond Elite</div>
+                    <div class="price-container">
+                        <?php if ($discountPriceShow) { ?>
+                            <div class="original-price"
+                                data-monthly-orig="<?php echo $premium_amounts['diamond_without_discount']; ?>"
+                                data-annual-orig="<?php echo $premium_amounts['diamond_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['diamond_without_discount']; ?>
+                            </div>
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['diamond_with_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['diamond_with_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['diamond_with_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                            <div class="savings-text show"
+                                data-monthly-save="Save $<?php echo $diamond_monthly_savings; ?>/month!"
+                                data-annual-save="Save $<?php echo $diamond_annual_savings; ?>/year!">
+                                Save $<?php echo $diamond_monthly_savings; ?>/month!
+                            </div>
+                        <?php } else { ?>
+
+                            <div class="price"
+                                data-monthly="<?php echo $premium_amounts['diamond_without_discount']; ?>"
+                                data-annual="<?php echo $premium_amounts['diamond_without_discount_yearly']; ?>">
+                                $<?php echo $premium_amounts['diamond_without_discount']; ?>
+                            </div>
+                            <div class="price-period"
+                                data-monthly-period="per month"
+                                data-annual-period="per year">
+                                per month
+                            </div>
+                        <?php } ?>
+                        <div class="bonus-tokens">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                            <span data-monthly-tokens="2000" data-annual-tokens="5000">+ 2,000 TLM tokens</span>
+                        </div>
+                    </div>
+                    <button class="cta-button cta-elite" onclick="upgradeAccount('monthly', 'diamond')">Claim Diamond Status!</button>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <div class="features-grid">
+                    <div class="feature-column">
+                        <h4>Basic Premium</h4>
+                        <ul class="feature-list">
+                            <li>Unlimited chat with models</li>
+                            <li>Ad-free streaming experience</li>
+                            <li>HD video quality</li>
+                            <li>Advanced search & filters</li>
+                            <li>Profile visibility boost</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-column">
+                        <h4 class="elite-title">Diamond Elite Exclusive</h4>
+                        <ul class="feature-list elite-features">
+                            <li>Everything in Basic Premium</li>
+                            <li>Unlimited chat in live streaming</li>
+                            <li>Top priority in creator inbox</li>
+                            <li>VIP-only exclusive content</li>
+                            <li>Diamond Elite status badge</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="token-packages-section">
+                <div class="token-packages-title">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                    Explore Token Packages
+                </div>
+                <div class="token-packages-subtitle">
+                    Get extra TLM tokens for premium interactions, gifts, and exclusive content access
+                </div>
+                <button class="token-packages-btn" onclick="exploreTokens()">
+                    🎁 Browse Token Deals
+                </button>
+                <div class="token-expires">⏰ Special token offers expire soon!</div>
+            </div>
+        </div>
+    </div>
+
+
 
   <div class="modal-overlay" id="follow_modal">
     <div class="modal">
@@ -3486,6 +3713,53 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
   <script>
+
+      const premiumAmounts = <?php echo json_encode($premium_amounts); ?>;
+
+      function upgradeAccount(plan_type, plan_status) {
+
+            let key = '';
+            if (plan_status === 'basic') {
+                key = 'basic_with_discount';
+                if (plan_type === 'annual') {
+                    key = 'basic_with_discount_yearly';
+                }
+            } else if (plan_status === 'diamond') {
+                key = 'diamond_with_discount';
+                if (plan_type === 'annual') {
+                    key = 'diamond_with_discount_yearly';
+                }
+            }
+
+            const amount = premiumAmounts[key];
+
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'payments/preminum.php';
+
+            const inputPlanType = document.createElement('input');
+            inputPlanType.type = 'hidden';
+            inputPlanType.name = 'plan_type';
+            inputPlanType.value = plan_type;
+            form.appendChild(inputPlanType);
+
+            const inputPlanStatus = document.createElement('input');
+            inputPlanStatus.type = 'hidden';
+            inputPlanStatus.name = 'plan_status';
+            inputPlanStatus.value = plan_status;
+            form.appendChild(inputPlanStatus);
+
+            const inputAmount = document.createElement('input');
+            inputAmount.type = 'hidden';
+            inputAmount.name = 'amount';
+            inputAmount.value = amount;
+            form.appendChild(inputAmount);
+
+            document.body.appendChild(form);
+            form.submit();
+      }
+
+
     function select_hs_country(state) {
       $("#i-hs-city").html('<option value="">Select</option>');
       $("#i-hs-state").html('<option value="">Select</option>');
@@ -5119,12 +5393,16 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     });
   </script>
   <script>
-    //Premium checking
-    jQuery('.premiumcheck').click(function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      $('#premium_modal').addClass('active');
-    });
+      //Premium checking
+      jQuery('.premiumcheck').click(function(e) {
+
+        e.preventDefault();
+
+        e.stopPropagation();
+
+        $('#premium_modal').addClass('active');
+
+      });
 
     jQuery('.access_restricted').click(function(e) {
       e.preventDefault();
