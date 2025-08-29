@@ -924,7 +924,7 @@ include('includes/helper.php');
 
                         $prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
 
-                        if(!empty($rowesdw[0]['profile_pic']))
+                        if(!empty($rowesdw['profile_pic']))
                         {
                             if (checkImageExists($rowesdw['profile_pic'])) {
                         
