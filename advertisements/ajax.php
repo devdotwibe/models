@@ -90,26 +90,21 @@ $sort_type = $_GET['sort_type'];
     }
 
 
-    $params = [];
+        $params = [];
+        $where  = [];
 
-    $where  = [];
+        $category = $_GET['category'] ?? '';
+        $country  = $_GET['country'] ?? '';
 
-    $category =  $_GET['category'];
+        if (!empty($category)) {
+            $where[]  = "tb.category = %s";
+            $params[] = $category;
+        }
 
-    $country =  $_GET['country'];
-
-	if (!empty($category)) {
-
-         $where[] =" and tb.category = %s ";
-        $params[] = $category;
-    }
-
-    if (!empty($country)) {
-
-        $where[]   = " and tb.country = %s ";
-        $params[] = $country;
-
-    }
+        if (!empty($country)) {
+            $where[]  = "tb.country = %s";
+            $params[] = $country;
+        }
 
     if (!empty($where)) {
 
@@ -117,21 +112,21 @@ $sort_type = $_GET['sort_type'];
     }
 
 
-$limited = " limit $offset, ".$perPage;
+    $limited = " limit $offset, ".$perPage;
 
-$where_clause = rtrim($where_clause,'and');
-
-
-$finalQuery = $stringQuery . " " . $orderBy . " " . $limited;
+    $where_clause = rtrim($where_clause,'and');
 
 
-$all_data = DB::query($finalQuery, ...$params);
+    $finalQuery = $stringQuery . " " . $orderBy . " " . $limited;
 
 
-$totalQuery = $stringQuery; 
-$total      = DB::query($totalQuery, ...$params);
-$output['total'] = DB::numRows();
-$output['total_page_all'] = $totalQuery;
+    $all_data = DB::query($finalQuery, ...$params);
+
+
+    $totalQuery = $stringQuery; 
+    $total      = DB::query($totalQuery, ...$params);
+    $output['total'] = DB::numRows();
+    $output['total_page_all'] = $totalQuery;
 
 // if($where_clause){
 
