@@ -945,14 +945,14 @@ else{
         {
             $('#lauch_title').text('Update Launch Campaign');
 
-            $('#launch_des').text('Do you want to conform the </span>Update Changes</strong>?');
+            $('#launch_des').html('Do you want to conform the </span>Update Changes</strong>?');
         }
         else
         {
 
             $('#lauch_title').text('Launch Campaign');
 
-            $('#launch_des').text('Do you want to conform the </span>Launch Campaign</strong>?');
+            $('#launch_des').html('Do you want to conform the </span>Launch Campaign</strong>?');
         }
 
         $('#conform_modal').addClass('active');
