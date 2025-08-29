@@ -225,20 +225,23 @@ if (isset($_SESSION['log_user_id'])) {
  }
 
 
-    function SelectBulkAll(el)
-    {
-        var ischecked = $(el).ischecked();
+    function SelectBulkAll(el) {
 
-        if(ischecked)
-        {
-           $(each('[name="adv_id"]'),function()
-            {
-                $(this).prop('checkled',true);
+        var ischecked = $(el).is(":checked");
 
+        if (ischecked) {
+            $('[name="adv_id"]').each(function () {
+                $(this).prop("checked", true);
                 console.log($(this).val());
-            })
+            });
+
+        } else {
+            $('[name="adv_id"]').each(function () {
+                $(this).prop("checked", false);
+            });
         }
-    }   
+    }
+
 
 
 $(document).ready(function () {
