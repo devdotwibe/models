@@ -73,18 +73,17 @@ include('includes/helper.php');
     </script>
 
     <style>
-
         #sidebarMenu {
             z-index: 9999 !important;
         }
 
-         .badge-showcase {
+        .badge-showcase {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
- 
-        
+
+
+
         .badge-user {
             width: 64px;
             height: 64px;
@@ -96,26 +95,26 @@ include('includes/helper.php');
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
-        
+
         .badge-user:hover {
             transform: scale(1.15) translateY(-2px);
         }
-        
+
         .badge-demo {
             display: flex;
             align-items: center;
             gap: 2rem;
             margin: 3rem 0;
             padding: 2rem;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
-        
+
         .badge-demo::before {
             content: '';
             position: absolute;
@@ -123,40 +122,40 @@ include('includes/helper.php');
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             transition: left 0.6s;
         }
-        
+
         .badge-demo:hover::before {
             left: 100%;
         }
-        
+
         .badge-demo:hover {
-            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-            border-color: rgba(255,255,255,0.2);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+            border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
-        
+
         .badge-demo span {
             font-size: 1.2rem;
             font-weight: 600;
             min-width: 220px;
             letter-spacing: 0.02em;
         }
-        
+
         /* Ultra-premium Free Verified Badge with layered shield effects */
         .verified-user {
             background: linear-gradient(135deg, #10b981, #059669, #047857, #065f46);
             border-radius: 50%;
             border: 4px solid #34d399;
             position: relative;
-            box-shadow: 
+            box-shadow:
                 0 0 50px rgba(16, 185, 129, 0.9),
                 0 0 100px rgba(16, 185, 129, 0.5),
                 inset 0 4px 0 rgba(255, 255, 255, 0.6),
                 inset 0 -4px 0 rgba(0, 0, 0, 0.4);
         }
-        
+
         .verified-user::before {
             content: '';
             position: absolute;
@@ -166,7 +165,7 @@ include('includes/helper.php');
             z-index: -1;
             animation: verifiedPrisma 3s ease-in-out infinite;
         }
-        
+
         .verified-user::after {
             content: '';
             position: absolute;
@@ -176,20 +175,20 @@ include('includes/helper.php');
             z-index: -2;
             animation: verifiedAura 4s linear infinite;
         }
-        
+
         /* Luxury Basic Premium with golden star burst effects */
         .premium-basic-user {
             background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706, #b45309);
             border-radius: 50%;
             border: 4px solid #fcd34d;
             position: relative;
-            box-shadow: 
+            box-shadow:
                 0 0 50px rgba(251, 191, 36, 0.9),
                 0 0 100px rgba(251, 191, 36, 0.5),
                 inset 0 4px 0 rgba(255, 255, 255, 0.6),
                 inset 0 -4px 0 rgba(0, 0, 0, 0.4);
         }
-        
+
         .premium-basic-user::before {
             content: '';
             position: absolute;
@@ -199,7 +198,7 @@ include('includes/helper.php');
             z-index: -1;
             animation: premiumPrisma 3s ease-in-out infinite;
         }
-        
+
         .premium-basic-user::after {
             content: '';
             position: absolute;
@@ -209,7 +208,7 @@ include('includes/helper.php');
             z-index: -2;
             animation: premiumAura 4s linear infinite;
         }
-        
+
         /* Ultra-luxury Diamond Elite with crystal faceting and prismatic effects */
         .diamond-elite-user {
             background: linear-gradient(135deg, #06b6d4, #0891b2, #0e7490, #155e75);
@@ -218,26 +217,26 @@ include('includes/helper.php');
             position: relative;
             clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
             border: none;
-            box-shadow: 
+            box-shadow:
                 0 0 60px rgba(6, 182, 212, 1),
                 0 0 120px rgba(6, 182, 212, 0.6),
                 0 0 180px rgba(6, 182, 212, 0.3),
                 inset 0 8px 0 rgba(255, 255, 255, 0.7),
                 inset 0 -8px 0 rgba(0, 0, 0, 0.5);
         }
-        
+
         .diamond-elite-user::before {
             content: '';
             position: absolute;
             inset: -12px;
-            background: conic-gradient(from 0deg, 
-                #06b6d4, #22d3ee, #67e8f9, #a5f3fc, #cffafe, 
-                #a5f3fc, #67e8f9, #22d3ee, #06b6d4);
+            background: conic-gradient(from 0deg,
+                    #06b6d4, #22d3ee, #67e8f9, #a5f3fc, #cffafe,
+                    #a5f3fc, #67e8f9, #22d3ee, #06b6d4);
             clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
             z-index: -1;
             animation: diamondPrisma 2.5s ease-in-out infinite;
         }
-        
+
         .diamond-elite-user::after {
             content: '';
             position: absolute;
@@ -247,31 +246,31 @@ include('includes/helper.php');
             z-index: -2;
             animation: diamondAura 3s linear infinite;
         }
-        
+
         .diamond-elite-user span {
             transform: none;
             font-size: 32px;
-            text-shadow: 
+            text-shadow:
                 0 0 30px rgba(255, 255, 255, 1),
                 0 0 60px rgba(103, 232, 249, 0.8),
                 0 0 90px rgba(167, 243, 252, 0.6);
             filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1));
             animation: diamondSparkle 2s ease-in-out infinite;
         }
-        
+
         /* Premium Creator with artistic particle burst effects */
         .creator {
             background: linear-gradient(135deg, #8b5cf6, #7c3aed, #6d28d9, #5b21b6);
             border-radius: 50%;
             border: 4px solid #a78bfa;
             position: relative;
-            box-shadow: 
+            box-shadow:
                 0 0 50px rgba(139, 92, 246, 0.9),
                 0 0 100px rgba(139, 92, 246, 0.5),
                 inset 0 4px 0 rgba(255, 255, 255, 0.6),
                 inset 0 -4px 0 rgba(0, 0, 0, 0.4);
         }
-        
+
         .creator::before {
             content: '';
             position: absolute;
@@ -281,7 +280,7 @@ include('includes/helper.php');
             z-index: -1;
             animation: creatorPrisma 3s ease-in-out infinite;
         }
-        
+
         .creator::after {
             content: '';
             position: absolute;
@@ -291,7 +290,7 @@ include('includes/helper.php');
             z-index: -2;
             animation: creatorAura 4s linear infinite;
         }
-        
+
         .badge-container {
             display: flex;
             gap: 3rem;
@@ -301,12 +300,12 @@ include('includes/helper.php');
             justify-content: center;
             padding: 2rem;
         }
-        
+
         .tier-section {
             margin: 5rem 0;
             text-align: center;
         }
-        
+
         .tier-section h2 {
             font-size: 2.5rem;
             font-weight: 700;
@@ -317,144 +316,168 @@ include('includes/helper.php');
             background-clip: text;
             letter-spacing: -0.01em;
         }
-        
+
         /* Updated animations to match diamond's prismatic sophistication */
         @keyframes verifiedPrisma {
-            0%, 100% { 
-                transform: scale(1) rotate(0deg); 
-                opacity: 0.9; 
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.9;
                 filter: hue-rotate(0deg);
             }
-            33% { 
-                transform: scale(1.08) rotate(120deg); 
-                opacity: 1; 
+
+            33% {
+                transform: scale(1.08) rotate(120deg);
+                opacity: 1;
                 filter: hue-rotate(30deg);
             }
-            66% { 
-                transform: scale(1.05) rotate(240deg); 
-                opacity: 0.95; 
+
+            66% {
+                transform: scale(1.05) rotate(240deg);
+                opacity: 0.95;
                 filter: hue-rotate(60deg);
             }
         }
-        
+
         @keyframes verifiedAura {
-            from { 
-                transform: rotate(0deg); 
-                opacity: 0.4; 
+            from {
+                transform: rotate(0deg);
+                opacity: 0.4;
             }
-            to { 
-                transform: rotate(360deg); 
-                opacity: 0.7; 
-            }
-        }
-        
-        @keyframes premiumPrisma {
-            0%, 100% { 
-                transform: scale(1) rotate(0deg); 
-                opacity: 0.9; 
-                filter: hue-rotate(0deg);
-            }
-            33% { 
-                transform: scale(1.08) rotate(120deg); 
-                opacity: 1; 
-                filter: hue-rotate(20deg);
-            }
-            66% { 
-                transform: scale(1.05) rotate(240deg); 
-                opacity: 0.95; 
-                filter: hue-rotate(40deg);
-            }
-        }
-        
-        @keyframes premiumAura {
-            from { 
-                transform: rotate(0deg); 
-                opacity: 0.4; 
-            }
-            to { 
-                transform: rotate(360deg); 
-                opacity: 0.7; 
-            }
-        }
-        
-        @keyframes diamondPrisma {
-            0%, 100% { 
-                transform: scale(1) rotate(0deg); 
-                opacity: 0.9; 
-                filter: hue-rotate(0deg) brightness(1.1);
-            }
-            25% { 
-                transform: scale(1.12) rotate(90deg); 
-                opacity: 1; 
-                filter: hue-rotate(90deg) brightness(1.3);
-            }
-            50% { 
-                transform: scale(1.08) rotate(180deg); 
-                opacity: 0.95; 
-                filter: hue-rotate(180deg) brightness(1.2);
-            }
-            75% { 
-                transform: scale(1.15) rotate(270deg); 
-                opacity: 1; 
-                filter: hue-rotate(270deg) brightness(1.4);
-            }
-        }
-        
-        @keyframes diamondAura {
-            from { 
-                transform: rotate(0deg) scale(1); 
-                opacity: 0.6; 
-            }
-            50% { 
-                transform: rotate(180deg) scale(1.1); 
-                opacity: 0.9; 
-            }
-            to { 
-                transform: rotate(360deg) scale(1); 
-                opacity: 0.6; 
-            }
-        }
-        
-        @keyframes diamondSparkle {
-            0%, 100% { 
-                transform: scale(1); 
-                filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1)) brightness(1);
-            }
-            50% { 
-                transform: scale(1.1); 
-                filter: drop-shadow(0 0 25px rgba(255, 255, 255, 1.2)) brightness(1.3);
-            }
-        }
-        
-        @keyframes creatorPrisma {
-            0%, 100% { 
-                transform: scale(1) rotate(0deg); 
-                opacity: 0.9; 
-                filter: hue-rotate(0deg);
-            }
-            33% { 
-                transform: scale(1.08) rotate(120deg); 
-                opacity: 1; 
-                filter: hue-rotate(45deg);
-            }
-            66% { 
-                transform: scale(1.05) rotate(240deg); 
-                opacity: 0.95; 
-                filter: hue-rotate(90deg);
-            }
-        }
-        
-        @keyframes creatorAura {
-            from { 
-                transform: rotate(0deg); 
-                opacity: 0.4; 
-            }
-            to { 
-                transform: rotate(360deg); 
-                opacity: 0.7; 
+
+            to {
+                transform: rotate(360deg);
+                opacity: 0.7;
             }
         }
 
+        @keyframes premiumPrisma {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.9;
+                filter: hue-rotate(0deg);
+            }
+
+            33% {
+                transform: scale(1.08) rotate(120deg);
+                opacity: 1;
+                filter: hue-rotate(20deg);
+            }
+
+            66% {
+                transform: scale(1.05) rotate(240deg);
+                opacity: 0.95;
+                filter: hue-rotate(40deg);
+            }
+        }
+
+        @keyframes premiumAura {
+            from {
+                transform: rotate(0deg);
+                opacity: 0.4;
+            }
+
+            to {
+                transform: rotate(360deg);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes diamondPrisma {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.9;
+                filter: hue-rotate(0deg) brightness(1.1);
+            }
+
+            25% {
+                transform: scale(1.12) rotate(90deg);
+                opacity: 1;
+                filter: hue-rotate(90deg) brightness(1.3);
+            }
+
+            50% {
+                transform: scale(1.08) rotate(180deg);
+                opacity: 0.95;
+                filter: hue-rotate(180deg) brightness(1.2);
+            }
+
+            75% {
+                transform: scale(1.15) rotate(270deg);
+                opacity: 1;
+                filter: hue-rotate(270deg) brightness(1.4);
+            }
+        }
+
+        @keyframes diamondAura {
+            from {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.1);
+                opacity: 0.9;
+            }
+
+            to {
+                transform: rotate(360deg) scale(1);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes diamondSparkle {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1)) brightness(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 25px rgba(255, 255, 255, 1.2)) brightness(1.3);
+            }
+        }
+
+        @keyframes creatorPrisma {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.9;
+                filter: hue-rotate(0deg);
+            }
+
+            33% {
+                transform: scale(1.08) rotate(120deg);
+                opacity: 1;
+                filter: hue-rotate(45deg);
+            }
+
+            66% {
+                transform: scale(1.05) rotate(240deg);
+                opacity: 0.95;
+                filter: hue-rotate(90deg);
+            }
+        }
+
+        @keyframes creatorAura {
+            from {
+                transform: rotate(0deg);
+                opacity: 0.4;
+            }
+
+            to {
+                transform: rotate(360deg);
+                opacity: 0.7;
+            }
+        }
     </style>
 </head>
 
@@ -463,17 +486,17 @@ include('includes/helper.php');
 <body class="premimum-model1 enhanced5 socialwall-page">
 
     <?php if (isset($_SESSION["log_user_id"])) { ?>
-    
-        <?php  include('includes/side-bar.php'); ?>
 
-        <?php  include('includes/profile_header_index.php'); ?>  
-    
-    <?php } else{ ?>
-    
+        <?php include('includes/side-bar.php'); ?>
+
+        <?php include('includes/profile_header_index.php'); ?>
+
+    <?php } else { ?>
+
         <?php include('includes/header.php'); ?>
-        
+
     <?php } ?>
-    
+
 
     <?php
 
@@ -784,7 +807,6 @@ include('includes/helper.php');
                     $order = "";
 
                     $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList) " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
-
                 } else if (isset($_GET['sort']) && $_GET['sort'] == 'online') {
 
                     $onlineUserIds = array();
@@ -838,8 +860,6 @@ include('includes/helper.php');
                             }
 
                             $idList = implode(',', $onlineUserIds);
-
-                     
                         } else {
 
 
@@ -849,14 +869,13 @@ include('includes/helper.php');
 
                         if (!empty($privacy_user_ids)) {
 
-                                $privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'";
+                            $privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'";
 
-                                $order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
-                            } else {
+                            $order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
+                        } else {
 
-                                $order = " ORDER BY mu.id DESC ";
-                            }
-                
+                            $order = " ORDER BY mu.id DESC ";
+                        }
                     }
 
                     if (empty($onlineUserIds)) {
@@ -871,7 +890,6 @@ include('includes/helper.php');
                         $row_cnt = mysqli_fetch_assoc($result_count);
 
                         $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
-
                     } else {
 
                         $idList = implode(',', $onlineUserIds);
@@ -911,9 +929,9 @@ include('includes/helper.php');
 
                         $result = CheckPremiumAccess($rowesdw['id']);
 
-                          $preminum_plan = "";
+                        $preminum_plan = "";
 
-                           $is_user_preminum = false;
+                        $is_user_preminum = false;
 
                         if ($result && $result['active']) {
 
@@ -922,12 +940,11 @@ include('includes/helper.php');
                             $preminum_plan = $result['plan_status'];
                         }
 
-                        $prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
+                        $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
 
-                        if(!empty($rowesdw['profile_pic']))
-                        {
+                        if (!empty($rowesdw['profile_pic'])) {
                             if (checkImageExists($rowesdw['profile_pic'])) {
-                        
+
                                 $prof_img = SITEURL . $rowesdw['profile_pic'];
                             }
                         }
@@ -945,6 +962,7 @@ include('includes/helper.php');
 
 
                                     <div class="profile-badges">
+
                                         <span class="profile-badge badge-live">Live</span>
 
                                         <?php if ($is_user_new) { ?>
@@ -955,25 +973,37 @@ include('includes/helper.php');
 
                                         <?php if ($is_user_preminum) { ?>
 
-                                            <?php if($preminum_plan =='basic') { ?>
+                                            <?php if ($preminum_plan == 'basic') { ?>
 
-                                            <span class="profile-badge badge-premium"><div class="badge-user premium-basic-user">⭐</div> </span>
+                                                <span class="profile-badge badge-premium">
+                                                    <div class="badge-user premium-basic-user">⭐</div>
+                                                    <p>Premium</p>
+                                                </span>
 
                                             <?php } else { ?>
 
-                                                 <span class="profile-badge badge-premium"><div class="badge-user diamond-elite-user"><span>💎</span></div> </span>
+                                                <span class="profile-badge badge-premium">
+                                                    <div class="badge-user diamond-elite-user"><span>💎</span></div>
+                                                    <p>Premium</p>
+                                                </span>
 
                                             <?php } ?>
 
                                         <?php } ?>
 
                                         <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
-                                            <span class="profile-badge badge-verified"> <div class="badge-user verified-user">🛡</div> </span>
+                                            <span class="profile-badge badge-verified">
+                                                <div class="badge-user verified-user">🛡</div>
+                                                <p>Verified</p>
+                                            </span>
                                         <?php } ?>
 
                                         <?php if (!empty($rowesdw) &&  $rowesdw['as_a_model'] == 'Yes') { ?>
 
-                                            <span class="profile-badge creator-badge"><div class="badge-user creator">✨</div> </span>
+                                            <span class="profile-badge creator-badge">
+                                                <div class="badge-user creator">✨</div>
+                                                <p>Creator</p>
+                                            </span>
 
                                         <?php } ?>
 
@@ -1057,7 +1087,7 @@ include('includes/helper.php');
 
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                    <a href="<?=SITEURL?>chat-app.php?modelid=<?php echo $rowesdw['id']; ?>" 
+                                    <a href="<?= SITEURL ?>chat-app.php?modelid=<?php echo $rowesdw['id']; ?>"
 
                                         class="action-btn chat" title="Chat">
 
@@ -1066,7 +1096,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
 
-                                    <a href="<?=SITEURL?>login.php" 
+                                    <a href="<?= SITEURL ?>login.php"
 
                                         class="action-btn chat" title="Chat">
 
@@ -1079,7 +1109,7 @@ include('includes/helper.php');
                                     <i class="fas fa-times"></i>
                                 </button>
 
-                               
+
 
                             </div>
                         </div>
@@ -1326,7 +1356,6 @@ include('includes/helper.php');
                     $order = "";
 
                     $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList) " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
-
                 } else if (isset($_GET['sort']) && $_GET['sort'] == 'online') {
 
                     $onlineUserIds = array();
@@ -1380,8 +1409,6 @@ include('includes/helper.php');
                             }
 
                             $idList = implode(',', $onlineUserIds);
-
-                     
                         } else {
 
 
@@ -1391,14 +1418,13 @@ include('includes/helper.php');
 
                         if (!empty($privacy_user_ids)) {
 
-                                $privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'";
+                            $privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'";
 
-                                $order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
-                            } else {
+                            $order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
+                        } else {
 
-                                $order = " ORDER BY mu.id DESC ";
-                            }
-                
+                            $order = " ORDER BY mu.id DESC ";
+                        }
                     }
 
                     if (empty($onlineUserIds)) {
@@ -1413,7 +1439,6 @@ include('includes/helper.php');
                         $row_cnt = mysqli_fetch_assoc($result_count);
 
                         $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
-
                     } else {
 
                         $idList = implode(',', $onlineUserIds);
@@ -1453,11 +1478,11 @@ include('includes/helper.php');
 
                         $is_user_preminum = CheckPremiumAccess($rowesdw['id']);
 
-                           $result = CheckPremiumAccess($rowesdw['id']);
+                        $result = CheckPremiumAccess($rowesdw['id']);
 
-                          $preminum_plan = "";
+                        $preminum_plan = "";
 
-                           $is_user_preminum = false;
+                        $is_user_preminum = false;
 
                         if ($result && $result['active']) {
 
@@ -1466,12 +1491,11 @@ include('includes/helper.php');
                             $preminum_plan = $result['plan_status'];
                         }
 
-                        $prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
+                        $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
 
-                        if(!empty($rowesdw['profile_pic']))
-                        {
+                        if (!empty($rowesdw['profile_pic'])) {
                             if (checkImageExists($rowesdw['profile_pic'])) {
-                        
+
                                 $prof_img = SITEURL . $rowesdw['profile_pic'];
                             }
                         }
@@ -1487,7 +1511,7 @@ include('includes/helper.php');
                                     <img src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
                                     <div class="profile-badges">
-                                        
+
                                         <span class="profile-badge badge-live">Live</span>
 
                                         <?php if ($is_user_new) { ?>
@@ -1498,29 +1522,37 @@ include('includes/helper.php');
 
                                         <?php if ($is_user_preminum) { ?>
 
-                                            <?php if($preminum_plan =='basic') { ?>
+                                            <?php if ($preminum_plan == 'basic') { ?>
 
-                                            <span class="profile-badge badge-premium"><div class="badge-user premium-basic-user">⭐</div> Premium</span>
+                                                <span class="profile-badge badge-premium">
+                                                    <div class="badge-user premium-basic-user">⭐</div> Premium
+                                                </span>
 
                                             <?php } else { ?>
 
-                                                 <span class="profile-badge badge-premium"><div class="badge-user diamond-elite-user"><span>💎</span></div> Premium</span>
+                                                <span class="profile-badge badge-premium">
+                                                    <div class="badge-user diamond-elite-user"><span>💎</span></div> Premium
+                                                </span>
 
                                             <?php } ?>
 
                                         <?php } ?>
 
                                         <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
-                                            <span class="profile-badge badge-verified"> <div class="badge-user verified-user">🛡</div> Verified</span>
+                                            <span class="profile-badge badge-verified">
+                                                <div class="badge-user verified-user">🛡</div> Verified
+                                            </span>
                                         <?php } ?>
 
                                         <?php if (!empty($rowesdw) &&  $rowesdw['as_a_model'] == 'Yes') { ?>
 
-                                            <span class="profile-badge creator-badge"><div class="badge-user creator">✨</div> Creator</span>
+                                            <span class="profile-badge creator-badge">
+                                                <div class="badge-user creator">✨</div> Creator
+                                            </span>
 
                                         <?php } ?>
 
-                                    </div>    
+                                    </div>
 
                                 </a>
                             </div>
@@ -1600,7 +1632,7 @@ include('includes/helper.php');
 
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                    <a href="<?=SITEURL?>chat-app.php?modelid=<?php echo $rowesdw['id']; ?>" 
+                                    <a href="<?= SITEURL ?>chat-app.php?modelid=<?php echo $rowesdw['id']; ?>"
 
                                         class="action-btn chat" title="Chat">
 
@@ -1609,7 +1641,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
 
-                                    <a href="<?=SITEURL?>login.php" 
+                                    <a href="<?= SITEURL ?>login.php"
 
                                         class="action-btn chat" title="Chat">
 
