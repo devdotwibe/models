@@ -48,6 +48,18 @@ function h_my_ip_address(){
 		return false;
 	}
 
+function UserLogout($userId)
+{
+
+    $cacheDir = __DIR__ . '/cache/user_activity/';
+    $file     = $cacheDir . 'user_' . $userId . '.txt';
+
+    if (!is_dir($cacheDir)) {
+        mkdir($cacheDir, 0777, true);
+    }
+
+    file_put_contents($file, time() - (5 * 60));
+}
 
 function updateUserActivity($userId) {
     $cacheDir = __DIR__ . '/cache/user_activity/';

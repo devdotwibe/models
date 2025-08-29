@@ -2,16 +2,11 @@
 
 session_start();
 
+include('includes/helper.php');
+
 if (!empty($_SESSION['log_user_id'])) {
-    $userId   = $_SESSION['log_user_id'];
-    $cacheDir = __DIR__ . '/cache/user_activity/';
-    $file     = $cacheDir . 'user_' . $userId . '.txt';
 
-    if (!is_dir($cacheDir)) {
-        mkdir($cacheDir, 0777, true);
-    }
-
-    file_put_contents($file, time() - (5 * 60));
+    UserLogout($_SESSION['log_user_id']);
 }
 
 
