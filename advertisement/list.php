@@ -232,14 +232,30 @@ if (isset($_SESSION['log_user_id'])) {
         if (ischecked) {
             $('[name="adv_id[]"]').each(function () {
                 $(this).prop("checked", true);
-                console.log($(this).val());
             });
 
+            $('#bulk_delete_button').show();
+
         } else {
+
             $('[name="adv_id[]"]').each(function () {
                 $(this).prop("checked", false);
             });
+
+            $('#bulk_delete_button').hide();
         }
+
+
+        $('[name="adv_id[]"]').each(function () {
+
+            var bulk = $(this).is(":checked");
+
+            if(bulk)
+            {
+                $('#bulk_delete_button').show();
+            }
+            
+        });
     }
 
 
