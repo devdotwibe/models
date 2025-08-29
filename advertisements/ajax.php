@@ -2,160 +2,109 @@
 session_start(); 
 include('../includes/config.php');
 include('../includes/helper.php');
-$perPage = 20;
-$output = array();
-$output['result']= 'ok';
-$output['total'] = 0;
 
-$where_clause = '';
-$perPage =6;
+$perPage = 6;
+$output  = [
+    'result' => 'ok',
+    'total'  => 0
+];
 
-$list_data = $perPage;
-$page = $_GET['page'];
-if(!$page){
-    $page_number =1;
-    $offset = 0;
-}else{
-    $offset = $page*$perPage-$perPage;
-    $page_number = $page;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page_number = max(1, $page);
+$offset = ($page_number - 1) * $perPage;
+
+$sort_by   = ' ORDER BY tb.is_paid DESC, tb.id DESC';
+$sort_type = $_GET['sort_type'] ?? '';
+$sort_col  = $_GET['sort_column'] ?? '';
+
+// ------------------ BOOST LOGIC ------------------
+if (isset($_SESSION["log_user_id"])) {
+    $userDetails     = get_data('model_user', ['id'=>$_SESSION["log_user_id"]], true);
+    $boosted_ad_ids  = BoostedModelIdsByUser($userDetails, $con);
+} else {
+    $boosted_ad_ids  = BoostedModelIds($con);
 }
-$list_data = $perPage;
 
-
-// $name = $_GET['q'];
-// if($name){
-//     $url .= 'q='.$name.'&';
-//     $where_clause .= " (lower(name) like '%".strtolower($name)."%' ) and";
-// }
-
-$sort_by = ' order by tb.is_paid desc, tb.id desc';
-$sort_column = $_GET['sort_column'];
-$sort_type = $_GET['sort_type'];
-
-   if(isset($_SESSION["log_user_id"])){
-        
-        $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
-
-        $boosted_ad_ids = BoostedModelIdsByUser($userDetails,$con);
+$order = "";
+if (!empty($boosted_ad_ids)) {
+    $boosted_ad_ids = array_unique(array_map('intval', $boosted_ad_ids)); // remove duplicates
+    $ordered_ids    = implode(',', $boosted_ad_ids);
+    if (!empty($ordered_ids)) {
+        $order   = " ORDER BY FIELD(tb.id, $ordered_ids)";
+        $sort_by = ""; // override default sort
     }
-    else
-    {
-            $boosted_ad_ids = BoostedModelIds($con);
-    }
+} else {
+    $order = " ORDER BY tb.id DESC";
+    $sort_by = "";
+}
 
+// ------------------ BASE QUERY ------------------
+$basic_filed_users = GetUsersWithBasicFilled();
 
+if (!empty($basic_filed_users)) {
+    $basic_filed_users = array_map('intval', $basic_filed_users);
+    $basicList = implode(',', $basic_filed_users);
 
-    if (!empty($boosted_ad_ids)) {
+    $stringQuery = "
+        SELECT tb.*, mu.age 
+        FROM banners tb 
+        JOIN model_user mu ON mu.id = tb.user_id 
+        WHERE mu.verified = '1' 
+        AND mu.id IN ($basicList)
+    ";
+} else {
+    $stringQuery = "
+        SELECT tb.*, mu.age 
+        FROM banners tb 
+        JOIN model_user mu ON mu.id = tb.user_id 
+        WHERE 1 = 0
+    ";
+}
 
-        $boosted_ad_ids = array_map('intval', $boosted_ad_ids);
+// ------------------ FILTERS ------------------
+$params = [];
+$where  = [];
 
-        $ordered_ids = implode(',',  $boosted_ad_ids); 
+$category = $_GET['category'] ?? '';
+$country  = $_GET['country'] ?? '';
 
-        $order = " ORDER BY FIELD(tb.id, $ordered_ids) DESC";
+if (!empty($category)) {
+    $where[]  = "tb.category = %s";
+    $params[] = $category;
+}
 
-        $sort_by="";
-        
-    } else {
+if (!empty($country)) {
+    $where[]  = "tb.country = %s";
+    $params[] = $country;
+}
 
-        $order = " ORDER BY tb.id DESC"; 
+if (!empty($where)) {
+    $stringQuery .= " AND " . implode(" AND ", $where);
+}
 
-        $sort_by="";
-    }
+// ------------------ FINAL QUERY ------------------
+$orderBy = !empty($order) ? $order : $sort_by;
+$limited = " LIMIT $offset, " . (int)$perPage;
 
+$finalQuery = $stringQuery . $orderBy . $limited;
+$all_data   = DB::query($finalQuery, ...$params);
 
-    $basic_filed_users = GetUsersWithBasicFilled();
+// ------------------ TOTAL COUNT ------------------
+$totalQuery = "SELECT COUNT(*) AS cnt FROM (" . $stringQuery . ") AS t";
+$totalRow   = DB::queryFirstRow($totalQuery, ...$params);
 
-    if (!empty($basic_filed_users)) {
-        $basic_filed_users = array_map('intval', $basic_filed_users);
-        $basicList = implode(',', $basic_filed_users);
+$output['total']          = $totalRow['cnt'] ?? 0;
+$output['total_page_all'] = $stringQuery;
+$output['total_page']     = (int) ceil($output['total'] / $perPage);
+$output['page']           = $page_number;
 
-        $stringQuery = "
-            SELECT tb.*, mu.age 
-            FROM banners tb 
-            JOIN model_user mu ON mu.id = tb.user_id 
-            WHERE mu.verified = '1' 
-            AND mu.id IN ($basicList)
-        ";
-    } else {
-        $stringQuery = "
-            SELECT tb.*, mu.age 
-            FROM banners tb 
-            JOIN model_user mu ON mu.id = tb.user_id 
-            WHERE 1 = 0
-        "; 
-    }
-
-    $params = [];
-    $where  = [];
-
-    $category = $_GET['category'] ?? '';
-    $country  = $_GET['country'] ?? '';
-
-    if (!empty($category)) {
-        $where[]  = "tb.category = %s";
-        $params[] = $category;
-    }
-
-    if (!empty($country)) {
-        $where[]  = "tb.country = %s";
-        $params[] = $country;
-    }
-
-    if (!empty($where)) {
-        $stringQuery .= " AND " . implode(" AND ", $where);
-    }
-
-    $orderBy = !empty($order) ? " $order " : "";
-    $limited = " LIMIT $offset, " . (int)$perPage;
-
-
-    $finalQuery = $stringQuery . $orderBy . $limited;
-
-    echo $finalQuery ; die();
-    
-    $all_data   = DB::query($finalQuery, ...$params);
-
-    $totalQuery = "SELECT COUNT(*) AS cnt FROM (" . $stringQuery . ") AS t";
-    $total   = DB::queryFirstRow($totalQuery, ...$params);
-
-    $output['total']          = $total['cnt'];
-    $output['total_page_all'] = $stringQuery;
-
-// if($where_clause){
-
-  
-//     $finalQuery = $stringQuery . " " . $orderBy . " " . $limited;
-
-//     // $all_data = DB::query($stringQuery." where ".$where_clause." ".$sort_by.$limited,...$params);
-
-//     $all_data = DB::query($finalQuery, ...$params);
-
-//     // $total = $output['total'] = DB::numRows($stringQuery." where ".$where_clause );
-	
-// 	// $output['total_page_all'] = $stringQuery." where ".$where_clause;
-
-//     $totalQuery = $stringQuery;
-//     $total      = DB::query($totalQuery, ...$params);
-//     $output['total'] = DB::numRows();
-//     $output['total_page_all'] = $totalQuery;
-
-// }
-// else{
-//     $all_data = DB::query($stringQuery." ".$sort_by.$limited );
-//     $total = $output['total'] = DB::numRows($stringQuery);
-	
-// 	$output['total_page_all'] = $stringQuery;
-// }
-
-$output['total_page'] = (int) ceil($total/ $perPage);
-$output['page'] = $page_number;
-
+// ------------------ HTML ------------------
 ob_start();
 include 'ajax_item.php';
-$html= ob_get_clean();
+$html = ob_get_clean();
 
 $output['html'] = $html;
-$output['total_page'] = (int) ceil($total/ $perPage);
-$output['page'] = $page_number;
+
+// ------------------ RETURN ------------------
 echo json_encode($output);
-?>
+exit;
