@@ -11,9 +11,13 @@ if (isset($_SESSION['log_user_unique_id'])) {
  if ($userDetails) {
 	    $result = CheckPremiumAccess($userDetails['id']);
 
+        $plan = "";
+
         if ($result && $result['active']) {
 
             $user_have_preminum = true;
+
+            $plan = $result['plan_status'];
         }
 		
 }
@@ -2064,7 +2068,7 @@ body .owl-carousel .owl-nav.disabled {
 		<?php if(!empty($extra_details) && !empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ ?>
 			<?php if($extra_details['in_per_hour']){ ?>
                 <!-- Meetup Service -->
-                <div class="service-card" onclick="<?php if (!$user_have_preminum) { ?>handleService('meetup')<?php } ?>">
+                <div class="service-card" onclick="<?php if ($user_have_preminum) { ?>handleService('meetup')<?php } ?> ">
                     <div class="service-header">
                         <div class="service-icon">☕</div>
                         <div class="service-info">
@@ -2096,7 +2100,7 @@ body .owl-carousel .owl-nav.disabled {
 			<?php if($extra_details['daily_rate']){ ?>
 
                 <!-- Travel Service -->
-                <div class="service-card" onclick="<?php if (!$user_have_preminum) { ?>handleService('travel')<?php } ?>">
+                <div class="service-card" onclick="<?php if ($user_have_preminum && $plan =='diamond') { ?>handleService('travel')<?php } ?>">
                     <div class="service-header">
                         <div class="service-icon">✈️</div>
                         <div class="service-info">
