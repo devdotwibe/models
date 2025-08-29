@@ -2724,26 +2724,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         </div>
 
         <div class="chart-container mb-6">
-          <div class="chart-bar" id="monday_data"></div>
-          <div class="chart-label" id="monday_label">Mon</div>
+          <div style="position: relative;">
 
-          <div class="chart-bar" id="tuesday_data"></div>
-          <div class="chart-label" id="tuesday_label">Tue</div>
-
-          <div class="chart-bar" id="wednesday_data"></div>
-          <div class="chart-label" id="wednesday_label">Wed</div>
-
-          <div class="chart-bar" id="thursday_data"></div>
-          <div class="chart-label" id="thursday_label">Thu</div>
-
-          <div class="chart-bar" id="friday_data"></div>
-          <div class="chart-label" id="friday_label">Fri</div>
-
-          <div class="chart-bar" id="saturday_data"></div>
-          <div class="chart-label" id="saturday_label">Sat</div>
-
-          <div class="chart-bar" id="sunday_data"></div>
-          <div class="chart-label" id="sunday_label">Sun</div>
+          </div>
+          
         </div>
 
 
@@ -4990,6 +4974,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               const value = data[key] || 0;
               const height = value * scaleFactor;
 
+              const outerbar = document.createElement("div");
+
+              outerbar.className="outer-bar";
+
               const bar = document.createElement("div");
               bar.className = "chart-bar";
               bar.style.height = `${height}px`;
@@ -4999,8 +4987,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               label.className = "chart-label";
               label.innerText = key;
 
-              chartContainer.appendChild(bar);
-              chartContainer.appendChild(label);
+              outerbar.appendChild(bar);
+              outerbar.appendChild(label);
+
+              chartContainer.appendChild(outerbar);
+              // chartContainer.appendChild(label);
           });
       }
 

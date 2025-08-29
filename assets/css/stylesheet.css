@@ -12111,6 +12111,7 @@ overflow-x: auto !important;
     padding-inline: 30px;
     padding-block: 10px;
     overflow-x: auto;
+    padding-right: 0;
 }
 
 
