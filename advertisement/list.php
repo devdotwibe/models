@@ -171,7 +171,9 @@ if (isset($_SESSION['log_user_id'])) {
                 <div class="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-white/80 uppercase tracking-wider">
 
                     <div class="col-span-1" id="bulk_delete_check" style="display:none;">
-                        <input type="checkbox" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+
+                        <input type="checkbox" id="bulk_all_check" onchange="SelectBulkAll(this)" name="bulk_all_check" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+
                     </div>
 
                     <div class="col-span-1">ID</div>
@@ -222,6 +224,21 @@ if (isset($_SESSION['log_user_id'])) {
       loadData(1, value,status);
  }
 
+
+    function SelectBulkAll(el)
+    {
+        var ischecked = $(el).ischecked();
+
+        if(ischecked)
+        {
+           $(each('[name="adv_id"]'),function()
+            {
+                $(this).prop('checkled',true);
+
+                console.log($(this).val());
+            })
+        }
+    }   
 
 
 $(document).ready(function () {

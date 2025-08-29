@@ -16,7 +16,7 @@ if ($all_data) {
 
                     <div class="col-span-1 adv_checkbox" style="display:none;">
 
-                        <input type="checkbox" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                        <input type="checkbox" name="adv_id[]" value="<?= $set_data['id'] ?>" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
                     </div>
                     
                     <div class="col-span-1 text-white/60 font-mono">#<?= $set_data['id'] ?></div>
