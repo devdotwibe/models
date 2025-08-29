@@ -12275,6 +12275,7 @@ overflow-x: auto !important;
     margin-left: 15px !important;
     font-size: 10px !important;
 }
+
 .badge-user.verified-user {
     width: 30px !important;
     height: 30px !important;
@@ -12282,6 +12283,30 @@ overflow-x: auto !important;
 }
 
 .profile-badge.badge-verified p {
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    margin: 0 auto;
+    transform: translateX(-50%);
+}
+
+.profile-badge.creator-badge {
+
+       position: relative;
+    border: 1px solid blue;
+    width: fit-content;
+    padding: 0 !important;
+    margin-bottom: 16px;
+    margin-left: 15px !important;
+    font-size: 10px !important;
+}
+
+.badge-user.creator {
+     width: 30px !important;
+    height: 30px !important;
+    font-size: 12px !important;
+}
+.profile-badge.creator-badge p {
     position: absolute;
     top: 110%;
     left: 50%;
