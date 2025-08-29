@@ -108,8 +108,11 @@ $sort_type = $_GET['sort_type'];
     $orderBy = !empty($order) ? " $order " : "";
     $limited = " LIMIT $offset, " . (int)$perPage;
 
-    // final paginated query
+
     $finalQuery = $stringQuery . $orderBy . $limited;
+
+    echo $finalQuery ; die();
+    
     $all_data   = DB::query($finalQuery, ...$params);
 
     $totalQuery = "SELECT COUNT(*) AS cnt FROM (" . $stringQuery . ") AS t";
