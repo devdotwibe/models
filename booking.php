@@ -344,7 +344,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
 							<?php } else{ ?>
                             <h2 class="text-3xl font-bold premium-text heading-font"  >When do you want to see me?</h2>
-							<?php } ?>
+							
+                            <h3 class="text-3xl font-bold premium-text heading-font" style="margin-left: auto;">token <span id="token_no"></span> </h3>
+                            
+                            <?php } ?>
                         </div>
                         <?php if($_GET['service'] == 'Travel'){ ?>
 						<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -452,7 +455,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 							</div>
 							<div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">No of hours need to meet</label>
-                                <select name="no_of_hrs_meet" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                <select name="no_of_hrs_meet"  onchange="CalculateToken(this)" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">Hours</option>
                                     <?php for($i = 1;$i <=24; $i++){ ?>
 									<option value="<?php echo $i; ?>" class="bg-gray-900"><?php echo $i; ?></option>
@@ -559,7 +562,37 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 $('#token_cost').val(total);
             }    
             
-            
+           //Meet up token calculation
+			function CalculateToken(selectElement){
+				var selectedValue = selectElement.value;
+				if(selectedValue != ''){
+					
+					let localMeetupRate   = parseFloat("<?php echo !empty($extra_details) ? $extra_details['in_per_hour'] : 0; ?>");
+					let extendedSocialRate  = parseFloat("<?php echo !empty($extra_details) ? $extra_details['extended_rate'] : 0; ?>");
+					let extendedEveningRate = parseFloat("<?php echo !empty($extra_details) ? $extra_details['in_overnight'] : 0; ?>");
+					let fulldaySocialRate = parseFloat("<?php echo !empty($extra_details) ? $extra_details['fullday_social'] : 0; ?>");
+					
+					let total = 0;
+					
+					if(selectedValue == 1){
+						total = localMeetupRate;
+					}else if(selectedValue > 1 && selectedValue < 8){
+						total = localMeetupRate + (selectedValue - 1) * extendedSocialRate;
+					}else if(selectedValue == 8){
+						total = extendedEveningRate;
+					}else if(selectedValue > 8 && selectedValue < 24){
+						total = extendedEveningRate + (selectedValue - 8) * extendedSocialRate;
+					}else if(selectedValue == 24){
+						total = fulldaySocialRate;
+					}
+					
+					$('#token_no').text(total);
+					$('#tokens_used').val(total);
+
+					$('#token_cost').val(total);
+				
+				}
+			} 
         // Initialize premium features
         document.addEventListener('DOMContentLoaded', function() {
             initializePremiumFeatures();
