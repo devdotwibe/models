@@ -139,34 +139,13 @@ if(!empty($userDetails['profile_pic'])){
               SELECT DISTINCT model_user.id AS user_id, model_user.gender
               FROM live_posts 
               JOIN model_user ON live_posts.post_author = model_user.id 
-              ORDER BY RAND() 
-              LIMIT 5
+              ORDER BY live_posts.id DESC
           ";
             $result = mysqli_query($con, $sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
                 $target_gender = $row['gender'];
                 $allow = true;
-
-                // if ($current_user_gender === "Male" || $current_user_gender === "male") {
-                //     if (
-                //         ($privacy['male_to_female'] && ($target_gender === "Female" || $target_gender === "female") ) ||
-                //         ($privacy['male_to_male'] && ($target_gender === "Male" || $target_gender === "male" ))
-                //     ) {
-                //         $allow = true;
-                //     }
-                // } elseif ($current_user_gender === "Female" || $current_user_gender === "female") {
-                //     if (
-                //         ($privacy['female_to_male'] && ($target_gender === "Male" || $target_gender === "male")) ||
-                //         ($privacy['female_to_female'] && ($target_gender === "Female" || $target_gender === "female"  ))
-                //     ) {
-                //         $allow = true;
-                //     }
-                // }
-
-                // if ($privacy['transgender'] && $target_gender === "Couple") {
-                //     $allow = true;
-                // }
 
                 if ($allow) {
                     $followed_user_ids[] = (int)$row['user_id'];
@@ -178,36 +157,38 @@ if(!empty($userDetails['profile_pic'])){
     if (!empty($followed_user_ids) && count($followed_user_ids) > 0 ) {
 
    
-        $boost_follower_unique_ids = BoostedModelIdsByUser($userDetails,$con);
+        // $boost_follower_unique_ids = BoostedModelIdsByUser($userDetails,$con);
 
-        $filter_follower_ids = [];
+        // $filter_follower_ids = [];
         
-        if (!empty($boost_follower_unique_ids)) {
+        // if (!empty($boost_follower_unique_ids)) {
 
-            $in_clause = implode(',', array_fill(0, count($boost_follower_unique_ids), '?'));
-            $types_follower = str_repeat('s', count($boost_follower_unique_ids));
+        //     $in_clause = implode(',', array_fill(0, count($boost_follower_unique_ids), '?'));
+        //     $types_follower = str_repeat('s', count($boost_follower_unique_ids));
 
-            $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
-            $stmt = $con->prepare($followQuery);
+        //     $followQuery = "SELECT id FROM model_user WHERE unique_id IN ($in_clause)";
+        //     $stmt = $con->prepare($followQuery);
 
-            if (!$stmt) {
-                die("Prepare failed: " . $con->error);
-            }
+        //     if (!$stmt) {
+        //         die("Prepare failed: " . $con->error);
+        //     }
 
-            $boost_follower_unique_ids = array_map('strval', $boost_follower_unique_ids);
+        //     $boost_follower_unique_ids = array_map('strval', $boost_follower_unique_ids);
 
-            $stmt->bind_param($types_follower, ...$boost_follower_unique_ids);
-            $stmt->execute();
-            $result = $stmt->get_result();
+        //     $stmt->bind_param($types_follower, ...$boost_follower_unique_ids);
+        //     $stmt->execute();
+        //     $result = $stmt->get_result();
 
-            while ($row = $result->fetch_assoc()) {
-                $filter_follower_ids[] = $row['id'];
-            }
+        //     while ($row = $result->fetch_assoc()) {
+        //         $filter_follower_ids[] = $row['id'];
+        //     }
 
-            $stmt->close();
-        }
+        //     $stmt->close();
+        // }
 
-        $priority_ids = array_values(array_intersect($followed_user_ids, $filter_follower_ids));
+        // $priority_ids = array_values(array_intersect($followed_user_ids, $filter_follower_ids));
+
+        // $priority_ids = array_values($followed_user_ids);
         
         $placeholders = implode(',', array_fill(0, count($followed_user_ids), '?'));
         $types = str_repeat('i', count($followed_user_ids));
