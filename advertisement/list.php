@@ -165,7 +165,7 @@ if (isset($_SESSION['log_user_id'])) {
         </div>
 
         <!-- Advertisements Table -->
-        <div class="premium-table">
+        <div class="premium-table advertisement-table">
             <!-- Table Header -->
             <div class="px-8 py-6 border-b border-white/10">
                 <div class="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-white/80 uppercase tracking-wider">
