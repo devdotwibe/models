@@ -490,31 +490,53 @@ else{
                             </svg>
                             Target Audience
                         </h2>
+
+                        <?php 
+
+                            $target_values = [];
+
+                             $age_values = [];
+
+                             $location = "";
+
+                            if($adver_have_active_boost)
+                            {
+                                $target_audience = $adver_have_active_boost['target_audience'];
+
+                                $age_range = $adver_have_active_boost['age_range'];
+
+                                $location = $adver_have_active_boost['location'];
+
+                                $target_values   = array_map('trim', explode(',', strtolower($target_audience)));
+
+                                $age_values   = array_map('trim', explode(',', strtolower($age_range)));
+                            }
+                        ?>
                         
                         <div class="space-y-6">
                             <div>
                                 <label class="block text-white font-semibold mb-3">Who do you want to reach?</label>
                                 <div class="grid grid-cols-2 gap-3">
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'men')">
+                                    <div class="audience-chip p-3 rounded-xl text-center" <?php echo in_array('men', $target_values) ? 'selected' : ''; ?>onclick="toggleTarget(this, 'men')">
                                         <div class="text-2xl mb-1">👨</div>
                                         <div class="text-sm">Men</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'women')">
+                                    <div class="audience-chip p-3 rounded-xl text-center"  <?php echo in_array('women', $target_values) ? 'selected' : ''; ?> onclick="toggleTarget(this, 'women')">
                                         <div class="text-2xl mb-1">👩</div>
                                         <div class="text-sm">Women</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'couples')">
+                                    <div class="audience-chip p-3 rounded-xl text-center"  <?php echo in_array('couples', $target_values) ? 'selected' : ''; ?> onclick="toggleTarget(this, 'couples')">
                                         <div class="text-2xl mb-1">💑</div>
                                         <div class="text-sm">Couples</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center" onclick="toggleTarget(this, 'all')">
+                                    <div class="audience-chip p-3 rounded-xl text-center"  <?php echo in_array('all', $target_values) ? 'selected' : ''; ?> onclick="toggleTarget(this, 'all')">
                                         <div class="text-2xl mb-1">🌈</div>
                                         <div class="text-sm">Everyone</div>
                                     </div>
 
                                      <input type="hidden" name="user_unique_id" id="user_unique_id" value="<?php echo $userDetails['unique_id'] ?>">
 
-                                     <input type="hidden" name="target_audience[]" id="target_audience" >
+                                     <input type="hidden" name="target_audience[]" id="target_audience" value="<?= $age_range ?>" >
 
                                      <input type="hidden" name="ad_id" id="ad_id" value="<?php echo $adDetails['id'] ?>">
                                 </div>
@@ -522,15 +544,28 @@ else{
                             
                             <div>
                                 <label class="block text-white font-semibold mb-3">Age Range</label>
-                                <div class="grid grid-cols-3 gap-2">
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '18-25')">18-25</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '26-35')">26-35</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '36-45')">36-45</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '46-55')">46-55</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, '55+')">55+</div>
-                                    <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm" onclick="toggleRange(this, 'all-ages')">All Ages</div>
 
-                                    <input type="hidden" name="age_range[]" id="age_range" >
+                                <div class="grid grid-cols-3 gap-2">
+                                        <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm <?php echo in_array('18-25', $age_values) ? 'selected' : ''; ?>" 
+                                            onclick="toggleRange(this, '18-25')">18-25</div>
+
+                                        <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm <?php echo in_array('26-35', $age_values) ? 'selected' : ''; ?>" 
+                                            onclick="toggleRange(this, '26-35')">26-35</div>
+
+                                        <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm <?php echo in_array('36-45', $age_values) ? 'selected' : ''; ?>" 
+                                            onclick="toggleRange(this, '36-45')">36-45</div>
+
+                                        <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm <?php echo in_array('46-55', $age_values) ? 'selected' : ''; ?>" 
+                                            onclick="toggleRange(this, '46-55')">46-55</div>
+
+                                        <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm <?php echo in_array('55+', $age_values) ? 'selected' : ''; ?>" 
+                                            onclick="toggleRange(this, '55+')">55+</div>
+
+                                        <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm <?php echo in_array('all-ages', $age_values) ? 'selected' : ''; ?>" 
+                                            onclick="toggleRange(this, 'all-ages')">All Ages</div>
+                             
+                                        <input type="hidden" name="age_range[]" value="<?= $target_values ?>" id="age_range" >
+
 
                                 </div>
                             </div>
@@ -551,7 +586,7 @@ else{
                             <div>
                                 <label class="block text-white font-semibold mb-3">Reach</label>
                                 <div class="space-y-3">
-                                    <div class="audience-chip p-4 rounded-xl" onclick="selectLocation(this, 'local')">
+                                    <div class="audience-chip p-4 rounded-xl" onclick="selectLocation(this, 'local')" <?if ($location =='local') {?> selected <?php } ?> >
                                         <div class="flex items-center">
                                             <div class="text-2xl mr-3">🏙️</div>
                                             <div>
@@ -560,7 +595,7 @@ else{
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="audience-chip p-4 rounded-xl" onclick="selectLocation(this, 'national')">
+                                    <div class="audience-chip p-4 rounded-xl" onclick="selectLocation(this, 'national')" <?if ($location =='national') {?> selected <?php } ?> >
                                         <div class="flex items-center">
                                             <div class="text-2xl mr-3">🇺🇸</div>
                                             <div>
@@ -569,7 +604,7 @@ else{
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="audience-chip p-4 rounded-xl" onclick="selectLocation(this, 'international')">
+                                    <div class="audience-chip p-4 rounded-xl" onclick="selectLocation(this, 'international')"  <?if ($location =='international') {?> selected <?php } ?> >
                                         <div class="flex items-center">
                                             <div class="text-2xl mr-3">🌍</div>
                                             <div>
@@ -579,7 +614,7 @@ else{
                                         </div>
                                     </div>
 
-                                    <input type="hidden" name="location" id="location" >
+                                    <input type="hidden" name="location" id="location" value="<?= $location ?>">
 
                                 </div>
                             </div>
