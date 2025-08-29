@@ -481,12 +481,28 @@ function deleteAd(id) {
         }
     }
 
+
     function bulkActions() {
 
-        $('#bulk_delete_check').show();
+        let bulkSection = $('#bulk_delete_check');
+        let checkboxes  = $('.adv_checkbox');
+        let masterCheck = $('#bulk_all_check');
 
-        $('.adv_checkbox').show();
+        if (bulkSection.is(':visible')) {
+
+            bulkSection.hide();
+            checkboxes.hide();
+
+            masterCheck.prop("checked", false);
+            $('[name="adv_id[]"]').prop("checked", false);
+
+        } else {
+ 
+            bulkSection.show();
+            checkboxes.show();
+        }
     }
+
 
 </script>
 
