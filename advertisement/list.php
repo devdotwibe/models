@@ -83,9 +83,9 @@ if (isset($_SESSION['log_user_id'])) {
             
             <div class="flex space-x-4">
 
-                <select onchange="FilterAdver(this)" id="category_id" class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
+                <select onchange="FilterAdver()" id="category_id" class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
 
-                    <option value="all">All Categories</option>
+                    <option value="">All Categories</option>
 
                     <?php foreach($category_list as $item) {  ?>
 
@@ -95,9 +95,9 @@ if (isset($_SESSION['log_user_id'])) {
                     
                 </select>
 
-                <select class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
-                    <option value="all">All Status</option>
-                    <option value="active">Active</option>
+                <select  onchange="FilterAdver()" id="status_filter" class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
+                    <option value="">All Status</option>
+                    <option value="">Active</option>
                     <option value="pending">Pending</option>
                     <option value="paused">Paused</option>
                     <option value="expired">Expired</option>
@@ -208,27 +208,29 @@ if (isset($_SESSION['log_user_id'])) {
 
 <script>
 
- function FilterAdver(el)
+ function FilterAdver()
  {
 
-    var value = $(el).val();
+    var value =  $('#category_id').val();
 
-    var pageno = $('#pagination-container .active .current').text();
+    var status = $('#status_filter').val();
 
-      loadData(pageno, value);
+    // var pageno = $('#pagination-container .active .current').text();
+
+      loadData(1, value,status);
  }
 
 
 
 $(document).ready(function () {
-    
+
     loadData(1);
 });
 
 
     let itemsPerPage = 10;
 
-    function loadData(page = 1, category = '') {
+    function loadData(page = 1, category = '',status='') {
 
         $.ajax({
             url: "<?php echo SITEURL.'advertisement/ajax.php'?>",
@@ -237,7 +239,8 @@ $(document).ready(function () {
             data: { 
                     page: page,
                     limit: itemsPerPage,
-                    category : category
+                    category : category,
+                    status : status
                 },
             dataType: "json",
             success: function (response) {

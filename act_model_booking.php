@@ -13,6 +13,8 @@ if (isset($_POST['booking_submit'])) {
    $meeting_date = $_POST['meeting_date'];
    
    if(isset($_POST['meeting_date_to'])) $meeting_date_to = $_POST['meeting_date_to'];
+   if(isset($_POST['destination'])) $destination = $_POST['destination'];
+   if(isset($_POST['no_of_hrs_meet'])) $no_of_hrs_meet = $_POST['no_of_hrs_meet'];
    
    //$booking_type = $_POST['booking_type'];
    $booking_for = $_POST['booking_for'];
@@ -38,6 +40,9 @@ if (isset($_POST['booking_submit'])) {
 	$post_data['duration'] = '';
 	if(isset($_POST['meeting_hrs'])) $post_data['meeting_time'] = $meeting_time;
 	if(isset($_POST['meeting_date_to'])) $post_data['meeting_date_to'] = $meeting_date_to;
+	
+	if(isset($_POST['destination'])) $post_data['destination'] = $destination;
+	if(isset($_POST['no_of_hrs_meet'])) $post_data['no_of_hrs_meet'] = $no_of_hrs_meet;
 	$post_data['address'] = '';
 	$post_data['city'] = '';
 	$post_data['state'] = '';

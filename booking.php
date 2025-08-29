@@ -59,7 +59,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 	<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
    
 </head>
-<body class="min-h-screen text-white booking-form text-white socialwall-page">
+<body class="min-h-screen text-white booking-form text-white socialwall-page enhanced5">
 	
 	
 	<?php if (isset($_SESSION["log_user_id"])) { ?>
@@ -192,7 +192,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Local Meetup Rate: <?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?>/hr</div>
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Extended Social Rate: <?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?>/hr</div>
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Extended Evening Rate: <?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?>/8hrs</div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Full-day Social Rate: <?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?>/d</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Full-day Social Rate: <?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?>/day</div>
 							</div>
 							<?php $social_availability = json_decode($extra_details['social_availability']);
 							if(!empty($social_availability)){
@@ -223,10 +223,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 							</div> 
 							
 							<div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Daily Rate: <?php if (!empty($extra_details)) echo $extra_details['daily_rate']; ?>/hr</div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Weekly Rate: <?php if (!empty($extra_details)) echo $extra_details['weekly_rate']; ?>/hr</div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Monthly Rate: <?php if (!empty($extra_details)) echo $extra_details['monthly_rate']; ?>/8hrs</div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Preferred Travel Destinations: <?php if (!empty($extra_details)) echo $extra_details['travel_destination']; ?>/d</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Daily Rate: <?php if (!empty($extra_details)) echo $extra_details['daily_rate']; ?>/day</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Weekly Rate: <?php if (!empty($extra_details)) echo $extra_details['weekly_rate']; ?>/week</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Monthly Rate: <?php if (!empty($extra_details)) echo $extra_details['monthly_rate']; ?>/mon</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Preferred Travel Destinations: <?php if (!empty($extra_details)) echo $extra_details['travel_destination']; ?></div>
 							</div>
 							<?php $travel_months = json_decode($extra_details['travel_months']); 
 							if(!empty($travel_months)){
@@ -336,13 +336,23 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                             <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                             </div>
-                            <h2 class="text-3xl font-bold premium-text heading-font">When do you want to see me?</h2>
+							<?php if($_GET['service'] == 'Travel'){ ?>
+
+							<h2 class="text-3xl font-bold premium-text heading-font">Select travel date</h2>
+
+                            <h3 class="text-3xl font-bold premium-text heading-font" style="margin-left: auto;">token <span id="token_no"></span> </h3>
+
+							<?php } else{ ?>
+                            <h2 class="text-3xl font-bold premium-text heading-font"  >When do you want to see me?</h2>
+							<?php } ?>
                         </div>
                         <?php if($_GET['service'] == 'Travel'){ ?>
 						<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                             <div class="md:col-span-2">
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">From</label>
-                                <input name="meeting_date"
+                                <input name="meeting_date" onchange="CalculateDate()"
+
+                                    id="meeting_date_from"
                                     type="date" 
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                     required
@@ -351,13 +361,26 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                             </div>
 							<div class="md:col-span-2">
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">To</label>
-                                <input name="meeting_date_to"
+                                <input name="meeting_date_to"  onchange="CalculateDate()"
+                                    id="meeting_date_to"
                                     type="date" 
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                     required
                                     min=""
                                 >
+
+
+                                <span id="end_date_error"  style="display: none; color:red;"> </span>
                             </div>
+							
+							<div>
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Travel location</label>
+								<input name="destination"
+                                    type="text" 
+                                    class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
+                                    required
+                                >
+							</div>
 							
 						</div>
 						<?php } else{ ?>
@@ -399,6 +422,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     <option value="45" class="bg-gray-900">45</option>
                                 </select>
                             </div>
+							
+							
                         </div>
                         
                         <div class="mt-6">
@@ -413,6 +438,29 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                 </label>
                             </div>
                         </div>
+						
+						
+							<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+							<div>
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Destination</label>
+								<input name="destination"
+                                    type="text" 
+                                    class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
+                                    required
+                                >
+
+							</div>
+							<div>
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">No of hours need to meet</label>
+                                <select name="no_of_hrs_meet" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                    <option value="" class="bg-gray-900">Hours</option>
+                                    <?php for($i = 1;$i <=24; $i++){ ?>
+									<option value="<?php echo $i; ?>" class="bg-gray-900"><?php echo $i; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+							</div>
+							
 						
 						<?php } ?>
 						
@@ -430,6 +478,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 						<input type="hidden" name="name" value="<?php echo $userDetails['name']; ?>">
 						<input type="hidden" name="service_name" value="<?php echo $_GET['service']; ?>">
 						<input type="hidden" name="main_service" value="<?php echo $_GET['type']; ?>">
+                        <input type="hidden" name="token_cost" id="token_cost">
+
+                        
 					
                         <button name="booking_submit" type="submit" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>
@@ -445,6 +496,67 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
    <?php include('includes/footer.php'); ?>
 
     <script>
+
+
+        function CalculateDate() {
+
+                let fromDate = $('#meeting_date_from').val();
+                let toDate   = $('#meeting_date_to').val();
+
+                $('#end_date_error').hide().text('');
+
+                if (!fromDate || !toDate) {
+                    $('#token_no').text('');
+                    return;
+                }
+
+                let start = new Date(fromDate);
+                let end   = new Date(toDate);
+
+                if (end < start) {
+
+                    // alert("End date must be after start date");
+
+                    $('#end_date_error').show().text('From date must be after To date');
+
+                    $('#token_no').text('');
+
+                    return;
+                }
+
+                let diffTime = end - start;
+                let days = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+                let dailyRate   = parseFloat("<?php echo !empty($extra_details) ? $extra_details['daily_rate'] : 0; ?>");
+                let weeklyRate  = parseFloat("<?php echo !empty($extra_details) ? $extra_details['weekly_rate'] : 0; ?>");
+                let monthlyRate = parseFloat("<?php echo !empty($extra_details) ? $extra_details['monthly_rate'] : 0; ?>");
+
+                let total = 0;
+
+                if (days < 7) {
+                    total = days * dailyRate;
+                } 
+                else if (days < 30) {
+                    let weeks = Math.floor(days / 7);
+                    let remainingDays = days % 7;
+                    total = (weeks * weeklyRate) + (remainingDays * dailyRate);
+                } 
+                else {
+                    let months = Math.floor(days / 30);
+                    let remainingAfterMonths = days % 30;
+
+                    let weeks = Math.floor(remainingAfterMonths / 7);
+                    let remainingDays = remainingAfterMonths % 7;
+
+                    total = (months * monthlyRate) + (weeks * weeklyRate) + (remainingDays * dailyRate);
+                }
+
+                $('#token_no').text(total);
+
+                $('#token_cost').val(total);
+            }    
+            
+            
         // Initialize premium features
         document.addEventListener('DOMContentLoaded', function() {
             initializePremiumFeatures();
