@@ -1307,9 +1307,7 @@ body .owl-carousel .owl-nav.disabled {
 
             }
 
-
-
-
+             $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_GET['m_unique_id']);
 
             ?>
 
@@ -1691,8 +1689,7 @@ body .owl-carousel .owl-nav.disabled {
 
             <?php }?>
             
-            <?php $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $_GET['m_unique_id']); ?>
-            
+         
             <div class="about-section">
                 <h3 class="about-section-title">Physical Attributes</h3>
                 <div class="attributes-grid">
