@@ -923,12 +923,18 @@ body .owl-carousel .owl-nav.disabled {
                                         if ($_SESSION["log_user_unique_id"] == $session_id) {
                                             $link = SITEURL . 'live-stream/stream.php?user=streamer&unique_model_id=' . $uniqueModelId;
 
-                                            $label = "Go Live";
-
+                                          
                                         } else {
                                             $link = SITEURL . 'live-stream/view.php?user=viewer&unique_model_id=' . $uniqueModelId;
 
-                                            $label = "Watch Live";
+                                        }
+                                        if($userDetails['as_a_model'] =='Yes')
+                                        {
+                                            $label = "Go Live";
+                                        }
+                                        else
+                                        {
+                                             $label = "Watch Live";
                                         }
                                     ?>
 
