@@ -39,7 +39,7 @@ if (isset($_SESSION["log_user_id"])) {
 
                 $boostId = mysqli_insert_id($con);
 
-                $coins = $budget;
+                $coins = $total_amount;
 
                 $date = date('Y-m-d H:i:s');
 
