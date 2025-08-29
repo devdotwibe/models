@@ -90,14 +90,24 @@ $sort_type = $_GET['sort_type'];
     }
 
 
-if($_GET['country']){
+    $params = [];
 
-    $where_clause .= " tb.country='".$_GET['country']."' and";
-}
-if($_GET['category']){
+    $category =  $_GET['category'];
 
-    $where_clause .= " tb.category='".$_GET['category']."' and";
-}
+    $country =  $_GET['country'];
+
+	if (!empty($category)) {
+
+        $where_clause = " and tb.category = %s ";
+        $params[] = $category;
+    }
+
+    if (!empty($country)) {
+
+        $where_clause = " and tb.country = %s ";
+        $params[] = $country;
+
+    }
 
 
 $limited = " limit $offset, ".$perPage;
@@ -107,7 +117,8 @@ $where_clause = rtrim($where_clause,'and');
 if($where_clause){
 
   
-    $all_data = DB::query($stringQuery." where ".$where_clause." ".$sort_by.$limited );
+    $all_data = DB::query($stringQuery." where ".$where_clause." ".$sort_by.$limited,...$params);
+
     $total = $output['total'] = DB::numRows($stringQuery." where ".$where_clause );
 	
 	$output['total_page_all'] = $stringQuery." where ".$where_clause;
