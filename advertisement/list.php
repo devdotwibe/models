@@ -230,13 +230,13 @@ if (isset($_SESSION['log_user_id'])) {
         var ischecked = $(el).is(":checked");
 
         if (ischecked) {
-            $('[name="adv_id"]').each(function () {
+            $('[name="adv_id[]"]').each(function () {
                 $(this).prop("checked", true);
                 console.log($(this).val());
             });
 
         } else {
-            $('[name="adv_id"]').each(function () {
+            $('[name="adv_id[]"]').each(function () {
                 $(this).prop("checked", false);
             });
         }
