@@ -876,14 +876,17 @@ function checkImageExists($relativePath) {
 }
 
 function RemoveFilePath($relativePath) {
+
     if (empty($relativePath)) {
         return false;
     }
 
-    $rootPath = rtrim($_SERVER['DOCUMENT_ROOT'], '/'); 
+	$rootPath = $_SERVER['DOCUMENT_ROOT']; 
+
     $imagePath = $rootPath . '/' . ltrim($relativePath, '/');
 
     if (file_exists($imagePath)) {
+
         return unlink($imagePath); 
     }
 
