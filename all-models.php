@@ -85,7 +85,7 @@ include('includes/helper.php');
         
  
         
-        .badge {
+        .badge-user {
             width: 64px;
             height: 64px;
             display: flex;
@@ -97,7 +97,7 @@ include('includes/helper.php');
             cursor: pointer;
         }
         
-        .badge:hover {
+        .badge-user:hover {
             transform: scale(1.15) translateY(-2px);
         }
         
@@ -929,7 +929,7 @@ include('includes/helper.php');
                                         <?php } ?>
 
                                         <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
-                                            <span class="profile-badge badge-verified"> <div class="badge verified-user">🛡</div> Verified</span>
+                                            <span class="profile-badge badge-verified"> <div class="badge-user verified-user">🛡</div> Verified</span>
                                         <?php } ?>
 
                                     </div>
