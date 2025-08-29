@@ -1503,10 +1503,49 @@ body .owl-carousel .owl-nav.disabled {
                                     <div class="text-xs sm:text-sm text-white/60">In-person experiences</div>
                                 </div>
                             </li>
-                        </ul>
-                        <button class="w-full btn-primary text-white font-semibold py-2 sm:py-3 rounded-xl mt-4 text-sm sm:text-base" id="viewServicesBtn">
+
+
+                         <?php if(!empty($extra_details) && !empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ ?>
+
+			                <?php if($extra_details['daily_rate']){ ?>
+
+                                <li class="flex items-center gap-3"  <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking.php?type=travel&service=Travel&token=<?= $extra_details['daily_rate'] ?>&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else { ?> onclick="handleService('travel')" <?php } ?> >
+        
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+
+                                        <div class="service-icon">✈️</div>
+                                    </div>
+
+                                    <div>
+                                        <div class="font-semibold text-sm sm:text-base">Travel</div>
+                                        <div class="text-xs sm:text-sm text-white/60">Travel together and explore</div>
+                                    </div>
+                                </li>
+
+                        <?php } } ?>
+       
+
+                            <li class="flex items-center gap-3"  <?php if ($user_have_preminum && $plan == 'diamond') { ?>  <?php } else { ?> onclick="handleService('collaboration')" <?php } ?> >
+        
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+
+                                       <div class="service-icon">🤝</div>
+                                    </div>
+
+                                    <div>
+                                        <div class="font-semibold text-sm sm:text-base">Collaborate</div>
+                                        <div class="text-xs sm:text-sm text-white/60">Professional work partnerships</div>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+
+
+                        <!-- <button class="w-full btn-primary text-white font-semibold py-2 sm:py-3 rounded-xl mt-4 text-sm sm:text-base" id="viewServicesBtn">
                             View All Services
-                        </button>
+                        </button> -->
+
                     </div>
 
                     <!-- Similar Models Card -->
