@@ -12229,43 +12229,69 @@ overflow-x: auto !important;
 }
 
 .profile-badge.creator-badge {
-backdrop-filter: none !important;
+    backdrop-filter: none !important;
     box-shadow: none !important;
 }
-  
 
- 
+
+
 
 
 
 
 .profile-badge.badge-premium {
-position: relative;
-  border: 1px solid blue;
-  width: fit-content;
-padding: 0 !important;
-  margin-bottom: 16px;
-  margin-left: 15px !important;
-  font-size: 10px !important;
+    position: relative;
+    border: 1px solid blue;
+    width: fit-content;
+    padding: 0 !important;
+    margin-bottom: 16px;
+    margin-left: 15px !important;
+    font-size: 10px !important;
 }
 
-.premium-basic-user{
-width: 30px !important;
-  height: 30px !important;
-  font-size: 12px !important;
+.premium-basic-user {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 12px !important;
 }
 
 .profile-badge.badge-premium p {
-  position: absolute;
-  top: 110%;
-  left: 50%;
-  margin: 0 auto;
-  transform: translateX(-50%);
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    margin: 0 auto;
+    transform: translateX(-50%);
 }
 
 
 
- 
+
+.profile-badge.badge-verified {
+    position: relative;
+    border: 1px solid blue;
+    width: fit-content;
+    padding: 0 !important;
+    margin-bottom: 16px;
+    margin-left: 15px !important;
+    font-size: 10px !important;
+}
+.badge-user.verified-user {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 12px !important;
+}
+
+.profile-badge.badge-verified p {
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    margin: 0 auto;
+    transform: translateX(-50%);
+}
+
+
+
+
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
 
