@@ -942,11 +942,11 @@ include('includes/helper.php');
 
                                             <?php if($preminum_plan =='basic') { ?>
 
-                                            <span class="profile-badge badge-premium"><div class="badge premium-basic-user">⭐</div> Premium</span>
+                                            <span class="profile-badge badge-premium"><div class="badge-user premium-basic-user">⭐</div> Premium</span>
 
                                             <?php } else { ?>
 
-                                                 <span class="profile-badge badge-premium"><div class="badge diamond-elite-user"><span>💎</span></div> Premium</span>
+                                                 <span class="profile-badge badge-premium"><div class="badge-user diamond-elite-user"><span>💎</span></div> Premium</span>
 
                                             <?php } ?>
 
