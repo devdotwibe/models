@@ -12292,7 +12292,7 @@ overflow-x: auto !important;
 
 .profile-badge.creator-badge {
 
-       position: relative;
+    position: relative;
     border: 1px solid blue;
     width: fit-content;
     padding: 0 !important;
@@ -12302,18 +12302,21 @@ overflow-x: auto !important;
 }
 
 .badge-user.creator {
-     width: 30px !important;
+    width: 30px !important;
     height: 30px !important;
     font-size: 12px !important;
 }
+
 .profile-badge.creator-badge p {
     position: absolute;
     top: 110%;
     left: 50%;
     margin: 0 auto;
     transform: translateX(-50%);
-    color:#fff;
+    color: #fff;
 }
+
+
 
 
 
@@ -12542,8 +12545,8 @@ overflow-x: auto !important;
 
     .premimum-model1 .profile-grid .profile-card img {
 
-  height: 35vw;
-}
+        height: 35vw;
+    }
 }
 
 
@@ -13024,10 +13027,10 @@ overflow-x: auto !important;
         padding: 20px;
     }
 
-.premimum-model1 .profile-grid .profile-card img {
+    .premimum-model1 .profile-grid .profile-card img {
 
-  height: 45vw;
-}
+        height: 45vw;
+    }
 
 }
 
@@ -13562,10 +13565,11 @@ overflow-x: auto !important;
         font-size: 10px;
         padding: 5px 10px;
     }
-.premimum-model1 .profile-grid .profile-card img {
 
-  height: 50vw;
-}
+    .premimum-model1 .profile-grid .profile-card img {
+
+        height: 50vw;
+    }
 
 
 }
@@ -14410,12 +14414,26 @@ overflow-x: auto !important;
     }
 
 
+    .premium-basic-user {
+        width: 20px !important;
+        height: 20px !important;
+    }
 
+    .badge-user.verified-user {
+        width: 20px !important;
+        height: 20px !important;
 
+    }
 
+    .badge-user.creator {
+        width: 20px !important;
+        height: 20px !important;
 
+    }
 
-
+    .profile-badge.creator-badge p ,.profile-badge.badge-verified p, .profile-badge.badge-premium p{
+    font-size: 9px;
+}
 
 
     .premimum-model1 .filter-modal-actions .modal-btn {
