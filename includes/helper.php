@@ -883,7 +883,7 @@ function RemoveFilePath($relativePath) {
 
 	$rootPath = $_SERVER['DOCUMENT_ROOT']; 
 
-    $imagePath = $rootPath . '/' . ltrim($relativePath, '/');
+    $imagePath = $rootPath . '/' . ltrim('uploads/banners/'.$relativePath, '/');
 
     if (file_exists($imagePath)) {
 

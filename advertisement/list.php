@@ -306,6 +306,10 @@ if (isset($_SESSION['log_user_id'])) {
 
                         ConformCloseModal();
 
+                        $('#bulk_delete_button').hide();
+
+                        $('#bulk_delete_check').hide();
+
                         showNotification('Advertisement delted successfully', 'success');
 
                     } else {
