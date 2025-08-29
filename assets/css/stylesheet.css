@@ -12148,10 +12148,10 @@ display: flex !important;
     padding-right: .60rem !important;
     font-size: .75rem;
 }
-#list_advertisements > div > div > :last-child *:last-child{
+/* #list_advertisements > div > div > :last-child *:last-child{
     padding-left: 1rem !important;
         padding-right: 1rem !important;
-}
+} */
 
 
 
