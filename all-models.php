@@ -1510,6 +1510,7 @@ include('includes/helper.php');
 
                                     <img src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
+                                 
                                     <div class="profile-badges">
 
                                         <span class="profile-badge badge-live">Live</span>
@@ -1525,13 +1526,15 @@ include('includes/helper.php');
                                             <?php if ($preminum_plan == 'basic') { ?>
 
                                                 <span class="profile-badge badge-premium">
-                                                    <div class="badge-user premium-basic-user">⭐</div> Premium
+                                                    <div class="badge-user premium-basic-user">⭐</div>
+                                                    <p>Premium</p>
                                                 </span>
 
                                             <?php } else { ?>
 
                                                 <span class="profile-badge badge-premium">
-                                                    <div class="badge-user diamond-elite-user"><span>💎</span></div> Premium
+                                                    <div class="badge-user diamond-elite-user"><span>💎</span></div>
+                                                    <p>Premium</p>
                                                 </span>
 
                                             <?php } ?>
@@ -1540,14 +1543,16 @@ include('includes/helper.php');
 
                                         <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
                                             <span class="profile-badge badge-verified">
-                                                <div class="badge-user verified-user">🛡</div> Verified
+                                                <div class="badge-user verified-user">🛡</div>
+                                                <p>Verified</p>
                                             </span>
                                         <?php } ?>
 
                                         <?php if (!empty($rowesdw) &&  $rowesdw['as_a_model'] == 'Yes') { ?>
 
                                             <span class="profile-badge creator-badge">
-                                                <div class="badge-user creator">✨</div> Creator
+                                                <div class="badge-user creator">✨</div>
+                                                <p>Creator</p>
                                             </span>
 
                                         <?php } ?>

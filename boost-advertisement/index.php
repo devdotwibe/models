@@ -501,6 +501,14 @@ else{
 
                              $budget = 50;
 
+                             $duration = "";
+
+                             $total_amount="";
+
+                            $expected_views_range = "";
+
+                            $reached_views_range ="";
+
                             if($adver_have_active_boost)
                             {
                                 $target_audience = $adver_have_active_boost['target_audience'];
@@ -511,9 +519,18 @@ else{
 
                                 $budget =  $adver_have_active_boost['budget'];
 
+                                $duration =  $adver_have_active_boost['duration'];
+
+                                $total_amount = $adver_have_active_boost['total_amount'];
+
+                                $expected_views_range = $adver_have_active_boost['expected_views_range'];
+
+                                $reached_views_range = $adver_have_active_boost['reached_views_range'];
+
                                 $target_values   = array_map('trim', explode(',', strtolower($target_audience)));
 
                                 $age_values   = array_map('trim', explode(',', strtolower($age_range)));
+
                             }
                         ?>
                         
@@ -672,34 +689,43 @@ else{
                         <!-- Duration -->
                         <div>
                             <label class="block text-white font-semibold mb-4">Campaign Duration</label>
+
                             <div class="grid grid-cols-2 gap-3">
-                                <div class="audience-chip p-4 rounded-xl text-center" onclick="selectDuration(this, 1)">
+
+                                <div class="audience-chip p-4 rounded-xl text-center <?if($duration ==1 ) {?> selected <?php }?>" onclick="selectDuration(this, 1)">
                                     <div class="text-2xl font-bold text-indigo-400">1</div>
                                     <div class="text-sm text-white/70">Day</div>
                                     <div class="text-xs text-green-400 mt-1">Quick boost</div>
                                 </div>
-                                <div class="audience-chip p-4 rounded-xl text-center" onclick="selectDuration(this, 3)">
+
+                                <div class="audience-chip p-4 rounded-xl text-center  <?if($duration ==3 ) {?> selected <?php }?>" onclick="selectDuration(this, 3)">
                                     <div class="text-2xl font-bold text-indigo-400">3</div>
                                     <div class="text-sm text-white/70">Days</div>
                                     <div class="text-xs text-green-400 mt-1">Most popular</div>
                                 </div>
-                                <div class="audience-chip p-4 rounded-xl text-center" onclick="selectDuration(this, 7)">
+
+                                <div class="audience-chip p-4 rounded-xl text-center  <?if($duration ==7 ) {?> selected <?php }?>" onclick="selectDuration(this, 7)">
                                     <div class="text-2xl font-bold text-indigo-400">7</div>
                                     <div class="text-sm text-white/70">Days</div>
                                     <div class="text-xs text-green-400 mt-1">Extended reach</div>
                                 </div>
-                                <div class="audience-chip p-4 rounded-xl text-center" onclick="selectDuration(this, 14)">
+
+                                <div class="audience-chip p-4 rounded-xl text-center  <?if($duration ==14 ) {?> selected <?php }?>" onclick="selectDuration(this, 14)">
                                     <div class="text-2xl font-bold text-indigo-400">14</div>
                                     <div class="text-sm text-white/70">Days</div>
                                     <div class="text-xs text-green-400 mt-1">Maximum impact</div>
                                 </div>
+
                             </div>
 
-                            <input type="hidden" name="duration" id="duration" >
+                            <input type="hidden" name="duration" id="duration" value="<?=$duration?>" >
 
-                            <input type="hidden" name="total_amount" id="total_amount" >
-                            <input type="hidden" name="expected_views_range" id="expected_views_range" >
-                            <input type="hidden" name="reached_views_range" id="reached_views_range" >
+                            <input type="hidden" name="total_amount" id="total_amount" value="<?= $total_amount ?>">
+
+                            <input type="hidden" name="expected_views_range" id="expected_views_range" value="<?= $expected_views_range ?>" >
+
+                            <input type="hidden" name="reached_views_range" id="reached_views_range" value="<?= $reached_views_range ?>" >
+
                         </div>
                     </div>
                     
@@ -708,7 +734,7 @@ else{
                         <h3 class="text-lg font-semibold premium-text mb-4">Campaign Summary</h3>
                         <div class="grid md:grid-cols-4 gap-4 text-center">
                             <div>
-                                <div class="text-2xl font-bold text-green-400" id="totalBudget">$50</div>
+                                <div class="text-2xl font-bold text-green-400" id="totalBudget"><?= $total_amount ?></div>
                                 <div class="text-sm text-white/70">Total Investment</div>
                             </div>
                             <div>
@@ -1020,7 +1046,7 @@ else{
         var budget = '<?= $budget ?>';
 
         setBudget(budget);
-        
+
     });
 
     function selectQuickSetup(element, goal) {
