@@ -10247,7 +10247,7 @@ body.advt-page.my-purpose .scroll-indicator {
     object-fit: cover;
     position: relative !important;
     top: unset;
-    height: auto;
+    height: 26vw;
 }
 
 .premimum-model1 .profile-grid .profile-actions {
@@ -12312,6 +12312,7 @@ overflow-x: auto !important;
     left: 50%;
     margin: 0 auto;
     transform: translateX(-50%);
+    color:#fff;
 }
 
 
@@ -12538,6 +12539,11 @@ overflow-x: auto !important;
         max-width: 96% !important;
     }
 
+
+    .premimum-model1 .profile-grid .profile-card img {
+
+  height: 35vw;
+}
 }
 
 
@@ -13017,6 +13023,11 @@ overflow-x: auto !important;
     .activity-page .sort-dropdown {
         padding: 20px;
     }
+
+.premimum-model1 .profile-grid .profile-card img {
+
+  height: 45vw;
+}
 
 }
 
@@ -13551,6 +13562,12 @@ overflow-x: auto !important;
         font-size: 10px;
         padding: 5px 10px;
     }
+.premimum-model1 .profile-grid .profile-card img {
+
+  height: 50vw;
+}
+
+
 }
 
 
@@ -14388,7 +14405,8 @@ overflow-x: auto !important;
     }
 
     .premimum-model1 .profile-grid.profile-columns .profile-image-container img {
-        max-height: 260px
+        max-height: 370px;
+        height: 70vw;
     }
 
 
