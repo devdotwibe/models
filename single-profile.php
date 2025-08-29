@@ -2117,7 +2117,7 @@ body .owl-carousel .owl-nav.disabled {
 					
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?>  href='<?=SITEURL?>booking.php?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?=SITEURL?>booking.php?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
 
                     <?php }?>
 					
