@@ -27,12 +27,16 @@ $serviceArr = array('Providing services', 'Looking for services');
 </head>
 
 <body class="advt-page  socialwall-page">
-<!-- Premium Particle System -->  <div class="particles" id="particles"></div>
+    
+<div class="particles" id="particles"></div>
 
 
     <?php if (isset($_SESSION["log_user_id"])) { ?>
+
         <?php  include('../includes/side-bar.php'); ?>
+
         <?php  include('../includes/profile_header_index.php'); ?>
+
 	<?php } ?>
    
 
