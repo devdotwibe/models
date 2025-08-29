@@ -12090,7 +12090,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 /* .premium-table {
-  padding-inline: 40px;
+  padding-inline: 40px; 
 overflow-x: auto !important;
 }
 
@@ -12109,6 +12109,7 @@ overflow-x: auto !important;
 
 #list_advertisements {
     padding-inline: 30px;
+    padding-block: 10px;
     overflow-x: auto;
 }
 
