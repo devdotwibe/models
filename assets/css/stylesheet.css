@@ -12313,7 +12313,7 @@ overflow-x: auto !important;
     left: 50%;
     margin: 0 auto;
     transform: translateX(-50%);
-    color: #fff;
+    color: #fff !important;
 }
 
 
@@ -14410,7 +14410,7 @@ overflow-x: auto !important;
 
     .premimum-model1 .profile-grid.profile-columns .profile-image-container img {
         max-height: 370px;
-        height: 70vw;
+        height: 62vw;
     }
 
 
@@ -14419,7 +14419,7 @@ overflow-x: auto !important;
         height: 20px !important;
     }
 
-    .badge-user.verified-user {
+    .badge-user.verified-user { 
         width: 20px !important;
         height: 20px !important;
 

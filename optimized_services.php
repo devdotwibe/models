@@ -402,7 +402,7 @@ else{
   </main>
 
   <!-- Mobile Navigation -->
-  <nav class="mobile-nav md:hidden">
+  <!-- <nav class="mobile-nav md:hidden">
     <div class="mobile-nav-grid">
       <div class="mobile-nav-item active">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-5 h-5 mb-1">
@@ -423,12 +423,12 @@ else{
         <span class="text-xs font-medium">Profile</span>
       </div>
     </div>
-  </nav>
+  </nav> -->
 
-  <!-- Notification -->
+
   <div id="notification" class="notification"></div>
 
-  <!-- Review Modal -->
+
   <div id="reviewModal" class="modal-overlay">
     <div class="modal-container">
       <div class="modal-header">
