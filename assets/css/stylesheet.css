@@ -12232,7 +12232,35 @@ overflow-x: auto !important;
 backdrop-filter: none !important;
     box-shadow: none !important;
 }
+  
 
+ 
+
+
+
+
+.profile-badge.badge-premium {
+position: relative;
+  border: 1px solid blue;
+  width: fit-content;
+  padding: 0;
+  margin-bottom: 16px;
+  font-size: 10px;
+}
+
+.premium-basic-user{
+    width: 30px;
+  height: 30px;
+  font-size: 12px;
+}
+
+.profile-badge.badge-premium p {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  margin: 0 auto;
+  transform: translateX(-50%);
+}
 
 
 
