@@ -922,13 +922,28 @@ include('includes/helper.php');
                             $preminum_plan = $result['plan_status'];
                         }
 
+                        $prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
+
+                        if(!empty($get_modal_user[0]['profile_pic']))
+                        {
+                            if (checkImageExists($rowesdw['profile_pic'])) {
+                        
+                                $prof_img = SITEURL . $rowesdw['profile_pic'];
+                            }
+                        }
+
                 ?>
 
                         <!-- Profile Card 1 -->
                         <div class="profile-card">
+
                             <div class="profile-image-container">
+
                                 <a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
-                                    <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
+
+                                    <img src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
+
+
                                     <div class="profile-badges">
                                         <span class="profile-badge badge-live">Live</span>
 
