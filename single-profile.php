@@ -883,7 +883,11 @@ body .owl-carousel .owl-nav.disabled {
                                     <div class="action-dropdown" id="moreActions">
 
                                         <button class="btn-secondary px-3 py-2 rounded-full text-white" id="moreActionsBtn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+
+                                        
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+
+                                            <span id="mobile-explore">Explore</span>
                                         </button>
 
 
@@ -918,8 +922,13 @@ body .owl-carousel .owl-nav.disabled {
                                         $uniqueModelId = isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : '';
                                         if ($_SESSION["log_user_unique_id"] == $session_id) {
                                             $link = SITEURL . 'live-stream/stream.php?user=streamer&unique_model_id=' . $uniqueModelId;
+
+                                            $label = "Go Live";
+
                                         } else {
                                             $link = SITEURL . 'live-stream/view.php?user=viewer&unique_model_id=' . $uniqueModelId;
+
+                                            $label = "Watch Live";
                                         }
                                     ?>
 
@@ -928,7 +937,7 @@ body .owl-carousel .owl-nav.disabled {
                                             <circle cx="12" cy="12" r="10"></circle>
                                             <circle cx="12" cy="12" r="4"></circle>
                                         </svg>
-                                        Go Live
+                                        <?= $label ?>
                                     </div>
 
 								<?php if($userDetails['as_a_model'] =='No') { ?>
