@@ -552,7 +552,7 @@ include('includes/helper.php');
                                         <?php } ?>
 
                                         <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
-                                            <span class="profile-badge badge-verified">Verified</span>
+                                            <span class="profile-badge badge-verified"> <div class="badge verified">🛡</div> Verified</span>
                                         <?php } ?>
 
                                     </div>
