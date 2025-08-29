@@ -215,6 +215,31 @@ if (isset($_SESSION['log_user_id'])) {
 </main>	
 	
 
+    <div class="modal-overlay" id="conform_adver">
+        <div class="modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Confirm Bulk Delete ?</h2>
+            <button class="close-modal" id="closeRemoveProfilePicModal" type="button" onclick="ConformCloseModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete your advertisements ?</p>
+
+            <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
+            <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" onclick="confirmRemoveProfilePic()">Yes, Conform</button>
+
+            <button class="btn btn-secondary" type="button" onclick="ConformCloseModal()">Cancel</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
 
  <?php include('../includes/footer.php'); ?>
 
@@ -222,6 +247,13 @@ if (isset($_SESSION['log_user_id'])) {
 <script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
 <script>
+
+
+    function ConformCloseModal()
+    {
+
+        $('#conform_adver').removeClass('active');
+    }
 
  function FilterAdver()
  {
@@ -234,6 +266,11 @@ if (isset($_SESSION['log_user_id'])) {
 
       loadData(1, value,status);
  }
+
+    function BulkDeleteAll()
+    {
+        $('#conform_adver').addClass('active');
+    }
 
 
     function SelectBulkAll(el) {
