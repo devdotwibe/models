@@ -12176,7 +12176,7 @@ display: flex !important;
 
 
 .profile-avatar-container {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   border-radius: 50%;
   max-width: 140px;
   max-height: 140px;
@@ -12201,9 +12201,31 @@ display: flex !important;
   width: 100%;
   object-fit: contain;
 }
+ .profile-avatar-container .owl-carousel .owl-prev ,  .profile-avatar-container .owl-next{
+display:none ;
+ }
 
 
 
+ /* .profile-badge.creator-badge {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+  border-radius: 50%;
+  flex-direction: column;
+} */
+
+ .profile-badge.creator-badge .badge-user.creator {
+font-size: 12px;
+}
+
+.profile-badge.creator-badge {
+  width: 30px;
+  height: 30px;
+}
 
 
 
