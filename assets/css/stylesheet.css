@@ -12135,6 +12135,15 @@ overflow-x: auto !important;
   /* background: blue; */
 }
 
+/* #list_advertisements > div > div > :nth-child(4){
+       min-width: 243px !important;
+       background-color: #00d2ff;
+} */
+ #list_advertisements > div > div > :nth-child(4) span{
+      width: 100% !important;;
+      display: flex;
+}
+
 #list_advertisements>div>div>*:last-child {
     display: flex !important;
     flex-wrap: wrap;
