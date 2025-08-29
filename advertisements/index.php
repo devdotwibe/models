@@ -533,12 +533,11 @@ $serviceArr = array('Providing services', 'Looking for services');
 
         function submitSelect() {
 
-
+            submit_search(1);
 
             // setTimeout(function() {
             //     submit_search(1);
             // }, 500);
-
         }
     </script>
 
