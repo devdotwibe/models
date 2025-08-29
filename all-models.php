@@ -913,11 +913,11 @@ include('includes/helper.php');
 
                           $preminum_plan = "";
 
-                           $user_have_preminum = false;
+                           $is_user_preminum = false;
 
                         if ($result && $result['active']) {
 
-                            $user_have_preminum = true;
+                            $is_user_preminum = true;
 
                             $preminum_plan = $result['plan_status'];
                         }
@@ -942,11 +942,11 @@ include('includes/helper.php');
 
                                             <?php if($preminum_plan =='basic') { ?>
 
-                                            <span class="profile-badge badge-premium"><div class="badge premium-basic-user">⭐</div> Premium</span>
+                                            <span class="profile-badge badge-premium"><div class="badge-user premium-basic-user">⭐</div> Premium</span>
 
                                             <?php } else { ?>
 
-                                                 <span class="profile-badge badge-premium"><div class="badge diamond-elite-user"><span>💎</span></div> Premium</span>
+                                                 <span class="profile-badge badge-premium"><div class="badge-user diamond-elite-user"><span>💎</span></div> Premium</span>
 
                                             <?php } ?>
 
