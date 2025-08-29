@@ -12131,7 +12131,7 @@ overflow-x: auto !important;
     display: flex !important;
     flex-wrap: wrap;
     background-color: #00d2ff;
-    /* min-width: 243px !important; */
+    min-width: 243px !important;
 }
 
 #list_advertisements>div>div>*:last-child>*{
