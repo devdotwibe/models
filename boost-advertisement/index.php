@@ -34,6 +34,9 @@ else{
 	die;
 }
 
+
+    $adver_have_active_boost = AdverBoostActive($_GET['id'],$con );
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

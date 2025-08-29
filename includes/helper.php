@@ -292,6 +292,33 @@ function BoostedModelIds($con) {
 		return array_column($validBoosts, 'ad_id');
 	}
 
+	function AdverBoostActive($adv_id, $con)
+	{
+		$today = new DateTime();
+
+		$query = "SELECT * FROM boost_avertisement WHERE ad_id = ? ORDER BY created_at DESC LIMIT 1";
+		$stmt  = mysqli_prepare($con, $query);
+		mysqli_stmt_bind_param($stmt, "i", $adv_id);
+		mysqli_stmt_execute($stmt);
+		$result = mysqli_stmt_get_result($stmt);
+
+		if ($row = mysqli_fetch_assoc($result)) {
+
+			$createdAt = new DateTime($row['created_at']);
+			$duration  = (int)$row['duration'];
+
+			$expiryDate = clone $createdAt;
+			$expiryDate->modify("+$duration days");
+
+			if ($today <= $expiryDate) {
+				return $row; 
+			}
+		}
+
+		return false;
+	}
+
+
 function PrivacyModelIdsByUser($userDetails, $con, $children_preference, $height_range, $weight_range, $education_level) {
 	
 	$query = "SELECT id,unique_model_id 
