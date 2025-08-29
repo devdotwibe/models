@@ -835,19 +835,6 @@ else{
 
     function ConformLaunch()
     {
-        $('#conform_modal').addClass('active');
-    }
-
-    function showErrorModal(message) {
-
-        $('#modal_error_message').html("<p style='color:red;'>" + message + "</p>" +
-            '<button class="btn btn-primary" type="button" onclick="CloseModal(\'error_modal\')">Close</button>');
-        $('#error_modal .modal-title').text("Error");
-        $('#error_modal').addClass('active');
-    }
-
-    function SubmitLaunch() {
-
         var target_audience = $('#target_audience').val();
         var location = $('#location').val();
         var age_range = $('#age_range').val();
@@ -870,8 +857,6 @@ else{
                 "Plan Type": plan_type
             };
 
-
-
         for (var field in requiredFields) {
 
             if (!requiredFields[field] || requiredFields[field].trim() === "") {
@@ -880,7 +865,29 @@ else{
             }
         }
 
-     
+
+        $('#conform_modal').addClass('active');
+    }
+
+    function showErrorModal(message) {
+
+        $('#modal_error_message').html("<p style='color:red;'>" + message + "</p>" +
+            '<button class="btn btn-primary" type="button" onclick="CloseModal(\'error_modal\')">Close</button>');
+        $('#error_modal .modal-title').text("Error");
+        $('#error_modal').addClass('active');
+    }
+
+    function SubmitLaunch() {
+
+        var target_audience = $('#target_audience').val();
+        var location = $('#location').val();
+        var age_range = $('#age_range').val();
+        var budget = $('#budget').val();
+        var duration = $('#duration').val();
+        var total_amount = $('#total_amount').val();
+        var expected_views_range = $('#expected_views_range').val();
+        var reached_views_range = $('#reached_views_range').val();
+        var plan_type = $('#plan_type').val();
         var user_unique_id = $('#user_unique_id').val();
 
         var ad_id = $('#ad_id').val();
