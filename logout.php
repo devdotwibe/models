@@ -7,10 +7,13 @@ if (!empty($_SESSION['log_user_id'])) {
     $cacheDir = __DIR__ . '/cache/user_activity/';
     $file     = $cacheDir . 'user_' . $userId . '.txt';
 
-    $data = time() - (5 * 60);
+    if (!is_dir($cacheDir)) {
+        mkdir($cacheDir, 0777, true);
+    }
 
-    file_put_contents($file, json_encode($data));
+    file_put_contents($file, time() - (5 * 60));
 }
+
 
 
 session_destroy();
