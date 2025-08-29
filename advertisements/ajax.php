@@ -121,31 +121,43 @@ $limited = " limit $offset, ".$perPage;
 
 $where_clause = rtrim($where_clause,'and');
 
-if($where_clause){
+
+$finalQuery = $stringQuery . " " . $orderBy . " " . $limited;
+
+
+$all_data = DB::query($finalQuery, ...$params);
+
+
+$totalQuery = $stringQuery; 
+$total      = DB::query($totalQuery, ...$params);
+$output['total'] = DB::numRows();
+$output['total_page_all'] = $totalQuery;
+
+// if($where_clause){
 
   
-    $finalQuery = $stringQuery . " " . $orderBy . " " . $limited;
+//     $finalQuery = $stringQuery . " " . $orderBy . " " . $limited;
 
-    // $all_data = DB::query($stringQuery." where ".$where_clause." ".$sort_by.$limited,...$params);
+//     // $all_data = DB::query($stringQuery." where ".$where_clause." ".$sort_by.$limited,...$params);
 
-    $all_data = DB::query($finalQuery, ...$params);
+//     $all_data = DB::query($finalQuery, ...$params);
 
-    // $total = $output['total'] = DB::numRows($stringQuery." where ".$where_clause );
+//     // $total = $output['total'] = DB::numRows($stringQuery." where ".$where_clause );
 	
-	// $output['total_page_all'] = $stringQuery." where ".$where_clause;
+// 	// $output['total_page_all'] = $stringQuery." where ".$where_clause;
 
-    $totalQuery = $stringQuery;
-    $total      = DB::query($totalQuery, ...$params);
-    $output['total'] = DB::numRows();
-    $output['total_page_all'] = $totalQuery;
-    
-}
-else{
-    $all_data = DB::query($stringQuery." ".$sort_by.$limited );
-    $total = $output['total'] = DB::numRows($stringQuery);
+//     $totalQuery = $stringQuery;
+//     $total      = DB::query($totalQuery, ...$params);
+//     $output['total'] = DB::numRows();
+//     $output['total_page_all'] = $totalQuery;
+
+// }
+// else{
+//     $all_data = DB::query($stringQuery." ".$sort_by.$limited );
+//     $total = $output['total'] = DB::numRows($stringQuery);
 	
-	$output['total_page_all'] = $stringQuery;
-}
+// 	$output['total_page_all'] = $stringQuery;
+// }
 
 $output['total_page'] = (int) ceil($total/ $perPage);
 $output['page'] = $page_number;
