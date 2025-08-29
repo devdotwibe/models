@@ -945,7 +945,7 @@ else{
         {
             $('#lauch_title').text('Update Launch Campaign');
 
-            $('#launch_des').html('Do you want to conform the </span>Update Changes</strong>?');
+            $('#launch_des').html('Do you want to conform to </span>Update Changes</strong>?');
         }
         else
         {
