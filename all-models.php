@@ -956,6 +956,12 @@ include('includes/helper.php');
                                             <span class="profile-badge badge-verified"> <div class="badge-user verified-user">🛡</div> Verified</span>
                                         <?php } ?>
 
+                                        <?php if (!empty($rowesdw) &&  $rowesdw['as_a_model'] == 'Yes') { ?>
+
+                                            <span class="profile-badge creator-badge"><div class="badge-user creator">✨</div> Creator</span>
+
+                                        <?php } ?>
+
                                     </div>
                                 </a>
                             </div>
