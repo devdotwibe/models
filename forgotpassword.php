@@ -35,13 +35,18 @@ if($_POST){
 
 			$htmlContent = file_get_contents("mail/forgotmail.php");
 
-			$imageUrl = 'https://models.staging3.dotwibe.com/assets/images/logo-live.jpg';
+			// $imageUrl = 'https://models.staging3.dotwibe.com/assets/images/logo-live.jpg';
+
 			
+			$rootPath = $_SERVER['DOCUMENT_ROOT']; 
+
+    		$imagePath = $rootPath . '/' . ltrim('assets/images/logo-live.jpg', '/');
+
 			$base64 = '';
 
-			$imageData = @file_get_contents($imageUrl);
+			$imageData = @file_get_contents($imagePath);
 			if ($imageData !== false) {
-				$type = pathinfo($imageUrl, PATHINFO_EXTENSION);
+				$type = pathinfo($imagePath, PATHINFO_EXTENSION);
 				$base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
 			}
 
