@@ -478,12 +478,23 @@ $serviceArr = array('Providing services', 'Looking for services');
 
             perPage = $("#selpagesize").val();
 
-            var data = $('#search-form').serialize() + '&page=' + pageNum + '&data_list=' + perPage;
-            
+            // var data = $('#search-form').serialize() + '&page=' + pageNum + '&data_list=' + perPage;
+
+            var category = $('#categoryFilter').val();
+
+            var search_val =  $('#searchInput').val();
+
+            var country =  $('#i-hs-country').val();
+
             $.ajax({
                 type: 'GET',
                 url: "<?php echo $m_link . 'ajax.php' ?>",
-                data: data,
+                data:{
+
+                    category:category,
+                    country:country,
+                    search_val:search_val,
+                },
                 dataType: 'json',
                 success: function(response) {
                     $('#gridView').html(response.html);
