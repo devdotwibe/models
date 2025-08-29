@@ -499,6 +499,8 @@ else{
 
                              $location = "";
 
+                             $budget = 50;
+
                             if($adver_have_active_boost)
                             {
                                 $target_audience = $adver_have_active_boost['target_audience'];
@@ -506,6 +508,8 @@ else{
                                 $age_range = $adver_have_active_boost['age_range'];
 
                                 $location = $adver_have_active_boost['location'];
+
+                                $budget =  $adver_have_active_boost['budget'];
 
                                 $target_values   = array_map('trim', explode(',', strtolower($target_audience)));
 
@@ -636,10 +640,13 @@ else{
                         <!-- Budget -->
                         <div>
                             <div class="flex justify-between items-center mb-4">
+
                                 <label class="text-white font-semibold">Daily Budget</label>
+
                                 <span class="text-3xl font-bold text-green-400" id="budgetDisplay">$50</span>
                             </div>
-                            <input type="range" class="budget-slider w-full" min="10" id="budget" max="200" value="50" step="10" oninput="updateBudget(this.value)">
+                            <input type="range" class="budget-slider w-full" min="10" id="budget" max="200" value="<?=$budget?>" step="10" oninput="updateBudget(this.value)">
+
                             <div class="flex justify-between text-white/50 text-sm mt-2">
                                 <span>$10</span>
                                 <span>$200</span>
@@ -1007,6 +1014,14 @@ else{
 
     //     setInterval(createPremiumParticle, 150);
     // }
+
+    $(function() {
+        
+        var budget = '<?= $budget ?>';
+
+        setBudget(budget);
+        
+    });
 
     function selectQuickSetup(element, goal) {
         document.querySelectorAll('.quick-setup').forEach(card => {
