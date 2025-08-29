@@ -494,6 +494,7 @@ $serviceArr = array('Providing services', 'Looking for services');
                     category:category,
                     country:country,
                     search_val:search_val,
+                    page:pageNum,
                 },
                 dataType: 'json',
                 success: function(response) {
