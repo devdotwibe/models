@@ -1452,17 +1452,42 @@ include('includes/helper.php');
                         $is_user_new = IsNewUser($rowesdw['id']);
 
                         $is_user_preminum = CheckPremiumAccess($rowesdw['id']);
+
+                           $result = CheckPremiumAccess($rowesdw['id']);
+
+                          $preminum_plan = "";
+
+                           $is_user_preminum = false;
+
+                        if ($result && $result['active']) {
+
+                            $is_user_preminum = true;
+
+                            $preminum_plan = $result['plan_status'];
+                        }
+
+                        $prof_img = SITEURL.'assets/images/model-gal-no-img.jpg';
+
+                        if(!empty($get_modal_user[0]['profile_pic']))
+                        {
+                            if (checkImageExists($rowesdw['profile_pic'])) {
+                        
+                                $prof_img = SITEURL . $rowesdw['profile_pic'];
+                            }
+                        }
                 ?>
 
                         <!-- Profile Card 1 -->
                         <div class="profile-card">
+
                             <div class="profile-image-container">
+
                                 <a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
-                                    <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
+
+                                    <img src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
                                     <div class="profile-badges">
-
-
+                                        
                                         <span class="profile-badge badge-live">Live</span>
 
                                         <?php if ($is_user_new) { ?>
@@ -1473,18 +1498,29 @@ include('includes/helper.php');
 
                                         <?php if ($is_user_preminum) { ?>
 
-                                            <span class="profile-badge badge-premium">Premium</span>
+                                            <?php if($preminum_plan =='basic') { ?>
+
+                                            <span class="profile-badge badge-premium"><div class="badge-user premium-basic-user">⭐</div> Premium</span>
+
+                                            <?php } else { ?>
+
+                                                 <span class="profile-badge badge-premium"><div class="badge-user diamond-elite-user"><span>💎</span></div> Premium</span>
+
+                                            <?php } ?>
 
                                         <?php } ?>
 
                                         <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
-                                            <span class="profile-badge badge-verified">Verified</span>
+                                            <span class="profile-badge badge-verified"> <div class="badge-user verified-user">🛡</div> Verified</span>
                                         <?php } ?>
 
-                                    </div>
+                                        <?php if (!empty($rowesdw) &&  $rowesdw['as_a_model'] == 'Yes') { ?>
 
-                                  
+                                            <span class="profile-badge creator-badge"><div class="badge-user creator">✨</div> Creator</span>
 
+                                        <?php } ?>
+
+                                    </div>    
 
                                 </a>
                             </div>
