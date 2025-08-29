@@ -12076,6 +12076,11 @@ body.advt-page.my-purpose .scroll-indicator {
     display: flex;
     flex-wrap: wrap;
 } */
+.premium-table.advertisement-table {
+  border-radius: 20px 20px 0 0;
+}
+
+
 #list_advertisements .table-row>div .grid-cols-12 div:last-child>* {
 
     padding-left: .60rem !important;
