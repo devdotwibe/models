@@ -232,7 +232,7 @@ if (isset($_SESSION['log_user_id'])) {
             <p>Are you sure you want to delete your advertisements ?</p>
 
             <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
-            <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" onclick="confirmRemoveProfilePic()">Yes, Conform</button>
+            <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" onclick="ConformDelete()">Yes, Conform</button>
 
             <button class="btn btn-secondary" type="button" onclick="ConformCloseModal()">Cancel</button>
             </div>
@@ -270,6 +270,52 @@ if (isset($_SESSION['log_user_id'])) {
     function BulkDeleteAll()
     {
         $('#conform_adver').addClass('active');
+    }
+
+    function ConformDelete()
+    {
+        let formData = new FormData();
+
+        $('[name="adv_id[]"]').each(function () {
+
+            var bulk = $(this).is(":checked");
+
+            if(bulk)
+            {
+                formData.append("adv_id[]", $(this).val());
+            }
+            
+        });
+
+        formData.append("action",'bulk_delete');
+
+          $.ajax({
+
+                url: "<?php echo SITEURL.'advertisement/ajax.php'?>",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+
+                let res = JSON.parse(response);
+
+                    if (res.status === 'success') {
+
+
+                        showNotification('Advertisement delted successfully', 'success');
+
+                    } else {
+
+                        showNotification('Something Error Occur');
+                    }
+
+                },
+
+                error: function(xhr, status, error) {
+
+                }
+          });
     }
 
 
@@ -342,7 +388,8 @@ $(document).ready(function () {
                     page: page,
                     limit: itemsPerPage,
                     category : category,
-                    status : status
+                    status : status,
+                    action:'table_list',
                 },
             dataType: "json",
             success: function (response) {

@@ -875,6 +875,21 @@ function checkImageExists($relativePath) {
     return !empty($relativePath) && file_exists($imagePath);
 }
 
+function RemoveFilePath($relativePath) {
+    if (empty($relativePath)) {
+        return false;
+    }
+
+    $rootPath = rtrim($_SERVER['DOCUMENT_ROOT'], '/'); 
+    $imagePath = $rootPath . '/' . ltrim($relativePath, '/');
+
+    if (file_exists($imagePath)) {
+        return unlink($imagePath); 
+    }
+
+    return false;
+}
+
 
 function extra_setting($field,$default=false,$set_zero=false){
 	$where_clause = " `fields` = '".$field."' ";
