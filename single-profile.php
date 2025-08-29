@@ -2068,7 +2068,7 @@ body .owl-carousel .owl-nav.disabled {
 		<?php if(!empty($extra_details) && !empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ ?>
 			<?php if($extra_details['in_per_hour']){ ?>
                 <!-- Meetup Service -->
-                <div class="service-card" onclick="<?php if ($user_have_preminum) { ?>handleService('meetup')<?php } ?> ">
+                <div class="service-card" onclick="<?php if ($user_have_preminum) { ?>handleService('meetup')<?php } else { ?> ShowPreminumAcess() <?php }?>" >
                     <div class="service-header">
                         <div class="service-icon">☕</div>
                         <div class="service-info">
@@ -2100,7 +2100,7 @@ body .owl-carousel .owl-nav.disabled {
 			<?php if($extra_details['daily_rate']){ ?>
 
                 <!-- Travel Service -->
-                <div class="service-card" onclick="<?php if ($user_have_preminum && $plan =='diamond') { ?>handleService('travel')<?php } ?>">
+                <div class="service-card" onclick="<?php if ($user_have_preminum && $plan =='diamond') { ?>handleService('travel')<?php } else { ?>  ShowPreminumAcess() <?php }?>">
                     <div class="service-header">
                         <div class="service-icon">✈️</div>
                         <div class="service-info">
@@ -2128,7 +2128,7 @@ body .owl-carousel .owl-nav.disabled {
 		<?php } ?>
 
                 <!-- Collaboration Service -->
-                <div class="service-card" onclick="handleService('collaboration')">
+                <div class="service-card" onclick="<?php if ($user_have_preminum && $plan =='diamond') { ?>handleService('collaboration')<?php } else { ?>  ShowPreminumAcess() <?php }?> " >
                     <div class="service-header">
                         <div class="service-icon">🤝</div>
                         <div class="service-info">
@@ -3044,6 +3044,46 @@ body .owl-carousel .owl-nav.disabled {
 <script>
 
 
+    $(document).ready(function() {
+
+        $('.toggle-option').on('click', function() {
+
+            $('.toggle-option').removeClass('active');
+            $(this).addClass('active');
+
+            const billingType = $(this).data('billing');
+
+            $('.pricing-card').each(function() {
+                const $card = $(this);
+
+                const $originalPriceEl = $card.find('.original-price');
+                const $priceEl = $card.find('.price');
+                const $pricePeriodEl = $card.find('.price-period');
+                const $savingsTextEl = $card.find('.savings-text');
+                const $bonusTokensSpan = $card.find('.bonus-tokens span');
+                const $btn = $card.find('button.cta-button');
+
+                $originalPriceEl.text(`$${$originalPriceEl.data(`${billingType}-orig`)}`);
+                $priceEl.text(`$${$priceEl.data(billingType)}`);
+
+                $pricePeriodEl.text($pricePeriodEl.data(`${billingType}-period`));
+
+                $savingsTextEl.text($savingsTextEl.data(`${billingType}-save`));
+
+                const tokens = $bonusTokensSpan.data(`${billingType}-tokens`);
+                $bonusTokensSpan.text(`+ ${tokens} TLM tokens`);
+
+                if ($btn.length) {
+                    const planType = $card.hasClass('elite') ? 'diamond' : 'basic';
+                    $btn.attr('onclick', `upgradeAccount('${billingType}', '${planType}')`);
+                }
+            });
+        });
+
+        $('.toggle-option.active').click();
+    });
+
+
     $(document).ready(function () {
         var itemsPerPage = <?php echo $itemsPerPage; ?>;
         var totalPosts   = <?php echo $total_posts; ?>;
@@ -3188,6 +3228,61 @@ jQuery('.send_gift_btn').click(function(){
 		});
 	}
 });
+
+
+    function ShowPreminumAcess()
+    {
+        $('#premium-modal').addClass('show');
+    }
+
+
+
+      const premiumAmounts = <?php echo json_encode($premium_amounts); ?>;
+
+      function upgradeAccount(plan_type, plan_status) {
+
+            let key = '';
+            if (plan_status === 'basic') {
+                key = 'basic_with_discount';
+                if (plan_type === 'annual') {
+                    key = 'basic_with_discount_yearly';
+                }
+            } else if (plan_status === 'diamond') {
+                key = 'diamond_with_discount';
+                if (plan_type === 'annual') {
+                    key = 'diamond_with_discount_yearly';
+                }
+            }
+
+            const amount = premiumAmounts[key];
+
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'payments/preminum.php';
+
+            const inputPlanType = document.createElement('input');
+            inputPlanType.type = 'hidden';
+            inputPlanType.name = 'plan_type';
+            inputPlanType.value = plan_type;
+            form.appendChild(inputPlanType);
+
+            const inputPlanStatus = document.createElement('input');
+            inputPlanStatus.type = 'hidden';
+            inputPlanStatus.name = 'plan_status';
+            inputPlanStatus.value = plan_status;
+            form.appendChild(inputPlanStatus);
+
+            const inputAmount = document.createElement('input');
+            inputAmount.type = 'hidden';
+            inputAmount.name = 'amount';
+            inputAmount.value = amount;
+            form.appendChild(inputAmount);
+
+            document.body.appendChild(form);
+            form.submit();
+      }
+
+
 </script>
 
     <script>
