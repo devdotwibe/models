@@ -12145,7 +12145,7 @@ overflow-x: auto !important;
 }
 
 #list_advertisements>div>div>*:last-child {
-    display: flex !important;
+    display: flex !important; 
     flex-wrap: wrap;
     /* background-color: #00d2ff; */
     min-width: 243px !important;
@@ -12168,6 +12168,42 @@ display: flex !important;
   padding:0rem !important;
  
 }
+
+
+
+
+
+
+
+.profile-avatar-container {
+  border: 1px solid red;
+  border-radius: 50%;
+  max-width: 140px;
+  max-height: 140px;
+  aspect-ratio: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-avatar-container .owl-carousel{
+    width:100%;
+    height: 100%;
+}
+
+.profile-avatar-container .owl-carousel .owl-stage-outer{
+ width:100%;
+    height: 100%;
+}
+
+
+.profile-avatar-container .owl-carousel .owl-item img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+
+
 
 
 
