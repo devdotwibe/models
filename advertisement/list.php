@@ -169,9 +169,11 @@ if (isset($_SESSION['log_user_id'])) {
             <!-- Table Header -->
             <div class="px-8 py-6 border-b border-white/10">
                 <div class="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-white/80 uppercase tracking-wider">
-                    <div class="col-span-1">
+
+                    <div class="col-span-1" id="bulk_delete_check" style="display:none;">
                         <input type="checkbox" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
                     </div>
+
                     <div class="col-span-1">ID</div>
                     <div class="col-span-3">Title</div>
                     <div class="col-span-2">Category</div>
@@ -288,8 +290,10 @@ function deleteAd(id) {
     }
 
     function bulkActions() {
-        alert('📋 Bulk actions panel opened. Select multiple ads to perform batch operations.');
+
+        $('#bulk_delete_check').show();
     }
+    
 </script>
 
 
