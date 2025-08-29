@@ -478,7 +478,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 						<input type="hidden" name="name" value="<?php echo $userDetails['name']; ?>">
 						<input type="hidden" name="service_name" value="<?php echo $_GET['service']; ?>">
 						<input type="hidden" name="main_service" value="<?php echo $_GET['type']; ?>">
-                        <input type="hidden" name="token_cost" id="token_cost">
+                        <input type="hidden" name="tokens" id="tokens_used" value="<?php echo $_GET['token']; ?>" >
 
                         
 					
@@ -507,6 +507,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                 if (!fromDate || !toDate) {
                     $('#token_no').text('');
+					$('#tokens_used').val('<?php echo $_GET['token']; ?>');
                     return;
                 }
 
@@ -519,7 +520,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                     $('#end_date_error').show().text('From date must be after To date');
 
-                    $('#token_no').text('');
+                    $('#token_no').text(''); 
+					$('#tokens_used').val('<?php echo $_GET['token']; ?>');
 
                     return;
                 }
@@ -552,6 +554,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 }
 
                 $('#token_no').text(total);
+				$('#tokens_used').val(total);
 
                 $('#token_cost').val(total);
             }    

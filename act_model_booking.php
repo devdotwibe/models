@@ -28,10 +28,12 @@ if (isset($_POST['booking_submit'])) {
    }else $meeting_time = '';
    $model_ID = $_POST['model_ID'];
    $model_unique_id = $_POST['model_unique_id'];
+   
+   $tokens = $_POST['tokens'];
 
  	//$que = "INSERT INTO `model_booking` (`model_unique_id`, `name`, `phone`, `email`, `age`, `model_name`,`duration`,`meeting_date`,`meeting_time`,`address`,`city`,`state`,`zip_code`,`country`,`instructions`) VALUES ('".$name."', '".$phone."', '".$email."', '".$age."', '".$model_name."', '".$duration."', '".$meeting_date."','".$meeting_time."','".$address."','".$city."','".$state."','".$zip_code."','".$country."','".$instructions."')";
 
-	$arr = array('model_unique_id','user_unique_id','name','model_name','meeting_date','country','instructions','booking_for','service_name','main_service');  //,'booking_type'
+	$arr = array('model_unique_id','user_unique_id','name','model_name','tokens','meeting_date','country','instructions','booking_for','service_name','main_service');  //,'booking_type'
 	$post_data = array_from_post($arr);
 	
 	$post_data['phone'] = '';
