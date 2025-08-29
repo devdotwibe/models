@@ -13,9 +13,12 @@ if ($all_data) {
             <!-- Table Rows -->
             <div class="table-row px-8 py-6" id="adv_row_<?= $set_data['id'] ?>">
                 <div class="grid grid-cols-12 gap-4 items-center">
-                    <div class="col-span-1">
+
+                    <div class="col-span-1 adv_checkbox" style="display:none;">
+
                         <input type="checkbox" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
                     </div>
+                    
                     <div class="col-span-1 text-white/60 font-mono">#<?= $set_data['id'] ?></div>
                     <div class="col-span-3">
                         <div class="flex items-center space-x-3">

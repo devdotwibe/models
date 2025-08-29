@@ -292,8 +292,10 @@ function deleteAd(id) {
     function bulkActions() {
 
         $('#bulk_delete_check').show();
+
+        $('.adv_checkbox').show();
     }
-    
+
 </script>
 
 
