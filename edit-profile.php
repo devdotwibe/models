@@ -3714,6 +3714,47 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
   <script>
 
+
+       $(document).ready(function() {
+
+            $('.toggle-option').on('click', function() {
+
+                $('.toggle-option').removeClass('active');
+                $(this).addClass('active');
+
+                const billingType = $(this).data('billing');
+
+                $('.pricing-card').each(function() {
+                    const $card = $(this);
+
+                    const $originalPriceEl = $card.find('.original-price');
+                    const $priceEl = $card.find('.price');
+                    const $pricePeriodEl = $card.find('.price-period');
+                    const $savingsTextEl = $card.find('.savings-text');
+                    const $bonusTokensSpan = $card.find('.bonus-tokens span');
+                    const $btn = $card.find('button.cta-button');
+
+                    $originalPriceEl.text(`$${$originalPriceEl.data(`${billingType}-orig`)}`);
+                    $priceEl.text(`$${$priceEl.data(billingType)}`);
+
+                    $pricePeriodEl.text($pricePeriodEl.data(`${billingType}-period`));
+
+                    $savingsTextEl.text($savingsTextEl.data(`${billingType}-save`));
+
+                    const tokens = $bonusTokensSpan.data(`${billingType}-tokens`);
+                    $bonusTokensSpan.text(`+ ${tokens} TLM tokens`);
+
+                    if ($btn.length) {
+                        const planType = $card.hasClass('elite') ? 'diamond' : 'basic';
+                        $btn.attr('onclick', `upgradeAccount('${billingType}', '${planType}')`);
+                    }
+                });
+            });
+
+            $('.toggle-option.active').click();
+        });
+
+
       const premiumAmounts = <?php echo json_encode($premium_amounts); ?>;
 
       function upgradeAccount(plan_type, plan_status) {
