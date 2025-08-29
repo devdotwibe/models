@@ -2068,7 +2068,7 @@ body .owl-carousel .owl-nav.disabled {
 		<?php if(!empty($extra_details) && !empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ ?>
 			<?php if($extra_details['in_per_hour']){ ?>
                 <!-- Meetup Service -->
-                <div class="service-card" onclick="<?php if ($user_have_preminum) { ?>handleService('meetup')<?php } else { ?> ShowPreminumAcess() <?php }?>" >
+                <div class="service-card" onclick="<?php if (!$user_have_preminum) { ?>handleService('meetup')<?php } ?>" >
                     <div class="service-header">
                         <div class="service-icon">☕</div>
                         <div class="service-info">
@@ -2100,7 +2100,7 @@ body .owl-carousel .owl-nav.disabled {
 			<?php if($extra_details['daily_rate']){ ?>
 
                 <!-- Travel Service -->
-                <div class="service-card" onclick="<?php if ($user_have_preminum && $plan =='diamond') { ?>handleService('travel')<?php } else { ?>  ShowPreminumAcess() <?php }?>">
+                <div class="service-card" onclick="<?php if ( !($user_have_preminum && $plan =='diamond') ) { ?>handleService('travel')<?php } ?>">
                     <div class="service-header">
                         <div class="service-icon">✈️</div>
                         <div class="service-info">
@@ -2128,7 +2128,7 @@ body .owl-carousel .owl-nav.disabled {
 		<?php } ?>
 
                 <!-- Collaboration Service -->
-                <div class="service-card" onclick="<?php if ($user_have_preminum && $plan =='diamond') { ?>handleService('collaboration')<?php } else { ?>  ShowPreminumAcess() <?php }?> " >
+                <div class="service-card" onclick="<?php if (!($user_have_preminum && $plan =='diamond')) { ?>handleService('collaboration')<?php }  ?>" >
                     <div class="service-header">
                         <div class="service-icon">🤝</div>
                         <div class="service-info">
