@@ -181,7 +181,18 @@ if (isset($_SESSION['log_user_id'])) {
                     <div class="col-span-2">Category</div>
                     <div class="col-span-2">Date</div>
                     <div class="col-span-1">Status</div>
-                    <div class="col-span-2">Options</div>
+                    <div class="col-span-2">Options
+
+                    <button style="display: none;" class="btn-danger px-3 py-2 rounded-lg text-white text-sm del" onclick="BulkDeleteAll()">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                    </button>
+
+                    </div>
+
                 </div>
             </div>
 			
@@ -247,6 +258,22 @@ if (isset($_SESSION['log_user_id'])) {
 
 
         $('[name="adv_id[]"]').each(function () {
+
+            var bulk = $(this).is(":checked");
+
+            if(bulk)
+            {
+                $('#bulk_delete_button').show();
+            }
+            
+        });
+    }
+
+    function DeleteCheck()
+    {
+         $('#bulk_delete_button').hide();
+
+          $('[name="adv_id[]"]').each(function () {
 
             var bulk = $(this).is(":checked");
 

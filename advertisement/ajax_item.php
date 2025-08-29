@@ -16,7 +16,7 @@ if ($all_data) {
 
                     <div class="col-span-1 adv_checkbox" style="display:none;">
 
-                        <input type="checkbox" name="adv_id[]" value="<?= $set_data['id'] ?>" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                        <input type="checkbox" name="adv_id[]" onchange="DeleteCheck()" value="<?= $set_data['id'] ?>" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
                     </div>
                     
                     <div class="col-span-1 text-white/60 font-mono">#<?= $set_data['id'] ?></div>
@@ -51,12 +51,14 @@ if ($all_data) {
                             <button class="btn-success px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="window.location='<?= SITEURL . 'advertisement/edit.php?id=' . $set_data['id'] ?>'">Edit</button>
                             <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="window.location='<?= SITEURL . 'advertisements/view.php?id=' . $set_data['id'] ?>'">View</button>
                             <button class="btn-warning px-4 py-2 rounded-lg text-white text-sm font-semibold" onclick="window.location='<?= SITEURL . 'boost-advertisement/index.php?id=' . $set_data['id'] ?>'">Promote</button>
+
                             <button class="btn-danger px-3 py-2 rounded-lg text-white text-sm del_<?= $set_data['id'] ?>" onclick="deleteAd(<?php echo $set_data['id']; ?>)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="3 6 5 6 21 6"></polyline>
                                     <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                 </svg>
                             </button>
+                            
                         </div>
                     </div>
                 </div>
