@@ -12132,7 +12132,7 @@ overflow-x: auto !important;
 #list_advertisements>div>div>*:last-child {
     display: flex !important;
     flex-wrap: wrap;
-    background-color: #00d2ff;
+    /* background-color: #00d2ff; */
     min-width: 243px !important;
 }
 
@@ -12147,6 +12147,10 @@ display: flex !important;
     padding-left: .60rem !important;
     padding-right: .60rem !important;
     font-size: .75rem;
+}
+#list_advertisements > div > div > :last-child *:last-child{
+    padding-left: 1rem !important;
+        padding-right: 1rem !important;
 }
 
 
