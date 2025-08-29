@@ -5,6 +5,10 @@ include('includes/helper.php');
 
 
 if (isset($_POST['booking_submit'])) {
+	
+	if(isset($_SESSION["log_user_id"])){
+$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+if($userDetails){
 
    $name = $_POST['name'];
    $model_unique_id = $_POST['model_unique_id'];
@@ -68,6 +72,14 @@ if (isset($_POST['booking_submit'])) {
 
 		DB::insert('all_notifications', $notif_data);
 		$created_id_notif = DB::insertId();
+		
+		// Update user balance
+						DB::query(
+							"UPDATE model_user SET balance = ROUND(balance - %d) WHERE id = %s",
+							$tokens,
+							$userDetails['id']
+						);
+		
  
       echo '<script>alert("Booking Successfully");
 	  window.location="single-profile.php?m_unique_id='.$model_unique_id.'"</script>';
@@ -122,12 +134,23 @@ if (isset($_POST['booking_submit'])) {
                 echo '<script>window.location="login.php"</script>';
          }*/
 
-    }
-    else{
-      echo '<script>alert("You have Not Booked")</script>';
-      echo '<script>window.location="booking.php"</script>';
-    }
+		}
+		else{
+		  echo '<script>alert("You have Not Booked")</script>';
+		  echo '<script>window.location="booking.php"</script>';
+		}
+	
+	}
+	else{
 
+		echo "<script>alert('Please login');</script>";
+		echo "<script>window.location='login.php'</script>";
+	}
+}
+else{
+	echo "<script>alert('Please login');</script>";
+	echo "<script>window.location='login.php'</script>";
+}
  
 }
 
