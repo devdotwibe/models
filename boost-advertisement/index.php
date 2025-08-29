@@ -770,11 +770,16 @@ else{
                             </svg>
                             Preview
                         </button>
-                        <button type="button" class="btn-primary px-8 py-4 rounded-xl font-semibold" onclick="ConformLaunch()">
+                        
+                        <button type="button" class="btn-primary px-8 py-4 rounded-xl font-semibold" <?php if($adver_have_active_boost) { ?> onclick="ConformLaunch('update')" <?php }else { ?>  onclick="ConformLaunch('create')" <?php } ?> >
+
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline">
+
                                 <path d="M5 12l5 5l10-10"></path>
+
                             </svg>
                             Launch Campaign
+
                         </button>
                     </div>
                 </div>
@@ -823,7 +828,7 @@ else{
      <div class="modal-overlay" id="conform_modal">
           <div class="modal">
               <div class="modal-header">
-              <h2 class="modal-title">Launch Campaign</span></h2>
+              <h2 class="modal-title" id="lauch_title">Launch Campaign</span></h2>
 
               <button class="close-modal" type="button" onclick="CloseModal('conform_modal')">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -835,7 +840,7 @@ else{
 
               <div class="modal-body">
 
-              <p>Do you want to conform the </span>Launch Campaign</strong>?</p>
+                <p id="launch_des" >Do you want to conform the </span>Launch Campaign</strong>?</p>
 
                 <div style="margin-top: 20px;">
 
@@ -904,7 +909,7 @@ else{
 
     }
 
-    function ConformLaunch()
+    function ConformLaunch(status)
     {
         var target_audience = $('#target_audience').val();
         var location = $('#location').val();
@@ -936,8 +941,22 @@ else{
             }
         }
 
+        if(update =='update')
+        {
+            $('#lauch_title').text('Update Launch Campaign');
+
+            $('#launch_des').text('Do you want to conform the </span>Update Changes</strong>?');
+        }
+        else
+        {
+
+            $('#lauch_title').text('Launch Campaign');
+
+            $('#launch_des').text('Do you want to conform the </span>Launch Campaign</strong>?');
+        }
 
         $('#conform_modal').addClass('active');
+
     }
 
     function showErrorModal(message) {
