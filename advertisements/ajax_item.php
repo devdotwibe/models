@@ -12,6 +12,17 @@ if($all_data){
         $adver_liked = AdverLikedCount($set_data['id']);
 
         $is_user_liked = AdverLiked($set_data['id'],$_SESSION['log_user_id']);
+
+           $adv_img = SITEURL.'assets/images/advert-no-image.jpg';
+
+        if(!empty($set_data['image']))
+        {
+            if (checkImageExists('uploads/banners/'.$set_data['image'])) {
+            
+                $adv_img = SITEURL .'uploads/banners/'.$set_data['image'];
+            }
+        }        
+               
 ?>
 
 
@@ -30,7 +41,7 @@ if($all_data){
 
                     <?php } ?>
 
-                        <img src="<?php echo SITEURL.'uploads/banners/'.$set_data['image']; ?>" alt="Social Media Influencer">
+                        <img src="<?php echo $adv_img ?>" alt="Social Media Influencer">
                     </div>
                     <div class="ad-content">
                         <h3 class="ad-title"><?php echo $set_data['name']; ?></h3>
