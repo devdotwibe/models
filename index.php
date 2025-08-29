@@ -258,7 +258,7 @@ include('includes/helper.php');
                                 </button>
                             </div> -->
 
-                            <form id="signupForm" class="space-y-5" method="post" enctype="multipart/form-data" onsubmit="SubmitForm()" action="act-register.php">
+                            <form id="signupForm" class="space-y-5" method="post" enctype="multipart/form-data"  onsubmit="return SubmitForm()"  action="act-register.php">
 
 
                                 <?php if(isset($_SESSION["user_name_exist"] )) { ?>
