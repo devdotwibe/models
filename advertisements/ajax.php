@@ -66,7 +66,6 @@ $sort_type = $_GET['sort_type'];
     $basic_filed_users = GetUsersWithBasicFilled();
 
     if (!empty($basic_filed_users)) {
-
         $basic_filed_users = array_map('intval', $basic_filed_users);
         $basicList = implode(',', $basic_filed_users);
 
@@ -76,19 +75,15 @@ $sort_type = $_GET['sort_type'];
             JOIN model_user mu ON mu.id = tb.user_id 
             WHERE mu.verified = '1' 
             AND mu.id IN ($basicList)
-            $order
         ";
     } else {
-   
         $stringQuery = "
             SELECT tb.*, mu.age 
             FROM banners tb 
             JOIN model_user mu ON mu.id = tb.user_id 
-            WHERE 1 = 0 $order
+            WHERE 1 = 0
         "; 
-
     }
-
 
     $params = [];
     $where  = [];
@@ -110,17 +105,18 @@ $sort_type = $_GET['sort_type'];
         $stringQuery .= " AND " . implode(" AND ", $where);
     }
 
-    $orderBy = !empty($order) ? $order : "";
+    $orderBy = !empty($order) ? " $order " : "";
     $limited = " LIMIT $offset, " . (int)$perPage;
 
-    $finalQuery = $stringQuery . " " . $orderBy . " " . $limited;
+    // final paginated query
+    $finalQuery = $stringQuery . $orderBy . $limited;
+    $all_data   = DB::query($finalQuery, ...$params);
 
-    $all_data = DB::query($finalQuery, ...$params);
+    $totalQuery = "SELECT COUNT(*) AS cnt FROM (" . $stringQuery . ") AS t";
+    $total   = DB::queryFirstRow($totalQuery, ...$params);
 
-    $totalQuery = $stringQuery;
-    $total      = DB::query($totalQuery, ...$params);
-    $output['total'] = DB::numRows();
-    $output['total_page_all'] = $totalQuery;
+    $output['total']          = $total['cnt'];
+    $output['total_page_all'] = $stringQuery;
 
 // if($where_clause){
 
