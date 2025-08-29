@@ -12229,24 +12229,11 @@ overflow-x: auto !important;
 }
 
 .profile-badge.creator-badge {
-    width: 30px;
-    height: 30px;
-    padding: 0 !important;
+backdrop-filter: none !important;
+    box-shadow: none !important;
 }
 
-.profile-badge.creator-badge .badge-user.creator {
-  width: 100%;
-  height: 100%;
-}
 
-.creator::before{
-    width: 100%;
-  height: 100%
-}
-.creator::after{
-    width: 100%;
-  height: 100%
-}
 
 
 
