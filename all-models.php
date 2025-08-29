@@ -913,11 +913,11 @@ include('includes/helper.php');
 
                           $preminum_plan = "";
 
-                           $user_have_preminum = false;
+                           $is_user_preminum = false;
 
                         if ($result && $result['active']) {
 
-                            $user_have_preminum = true;
+                            $is_user_preminum = true;
 
                             $preminum_plan = $result['plan_status'];
                         }
