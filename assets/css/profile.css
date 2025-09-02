@@ -6679,7 +6679,7 @@ button.btn-secondary.add-intrst {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 18px;
     width: 100%;
 }
 
