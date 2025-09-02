@@ -195,6 +195,8 @@ else{
               {
                  $staus = "pending_status";
               }
+			  
+			  $serv_tokens = $item['tokens'];
         ?>
 
             <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['main_service'] ?> all_status all_type" data-status="pending" data-type="group">
@@ -270,6 +272,12 @@ else{
                         <span class="amount-display">$<?php echo $token_amount ?></span>
 
                     <?php }?>
+					
+					<?php if(!empty($serv_tokens)){ ?>
+						
+						<span class="token-display"><img src="<?= SITEURL ?>assets/images/token.png"><?php echo $serv_tokens ?></span>
+						
+					<?php } ?>
 
                     <?php if($item['status'] ==='Completed') { ?>
 
@@ -330,8 +338,13 @@ else{
 
                 <?php } else { ?>
                     
+					<?php  if($userDetails['as_a_model'] =='Yes') { ?>
+					
                     <button class="btn btn-success when_aprrove_button<?php echo $item['id'] ?>" data-id="<?php echo $item['id']; ?>" onclick="acceptRequest(this)">Accept</button>
                     <button class="btn btn-danger when_aprrove_button<?php echo $item['id'] ?>" data-id="<?php echo $item['id']; ?>" onclick="declineRequest(this)">Decline</button>
+					
+					<?php } ?>
+					
                     <button class="btn btn-message when_aprrove_button<?php echo $item['id'] ?>" onclick="openMessage(this)">Message</button>
 
                 <?php }?>
