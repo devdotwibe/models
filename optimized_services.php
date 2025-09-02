@@ -137,11 +137,12 @@ else{
 
     <!-- Filters -->
     <div class="filters">
+
       <button class="filter-btn active" data-filter="all" onclick="FilterTab('all_type',this)">All Types</button>
-      <button class="filter-btn" data-filter="group" onclick="FilterTab('Group',this)" >Group Chat</button>
-      <button class="filter-btn" data-filter="dating" onclick="FilterTab('International',this)">International Tour</button>
-      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('Luxury',this)">Luxury Companion</button>
-      <button class="filter-btn" data-filter="international" onclick="FilterTab('premium-experience',this)">premium-experience</button>
+      <button class="filter-btn" data-filter="group" onclick="FilterTab('meet',this)" >Meetup</button>
+      <button class="filter-btn" data-filter="dating" onclick="FilterTab('travel',this)">Travel</button>
+      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('collaborate',this)">Collaborate</button>
+
     </div>
 
     <div id="services-list" class="space-y-3">
@@ -196,10 +197,12 @@ else{
               }
         ?>
 
-            <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['booking_type'] ?> all_status all_type" data-status="pending" data-type="group">
+            <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['main_service'] ?> all_status all_type" data-status="pending" data-type="group">
+
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
+
                     <img src="<?php echo $defaultImage ?>" alt="Client" class="client-avatar border-orange-400">
                     <div>
 
