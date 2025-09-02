@@ -1484,8 +1484,9 @@ body .owl-carousel .owl-nav.disabled {
                     
             <?php } ?>
 
-
-                    <!-- Services Card -->
+            
+                <?php if($modelDetails['as_a_model'] =='Yes') { ?>
+                    
                     <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
                         <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
                         <ul class="space-y-4">
@@ -1592,6 +1593,8 @@ body .owl-carousel .owl-nav.disabled {
                         </button> -->
 
                     </div>
+
+                <?php } ?>
 
                     <!-- Similar Models Card -->
 
