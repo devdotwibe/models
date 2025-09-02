@@ -506,13 +506,16 @@ else{
                         </a>
 						
 						<?php if (isset($_SESSION['log_user_unique_id']) && $_SESSION['log_user_unique_id'] == $userDetails['unique_id']) { }else{ ?>
-                        <button class="btn-secondary action-btn" onclick="window.location='<?= SITEURL ?>user/chat/user_chat.php?id=<?= $form_data['user_id'] ?>'"  >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                            </svg>
-                            Contact Advertiser
-                        </button>
+
+                            <button class="btn-secondary action-btn" onclick="window.location='<?= SITEURL ?>chat-app.php'"  >
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                                Contact Advertiser
+                            </button>
+
 						<?php } ?>
+
                         <button class="btn-secondary action-btn" onclick="saveAd()">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
