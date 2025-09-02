@@ -451,7 +451,7 @@ if(!empty($userDetails['profile_pic'])){
             }
         }
     </style>
-    
+
 </head>
 
 <body class="socialwall-page">
@@ -1011,14 +1011,14 @@ if(!empty($userDetails['profile_pic'])){
 
                             <?php if ($preminum_plan == 'basic') { ?>
 
-                                <span class="profile-badge badge-premium">
+                                <span class="profile-badge badge-premium user-index">
                                     <div class="badge-user premium-basic-user">⭐</div>
                                     <p>Premium</p>
                                 </span>
 
                             <?php } else { ?>
 
-                                <span class="profile-badge badge-premium">
+                                <span class="profile-badge badge-premium user-index">
                                     <div class="badge-user diamond-elite-user"><span>💎</span></div>
                                     <p>Premium</p>
                                 </span>
@@ -1029,7 +1029,7 @@ if(!empty($userDetails['profile_pic'])){
 
                         <?php if (!empty($modelDetails) && $modelDetails['status'] == 'Published') { ?>
 
-                            <span class="profile-badge badge-verified">
+                            <span class="profile-badge badge-verified user-index">
                                 <div class="badge-user verified-user">🛡</div>
                                 <p>Verified</p>
                             </span>
@@ -1038,7 +1038,7 @@ if(!empty($userDetails['profile_pic'])){
 
                         <?php if (!empty($modelDetails) &&  $modelDetails['as_a_model'] == 'Yes') { ?>
 
-                            <span class="profile-badge creator-badge">
+                            <span class="profile-badge creator-badge user-index">
                                 <div class="badge-user creator">✨</div>
                                 <p>Creator</p>
                             </span>
