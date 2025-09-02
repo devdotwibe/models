@@ -693,15 +693,18 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         $totalAmount = getUserTotalTransactionAmount($con, $user_id);
         ?>
 
-        <div>
-          <div class="flex items-center text-3xl font-bold mb-1">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token-large mr-2">
+        <?php if($is_model) { ?>
+          <div>
+            <div class="flex items-center text-3xl font-bold mb-1">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token-large mr-2">
 
-            <?php echo $totalAmount; ?>
+              <?php echo $totalAmount; ?>
 
+            </div>
+            <div class="text-white/80">Total Earned</div>
           </div>
-          <div class="text-white/80">Total Earned</div>
-        </div>
+
+        <?php } ?>
 
 
         <div>
