@@ -35,6 +35,8 @@ if (isset($_SESSION['log_user_unique_id'])) {
   }
 
     $is_model = $userDetails['as_a_model'] =='Yes' ? true : false;
+
+    $guest_model = $userDetails['id'] == $modelDetails['id'] ? true : false;
 }
 
 
@@ -902,7 +904,7 @@ body .owl-carousel .owl-nav.disabled {
                                                     About
                                                 </div>
 
-                                                <?php if($is_model) { ?>
+                                                <?php if($guest_model) { ?>
                                             
                                                     <div class="action-item" id="servicesBtn" bis_skin_checked="1">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
