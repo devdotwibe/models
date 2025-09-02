@@ -4974,9 +4974,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               const value = data[key] || 0;
               const height = value * scaleFactor;
 
-              const outerbar = document.createElement("div");
+              // const outerbar = document.createElement("div");
 
-              outerbar.className="outer-bar";
+              // outerbar.className="outer-bar";
 
               const bar = document.createElement("div");
               bar.className = "chart-bar";
@@ -4987,11 +4987,12 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               label.className = "chart-label";
               label.innerText = key;
 
-              outerbar.appendChild(bar);
-              outerbar.appendChild(label);
+              // outerbar.appendChild(bar);
+              // outerbar.appendChild(label);
 
-              chartContainer.appendChild(outerbar);
-              // chartContainer.appendChild(label);
+              // chartContainer.appendChild(outerbar);
+              chartContainer.appendChild(bar);
+                      chartContainer.appendChild(label);
           });
       }
 
