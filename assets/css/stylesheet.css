@@ -14420,7 +14420,7 @@ overflow-x: auto !important;
         height: 20px !important;
     }
 
-    .badge-user.verified-user { 
+    .badge-user.verified-user {
         width: 20px !important;
         height: 20px !important;
 
@@ -14432,9 +14432,11 @@ overflow-x: auto !important;
 
     }
 
-    .profile-badge.creator-badge p ,.profile-badge.badge-verified p, .profile-badge.badge-premium p{
-    font-size: 9px;
-}
+    .profile-badge.creator-badge p,
+    .profile-badge.badge-verified p,
+    .profile-badge.badge-premium p {
+        font-size: 9px;
+    }
 
 
     .premimum-model1 .filter-modal-actions .modal-btn {
