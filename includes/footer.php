@@ -195,7 +195,7 @@ $currentpage = $_SERVER['REQUEST_URI'];
 
 <?php if(isset($_SESSION["log_user_id"])){ ?>
 
-  <nav class="mobile-nav md:hidden footer-mobile-menus">
+  <nav class="socialwall-page mobile-nav md:hidden footer-mobile-menus">
     <div class="flex justify-around">
       <div class="mobile-nav-item active">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
