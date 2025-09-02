@@ -614,7 +614,7 @@ if (mysqli_num_rows($service_group) > 0) {
 	
 }else{
 	
-	echo 'Not found any liked members.';
+	echo 'No members liked it.';
 	
 } ?>
 
