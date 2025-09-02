@@ -170,10 +170,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $coins = $model_data['all_30day_access_price'];
                                 $sql = "INSERT INTO `user_all_access`(`model_id`, `user_id`, `start_date`, `end_date`, `status`) VALUES ('".$_POST['model_id']."','".$userDetails['unique_id']."','".date("Y-m-d")."','".date('Y-m-d', strtotime("+30 days"))."','1')";
 
+                                $date = date('Y-m-d H:i:s');
+
                                 DB::query($sql);
+
                                 DB::query("UPDATE model_user SET balance=round(%d+balance) WHERE id=%s", $coins, $modelDetails['id']);
                         
                                 DB::query("UPDATE model_user SET balance=round(balance-%d) WHERE id=%s", $coins, $userDetails['id']);
+
+
+                                	DB::insert('model_user_transaction_history', array(
+                                        'user_id' => $userDetails['id'],
+                                        'other_id' => $model_data['id'],
+                                        'amount' => $coins,
+                                        'type' => 'all_access_model',
+                                        'created_at' => $date,
+                                    ));
 
                                     // echo '<script>alert("You have successfully subscribe 30 days all access. It will reflect at your profile within 2-3 hour.");</script>';
                                     // echo '<script>window.history.back();</script>';	
