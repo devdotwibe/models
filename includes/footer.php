@@ -197,7 +197,7 @@ $currentpage = $_SERVER['REQUEST_URI'];
     <div class="container mx-auto">
         <div class="grid md:grid-cols-4 gap-12 mb-16">
             <div>
-                <h3 class="text-3xl font-bold gradient-text heading-font mb-6">Live Models</h3>
+                <h3 class="text-3xl font-bold gradient-text heading-font mb-6">The Live Models</h3>
                 <p class="text-white/60 mb-6 text-lg leading-relaxed">The premier platform for authentic connections. Chat, Watch, and Meet with amazing verified models in a safe, secure environment.</p>
                 <div class="flex space-x-4">
                     <!-- Social Media Icons -->
