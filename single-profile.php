@@ -36,7 +36,7 @@ if (isset($_SESSION['log_user_unique_id'])) {
 
     $is_model = $userDetails['as_a_model'] =='Yes' ? true : false;
 
-    $guest_model = $userDetails['id'] == $modelDetails['id'] ? true : false;
+    $guest_model = $modelDetails['as_a_model'] =='Yes' ? true : false;
 }
 
 
