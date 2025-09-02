@@ -893,122 +893,157 @@ body .owl-carousel .owl-nav.disabled {
 
                                         <div class="action-menu" bis_skin_checked="1">
 
-                                <div class="action-item" id="aboutBtn" bis_skin_checked="1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                    </svg>
-                                    About
-                                </div>
+                                                <div class="action-item" id="aboutBtn" bis_skin_checked="1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                                    </svg>
+                                                    About
+                                                </div>
 
-                               
-                                <div class="action-item" id="servicesBtn" bis_skin_checked="1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                                    </svg>
-                                    Services
-                                </div>
+                                                <?php if($is_model) { ?>
+                                            
+                                                    <div class="action-item" id="servicesBtn" bis_skin_checked="1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                                        </svg>
+                                                        Services
+                                                    </div>
 
-                                <div class="action-item" id="wishlistBtn" bis_skin_checked="1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                    </svg>
-                                    Wishlist
-                                </div>
+                                                    <div class="action-item" id="wishlistBtn" bis_skin_checked="1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                                        </svg>
+                                                        Wishlist
+                                                    </div>
 
-                                
-                                <?php
-                                        $uniqueModelId = isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : '';
-                                        if ($_SESSION["log_user_unique_id"] == $session_id) {
-                                            $link = SITEURL . 'live-stream/stream.php?user=streamer&unique_model_id=' . $uniqueModelId;
-
-                                          
-                                        } else {
-                                            $link = SITEURL . 'live-stream/view.php?user=viewer&unique_model_id=' . $uniqueModelId;
-
-                                        }
-                                        if($userDetails['as_a_model'] =='Yes')
-                                        {
-                                            $label = "Go Live";
-                                        }
-                                        else
-                                        {
-                                             $label = "Watch Live";
-                                        }
-                                    ?>
-
-                                    <div class="action-item" id="liveBtn" bis_skin_checked="1" onclick="window.location.href='<?php echo $link; ?>' ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <circle cx="12" cy="12" r="4"></circle>
-                                        </svg>
-                                        <?= $label ?>
-                                    </div>
-
-								<?php if($userDetails['as_a_model'] =='No') { ?>
-								
-                                <div class="action-item" id="tipBtn" bis_skin_checked="1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="12" y1="1" x2="12" y2="23"></line>
-                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                                    </svg>
-                                    Send Tip
-                                </div>
-
-
-                                <div class="action-item" id="giftBtn" bis_skin_checked="1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="3" y="8" width="18" height="4" rx="1"></rect>
-                                        <path d="M12 8v13"></path>
-                                        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
-                                        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
-                                    </svg>
-                                    Send Gift
-                                </div>
-
-                                <?php } ?>
-
-                                <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] != $_SESSION['log_user_unique_id']) { 
-                                    
-                                           $sql_ap = "SELECT * FROM model_extra_details WHERE unique_model_id = '".$_GET['m_unique_id']."'";
-
-                                           $model_data = DB::queryFirstRow($sql_ap);
-
-                                        if($model_data['all_30day_access'] == 'Yes' && !$isuser_have_access) {
-                                    ?>
-
-                                    <div onclick="ConformAllAccess('<?php echo $model_data['all_30day_access_price'] ?>')" class="action-item" id="all_access_30" bis_skin_checked="1" >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <circle cx="12" cy="12" r="4"></circle>
-                                        </svg>
-                                        All Access (30 Days)
-                                    </div>
-
-                                <?php } } ?>
-
-                                <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
-
-                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         
-                                        <rect x="3" y="8" width="18" height="4" rx="1"></rect>
-                                        <path d="M12 8v13"></path>
-                                        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
-                                        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
-                                    </svg> -->
+                                                    <?php
+                                                            $uniqueModelId = isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : '';
+                                                            if ($_SESSION["log_user_unique_id"] == $session_id) {
+                                                                $link = SITEURL . 'live-stream/stream.php?user=streamer&unique_model_id=' . $uniqueModelId;
 
-                                    <div class="all-link-btn">
+                                                            
+                                                            } else {
+                                                                $link = SITEURL . 'live-stream/view.php?user=viewer&unique_model_id=' . $uniqueModelId;
 
-                                        <img src="<?=SITEURL?>assets/images/all-links.svg" />
-                                        
-                                    </div>
+                                                            }
+                                                            if($userDetails['as_a_model'] =='Yes')
+                                                            {
+                                                                $label = "Go Live";
+                                                            }
+                                                            else
+                                                            {
+                                                                $label = "Watch Live";
+                                                            }
+                                                        ?>
 
-                                    All my links
-                                </div>
+                                                        <div class="action-item" id="liveBtn" bis_skin_checked="1" onclick="window.location.href='<?php echo $link; ?>' ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <circle cx="12" cy="12" r="10"></circle>
+                                                                <circle cx="12" cy="12" r="4"></circle>
+                                                            </svg>
+                                                            <?= $label ?>
+                                                        </div>
+
+                                                    <?php if($userDetails['as_a_model'] =='No') { ?>
+                                                    
+                                                    <div class="action-item" id="tipBtn" bis_skin_checked="1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                                                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                                        </svg>
+                                                        Send Tip
+                                                    </div>
 
 
-                                    </div>
+                                                <div class="action-item" id="giftBtn" bis_skin_checked="1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                                                        <path d="M12 8v13"></path>
+                                                        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                                                        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+                                                    </svg>
+                                                    Send Gift
+                                                </div>
+
+                                                <?php } ?>
+
+                                                <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] != $_SESSION['log_user_unique_id']) { 
+                                                    
+                                                        $sql_ap = "SELECT * FROM model_extra_details WHERE unique_model_id = '".$_GET['m_unique_id']."'";
+
+                                                        $model_data = DB::queryFirstRow($sql_ap);
+
+                                                        if($model_data['all_30day_access'] == 'Yes' && !$isuser_have_access) {
+                                                    ?>
+
+                                                    <div onclick="ConformAllAccess('<?php echo $model_data['all_30day_access_price'] ?>')" class="action-item" id="all_access_30" bis_skin_checked="1" >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                            <circle cx="12" cy="12" r="4"></circle>
+                                                        </svg>
+                                                        All Access (30 Days)
+                                                    </div>
+
+                                                <?php } } ?>
+
+                                                <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
+
+                                                    <div class="all-link-btn">
+
+                                                        <img src="<?=SITEURL?>assets/images/all-links.svg" />
+                                                        
+                                                    </div>
+
+                                                    All my links
+
+                                                </div>
+
+                                            <?php } else { ?>
+
+
+                                                <div class="action-item" id="hide_profile" bis_skin_checked="1">
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                                    </svg>
+                                                    Hide Profile
+
+                                                </div>
+
+                                                <div class="action-item" id="block-profile" bis_skin_checked="1">
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                                                        <path d="M12 8v13"></path>
+                                                        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                                                        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+                                                    </svg>
+
+                                                    Block Profile
+
+                                                </div>
+
+                                                <div class="action-item" id="report-profile" bis_skin_checked="1">
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                                    </svg>
+
+                                                    Report Profile
+
+                                                </div>
+
+                                            <?php } ?>
+
+
+                                        </div>
                                         
                                     </div>
 
