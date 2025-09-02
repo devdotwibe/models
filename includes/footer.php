@@ -193,40 +193,6 @@ $currentpage = $_SERVER['REQUEST_URI'];
             </div>
     </div>
 
-<?php if(isset($_SESSION["log_user_id"])){ ?>
-
-  <nav class="socialwall-page mobile-nav md:hidden footer-mobile-menus">
-    <div class="flex justify-around">
-      <div class="mobile-nav-item active">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v3H8V5z"></path>
-        </svg>
-        <span>Feed</span>
-      </div>
-      <div class="mobile-nav-item">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-        </svg>
-        <span>Search</span>
-      </div>
-      <div class="mobile-nav-item">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-        </svg>
-        <span>Messages</span>
-      </div>
-      <div class="mobile-nav-item">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-        </svg>
-        <span>Profile</span>
-      </div>
-    </div>
-  </nav>
-
-<?php } ?>
-
 <footer class="bg-black text-white py-20 border-t border-white/10 footer-div">
     <div class="container mx-auto">
         <div class="grid md:grid-cols-4 gap-12 mb-16">
