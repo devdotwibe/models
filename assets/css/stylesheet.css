@@ -2983,7 +2983,7 @@ textarea:focus {
     transition: left 0.3s ease;
     overflow-y: auto;
     color: var(--menu-text);
-        padding-bottom: 80px;
+        padding-bottom: 70px;
 }
  
 .socialwall-page .sidebar-menu.open {
