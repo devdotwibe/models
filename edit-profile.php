@@ -25,6 +25,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   $country_id = $userDetails['country'];
 
   $country_name = DB::queryFirstRow("SELECT * FROM countries WHERE id = %s ", $country_id);
+
+
+   $is_model = $userDetails['as_a_model'] =='Yes' ? true : false;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -635,15 +640,41 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     <div class="wallet-card mb-8 ">
       <div class="flex justify-between items-start mb-4 edit-first-header">
         <div>
-          <h2 class="text-2xl font-bold mb-2">Creator Wallet</h2>
-          <p class="text-white/80">Manage your earnings and withdrawals</p>
+          <h2 class="text-2xl font-bold mb-2"><?php if($is_model) { ?>Creator <?php } ?>Wallet</h2>
+
+          <?php if($is_model) { ?>
+
+            <p class="text-white/80">Manage your earnings and withdrawals</p>
+
+           <?php } else { ?>
+
+            <p class="text-white/80">Manage your tokes</p>
+
+          <?php } ?>
+
         </div>
-        <button class="btn-withdraw" onclick="openWithdrawModal()">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-          </svg>
-          Withdraw
-        </button>
+
+        <?php if($is_model) { ?>
+
+          <button class="btn-withdraw" onclick="openWithdrawModal()">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            Withdraw
+          </button>
+
+        <?php } else {?>
+
+            <a class="btn-withdraw" href="<?php echo SITEURL ?>wallet.php">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              Buy More
+          </a>
+
+        <?php } ?>
+
+
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 edit-pro-pop">
