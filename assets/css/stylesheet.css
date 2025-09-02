@@ -952,7 +952,7 @@ header .btn-primary:active {
         gap: 2rem;
     }
 
-/* 
+    /* 
     .premimum-model1 .profile-grid.profile-list .profile-image-container img {
         height: 36vw;
     } */
@@ -12127,9 +12127,9 @@ overflow-x: auto !important;
 
 
 #list_advertisements {
-    padding-inline: 30px;
-    padding-block: 10px;
-    overflow-x: auto;
+    padding-inline: 0px;
+    padding-block: 0px;
+    /* overflow-x: auto; */
     padding-right: 0;
 }
 
@@ -12191,7 +12191,11 @@ overflow-x: auto !important;
 
 }
 
-
+.status-Active {
+  width: 100% !important;
+  display: flex;
+  justify-content: flex-end;
+}
 
 
 
@@ -12338,10 +12342,30 @@ overflow-x: auto !important;
 
 
 
-.premimum-model1 .profile-grid.profile-list .profile-badges{
-    top:0;
-    padding-top:12px;
+.premimum-model1 .profile-grid.profile-list .profile-badges {
+    top: 0;
+    padding-top: 12px;
 }
+
+
+
+/* table responsive ..... */
+
+.premium-table.advertisement-table>div:first-child{
+    min-width: 1200px;
+}
+
+.premium-table.advertisement-table {
+  overflow-x: hidden;
+  width: 100%;
+  overflow-x: auto !important;
+}
+#list_advertisements > div {
+  border: 1px solid red !important;
+  min-width: 1200px;
+  display: grid;
+}
+
 
 
 
@@ -12578,9 +12602,7 @@ overflow-x: auto !important;
 
 
 @media (max-width: 900px) {
-    /* .enhanced5 .profile-avatar {
-    width: 100px;
-    height: 100px;} */
+
 
 
     .enhanced5 .profile-info {
@@ -12588,6 +12610,10 @@ overflow-x: auto !important;
         /* height: 381px !important; */
 
     }
+
+    /* .enhanced5 .profile-avatar {
+                width: 100px;
+                height: 100px;} */
 
 
     .profile-wrapp1>div {
@@ -13058,7 +13084,7 @@ overflow-x: auto !important;
         height: 45vw;
     }
 
-  .premimum-model1 .profile-grid.profile-list .profile-image-container img {
+    .premimum-model1 .profile-grid.profile-list .profile-image-container img {
         min-height: 40vw;
     }
 
@@ -14797,7 +14823,8 @@ overflow-x: auto !important;
         align-items: center;
         justify-content: center;
     }
-/* .premimum-model1 .profile-grid.profile-list .profile-image-container img{
+
+    /* .premimum-model1 .profile-grid.profile-list .profile-image-container img{
     height: 50vw;
 } */
 
