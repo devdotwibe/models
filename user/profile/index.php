@@ -619,7 +619,7 @@ if(!empty($userDetails['profile_pic'])){
 
                         <?php } ?>
 
-                        <?php if (!empty($modelDetails) && !empty($modelDetails) && $modelDetails['status'] == 'Published') { ?>
+                        <?php if (!empty($modelDetails) && $modelDetails['status'] == 'Published') { ?>
 
                             <span class="profile-badge badge-verified">
                                 <div class="badge-user verified-user">🛡</div>
