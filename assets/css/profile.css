@@ -10152,6 +10152,25 @@ button.btn-secondary.add-intrst {
 }
 
 
+
+
+.ss-icons>a{
+  filter: blur(0px) !important;
+    display: flex;
+  width: auto;
+  flex-direction: row;
+  gap:18px;
+}
+.ss-icons>a button{
+  color:yellow;
+}
+.ss-icons>a button:hover{
+    color: #b4499d;
+}
+
+
+
+
 /* RESPONSIVE DESIGN */
 
 @media (max-width: 991px) {
