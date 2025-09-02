@@ -933,7 +933,7 @@ body .owl-carousel .owl-nav.disabled {
                                                                 $link = SITEURL . 'live-stream/view.php?user=viewer&unique_model_id=' . $uniqueModelId;
 
                                                             }
-                                                            if($userDetails['as_a_model'] =='Yes')
+                                                            if($modelDetails['as_a_model'] =='Yes')
                                                             {
                                                                 $label = "Go Live";
                                                             }
@@ -951,7 +951,7 @@ body .owl-carousel .owl-nav.disabled {
                                                             <?= $label ?>
                                                         </div>
 
-                                                <?php if($userDetails['as_a_model'] =='No') { ?>
+                                                <?php if($modelDetails['as_a_model'] =='Yes') { ?>
                                                     
                                                         <div class="action-item" id="tipBtn" bis_skin_checked="1">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
