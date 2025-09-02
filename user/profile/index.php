@@ -569,19 +569,8 @@ if(!empty($userDetails['profile_pic'])){
                 
                   $post_upload_id = $post['ID'];
 
-                   $psot_user_status =  getPostUploadTime($post_upload_id);
+                  $psot_user_status =  getPostUploadTime($post_upload_id);
 
-                ?>
-                <div class="ml-3 md:ml-4">
-                    <div class="flex items-center flex-wrap">
-                    <h4 class="font-bold text-base md:text-lg"><?php echo $post['author_name']?></h4>
-                    <span class="verified-badge ml-2">✓</span>
-                    </div>
-                    <p class="text-xs md:text-sm text-white/60"><?php echo $psot_user_status ?> •</p>
-                </div>
-                </div>
-
-                <?php
                 
                    $post_user_id = $post['user_id'];
 
@@ -589,8 +578,72 @@ if(!empty($userDetails['profile_pic'])){
 
                   $isconnected =  isUserFollow($modelDetails['unique_id'],$userDetails['unique_id']); 
 
+                  $result = CheckPremiumAccess($modelDetails['id']);
+
+                  $preminum_plan = "";
+
+                  $is_user_preminum = false;
+
+                  if ($result && $result['active']) {
+
+                      $is_user_preminum = true;
+
+                      $preminum_plan = $result['plan_status'];
+                  }
+
                 ?>
 
+                <div class="ml-3 md:ml-4">
+                    <div class="flex items-center flex-wrap">
+                    <h4 class="font-bold text-base md:text-lg"><?php echo $post['author_name']?></h4>
+
+                        <!-- <span class="verified-badge ml-2">✓</span> -->
+
+                         <?php if ($is_user_preminum) { ?>
+
+                            <?php if ($preminum_plan == 'basic') { ?>
+
+                                <span class="profile-badge badge-premium">
+                                    <div class="badge-user premium-basic-user">⭐</div>
+                                    <p>Premium</p>
+                                </span>
+
+                            <?php } else { ?>
+
+                                <span class="profile-badge badge-premium">
+                                    <div class="badge-user diamond-elite-user"><span>💎</span></div>
+                                    <p>Premium</p>
+                                </span>
+
+                            <?php } ?>
+
+                        <?php } ?>
+
+                        <?php if (!empty($modelDetails) && !empty($modelDetails) && $modelDetails['status'] == 'Published') { ?>
+
+                            <span class="profile-badge badge-verified">
+                                <div class="badge-user verified-user">🛡</div>
+                                <p>Verified</p>
+                            </span>
+
+                        <?php } ?>
+
+                        <?php if (!empty($modelDetails) &&  $modelDetails['as_a_model'] == 'Yes') { ?>
+
+                            <span class="profile-badge creator-badge">
+                                <div class="badge-user creator">✨</div>
+                                <p>Creator</p>
+                            </span>
+
+                        <?php } ?>
+
+
+                    </div>
+                    <p class="text-xs md:text-sm text-white/60"><?php echo $psot_user_status ?> •</p>
+                </div>
+                </div>
+
+             
                 <?php if($isconnected) { ?>
 
                   <span class="status-online">Connected</span>
