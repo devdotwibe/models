@@ -10472,7 +10472,7 @@ body.profile-advts {
 
 
     .profile-header .profile-info {
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
         padding-top: 40px;
         display: flex;
         align-items: center;
