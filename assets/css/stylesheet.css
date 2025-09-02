@@ -925,6 +925,13 @@ header .btn-primary:active {
         gap: 3rem;
         min-height: auto;
     }
+
+
+    /* .premimum-model1 .profile-grid.profile-list .profile-image-container img {
+        height: 31vw;
+    } */
+
+
 }
 
 @media (max-width: 768px) {
@@ -944,6 +951,12 @@ header .btn-primary:active {
     .home-page .hero-grid {
         gap: 2rem;
     }
+
+/* 
+    .premimum-model1 .profile-grid.profile-list .profile-image-container img {
+        height: 36vw;
+    } */
+
 }
 
 @media (max-width: 640px) {
@@ -954,6 +967,11 @@ header .btn-primary:active {
     .home-page .hero-grid {
         gap: 1.5rem;
     }
+
+    /* .premimum-model1 .profile-grid.profile-list .profile-image-container img {
+        height: 43vw;
+    } */
+
 }
 
 /* Premium Input Styles */
@@ -10173,7 +10191,8 @@ body.advt-page.my-purpose .scroll-indicator {
     object-fit: cover;
     border-radius: 16px 0 0 0px;
     transform: none;
-    max-height: 330px;
+    max-height: 370px;
+    height: 22vw;
 
 }
 
@@ -12319,6 +12338,10 @@ overflow-x: auto !important;
 
 
 
+.premimum-model1 .profile-grid.profile-list .profile-badges{
+    top:0;
+    padding-top:12px;
+}
 
 
 
@@ -12415,6 +12438,8 @@ overflow-x: auto !important;
 
 
 @media (max-width: 1024px) {
+
+
     body header .container .hidden {
         display: none !important;
     }
@@ -13033,6 +13058,10 @@ overflow-x: auto !important;
         height: 45vw;
     }
 
+  .premimum-model1 .profile-grid.profile-list .profile-image-container img {
+        min-height: 40vw;
+    }
+
 }
 
 
@@ -13046,6 +13075,9 @@ overflow-x: auto !important;
             margin-bottom: 65px;
         } */
 
+    .premimum-model1 .profile-grid.profile-list .profile-image-container img {
+        height: 43vw;
+    }
 
 }
 
@@ -13570,6 +13602,10 @@ overflow-x: auto !important;
     .premimum-model1 .profile-grid .profile-card img {
 
         height: 50vw;
+    }
+
+    .premimum-model1 .profile-grid.profile-list .profile-image-container img {
+        min-height: 48vw;
     }
 
 
@@ -14761,7 +14797,9 @@ overflow-x: auto !important;
         align-items: center;
         justify-content: center;
     }
-
+/* .premimum-model1 .profile-grid.profile-list .profile-image-container img{
+    height: 50vw;
+} */
 
 }
 
