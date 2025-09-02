@@ -44,6 +44,414 @@ if(!empty($userDetails['profile_pic'])){
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
 
+   <style>
+        #sidebarMenu {
+            z-index: 9999 !important;
+        }
+
+        .badge-showcase {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+
+
+        .badge-user {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .badge-user:hover {
+            transform: scale(1.15) translateY(-2px);
+        }
+
+        .badge-demo {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge-demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .badge-demo:hover::before {
+            left: 100%;
+        }
+
+        .badge-demo:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .badge-demo span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            min-width: 220px;
+            letter-spacing: 0.02em;
+        }
+
+        /* Ultra-premium Free Verified Badge with layered shield effects */
+        .verified-user {
+            background: linear-gradient(135deg, #10b981, #059669, #047857, #065f46);
+            border-radius: 50%;
+            border: 4px solid #34d399;
+            position: relative;
+            box-shadow:
+                0 0 50px rgba(16, 185, 129, 0.9),
+                0 0 100px rgba(16, 185, 129, 0.5),
+                inset 0 4px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -4px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .verified-user::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            background: conic-gradient(from 0deg, #10b981, #34d399, #6ee7b7, #a7f3d0, #6ee7b7, #34d399, #10b981);
+            border-radius: 50%;
+            z-index: -1;
+            animation: verifiedPrisma 3s ease-in-out infinite;
+        }
+
+        .verified-user::after {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.5) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -2;
+            animation: verifiedAura 4s linear infinite;
+        }
+
+        /* Luxury Basic Premium with golden star burst effects */
+        .premium-basic-user {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706, #b45309);
+            border-radius: 50%;
+            border: 4px solid #fcd34d;
+            position: relative;
+            box-shadow:
+                0 0 50px rgba(251, 191, 36, 0.9),
+                0 0 100px rgba(251, 191, 36, 0.5),
+                inset 0 4px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -4px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .premium-basic-user::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            background: conic-gradient(from 0deg, #fbbf24, #fcd34d, #fef3c7, #fffbeb, #fef3c7, #fcd34d, #fbbf24);
+            border-radius: 50%;
+            z-index: -1;
+            animation: premiumPrisma 3s ease-in-out infinite;
+        }
+
+        .premium-basic-user::after {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.5) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -2;
+            animation: premiumAura 4s linear infinite;
+        }
+
+        /* Ultra-luxury Diamond Elite with crystal faceting and prismatic effects */
+        .diamond-elite-user {
+            background: linear-gradient(135deg, #06b6d4, #0891b2, #0e7490, #155e75);
+            width: 68px;
+            height: 68px;
+            position: relative;
+            clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+            border: none;
+            box-shadow:
+                0 0 60px rgba(6, 182, 212, 1),
+                0 0 120px rgba(6, 182, 212, 0.6),
+                0 0 180px rgba(6, 182, 212, 0.3),
+                inset 0 8px 0 rgba(255, 255, 255, 0.7),
+                inset 0 -8px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .diamond-elite-user::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            background: conic-gradient(from 0deg,
+                    #06b6d4, #22d3ee, #67e8f9, #a5f3fc, #cffafe,
+                    #a5f3fc, #67e8f9, #22d3ee, #06b6d4);
+            clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+            z-index: -1;
+            animation: diamondPrisma 2.5s ease-in-out infinite;
+        }
+
+        .diamond-elite-user::after {
+            content: '';
+            position: absolute;
+            inset: -30px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.8) 0%, rgba(34, 211, 238, 0.4) 40%, transparent 70%);
+            border-radius: 50%;
+            z-index: -2;
+            animation: diamondAura 3s linear infinite;
+        }
+
+        .diamond-elite-user span {
+            transform: none;
+            font-size: 32px;
+            text-shadow:
+                0 0 30px rgba(255, 255, 255, 1),
+                0 0 60px rgba(103, 232, 249, 0.8),
+                0 0 90px rgba(167, 243, 252, 0.6);
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1));
+            animation: diamondSparkle 2s ease-in-out infinite;
+        }
+
+        /* Premium Creator with artistic particle burst effects */
+        .creator {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed, #6d28d9, #5b21b6);
+            border-radius: 50%;
+            border: 4px solid #a78bfa;
+            position: relative;
+            box-shadow:
+                0 0 50px rgba(139, 92, 246, 0.9),
+                0 0 100px rgba(139, 92, 246, 0.5),
+                inset 0 4px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -4px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .creator::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            background: conic-gradient(from 0deg, #8b5cf6, #a78bfa, #c4b5fd, #e9d5ff, #c4b5fd, #a78bfa, #8b5cf6);
+            border-radius: 50%;
+            z-index: -1;
+            animation: creatorPrisma 3s ease-in-out infinite;
+        }
+
+        .creator::after {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -2;
+            animation: creatorAura 4s linear infinite;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 4rem 0;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .tier-section {
+            margin: 5rem 0;
+            text-align: center;
+        }
+
+        .tier-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #f9fafb, #e5e7eb, #d1d5db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.01em;
+        }
+
+        /* Updated animations to match diamond's prismatic sophistication */
+        @keyframes verifiedPrisma {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.9;
+                filter: hue-rotate(0deg);
+            }
+
+            33% {
+                transform: scale(1.08) rotate(120deg);
+                opacity: 1;
+                filter: hue-rotate(30deg);
+            }
+
+            66% {
+                transform: scale(1.05) rotate(240deg);
+                opacity: 0.95;
+                filter: hue-rotate(60deg);
+            }
+        }
+
+        @keyframes verifiedAura {
+            from {
+                transform: rotate(0deg);
+                opacity: 0.4;
+            }
+
+            to {
+                transform: rotate(360deg);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes premiumPrisma {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.9;
+                filter: hue-rotate(0deg);
+            }
+
+            33% {
+                transform: scale(1.08) rotate(120deg);
+                opacity: 1;
+                filter: hue-rotate(20deg);
+            }
+
+            66% {
+                transform: scale(1.05) rotate(240deg);
+                opacity: 0.95;
+                filter: hue-rotate(40deg);
+            }
+        }
+
+        @keyframes premiumAura {
+            from {
+                transform: rotate(0deg);
+                opacity: 0.4;
+            }
+
+            to {
+                transform: rotate(360deg);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes diamondPrisma {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.9;
+                filter: hue-rotate(0deg) brightness(1.1);
+            }
+
+            25% {
+                transform: scale(1.12) rotate(90deg);
+                opacity: 1;
+                filter: hue-rotate(90deg) brightness(1.3);
+            }
+
+            50% {
+                transform: scale(1.08) rotate(180deg);
+                opacity: 0.95;
+                filter: hue-rotate(180deg) brightness(1.2);
+            }
+
+            75% {
+                transform: scale(1.15) rotate(270deg);
+                opacity: 1;
+                filter: hue-rotate(270deg) brightness(1.4);
+            }
+        }
+
+        @keyframes diamondAura {
+            from {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.1);
+                opacity: 0.9;
+            }
+
+            to {
+                transform: rotate(360deg) scale(1);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes diamondSparkle {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1)) brightness(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 25px rgba(255, 255, 255, 1.2)) brightness(1.3);
+            }
+        }
+
+        @keyframes creatorPrisma {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.9;
+                filter: hue-rotate(0deg);
+            }
+
+            33% {
+                transform: scale(1.08) rotate(120deg);
+                opacity: 1;
+                filter: hue-rotate(45deg);
+            }
+
+            66% {
+                transform: scale(1.05) rotate(240deg);
+                opacity: 0.95;
+                filter: hue-rotate(90deg);
+            }
+        }
+
+        @keyframes creatorAura {
+            from {
+                transform: rotate(0deg);
+                opacity: 0.4;
+            }
+
+            to {
+                transform: rotate(360deg);
+                opacity: 0.7;
+            }
+        }
+    </style>
+    
 </head>
 
 <body class="socialwall-page">
