@@ -913,6 +913,8 @@ body .owl-carousel .owl-nav.disabled {
                                                         Services
                                                     </div>
 
+                                                <?php }  ?>
+
                                                     <div class="action-item" id="wishlistBtn" bis_skin_checked="1">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -949,26 +951,26 @@ body .owl-carousel .owl-nav.disabled {
                                                             <?= $label ?>
                                                         </div>
 
-                                                    <?php if($userDetails['as_a_model'] =='No') { ?>
+                                                <?php if($userDetails['as_a_model'] =='No') { ?>
                                                     
-                                                    <div class="action-item" id="tipBtn" bis_skin_checked="1">
+                                                        <div class="action-item" id="tipBtn" bis_skin_checked="1">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                                            </svg>
+                                                            Send Tip
+                                                        </div>
+
+
+                                                    <div class="action-item" id="giftBtn" bis_skin_checked="1">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                            <line x1="12" y1="1" x2="12" y2="23"></line>
-                                                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                                            <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                                                            <path d="M12 8v13"></path>
+                                                            <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                                                            <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
                                                         </svg>
-                                                        Send Tip
+                                                        Send Gift
                                                     </div>
-
-
-                                                <div class="action-item" id="giftBtn" bis_skin_checked="1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <rect x="3" y="8" width="18" height="4" rx="1"></rect>
-                                                        <path d="M12 8v13"></path>
-                                                        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
-                                                        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
-                                                    </svg>
-                                                    Send Gift
-                                                </div>
 
                                                 <?php } ?>
 
@@ -991,6 +993,46 @@ body .owl-carousel .owl-nav.disabled {
 
                                                 <?php } } ?>
 
+                                                <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] != $_SESSION['log_user_unique_id']) { ?>
+
+                                                    <div class="action-item" id="hide_profile" bis_skin_checked="1">
+
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                                        </svg>
+                                                        Hide Profile
+
+                                                    </div>
+
+                                                    <div class="action-item" id="block-profile" bis_skin_checked="1">
+
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                                                            <path d="M12 8v13"></path>
+                                                            <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                                                            <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+                                                        </svg>
+
+                                                        Block Profile
+
+                                                    </div>
+
+                                                    <div class="action-item" id="report-profile" bis_skin_checked="1">
+
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                                                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                                        </svg>
+
+                                                        Report Profile
+
+                                                    </div>
+
+                                                <?php } ?>
+
                                                 <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
 
                                                     <div class="all-link-btn">
@@ -1003,48 +1045,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                                 </div>
 
-                                            <?php } else { ?>
-
-
-                                                <div class="action-item" id="hide_profile" bis_skin_checked="1">
-
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="12" cy="12" r="10"></circle>
-                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                                    </svg>
-                                                    Hide Profile
-
-                                                </div>
-
-                                                <div class="action-item" id="block-profile" bis_skin_checked="1">
-
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <rect x="3" y="8" width="18" height="4" rx="1"></rect>
-                                                        <path d="M12 8v13"></path>
-                                                        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
-                                                        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
-                                                    </svg>
-
-                                                    Block Profile
-
-                                                </div>
-
-                                                <div class="action-item" id="report-profile" bis_skin_checked="1">
-
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="12" cy="12" r="10"></circle>
-                                                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                                    </svg>
-
-                                                    Report Profile
-
-                                                </div>
-
-                                            <?php } ?>
-
-
+                                          
                                         </div>
                                         
                                     </div>
