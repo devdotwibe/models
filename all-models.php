@@ -1985,9 +1985,9 @@ include('includes/helper.php');
                                 <span class="maxValue range-value">200</span>
                             </div>
 
-                            <input type="hidden" name="height_max" id="height_max" value="<?php echo $_POST['height_max']??120;  ?>" >
+                            <input type="hidden" name="height_max" id="height_max" value="<?php echo $_POST['height_max']??200;  ?>" >
 
-                            <input type="hidden" name="height_min" id="height_min" value="<?php echo $_POST['height_min']??200;  ?>" >
+                            <input type="hidden" name="height_min" id="height_min" value="<?php echo $_POST['height_min']??120;  ?>" >
 
                         </div>
 
