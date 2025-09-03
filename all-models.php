@@ -699,10 +699,19 @@ include('includes/helper.php');
 
                         $where .= " AND mu.gender = '" . mysqli_real_escape_string($con, $_POST['f_gender']) . "'";
                     }
-                    if (isset($_POST['f_age'])) {
-                        if ($_POST['f_age'] == 65) $where .= ' AND age >= ' . $_POST['f_age'];
-                        else $where .= ' AND mu.age = ' . $_POST['f_age'];
-                    }
+                    // if (isset($_POST['f_age'])) {
+
+                    //     if ($_POST['f_age'] == 65) $where .= ' AND age >= ' . $_POST['f_age'];
+                    //     else $where .= ' AND mu.age = ' . $_POST['f_age'];
+                    // }
+
+                     if (isset($_POST['age_max']) && isset($_POST['age_min'])) {
+
+                        $where .= ' AND age >= ' . $_POST['age_min'];
+
+                        $where .= ' AND age <= ' . $_POST['age_max'];
+                     }
+
                     if (isset($_POST['f_location']) && !empty($_POST['f_location'])) {
                         $city_array = '';
                         $get_citylist = DB::query('select id,name from cities where name LIKE "%' . $_POST['f_location'] . '%" order by name asc');
@@ -763,6 +772,7 @@ include('includes/helper.php');
                     }
 
                     if ($user_have_preminum) {
+
                         if (isset($_POST['f_body_type']) && $_POST['f_body_type'] != 'any') {
                             $where .= ' AND md.body_type = "' . $_POST['f_body_type'] . '"';
                         }
@@ -791,12 +801,28 @@ include('includes/helper.php');
                             $where .= ' AND pu.education_level = "' . $_POST['education_level'] . '"';
                         }
 
-                        if (isset($_POST['f_height']) && !empty(($_POST['f_height']))) {
-                            $where .= ' AND md.height_in_cm >= ' . $_POST['f_height'] . ' AND md.height_in_cm <= ' . ($_POST['f_height'] + 1);
+                        // if (isset($_POST['f_height']) && !empty(($_POST['f_height']))) {
+                        //     $where .= ' AND md.height_in_cm >= ' . $_POST['f_height'] . ' AND md.height_in_cm <= ' . ($_POST['f_height'] + 1);
+                        // }
+                        // if (isset($_POST['f_weight']) && !empty(($_POST['f_weight']))) {
+                        //     $where .= ' AND md.weight_in_kg >= ' . $_POST['f_weight'] . ' AND md.weight_in_kg <= ' . ($_POST['f_weight'] + 1);
+                        // }
+
+                        if (isset($_POST['height_max']) && isset($_POST['height_min'])) {
+
+                            $where .= ' AND height_in_cm >= ' . $_POST['height_min'];
+
+                            $where .= ' AND height_in_cm <= ' . $_POST['height_max'];
                         }
-                        if (isset($_POST['f_weight']) && !empty(($_POST['f_weight']))) {
-                            $where .= ' AND md.weight_in_kg >= ' . $_POST['f_weight'] . ' AND md.weight_in_kg <= ' . ($_POST['f_weight'] + 1);
+
+                        if (isset($_POST['weight_max']) && isset($_POST['weight_min'])) {
+
+                            $where .= ' AND weight_in_kg >= ' . $_POST['weight_min'];
+
+                            $where .= ' AND weight_in_kg <= ' . $_POST['weight_max'];
                         }
+
+
                     }
 
 
