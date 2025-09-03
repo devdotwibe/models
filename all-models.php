@@ -1863,13 +1863,13 @@ include('includes/helper.php');
                                 <div class="knob max"></div>
                             </div>
                             <div class="values">
-                                <span class="minValue range-value"><?php echo $_POST['age_min']??30;  ?></span> 
-                                <span class="maxValue range-value"><?php echo $_POST['age_max']??120;  ?></span>
+                                <span class="minValue range-value"><?php echo $_POST['age_min']??18;  ?></span> 
+                                <span class="maxValue range-value"><?php echo $_POST['age_max']??65;  ?></span>
                             </div>
 
-                            <input type="hidden" name="age_max" id="age_max" value="<?php echo $_POST['age_max']??120;  ?>">
+                            <input type="hidden" name="age_max" id="age_max" value="<?php echo $_POST['age_max']??65;  ?>">
 
-                            <input type="hidden" name="age_min" id="age_min" value="<?php echo $_POST['age_min']??30;  ?>" >
+                            <input type="hidden" name="age_min" id="age_min" value="<?php echo $_POST['age_min']??18;  ?>" >
 
                         </div>
 
@@ -1985,9 +1985,9 @@ include('includes/helper.php');
                                 <span class="maxValue range-value">200</span>
                             </div>
 
-                            <input type="hidden" name="height_max" id="height_max" >
+                            <input type="hidden" name="height_max" id="height_max" value="<?php echo $_POST['height_max']??120;  ?>" >
 
-                            <input type="hidden" name="height_min" id="height_min" >
+                            <input type="hidden" name="height_min" id="height_min" value="<?php echo $_POST['height_min']??200;  ?>" >
 
                         </div>
 
@@ -2021,9 +2021,9 @@ include('includes/helper.php');
                                 <span class="maxValue range-value">150</span>
                             </div>
 
-                            <input type="hidden" name="weight_max" id="weight_max" >
+                            <input type="hidden" name="weight_max" id="weight_max" value="<?php echo $_POST['weight_max']??150;  ?>" >
 
-                            <input type="hidden" name="weight_min" id="weight_min" >
+                            <input type="hidden" name="weight_min" id="weight_min" value="<?php echo $_POST['weight_min']??30;  ?>" >
 
                         </div>
 
