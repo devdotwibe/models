@@ -480,30 +480,43 @@ include('includes/helper.php');
         }
 
 
-        .range-container {
-        position: relative;
-        width: 300px;
-        margin: 20px 0;
-        }
+         .progress-container {
+            width: 300px;
+            height: 20px;
+            background: #f5f5f5; /* white/gray background */
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px auto;
+            position: relative;
+            }
 
-        .range-values {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 8px;
-        font-weight: bold;
-        }
+            .progress-fill {
+            height: 100%;
+            width: 50%; /* start in the middle */
+            background: #007bff; /* blue color */
+            transition: width 0.3s ease;
+            }
 
-        input[type="range"] {
-        position: absolute;
-        width: 100%;
-        pointer-events: none; /* let the top slider capture events */
-        }
+            .progress-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            }
 
-        input[type="range"]::-webkit-slider-thumb {
-        pointer-events: all;
-        position: relative;
-        z-index: 2;
-        }
+            .progress-controls button {
+            padding: 6px 12px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            }
+
+            .progress-controls button:hover {
+            background: #0056b3;
+            }
 
     </style>
 </head>
@@ -1770,16 +1783,13 @@ include('includes/helper.php');
                         </div>
                         */?>
 
-                        <div class="range-container">
-                            
-                            <div class="range-values">
-                                <span id="ageMinValue">18</span>
-                                <span id="ageMaxValue">65+</span>
-                            </div>
+                        <div class="progress-container">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
 
-                            <input type="range" id="ageMin" name="f_age_min" min="18" max="65" value="18">
-                            
-                            <input type="range" id="ageMax" name="f_age_max" min="18" max="65" value="65">
+                        <div class="progress-controls">
+                            <button id="moveLeft">⬅ Left</button>
+                            <button id="moveRight">Right ➡</button>
                         </div>
 
                     </div>
@@ -2442,33 +2452,27 @@ include('includes/helper.php');
 
 
         $(document).ready(function () {
-            const $ageMin = $("#ageMin");
-            const $ageMax = $("#ageMax");
-            const $ageMinValue = $("#ageMinValue");
-            const $ageMaxValue = $("#ageMaxValue");
+        let progress = 50; // start from 50%
 
-            function updateValues() {
-                let minVal = parseInt($ageMin.val());
-                let maxVal = parseInt($ageMax.val());
+        function updateProgress() {
+            $("#progressFill").css("width", progress + "%");
+        }
 
-                if (minVal > maxVal) {
-                    // prevent overlap
-                    let temp = minVal;
-                    minVal = maxVal;
-                    maxVal = temp;
-
-                    $ageMin.val(minVal);
-                    $ageMax.val(maxVal);
-                }
-
-                $ageMinValue.text(minVal);
-                $ageMaxValue.text(maxVal === 65 ? "65+" : maxVal);
+        $("#moveLeft").click(function () {
+            if (progress > 0) {
+            progress -= 10; // move left
+            updateProgress();
             }
+        });
 
-            $ageMin.on("input", updateValues);
-            $ageMax.on("input", updateValues);
+        $("#moveRight").click(function () {
+            if (progress < 100) {
+            progress += 10; // move right
+            updateProgress();
+            }
+        });
 
-            updateValues(); 
+        updateProgress(); // initialize
         });
 
         function ChangeView(value) {
