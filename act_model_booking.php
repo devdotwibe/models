@@ -34,6 +34,8 @@ if($userDetails){
    $model_unique_id = $_POST['model_unique_id'];
    
    $tokens = $_POST['tokens'];
+   
+    if ($userDetails['balance'] >= $tokens) {
 
  	//$que = "INSERT INTO `model_booking` (`model_unique_id`, `name`, `phone`, `email`, `age`, `model_name`,`duration`,`meeting_date`,`meeting_time`,`address`,`city`,`state`,`zip_code`,`country`,`instructions`) VALUES ('".$name."', '".$phone."', '".$email."', '".$age."', '".$model_name."', '".$duration."', '".$meeting_date."','".$meeting_time."','".$address."','".$city."','".$state."','".$zip_code."','".$country."','".$instructions."')";
 
@@ -139,7 +141,11 @@ if($userDetails){
 		  echo '<script>alert("You have Not Booked")</script>';
 		  echo '<script>window.location="booking.php"</script>';
 		}
-	
+    }else{
+			echo '<script>alert("You dont have sufficiant tokens for booking.")</script>';
+		    echo '<script>window.location="booking.php"</script>';	
+		}
+				
 	}
 	else{
 
