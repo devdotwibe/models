@@ -2593,8 +2593,14 @@ include('includes/helper.php');
 
                     const filedName = $wrapper.data("name");
 
-                    let minPercent = 0;  
-                    let maxPercent = 100;
+                    // let minPercent = 0;  
+                    // let maxPercent = 100;
+
+                    let initMin = parseInt($(`#${filedName}_min`).val()) || minAge;
+                    let initMax = parseInt($(`#${filedName}_max`).val()) || maxAge;
+
+                    let minPercent = ((initMin - minAge) / (maxAge - minAge)) * 100;
+                    let maxPercent = ((initMax - minAge) / (maxAge - minAge)) * 100;
 
                     function updateUI() {
                     const barWidth = $bar.width();
