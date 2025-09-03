@@ -705,12 +705,14 @@ include('includes/helper.php');
                     //     else $where .= ' AND mu.age = ' . $_POST['f_age'];
                     // }
 
-                    //  if (isset($_POST['age_max']) && isset($_POST['age_min'])) {
+                     if (isset($_POST['age_max']) && isset($_POST['age_min'])) {
 
-                    //     $where .= ' AND age >= ' . $_POST['age_min'];
+                        $age_min = (int) $_POST['age_min'];
+                        $age_max = (int) $_POST['age_max'];
 
-                    //     $where .= ' AND age <= ' . $_POST['age_max'];
-                    //  }
+                        $where .= " AND mu.age >= $age_min";
+                        $where .= " AND mu.age <= $age_max";
+                     }
 
                     if (isset($_POST['f_location']) && !empty($_POST['f_location'])) {
                         $city_array = '';
