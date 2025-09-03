@@ -145,7 +145,7 @@ if (isset($_SESSION["log_user_id"])) {
 
             if ($result->num_rows > 0) {
    
-                if( $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level')
+                if( $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' ||  $field_name == 'age_min' || $field_name == 'age_max' )
                 {
                     $updateSql = "UPDATE model_privacy_settings SET `$field_name` = ?, updated_at = ? WHERE unique_model_id = ?";
                     $updateStmt = $con->prepare($updateSql);
@@ -163,7 +163,7 @@ if (isset($_SESSION["log_user_id"])) {
         
             } else {
            
-                if( $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level')
+                if( $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' ||  $field_name == 'age_min' || $field_name == 'age_max')
                 {
                     $insertSql = "INSERT INTO model_privacy_settings (unique_model_id, `$field_name`, created_at, updated_at)
                             VALUES (?, ?, ?, ?)";
