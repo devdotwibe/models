@@ -480,42 +480,40 @@ include('includes/helper.php');
         }
 
 
-         .progress-container {
-            width: 300px;
-            height: 20px;
-            background: #f5f5f5; /* white/gray background */
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 20px auto;
+       .progress-container {
             position: relative;
+            width: 400px;
+            height: 10px;
+            background: #f5f5f5; /* white/gray bg */
+            border-radius: 5px;
+            margin: 50px auto;
             }
 
             .progress-fill {
+            position: absolute;
             height: 100%;
-            width: 50%; /* start in the middle */
-            background: #007bff; /* blue color */
-            transition: width 0.3s ease;
-            }
-
-            .progress-controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-            }
-
-            .progress-controls button {
-            padding: 6px 12px;
-            border: none;
-            background: #007bff;
-            color: white;
+            background: #007bff; /* blue fill */
             border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
             }
 
-            .progress-controls button:hover {
-            background: #0056b3;
+            .knob {
+            position: absolute;
+            top: -6px; /* place above the bar */
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            cursor: pointer;
+            transform: translateX(-50%);
+            }
+
+            .values {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px auto;
+            width: 400px;
+            font-weight: bold;
             }
 
     </style>
@@ -1783,13 +1781,15 @@ include('includes/helper.php');
                         </div>
                         */?>
 
-                        <div class="progress-container">
+                        <div class="progress-container" id="progressBar">
                             <div class="progress-fill" id="progressFill"></div>
+                            <div class="knob" id="minKnob"></div>
+                            <div class="knob" id="maxKnob"></div>
                         </div>
 
-                        <div class="progress-controls">
-                            <button type="button" id="moveLeft">⬅ Left</button>
-                            <button type="button" id="moveRight">Right ➡</button>
+                        <div class="values">
+                            <span id="minValue">18</span>
+                            <span id="maxValue">65+</span>
                         </div>
 
                     </div>
@@ -2451,29 +2451,72 @@ include('includes/helper.php');
     <script>
 
 
-        $(document).ready(function () {
-        let progress = 50; // start from 50%
+       $(document).ready(function () {
+        
+            const $bar = $("#progressBar");
+            const $fill = $("#progressFill");
+            const $minKnob = $("#minKnob");
+            const $maxKnob = $("#maxKnob");
+            const $minValue = $("#minValue");
+            const $maxValue = $("#maxValue");
 
-        function updateProgress() {
-            $("#progressFill").css("width", progress + "%");
-        }
+            const minAge = 18;
+            const maxAge = 65;
 
-        $("#moveLeft").click(function () {
-            if (progress > 0) {
-            progress -= 10; // move left
-            updateProgress();
+            let minPercent = 0;   // left knob (0%)
+            let maxPercent = 100; // right knob (100%)
+
+            function updateUI() {
+                const barWidth = $bar.width();
+                const minX = (minPercent / 100) * barWidth;
+                const maxX = (maxPercent / 100) * barWidth;
+
+                $minKnob.css("left", minX + "px");
+                $maxKnob.css("left", maxX + "px");
+
+                $fill.css({
+                left: minX + "px",
+                width: (maxX - minX) + "px"
+                });
+
+                const minVal = Math.round(minAge + (minPercent / 100) * (maxAge - minAge));
+                const maxVal = Math.round(minAge + (maxPercent / 100) * (maxAge - minAge));
+
+                $minValue.text(minVal);
+                $maxValue.text(maxVal === maxAge ? maxAge + "+" : maxVal);
             }
-        });
 
-        $("#moveRight").click(function () {
-            if (progress < 100) {
-            progress += 10; // move right
-            updateProgress();
+            function makeDraggable($knob, isMin) {
+                $knob.on("mousedown touchstart", function (e) {
+                e.preventDefault();
+
+                $(document).on("mousemove touchmove", function (e2) {
+                    const clientX = e2.type.includes("touch") ? e2.touches[0].clientX : e2.clientX;
+                    const rect = $bar[0].getBoundingClientRect();
+                    let percent = ((clientX - rect.left) / rect.width) * 100;
+
+                    percent = Math.max(0, Math.min(100, percent));
+
+                    if (isMin) {
+                    if (percent < maxPercent) minPercent = percent;
+                    } else {
+                    if (percent > minPercent) maxPercent = percent;
+                    }
+
+                    updateUI();
+                });
+
+                $(document).on("mouseup touchend", function () {
+                    $(document).off("mousemove touchmove mouseup touchend");
+                });
+                });
             }
-        });
 
-        updateProgress(); // initialize
-        });
+            makeDraggable($minKnob, true);
+            makeDraggable($maxKnob, false);
+
+            updateUI(); // init
+            });
 
         function ChangeView(value) {
             $('#gridViewBtn, #menuBtn').removeClass('active');
