@@ -47,6 +47,23 @@ function h_my_ip_address(){
 		}
 		return false;
 	}
+	
+//Function for check count of followers
+	function CheckFollowersCountRestriction($userId) {
+		
+		//Code for checking number of followers
+        $followers_array = DB::query('select unique_model_id from model_follow where unique_user_id="' . $userId . '"  AND status = "Follow" ');
+		if (empty($followers_array) || count($followers_array) < 1000) {
+            
+			return false;
+			
+		}else{
+			
+			return true; 
+			
+		}
+		
+	}
 
 function UserLogout($userId)
 {
