@@ -3840,19 +3840,13 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               $minValue.text(minVal);
               $maxValue.text(maxVal === maxAge ? maxAge + "+" : maxVal);
 
-              console.log(filedName,'filedName');
-
-              console.log(`${filedName}_min`);
-
-                console.log(`#${filedName}_min`);
-
               $(`#${filedName}_min`).val(minVal);
 
-              updateSettings(document.getElementById(`#${filedName}_min`), `#${filedName}_min`);
+              updateSettings(document.getElementById(`#${filedName}_min`), `${filedName}_min`);
 
               $(`#${filedName}_max`).val(maxVal === maxAge ? maxAge : maxVal);
 
-               updateSettings(document.getElementById(`#${filedName}_max`), `#${filedName}_max`);
+               updateSettings(document.getElementById(`#${filedName}_max`), `${filedName}_max`);
 
               }
 
