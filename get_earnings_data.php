@@ -112,6 +112,8 @@ if (isset($_SESSION["log_user_id"])) {
                                 'country_enable',
                                 'profile_visibility',
                                 'apply_age_range',
+                                'age_min',
+                                'age_max',
                                 'age_range',
                                 'read_receipt',
                                 'show_visit',

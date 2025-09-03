@@ -3185,9 +3185,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                               <span class="maxValue range-value">65</span>
                           </div>
 
-                          <input type="hidden" name="weight_max" id="weight_max" value="<?php echo $_POST['weight_max']??65;  ?>" >
+                          <input type="hidden" name="age_max" id="age_max" onchange="updateSettings(this,'age_max')"  value="<?php echo $privacy_setting['age_max']??65;  ?>" >
 
-                          <input type="hidden" name="weight_min" id="weight_min" value="<?php echo $_POST['weight_min']??18;  ?>" >
+                          <input type="hidden" name="age_min" id="age_min" onchange="updateSettings(this,'age_min')" value="<?php echo $privacy_setting['age_min']??18;  ?>" >
 
                     </div>
 
