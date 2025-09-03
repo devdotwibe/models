@@ -1949,7 +1949,7 @@ include('includes/helper.php');
                             </div>
                         */?>
 
-                        <div class="progress-wrapper" data-min="120" data-name="weight" data-max="200" >
+                        <div class="progress-wrapper" data-min="30" data-name="weight" data-max="150" >
 
                             <div class="progress-container">
                                 <div class="progress-fill"></div>
@@ -1957,8 +1957,8 @@ include('includes/helper.php');
                                 <div class="knob max"></div>
                             </div>
                             <div class="values">
-                                <span class="minValue range-value">120</span> 
-                                <span class="maxValue range-value">200</span>
+                                <span class="minValue range-value">30</span> 
+                                <span class="maxValue range-value">150</span>
                             </div>
 
                             <input type="hidden" name="weight_max" id="weight_max" >
