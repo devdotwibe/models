@@ -1802,10 +1802,10 @@ include('includes/helper.php');
                                 <div class="knob min"></div>
                                 <div class="knob max"></div>
                             </div>
-                            <div class="values">
-                                <span class="minValue">30</span> 
-                                <span class="maxValue">120+</span>
-                            </div>
+                            <!-- <div class="values"> -->
+                                <span class="minValue range-value">30</span> 
+                                <span class="maxValue range-value">120+</span>
+                            <!-- </div> -->
 
                             <input type="hidden" name="age_max" id="age_max" >
 
