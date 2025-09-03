@@ -3848,7 +3848,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
               $(`#${filedName}_min`).val(minVal);
 
+              updateSettings(document.getElementById(`#${filedName}_min`), `#${filedName}_min`);
+
               $(`#${filedName}_max`).val(maxVal === maxAge ? maxAge : maxVal);
+
+               updateSettings(document.getElementById(`#${filedName}_max`), `#${filedName}_max`);
 
               }
 
