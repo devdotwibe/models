@@ -465,6 +465,44 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         grid-template-columns: 1fr;
       }
     }
+
+
+    .progress-container {
+        position: relative;
+        width: 400px;
+        height: 10px;
+        background: #333; /* white/gray bg */
+        border-radius: 5px;
+        margin: 50px auto;
+        }
+
+        .progress-fill {
+        position: absolute;
+        height: 100%;
+        background: #333; /* blue fill */
+        border-radius: 5px;
+        }
+
+        .knob {
+        position: absolute;
+        top: -6px; /* place above the bar */
+        width: 20px;
+        height: 20px;
+        background:  #8b5cf6;
+        border: 2px solid #333;
+        border-radius: 50%;
+        cursor: pointer;
+        transform: translateX(-50%);
+        }
+
+        .values {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px auto;
+        width: 400px;
+        font-weight: bold;
+        }
+
   </style>
 </head>
 
@@ -3141,7 +3179,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                             <div class="knob min"></div>
                             <div class="knob max"></div>
                         </div>
-                        
+
                           <div class="values">
                               <span class="minValue range-value">18</span> 
                               <span class="maxValue range-value">65</span>
