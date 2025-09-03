@@ -1780,16 +1780,32 @@ include('includes/helper.php');
 
                         </div>
                         */?>
-
+<!-- 
                         <div class="progress-container" id="progressBar">
+
                             <div class="progress-fill" id="progressFill"></div>
+
                             <div class="knob" id="minKnob"></div>
                             <div class="knob" id="maxKnob"></div>
+
                         </div>
 
                         <div class="values">
                             <span id="minValue">18</span>
                             <span id="maxValue">65+</span>
+                        </div> -->
+
+                        <div class="progress-wrapper" data-min="18" data-max="65">
+
+                            <div class="progress-container">
+                                <div class="progress-fill"></div>
+                                <div class="knob min"></div>
+                                <div class="knob max"></div>
+                            </div>
+                            <div class="values">
+                                <span class="minValue">30</span> - 
+                                <span class="maxValue">120+</span>
+                            </div>
                         </div>
 
                     </div>
@@ -2450,73 +2466,149 @@ include('includes/helper.php');
 
     <script>
 
+        $(document).ready(function () {
 
-       $(document).ready(function () {
-        
-            const $bar = $("#progressBar");
-            const $fill = $("#progressFill");
-            const $minKnob = $("#minKnob");
-            const $maxKnob = $("#maxKnob");
-            const $minValue = $("#minValue");
-            const $maxValue = $("#maxValue");
 
-            const minAge = 18;
-            const maxAge = 65;
+                function initProgressBar($wrapper) {
+                    const $bar = $wrapper.find(".progress-container");
+                    const $fill = $wrapper.find(".progress-fill");
+                    const $minKnob = $wrapper.find(".knob.min");
+                    const $maxKnob = $wrapper.find(".knob.max");
+                    const $minValue = $wrapper.find(".minValue");
+                    const $maxValue = $wrapper.find(".maxValue");
 
-            let minPercent = 0;   // left knob (0%)
-            let maxPercent = 100; // right knob (100%)
+                    const minAge = parseInt($wrapper.data("min"));
+                    const maxAge = parseInt($wrapper.data("max"));
 
-            function updateUI() {
-                const barWidth = $bar.width();
-                const minX = (minPercent / 100) * barWidth;
-                const maxX = (maxPercent / 100) * barWidth;
+                    let minPercent = 0;   // left knob
+                    let maxPercent = 100; // right knob
 
-                $minKnob.css("left", minX + "px");
-                $maxKnob.css("left", maxX + "px");
+                    function updateUI() {
+                    const barWidth = $bar.width();
+                    const minX = (minPercent / 100) * barWidth;
+                    const maxX = (maxPercent / 100) * barWidth;
 
-                $fill.css({
-                left: minX + "px",
-                width: (maxX - minX) + "px"
-                });
+                    $minKnob.css("left", minX + "px");
+                    $maxKnob.css("left", maxX + "px");
 
-                const minVal = Math.round(minAge + (minPercent / 100) * (maxAge - minAge));
-                const maxVal = Math.round(minAge + (maxPercent / 100) * (maxAge - minAge));
+                    $fill.css({
+                        left: minX + "px",
+                        width: (maxX - minX) + "px"
+                    });
 
-                $minValue.text(minVal);
-                $maxValue.text(maxVal === maxAge ? maxAge + "+" : maxVal);
-            }
+                    const minVal = Math.round(minAge + (minPercent / 100) * (maxAge - minAge));
+                    const maxVal = Math.round(minAge + (maxPercent / 100) * (maxAge - minAge));
 
-            function makeDraggable($knob, isMin) {
-                $knob.on("mousedown touchstart", function (e) {
-                e.preventDefault();
-
-                $(document).on("mousemove touchmove", function (e2) {
-                    const clientX = e2.type.includes("touch") ? e2.touches[0].clientX : e2.clientX;
-                    const rect = $bar[0].getBoundingClientRect();
-                    let percent = ((clientX - rect.left) / rect.width) * 100;
-
-                    percent = Math.max(0, Math.min(100, percent));
-
-                    if (isMin) {
-                    if (percent < maxPercent) minPercent = percent;
-                    } else {
-                    if (percent > minPercent) maxPercent = percent;
+                    $minValue.text(minVal);
+                    $maxValue.text(maxVal === maxAge ? maxAge + "+" : maxVal);
                     }
 
+                    function makeDraggable($knob, isMin) {
+                    $knob.on("mousedown touchstart", function (e) {
+                        e.preventDefault();
+
+                        $(document).on("mousemove touchmove", function (e2) {
+                        const clientX = e2.type.includes("touch") ? e2.touches[0].clientX : e2.clientX;
+                        const rect = $bar[0].getBoundingClientRect();
+                        let percent = ((clientX - rect.left) / rect.width) * 100;
+
+                        percent = Math.max(0, Math.min(100, percent));
+
+                        if (isMin) {
+                            if (percent < maxPercent) minPercent = percent;
+                        } else {
+                            if (percent > minPercent) maxPercent = percent;
+                        }
+
+                        updateUI();
+                        });
+
+                        $(document).on("mouseup touchend", function () {
+                        $(document).off("mousemove touchmove mouseup touchend");
+                        });
+                    });
+                    }
+
+                    makeDraggable($minKnob, true);
+                    makeDraggable($maxKnob, false);
+
                     updateUI();
+                }
+
+                // Initialize all progress bars
+                $(".progress-wrapper").each(function () {
+                    initProgressBar($(this));
                 });
 
-                $(document).on("mouseup touchend", function () {
-                    $(document).off("mousemove touchmove mouseup touchend");
                 });
-                });
-            }
 
-            makeDraggable($minKnob, true);
-            makeDraggable($maxKnob, false);
 
-            updateUI(); // init
-            });
+    //    $(document).ready(function () {
+        
+    //         const $bar = $("#progressBar");
+    //         const $fill = $("#progressFill");
+    //         const $minKnob = $("#minKnob");
+    //         const $maxKnob = $("#maxKnob");
+    //         const $minValue = $("#minValue");
+    //         const $maxValue = $("#maxValue");
+
+    //         const minAge = 18;
+    //         const maxAge = 65;
+
+    //         let minPercent = 0;   // left knob (0%)
+    //         let maxPercent = 100; // right knob (100%)
+
+    //         function updateUI() {
+    //             const barWidth = $bar.width();
+    //             const minX = (minPercent / 100) * barWidth;
+    //             const maxX = (maxPercent / 100) * barWidth;
+
+    //             $minKnob.css("left", minX + "px");
+    //             $maxKnob.css("left", maxX + "px");
+
+    //             $fill.css({
+    //             left: minX + "px",
+    //             width: (maxX - minX) + "px"
+    //             });
+
+    //             const minVal = Math.round(minAge + (minPercent / 100) * (maxAge - minAge));
+    //             const maxVal = Math.round(minAge + (maxPercent / 100) * (maxAge - minAge));
+
+    //             $minValue.text(minVal);
+    //             $maxValue.text(maxVal === maxAge ? maxAge + "+" : maxVal);
+    //         }
+
+    //         function makeDraggable($knob, isMin) {
+    //             $knob.on("mousedown touchstart", function (e) {
+    //             e.preventDefault();
+
+    //             $(document).on("mousemove touchmove", function (e2) {
+    //                 const clientX = e2.type.includes("touch") ? e2.touches[0].clientX : e2.clientX;
+    //                 const rect = $bar[0].getBoundingClientRect();
+    //                 let percent = ((clientX - rect.left) / rect.width) * 100;
+
+    //                 percent = Math.max(0, Math.min(100, percent));
+
+    //                 if (isMin) {
+    //                 if (percent < maxPercent) minPercent = percent;
+    //                 } else {
+    //                 if (percent > minPercent) maxPercent = percent;
+    //                 }
+
+    //                 updateUI();
+    //             });
+
+    //             $(document).on("mouseup touchend", function () {
+    //                 $(document).off("mousemove touchmove mouseup touchend");
+    //             });
+    //             });
+    //         }
+
+    //         makeDraggable($minKnob, true);
+    //         makeDraggable($maxKnob, false);
+
+    //         updateUI(); 
+    //     });
 
         function ChangeView(value) {
             $('#gridViewBtn, #menuBtn').removeClass('active');
