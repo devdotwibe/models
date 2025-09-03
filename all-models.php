@@ -2515,9 +2515,9 @@ include('includes/helper.php');
 
                      console.log(`#${filedName}_min`);
 
-                    $(`#${filedName}_min`).val(minValue);
+                    $(`#${filedName}_min`).val(minVal);
 
-                    $(`#${filedName}_max`).val(maxValue);
+                    $(`#${filedName}_max`).val(maxVal === maxAge ? maxAge + "+" : maxVal);
 
                     }
 
