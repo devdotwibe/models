@@ -633,7 +633,7 @@ else{
 
                 <p style="margin-top: 20px;"><strong>Your Contact Details </strong></p>
 
-                  <p><strong>Booking Type:</strong> <span id="booking_type"></span></p>
+                  <p  style="margin-top: 10px;"><strong>Booking Type:</strong> <span id="booking_type"></span></p>
                   <p><strong>Booking For:</strong> <span id="booking_for"></span></p>
                   <p><strong>Country:</strong> <span id="booking_country"></span></p>
 
@@ -644,9 +644,11 @@ else{
               <p id="booking_description" style="margin-top: 10px;"></p>
 
               <div class="booking-time-info">
-
-                  <p><strong>Booking Date:</strong> <span id="booking_date"></span></p>
-                  <p><strong>Booking Time:</strong> <span id="booking_time"></span></p>
+					<p id="serviceheading" style="margin-top: 20px;"></p>
+                  <p id="booking_date"  style="margin-top: 10px;"></p>
+                  <p id="booking_time"></p>
+				  <p id="booking_destination"></p>
+				  <p id="booking_no_of_hrs_meet"></p>
 <!-- 
                   <p><strong>Meeting duration:</strong><span id="booking_hour"></span></p> -->
                   
@@ -705,14 +707,27 @@ else{
 
                     var data = response.data;
 
-                    $('#booking_type').text(data.booking_type);
+                    $('#booking_type').text(data.service_name);
                     $('#booking_for').text(data.booking_for);
                     $('#booking_country').text(data.country);
                     $('#booking_description').text(data.instructions);
+					
+					if(data.service_name == 'Travel'){
+						$('#serviceheading').html('<b>Travel date</b>');
+						$('#booking_date').html('<b>From: </b><span>'+data.meeting_date+'</span>');
+						$('#booking_time').html('<b>To: </b><span>'+data.meeting_date_to+'</span>');
+						$('#booking_destination').html('<b>Travel location: </b><span>'+data.destination+'</span>');
+					}else if(data.service_name == 'Meetup'){
+						$('#serviceheading').html('<b>Meetup date</b>');
+						$('#booking_date').html('<b>Booking Date: </b><span>'+data.meeting_date+'</span>');
+						$('#booking_time').html('<b>Booking Time: </b><span>'+data.meeting_time+'</span>');
+						$('#booking_destination').html('<b>Destination: </b><span>'+data.destination+'</span>');
+						$('#booking_no_of_hrs_meet').html('<b>No of hours need to meet: </b><span>'+data.no_of_hrs_meet+'hrs</span>');
+					}
 
-                    $('#booking_date').text(data.meeting_date);
+                    
                     // $('#booking_hour').text(data.duration);
-                    $('#booking_time').text(data.meeting_time);
+                    
 
                     $('#details_modal').addClass('active');
                     
