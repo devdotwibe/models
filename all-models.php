@@ -1803,7 +1803,7 @@ include('includes/helper.php');
                                 <div class="knob max"></div>
                             </div>
                             <div class="values">
-                                <span class="minValue">30</span> - 
+                                <span class="minValue">30</span> 
                                 <span class="maxValue">120+</span>
                             </div>
                         </div>
