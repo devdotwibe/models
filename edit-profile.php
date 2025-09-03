@@ -3185,9 +3185,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                               <span class="maxValue range-value">65</span>
                           </div>
 
-                          <input type="text" style="display:none" name="age_max" id="age_max" onchange="updateSettings(this,'age_max')"  value="<?php echo $privacy_setting['age_max']??65;  ?>" >
+                          <input type="hidden" name="age_max" id="age_max" onchange="updateSettings(this,'age_max')"  value="<?php echo $privacy_setting['age_max']??65;  ?>" >
 
-                          <input type="text" style="display:none" name="age_min" id="age_min" onchange="updateSettings(this,'age_min')" value="<?php echo $privacy_setting['age_min']??18;  ?>" >
+                          <input type="hidden" name="age_min" id="age_min" onchange="updateSettings(this,'age_min')" value="<?php echo $privacy_setting['age_min']??18;  ?>" >
 
                     </div>
 
@@ -5261,7 +5261,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     function updateSettings(element, field_name) {
       var value = element.checked ? 'Y' : 'N';
 
-      if (field_name == 'age_range' || field_name == 'message_template' || field_name == 'education_level' || field_name == 'children_preference' || field_name == 'height_range' || field_name == 'weight_range') {
+      if (field_name == 'age_min' || field_name == 'age_max'  ||field_name == 'age_range' || field_name == 'message_template' || field_name == 'education_level' || field_name == 'children_preference' || field_name == 'height_range' || field_name == 'weight_range') {
         value = $(element).val();
       }
 
