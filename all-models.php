@@ -819,13 +819,6 @@ include('includes/helper.php');
                             $where .= " AND md.height_in_cm <= $height_max";
                         }
 
-                        // if (isset($_POST['weight_max']) && isset($_POST['weight_min'])) {
-
-                        //     $where .= ' AND weight_in_kg >= ' . $_POST['weight_min'];
-
-                        //     $where .= ' AND weight_in_kg <= ' . $_POST['weight_max'];
-                        // }
-
                         if (isset($_POST['weight_max']) && isset($_POST['weight_min'])) {
 
                             $weight_min = (int) $_POST['weight_min'];
@@ -834,9 +827,6 @@ include('includes/helper.php');
                             $where .= " AND md.weight_in_kg >= $weight_min";
                             $where .= " AND md.weight_in_kg <= $weight_max";
                         }
-
-
-
                     }
 
 
@@ -1205,378 +1195,408 @@ include('includes/helper.php');
 
                 <?php
 
-                $userDetails = [];
-
-                $basic_filed_users = GetUsersWithBasicFilled();
-
-                $basicList = implode(',', $basic_filed_users);
-
-                $condtion = "";
-
-                if (isset($_SESSION["log_user_id"])) {
-
-                    $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
-
-                    $premium_check = CheckPremiumAccess($userDetails['id']);
-
-                    $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
-
-                    if (!empty($premium_check) && !empty($privacy_setting)) {
-
-                        $privacy_user_ids = PrivacyModelIdsByUser($userDetails, $con, $privacy_setting['children_preference'], $privacy_setting['height_range'], $privacy_setting['weight_range'], $privacy_setting['education_level']);
-                    } else {
-                        $privacy_user_ids = '';
-                    }
-                }
-
-                $followed_user_ids = [];
-
-                if (!empty($userDetails) && count($userDetails) > 0) {
-                    $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
-
-                    $followed_model_unique_ids = [];
-
-                    $query = "SELECT unique_id FROM model_user WHERE verified = '1'";
-
-                    $result = mysqli_query($con, $query);
-
-                    if ($result && mysqli_num_rows($result) > 0) {
-
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $followed_model_unique_ids[] = $row['unique_id'];
-                        }
-                    }
-
-                    $filteredFollowedIds = filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $userDetails, $privacy_setting);
-
-                    $followed_user_ids = array_merge($followed_user_ids, $filteredFollowedIds);
-                }
+             
+                    $userDetails = [];
 
 
-                $limit = 8;
-                if (isset($_GET['offset'])) {
-                    $offset = $_GET['offset'];
-                } else $offset = 0;
+                    $basic_filed_users = GetUsersWithBasicFilled();
 
-                if (isset($_GET['sort'])) {
-                    $sort_filter = $_GET['sort'];
-                } else $sort_filter = 0;
+                    $basicList = implode(',', $basic_filed_users);
 
-                $where = '';
+                    $condtion = "";
 
-                if (!empty($followed_user_ids)) {
+                    if (isset($_SESSION["log_user_id"])) {
 
-                    $escaped_ids = array_map(function ($id) use ($con) {
-                        return "'" . mysqli_real_escape_string($con, $id) . "'";
-                    }, $followed_user_ids);
+                        $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
 
-                    $ids_string = implode(",", $escaped_ids);
+                        $premium_check = CheckPremiumAccess($userDetails['id']);
 
-                    $where .= " AND mu.id IN ($ids_string)";
-                }
-
-                if (isset($_GET['filter']) && $_GET['filter'] == 'new') {
-
-                    $where .= " AND mu.register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
-                }
-
-                if (isset($_POST['filter_submit'])) {
-
-                    if (isset($_POST['f_gender']) && $_POST['f_gender'] != 'any') {
-
-                        // $where .= ' AND mu.gender = "'.$_POST['f_gender'].'"';
-
-                        $where .= " AND mu.gender = '" . mysqli_real_escape_string($con, $_POST['f_gender']) . "'";
-                    }
-                    if (isset($_POST['f_age'])) {
-                        if ($_POST['f_age'] == 65) $where .= ' AND age >= ' . $_POST['f_age'];
-                        else $where .= ' AND mu.age = ' . $_POST['f_age'];
-                    }
-                    if (isset($_POST['f_location']) && !empty($_POST['f_location'])) {
-                        $city_array = '';
-                        $get_citylist = DB::query('select id,name from cities where name LIKE "%' . $_POST['f_location'] . '%" order by name asc');
-                        if (!empty($get_citylist)) {
-                            foreach ($get_citylist as $ct) {
-                                $city_array .= $ct['id'] . ',';
-                            }
-                            $where .= ' AND mu.city IN (' . rtrim($city_array, ',') . ')';
-                        }
-                    }
-
-                    if (isset($_POST['onlineStatus']) && !empty($_POST['onlineStatus'])) {
-                        $onlineStatus = $_POST['onlineStatus'];
-                        $onlineUserIds = array();
-                        $idsQuery_filter = "SELECT id FROM model_user mu WHERE mu.verified = '1'";
-
-                        $result_online = mysqli_query($con, $idsQuery_filter);
-
-                        $idList = '';
-                        if ($onlineStatus == 'now') {
-
-                            while ($row = mysqli_fetch_assoc($result_online)) {
-                                if (isUserOnline($row['id']) === 'Online') {
-                                    $onlineUserIds[] = $row['id'];
-                                }
-                            }
-
-                            $idList = implode(',', $onlineUserIds);
-                        } else if ($onlineStatus == 'today') {
-
-                            while ($row = mysqli_fetch_assoc($result_online)) {
-                                if (isUserOnlineStatusCheck($row['id'], 1440) === 'logged') {
-                                    $onlineUserIds[] = $row['id'];
-                                }
-                            }
-
-                            $idList = implode(',', $onlineUserIds);
-                        } else if ($onlineStatus == 'week') {
-
-                            while ($row = mysqli_fetch_assoc($result_online)) {
-                                if (isUserOnlineStatusCheck($row['id'], (7 * 24 * 60)) === 'logged') {
-                                    $onlineUserIds[] = $row['id'];
-                                }
-                            }
-
-                            $idList = implode(',', $onlineUserIds);
-                        } else if ($onlineStatus == 'anytime') {
-
-                            while ($row = mysqli_fetch_assoc($result_online)) {
-                                if (isUserOnlineStatusCheck($row['id'], 'any') === 'logged') {
-                                    $onlineUserIds[] = $row['id'];
-                                }
-                            }
-
-                            $idList = implode(',', $onlineUserIds);
-                        }
-                        if (!empty($idList)) $where .= " AND mu.id IN ($idList)";
-                    }
-
-                    if ($user_have_preminum) {
-                        if (isset($_POST['f_body_type']) && $_POST['f_body_type'] != 'any') {
-                            $where .= ' AND md.body_type = "' . $_POST['f_body_type'] . '"';
-                        }
-
-                        if (isset($_POST['f_ethnicity']) && $_POST['f_ethnicity'] != 'any') {
-                            $where .= ' AND md.ethnicity = "' . $_POST['f_ethnicity'] . '"';
-                        }
-
-                        if (isset($_POST['f_hair_color']) && $_POST['f_hair_color'] != 'any') {
-                            $where .= ' AND md.hair_color = "' . $_POST['f_hair_color'] . '"';
-                        }
-
-                        if (isset($_POST['f_eye_color']) && $_POST['f_eye_color'] != 'any') {
-                            $where .= ' AND md.eye_color = "' . $_POST['f_eye_color'] . '"';
-                        }
-
-                        if (isset($_POST['f_language']) && $_POST['f_language'] != 'any') {
-                            $where .= ' AND mu.english_ability = "' . $_POST['f_language'] . '"';
-                        }
-
-                        if (isset($_POST['children_preference']) && $_POST['children_preference'] != 'any') {
-                            $where .= ' AND pu.children_preference = "' . $_POST['children_preference'] . '"';
-                        }
-
-                        if (isset($_POST['education_level']) && $_POST['education_level'] != 'any') {
-                            $where .= ' AND pu.education_level = "' . $_POST['education_level'] . '"';
-                        }
-
-                        if (isset($_POST['f_height']) && !empty(($_POST['f_height']))) {
-                            $where .= ' AND md.height_in_cm >= ' . $_POST['f_height'] . ' AND md.height_in_cm <= ' . ($_POST['f_height'] + 1);
-                        }
-                        if (isset($_POST['f_weight']) && !empty(($_POST['f_weight']))) {
-                            $where .= ' AND md.weight_in_kg >= ' . $_POST['f_weight'] . ' AND md.weight_in_kg <= ' . ($_POST['f_weight'] + 1);
-                        }
-                    }
-
-
-                    if (!empty($userDetails) && count($userDetails) > 0 && $user_have_preminum) {
                         $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
 
-                        if ($privacy_setting['verified_photos'] && isset($_POST['verified_photos']) && !empty($_POST['verified_photos'] && $_POST['verified_photos'] == 'Yes')) {
-                            $where .= " AND md.status = 'Published'";
-                        }
+                        if (!empty($premium_check) && !empty($privacy_setting)) {
 
-                        $getActiveUsers = getActiveUsers($userDetails['id'], $con);
-
-                        $excludeIds = "'" . implode("','", $getActiveUsers['user_ids']) . "'";
-
-                        if ($privacy_setting['exclude_message_already'] && isset($_POST['exclude_message_already']) && !empty($_POST['exclude_message_already'])) {
-                            $where .= " AND mu.unique_id NOT IN ($excludeIds)";
-                        }
-
-                        $user_liked_rows = DB::query(
-                            "SELECT model_id FROM user_model_likes WHERE user_id = %s",
-                            $_SESSION['log_user_id']
-                        );
-
-                        $RowLikedModelIds = [];
-
-                        foreach ($user_liked_rows as $item) {
-                            $RowLikedModelIds[] = $item['model_id'];
-                        }
-
-                        if (!empty($RowLikedModelIds)) {
-                            $LikedIds = "'" . implode("','", $RowLikedModelIds) . "'";
-
-                            if ($privacy_setting['show_liked']) {
-                                $where .= " AND mu.id IN ($LikedIds)";
-                            }
-                        }
-                    }
-
-                    $sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id JOIN model_privacy_settings pu ON pu.unique_model_id = mu.unique_id  WHERE mu.verified = '1' " . $where . "  Order by mu.id DESC LIMIT $limit OFFSET $offset";
-                } else if (isset($_GET['sort']) && $_GET['sort'] == 'newest') {
-
-                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE verified = '1' ";
-                    $result_count = mysqli_query($con, $sqls_count);
-                    $row_cnt = mysqli_fetch_assoc($result_count);
-
-                    $order = "";
-
-                    $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList) " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
-                } else if (isset($_GET['sort']) && $_GET['sort'] == 'online') {
-
-                    $onlineUserIds = array();
-                    $not_onlineUserIds = array();
-                    $idsQuery = "SELECT id FROM model_user mu WHERE mu.verified = '1' ";
-
-                    $result = mysqli_query($con, $idsQuery);
-
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        if (isUserOnline($row['id']) === 'Online') {
-                            $onlineUserIds[] = $row['id'];
+                            $privacy_user_ids = PrivacyModelIdsByUser($userDetails, $con, $privacy_setting['children_preference'], $privacy_setting['height_range'], $privacy_setting['weight_range'], $privacy_setting['education_level']);
                         } else {
-                            $not_onlineUserIds[] = $row['id'];
+                            $privacy_user_ids = '';
                         }
                     }
 
-                    $idList = implode(',', $onlineUserIds);
-                    $not_idList = implode(',', $not_onlineUserIds);
+                    $followed_user_ids = [];
 
-                    if (!empty($idList)) $allIds = $idList . ',' . $not_idList;
-                    else $allIds = $not_idList;
-                    //echo $allIds.'<br/>';
+                    if (!empty($userDetails) && count($userDetails) > 0) {
+                        $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
 
-                    $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($allIds)";
-                    $result_count = mysqli_query($con, $sqls_count);
-                    $row_cnt = mysqli_fetch_assoc($result_count);
+                        $followed_model_unique_ids = [];
 
+                        $query = "SELECT unique_id FROM model_user WHERE verified = '1'";
 
-                    $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($allIds)  AND mu.id  IN ($basicList) $order LIMIT $limit OFFSET $offset";
-                } else {
+                        $result = mysqli_query($con, $query);
 
-
-                    $onlineUserIds = [];
-
-                    if (isset($_GET['filter'])) {
-
-                        if ($_GET['filter'] == 'new') {
-
-                            $where .= " AND mu.register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
-                            $order = " ORDER BY mu.register_date DESC ";
-                        } elseif ($_GET['filter'] == 'available') {
-
-                            $idsQuery = "SELECT id FROM model_user mu WHERE mu.verified = '1' $where";
-
-                            $result = mysqli_query($con, $idsQuery);
+                        if ($result && mysqli_num_rows($result) > 0) {
 
                             while ($row = mysqli_fetch_assoc($result)) {
-                                if (isUserOnline($row['id']) === 'Online') {
-                                    $onlineUserIds[] = $row['id'];
+                                $followed_model_unique_ids[] = $row['unique_id'];
+                            }
+                        }
+
+                        $filteredFollowedIds = filterFollowedModelIdsByPrivacy($con, $followed_model_unique_ids, $userDetails, $privacy_setting);
+
+                        $followed_user_ids = array_merge($followed_user_ids, $filteredFollowedIds);
+                    }
+
+
+                    $limit = 8;
+                    if (isset($_GET['offset'])) {
+                        $offset = $_GET['offset'];
+                    } else $offset = 0;
+
+                    if (isset($_GET['sort'])) {
+                        $sort_filter = $_GET['sort'];
+                    } else $sort_filter = 0;
+
+                    $where = '';
+
+                    if (!empty($followed_user_ids)) {
+
+                        $escaped_ids = array_map(function ($id) use ($con) {
+                            return "'" . mysqli_real_escape_string($con, $id) . "'";
+                        }, $followed_user_ids);
+
+                        $ids_string = implode(",", $escaped_ids);
+
+                        $where .= " AND mu.id IN ($ids_string)";
+                    }
+
+                    if (isset($_GET['filter']) && $_GET['filter'] == 'new') {
+
+                        $where .= " AND mu.register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
+                    }
+
+                    if (isset($_POST['filter_submit'])) {
+
+                        if (isset($_POST['f_gender']) && $_POST['f_gender'] != 'any') {
+
+                            // $where .= ' AND mu.gender = "'.$_POST['f_gender'].'"';
+
+                            $where .= " AND mu.gender = '" . mysqli_real_escape_string($con, $_POST['f_gender']) . "'";
+                        }
+                        // if (isset($_POST['f_age'])) {
+
+                        //     if ($_POST['f_age'] == 65) $where .= ' AND age >= ' . $_POST['f_age'];
+                        //     else $where .= ' AND mu.age = ' . $_POST['f_age'];
+                        // }
+
+                        if (isset($_POST['age_max']) && isset($_POST['age_min'])) {
+
+                            $age_min = (int) $_POST['age_min'];
+                            $age_max = (int) $_POST['age_max'];
+
+                            $where .= " AND mu.age >= $age_min";
+                            $where .= " AND mu.age <= $age_max";
+                        }
+
+                        if (isset($_POST['f_location']) && !empty($_POST['f_location'])) {
+                            $city_array = '';
+                            $get_citylist = DB::query('select id,name from cities where name LIKE "%' . $_POST['f_location'] . '%" order by name asc');
+                            if (!empty($get_citylist)) {
+                                foreach ($get_citylist as $ct) {
+                                    $city_array .= $ct['id'] . ',';
+                                }
+                                $where .= ' AND mu.city IN (' . rtrim($city_array, ',') . ')';
+                            }
+                        }
+
+                        if (isset($_POST['onlineStatus']) && !empty($_POST['onlineStatus'])) {
+                            $onlineStatus = $_POST['onlineStatus'];
+                            $onlineUserIds = array();
+                            $idsQuery_filter = "SELECT id FROM model_user mu WHERE mu.verified = '1'";
+
+                            $result_online = mysqli_query($con, $idsQuery_filter);
+
+                            $idList = '';
+                            if ($onlineStatus == 'now') {
+
+                                while ($row = mysqli_fetch_assoc($result_online)) {
+                                    if (isUserOnline($row['id']) === 'Online') {
+                                        $onlineUserIds[] = $row['id'];
+                                    }
+                                }
+
+                                $idList = implode(',', $onlineUserIds);
+                            } else if ($onlineStatus == 'today') {
+
+                                while ($row = mysqli_fetch_assoc($result_online)) {
+                                    if (isUserOnlineStatusCheck($row['id'], 1440) === 'logged') {
+                                        $onlineUserIds[] = $row['id'];
+                                    }
+                                }
+
+                                $idList = implode(',', $onlineUserIds);
+                            } else if ($onlineStatus == 'week') {
+
+                                while ($row = mysqli_fetch_assoc($result_online)) {
+                                    if (isUserOnlineStatusCheck($row['id'], (7 * 24 * 60)) === 'logged') {
+                                        $onlineUserIds[] = $row['id'];
+                                    }
+                                }
+
+                                $idList = implode(',', $onlineUserIds);
+                            } else if ($onlineStatus == 'anytime') {
+
+                                while ($row = mysqli_fetch_assoc($result_online)) {
+                                    if (isUserOnlineStatusCheck($row['id'], 'any') === 'logged') {
+                                        $onlineUserIds[] = $row['id'];
+                                    }
+                                }
+
+                                $idList = implode(',', $onlineUserIds);
+                            }
+                            if (!empty($idList)) $where .= " AND mu.id IN ($idList)";
+                        }
+
+                        if ($user_have_preminum) {
+
+                            if (isset($_POST['f_body_type']) && $_POST['f_body_type'] != 'any') {
+                                $where .= ' AND md.body_type = "' . $_POST['f_body_type'] . '"';
+                            }
+
+                            if (isset($_POST['f_ethnicity']) && $_POST['f_ethnicity'] != 'any') {
+                                $where .= ' AND md.ethnicity = "' . $_POST['f_ethnicity'] . '"';
+                            }
+
+                            if (isset($_POST['f_hair_color']) && $_POST['f_hair_color'] != 'any') {
+                                $where .= ' AND md.hair_color = "' . $_POST['f_hair_color'] . '"';
+                            }
+
+                            if (isset($_POST['f_eye_color']) && $_POST['f_eye_color'] != 'any') {
+                                $where .= ' AND md.eye_color = "' . $_POST['f_eye_color'] . '"';
+                            }
+
+                            if (isset($_POST['f_language']) && $_POST['f_language'] != 'any') {
+                                $where .= ' AND mu.english_ability = "' . $_POST['f_language'] . '"';
+                            }
+
+                            if (isset($_POST['children_preference']) && $_POST['children_preference'] != 'any') {
+                                $where .= ' AND pu.children_preference = "' . $_POST['children_preference'] . '"';
+                            }
+
+                            if (isset($_POST['education_level']) && $_POST['education_level'] != 'any') {
+                                $where .= ' AND pu.education_level = "' . $_POST['education_level'] . '"';
+                            }
+
+                            // if (isset($_POST['f_height']) && !empty(($_POST['f_height']))) {
+                            //     $where .= ' AND md.height_in_cm >= ' . $_POST['f_height'] . ' AND md.height_in_cm <= ' . ($_POST['f_height'] + 1);
+                            // }
+                            // if (isset($_POST['f_weight']) && !empty(($_POST['f_weight']))) {
+                            //     $where .= ' AND md.weight_in_kg >= ' . $_POST['f_weight'] . ' AND md.weight_in_kg <= ' . ($_POST['f_weight'] + 1);
+                            // }
+
+                            if (isset($_POST['height_max']) && isset($_POST['height_min'])) {
+
+                                $height_min = (int) $_POST['height_min'];
+                                $height_max = (int) $_POST['height_max'];
+
+                                $where .= " AND md.height_in_cm >= $height_min";
+                                $where .= " AND md.height_in_cm <= $height_max";
+                            }
+
+                            if (isset($_POST['weight_max']) && isset($_POST['weight_min'])) {
+
+                                $weight_min = (int) $_POST['weight_min'];
+                                $weight_max = (int) $_POST['weight_max'];
+
+                                $where .= " AND md.weight_in_kg >= $weight_min";
+                                $where .= " AND md.weight_in_kg <= $weight_max";
+                            }
+                        }
+
+
+                        if (!empty($userDetails) && count($userDetails) > 0 && $user_have_preminum) {
+                            $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
+
+                            if ($privacy_setting['verified_photos'] && isset($_POST['verified_photos']) && !empty($_POST['verified_photos'] && $_POST['verified_photos'] == 'Yes')) {
+                                $where .= " AND md.status = 'Published'";
+                            }
+
+                            $getActiveUsers = getActiveUsers($userDetails['id'], $con);
+
+                            $excludeIds = "'" . implode("','", $getActiveUsers['user_ids']) . "'";
+
+                            if ($privacy_setting['exclude_message_already'] && isset($_POST['exclude_message_already']) && !empty($_POST['exclude_message_already'])) {
+                                $where .= " AND mu.unique_id NOT IN ($excludeIds)";
+                            }
+
+                            $user_liked_rows = DB::query(
+                                "SELECT model_id FROM user_model_likes WHERE user_id = %s",
+                                $_SESSION['log_user_id']
+                            );
+
+                            $RowLikedModelIds = [];
+
+                            foreach ($user_liked_rows as $item) {
+                                $RowLikedModelIds[] = $item['model_id'];
+                            }
+
+                            if (!empty($RowLikedModelIds)) {
+                                $LikedIds = "'" . implode("','", $RowLikedModelIds) . "'";
+
+                                if ($privacy_setting['show_liked']) {
+                                    $where .= " AND mu.id IN ($LikedIds)";
                                 }
                             }
-
-                            $idList = implode(',', $onlineUserIds);
-                        } else {
-
-
-                            $order = " ORDER BY mu.id DESC ";
                         }
-                    } else {
 
-                        if (!empty($privacy_user_ids)) {
+                        $sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id JOIN model_privacy_settings pu ON pu.unique_model_id = mu.unique_id  WHERE mu.verified = '1' " . $where . "  Order by mu.id DESC LIMIT $limit OFFSET $offset";
+                    } else if (isset($_GET['sort']) && $_GET['sort'] == 'newest') {
 
-                            $privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'";
-
-                            $order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
-                        } else {
-
-                            $order = " ORDER BY mu.id DESC ";
-                        }
-                    }
-
-                    if (empty($onlineUserIds)) {
-
-
-                        // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
-
-                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.verified = '1' " . $where;
-
+                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE verified = '1' ";
                         $result_count = mysqli_query($con, $sqls_count);
-
                         $row_cnt = mysqli_fetch_assoc($result_count);
 
-                        $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
-                    } else {
+                        $order = "";
 
-                        $idList = implode(',', $onlineUserIds);
+                        $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList) " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
+                    } else if (isset($_GET['sort']) && $_GET['sort'] == 'online') {
 
-                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList)";
-                        $result_count = mysqli_query($con, $sqls_count);
+                        $onlineUserIds = array();
+                        $not_onlineUserIds = array();
+                        $idsQuery = "SELECT id FROM model_user mu WHERE mu.verified = '1' ";
 
-                        $row_cnt = mysqli_fetch_assoc($result_count);
+                        $result = mysqli_query($con, $idsQuery);
 
-                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
-                    }
-                }
-
-                $resultd = mysqli_query($con, $sqls);
-
-                if (mysqli_num_rows($resultd) > 0) {
-
-                    while ($rowesdw = mysqli_fetch_assoc($resultd)) {
-
-                        $unique_id = $rowesdw['unique_id'];
-
-                        if (!empty($rowesdw['profile_pic'])) {
-                            $profile_pic = SITEURL . $rowesdw['profile_pic'];
-                        } else {
-                            $profile_pic = SITEURL . 'assets/images/model-gal-no-img.jpg';
-                        }
-
-                        if (!empty($rowesdw['username'])) {
-                            $modalname = $rowesdw['username'];
-                        } else {
-                            $modalname = $rowesdw['name'];
-                        }
-
-                        $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
-
-                        $is_user_new = IsNewUser($rowesdw['id']);
-
-                        $is_user_preminum = CheckPremiumAccess($rowesdw['id']);
-
-                        $result = CheckPremiumAccess($rowesdw['id']);
-
-                        $preminum_plan = "";
-
-                        $is_user_preminum = false;
-
-                        if ($result && $result['active']) {
-
-                            $is_user_preminum = true;
-
-                            $preminum_plan = $result['plan_status'];
-                        }
-
-                        $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
-
-                        if (!empty($rowesdw['profile_pic'])) {
-                            if (checkImageExists($rowesdw['profile_pic'])) {
-
-                                $prof_img = SITEURL . $rowesdw['profile_pic'];
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            if (isUserOnline($row['id']) === 'Online') {
+                                $onlineUserIds[] = $row['id'];
+                            } else {
+                                $not_onlineUserIds[] = $row['id'];
                             }
                         }
+
+                        $idList = implode(',', $onlineUserIds);
+                        $not_idList = implode(',', $not_onlineUserIds);
+
+                        if (!empty($idList)) $allIds = $idList . ',' . $not_idList;
+                        else $allIds = $not_idList;
+                        //echo $allIds.'<br/>';
+
+                        $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($allIds)";
+                        $result_count = mysqli_query($con, $sqls_count);
+                        $row_cnt = mysqli_fetch_assoc($result_count);
+
+
+                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($allIds)  AND mu.id  IN ($basicList) $order LIMIT $limit OFFSET $offset";
+                    } else {
+
+
+                        $onlineUserIds = [];
+
+                        if (isset($_GET['filter'])) {
+
+                            if ($_GET['filter'] == 'new') {
+
+                                $where .= " AND mu.register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
+                                $order = " ORDER BY mu.register_date DESC ";
+                            } elseif ($_GET['filter'] == 'available') {
+
+                                $idsQuery = "SELECT id FROM model_user mu WHERE mu.verified = '1' $where";
+
+                                $result = mysqli_query($con, $idsQuery);
+
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    if (isUserOnline($row['id']) === 'Online') {
+                                        $onlineUserIds[] = $row['id'];
+                                    }
+                                }
+
+                                $idList = implode(',', $onlineUserIds);
+                            } else {
+
+
+                                $order = " ORDER BY mu.id DESC ";
+                            }
+                        } else {
+
+                            if (!empty($privacy_user_ids)) {
+
+                                $privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'";
+
+                                $order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
+                            } else {
+
+                                $order = " ORDER BY mu.id DESC ";
+                            }
+                        }
+
+                        if (empty($onlineUserIds)) {
+
+
+                            // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
+
+                            $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.verified = '1' " . $where;
+
+                            $result_count = mysqli_query($con, $sqls_count);
+
+                            $row_cnt = mysqli_fetch_assoc($result_count);
+
+                            $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                        } else {
+
+                            $idList = implode(',', $onlineUserIds);
+
+                            $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList)";
+                            $result_count = mysqli_query($con, $sqls_count);
+
+                            $row_cnt = mysqli_fetch_assoc($result_count);
+
+                            $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
+                        }
+                    }
+
+                    $resultd = mysqli_query($con, $sqls);
+
+                    if (mysqli_num_rows($resultd) > 0) {
+
+                        while ($rowesdw = mysqli_fetch_assoc($resultd)) {
+
+                            $unique_id = $rowesdw['unique_id'];
+
+                            if (!empty($rowesdw['profile_pic'])) {
+                                $profile_pic = SITEURL . $rowesdw['profile_pic'];
+                            } else {
+                                $profile_pic = SITEURL . 'assets/images/model-gal-no-img.jpg';
+                            }
+
+                            if (!empty($rowesdw['username'])) {
+                                $modalname = $rowesdw['username'];
+                            } else {
+                                $modalname = $rowesdw['name'];
+                            }
+
+                            $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
+
+                            $is_user_new = IsNewUser($rowesdw['id']);
+
+                            $result = CheckPremiumAccess($rowesdw['id']);
+
+                            $preminum_plan = "";
+
+                            $is_user_preminum = false;
+
+                            if ($result && $result['active']) {
+
+                                $is_user_preminum = true;
+
+                                $preminum_plan = $result['plan_status'];
+                            }
+
+                            $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
+
+                            if (!empty($rowesdw['profile_pic'])) {
+                                if (checkImageExists($rowesdw['profile_pic'])) {
+
+                                    $prof_img = SITEURL . $rowesdw['profile_pic'];
+                                }
+                            }
                 ?>
 
                         <!-- Profile Card 1 -->
@@ -1843,13 +1863,13 @@ include('includes/helper.php');
                                 <div class="knob max"></div>
                             </div>
                             <div class="values">
-                                <span class="minValue range-value">30</span> 
-                                <span class="maxValue range-value">120+</span>
+                                <span class="minValue range-value"><?php echo $_POST['age_min']??30;  ?></span> 
+                                <span class="maxValue range-value"><?php echo $_POST['age_max']??120;  ?></span>
                             </div>
 
-                            <input type="hidden" name="age_max" id="age_max" >
+                            <input type="hidden" name="age_max" id="age_max" value="<?php echo $_POST['age_max']??120;  ?>">
 
-                            <input type="hidden" name="age_min" id="age_min" >
+                            <input type="hidden" name="age_min" id="age_min" value="<?php echo $_POST['age_min']??30;  ?>" >
 
                         </div>
 
