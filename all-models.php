@@ -1788,8 +1788,8 @@ include('includes/helper.php');
                         </div>
 
                         <div class="progress-controls">
-                            <button id="moveLeft">⬅ Left</button>
-                            <button id="moveRight">Right ➡</button>
+                            <button type="button" id="moveLeft">⬅ Left</button>
+                            <button type="button" id="moveRight">Right ➡</button>
                         </div>
 
                     </div>
