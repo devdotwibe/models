@@ -3271,9 +3271,33 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <div>
                 <label class="form-label">Height Range</label>
                 <div class="flex items-center space-x-4">
+
+                  <?php /*
                   <span class="text-sm">120cm</span>
                   <input type="range" min="120" max="200" value="<?php echo $privacy_setting['height_range'] ?? 170  ?>" class="flex-1 accent-purple-500" oninput="updateHeightDisplay(this)" onchange="updateSettings(this,'height_range')">
                   <span class="text-sm"><span id="height_value_display"><?php echo $privacy_setting['height_range'] ?? 120  ?></span>cm</span>
+                */?>
+
+                  <div class="progress-wrapper" data-min="120" data-name="height" data-max="200" >
+
+                        <div class="progress-container">
+
+                            <div class="progress-fill"></div>
+                            <div class="knob min"></div>
+                            <div class="knob max"></div>
+                        </div>
+
+                          <div class="values">
+                              <span class="minValue range-value">120</span> 
+                              <span class="maxValue range-value">200</span>
+                          </div>
+
+                          <input type="hidden" name="height_max" id="height_max" onchange="updateSettings(this,'height_max')"  value="<?php echo $privacy_setting['height_max']??200;  ?>" >
+
+                          <input type="hidden" name="height_min" id="height_min" onchange="updateSettings(this,'height_min')" value="<?php echo $privacy_setting['height_min']??120;  ?>" >
+
+                  </div>
+
                 </div>
               </div>
               <div>
@@ -3846,21 +3870,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 $(`#${filedName}_min`).val(minVal);
 
                 $(`#${filedName}_max`).val(maxVal === maxAge ? maxAge : maxVal);
-
-                  // updateSettings(document.getElementById(`#${filedName}_min`), `${filedName}_min`);
-
-                  // updateSettings(document.getElementById(`#${filedName}_max`), `${filedName}_max`);
-
-                  // if (!updateCooldown) {
-                  //     updateCooldown = true;
-
-                  //     updateSettings(document.getElementById(`${filedName}_min`), `${filedName}_min`);
-                  //     updateSettings(document.getElementById(`${filedName}_max`), `${filedName}_max`);
-
-                  //     setTimeout(() => {
-                  //         updateCooldown = false;
-                  //     }, 5000);
-                  // }
 
               }
 
