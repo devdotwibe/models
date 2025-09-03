@@ -1938,15 +1938,40 @@ include('includes/helper.php');
                     </div>
 
                     <div class="filter-group f-g2">
+
                         <label class="filter-label">Weight</label>
-                        <div class="range-container">
-                            <span class="range-value">30kg</span>
-                            <input type="range" class="range-slider" min="30" max="150" value="60" id="weightRange" name="f_weight" value="<?php if (isset($_POST['f_weight'])) echo $_POST['f_weight']; ?>">
-                            <span class="range-value" id="weightValue">150kg</span>
+
+                        <?php /*
+                            <div class="range-container">
+                                <span class="range-value">30kg</span>
+                                <input type="range" class="range-slider" min="30" max="150" value="60" id="weightRange" name="f_weight" value="<?php if (isset($_POST['f_weight'])) echo $_POST['f_weight']; ?>">
+                                <span class="range-value" id="weightValue">150kg</span>
+                            </div>
+                        */?>
+
+                        <div class="progress-wrapper" data-min="120" data-name="weight" data-max="200" >
+
+                            <div class="progress-container">
+                                <div class="progress-fill"></div>
+                                <div class="knob min"></div>
+                                <div class="knob max"></div>
+                            </div>
+                            <div class="values">
+                                <span class="minValue range-value">120</span> 
+                                <span class="maxValue range-value">200</span>
+                            </div>
+
+                            <input type="hidden" name="weight_max" id="weight_max" >
+
+                            <input type="hidden" name="weight_min" id="weight_min" >
+
                         </div>
+
+
                         <div class="text-center mt-1 measurement">
-                            30 - 60 kg
+                            30 - 150 kg
                         </div>
+
                     </div>
 
                     <div class="filter-group">
