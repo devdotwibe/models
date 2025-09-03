@@ -3851,43 +3851,51 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                   // updateSettings(document.getElementById(`#${filedName}_max`), `${filedName}_max`);
 
-                  if (!updateCooldown) {
-                      updateCooldown = true;
+                  // if (!updateCooldown) {
+                  //     updateCooldown = true;
 
-                      updateSettings(document.getElementById(`${filedName}_min`), `${filedName}_min`);
-                      updateSettings(document.getElementById(`${filedName}_max`), `${filedName}_max`);
+                  //     updateSettings(document.getElementById(`${filedName}_min`), `${filedName}_min`);
+                  //     updateSettings(document.getElementById(`${filedName}_max`), `${filedName}_max`);
 
-                      setTimeout(() => {
-                          updateCooldown = false;
-                      }, 5000);
-                  }
+                  //     setTimeout(() => {
+                  //         updateCooldown = false;
+                  //     }, 5000);
+                  // }
 
               }
 
               function makeDraggable($knob, isMin) {
-              $knob.on("mousedown touchstart", function (e) {
-                  e.preventDefault();
 
-                  $(document).on("mousemove touchmove", function (e2) {
-                  const clientX = e2.type.includes("touch") ? e2.touches[0].clientX : e2.clientX;
-                  const rect = $bar[0].getBoundingClientRect();
-                  let percent = ((clientX - rect.left) / rect.width) * 100;
+                      $knob.on("mousedown touchstart", function (e) {
+                          e.preventDefault();
 
-                  percent = Math.max(0, Math.min(100, percent));
+                          $(document).on("mousemove touchmove", function (e2) {
+                              const clientX = e2.type.includes("touch") ? e2.touches[0].clientX : e2.clientX;
+                              const rect = $bar[0].getBoundingClientRect();
+                              let percent = ((clientX - rect.left) / rect.width) * 100;
 
-                  if (isMin) {
-                      if (percent < maxPercent) minPercent = percent;
-                  } else {
-                      if (percent > minPercent) maxPercent = percent;
-                  }
+                              percent = Math.max(0, Math.min(100, percent));
 
-                  updateUI();
-                  });
+                              if (isMin) {
+                                  if (percent < maxPercent) minPercent = percent;
+                              } else {
+                                  if (percent > minPercent) maxPercent = percent;
+                              }
 
-                  $(document).on("mouseup touchend", function () {
-                  $(document).off("mousemove touchmove mouseup touchend");
-                  });
-              });
+                                updateUI();
+                          });
+
+                          // $(document).on("mouseup touchend", function () {
+                          // $(document).off("mousemove touchmove mouseup touchend");
+                          // });
+
+                           $(document).on("mouseup touchend", function () {
+                                $(document).off("mousemove touchmove mouseup touchend");
+
+                                    updateSettings(document.getElementById(`${filedName}_min`), `${filedName}_min`);
+                                    updateSettings(document.getElementById(`${filedName}_max`), `${filedName}_max`);
+                            });
+                      });
               }
 
               makeDraggable($minKnob, true);
