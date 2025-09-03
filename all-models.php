@@ -810,12 +810,14 @@ include('includes/helper.php');
                         //     $where .= ' AND md.weight_in_kg >= ' . $_POST['f_weight'] . ' AND md.weight_in_kg <= ' . ($_POST['f_weight'] + 1);
                         // }
 
-                        // if (isset($_POST['height_max']) && isset($_POST['height_min'])) {
+                        if (isset($_POST['height_max']) && isset($_POST['height_min'])) {
 
-                        //     $where .= ' AND height_in_cm >= ' . $_POST['height_min'];
+                            $height_min = (int) $_POST['height_min'];
+                            $height_max = (int) $_POST['height_max'];
 
-                        //     $where .= ' AND height_in_cm <= ' . $_POST['height_max'];
-                        // }
+                            $where .= " AND md.height_in_cm >= $height_min";
+                            $where .= " AND md.height_in_cm <= $height_max";
+                        }
 
                         // if (isset($_POST['weight_max']) && isset($_POST['weight_min'])) {
 
@@ -823,6 +825,16 @@ include('includes/helper.php');
 
                         //     $where .= ' AND weight_in_kg <= ' . $_POST['weight_max'];
                         // }
+
+                        if (isset($_POST['weight_max']) && isset($_POST['weight_min'])) {
+
+                            $weight_min = (int) $_POST['weight_min'];
+                            $weight_max = (int) $_POST['weight_max'];
+
+                            $where .= " AND md.weight_in_kg >= $weight_min";
+                            $where .= " AND md.weight_in_kg <= $weight_max";
+                        }
+
 
 
                     }
