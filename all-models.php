@@ -492,7 +492,7 @@ include('includes/helper.php');
             .progress-fill {
             position: absolute;
             height: 100%;
-            background: #7650d1; /* blue fill */
+            background: #333; /* blue fill */8b5cf6
             border-radius: 5px;
             }
 
@@ -502,7 +502,7 @@ include('includes/helper.php');
             width: 20px;
             height: 20px;
             background: white;
-            border: 2px solid #7650d1;
+            border: 2px solid #8b5cf6;
             border-radius: 50%;
             cursor: pointer;
             transform: translateX(-50%);
