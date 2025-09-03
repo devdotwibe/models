@@ -165,6 +165,22 @@ else{
 				'status' => $status,
 			], 'id = %i', $accept_id);
 
+		if($status == 'Decline'){
+			
+			$get_model_booking = DB::queryFirstRow("SELECT tokens,user_unique_id FROM model_booking WHERE id =  %s ", $accept_id);
+			
+			if(!empty($get_model_booking) && !empty($get_model_booking['tokens']) && !empty($get_model_booking['user_unique_id'])){
+				
+				// Update user balance
+						DB::query(
+							"UPDATE model_user SET balance = ROUND(balance + %d) WHERE unique_id = %s",
+							$get_model_booking['tokens'],
+							$get_model_booking['user_unique_id']
+						);
+				
+			}
+			
+		}
 
 		echo json_encode(['status'=>'success','message'=>'Successfully Updated','action'=>$status]);
 
