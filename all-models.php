@@ -492,7 +492,7 @@ include('includes/helper.php');
             .progress-fill {
             position: absolute;
             height: 100%;
-            background: #bda1ffff; /* blue fill */
+            background: #333; /* blue fill */
             border-radius: 5px;
             }
 
@@ -1795,7 +1795,7 @@ include('includes/helper.php');
                             <span id="maxValue">65+</span>
                         </div> -->
 
-                        <div class="progress-wrapper" data-min="18" data-max="65">
+                        <div class="progress-wrapper" data-min="18" data-name="age" data-max="65" >
 
                             <div class="progress-container">
                                 <div class="progress-fill"></div>
@@ -1806,6 +1806,11 @@ include('includes/helper.php');
                                 <span class="minValue">30</span> 
                                 <span class="maxValue">120+</span>
                             </div>
+
+                            <input type="hidden" name="age_max" id="age_max" >
+
+                            <input type="hidden" name="age_min" id="age_min" >
+
                         </div>
 
                     </div>
@@ -2480,8 +2485,10 @@ include('includes/helper.php');
                     const minAge = parseInt($wrapper.data("min"));
                     const maxAge = parseInt($wrapper.data("max"));
 
-                    let minPercent = 0;   // left knob
-                    let maxPercent = 100; // right knob
+                    const filedName = $wrapper.data("name");
+
+                    let minPercent = 0;  
+                    let maxPercent = 100;
 
                     function updateUI() {
                     const barWidth = $bar.width();
@@ -2501,6 +2508,11 @@ include('includes/helper.php');
 
                     $minValue.text(minVal);
                     $maxValue.text(maxVal === maxAge ? maxAge + "+" : maxVal);
+
+                    $(`#${filedName}_min`).val(minValue);
+
+                    $(`#${filedName}_max`).val(maxValue);
+
                     }
 
                     function makeDraggable($knob, isMin) {
