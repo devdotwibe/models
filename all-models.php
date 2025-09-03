@@ -2511,6 +2511,10 @@ include('includes/helper.php');
 
                     console.log(filedName,'filedName');
 
+                    console.log(`${filedName}_min`);
+
+                     console.log(`#${filedName}_min`);
+
                     $(`#${filedName}_min`).val(minValue);
 
                     $(`#${filedName}_max`).val(maxValue);
