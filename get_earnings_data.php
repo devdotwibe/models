@@ -99,7 +99,7 @@ if (isset($_SESSION["log_user_id"])) {
 
             $field_name = $_POST['field_name'];
 
-            if($field_name == 'age_range' || $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' || $field_name == 'height_range' || $field_name == 'weight_range' )
+            if( $field_name == 'age_min' ||  $field_name == 'age_max' ||  $field_name == 'age_range' || $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' || $field_name == 'height_range' || $field_name == 'weight_range' )
             {
                 $value = $_POST['value'];
             }
