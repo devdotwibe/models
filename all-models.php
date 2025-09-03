@@ -501,8 +501,8 @@ include('includes/helper.php');
             top: -6px; /* place above the bar */
             width: 20px;
             height: 20px;
-            background: white;
-            border: 2px solid #8b5cf6;
+            background:  #8b5cf6;
+            border: 2px solid #333;
             border-radius: 50%;
             cursor: pointer;
             transform: translateX(-50%);
