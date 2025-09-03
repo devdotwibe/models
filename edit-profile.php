@@ -2316,7 +2316,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <?php
 
         //Code for checking number of followers
-        $followers_array = DB::query('select unique_model_id from model_follow where unique_user_id="' . $userDetails['unique_id'] . '"  AND status = "Follow" ');
+        $followers_array = CheckFollowersCountRestriction($userDetails['unique_id']);
 
         ?>
 
@@ -2328,7 +2328,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </div>
-          <div class="collapsible-content <?php if (empty($followers_array) || count($followers_array) < 1000) {
+          <div class="collapsible-content <?php if (empty($followers_array)) {
                                             echo 'access_restricted';
                                           } ?>">
             <div class="private-section mb-6">
@@ -2343,14 +2343,14 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <input type="radio" id="modeling-yes" name="modeling" value="Yes" <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
                                                                                       echo 'checked';
                                                                                     } ?>
-                    <?php if (!empty($followers_array) && count($followers_array) >= 1000) { ?> onchange="toggleConditionalSection('modeling-options', true)" <?php } ?>>
+                    <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('modeling-options', true)" <?php } ?>>
                   <label for="modeling-yes">Yes</label>
                 </div>
                 <div class="radio-option">
                   <input type="radio" id="modeling-no" name="modeling" value="No" <?php if ((!empty($extra_details['modeling']) && $extra_details['modeling'] == 'No') || empty($extra_details['modeling'])) {
                                                                                     echo 'checked';
                                                                                   } ?>
-                    <?php if (!empty($followers_array) && count($followers_array) >= 1000) { ?> onchange="toggleConditionalSection('modeling-options', false)" <?php } ?>>
+                    <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('modeling-options', false)" <?php } ?>>
                   <label for="modeling-no">No</label>
                 </div>
               </div>
@@ -2370,14 +2370,14 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                       <input type="radio" id="adult-yes" name="adult_content" value="Yes" <?php if (!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes') {
                                                                                             echo 'checked';
                                                                                           } ?>
-                        <?php if (!empty($followers_array) && count($followers_array) >= 1000) { ?> onchange="toggleConditionalSection('adult-services', true)" <?php } ?>>
+                        <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('adult-services', true)" <?php } ?>>
                       <label for="adult-yes">Yes, I'm comfortable</label>
                     </div>
                     <div class="radio-option">
                       <input type="radio" id="adult-no" name="adult_content" value="No" <?php if ((!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'No') || empty($extra_details['adult_content'])) {
                                                                                           echo 'checked';
                                                                                         } ?>
-                        <?php if (!empty($followers_array) && count($followers_array) >= 1000) { ?> onchange="toggleConditionalSection('adult-services', false)" <?php } ?>>
+                        <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('adult-services', false)" <?php } ?>>
                       <label for="adult-no">No, only non-adult content</label>
                     </div>
                   </div>
