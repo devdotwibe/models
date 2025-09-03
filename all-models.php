@@ -808,19 +808,19 @@ include('includes/helper.php');
                         //     $where .= ' AND md.weight_in_kg >= ' . $_POST['f_weight'] . ' AND md.weight_in_kg <= ' . ($_POST['f_weight'] + 1);
                         // }
 
-                        if (isset($_POST['height_max']) && isset($_POST['height_min'])) {
+                        // if (isset($_POST['height_max']) && isset($_POST['height_min'])) {
 
-                            $where .= ' AND height_in_cm >= ' . $_POST['height_min'];
+                        //     $where .= ' AND height_in_cm >= ' . $_POST['height_min'];
 
-                            $where .= ' AND height_in_cm <= ' . $_POST['height_max'];
-                        }
+                        //     $where .= ' AND height_in_cm <= ' . $_POST['height_max'];
+                        // }
 
-                        if (isset($_POST['weight_max']) && isset($_POST['weight_min'])) {
+                        // if (isset($_POST['weight_max']) && isset($_POST['weight_min'])) {
 
-                            $where .= ' AND weight_in_kg >= ' . $_POST['weight_min'];
+                        //     $where .= ' AND weight_in_kg >= ' . $_POST['weight_min'];
 
-                            $where .= ' AND weight_in_kg <= ' . $_POST['weight_max'];
-                        }
+                        //     $where .= ' AND weight_in_kg <= ' . $_POST['weight_max'];
+                        // }
 
 
                     }
