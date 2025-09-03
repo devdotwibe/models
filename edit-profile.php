@@ -3796,6 +3796,102 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
   <script>
 
 
+       $(document).ready(function () {
+
+          function initProgressBar($wrapper) {
+
+              const $bar = $wrapper.find(".progress-container");
+              const $fill = $wrapper.find(".progress-fill");
+              const $minKnob = $wrapper.find(".knob.min");
+              const $maxKnob = $wrapper.find(".knob.max");
+              const $minValue = $wrapper.find(".minValue");
+              const $maxValue = $wrapper.find(".maxValue");
+
+              const minAge = parseInt($wrapper.data("min"));
+              const maxAge = parseInt($wrapper.data("max"));
+
+              const filedName = $wrapper.data("name");
+
+              // let minPercent = 0;  
+              // let maxPercent = 100;
+
+              let initMin = parseInt($(`#${filedName}_min`).val()) || minAge;
+              let initMax = parseInt($(`#${filedName}_max`).val()) || maxAge;
+
+              let minPercent = ((initMin - minAge) / (maxAge - minAge)) * 100;
+              let maxPercent = ((initMax - minAge) / (maxAge - minAge)) * 100;
+
+              function updateUI() {
+              const barWidth = $bar.width();
+              const minX = (minPercent / 100) * barWidth;
+              const maxX = (maxPercent / 100) * barWidth;
+
+              $minKnob.css("left", minX + "px");
+              $maxKnob.css("left", maxX + "px");
+
+              $fill.css({
+                  left: minX + "px",
+                  width: (maxX - minX) + "px"
+              });
+
+              const minVal = Math.round(minAge + (minPercent / 100) * (maxAge - minAge));
+              const maxVal = Math.round(minAge + (maxPercent / 100) * (maxAge - minAge));
+
+              $minValue.text(minVal);
+              $maxValue.text(maxVal === maxAge ? maxAge + "+" : maxVal);
+
+              console.log(filedName,'filedName');
+
+              console.log(`${filedName}_min`);
+
+                console.log(`#${filedName}_min`);
+
+              $(`#${filedName}_min`).val(minVal);
+
+              $(`#${filedName}_max`).val(maxVal === maxAge ? maxAge : maxVal);
+
+              }
+
+              function makeDraggable($knob, isMin) {
+              $knob.on("mousedown touchstart", function (e) {
+                  e.preventDefault();
+
+                  $(document).on("mousemove touchmove", function (e2) {
+                  const clientX = e2.type.includes("touch") ? e2.touches[0].clientX : e2.clientX;
+                  const rect = $bar[0].getBoundingClientRect();
+                  let percent = ((clientX - rect.left) / rect.width) * 100;
+
+                  percent = Math.max(0, Math.min(100, percent));
+
+                  if (isMin) {
+                      if (percent < maxPercent) minPercent = percent;
+                  } else {
+                      if (percent > minPercent) maxPercent = percent;
+                  }
+
+                  updateUI();
+                  });
+
+                  $(document).on("mouseup touchend", function () {
+                  $(document).off("mousemove touchmove mouseup touchend");
+                  });
+              });
+              }
+
+              makeDraggable($minKnob, true);
+              makeDraggable($maxKnob, false);
+
+              updateUI();
+          }
+
+          $(".progress-wrapper").each(function () {
+              initProgressBar($(this));
+          });
+
+      });
+
+
+
        $(document).ready(function() {
 
             $('.toggle-option').on('click', function() {
