@@ -484,7 +484,7 @@ include('includes/helper.php');
             position: relative;
             width: 400px;
             height: 10px;
-            background: #rgb(255 255 255 / 3%); 
+            background: #333; /* white/gray bg */
             border-radius: 5px;
             margin: 50px auto;
             }
@@ -492,7 +492,7 @@ include('includes/helper.php');
             .progress-fill {
             position: absolute;
             height: 100%;
-            background: #333; /* blue fill */8b5cf6
+            background: #bda1ffff; /* blue fill */
             border-radius: 5px;
             }
 
@@ -2452,7 +2452,7 @@ include('includes/helper.php');
 
 
        $(document).ready(function () {
-
+        
             const $bar = $("#progressBar");
             const $fill = $("#progressFill");
             const $minKnob = $("#minKnob");
