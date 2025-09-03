@@ -3302,11 +3302,38 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               </div>
               <div>
                 <label class="form-label">Weight Range</label>
+
                 <div class="flex items-center space-x-4">
+
+                <?php /*
                   <span class="text-sm">30kg</span>
                   <input type="range" min="30" max="150" value="<?php echo $privacy_setting['weight_range'] ?? 60  ?>" class="flex-1 accent-purple-500" oninput="updateWeightDisplay(this)" onchange="updateSettings(this,'weight_range')">
                   <span class="text-sm"><span id="weight_value_display"><?php echo $privacy_setting['weight_range'] ?? 60  ?></span>kg</span>
+                */?>
+
+                  <div class="progress-wrapper" data-min="30" data-name="weight" data-max="150" >
+
+                        <div class="progress-container">
+
+                            <div class="progress-fill"></div>
+                            <div class="knob min"></div>
+                            <div class="knob max"></div>
+                        </div>
+
+                          <div class="values">
+                              <span class="minValue range-value">30</span> 
+                              <span class="maxValue range-value">150</span>
+                          </div>
+
+                          <input type="hidden" name="weight_max" id="weight_max" onchange="updateSettings(this,'weight_max')"  value="<?php echo $privacy_setting['weight_max']??150;  ?>" >
+
+                          <input type="hidden" name="weight_min" id="weight_min" onchange="updateSettings(this,'weight_min')" value="<?php echo $privacy_setting['weight_min']??30;  ?>" >
+
+                  </div>
+
+
                 </div>
+
               </div>
             </div>
 
@@ -5291,7 +5318,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
       console.log(element,'field_name');
 
-      if (field_name == 'age_min' || field_name == 'age_max'  ||field_name == 'age_range' || field_name == 'message_template' || field_name == 'education_level' || field_name == 'children_preference' || field_name == 'height_range' || field_name == 'weight_range') {
+      if ( field_name == 'weight_max' || field_name == 'weight_min' || field_name == 'height_max' || field_name == 'height_min' || field_name == 'age_min' || field_name == 'age_max'  ||field_name == 'age_range' || field_name == 'message_template' || field_name == 'education_level' || field_name == 'children_preference' || field_name == 'height_range' || field_name == 'weight_range') {
         var  value = $(element).val();
       }
       else

@@ -99,7 +99,7 @@ if (isset($_SESSION["log_user_id"])) {
 
             $field_name = $_POST['field_name'];
 
-            if( $field_name == 'age_min' ||  $field_name == 'age_max' ||  $field_name == 'age_range' || $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' || $field_name == 'height_range' || $field_name == 'weight_range' )
+            if($field_name == 'weight_max' || $field_name == 'weight_min' || $field_name == 'height_max' || $field_name == 'height_min' ||  $field_name == 'age_min' ||  $field_name == 'age_max' ||  $field_name == 'age_range' || $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' || $field_name == 'height_range' || $field_name == 'weight_range' )
             {
                 $value = $_POST['value'];
             }
@@ -114,6 +114,10 @@ if (isset($_SESSION["log_user_id"])) {
                                 'apply_age_range',
                                 'age_min',
                                 'age_max',
+                                'weight_min',
+                                'weight_max',
+                                'height_min',
+                                'height_max',
                                 'age_range',
                                 'read_receipt',
                                 'show_visit',
@@ -145,7 +149,7 @@ if (isset($_SESSION["log_user_id"])) {
 
             if ($result->num_rows > 0) {
    
-                if( $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' ||  $field_name == 'age_min' || $field_name == 'age_max' )
+                if( $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' ||  $field_name == 'age_min' || $field_name == 'age_max'  || $field_name == 'height_min' || $field_name == 'height_max' || $field_name == 'weight_min' || $field_name == 'weight_max' )
                 {
                     $updateSql = "UPDATE model_privacy_settings SET `$field_name` = ?, updated_at = ? WHERE unique_model_id = ?";
                     $updateStmt = $con->prepare($updateSql);
@@ -163,7 +167,7 @@ if (isset($_SESSION["log_user_id"])) {
         
             } else {
            
-                if( $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' ||  $field_name == 'age_min' || $field_name == 'age_max')
+                if( $field_name == 'message_template' || $field_name == 'children_preference' || $field_name == 'education_level' ||  $field_name == 'age_min' || $field_name == 'age_max'  || $field_name == 'height_min' || $field_name == 'height_max' || $field_name == 'weight_min' || $field_name == 'weight_max')
                 {
                     $insertSql = "INSERT INTO model_privacy_settings (unique_model_id, `$field_name`, created_at, updated_at)
                             VALUES (?, ?, ?, ?)";
