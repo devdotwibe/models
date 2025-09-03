@@ -2629,7 +2629,7 @@ include('includes/helper.php');
 
                     $(`#${filedName}_min`).val(minVal);
 
-                    $(`#${filedName}_max`).val(maxVal === maxAge ? maxAge + "+" : maxVal);
+                    $(`#${filedName}_max`).val(maxVal === maxAge ? maxAge : maxVal);
 
                     }
 
