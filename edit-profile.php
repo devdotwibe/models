@@ -3798,6 +3798,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
        $(document).ready(function () {
 
+
+        let updateCooldown = false;
+
           function initProgressBar($wrapper) {
 
               const $bar = $wrapper.find(".progress-container");
@@ -3822,31 +3825,42 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               let maxPercent = ((initMax - minAge) / (maxAge - minAge)) * 100;
 
               function updateUI() {
-              const barWidth = $bar.width();
-              const minX = (minPercent / 100) * barWidth;
-              const maxX = (maxPercent / 100) * barWidth;
+                const barWidth = $bar.width();
+                const minX = (minPercent / 100) * barWidth;
+                const maxX = (maxPercent / 100) * barWidth;
 
-              $minKnob.css("left", minX + "px");
-              $maxKnob.css("left", maxX + "px");
+                $minKnob.css("left", minX + "px");
+                $maxKnob.css("left", maxX + "px");
 
-              $fill.css({
-                  left: minX + "px",
-                  width: (maxX - minX) + "px"
-              });
+                $fill.css({
+                    left: minX + "px",
+                    width: (maxX - minX) + "px"
+                });
 
-              const minVal = Math.round(minAge + (minPercent / 100) * (maxAge - minAge));
-              const maxVal = Math.round(minAge + (maxPercent / 100) * (maxAge - minAge));
+                const minVal = Math.round(minAge + (minPercent / 100) * (maxAge - minAge));
+                const maxVal = Math.round(minAge + (maxPercent / 100) * (maxAge - minAge));
 
-              $minValue.text(minVal);
-              $maxValue.text(maxVal === maxAge ? maxAge + "+" : maxVal);
+                $minValue.text(minVal);
+                $maxValue.text(maxVal === maxAge ? maxAge + "+" : maxVal);
 
-              $(`#${filedName}_min`).val(minVal);
+                $(`#${filedName}_min`).val(minVal);
 
-              updateSettings(document.getElementById(`#${filedName}_min`), `${filedName}_min`);
+                $(`#${filedName}_max`).val(maxVal === maxAge ? maxAge : maxVal);
 
-              $(`#${filedName}_max`).val(maxVal === maxAge ? maxAge : maxVal);
+                  // updateSettings(document.getElementById(`#${filedName}_min`), `${filedName}_min`);
 
-               updateSettings(document.getElementById(`#${filedName}_max`), `${filedName}_max`);
+                  // updateSettings(document.getElementById(`#${filedName}_max`), `${filedName}_max`);
+
+                  if (!updateCooldown) {
+                      updateCooldown = true;
+
+                      updateSettings(document.getElementById(`${filedName}_min`), `${filedName}_min`);
+                      updateSettings(document.getElementById(`${filedName}_max`), `${filedName}_max`);
+
+                      setTimeout(() => {
+                          updateCooldown = false;
+                      }, 5000);
+                  }
 
               }
 
