@@ -3115,19 +3115,44 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
               <div class="flex items-center space-x-4 age-range">
 
-                <span class="text-sm">18</span>
 
-                <?php
+                    <?php /* 
+                    <span class="text-sm">18</span>
 
-                $age_range = $privacy_setting['age_range'] ?? 18;
+                    <?php
 
-                if ($age_range == 65) {
-                  $age_range = $age_range . '+';
-                }
+                    $age_range = $privacy_setting['age_range'] ?? 18;
 
-                ?>
-                <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range'] ?? 18  ?>" class="flex-1 accent-purple-500" oninput="updateAgeDisplay(this)" onchange="updateSettings(this,'age_range')">
-                <span class="text-sm" id="age_value_display"> <?php echo $age_range ?></span>
+                    if ($age_range == 65) {
+                      $age_range = $age_range . '+';
+                    }
+
+                    ?>
+                    <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range'] ?? 18  ?>" class="flex-1 accent-purple-500" oninput="updateAgeDisplay(this)" onchange="updateSettings(this,'age_range')">
+                    <span class="text-sm" id="age_value_display"> <?php echo $age_range ?></span>
+
+                    */?>
+
+                     <div class="progress-wrapper" data-min="18" data-name="age" data-max="65" >
+
+                        <div class="progress-container">
+
+                            <div class="progress-fill"></div>
+                            <div class="knob min"></div>
+                            <div class="knob max"></div>
+                        </div>
+                        
+                          <div class="values">
+                              <span class="minValue range-value">18</span> 
+                              <span class="maxValue range-value">65</span>
+                          </div>
+
+                          <input type="hidden" name="weight_max" id="weight_max" value="<?php echo $_POST['weight_max']??65;  ?>" >
+
+                          <input type="hidden" name="weight_min" id="weight_min" value="<?php echo $_POST['weight_min']??18;  ?>" >
+
+                    </div>
+
               </div>
             </div>
           </div>
