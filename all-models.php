@@ -478,6 +478,33 @@ include('includes/helper.php');
                 opacity: 0.7;
             }
         }
+
+
+        .range-container {
+        position: relative;
+        width: 300px;
+        margin: 20px 0;
+        }
+
+        .range-values {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-weight: bold;
+        }
+
+        input[type="range"] {
+        position: absolute;
+        width: 100%;
+        pointer-events: none; /* let the top slider capture events */
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+        pointer-events: all;
+        position: relative;
+        z-index: 2;
+        }
+
     </style>
 </head>
 
@@ -1729,12 +1756,32 @@ include('includes/helper.php');
                     </div>
 
                     <div class="filter-group">
+
                         <label class="filter-label">Age Range</label>
+
+                        <?php /*
                         <div class="range-container">
+
                             <span class="range-value" id="ageMinValue">18</span>
+
                             <input type="range" class="range-slider" min="18" max="65" value="18" id="ageRange" name="f_age" value="<?php if (isset($_POST['f_age'])) echo $_POST['f_age']; ?>">
                             <span class="range-value" id="ageMaxValue">65+</span>
+
                         </div>
+                        */?>
+
+                        <div class="range-container">
+                            
+                            <div class="range-values">
+                                <span id="ageMinValue">18</span>
+                                <span id="ageMaxValue">65+</span>
+                            </div>
+
+                            <input type="range" id="ageMin" name="f_age_min" min="18" max="65" value="18">
+                            
+                            <input type="range" id="ageMax" name="f_age_max" min="18" max="65" value="65">
+                        </div>
+
                     </div>
 
                     <div class="filter-group">
@@ -2392,6 +2439,38 @@ include('includes/helper.php');
     <?php } ?>
 
     <script>
+
+
+        $(document).ready(function () {
+            const $ageMin = $("#ageMin");
+            const $ageMax = $("#ageMax");
+            const $ageMinValue = $("#ageMinValue");
+            const $ageMaxValue = $("#ageMaxValue");
+
+            function updateValues() {
+                let minVal = parseInt($ageMin.val());
+                let maxVal = parseInt($ageMax.val());
+
+                if (minVal > maxVal) {
+                    // prevent overlap
+                    let temp = minVal;
+                    minVal = maxVal;
+                    maxVal = temp;
+
+                    $ageMin.val(minVal);
+                    $ageMax.val(maxVal);
+                }
+
+                $ageMinValue.text(minVal);
+                $ageMaxValue.text(maxVal === 65 ? "65+" : maxVal);
+            }
+
+            $ageMin.on("input", updateValues);
+            $ageMax.on("input", updateValues);
+
+            updateValues(); 
+        });
+
         function ChangeView(value) {
             $('#gridViewBtn, #menuBtn').removeClass('active');
             $('#profileGrid, #profileList').hide();
