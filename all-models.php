@@ -1802,10 +1802,10 @@ include('includes/helper.php');
                                 <div class="knob min"></div>
                                 <div class="knob max"></div>
                             </div>
-                            <!-- <div class="values"> -->
+                            <div class="values">
                                 <span class="minValue range-value">30</span> 
                                 <span class="maxValue range-value">120+</span>
-                            <!-- </div> -->
+                            </div>
 
                             <input type="hidden" name="age_max" id="age_max" >
 
@@ -1904,10 +1904,31 @@ include('includes/helper.php');
 
                     <div class="filter-group f-g1">
                         <label class="filter-label">Height</label>
+
+                        <?php /*
                         <div class="range-container">
                             <span class="range-value">120cm</span>
                             <input type="range" class="range-slider" min="120" max="200" value="160" id="heightRange" name="f_height" value="<?php if (isset($_POST['f_height'])) echo $_POST['f_height']; ?>">
                             <span class="range-value" id="heightValue">200cm</span>
+                        </div>
+                        */?>
+
+                         <div class="progress-wrapper" data-min="120" data-name="height" data-max="200" >
+
+                            <div class="progress-container">
+                                <div class="progress-fill"></div>
+                                <div class="knob min"></div>
+                                <div class="knob max"></div>
+                            </div>
+                            <div class="values">
+                                <span class="minValue range-value">120</span> 
+                                <span class="maxValue range-value">200</span>
+                            </div>
+
+                            <input type="hidden" name="height_max" id="height_max" >
+
+                            <input type="hidden" name="height_min" id="height_min" >
+
                         </div>
 
                         <div class="text-center mt-1 measurement">
