@@ -41,6 +41,8 @@ $model_ID = $model_data['id'];
 
 $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE unique_model_id = %s ", $m_id);
 
+$country_list = DB::query('select id,name,sortname from countries order by name asc');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -295,9 +297,12 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                             </div>
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Country</label>
+
                                 <select name="country" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+
                                     <option value="" class="bg-gray-900">Select...</option>
-                                    <option value="us" class="bg-gray-900">🇺🇸 United States</option>
+
+                                    <!-- <option value="us" class="bg-gray-900">🇺🇸 United States</option>
                                     <option value="uk" class="bg-gray-900">🇬🇧 United Kingdom</option>
                                     <option value="ca" class="bg-gray-900">🇨🇦 Canada</option>
                                     <option value="au" class="bg-gray-900">🇦🇺 Australia</option>
@@ -306,7 +311,15 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     <option value="jp" class="bg-gray-900">🇯🇵 Japan</option>
                                     <option value="ae" class="bg-gray-900">🇦🇪 UAE</option>
                                     <option value="ch" class="bg-gray-900">🇨🇭 Switzerland</option>
-                                    <option value="sg" class="bg-gray-900">🇸🇬 Singapore</option>
+                                    <option value="sg" class="bg-gray-900">🇸🇬 Singapore</option> -->
+
+                                    <?php  foreach ($country_list as $val) { ?>
+
+                                          <option value="<?= $val['id'] ?>" class="bg-gray-900"><?= $val['name'] ?></option>
+
+                                    <?php } ?>
+
+
                                 </select>
                             </div>
                         </div>
