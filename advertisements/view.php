@@ -67,6 +67,10 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
             $add_views_count = DB::numRows(
                                     "SELECT * FROM avertisement_view WHERE adver_id =$id "
                                 );
+
+            $add_like_count = DB::numRows(
+                                            "SELECT * FROM avertisement_like WHERE adver_id =$id AND liked ='Yes' "
+                                        );
 ?>
 
 <!DOCTYPE html>
@@ -445,7 +449,7 @@ else{
                                 <span class="stat-label">Views</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-value">189</span>
+                                <span class="stat-value"><?= $add_like_count ?></span>
                                 <span class="stat-label">Likes</span>
                             </div>
                             <div class="stat">
