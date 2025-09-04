@@ -66,11 +66,11 @@ else{
 
         if($userDetails['as_a_model'] =='Yes')
         {
-            $model_bookings = DB::query("SELECT * FROM model_booking WHERE model_unique_id =  %s ", $model_unique_id);
+            $model_bookings = DB::query("SELECT * FROM model_booking WHERE model_unique_id =  %s  ORDER BY created_at DESC", $model_unique_id);
         }
         else
         {
-          $model_bookings = DB::query("SELECT * FROM model_booking WHERE user_unique_id =  %s ", $model_unique_id);
+          $model_bookings = DB::query("SELECT * FROM model_booking WHERE user_unique_id =  %s  ORDER BY created_at DESC", $model_unique_id);
         }
 
         $pending_count = 0;
