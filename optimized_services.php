@@ -855,7 +855,11 @@ else{
 
         $('#conform_modal').addClass('active');
 
-        $('#button_status').text('Accept');
+        $('#button_status').text('Accept'); 
+		
+		$('#conform_modal .modal-title').text('Accept'); 
+		
+		$('#conform_modal #accept_conform_btn').text('Yes, Accept');
 
         $('#accept_id').val(id);
 
@@ -869,6 +873,10 @@ else{
         $('#conform_modal').addClass('active');
 
         $('#button_status').text('Decline');
+		
+		$('#conform_modal .modal-title').text('Decline'); 
+		
+		$('#conform_modal #accept_conform_btn').text('Yes, Decline');
 
        $('#accept_conform_btn').attr('onclick', "AcceptConform('Decline')");
 
