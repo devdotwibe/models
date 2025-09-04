@@ -1025,6 +1025,37 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <option value="Prefer not to say" <?php if ($userDetails['relationship'] == 'Prefer not to say') echo 'selected';  ?>>Prefer not to say</option>
                 </select>
               </div>
+
+              <div class="grid grid-cols-2 gap-4">
+
+                    <div>
+                        <label class="form-label">Children Preference</label>
+                        <select class="form-select" name="children_preference" >
+                          <option value="">Any</option>
+                          <option value="no-children" <?php if ($userDetails['children_preference'] == 'no-children') { ?> selected <?php } ?>>No Children</option>
+                          <option value="wants-children" <?php if ($userDetails['children_preference'] == 'wants-children') { ?> selected <?php } ?>>Wants Children</option>
+                          <option value="has-children" <?php if ($userDetails['children_preference'] == 'has-children') { ?> selected <?php } ?>>Has Children</option>
+                        </select>
+                    </div>
+
+                    <div>
+
+                        <label class="form-label">Education Level</label>
+
+                        <select class="form-select" name="education_level">
+                          <option value="">Any</option>
+                          <option value="high-school" <?php if ($userDetails['education_level'] == 'high-school') { ?> selected <?php } ?>>High School</option>
+                          <option value="college" <?php if ($userDetails['education_level'] == 'college') { ?> selected <?php } ?>> College</option>
+                          <option value="university" <?php if ($userDetails['education_level'] == 'university') { ?> selected <?php } ?>>University</option>
+                          <option value="graduate" <?php if ($userDetails['education_level'] == 'graduate') { ?> selected <?php } ?>>Graduate Degree</option>
+                          <option value="masters" <?php if ($userDetails['education_level'] == 'masters') { ?> selected <?php } ?>>Masters</option>
+                          <option value="phd" <?php if ($userDetails['education_level'] == 'phd') { ?> selected <?php } ?>>PhD</option>
+                        </select>   
+                        
+                    </div>
+
+              </div>
+
               <div>
                 <label class="form-label">Bio</label>
                 <textarea name="user_bio" class="form-input user_bio" rows="4" placeholder="Tell us about yourself, your interests, and what makes you unique..."><?php echo $userDetails['user_bio']; ?></textarea>
