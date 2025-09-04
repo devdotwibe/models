@@ -923,6 +923,12 @@ else{
                           <button class="btn btn-message" onclick="openMessage(this)">Message</button>
                         `);
                     }
+					
+					if(response.action =='Decline')
+                    {
+						$(`.when_aprrove_button${accept_id}`).remove();
+						
+					}
 
                     setTimeout(function()
                     {
