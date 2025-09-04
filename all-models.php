@@ -1219,7 +1219,7 @@ include('includes/helper.php');
 
                             $privacy_user_ids = PrivacyModelIdsByUser($userDetails, $con);
 
-                            $privacy_user_ids ='';
+                            // $privacy_user_ids ='';
                         } else {
                             $privacy_user_ids = '';
                         }
