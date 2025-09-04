@@ -964,6 +964,8 @@ include('includes/helper.php');
                             if (!empty($privacy_user_ids) && !isset($_GET['filter']) ) {
 
                                 $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
+
+                                $where .= " AND mu.id IN ($idPrivacy)";
                             } 
 
 
