@@ -21,7 +21,7 @@ if (isset($_SESSION['log_user_id'])) {
 
     $category_list = adv_category_list();
 
-    $advertisements = DB::query("SELECT * FROM banners WHERE user_id = %i", $user_id);
+    $advertisements = DB::query("SELECT * FROM banners WHERE user_id = %i", $userDetails['id']);
     $total_ads = count($advertisements);
 
 
