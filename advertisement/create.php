@@ -652,6 +652,9 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                                if (response.message === "exist") {
                                     $('#err_add_city').show();
+
+                                    $('#err_add_city').text('The city name is already exist in the state');
+
                                 } else {
 
                                     $('#err_add_city').hide();
@@ -683,22 +686,34 @@ $serviceArr = array('Providing services', 'Looking for services');
                 }
                 else
                 {
-                     $('#err_add_city').hide();
 
-                    if(jQuery('.adv_country').val() == ''){
-					jQuery('.adv_country').addClass('invalid');
-					allow_next = false;
-                    }else jQuery('.adv_country').removeClass('invalid');
-                    
-                    if(jQuery('.adv_state').val() == ''){
-                        jQuery('.adv_state').addClass('invalid');
-                        allow_next = false;
-                    }else jQuery('.adv_state').removeClass('invalid');
-                    
-                    if(jQuery('.adv_city').val() == ''){
-                        jQuery('.adv_city').addClass('invalid');
-                        allow_next = false;
-                    }else jQuery('.adv_city').removeClass('invalid');
+                    if(city == "other" && add_city == '' )
+                     {
+                         $('#err_add_city').show();
+
+                         $('#err_add_city').text('The city name is required');
+                     }
+                     else
+                    {
+                          $('#err_add_city').hide();
+
+                          if(jQuery('.adv_country').val() == ''){
+                            jQuery('.adv_country').addClass('invalid');
+                            allow_next = false;
+                            }else jQuery('.adv_country').removeClass('invalid');
+                            
+                            if(jQuery('.adv_state').val() == ''){
+                                jQuery('.adv_state').addClass('invalid');
+                                allow_next = false;
+                            }else jQuery('.adv_state').removeClass('invalid');
+                            
+                            if(jQuery('.adv_city').val() == ''){
+                                jQuery('.adv_city').addClass('invalid');
+                                allow_next = false;
+                            }else jQuery('.adv_city').removeClass('invalid');
+
+                    }
+                  
                 }
 
 				
