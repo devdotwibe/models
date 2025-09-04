@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Streamer</title>
+  <style>
+    body { font-family: Arial; margin:20px; }
+    video { width: 400px; border:1px solid #ccc; margin:10px; }
+  </style>
+</head>
+<body>
+  <h2>Streamer</h2>
+  <label>Room ID: <input id="room" value="room123"></label>
+  <button id="start">Start Stream</button>
+
+  <h3>Local Stream</h3>
+  <video id="localVideo" autoplay playsinline muted></video>
+
+<script>
+const ICE_SERVERS = [{urls: "stun:stun.l.google.com:19302"}];
+let room, localStream;
+let pcs = {}; // peerId -> RTCPeerConnection
+
+function ajax(url, method="GET", data=null) {
+  return fetch(url, {
+    method,
+    headers: {"Content-Type":"application/x-www-form-urlencoded"},
+    body: data ? new URLSearchParams(data) : null
+  }).then(r => r.json());
+}
+
+async function startStreamer() {
+  room = document.getElementById("room").value;
+  localStream = await navigator.mediaDevices.getUserMedia({video:true, audio:true});
+  document.getElementById("localVideo").srcObject = localStream;
+  poll();
+}
+
+async function handleViewerOffer(peer, offer) {
+  if (pcs[peer]) return; // already connected
+
+  const pc = new RTCPeerConnection({iceServers: ICE_SERVERS});
+  pcs[peer] = pc;
+
+  localStream.getTracks().forEach(track => pc.addTrack(track, localStream));
+
+  pc.onicecandidate = e => {
+    if (e.candidate) {
+      ajax("signaling.php?room="+room, "POST", {
+        type:"candidates", peer:peer, payload:JSON.stringify(e.candidate)
+      });
+    }
+  };
+
+  await pc.setRemoteDescription(JSON.parse(offer));
+  const answer = await pc.createAnswer();
+  await pc.setLocalDescription(answer);
+
+  await ajax("signaling.php?room="+room, "POST", {
+    type:"answers", peer:peer, payload:JSON.stringify(answer)
+  });
+}
+
+async function poll() {
+  setInterval(async () => {
+    const data = await ajax("signaling.php?room="+room);
+
+    // handle new offers from viewers
+    for (const off of data.offers) {
+      await handleViewerOffer(off.peer, off.payload);
+    }
+
+    // handle candidates from viewers
+    for (const cand of data.candidates) {
+      const pc = pcs[cand.peer];
+      if (pc) {
+        try { await pc.addIceCandidate(JSON.parse(cand.payload)); } catch(e) {}
+      }
+    }
+  }, 2000);
+}
+
+document.getElementById("start").onclick = startStreamer;
+</script>
+</body>
+</html>
