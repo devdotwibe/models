@@ -942,15 +942,15 @@ include('includes/helper.php');
 
                             $idPrivacy = "";
 
-                            if (!empty($privacy_user_ids) && !isset($_GET['filter']) ) {
+                            // if (!empty($privacy_user_ids) && !isset($_GET['filter']) ) {
 
-                                $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
+                            //     $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
 
-                            } 
+                            // } 
 
-                            echo $idPrivacy ;
+                            // echo $idPrivacy ;
 
-                            die();
+                            // die();
 
                             // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
 
