@@ -3828,7 +3828,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 <div class="token-packages-subtitle">
                     Get extra TLM tokens for premium interactions, gifts, and exclusive content access
                 </div>
-                <button class="token-packages-btn" onclick="exploreTokens()">
+                <button class="token-packages-btn"  onclick="window.location.href='<?= SITEURL .'wallet.php' ?>'" >
                     🎁 Browse Token Deals
                 </button>
                 <div class="token-expires">⏰ Special token offers expire soon!</div>
