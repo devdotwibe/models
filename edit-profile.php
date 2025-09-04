@@ -1258,9 +1258,26 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                         } ?>>Amber</option>
                 </select>
               </div>
+
               <div>
+
                 <label class="form-label">Ethnicity</label>
+
                 <input type="text" class="form-input" name="ethnicity" placeholder="Enter your ethnicity" value="<?php echo $extra_details['ethnicity']; ?>">
+
+                <select class="form-select" name="ethnicity">
+
+                    <option value="">Select Ethnicity</option>
+
+                    <option value="asian" <?php if($extra_details['ethnicity'] =='asian')  { ?> selected <?php } ?>  >Asian</option>
+                    <option value="black" <?php if($extra_details['ethnicity'] =='black')  { ?> selected <?php } ?>  >Black</option>
+                    <option value="hispanic" <?php if($extra_details['ethnicity'] =='hispanic')  { ?> selected <?php } ?>  >Hispanic</option>
+                    <option value="white" <?php if($extra_details['ethnicity'] =='white')  { ?> selected <?php } ?>  >White</option>
+                    <option value="mixed" <?php if($extra_details['ethnicity'] =='mixed')  { ?> selected <?php } ?>  >Mixed</option>
+                    <option value="other" <?php if($extra_details['ethnicity'] =='other')  { ?> selected <?php } ?>  >Other</option>
+
+                </select>
+
               </div>
               <div>
                 <label class="form-label">Body Type</label>
