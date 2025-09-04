@@ -1223,6 +1223,10 @@ include('includes/helper.php');
                         } else {
                             $privacy_user_ids = '';
                         }
+                        
+                        echo $privacy_user_ids;
+
+                        die();
                     }
 
                     $followed_user_ids = [];
