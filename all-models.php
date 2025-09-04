@@ -946,12 +946,8 @@ include('includes/helper.php');
 
                                 $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
 
-                                $where .= " AND  WHERE mu.id IN ($idPrivacy)";
+                                $where .= " AND mu.id IN ($idPrivacy)";
                             } 
-
-                            echo $where;
-
-                            die();
 
                             $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.verified = '1' " . $where;
 
