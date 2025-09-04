@@ -1349,6 +1349,19 @@ if(!empty($userDetails['profile_pic'])){
                           $defaultImage = SITEURL . $post['profile_pic'];
                       }
                   }
+
+                  $result = CheckPremiumAccess($modelDetails['id']);
+
+                  $preminum_plan = "";
+
+                  $is_user_preminum = false;
+
+                  if ($result && $result['active']) {
+
+                      $is_user_preminum = true;
+
+                      $preminum_plan = $result['plan_status'];
+                  }
             ?>
 
           <div class="model-card">
@@ -1363,14 +1376,63 @@ if(!empty($userDetails['profile_pic'])){
                   <div class="online-dot"></div>
                 </div>
                 <div class="ml-3 md:ml-4">
+
                   <div class="flex items-center flex-wrap">
+
                     <h4 class="font-bold text-base md:text-lg"> <?php echo $post['name'] ?> </h4>
-                    <span class="verified-badge ml-2">✓</span>
+
+                    <!-- <span class="verified-badge ml-2">✓</span> -->
+
+
+                       <?php if ($is_user_preminum) { ?>
+
+                            <?php if ($preminum_plan == 'basic') { ?>
+
+                                <span class="profile-badge badge-premium user-index">
+                                    <div class="badge-user premium-basic-user">⭐</div>
+                                    <p>Premium</p>
+                                </span>
+
+                            <?php } else { ?>
+
+                                <span class="profile-badge badge-premium user-index">
+                                    <div class="badge-user diamond-elite-user"><span>💎</span></div>
+                                    <p>Premium</p>
+                                </span>
+
+                            <?php } ?>
+
+                        <?php } ?>
+
+                        <?php if (!empty($modelDetails) && $modelDetails['status'] == 'Published') { ?>
+
+                            <span class="profile-badge badge-verified user-index">
+                                <div class="badge-user verified-user">🛡</div>
+                                <p>Verified</p>
+                            </span>
+
+                        <?php } ?>
+
+                        <?php if (!empty($modelDetails) &&  $modelDetails['as_a_model'] == 'Yes') { ?>
+
+                            <span class="profile-badge creator-badge user-index">
+                                <div class="badge-user creator">✨</div>
+                                <p>Creator</p>
+                            </span>
+
+                        <?php } ?>
+
+
                   </div>
+
                   <p class="text-xs md:text-sm text-white/60">Active now •</p>
+
                 </div>
+
               </div>
+
               <button class="btn-primary text-sm md:text-base" onclick="toggleConnect(this)">Connect</button>
+
             </div>
 
             <p class="mb-4 text-sm md:text-base text-white/90"> <?php echo $post['post_content'] ?></p>
