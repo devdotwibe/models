@@ -55,13 +55,18 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
 		header("Location: ".SITEURL."advertisements");
 	}
 	
-					$rowes1 = '';
-					$userDetails = get_data('model_user', array('id' => $form_data['user_id']), true);
-					$sql1 = "SELECT * FROM model_extra_details WHERE unique_model_id = '" . $userDetails['unique_id'] . "'";
-					$result1 = mysqli_query($con, $sql1);
-					if (mysqli_num_rows($result1) > 0) {
-						$rowes1 = mysqli_fetch_assoc($result1);
-					}
+            $rowes1 = '';
+            $userDetails = get_data('model_user', array('id' => $form_data['user_id']), true);
+            $sql1 = "SELECT * FROM model_extra_details WHERE unique_model_id = '" . $userDetails['unique_id'] . "'";
+            $result1 = mysqli_query($con, $sql1);
+            if (mysqli_num_rows($result1) > 0) {
+                $rowes1 = mysqli_fetch_assoc($result1);
+            }
+
+
+            $add_views_count = DB::numRows(
+                                    "SELECT * FROM avertisement_view WHERE adver_id =$id "
+                                );
 ?>
 
 <!DOCTYPE html>
@@ -436,7 +441,7 @@ else{
 
                         <div class="ad-stats">
                             <div class="stat">
-                                <span class="stat-value">2.4K</span>
+                                <span class="stat-value"><?= $add_views_count ?></span>
                                 <span class="stat-label">Views</span>
                             </div>
                             <div class="stat">
