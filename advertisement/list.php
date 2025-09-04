@@ -271,6 +271,36 @@ if (isset($_SESSION['log_user_id'])) {
     </div>
 
 
+    <div class="modal-overlay" id="confirm_remove_advertisement">
+        <div class="modal">
+            <div class="modal-header">
+            <h2 class="modal-title">Confirm Advertisement Deletion</h2>
+            <button class="close-modal" id="closeRemoveAdModal" type="button" onclick="confirmCancelModal('confirm_remove_advertisement')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <input type="hidden" id="adver_remove_id" >
+            </div>
+            <div class="modal-body">
+            <p>Are you sure you want to delete this advertisement?</p>
+
+            <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
+                <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" onclick="confirmRemoveAdvertisement()">Yes, Delete</button>
+
+                <button class="btn btn-secondary" type="button" onclick="confirmCancelModal('confirm_remove_advertisement')">Cancel</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
+
+
+
  <?php include('../includes/footer.php'); ?>
 
 <link href="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
@@ -284,6 +314,12 @@ if (isset($_SESSION['log_user_id'])) {
 
         $('#conform_adver').removeClass('active');
     }
+
+    function confirmCancelModal(id)
+    {
+        $(`#${id}`).removeClass('active');
+    }
+    
 
  function FilterAdver()
  {
@@ -500,24 +536,38 @@ $(document).ready(function () {
 </script>
 
 <script>
-function deleteAd(id) {
-        if (confirm('Are you sure you want to delete this advertisement?')) {
-			
-			jQuery.ajax({
-				type: 'GET',
-				url : "<?=SITEURL.'advertisement/advertisements_remove.php'?>",
-				data:{id:id},
-				dataType:'json',
-				success: function(response){
-					if(response.msg == 'success'){
-					alert(`🗑️ Advertisement #${id} deleted successfully.`);
-					jQuery('#adv_row_'+id).remove();
-					}else alert(response.msg);
-				}
-			});
-			
+
+
+ function deleteAd(id) {
+
+    $('#adver_remove_id').val(id);
+
+    $('#confirm_remove_advertisement').addClass('active');
+
+ }
+    function confirmRemoveAdvertisement() {
+        
+        var id = $('#adver_remove_id').val();
+
+        jQuery.ajax({
+            type: 'GET',
+            url : "<?=SITEURL.'advertisement/advertisements_remove.php'?>",
+            data:{id:id},
+            dataType:'json',
+            success: function(response){
+
+                if(response.msg == 'success'){
+
+                // alert(`🗑️ Advertisement #${id} deleted successfully.`);
+
+                    $('#confirm_remove_advertisement').removeClass('active');
+                    
+                    jQuery('#adv_row_'+id).remove();
+
+                }
+            }
+        });
             
-        }
     }
 
 
