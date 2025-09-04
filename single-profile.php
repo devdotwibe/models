@@ -1598,7 +1598,7 @@ body .owl-carousel .owl-nav.disabled {
 
                     <!-- Similar Models Card -->
 
-                <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id']) { ?>
+                <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] && $is_model) { ?>
 
                     <div class="ultra-glass rounded-2xl p-4 sm:p-6">
                         <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>

@@ -1,6 +1,9 @@
 <?php  session_start();
 include('includes/config.php');
 include('includes/helper.php');
+
+$country_list = DB::query('select id,name,sortname from countries order by name asc');
+
 ?>
 <!doctype html>
 <html lang="en-US" class="no-js">
@@ -328,7 +331,7 @@ include('includes/helper.php');
 
                                 <select name="country" class="w-full px-6 py-4 rounded-xl ultra-glass text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300 border border-white/10" required>
                                     <option value="" class="bg-gray-900">Select Country</option>
-                                    <option value="US" class="bg-gray-900">🇺🇸 United States</option>
+                                    <!-- <option value="US" class="bg-gray-900">🇺🇸 United States</option>
                                     <option value="UK" class="bg-gray-900">🇬🇧 United Kingdom</option>
                                     <option value="CA" class="bg-gray-900">🇨🇦 Canada</option>
                                     <option value="AU" class="bg-gray-900">🇦🇺 Australia</option>
@@ -340,7 +343,13 @@ include('includes/helper.php');
 									<option value="NZ" class="bg-gray-900">🇳z New Zealand</option>
 									<option value="CL" class="bg-gray-900">CL Columbia</option>
 									<option value="TH" class="bg-gray-900">TH Thailand</option>
-                                    <option value="Other" class="bg-gray-900">🌍 Other</option>
+                                    <option value="Other" class="bg-gray-900">🌍 Other</option> -->
+                                    <?php  foreach ($country_list as $val) { ?>
+
+                                          <option value="<?= $val['id'] ?>" class="bg-gray-900"><?= $val['name'] ?></option>
+
+                                    <?php } ?>
+                                    
                                 </select>
 
                                 <div class="flex banner-select flex-wrap space-x-6">
