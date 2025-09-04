@@ -171,7 +171,9 @@ $currentpage = $_SERVER['REQUEST_URI'];
  <!-- Ultra Premium Footer -->
 
     <div class="modal-overlay" id="payment_done" style="display:none;">
-            <div class="modal">
+
+            <div class="modal" style="display:block; height:auto;">
+                
                 <div class="modal-header">
                 <h2 class="modal-title text-green-600">Payment Successful 🎉</h2>
                 <button class="close-modal" id="closeTipModal" type="button" onclick="paymentclose()">
