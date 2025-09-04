@@ -1518,24 +1518,17 @@ include('includes/helper.php');
 
                                 $order = " ORDER BY mu.id DESC ";
                             }
-                        } else {
-
-                            if (!empty($privacy_user_ids)) {
-
-                                $idList = "'" . implode("','", $privacy_user_ids) . "'";
-
-                                // $order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
-
-                                 $order = " ORDER BY mu.id DESC ";
-
-                            } else {
-
-                                $order = " ORDER BY mu.id DESC ";
-                            }
                         }
 
                         if (empty($onlineUserIds)) {
 
+                            $idPrivacy = "";
+
+                            if (!empty($privacy_user_ids) && !isset($_GET['filter']) ) {
+
+                                $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
+
+                            } 
 
                             // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
 
@@ -1545,8 +1538,15 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu  WHERE mu.id IN ($idList) WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                            $sqls = "SELECT * FROM model_user mu  WHERE mu.id IN ($idPrivacy) WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
                         } else {
+
+                            $idPrivacy = "";
+
+                            if (!empty($privacy_user_ids) && !isset($_GET['filter']) ) {
+
+                                $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
+                            } 
 
                             $idList = implode(',', $onlineUserIds);
 
@@ -1555,7 +1555,7 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
+                            $sqls = "SELECT * FROM model_user mu  WHERE mu.id IN ($idPrivacy) WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
                         }
                     }
 
