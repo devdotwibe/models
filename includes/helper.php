@@ -18,6 +18,10 @@ function h_my_ip_address(){
 
 	function getCountry($country_id)
 	{
+
+		echo $country_id;
+
+				die();
 		if (is_numeric($country_id)) {
 		
 			$country = DB::queryFirstRow("SELECT country_name FROM countries WHERE id = %i", (int)$country_id);
