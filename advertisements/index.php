@@ -161,7 +161,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 			
 
             <!-- Pagination -->
-            <div class="pagination">
+            <div class="pagination" id="pagination-container">
 			
 				
             <div class="row" style="margin-top:10px">
