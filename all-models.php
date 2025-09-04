@@ -1545,7 +1545,7 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu   AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                            $sqls = "SELECT * FROM model_user mu WHERE  mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
 
                         } else {
 
