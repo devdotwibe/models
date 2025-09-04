@@ -692,6 +692,8 @@ $serviceArr = array('Providing services', 'Looking for services');
                          $('#err_add_city').show();
 
                          $('#err_add_city').text('The city name is required');
+
+                           allow_next = false;
                      }
                      else
                     {
