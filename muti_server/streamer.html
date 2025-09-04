@@ -115,4 +115,45 @@ async function handleViewerOffer(peerId, offerPayload, initialCandidates){
     log('setRemoteDescription error', e);
     try { pc.close(); } catch(_) {}
     delete pcs[peerId];
-    re
+    return;
+  }
+
+  // create and send answer
+  const answer = await pc.createAnswer();
+  await pc.setLocalDescription(answer);
+  await ajaxPOST({ type:'answer', peer:peerId, payload: JSON.stringify(pc.localDescription) });
+
+  log('Answered viewer', peerId);
+
+  // poll for extra candidates for this peer and apply & cleanup periodically
+  const candInterval = setInterval(async ()=>{
+    if (!pcs[peerId]) { clearInterval(candInterval); return; }
+    try {
+      // fetch candidates for this peer without consuming answers/offers
+      const res = await ajaxGET({ room, role:'streamer', consume:0 });
+      if (res && res.candidates && res.candidates[peerId]) {
+        for (const c of res.candidates[peerId]) {
+          try { await pc.addIceCandidate(JSON.parse(c)); } catch(e){ /* ignore */ }
+        }
+        // after applying those candidates, remove them from server to avoid re-applying
+        await ajaxPOST({ type:'cleanup_peer', peer: peerId, payload:'1' }).catch(()=>{});
+      }
+    } catch(e) {
+      log('cand poll err', e);
+    }
+  }, 1500);
+
+  pc.onconnectionstatechange = () => {
+    log('pc state', peerId, pc.connectionState);
+    if (['closed','failed','disconnected'].includes(pc.connectionState)) {
+      try { pc.close(); } catch(_) {}
+      delete pcs[peerId];
+      clearInterval(candInterval);
+      // request cleanup on server
+      ajaxPOST({ type:'cleanup_peer', peer: peerId, payload:'1' }).catch(()=>{});
+    }
+  };
+}
+</script>
+</body>
+</html>
