@@ -379,12 +379,6 @@ function BoostedModelIds($con) {
 			$whereClause
 		";
 
-
-		echo $query ;
-
-		die();
-
-		
 		$result = mysqli_query($con, $query);
 
 		$validmatches = [];
@@ -395,6 +389,11 @@ function BoostedModelIds($con) {
 				];
 			}
 		}
+
+			print_r($validmatches) ;
+			
+
+		die();
 
 		return array_column($validmatches, 'id');
 	}
