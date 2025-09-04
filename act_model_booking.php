@@ -199,6 +199,10 @@ else{
 
 			$bookig_detail = DB::queryFirstRow("SELECT * FROM model_booking WHERE id = %i", $accept_id);
 
+			$country_name = getCountry($bookig_detail['country']);
+
+			$bookig_detail['country_name'] = $country_name;
+
 		echo json_encode(['status'=>'success','data'=>$bookig_detail]);
 
 	}

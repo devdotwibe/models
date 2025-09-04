@@ -16,6 +16,12 @@ function h_my_ip_address(){
 	return $ip;
 }	
 
+	function getCountry($country_id)
+	{
+		$country = DB::queryFirstRow("SELECT country_name FROM countries WHERE id = %i", $country_id);
+		return $country ? $country['country_name'] : null;
+	}
+
 
 	function CheckPremiumAccess($userId) {
 		
