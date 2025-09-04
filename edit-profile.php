@@ -1263,8 +1263,6 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                 <label class="form-label">Ethnicity</label>
 
-                <input type="text" class="form-input" name="ethnicity" placeholder="Enter your ethnicity" value="<?php echo $extra_details['ethnicity']; ?>">
-
                 <select class="form-select" name="ethnicity">
 
                     <option value="">Select Ethnicity</option>
