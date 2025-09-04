@@ -357,7 +357,7 @@ function BoostedModelIds($con) {
 			$conditions[] = "mu.children_preference = '" . mysqli_real_escape_string($con, $children_preference) . "'";
 		}
 		if (!empty($education_level)) {
-			
+
 			$conditions[] = "mu.education_level = '" . mysqli_real_escape_string($con, $education_level) . "'";
 		}
 
@@ -383,6 +383,9 @@ function BoostedModelIds($con) {
 			$whereClause
 		";
 
+		echo $whereClause;
+
+		die();
 		
 		$result = mysqli_query($con, $query);
 
