@@ -955,7 +955,7 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu WHERE mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                            $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
 
                         } else {
 
@@ -976,7 +976,7 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu  WHERE mu.id IN ($idPrivacy) WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
+                            $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id IN ($idPrivacy) WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
                         }
                     }
 
@@ -1545,7 +1545,7 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu WHERE  mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                            $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1' AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
 
                         } else {
 
@@ -1561,12 +1561,12 @@ include('includes/helper.php');
 
                             $idList = implode(',', $onlineUserIds);
 
-                            $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList)";
+                            $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.verified = '1' AND mu.id IN ($idList)";
                             $result_count = mysqli_query($con, $sqls_count);
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu  WHERE mu.id IN ($idPrivacy) WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
+                            $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1' AND mu.id IN ($idPrivacy) WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
                         }
                     }
 
