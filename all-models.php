@@ -1217,7 +1217,7 @@ include('includes/helper.php');
 
                         if (!empty($premium_check) && !empty($privacy_setting)) {
 
-                            // $privacy_user_ids = PrivacyModelIdsByUser($userDetails, $con, $privacy_setting['children_preference'], $privacy_setting['height_range'], $privacy_setting['weight_range'], $privacy_setting['education_level']);
+                            $privacy_user_ids = PrivacyModelIdsByUser($userDetails, $con);
 
                             $privacy_user_ids ='';
                         } else {

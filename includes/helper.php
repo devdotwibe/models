@@ -336,25 +336,60 @@ function BoostedModelIds($con) {
 	}
 
 
-function PrivacyModelIdsByUser($userDetails, $con, $children_preference, $height_range, $weight_range, $education_level) {
-	
-	$query = "SELECT id,unique_model_id 
-				FROM model_privacy_settings WHERE children_preference='".$children_preference."' OR height_range='".$height_range."' OR weight_range='".$weight_range."' OR education_level='".$education_level."'";
+	function PrivacyModelIdsByUser($userDetails, $con) {
+		
+		$privacy_setting = getModelPrivacySettings($userDetails['unique_id']);
+
+		$children_preference = $privacy_setting['children_preference'];
+		$education_level     = $privacy_setting['education_level'];
+		$height_min          = $privacy_setting['height_min'];
+		$height_max          = $privacy_setting['height_max'];
+		$weight_min          = $privacy_setting['weight_min'];
+		$weight_max          = $privacy_setting['weight_max'];
+		$age_min             = $privacy_setting['age_min'];
+		$age_max             = $privacy_setting['age_max'];
+
+		$conditions = [];
+
+		if (!empty($children_preference)) {
+			$conditions[] = "children_preference = '" . mysqli_real_escape_string($con, $children_preference) . "'";
+		}
+		if (!empty($education_level)) {
+			$conditions[] = "education_level = '" . mysqli_real_escape_string($con, $education_level) . "'";
+		}
+		if (!empty($height_min) && !empty($height_max)) {
+			$conditions[] = "height BETWEEN " . intval($height_min) . " AND " . intval($height_max);
+		}
+		if (!empty($weight_min) && !empty($weight_max)) {
+			$conditions[] = "weight BETWEEN " . intval($weight_min) . " AND " . intval($weight_max);
+		}
+		if (!empty($age_min) && !empty($age_max)) {
+			$conditions[] = "age BETWEEN " . intval($age_min) . " AND " . intval($age_max);
+		}
+
+		$whereClause = !empty($conditions) ? "WHERE " . implode(" AND ", $conditions) : "";
+
+		$query = "
+			SELECT id, unique_id
+			FROM model_user
+			$whereClause
+		";
 
 		$result = mysqli_query($con, $query);
 
 		$validmatches = [];
-
-		while ($row = mysqli_fetch_assoc($result)) {
-			
-			$validmatches[] = [
-							'unique_model_id' => $row['unique_model_id'],
-						];
-			
+		if ($result) {
+			while ($row = mysqli_fetch_assoc($result)) {
+				$validmatches[] = [
+					'unique_model_id' => $row['unique_id'],
+				];
+			}
 		}
-	
-	return array_column($validmatches, 'unique_model_id');
-}
+
+		return array_column($validmatches, 'unique_model_id');
+	}
+
+
 
 function checkUserFollow($model_id, $user_id) {
 	
