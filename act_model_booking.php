@@ -199,18 +199,20 @@ else{
 
 			$bookig_detail = DB::queryFirstRow("SELECT * FROM model_booking WHERE id = %i", $accept_id);
 
-		  if (!empty($booking_detail)) {
+			echo json_encode(['status' => 'success', 'data' => $booking_detail]);
 
-				$country_name = getCountry($booking_detail['country']);
+		//   if (!empty($booking_detail)) {
 
-				$booking_detail['country_name'] = $country_name;
+		// 		$country_name = getCountry($booking_detail['country']);
+
+		// 		$booking_detail['country_name'] = $country_name;
 				
-				echo json_encode(['status' => 'success', 'data' => $booking_detail]);
+		// 		echo json_encode(['status' => 'success', 'data' => $booking_detail]);
 
-			} else {
+		// 	} else {
 
-				echo json_encode(['status' => 'error', 'message' => 'Booking not found']);
-			}
+		// 		echo json_encode(['status' => 'error', 'message' => 'Booking not found']);
+		// 	}
 
 	}
 
