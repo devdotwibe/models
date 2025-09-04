@@ -641,7 +641,7 @@ include('includes/helper.php');
                             $privacy_user_ids = '';
                         }
                         
-                        echo $privacy_user_ids , 'testffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
+                        print_r($privacy_user_ids);
 
                         die();
                     }
