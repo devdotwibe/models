@@ -142,7 +142,7 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 			<div class="form-group">
 				<label for="pwd">Coins:</label>
 
-				<input type="hidden" class="form-control" id="showcoin" value="<?php echo $showcoin; ?>" readonly>
+				<input type="text" class="form-control" id="showcoin" value="<?php echo $showcoin; ?>" readonly>
 
 				<input type="hidden" class="form-control" id="coins" value="<?php echo $coins; ?>" readonly>
 
