@@ -82,18 +82,37 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 		if (isset($_POST['submit10'])) {
 			$amount = $_POST['amount'];
 			$coins = $_POST['coins'];
+
+			$showcoin =  $_POST['coins'];
+
 		} else if (isset($_POST['submit100'])) {
 			$amount = $_POST['amount'];
 			$coins = $_POST['coins'];
+
+			$showcoin =  $_POST['coins'];
+
 		} else if (isset($_POST['submit500'])) {
 			$amount = $_POST['amount'];
-			$coins = $_POST['coins'];
+
+			$coins = $_POST['coins'] + 750;
+
+			$showcoin =  $_POST['coins'];
+
 		} else if (isset($_POST['submit1000'])) {
+
 			$amount = $_POST['amount'];
-			$coins = $_POST['coins'];
+
+			$coins = $_POST['coins'] + 2000;
+
+			$showcoin =  $_POST['coins'];
+
 		} else if (isset($_POST['submit2500'])) {
+
 			$amount = $_POST['amount'];
-			$coins = $_POST['coins'];
+
+			$coins = $_POST['coins'] + 4000;
+
+			$showcoin =  $_POST['coins'];
 		}
 		?>
 
@@ -122,7 +141,11 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 			</div>
 			<div class="form-group">
 				<label for="pwd">Coins:</label>
-				<input type="text" class="form-control" id="coins" value="<?php echo $coins; ?>" readonly>
+
+				<input type="hidden" class="form-control" id="showcoin" value="<?php echo $showcoin; ?>" readonly>
+
+				<input type="hidden" class="form-control" id="coins" value="<?php echo $coins; ?>" readonly>
+
 			</div>
 			<?php $total_amt = $amount * 100; ?>
 
