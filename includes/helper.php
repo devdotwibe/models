@@ -383,7 +383,7 @@ function BoostedModelIds($con) {
 			$whereClause
 		";
 
-		echo $whereClause;
+		echo $query;
 
 		die();
 		
