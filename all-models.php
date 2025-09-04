@@ -948,10 +948,6 @@ include('includes/helper.php');
 
                             } 
 
-                            echo $idPrivacy ;
-
-                            die();
-
                             // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
 
                             $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.verified = '1' " . $where;
@@ -969,10 +965,6 @@ include('includes/helper.php');
 
                                 $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
                             } 
-
-                              echo $idPrivacy ;
-
-                            die();
 
                             $idList = implode(',', $onlineUserIds);
 
