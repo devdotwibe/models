@@ -379,26 +379,22 @@ function BoostedModelIds($con) {
 			$whereClause
 		";
 
+
+		echo $query ;
+
+		die();
+
+		
 		$result = mysqli_query($con, $query);
-
-			echo $result;
-
-					die();
 
 		$validmatches = [];
 		if ($result) {
 			while ($row = mysqli_fetch_assoc($result)) {
 				$validmatches[] = [
 					'id' => $row['user_id'], 
-
 				];
 			}
 		}
-
-			
-
-
-		die();
 
 		return array_column($validmatches, 'id');
 	}
