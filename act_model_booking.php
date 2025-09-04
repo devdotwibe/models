@@ -204,10 +204,6 @@ else{
 
 				$country_name = getCountry($bookig_detail['country']);
 
-				echo $country_name;
-
-				die();
-				
 				$bookig_detail['country_name'] = $country_name;
 				
 				echo json_encode(['status' => 'success', 'data' => $bookig_detail]);
