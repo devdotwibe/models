@@ -2,16 +2,16 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Streamer (AJAX signaling)</title>
+<title>Streamer (AJAX signaling) — DEBUG</title>
 <style>
   body{font-family:Arial;padding:12px}
   video{width:48%;border-radius:8px;background:#000}
-  #log{height:220px;background:#0b1220;color:#bdf;padding:8px;overflow:auto;border-radius:6px;margin-top:8px}
+  #log{height:320px;background:#0b1220;color:#bdf;padding:8px;overflow:auto;border-radius:6px;margin-top:8px}
   input,button{padding:8px;margin:6px}
 </style>
 </head>
 <body>
-  <h2>Streamer</h2>
+  <h2>Streamer (DEBUG)</h2>
   <label>Room: <input id="room" value="room123"></label>
   <button id="startBtn">Start Stream (mark room started)</button>
   <div>
@@ -21,17 +21,27 @@
 
 <script>
 const SIGNAL = 'signaling.php';
-const ICE = [{ urls: 'stun:stun.l.google.com:19302' }]; // add TURN for public internet
+const ICE = [{ urls: 'stun:stun.l.google.com:19302' }]; // add TURN for production
 let room = null;
 let localStream = null;
-const pcs = {}; // peerId -> pc
+const pcs = {}; // peerId -> { pc, candInterval }
 
 const logEl = document.getElementById('log');
 function log(...a){ console.log(...a); logEl.textContent += a.map(x=> typeof x==='object'? JSON.stringify(x): String(x)).join(' ') + '\n'; logEl.scrollTop = logEl.scrollHeight; }
 
+// send debug log to server too
+async function serverLog(msg){
+  try {
+    await fetch(`${SIGNAL}?room=${encodeURIComponent(room)}`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ type:'log', from:'streamer', msg })
+    });
+  } catch(e){}
+}
+
 async function postJson(body){
   const res = await fetch(`${SIGNAL}?room=${encodeURIComponent(room)}`, {
-    method:'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body)
+    method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
   });
   return res.json();
 }
@@ -46,70 +56,94 @@ document.getElementById('startBtn').addEventListener('click', start);
 async function start(){
   room = document.getElementById('room').value.trim();
   if (!room) return alert('Enter room');
-  // mark room started (won't delete existing offers)
   await postJson({ type:'start' });
+  serverLog('streamer start called');
   try {
     localStream = await navigator.mediaDevices.getUserMedia({ video:true, audio:true });
     document.getElementById('localVideo').srcObject = localStream;
-  } catch(e) { return alert('getUserMedia failed: '+e.message); }
+    log('Got local media');
+    serverLog('got local media');
+  } catch(e) { log('getUserMedia failed: ' + e.message); serverLog('getUserMedia failed: '+e.message); return; }
 
-  // poll for viewer offers and for candidates
   pollOffers();
   setInterval(pollOffers, 1200);
   setInterval(pollCandidates, 1400);
   log('Streamer started and polling for viewer offers...');
+  serverLog('polling started');
 }
 
 async function pollOffers(){
   if (!room) return;
   try{
-    const res = await getJson({ room, action:'streamer', consume:1 }); // consume offers + those peers' candidates
-    if (!res || !res.offers) return;
-    for (const peerId in res.offers) {
-      if (!res.offers.hasOwnProperty(peerId)) continue;
-      if (pcs[peerId]) { log('Already answering', peerId); continue; }
-      const offer = res.offers[peerId];
-      const preCands = res.candidates && res.candidates[peerId] ? res.candidates[peerId] : [];
-      handleOffer(peerId, offer, preCands).catch(e=> log('handleOffer err', e));
+    const res = await getJson({ room, action:'streamer', consume:1 });
+    if (!res) return;
+    const offers = res.offers || {};
+    const candidatesMap = res.candidates || {};
+    log('pollOffers got peers: ' + Object.keys(offers).join(', '));
+    for (const peerId in offers) {
+      if (!offers.hasOwnProperty(peerId)) continue;
+      if (pcs[peerId]) { log('Already answering ' + peerId); continue; }
+      const offer = offers[peerId];
+      const preCands = candidatesMap[peerId] || [];
+      handleOffer(peerId, offer, preCands).catch(e=> { log('handleOffer err '+peerId, e); serverLog('handleOffer err '+peerId+' '+e.message); });
     }
-  } catch(e){ log('pollOffers error', e); }
+  } catch(e){ log('pollOffers error ' + e.message); serverLog('pollOffers error '+e.message); }
 }
 
 async function handleOffer(peerId, offerPayload, initialCandidates){
-  log('New viewer offer', peerId);
+  log('New viewer offer -> ' + peerId);
+  serverLog('new viewer offer ' + peerId);
   const pc = new RTCPeerConnection({ iceServers: ICE });
-  pcs[peerId] = pc;
+  pcs[peerId] = { pc, candInterval: null };
 
   // add local tracks
-  localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
+  try {
+    localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
+  } catch(e){
+    log('addTrack error: '+ e.message); serverLog('addTrack error '+e.message);
+  }
 
   pc.onicecandidate = e => {
     if (e.candidate) {
-      postJson({ type:'candidate', peer:peerId, payload: e.candidate }).catch(()=>{});
+      postJson({ type:'candidate', peer:peerId, payload: e.candidate.toJSON ? e.candidate.toJSON() : e.candidate }).catch(()=>{});
+      log('Streamer ICE -> posted candidate for ' + peerId);
     }
   };
 
-  // apply any pre-sent candidates viewer made
+  // apply any pre-sent viewer->streamer candidates
   for (const c of (initialCandidates||[])) {
-    try { await pc.addIceCandidate(new RTCIceCandidate(c)); } catch(e){ /* ignore */ }
+    try { await pc.addIceCandidate(new RTCIceCandidate(c)); log('Applied initial candidate for ' + peerId); }
+    catch(e){ log('apply initial candidate failed ' + peerId + ' ' + (e.message || e)); }
   }
 
+  // set remote description (offer)
   try {
-    await pc.setRemoteDescription(offerPayload);
+    await pc.setRemoteDescription(new RTCSessionDescription(offerPayload));
+    log('setRemoteDescription OK for ' + peerId);
   } catch(e) {
-    log('setRemoteDescription failed for', peerId, e);
+    log('setRemoteDescription failed for ' + peerId + ' : ' + (e.message || e));
+    serverLog('setRemoteDescription failed for ' + peerId + ' ' + (e.message || e));
     try { pc.close(); } catch(_) {}
     delete pcs[peerId];
     return;
   }
 
-  const answer = await pc.createAnswer();
-  await pc.setLocalDescription(answer);
-  // post answer
-  await postJson({ type:'answer', peer: peerId, payload: pc.localDescription });
-  log('Answer posted for', peerId);
+  // create & send answer
+  try {
+    const answer = await pc.createAnswer();
+    await pc.setLocalDescription(answer);
+    await postJson({ type:'answer', peer:peerId, payload: pc.localDescription.toJSON ? pc.localDescription.toJSON() : pc.localDescription });
+    log('Answer posted for ' + peerId);
+    serverLog('Answer posted for ' + peerId);
+  } catch(e) {
+    log('createAnswer/setLocalDescription failed for ' + peerId + ' : ' + (e.message || e));
+    serverLog('createAnswer failed ' + peerId + ' ' + (e.message || e));
+    try { pc.close(); } catch(_) {}
+    delete pcs[peerId];
+    return;
+  }
 
-  // poll for later candidates for this peer and apply then cleanup
+  // poll for late candidates for this peer and apply them, then cleanup
   const candInterval = setInterval(async ()=>{
     if (!pcs[peerId]) { clearInterval(candInterval); return; }
     try {
@@ -117,28 +151,31 @@ async function handleOffer(peerId, offerPayload, initialCandidates){
       const list = (state.candidates && state.candidates[peerId]) ? state.candidates[peerId] : [];
       if (list && list.length) {
         for (const cc of list) {
-          try { await pc.addIceCandidate(cc); } catch(e){}
+          try { await pc.addIceCandidate(new RTCIceCandidate(cc)); log('Applied post candidate for ' + peerId); }
+          catch(e){ log('apply post candidate err ' + peerId + ' ' + (e.message||e)); }
         }
-        // remove those applied candidates from server
+        // remove applied candidates from server
         await postJson({ type:'cleanup', peer: peerId });
       }
-    } catch(e){ /* ignore */ }
+    } catch(e){ /* ignore polling errors */ }
   }, 1500);
 
+  pcs[peerId].candInterval = candInterval;
+
   pc.onconnectionstatechange = ()=> {
-    log('pc state', peerId, pc.connectionState);
+    log('pc state ' + peerId + ' : ' + pc.connectionState);
+    serverLog('pc state ' + peerId + ' : ' + pc.connectionState);
     if (['failed','disconnected','closed'].includes(pc.connectionState)) {
       try { pc.close(); } catch(_){}
+      if (pcs[peerId] && pcs[peerId].candInterval) clearInterval(pcs[peerId].candInterval);
       delete pcs[peerId];
-      clearInterval(candInterval);
       postJson({ type:'cleanup', peer: peerId }).catch(()=>{});
     }
   };
 }
 
 async function pollCandidates(){
-  // streamer may also need to apply candidate lists targeted at streamer id if you used that pattern.
-  // (Not necessary in this design; we use per-peer candidates.)
+  // not used (we apply per-peer during pollOffers flow)
 }
 </script>
 </body>

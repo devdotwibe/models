@@ -2,16 +2,16 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Viewer (AJAX signaling)</title>
+<title>Viewer (AJAX signaling) — DEBUG</title>
 <style>
   body{font-family:Arial;padding:12px}
   video{width:70%;border-radius:8px;background:#000}
+  #log{height:220px;background:#0b1220;color:#bdf;padding:8px;overflow:auto;border-radius:6px;margin-top:8px}
   input,button{padding:8px;margin:6px}
-  #log{height:140px;background:#0b1220;color:#bdf;padding:8px;overflow:auto;border-radius:6px;margin-top:8px}
 </style>
 </head>
 <body>
-  <h2>Viewer</h2>
+  <h2>Viewer (DEBUG)</h2>
   <label>Room: <input id="room" value="room123"></label>
   <button id="joinBtn">Join</button>
   <div><video id="remoteVideo" autoplay playsinline></video></div>
@@ -24,8 +24,16 @@ let room = null;
 const peerId = 'peer_' + Math.floor(Math.random()*1000000) + '_' + Date.now();
 let pc = null;
 let pollTimer = null;
+
 const logEl = document.getElementById('log');
-function log(...a){ logEl.textContent += a.map(x=> typeof x==='object'? JSON.stringify(x): String(x)).join(' ') + '\n'; logEl.scrollTop = logEl.scrollHeight; console.log(...a); }
+function log(...a){ console.log(...a); logEl.textContent += a.map(x=> typeof x==='object'? JSON.stringify(x): String(x)).join(' ') + '\n'; logEl.scrollTop = logEl.scrollHeight; }
+
+// send debug log to server
+async function serverLog(msg){
+  try { await fetch(`${SIGNAL}?room=${encodeURIComponent(room)}`, {
+    method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ type:'log', from:'viewer', msg })
+  }); } catch(e){}
+}
 
 async function postJson(body){ const res = await fetch(`${SIGNAL}?room=${encodeURIComponent(room)}`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) }); return res.json(); }
 async function getJson(params){ const qs = new URLSearchParams(params); const res = await fetch(`${SIGNAL}?${qs}`); return res.json(); }
@@ -42,28 +50,39 @@ async function join(){
     return alert('No streamer started in that room yet.');
   }
 
+  log('Joining as ' + peerId);
+  serverLog('viewer join ' + peerId);
+
   pc = new RTCPeerConnection({ iceServers: ICE });
 
   pc.ontrack = e => {
     document.getElementById('remoteVideo').srcObject = e.streams[0];
     log('Remote stream received');
+    serverLog('remote stream received');
   };
 
   pc.onicecandidate = e => {
     if (e.candidate) {
-      postJson({ type:'candidate', peer: peerId, payload: e.candidate }).catch(()=>{});
+      const candJson = e.candidate.toJSON ? e.candidate.toJSON() : e.candidate;
+      postJson({ type:'candidate', peer: peerId, payload: candJson }).catch(()=>{});
+      log('local ICE candidate posted');
     }
   };
 
   // Viewer creates offer (no local tracks)
-  const offer = await pc.createOffer();
-  await pc.setLocalDescription(offer);
+  try {
+    const offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+    log('Created local offer');
+    serverLog('created local offer');
+  } catch(e){ log('createOffer error ' + (e.message||e)); serverLog('createOffer error '+(e.message||e)); return; }
 
-  // post offer to server
-  await postJson({ type:'offer', peer: peerId, payload: pc.localDescription });
-  log('Sent offer', peerId);
+  // post offer
+  await postJson({ type:'offer', peer: peerId, payload: pc.localDescription.toJSON ? pc.localDescription.toJSON() : pc.localDescription });
+  log('Sent offer ' + peerId);
+  serverLog('sent offer ' + peerId);
 
-  // poll for answer and candidates
+  // start polling for answer & candidates
   await pollOnce(); // immediate
   pollTimer = setInterval(pollOnce, 1200);
 
@@ -80,19 +99,22 @@ async function pollOnce(){
   try {
     const res = await getJson({ room, action:'viewer', peer: peerId, consume:1 });
     if (!res) return;
-
     if (res.answer) {
       try {
-        await pc.setRemoteDescription(res.answer);
+        await pc.setRemoteDescription(new RTCSessionDescription(res.answer));
         log('Applied remote answer');
-      } catch(e) { log('setRemoteDescription error', e); }
+        serverLog('applied remote answer');
+      } catch(e) { log('setRemoteDescription error ' + (e.message||e)); serverLog('setRemoteDescription error '+(e.message||e)); }
+    } else {
+      log('No answer yet');
     }
     if (res.candidates && res.candidates.length) {
       for (const c of res.candidates) {
-        try { await pc.addIceCandidate(c); } catch(e){ log('addIceCandidate err', e); }
+        try { await pc.addIceCandidate(new RTCIceCandidate(c)); log('Added remote candidate'); }
+        catch(e){ log('addIceCandidate error ' + (e.message||e)); serverLog('addIceCandidate error '+(e.message||e)); }
       }
     }
-  } catch(e){ log('pollOnce err', e); }
+  } catch(e){ log('pollOnce err ' + (e.message||e)); serverLog('pollOnce err '+(e.message||e)); }
 }
 </script>
 </body>

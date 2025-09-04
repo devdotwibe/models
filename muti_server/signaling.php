@@ -1,15 +1,7 @@
 <?php
 // signaling.php
-// File-based per-room, per-peer signaling for prototyping.
-// Endpoints:
-// POST ?room=ROOM  + body JSON { type: "start" }               -> create/reset room (streamer)
-// POST ?room=ROOM  + body JSON { type: "offer", peer, offer }  -> viewer posts offer
-// POST ?room=ROOM  + body JSON { type: "answer", peer, answer }-> streamer posts answer
-// POST ?room=ROOM  + body JSON { type: "candidate", peer, candidate } -> any posts candidate for peer
-// POST ?room=ROOM  + body JSON { type: "cleanup", peer }       -> remove peer data
-// GET  ?room=ROOM&action=state                                -> return whole room (for debug)
-// GET  ?room=ROOM&action=streamer&consume=1                   -> streamer fetch offers + candidates (consume offers)
-// GET  ?room=ROOM&action=viewer&peer=PEER&consume=1           -> viewer fetch answer+candidates (consume)
+// File-based per-room, per-peer signaling with server-side logging for debugging.
+// See in-room meta.logs for server-side events.
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -26,7 +18,12 @@ $roomFile = $dir . '/room_' . preg_replace('/[^a-zA-Z0-9_\-]/','_', $room) . '.j
 
 // default structure
 $default = [
-    'meta' => ['streamer_started' => false, 'streamer_id' => null, 'created_at' => time()],
+    'meta' => [
+        'streamer_started' => false,
+        'streamer_id' => null,
+        'created_at' => time(),
+        'logs' => []
+    ],
     'offers' => new stdClass(),      // { peerId: offerPayload }
     'answers' => new stdClass(),     // { peerId: answerPayload }
     'candidates' => new stdClass()   // { peerId: [candidatePayload, ...] }
@@ -63,7 +60,7 @@ function save_room($file, $data) {
 $method = $_SERVER['REQUEST_METHOD'];
 $data = read_room($roomFile, $default);
 
-// READ (GET)
+// GET handlers
 if ($method === 'GET') {
     $action = $_GET['action'] ?? 'state';
     if ($action === 'state') {
@@ -71,7 +68,6 @@ if ($method === 'GET') {
         exit;
     }
     if ($action === 'streamer') {
-        // streamer wants offers and candidates for those offers
         $consume = isset($_GET['consume']) && ($_GET['consume'] === '1' || $_GET['consume'] === 'true');
         $offers = $data['offers'] ?? [];
         $cands_for_offers = [];
@@ -80,10 +76,10 @@ if ($method === 'GET') {
         }
         $out = ['meta' => $data['meta'], 'offers' => $offers, 'candidates' => $cands_for_offers];
         if ($consume && !empty($offers)) {
-            // remove consumed offers and their candidate batches (viewer -> streamer candidates)
             foreach (array_keys($offers) as $p) {
                 unset($data['offers'][$p]);
-                unset($data['candidates'][$p]);
+                // keep answers until viewer consumes
+                unset($data['candidates'][$p]); // viewer->streamer candidates consumed with the offer
             }
             save_room($roomFile, $data);
         }
@@ -105,12 +101,11 @@ if ($method === 'GET') {
         echo json_encode($out);
         exit;
     }
-    // fallback
     echo json_encode(['error'=>'unknown action']);
     exit;
 }
 
-// WRITE (POST)
+// POST handlers
 $raw = file_get_contents('php://input');
 $body = json_decode($raw, true) ?? [];
 
@@ -118,18 +113,36 @@ $type = $body['type'] ?? ($body['action'] ?? '');
 $peer = $body['peer'] ?? '';
 $payload = $body['payload'] ?? $body['offer'] ?? $body['answer'] ?? $body['candidate'] ?? null;
 
-// start (streamer creates / marks started) - safe: do NOT wipe existing offers unless explicitly asked
-if ($type === 'start') {
-    $data['meta'] = ['streamer_started' => true, 'streamer_id' => $body['streamer_id'] ?? uniqid('streamer_'), 'created_at' => time()];
+// server-side logging endpoint
+if ($type === 'log') {
+    $entry = [
+        'ts' => time(),
+        'from' => $body['from'] ?? 'client',
+        'msg' => $body['msg'] ?? $raw
+    ];
+    if (!isset($data['meta']['logs']) || !is_array($data['meta']['logs'])) $data['meta']['logs'] = [];
+    $data['meta']['logs'][] = $entry;
+    // keep last 200 logs
+    $data['meta']['logs'] = array_slice($data['meta']['logs'], -200);
     save_room($roomFile, $data);
-    echo json_encode(['ok' => true, 'meta' => $data['meta']]);
+    echo json_encode(['ok'=>true]); exit;
+}
+
+if ($type === 'start') {
+    $data['meta'] = [
+        'streamer_started' => true,
+        'streamer_id' => $body['streamer_id'] ?? uniqid('streamer_'),
+        'created_at' => time(),
+        'logs' => $data['meta']['logs'] ?? []
+    ];
+    save_room($roomFile, $data);
+    echo json_encode(['ok'=>true,'meta'=>$data['meta']]);
     exit;
 }
 
 if ($type === 'offer') {
     if (!$peer || !$payload) { http_response_code(400); echo json_encode(['error'=>'peer and offer required']); exit; }
-    $data['offers'][$peer] = $payload;            // viewer -> streamer
-    // remove any stale answer (viewer re-offered)
+    $data['offers'][$peer] = $payload;
     if (isset($data['answers'][$peer])) unset($data['answers'][$peer]);
     save_room($roomFile, $data);
     echo json_encode(['ok'=>true]); exit;
@@ -137,7 +150,7 @@ if ($type === 'offer') {
 
 if ($type === 'answer') {
     if (!$peer || !$payload) { http_response_code(400); echo json_encode(['error'=>'peer and answer required']); exit; }
-    $data['answers'][$peer] = $payload;           // streamer -> viewer (persist until viewer consumes)
+    $data['answers'][$peer] = $payload;
     save_room($roomFile, $data);
     echo json_encode(['ok'=>true]); exit;
 }
