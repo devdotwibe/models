@@ -382,10 +382,6 @@ function BoostedModelIds($con) {
 				ON mu.unique_id = med.unique_model_id
 			$whereClause
 		";
-
-		echo $query;
-
-		die();
 		
 		$result = mysqli_query($con, $query);
 
