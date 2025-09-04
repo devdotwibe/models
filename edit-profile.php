@@ -476,7 +476,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         margin: 50px auto;
         }
 
-        .progress-fill {
+        .progress-fill-input {
         position: absolute;
         height: 100%;
         background: #333; /* blue fill */
@@ -3175,7 +3175,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                         <div class="progress-container">
 
-                            <div class="progress-fill"></div>
+                            <div class="progress-fill-input"></div>
                             <div class="knob min"></div>
                             <div class="knob max"></div>
                         </div>
@@ -3282,7 +3282,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                         <div class="progress-container">
 
-                            <div class="progress-fill"></div>
+                            <div class="progress-fill-input"></div>
                             <div class="knob min"></div>
                             <div class="knob max"></div>
                         </div>
@@ -3315,7 +3315,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                         <div class="progress-container">
 
-                            <div class="progress-fill"></div>
+                            <div class="progress-fill-input"></div>
                             <div class="knob min"></div>
                             <div class="knob max"></div>
                         </div>
@@ -3855,7 +3855,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           function initProgressBar($wrapper) {
 
               const $bar = $wrapper.find(".progress-container");
-              const $fill = $wrapper.find(".progress-fill");
+              const $fill = $wrapper.find(".progress-fill-input");
               const $minKnob = $wrapper.find(".knob.min");
               const $maxKnob = $wrapper.find(".knob.max");
               const $minValue = $wrapper.find(".minValue");
@@ -4380,7 +4380,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       });
 
       const progress = (completedSections / totalSections) * 100;
-      const progressFill = document.querySelector('.progress-fill');
+      const progressFill = document.querySelector('.progress-fill-input');
       if (progressFill) {
         progressFill.style.width = `${progress}%`;
       }
@@ -4821,7 +4821,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             console.log(response);
 
             if (response.status === 'success') {
-              $('.progress-fill').css('width', '100%');
+              $('.progress-fill-input').css('width', '100%');
               $('.step').addClass('completed').removeClass('active');
 
               setTimeout(() => {
@@ -5073,7 +5073,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           console.log(response);
 
           if (response.status === 'success') {
-            $('.progress-fill').css('width', '100%');
+            $('.progress-fill-input').css('width', '100%');
             $('.step').addClass('completed').removeClass('active');
 
             setTimeout(() => {
