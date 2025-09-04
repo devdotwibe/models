@@ -353,13 +353,15 @@ function BoostedModelIds($con) {
 		$conditions = [];
 
 		if (!empty($children_preference)) {
+
 			$conditions[] = "mu.children_preference = '" . mysqli_real_escape_string($con, $children_preference) . "'";
 		}
 		if (!empty($education_level)) {
+			
 			$conditions[] = "mu.education_level = '" . mysqli_real_escape_string($con, $education_level) . "'";
 		}
 
-		
+
 		// if (!empty($age_min) && !empty($age_max)) {
 		// 	$conditions[] = "mu.age BETWEEN " . intval($age_min) . " AND " . intval($age_max);
 		// }
