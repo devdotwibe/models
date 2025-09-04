@@ -798,11 +798,11 @@ include('includes/helper.php');
                         }
 
                         if (isset($_POST['children_preference']) && $_POST['children_preference'] != 'any') {
-                            $where .= ' AND pu.children_preference = "' . $_POST['children_preference'] . '"';
+                            $where .= ' AND mu.children_preference = "' . $_POST['children_preference'] . '"';
                         }
 
                         if (isset($_POST['education_level']) && $_POST['education_level'] != 'any') {
-                            $where .= ' AND pu.education_level = "' . $_POST['education_level'] . '"';
+                            $where .= ' AND mu.education_level = "' . $_POST['education_level'] . '"';
                         }
 
                         // if (isset($_POST['f_height']) && !empty(($_POST['f_height']))) {
@@ -1381,11 +1381,11 @@ include('includes/helper.php');
                             }
 
                             if (isset($_POST['children_preference']) && $_POST['children_preference'] != 'any') {
-                                $where .= ' AND pu.children_preference = "' . $_POST['children_preference'] . '"';
+                                $where .= ' AND mu.children_preference = "' . $_POST['children_preference'] . '"';
                             }
 
                             if (isset($_POST['education_level']) && $_POST['education_level'] != 'any') {
-                                $where .= ' AND pu.education_level = "' . $_POST['education_level'] . '"';
+                                $where .= ' AND mu.education_level = "' . $_POST['education_level'] . '"';
                             }
 
                             // if (isset($_POST['f_height']) && !empty(($_POST['f_height']))) {
@@ -2150,7 +2150,7 @@ include('includes/helper.php');
                     </div>
 
                     <div class="filter-group">
-                        <label class="filter-label">No Children</label>
+                        <label class="filter-label">Children Preference</label>
                         <select class="filter-select" name="children_preference" id="noChildrenFilter">
                             <option value="any">Any</option>
                             <option value="no-children" <?php if (isset($_POST['children_preference'])  && $_POST['children_preference'] == 'no-children') { ?> selected <?php } ?>>No Children</option>
