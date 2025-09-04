@@ -756,7 +756,7 @@ body .owl-carousel .owl-nav.disabled {
                             <?php
                                $profile_pic = $rowesdw['profile_pic'] ?? '';
 
-                                if (file_exists($profile_pic) || !empty($modal_img_list_array)) {
+                                if (checkImageExists($profile_pic) || !empty($modal_img_list_array)) {
 
                                   $modal_img_list_array[] = SITEURL . $profile_pic; 
 								  
