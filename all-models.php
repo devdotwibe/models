@@ -942,17 +942,12 @@ include('includes/helper.php');
 
                             $idPrivacy = "";
 
-                            // if (!empty($privacy_user_ids) && !isset($_GET['filter']) ) {
+                            if (!empty($privacy_user_ids) && !isset($_GET['filter']) ) {
 
-                            //     $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
+                                $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
 
-                            // } 
-
-                            // echo $idPrivacy ;
-
-                            // die();
-
-                            // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
+                                $where .= " AND  WHERE mu.id IN ($idPrivacy)";
+                            } 
 
                             $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.verified = '1' " . $where;
 
@@ -960,7 +955,8 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu   WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                            $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+
                         } else {
 
                             $idPrivacy = "";
