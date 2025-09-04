@@ -949,6 +949,10 @@ include('includes/helper.php');
                                 $where .= " AND  WHERE mu.id IN ($idPrivacy)";
                             } 
 
+                            echo $where;
+
+                            die();
+
                             $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.verified = '1' " . $where;
 
                             $result_count = mysqli_query($con, $sqls_count);
