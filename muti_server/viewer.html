@@ -1,84 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <title>Viewer</title>
-  <style>
-    body { font-family: Arial; margin:20px; }
-    video { width: 400px; border:1px solid #ccc; margin:10px; }
-  </style>
+  <meta charset="utf-8">
+  <title>Viewer (AJAX signaling)</title>
+  <style>body{font-family:Arial;padding:16px}video{width:60%;}</style>
 </head>
 <body>
-  <h2>Viewer</h2>
+  <h1>Viewer</h1>
   <label>Room ID: <input id="room" value="room123"></label>
-  <button id="join">Join Stream</button>
-
-  <h3>Remote Stream</h3>
-  <video id="remoteVideo" autoplay playsinline></video>
+  <button id="joinBtn">Join Stream</button>
+  <div style="margin-top:12px;">
+    <video id="remoteVideo" autoplay playsinline></video>
+  </div>
+  <pre id="log" style="background:#111;color:#bde;padding:8px;height:160px;overflow:auto;"></pre>
 
 <script>
-const ICE_SERVERS = [{urls: "stun:stun.l.google.com:19302"}];
-let room, peerId, pc;
+const SIGNAL_URL = 'signaling.php';
+const ICE = [{urls:'stun:stun.l.google.com:19302'}];
 
-function ajax(url, method="GET", data=null) {
-  return fetch(url, {
-    method,
-    headers: {"Content-Type":"application/x-www-form-urlencoded"},
-    body: data ? new URLSearchParams(data) : null
-  }).then(r => r.json());
+let pc = null;
+let room = null;
+let peerId = null;
+
+const logEl = document.getElementById('log');
+function log(...args){ console.log(...args); logEl.textContent += args.map(a=> typeof a==='object' ? JSON.stringify(a) : String(a)).join(' ') + '\\n'; logEl.scrollTop = 99999; }
+
+async function ajaxGET(params){
+  const q = new URLSearchParams(params);
+  const r = await fetch(`${SIGNAL_URL}?${q.toString()}`);
+  return r.json();
+}
+async function ajaxPOST(params){
+  const body = new URLSearchParams(params);
+  const r = await fetch(SIGNAL_URL + '?room=' + encodeURIComponent(room), { method: 'POST', body });
+  return r.json();
 }
 
-async function startViewer() {
-  room = document.getElementById("room").value;
-  peerId = "peer_" + Math.floor(Math.random()*1000000);
-  pc = new RTCPeerConnection({iceServers: ICE_SERVERS});
+document.getElementById('joinBtn').addEventListener('click', joinStream);
 
-  pc.ontrack = e => document.getElementById("remoteVideo").srcObject = e.streams[0];
+function genPeerId(){ return 'peer_' + Math.floor(Math.random()*1000000) + '_' + Date.now(); }
+
+async function joinStream(){
+  room = document.getElementById('room').value.trim();
+  if (!room) return alert('enter room');
+
+  // check room status first (ensure streamer started)
+  const status = await ajaxGET({ room, status:1 });
+  if (!status.meta || !status.meta.streamer_started) {
+    return alert('No streamer started in that room yet.');
+  }
+
+  peerId = genPeerId();
+  pc = new RTCPeerConnection({ iceServers: ICE });
+
+  pc.ontrack = e => {
+    document.getElementById('remoteVideo').srcObject = e.streams[0];
+    log('Got remote stream');
+  };
 
   pc.onicecandidate = e => {
     if (e.candidate) {
-      ajax("signaling.php?room="+room, "POST", {
-        type:"candidates", peer:peerId, payload:JSON.stringify(e.candidate)
-      });
+      ajaxPOST({ type:'candidate', peer:peerId, payload: JSON.stringify(e.candidate) }).catch(()=>{});
     }
   };
 
+  // Viewer creates offer (no local tracks) because streamer will send media
   const offer = await pc.createOffer();
   await pc.setLocalDescription(offer);
 
-  await ajax("signaling.php?room="+room, "POST", {
-    type:"offers", peer:peerId, payload:JSON.stringify(offer)
-  });
+  // send offer to server
+  await ajaxPOST({ type:'offer', peer:peerId, payload: JSON.stringify(pc.localDescription) });
+  log('Sent offer for peer', peerId);
 
-  poll();
+  // start polling to fetch answer + candidates
+  pollLoop();
+  setInterval(pollLoop, 1400);
 }
 
-async function poll() {
-  setInterval(async () => {
-    const data = await ajax("signaling.php?room="+room);
+async function pollLoop(){
+  if (!room || !peerId || !pc) return;
+  const res = await ajaxGET({ room, role:'viewer', peer:peerId, consume:1 });
+  if (!res) return;
 
-    // find my answer
-    for (const ans of data.answers) {
-      if (ans.peer === peerId && !pc.currentRemoteDescription) {
-        await pc.setRemoteDescription(JSON.parse(ans.payload));
-      }
+  if (res.answer) {
+    try {
+      await pc.setRemoteDescription(JSON.parse(res.answer));
+      log('Applied remote answer');
+    } catch(e){ log('remoteDesc err', e); }
+  }
+  if (res.candidates && res.candidates.length) {
+    for (const c of res.candidates) {
+      try { await pc.addIceCandidate(JSON.parse(c)); } catch(e){ log('cand add err', e); }
     }
-
-    // // find candidates for me
-    // for (const cand of data.candidates) {
-    //   if (cand.peer !== peerId) continue;
-    //   try { await pc.addIceCandidate(JSON.parse(cand.payload)); } catch(e) {}
-    // }
-    
-    for (const ans of data.answers) {
-        if (ans.peer === peerId && !pc.currentRemoteDescription) {
-            await pc.setRemoteDescription(JSON.parse(ans.payload));
-        }
-    }
-
-  }, 2000);
+  }
 }
-
-document.getElementById("join").onclick = startViewer;
 </script>
 </body>
 </html>
