@@ -640,10 +640,7 @@ include('includes/helper.php');
                         } else {
                             $privacy_user_ids = '';
                         }
-                        
-                        print_r($privacy_user_ids);
-
-                        die();
+                    
                     }
 
                     $followed_user_ids = [];
