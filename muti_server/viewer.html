@@ -1,114 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Viewer (AJAX signaling)</title>
-  <style>
-    body { font-family: Arial, Helvetica, sans-serif; padding:16px; }
-    video { width:70%; border-radius:8px; background:#111; }
-    #log { background:#0b1220; color:#9fd; padding:8px; height:180px; overflow:auto; border-radius:6px; }
-    input, button { padding:8px 10px; margin:6px; font-size:14px; }
-  </style>
+  <title>Viewer</title>
 </head>
 <body>
-  <h2>Viewer</h2>
-  <label>Room ID: <input id="room" value="room123"></label>
-  <button id="joinBtn">Join Stream</button>
-  <div style="margin-top:12px;">
-    <video id="remoteVideo" autoplay playsinline></video>
-  </div>
-  <h3>Log</h3>
-  <pre id="log"></pre>
-
+<h2>Viewer</h2>
+<video id="remoteVideo" autoplay playsinline></video>
 <script>
-const SIGNAL = 'signaling.php';
-const ICE_SERVERS = [{ urls: 'stun:stun.l.google.com:19302' }]; // add TURN for production
+const roomId = "room123"; // same as streamer
+const roomUrl = "signaling.php?room=" + roomId;
+const peerId = "peer_" + Math.floor(Math.random()*1000000);
+let pc;
 
-let room = null;
-let peerId = null;
-let pc = null;
-let pollTimer = null;
-
-const logEl = document.getElementById('log');
-function log(...a){ console.log(...a); logEl.textContent += a.map(x=> typeof x==='object'?JSON.stringify(x):String(x)).join(' ') + '\n'; logEl.scrollTop = logEl.scrollHeight; }
-
-async function ajaxGET(params){
-  const qs = new URLSearchParams(params).toString();
-  const res = await fetch(`${SIGNAL}?${qs}`);
-  return res.json();
-}
-async function ajaxPOST(params){
-  const body = new URLSearchParams(params);
-  const res = await fetch(`${SIGNAL}?room=${encodeURIComponent(room)}`, { method:'POST', body });
-  return res.json();
-}
-
-document.getElementById('joinBtn').addEventListener('click', join);
-
-function genPeerId(){ return 'peer_' + Math.floor(Math.random()*1000000) + '_' + Date.now(); }
-
-async function join(){
-  room = document.getElementById('room').value.trim();
-  if (!room) return alert('Enter room id');
-
-  // check room status: ensure streamer started
-  const status = await ajaxGET({ room, status:1 });
-  if (!status.meta || !status.meta.streamer_started) {
-    return alert('No streamer started in that room yet.');
-  }
-
-  peerId = genPeerId();
-  pc = new RTCPeerConnection({ iceServers: ICE_SERVERS });
+async function init() {
+  pc = new RTCPeerConnection();
 
   pc.ontrack = e => {
-    document.getElementById('remoteVideo').srcObject = e.streams[0];
-    log('remote stream received');
+    document.getElementById("remoteVideo").srcObject = e.streams[0];
   };
 
   pc.onicecandidate = e => {
     if (e.candidate) {
-      ajaxPOST({ type:'candidate', peer: peerId, payload: JSON.stringify(e.candidate) }).catch(()=>{});
+      fetch(roomUrl + "&action=candidate", {
+        method: "POST",
+        body: JSON.stringify({ peer: peerId, candidate: e.candidate }),
+      });
     }
   };
 
-  // viewer creates offer (no local tracks)
   const offer = await pc.createOffer();
   await pc.setLocalDescription(offer);
 
-  // send offer to server (viewer -> streamer)
-  await ajaxPOST({ type:'offer', peer: peerId, payload: JSON.stringify(pc.localDescription) });
-  log('Sent offer for', peerId);
-
-  // start polling for answer + candidates for this peer; consume them when received
-  await pollOnce(); // immediate attempt
-  pollTimer = setInterval(pollOnce, 1400);
-
-  // when leaving page, cleanup on server
-  window.addEventListener('beforeunload', ()=> {
-    try { navigator.sendBeacon(`${SIGNAL}?room=${encodeURIComponent(room)}`, new URLSearchParams({ type:'cleanup_peer', peer: peerId, payload:'1' })); } catch(e){}
+  await fetch(roomUrl + "&action=offer", {
+    method: "POST",
+    body: JSON.stringify({ peer: peerId, offer }),
   });
+
+  pollForAnswer();
 }
 
-async function pollOnce(){
-  if (!room || !peerId || !pc) return;
-  try {
-    const res = await ajaxGET({ room, role:'viewer', peer: peerId, consume:1 });
-    if (!res) return;
-    if (res.answer) {
-      try {
-        await pc.setRemoteDescription(JSON.parse(res.answer));
-        log('Applied remote answer');
-      } catch(e) { log('setRemoteDescription err', e); }
-    }
-    if (res.candidates && res.candidates.length) {
-      for (const c of res.candidates) {
-        try { await pc.addIceCandidate(JSON.parse(c)); } catch(e) { log('addIce err', e); }
-      }
-    }
-  } catch(e) {
-    log('poll error', e);
+async function pollForAnswer() {
+  const res = await fetch(roomUrl + "&action=state");
+  const state = await res.json();
+
+  if (state.answers && state.answers[peerId]) {
+    const answer = state.answers[peerId];
+    await pc.setRemoteDescription(new RTCSessionDescription(answer));
+    console.log("✅ Got remote answer");
+    return;
   }
+
+  setTimeout(pollForAnswer, 2000);
 }
+
+init();
 </script>
 </body>
 </html>

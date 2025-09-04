@@ -1,159 +1,65 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Streamer (AJAX signaling)</title>
-  <style>
-    body { font-family: Arial, Helvetica, sans-serif; padding:16px; }
-    video { width:48%; display:inline-block; vertical-align:top; border-radius:8px; background:#111; }
-    #log { background:#0b1220; color:#9fd; padding:8px; height:220px; overflow:auto; border-radius:6px; }
-    input, button { padding:8px 10px; margin:6px; font-size:14px; }
-  </style>
+  <title>Streamer</title>
 </head>
 <body>
-  <h2>Streamer</h2>
-  <label>Room ID: <input id="room" value="room123"></label>
-  <button id="startBtn">Start Stream (reset room)</button>
-  <div style="margin-top:12px;">
-    <video id="localVideo" autoplay playsinline muted></video>
-  </div>
-  <h3>Log</h3>
-  <pre id="log"></pre>
-
+<h2>Streamer</h2>
+<video id="localVideo" autoplay playsinline muted></video>
 <script>
-const SIGNAL = 'signaling.php';
-const ICE_SERVERS = [{ urls: 'stun:stun.l.google.com:19302' }]; // add TURN for internet
+const roomId = "room123"; // set dynamically if needed
+const roomUrl = "signaling.php?room=" + roomId;
+let pcMap = {};
 
-let room = null;
-let localStream = null;
-const pcs = {}; // peerId -> RTCPeerConnection
+async function init() {
+  // Clean old room file
+  await fetch(roomUrl + "&action=create");
 
-const logEl = document.getElementById('log');
-function log(...args){ console.log(...args); logEl.textContent += args.map(a => (typeof a==='object'?JSON.stringify(a):String(a))).join(' ') + '\n'; logEl.scrollTop = logEl.scrollHeight; }
+  const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+  document.getElementById("localVideo").srcObject = stream;
 
-async function ajaxGET(params){
-  const qs = new URLSearchParams(params).toString();
-  const res = await fetch(`${SIGNAL}?${qs}`);
-  return res.json();
-}
-async function ajaxPOST(params){
-  const body = new URLSearchParams(params);
-  const res = await fetch(`${SIGNAL}?room=${encodeURIComponent(room)}`, { method:'POST', body });
-  return res.json();
+  setInterval(checkOffers, 2000); // poll for new offers
 }
 
-document.getElementById('startBtn').addEventListener('click', startStreamer);
+async function checkOffers() {
+  const res = await fetch(roomUrl + "&action=state");
+  const state = await res.json();
 
-async function startStreamer(){
-  room = document.getElementById('room').value.trim();
-  if (!room) return alert('Enter room id');
-
-  // reset/create room and mark streamer started
-  await ajaxPOST({ type:'start_streamer', peer: 'streamer_' + Date.now() });
-
-  // get local camera/mic
-  try {
-    localStream = await navigator.mediaDevices.getUserMedia({ video:true, audio:true });
-    document.getElementById('localVideo').srcObject = localStream;
-  } catch (err) {
-    return alert('getUserMedia failed: ' + err.message);
-  }
-
-  // poll for viewer offers regularly
-  pollOffers();
-  setInterval(pollOffers, 1200);
-  log('Streamer started, polling for viewer offers...');
-}
-
-async function pollOffers(){
-  if (!room) return;
-  try {
-    const data = await ajaxGET({ room, role:'streamer', consume:1 }); // consume offers and those peers' candidates
-    if (!data) return;
-    const offers = data.offers || {};
-    const candidatesMap = data.candidates || {};
-
-    for (const peerId in offers) {
-      if (!offers.hasOwnProperty(peerId)) continue;
-      if (pcs[peerId]) {
-        log('Already handling peer', peerId);
-        continue;
-      }
-      const offerPayload = offers[peerId];
-      const preCandidates = candidatesMap[peerId] || [];
-      handleViewerOffer(peerId, offerPayload, preCandidates).catch(e => log('handle error', e));
-    }
-  } catch(e) {
-    log('pollOffers error', e);
+  for (let peerId in state.offers) {
+    if (pcMap[peerId]) continue; // already handled
+    const offer = state.offers[peerId];
+    await handleOffer(peerId, offer);
   }
 }
 
-async function handleViewerOffer(peerId, offerPayload, initialCandidates){
-  log('Received offer from', peerId);
-  const pc = new RTCPeerConnection({ iceServers: ICE_SERVERS });
-  pcs[peerId] = pc;
+async function handleOffer(peerId, offer) {
+  const pc = new RTCPeerConnection();
+  pcMap[peerId] = pc;
 
-  // add local tracks (streamer -> viewers)
-  localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
+  // Add local stream
+  const stream = document.getElementById("localVideo").srcObject;
+  stream.getTracks().forEach(track => pc.addTrack(track, stream));
 
   pc.onicecandidate = e => {
     if (e.candidate) {
-      // post candidate targeted at the viewer peer id
-      ajaxPOST({ type:'candidate', peer:peerId, payload: JSON.stringify(e.candidate) }).catch(()=>{});
+      fetch(roomUrl + "&action=candidate", {
+        method: "POST",
+        body: JSON.stringify({ peer: peerId, candidate: e.candidate }),
+      });
     }
   };
 
-  // apply any candidate viewer already sent before pc creation
-  for (const c of (initialCandidates || [])) {
-    try { await pc.addIceCandidate(JSON.parse(c)); } catch(e){ /* ignore */ }
-  }
-
-  // set remote description (viewer offer)
-  try {
-    await pc.setRemoteDescription(JSON.parse(offerPayload));
-  } catch(e) {
-    log('setRemoteDescription error', e);
-    try { pc.close(); } catch(_) {}
-    delete pcs[peerId];
-    return;
-  }
-
-  // create and send answer
+  await pc.setRemoteDescription(new RTCSessionDescription(offer));
   const answer = await pc.createAnswer();
   await pc.setLocalDescription(answer);
-  await ajaxPOST({ type:'answer', peer:peerId, payload: JSON.stringify(pc.localDescription) });
 
-  log('Answered viewer', peerId);
-
-  // poll for extra candidates for this peer and apply & cleanup periodically
-  const candInterval = setInterval(async ()=>{
-    if (!pcs[peerId]) { clearInterval(candInterval); return; }
-    try {
-      // fetch candidates for this peer without consuming answers/offers
-      const res = await ajaxGET({ room, role:'streamer', consume:0 });
-      if (res && res.candidates && res.candidates[peerId]) {
-        for (const c of res.candidates[peerId]) {
-          try { await pc.addIceCandidate(JSON.parse(c)); } catch(e){ /* ignore */ }
-        }
-        // after applying those candidates, remove them from server to avoid re-applying
-        await ajaxPOST({ type:'cleanup_peer', peer: peerId, payload:'1' }).catch(()=>{});
-      }
-    } catch(e) {
-      log('cand poll err', e);
-    }
-  }, 1500);
-
-  pc.onconnectionstatechange = () => {
-    log('pc state', peerId, pc.connectionState);
-    if (['closed','failed','disconnected'].includes(pc.connectionState)) {
-      try { pc.close(); } catch(_) {}
-      delete pcs[peerId];
-      clearInterval(candInterval);
-      // request cleanup on server
-      ajaxPOST({ type:'cleanup_peer', peer: peerId, payload:'1' }).catch(()=>{});
-    }
-  };
+  await fetch(roomUrl + "&action=answer", {
+    method: "POST",
+    body: JSON.stringify({ peer: peerId, answer }),
+  });
 }
+
+init();
 </script>
 </body>
 </html>
