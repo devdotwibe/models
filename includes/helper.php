@@ -18,9 +18,14 @@ function h_my_ip_address(){
 
 	function getCountry($country_id)
 	{
-		$country = DB::queryFirstRow("SELECT country_name FROM countries WHERE id = %s", $country_id);
+		if (is_numeric($country_id)) {
+		
+			$country = DB::queryFirstRow("SELECT country_name FROM countries WHERE id = %i", (int)$country_id);
+		}
+
 		return $country ? $country['country_name'] : null;
 	}
+
 
 
 	function CheckPremiumAccess($userId) {
