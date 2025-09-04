@@ -322,15 +322,17 @@ else{
                   <?php if($item['complete_request'] === 'requested') { ?>
 
                        <?php  if($userDetails['as_a_model'] !='Yes') { ?>
-
+							
                           <button class="btn btn-success when_aprrove_button" data-id="<?php echo $item['id'] ?>" onclick="CompleteRequest(this)">Accept Complete</button>
 
                         <?php } ?>
 
                   <?php } else { ?>
 
+					<button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
                     <button class="btn btn-message" data-id="<?php echo $item['id'] ?>" onclick="OpenRequest(this)">Request Complete</button>
-                    
+                    <button class="btn btn-message when_aprrove_button<?php echo $item['id'] ?>" onclick="openMessage(this)">Message</button>
+					
                   <?php } ?>
 
                 <?php } else if($item['status'] ==='Decline') { ?>
@@ -917,6 +919,7 @@ else{
 
                         $(`#when_aprrove_button${accept_id}`).before(`
                           <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
+						  <button class="btn btn-message" data-id="${accept_id}" onclick="OpenRequest(this)">Request Complete</button>
                           <button class="btn btn-message" onclick="openMessage(this)">Message</button>
                         `);
                     }
