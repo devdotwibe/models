@@ -505,7 +505,14 @@ $serviceArr = array('Providing services', 'Looking for services');
                     $('#i-total-page').val(response.total_page);
                     currentPage = response.page;
 
-                    rebindpagination(response.total);
+                    if(response.total_page == 0)
+                    {
+                        $("#pagination-container").hide();
+                    }
+                    else
+                    {
+                        rebindpagination(response.total);
+                    }
                 }
             });
         }
