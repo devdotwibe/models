@@ -472,18 +472,27 @@ $(document).ready(function () {
                 
                 $("#list_advertisements").html(response.html);
 
-                // Init pagination only once
-                if ($("#pagination-container").data("pagination-initialized") !== true) {
-                    $("#pagination-container").pagination({
-                        items: '<?php echo $total_adv['total']; ?>',
-                        itemsOnPage: itemsPerPage,
-                        cssStyle: "light-theme",
-                        onPageClick: function (pageNumber) {
-                            loadData(pageNumber);
-                        }
-                    });
-                    $("#pagination-container").data("pagination-initialized", true);
+                if(response.total_page == 0)
+                {
+                    $("#pagination-container").hide();
                 }
+                else
+                {
+                     $("#pagination-container").show();
+
+                    if ($("#pagination-container").data("pagination-initialized") !== true) {
+                        $("#pagination-container").pagination({
+                            items: '<?php echo $total_adv['total']; ?>',
+                            itemsOnPage: itemsPerPage,
+                            cssStyle: "light-theme",
+                            onPageClick: function (pageNumber) {
+                                loadData(pageNumber);
+                            }
+                        });
+                        $("#pagination-container").data("pagination-initialized", true);
+                    }
+                }
+             
             }
         });
     }
