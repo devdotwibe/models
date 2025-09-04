@@ -1,6 +1,6 @@
 <?php
 if ($all_data) {
-    foreach ($all_data as $set_data) {
+    foreach ($all_data as $index=> $set_data) {
         if (empty($set_data['adv_status'])) {
             $status = '<span class="badge bg-primary text-white">Active</span>';
         } else {
@@ -19,7 +19,7 @@ if ($all_data) {
                         <input type="checkbox" name="adv_id[]" onchange="DeleteCheck()" value="<?= $set_data['id'] ?>" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
                     </div>
                     
-                    <div class="col-span-1 text-white/60 font-mono">#<?= $set_data['id'] ?></div>
+                    <div class="col-span-1 text-white/60 font-mono">#<?= $index +1  ?></div>
                     <div class="col-span-3">
                         <div class="flex items-center space-x-3">
 						<?php 

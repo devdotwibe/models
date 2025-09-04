@@ -6,15 +6,24 @@ if (isset($_SESSION['log_user_id'])) {
 	$log_user_id = $_SESSION['log_user_id'];
 	$get_modal_user = DB::query('select as_a_model from model_user where id='.$log_user_id); 
 	$as_a_model = $get_modal_user[0]['as_a_model'];
+
+    $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
+
 }else{ 
+
 	$as_a_model = '';
+
+    header("Location: login.php");
 }
 // if($as_a_model != 'Yes'){
 // 	header("Location: login.php");
 // }
 
-
     $category_list = adv_category_list();
+
+    $advertisements = get_data('banners', array('user_id' => $userDetails["id"]), true);
+
+    $total_ads = count($advertisements);
 ?>
 	
 <!DOCTYPE html>
@@ -117,7 +126,7 @@ if (isset($_SESSION['log_user_id'])) {
                     </div>
                     <span class="text-green-400 text-sm font-semibold">+12%</span>
                 </div>
-                <h3 class="text-2xl font-bold premium-text mb-2">24</h3>
+                <h3 class="text-2xl font-bold premium-text mb-2"><?= $total_ads ?></h3>
                 <p class="text-white/60">Total Ads</p>
             </div>
             
