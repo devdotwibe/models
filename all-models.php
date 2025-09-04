@@ -1205,7 +1205,7 @@ include('includes/helper.php');
                 <?php
 
              
-                    $userDetails = [];
+                      $userDetails = [];
 
 
                     $basic_filed_users = GetUsersWithBasicFilled();
@@ -1224,12 +1224,13 @@ include('includes/helper.php');
 
                         if (!empty($premium_check) && !empty($privacy_setting)) {
 
-                            // $privacy_user_ids = PrivacyModelIdsByUser($userDetails, $con);
+                            $privacy_user_ids = PrivacyModelIdsByUser($userDetails, $con);
 
-                            $privacy_user_ids ='';
+                            // $privacy_user_ids ='';
                         } else {
                             $privacy_user_ids = '';
                         }
+                    
                     }
 
                     $followed_user_ids = [];
@@ -1525,23 +1526,18 @@ include('includes/helper.php');
 
                                 $order = " ORDER BY mu.id DESC ";
                             }
-                        } else {
-
-                            if (!empty($privacy_user_ids)) {
-
-                                $privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'";
-
-                                $order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
-                            } else {
-
-                                $order = " ORDER BY mu.id DESC ";
-                            }
                         }
 
                         if (empty($onlineUserIds)) {
 
+                            $idPrivacy = "";
 
-                            // $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE as_a_model = 'Yes' ".$where; 
+                            if (!empty($privacy_user_ids) && !isset($_GET['filter']) ) {
+
+                                $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
+
+                                $where .= " AND mu.id IN ($idPrivacy)";
+                            } 
 
                             $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu  WHERE mu.verified = '1' " . $where;
 
@@ -1550,7 +1546,18 @@ include('includes/helper.php');
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
                             $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+
                         } else {
+
+                            $idPrivacy = "";
+
+                            if (!empty($privacy_user_ids) && !isset($_GET['filter']) ) {
+
+                                $idPrivacy = "'" . implode("','", $privacy_user_ids) . "'";
+
+                                $where .= " AND mu.id IN ($idPrivacy)";
+                            } 
+
 
                             $idList = implode(',', $onlineUserIds);
 
@@ -1559,7 +1566,7 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
+                            $sqls = "SELECT * FROM model_user mu  WHERE mu.id IN ($idPrivacy) WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
                         }
                     }
 
