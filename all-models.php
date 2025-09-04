@@ -2509,9 +2509,9 @@ include('includes/helper.php');
                 <div class="token-packages-subtitle">
                     Get extra TLM tokens for premium interactions, gifts, and exclusive content access
                 </div>
-                <button class="token-packages-btn" onclick="exploreTokens()">
+                <a class="token-packages-btn" href="<?= SITEURL .'wallet.php' ?>">
                     🎁 Browse Token Deals
-                </button>
+                </a>
                 <div class="token-expires">⏰ Special token offers expire soon!</div>
             </div>
         </div>
