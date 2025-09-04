@@ -31,11 +31,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $id = uniqid();
-    $data[$type][] = ['peer'=>$peer, 'payload'=>$payload];
-    file_put_contents($file, json_encode($data));
+    // Keep only the latest for each peer
+    if ($type === 'offers' || $type === 'answers') {
+        $data[$type] = array_filter($data[$type], fn($o) => $o['peer'] !== $peer);
+        $data[$type][] = ['peer'=>$peer, 'payload'=>$payload];
+    }
+    elseif ($type === 'candidates') {
+        // Candidates can accumulate
+        $data[$type][] = ['peer'=>$peer, 'payload'=>$payload];
+    }
 
-    echo json_encode(['ok'=>true, 'id'=>$id]);
+    file_put_contents($file, json_encode($data));
+    echo json_encode(['ok'=>true]);
     exit;
 }
 

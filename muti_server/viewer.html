@@ -63,11 +63,18 @@ async function poll() {
       }
     }
 
-    // find candidates for me
-    for (const cand of data.candidates) {
-      if (cand.peer !== peerId) continue;
-      try { await pc.addIceCandidate(JSON.parse(cand.payload)); } catch(e) {}
+    // // find candidates for me
+    // for (const cand of data.candidates) {
+    //   if (cand.peer !== peerId) continue;
+    //   try { await pc.addIceCandidate(JSON.parse(cand.payload)); } catch(e) {}
+    // }
+    
+    for (const ans of data.answers) {
+        if (ans.peer === peerId && !pc.currentRemoteDescription) {
+            await pc.setRemoteDescription(JSON.parse(ans.payload));
+        }
     }
+
   }, 2000);
 }
 
