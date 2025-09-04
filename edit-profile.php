@@ -5258,7 +5258,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
       
               document.body.removeChild(modalOverlay);
               
-              jQuery('#premium-modal').addClass('show');
+              $('#premium_modal').addClass('show');
       
               jQuery('#servicesModalOverlay').removeClass('active');
               
