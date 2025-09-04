@@ -337,7 +337,8 @@ function BoostedModelIds($con) {
 
 
 	function PrivacyModelIdsByUser($userDetails, $con) {
-		
+
+
 		$privacy_setting = getModelPrivacySettings($userDetails['unique_id']);
 
 		$children_preference = $privacy_setting['children_preference'];
@@ -352,26 +353,29 @@ function BoostedModelIds($con) {
 		$conditions = [];
 
 		if (!empty($children_preference)) {
-			$conditions[] = "children_preference = '" . mysqli_real_escape_string($con, $children_preference) . "'";
+			$conditions[] = "mu.children_preference = '" . mysqli_real_escape_string($con, $children_preference) . "'";
 		}
 		if (!empty($education_level)) {
-			$conditions[] = "education_level = '" . mysqli_real_escape_string($con, $education_level) . "'";
-		}
-		if (!empty($height_min) && !empty($height_max)) {
-			$conditions[] = "height BETWEEN " . intval($height_min) . " AND " . intval($height_max);
-		}
-		if (!empty($weight_min) && !empty($weight_max)) {
-			$conditions[] = "weight BETWEEN " . intval($weight_min) . " AND " . intval($weight_max);
+			$conditions[] = "mu.education_level = '" . mysqli_real_escape_string($con, $education_level) . "'";
 		}
 		if (!empty($age_min) && !empty($age_max)) {
-			$conditions[] = "age BETWEEN " . intval($age_min) . " AND " . intval($age_max);
+			$conditions[] = "mu.age BETWEEN " . intval($age_min) . " AND " . intval($age_max);
+		}
+
+		if (!empty($height_min) && !empty($height_max)) {
+			$conditions[] = "med.height_in_cm BETWEEN " . intval($height_min) . " AND " . intval($height_max);
+		}
+		if (!empty($weight_min) && !empty($weight_max)) {
+			$conditions[] = "med.weight_in_kg BETWEEN " . intval($weight_min) . " AND " . intval($weight_max);
 		}
 
 		$whereClause = !empty($conditions) ? "WHERE " . implode(" AND ", $conditions) : "";
 
 		$query = "
-			SELECT id, unique_id
-			FROM model_user
+			SELECT mu.id, mu.unique_id
+			FROM model_user mu
+			INNER JOIN model_extra_details med 
+				ON mu.unique_id = med.unique_model_id
 			$whereClause
 		";
 
@@ -388,6 +392,7 @@ function BoostedModelIds($con) {
 
 		return array_column($validmatches, 'unique_model_id');
 	}
+
 
 
 
