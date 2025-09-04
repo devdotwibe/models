@@ -29,6 +29,21 @@ if (isset($_SESSION['log_user_id'])) {
                                     $userDetails['id']
                                 );
 
+        $add_ids = array_column($advertisements, 'id');
+
+        if (!empty($add_ids)) {
+
+            $add_ids_str = implode(',', $add_ids);
+
+            $add_views_count = DB::numRows(
+                "SELECT * FROM avertisement_view WHERE adver_id IN ($add_ids_str)"
+            );
+
+        } else {
+
+            $add_views_count = 0; 
+        }
+
 
 ?>
 	
@@ -160,7 +175,7 @@ if (isset($_SESSION['log_user_id'])) {
                     </div>
                     <span class="text-purple-400 text-sm font-semibold">+25%</span>
                 </div>
-                <h3 class="text-2xl font-bold premium-text mb-2">1.2K</h3>
+                <h3 class="text-2xl font-bold premium-text mb-2"> <?= $add_views_count ?></h3>
                 <p class="text-white/60">Total Views</p>
             </div>
             
