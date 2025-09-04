@@ -379,11 +379,6 @@ function BoostedModelIds($con) {
 			$whereClause
 		";
 
-
-		echo $query ;
-
-		die();
-
 		
 		$result = mysqli_query($con, $query);
 
