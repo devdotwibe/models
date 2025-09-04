@@ -1031,7 +1031,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                     <div>
                         <label class="form-label">Children Preference</label>
                         <select class="form-select" name="children_preference" >
-                          <option value="">Any</option>
+                          <option value="">Select Children Preference</option>
                           <option value="no-children" <?php if ($userDetails['children_preference'] == 'no-children') { ?> selected <?php } ?>>No Children</option>
                           <option value="wants-children" <?php if ($userDetails['children_preference'] == 'wants-children') { ?> selected <?php } ?>>Wants Children</option>
                           <option value="has-children" <?php if ($userDetails['children_preference'] == 'has-children') { ?> selected <?php } ?>>Has Children</option>
@@ -1043,7 +1043,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                         <label class="form-label">Education Level</label>
 
                         <select class="form-select" name="education_level">
-                          <option value="">Any</option>
+                          <option value="">Select Education Level</option>
                           <option value="high-school" <?php if ($userDetails['education_level'] == 'high-school') { ?> selected <?php } ?>>High School</option>
                           <option value="college" <?php if ($userDetails['education_level'] == 'college') { ?> selected <?php } ?>> College</option>
                           <option value="university" <?php if ($userDetails['education_level'] == 'university') { ?> selected <?php } ?>>University</option>
