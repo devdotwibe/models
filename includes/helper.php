@@ -20,7 +20,7 @@ function h_my_ip_address(){
 	{
 		if (is_numeric($country_id)) {
 		
-			$country = DB::queryFirstRow("SELECT country_name FROM countries WHERE id = %i", (int)$country_id);
+			$country = DB::queryFirstRow("SELECT name FROM countries WHERE id = %i", (int)$country_id);
 		}
 
 		echo $country;die();
