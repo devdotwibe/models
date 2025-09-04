@@ -386,12 +386,16 @@ function BoostedModelIds($con) {
 			while ($row = mysqli_fetch_assoc($result)) {
 				$validmatches[] = [
 					'id' => $row['user_id'], 
+
+					echo $row['user_id'];
+
+					die();
 				];
 			}
 		}
 
-			print_r($validmatches) ;
 			
+
 
 		die();
 
