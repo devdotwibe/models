@@ -3653,7 +3653,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     <div class="popup-overlay" id="premium_modal">
         <div class="popup-container">
-            <button class="close-btn" onclick="closePremiumModal()">&times;</button>
+
+            <button class="close-btn" onclick="ClosePremiumModal()">&times;</button>
 
             <div class="top-icons">
                 <div class="top-icon">🚀</div>
@@ -5154,6 +5155,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
     }
 
     function ClosePremiumModal() {
+      
       $('#premium_modal').removeClass('show');
     }
 
