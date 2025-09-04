@@ -1,81 +1,165 @@
 <?php
-header('Content-Type: application/json');
+// signaling.php
+// File-based per-room, per-peer signaling for prototyping.
+// Endpoints:
+// POST ?room=ROOM  + body JSON { type: "start" }               -> create/reset room (streamer)
+// POST ?room=ROOM  + body JSON { type: "offer", peer, offer }  -> viewer posts offer
+// POST ?room=ROOM  + body JSON { type: "answer", peer, answer }-> streamer posts answer
+// POST ?room=ROOM  + body JSON { type: "candidate", peer, candidate } -> any posts candidate for peer
+// POST ?room=ROOM  + body JSON { type: "cleanup", peer }       -> remove peer data
+// GET  ?room=ROOM&action=state                                -> return whole room (for debug)
+// GET  ?room=ROOM&action=streamer&consume=1                   -> streamer fetch offers + candidates (consume offers)
+// GET  ?room=ROOM&action=viewer&peer=PEER&consume=1           -> viewer fetch answer+candidates (consume)
 
-$roomId = $_GET['room'] ?? null;
-$action = $_GET['action'] ?? null;
-$roomsDir = __DIR__ . '/rooms';
+header('Content-Type: application/json; charset=utf-8');
 
-if (!$roomId || !$action) {
-    echo json_encode(["error" => "Missing params"]);
+$room = trim($_GET['room'] ?? '');
+if ($room === '') {
+    http_response_code(400);
+    echo json_encode(['error'=>'room required']);
     exit;
 }
 
-$roomFile = "$roomsDir/$roomId.json";
-if (!file_exists($roomsDir)) mkdir($roomsDir, 0777, true);
+$dir = __DIR__ . '/rooms';
+if (!is_dir($dir)) mkdir($dir, 0777, true);
+$roomFile = $dir . '/room_' . preg_replace('/[^a-zA-Z0-9_\-]/','_', $room) . '.json';
 
-// Load current room state (or create if missing)
-if (file_exists($roomFile)) {
-    $data = json_decode(file_get_contents($roomFile), true);
-} else {
-    $data = [
-        "meta" => [
-            "streamer_started" => false,
-            "streamer_id" => null,
-            "created_at" => time()
-        ],
-        "offers" => [],
-        "answers" => [],
-        "candidates" => []
-    ];
+// default structure
+$default = [
+    'meta' => ['streamer_started' => false, 'streamer_id' => null, 'created_at' => time()],
+    'offers' => new stdClass(),      // { peerId: offerPayload }
+    'answers' => new stdClass(),     // { peerId: answerPayload }
+    'candidates' => new stdClass()   // { peerId: [candidatePayload, ...] }
+];
+
+function read_room($file, $default) {
+    if (!file_exists($file)) {
+        file_put_contents($file, json_encode($default, JSON_PRETTY_PRINT));
+    }
+    $fh = fopen($file, 'r');
+    if (!$fh) return $default;
+    flock($fh, LOCK_SH);
+    $raw = stream_get_contents($fh);
+    flock($fh, LOCK_UN);
+    fclose($fh);
+    $data = json_decode($raw, true);
+    if ($data === null) return json_decode(json_encode($default), true);
+    return $data;
 }
 
-// Streamer starts room (do NOT wipe offers if any exist)
-if ($action === 'create') {
-    $data['meta'] = [
-        "streamer_started" => true,
-        "streamer_id" => uniqid("streamer_"),
-        "created_at" => time()
-    ];
-    file_put_contents($roomFile, json_encode($data, JSON_PRETTY_PRINT));
-    echo json_encode(["ok" => true]);
+function save_room($file, $data) {
+    $fh = fopen($file, 'c+');
+    if (!$fh) return false;
+    flock($fh, LOCK_EX);
+    ftruncate($fh, 0);
+    rewind($fh);
+    fwrite($fh, json_encode($data, JSON_PRETTY_PRINT));
+    fflush($fh);
+    flock($fh, LOCK_UN);
+    fclose($fh);
+    return true;
+}
+
+$method = $_SERVER['REQUEST_METHOD'];
+$data = read_room($roomFile, $default);
+
+// READ (GET)
+if ($method === 'GET') {
+    $action = $_GET['action'] ?? 'state';
+    if ($action === 'state') {
+        echo json_encode($data);
+        exit;
+    }
+    if ($action === 'streamer') {
+        // streamer wants offers and candidates for those offers
+        $consume = isset($_GET['consume']) && ($_GET['consume'] === '1' || $_GET['consume'] === 'true');
+        $offers = $data['offers'] ?? [];
+        $cands_for_offers = [];
+        foreach ($offers as $p => $payload) {
+            $cands_for_offers[$p] = $data['candidates'][$p] ?? [];
+        }
+        $out = ['meta' => $data['meta'], 'offers' => $offers, 'candidates' => $cands_for_offers];
+        if ($consume && !empty($offers)) {
+            // remove consumed offers and their candidate batches (viewer -> streamer candidates)
+            foreach (array_keys($offers) as $p) {
+                unset($data['offers'][$p]);
+                unset($data['candidates'][$p]);
+            }
+            save_room($roomFile, $data);
+        }
+        echo json_encode($out);
+        exit;
+    }
+    if ($action === 'viewer') {
+        $peer = $_GET['peer'] ?? '';
+        if ($peer === '') { http_response_code(400); echo json_encode(['error'=>'peer required']); exit; }
+        $consume = isset($_GET['consume']) && ($_GET['consume'] === '1' || $_GET['consume'] === 'true');
+        $answer = $data['answers'][$peer] ?? null;
+        $cands = $data['candidates'][$peer] ?? [];
+        $out = ['meta' => $data['meta'], 'answer' => $answer, 'candidates' => $cands];
+        if ($consume) {
+            unset($data['answers'][$peer]);
+            unset($data['candidates'][$peer]);
+            save_room($roomFile, $data);
+        }
+        echo json_encode($out);
+        exit;
+    }
+    // fallback
+    echo json_encode(['error'=>'unknown action']);
     exit;
 }
 
-// Add viewer offer
-if ($action === 'offer' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $body = json_decode(file_get_contents("php://input"), true);
-    $peerId = $body['peer'];
-    $data['offers'][$peerId] = $body['offer'];
-    file_put_contents($roomFile, json_encode($data, JSON_PRETTY_PRINT));
-    echo json_encode(["ok" => true]);
+// WRITE (POST)
+$raw = file_get_contents('php://input');
+$body = json_decode($raw, true) ?? [];
+
+$type = $body['type'] ?? ($body['action'] ?? '');
+$peer = $body['peer'] ?? '';
+$payload = $body['payload'] ?? $body['offer'] ?? $body['answer'] ?? $body['candidate'] ?? null;
+
+// start (streamer creates / marks started) - safe: do NOT wipe existing offers unless explicitly asked
+if ($type === 'start') {
+    $data['meta'] = ['streamer_started' => true, 'streamer_id' => $body['streamer_id'] ?? uniqid('streamer_'), 'created_at' => time()];
+    save_room($roomFile, $data);
+    echo json_encode(['ok' => true, 'meta' => $data['meta']]);
     exit;
 }
 
-// Add streamer answer
-if ($action === 'answer' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $body = json_decode(file_get_contents("php://input"), true);
-    $peerId = $body['peer'];
-    $data['answers'][$peerId] = $body['answer'];
-    file_put_contents($roomFile, json_encode($data, JSON_PRETTY_PRINT));
-    echo json_encode(["ok" => true]);
-    exit;
+if ($type === 'offer') {
+    if (!$peer || !$payload) { http_response_code(400); echo json_encode(['error'=>'peer and offer required']); exit; }
+    $data['offers'][$peer] = $payload;            // viewer -> streamer
+    // remove any stale answer (viewer re-offered)
+    if (isset($data['answers'][$peer])) unset($data['answers'][$peer]);
+    save_room($roomFile, $data);
+    echo json_encode(['ok'=>true]); exit;
 }
 
-// Add ICE candidate
-if ($action === 'candidate' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $body = json_decode(file_get_contents("php://input"), true);
-    $peerId = $body['peer'];
-    if (!isset($data['candidates'][$peerId])) $data['candidates'][$peerId] = [];
-    $data['candidates'][$peerId][] = $body['candidate'];
-    file_put_contents($roomFile, json_encode($data, JSON_PRETTY_PRINT));
-    echo json_encode(["ok" => true]);
-    exit;
+if ($type === 'answer') {
+    if (!$peer || !$payload) { http_response_code(400); echo json_encode(['error'=>'peer and answer required']); exit; }
+    $data['answers'][$peer] = $payload;           // streamer -> viewer (persist until viewer consumes)
+    save_room($roomFile, $data);
+    echo json_encode(['ok'=>true]); exit;
 }
 
-// Get room state
-if ($action === 'state') {
-    echo json_encode($data);
-    exit;
+if ($type === 'candidate') {
+    if (!$peer || !$payload) { http_response_code(400); echo json_encode(['error'=>'peer and candidate required']); exit; }
+    if (!isset($data['candidates'][$peer]) || !is_array($data['candidates'][$peer])) $data['candidates'][$peer] = [];
+    $data['candidates'][$peer][] = $payload;
+    save_room($roomFile, $data);
+    echo json_encode(['ok'=>true]); exit;
 }
 
-echo json_encode(["error" => "Unknown action"]);
+if ($type === 'cleanup') {
+    if ($peer !== '') {
+        unset($data['offers'][$peer]);
+        unset($data['answers'][$peer]);
+        unset($data['candidates'][$peer]);
+        save_room($roomFile, $data);
+    }
+    echo json_encode(['ok'=>true]); exit;
+}
+
+http_response_code(400);
+echo json_encode(['error'=>'unknown type']);
+exit;

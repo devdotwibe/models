@@ -1,76 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <title>Viewer</title>
+<meta charset="utf-8" />
+<title>Viewer (AJAX signaling)</title>
+<style>
+  body{font-family:Arial;padding:12px}
+  video{width:70%;border-radius:8px;background:#000}
+  input,button{padding:8px;margin:6px}
+  #log{height:140px;background:#0b1220;color:#bdf;padding:8px;overflow:auto;border-radius:6px;margin-top:8px}
+</style>
 </head>
 <body>
-<h2>Viewer</h2>
-<video id="remoteVideo" autoplay playsinline></video>
+  <h2>Viewer</h2>
+  <label>Room: <input id="room" value="room123"></label>
+  <button id="joinBtn">Join</button>
+  <div><video id="remoteVideo" autoplay playsinline></video></div>
+  <pre id="log"></pre>
 
 <script>
-const roomId = "room123";
-const roomUrl = "signaling.php?room=" + roomId;
-const peerId = "peer_" + Math.floor(Math.random()*1000000);
-let pc;
+const SIGNAL = 'signaling.php';
+const ICE = [{ urls: 'stun:stun.l.google.com:19302' }];
+let room = null;
+const peerId = 'peer_' + Math.floor(Math.random()*1000000) + '_' + Date.now();
+let pc = null;
+let pollTimer = null;
+const logEl = document.getElementById('log');
+function log(...a){ logEl.textContent += a.map(x=> typeof x==='object'? JSON.stringify(x): String(x)).join(' ') + '\n'; logEl.scrollTop = logEl.scrollHeight; console.log(...a); }
 
-async function init() {
-  pc = new RTCPeerConnection();
+async function postJson(body){ const res = await fetch(`${SIGNAL}?room=${encodeURIComponent(room)}`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) }); return res.json(); }
+async function getJson(params){ const qs = new URLSearchParams(params); const res = await fetch(`${SIGNAL}?${qs}`); return res.json(); }
+
+document.getElementById('joinBtn').addEventListener('click', join);
+
+async function join(){
+  room = document.getElementById('room').value.trim();
+  if (!room) return alert('enter room');
+
+  // check streamer started
+  const state = await getJson({ room, action:'state' });
+  if (!state.meta || !state.meta.streamer_started) {
+    return alert('No streamer started in that room yet.');
+  }
+
+  pc = new RTCPeerConnection({ iceServers: ICE });
 
   pc.ontrack = e => {
-    document.getElementById("remoteVideo").srcObject = e.streams[0];
+    document.getElementById('remoteVideo').srcObject = e.streams[0];
+    log('Remote stream received');
   };
 
   pc.onicecandidate = e => {
     if (e.candidate) {
-      fetch(roomUrl + "&action=candidate", {
-        method: "POST",
-        body: JSON.stringify({ peer: peerId, candidate: e.candidate }),
-      });
+      postJson({ type:'candidate', peer: peerId, payload: e.candidate }).catch(()=>{});
     }
   };
 
+  // Viewer creates offer (no local tracks)
   const offer = await pc.createOffer();
   await pc.setLocalDescription(offer);
 
-  await fetch(roomUrl + "&action=offer", {
-    method: "POST",
-    body: JSON.stringify({ peer: peerId, offer }),
+  // post offer to server
+  await postJson({ type:'offer', peer: peerId, payload: pc.localDescription });
+  log('Sent offer', peerId);
+
+  // poll for answer and candidates
+  await pollOnce(); // immediate
+  pollTimer = setInterval(pollOnce, 1200);
+
+  // cleanup on unload
+  window.addEventListener('beforeunload', ()=> {
+    try {
+      navigator.sendBeacon(`${SIGNAL}?room=${encodeURIComponent(room)}`, JSON.stringify({ type:'cleanup', peer: peerId }));
+    } catch(e){}
   });
-
-  pollForAnswer();
-  pollForCandidates();
 }
 
-async function pollForAnswer() {
-  const res = await fetch(roomUrl + "&action=state");
-  const state = await res.json();
+async function pollOnce(){
+  if (!room || !peerId || !pc) return;
+  try {
+    const res = await getJson({ room, action:'viewer', peer: peerId, consume:1 });
+    if (!res) return;
 
-  if (state.answers && state.answers[peerId]) {
-    const answer = state.answers[peerId];
-    await pc.setRemoteDescription(new RTCSessionDescription(answer));
-    console.log("✅ Applied remote answer");
-    return;
-  }
-  setTimeout(pollForAnswer, 2000);
-}
-
-async function pollForCandidates() {
-  const res = await fetch(roomUrl + "&action=state");
-  const state = await res.json();
-
-  if (state.candidates && state.candidates[peerId]) {
-    const candidates = state.candidates[peerId];
-    while (candidates && candidates.length > 0) {
-      const cand = candidates.shift();
+    if (res.answer) {
       try {
-        await pc.addIceCandidate(new RTCIceCandidate(cand));
-      } catch(e) { console.error(e); }
+        await pc.setRemoteDescription(res.answer);
+        log('Applied remote answer');
+      } catch(e) { log('setRemoteDescription error', e); }
     }
-  }
-  setTimeout(pollForCandidates, 2000);
+    if (res.candidates && res.candidates.length) {
+      for (const c of res.candidates) {
+        try { await pc.addIceCandidate(c); } catch(e){ log('addIceCandidate err', e); }
+      }
+    }
+  } catch(e){ log('pollOnce err', e); }
 }
-
-init();
 </script>
 </body>
 </html>
