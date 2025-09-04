@@ -167,7 +167,7 @@ $serviceArr = array('Providing services', 'Looking for services');
             <div class="row" style="margin-top:10px">
                 <div class="col-md-6"></div>
                 <div class="col-md-6">
-                    <ul class="pagination pull-right" style="margin:0" id="list-paginations"></ul>
+                    <ul class="pagination pull-right" style="margin:0" id="list-paginations" id="pagination-container"></ul>
                 </div>
             </div>
 
@@ -511,6 +511,8 @@ $serviceArr = array('Providing services', 'Looking for services');
                     }
                     else
                     {
+                        $("#pagination-container").show();
+
                         rebindpagination(response.total);
                     }
                 }
