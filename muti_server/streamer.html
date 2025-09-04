@@ -13,12 +13,13 @@ const roomUrl = "signaling.php?room=" + roomId;
 let pcMap = {};
 
 async function init() {
-  // Reset room
+  // Start the room (safe: does not delete existing offers)
   await fetch(roomUrl + "&action=create");
 
   const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
   document.getElementById("localVideo").srcObject = stream;
 
+  // Poll for new offers & candidates
   setInterval(checkOffers, 2000);
   setInterval(checkCandidates, 2000);
 }
@@ -58,6 +59,8 @@ async function handleOffer(peerId, offer) {
     method: "POST",
     body: JSON.stringify({ peer: peerId, answer }),
   });
+
+  console.log("✅ Answer sent to", peerId);
 }
 
 async function checkCandidates() {
@@ -70,7 +73,9 @@ async function checkCandidates() {
     const candidates = state.candidates[peerId];
     while (candidates && candidates.length > 0) {
       const cand = candidates.shift();
-      await pc.addIceCandidate(new RTCIceCandidate(cand));
+      try {
+        await pc.addIceCandidate(new RTCIceCandidate(cand));
+      } catch(e) { console.error(e); }
     }
   }
 }

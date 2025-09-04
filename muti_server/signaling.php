@@ -13,18 +13,30 @@ if (!$roomId || !$action) {
 $roomFile = "$roomsDir/$roomId.json";
 if (!file_exists($roomsDir)) mkdir($roomsDir, 0777, true);
 
-// Create room (by streamer)
-if ($action === 'create') {
-    file_put_contents($roomFile, json_encode([
+// Load current room state (or create if missing)
+if (file_exists($roomFile)) {
+    $data = json_decode(file_get_contents($roomFile), true);
+} else {
+    $data = [
         "meta" => [
-            "streamer_started" => true,
-            "streamer_id" => uniqid("streamer_"),
+            "streamer_started" => false,
+            "streamer_id" => null,
             "created_at" => time()
         ],
         "offers" => [],
         "answers" => [],
         "candidates" => []
-    ], JSON_PRETTY_PRINT));
+    ];
+}
+
+// Streamer starts room (do NOT wipe offers if any exist)
+if ($action === 'create') {
+    $data['meta'] = [
+        "streamer_started" => true,
+        "streamer_id" => uniqid("streamer_"),
+        "created_at" => time()
+    ];
+    file_put_contents($roomFile, json_encode($data, JSON_PRETTY_PRINT));
     echo json_encode(["ok" => true]);
     exit;
 }
@@ -32,7 +44,6 @@ if ($action === 'create') {
 // Add viewer offer
 if ($action === 'offer' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $body = json_decode(file_get_contents("php://input"), true);
-    $data = json_decode(file_get_contents($roomFile), true);
     $peerId = $body['peer'];
     $data['offers'][$peerId] = $body['offer'];
     file_put_contents($roomFile, json_encode($data, JSON_PRETTY_PRINT));
@@ -43,7 +54,6 @@ if ($action === 'offer' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 // Add streamer answer
 if ($action === 'answer' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $body = json_decode(file_get_contents("php://input"), true);
-    $data = json_decode(file_get_contents($roomFile), true);
     $peerId = $body['peer'];
     $data['answers'][$peerId] = $body['answer'];
     file_put_contents($roomFile, json_encode($data, JSON_PRETTY_PRINT));
@@ -54,7 +64,6 @@ if ($action === 'answer' && $_SERVER['REQUEST_METHOD'] === 'POST') {
 // Add ICE candidate
 if ($action === 'candidate' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $body = json_decode(file_get_contents("php://input"), true);
-    $data = json_decode(file_get_contents($roomFile), true);
     $peerId = $body['peer'];
     if (!isset($data['candidates'][$peerId])) $data['candidates'][$peerId] = [];
     $data['candidates'][$peerId][] = $body['candidate'];
@@ -63,13 +72,9 @@ if ($action === 'candidate' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-// Poll state
+// Get room state
 if ($action === 'state') {
-    if (!file_exists($roomFile)) {
-        echo json_encode(["error" => "Room not found"]);
-        exit;
-    }
-    echo file_get_contents($roomFile);
+    echo json_encode($data);
     exit;
 }
 

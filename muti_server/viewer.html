@@ -62,7 +62,9 @@ async function pollForCandidates() {
     const candidates = state.candidates[peerId];
     while (candidates && candidates.length > 0) {
       const cand = candidates.shift();
-      await pc.addIceCandidate(new RTCIceCandidate(cand));
+      try {
+        await pc.addIceCandidate(new RTCIceCandidate(cand));
+      } catch(e) { console.error(e); }
     }
   }
   setTimeout(pollForCandidates, 2000);
