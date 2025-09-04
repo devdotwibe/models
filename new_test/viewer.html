@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Viewer</title>
+  <style>
+    body { font-family: Arial; margin:20px; }
+    video { width: 400px; border:1px solid #ccc; margin:10px; }
+  </style>
+</head>
+<body>
+  <h2>Viewer</h2>
+  <label>Room ID: <input id="room" value="room123"></label>
+  <button id="join">Join Stream</button>
+
+  <h3>Remote Stream</h3>
+  <video id="remoteVideo" autoplay playsinline></video>
+
+<script>
+const ICE_SERVERS = [{urls: "stun:stun.l.google.com:19302"}];
+let pc, room;
+
+function ajax(url, method="GET", data=null) {
+  return fetch(url, {
+    method,
+    headers: {"Content-Type":"application/x-www-form-urlencoded"},
+    body: data ? new URLSearchParams(data) : null
+  }).then(r => r.json());
+}
+
+async function startViewer() {
+  room = document.getElementById("room").value;
+  pc = new RTCPeerConnection({iceServers: ICE_SERVERS});
+  pc.ontrack = e => document.getElementById("remoteVideo").srcObject = e.streams[0];
+
+  const offerData = await ajax("signaling.php?room="+room);
+  if (!offerData.offers.length) {
+    alert("No streamer found yet");
+    return;
+  }
+  const offer = JSON.parse(offerData.offers[0].payload);
+  await pc.setRemoteDescription(offer);
+
+  pc.onicecandidate = e => {
+    if (e.candidate) {
+      ajax("signaling.php?room="+room, "POST", {
+        type: "candidates", payload: JSON.stringify(e.candidate)
+      });
+    }
+  };
+
+  const answer = await pc.createAnswer();
+  await pc.setLocalDescription(answer);
+  await ajax("signaling.php?room="+room, "POST", {
+    type: "answers", payload: JSON.stringify(answer)
+  });
+
+  poll();
+}
+
+async function poll() {
+  setInterval(async () => {
+    const data = await ajax("signaling.php?room="+room);
+    for (const cand of data.candidates) {
+      try { await pc.addIceCandidate(JSON.parse(cand.payload)); } catch(e) {}
+    }
+  }, 2000);
+}
+
+document.getElementById("join").onclick = startViewer;
+</script>
+</body>
+</html>
