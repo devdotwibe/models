@@ -6,8 +6,9 @@
 <body>
 <h2>Viewer</h2>
 <video id="remoteVideo" autoplay playsinline></video>
+
 <script>
-const roomId = "room123"; // same as streamer
+const roomId = "room123";
 const roomUrl = "signaling.php?room=" + roomId;
 const peerId = "peer_" + Math.floor(Math.random()*1000000);
 let pc;
@@ -37,6 +38,7 @@ async function init() {
   });
 
   pollForAnswer();
+  pollForCandidates();
 }
 
 async function pollForAnswer() {
@@ -46,11 +48,24 @@ async function pollForAnswer() {
   if (state.answers && state.answers[peerId]) {
     const answer = state.answers[peerId];
     await pc.setRemoteDescription(new RTCSessionDescription(answer));
-    console.log("✅ Got remote answer");
+    console.log("✅ Applied remote answer");
     return;
   }
-
   setTimeout(pollForAnswer, 2000);
+}
+
+async function pollForCandidates() {
+  const res = await fetch(roomUrl + "&action=state");
+  const state = await res.json();
+
+  if (state.candidates && state.candidates[peerId]) {
+    const candidates = state.candidates[peerId];
+    while (candidates && candidates.length > 0) {
+      const cand = candidates.shift();
+      await pc.addIceCandidate(new RTCIceCandidate(cand));
+    }
+  }
+  setTimeout(pollForCandidates, 2000);
 }
 
 init();

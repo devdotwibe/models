@@ -6,19 +6,21 @@
 <body>
 <h2>Streamer</h2>
 <video id="localVideo" autoplay playsinline muted></video>
+
 <script>
-const roomId = "room123"; // set dynamically if needed
+const roomId = "room123";
 const roomUrl = "signaling.php?room=" + roomId;
 let pcMap = {};
 
 async function init() {
-  // Clean old room file
+  // Reset room
   await fetch(roomUrl + "&action=create");
 
   const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
   document.getElementById("localVideo").srcObject = stream;
 
-  setInterval(checkOffers, 2000); // poll for new offers
+  setInterval(checkOffers, 2000);
+  setInterval(checkCandidates, 2000);
 }
 
 async function checkOffers() {
@@ -36,7 +38,6 @@ async function handleOffer(peerId, offer) {
   const pc = new RTCPeerConnection();
   pcMap[peerId] = pc;
 
-  // Add local stream
   const stream = document.getElementById("localVideo").srcObject;
   stream.getTracks().forEach(track => pc.addTrack(track, stream));
 
@@ -59,6 +60,20 @@ async function handleOffer(peerId, offer) {
   });
 }
 
+async function checkCandidates() {
+  const res = await fetch(roomUrl + "&action=state");
+  const state = await res.json();
+
+  for (let peerId in state.candidates) {
+    if (!pcMap[peerId]) continue;
+    const pc = pcMap[peerId];
+    const candidates = state.candidates[peerId];
+    while (candidates && candidates.length > 0) {
+      const cand = candidates.shift();
+      await pc.addIceCandidate(new RTCIceCandidate(cand));
+    }
+  }
+}
 init();
 </script>
 </body>

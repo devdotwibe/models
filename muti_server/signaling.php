@@ -13,7 +13,7 @@ if (!$roomId || !$action) {
 $roomFile = "$roomsDir/$roomId.json";
 if (!file_exists($roomsDir)) mkdir($roomsDir, 0777, true);
 
-// Create new room (by streamer)
+// Create room (by streamer)
 if ($action === 'create') {
     file_put_contents($roomFile, json_encode([
         "meta" => [
@@ -21,8 +21,8 @@ if ($action === 'create') {
             "streamer_id" => uniqid("streamer_"),
             "created_at" => time()
         ],
-        "offers" => [],   // viewer offers
-        "answers" => [],  // streamer answers
+        "offers" => [],
+        "answers" => [],
         "candidates" => []
     ], JSON_PRETTY_PRINT));
     echo json_encode(["ok" => true]);
@@ -56,13 +56,14 @@ if ($action === 'candidate' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $body = json_decode(file_get_contents("php://input"), true);
     $data = json_decode(file_get_contents($roomFile), true);
     $peerId = $body['peer'];
+    if (!isset($data['candidates'][$peerId])) $data['candidates'][$peerId] = [];
     $data['candidates'][$peerId][] = $body['candidate'];
     file_put_contents($roomFile, json_encode($data, JSON_PRETTY_PRINT));
     echo json_encode(["ok" => true]);
     exit;
 }
 
-// Poll room state
+// Poll state
 if ($action === 'state') {
     if (!file_exists($roomFile)) {
         echo json_encode(["error" => "Room not found"]);
