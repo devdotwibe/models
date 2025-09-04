@@ -24,6 +24,10 @@ if (isset($_SESSION['log_user_id'])) {
     $advertisements = DB::query("SELECT * FROM banners WHERE user_id = %i", $userDetails['id']);
     $total_ads = count($advertisements);
 
+    $active_ads = DB::numRows(
+                                    "SELECT * FROM banners WHERE user_id = %i AND (adv_status = '' OR adv_status IS NULL)",
+                                    $userDetails['id']
+                                );
 
 
 ?>
@@ -142,7 +146,7 @@ if (isset($_SESSION['log_user_id'])) {
                     </div>
                     <span class="text-blue-400 text-sm font-semibold">Live</span>
                 </div>
-                <h3 class="text-2xl font-bold premium-text mb-2">18</h3>
+                <h3 class="text-2xl font-bold premium-text mb-2"><?= $active_ads ?></h3>
                 <p class="text-white/60">Active Ads</p>
             </div>
             
