@@ -1522,9 +1522,12 @@ include('includes/helper.php');
 
                             if (!empty($privacy_user_ids)) {
 
-                                $privacyUniqueIdsQuoted = "'" . implode("','", $privacy_user_ids) . "'";
+                                $idList = "'" . implode("','", $privacy_user_ids) . "'";
 
-                                $order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
+                                // $order = " ORDER BY FIELD(mu.unique_id, $privacyUniqueIdsQuoted) DESC, RAND() ";
+
+                                 $order = " ORDER BY mu.id DESC ";
+
                             } else {
 
                                 $order = " ORDER BY mu.id DESC ";
@@ -1542,7 +1545,7 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
+                            $sqls = "SELECT * FROM model_user mu  WHERE mu.id IN ($idList) WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
                         } else {
 
                             $idList = implode(',', $onlineUserIds);

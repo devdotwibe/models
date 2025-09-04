@@ -371,13 +371,14 @@ function BoostedModelIds($con) {
 
 		$whereClause = !empty($conditions) ? "WHERE " . implode(" AND ", $conditions) : "";
 
-		$query = "
-			SELECT mu.id, mu.unique_id
+		 $query = "
+			SELECT mu.id AS user_id, mu.unique_id
 			FROM model_user mu
 			INNER JOIN model_extra_details med 
 				ON mu.unique_id = med.unique_model_id
 			$whereClause
 		";
+
 
 		$result = mysqli_query($con, $query);
 
@@ -385,12 +386,12 @@ function BoostedModelIds($con) {
 		if ($result) {
 			while ($row = mysqli_fetch_assoc($result)) {
 				$validmatches[] = [
-					'unique_model_id' => $row['unique_id'],
+					'id' => $row['user_id'], 
 				];
 			}
 		}
 
-		return array_column($validmatches, 'unique_model_id');
+		return array_column($validmatches, 'id');
 	}
 
 
