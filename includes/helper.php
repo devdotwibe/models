@@ -922,14 +922,31 @@ if (!empty($_SESSION['log_user_id'])) {
 	}
 
 
-function checkImageExists($relativePath) {
+// function checkImageExists($relativePath) {
 
-    $rootPath = $_SERVER['DOCUMENT_ROOT']; 
+//     $rootPath = $_SERVER['DOCUMENT_ROOT']; 
 
-    $imagePath = $rootPath . '/' . ltrim($relativePath, '/');
+//     $imagePath = $rootPath . '/' . ltrim($relativePath, '/');
 
-    return !empty($relativePath) && file_exists($imagePath);
-}
+//     return !empty($relativePath) && file_exists($imagePath);
+// }
+
+	function checkImageExists($relativePath) {
+		if (empty($relativePath)) {
+			return false;
+		}
+
+		$rootPath = rtrim($_SERVER['DOCUMENT_ROOT'], '/'); 
+		$imagePath = $rootPath . '/' . ltrim($relativePath, '/');
+
+		if (!file_exists($imagePath)) {
+			return false;
+		}
+
+		$imageType = @exif_imagetype($imagePath); 
+		return ($imageType !== false);
+	}
+
 
 function RemoveFilePath($relativePath) {
 
