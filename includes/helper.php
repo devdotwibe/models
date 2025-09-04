@@ -23,7 +23,7 @@ function h_my_ip_address(){
 			$country = DB::queryFirstRow("SELECT name FROM countries WHERE id = %i", (int)$country_id);
 		}
 
-		return $country ? $country['country_name'] : null;
+		return $country ? $country['name'] : null;
 	}
 
 

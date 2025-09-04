@@ -709,7 +709,7 @@ else{
 
                     $('#booking_type').text(data.service_name);
                     $('#booking_for').text(data.booking_for);
-                    $('#booking_country').text(data.country);
+                    $('#booking_country').text(data.country_name);
                     $('#booking_description').text(data.instructions);
 					
 					if(data.service_name == 'Travel'){
