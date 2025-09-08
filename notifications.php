@@ -470,6 +470,8 @@ else{
 
                     $follow_content = '';
 
+                    $sender_user = false;
+
                     if($rowesdw['sender_id'] == $log_user_id)
                     {
                          $notify_user = DB::queryFirstRow("SELECT id,name,username,profile_pic,unique_id,email FROM model_user WHERE id =  %s ", $rowesdw['receiver_id']);
@@ -489,6 +491,8 @@ else{
                         $sender_email =  $notify_user['email'];
 
                         $follow_title = 'Follow Request Sent';
+
+                        $sender_user = true;
 
                         $follow_content = 'You have requested to follow  <strong class="text-indigo-400"> '.$modalname.' </strong>. Wait until they accept or decline your request.';
 
@@ -643,6 +647,7 @@ else{
 						</p>
 						<?php if(!empty($unique_id)){ 
 						if($rowesdw['notification_type'] == 'follow'){
+
 						$get_modal_notif = DB::query('select status,follow_date from model_follow where unique_model_id = "'.$unique_rec_id.'" AND unique_user_id = "'.$unique_id.'"');
 						$followstatus = ''; $followdate = '';
 						if(!empty($get_modal_notif)){
@@ -651,15 +656,31 @@ else{
 						}
 						?>
                         <div class="flex space-x-3">
-                            <button id="acc_<?php echo $unique_id; ?>" class="btn-success px-6 py-2 rounded-lg text-white font-semibold" <?php if($followstatus == 'Follow') echo 'disabled'; ?> onclick="acceptFollow('<?php echo $unique_id; ?>','<?php echo $unique_rec_id; ?>','<?php echo $modalname; ?>')">
-                                <?php if($followstatus == 'Follow'){ echo 'Accepted on '.date('d/m/Y',strtotime($followdate)); }else{ ?>✓ Accept <?php } ?>
-                            </button>
-						
-                            <?php if($followstatus != 'Follow') { ?>
 
-                                <button id="dec_<?php echo $unique_id; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($followstatus == 'Unfollow') echo 'disabled'; ?> onclick="declineFollow('<?php echo $unique_id; ?>','<?php echo $unique_rec_id; ?>','<?php echo $modalname; ?>')">
-                                    <?php if($followstatus == 'Unfollow'){ echo 'Declined on '.date('d/m/Y',strtotime($followdate)); }else{ ?>✗ Decline <?php } ?>
+
+                            <?php if($sender_user) { ?>
+
+                                <button id="cancel_<?php echo $unique_id; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($followstatus == 'Follow') echo 'disabled'; ?> onclick="declineFollow('<?php echo $unique_id; ?>','<?php echo $unique_rec_id; ?>','<?php echo $modalname; ?>')">
+
+                                        ✗ Cancel Request 
+
                                 </button>
+
+                            <?php } ?>
+
+                            <?php if(!$sender_user) { ?>
+
+                                <button id="acc_<?php echo $unique_id; ?>" class="btn-success px-6 py-2 rounded-lg text-white font-semibold" <?php if($followstatus == 'Follow') echo 'disabled'; ?> onclick="acceptFollow('<?php echo $unique_id; ?>','<?php echo $unique_rec_id; ?>','<?php echo $modalname; ?>')">
+                                    <?php if($followstatus == 'Follow'){ echo 'Accepted on '.date('d/m/Y',strtotime($followdate)); }else{ ?>✓ Accept <?php } ?>
+                                </button>
+                            
+                                <?php if($followstatus != 'Follow') { ?>
+
+                                    <button id="dec_<?php echo $unique_id; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($followstatus == 'Unfollow') echo 'disabled'; ?> onclick="declineFollow('<?php echo $unique_id; ?>','<?php echo $unique_rec_id; ?>','<?php echo $modalname; ?>')">
+                                        <?php if($followstatus == 'Unfollow'){ echo 'Declined on '.date('d/m/Y',strtotime($followdate)); }else{ ?>✗ Decline <?php } ?>
+                                    </button>
+
+                                <?php } ?>
 
                             <?php } ?>
 
@@ -667,7 +688,9 @@ else{
                                 View Profile
                             </button>
                         </div>
-						<?php } else if($rowesdw['notification_type'] == 'requests'){ 
+						<?php }
+
+                             else if($rowesdw['notification_type'] == 'requests'){ 
 						$status = ''; $changed_date = ''; 
 							if(!empty($booking_id)){
 								$status = $model_booking['status'];
