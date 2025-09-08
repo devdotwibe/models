@@ -135,12 +135,27 @@ $resultd = mysqli_query($con, $sqls);
 
                     <div class="flex-1">
 
-                        <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center justify-between mb-2">';
 
+						if($rowesdw['notification_type'] != 'requests')
+						{
+						
+							if($rowesdw['notification_type'] == 'follow') {
 
-                            <h3 class="text-lg font-semibold premium-text">'. ucfirst($follow_title) .'</h3>';
+								$html .='<h3 class="text-lg font-semibold premium-text">'. ucfirst($follow_title) .'</h3>';
 
+							}else
+							{
+							
+								$html .='<h3 class="text-lg font-semibold premium-text">'. ucfirst($rowesdw['notification_type']) .'Request' .'</h3>';
+							}
 
+						}
+						else
+						{
+		
+							$html .='<h3 class="text-lg font-semibold premium-text">'.'Service Request'.'</h3>';
+						}
 
                         $date1 = new DateTime($rowesdw['notification_date']);
 							$now = new DateTime(); 
