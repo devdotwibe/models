@@ -622,11 +622,25 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                         <input type="hidden" name="tokens" id="tokens_used" value="<?php echo $_GET['token']; ?>" >
 
                         
-					
+                    <?php if($_GET['service'] == 'Collaboration' ) { ?>
+
+                        <button name="booking_submit" type="submit" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>
+                             Confirm Booking
+                        </button>
+
+                    <?php } else { ?>
+
+
                         <button name="booking_submit" type="submit" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>
                             Let's Meet - Confirm Booking
                         </button>
+
+                    <?php } ?>
+
+
+
                         <p class="text-white/60 mt-4 text-lg">Your booking will be processed securely and you'll receive confirmation within 24 hours</p>
                     </div>
                 </form>
