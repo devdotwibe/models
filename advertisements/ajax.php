@@ -95,9 +95,12 @@ if (!empty($where)) {
 $orderBy = !empty($order) ? $order : $sort_by;
 $limited = " LIMIT $offset, " . (int)$perPage;
 
-echo $orderBy; die();
 
 $finalQuery = $stringQuery . $orderBy . $limited;
+
+
+echo $finalQuery; die();
+
 $all_data   = DB::query($finalQuery, ...$params);
 
 // ------------------ TOTAL COUNT ------------------
