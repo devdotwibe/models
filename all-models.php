@@ -2934,7 +2934,8 @@ include('includes/helper.php');
                         },
                         dataType: 'json',
                         success: function(response) {
-                            showNotification(`Connection request sent to ${profileName}!`, 'success');
+                            
+                            // showNotification(`Connection request sent to ${profileName}!`, 'success');
                         }
                     });
 
