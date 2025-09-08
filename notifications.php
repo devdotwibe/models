@@ -418,10 +418,16 @@ else{
 				<?php while($rowesdw = mysqli_fetch_assoc($resultd)) {
 					
 					$get_modal = DB::query('select id,name,username,profile_pic,unique_id,email from model_user where id IN ('.$rowesdw['sender_id'].', '.$rowesdw['receiver_id'].')');
+
+
 					if(!empty($get_modal)){  
+
 						foreach($get_modal as $md){
+
 							if($md['id'] == $rowesdw['sender_id']){
+
 								$profilepic = $md['profile_pic'];
+
 								if(!empty($md['username'])){
 									 $modalname = $md['username'];
 								 }else{
@@ -430,13 +436,18 @@ else{
 								 $unique_id = $md['unique_id'];
 								 $modal_senderid = $md['id'];
 								 $sender_email = $md['email'];
+
 							}else if($md['id'] == $rowesdw['receiver_id']){
+
 								 $unique_rec_id = $md['unique_id'];
 								 $modal_senderid = $md['id'];
+
+                                $profilepic = $md['profile_pic'];
 							}
 						}
 						
 					}else{
+
 						$profilepic = 'assets/images/model-gal-no-img.jpg';
 						$modalname = '';
 						$unique_id = ''; $modalid = ''; $sender_email = '';
@@ -491,18 +502,24 @@ else{
 							
                         </div>
                         <p class="text-white/80 mb-4">
+
 						<?php if($rowesdw['notification_type'] == 'follow'){ ?>
+
                             <strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> wants to follow you and get updates about your content and availability.
+
                         <?php }else if($rowesdw['notification_type'] == 'requests'){ 
-						$booking_id = $rowesdw['booking_id'];
-						$model_serv = 'Services';
-						$booking_type = '';
-						if(!empty($booking_id)){
-							$model_booking = DB::queryFirstRow('select * from model_booking where id="'.$booking_id.'"');
-							if($model_booking['main_service'] == 'chat') $model_serv = 'Chat Services - '.$model_booking['service_name'];
-							else if($model_booking['main_service'] == 'meet') $model_serv = 'Meet Services - '.$model_booking['service_name'];
-							$booking_type = $model_booking['booking_type'].' at '.date('d/m/Y',strtotime($model_booking['meeting_date'])).' '.$model_booking['meeting_time'];
-						} 
+
+
+                            $booking_id = $rowesdw['booking_id'];
+                            $model_serv = 'Services';
+                            $booking_type = '';
+                            if(!empty($booking_id)){
+                                $model_booking = DB::queryFirstRow('select * from model_booking where id="'.$booking_id.'"');
+                                if($model_booking['main_service'] == 'chat') $model_serv = 'Chat Services - '.$model_booking['service_name'];
+                                else if($model_booking['main_service'] == 'meet') $model_serv = 'Meet Services - '.$model_booking['service_name'];
+                                $booking_type = $model_booking['booking_type'].' at '.date('d/m/Y',strtotime($model_booking['meeting_date'])).' '.$model_booking['meeting_time'];
+                            } 
+
 						?>
 							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> has requested a <strong class="text-pink-400"><?php echo $model_serv; ?></strong> <?=$booking_type?>.
                            <?php /*<span class="text-green-400 font-semibold">$150</span> for 1 hour.<?php */ ?>
