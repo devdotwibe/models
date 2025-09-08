@@ -660,7 +660,7 @@ else{
 
                             <?php if($sender_user) { ?>
 
-                                <button id="cancel_<?php echo $unique_id; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($followstatus == 'Follow') echo 'disabled'; ?> onclick="declineFollow('<?php echo $unique_id; ?>','<?php echo $unique_rec_id; ?>','<?php echo $modalname; ?>')">
+                                <button id="cancel_<?php echo $unique_id; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($followstatus == 'Follow') echo 'disabled'; ?> onclick="CancelFollow('<?php echo $unique_id; ?>','<?php echo $modalname; ?>')">
 
                                         ✗ Cancel Request 
 
@@ -975,6 +975,27 @@ offset = offset+limit;
 				}
 			});
         event.target.closest('.notification-card').style.opacity = '0.5';
+    }
+
+    function CancelFollow(reciever,name)
+    {
+
+        jQuery.ajax({
+            type: 'GET',
+            url : "<?=SITEURL.'/ajax/model_cancel_request.php'?>",
+            data:{reciever:reciever},
+            dataType:'json',
+            success: function(response){ 
+
+                showNotification(`🚫 You cancelled your follow request to ${name}.`, 'success');
+
+                jQuery('#cancel_'+reciever).remove();
+       
+            }
+        });
+
+        event.target.closest('.notification-card').style.opacity = '0.5';
+
     }
 
     function acceptMeeting(userId) {
