@@ -475,7 +475,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                                     <label class="block text-white/80 font-semibold mb-3 text-lg">Hour</label>
 
-                                    <select name="meeting_hrs" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                    <select name="meeting_hrs" id="meeting_hrs" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                         <option value="" class="bg-gray-900">HH</option>
                                         <option value="01" class="bg-gray-900">01</option>
                                         <option value="02" class="bg-gray-900">02</option>
@@ -669,11 +669,10 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                 return;
             }
 
-            // ✅ Case: same day → show hour selector
             if (start.toDateString() === end.toDateString()) {
                 $hourDiv.show();
 
-                $("select[name='meeting_hrs']").off("change").on("change", function () {
+                $("#meeting_hrs").off("change").on("change", function () {
                     let hrs = parseInt($(this).val()) || 0;
                     let totalTokens = hrs * collab_hours_per;
                     $tokens.val(totalTokens);
@@ -808,11 +807,11 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 				
 				}
 			} 
-        // Initialize premium features
-        document.addEventListener('DOMContentLoaded', function() {
-            initializePremiumFeatures();
-            setMinDate();
-        });
+        // // Initialize premium features
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     initializePremiumFeatures();
+        //     setMinDate();
+        // });
 
         function initializePremiumFeatures() {
             // Premium Particle System
