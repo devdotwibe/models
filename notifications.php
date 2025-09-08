@@ -490,7 +490,7 @@ else{
 
                         $follow_title = 'Follow Request Sent';
 
-                        $follow_content = 'You have requested to follow <strong> '.$modalname.' </strong>. Wait until they accept or decline your request.';
+                        $follow_content = 'You have requested to follow  <strong class="text-indigo-400"> '.$modalname.' </strong>. Wait until they accept or decline your request.';
 
                     }
 
@@ -516,7 +516,7 @@ else{
                         $follow_title = 'Follow Request';
 
 
-                        $follow_content = '<strong> '.$modalname.'</strong> wants to follow you and get updates about your content and availability.';
+                        $follow_content = ' <strong class="text-indigo-400"> '.$modalname.'</strong> wants to follow you and get updates about your content and availability.';
 
                         if(empty($profilepic))
                         {
@@ -596,7 +596,7 @@ else{
 
 						<?php if($rowesdw['notification_type'] == 'follow'){ ?>
 
-                            <strong class="text-indigo-400"><?php echo $follow_content; ?>
+                           <?php echo $follow_content; ?>
 
                         <?php }else if($rowesdw['notification_type'] == 'requests'){ 
 
