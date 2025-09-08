@@ -315,7 +315,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                             <div>
 
-                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Collaboration For</label>
+                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Collaboration Type</label>
 
                                 <select name="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
 
