@@ -2442,6 +2442,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                            
             </div>
 
+
+            <?php /*
             <div class="mb-6">
 
               <div class="question-text">Are you interested in professional modeling opportunities?</div>
@@ -2463,6 +2465,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 </div>
               </div>
             </div>
+            */?>
 
 
             <div class="mb-6">
