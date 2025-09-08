@@ -386,7 +386,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                             <div class="mt-8 text-center">
                                 <p class="text-white/50 text-sm">
-                                    By joining, you agree to our <a href="#" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium read-more-btn">Terms</a> and <a href="#" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium read-more-btn">Privacy Policy</a>
+                                    By joining, you agree to our <a href="<?= SITEURL.'tls-tom.php'?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium read-more-btn">Terms</a> and <a href="<?= SITEURL.'privacy-policy.php'?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium read-more-btn">Privacy Policy</a>
                                 </p>
                             </div>
                         </div>
