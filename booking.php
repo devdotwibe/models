@@ -293,7 +293,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                 $collab_categorys = json_decode($extra_details['collab_category']); 
 
                                 $category_labels = [
-                                    'life_style_entertainment'=>'>Lifestyle & Entertainment  Includes vlogs, fashion, product features, travel stories, etc.',
+                                    'life_style_entertainment'=>'Lifestyle & Entertainment  Includes vlogs, fashion, product features, travel stories, etc.',
                                     'creative_editorial'=>'Creative & Editorial Projects Conceptual shoots, art-based themes, expressive photography, etc.',
                                     'fashion'=>'Swimwear / Lingerie / Fitness Modeling Includes stylized or bold fashion looks for commercial or brand use',
                                     'adult_oriented'=>'Adult-Oriented or 18+ Content (Confidential)  May include provocative or mature themes created for verified age-restricted audiences or private platforms.'
