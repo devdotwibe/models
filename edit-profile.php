@@ -2412,7 +2412,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
           <div class="collapsible-header" onclick="toggleCollapsible(this)">
 
-            <h2 class="text-xl font-bold">🎬 Professional Modeling & Entertainment</h2>
+            <!-- <h2 class="text-xl font-bold">🎬 Professional Modeling & Entertainment</h2> -->
+
+             <h2 class="text-xl font-bold"> 🎬 Collaborations</h2>
+
             <svg class="w-6 h-6 collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
@@ -2421,12 +2424,22 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           <div class="collapsible-content <?php if (empty($followers_array)) {  echo 'access_restricted';  } ?>">
                                            
                                          
-            <div class="private-section mb-6">
+            <!-- <div class="private-section mb-6">
 
               <div class="private-badge">🔒 Private & Confidential</div>
 
               <p class="text-sm">This information is kept strictly confidential and used only for professional matching with appropriate opportunities.</p>
 
+            </div> -->
+
+
+            <div class="private-section mb-6">
+
+              <div class="private-badge"> 🔐 Important Legal Disclaimer </div>
+
+              <p class="text-sm">This setting refers to content creation only and does not imply or allow promotion of any physical services. 
+                  You must be 18+ to opt-in. You are free to opt out or update this setting at any time in your profile preferences. </p>
+                                           
             </div>
 
             <div class="mb-6">
@@ -2450,6 +2463,34 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 </div>
               </div>
             </div>
+
+
+            <div class="mb-6">
+
+              <div class="question-text">Are you open to brand partnerships and professional collaborations?</div>
+
+              <p class="text-sm text-white/80 mb-4">Let us know if you'd like to be considered for modeling, content creation, or event-based opportunities.
+                 Your preferences remain confidential and are only visible to verified campaign partners and team coordinators.</p>
+              
+              <div class="radio-group mt-3">
+                <div class="radio-option">
+                  <input type="radio" id="modeling-yes" name="modeling" value="Yes" <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
+                                                                                      echo 'checked';
+                                                                                    } ?>
+                    <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('modeling-options', true)" <?php } ?>>
+                  <label for="modeling-yes">Yes</label>
+                </div>
+                <div class="radio-option">
+                  <input type="radio" id="modeling-no" name="modeling" value="No" <?php if ((!empty($extra_details['modeling']) && $extra_details['modeling'] == 'No') || empty($extra_details['modeling'])) {
+                                                                                    echo 'checked';
+                                                                                  } ?>
+                    <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('modeling-options', false)" <?php } ?>>
+                  <label for="modeling-no">No</label>
+                </div>
+              </div>
+
+            </div>
+
 
 
             <?php /* 
