@@ -551,7 +551,7 @@ else{
                                         <div class="text-2xl mb-1">👨</div>
                                         <div class="text-sm">Men</div>
                                     </div>
-                                    <div class="audience-chip p-3 rounded-xl text-center<?php echo in_array('women', $target_values) ? 'selected' : ''; ?>"   onclick="toggleTarget(this, 'women')">
+                                    <div class="audience-chip p-3 rounded-xl text-center <?php echo in_array('women', $target_values) ? 'selected' : ''; ?>"   onclick="toggleTarget(this, 'women')">
                                         <div class="text-2xl mb-1">👩</div>
                                         <div class="text-sm">Women</div>
                                     </div>
