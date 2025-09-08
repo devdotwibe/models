@@ -2549,11 +2549,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               </div>
 
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
 
-              
-                <div class="question-text">Collaboration will be </div>
-                
+            
                   <div>
 
                     <label class="form-label">Per Hour</label>
