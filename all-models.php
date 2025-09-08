@@ -1124,7 +1124,7 @@ include('includes/helper.php');
                                 <?php if (isset($_SESSION['log_user_id'])) { 
                                     
                                         $user_requested_row = DB::queryFirstRow(
-                                            "SELECT id 
+                                            "SELECT notification_id 
                                             FROM all_notifications 
                                             WHERE sender_id = %s 
                                             AND receiver_id = %s 
