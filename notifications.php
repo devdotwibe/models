@@ -460,7 +460,7 @@ else{
 						$unique_id = ''; $modalid = ''; $sender_email = '';
 					}
 
-                    $profilepic = 'assets/images/model-gal-no-img.jpg';
+                 
                     $modalname = '';
                     $unique_id = '';
                      $modalid = '';
@@ -517,6 +517,11 @@ else{
 
 
                         $follow_content = '<strong> '.$modalname.'</strong> wants to follow you and get updates about your content and availability.';
+
+                        if(empty($profilepic))
+                        {
+                               $profilepic = 'assets/images/model-gal-no-img.jpg';
+                        }
 
                     }
 					
