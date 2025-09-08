@@ -527,9 +527,18 @@ else{
 
                                 $reached_views_range = $adver_have_active_boost['reached_views_range'];
 
-                                $target_values   = array_map('trim', explode(',', strtolower($target_audience)));
+                                if (strpos($target_audience, ',') !== false) {
+                                    $target_values = array_map('trim', explode(',', strtolower($target_audience)));
+                                } else {
+                                    $target_values = [strtolower(trim($target_audience))];
+                                }
 
-                                $age_values   = array_map('trim', explode(',', strtolower($age_range)));
+                                if (strpos($age_range, ',') !== false) {
+                                    $age_values = array_map('trim', explode(',', strtolower($age_range)));
+                                } else {
+                                    $age_values = [strtolower(trim($age_range))];
+                                }
+
 
                             }
                         ?>
