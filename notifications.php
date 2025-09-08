@@ -444,6 +444,11 @@ else{
 
                                 $profilepic = $md['profile_pic'];
 							}
+
+                            if(empty($profilepic))
+                            {
+                                $profilepic = 'assets/images/model-gal-no-img.jpg';
+                            }
 						}
 						
 					}else{
