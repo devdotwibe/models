@@ -825,67 +825,67 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
         //     setMinDate();
         // });
 
-        function initializePremiumFeatures() {
-            // Premium Particle System
-            function createPremiumParticle() {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 12 + 's';
-                particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
-                particle.style.opacity = Math.random() * 0.8 + 0.2;
+        // function initializePremiumFeatures() {
+        //     // Premium Particle System
+        //     function createPremiumParticle() {
+        //         const particle = document.createElement('div');
+        //         particle.className = 'particle';
+        //         particle.style.left = Math.random() * 100 + '%';
+        //         particle.style.animationDelay = Math.random() * 12 + 's';
+        //         particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+        //         particle.style.opacity = Math.random() * 0.8 + 0.2;
                 
-                const colors = [
-                    'rgba(139, 92, 246, 0.8)',
-                    'rgba(236, 72, 153, 0.6)',
-                    'rgba(6, 182, 212, 0.7)'
-                ];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
+        //         const colors = [
+        //             'rgba(139, 92, 246, 0.8)',
+        //             'rgba(236, 72, 153, 0.6)',
+        //             'rgba(6, 182, 212, 0.7)'
+        //         ];
+        //         const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        //         particle.style.background = `radial-gradient(circle, ${randomColor} 0%, transparent 70%)`;
                 
-                document.getElementById('particles').appendChild(particle);
+        //         document.getElementById('particles').appendChild(particle);
                 
-                setTimeout(() => {
-                    if (particle.parentNode) {
-                        particle.remove();
-                    }
-                }, 12000);
-            }
+        //         setTimeout(() => {
+        //             if (particle.parentNode) {
+        //                 particle.remove();
+        //             }
+        //         }, 12000);
+        //     }
 
-            setInterval(createPremiumParticle, 150);
+        //     setInterval(createPremiumParticle, 150);
 
-            // Animated Counter
-            function animatePremiumCounter(element, target) {
-                let current = 0;
-                const increment = target / 200;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    element.textContent = Math.floor(current).toLocaleString();
-                }, 10);
-            }
+        //     // Animated Counter
+        //     function animatePremiumCounter(element, target) {
+        //         let current = 0;
+        //         const increment = target / 200;
+        //         const timer = setInterval(() => {
+        //             current += increment;
+        //             if (current >= target) {
+        //                 current = target;
+        //                 clearInterval(timer);
+        //             }
+        //             element.textContent = Math.floor(current).toLocaleString();
+        //         }, 10);
+        //     }
 
-            document.querySelectorAll('.stats-counter').forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                animatePremiumCounter(counter, target);
-            });
+        //     document.querySelectorAll('.stats-counter').forEach(counter => {
+        //         const target = parseInt(counter.getAttribute('data-target'));
+        //         animatePremiumCounter(counter, target);
+        //     });
 
-            // Scroll reveal
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                    }
-                });
-            }, { threshold: 0.1 });
+        //     // Scroll reveal
+        //     const observer = new IntersectionObserver((entries) => {
+        //         entries.forEach(entry => {
+        //             if (entry.isIntersecting) {
+        //                 entry.target.classList.add('revealed');
+        //             }
+        //         });
+        //     }, { threshold: 0.1 });
 
-            document.querySelectorAll('.scroll-reveal').forEach(el => {
-                observer.observe(el);
-            });
-        }
+        //     document.querySelectorAll('.scroll-reveal').forEach(el => {
+        //         observer.observe(el);
+        //     });
+        // }
 
         function setMinDate() {
             const today = new Date();
