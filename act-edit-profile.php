@@ -210,11 +210,16 @@ if ($_POST['submit_name']){
 		$model_unique_id = $_POST['model_unique_id']; 
 		
 		$arr_proof = array();
-		$arr_proof = array('live_cam','private_chat_token','group_show','gs_min_member','gs_token_price','work_escort','in_per_hour','extended_rate','in_overnight','fullday_social','d_a_address','International_tours','daily_rate','weekly_rate','monthly_rate','travel_destination','video_pictures','modeling','all_30day_access','all_30day_access_price','adult_content','hourly_rate','overnight_rate','weekend_rate','adult_content_rate','live_show_rate','professional_rate','professional_service','choose_document');  //,'group_chat_tocken'
+
+		$arr_proof = array('live_cam','private_chat_token','group_show','gs_min_member','gs_token_price','work_escort','in_per_hour','extended_rate','in_overnight','fullday_social','d_a_address','International_tours','daily_rate','weekly_rate','monthly_rate','travel_destination','video_pictures','modeling',
+					'collab','collab_day','collab_hour','collab_week',
+					'all_30day_access','all_30day_access_price','adult_content','hourly_rate','overnight_rate','weekend_rate','adult_content_rate','live_show_rate','professional_rate','professional_service','choose_document');  //,'group_chat_tocken'
+
 		$post_data_extra = array_from_post($arr_proof);
 		$post_data_extra['unique_model_id'] = $model_unique_id;
 		
 		if(!empty($_POST['social_availability'])){
+
 			$post_data_extra['social_availability'] = json_encode($_POST['social_availability']);
 			
 			$availability_time_slot = array();
@@ -247,6 +252,11 @@ if ($_POST['submit_name']){
 		if(!empty($_POST['travel_months'])){
 			$post_data_extra['travel_months'] = json_encode($_POST['travel_months']);
 		}
+
+		if(!empty($_POST['collab_category'])){
+			$post_data_extra['collab_category'] = json_encode($_POST['collab_category']);
+		}
+		
 		if(!empty($_POST['escort_services'])){
 			$post_data_extra['escort_services'] = json_encode($_POST['escort_services']);
 		}
