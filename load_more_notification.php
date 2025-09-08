@@ -134,7 +134,7 @@ $resultd = mysqli_query($con, $sqls);
                         <div class="flex items-center justify-between mb-2">
 
 
-                            <h3 class="text-lg font-semibold premium-text">'. ucfirst($follow_title);'.</h3>';
+                            <h3 class="text-lg font-semibold premium-text">'. ucfirst($follow_title) .'</h3>';
 
 
 
