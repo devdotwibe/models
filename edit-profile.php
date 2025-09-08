@@ -2554,7 +2554,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             
                   <div>
 
-                    <label class="form-label">Per Hour</label>
+                    <label class="form-label">Per Hour Rate</label>
 
                     <input type="number" class="form-input" name="collab_hour" value="<?php echo $extra_details['collab_hour']; ?>" placeholder="e.g., 3" min="2" max="20">
 
@@ -2564,7 +2564,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                   <div>
 
-                    <label class="form-label">Per Day</label>
+                    <label class="form-label">Per Day Rate</label>
 
                     <input type="number" class="form-input" name="collab_day" value="<?php echo $extra_details['collab_day']; ?>" placeholder="e.g., 15" min="1">
 
@@ -2574,11 +2574,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                   <div>
 
-                    <label class="form-label">Per Week</label>
+                    <label class="form-label">Weekend Rate</label>
 
                     <input type="number" class="form-input" name="collab_week" value="<?php echo $extra_details['collab_week']; ?>" placeholder="e.g., 15" min="1">
 
-                    <p class="help-text">Set per week collaboration rate</p>
+                    <p class="help-text">Set collaboration weekend rate</p>
 
                   </div>
 
