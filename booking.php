@@ -314,7 +314,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             ?>
 
                             <div>
-                                
+
                                  <label class="block text-white/80 font-semibold mb-3 text-lg">Collaboration For</label>
 
                                 <select name="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
@@ -413,11 +413,17 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             <h3 class="text-3xl font-bold premium-text heading-font" style="margin-left: auto;">token <span id="token_no"></span> </h3>
 
 							<?php } else{ ?>
-                            <h2 class="text-3xl font-bold premium-text heading-font"  >When do you want to see me?</h2>
+
+
+
+                            <h2 class="text-3xl font-bold premium-text heading-font"  ><?php if($_GET['service'] == 'Collaboration') { ?>  When do you want to collaborate  <?php } else { ?> When do you want to see me? <?php } ?> </h2>
 							
                             <h3 class="text-3xl font-bold premium-text heading-font" style="margin-left: auto;">token <span id="token_no"></span> </h3>
                             
                             <?php } ?>
+
+
+
                         </div>
                         <?php if($_GET['service'] == 'Travel' || $_GET['service'] == 'Collaboration' ){ ?>
 						<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -446,6 +452,26 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                 <span id="end_date_error"  style="display: none; color:red;"> </span>
                             </div>
 							
+
+                            <div>
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Hour</label>
+                                <select name="meeting_hrs" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                    <option value="" class="bg-gray-900">HH</option>
+                                    <option value="01" class="bg-gray-900">01</option>
+                                    <option value="02" class="bg-gray-900">02</option>
+                                    <option value="03" class="bg-gray-900">03</option>
+                                    <option value="04" class="bg-gray-900">04</option>
+                                    <option value="05" class="bg-gray-900">05</option>
+                                    <option value="06" class="bg-gray-900">06</option>
+                                    <option value="07" class="bg-gray-900">07</option>
+                                    <option value="08" class="bg-gray-900">08</option>
+                                    <option value="09" class="bg-gray-900">09</option>
+                                    <option value="10" class="bg-gray-900">10</option>
+                                    <option value="11" class="bg-gray-900">11</option>
+                                    <option value="12" class="bg-gray-900">12</option>
+                                </select>
+                            </div>
+
 
                               <?php if($_GET['service'] == 'Travel' ){ ?>
 
