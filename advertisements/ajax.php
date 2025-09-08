@@ -101,6 +101,8 @@ $finalQuery = $stringQuery . $orderBy . $limited;
 
 $all_data   = DB::query($finalQuery, ...$params);
 
+print_r($all_data); die();
+
 // ------------------ TOTAL COUNT ------------------
 $totalQuery = "SELECT COUNT(*) AS cnt FROM (" . $stringQuery . ") AS t";
 $totalRow   = DB::queryFirstRow($totalQuery, ...$params);
