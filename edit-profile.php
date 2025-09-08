@@ -2501,6 +2501,58 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                                                
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
+               
+              <?php $collab_category = json_decode($extra_details['collab_category']); ?>
+
+
+              <div>
+
+                <label class="form-label">Collaboration Types</label>
+
+                <p class="help-text">Select collaboration type from the check boxs</p>
+
+                  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3">
+
+                    <div class="checkbox-option">
+
+                      <input type="checkbox" id="life_style_entertainment" name="collab_category[]" value="life_style_entertainment" <?php if (!empty($collab_category) && in_array('life_style_entertainment', $collab_category)) echo 'checked'; ?>>
+
+                      <label for="life_style_entertainment">Lifestyle & Entertainment
+                      Includes vlogs, fashion, product features, travel stories, etc.
+                      </label>
+                    </div>
+
+
+                    <div class="checkbox-option">
+                      <input type="checkbox" id="creative_editorial" name="collab_category[]" value="creative_editorial" <?php if (!empty($collab_category) && in_array('creative_editorial', $collab_category)) echo 'checked'; ?>>
+                      <label for="creative_editorial">Creative & Editorial Projects
+                      Conceptual shoots, art-based themes, expressive photography, etc.
+                      </label>
+                    </div>
+
+
+                   
+                    <div class="checkbox-option">
+                      <input type="checkbox" id="fashion" name="collab_category[]" value="fashion" <?php if (!empty($collab_category) && in_array('fashion', $collab_category)) echo 'checked'; ?>>
+                      <label for="fashion">Swimwear / Lingerie / Fitness Modeling
+                                        Includes stylized or bold fashion looks for commercial or brand use
+                      </label>
+                    </div>
+
+
+                    <div class="checkbox-option">
+                      <input type="checkbox" id="adult_oriented" name="collab_category[]" value="adult_oriented" <?php if (!empty($collab_category) && in_array('adult_oriented', $collab_category)) echo 'checked'; ?>>
+                      <label for="adult_oriented">Adult-Oriented or 18+ Content (Confidential)
+                                          May include provocative or mature themes created for verified age-restricted audiences or private platforms.
+
+                      </label>
+                    </div>
+
+          
+                  </div>
+
+              </div>
+
 
                 <div class="question-text">Collaboration will be </div>
                 
