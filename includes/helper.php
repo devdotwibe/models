@@ -252,9 +252,13 @@ function BoostedModelIds($con) {
 	function BoostedModelIdsByUser($userDetails, $con) {
 
 		$today = new DateTime();
+
 		$user_gender = strtolower($userDetails['gender']);
 
 		$user_country_id = $userDetails['country'];
+
+
+		$user_city_id = $userDetails['city'];
 
 		if($user_gender =='Female' || $user_gender=='female')
 		{
@@ -271,7 +275,7 @@ function BoostedModelIds($con) {
 			$user_gender = 'couples';
 		}
 
-		$query = "SELECT user_unique_id, created_at, duration, total_amount, target_audience,ad_id 
+		$query = "SELECT user_unique_id, created_at, duration, total_amount,location,target_audience,ad_id 
 				FROM boost_avertisement";
 
 		$result = mysqli_query($con, $query);
@@ -291,15 +295,25 @@ function BoostedModelIds($con) {
 
 				if (in_array($user_gender, $targetAudience) || in_array('all', $targetAudience)) {
 
-					$allowBoost = true;
+					$allowBoost = false;
 
 					if (strtolower($row['location']) === 'national') {
 						
 						$boostUser = get_data('model_user', ['unique_id' => $row['user_unique_id']], true);
 
-						if (!$boostUser || $boostUser['country'] != $user_country_id) {
+						if ($boostUser && $boostUser['country'] == $user_country_id) {
 
-							$allowBoost = false;
+							$allowBoost = true;
+						}
+					}
+
+					if (strtolower($row['location']) === 'local') {
+						
+						$boostUser = get_data('model_user', ['unique_id' => $row['user_unique_id']], true);
+
+						if ($boostUser && $boostUser['city'] == $user_city_id) {
+
+							$allowBoost = true;
 						}
 					}
 

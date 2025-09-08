@@ -19,8 +19,11 @@ $sort_col  = $_GET['sort_column'] ?? '';
 
 // ------------------ BOOST LOGIC ------------------
 if (isset($_SESSION["log_user_id"])) {
+
     $userDetails     = get_data('model_user', ['id'=>$_SESSION["log_user_id"]], true);
+
     $boosted_ad_ids  = BoostedModelIdsByUser($userDetails, $con);
+    
 } else {
     $boosted_ad_ids  = BoostedModelIds($con);
 }
