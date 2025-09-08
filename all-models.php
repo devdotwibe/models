@@ -2922,67 +2922,67 @@ include('includes/helper.php');
             const $card = $(element).closest('.profile-card');
             const profileName = $(element).find('.profile-name').text().split(',')[0];
 
-            switch (action) {
-                case 'connect':
+            // switch (action) {
+            //     case 'connect':
 
-                    jQuery.ajax({
-                        type: 'GET',
-                        url: "<?= SITEURL . '/ajax/model_followrequest.php' ?>",
-                        data: {
-                            modelid: modelid,
-                            notification_type: 'follow'
-                        },
-                        dataType: 'json',
-                        success: function(response) {
+            //         jQuery.ajax({
+            //             type: 'GET',
+            //             url: "<?= SITEURL . '/ajax/model_followrequest.php' ?>",
+            //             data: {
+            //                 modelid: modelid,
+            //                 notification_type: 'follow'
+            //             },
+            //             dataType: 'json',
+            //             success: function(response) {
 
-                            // showNotification(`Connection request sent to ${profileName}!`, 'success');
-                        }
-                    });
+            //                 // showNotification(`Connection request sent to ${profileName}!`, 'success');
+            //             }
+            //         });
 
-                    break;
-                case 'like':
-                    $(element).css('color', 'var(--secondary)');
-                    //ajax for increase like count
-                    jQuery.ajax({
-                        type: 'GET',
-                        url: "<?= SITEURL . '/ajax/model_like.php' ?>",
-                        data: {
-                            modelid: modelid
-                        },
-                        dataType: 'json',
-                        success: function(response) {
-
-
-                            console.log(response);
-                            if (response.status == "success") {
-                                $('#message_pag').remove();
-
-                                $('#modal_success_message').prepend(`<p id="message_pag" class="success-text">${response.message}</p>`);
-
-                                $('#success_modal').addClass('active');
-
-                                setTimeout(() => {
-
-                                    $('#success_modal').removeClass('active');
-
-                                }, 3000);
-                                // showNotification(`You liked ${profileName}!`, 'success');
-                            }
-                        }
-                    });
-
-                    break;
-                case 'pass':
-
-                    // $card.css('opacity', '0.5');
-                    // setTimeout(() => {
-                    //     $card.css('display', 'none');
-                    // }, 300);
+            //         break;
+            //     case 'like':
+            //         $(element).css('color', 'var(--secondary)');
+            //         //ajax for increase like count
+            //         jQuery.ajax({
+            //             type: 'GET',
+            //             url: "<?= SITEURL . '/ajax/model_like.php' ?>",
+            //             data: {
+            //                 modelid: modelid
+            //             },
+            //             dataType: 'json',
+            //             success: function(response) {
 
 
-                    showNotification(`${profileName} has been hidden`, 'info');
-                    break;
-            }
+            //                 console.log(response);
+            //                 if (response.status == "success") {
+            //                     $('#message_pag').remove();
+
+            //                     $('#modal_success_message').prepend(`<p id="message_pag" class="success-text">${response.message}</p>`);
+
+            //                     $('#success_modal').addClass('active');
+
+            //                     setTimeout(() => {
+
+            //                         $('#success_modal').removeClass('active');
+
+            //                     }, 3000);
+            //                     // showNotification(`You liked ${profileName}!`, 'success');
+            //                 }
+            //             }
+            //         });
+
+            //         break;
+            //     case 'pass':
+
+            //         // $card.css('opacity', '0.5');
+            //         // setTimeout(() => {
+            //         //     $card.css('display', 'none');
+            //         // }, 300);
+
+
+            //         showNotification(`${profileName} has been hidden`, 'info');
+            //         break;
+            // }
         }
         // Handle Profile Actions
         function handleProfileAction($button, action, modelid) {
