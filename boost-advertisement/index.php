@@ -1016,6 +1016,8 @@ else{
 
                     $('#success_modal').addClass('active');
 
+                    $('#modal_success_message').html("");
+
                     $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
            
                 } else {
