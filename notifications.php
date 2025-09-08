@@ -542,7 +542,26 @@ else{
                     <div class="flex-1">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-semibold premium-text">
-							<?php if($rowesdw['notification_type'] != 'requests'){ echo ucfirst($rowesdw['notification_type']); }else echo 'Service'; ?> Request
+
+							    <?php if($rowesdw['notification_type'] != 'requests')
+                                    {
+                                    
+                                        if($rowesdw['notification_type'] == 'follow') {
+
+                                            echo ucfirst($follow_title);
+
+                                        }else
+                                        {
+                                            echo ucfirst($rowesdw['notification_type']) .'Request';
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        echo 'Service Request';
+                                    }
+                                        
+                                   ?> 
 							</h3>
                             
 							<?php $date1 = new DateTime($rowesdw['notification_date']);
