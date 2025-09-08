@@ -317,6 +317,11 @@ function BoostedModelIds($con) {
 						}
 					}
 
+					if (strtolower($row['location']) === 'international') {
+						
+						$allowBoost = true;
+					}
+
 					if ($allowBoost) {
 						$validBoosts[] = [
 							'ad_id' => $row['ad_id'],
