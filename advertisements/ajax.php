@@ -47,9 +47,6 @@ $order = "";
         $sort_by = "";
     }
 
-    echo $order;
-
-    die();
 // ------------------ BASE QUERY ------------------
 $basic_filed_users = GetUsersWithBasicFilled();
 
@@ -97,6 +94,8 @@ if (!empty($where)) {
 // ------------------ FINAL QUERY ------------------
 $orderBy = !empty($order) ? $order : $sort_by;
 $limited = " LIMIT $offset, " . (int)$perPage;
+
+echo $orderBy; die();
 
 $finalQuery = $stringQuery . $orderBy . $limited;
 $all_data   = DB::query($finalQuery, ...$params);
