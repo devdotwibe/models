@@ -260,7 +260,18 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                             </div>
-                            <h2 class="text-3xl font-bold premium-text heading-font">Your Contact Details</h2>
+
+                            <?php if(isset($_GET['type']) && $_GET['type'] =='collaboration' ){ ?> 
+
+                                <h2 class="text-3xl font-bold premium-text heading-font">Your Collaboration Details</h2>
+
+                            <?php } else  {  ?>
+
+
+                                <h2 class="text-3xl font-bold premium-text heading-font">Your Contact Details</h2>
+
+                            <?php } ?> 
+
                         </div>
 						
 						<?php 
@@ -304,7 +315,15 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                             <div>
 
-                                <label class="block text-white/80 font-semibold mb-3 text-lg">Booking For</label>
+                                <?php if(isset($_GET['type']) && $_GET['type'] =='collaboration' ){  ?> 
+
+                                        <label class="block text-white/80 font-semibold mb-3 text-lg">Collaboration For</label>
+
+                                <?php } else { ?>
+
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">Booking For</label>
+
+                                <?php } ?>
 
                                 <select name="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
 
