@@ -407,7 +407,7 @@ else{
             $result_count = mysqli_query($con, $sqls_count);
 			$row_cnt = mysqli_fetch_assoc($result_count);
 			
-			$sqls = "SELECT * FROM all_notifications WHERE receiver_id = ".$_SESSION['log_user_id']." AND sender_id = ".$_SESSION['log_user_id']."  Order by notification_id DESC LIMIT $limit OFFSET $offset";
+			$sqls = "SELECT * FROM all_notifications WHERE receiver_id = ".$_SESSION['log_user_id']." OR sender_id = ".$_SESSION['log_user_id']."  Order by notification_id DESC LIMIT $limit OFFSET $offset";
 
               $resultd = mysqli_query($con, $sqls);
 
