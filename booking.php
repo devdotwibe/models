@@ -314,16 +314,8 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             ?>
 
                             <div>
-
-                                <?php if(isset($_GET['type']) && $_GET['type'] =='collaboration' ){  ?> 
-
-                                        <label class="block text-white/80 font-semibold mb-3 text-lg">Collaboration For</label>
-
-                                <?php } else { ?>
-
-                                    <label class="block text-white/80 font-semibold mb-3 text-lg">Booking For</label>
-
-                                <?php } ?>
+                                
+                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Collaboration For</label>
 
                                 <select name="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
 
