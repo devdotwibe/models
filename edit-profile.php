@@ -2430,7 +2430,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             </div>
 
             <div class="mb-6">
+
               <div class="question-text">Are you interested in professional modeling opportunities?</div>
+              
               <div class="radio-group mt-3">
                 <div class="radio-option">
                   <input type="radio" id="modeling-yes" name="modeling" value="Yes" <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
@@ -2449,6 +2451,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               </div>
             </div>
 
+
+            <?php /* 
 
             <div id="modeling-options" class="conditional-section <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
                                                                     echo 'show';
@@ -2694,6 +2698,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 </div>
               </div>
             </div>
+
+          */ ?>
+
+
+
           </div>
         </div>
 
