@@ -425,11 +425,24 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
 
                         </div>
-                        <?php if($_GET['service'] == 'Travel' || $_GET['service'] == 'Collaboration' ){ ?>
+
+
+                        <?php if($_GET['service'] == 'Travel' || $_GET['service'] == 'Collaboration' ){ 
+                            
+                            
+                                $collab_hours_per = $extra_details['collab_hour'];
+
+                                $collab_days_per = $extra_details['collab_day'];
+
+                                $collab_weekend_rate = $extra_details['collab_week'];
+                            
+                            ?>
+
 						<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
                             <div class="md:col-span-2">
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">From</label>
-                                <input name="meeting_date" onchange="CalculateDate()"
+                                <input name="meeting_date" <?php if($_GET['service'] == 'Collaboration') { ?> onchange="CalculateCollaborate()" <?php } else { ?>  onchange="CalculateDate()"  <?php } ?>
 
                                     id="meeting_date_from"
                                     type="date" 
@@ -437,10 +450,12 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                     required
                                     min=""
                                 >
+
                             </div>
+
 							<div class="md:col-span-2">
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">To</label>
-                                <input name="meeting_date_to"  onchange="CalculateDate()"
+                                <input name="meeting_date_to" <?php if($_GET['service'] == 'Collaboration') { ?> onchange="CalculateCollaborate()" <?php } else { ?>  onchange="CalculateDate()"  <?php } ?>
                                     id="meeting_date_to"
                                     type="date" 
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
@@ -450,27 +465,35 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
 
                                 <span id="end_date_error"  style="display: none; color:red;"> </span>
+
                             </div>
 							
 
-                            <div>
-                                <label class="block text-white/80 font-semibold mb-3 text-lg">Hour</label>
-                                <select name="meeting_hrs" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
-                                    <option value="" class="bg-gray-900">HH</option>
-                                    <option value="01" class="bg-gray-900">01</option>
-                                    <option value="02" class="bg-gray-900">02</option>
-                                    <option value="03" class="bg-gray-900">03</option>
-                                    <option value="04" class="bg-gray-900">04</option>
-                                    <option value="05" class="bg-gray-900">05</option>
-                                    <option value="06" class="bg-gray-900">06</option>
-                                    <option value="07" class="bg-gray-900">07</option>
-                                    <option value="08" class="bg-gray-900">08</option>
-                                    <option value="09" class="bg-gray-900">09</option>
-                                    <option value="10" class="bg-gray-900">10</option>
-                                    <option value="11" class="bg-gray-900">11</option>
-                                    <option value="12" class="bg-gray-900">12</option>
-                                </select>
-                            </div>
+                            <?php if($_GET['service'] == 'Collaboration' ){ ?>
+
+                                <div style="display:none" id="collab_hour">
+
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">Hour</label>
+
+                                    <select name="meeting_hrs" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                        <option value="" class="bg-gray-900">HH</option>
+                                        <option value="01" class="bg-gray-900">01</option>
+                                        <option value="02" class="bg-gray-900">02</option>
+                                        <option value="03" class="bg-gray-900">03</option>
+                                        <option value="04" class="bg-gray-900">04</option>
+                                        <option value="05" class="bg-gray-900">05</option>
+                                        <option value="06" class="bg-gray-900">06</option>
+                                        <option value="07" class="bg-gray-900">07</option>
+                                        <option value="08" class="bg-gray-900">08</option>
+                                        <option value="09" class="bg-gray-900">09</option>
+                                        <option value="10" class="bg-gray-900">10</option>
+                                        <option value="11" class="bg-gray-900">11</option>
+                                        <option value="12" class="bg-gray-900">12</option>
+                                    </select>
+
+                                </div>
+
+                            <?php } ?>
 
 
                               <?php if($_GET['service'] == 'Travel' ){ ?>
@@ -612,6 +635,83 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
     </main>
 	
    <?php include('includes/footer.php'); ?>
+
+
+
+   <script>
+
+        const collab_hours_per = <?php echo (int)$collab_hours_per; ?>;
+        const collab_days_per = <?php echo (int)$collab_days_per; ?>;
+        const collab_weekend_rate = <?php echo (int)$collab_weekend_rate; ?>;
+
+        function CalculateCollaborate() {
+
+            let fromDate = $("#meeting_date_from").val();
+            let toDate   = $("#meeting_date_to").val();
+            let $error   = $("#end_date_error");
+            let $tokens  = $("#tokens_used");
+            let $hourDiv = $("#collab_hour");
+
+            $error.hide().text("");
+            $tokens.val("");
+
+            $('#token_no').val("");
+
+            if (!fromDate || !toDate) return;
+
+            let start = new Date(fromDate);
+            let end   = new Date(toDate);
+
+            // ❌ Case: end < start
+            if (end < start) {
+                $error.text("❌ End date must be greater than start date.").show();
+                $hourDiv.hide();
+                return;
+            }
+
+            // ✅ Case: same day → show hour selector
+            if (start.toDateString() === end.toDateString()) {
+                $hourDiv.show();
+
+                $("select[name='meeting_hrs']").off("change").on("change", function () {
+                    let hrs = parseInt($(this).val()) || 0;
+                    let totalTokens = hrs * collab_hours_per;
+                    $tokens.val(totalTokens);
+
+                     $('#token_no').val(totalTokens);
+                });
+
+                return;
+            }
+
+            $hourDiv.hide();
+
+            let totalTokens = 0;
+            let loopDate = new Date(start);
+
+            while (loopDate <= end) {
+                let day = loopDate.getDay(); // 0=Sunday, 6=Saturday
+                if (day === 0 || day === 6) {
+                    totalTokens += collab_weekend_rate;
+                } else {
+                    totalTokens += collab_days_per;
+                }
+                loopDate.setDate(loopDate.getDate() + 1);
+            }
+
+            $tokens.val(totalTokens);
+
+            $('#token_no').val(totalTokens);
+        }
+
+        $(document).ready(function () {
+
+            $("#meeting_date_from, #meeting_date_to").on("change", CalculateDate);
+
+        });
+</script>
+
+
 
     <script>
 
