@@ -404,6 +404,9 @@ else{
 			}else $offset = 0;
 			
 			$sqls_count = "SELECT COUNT(*) AS total FROM all_notifications WHERE receiver_id = ".$_SESSION['log_user_id'];
+
+            $log_user_id = $_SESSION['log_user_id'];
+
             $result_count = mysqli_query($con, $sqls_count);
 			$row_cnt = mysqli_fetch_assoc($result_count);
 			
@@ -421,34 +424,34 @@ else{
 
 					if(!empty($get_modal)){  
 
-						foreach($get_modal as $md){
+						// foreach($get_modal as $md){
 
-							if($md['id'] == $rowesdw['sender_id']){
+						// 	if($md['id'] == $rowesdw['sender_id']){
 
-								$profilepic = $md['profile_pic'];
+						// 		$profilepic = $md['profile_pic'];
 
-								if(!empty($md['username'])){
-									 $modalname = $md['username'];
-								 }else{
-									 $modalname = $md['name'];
-								 }
-								 $unique_id = $md['unique_id'];
-								 $modal_senderid = $md['id'];
-								 $sender_email = $md['email'];
+						// 		if(!empty($md['username'])){
+						// 			 $modalname = $md['username'];
+						// 		 }else{
+						// 			 $modalname = $md['name'];
+						// 		 }
+						// 		 $unique_id = $md['unique_id'];
+						// 		 $modal_senderid = $md['id'];
+						// 		 $sender_email = $md['email'];
 
-							}else if($md['id'] == $rowesdw['receiver_id']){
+						// 	}else if($md['id'] == $rowesdw['receiver_id']){
 
-								 $unique_rec_id = $md['unique_id'];
-								 $modal_senderid = $md['id'];
+						// 		 $unique_rec_id = $md['unique_id'];
+						// 		 $modal_senderid = $md['id'];
 
-                                $profilepic = $md['profile_pic'];
-							}
+                        //         $profilepic = $md['profile_pic'];
+						// 	}
 
-                            if(empty($profilepic))
-                            {
-                                $profilepic = 'assets/images/model-gal-no-img.jpg';
-                            }
-						}
+                        //     if(empty($profilepic))
+                        //     {
+                        //         $profilepic = 'assets/images/model-gal-no-img.jpg';
+                        //     }
+						// }
 						
 					}else{
 
@@ -456,6 +459,53 @@ else{
 						$modalname = '';
 						$unique_id = ''; $modalid = ''; $sender_email = '';
 					}
+
+                    $profilepic = 'assets/images/model-gal-no-img.jpg';
+                    $modalname = '';
+                    $unique_id = '';
+                     $modalid = '';
+                    $sender_email = '';
+
+                    if($rowesdw['sender_id'] == $log_user_id)
+                    {
+                         $notify_user = DB::queryFirstRow("SELECT id,name,username,profile_pic,unique_id,email FROM model_user WHERE id =  %s ", $rowesdw['receiver_id']);
+
+                        $profilepic = $notify_user['profile_pic'];
+
+                       	if(!empty($notify_user['username'])){
+                            $modalname = $notify_user['username'];
+                        }else{
+                            $modalname = $notify_user['name'];
+                        }
+
+                        $unique_id =  $notify_user['unique_id'];
+
+                        $modalid =  $notify_user['id'];
+
+                        $sender_email =  $notify_user['email'];
+
+                    }
+
+
+                    if($rowesdw['receiver_id'] == $log_user_id)
+                    {
+                         $notify_user = DB::queryFirstRow("SELECT id,name,username,profile_pic,unique_id,email FROM model_user WHERE id =  %s ", $rowesdw['sender_id']);
+
+                        $profilepic = $notify_user['profile_pic'];
+
+                       	if(!empty($notify_user['username'])){
+                            $modalname = $notify_user['username'];
+                        }else{
+                            $modalname = $notify_user['name'];
+                        }
+
+                        $unique_id =  $notify_user['unique_id'];
+
+                        $modalid =  $notify_user['id'];
+
+                        $sender_email =  $notify_user['email'];
+
+                    }
 					
 					//Tip & Gift Data
 					$tg_amount = 0;
