@@ -2912,10 +2912,10 @@ include('includes/helper.php');
 
         function ActionBtn(element, action) {
 
-            $(element).css('transform', 'scale(1.2)');
-            setTimeout(() => {
-                $(element).css('transform', 'scale(1)');
-            }, 200);
+            // $(element).css('transform', 'scale(1.2)');
+            // setTimeout(() => {
+            //     $(element).css('transform', 'scale(1)');
+            // }, 200);
 
             const modelid = $(element).attr('modelid');
 
