@@ -2229,7 +2229,9 @@ body .owl-carousel .owl-nav.disabled {
                     <div class="service-status">
                         <div class="status-badge status-exclusive">By Quote</div>
                     </div>
-                    <button class="action-button">Get Quote</button>
+
+                    <a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking.php?type=travel&service=Travel&token=<?= $extra_details['daily_rate'] ?>&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
+
                 </div>
             </div>
 
