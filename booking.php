@@ -647,7 +647,6 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
     $(document).ready(function () {
 
-        // Hour dropdown change handler (always active, but only works if same-day)
         $("#meeting_hrs").on("change", function () {
             let fromDate = $("#meeting_date_from").val();
             let toDate   = $("#meeting_date_to").val();
@@ -723,7 +722,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
         $tokens.val(totalTokens);
         $("#token_no").val(totalTokens);
     }
-    
+
 </script>
 
 
