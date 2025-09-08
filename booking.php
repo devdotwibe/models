@@ -265,6 +265,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 						
 						<?php 
 						if(isset($_GET['service']) && !empty($_GET['service'])){
+
 							$service = $_GET['service']; 
 						}else{
 							$service = '';
@@ -285,6 +286,47 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 									
                                 </select>
                             </div> <?php */ ?>
+
+
+                        <?php if(isset($_GET['type']) && $_GET['type'] =='collaboration' ){
+                            
+                                $collab_categorys = json_decode($extra_details['collab_category']); 
+
+                                $category_labels = [
+                                    'life_style_entertainment'=>'>Lifestyle & Entertainment  Includes vlogs, fashion, product features, travel stories, etc.',
+                                    'creative_editorial'=>'Creative & Editorial Projects Conceptual shoots, art-based themes, expressive photography, etc.',
+                                    'fashion'=>'Swimwear / Lingerie / Fitness Modeling Includes stylized or bold fashion looks for commercial or brand use',
+                                    'adult_oriented'=>'Adult-Oriented or 18+ Content (Confidential)  May include provocative or mature themes created for verified age-restricted audiences or private platforms.'
+                                                                   
+                                ];
+                         
+                            ?>
+
+                            <div>
+
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Booking For</label>
+
+                                <select name="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+
+                                    <option value="" class="bg-gray-900">Select...</option>
+
+                                    <?php if(!empty($collab_categorys)) { ?>
+
+                                        <?php foreach($collab_categorys as $item) { ?>
+
+                                            <option value="<?= $item ?>" class="bg-gray-900"> <?php echo $category_labels[$item] ?></option>
+
+                                         <?php } ?>
+
+                                    <?php } ?>
+                          
+                                    
+                                </select>
+
+                            </div>
+
+                        <?php } else { ?>
+
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Booking For</label>
                                 <select name="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
@@ -295,6 +337,10 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                     <option value="Group Booking" class="bg-gray-900">👥 Group Booking</option>
                                 </select>
                             </div>
+
+                        <?php } ?>
+
+
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Country</label>
 
