@@ -664,7 +664,7 @@ $(document).ready(function () {
             let hrs = parseInt($(this).val()) || 0;
             let totalTokens = hrs * collab_hours_per;
             $("#tokens_used").val(totalTokens);
-            $("#token_no").val(totalTokens);
+            $("#token_no").text(totalTokens);
         }
     });
 
@@ -679,7 +679,7 @@ function CalculateCollaborate() {
 
     $error.hide().text("");
     $tokens.val("");
-    $("#token_no").val("");
+    $("#token_no").text("");
 
     if (!fromDate || !toDate) return;
 
@@ -702,7 +702,7 @@ function CalculateCollaborate() {
         if (hrs > 0) {
             let totalTokens = hrs * collab_hours_per;
             $tokens.val(totalTokens);
-            $("#token_no").val(totalTokens);
+            $("#token_no").text(totalTokens);
         }
         return;
     }
@@ -724,7 +724,7 @@ function CalculateCollaborate() {
     }
 
     $tokens.val(totalTokens);
-    $("#token_no").val(totalTokens);
+    $("#token_no").text(totalTokens);
 }
 
 
