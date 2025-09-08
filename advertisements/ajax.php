@@ -38,7 +38,11 @@ $order = "";
         $ordered_ids    = implode(',', $boosted_ad_ids);
         
         if (!empty($ordered_ids)) {
-            $order   = " ORDER BY FIELD(tb.id, $ordered_ids)";
+
+            // $order   = " ORDER BY FIELD(tb.id, $ordered_ids)";
+
+            $order = " ORDER BY FIELD(tb.id, $ordered_ids) DESC, tb.id DESC";
+
             $sort_by = ""; // override default sort
         }
 
@@ -101,7 +105,7 @@ $finalQuery = $stringQuery . $orderBy . $limited;
 
 $all_data   = DB::query($finalQuery, ...$params);
 
-print_r($all_data); die();
+// print_r($all_data); die();
 
 // ------------------ TOTAL COUNT ------------------
 $totalQuery = "SELECT COUNT(*) AS cnt FROM (" . $stringQuery . ") AS t";
