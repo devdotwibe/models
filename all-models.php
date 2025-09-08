@@ -1120,22 +1120,21 @@ include('includes/helper.php');
                                 <?php } ?>
                             </div>
                             <div class="profile-actions">
+
                                 <?php if (isset($_SESSION['log_user_id'])) { 
                                     
-
-
                                         $user_requested_row = DB::queryFirstRow(
-                                            "SELECT id FROM all_notifications WHERE sender_id = %s AND receiver_id = %s AND notification_type ='follow' LIMIT 1",
+                                            "SELECT id 
+                                            FROM all_notifications 
+                                            WHERE sender_id = %s 
+                                            AND receiver_id = %s 
+                                            AND notification_type = 'follow' 
+                                            LIMIT 1",
                                             $_SESSION['log_user_id'],
                                             $rowesdw['id']
                                         );
 
-                                        $user_requested = false;
-
-                                        if (!empty($user_requested_row)) {
-                                            
-                                            $user_requested = true;
-                                        }
+                                        $user_requested = !empty($user_requested_row);
                                     
                                     ?>
 
