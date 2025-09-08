@@ -29,23 +29,27 @@ if (isset($_SESSION["log_user_id"])) {
 }
 
 
-print_r($boosted_ad_ids);
-
-die();
 
 $order = "";
-if (!empty($boosted_ad_ids)) {
-    $boosted_ad_ids = array_unique(array_map('intval', $boosted_ad_ids)); // remove duplicates
-    $ordered_ids    = implode(',', $boosted_ad_ids);
-    if (!empty($ordered_ids)) {
-        $order   = " ORDER BY FIELD(tb.id, $ordered_ids)";
-        $sort_by = ""; // override default sort
-    }
-} else {
-    $order = " ORDER BY tb.id DESC";
-    $sort_by = "";
-}
 
+    if (!empty($boosted_ad_ids)) {
+        $boosted_ad_ids = array_unique(array_map('intval', $boosted_ad_ids));
+
+        $ordered_ids    = implode(',', $boosted_ad_ids);
+        
+        if (!empty($ordered_ids)) {
+            $order   = " ORDER BY FIELD(tb.id, $ordered_ids)";
+            $sort_by = ""; // override default sort
+        }
+
+    } else {
+        $order = " ORDER BY tb.id DESC";
+        $sort_by = "";
+    }
+
+    echo $order;
+
+    die();
 // ------------------ BASE QUERY ------------------
 $basic_filed_users = GetUsersWithBasicFilled();
 
