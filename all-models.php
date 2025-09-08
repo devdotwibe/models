@@ -1120,9 +1120,26 @@ include('includes/helper.php');
                                 <?php } ?>
                             </div>
                             <div class="profile-actions">
-                                <?php if (isset($_SESSION['log_user_id'])) { ?>
+                                <?php if (isset($_SESSION['log_user_id'])) { 
+                                    
 
-                                    <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>">
+
+                                        $user_requested_row = DB::queryFirstRow(
+                                            "SELECT id FROM all_notifications WHERE sender_id = %s AND receiver_id = %s AND notification_type ='follow' LIMIT 1",
+                                            $_SESSION['log_user_id'],
+                                            $rowesdw['id']
+                                        );
+
+                                        $user_requested = false;
+
+                                        if (!empty($user_requested_row)) {
+                                            
+                                            $user_requested = true;
+                                        }
+                                    
+                                    ?>
+
+                                    <button type="button" class="action-btn connect" <?php if($user_requested) { ?> style="display: none;" <?php }?> onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
 
