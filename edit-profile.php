@@ -2498,13 +2498,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
             <div id="collab-options" class="conditional-section <?php if (!empty($extra_details['collab']) && $extra_details['collab'] == 'Yes') {  echo 'show';  } ?> ">
                                                                  
-                                                               
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-               
-              <?php $collab_category = json_decode($extra_details['collab_category']); ?>
-
-
+                        
+            <?php $collab_category = json_decode($extra_details['collab_category']); ?>
               <div>
 
                 <label class="form-label">Collaboration Types</label>
@@ -2554,6 +2549,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               </div>
 
 
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+              
                 <div class="question-text">Collaboration will be </div>
                 
                   <div>
