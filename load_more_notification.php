@@ -83,7 +83,11 @@ $resultd = mysqli_query($con, $sqls);
 
                         $follow_title = 'Follow Request Sent';
 
-                        $sender_user = true;
+						if($rowesdw['notification_type'] =='follow')
+						{
+
+                        	$sender_user = true;
+						}
 
                         $follow_content = 'You have requested to follow  <strong class="text-indigo-400"> '.$modalname.' </strong>. Wait until they accept or decline your request.';
 
