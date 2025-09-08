@@ -419,6 +419,9 @@ else{
 					
 					$get_modal = DB::query('select id,name,username,profile_pic,unique_id,email from model_user where id IN ('.$rowesdw['sender_id'].', '.$rowesdw['receiver_id'].')');
 
+                    print_r($get_modal);
+
+                    die();
 
 					if(!empty($get_modal)){  
 
