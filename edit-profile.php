@@ -2476,16 +2476,16 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                   <div class="radio-option">
 
-                    <input type="radio" id="collab-yes" name="modeling" value="Yes" <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
-                                                                                        echo 'checked';
-                                                                                      } ?>
+                    <input type="radio" id="collab-yes" name="collab" value="Yes" <?php if (!empty($extra_details['collab']) && $extra_details['collab'] == 'Yes') { echo 'checked';  } ?>
+                                                                                        
+                                                                                     
                       <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('collab-options', true)" <?php } ?>>
                     <label for="collab-yes">Yes</label>
                   </div>
                   <div class="radio-option">
-                    <input type="radio" id="collab-no" name="modeling" value="No" <?php if ((!empty($extra_details['modeling']) && $extra_details['modeling'] == 'No') || empty($extra_details['modeling'])) {
-                                                                                      echo 'checked';
-                                                                                    } ?>
+                    <input type="radio" id="collab-no" name="collab" value="No" <?php if ((!empty($extra_details['collab']) && $extra_details['collab'] == 'No') || empty($extra_details['collab'])) {  echo 'checked';    } ?>
+                                                                                     
+                                                                                 
                       <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('collab-options', false)" <?php } ?> >
 
                     <label for="collab-no">No</label>
@@ -2496,21 +2496,47 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             </div>
 
 
-            <div id="collab-options" class="conditional-section <?php if (!empty($extra_details['group_show']) && $extra_details['group_show'] == 'Yes') {
-                                                                  echo 'show';
-                                                                } ?> ">
+            <div id="collab-options" class="conditional-section <?php if (!empty($extra_details['collab']) && $extra_details['collab'] == 'Yes') {  echo 'show';  } ?> ">
+                                                                 
+                                                               
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="form-label">Minimum Group Size</label>
-                  <input type="number" class="form-input" name="gs_min_member" value="<?php echo $extra_details['gs_min_member']; ?>" placeholder="e.g., 3" min="2" max="20">
-                  <p class="help-text">Minimum number of participants to start a session</p>
-                </div>
-                <div>
-                  <label class="form-label">TLM Tokens per Person per Minute</label>
-                  <input type="number" class="form-input" name="gs_token_price" value="<?php echo $extra_details['gs_token_price']; ?>" placeholder="e.g., 15" min="1">
-                  <p class="help-text">Rate per participant in group sessions</p>
-                </div>
+
+
+                <div class="question-text">Collaboration will be </div>
+                
+                  <div>
+
+                    <label class="form-label">Per Hour</label>
+
+                    <input type="number" class="form-input" name="collab_hour" value="<?php echo $extra_details['collab_hour']; ?>" placeholder="e.g., 3" min="2" max="20">
+
+                    <p class="help-text">Set the hourly collaboration rate </p>
+                    
+                  </div>
+
+                  <div>
+
+                    <label class="form-label">Per Day</label>
+
+                    <input type="number" class="form-input" name="collab_day" value="<?php echo $extra_details['collab_day']; ?>" placeholder="e.g., 15" min="1">
+
+                    <p class="help-text">Set per day collaboration rate </p>
+
+                  </div>
+
+                  <div>
+
+                    <label class="form-label">Per Week</label>
+
+                    <input type="number" class="form-input" name="collab_week" value="<?php echo $extra_details['collab_week']; ?>" placeholder="e.g., 15" min="1">
+
+                    <p class="help-text">Set per week collaboration rate</p>
+
+                  </div>
+
+
               </div>
+
             </div>
 
 
