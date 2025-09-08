@@ -596,7 +596,7 @@ else{
 
 						<?php if($rowesdw['notification_type'] == 'follow'){ ?>
 
-                            <strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> wants to follow you and get updates about your content and availability.
+                            <strong class="text-indigo-400"><?php echo $follow_content; ?>
 
                         <?php }else if($rowesdw['notification_type'] == 'requests'){ 
 
