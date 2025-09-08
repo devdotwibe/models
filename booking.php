@@ -641,87 +641,92 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
    <script>
 
  
-  const collab_hours_per = <?php echo (int)$collab_hours_per; ?>;
-    const collab_days_per = <?php echo (int)$collab_days_per; ?>;
-    const collab_weekend_rate = <?php echo (int)$collab_weekend_rate; ?>;
+const collab_hours_per = <?php echo (int)$collab_hours_per; ?>;
+const collab_days_per = <?php echo (int)$collab_days_per; ?>;
+const collab_weekend_rate = <?php echo (int)$collab_weekend_rate; ?>;
 
-    $(document).ready(function () {
+$(document).ready(function () {
 
-        $("#meeting_hrs").on("change", function () {
-            let fromDate = $("#meeting_date_from").val();
-            let toDate   = $("#meeting_date_to").val();
+    // Date change handler
+    $("#meeting_date_from, #meeting_date_to").on("change", CalculateCollaborate);
 
-            if (!fromDate || !toDate) return;
-
-            let start = new Date(fromDate);
-            let end   = new Date(toDate);
-
-            // Only apply hour logic if same-day
-            if (start.toDateString() === end.toDateString()) {
-                let hrs = parseInt($(this).val()) || 0;
-                let totalTokens = hrs * collab_hours_per;
-                $("#tokens_used").val(totalTokens);
-                $("#token_no").val(totalTokens);
-            }
-        });
-
-        // Date change handler
-        $("#meeting_date_from, #meeting_date_to").on("change", CalculateCollaborate);
-
-    });
-
-    function CalculateCollaborate() {
+    // Hour change handler (only applies if same-day)
+    $("#meeting_hrs").on("change", function () {
         let fromDate = $("#meeting_date_from").val();
         let toDate   = $("#meeting_date_to").val();
-        let $error   = $("#end_date_error");
-        let $tokens  = $("#tokens_used");
-        let $hourDiv = $("#collab_hour");
-
-        $error.hide().text("");
-        $tokens.val("");
-        $("#token_no").val("");
 
         if (!fromDate || !toDate) return;
 
         let start = new Date(fromDate);
         let end   = new Date(toDate);
 
-        // ❌ Case: end < start
-        if (end < start) {
-            $error.text("❌ End date must be greater than start date.").show();
-            $hourDiv.hide();
-            return;
-        }
-
-        // ✅ Case: same day → show hour selector
         if (start.toDateString() === end.toDateString()) {
-            $hourDiv.show();
-
-            // reset tokens until user selects hours
-            $tokens.val("");
-            $("#token_no").val("");
-            return;
+            let hrs = parseInt($(this).val()) || 0;
+            let totalTokens = hrs * collab_hours_per;
+            $("#tokens_used").val(totalTokens);
+            $("#token_no").val(totalTokens);
         }
+    });
 
-        // ✅ Case: multi-day → calculate by days & weekends
+});
+
+function CalculateCollaborate() {
+    let fromDate = $("#meeting_date_from").val();
+    let toDate   = $("#meeting_date_to").val();
+    let $error   = $("#end_date_error");
+    let $tokens  = $("#tokens_used");
+    let $hourDiv = $("#collab_hour");
+
+    $error.hide().text("");
+    $tokens.val("");
+    $("#token_no").val("");
+
+    if (!fromDate || !toDate) return;
+
+    let start = new Date(fromDate);
+    let end   = new Date(toDate);
+
+    // ❌ Case: end < start
+    if (end < start) {
+        $error.text("❌ End date must be greater than start date.").show();
         $hourDiv.hide();
-
-        let totalTokens = 0;
-        let loopDate = new Date(start);
-
-        while (loopDate <= end) {
-            let day = loopDate.getDay(); // 0=Sunday, 6=Saturday
-            if (day === 0 || day === 6) {
-                totalTokens += collab_weekend_rate;
-            } else {
-                totalTokens += collab_days_per;
-            }
-            loopDate.setDate(loopDate.getDate() + 1);
-        }
-
-        $tokens.val(totalTokens);
-        $("#token_no").val(totalTokens);
+        return;
     }
+
+    // ✅ Case: same day → show hour selector
+    if (start.toDateString() === end.toDateString()) {
+        $hourDiv.show();
+
+        // Recalculate tokens immediately if an hour is already selected
+        let hrs = parseInt($("#meeting_hrs").val()) || 0;
+        if (hrs > 0) {
+            let totalTokens = hrs * collab_hours_per;
+            $tokens.val(totalTokens);
+            $("#token_no").val(totalTokens);
+        }
+        return;
+    }
+
+    // ✅ Case: multi-day → calculate by days & weekends
+    $hourDiv.hide();
+
+    let totalTokens = 0;
+    let loopDate = new Date(start);
+
+    while (loopDate <= end) {
+        let day = loopDate.getDay(); // 0=Sunday, 6=Saturday
+        if (day === 0 || day === 6) {
+            totalTokens += collab_weekend_rate;
+        } else {
+            totalTokens += collab_days_per;
+        }
+        loopDate.setDate(loopDate.getDate() + 1);
+    }
+
+    $tokens.val(totalTokens);
+    $("#token_no").val(totalTokens);
+}
+
 
 </script>
 
