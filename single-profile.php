@@ -1571,7 +1571,7 @@ body .owl-carousel .owl-nav.disabled {
                         <?php } } ?>
        
 
-                            <li class="flex items-center gap-3"  <?php if ($user_have_preminum && $plan == 'diamond') { ?>  <?php } else { ?> onclick="handleService('collaboration')" <?php } ?> >
+                            <li class="flex items-center gap-3" <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking.php?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else { ?> onclick="handleService('collaboration')" <?php } ?> >
         
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
