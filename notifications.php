@@ -420,9 +420,9 @@ else{
 				
 				<?php while($rowesdw = mysqli_fetch_assoc($resultd)) {
 					
-					$get_modal = DB::query('select id,name,username,profile_pic,unique_id,email from model_user where id IN ('.$rowesdw['sender_id'].', '.$rowesdw['receiver_id'].')');
+					// $get_modal = DB::query('select id,name,username,profile_pic,unique_id,email from model_user where id IN ('.$rowesdw['sender_id'].', '.$rowesdw['receiver_id'].')');
 
-					if(!empty($get_modal)){  
+					// if(!empty($get_modal)){  
 
 						// foreach($get_modal as $md){
 
@@ -453,12 +453,12 @@ else{
                         //     }
 						// }
 						
-					}else{
+					// }else{
 
-						$profilepic = 'assets/images/model-gal-no-img.jpg';
-						$modalname = '';
-						$unique_id = ''; $modalid = ''; $sender_email = '';
-					}
+					// 	$profilepic = 'assets/images/model-gal-no-img.jpg';
+					// 	$modalname = '';
+					// 	$unique_id = ''; $modalid = ''; $sender_email = '';
+					// }
 
                  
                     $modalname = '';
