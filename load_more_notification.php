@@ -13,7 +13,9 @@
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
 $total = isset($_GET['total']) ? intval($_GET['total']) : 0;
 $html = '';
-$sqls = "SELECT * FROM all_notifications WHERE receiver_id = ".$_SESSION['log_user_id']."  Order by notification_id DESC LIMIT $limit OFFSET $offset";
+$sqls = "SELECT * FROM all_notifications WHERE receiver_id = ".$_SESSION['log_user_id']." OR sender_id = ".$_SESSION['log_user_id']."  Order by notification_id DESC LIMIT $limit OFFSET $offset";
+
+		
 $resultd = mysqli_query($con, $sqls);
 
                 if (mysqli_num_rows($resultd) > 0) { 
