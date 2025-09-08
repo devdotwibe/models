@@ -2403,7 +2403,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         //Code for checking number of followers
         $followers_array = CheckFollowersCountRestriction($userDetails['unique_id']);
 
-        $followers_array =false;
+        $followers_array ='test';
 
         ?>
 
