@@ -2934,7 +2934,7 @@ include('includes/helper.php');
                         },
                         dataType: 'json',
                         success: function(response) {
-                            
+
                             // showNotification(`Connection request sent to ${profileName}!`, 'success');
                         }
                     });
@@ -2973,10 +2973,13 @@ include('includes/helper.php');
 
                     break;
                 case 'pass':
-                    $card.css('opacity', '0.5');
-                    setTimeout(() => {
-                        $card.css('display', 'none');
-                    }, 300);
+
+                    // $card.css('opacity', '0.5');
+                    // setTimeout(() => {
+                    //     $card.css('display', 'none');
+                    // }, 300);
+
+
                     showNotification(`${profileName} has been hidden`, 'info');
                     break;
             }
