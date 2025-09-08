@@ -557,7 +557,7 @@ else{
 
                                      <input type="hidden" name="user_unique_id" id="user_unique_id" value="<?php echo $userDetails['unique_id'] ?>">
 
-                                     <input type="hidden" name="target_audience[]" id="target_audience" value="<?= $age_range ?>" >
+                                     <input type="hidden" name="target_audience[]" id="target_audience" value="<?= $target_audience ?>" >
 
                                      <input type="hidden" name="ad_id" id="ad_id" value="<?php echo $adDetails['id'] ?>">
                                 </div>
@@ -585,7 +585,7 @@ else{
                                         <div class="audience-chip px-3 py-2 rounded-lg text-center text-sm <?php echo in_array('all-ages', $age_values) ? 'selected' : ''; ?>" 
                                             onclick="toggleRange(this, 'all-ages')">All Ages</div>
                              
-                                        <input type="hidden" name="age_range[]" value="<?= $target_values ?>" id="age_range" >
+                                        <input type="hidden" name="age_range[]" value="<?= $age_range ?>" id="age_range" >
 
 
                                 </div>
