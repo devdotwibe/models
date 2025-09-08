@@ -2403,22 +2403,30 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         //Code for checking number of followers
         $followers_array = CheckFollowersCountRestriction($userDetails['unique_id']);
 
+        $followers_array =false;
+
         ?>
 
         <!-- Professional Work -->
         <div id="professional-work" class="collapsible-section">
+
           <div class="collapsible-header" onclick="toggleCollapsible(this)">
+
             <h2 class="text-xl font-bold">🎬 Professional Modeling & Entertainment</h2>
             <svg class="w-6 h-6 collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </div>
-          <div class="collapsible-content <?php if (empty($followers_array)) {
-                                            echo 'access_restricted';
-                                          } ?>">
+
+          <div class="collapsible-content <?php if (empty($followers_array)) {  echo 'access_restricted';  } ?>">
+                                           
+                                         
             <div class="private-section mb-6">
+
               <div class="private-badge">🔒 Private & Confidential</div>
+
               <p class="text-sm">This information is kept strictly confidential and used only for professional matching with appropriate opportunities.</p>
+
             </div>
 
             <div class="mb-6">
