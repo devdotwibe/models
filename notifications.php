@@ -466,6 +466,10 @@ else{
                      $modalid = '';
                     $sender_email = '';
 
+                    $follow_title = '';
+
+                    $follow_content = '';
+
                     if($rowesdw['sender_id'] == $log_user_id)
                     {
                          $notify_user = DB::queryFirstRow("SELECT id,name,username,profile_pic,unique_id,email FROM model_user WHERE id =  %s ", $rowesdw['receiver_id']);
@@ -483,6 +487,10 @@ else{
                         $modalid =  $notify_user['id'];
 
                         $sender_email =  $notify_user['email'];
+
+                        $follow_title = 'Follow Request Sent';
+
+                        $follow_content = 'You have requested to follow <strong> '.$modalname.' </strong>. Wait until they accept or decline your request.';
 
                     }
 
@@ -504,6 +512,11 @@ else{
                         $modalid =  $notify_user['id'];
 
                         $sender_email =  $notify_user['email'];
+
+                        $follow_title = 'Follow Request';
+
+
+                        $follow_content = '<strong> '.$modalname.'</strong> wants to follow you and get updates about your content and availability.';
 
                     }
 					
