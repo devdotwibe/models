@@ -640,9 +640,21 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
    <script>
 
+ 
+
         const collab_hours_per = <?php echo (int)$collab_hours_per; ?>;
         const collab_days_per = <?php echo (int)$collab_days_per; ?>;
         const collab_weekend_rate = <?php echo (int)$collab_weekend_rate; ?>;
+
+        $(document).ready(function () {
+
+            $("#meeting_hrs").on("change", function () {
+                let hrs = parseInt($(this).val()) || 0;
+                let totalTokens = hrs * collab_hours_per;
+                $("#tokens_used").val(totalTokens);
+            });
+
+        });
 
         function CalculateCollaborate() {
 
