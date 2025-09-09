@@ -1178,6 +1178,8 @@ else{
         updateEstimates();
 
         updateCampaignSummary();
+
+        console.log('updateEstimatesupdateEstimatesupdateEstimates');
     }
 
     function setBudget(amount) {
