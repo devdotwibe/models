@@ -3706,7 +3706,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <div class="particle" style="left: 70.0328%; top: 35.1872%; animation-delay: 5.79461s; animation-duration: 5.15832s;"></div>
         <div class="particle" style="left: 62.4816%; top: 7.0639%; animation-delay: 5.22198s; animation-duration: 4.75093s;"></div>
       </div>
-</div>
+
 
       <button class="close-btn" onclick="CloseCrreator()"> ×</button>
 
@@ -3749,6 +3749,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         Start Earning Today
         <div class="button-shine"></div>
       </button>
+
+      </div>
     </div>
   </div>
 <!-- 
