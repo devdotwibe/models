@@ -1431,7 +1431,23 @@ if(!empty($userDetails['profile_pic'])){
 
               </div>
 
-              <button class="btn-primary text-sm md:text-base"  onclick="FollowModel('<?= $modelDetails['id'] ?>', '<?= $modelDetails['username'] ?>','follow_similar-<?= $_SESSION['log_user_id'] ?>')" > <span id="follow_similar-<?= $_SESSION['log_user_id'] ?>"></span>Connect </span></button>
+              <?php
+              
+                    $user_requested_row = DB::queryFirstRow(
+                        "SELECT notification_id 
+                        FROM all_notifications 
+                        WHERE sender_id = %s 
+                        AND receiver_id = %s 
+                        AND notification_type = 'follow' 
+                        LIMIT 1",
+                        $_SESSION['log_user_id'],
+                        $modelDetails['id']
+                    );
+
+                    $user_requested = !empty($user_requested_row);
+              ?>
+
+              <button class="btn-primary text-sm md:text-base"  onclick="FollowModel('<?= $modelDetails['id'] ?>', '<?= $modelDetails['username'] ?>','follow_similar-<?= $_SESSION['log_user_id'] ?>')" > <span id="follow_similar-<?= $_SESSION['log_user_id'] ?>"></span> <?php if($user_requested) { ?>Follow Requested <?php } else { ?>Connect <?php }?></span></button>
 
             </div>
 
