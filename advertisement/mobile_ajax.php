@@ -13,7 +13,7 @@ if ($all_data) {
 
         <div class="max-w-3xl mx-auto mt-10 rounded-xl bg-[#131a2a] p-6 shadow-lg" id="adv_row_mob_<?= $set_data['id'] ?>">
 
-            <div class="grid grid-cols-12 gap-4 mb-4">
+            <div class="grid grid-cols-12 gap-4 mb-4 mob1">
 
                 <div class="col-span-2">
 
@@ -78,7 +78,7 @@ if ($all_data) {
             </div>
 
 
-            <div class="grid grid-cols-12 gap-4 items-center">
+            <div class="grid grid-cols-12 gap-4 items-center mob1 mob2">
 
 
                 <div class="col-span-3">
