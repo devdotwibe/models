@@ -12074,7 +12074,7 @@ body.advt-page.my-purpose .scroll-indicator {
     padding-inline: 30px;
 
     width: 100%;
-    overflow-x: auto;
+    /* overflow-x: auto; */
 }
 
 /* #list_advertisements .table-row .col-span-1 {
