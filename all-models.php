@@ -1138,7 +1138,7 @@ include('includes/helper.php');
                                     
                                     ?>
 
-                                    <button type="button" class="action-btn connect" <?php if($user_requested) { ?> style="display: none;" <?php }?> onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button type="button" class="action-btn connect connect_btn_<?php echo $rowesdw['id']; ?>" <?php if($user_requested) { ?> style="display: none;" <?php }?> onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
 
@@ -1728,7 +1728,7 @@ include('includes/helper.php');
                             <div class="profile-actions">
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                    <button type="button" class="action-btn connect" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="action-btn connect connect_btn_<?php echo $rowesdw['id']; ?>" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" >
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } else { ?>
@@ -2950,7 +2950,10 @@ include('includes/helper.php');
                         },
                         dataType: 'json',
                         success: function(response) {
+
                             showNotification(`Connection request sent to ${profileName}!`, 'success');
+
+                            $(`.connect_btn_${modelid}`).remove();
                         }
                     });
 
