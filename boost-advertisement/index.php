@@ -1175,7 +1175,7 @@ else{
 
         $('#duration').val(days);
 
-        var budget = parseInt($('#budgetDisplay').text(), 10);
+        var budget = parseInt($('#budgetDisplay').text());
 
         updateEstimates();
 
