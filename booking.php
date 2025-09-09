@@ -488,7 +488,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                     type="date" 
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                     required
-                                    min=""
+                                    min="<?php echo date('Y-m-d'); ?>"
                                 >
 
                             </div>
@@ -572,7 +572,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                     type="date" 
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                     required
-                                    min=""
+                                    min="<?php echo date('Y-m-d'); ?>"
                                 >
                             </div>
                             <div>
