@@ -996,6 +996,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <label class="form-label">Age *</label>
                   <input type="number" id="age-display" class="form-input age" name="age" value="<?php echo $userDetails['age']; ?>" readonly required>
                   <p class="help-text">Auto-calculated</p>
+
+                   <span id="age_error" class="text-danger"></span>
+
                 </div>
               </div>
               <div>
@@ -4713,6 +4716,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
           $('#dob_error').hide().text('');
 
+          $('#age_error').hide().text('');
+
+
         if (dob > today) {
 
           // alert("Future dates are not allowed.");
@@ -4732,7 +4738,17 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
           age--;
         }
 
-        ageDisplay.value = age;
+        if(age >=18 )
+        {
+          ageDisplay.value = age;
+        }
+        else
+        {
+            ageDisplay.value = "";
+
+            $('#age_error').show().text('Age should be greater than 18');
+        }
+
       }
     }
 
