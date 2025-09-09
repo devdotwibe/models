@@ -710,9 +710,11 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
   </div>
 
 
-<?php if($_GET['service'] == 'Collaboration') { ?>
 
 <script>
+
+
+<?php if($_GET['service'] == 'Collaboration') { ?>
 
  
 const collab_hours_per = <?php echo (int)$collab_hours_per; ?>;
