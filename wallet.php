@@ -469,7 +469,7 @@ $activeTab = 'wallet';
 							
 								<label class="form-label">USD Equivalent</label>
 							
-								<input type="text" id="withdraw-usd" class="form-input" readonly placeholder="$0.00" value="$<?php echo number_format((1000*0.1), 2, '.', ''); ?>">
+								<input type="text" id="withdraw-usd" class="form-input" readonly placeholder="$0.00" value="$<?php echo number_format((1000*0.01), 2, '.', ''); ?>">
 							
 							</div>
 
