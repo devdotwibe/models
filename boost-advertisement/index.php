@@ -1179,9 +1179,11 @@ else{
 
         updateCampaignSummary();
 
-        var value = $('#total_amount').val();
+        const totalBudget = dailyBudget * selectedDuration;
+        document.getElementById('totalBudget').textContent = '$' + totalBudget;
+        document.getElementById('campaignLength').textContent = selectedDuration + (selectedDuration === 1 ? ' Day' : ' Days');
 
-        setBudget(value);
+        setBudget(totalBudget);
 
         console.log('updateEstimatesupdateEstimatesupdateEstimates');
     }
