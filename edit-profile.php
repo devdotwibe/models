@@ -768,9 +768,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
         <?php
 
-        $is_user_have_extra = isUserHaveExtraDetail($userDetails['unique_id'], $con);
+        // $is_user_have_extra = isUserHaveExtraDetail($userDetails['unique_id'], $con);
 
-        if ($is_user_have_extra) {  ?>
+
+
+        if ($is_model) {  ?>
 
           <button class="tab-button" onclick="switchTab('creator')" id="creator-tab">
             Creator Settings
