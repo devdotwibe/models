@@ -827,8 +827,10 @@ function CalculateCollaborate() {
 				
 				<?php if($_GET['service'] == 'Travel') { ?>
 				if(fromDate){
+
 					let date = new Date(fromDate);
-					date.setDate(date.getDate() + 1);  // Add 1 day
+
+					// date.setDate(date.getDate() + 1);  // Add 1 day
 
 					// Format to YYYY-MM-DD
 					let minDate = date.toISOString().split('T')[0];
