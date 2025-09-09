@@ -12384,7 +12384,9 @@ background: linear-gradient(135deg, #3414ce, #280bf5);
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(11, 59, 245, 0.4);
 }
-
+  .adver-table-outer.mobile-adver-table {
+    display: none;
+  }
 
 
 @media (max-width: 1540px) {
