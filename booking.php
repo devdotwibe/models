@@ -263,7 +263,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                             <?php if(isset($_GET['type']) && $_GET['type'] =='collaboration' ){ ?> 
 
-                                <h2 class="text-3xl font-bold premium-text heading-font">Your Collaboration Details</h2>
+                                <h2 class="text-3xl font-bold premium-text heading-font">Collaboration Details</h2>
 
                             <?php } else  {  ?>
 
@@ -383,22 +383,49 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                     </div>
 
                     <!-- Instructions Section -->
-                    <div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
-                        <div class="flex items-center mb-8">
-                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+
+                    <?php if(isset($_GET['type']) && $_GET['type'] =='collaboration' ){ ?> 
+
+                        <div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
+                            <div class="flex items-center mb-8">
+                                <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                </div>
+                                <h2 class="text-3xl font-bold premium-text heading-font">Description</h2>
                             </div>
-                            <h2 class="text-3xl font-bold premium-text heading-font">Instructions</h2>
+                            
+                            <div>
+
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Briefly describe your idea</label>
+                                <textarea name="instructions"
+                                    class="w-full px-6 py-4 ultra-glass text-white placeholder-white/50 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-40 resize-none shadow-lg transition duration-300" 
+                                    placeholder="Please provide any special requirements, preferences, dietary restrictions, accessibility needs, or other important information for your international tour experience. Include details about locations, activities, duration, or any specific requests you may have..."
+                                ></textarea>
+                            </div>
                         </div>
-                        
-                        <div>
-                            <label class="block text-white/80 font-semibold mb-3 text-lg">Special Instructions, or notes (optional)</label>
-                            <textarea name="instructions"
-                                class="w-full px-6 py-4 ultra-glass text-white placeholder-white/50 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-40 resize-none shadow-lg transition duration-300" 
-                                placeholder="Please provide any special requirements, preferences, dietary restrictions, accessibility needs, or other important information for your international tour experience. Include details about locations, activities, duration, or any specific requests you may have..."
-                            ></textarea>
+
+                    <?php } else { ?>
+
+                        <div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
+                            <div class="flex items-center mb-8">
+                                <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                </div>
+                                <h2 class="text-3xl font-bold premium-text heading-font">Instructions</h2>
+                            </div>
+                            
+                            <div>
+
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Special Instructions, or notes (optional)</label>
+                                <textarea name="instructions"
+                                    class="w-full px-6 py-4 ultra-glass text-white placeholder-white/50 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-40 resize-none shadow-lg transition duration-300" 
+                                    placeholder="Please provide any special requirements, preferences, dietary restrictions, accessibility needs, or other important information for your international tour experience. Include details about locations, activities, duration, or any specific requests you may have..."
+                                ></textarea>
+                            </div>
                         </div>
-                    </div>
+
+                    <?php } ?>
+
 
                     <!-- Schedule Section -->
                     <div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
