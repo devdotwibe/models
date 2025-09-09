@@ -1121,7 +1121,7 @@ include('includes/helper.php');
                             </div>
                             <div class="profile-actions">
 
-                                <?php if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != $rowesdw['id'] ) { 
+                                <?php if (isset($_SESSION['log_user_id'])) { 
                                     
                                         $user_requested_row = DB::queryFirstRow(
                                             "SELECT notification_id 
@@ -1138,9 +1138,13 @@ include('includes/helper.php');
                                     
                                     ?>
 
-                                    <button type="button" class="action-btn connect connect_btn_<?php echo $rowesdw['id']; ?>" <?php if($user_requested) { ?> style="display: none;" <?php }?> onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>">
-                                        <i class="fas fa-user-plus"></i>
-                                    </button>
+                                    <?php if( $_SESSION['log_user_id'] != $rowesdw['id'] ) { ?>
+
+                                        <button type="button" class="action-btn connect connect_btn_<?php echo $rowesdw['id']; ?>" <?php if($user_requested) { ?> style="display: none;" <?php }?> onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+
+                                    <?php } ?>
 
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
