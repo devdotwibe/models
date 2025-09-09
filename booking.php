@@ -171,7 +171,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
         <section class="py-12 relative">
             <div class="container mx-auto">
 			
-				<form method="post" class="max-w-6xl mx-auto space-y-8" action="act_model_booking.php" enctype="multipart/form-data" >
+				<form method="post" id="serviceBookingForm" class="max-w-6xl mx-auto space-y-8" action="act_model_booking.php" enctype="multipart/form-data" >
 				
 				<?php if(isset($_GET['service'])){ ?>
 				
@@ -330,7 +330,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                                  <label class="block text-white/80 font-semibold mb-3 text-lg">Collaboration Type</label>
 
-                                <select name="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                <select name="booking_for" id="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
 
                                     <option value="" class="bg-gray-900">Select...</option>
 
@@ -353,7 +353,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Booking For</label>
-                                <select name="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                <select name="booking_for" id="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">Select...</option>
                                     <option value="Myself" class="bg-gray-900">👤 Myself</option>
                                     <option value="Business Partner" class="bg-gray-900">🤝 Business Partner</option>
@@ -368,7 +368,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Country</label>
 
-                                <select name="country" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                <select name="country" id="country" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
 
                                     <option value="" class="bg-gray-900">Select...</option>
 
@@ -410,7 +410,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             <div>
 
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Briefly describe your idea</label>
-                                <textarea name="instructions"
+                                <textarea name="instructions" id="instructions"
                                     class="w-full px-6 py-4 ultra-glass text-white placeholder-white/50 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-40 resize-none shadow-lg transition duration-300" 
                                     placeholder="Please provide any special requirements, preferences, dietary restrictions, accessibility needs, or other important information for your international tour experience. Include details about locations, activities, duration, or any specific requests you may have..."
                                 ></textarea>
@@ -430,7 +430,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             <div>
 
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Special Instructions, or notes (optional)</label>
-                                <textarea name="instructions"
+                                <textarea name="instructions" id="instructions"
                                     class="w-full px-6 py-4 ultra-glass text-white placeholder-white/50 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-40 resize-none shadow-lg transition duration-300" 
                                     placeholder="Please provide any special requirements, preferences, dietary restrictions, accessibility needs, or other important information for your international tour experience. Include details about locations, activities, duration, or any specific requests you may have..."
                                 ></textarea>
@@ -541,7 +541,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                     
                                 <div>
                                     <label class="block text-white/80 font-semibold mb-3 text-lg">Travel location</label>
-                                    <input name="destination"
+                                    <input name="destination" id="destination"
                                         type="text" 
                                         class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                         required
@@ -552,7 +552,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                                 <div>
                                     <label class="block text-white/80 font-semibold mb-3 text-lg">Collaboration location</label>
-                                    <input name="destination"
+                                    <input name="destination" id="destination"
                                         type="text" 
                                         class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                         required
@@ -568,7 +568,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                             <div class="md:col-span-2">
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Date</label>
-                                <input name="meeting_date"
+                                <input name="meeting_date" id="meeting_date" 
                                     type="date" 
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                     required
@@ -577,7 +577,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             </div>
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Hour</label>
-                                <select name="meeting_hrs" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                <select name="meeting_hrs" id="meetup_hrs" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">HH</option>
                                     <option value="01" class="bg-gray-900">01</option>
                                     <option value="02" class="bg-gray-900">02</option>
@@ -595,7 +595,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             </div>
                             <div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Minute</label>
-                                <select name="meeting_min" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                <select name="meeting_min" id="meeting_min" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">MM</option>
                                     <option value="00" class="bg-gray-900">00</option>
                                     <option value="15" class="bg-gray-900">15</option>
@@ -610,11 +610,11 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                         <div class="mt-6">
                             <div class="flex space-x-6">
                                 <label class="flex items-center space-x-3 text-white cursor-pointer hover-lift">
-                                    <input type="radio"  name="meeting_g" value="AM" class="form-radio text-indigo-600 w-5 h-5" required>
+                                    <input type="radio"  name="meeting_g" value="AM" class="meeting_g form-radio text-indigo-600 w-5 h-5" checked required>
                                     <span class="font-medium text-lg">AM</span>
                                 </label>
                                 <label class="flex items-center space-x-3 text-white cursor-pointer hover-lift">
-                                    <input type="radio" name="meeting_g" value="PM" class="form-radio text-indigo-600 w-5 h-5" required>
+                                    <input type="radio" name="meeting_g" value="PM" class="meeting_g form-radio text-indigo-600 w-5 h-5" required>
                                     <span class="font-medium text-lg">PM</span>
                                 </label>
                             </div>
@@ -624,7 +624,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 							<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
 							<div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">Destination</label>
-								<input name="destination"
+								<input name="destination" id="destination"
                                     type="text" 
                                     class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" 
                                     required
@@ -633,7 +633,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 							</div>
 							<div>
                                 <label class="block text-white/80 font-semibold mb-3 text-lg">No of hours need to meet</label>
-                                <select name="no_of_hrs_meet"  onchange="CalculateToken(this)" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                <select name="no_of_hrs_meet" id="no_of_hrs_meet"  onchange="CalculateToken(this)" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
                                     <option value="" class="bg-gray-900">Hours</option>
                                     <?php for($i = 1;$i <=24; $i++){ ?>
 									<option value="<?php echo $i; ?>" class="bg-gray-900"><?php echo $i; ?></option>
@@ -664,7 +664,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                         
                     <?php if($_GET['service'] == 'Collaboration' ) { ?>
 
-                        <button name="booking_submit" type="submit" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
+                        <button name="booking_submit" type="button" onclick="serviceBookingSubmission(this)"  class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>
                              Confirm Booking
                         </button>
@@ -672,7 +672,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                     <?php } else { ?>
 
 
-                        <button name="booking_submit" type="submit" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
+                        <button name="booking_submit" type="button" onclick="serviceBookingSubmission(this)"  class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M5 12l5 5l10-10"></path></svg>
                             Let's Meet - Confirm Booking
                         </button>
@@ -690,7 +690,24 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 	
    <?php include('includes/footer.php'); ?>
 
+  <div class="modal-overlay" id="success_modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Success</h2>
+        <button class="close-modal" id="closeTipModal" type="button" onclick="CloseModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" id="modal_success_message">
 
+
+        <button class="btn btn-primary" type="button" onclick="CloseModal()">Close</button>
+      </div>
+    </div>
+  </div>
 
    <script>
 
@@ -734,6 +751,12 @@ function CalculateCollaborate() {
     $error.hide().text("");
     $tokens.val("");
     $("#token_no").text("");
+	
+	if(fromDate){
+		
+		$('#meeting_date_to').attr('min', fromDate);
+		
+	}
 
     if (!fromDate || !toDate) return;
 
@@ -996,6 +1019,211 @@ function CalculateCollaborate() {
         function goBack() {
             alert('🔙 Returning to model selection...');
         }
+		
+		//form submission
+		function serviceBookingSubmission(button) { 
+			
+		  let completedFields = 0;
+		  let totalFields = 0;
+
+		  let missingFields = [];
+
+		  const basicFields = [{
+			  selector: '#booking_for',
+			  label: 'Booking For'
+			},
+			{
+			  selector: '#country',
+			  label: 'Country'
+			},
+			{
+			  selector: '#instructions',
+			  label: 'Instructions / Description'
+			}
+		  ];
+
+		  basicFields.forEach(fieldData => {
+			totalFields++;
+			const field = document.querySelector(fieldData.selector);
+			if (field && field.value.trim()) {
+			  completedFields++;
+			} else {
+			  missingFields.push(fieldData.label);
+			}
+		  });
+		  
+		  <?php if(isset($_GET['service'])){ ?>
+		  
+		    <?php if($_GET['service'] == 'Meetup' ) { ?>
+		  
+					  const extraFields = [{
+						  id: 'meeting_date',
+						  label: 'Date'
+						},
+						{
+						  id: 'meetup_hrs',
+						  label: 'Hour'
+						},
+						{
+						  id: 'meeting_min', 
+						  label: 'Minute'
+						},
+						{
+						  id: 'destination',
+						  label: 'Destination'
+						},
+						{
+						  id: 'no_of_hrs_meet',
+						  label: 'No of hours need to meet'
+						}
+					  ];
+		  
+		  <?php } ?>
+		  
+		  <?php if($_GET['service'] == 'Travel' ) { ?>
+		  
+					  const extraFields = [{
+						  id: 'meeting_date_from',
+						  label: 'From'
+						},
+						{
+						  id: 'meeting_date_to',
+						  label: 'To'
+						},
+						{
+						  id: 'destination',
+						  label: 'Travel location'
+						}
+					  ];
+		  
+		  <?php } ?>
+				
+			<?php if($_GET['service'] == 'Collaboration' ) { ?>
+		  
+					  const extraFields = [{
+						  id: 'meeting_date_from',
+						  label: 'From'
+						},
+						{
+						  id: 'meeting_date_to',
+						  label: 'To'
+						},
+						{
+						  id: 'destination',
+						  label: 'Collaboration location'
+						}
+					  ];
+		  
+		  <?php } ?>
+		  
+		  <?php } ?>
+		  
+		  totalFields += extraFields.length;
+
+      extraFields.forEach(fieldData => {
+        const field = document.getElementById(fieldData.id);
+        if (field && field.value.trim()) {
+          completedFields++;
+        } else {
+          missingFields.push(fieldData.label);
+        }
+      });
+
+      if (totalFields == completedFields) {
+		  
+		const $button = $(button);
+        const originalText = $button.text();
+
+        $button.text('Booking...');
+        $button.prop('disabled', true);
+		  
+		const form = $('#serviceBookingForm')[0];
+
+        const formData = new FormData(form);
+
+        formData.append('booking_submit', 'booking_submit');
+
+        $.ajax({
+          url: 'act_model_booking.php',
+          type: 'POST',
+          data: formData,
+          contentType: false,
+          processData: false,
+          dataType: 'json',
+          success: function(response) {
+
+            console.log(response);
+
+            if (response.status === 'success') {
+              
+
+              setTimeout(() => {
+                $button.text(originalText);
+                $button.prop('disabled', false);
+
+                $('#modal_success_message').prepend('<p class="success-text">Booking Successfully!</p>');
+
+                $('#success_modal').addClass('active');
+
+              }, 1000);
+            }
+          },
+
+          error: function(xhr, status, error) {
+            $button.text(originalText);
+            $button.prop('disabled', false);
+          }
+        });  
+		  
+	  } else {
+
+        showNotification('Please fill required fields: ' + missingFields.join(', '), 'error');
+
+      }
+			
+		}
+		
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+              position: fixed;
+              top: 20px;
+              right: 20px;
+              background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : 'var(--primary)'};
+              color: white;
+              padding: 1rem 1.5rem;
+              border-radius: var(--radius);
+              box-shadow: var(--shadow-lg);
+              z-index: 10000;
+              font-weight: 600;
+              transform: translateX(100%);
+              transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          `;
+      notification.textContent = message;
+
+      document.body.appendChild(notification);
+
+      // Show notification
+      setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+      }, 100);
+
+      // Hide notification
+      setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }, 3000);
+    }
+	
+	function CloseModal() {
+      $('#success_modal').removeClass('active');
+      $('#modal_success_message .success-text').remove();
+	  window.location="single-profile.php?m_unique_id=<?php echo $_GET['m_id']; ?>";
+    }
     </script>
 </body>
 </html>

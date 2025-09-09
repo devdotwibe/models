@@ -2,13 +2,19 @@
 session_start();
 include('includes/config.php');
 include('includes/helper.php');
-
+if(isset($_SESSION["log_user_id"])){
+$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
+	if($userDetails){}
+	else{
+		echo '<script>window.location.href="login.php"</script>';
+		die;
+	}
+}else{
+	echo '<script>window.location.href="login.php"</script>';
+	die;
+}
 
 if (isset($_POST['booking_submit'])) {
-	
-	if(isset($_SESSION["log_user_id"])){
-$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
-if($userDetails){
 
    $name = $_POST['name'];
    $model_unique_id = $_POST['model_unique_id'];
@@ -83,8 +89,8 @@ if($userDetails){
 						);
 		
  
-      echo '<script>alert("Booking Successfully");
-	  window.location="single-profile.php?m_unique_id='.$model_unique_id.'"</script>';
+      /*echo '<script>alert("Booking Successfully");
+	  window.location="single-profile.php?m_unique_id='.$model_unique_id.'"</script>'; */
       
       	 $email_to = 'shibuster@gmail.com';
          $subject = "Booking Details From The Live Model";
@@ -136,27 +142,20 @@ if($userDetails){
                 echo '<script>window.location="login.php"</script>';
          }*/
 
+		echo json_encode(['status' => 'success']);
+		
 		}
 		else{
-		  echo '<script>alert("You have Not Booked")</script>';
-		  echo '<script>window.location="booking.php"</script>';
+		  //echo '<script>alert("You have Not Booked")</script>';
+		  //echo '<script>window.location="booking.php"</script>';
+		  echo json_encode(['status' => 'You have Not Booked']);
 		}
     }else{
-			echo '<script>alert("You dont have sufficiant tokens for booking.")</script>';
-		    echo '<script>window.location="booking.php"</script>';	
+			//echo '<script>alert("You dont have sufficiant tokens for booking.")</script>';
+		   // echo '<script>window.location="booking.php"</script>';	
+			echo json_encode(['status' => 'You dont have sufficiant tokens for booking.']);
 		}
 				
-	}
-	else{
-
-		echo "<script>alert('Please login');</script>";
-		echo "<script>window.location='login.php'</script>";
-	}
-}
-else{
-	echo "<script>alert('Please login');</script>";
-	echo "<script>window.location='login.php'</script>";
-}
  
 }
 
