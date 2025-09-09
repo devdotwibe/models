@@ -86,9 +86,21 @@ $output['result']= 'ok';
 				$output['page'] = $page_number;
 				
 				ob_start();
+
 				include 'ajax_item.php';
+
 				$html= ob_get_clean();
+
 				$output['html'] = $html;
+
+				ob_start();
+
+				include 'mobile_ajax.php';
+
+				$mob_html = ob_get_clean();
+
+				$output['mob_html'] = $mob_html;
+
 				$output['total_page'] = (int) ceil($total/ $perPage);
 
 				$output['total'] = $total;

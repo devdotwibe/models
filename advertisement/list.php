@@ -194,52 +194,69 @@ if (isset($_SESSION['log_user_id'])) {
             </div>
         </div>
 
-        <!-- Advertisements Table -->
-        <div class="premium-table advertisement-table">
-            <!-- Table Header -->
-            <div class="px-8 py-6 border-b border-white/10">
-                <div class="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-white/80 uppercase tracking-wider">
+        <div class="adver-table-outer">
 
-                    <div class="col-span-1" id="bulk_delete_check" style="display:none;">
+            <div class="premium-table advertisement-table">
+                <!-- Table Header -->
+                <div class="px-8 py-6 border-b border-white/10">
+                    <div class="grid grid-cols-12 gap-4 items-center text-sm font-semibold text-white/80 uppercase tracking-wider">
 
-                        <input type="checkbox" id="bulk_all_check" onchange="SelectBulkAll(this)" name="bulk_all_check" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                        <div class="col-span-1" id="bulk_delete_check" style="display:none;">
+
+                            <input type="checkbox" id="bulk_all_check" onchange="SelectBulkAll(this)" name="bulk_all_check" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+
+                        </div>
+
+                        <div class="col-span-1">ID</div>
+                        <div class="col-span-3">Title</div>
+                        <div class="col-span-2">Category</div>
+                        <div class="col-span-2">Date</div>
+                        <div class="col-span-1">Status</div>
+                        <div class="col-span-2">Options
+
+                        <button id="bulk_delete_button" style="display: none;" class="btn-danger px-3 py-2 rounded-lg text-white text-sm del" onclick="BulkDeleteAll()">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+
+                        </div>
 
                     </div>
-
-                    <div class="col-span-1">ID</div>
-                    <div class="col-span-3">Title</div>
-                    <div class="col-span-2">Category</div>
-                    <div class="col-span-2">Date</div>
-                    <div class="col-span-1">Status</div>
-                    <div class="col-span-2">Options
-
-                    <button id="bulk_delete_button" style="display: none;" class="btn-danger px-3 py-2 rounded-lg text-white text-sm del" onclick="BulkDeleteAll()">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="3 6 5 6 21 6"></polyline>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        </svg>
-                    </button>
-
-                    </div>
-
                 </div>
+                
+                <?php 
+                
+                $total_adv = DB::queryFirstrow("SELECT COUNT(*) AS total FROM banners where user_id=".$_SESSION['log_user_id']);
+                
+                ?>
+                
+                <div id="list_advertisements"><h3>Loading...</h3></div>	
+                
             </div>
-			
-			<?php 
-			
-			$total_adv = DB::queryFirstrow("SELECT COUNT(*) AS total FROM banners where user_id=".$_SESSION['log_user_id']);
-			
-			?>
             
-			<div id="list_advertisements"><h3>Loading...</h3></div>	
-            
+            <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
+                <div id="pagination-container"></div>
+            </div>
+
         </div>
-		
-		<!-- Pagination -->
-        <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
-			<div id="pagination-container"></div>
-		</div>
+
+
+        <div class="adver-table-outer mobile-adver-table" id="list_advertisements_mobile">
+
+              
+            
+            <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
+                <div id="pagination-container-mobile"></div>
+            </div>
+
+        </div>
+
+
+
+
 		
     </div>
 </main>	
@@ -508,9 +525,14 @@ $(document).ready(function () {
                 
                 $("#list_advertisements").html(response.html);
 
+                $("#list_advertisements_mobile").html(response.mob_html);
+
+                
                 if(response.total_page == 0)
                 {
                     $("#pagination-container").hide();
+
+                    $("#pagination-container-mobile").hide();
                 }
                 else
                 {
@@ -526,6 +548,20 @@ $(document).ready(function () {
                             }
                         });
                         $("#pagination-container").data("pagination-initialized", true);
+                    }
+
+                    $("#pagination-container-mobile").show();
+
+                    if ($("#pagination-container-mobile").data("pagination-initialized") !== true) {
+                        $("#pagination-container-mobile").pagination({
+                            items: '<?php echo $total_adv['total']; ?>',
+                            itemsOnPage: itemsPerPage,
+                            cssStyle: "light-theme",
+                            onPageClick: function (pageNumber) {
+                                loadData(pageNumber);
+                            }
+                        });
+                        $("#pagination-container-mobile").data("pagination-initialized", true);
                     }
                 }
              
