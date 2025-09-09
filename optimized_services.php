@@ -635,8 +635,10 @@ else{
 
                 <p style="margin-top: 20px;"><strong>Your Contact Details </strong></p>
 
-                  <p  style="margin-top: 10px;"><strong>Booking Type:</strong> <span id="booking_type"></span></p>
-                  <p><strong>Booking For:</strong> <span id="booking_for"></span></p>
+                  <p  style="margin-top: 10px;"><span id="booking_type"></span></p>
+
+                  <p><span id="booking_for"></span></p>
+
                   <p><strong>Country:</strong> <span id="booking_country"></span></p>
 
               </div>
@@ -719,8 +721,20 @@ else{
                 $('#booking_no_of_hrs_meet').html('');
                 $('#serviceheading').html('');
 
-                $('#booking_type').text(data.service_name || '');
-                $('#booking_for').text(data.booking_for || '');
+
+                if(data.main_service =='collaboration')
+                {
+                    $('#booking_type').html(`<strong>Collaboration Type:</strong> ${data.service_name}`);
+
+                    $('#booking_for').html(`<strong>Collaboration For:</strong>${data.booking_for }`);
+                }
+                else
+                {
+                    $('#booking_type').html(`<strong>Booking Type:</strong> ${data.service_name}`);
+
+                    $('#booking_for').html(`<strong>Booking For:</strong>${data.booking_for }`);
+                }
+
                 $('#booking_country').text(data.country_name || '');
                 $('#booking_description').text(data.instructions || '');
 
