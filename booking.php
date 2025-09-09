@@ -173,7 +173,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 			
 				<form method="post" class="max-w-6xl mx-auto space-y-8" action="act_model_booking.php" enctype="multipart/form-data" >
 				
-				<?php if(isset($_GET['service']) && isset($_GET['token'])){ ?>
+				<?php if(isset($_GET['service'])){ ?>
 				
 					<div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
 						 
