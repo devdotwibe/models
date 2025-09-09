@@ -2983,9 +2983,9 @@ textarea:focus {
     transition: left 0.3s ease;
     overflow-y: auto;
     color: var(--menu-text);
-        padding-bottom: 70px;
+    padding-bottom: 70px;
 }
- 
+
 .socialwall-page .sidebar-menu.open {
     left: 0;
 }
@@ -12194,9 +12194,9 @@ overflow-x: auto !important;
 }
 
 .status-Active {
-  width: 100% !important;
-  display: flex;
-  justify-content: flex-end;
+    width: 100% !important;
+    display: flex;
+    justify-content: flex-end;
 }
 
 
@@ -12267,7 +12267,7 @@ overflow-x: auto !important;
 
 .profile-badge.badge-premium {
     position: relative;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     width: fit-content;
     padding: 0 !important;
     margin-bottom: 16px;
@@ -12353,21 +12353,22 @@ overflow-x: auto !important;
 
 /* table responsive ..... */
 
-.premium-table.advertisement-table>div:first-child{
+.premium-table.advertisement-table>div:first-child {
     min-width: 1200px;
 }
 
 .premium-table.advertisement-table {
-  overflow-x: hidden;
-  width: 100%;
-  overflow-x: auto !important;
+    overflow-x: hidden;
+    width: 100%;
+    overflow-x: auto !important;
 }
-#list_advertisements > div {
-  /* border: 1px solid red !important; */
-  min-width: 1200px;
-  display: grid;
+
+#list_advertisements>div {
+    /* border: 1px solid red !important; */
+    min-width: 1200px;
+    display: grid;
 }
- 
+
 
 
 
@@ -13089,6 +13090,24 @@ overflow-x: auto !important;
     .premimum-model1 .profile-grid.profile-list .profile-image-container img {
         min-height: 40vw;
     }
+
+/* mobile table for advertisement.......... */
+
+
+    .adver-table-outer {
+        display: none;
+    }
+
+    .adver-table-outer.mobile-adver-table {
+        display: block;
+    }
+
+
+    .adver-table-outer.mobile-adver-table .premium-table.mobile_view_table>div:first-child {
+
+        min-width: auto;
+    }
+
 
 }
 
