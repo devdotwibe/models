@@ -13184,6 +13184,12 @@ border: 1px solid rgba(255, 255, 255, 0.1);
          padding-block: 10px;
     }
 
+    .adver-table-outer.mobile-adver-table .mob1.mob2 > div:nth-child(1) b {
+        border-right: 0;
+       
+    }
+
+
 }
 
 
