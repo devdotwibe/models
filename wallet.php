@@ -755,7 +755,7 @@ $activeTab = 'wallet';
 				  const usdInput = document.getElementById('withdraw-usd');
 				  if (value && usdInput) {
 					const amount = parseFloat(value) || 0;
-					const usdValue = (amount * 0.1).toFixed(2); // 1 token = $0.10
+					const usdValue = (amount * 0.01).toFixed(2); // 1 token = $0.10
 					usdInput.value = `$${usdValue}`;
 				  }
 
