@@ -443,10 +443,10 @@ $activeTab = 'wallet';
 
                     <div class="max-w-2xl mx-auto withdraw-div">
                         <div class="glass-card p-6 mb-6">
-                            <h4 class="text-xl font-semibold mb-4">Available for Withdrawal</h4>
+                            <h4 class="text-xl font-semibold mb-4">Available for Withdrawal Token</h4>
                             <div class="text-center">
-                                <div class="text-4xl font-bold text-green-400 mb-2">token <?= $userDetails['balance'] ?></div>
-                                <p class="text-gray-400">Minimum withdrawal: token 1,000</p>
+                                <div class="text-4xl font-bold text-green-400 mb-2"> <?= $userDetails['balance'] ?></div>
+                                <p class="text-gray-400">Minimum withdrawal Token : 1,000</p>
                             </div>
                         </div>
 
