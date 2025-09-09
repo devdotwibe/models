@@ -12399,6 +12399,8 @@ width: 20px;
   align-items: center;
   justify-content: center;
   gap: 6px;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 
