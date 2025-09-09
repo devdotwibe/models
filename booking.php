@@ -709,7 +709,10 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
     </div>
   </div>
 
-   <script>
+
+<?php if($_GET['service'] == 'Collaboration') { ?>
+
+<script>
 
  
 const collab_hours_per = <?php echo (int)$collab_hours_per; ?>;
@@ -807,11 +810,7 @@ function CalculateCollaborate() {
 }
 
 
-</script>
-
-
-
-    <script>
+    <?php } else { ?>
 		
 		$('#meeting_date_from').change(function(){
 			$('#meeting_date_to').val('');
@@ -921,6 +920,9 @@ function CalculateCollaborate() {
 				
 				}
 			} 
+
+    <?php } ?>
+
         // // Initialize premium features
         // document.addEventListener('DOMContentLoaded', function() {
         //     initializePremiumFeatures();
