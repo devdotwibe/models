@@ -1175,6 +1175,8 @@ else{
 
         $('#duration').val(days);
         
+        updateEstimates();
+
         updateCampaignSummary();
     }
 
