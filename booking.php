@@ -787,7 +787,10 @@ function CalculateCollaborate() {
 
 
     <script>
-
+		
+		$('#meeting_date_from').change(function(){
+			$('#meeting_date_to').val('');
+		});
 
         function CalculateDate() {
 
@@ -795,6 +798,10 @@ function CalculateCollaborate() {
                 let toDate   = $('#meeting_date_to').val();
 
                 $('#end_date_error').hide().text('');
+				
+				if(fromDate){
+					$('#meeting_date_to').attr('min', fromDate);
+				}
 
                 if (!fromDate || !toDate) {
                     $('#token_no').text('');
