@@ -1174,18 +1174,10 @@ else{
         selectedDuration = parseInt(days);
 
         $('#duration').val(days);
-
-        var budget = parseInt($('#budgetDisplay').text().replace(/[^0-9]/g, ''), 10) || 0;
-
-        updateEstimates();
+        
+        updateEstimates(days);
 
         updateCampaignSummary();
-
-        const totalBudget = days * budget;
-
-        setBudget(totalBudget);
-
-        console.log('updateEstimatesupdateEstimatesupdateEstimates');
     }
 
     function setBudget(amount) {
@@ -1207,8 +1199,9 @@ else{
         updateCampaignSummary();
     }
 
-    function updateEstimates() {
-        let multiplier = 1;
+    function updateEstimates(days) {
+
+         let multiplier = days ?? 1;
         
         // Adjust based on goal
         if (selectedGoal === 'engagement') multiplier = 0.8;
