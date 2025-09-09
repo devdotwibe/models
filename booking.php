@@ -752,11 +752,13 @@ function CalculateCollaborate() {
     $tokens.val("");
     $("#token_no").text("");
 	
+	<?php if($_GET['service'] == 'Collaboration') { ?>
 	if(fromDate){
 		
 		$('#meeting_date_to').attr('min', fromDate);
 		
 	}
+	<?php } ?>
 
     if (!fromDate || !toDate) return;
 
@@ -822,15 +824,17 @@ function CalculateCollaborate() {
 
                 $('#end_date_error').hide().text('');
 				
+				<?php if($_GET['service'] == 'Travel') { ?>
 				if(fromDate){
 					let date = new Date(fromDate);
 					date.setDate(date.getDate() + 1);  // Add 1 day
 
 					// Format to YYYY-MM-DD
-					let minDate = date.toISOString().split('T')[0]; alert(minDate);
+					let minDate = date.toISOString().split('T')[0];
 
 					$('#meeting_date_to').attr('min', minDate);
 				}
+				<?php } ?>
 
                 if (!fromDate || !toDate) {
                     $('#token_no').text('');
