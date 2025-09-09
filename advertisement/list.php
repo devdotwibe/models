@@ -244,9 +244,13 @@ if (isset($_SESSION['log_user_id'])) {
         </div>
 
 
-        <div class="adver-table-outer mobile-adver-table" id="list_advertisements_mobile">
+        <div class="adver-table-outer mobile-adver-table">
 
-              
+            <div class="premium-table advertisement-table mobile_view_table" id="list_advertisements_mobile">
+
+
+            
+            </div>
             
             <div class="flex justify-center items-center space-x-4 mt-8 adv-pagination">
                 <div id="pagination-container-mobile"></div>
