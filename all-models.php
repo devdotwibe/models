@@ -1729,12 +1729,36 @@ include('includes/helper.php');
                                     <p class="profile-bio"><?php echo $user_bio; ?></p>
                                 <?php } ?>
                             </div>
-                            <div class="profile-actions">
-                                <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                    <button type="button" class="action-btn connect connect_btn_<?php echo $rowesdw['id']; ?>" onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" >
-                                        <i class="fas fa-user-plus"></i>
-                                    </button>
+                            <div class="profile-actions">
+
+                            <?php if (isset($_SESSION['log_user_id'])) { 
+                                    
+                                        $user_requested_row = DB::queryFirstRow(
+                                            "SELECT notification_id 
+                                            FROM all_notifications 
+                                            WHERE sender_id = %s 
+                                            AND receiver_id = %s 
+                                            AND notification_type = 'follow' 
+                                            LIMIT 1",
+                                            $_SESSION['log_user_id'],
+                                            $rowesdw['id']
+                                        );
+
+                                        $user_requested = !empty($user_requested_row);
+                                    
+                                    ?>
+
+                                    <?php if( $_SESSION['log_user_id'] != $rowesdw['id'] ) { ?>
+
+
+                                        <button type="button" class="action-btn connect connect_btn_<?php echo $rowesdw['id']; ?>" <?php if($user_requested) { ?> style="display: none;" <?php } ?> onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" >
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+
+                                    <?php } ?>
+
+
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
                                     <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
