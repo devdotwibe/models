@@ -16,7 +16,7 @@ if ($all_data) {
             <div class="grid grid-cols-12 gap-4 mb-4 mob1">
 
 
-                <div class="mob-tit">
+                <!-- <div class="mob-tit"> -->
 
                     <div class="col-span-2">
 
@@ -58,9 +58,9 @@ if ($all_data) {
 
                     </div>
 
-                </div>
+                <!-- </div> -->
 
-                
+
                 <div class="col-span-3">
 
                     <b class="block">CATEGORY</b>
