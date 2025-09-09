@@ -754,7 +754,7 @@ function CalculateCollaborate() {
 	
 	if(fromDate){
 		
-		$('#meeting_date_to').attr('min', fromDate);
+		//$('#meeting_date_to').attr('min', fromDate);
 		
 	}
 
