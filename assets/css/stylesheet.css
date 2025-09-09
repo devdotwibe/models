@@ -13167,8 +13167,8 @@ overflow-x: auto !important;
     }
 
     .adver-table-outer.mobile-adver-table .mob1>div>span {
-margin-inline: 14px;
-    padding-block: 10px;
+        margin-inline: 14px;
+        padding-block: 10px;
     }
 
     .adver-table-outer.mobile-adver-table .mob1>div:nth-child(1) b {
@@ -13230,14 +13230,15 @@ margin-inline: 14px;
         height: 34px;
         margin-bottom: 8px;
     }
-.adver-table-outer.mobile-adver-table .mob1.mob2{
-  margin-bottom: 2% !important;
-}
 
-.adver-table-outer.mobile-adver-table .mob1.mob2 b{
-padding-top:0px !important;
-  
-}
+    .adver-table-outer.mobile-adver-table .mob1.mob2 {
+        margin-bottom: 2% !important;
+    }
+
+    .adver-table-outer.mobile-adver-table .mob1.mob2 b {
+        padding-top: 0px !important;
+
+    }
 
 
 
@@ -13787,6 +13788,16 @@ padding-top:0px !important;
     .premimum-model1 .profile-grid.profile-list .profile-image-container img {
         min-height: 48vw;
     }
+
+
+
+
+    .adver-table-outer.mobile-adver-table .mob1>div>* {
+        font-size: 12px;
+    }
+
+
+
 
 
 }
@@ -15004,5 +15015,61 @@ padding-top:0px !important;
     .premium-wallet .transaction-item {
         padding: 10px;
     }
+
+    .adver-table-outer.mobile-adver-table .mob1>div:nth-child(2) {
+
+        flex-basis: 80%;
+        margin-bottom: 20px;
+    }
+
+    .adver-table-outer.mobile-adver-table .mob1>div:nth-child(1) {
+
+        flex-basis: 20%;
+        margin-bottom: 20px;
+    }
+
+        .adver-table-outer.mobile-adver-table .mob1>div:nth-child(1)>span{
+        margin-top: 8px;
+    }
+
+
+
+    .adver-table-outer.mobile-adver-table .mob1.mob2>div:nth-child(2) {
+
+        flex-basis: 100%;
+
+    }
+
+
+    .adver-table-outer.mobile-adver-table .mob1.mob2>div:nth-child(1) {
+        flex-basis: 100%;
+
+    }
+
+    
+  .adver-table-outer.mobile-adver-table .mob1.mob2 > div:nth-child(1){
+      flex-basis: 100%;
+    margin-bottom: 25px;
+      
+  }
+
+
+  .adver-table-outer.mobile-adver-table .mob1 > div:nth-child(3){
+      flex-basis: 100%;
+    margin-bottom: 25px;
+  }
+   .adver-table-outer.mobile-adver-table .mob1 > div:nth-child(4){
+          flex-basis: 100%;
+    margin-bottom: 25px;
+  }
+
+
+
+    .adver-table-outer.mobile-adver-table .mob1.mob2>div:nth-child(2) {
+
+        flex-basis: 100%;
+  margin-bottom:8px
+    }
+
 
 }
