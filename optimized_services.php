@@ -141,7 +141,7 @@ else{
       <button class="filter-btn active" data-filter="all" onclick="FilterTab('all_type',this)">All Types</button>
       <button class="filter-btn" data-filter="group" onclick="FilterTab('meet',this)" >Meetup</button>
       <button class="filter-btn" data-filter="dating" onclick="FilterTab('travel',this)">Travel</button>
-      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('collaborate',this)">Collaborate</button>
+      <button class="filter-btn" data-filter="modeling" onclick="FilterTab('collaboration',this)">Collaborate</button>
 
     </div>
 
