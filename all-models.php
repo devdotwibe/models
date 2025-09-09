@@ -1121,7 +1121,7 @@ include('includes/helper.php');
                             </div>
                             <div class="profile-actions">
 
-                                <?php if (isset($_SESSION['log_user_id'])) { 
+                                <?php if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != $rowesdw['id'] ) { 
                                     
                                         $user_requested_row = DB::queryFirstRow(
                                             "SELECT notification_id 
