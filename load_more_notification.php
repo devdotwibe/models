@@ -215,11 +215,11 @@ $resultd = mysqli_query($con, $sqls);
 
 							if($sender_user) {
 
-								$html .=  '<button id="dec_'.$unique_id.'" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold" ';
+								$html .=  '<button id="cancel_'.$modalid.'"  class="btn-danger px-6 py-2 rounded-lg text-white font-semibold" ';
 
 										if($followstatus == 'Follow') $html .= ' disabled ';
 
-										$html .= ' onclick="CancelFollow(\''.$unique_id.'\',\''.$modalname.'\')">';
+										$html .= ' onclick="CancelFollow(\''.$modalid.'\',\''.$modalname.'\')">';
 
 										$html .= '✗ Cancel Request ';
 

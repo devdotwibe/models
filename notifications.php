@@ -664,7 +664,7 @@ else{
 
                             <?php if($sender_user) { ?>
 
-                                <button id="cancel_<?php echo $unique_id; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($followstatus == 'Follow') echo 'disabled'; ?> onclick="CancelFollow('<?php echo $unique_id; ?>','<?php echo $modalname; ?>')">
+                                <button id="cancel_<?php echo $modalid; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($followstatus == 'Follow') echo 'disabled'; ?> onclick="CancelFollow('<?php echo $modalid; ?>','<?php echo $modalname; ?>')">
 
                                         ✗ Cancel Request 
 
