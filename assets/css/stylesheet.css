@@ -13161,13 +13161,14 @@ overflow-x: auto !important;
 
 
     .adver-table-outer.mobile-adver-table .mob1>div>* {
-        padding-inline: 10px;
+        padding-inline: 14px;
         padding-block: 5px;
         line-height: normal;
     }
 
     .adver-table-outer.mobile-adver-table .mob1>div>span {
-        margin-inline: 10px;
+margin-inline: 14px;
+    padding-block: 10px;
     }
 
     .adver-table-outer.mobile-adver-table .mob1>div:nth-child(1) b {
@@ -13177,7 +13178,7 @@ overflow-x: auto !important;
     .adver-table-outer.mobile-adver-table .mob1>div:nth-child(1)>b,
     .adver-table-outer.mobile-adver-table .mob1>div:nth-child(2)>b {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding-block: 10px;
+        padding-block: 14px;
     }
 
     .adver-table-outer.mobile-adver-table .mob1.mob2>div:nth-child(1) b,
