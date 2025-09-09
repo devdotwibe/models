@@ -1175,7 +1175,7 @@ else{
 
         $('#duration').val(days);
 
-        var buget =  $('#budget').val();
+        var buget =  $('#budgetDisplay').text();
 
         updateEstimates();
 
