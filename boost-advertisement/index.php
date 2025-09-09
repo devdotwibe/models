@@ -1175,13 +1175,13 @@ else{
 
         $('#duration').val(days);
 
-        var value = $('#total_amount').val();
-
-        setBudget(value);
-        
         updateEstimates();
 
         updateCampaignSummary();
+
+        var value = $('#total_amount').val();
+
+        setBudget(value);
 
         console.log('updateEstimatesupdateEstimatesupdateEstimates');
     }
