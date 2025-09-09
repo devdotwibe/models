@@ -13144,7 +13144,7 @@ overflow-x: auto !important;
         flex-wrap: wrap;
         /* border: 1px solid red; */
         justify-content: center;
-        margin-bottom: 2% !important;
+        margin-bottom: .25% !important;
         gap: 0;
     }
 
@@ -13230,6 +13230,16 @@ margin-inline: 14px;
         height: 34px;
         margin-bottom: 8px;
     }
+.adver-table-outer.mobile-adver-table .mob1.mob2{
+  margin-bottom: 2% !important;
+}
+
+.adver-table-outer.mobile-adver-table .mob1.mob2 b{
+padding-top:0px !important;
+  
+}
+
+
 
 
 }
