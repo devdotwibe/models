@@ -328,9 +328,10 @@ else{
                         <?php } ?>
 
                   <?php } else { ?>
-
+					<?php  if($userDetails['as_a_model'] =='Yes') { ?>
 					<button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
                     <button class="btn btn-message" data-id="<?php echo $item['id'] ?>" onclick="OpenRequest(this)">Request Complete</button>
+					<?php } ?>
                     <button class="btn btn-message when_aprrove_button<?php echo $item['id'] ?>" onclick="openMessage(this)">Message</button>
 					
                   <?php } ?>
