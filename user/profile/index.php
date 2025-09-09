@@ -1431,7 +1431,7 @@ if(!empty($userDetails['profile_pic'])){
 
               </div>
 
-              <button class="btn-primary text-sm md:text-base" onclick="toggleConnect(this)">Connect</button>
+              <button class="btn-primary text-sm md:text-base"  onclick="FollowModel('<?= $modelDetails['id'] ?>', '<?= $modelDetails['username'] ?>','follow_similar-<?= $_SESSION['log_user_id'] ?>')" > <span id="follow_similar-<?= $_SESSION['log_user_id'] ?>"></span>Connect </span></button>
 
             </div>
 
@@ -1531,6 +1531,66 @@ if(!empty($userDetails['profile_pic'])){
             $("#pagination-container").data("pagination-initialized", true);
         }
     });
+
+        function FollowModel(model_id,profileName,status)
+        {
+
+            $.ajax({
+                url: "<?= SITEURL . '/ajax/model_followrequest.php' ?>",
+                type: 'GET',
+                data:{
+                    modelid: model_id,
+                    notification_type: 'follow',
+                },
+                success: function (response) {
+        
+                    $(`#${status}`).text('Follow Requested');
+
+                    showNotification(`Connection request sent to ${profileName}!`, 'success');
+               
+                },
+                error: function (xhr) {
+                  
+                }
+            });
+
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : 'var(--primary)'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: var(--radius);
+                box-shadow: var(--shadow-lg);
+                z-index: 10000;
+                font-weight: 600;
+                transform: translateX(100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Hide notification
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
 
   </script>
 

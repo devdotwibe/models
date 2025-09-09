@@ -1661,9 +1661,31 @@ body .owl-carousel .owl-nav.disabled {
                                     <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
                                     <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
                                 </div>
+
+                                <?php 
+
+                                  $user_requested_row = DB::queryFirstRow(
+                                            "SELECT notification_id 
+                                            FROM all_notifications 
+                                            WHERE sender_id = %s 
+                                            AND receiver_id = %s 
+                                            AND notification_type = 'follow' 
+                                            LIMIT 1",
+                                            $_SESSION['log_user_id'],
+                                            $rows_md['id']
+                                        );
+
+                                        $user_requested = !empty($user_requested_row);
+                                        
+                                    
+                                ?>
+
                                 <button type="button" onclick="FollowModel('<?= $rows_md['id'] ?>', '<?= $rows_md['username'] ?>','follow_similar-<?= $user_unique_id ?>')" class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
-                                     <span id="follow_similar-<?= $user_unique_id ?>">Follow</span>
+
+                                     <span id="follow_similar-<?= $user_unique_id ?>"><?php if(!$user_requested) {  ?>  Follow requested <?php } else { ?>Follow <?php }?></span>
+                                     
                                 </button>
+
                             </div>
                             
                         <?php } } ?>
