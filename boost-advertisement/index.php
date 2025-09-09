@@ -1174,6 +1174,10 @@ else{
         selectedDuration = parseInt(days);
 
         $('#duration').val(days);
+
+        var value = $('#total_amount').val();
+
+        setBudget(value);
         
         updateEstimates();
 
