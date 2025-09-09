@@ -800,7 +800,13 @@ function CalculateCollaborate() {
                 $('#end_date_error').hide().text('');
 				
 				if(fromDate){
-					$('#meeting_date_to').attr('min', fromDate);
+					let date = new Date(fromDate);
+					date.setDate(date.getDate() + 1);  // Add 1 day
+
+					// Format to YYYY-MM-DD
+					let minDate = date.toISOString().split('T')[0];
+
+					$('#meeting_date_to').attr('min', minDate);
 				}
 
                 if (!fromDate || !toDate) {
