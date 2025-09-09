@@ -1175,13 +1175,13 @@ else{
 
         $('#duration').val(days);
 
+        var buget =  $('#budget').val();
+
         updateEstimates();
 
         updateCampaignSummary();
 
-        const totalBudget = dailyBudget * selectedDuration;
-        document.getElementById('totalBudget').textContent = '$' + totalBudget;
-        document.getElementById('campaignLength').textContent = selectedDuration + (selectedDuration === 1 ? ' Day' : ' Days');
+        const totalBudget = days * buget;
 
         setBudget(totalBudget);
 
