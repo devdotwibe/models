@@ -1181,7 +1181,7 @@ else{
 
         updateCampaignSummary();
 
-        const totalBudget = days * buget;
+        const totalBudget = days * budget;
 
         setBudget(totalBudget);
 
