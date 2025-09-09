@@ -12389,6 +12389,21 @@ background: linear-gradient(135deg, #3414ce, #280bf5);
   }
 
 
+
+.token-display img {
+width: 20px;
+  object-fit: cover;
+}
+.token-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
 
