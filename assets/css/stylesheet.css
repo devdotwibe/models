@@ -12372,6 +12372,14 @@ overflow-x: auto !important;
 
 
 
+.user-home .user-home-right .model-card >img{
+
+object-fit: contain ;
+  max-width: 100% ;
+
+}
+
+
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
 
@@ -13101,6 +13109,29 @@ overflow-x: auto !important;
     .adver-table-outer.mobile-adver-table {
         display: block;
     }
+
+
+.premium-table.mobile_view_table {
+  border: 0;
+  padding: 5px;
+}
+
+.premium-table.mobile_view_table>div:not(:first-child){
+
+    border-radius: 0 ;
+    border-top:transparent
+}
+
+.adver-table-outer.mobile-adver-table .mobile_view_table > div {
+    min-width: auto;
+border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 0 !important;
+    margin-top: 0;
+    overflow: hidden;
+  }
+
 
 
     .adver-table-outer.mobile-adver-table .premium-table.mobile_view_table>div:first-child {
