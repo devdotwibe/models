@@ -181,6 +181,19 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 								<h2 class="text-3xl font-bold premium-text heading-font"><?php echo $_GET['service']; ?></h2>
 								
 							</div>
+
+
+                            <?php if($_GET['type'] == 'collaboration'){ ?>
+							
+                                <div>
+                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Per Hour Rate: <?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?></div>
+                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Per Day Rate: <?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?></div>
+                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Weekend Rate: <?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?></div>
+                                
+                                </div>
+					
+								
+						    <?php } ?>
 							
 							
 							<?php if($_GET['service'] == 'Meetup'){ ?>
@@ -225,9 +238,9 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 							</div> 
 							
 							<div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Daily Rate: <?php if (!empty($extra_details)) echo $extra_details['daily_rate']; ?>/day</div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Weekly Rate: <?php if (!empty($extra_details)) echo $extra_details['weekly_rate']; ?>/week</div>
-								<div class="block text-white/80 font-semibold mb-3 text-lg">Monthly Rate: <?php if (!empty($extra_details)) echo $extra_details['monthly_rate']; ?>/mon</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Daily Rate: <?php if (!empty($extra_details)) echo $extra_details['collab_hour']; ?>/day</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Weekly Rate: <?php if (!empty($extra_details)) echo $extra_details['collab_day']; ?>/week</div>
+								<div class="block text-white/80 font-semibold mb-3 text-lg">Monthly Rate: <?php if (!empty($extra_details)) echo $extra_details['collab_week']; ?>/mon</div>
 								<div class="block text-white/80 font-semibold mb-3 text-lg">Preferred Travel Destinations: <?php if (!empty($extra_details)) echo $extra_details['travel_destination']; ?></div>
 							</div>
 							<?php $travel_months = json_decode($extra_details['travel_months']); 
