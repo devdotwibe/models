@@ -12379,6 +12379,13 @@ overflow-x: auto !important;
 
 }
 
+.profile-advts .bg-blue-600:hover{
+background: linear-gradient(135deg, #3414ce, #280bf5);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(11, 59, 245, 0.4);
+}
+
+
 
 @media (max-width: 1540px) {
     .home-page .discover-sec .model-card .btn-primary {
