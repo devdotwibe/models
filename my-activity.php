@@ -528,34 +528,71 @@ if (mysqli_num_rows($service_group) > 0) {
                         $is_user_new = IsNewUser($rowesdw['id']);
 
                         $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
-                ?>
+                
+						$prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
+
+                            if (!empty($rowesdw['profile_pic'])) {
+                                if (checkImageExists($rowesdw['profile_pic'])) {
+
+                                    $prof_img = SITEURL . $rowesdw['profile_pic'];
+                                }
+                            }
+				?>
 		
 				<!-- Model Card 1 -->
     <div class="model-card" data-premium="false" onclick="<?php if (!$user_have_preminum) { ?>showPremiumModal()<?php } ?>">
         <div style="position: relative;">
-            <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="Model" class="model-image">
+            <img src="<?= $prof_img; ?>" alt="Model" class="model-image">
             <div class="status-indicator status-online"></div>
-            <div class="verified-badge">
+            
 			
-				<span class="profile-badge badge-live">Live</span>
+					<div class="verified-badge">
 
-                                        <?php if($is_user_new) { ?>
+                                        <span class="profile-badge badge-live">Live</span>
 
-                                             <span class="profile-badge badge-new">New</span>
+                                        <?php if ($is_user_new) { ?>
+
+                                            <span class="profile-badge badge-new">New</span>
 
                                         <?php } ?>
 
-                                        <?php if($is_user_preminum) { ?>
+                                        <?php if ($is_user_preminum) { ?>
 
-                                             <span class="profile-badge badge-premium">Premium</span>
+                                            <?php if ($preminum_plan == 'basic') { ?>
+
+                                                <span class="profile-badge badge-premium">
+                                                    <div class="badge-user premium-basic-user">⭐</div>
+                                                    <p>Premium</p>
+                                                </span>
+
+                                            <?php } else { ?>
+
+                                                <span class="profile-badge badge-premium">
+                                                    <div class="badge-user diamond-elite-user"><span>💎</span></div>
+                                                    <p>Premium</p>
+                                                </span>
+
+                                            <?php } ?>
 
                                         <?php } ?>
 
                                         <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
-                                            <span class="profile-badge badge-verified">Verified</span>
+                                            <span class="profile-badge badge-verified">
+                                                <div class="badge-user verified-user">🛡</div>
+                                                <p>Verified</p>
+                                            </span>
                                         <?php } ?>
-			
-			</div>
+
+                                        <?php if (!empty($rowesdw) &&  $rowesdw['as_a_model'] == 'Yes') { ?>
+
+                                            <span class="profile-badge creator-badge">
+                                                <div class="badge-user creator">✨</div>
+                                                <p>Creator</p>
+                                            </span>
+
+                                        <?php } ?>
+
+                                    </div>
         </div>
         
 		
