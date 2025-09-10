@@ -616,11 +616,12 @@ else{
                                 $model_booking = DB::queryFirstRow('select * from model_booking where id="'.$booking_id.'"');
                                 if($model_booking['main_service'] == 'chat') $model_serv = 'Chat Services - '.$model_booking['service_name'];
                                 else if($model_booking['main_service'] == 'meet') $model_serv = 'Meet Services - '.$model_booking['service_name'];
+								else $model_serv = ucfirst($model_booking['main_service']).' Services - '.$model_booking['service_name'];
                                 $booking_type = $model_booking['booking_type'].' at '.date('d/m/Y',strtotime($model_booking['meeting_date'])).' '.$model_booking['meeting_time'];
                             } 
 
 						?>
-							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> has requested a <strong class="text-pink-400"><?php echo $model_serv; ?></strong> <?=$booking_type?>.
+							<strong class="text-indigo-400"><?php echo $model_booking['name']; ?>.</strong> has requested a <strong class="text-pink-400"><?php echo $model_serv; ?></strong> <?=$booking_type?>.
                            <?php /*<span class="text-green-400 font-semibold">$150</span> for 1 hour.<?php */ ?>
 						<?php }else if($rowesdw['notification_type'] == 'tip'){ ?> 
 							<strong class="text-indigo-400"><?php echo $modalname; ?>.</strong> sent you a tip of <strong class="text-green-400">$<?php echo $tg_amount; ?></strong> 
@@ -698,19 +699,19 @@ else{
 						$status = ''; $changed_date = ''; 
 							if(!empty($booking_id)){
 								$status = $model_booking['status'];
-								$changed_date = $model_booking['changed_date'];
+								if(!empty($model_booking['changed_date'])) $changed_date = 'on '.date('d/m/Y',strtotime($model_booking['changed_date']));
 							}
 						?>
 							
 							<div class="flex space-x-3">
 								<button id="acc_<?php echo $loop_count; ?>" class="btn-success px-6 py-2 rounded-lg text-white font-semibold" <?php if($status == 'Accept') echo 'disabled'; ?> onclick="acceptRequest(<?php echo $booking_id; ?>,<?php echo $loop_count; ?>)">
-									<?php if($status == 'Accept'){ echo 'Accepted on '.date('d/m/Y',strtotime($changed_date)); }else{ ?>✓ Accept <?php } ?>
+									<?php if($status == 'Accept'){ echo 'Accepted '.$changed_date; }else{ ?>✓ Accept <?php } ?>
 								</button>
 
                                 <?php if($status != 'Accept') { ?>
 
                                     <button id="dec_<?php echo $loop_count; ?>" class="btn-danger px-6 py-2 rounded-lg text-white font-semibold"  <?php if($status == 'Decline') echo 'disabled'; ?>  onclick="declineRequest(<?php echo $booking_id; ?>,<?php echo $loop_count; ?>)">
-                                        <?php if($status == 'Decline'){ echo 'Declined on '.date('d/m/Y',strtotime($changed_date)); }else{ ?>✗ Decline <?php } ?>
+                                        <?php if($status == 'Decline'){ echo 'Declined '.$changed_date; }else{ ?>✗ Decline <?php } ?>
                                     </button>
 
                                 <?php } ?>
