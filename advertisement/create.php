@@ -46,8 +46,24 @@ if (isset($_SESSION['log_user_id'])) {
                     $joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
                 }
             }
+            // if(isset($_POST['save_video_file'])){
+
+            //     $joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $created_id);
+            // }
+
             if(isset($_POST['save_video_file'])){
-                $joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $created_id);
+
+                $additional_video = '';
+                $exp_file_video = explode('|',$_POST['save_video_file']);
+
+                $joe_id = DB::update('banners', array('video' => $exp_file_img[0]), "id=%s", $created_id);
+
+                if(count($exp_file_video) > 1){
+                    for ($i = 0; $i < count($exp_file_video); $i++) {
+                        $additional_video .= $exp_file_video[$i].'|';
+                    }
+                    $joe_id = DB::update('banners', array('video' => rtrim($additional_video, "|")), "id=%s", $created_id);
+                }
             }
 
             if ($error) {
