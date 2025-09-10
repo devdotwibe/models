@@ -389,11 +389,12 @@ if (isset($_SESSION['log_user_id'])) {
                 <?php } else if ($file_type == 'Video') { ?>
 
 
-
-                    <!-- Premium Purchase Card 2 - Video -->
                     <div class="card-premium animate-fade-in-up" data-type="video" data-model="phoenix" data-price="45"
+
                       data-date="2024-12-14" style="animation-delay: 0.2s">
+
                       <div class="image-premium relative">
+
                         <img src="<?php echo SITEURL . $url; ?>" alt="Exclusive Video by Phoenix"
                           class="w-full h-48 sm:h-64 object-cover">
                         <div class="video-overlay-advanced" onclick="viewContent('video', 'phoenix-1')">
@@ -402,17 +403,21 @@ if (isset($_SESSION['log_user_id'])) {
                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
                           </svg>
                         </div>
+
                         <div class="absolute top-3 sm:top-4 left-3 sm:left-4 badge-verified">
                           🎥 4K Video
                         </div>
+
                         <div
                           class="absolute top-3 sm:top-4 right-3 sm:right-4 glass-ultra px-2 sm:px-3 py-1 rounded-full text-xs font-semibold text-white">
                           5:32 min
                         </div>
+
                         <div
                           class="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 glass-ultra px-2 sm:px-3 py-1 rounded-full text-xs font-semibold text-white">
                           4K • 60fps
                         </div>
+
                         <button
                           class="absolute bottom-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300"
                           onclick="toggleFavorite(this)" aria-label="Add to favorites">
@@ -423,8 +428,11 @@ if (isset($_SESSION['log_user_id'])) {
                             </path>
                           </svg>
                         </button>
+                        
                       </div>
+
                       <div class="p-4 sm:p-6 relative z-10">
+
                         <div class="flex items-center mb-4">
                           <img src="<?php echo $prof_img ?>" alt="<?php echo ucfirst($row1['username']); ?> Profile"
                             class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500">
@@ -462,75 +470,75 @@ if (isset($_SESSION['log_user_id'])) {
                             <span class="text-white/70">Duration:</span>
                             <span class="text-white font-medium">5:32 minutes</span>
                           </div>
-                          <div class="flex justify-between text-xs sm:text-sm">
+
+
+                          <!-- <div class="flex justify-between text-xs sm:text-sm">
                             <span class="text-white/70">Quality:</span>
                             <span class="text-white font-medium">4K 60fps</span>
-                          </div>
+                          </div> -->
+
                         </div>
-                        <div class="flex gap-2 sm:gap-3">
-                          <button class="flex-1 btn-premium py-2 sm:py-3 text-xs sm:text-sm"
-                            onclick="viewContent('video', 'phoenix-1')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                            </svg>
-                            Play
-                          </button>
 
-                        <?php if (file_exists($url_ext)) { ?>
+                        <?php /*
 
-                            <a href="<?= SITEURL . 'ajax/download.php?file=' . $url_ext . '&id=' . $rowesdw['id']; ?>"
-                              class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" aria-label="Download content">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="7 10 12 15 17 10"></polyline>
-                                <line x1="12" y1="15" x2="12" y2="3"></line>
-                              </svg>
-                            </a>
+                            <div class="flex gap-2 sm:gap-3">
+                              <button class="flex-1 btn-premium py-2 sm:py-3 text-xs sm:text-sm"
+                                onclick="viewContent('video', 'phoenix-1')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                Play
+                              </button>
 
-                        <?php } else { ?>
+                            <?php if (file_exists($url_ext)) { ?>
 
-                            <button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="downloadContent()"
-                              aria-label="Download content">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="7 10 12 15 17 10"></polyline>
-                                <line x1="12" y1="15" x2="12" y2="3"></line>
-                              </svg>
-                            </button>
+                                <a href="<?= SITEURL . 'ajax/download.php?file=' . $url_ext . '&id=' . $rowesdw['id']; ?>"
+                                  class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" aria-label="Download content">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                  </svg>
+                                </a>
 
-                        <?php } ?>
+                            <?php } else { ?>
 
-                          <button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl"
-                            onclick="shareContent('phoenix-1')" aria-label="Share content">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <circle cx="18" cy="5" r="3"></circle>
-                              <circle cx="6" cy="12" r="3"></circle>
-                              <circle cx="18" cy="19" r="3"></circle>
-                              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                            </svg>
-                          </button>
-                        </div>
+                                <button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl" onclick="downloadContent()"
+                                  aria-label="Download content">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                  </svg>
+                                </button>
+
+                            <?php } ?>
+
+                              <button class="btn-secondary-premium px-3 sm:px-4 py-2 sm:py-3 rounded-xl"
+                                onclick="shareContent('phoenix-1')" aria-label="Share content">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <circle cx="18" cy="5" r="3"></circle>
+                                  <circle cx="6" cy="12" r="3"></circle>
+                                  <circle cx="18" cy="19" r="3"></circle>
+                                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                                </svg>
+                              </button>
+                            </div>
+
+                        */ ?>
+
                       </div>
                     </div>
 
                 <?php } ?>
 
-                <?php
-              }
-              $count++;
-            }
-          } else {
-            //echo "0 results";
-          }
-          ?>
-
-
-
+          <?php }   $count++; } }  ?>
+        
         </div>
 
       </div>
@@ -552,159 +560,3 @@ if (isset($_SESSION['log_user_id'])) {
     alert('File is not exist');
   }
 </script>
-
-
-<?php /*?>
-
-<div class="container">
-<div class="row">
-<h2 class="page_heading">My Purchase</h2>
-
-<h4>Images and Video's</h4>
-<?php
-$count = 1;
-$log_user_id = $_SESSION["log_user_unique_id"];
-$sqls = "SELECT * FROM user_purchased_image WHERE user_unique_id = '".$log_user_id."' ORDER BY id DESC";
-$resultd = mysqli_query($con, $sqls);
-if (mysqli_num_rows($resultd) > 0) {
-  while($rowesdw = mysqli_fetch_assoc($resultd)) {
-     $file_id = $rowesdw['file_unique_id'];
-     $file_type = $rowesdw['file_type'];
-     $model_unique_id = $rowesdw['model_unique_id'];
-
-
-    $sql = "SELECT * FROM model_images WHERE id = '".$file_id."'";
-    $result = mysqli_query($con, $sql);
-    if (mysqli_num_rows($result) > 0) {
-      while($row = mysqli_fetch_assoc($result)) {
-        $url = $row['file'];
-        $image_text = $row['image_text'];
-      }
-    }
-
-  $sql1 = "SELECT * FROM model_user WHERE unique_id = '".$model_unique_id."'";
-    $result1 = mysqli_query($con, $sql1);
-    if (mysqli_num_rows($result1) > 0) {
-      $row1 = mysqli_fetch_assoc($result1);
-?>
-<div class="col-md-3">
-<?php if($file_type == 'Image'){ ?>
-<div class="creator-list" data-toggle="modal" data-target="#myModal<?php echo $count; ?>">
-  <img class="bot_plus" src="../<?php echo $url; ?>" alt="photo" />
-</div>
-
-<span><?php echo $image_text; ?></span>
-<?php }else{ ?>
-<div class="creator-list" data-toggle="modal" data-target="#myModal<?php echo $count; ?>">
-  <video class="paid-video" controls> <source src="../<?php echo $url; ?>" type="video/mp4"> </video>
-</div>
-
-<span><?php echo $image_text; ?></span>
-<?php } ?>
-</div>
-
-<div class="modal fade" id="myModal<?php echo $count; ?>" role="dialog" >
-<div class="modal-dialog">
-<div class="modal-content" style="border-radius: 20px;">
-  <div class="modal-body">
-    <div class="row">
-      <div class="col-md-6">
-
-        <?php if($file_type == 'Image'){ ?>
-        <img class="full_img" src="../<?php echo $url; ?>" alt="photo">
-        <?php }else{ ?>
-          <video class="full_img" controls data-toggle="modal" data-target="#myModal<?php echo $count; ?>">
-            <source src="../<?php echo $url; ?>" type="video/mp4">
-          </video>
-        <?php } ?>
-      </div>
-      <div class="col-md-6">
-        <button type="button" class="close" data-dismiss="modal" style="padding-right: 15px;padding-top: 15px;">×</button>
-        <div class="usern model-prof">
-          <a title="" href="single-profile.php?model=<?php echo $row1['username']; ?>&m_id=<?php echo $row1['id']; ?>&m_unique_id=<?php echo $row1['unique_id'];?>" >
-            <figure class="user_profile">
-              <img alt="image" class="profil_img" src="<?php echo $row1['photo_2'] ?>">
-            </figure>
-            <span>
-              <p class="username"><?php echo $row1['username']; ?></p>
-            </span>
-          </a>
-        </div>
-        <p><?php echo $image_text; ?></p>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
-<?php
-}
-$count++;
-}
-} else {
-  //echo "0 results";
-}
-?>
-<!-- <h4>Subscription</h4>
-
-<h4>Video/Audio calls</h4> -->
-</div>
-</div>
-
-
-<?php
-$count = 1;
-  $sqls = "SELECT * FROM casting WHERE status = 'Published' Order by id ASC LIMIT 6 ";
-    $resultd = mysqli_query($con, $sqls);
-      if (mysqli_num_rows($resultd) > 0) {
-        while($rowesdw1 = mysqli_fetch_assoc($resultd)) {
-
-          $sql1 = "SELECT * FROM model_images WHERE unique_model_id = '".$rowesdw1['unique_id']."' Order by id DESC LIMIT 1 ";
-          $result1 = mysqli_query($con, $sql1);
-          if (mysqli_num_rows($result1) > 0) {
-            $rowes1 = mysqli_fetch_assoc($result1);
-?>
-<div class="modal fade" id="myModal<?php echo $count; ?>" role="dialog" >
-<div class="modal-dialog">
-<div class="modal-content" style="border-radius: 20px;">
-<div class="modal-body">
-<div class="row">
-<div class="col-md-6">
-
-  <?php if($rowes1['file_type'] == 'Image'){ ?>
-  <img src="<?php echo $rowes1['file']; ?>" style="height: 500px;border-radius: 20px 0 0 20px;" alt="image">
-  <?php }else{ ?>
-    <video style="height: 500px;border-radius: 20px 0 0 20px;" controls data-toggle="modal" data-target="#myModal<?php echo $count; ?>"poster= "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190710102234/download3.png">
-      <source src="<?php echo $rowes1['file']; ?>" type="video/mp4">
-    </video>
-  <?php } ?>
-</div>
-<div class="col-md-6">
-  <button type="button" class="close" data-dismiss="modal" style="padding-right: 15px;padding-top: 15px;">×</button>
-  <div class="usern model-prof">
-    <a title="" href="single-profile.php?model=<?php echo $rowesdw1['username']; ?>&m_id=<?php echo $rowesdw1['id']; ?>&m_unique_id=<?php echo $rowesdw1['unique_id'];?>" >
-      <figure class="user_profile">
-        <img alt="images"> src="<?php echo $rowesdw1['photo_2'] ?>">
-      </figure>
-      <span>
-        <a title="" href="#" style="background: unset;"><?php echo $rowesdw1['username']; ?></a>
-      </span>
-    </a>
-  </div>
-  <p><?php echo $rowes1['image_text'] ?></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<?php
-          }
-$count++;
-}
-} else {
-echo "Currently you bucket is empty.";
-}
-*/
-?>
