@@ -397,7 +397,7 @@ if (isset($_SESSION['log_user_id'])) {
 
                           class="w-full h-48 sm:h-64 object-cover">
 
-                        <div class="video-overlay-advanced" onclick="viewContent('video', 'phoenix-1')">
+                        <div class="video-overlay-advanced"  onclick="ShowVideo('<?php echo SITEURL. $url ?>')" >
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"
                             stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="5 3 19 12 5 21 5 3"></polygon>
