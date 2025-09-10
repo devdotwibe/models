@@ -464,12 +464,12 @@ if (mysqli_num_rows($service_group) > 0) {
         </div><?php */ ?>
     </div>
 </div>
-
+<?php /*?>
 <!-- Search Bar -->
 <div class="search-container">
     <input type="text" class="search-bar" placeholder="🔍 Search by Name or City">
 </div>
-<?php /*?>
+
 <!-- Secondary Filters -->
 <div class="secondary-filters-row">
     <button class="secondary-filter-btn active">Recently Active</button>
