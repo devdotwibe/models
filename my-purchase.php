@@ -565,6 +565,22 @@ if (isset($_SESSION['log_user_id'])) {
 
     </section>
 
+    <div id="videoModal" class="fixed inset-0 bg-black bg-opacity-80 hidden flex items-center justify-center z-50">
+      <div class="relative w-11/12 sm:w-3/4 lg:w-1/2 bg-black rounded-xl shadow-lg overflow-hidden">
+        
+        <button onclick="CloseVideo()" 
+          class="absolute top-3 right-3 text-white text-2xl font-bold z-50 hover:text-gray-400">
+          ✖
+        </button>
+
+        <video id="popupVideo" controls autoplay class="w-full h-[70vh] object-contain">
+          <source src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+
 
   </main>
 
@@ -573,9 +589,32 @@ if (isset($_SESSION['log_user_id'])) {
 </body>
 
 </html>
-
-
 <script>
+
+
+  function ShowVideo(url) {
+    
+      const modal = document.getElementById("videoModal");
+      const video = document.getElementById("popupVideo");
+
+      video.src = url;
+      video.load();
+      video.play();
+
+      modal.classList.remove("hidden");
+    }
+
+    function CloseVideo() {
+      const modal = document.getElementById("videoModal");
+      const video = document.getElementById("popupVideo");
+
+      video.pause();
+      video.src = "";
+
+      modal.classList.add("hidden");
+    }
+
+
   function downloadContent() {
     alert('File is not exist');
   }
