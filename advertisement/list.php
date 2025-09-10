@@ -179,19 +179,22 @@ if (isset($_SESSION['log_user_id'])) {
                 <p class="text-white/60">Total Views</p>
             </div>
             
-            <div class="ultra-glass p-6 rounded-2xl hover-lift">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-                            <line x1="12" y1="1" x2="12" y2="23"></line>
-                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                        </svg>
+            <?php /*
+                <div class="ultra-glass p-6 rounded-2xl hover-lift">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <span class="text-green-400 text-sm font-semibold">+18%</span>
                     </div>
-                    <span class="text-green-400 text-sm font-semibold">+18%</span>
+                    <h3 class="text-2xl font-bold premium-text mb-2">$2.4K</h3>
+                    <p class="text-white/60">Revenue</p>
                 </div>
-                <h3 class="text-2xl font-bold premium-text mb-2">$2.4K</h3>
-                <p class="text-white/60">Revenue</p>
-            </div>
+            */?>
+
         </div>
 
         <div class="adver-table-outer">
