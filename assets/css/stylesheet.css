@@ -12319,7 +12319,7 @@ overflow-x: auto !important;
 .profile-badge.creator-badge {
 
     position: relative;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     width: fit-content;
     padding: 0 !important;
     margin-bottom: 16px;
@@ -12430,6 +12430,21 @@ width: 20px;
   background: #b30000; 
 }
 
+.socialwall-page .header-desk-outer .ultra-glass{
+background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+border-radius:50%;
+padding: 0.5rem !important;
+width:auto !important;
+height:auto !important;
+}
+
+.socialwall-page .header-desk-outer .ultra-glass:hover{
+    background-color: rgb(255 255 255 / 0.1);
+}
 
 
 
