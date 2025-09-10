@@ -312,7 +312,7 @@ else{
 
                  <?php if($item['status'] ==='Completed') { ?>
 
-
+				<button class="btn btn-secondary" onclick="openReviewModal('<?=$client_name?>', '<?=$item['service_name'];?>', '$<?php echo $serv_tokens ?>')" >Write Review</button>
 
                 <?php } else if($item['status'] ==='Accept') { ?>
                  
@@ -986,7 +986,38 @@ else{
     }
 
 
- 
+ function openReviewModal(clientName, serviceType, amount, isEdit = false) {
+      const modal = document.getElementById('reviewModal');
+      const modalTitle = document.querySelector('.modal-title');
+      const submitBtn = document.getElementById('submitReview');
+
+      // Set modal content
+      document.getElementById('reviewClientName').textContent = clientName;
+      document.getElementById('reviewServiceType').textContent = serviceType;
+      document.getElementById('reviewAmount').textContent = amount;
+
+      // Set title and button text based on whether it's an edit
+      if (isEdit) {
+        modalTitle.textContent = 'Edit Review';
+        submitBtn.textContent = 'Update Review';
+
+        // Pre-fill with existing review data (in a real app, this would fetch from API)
+        setRating(4); // Example: 4 stars
+        document.getElementById('reviewText').value = 'Great client, very professional and respectful. Would work with them again!';
+        document.querySelector('input[name="workAgain"][value="yes"]').checked = true;
+      } else {
+        modalTitle.textContent = 'Write Review';
+        submitBtn.textContent = 'Submit Review';
+
+        // Reset form
+        setRating(0);
+        document.getElementById('reviewText').value = '';
+        document.querySelector('input[name="workAgain"][value="yes"]').checked = true;
+      }
+
+      // Show modal with animation
+      modal.classList.add('active');
+    }
 
 
 
