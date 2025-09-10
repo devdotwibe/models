@@ -127,81 +127,19 @@ if (isset($_SESSION['log_user_id'])) {
       </div>
     </section>
 
-    <!-- Advanced Filters & Search -->
-    <?php /* ?><section class="py-4 sm:py-8 relative">
-  <div class="container-advanced mx-auto">
-      <div class="glass-ultra p-4 sm:p-8 rounded-3xl mb-6 sm:mb-8">
-          <div class="flex flex-col gap-4 sm:gap-6">
-              <!-- Advanced Filter Tabs -->
-              <div class="filter-advanced">
-                  <div class="filter-tab-advanced active" onclick="filterPurchases('all', this)">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"></path></svg>
-                      All Content
-                  </div>
-                  <div class="filter-tab-advanced" onclick="filterPurchases('photos', this)">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
-                      Photos
-                  </div>
-                  <div class="filter-tab-advanced" onclick="filterPurchases('videos', this)">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
-                      Videos
-                  </div>
-                  <div class="filter-tab-advanced" onclick="filterPurchases('premium', this)">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                      Premium
-                  </div>
-                  <div class="filter-tab-advanced" onclick="filterPurchases('recent', this)">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                      Recent
-                  </div>
-                  <div class="filter-tab-advanced" onclick="filterPurchases('favorites', this)">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                      Favorites
-                  </div>
-              </div>
-
-              <!-- Advanced Search & Controls -->
-              <div class="flex flex-col sm:flex-row gap-4">
-                  <div class="relative flex-1">
-                      <input
-                          type="text"
-                          placeholder="Search by model name, content type, or date..."
-                          class="w-full px-4 sm:px-6 py-3 glass-ultra text-white placeholder-white/50 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-lg transition-all duration-300 text-sm sm:text-base focus-visible:focus"
-                          id="searchInput"
-                      >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-                  </div>
-                  <select class="px-4 py-3 glass-ultra text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-lg transition-all duration-300 text-sm sm:text-base focus-visible:focus" id="sortSelect">
-                      <option value="newest" class="bg-gray-900">Newest First</option>
-                      <option value="oldest" class="bg-gray-900">Oldest First</option>
-                      <option value="price-high" class="bg-gray-900">Price: High to Low</option>
-                      <option value="price-low" class="bg-gray-900">Price: Low to High</option>
-                      <option value="rating" class="bg-gray-900">Highest Rated</option>
-                      <option value="popular" class="bg-gray-900">Most Popular</option>
-                  </select>
-                  <button class="btn-secondary-premium px-4 py-3 rounded-xl flex items-center gap-2" onclick="toggleViewMode()">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                      <span class="hidden sm:inline">Grid</span>
-                  </button>
-              </div>
-          </div>
-      </div>
-  </div>
-</section> <?php */ ?>
-
-    <!-- Advanced Purchases Grid -->
     <section class="py-4 sm:py-8 relative">
       <div class="container-advanced mx-auto">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8" id="purchasesGrid">
 
-
-
           <?php
+
           $count = 1;
           $sqls = "SELECT * FROM user_purchased_image WHERE user_unique_id = '" . $log_user_id . "' ORDER BY id DESC";
+
           $resultd = mysqli_query($con, $sqls);
           if (mysqli_num_rows($resultd) > 0) {
             while ($rowesdw = mysqli_fetch_assoc($resultd)) {
+
               $file_id = $rowesdw['file_unique_id'];
               $file_type = $rowesdw['file_type'];
               $model_unique_id = $rowesdw['model_unique_id'];
@@ -210,35 +148,70 @@ if (isset($_SESSION['log_user_id'])) {
               $purchase_amount = $rowesdw['file_coins'];
 
               $sql = "SELECT * FROM live_posts WHERE id = '" . $file_id . "'";
+
               $result = mysqli_query($con, $sql);
+
               if (mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                  $url = $row['post_image'];
-                  $url_ext = $row['post_image'];
 
-                  $post_id = $row['id'];
 
-                  $url = 'assets/images/model-gal-no-img.jpg';
+                  while ($row = mysqli_fetch_assoc($result)) {
 
-                  if (checkImageExists($url_ext)) {
+                      $url = $row['post_image'];
+                      $url_ext = $row['post_image'];
 
-                    $url = $url_ext;
+                      $post_id = $row['id'];
 
+                      $url = 'assets/images/model-gal-no-img.jpg';
+
+                      if (checkImageExists($url_ext)) {
+
+                        $url = $url_ext;
+
+                      }
+                      $url = $url_ext;
+
+                      $image_text = $row['image_text'];
                   }
-                  $url = $url_ext;
-
-                  $image_text = $row['image_text'];
-                }
               }
 
-              $sql1 = "SELECT * FROM model_user WHERE unique_id = '" . $model_unique_id . "'";
-              $result1 = mysqli_query($con, $sql1);
-              if (mysqli_num_rows($result1) > 0) {
-                $row1 = mysqli_fetch_assoc($result1);
-                if (!empty($row1['profile_pic']))
-                  $prof_img = SITEURL . $row1['profile_pic'];
-                else
-                  $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
+                $sql1 = "SELECT * FROM model_user WHERE unique_id = '" . $model_unique_id . "'";
+
+                $result1 = mysqli_query($con, $sql1);
+                if (mysqli_num_rows($result1) > 0) {
+
+                    $row1 = mysqli_fetch_assoc($result1);
+
+                    if (!empty($row1['profile_pic']))
+
+                      $prof_img = SITEURL . $row1['profile_pic'];
+
+                    else
+                      
+                      $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
+
+
+                    $result = CheckPremiumAccess($row1['id']);
+
+                    $preminum_plan = "";
+
+                    $is_user_preminum = false;
+
+                    if ($result && $result['active']) {
+
+                        $is_user_preminum = true;
+
+                        $preminum_plan = $result['plan_status'];
+                    }
+
+                    $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $model_unique_id);
+
+                    $is_user_verified = false;
+
+                    if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') {
+
+                        $is_user_verified = true;
+                    }
+
                 ?>
 
                 <?php if ($file_type == 'Image') { ?>
@@ -246,7 +219,9 @@ if (isset($_SESSION['log_user_id'])) {
 
                   <div class="card-premium animate-fade-in-up" data-post-id="<?php echo $post_id ?>" data-type="photo"
                     data-model="aria" data-price="25" data-date="2024-12-15" style="animation-delay: 0.1s">
+
                     <div class="image-premium relative">
+
                       <img src="<?php echo SITEURL . $url; ?>" alt="<?php echo $image_text; ?>"
                         class="w-full h-48 sm:h-64 object-cover">
 
@@ -269,21 +244,39 @@ if (isset($_SESSION['log_user_id'])) {
                           </path>
                         </svg>
                       </button>
+
                     </div>
 
-
                     <div class="p-4 sm:p-6 relative z-10">
+
                       <div class="flex items-center mb-4">
+
                         <img src="<?php echo $prof_img ?>" alt="<?php echo ucfirst($row1['username']); ?> Profile"
+
                           class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500">
                         <div class="flex-1">
                           <h4 class="text-base sm:text-lg font-bold gradient-text-premium">
+
                             <?php echo ucfirst($row1['username']); ?>.
                           </h4>
                           <div class="flex items-center gap-2">
+
                             <span class="status-premium status-online-premium w-2 h-2 rounded-full"></span>
-                            <span class="text-xs sm:text-sm text-white/60">Verified Model</span>
+
+                            <?php if($is_user_preminum) { ?>
+
+                              <span class="text-xs sm:text-sm text-white/60">Premium Model</span>
+
+                            <?php } ?>
+
+                            <?php if($is_user_verified) { ?>
+
+                              <span class="text-xs sm:text-sm text-white/60">Verified Model</span>
+
+                            <?php }?>
+
                             <div class="flex items-center gap-1">
+
                               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
                                 fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="text-yellow-400">
@@ -297,11 +290,14 @@ if (isset($_SESSION['log_user_id'])) {
                         </div>
                       </div>
                       <div class="space-y-2 sm:space-y-3 mb-4">
+
                         <div class="flex justify-between text-xs sm:text-sm">
+
                           <span class="text-white/70">Purchase Date:</span>
                           <span
                             class="text-white font-medium"><?php echo date('M d, Y', strtotime($rowesdw['purchase_date'])); ?></span>
                         </div>
+
                         <div class="flex justify-between text-xs sm:text-sm">
                           <span class="text-white/70">Price:</span>
                           <span class="text-green-400 font-bold">$ <?php echo $purchase_amount ?></span>
@@ -434,16 +430,32 @@ if (isset($_SESSION['log_user_id'])) {
                       <div class="p-4 sm:p-6 relative z-10">
 
                         <div class="flex items-center mb-4">
+
                           <img src="<?php echo $prof_img ?>" alt="<?php echo ucfirst($row1['username']); ?> Profile"
                             class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500">
+
                           <div class="flex-1">
+
                             <h4 class="text-base sm:text-lg font-bold gradient-text-premium">
                             <?php echo ucfirst($row1['username']); ?>.
                             </h4>
                             <div class="flex items-center gap-2">
                               <span class="status-premium status-online-premium w-2 h-2 rounded-full"></span>
-                              <span class="text-xs sm:text-sm text-white/60">Premium Model</span>
+
+                              <?php if($is_user_preminum) { ?>
+
+                                <span class="text-xs sm:text-sm text-white/60">Premium Model</span>
+
+                              <?php } ?>
+
+                              <?php if($is_user_verified) { ?>
+
+                                <span class="text-xs sm:text-sm text-white/60">Verified Model</span>
+
+                              <?php }?>
+
                               <div class="flex items-center gap-1">
+
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
                                   fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                   stroke-linejoin="round" class="text-yellow-400">
@@ -454,8 +466,12 @@ if (isset($_SESSION['log_user_id'])) {
                                 <span class="text-xs text-white/60">4.8</span>
                               </div>
                             </div>
+
                           </div>
+
                         </div>
+
+
                         <div class="space-y-2 sm:space-y-3 mb-4">
                           <div class="flex justify-between text-xs sm:text-sm">
                             <span class="text-white/70">Purchase Date:</span>
