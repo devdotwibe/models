@@ -995,57 +995,57 @@ let selectedFiles_video = [];
 		
 		//uploading Image files
 
-        console.log('files_img',files_img);
+        // console.log('files_img',files_img);
 
-		if (files_img.length > 0) {
-			// Create a new FormData object
-			var formData = new FormData();
-			var uploaded_file = [];
-			for (var i = 0; i < files_img.length; i++) {
-				formData.append('uploaded_file[]', files_img[i]);  
-			}
+		// if (files_img.length > 0) {
+		// 	// Create a new FormData object
+		// 	var formData = new FormData();
+		// 	var uploaded_file = [];
+		// 	for (var i = 0; i < files_img.length; i++) {
+		// 		formData.append('uploaded_file[]', files_img[i]);  
+		// 	}
 			
-			progressFill.style.width = '25%';
-            progressText.textContent = '25%';
-			progress = 25;
+		// 	progressFill.style.width = '25%';
+        //     progressText.textContent = '25%';
+		// 	progress = 25;
 			
-			// Send the FormData object using Fetch API
-			fetch('<?=SITEURL.'/ajax/adv_upload.php'?>', {
-				method: 'POST',
-				body: formData
-			})
-			.then(response => response.text())
-			.then(data => { 
-				if(data == 'No files were uploaded.'){
-					alert(data);
-				}else if(data == 'Error'){
-					alert('Sorry, there was an error uploading the images.')
-				}else{
-					jQuery('#save_image_file').val(data);
-				}
-				if (files_vd.length > 0) {
-				progressFill.style.width = '50%';
-				progressText.textContent = '50%';
-				progress = 50;
-				}else{
-				progressFill.style.width = '100%';
-				progressText.textContent = '100%';
-				progress = 100;
-				}
+		// 	// Send the FormData object using Fetch API
+		// 	fetch('<?=SITEURL.'/ajax/adv_upload.php'?>', {
+		// 		method: 'POST',
+		// 		body: formData
+		// 	})
+		// 	.then(response => response.text())
+		// 	.then(data => { 
+		// 		if(data == 'No files were uploaded.'){
+		// 			alert(data);
+		// 		}else if(data == 'Error'){
+		// 			alert('Sorry, there was an error uploading the images.')
+		// 		}else{
+		// 			jQuery('#save_image_file').val(data);
+		// 		}
+		// 		if (files_vd.length > 0) {
+		// 		progressFill.style.width = '50%';
+		// 		progressText.textContent = '50%';
+		// 		progress = 50;
+		// 		}else{
+		// 		progressFill.style.width = '100%';
+		// 		progressText.textContent = '100%';
+		// 		progress = 100;
+		// 		}
 				
-				if(progress >= 100){
-				setTimeout(() => {
-                    event.target.submit();
-                }, 1000);
-			} 
-			})
-			.catch(error => {
-				console.error('Upload failed:', error);
-			});
-				if (files_vd.length > 0) progress = 50;
-				else progress = 100;
+		// 		if(progress >= 100){
+		// 		setTimeout(() => {
+        //             event.target.submit();
+        //         }, 1000);
+		// 	} 
+		// 	})
+		// 	.catch(error => {
+		// 		console.error('Upload failed:', error);
+		// 	});
+		// 		if (files_vd.length > 0) progress = 50;
+		// 		else progress = 100;
 			
-		}
+		// }
 		//uploading video files
 
 		if (files_vd.length > 0) {
