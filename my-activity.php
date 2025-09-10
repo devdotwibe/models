@@ -627,7 +627,7 @@ if (mysqli_num_rows($service_group) > 0) {
 									
 			</div>
 			<?php } ?>
-            <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">Just Now • <?php if ($user_have_preminum) { ?> 👑 Premium<?php } ?></div>
+            <?php /* ?><div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;"><?php if ($user_have_preminum) { ?> 👑 Premium<?php } ?></div> <?php */ ?>
 			<?php if (!$user_have_preminum) { ?>
             <button class="upgrade-btn" onclick="event.stopPropagation(); showPremiumModal();">👑 Upgrade to Premium</button>
 			<?php } ?>
