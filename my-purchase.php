@@ -230,20 +230,26 @@
 
 				<?php if($file_type == 'Image'){ ?>
 
-                    <!-- Premium Purchase Card 1 - Photo -->
+
                     <div class="card-premium animate-fade-in-up" data-post-id="<?php echo $post_id ?>" data-type="photo" data-model="aria" data-price="25" data-date="2024-12-15" style="animation-delay: 0.1s">
                         <div class="image-premium relative">
                             <img src="<?php echo SITEURL.$url; ?>" alt="<?php echo $image_text; ?>" class="w-full h-48 sm:h-64 object-cover">
+
+                            <!-- 
                             <div class="absolute top-3 sm:top-4 left-3 sm:left-4 badge-premium">
                                 📸 4K Photo
                             </div>
                             <div class="absolute top-3 sm:top-4 right-3 sm:right-4 glass-ultra px-2 sm:px-3 py-1 rounded-full text-xs font-semibold text-white">
                                 Ultra HD
-                            </div>
+                            </div> -->
+
+
                             <button class="absolute bottom-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300" onclick="toggleFavorite(this)" aria-label="Add to favorites">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                             </button>
                         </div>
+
+
                         <div class="p-4 sm:p-6 relative z-10">
                             <div class="flex items-center mb-4">
                                 <img src="<?php echo $prof_img ?>" alt="<?php echo ucfirst($row1['username']); ?> Profile" class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500">
