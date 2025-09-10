@@ -199,7 +199,7 @@ else{
 			  $serv_tokens = $item['tokens'];
         ?>
 
-            <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['main_service'] ?> all_status all_type" data-status="pending" data-type="group">
+            <div class="service-card fade-in-up <?php echo $staus ?> <?php echo $item['main_service'] ?> all_status all_type" data-status="pending" data-type="group" id="<?php echo $item['id']; ?>" >
 
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div class="flex-1">

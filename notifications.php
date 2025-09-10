@@ -705,7 +705,7 @@ else{
 							
 							<div class="flex space-x-3">
 							
-							<?php if($userDetails['as_a_model'] =='Yes') { ?>
+							<?php /* if($userDetails['as_a_model'] =='Yes') { ?>
 							
 								<button id="acc_<?php echo $loop_count; ?>" class="btn-success px-6 py-2 rounded-lg text-white font-semibold" <?php if($status == 'Accept') echo 'disabled'; ?> onclick="acceptRequest(<?php echo $booking_id; ?>,<?php echo $loop_count; ?>)">
 									<?php if($status == 'Accept'){ echo 'Accepted '.$changed_date; }else{ ?>✓ Accept <?php } ?>
@@ -719,9 +719,9 @@ else{
 
                                 <?php } ?>
 								
-							<?php } ?>
+							<?php } */ ?>
 							
-							<?php if($userDetails['as_a_model'] =='No') { ?>
+							<?php //if($userDetails['as_a_model'] =='No') { ?>
 							
 								<button  class="btn-success px-6 py-2 rounded-lg text-white font-semibold" disabled >
 									<?php if(empty($status)){
@@ -734,8 +734,12 @@ else{
 										echo $status.$changed_date;
 									} ?>
 								</button>
+								
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewServicePage('<?php echo $model_booking['id']; ?>')">
+									Details
+								</button>
 							
-							<?php } ?>
+							<?php //} ?>
 							
 								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
 									View Profile
@@ -1073,6 +1077,10 @@ offset = offset+limit;
 
     function viewProfile(userId) { 
         window.location.href = '<?= SITEURL ?>single-profile.php?m_unique_id='+userId;
+    }
+	
+	function viewServicePage(servId) { 
+        window.location.href = '<?= SITEURL ?>optimized_services.php#'+servId;
     }
 
     function uploadContent() {

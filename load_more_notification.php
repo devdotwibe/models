@@ -181,9 +181,19 @@ $resultd = mysqli_query($con, $sqls);
 
 
                          }else if($rowesdw['notification_type'] == 'requests'){ 
+						 
+						 $booking_id = $rowesdw['booking_id'];
+                            $model_serv = 'Services';
+                            $booking_type = '';
+                            if(!empty($booking_id)){
+                                $model_booking = DB::queryFirstRow('select * from model_booking where id="'.$booking_id.'"');
+                                if($model_booking['main_service'] == 'chat') $model_serv = 'Chat Services - '.$model_booking['service_name'];
+                                else if($model_booking['main_service'] == 'meet') $model_serv = 'Meet Services - '.$model_booking['service_name'];
+								else $model_serv = ucfirst($model_booking['main_service']).' Services - '.$model_booking['service_name'];
+                                $booking_type = $model_booking['booking_type'].' at '.date('d/m/Y',strtotime($model_booking['meeting_date'])).' '.$model_booking['meeting_time'];
+                            }
 
-							$html .= '<strong class="text-indigo-400">'.$modalname.'.</strong> has requested a <strong class="text-pink-400">Chat & Watch</strong> session for tonight at 8 PM.
-                            <span class="text-green-400 font-semibold">$150</span> for 1 hour.';
+							$html .= '<strong class="text-indigo-400">'.$model_booking['name'].'.</strong> has requested a <strong class="text-pink-400">'.$model_serv.'</strong> '.$booking_type.'.';
 						 }else if($rowesdw['notification_type'] == 'tips'){ 
 							$html .= '<strong class="text-indigo-400">'.$modalname.'.</strong> sent you a tip of <strong class="text-green-400">$50</strong> with the message:
                             <em class="text-white/60">"Amazing show last night! You are incredible! 🔥"</em>';
@@ -202,6 +212,7 @@ $resultd = mysqli_query($con, $sqls);
 						$html .= '</p>';
 
 						if(!empty($unique_id)){
+							if($rowesdw['notification_type'] == 'follow'){
 							$get_modal_notif = DB::query('select status,follow_date from model_follow where unique_model_id = "'.$unique_rec_id.'" AND unique_user_id = "'.$unique_id.'"');
 							$followstatus = ''; $followdate = '';
 							if(!empty($get_modal_notif)){
@@ -259,6 +270,39 @@ $resultd = mysqli_query($con, $sqls);
 								</button>
 
                         </div>';
+							}else if($rowesdw['notification_type'] == 'requests'){ 
+								$status = ''; $changed_date = ''; 
+								if(!empty($booking_id)){
+									$status = $model_booking['status'];
+									if(!empty($model_booking['changed_date'])) $changed_date = 'on '.date('d/m/Y',strtotime($model_booking['changed_date']));
+								}
+							
+							$html .= '<div class="flex space-x-3">';
+									
+							$html .= '<button  class="btn-success px-6 py-2 rounded-lg text-white font-semibold" disabled >';
+									if(empty($status)){
+										$html .= 'Pending';
+									}else if($status == 'Accept'){ 
+										$html .= 'Accepted '.$changed_date; 
+									}else if($status == 'Decline'){  
+										$html .= 'Declined '.$changed_date;
+									} else{
+										$html .= $status.$changed_date;
+									}
+							$html .= '</button>';
+							
+							$html .=
+								'<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewServicePage(\''.$model_booking['id'].'\')">
+									Details
+								</button>';
+							
+							$html .=
+								'<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile(\''.$unique_id.'\')">
+									View Profile
+								</button>';
+							
+							$html .= '</div>';
+							}
 						}
                     $html .= '</div>
                 </div>
