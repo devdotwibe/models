@@ -393,7 +393,8 @@ if (isset($_SESSION['log_user_id'])) {
 
                       <div class="image-premium relative">
 
-                        <img src="<?php echo SITEURL . $url; ?>" alt="Exclusive Video by Phoenix"
+                        <img src="<?php echo SITEURL .'assets/images/advert-no-image.jpg' ?>" alt="Exclusive Video by Phoenix"
+
                           class="w-full h-48 sm:h-64 object-cover">
 
                         <div class="video-overlay-advanced" onclick="viewContent('video', 'phoenix-1')">
@@ -419,7 +420,7 @@ if (isset($_SESSION['log_user_id'])) {
 
                         <button
                           class="absolute bottom-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300"
-                          onclick="toggleFavorite(this)" aria-label="Add to favorites">
+                          onclick="ShowVideo('<?php echo SITEURL. $url ?>')" aria-label="Add to favorites">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
@@ -498,7 +499,8 @@ if (isset($_SESSION['log_user_id'])) {
 
                         </div>
 
-                   
+                        <?php /*
+
                             <div class="flex gap-2 sm:gap-3">
                               <button class="flex-1 btn-premium py-2 sm:py-3 text-xs sm:text-sm"
                                 onclick="viewContent('video', 'phoenix-1')">
@@ -548,6 +550,7 @@ if (isset($_SESSION['log_user_id'])) {
                               </button>
                             </div>
 
+                        // */ ?>
 
                       </div>
                     </div>
