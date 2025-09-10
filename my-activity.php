@@ -543,7 +543,12 @@ if (mysqli_num_rows($service_group) > 0) {
     <div class="model-card" data-premium="false" onclick="<?php if (!$user_have_preminum) { ?>showPremiumModal()<?php } ?>">
         <div style="position: relative;">
             <img src="<?= $prof_img; ?>" alt="Model" class="model-image">
+			
+			<?php if (isUserOnline($rowesdw['id']) === 'Online') { ?>
+			
             <div class="status-indicator status-online"></div>
+			
+			<?php } ?>
             
 			
 					<div class="verified-badge">
