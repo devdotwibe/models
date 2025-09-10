@@ -168,6 +168,7 @@ if (isset($_POST['booking_submit'])) {
 
 			  DB::update('model_booking', [
 				'status' => $status,
+				'changed_date' => date('Y-m-d'),
 			], 'id = %i', $accept_id);
 
 		if($status == 'Decline'){
@@ -222,6 +223,7 @@ if (isset($_POST['booking_submit'])) {
 
 				  DB::update('model_booking', [
 					'complete_request' => $status,
+					'changed_date' => date('Y-m-d'),
 				], 'id = %i', $request_id);
 			
 //Adding token to model			
@@ -251,6 +253,7 @@ if (isset($_POST['booking_submit'])) {
 				  DB::update('model_booking', [
 					'complete_request' => $status,
 					'status' => 'Completed',
+					'changed_date' => date('Y-m-d'),
 				], 'id = %i', $complete_id);
 
 		echo json_encode(['status'=>'success','message'=>'Complete Accepted Successfully']);
