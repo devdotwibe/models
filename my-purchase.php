@@ -157,6 +157,7 @@ if (isset($_SESSION['log_user_id'])) {
                   while ($row = mysqli_fetch_assoc($result)) {
 
                       $url = $row['post_image'];
+
                       $url_ext = $row['post_image'];
 
                       $post_id = $row['id'];
@@ -168,6 +169,7 @@ if (isset($_SESSION['log_user_id'])) {
                         $url = $url_ext;
 
                       }
+
                       $url = $url_ext;
 
                       $image_text = $row['image_text'];
@@ -393,6 +395,7 @@ if (isset($_SESSION['log_user_id'])) {
 
                         <img src="<?php echo SITEURL . $url; ?>" alt="Exclusive Video by Phoenix"
                           class="w-full h-48 sm:h-64 object-cover">
+
                         <div class="video-overlay-advanced" onclick="viewContent('video', 'phoenix-1')">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"
                             stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -495,8 +498,7 @@ if (isset($_SESSION['log_user_id'])) {
 
                         </div>
 
-                        <?php /*
-
+                   
                             <div class="flex gap-2 sm:gap-3">
                               <button class="flex-1 btn-premium py-2 sm:py-3 text-xs sm:text-sm"
                                 onclick="viewContent('video', 'phoenix-1')">
@@ -546,7 +548,6 @@ if (isset($_SESSION['log_user_id'])) {
                               </button>
                             </div>
 
-                        */ ?>
 
                       </div>
                     </div>
