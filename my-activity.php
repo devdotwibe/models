@@ -1008,8 +1008,8 @@ function ActionBtn(element, action) {
 
             const modelid = $(element).attr('modelid');
 
-            const $card = $(element).closest('.profile-card');
-            const profileName = $(element).find('.profile-name').text().split(',')[0];
+            const $card = $(element).closest('.model-card');
+            const profileName = $(element).find('.model-name').text().split(' ')[0];
 
             switch (action) {
                 case 'connect':
