@@ -278,14 +278,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'updated_at'     => $date
                     ));
 
+                    echo json_encode([
+                        "status" => "success",
+                        "blocked_users" => 'successfully updated'
+                    ]);
+
            
                 }
-
-            echo json_encode([
-                "status" => "success",
-                "blocked_users" => 'successfully updated'
-            ]);
-
 
         } else {
             echo json_encode([
