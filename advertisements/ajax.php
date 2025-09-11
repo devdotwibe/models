@@ -17,12 +17,18 @@ $sort_by   = ' ORDER BY tb.is_paid DESC, tb.id DESC';
 $sort_type = $_GET['sort_type'] ?? '';
 $sort_col  = $_GET['sort_column'] ?? '';
 
-// ------------------ BOOST LOGIC ------------------
+
+
+ $blocked_users = [];
+
+
 if (isset($_SESSION["log_user_id"])) {
 
     $userDetails     = get_data('model_user', ['id'=>$_SESSION["log_user_id"]], true);
 
     $boosted_ad_ids  = BoostedModelIdsByUser($userDetails, $con);
+
+     $blocked_users = BlockedUsers($_SESSION["log_user_id"]);
 
 } else {
     $boosted_ad_ids  = BoostedModelIds($con);
@@ -90,6 +96,14 @@ if (!empty($country)) {
     $where[]  = "tb.country = %s";
     $params[] = $country;
 }
+
+    if (!empty($blocked_users)) {
+                                
+        $blocked_ids = implode(',', array_map('intval', $blocked_users));
+
+       $where[] = " AND mu.id NOT IN ($blocked_ids) ";
+        
+    }   
 
 if (!empty($where)) {
     $stringQuery .= " AND " . implode(" AND ", $where);
