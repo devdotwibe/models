@@ -250,6 +250,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($user_id && $blocked_user_id) {
     
+            echo 'test';
+
+            die();
+            
             DB::insertIgnore("block_users", [
                 "user_id" => $user_id,
                 "blocked_user_id" => $blocked_user_id
