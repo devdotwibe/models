@@ -250,14 +250,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($user_id && $blocked_user_id) {
     
-            echo 'test';
+            $date = date('Y-m-d H:i:s');
 
-            die();
-            
-            DB::insertIgnore("block_users", [
-                "user_id" => $user_id,
-                "blocked_user_id" => $blocked_user_id
-            ]);
+            // Check if already blocked
+            $exists = DB::queryFirstField(
+                "SELECT COUNT(*) FROM block_users WHERE user_id = %i AND blocked_user_id = %i",
+                $user_id,
+                $blocked_user_id
+            );
+
+            if ($exists > 0) {
+                echo json_encode([
+                    "status"  => "error",
+                    "message" => "You already blocked this user"
+                ]);
+            } else {
+                
+                DB::insert('block_users', array(
+                    'user_id'        => $user_id,
+                    'blocked_user_id'=> $blocked_user_id,
+                    'created_at'     => $date,
+                    'updated_at'     => $date
+                ));
+
+                echo json_encode([
+                    "status"  => "success",
+                    "message" => "User blocked successfully"
+                ]);
+
 
             $blockedUsers = DB::query(
                 "SELECT bu.id, bu.blocked_user_id, u.name, bu.created_at 
