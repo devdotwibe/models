@@ -310,7 +310,8 @@ if (isset($_SESSION['log_user_id'])) {
                                   points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                                 </polygon>
                               </svg>
-                              <span class="text-xs text-white/60"><?= $average_rating ?></span>
+                              <span class="text-xs text-white/60"><?= number_format($average_rating, 2) ?>
+</span>
                             </div>
                           </div>
                         </div>
@@ -495,7 +496,8 @@ if (isset($_SESSION['log_user_id'])) {
                                     points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                                   </polygon>
                                 </svg>
-                                <span class="text-xs text-white/60">4.8</span>
+                                <span class="text-xs text-white/60"><?= number_format($average_rating, 2) ?>
+</span>
                               </div>
                             </div>
 
