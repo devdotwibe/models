@@ -363,23 +363,18 @@ $liked_me_array = DB::query("select model_id from user_model_likes where user_id
 $viewer_me_array = DB::query("select profile_user_id from model_user_profile_views where viewer_user_id=" . $userDetails['id']);
 
 //Code for booked services
-$group_chat_count = 0; $private_chat_count = 0; 
-$local_meetup_count = 0; $extended_social_count = 0; 
-$overnight_social_count = 0;
+$meetup_count = 0; $travel_count = 0; 
+$collaboration_count = 0;
 $service_group = mysqli_query($con, "select service_name,COUNT(DISTINCT model_unique_id) AS service_count from model_booking where user_unique_id='".$_SESSION['log_user_unique_id']."' GROUP BY service_name");
 if (mysqli_num_rows($service_group) > 0) {
 	while ($row_serv = mysqli_fetch_assoc($service_group)) {
 		$service_name = $row_serv['service_name'];
-		if($service_name == 'Group Chat'){
-			$group_chat_count = $row_serv['service_count'];
-		}else if($service_name == 'Private Chat'){
-			$private_chat_count = $row_serv['service_count'];
-		}else if($service_name == 'Local Meetup'){
-			$local_meetup_count = $row_serv['service_count'];
-		} else if($service_name == 'Extended Social'){
-			$extended_social_count = $row_serv['service_count'];
-		} else if($service_name == 'Overnight Social'){
-			$overnight_social_count = $row_serv['service_count'];
+		if($service_name == 'Meetup'){
+			$meetup_count = $row_serv['service_count'];
+		}else if($service_name == 'Travel'){
+			$travel_count = $row_serv['service_count'];
+		}else if($service_name == 'Collaboration'){
+			$collaboration_count = $row_serv['service_count'];
 		} 
 	}
 } 
@@ -417,21 +412,16 @@ if (mysqli_num_rows($service_group) > 0) {
             <span class="premium-lock">🔒 Premium</span>
 			<?php } ?>
         </div>
-		<div class="dropdown-item" onclick="getSelectedResult('group_chat','💬 Group Chat (<?php echo $group_chat_count; ?>)')">
-            <span>💬 Group Chat (<?php echo $group_chat_count; ?>)</span>
+		<div class="dropdown-item" onclick="getSelectedResult('meet','💬 Meetup services activity (<?php echo $meetup_count; ?>)')">
+            <span>💬 Meetup services activity (<?php echo $meetup_count; ?>)</span>
         </div>
-		<div class="dropdown-item" onclick="getSelectedResult('private_chat','💬 Private Chat (<?php echo $private_chat_count; ?>)')"> 
-            <span>💬 Private Chat (<?php echo $private_chat; ?>)</span>
+		<div class="dropdown-item" onclick="getSelectedResult('travel','💬 Travel services activity (<?php echo $travel_count; ?>)')"> 
+            <span>💬 Travel services activity (<?php echo $travel_count; ?>)</span>
         </div>
-		<div class="dropdown-item" onclick="getSelectedResult('local_meetup','📺 Local Meetup (<?php echo $local_meetup_count; ?>)')">
-            <span>📺 Local Meetup (<?php echo $local_meetup_count; ?>)</span>
+		<div class="dropdown-item" onclick="getSelectedResult('collaboration','💬 Collaborate services activity (<?php echo $collaboration_count; ?>)')">
+            <span>💬 Collaborate services activity (<?php echo $collaboration_count; ?>)</span>
         </div>
-		<div class="dropdown-item" onclick="getSelectedResult('extended_social','📺 Extended Social (<?php echo $extended_social_count; ?>)')">
-            <span>📺 Extended Social (<?php echo $extended_social_count; ?>)</span>
-        </div>
-		<div class="dropdown-item" onclick="getSelectedResult('overnight_social','📺 Overnight Social (<?php echo $overnight_social_count; ?>)')">
-            <span>📺 Overnight Social (<?php echo $overnight_social_count; ?>)</span>
-        </div>
+		
 		<?php /*?>
         <div class="dropdown-item" onclick="selectSection('💬 Chat Requests (5)')">
             <span>💬 Chat Requests (5)</span>
