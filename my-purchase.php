@@ -419,19 +419,23 @@ if (isset($_SESSION['log_user_id'])) {
                           </svg>
                         </div>
 
-                        <div class="absolute top-3 sm:top-4 left-3 sm:left-4 badge-verified">
-                          🎥 4K Video
-                        </div>
+                        <?php /*
 
-                        <div
-                          class="absolute top-3 sm:top-4 right-3 sm:right-4 glass-ultra px-2 sm:px-3 py-1 rounded-full text-xs font-semibold text-white">
-                          5:32 min
-                        </div>
+                          <div class="absolute top-3 sm:top-4 left-3 sm:left-4 badge-verified">
+                            🎥 4K Video
+                          </div>
 
-                        <div
-                          class="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 glass-ultra px-2 sm:px-3 py-1 rounded-full text-xs font-semibold text-white">
-                          4K • 60fps
-                        </div>
+                          <div
+                            class="absolute top-3 sm:top-4 right-3 sm:right-4 glass-ultra px-2 sm:px-3 py-1 rounded-full text-xs font-semibold text-white">
+                            5:32 min
+                          </div>
+
+                          <div
+                            class="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 glass-ultra px-2 sm:px-3 py-1 rounded-full text-xs font-semibold text-white">
+                            4K • 60fps
+                          </div>
+
+                        */?>
 
                         <button
                           class="absolute bottom-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300"
@@ -501,10 +505,12 @@ if (isset($_SESSION['log_user_id'])) {
                             <span class="text-white/70">Price:</span>
                             <span class="text-green-400 font-bold">$ <?php echo $purchase_amount ?></span>
                           </div>
-                          <div class="flex justify-between text-xs sm:text-sm">
+
+
+                          <!-- <div class="flex justify-between text-xs sm:text-sm">
                             <span class="text-white/70">Duration:</span>
                             <span class="text-white font-medium">5:32 minutes</span>
-                          </div>
+                          </div> -->
 
 
                           <!-- <div class="flex justify-between text-xs sm:text-sm">
