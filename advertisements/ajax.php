@@ -116,6 +116,10 @@ $limited = " LIMIT $offset, " . (int)$perPage;
 
 $finalQuery = $stringQuery . $orderBy . $limited;
 
+echo  $finalQuery ;
+
+die();
+
 
 $all_data   = DB::query($finalQuery, ...$params);
 
