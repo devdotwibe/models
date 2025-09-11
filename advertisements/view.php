@@ -678,6 +678,7 @@ else{
                     <p>Note: This information is provided for professional casting purposes only. All bookings are subject to agency approval and contract terms.</p>
                 </div>
 
+                <?php /*
                 <!-- Availability Tab -->
                 <div id="availability" class="tab-content">
                     <h3>Availability Information</h3>
@@ -718,6 +719,8 @@ else{
 
                     <p>For the most current availability information and to discuss specific dates, please use the contact button to reach out directly. Priority is given to premium clients and long-term partnerships.</p>
                 </div>
+
+                */?>
 				
 				<?php if(!empty($form_data['terms_conditions'])){ ?>
                 <!-- Terms Tab -->
