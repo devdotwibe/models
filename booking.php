@@ -1192,6 +1192,8 @@ function CalculateCollaborate() {
               }, 1000);
             }else {
 				showNotification(response.status, 'error');
+				$button.text(originalText);
+                $button.prop('disabled', false);
 			}
           },
 
