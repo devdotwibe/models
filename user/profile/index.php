@@ -829,7 +829,19 @@ if(!empty($userDetails['profile_pic'])){
                     $idList = 0;
                 }
 
-                $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $order LIMIT 5";
+                $where = "";
+
+                $blocked_users = BlockedUsers($_SESSION["log_user_id"]);
+
+                if (!empty($blocked_users)) {
+                
+                    $blocked_ids = implode(',', array_map('intval', $blocked_users));
+
+                    $where .= " AND mu.id NOT IN ($blocked_ids) ";
+                    
+                }   
+
+                $sqls = "SELECT * FROM model_user WHERE id IN ($idList) $where $order LIMIT 5";
 
                 $resulusers = mysqli_query($con, $sqls);
 
