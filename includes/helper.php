@@ -16,6 +16,16 @@ function h_my_ip_address(){
 	return $ip;
 }	
 
+	function CheckBlockUser($user_id, $blocked_user_id)
+	{
+		$exists = DB::queryFirstField(
+			"SELECT COUNT(*) FROM block_users WHERE user_id = %i AND blocked_user_id = %i",
+			$user_id,
+			$blocked_user_id
+		);
+
+		return $exists > 0 ? true : false;
+	}
 	function getCountry($country_id)
 	{
 		if (is_numeric($country_id)) {

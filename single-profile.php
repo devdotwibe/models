@@ -40,6 +40,8 @@ if (isset($_SESSION['log_user_unique_id'])) {
 }
 
 
+    $is_user_blocked = CheckBlockUser($_SESSION["log_user_id"],$modelDetails['id']);
+
 // else {
 //   $error = 'login';
 
@@ -1004,7 +1006,7 @@ body .owl-carousel .owl-nav.disabled {
                                                             <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
                                                         </svg>
 
-                                                        <span id="block_profile">Block Profile </span>
+                                                        <span id="block_profile"><?php if($is_user_blocked) { ?>Profile Blocked <?php } else { ?> Block Profile <?php } ?> </span>
 
                                                     </div>
 
