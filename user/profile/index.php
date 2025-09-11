@@ -602,6 +602,18 @@ if(!empty($userDetails['profile_pic'])){
         $types = str_repeat('i', count($followed_user_ids));
 
 
+        $where = "";
+
+        $blocked_users = BlockedUsers($_SESSION["log_user_id"]);
+
+        if (!empty($blocked_users)) {
+        
+            $blocked_ids = implode(',', array_map('intval', $blocked_users));
+
+            $where .= " AND model_user.id NOT IN ($blocked_ids) ";
+            
+        }   
+
         $itemsPerPage = 5;
 
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -630,6 +642,7 @@ if(!empty($userDetails['profile_pic'])){
             FROM live_posts
             JOIN model_user ON live_posts.post_author = model_user.id
             WHERE post_author IN ($placeholders)
+            $where
         ";
 
         if (!empty($priority_ids)) {
