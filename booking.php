@@ -1190,7 +1190,9 @@ function CalculateCollaborate() {
                 $('#success_modal').addClass('active');
 
               }, 1000);
-            }
+            }else {
+				showNotification(response.status, 'error');
+			}
           },
 
           error: function(xhr, status, error) {
