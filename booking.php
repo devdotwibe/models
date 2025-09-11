@@ -1059,10 +1059,6 @@ function CalculateCollaborate() {
 			{
 			  selector: '#country',
 			  label: 'Country'
-			},
-			{
-			  selector: '#instructions',
-			  label: 'Instructions / Description'
 			}
 		  ];
 
@@ -1125,6 +1121,10 @@ function CalculateCollaborate() {
 			<?php if($_GET['service'] == 'Collaboration' ) { ?>
 		  
 					  const extraFields = [{
+						  selector: '#instructions',
+						  label: 'Description'
+						},
+						{
 						  id: 'meeting_date_from',
 						  label: 'From'
 						},
