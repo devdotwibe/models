@@ -417,13 +417,13 @@ if (mysqli_num_rows($service_group) > 0) {
 			<?php } ?>
         </div>
 		<div class="dropdown-item" onclick="getSelectedResult('meet','💬 Meetup services activity (<?php echo $meetup_count; ?>)')">
-            <span>💬 Meetup services activity (<?php echo $meetup_count; ?>)</span>
+            <span>👥 Social Meetups (<?php echo $meetup_count; ?>)</span>
         </div>
 		<div class="dropdown-item" onclick="getSelectedResult('travel','💬 Travel services activity (<?php echo $travel_count; ?>)')"> 
-            <span>💬 Travel services activity (<?php echo $travel_count; ?>)</span>
+            <span>👥 Travel Experiences (<?php echo $travel_count; ?>)</span>
         </div>
 		<div class="dropdown-item" onclick="getSelectedResult('collaboration','💬 Collaborate services activity (<?php echo $collaboration_count; ?>)')">
-            <span>💬 Collaborate services activity (<?php echo $collaboration_count; ?>)</span>
+            <span> 🎬 Collaborations (<?php echo $collaboration_count; ?>)</span>
         </div>
 		
 		<?php /*?>
