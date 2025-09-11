@@ -837,7 +837,7 @@ if(!empty($userDetails['profile_pic'])){
                 
                     $blocked_ids = implode(',', array_map('intval', $blocked_users));
 
-                    $where .= " AND mu.id NOT IN ($blocked_ids) ";
+                    $where .= " AND id NOT IN ($blocked_ids) ";
                     
                 }   
 
