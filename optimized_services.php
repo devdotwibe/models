@@ -228,9 +228,19 @@ else{
 
                             $meeting_date = $item['meeting_date']; //Y-m-d format;
 
-                            $formattedDate = date('M d', strtotime($meeting_date)); 
+                            $formattedDate = date('M d', strtotime($meeting_date));
+
+							$meeting_time = '';
+							if(!empty($item['meeting_time'])){
+								if($item['service_name'] == 'Collaboration'){
+									$meeting_time_exp = explode(':',$item['meeting_time']);
+									if(!empty($meeting_time_exp[0])) $meeting_time = ', '.$meeting_time_exp[0].' hrs';
+								}else{
+									$meeting_time = ', '.$item['meeting_time'];
+								}
+							}
                         ?>
-                        <span class="service-meta <?php if($item['status'] ==='Accept' || $item['status'] =='Decline' ) { ?>text-pink-400 <?php } else { ?> text-orange-400 <?php } ?>  "><?php echo $item['booking_for'] ?> • <?php echo $formattedDate ?>, <?php echo $item['meeting_time'] ?></span>
+                        <span class="service-meta <?php if($item['status'] ==='Accept' || $item['status'] =='Decline' ) { ?>text-pink-400 <?php } else { ?> text-orange-400 <?php } ?>  "><?php echo $item['booking_for'] ?> • <?php echo $formattedDate ?><?php echo $meeting_time ?></span>
                     </div>
                     </div>
 
