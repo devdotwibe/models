@@ -212,7 +212,10 @@ if($userDetails){
                                          }
 
                                          if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { 
-                                            $return_html .= '<span class="profile-badge badge-verified">Verified</span>';
+                                            $return_html .= '<span class="profile-badge badge-verified">
+                                                <div class="badge-user verified-user">🛡</div>
+                                                <p>Verified</p>
+                                            </span>';
                                        } 
 									   if (!empty($rowesdw) &&  $rowesdw['as_a_model'] == 'Yes') { 
 
