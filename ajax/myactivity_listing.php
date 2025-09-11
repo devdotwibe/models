@@ -245,10 +245,10 @@ if($userDetails){
 									
 			$return_html .= '</div>';
 			 } 
-            $return_html .= '<div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">';
-			$return_html .= 'Just Now • ';
+            /*$return_html .= '<div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 14px;">';
+			
 			if ($user_have_preminum) { $return_html .= ' 👑 Premium'; } 
-			$return_html .= '</div>';
+			$return_html .= '</div>';*/
 			if (!$user_have_preminum) { 
             $return_html .= '<button class="upgrade-btn" onclick="event.stopPropagation(); showPremiumModal();">👑 Upgrade to Premium</button>';
 			 } 
