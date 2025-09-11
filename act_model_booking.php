@@ -259,5 +259,37 @@ if (isset($_POST['booking_submit'])) {
 		echo json_encode(['status'=>'success','message'=>'Complete Accepted Successfully']);
 
 	}
+	
+	//Review
+	if (isset($_POST['action']) && $_POST['action'] =='send_reviews') {
+
+			$service_id = $_POST['service_id'];
+
+			$star_rating = $_POST['star_rating'];
+			
+			$clientName = $_POST['clientName'];
+
+			$reviewText = $_POST['reviewText'];
+			
+			$workAgain = $_POST['workAgain'];
+			
+			$reciever_id = $_POST['reciever_id'];
+
+			$post_data = array();
+			$post_data['service_id'] = $service_id;
+			$post_data['sender'] = $userDetails['unique_id'];
+			$post_data['receiver'] = $reciever_id;
+			$post_data['rating'] = $star_rating;
+			$post_data['review'] = $reviewText;
+			$post_data['work_again'] = $workAgain;
+			$post_data['send_date'] = date('Y-m-d H:i:s');
+			
+			DB::insert('service_review', $post_data); 
+			$created_id = DB::insertId();
+				  
+
+		echo json_encode(['status'=>'success','message'=>'Review submitted successfully!']);
+
+	}
 
 ?>

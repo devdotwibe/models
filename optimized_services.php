@@ -208,11 +208,17 @@ else{
                     <img src="<?php echo $defaultImage ?>" alt="Client" class="client-avatar border-orange-400">
                     <div>
 
-                      <?php  if($userDetails['as_a_model'] =='Yes') { ?>
+                      <?php  if($userDetails['as_a_model'] =='Yes') { 
+								$client_name = $item['name']; 
+								$client_uid = $item['user_unique_id'];
+					   ?>
 
                         <h3 class="client-name"><?php echo $item['name'] ?> </h3>
 
-                      <?php } else { ?>
+                      <?php } else { 
+								
+								$client_name = $item['model_name']; 
+								$client_uid = $item['model_unique_id']; ?>
                         
                          <h3 class="client-name"><?php echo $item['model_name'] ?> </h3>
 
@@ -312,7 +318,7 @@ else{
 
                  <?php if($item['status'] ==='Completed') { ?>
 
-				<button class="btn btn-secondary" onclick="openReviewModal('<?=$client_name?>', '<?=$item['service_name'];?>', '$<?php echo $serv_tokens ?>')" >Write Review</button>
+				<button class="btn btn-secondary" onclick="openReviewModal('<?=$client_name?>', '<?=$item['service_name'];?>', '$<?php echo $serv_tokens ?>',<?php echo $item['id'] ?>,'<?php echo $client_uid; ?>')" >Write Review</button>
 
                 <?php } else if($item['status'] ==='Accept') { ?>
                  
@@ -481,6 +487,7 @@ else{
             <span class="star" data-rating="4">★</span>
             <span class="star" data-rating="5">★</span>
           </div>
+		  <input type="hidden" name="star_rating" id="star_rating" class="star_rating" value="0">
         </div>
 
         <div class="form-group">
@@ -503,6 +510,8 @@ else{
         </div>
       </div>
       <div class="modal-footer">
+	    <input type="hidden" name="service_id" id="service_id" class="service_id" value="">
+		<input type="hidden" name="reciever_id" id="reciever_id" class="reciever_id" value="">
         <button class="btn btn-secondary" id="cancelReview">Cancel</button>
         <button class="btn btn-primary" id="submitReview">Submit Review</button>
       </div>
@@ -670,6 +679,11 @@ else{
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
    <script>
+   
+   // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeReviewModal();
+    });
 
     function FilterTab(tab,element)
     {
@@ -985,11 +999,45 @@ else{
        $(`#${id}`).removeClass('active');
     }
 
+	// Review Modal Functionality
+    function initializeReviewModal() {
+      const modal = document.getElementById('reviewModal');
+      const closeBtn = document.getElementById('closeReviewModal');
+      const cancelBtn = document.getElementById('cancelReview');
+      const submitBtn = document.getElementById('submitReview');
+      const stars = document.querySelectorAll('.star');
 
- function openReviewModal(clientName, serviceType, amount, isEdit = false) {
+      // Close modal
+      closeBtn.addEventListener('click', closeModal);
+      cancelBtn.addEventListener('click', closeModal);
+
+      // Submit review
+      submitBtn.addEventListener('click', submitReview);
+
+      // Star rating
+      stars.forEach(star => {
+        star.addEventListener('click', function() {
+          const rating = parseInt(this.getAttribute('data-rating')); 
+          setRating(rating);
+        });
+      });
+
+      // Close modal when clicking outside
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+
+ function openReviewModal(clientName, serviceType, amount, id, reciever, isEdit = false) {
       const modal = document.getElementById('reviewModal');
       const modalTitle = document.querySelector('.modal-title');
       const submitBtn = document.getElementById('submitReview');
+	  
+	  jQuery('#service_id').val(id);
+	  jQuery('#reciever_id').val(reciever);
+	  
 
       // Set modal content
       document.getElementById('reviewClientName').textContent = clientName;
@@ -1018,8 +1066,96 @@ else{
       // Show modal with animation
       modal.classList.add('active');
     }
+	
+	function closeReviewModal() {
+      const modal = document.getElementById('reviewModal');
+      modal.classList.remove('active');
+    }
+	
+	function closeModal() {
+      const modal = document.getElementById('reviewModal');
+      modal.classList.remove('active');
+    }
 
+	function setRating(rating) { 
+      currentRating = rating; 
+      const stars = document.querySelectorAll('.star'); 
+	  
+	  jQuery('#star_rating').val(rating);
 
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add('active');
+        } else {
+          star.classList.remove('active');
+        }
+      });
+    }
+
+    function submitReview() {
+      const clientName = document.getElementById('reviewClientName').textContent;
+      const reviewText = document.getElementById('reviewText').value;
+      const workAgain = document.querySelector('input[name="workAgain"]:checked').value;
+	  
+	  const service_id = document.getElementById('service_id').value;
+	  const reciever_id = document.getElementById('reciever_id').value;
+	  const star_rating = document.getElementById('star_rating').value;
+
+      if (currentRating === 0) {
+        showNotification('Please select a rating before submitting', 'warning');
+        return;
+      }
+
+      if (reviewText.trim() === '') {
+        showNotification('Please write a review before submitting', 'warning');
+        return;
+      }
+
+      // Ajax
+	  $.ajax({
+          url: 'act_model_booking.php',
+          type: 'POST',
+          data: {
+            action:'send_reviews',
+            service_id:service_id,
+			reciever_id:reciever_id,
+            star_rating:star_rating,
+			clientName:clientName,
+			reviewText:reviewText,
+			workAgain:workAgain,
+          },
+          dataType: 'json',
+          success: function (response) {
+              
+              console.log(response);
+
+              if (response.status === 'success') {
+
+                         showNotification('Review submitted successfully!', 'success');
+						 closeReviewModal();
+
+              }
+          },
+
+          error: function (xhr, status, error) {
+        
+          }
+        });
+	  
+      
+    }
+
+    // Notification system
+    function showNotification(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.className = `notification ${type}`;
+      notification.classList.add('show');
+
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 4000);
+    }
 
 
    </script>
