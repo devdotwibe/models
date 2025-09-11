@@ -543,7 +543,7 @@ if (mysqli_num_rows($service_group) > 0) {
 			
 					<div class="verified-badge">
 
-                                        <span class="profile-badge badge-live">Live</span>
+                                        <?php /*<span class="profile-badge badge-live">Live</span> */ ?>
 
                                         <?php if ($is_user_new) { ?>
 

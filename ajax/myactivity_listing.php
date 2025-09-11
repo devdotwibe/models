@@ -169,9 +169,9 @@ if($userDetails){
 			if (isUserOnline($rowesdw['id']) === 'Online') {
             $return_html .= '<div class="status-indicator status-online"></div>';
 			}
-            $return_html .= '<div class="verified-badge">
+            $return_html .= '<div class="verified-badge">';
 			
-				<span class="profile-badge badge-live">Live</span>';
+				//$return_html .= '<span class="profile-badge badge-live">Live</span>';
 
                                        if($is_user_new) { 
 
