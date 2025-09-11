@@ -226,20 +226,6 @@ if (isset($_POST['booking_submit'])) {
 					'changed_date' => date('Y-m-d'),
 				], 'id = %i', $request_id);
 			
-//Adding token to model			
-			$get_model_booking = DB::queryFirstRow("SELECT tokens,model_unique_id FROM model_booking WHERE id =  %s ", $request_id);
-			
-			if(!empty($get_model_booking) && !empty($get_model_booking['tokens']) && !empty($get_model_booking['model_unique_id'])){
-				
-				// Update user balance
-						DB::query(
-							"UPDATE model_user SET balance = ROUND(balance + %d) WHERE unique_id = %s",
-							$get_model_booking['tokens'],
-							$get_model_booking['model_unique_id']
-						);
-				
-			}
-
 		echo json_encode(['status'=>'success','message'=>'Complete Request Sended Successfully']);
 
 	}
@@ -255,6 +241,20 @@ if (isset($_POST['booking_submit'])) {
 					'status' => 'Completed',
 					'changed_date' => date('Y-m-d'),
 				], 'id = %i', $complete_id);
+				
+		//Adding token to model			
+			$get_model_booking = DB::queryFirstRow("SELECT tokens,model_unique_id FROM model_booking WHERE id =  %s ", $complete_id);
+			
+			if(!empty($get_model_booking) && !empty($get_model_booking['tokens']) && !empty($get_model_booking['model_unique_id'])){
+				
+				// Update user balance
+						DB::query(
+							"UPDATE model_user SET balance = ROUND(balance + %d) WHERE unique_id = %s",
+							$get_model_booking['tokens'],
+							$get_model_booking['model_unique_id']
+						);
+				
+			}
 
 		echo json_encode(['status'=>'success','message'=>'Complete Accepted Successfully']);
 
