@@ -165,9 +165,11 @@ if($userDetails){
 				if (!$user_have_preminum) { $return_html .= 'showPremiumModal()'; } 
 				$return_html .= '">
         <div style="position: relative;">
-            <img src="'.$prof_img .'" alt="Model" class="model-image">
-            <div class="status-indicator status-online"></div>
-            <div class="verified-badge">
+            <img src="'.$prof_img .'" alt="Model" class="model-image">';
+			if (isUserOnline($rowesdw['id']) === 'Online') {
+            $return_html .= '<div class="status-indicator status-online"></div>';
+			}
+            $return_html .= '<div class="verified-badge">
 			
 				<span class="profile-badge badge-live">Live</span>';
 
