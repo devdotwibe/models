@@ -145,6 +145,15 @@ if($userDetails){
                         } else {
                             $modalname = $rowesdw['name'];
                         }
+						
+						$prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
+
+                            if (!empty($rowesdw['profile_pic'])) {
+                                if (checkImageExists($rowesdw['profile_pic'])) {
+
+                                    $prof_img = SITEURL . $rowesdw['profile_pic'];
+                                }
+                            }
 
                 $is_user_preminum = CheckPremiumAccess($rowesdw['id']);
 
@@ -156,7 +165,7 @@ if($userDetails){
 				if (!$user_have_preminum) { $return_html .= 'showPremiumModal()'; } 
 				$return_html .= '">
         <div style="position: relative;">
-            <img src="'.SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic'].'" alt="Model" class="model-image">
+            <img src="'.$prof_img .'" alt="Model" class="model-image">
             <div class="status-indicator status-online"></div>
             <div class="verified-badge">
 			
@@ -173,10 +182,37 @@ if($userDetails){
                                              $return_html .= '<span class="profile-badge badge-premium">Premium</span>';
 
                                         } 
+										if ($is_user_preminum) { 
+
+                                            if ($preminum_plan == 'basic') { 
+
+                                                $return_html .= '<span class="profile-badge badge-premium">
+                                                    <div class="badge-user premium-basic-user">⭐</div>
+                                                    <p>Premium</p>
+                                                </span>';
+
+                                             } else { 
+
+                                               $return_html .= ' <span class="profile-badge badge-premium">
+                                                    <div class="badge-user diamond-elite-user"><span>💎</span></div>
+                                                    <p>Premium</p>
+                                                </span>';
+
+                                             } 
+
+                                         }
 
                                          if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { 
                                             $return_html .= '<span class="profile-badge badge-verified">Verified</span>';
                                        } 
+									   if (!empty($rowesdw) &&  $rowesdw['as_a_model'] == 'Yes') { 
+
+                                            $return_html .= '<span class="profile-badge creator-badge">
+                                                <div class="badge-user creator">✨</div>
+                                                <p>Creator</p>
+                                            </span>';
+
+                                        }
 			
 			$return_html .= '</div>
         </div>
