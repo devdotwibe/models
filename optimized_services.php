@@ -288,6 +288,23 @@ else{
                     <?php if($item['status'] ==='Completed') { ?>
 
                       <span class="status-badge badge-approved">Completed</span>
+					  
+					  <?php 
+					  
+					  $get_rating = DB::queryFirstRow("SELECT rating FROM service_review WHERE service_id =  %s ORDER BY send_date DESC", $item['id']);
+					  if(!empty($get_rating)){
+					  ?>
+					  
+					  <span class="rating-stars">
+					  <?php for($i=1; $i <= $get_rating['rating'];$i++){
+						  echo '★';
+						  
+					  } ?>
+					  
+					  
+					  </span>
+					  
+					  <?php } ?>
 
                     <?php }else if($item['status'] ==='Accept') { ?>
 
