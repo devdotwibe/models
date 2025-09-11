@@ -44,8 +44,7 @@ if (isset($_SESSION['log_user_unique_id'])) {
 
     if($is_user_blocked)
     {
-        $redirectUrl = $_SERVER['HTTP_REFERER'] ?? '/index.php';
-        header("Location: " . $redirectUrl);
+          echo "<script>window.location.href='" . ($_SERVER['HTTP_REFERER'] ?? '/index.php') . "';</script>";
         exit;
     }
 
