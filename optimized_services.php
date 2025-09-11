@@ -362,7 +362,7 @@ else{
 
                   <?php } else { ?>
 					<?php  if($userDetails['as_a_model'] =='Yes') { ?>
-					<button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
+					<?php /*?><button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button><?php */ ?>
                     <button class="btn btn-message" data-id="<?php echo $item['id'] ?>" onclick="OpenRequest(this)">Request Complete</button>
 					<?php } ?>
                     <button class="btn btn-message when_aprrove_button<?php echo $item['id'] ?>" onclick="openMessage(this)">Message</button>
@@ -993,10 +993,10 @@ else{
                         $(`.when_aprrove_button${accept_id}`).remove();
 
                         $(`#when_aprrove_button${accept_id}`).before(`
-                          <button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>
 						  <button class="btn btn-message" data-id="${accept_id}" onclick="OpenRequest(this)">Request Complete</button>
                           <button class="btn btn-message" onclick="openMessage(this)">Message</button>
                         `);
+						/*<button class="btn btn-primary" onclick="prepareSession('robert')">Prepare Session</button>*/
                     }
 					
 					if(response.action =='Decline')
