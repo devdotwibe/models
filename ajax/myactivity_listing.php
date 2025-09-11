@@ -52,6 +52,30 @@ if($userDetails){
 				$get_ids[] = $vw_you['profile_user_id'];
 			}
 		}
+	}else if($type == 'meet'){
+		$group_chat_array = DB::query("select DISTINCT model_unique_id from model_booking where user_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Meetup'");
+		$get_uids = array();
+		if(!empty($group_chat_array)){
+			foreach($group_chat_array as $vw_you){
+				$get_uids[] = "'".$vw_you['model_unique_id']."'";
+			}
+		}
+	}else if($type == 'travel'){
+		$group_chat_array = DB::query("select DISTINCT model_unique_id from model_booking where user_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Travel'");
+		$get_uids = array();
+		if(!empty($group_chat_array)){
+			foreach($group_chat_array as $vw_you){
+				$get_uids[] = "'".$vw_you['model_unique_id']."'";
+			}
+		}
+	}else if($type == 'collaboration'){
+		$group_chat_array = DB::query("select DISTINCT model_unique_id from model_booking where user_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Collaboration'");
+		$get_uids = array();
+		if(!empty($group_chat_array)){
+			foreach($group_chat_array as $vw_you){
+				$get_uids[] = "'".$vw_you['model_unique_id']."'";
+			}
+		}
 	}else if($type == 'group_chat'){
 		$group_chat_array = DB::query("select DISTINCT model_unique_id from model_booking where user_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Group Chat'");
 		$get_uids = array();
