@@ -995,18 +995,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                                 <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] != $_SESSION['log_user_unique_id']) { ?>
 
-                                                    <div class="action-item" id="hide_profile" bis_skin_checked="1">
-
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <line x1="12" y1="16" x2="12" y2="12"></line>
-                                                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                                                        </svg>
-                                                        Hide Profile
-
-                                                    </div>
-
-                                                    <div class="action-item" id="block-profile" bis_skin_checked="1">
+                                                    <div class="action-item" id="block-profile" bis_skin_checked="1" onclick="BlockUser('<?php echo $_SESSION['log_user_id'] ?>','<?php echo $modelDetails['id']  ?>')">
 
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                             <rect x="3" y="8" width="18" height="4" rx="1"></rect>
@@ -1015,7 +1004,7 @@ body .owl-carousel .owl-nav.disabled {
                                                             <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
                                                         </svg>
 
-                                                        Block Profile
+                                                        <span id="block_profile">Block Profile </span>
 
                                                     </div>
 
@@ -3154,6 +3143,32 @@ body .owl-carousel .owl-nav.disabled {
 <script>
 
 
+        function BlockUser(user_id,blocked_user_id)
+        {
+
+            $.ajax({
+
+                    url: 'user/profile/savepost.php',
+
+                    data:{
+
+                        user_id :user_id,
+                        blocked_user_id:blocked_user_id,
+                        action:'blocked_user',
+                    },
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (response) {
+
+                        if (response.status === 'success') {
+
+                        }
+                        
+                    }
+                });
+        }   
+
+    
     $(document).ready(function() {
 
         $('.toggle-option').on('click', function() {
