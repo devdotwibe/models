@@ -101,7 +101,7 @@ if (!empty($country)) {
                                 
         $blocked_ids = implode(',', array_map('intval', $blocked_users));
 
-       $where[] = " AND mu.id NOT IN ($blocked_ids) ";
+       $where[] = "mu.id NOT IN ($blocked_ids) ";
         
     }   
 
