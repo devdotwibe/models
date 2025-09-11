@@ -242,6 +242,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     }
 
+    if (isset($_POST['action']) && $_POST['action'] == 'blocked_user') {
+
+        $user_id = $_POST['user_id'] ?? null;
+
+        $blocked_user_id = $_POST['blocked_user_id'] ?? null;
+
+        if ($user_id && $blocked_user_id) {
+    
+            DB::insertIgnore("block_users", [
+                "user_id" => $user_id,
+                "blocked_user_id" => $blocked_user_id
+            ]);
+
+            $blockedUsers = DB::query(
+                "SELECT bu.id, bu.blocked_user_id, u.name, bu.created_at 
+                FROM block_users bu
+                JOIN users u ON u.id = bu.blocked_user_id
+                WHERE bu.user_id = %i 
+                ORDER BY bu.created_at DESC",
+                $user_id
+            );
+
+            echo json_encode([
+                "status" => "success",
+                "blocked_users" => $blockedUsers
+            ]);
+        } else {
+            echo json_encode([
+                "status"  => "error",
+                "message" => "Both user_id and blocked_user_id are required"
+            ]);
+        }
+    }
+
 }
 
     if (isset($_GET['action']) && $_GET['action'] == 'get_stories') {
@@ -275,41 +309,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-
-
-    if (isset($_GET['action']) && $_GET['action'] == 'blocked_user') {
-
-        $user_id = $_GET['user_id'] ?? null;
-
-        $blocked_user_id = $_GET['blocked_user_id'] ?? null;
-
-        if ($user_id && $blocked_user_id) {
-    
-            DB::insertIgnore("block_users", [
-                "user_id" => $user_id,
-                "blocked_user_id" => $blocked_user_id
-            ]);
-
-            $blockedUsers = DB::query(
-                "SELECT bu.id, bu.blocked_user_id, u.name, bu.created_at 
-                FROM block_users bu
-                JOIN users u ON u.id = bu.blocked_user_id
-                WHERE bu.user_id = %i 
-                ORDER BY bu.created_at DESC",
-                $user_id
-            );
-
-            echo json_encode([
-                "status" => "success",
-                "blocked_users" => $blockedUsers
-            ]);
-        } else {
-            echo json_encode([
-                "status"  => "error",
-                "message" => "Both user_id and blocked_user_id are required"
-            ]);
-        }
-    }
  
 
 
