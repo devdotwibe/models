@@ -554,12 +554,6 @@ include('includes/helper.php');
 
             $preminum_plan = $result['plan_status'];
         }
-
-             $blocked_users = BlockedUsers($_SESSION["log_user_id"]);
-                        
-                        print_r($blocked_users);
-
-                        die();
     }
 
     ?>
@@ -650,11 +644,7 @@ include('includes/helper.php');
                         }
 
                         $blocked_users = BlockedUsers($_SESSION["log_user_id"]);
-                        
-                        print_r($BlockedUsers);
-
-                        die();
-                    
+        
                     }
 
                     $followed_user_ids = [];
@@ -882,6 +872,15 @@ include('includes/helper.php');
                             }
                         }
 
+                        
+                        if (!empty($blocked_users)) {
+                            
+                            $blocked_ids = implode(',', array_map('intval', $blocked_users));
+
+                            $where .= " AND mu.id NOT IN ($blocked_ids) ";
+
+                        }
+
                         $sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id JOIN model_privacy_settings pu ON pu.unique_model_id = mu.unique_id  WHERE mu.verified = '1' " . $where . "  Order by mu.id DESC LIMIT $limit OFFSET $offset";
 
                     } else if (isset($_GET['sort']) && $_GET['sort'] == 'newest') {
@@ -891,6 +890,14 @@ include('includes/helper.php');
                         $row_cnt = mysqli_fetch_assoc($result_count);
 
                         $order = "";
+
+                         if (!empty($blocked_users)) {
+                            
+                            $blocked_ids = implode(',', array_map('intval', $blocked_users));
+
+                            $where .= " AND mu.id NOT IN ($blocked_ids) ";
+                            
+                        }
 
                         $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList) " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
 
@@ -922,7 +929,15 @@ include('includes/helper.php');
                         $row_cnt = mysqli_fetch_assoc($result_count);
 
 
-                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($allIds)  AND mu.id  IN ($basicList) $order LIMIT $limit OFFSET $offset";
+                        if (!empty($blocked_users)) {
+                            
+                            $blocked_ids = implode(',', array_map('intval', $blocked_users));
+
+                            $where .= " AND mu.id NOT IN ($blocked_ids) ";
+                            
+                        }
+
+                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($allIds)  AND mu.id  IN ($basicList)   $where  $order LIMIT $limit OFFSET $offset";
                     } else {
 
 
@@ -971,6 +986,15 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
+                            if (!empty($blocked_users)) {
+                            
+                                $blocked_ids = implode(',', array_map('intval', $blocked_users));
+
+                                $where .= " AND mu.id NOT IN ($blocked_ids) ";
+                                
+                            }
+
+
                             $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList)" . $where . " " . $order . " LIMIT $limit OFFSET $offset";
 
                         } else {
@@ -992,7 +1016,17 @@ include('includes/helper.php');
 
                             $row_cnt = mysqli_fetch_assoc($result_count);
 
-                            $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id IN ($idPrivacy) WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList)  $order LIMIT $limit OFFSET $offset";
+
+                            if (!empty($blocked_users)) {
+                            
+                                $blocked_ids = implode(',', array_map('intval', $blocked_users));
+
+                                $where .= " AND mu.id NOT IN ($blocked_ids) ";
+                                
+                            }
+                            
+
+                            $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id IN ($idPrivacy) WHERE mu.id IN ($idList)  AND mu.id  IN ($basicList) $where  $order LIMIT $limit OFFSET $offset";
                         }
                     }
 
