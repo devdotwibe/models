@@ -281,18 +281,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
            
                 }
 
-            $blockedUsers = DB::query(
-                "SELECT bu.id, bu.blocked_user_id, u.name, bu.created_at 
-                FROM block_users bu
-                JOIN users u ON u.id = bu.blocked_user_id
-                WHERE bu.user_id = %i 
-                ORDER BY bu.created_at DESC",
-                $user_id
-            );
-
             echo json_encode([
                 "status" => "success",
-                "blocked_users" => $blockedUsers
+                "blocked_users" => 'successfully updated'
             ]);
 
 
