@@ -91,7 +91,6 @@ if (isset($_SESSION['log_user_id'])) {
           $result = DB::queryFirstRow($sqls);
 
           $totalCoins = $result['total_coins'] ?? 0;
-
       ?>
 
   <main>
@@ -229,6 +228,16 @@ if (isset($_SESSION['log_user_id'])) {
                         $is_user_verified = true;
                     }
 
+
+
+                    $sqls = "SELECT AVG(rating) AS avg_rating 
+                          FROM service_review 
+                          WHERE sender = '" . $model_unique_id . "'";
+
+                  $result = DB::queryFirstRow($sqls);
+
+                  $average_rating = $result['avg_rating'] ?? 0;
+
                 ?>
 
                 <?php if ($file_type == 'Image') { ?>
@@ -301,7 +310,7 @@ if (isset($_SESSION['log_user_id'])) {
                                   points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                                 </polygon>
                               </svg>
-                              <span class="text-xs text-white/60">4.9</span>
+                              <span class="text-xs text-white/60"><?= $average_rating ?></span>
                             </div>
                           </div>
                         </div>

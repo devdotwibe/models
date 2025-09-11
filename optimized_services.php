@@ -306,10 +306,11 @@ else{
 					  ?>
 					  
 					  <span class="rating-stars">
-					  <?php for($i=1; $i <= $get_rating['rating'];$i++){
-						  echo '★';
-						  
-					  } ?>
+              
+              <?php for($i=1; $i <= $get_rating['rating'];$i++){
+                echo '★';
+                
+              } ?>
 					  
 					  
 					  </span>
