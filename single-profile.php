@@ -42,6 +42,12 @@ if (isset($_SESSION['log_user_unique_id'])) {
 
     $is_user_blocked = CheckBlockUser($_SESSION["log_user_id"],$modelDetails['id']);
 
+    if($is_user_blocked)
+    {
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+
 // else {
 //   $error = 'login';
 
