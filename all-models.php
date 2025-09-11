@@ -624,6 +624,8 @@ include('includes/helper.php');
 
                     $condtion = "";
 
+                    $blocked_users = [];
+
                     if (isset($_SESSION["log_user_id"])) {
 
                         $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
@@ -640,6 +642,12 @@ include('includes/helper.php');
                         } else {
                             $privacy_user_ids = '';
                         }
+
+                        $blocked_users = BlockedUsers($_SESSION["log_user_id"]);
+                        
+                        print_r($BlockedUsers);
+
+                        die();
                     
                     }
 
@@ -869,6 +877,7 @@ include('includes/helper.php');
                         }
 
                         $sqls = "SELECT mu.* FROM model_extra_details md join model_user mu on mu.unique_id = md.unique_model_id JOIN model_privacy_settings pu ON pu.unique_model_id = mu.unique_id  WHERE mu.verified = '1' " . $where . "  Order by mu.id DESC LIMIT $limit OFFSET $offset";
+
                     } else if (isset($_GET['sort']) && $_GET['sort'] == 'newest') {
 
                         $sqls_count = "SELECT COUNT(*) AS total FROM model_user WHERE verified = '1' ";
@@ -878,6 +887,7 @@ include('includes/helper.php');
                         $order = "";
 
                         $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList) " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
+
                     } else if (isset($_GET['sort']) && $_GET['sort'] == 'online') {
 
                         $onlineUserIds = array();

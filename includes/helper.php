@@ -26,6 +26,22 @@ function h_my_ip_address(){
 
 		return $exists > 0 ? true : false;
 	}
+
+	function BlockedUsers($user_id)
+	{
+		$rows = DB::query(
+			"SELECT blocked_user_id FROM block_users WHERE user_id = %i",
+			$user_id
+		);
+
+		$blocked_users = [];
+		foreach ($rows as $row) {
+			$blocked_users[] = $row['blocked_user_id'];
+		}
+
+		return $blocked_users;
+	}
+
 	function getCountry($country_id)
 	{
 		if (is_numeric($country_id)) {
