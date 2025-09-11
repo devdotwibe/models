@@ -569,7 +569,8 @@ else{
                     <button class="tab-btn active" onclick="openTab('details')">Ad Details</button>
 				<?php } ?>
                     <button class="tab-btn <?php if(empty($form_data['description'])){ echo 'active'; } ?>" onclick="openTab('specifications')">Specifications</button>
-                    <button class="tab-btn" onclick="openTab('availability')">Availability</button>
+
+
 					<?php if(!empty($form_data['terms_conditions'])){ ?>
                     <button class="tab-btn" onclick="openTab('terms')">Terms & Conditions</button>
 					<?php } ?>
