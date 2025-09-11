@@ -995,7 +995,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                                 <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] != $_SESSION['log_user_unique_id']) { ?>
 
-                                                    <div class="action-item" id="block-profile" bis_skin_checked="1" onclick="BlockUser('<?php echo $_SESSION['log_user_id'] ?>','<?php echo $modelDetails['id']  ?>')">
+                                                    <div class="action-item" id="block-profile" bis_skin_checked="1" onclick="BlockUser('<?php echo $_SESSION['log_user_id'] ?>','<?php echo $modelDetails['id']  ?>','<?php echo $modelDetails['name']  ?>')">
 
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                             <rect x="3" y="8" width="18" height="4" rx="1"></rect>
@@ -3143,7 +3143,7 @@ body .owl-carousel .owl-nav.disabled {
 <script>
 
 
-        function BlockUser(user_id,blocked_user_id)
+        function BlockUser(user_id,blocked_user_id,profile_name)
         {
 
             $.ajax({
@@ -3162,6 +3162,9 @@ body .owl-carousel .owl-nav.disabled {
 
                         if (response.status === 'success') {
 
+                            $('#block_profile').text('Profile Blocked');
+
+                             showNotification(`You Blocked ${profile_name}!`, 'success');
                         }
                         
                     }
