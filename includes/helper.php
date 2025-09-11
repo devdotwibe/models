@@ -30,7 +30,7 @@ function h_my_ip_address(){
 	function BlockedUsers($user_id)
 	{
 		$rows = DB::query(
-			"SELECT blocked_user_id FROM block_users WHERE user_id = %i",
+			"SELECT blocked_user_id FROM block_users WHERE user_id = %s",
 			$user_id
 		);
 
