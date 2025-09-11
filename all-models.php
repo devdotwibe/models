@@ -557,7 +557,7 @@ include('includes/helper.php');
 
              $blocked_users = BlockedUsers($_SESSION["log_user_id"]);
                         
-                        print_r($BlockedUsers);
+                        print_r($blocked_users);
 
                         die();
     }
