@@ -53,27 +53,39 @@ if($userDetails){
 			}
 		}
 	}else if($type == 'meet'){
-		$group_chat_array = DB::query("select DISTINCT model_unique_id from model_booking where user_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Meetup'");
+		if($userDetails['as_a_model'] =='Yes'){
+			$group_chat_array = DB::query("select DISTINCT user_unique_id as uid from model_booking where model_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Meetup' AND status='Completed'");
+		}else{
+			$group_chat_array = DB::query("select DISTINCT model_unique_id as uid from model_booking where user_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Meetup' AND status='Completed'");
+		}
 		$get_uids = array();
 		if(!empty($group_chat_array)){
 			foreach($group_chat_array as $vw_you){
-				$get_uids[] = "'".$vw_you['model_unique_id']."'";
+				$get_uids[] = "'".$vw_you['uid']."'";
 			}
 		}
 	}else if($type == 'travel'){
-		$group_chat_array = DB::query("select DISTINCT model_unique_id from model_booking where user_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Travel'");
+		if($userDetails['as_a_model'] =='Yes'){
+			$group_chat_array = DB::query("select DISTINCT user_unique_id as uid from model_booking where model_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Travel' AND status='Completed'");
+		}else{
+			$group_chat_array = DB::query("select DISTINCT model_unique_id as uid from model_booking where user_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Travel' AND status='Completed'");
+		}
 		$get_uids = array();
 		if(!empty($group_chat_array)){
 			foreach($group_chat_array as $vw_you){
-				$get_uids[] = "'".$vw_you['model_unique_id']."'";
+				$get_uids[] = "'".$vw_you['uid']."'";
 			}
 		}
 	}else if($type == 'collaboration'){
-		$group_chat_array = DB::query("select DISTINCT model_unique_id from model_booking where user_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Collaboration'");
+		if($userDetails['as_a_model'] =='Yes'){
+			$group_chat_array = DB::query("select DISTINCT user_unique_id as uid from model_booking where model_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Collaboration' AND status='Completed'");
+		}else{
+			$group_chat_array = DB::query("select DISTINCT model_unique_id as uid from model_booking where user_unique_id='" . $userDetails['unique_id'] . "' AND service_name='Collaboration' AND status='Completed'");
+		}
 		$get_uids = array();
 		if(!empty($group_chat_array)){
 			foreach($group_chat_array as $vw_you){
-				$get_uids[] = "'".$vw_you['model_unique_id']."'";
+				$get_uids[] = "'".$vw_you['uid']."'";
 			}
 		}
 	}else if($type == 'group_chat'){
@@ -179,11 +191,6 @@ if($userDetails){
 
                                         } 
 
-                                       if($is_user_preminum) { 
-
-                                             $return_html .= '<span class="profile-badge badge-premium">Premium</span>';
-
-                                        } 
 										if ($is_user_preminum) { 
 
                                             if ($preminum_plan == 'basic') { 
@@ -295,6 +302,7 @@ if($userDetails){
 		echo json_encode([
 					'status' => 'error',
 					'message' =>  'No users found',
+					'sql'=>$group_chat_array
 				]);
 				exit;
 		}

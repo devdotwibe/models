@@ -365,7 +365,11 @@ $viewer_me_array = DB::query("select profile_user_id from model_user_profile_vie
 //Code for booked services
 $meetup_count = 0; $travel_count = 0; 
 $collaboration_count = 0;
-$service_group = mysqli_query($con, "select service_name,COUNT(DISTINCT model_unique_id) AS service_count from model_booking where user_unique_id='".$_SESSION['log_user_unique_id']."' GROUP BY service_name");
+if($userDetails['as_a_model'] =='Yes'){
+	$service_group = mysqli_query($con, "select service_name,COUNT(DISTINCT user_unique_id) AS service_count from model_booking where model_unique_id='".$_SESSION['log_user_unique_id']."' AND status='Completed' GROUP BY service_name");
+}else{
+	$service_group = mysqli_query($con, "select service_name,COUNT(DISTINCT model_unique_id) AS service_count from model_booking where user_unique_id='".$_SESSION['log_user_unique_id']."' AND status='Completed' GROUP BY service_name");
+}
 if (mysqli_num_rows($service_group) > 0) {
 	while ($row_serv = mysqli_fetch_assoc($service_group)) {
 		$service_name = $row_serv['service_name'];
