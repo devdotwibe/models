@@ -64,22 +64,35 @@ if (isset($_SESSION['log_user_id'])) {
     </div>
   </div>
 
-  <?php
-  $photo_count = 0;
-  $video_count = 0;
-  $log_user_id = $_SESSION["log_user_unique_id"];
-  $sqls = "SELECT * FROM user_purchased_image WHERE user_unique_id = '" . $log_user_id . "' ORDER BY id DESC";
-  $resultd = mysqli_query($con, $sqls);
-  if (mysqli_num_rows($resultd) > 0) {
-    while ($rowesdw = mysqli_fetch_assoc($resultd)) {
-      if ($rowesdw['file_type'] == 'Image') {
-        $photo_count++;
-      } else if ($rowesdw['file_type'] == 'Video') {
-        $video_count++;
-      }
-    }
-  }
-  ?>
+      <?php
+
+          $photo_count = 0;
+          $video_count = 0;
+          $log_user_id = $_SESSION["log_user_unique_id"];
+          
+          $sqls = "SELECT * FROM user_purchased_image WHERE user_unique_id = '" . $log_user_id . "' ORDER BY id DESC";
+
+          $resultd = mysqli_query($con, $sqls);
+          if (mysqli_num_rows($resultd) > 0) {
+            while ($rowesdw = mysqli_fetch_assoc($resultd)) {
+              if ($rowesdw['file_type'] == 'Image') {
+                $photo_count++;
+              } else if ($rowesdw['file_type'] == 'Video') {
+                $video_count++;
+              }
+            }
+          }
+
+
+          $sqls = "SELECT SUM(file_coins) AS total_coins 
+          FROM user_purchased_image 
+          WHERE user_unique_id = '" . $log_user_id . "'";
+
+          $result = DB::queryFirstRow($sqls);
+
+          $totalCoins = $result['total_coins'] ?? 0;
+
+      ?>
 
   <main>
     <!-- Premium Page Header -->
@@ -116,8 +129,10 @@ if (isset($_SESSION['log_user_id'])) {
                   <div class="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full" style="width: 45%"></div>
               </div><?php */ ?>
           </div>
+
           <div class="anim-div glass-ultra p-4 sm:p-6 rounded-2xl text-center animate-bounce-in">
-            <div class="text-xl sm:text-2xl font-bold gradient-text-premium mb-2">$1,247</div>
+
+            <div class="text-xl sm:text-2xl font-bold gradient-text-premium mb-2">$ <?=$totalCoins ?? 0?> </div>
             <div class="text-white/70 font-medium text-sm sm:text-base">Total Investment</div>
             <?php /*?><div class="w-full bg-white/10 rounded-full h-2 mt-3">
                   <div class="bg-gradient-to-r from-yellow-500 to-orange-500 h-2 rounded-full" style="width: 85%"></div>
