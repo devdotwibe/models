@@ -554,6 +554,12 @@ include('includes/helper.php');
 
             $preminum_plan = $result['plan_status'];
         }
+
+             $blocked_users = BlockedUsers($_SESSION["log_user_id"]);
+                        
+                        print_r($BlockedUsers);
+
+                        die();
     }
 
     ?>
