@@ -624,6 +624,7 @@ if(!empty($userDetails['profile_pic'])){
 
         $count_sql = "SELECT COUNT(*) as total 
                       FROM live_posts 
+                      JOIN model_user ON live_posts.post_author = model_user.id
                       WHERE post_author IN ($placeholders) $where ";
         $count_stmt = $con->prepare($count_sql);
         $count_stmt->bind_param($types, ...$followed_user_ids);
