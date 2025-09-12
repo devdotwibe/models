@@ -49,52 +49,72 @@
                             S. no.
                           </th>
                           <th>
-                            User Unique id
+                            Reported By
                           </th>
                           <th>
-                            Model Unique id
+                            Reported User
                           </th>
                           <th>
-                            File Unique id
+                            Descrition
                           </th>
                           <th>
-                            File coins
+                            Attachment
                           </th>
                           <th>
-                            File Type
-                          </th>
-                          <th>
-                            Purchase Date
+                            Reported Data
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                          $sqls = "SELECT * FROM user_purchased_image Order by id DESC";
+                          $sqls = "SELECT * FROM user_reports Order by id DESC";
                           $resultd = mysqli_query($con, $sqls);
                           $count = 1;
                             if (mysqli_num_rows($resultd) > 0) {
                               while ($rowesdw = mysqli_fetch_assoc($resultd)){   
+
+                                $reported_by_id =  $rowesdw['user_id'];
+
+                                $repoted_user_id =  $rowesdw['reported_user_id'];
+
+                                $attachment = $rowesdw['attachment'];
+
+                                $reported_by_detail = get_data('model_user',array('id'=>$reported_by_id),true);
+
+                                $repoted_user_detail = get_data('model_user',array('id'=>$repoted_user_id),true);
+
+                                $repoted_date = $rowesdw['created_at'];
+
+                                $f_report_date = date('d-m-Y', strtotime($repoted_date));
+
+                                $imageUrl = "";
+
+                                if (checkImageExists($attachment)) {
+
+                                    $imageUrl = SITEURL . $attachment;
+                                }
+
                         ?>
+
                         <form method="post" >
                         <tr>
                           <td>
                             <?php echo $count; ?>
                           </td>
                           <td>
-                            <?php echo $rowesdw['user_unique_id']; ?>
+                            <?php echo $reported_by_detail['name']; ?>
                           </td>
                           <td>
-                            <?php echo $rowesdw['model_unique_id']; ?>
+                            <?php echo $repoted_user_detail['name']; ?>
                           </td>
                           <td>
-                            <?php echo $rowesdw['file_unique_id']; ?>
+                            <?php echo $rowesdw['description']; ?>
                           </td>
                           <td>
-                            <?php echo $rowesdw['file_coins']; ?>
+                                <img src="<?php echo $imageUrl ?>" >
                           </td>
                           <td>
-                            <?php echo $rowesdw['file_type']; ?>
+                            <?php echo $f_report_date; ?>
                           </td>
                           <td>
                             <?php 
