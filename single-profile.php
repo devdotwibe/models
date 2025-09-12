@@ -3245,6 +3245,13 @@ body .owl-carousel .owl-nav.disabled {
                     StoryCloseModal();
                  }
 
+                if (response.status === 'error') {
+
+                    showNotification(`${response.message}`, 'error');
+
+                    StoryCloseModal();
+                 }
+
             },
             error: function (xhr, status, error) {
 
