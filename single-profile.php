@@ -626,7 +626,8 @@ body .owl-carousel .owl-nav.disabled {
 
 <body class="enhanced5 min-h-screen bg-animated text-white socialwall-page">
 <!-- Premium Particle System -->
-<!-- <div class="particles" id="particles"></div> -->
+ 
+<div class="particles" id="particles"></div>
 
   <?php if (isset($_SESSION["log_user_id"])) { ?>
  
