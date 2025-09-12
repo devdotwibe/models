@@ -67,10 +67,14 @@
                       </thead>
                       <tbody>
                         <?php
+
                           $sqls = "SELECT * FROM user_reports Order by id DESC";
+
                           $resultd = mysqli_query($con, $sqls);
                           $count = 1;
+
                             if (mysqli_num_rows($resultd) > 0) {
+
                               while ($rowesdw = mysqli_fetch_assoc($resultd)){   
 
                                 $reported_by_id =  $rowesdw['user_id'];
@@ -96,7 +100,6 @@
 
                         ?>
 
-                        <form method="post" >
                         <tr>
                           <td>
                             <?php echo $count; ?>
@@ -116,55 +119,13 @@
                           <td>
                             <?php echo $f_report_date; ?>
                           </td>
-                          <td>
-                            <?php 
-                            $timestamp = strtotime($rowesdw['purchase_date']);
-                            echo date('d-m-Y', $timestamp);
-                            //echo $rowesdw['purchase_date']; ?>
-                          </td>
-                          <!-- <td>
-                            <span style="cursor:pointer;"  class="btn btn-success" data-toggle="modal" data-target="#exampleModalmail<?php echo $rowesdw['id']; ?>">Reply</span>
-                          </td> -->
-                          </form>
-
-                          <!-- model- togle -->
-        			             <div class="modal fade" id="exampleModalmail<?php echo $rowesdw['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"      aria-hidden="true">
-        			              <div class="modal-dialog" role="document">
-        			                <div class="modal-content">
-        			                  <div class="modal-header">
-        			                    <h5 class="modal-title" id="exampleModalLabel">Responds</h5>
-        			                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        			                      <span aria-hidden="true">&times;</span>
-        			                    </button>
-        			                  </div>
-        			                    <div class="modal-body">
-        			                      <form method="post" action="query-reply.php">
-        			                        <input type="hidden" name="query_id" value="<?php echo $rowesdw['id']; ?>">
-        			                        <input type="hidden" name="email" value="<?php echo $rowesdw['email']; ?>">
-        			                       <div class="form-group">
-        			                         <label for="subject"><b>Subject:</b></label>
-        			                          <input type="text" name="subject" class="form-control" placeholder="Enter subject" id="subject">
-        			                       </div>
-        			                        <div class="form-group">
-        			                         <label for="message"><b>Message:</b></label>
-        			                          <textarea type="text" name="message" class="form-control" placeholder="Enter message" id="message"></textarea>
-        			                        </div>
-        			                  <div class="modal-footer">
-        			                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-        			                    <button type="submit" name="reply" class="btn btn-primary">Reply</button>
-        			                  </div>
-        			                    </form>
-        			                  </div>
-        			                </div>
-        			              </div>
-        			            </div>
-
+    
                         </tr>
                         <?php
                           $count++;
                           }
                           } else {
-                            echo "Currently dont have contact query.";
+                            echo "Not Fount Any Reported Users ";
                           }
                         ?>
                       </tbody>
