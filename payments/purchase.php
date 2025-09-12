@@ -106,14 +106,15 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 
 			$showcoin =  $_POST['coins'];
 
-		} else if (isset($_POST['submit2500'])) {
-
-			$amount = $_POST['amount'];
-
-			$coins = $_POST['coins'] + 4000;
-
-			$showcoin =  $_POST['coins'];
 		}
+		// } else if (isset($_POST['submit2500'])) {
+
+		// 	$amount = $_POST['amount'];
+
+		// 	$coins = $_POST['coins'] + 4000;
+
+		// 	$showcoin =  $_POST['coins'];
+		// }
 		?>
 
 		<div class="purchase-payment-h3">
