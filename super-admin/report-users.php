@@ -91,12 +91,12 @@
 
                                 // $f_report_date = date('d-m-Y', strtotime($repoted_date));
 
-                                $imageUrl = "";
+                                // $imageUrl = "";
 
-                                if (checkImageExists($attachment)) {
+                                // if (checkImageExists($attachment)) {
 
-                                    $imageUrl = SITEURL . $attachment;
-                                }
+                                //     $imageUrl = SITEURL . $attachment;
+                                // }
 
                         ?>
 
@@ -112,7 +112,6 @@
                             <?php echo $rowesdw['description']; ?>
                           </td>
                           <td>
-                                <img src="<?php echo $imageUrl ?>" >
                           </td>
                           <td>
                           </td>
