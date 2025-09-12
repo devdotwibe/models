@@ -3143,7 +3143,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
               <?php }  */?>
 
-              <div class="flex justify-between items-center">
+              <!-- <div class="flex justify-between items-center">
                 <div>
                   <div class="font-medium">Text Chat</div>
                   <div class="text-sm text-white/60">Message-based chat</div>
@@ -3153,7 +3153,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <span class="font-bold mr-2">50</span>
                   <span class="text-sm text-white/60">/message</span>
                 </div>
-              </div>
+              </div> -->
+
+
             </div>
 
 
