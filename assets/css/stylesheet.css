@@ -12459,7 +12459,7 @@ overflow-x: auto !important;
   color: var(--menu-text);
 }
 .menu-item:hover{
-  color: transparent;
+  color:  var(--menu-text);
 }
 
 
