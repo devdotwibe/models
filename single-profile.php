@@ -1409,7 +1409,7 @@ body .owl-carousel .owl-nav.disabled {
 
                             <input type="hidden" name="user_id" id="user_id" value="<?php echo $rowesdw['id'] ?>">
 
-                            <div class="flex justify-between items-center">
+                            <div class="flex justify-between items-center post_submit " id="post_submit">
 
 
                                 <label for="post_image" id="post_image_label" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
@@ -3987,6 +3987,8 @@ jQuery('.send_gift_btn').click(function(){
             $('.file_type_sec').show();
 
             $('#post_image_label').hide();
+
+            $('#post_submit').addClass('image_posted');
             
         }
 
@@ -4041,6 +4043,9 @@ jQuery('.send_gift_btn').click(function(){
             $('.token_sec').hide();
 
             $('#post_image').val('');
+
+            $('#post_submit').removeClass('image_posted');
+            
         }
 
 
