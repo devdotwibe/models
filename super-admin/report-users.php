@@ -83,13 +83,13 @@
 
                                 $attachment = $rowesdw['attachment'];
 
-                                // $reported_by_detail = get_data('model_user',array('id'=>$reported_by_id),true);
+                                $reported_by_detail = get_data('model_user',array('id'=>$reported_by_id),true);
 
-                                // $repoted_user_detail = get_data('model_user',array('id'=>$repoted_user_id),true);
+                                $repoted_user_detail = get_data('model_user',array('id'=>$repoted_user_id),true);
 
-                                // $repoted_date = $rowesdw['created_at'];
+                                $repoted_date = $rowesdw['created_at'];
 
-                                // $f_report_date = date('d-m-Y', strtotime($repoted_date));
+                                $f_report_date = date('d-m-Y', strtotime($repoted_date));
 
                                 $imageUrl = "";
 
@@ -98,6 +98,8 @@
                                 //     $imageUrl = SITEURL . $attachment;
                                 // }
 
+                                 $imageUrl = SITEURL . $attachment;
+
                         ?>
 
                         <tr>
@@ -105,16 +107,19 @@
                             <?php echo $count; ?>
                           </td>
                           <td>
+                            <?php echo $reported_by_detail['name']; ?>
                           </td>
                           <td>
+                            <?php echo $repoted_user_detail['name']; ?>
                           </td>
                           <td>
                             <?php echo $rowesdw['description']; ?>
                           </td>
                           <td>
-                                <img src="<?php echo $imageUrl; ?>" >
+                                <img src="<?php echo $imageUrl ?>" >
                           </td>
                           <td>
+                            <?php echo $f_report_date; ?>
                           </td>
     
                         </tr>
