@@ -1380,6 +1380,9 @@ if(!empty($userDetails['profile_pic'])){
                       }
                   }
 
+
+                  $modelDetails = get_data('model_user',array('id'=>$post_user_id),true);
+
                   $result = CheckPremiumAccess($modelDetails['id']);
 
                   $preminum_plan = "";
