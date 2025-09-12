@@ -3016,6 +3016,7 @@ textarea:focus {
     transition: all 0.2s ease;
     cursor: pointer;
      color:  var(--menu-text);
+     border-radius: 0;
 }
 
 
@@ -3023,6 +3024,7 @@ textarea:focus {
 .socialwall-page .menu-item:hover {
     background: rgba(0, 0, 0, 0.05);
     color:  var(--menu-text) !important;
+    transform: none;
 }
 
 .socialwall-page .menu-item svg {
