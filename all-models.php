@@ -1008,16 +1008,6 @@ include('includes/helper.php');
                                 $where .= " AND mu.id IN ($idPrivacy)";
                             } 
 
-                            $idsQuery = "SELECT id FROM model_user mu WHERE mu.verified = '1' $where";
-
-                            $result = mysqli_query($con, $idsQuery);
-
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                if (isUserOnline($row['id']) === 'Online') {
-                                    $onlineUserIds[] = $row['id'];
-                                }
-                            }
-
                             $idList = implode(',', $onlineUserIds);
 
                             $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList)";
@@ -1677,16 +1667,6 @@ include('includes/helper.php');
 
                                 $where .= " AND mu.id IN ($idPrivacy)";
                             } 
-
-                            $idsQuery = "SELECT id FROM model_user mu WHERE mu.verified = '1' $where";
-
-                            $result = mysqli_query($con, $idsQuery);
-
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                if (isUserOnline($row['id']) === 'Online') {
-                                    $onlineUserIds[] = $row['id'];
-                                }
-                            }
 
 
                             $idList = implode(',', $onlineUserIds);
