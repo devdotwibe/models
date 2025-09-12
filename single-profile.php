@@ -1016,7 +1016,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                                     </div>
 
-                                                    <div class="action-item" id="report-profile" bis_skin_checked="1">
+                                                    <div class="action-item" id="report-profile" onclick="ReportUser('<?php echo $_SESSION['log_user_id'] ?>','<?php echo $modelDetails['id']  ?>','<?php echo $modelDetails['name']  ?>')" bis_skin_checked="1">
 
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                             <circle cx="12" cy="12" r="10"></circle>
@@ -2970,6 +2970,58 @@ body .owl-carousel .owl-nav.disabled {
             </div>
         </div>
 
+        <div class="modal-overlay" id="user_report_modal">
+                <div class="modal">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Report User</h2>
+                        <button class="close-modal" type="button" onclick="ReportCloseModal()">
+                            ✕
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="reportUserForm" enctype="multipart/form-data">
+                            <input type="hidden" name="user_id" id="report_user_id">
+                            <input type="hidden" name="reported_user_id" id="reported_user_id">
+                            <input type="hidden" name="profile_name" id="profile_name">
+
+                            <!-- Description -->
+                            <div class="form-group" style="margin-bottom: 15px;">
+
+                                <label for="report_description">Description</label>
+                                <textarea id="report_description" name="description" rows="3"
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-sm sm:text-base"
+                                    placeholder="Enter reason"></textarea>
+                                <span id="error_report_description" style="display: none;"></span>
+
+                            </div>
+
+                            <!-- Attachment -->
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label for="attachment" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
+                                    📎 Attach File
+                                </label>
+                                <input type="file" id="attachment" name="attachment" onchange="UserAttachment(this)" style="display: none;"
+                                    accept="image/*,.pdf,.doc,.docx,.txt" class="form-control">
+
+                                <span id="error_attachment" style="display: none;"></span>
+
+                                <div class="relative inline-block" style="display:none" id="filePreview_div_attachment">
+                                    <img id="filePreview_attachment" src="" alt="Preview"
+                                        class="w-32 h-32 object-cover mt-4 rounded-xl">
+                                </div>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div style="margin-top: 20px; display: flex; gap: 10px;">
+                                <button class="btn btn-primary" type="button" onclick="SubmitReportUser()">Submit</button>
+                                <button class="btn btn-secondary" type="button" onclick="StoryCloseModal()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
 
         <div class="modal-overlay" id="add_story_modal">
             <div class="modal">
@@ -3150,6 +3202,51 @@ body .owl-carousel .owl-nav.disabled {
 
 <script>
 
+    function ReportUser(user_id, reported_user_id, profile_name) {
+
+        $('#report_user_id').val(user_id);
+        $('#reported_user_id').val(reported_user_id);
+        $('#profile_name').val(profile_name);
+
+        $('#user_report_modal').addClass('active');
+    }
+
+    function ReportCloseModal() {
+
+        $('#user_report_modal').removeClass('active');
+
+        $('#reportUserForm')[0].reset();
+        $('#filePreview_div_story').hide();
+        $('#filePreview_attachment').attr('src', '');
+    }
+
+
+    function SubmitReportUser() {
+
+        const formData = new FormData(document.getElementById('reportUserForm'));
+
+        formData.append('action','report_user')
+
+        $.ajax({
+
+            url: 'user/profile/savepost.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+
+                showNotification(`Report submitted successfully!`, 'success');
+
+                StoryCloseModal();
+
+            },
+            error: function (xhr, status, error) {
+
+                alert('Something went wrong: ' + error);
+            }
+        });
+    }
 
         function BlockUser(user_id,blocked_user_id,profile_name)
         {
@@ -3644,6 +3741,32 @@ jQuery('.send_gift_btn').click(function(){
                     console.log(xhr.responseText);
                 }
             });
+        }
+
+       function UserAttachment(input) {
+
+            const file = input.files[0];
+            const preview = document.getElementById('filePreview_attachment');
+            const previewDiv = document.getElementById('filePreview_div_attachment');
+
+            if (!file) {
+                previewDiv.style.display = 'none';
+                return;
+            }
+
+            const fileType = file.type;
+
+            if (fileType.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    previewDiv.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = 'https://img.icons8.com/color/96/document.png'; 
+                previewDiv.style.display = 'block';
+            }
         }
 
 
