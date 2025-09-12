@@ -3208,7 +3208,7 @@ body .owl-carousel .owl-nav.disabled {
         $('#reported_user_id').val(reported_user_id);
         $('#profile_name').val(profile_name);
 
-        $('#user_report_name')text(profile_name);
+        $('#user_report_name').text(profile_name);
 
         $('#user_report_modal').addClass('active');
     }
@@ -3241,6 +3241,13 @@ body .owl-carousel .owl-nav.disabled {
                  if (response.status === 'success') {
 
                     showNotification(`Report submitted successfully!`, 'success');
+
+                    StoryCloseModal();
+                 }
+
+                if (response.status === 'error') {
+
+                    showNotification(`${response.message}`, 'error');
 
                     StoryCloseModal();
                  }
