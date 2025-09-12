@@ -98,7 +98,7 @@ require_once 'constant.php';
 
           <hr><p>Report Users</p><hr>
           <li class="nav-item">
-            <a class="nav-link" href="/report-users.php">
+            <a class="nav-link" href="report-users.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Reported Users List</span>
             </a>
