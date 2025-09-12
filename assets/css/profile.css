@@ -10600,6 +10600,12 @@ margin-top: 18px;
   bottom: 45px;
  
 }
+  .profile-header .profile-flex-wrapp {
+    display: flex;
+    flex-direction: column;
+  }
+
+
 
 }
 
