@@ -178,29 +178,75 @@ body .owl-carousel .owl-nav.disabled {
     });
 
 
-    $owl.on('play', 'video', function () {
+    function pauseOtherVideos(currentVideo) {
+        $owl.find('video').each(function () {
+        if (this !== currentVideo) {
+            try { this.pause(); } catch (e) {}
+        }
+        });
+    }
 
-        console.log('plauting');
+    // Helper: check if any video is currently playing
+    function anyVideoPlaying() {
+        var playing = false;
+        $owl.find('video').each(function () {
+        // video is playing if not paused and not ended
+        if (!this.paused && !this.ended) {
+            playing = true;
+            return false; // break
+        }
+        });
+        return playing;
+    }
 
-        $owl.trigger('stop.owl.autoplay');
+    // Bind video events (call after init and on refresh)
+    function bindVideoEvents() {
+        $owl.find('video').each(function () {
+        var vid = this;
+        // remove previously attached namespaced handlers
+        $(vid).off('.videoEvents');
+
+        // When a video plays -> stop carousel autoplay and pause other videos
+        $(vid).on('play.videoEvents', function () {
+            pauseOtherVideos(vid);
+            // stop Owl autoplay
+            $owl.trigger('stop.owl.autoplay');
+        });
+
+        // When a video is paused or ended -> resume autoplay if no other video is playing
+        $(vid).on('pause.videoEvents ended.videoEvents', function () {
+            // small timeout to allow browser to update paused state
+            setTimeout(function () {
+            if (!anyVideoPlaying()) {
+                $owl.trigger('play.owl.autoplay', [4000]); // resume with 4s timeout
+            }
+            }, 50);
+        });
+        });
+    }
+
+    // Bind events now (clones are created after init so call here)
+    bindVideoEvents();
+
+    // Re-bind after carousel is refreshed / changed (handles cloned items)
+    $owl.on('initialized.owl.carousel refreshed.owl.carousel', function () {
+        bindVideoEvents();
     });
 
-    // Resume carousel when video is paused
-    $owl.on('pause', 'video', function () {
-
-
-        console.log('paudinbg');
-
-        $owl.trigger('play.owl.autoplay');
+    // Whenever slide translation finishes, pause videos that are not in active slide
+    $owl.on('translated.owl.carousel changed.owl.carousel', function () {
+        // Pause videos not in active item to avoid background play
+        $owl.find('video').each(function () {
+        var $item = $(this).closest('.owl-item');
+        if (!$item.hasClass('active')) {
+            try { this.pause(); } catch (e) {}
+        }
+        });
     });
 
-    // Resume carousel when video ends
-    $owl.on('ended', 'video', function () {
-
-
-        console.log('eneding');
-
-        $owl.trigger('play.owl.autoplay');
+    // Optional: pause videos on slide change start too
+    $owl.on('change.owl.carousel', function () {
+        $owl.find('video').each(function () { try { this.pause(); } catch (e) {} });
     });
 
 
