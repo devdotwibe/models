@@ -93,10 +93,10 @@
 
                                 $imageUrl = "";
 
-                                if (checkImageExists($attachment)) {
+                                // if (checkImageExists($attachment)) {
 
-                                    $imageUrl = SITEURL . $attachment;
-                                }
+                                //     $imageUrl = SITEURL . $attachment;
+                                // }
 
                         ?>
 
