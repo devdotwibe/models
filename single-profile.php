@@ -3216,7 +3216,7 @@ body .owl-carousel .owl-nav.disabled {
         $('#user_report_modal').removeClass('active');
 
         $('#reportUserForm')[0].reset();
-        $('#filePreview_div_story').hide();
+        $('#filePreview_div_attachment').hide();
         $('#filePreview_attachment').attr('src', '');
     }
 
@@ -3762,11 +3762,25 @@ jQuery('.send_gift_btn').click(function(){
                     preview.src = e.target.result;
                     previewDiv.style.display = 'block';
                 }
+
+                $('#filePreview_attachment').after(`<button class="remove-btn absolute top-0 right-0" onclick="removePreviewReport(this)">×</button>`);
+
                 reader.readAsDataURL(file);
             } else {
                 preview.src = 'https://img.icons8.com/color/96/document.png'; 
                 previewDiv.style.display = 'block';
             }
+        }
+
+        function removePreviewReport(el)
+        {
+             $(el).remove();
+
+            $('#filePreview_attachment').attr('src',"");
+
+            $('#filePreview_div_attachment').hide();
+
+            $('#attachment').val("");
         }
 
 
