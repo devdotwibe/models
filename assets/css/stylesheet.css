@@ -12492,7 +12492,7 @@ min-height: 58px !important;
   height: auto
 }
 
-.booking-new #form {
+.booking-new form {
     max-width: 100%;
     width: 100%;
 }
