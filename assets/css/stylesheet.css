@@ -12070,7 +12070,7 @@ body.advt-page.my-purpose .scroll-indicator {
 
 
 
-#list_advertisements { 
+#list_advertisements {
     padding-inline: 30px;
 
     width: 100%;
@@ -12379,28 +12379,30 @@ overflow-x: auto !important;
 
 }
 
-.profile-advts .bg-blue-600:hover{
-background: linear-gradient(135deg, #3414ce, #280bf5);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(11, 59, 245, 0.4);
+.profile-advts .bg-blue-600:hover {
+    background: linear-gradient(135deg, #3414ce, #280bf5);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(11, 59, 245, 0.4);
 }
-  .adver-table-outer.mobile-adver-table {
+
+.adver-table-outer.mobile-adver-table {
     display: none;
-  }
+}
 
 
 
 .token-display img {
-width: 20px;
-  object-fit: cover;
+    width: 20px;
+    object-fit: cover;
 }
+
 .token-display {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 1.2rem;
-  font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 
@@ -12410,41 +12412,47 @@ width: 20px;
     overflow-y: auto;
     padding: 10px 0;
     padding-right: 15px;
-    margin:5% 0 0;
+    margin: 5% 0 0;
 }
- 
+
 .modal-scr::-webkit-scrollbar {
-  width: 4px; 
+    width: 4px;
 }
 
 .modal-scr::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.7); 
-  border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
 }
+
 .modal-scr::-webkit-scrollbar-thumb {
-  background: #a55cff; 
-  border-radius: 10px;
+    background: #a55cff;
+    border-radius: 10px;
 }
 
 .modal-scr::-webkit-scrollbar-thumb:hover {
-  background: #b30000; 
+    background: #b30000;
 }
 
-.socialwall-page .header-desk-outer .ultra-glass{
-background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-border-radius:50%;
-padding: 0.5rem !important;
-width:auto !important;
-height:auto !important;
+.socialwall-page .header-desk-outer .ultra-glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    padding: 0.5rem !important;
+    width: auto !important;
+    height: auto !important;
 }
 
-.socialwall-page .header-desk-outer .ultra-glass:hover{
+.socialwall-page .header-desk-outer .ultra-glass:hover {
     background-color: rgb(255 255 255 / 0.1);
 }
+
+.user-home-right .model-card {}
+
+
+
 
 
 
@@ -13866,7 +13874,11 @@ height:auto !important;
     }
 
 
-
+    header>div {
+        width: 85%;
+        margin-right: auto !important;
+        margin-left: 0 !important;
+    }
 
 
 }
@@ -14523,7 +14535,8 @@ height:auto !important;
         padding: 2px;
         width: 1rem;
         height: 1rem;
-        top: -0.5rem;
+        top: -0.1rem;
+        right: -4px;
     }
 
 
@@ -15097,7 +15110,7 @@ height:auto !important;
         margin-bottom: 20px;
     }
 
-        .adver-table-outer.mobile-adver-table .mob1>div:nth-child(1)>span{
+    .adver-table-outer.mobile-adver-table .mob1>div:nth-child(1)>span {
         margin-top: 8px;
     }
 
@@ -15115,29 +15128,30 @@ height:auto !important;
 
     }
 
-    
-  .adver-table-outer.mobile-adver-table .mob1.mob2 > div:nth-child(1){
-      flex-basis: 100%;
-    margin-bottom: 25px;
-      
-  }
+
+    .adver-table-outer.mobile-adver-table .mob1.mob2>div:nth-child(1) {
+        flex-basis: 100%;
+        margin-bottom: 25px;
+
+    }
 
 
-  .adver-table-outer.mobile-adver-table .mob1 > div:nth-child(3){
-      flex-basis: 100%;
-    margin-bottom: 25px;
-  }
-   .adver-table-outer.mobile-adver-table .mob1 > div:nth-child(4){
-          flex-basis: 100%;
-    margin-bottom: 25px;
-  }
+    .adver-table-outer.mobile-adver-table .mob1>div:nth-child(3) {
+        flex-basis: 100%;
+        margin-bottom: 25px;
+    }
+
+    .adver-table-outer.mobile-adver-table .mob1>div:nth-child(4) {
+        flex-basis: 100%;
+        margin-bottom: 25px;
+    }
 
 
 
     .adver-table-outer.mobile-adver-table .mob1.mob2>div:nth-child(2) {
 
         flex-basis: 100%;
-  margin-bottom:8px
+        margin-bottom: 8px
     }
 
 
