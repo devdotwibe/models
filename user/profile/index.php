@@ -1507,7 +1507,7 @@ if(!empty($userDetails['profile_pic'])){
             <div class="flex justify-between text-xs md:text-sm text-white/60">
               <!-- <span>🎯 95% match</span>
               <span>📍 3 miles</span> -->
-              <span>⭐ <?= $rating ?> rating <?php echo $post['unique_id'] ?></span>
+              <span>⭐ <?= $rating ?> rating <?php echo $modelDetails['unique_id'] ?></span>
             </div>
           </div>
 
