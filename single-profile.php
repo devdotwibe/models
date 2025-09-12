@@ -3768,6 +3768,9 @@ jQuery('.send_gift_btn').click(function(){
                 reader.readAsDataURL(file);
             } else {
                 preview.src = 'https://img.icons8.com/color/96/document.png'; 
+
+                 $('#filePreview_attachment').after(`<button class="remove-btn absolute top-0 right-0" onclick="removePreviewReport(this)">×</button>`);
+                 
                 previewDiv.style.display = 'block';
             }
         }
