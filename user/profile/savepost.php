@@ -327,8 +327,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($user_id && $reported_user_id) {
 
-                echo 'test'; die();
-        
                 $date = date('Y-m-d H:i:s');
 
                     $exists = DB::queryFirstField(
