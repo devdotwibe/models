@@ -3019,11 +3019,12 @@ textarea:focus {
     border-radius: 0;
 }
 
-.service-icon {
-    width: 2.5rem;
+.single-profile .service-icon {
+    width: 2.5rem ;
     height: 2.5rem;
     border-radius: 50%;
     font-size: 16px;
+    background: var(--primary-gradient);
 }
 
 
