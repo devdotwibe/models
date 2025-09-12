@@ -12455,6 +12455,13 @@ overflow-x: auto !important;
 .star-rating .star{
     color:#fff;
 }
+.menu-item{
+  color: var(--menu-text);
+}
+.menu-item:hover{
+  color: transparent;
+}
+
 
 
 
