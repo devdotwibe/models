@@ -10406,7 +10406,7 @@ body.profile-advts {
 
 
 
-    .profile-flex-wrapp {
+   .profile-header .profile-flex-wrapp {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -10414,7 +10414,7 @@ body.profile-advts {
   gap: 28px !important;
 }
 
-.profile-avatar-container{
+.profile-header .profile-avatar-container{
 margin-top: 18px;
 
 }
