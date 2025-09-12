@@ -83,9 +83,9 @@
 
                                 $attachment = $rowesdw['attachment'];
 
-                                $reported_by_detail = get_data('model_user',array('id'=>$reported_by_id),true);
+                                // $reported_by_detail = get_data('model_user',array('id'=>$reported_by_id),true);
 
-                                $repoted_user_detail = get_data('model_user',array('id'=>$repoted_user_id),true);
+                                // $repoted_user_detail = get_data('model_user',array('id'=>$repoted_user_id),true);
 
                                 $repoted_date = $rowesdw['created_at'];
 
@@ -107,10 +107,8 @@
                             <?php echo $count; ?>
                           </td>
                           <td>
-                            <?php echo $reported_by_detail['name']; ?>
                           </td>
                           <td>
-                            <?php echo $repoted_user_detail['name']; ?>
                           </td>
                           <td>
                             <?php echo $rowesdw['description']; ?>
