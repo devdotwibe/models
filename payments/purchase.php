@@ -79,34 +79,34 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 <body>
 	<div class="container">
 		<?php
-		// if (isset($_POST['submit10'])) {
-		// 	$amount = $_POST['amount'];
-		// 	$coins = $_POST['coins'];
+		if (isset($_POST['submit10'])) {
+			$amount = $_POST['amount'];
+			$coins = $_POST['coins'];
 
-		// 	$showcoin =  $_POST['coins'];
+			$showcoin =  $_POST['coins'];
 
-		// } else if (isset($_POST['submit100'])) {
-		// 	$amount = $_POST['amount'];
-		// 	$coins = $_POST['coins'];
+		} else if (isset($_POST['submit100'])) {
+			$amount = $_POST['amount'];
+			$coins = $_POST['coins'];
 
-		// 	$showcoin =  $_POST['coins'];
+			$showcoin =  $_POST['coins'];
 
-		// } else if (isset($_POST['submit500'])) {
-		// 	$amount = $_POST['amount'];
+		} else if (isset($_POST['submit500'])) {
+			$amount = $_POST['amount'];
 
-		// 	$coins = $_POST['coins'] + 750;
+			$coins = $_POST['coins'] + 750;
 
-		// 	$showcoin =  $_POST['coins'];
+			$showcoin =  $_POST['coins'];
 
-		// } else if (isset($_POST['submit1000'])) {
+		} else if (isset($_POST['submit1000'])) {
 
-		// 	$amount = $_POST['amount'];
+			$amount = $_POST['amount'];
 
-		// 	$coins = $_POST['coins'] + 2000;
+			$coins = $_POST['coins'] + 2000;
 
-		// 	$showcoin =  $_POST['coins'];
+			$showcoin =  $_POST['coins'];
 
-		// }
+		}
 		// } else if (isset($_POST['submit2500'])) {
 
 		// 	$amount = $_POST['amount'];
