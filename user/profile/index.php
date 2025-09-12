@@ -1340,7 +1340,7 @@ if(!empty($userDetails['profile_pic'])){
               $ids_string = implode(',', $suggested_user_ids);
 
                $post_query = mysqli_query($con, "
-                  SELECT live_posts.*, model_user.name, model_user.gender, model_user.profile_pic 
+                  SELECT live_posts.*, model_user.name, model_user.gender, model_user.profile_pic ,model_user.unique_id 
                   FROM live_posts 
                   JOIN model_user ON live_posts.post_author = model_user.id 
                   WHERE model_user.id IN ($ids_string)
