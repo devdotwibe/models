@@ -112,7 +112,7 @@
                             <?php echo $rowesdw['description']; ?>
                           </td>
                           <td>
-                                <img src="<?php echo $imageUrl ?>" >
+                                <img src="<?php echo $imageUrl; ?>" >
                           </td>
                           <td>
                           </td>
