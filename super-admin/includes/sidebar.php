@@ -95,6 +95,16 @@ require_once 'constant.php';
               <span class="menu-title">Purchase Details</span>
             </a>
           </li>
+
+          <hr><p>Report Users</p><hr>
+          <li class="nav-item">
+            <a class="nav-link" href="/report-users.php">
+              <i class="ti-layout-list-post menu-icon"></i>
+              <span class="menu-title">Reported Users List</span>
+            </a>
+          </li>
+
+
           <hr><p>Refund Coins</p><hr>
           <li class="nav-item">
             <a class="nav-link" href="refund-coins.php">
