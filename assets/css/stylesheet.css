@@ -12497,7 +12497,10 @@ min-height: 58px !important;
     width: 100% !important;
 }
 
-
+.booking-new form .text-center button{
+    padding-block: 15px !important;
+    padding-inline: 30px !important;
+}
 
 
 
