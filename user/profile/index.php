@@ -1479,7 +1479,7 @@ if(!empty($userDetails['profile_pic'])){
 
                     $user_requested = !empty($user_requested_row);
 
-                    $rating = GetRating($post['unique_id']);
+                    $rating = GetRating($modelDetails['unique_id']);
               ?>
 
               <button class="btn-primary text-sm md:text-base"  onclick="FollowModel('<?= $modelDetails['id'] ?>', '<?= $modelDetails['username'] ?>','follow_similar-<?= $_SESSION['log_user_id'] ?>')" > <span id="follow_similar-<?= $_SESSION['log_user_id'] ?>"></span> <?php if($user_requested) { ?>Follow Requested <?php } else { ?>Connect <?php }?></span></button>
@@ -1507,7 +1507,7 @@ if(!empty($userDetails['profile_pic'])){
             <div class="flex justify-between text-xs md:text-sm text-white/60">
               <!-- <span>🎯 95% match</span>
               <span>📍 3 miles</span> -->
-              <span>⭐ <?= $rating ?> rating <?php echo $modelDetails['unique_id'] ?></span>
+              <span>⭐ <?= $rating ?> rating </span>
             </div>
           </div>
 
