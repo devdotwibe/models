@@ -120,7 +120,9 @@
                             <?php echo $reported_by_detail['name']; ?>
                           </td>
                           <td>
-                            <?php echo $repoted_user_detail['name']; ?>
+                               <a href="<?php echo SITEURL . 'single-profile.php?m_unique_id=' . $reported_by_detail['unique_id']; ?>" target="_blank">
+                                    <?php echo $repoted_user_detail['name']; ?>
+                                </a>
                           </td>
                           <td>
                             <?php echo $rowesdw['description']; ?>
