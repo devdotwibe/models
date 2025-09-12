@@ -12487,9 +12487,8 @@ overflow-x: auto !important;
    align-items: stretch !important;;
 }
 
-.profile-wrapp1>div>div:nth-child(2)>*{
+.profile-wrapp1>div>div:nth-child(2) button{
 min-height: 58px;
-
   height: auto
 }
 
@@ -13929,7 +13928,10 @@ min-height: 58px;
         padding-bottom: 2px;
     }
 
-
+.profile-wrapp1>div>div:nth-child(2) button{
+min-height: auto;
+  height: auto
+}
 
 
 }
@@ -14516,7 +14518,7 @@ min-height: 58px;
 
     .profile-info .profile-flex-wrapp .profile-wrapp1>div>div:last-child button {
         width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 0px;
     }
 
     .enhanced5 .action-dropdown {
