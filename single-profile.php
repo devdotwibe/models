@@ -3236,6 +3236,7 @@ body .owl-carousel .owl-nav.disabled {
             data: formData,
             contentType: false,
             processData: false,
+            dataType: 'json', 
             success: function (response) {
 
                  if (response.status === 'success') {
