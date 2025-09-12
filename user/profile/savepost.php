@@ -345,7 +345,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     } else {
                         DB::insert('user_reports', array(
                             'user_id'        => $user_id,
-                            'reported_user_id'=> $blocked_user_id,
+                            'reported_user_id'=> $reported_user_id,
                             'description'=>$description,
                             'attachment'=>$image_path,
                             'created_at'     => $date,
