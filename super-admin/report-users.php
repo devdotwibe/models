@@ -98,7 +98,7 @@
                                 //     $imageUrl = SITEURL . $attachment;
                                 // }
 
-                                 $imageUrl = SITEURL . $attachment;
+                                //  $imageUrl = SITEURL . $attachment;
 
                         ?>
 
