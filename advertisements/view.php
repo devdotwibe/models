@@ -179,16 +179,27 @@ body .owl-carousel .owl-nav.disabled {
 
 
     $owl.on('play', 'video', function () {
+
+        console.log('plauting');
+
         $owl.trigger('stop.owl.autoplay');
     });
 
     // Resume carousel when video is paused
     $owl.on('pause', 'video', function () {
+
+
+        console.log('paudinbg');
+
         $owl.trigger('play.owl.autoplay');
     });
 
     // Resume carousel when video ends
     $owl.on('ended', 'video', function () {
+
+
+        console.log('eneding');
+
         $owl.trigger('play.owl.autoplay');
     });
 
