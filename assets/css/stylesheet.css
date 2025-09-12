@@ -12511,8 +12511,8 @@ min-height: 58px !important;
 
 .booking-new .book-time label {
 border-bottom:1px solid rgba(255, 255, 255, 0.06);
-padding-bottom: 5px;
-margin-bottom: 20px;
+padding-bottom: 8px;
+margin-bottom: 20px !important;
 margin-top:20px;
 }
 
@@ -13404,7 +13404,11 @@ gap:10px;
 
     }
 
-
+.profile-wrapp1 > div > div:nth-child(2) button {
+  min-height: 50px !important;
+  height: auto;
+  padding-inline: 17px !important;
+}
 
 
 }
