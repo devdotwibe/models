@@ -13909,11 +13909,11 @@ min-height: 58px;
     }
 
 
-    header>div {
+    /* header>div {
         width: 85%;
         margin-right: auto !important;
         margin-left: 0 !important;
-    }
+    } */
 
     .header-desk-inner button span {
         font-size: 9px;
