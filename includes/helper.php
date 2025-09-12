@@ -1059,30 +1059,41 @@ if (!empty($_SESSION['log_user_id'])) {
 		if (!file_exists($filePath)) {
 			return false;
 		}
-		
+
 		$fileMime = mime_content_type($filePath);
 
 		return strpos($fileMime, 'image/') === 0;
 	}
 
+	function GetRating($model_unique_id) {
+		
+		$sqls = "SELECT AVG(rating) AS avg_rating 
+				FROM service_review 
+				WHERE sender = '" . $model_unique_id . "'";
 
-function RemoveFilePath($relativePath) {
+		$result = DB::queryFirstRow($sqls);
 
-    if (empty($relativePath)) {
-        return false;
-    }
+		return $result['avg_rating'] ?? 0;
+	}
 
-	$rootPath = $_SERVER['DOCUMENT_ROOT']; 
 
-    $imagePath = $rootPath . '/' . ltrim('uploads/banners/'.$relativePath, '/');
+	function RemoveFilePath($relativePath) {
 
-    if (file_exists($imagePath)) {
+		if (empty($relativePath)) {
+			return false;
+		}
 
-        return unlink($imagePath); 
-    }
+		$rootPath = $_SERVER['DOCUMENT_ROOT']; 
 
-    return false;
-}
+		$imagePath = $rootPath . '/' . ltrim('uploads/banners/'.$relativePath, '/');
+
+		if (file_exists($imagePath)) {
+
+			return unlink($imagePath); 
+		}
+
+		return false;
+	}
 
 
 function extra_setting($field,$default=false,$set_zero=false){
