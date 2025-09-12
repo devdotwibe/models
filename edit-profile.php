@@ -531,7 +531,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             <span>Current Balance:</span>
             <div class="flex items-center">
               <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
-              <span class="font-bold text-xl">2,500</span>
+              <span class="font-bold text-xl"> <?php echo $userDetails['balance'] ?></span>
             </div>
           </div>
         </div>
@@ -3035,48 +3035,55 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         $percentageThisMonth = number_format($percentageThisMonth, 2);
 
         ?>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="glass-effect p-4 rounded-lg">
-            <div class="flex justify-between items-center mb-2">
-              <h4 class="font-semibold">Top Earning Service</h4>
-              <span class="text-green-400">+<?php echo $percentageThisMonth ?>% ↑</span>
-            </div>
-            <div class="flex items-center">
-              <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mr-4">
-                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                </svg>
-              </div>
 
-              <div>
-                <div class="font-bold">Private Video Chat</div>
-                <div class="text-sm text-white/60">$<?php echo $totalAmount_month ?> this month</div>
+      <?php /*
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="glass-effect p-4 rounded-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h4 class="font-semibold">Top Earning Service</h4>
+                <span class="text-green-400">+<?php echo $percentageThisMonth ?>% ↑</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mr-4">
+                  <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+
+                <div>
+                  <div class="font-bold">Private Video Chat</div>
+                  <div class="text-sm text-white/60">$<?php echo $totalAmount_month ?> this month</div>
+                </div>
+              </div>
+            </div>
+            <div class="glass-effect p-4 rounded-lg">
+              <div class="flex justify-between items-center mb-2">
+                <h4 class="font-semibold">Most Popular Time</h4>
+                <span class="text-blue-400">Consistent ↔</span>
+              </div>
+              <div class="flex items-center">
+                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mr-4">
+                  <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+
+                <?php
+                $timeRange = getTopEarningTimeSlot($con, $user_id);
+                $topDays = getTopEarningDays($con, $user_id);
+                ?>
+                <div>
+                  <div class="font-bold"><strong><?php echo $timeRange ?></strong></div>
+                  <div class="text-sm text-white/60"> <?php echo implode(" & ", $topDays); ?></div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="glass-effect p-4 rounded-lg">
-            <div class="flex justify-between items-center mb-2">
-              <h4 class="font-semibold">Most Popular Time</h4>
-              <span class="text-blue-400">Consistent ↔</span>
-            </div>
-            <div class="flex items-center">
-              <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mr-4">
-                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
 
-              <?php
-              $timeRange = getTopEarningTimeSlot($con, $user_id);
-              $topDays = getTopEarningDays($con, $user_id);
-              ?>
-              <div>
-                <div class="font-bold"><strong><?php echo $timeRange ?></strong></div>
-                <div class="text-sm text-white/60"> <?php echo implode(" & ", $topDays); ?></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        */?>
+
+
       </div>
 
       <div class="form-section service-last-form">
@@ -3084,7 +3091,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
         <div class="token-info flex items-center mb-6">
           <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
-          <span>You currently have <b>2,500 TLM tokens</b> available for withdrawal. <a href="#" class="text-purple-400 underline" onclick="openWithdrawModal()">Withdraw to bank account</a></span>
+          <span>You currently have <b> <?php echo $userDetails['balance'] ?> TLM tokens</b> available for withdrawal. <a href="#" class="text-purple-400 underline" onclick="openWithdrawModal()">Withdraw to bank account</a></span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 service-last-form-boxes">
@@ -3109,14 +3116,14 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <div class="flex items-center">
                     <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
                     <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['private_chat_token']; ?></span>
-                    <span class="text-sm text-white/60">/hour</span>
+                    <span class="text-sm text-white/60">min</span>
                   </div>
                 </div>
 
               <?php } ?>
 
 
-              <?php if (!empty($extra_details) && !empty($extra_details['group_chat_tocken'])) { ?>
+              <?php /* if (!empty($extra_details) && !empty($extra_details['group_chat_tocken'])) { ?>
 
                 <div class="flex justify-between items-center">
                   <div>
@@ -3133,9 +3140,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                 </div>
 
-              <?php } ?>
+              <?php } */ ?>
 
-              <div class="flex justify-between items-center">
+              <!-- <div class="flex justify-between items-center">
                 <div>
                   <div class="font-medium">Text Chat</div>
                   <div class="text-sm text-white/60">Message-based chat</div>
@@ -3146,18 +3153,18 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <span class="text-sm text-white/60">/message</span>
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <div class="mt-6">
+            <!-- <div class="mt-6">
               <button class="btn-secondary w-full">Edit Chat Services</button>
             </div>
-          </div>
+          </div> -->
 
           <!-- Meet Services -->
           <div class="glass-effect p-6 rounded-xl">
             <div class="flex justify-between items-center mb-4">
               <h4 class="text-lg font-bold">👥 Meet Services</h4>
-              <div class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">Active</div>
+              <div class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm"><?php  if (!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes') { ?> Active <?php } else { ?> Inactive <?php }?> </div>
             </div>
 
             <div class="space-y-4">
@@ -3213,9 +3220,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
             </div>
 
-            <div class="mt-6">
+            <!-- <div class="mt-6">
               <button class="btn-secondary w-full">Edit Meet Services</button>
-            </div>
+            </div> -->
+
+
           </div>
         </div>
       </div>
