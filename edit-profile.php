@@ -729,6 +729,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         $user_id = $userDetails['id'];
 
         $totalAmount = getUserTotalTransactionAmount($con, $user_id);
+
+        $rating = GetRating($userDetails['unique_id']);
+  
+
         ?>
 
         <?php if($is_model) { ?>
@@ -746,7 +750,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
 
         <div>
-          <div class="text-3xl font-bold mb-1">4.9★</div>
+          <div class="text-3xl font-bold mb-1"><?= number_format($average_rating, 2) ?> ★</div>
           <div class="text-white/80">Rating</div>
         </div>
       </div>
@@ -2976,13 +2980,18 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         <?php
 
         $count_active_user = getActiveUsers($userDetails['id'], $con);
+
+        $rating = GetRating($userDetails['unique_id']);
+
         ?>
         <div class="stat-card">
           <div class="stat-value gradient-text"> <?php echo $count_active_user['count'] ?></div>
           <div class="stat-label">Active Clients</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value gradient-text">4.9</div>
+
+          <div class="stat-value gradient-text"><?= number_format($average_rating, 2) ?></div>
+
           <div class="stat-label">Rating (out of 5)</div>
         </div>
       </div>
