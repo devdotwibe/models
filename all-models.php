@@ -1687,6 +1687,10 @@ include('includes/helper.php');
                             
 
                             $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id IN ($idPrivacy) AND mu.id IN ($idList)  AND mu.id  IN ($basicList) $where  $order LIMIT $limit OFFSET $offset";
+
+                            echo $sqls;
+
+                            die();
                         }
                     }
 
