@@ -404,8 +404,320 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                     <!-- Instructions Section -->
 
-                    <!-- add all code herer ...............................................................-->
+                  
 
+                    <?php if (isset($_GET['type']) && $_GET['type'] == 'collaboration') { ?>
+
+                        <div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
+                            <div class="flex items-center mb-8">
+                                <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                                        <polyline points="10 9 9 9 8 9"></polyline>
+                                    </svg>
+                                </div>
+                                <h2 class="text-3xl font-bold premium-text heading-font">Description</h2>
+                            </div>
+
+                            <div>
+
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Briefly describe your idea</label>
+                                <textarea name="instructions" id="instructions"
+                                    class="w-full px-6 py-4 ultra-glass text-white placeholder-white/50 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-40 resize-none shadow-lg transition duration-300"
+                                    placeholder="Please provide any special requirements, preferences, dietary restrictions, accessibility needs, or other important information for your international tour experience. Include details about locations, activities, duration, or any specific requests you may have..."></textarea>
+                            </div>
+                        </div>
+
+                    <?php } else { ?>
+
+                        <div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
+                            <div class="flex items-center mb-8">
+                                <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                                        <polyline points="10 9 9 9 8 9"></polyline>
+                                    </svg>
+                                </div>
+                                <h2 class="text-3xl font-bold premium-text heading-font">Instructions</h2>
+                            </div>
+
+                            <div>
+
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Special Instructions, or notes (optional)</label>
+                                <textarea name="instructions" id="instructions"
+                                    class="w-full px-6 py-4 ultra-glass text-white placeholder-white/50 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-40 resize-none shadow-lg transition duration-300"
+                                    placeholder="Please provide any special requirements, preferences, dietary restrictions, accessibility needs, or other important information for your international tour experience. Include details about locations, activities, duration, or any specific requests you may have..."></textarea>
+                            </div>
+                        </div>
+
+                    <?php } ?>
+
+
+
+                      <!-- Schedule Section -->
+                    <div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
+                        <div class="flex items-center mb-8">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <?php if ($_GET['service'] == 'Travel') { ?>
+
+                                <h2 class="text-3xl font-bold premium-text heading-font">Select travel date</h2>
+
+                                <h3 class="text-3xl font-bold premium-text heading-font" style="margin-left: auto;">token <span id="token_no"></span> </h3>
+
+                            <?php } else { ?>
+
+
+
+                                <h2 class="text-3xl font-bold premium-text heading-font"><?php if ($_GET['service'] == 'Collaboration') { ?> When do you want to collaborate <?php } else { ?> When do you want to see me? <?php } ?> </h2>
+
+                                <h3 class="text-3xl font-bold premium-text heading-font" style="margin-left: auto;">token <span id="token_no"></span> </h3>
+
+                            <?php } ?>
+
+
+
+                        </div>
+
+
+                        <?php if ($_GET['service'] == 'Travel' || $_GET['service'] == 'Collaboration') {
+
+
+                            $collab_hours_per = $extra_details['collab_hour'];
+
+                            $collab_days_per = $extra_details['collab_day'];
+
+                            $collab_weekend_rate = $extra_details['collab_week'];
+
+                        ?>
+
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+                                <div class="md:col-span-2">
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">From</label>
+                                    <input name="meeting_date" <?php if ($_GET['service'] == 'Collaboration') { ?> onchange="CalculateCollaborate()" <?php } else { ?> onchange="CalculateDate()" <?php } ?>
+
+                                        id="meeting_date_from"
+                                        type="date"
+                                        class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300"
+                                        required
+                                        min="<?php echo date('Y-m-d'); ?>">
+
+                                </div>
+
+                                <div class="md:col-span-2">
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">To</label>
+                                    <input name="meeting_date_to" <?php if ($_GET['service'] == 'Collaboration') { ?> onchange="CalculateCollaborate()" <?php } else { ?> onchange="CalculateDate()" <?php } ?>
+                                        id="meeting_date_to"
+                                        type="date"
+                                        class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300"
+                                        required
+                                        min="">
+
+
+                                    <span id="end_date_error" style="display: none; color:red;"> </span>
+
+                                </div>
+
+
+                                <?php if ($_GET['service'] == 'Collaboration') { ?>
+
+                                    <div style="display:none" id="collab_hour">
+
+                                        <label class="block text-white/80 font-semibold mb-3 text-lg">Hour</label>
+
+                                        <select name="meeting_hrs" id="meeting_hrs" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                            <option value="" class="bg-gray-900">HH</option>
+                                            <option value="01" class="bg-gray-900">01</option>
+                                            <option value="02" class="bg-gray-900">02</option>
+                                            <option value="03" class="bg-gray-900">03</option>
+                                            <option value="04" class="bg-gray-900">04</option>
+                                            <option value="05" class="bg-gray-900">05</option>
+                                            <option value="06" class="bg-gray-900">06</option>
+                                            <option value="07" class="bg-gray-900">07</option>
+                                            <option value="08" class="bg-gray-900">08</option>
+                                            <option value="09" class="bg-gray-900">09</option>
+                                            <option value="10" class="bg-gray-900">10</option>
+                                            <option value="11" class="bg-gray-900">11</option>
+                                            <option value="12" class="bg-gray-900">12</option>
+
+                                            <option value="13" class="bg-gray-900">13</option>
+                                            <option value="14" class="bg-gray-900">14</option>
+                                            <option value="15" class="bg-gray-900">15</option>
+                                            <option value="16" class="bg-gray-900">16</option>
+                                            <option value="17" class="bg-gray-900">17</option>
+                                            <option value="18" class="bg-gray-900">18</option>
+                                            <option value="19" class="bg-gray-900">19</option>
+                                            <option value="20" class="bg-gray-900">20</option>
+                                            <option value="21" class="bg-gray-900">21</option>
+                                            <option value="22" class="bg-gray-900">22</option>
+                                            <option value="23" class="bg-gray-900">23</option>
+                                            <option value="24" class="bg-gray-900">24</option>
+
+                                        </select>
+
+                                    </div>
+
+                                <?php } ?>
+
+
+                                <?php if ($_GET['service'] == 'Travel') { ?>
+
+
+                                    <div>
+                                        <label class="block text-white/80 font-semibold mb-3 text-lg">Travel location</label>
+                                        <input name="destination" id="destination"
+                                            type="text"
+                                            class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300"
+                                            required>
+                                    </div>
+
+                                <?php } else { ?>
+
+                                    <div>
+                                        <label class="block text-white/80 font-semibold mb-3 text-lg">Collaboration location</label>
+                                        <input name="destination" id="destination"
+                                            type="text"
+                                            class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300"
+                                            required>
+
+                                    </div>
+
+                                <?php } ?>
+
+                            </div>
+
+                        <?php } else { ?>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                <div class="md:col-span-2">
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">Date</label>
+                                    <input name="meeting_date" id="meeting_date"
+                                        type="date"
+                                        class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300"
+                                        required
+                                        min="<?php echo date('Y-m-d'); ?>">
+                                </div>
+                                <div>
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">Hour</label>
+                                    <select name="meeting_hrs" id="meetup_hrs" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                        <option value="" class="bg-gray-900">HH</option>
+                                        <option value="01" class="bg-gray-900">01</option>
+                                        <option value="02" class="bg-gray-900">02</option>
+                                        <option value="03" class="bg-gray-900">03</option>
+                                        <option value="04" class="bg-gray-900">04</option>
+                                        <option value="05" class="bg-gray-900">05</option>
+                                        <option value="06" class="bg-gray-900">06</option>
+                                        <option value="07" class="bg-gray-900">07</option>
+                                        <option value="08" class="bg-gray-900">08</option>
+                                        <option value="09" class="bg-gray-900">09</option>
+                                        <option value="10" class="bg-gray-900">10</option>
+                                        <option value="11" class="bg-gray-900">11</option>
+                                        <option value="12" class="bg-gray-900">12</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">Minute</label>
+                                    <select name="meeting_min" id="meeting_min" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                        <option value="" class="bg-gray-900">MM</option>
+                                        <option value="00" class="bg-gray-900">00</option>
+                                        <option value="15" class="bg-gray-900">15</option>
+                                        <option value="30" class="bg-gray-900">30</option>
+                                        <option value="45" class="bg-gray-900">45</option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+
+                            <div class="mt-6">
+                                <div class="flex space-x-6">
+                                    <label class="flex items-center space-x-3 text-white cursor-pointer hover-lift">
+                                        <input type="radio" name="meeting_g" value="AM" class="meeting_g form-radio text-indigo-600 w-5 h-5" checked required>
+                                        <span class="font-medium text-lg">AM</span>
+                                    </label>
+                                    <label class="flex items-center space-x-3 text-white cursor-pointer hover-lift">
+                                        <input type="radio" name="meeting_g" value="PM" class="meeting_g form-radio text-indigo-600 w-5 h-5" required>
+                                        <span class="font-medium text-lg">PM</span>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                <div>
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">Destination</label>
+                                    <input name="destination" id="destination"
+                                        type="text"
+                                        class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300"
+                                        required>
+
+                                </div>
+                                <div>
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">No of hours need to meet</label>
+                                    <select name="no_of_hrs_meet" id="no_of_hrs_meet" onchange="CalculateToken(this)" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                        <option value="" class="bg-gray-900">Hours</option>
+                                        <?php for ($i = 1; $i <= 24; $i++) { ?>
+                                            <option value="<?php echo $i; ?>" class="bg-gray-900"><?php echo $i; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        <?php } ?>
+
+                    </div>
+
+
+
+                    <!-- Submit Section -->
+                    <div class="text-center">
+
+                        <input type="hidden" name="model_unique_id" value="<?php echo $m_id; ?>">
+                        <input type="hidden" name="user_unique_id" value="<?php echo $_SESSION['log_user_unique_id']; ?>">
+                        <input type="hidden" name="model_name" value="<?php echo $model_name; ?>">
+                        <input type="hidden" name="model_ID" value="<?php echo $model_ID; ?>">
+                        <input type="hidden" name="name" value="<?php echo $userDetails['name']; ?>">
+                        <input type="hidden" name="service_name" value="<?php echo $_GET['service']; ?>">
+                        <input type="hidden" name="main_service" value="<?php echo $_GET['type']; ?>">
+                        <input type="hidden" name="tokens" id="tokens_used" value="<?php echo $_GET['token']; ?>">
+
+
+                        <?php if ($_GET['service'] == 'Collaboration') { ?>
+
+                            <button name="booking_submit" type="button" onclick="serviceBookingSubmission(this)" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline">
+                                    <path d="M5 12l5 5l10-10"></path>
+                                </svg>
+                                Confirm Booking
+                            </button>
+
+                        <?php } else { ?>
+
+
+                            <button name="booking_submit" type="button" onclick="serviceBookingSubmission(this)" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline">
+                                    <path d="M5 12l5 5l10-10"></path>
+                                </svg>
+                                Let's Meet - Confirm Booking
+                            </button>
+
+                        <?php } ?>
+
+
+
+                        <p class="text-white/60 mt-4 text-lg">Your booking will be processed securely and you'll receive confirmation within 24 hours</p>
+                    </div>
 
 
                 </form>
