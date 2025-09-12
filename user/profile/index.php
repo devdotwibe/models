@@ -1476,7 +1476,7 @@ if(!empty($userDetails['profile_pic'])){
 
                     $user_requested = !empty($user_requested_row);
 
-                    $rating = GetRating($modelDetails['unique_id']);
+                    $rating = GetRating($post['unique_id']);
               ?>
 
               <button class="btn-primary text-sm md:text-base"  onclick="FollowModel('<?= $modelDetails['id'] ?>', '<?= $modelDetails['username'] ?>','follow_similar-<?= $_SESSION['log_user_id'] ?>')" > <span id="follow_similar-<?= $_SESSION['log_user_id'] ?>"></span> <?php if($user_requested) { ?>Follow Requested <?php } else { ?>Connect <?php }?></span></button>
