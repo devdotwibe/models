@@ -3015,10 +3015,14 @@ textarea:focus {
     align-items: center;
     transition: all 0.2s ease;
     cursor: pointer;
+     color:  var(--menu-text);
 }
+
+
 
 .socialwall-page .menu-item:hover {
     background: rgba(0, 0, 0, 0.05);
+    color:  var(--menu-text) !important;
 }
 
 .socialwall-page .menu-item svg {
@@ -12455,12 +12459,7 @@ overflow-x: auto !important;
 .star-rating .star{
     color:#fff;
 }
-.menu-item{
-  color: var(--menu-text);
-}
-.menu-item:hover{
-  color:  var(--menu-text);
-}
+
 
 
 
