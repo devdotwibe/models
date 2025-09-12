@@ -3123,7 +3123,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
               <?php } ?>
 
 
-              <?php  if (!empty($extra_details) && !empty($extra_details['group_chat_tocken'])) { ?>
+            
+              <?php /* if (!empty($extra_details) && !empty($extra_details['group_chat_tocken'])) { ?>
 
                 <div class="flex justify-between items-center">
                   <div>
@@ -3140,9 +3141,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
                 </div>
 
-              <?php }  ?>
+              <?php }  */?>
 
-              <div class="flex justify-between items-center">
+              <!-- <div class="flex justify-between items-center">
                 <div>
                   <div class="font-medium">Text Chat</div>
                   <div class="text-sm text-white/60">Message-based chat</div>
@@ -3153,7 +3154,8 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                   <span class="text-sm text-white/60">/message</span>
                 </div>
               </div>
-            </div>
+            </div> -->
+
 
             <!-- <div class="mt-6">
               <button class="btn-secondary w-full">Edit Chat Services</button>
