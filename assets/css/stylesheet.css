@@ -12512,7 +12512,8 @@ min-height: 58px !important;
 .booking-new .book-time label {
 border-bottom:1px solid rgba(255, 255, 255, 0.06);
 padding-bottom: 5px;
-margin-bottom: 12px;
+margin-bottom: 20px;
+margin-top:20px;
 }
 
 .booking-new .book-time ul {
@@ -12537,6 +12538,10 @@ gap:10px;
     transform:translateY(-2px);
 }
 
+.book-data h2{
+    padding-top:0 !important;
+    line-height:normal;
+}
 
 
 
