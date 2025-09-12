@@ -37,7 +37,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Purchase Details</h4>
+                  <h4 class="card-title">Report Users List</h4>
                   <!-- <p class="card-description">
                     Add class <code>.table-striped</code>
                   </p> -->
@@ -49,102 +49,80 @@
                             S. no.
                           </th>
                           <th>
-                            User Unique id
+                            Reported By
                           </th>
                           <th>
-                            Model Unique id
+                            Reported User
                           </th>
                           <th>
-                            File Unique id
+                            Descrition
                           </th>
                           <th>
-                            File coins
+                            Attachment
                           </th>
                           <th>
-                            File Type
-                          </th>
-                          <th>
-                            Purchase Date
+                            Reported Data
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                          $sqls = "SELECT * FROM user_purchased_image Order by id DESC";
+
+                          $sqls = "SELECT * FROM user_reports Order by id DESC";
+
                           $resultd = mysqli_query($con, $sqls);
                           $count = 1;
+
                             if (mysqli_num_rows($resultd) > 0) {
+
                               while ($rowesdw = mysqli_fetch_assoc($resultd)){   
+
+                                $reported_by_id =  $rowesdw['user_id'];
+
+                                $repoted_user_id =  $rowesdw['reported_user_id'];
+
+                                $attachment = $rowesdw['attachment'];
+
+                                // $reported_by_detail = get_data('model_user',array('id'=>$reported_by_id),true);
+
+                                // $repoted_user_detail = get_data('model_user',array('id'=>$repoted_user_id),true);
+
+                                // $repoted_date = $rowesdw['created_at'];
+
+                                // $f_report_date = date('d-m-Y', strtotime($repoted_date));
+
+                                $imageUrl = "";
+
+                                if (checkImageExists($attachment)) {
+
+                                    $imageUrl = SITEURL . $attachment;
+                                }
+
                         ?>
-                        <form method="post" >
+
                         <tr>
                           <td>
                             <?php echo $count; ?>
                           </td>
                           <td>
-                            <?php echo $rowesdw['user_unique_id']; ?>
                           </td>
                           <td>
-                            <?php echo $rowesdw['model_unique_id']; ?>
                           </td>
                           <td>
-                            <?php echo $rowesdw['file_unique_id']; ?>
+                            <?php echo $rowesdw['description']; ?>
                           </td>
                           <td>
-                            <?php echo $rowesdw['file_coins']; ?>
+                                <img src="<?php echo $imageUrl ?>" >
                           </td>
                           <td>
-                            <?php echo $rowesdw['file_type']; ?>
                           </td>
-                          <td>
-                            <?php 
-                            $timestamp = strtotime($rowesdw['purchase_date']);
-                            echo date('d-m-Y', $timestamp);
-                            //echo $rowesdw['purchase_date']; ?>
-                          </td>
-                          <!-- <td>
-                            <span style="cursor:pointer;"  class="btn btn-success" data-toggle="modal" data-target="#exampleModalmail<?php echo $rowesdw['id']; ?>">Reply</span>
-                          </td> -->
-                          </form>
-
-                          <!-- model- togle -->
-        			             <div class="modal fade" id="exampleModalmail<?php echo $rowesdw['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"      aria-hidden="true">
-        			              <div class="modal-dialog" role="document">
-        			                <div class="modal-content">
-        			                  <div class="modal-header">
-        			                    <h5 class="modal-title" id="exampleModalLabel">Responds</h5>
-        			                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        			                      <span aria-hidden="true">&times;</span>
-        			                    </button>
-        			                  </div>
-        			                    <div class="modal-body">
-        			                      <form method="post" action="query-reply.php">
-        			                        <input type="hidden" name="query_id" value="<?php echo $rowesdw['id']; ?>">
-        			                        <input type="hidden" name="email" value="<?php echo $rowesdw['email']; ?>">
-        			                       <div class="form-group">
-        			                         <label for="subject"><b>Subject:</b></label>
-        			                          <input type="text" name="subject" class="form-control" placeholder="Enter subject" id="subject">
-        			                       </div>
-        			                        <div class="form-group">
-        			                         <label for="message"><b>Message:</b></label>
-        			                          <textarea type="text" name="message" class="form-control" placeholder="Enter message" id="message"></textarea>
-        			                        </div>
-        			                  <div class="modal-footer">
-        			                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-        			                    <button type="submit" name="reply" class="btn btn-primary">Reply</button>
-        			                  </div>
-        			                    </form>
-        			                  </div>
-        			                </div>
-        			              </div>
-        			            </div>
-
+    
                         </tr>
                         <?php
                           $count++;
                           }
                           } else {
-                            echo "Currently dont have contact query.";
+                            echo "Not Fount Any Reported Users ";
                           }
                         ?>
                       </tbody>
