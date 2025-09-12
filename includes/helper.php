@@ -1047,6 +1047,24 @@ if (!empty($_SESSION['log_user_id'])) {
 		return ($imageType !== false);
 	}
 
+	function isImageFile($relativePath) {
+
+		if (empty($relativePath)) {
+			return false;
+		}
+
+		$rootPath = rtrim($_SERVER['DOCUMENT_ROOT'], '/'); 
+		$filePath = $rootPath . '/' . ltrim($relativePath, '/');
+
+		if (!file_exists($filePath)) {
+			return false;
+		}
+		
+		$fileMime = mime_content_type($filePath);
+
+		return strpos($fileMime, 'image/') === 0;
+	}
+
 
 function RemoveFilePath($relativePath) {
 

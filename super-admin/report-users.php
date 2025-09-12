@@ -93,9 +93,21 @@
 
                                 $imageUrl = "";
 
-                                if (checkImageExists($attachment)) {
+                                $download_url = SITEURL . $attachment;
+
+                                $type="";
+
+                                if (isImageFile($attachment)) {
 
                                     $imageUrl = SITEURL . $attachment;
+
+                                    $type = "image";
+
+                                } else {
+
+                                    $imageUrl = "https://img.icons8.com/color/96/document.png";
+
+                                    $type = "file";
                                 }
 
                         ?>
@@ -114,7 +126,12 @@
                             <?php echo $rowesdw['description']; ?>
                           </td>
                           <td>
-                                <img src="<?php echo $imageUrl ?>" >
+                               <img src="<?php echo $imageUrl ?>" width="100" alt="Attachment Preview">
+
+                                <br>
+                                <a href="<?php echo $download_url ?>" download class="btn btn-sm btn-primary" style="margin-top:5px;">
+                                    Download
+                                </a>
                           </td>
                           <td>
                             <?php echo $f_report_date; ?>
