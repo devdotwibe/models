@@ -162,6 +162,10 @@ body .owl-carousel .owl-nav.disabled {
 </style>
   <script>
   jQuery(document).ready(function($) {
+
+
+    var $owl = $(".owl-carousel");
+
     $('.owl-carousel').owlCarousel({
       items: 1,         // Show only 1 item
       loop: true,       // Infinite loop
@@ -172,6 +176,23 @@ body .owl-carousel .owl-nav.disabled {
 	  autoplayTimeout: 5000,        // Time in ms before next slide (3 seconds)
     smartSpeed: 500,
     });
+
+
+    $owl.on('play', 'video', function () {
+        $owl.trigger('stop.owl.autoplay');
+    });
+
+    // Resume carousel when video is paused
+    $owl.on('pause', 'video', function () {
+        $owl.trigger('play.owl.autoplay');
+    });
+
+    // Resume carousel when video ends
+    $owl.on('ended', 'video', function () {
+        $owl.trigger('play.owl.autoplay');
+    });
+
+
   });
 </script>
 	
