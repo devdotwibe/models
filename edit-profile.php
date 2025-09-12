@@ -3036,7 +3036,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
         ?>
 
-      <?php /*
+
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="glass-effect p-4 rounded-lg">
@@ -3081,7 +3081,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
             </div>
           </div>
 
-        */?>
+        
 
 
       </div>
