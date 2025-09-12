@@ -55,6 +55,8 @@ include('../includes/helper.php');
                         }
                     }
 
+                    $defaultImage = SITEURL . $bookeduser['profile_pic'];
+
                   if (!empty($booking['meeting_date'])) {
 
                         $timestamp = strtotime($booking['meeting_date']);
