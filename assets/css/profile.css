@@ -8373,7 +8373,7 @@ button.btn-secondary.add-intrst {
     justify-content: flex-end;
 
     gap: 0.75rem;
-  align-items: center;
+    align-items: center;
 }
 
 
@@ -8447,10 +8447,11 @@ button.btn-secondary.add-intrst {
     resize: vertical;
 
 }
+
 .optim-services .modal-footer .btn.btn-secondary {
-  padding: 13px 34px;
-  line-height: 1;
-  margin-top: 15px;
+    padding: 13px 34px;
+    line-height: 1;
+    margin-top: 15px;
 }
 
 
@@ -10191,18 +10192,19 @@ body.profile-advts {
     color: #b4499d;
 }
 
-.diamond-elite-user{
-    width:35px;
+.diamond-elite-user {
+    width: 35px;
     height: 35px;
 }
-.diamond-elite-user span{
-   font-size: 15px;
+
+.diamond-elite-user span {
+    font-size: 15px;
 }
 
 
-.optim-services .modal-footer .btn.btn-secondary{
+/* .optim-services .modal-footer .btn.btn-secondary{
     padding:4px 12px
-}
+} */
 
 
 
@@ -10731,6 +10733,10 @@ width:auto;
         font-size: 12px;
     }
 
+
+    .optim-services .modal-footer .btn.btn-primary {
+        padding-inline: 8px;
+    }
 }
 
 
