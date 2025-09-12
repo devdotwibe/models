@@ -244,57 +244,131 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['action']) && $_POST['action'] == 'blocked_user') {
 
-        $user_id = $_POST['user_id'] ?? null;
+            $user_id = $_POST['user_id'] ?? null;
 
-        $blocked_user_id = $_POST['blocked_user_id'] ?? null;
+            $blocked_user_id = $_POST['blocked_user_id'] ?? null;
 
-        if ($user_id && $blocked_user_id) {
-    
-            // DB::insertIgnore("block_users", [
-            //     "user_id" => $user_id,
-            //     "blocked_user_id" => $blocked_user_id
-            // ]);
+            if ($user_id && $blocked_user_id) {
+        
+                // DB::insertIgnore("block_users", [
+                //     "user_id" => $user_id,
+                //     "blocked_user_id" => $blocked_user_id
+                // ]);
 
-            $date = date('Y-m-d H:i:s');
+                $date = date('Y-m-d H:i:s');
 
-                $exists = DB::queryFirstField(
-                    "SELECT COUNT(*) FROM block_users WHERE user_id = %i AND blocked_user_id = %i",
-                    $user_id,
-                    $blocked_user_id
-                );
+                    $exists = DB::queryFirstField(
+                        "SELECT COUNT(*) FROM block_users WHERE user_id = %i AND blocked_user_id = %i",
+                        $user_id,
+                        $blocked_user_id
+                    );
 
-                if ($exists > 0) {
+                    if ($exists > 0) {
 
-                    echo json_encode([
-                        "status"  => "error",
-                        "message" => "You already blocked this user"
-                    ]);
+                        echo json_encode([
+                            "status"  => "error",
+                            "message" => "You already blocked this user"
+                        ]);
 
-                } else {
-                    DB::insert('block_users', array(
-                        'user_id'        => $user_id,
-                        'blocked_user_id'=> $blocked_user_id,
-                        'created_at'     => $date,
-                        'updated_at'     => $date
-                    ));
+                    } else {
+                        DB::insert('block_users', array(
+                            'user_id'        => $user_id,
+                            'blocked_user_id'=> $blocked_user_id,
+                            'created_at'     => $date,
+                            'updated_at'     => $date
+                        ));
 
-                    echo json_encode([
-                        "status" => "success",
-                        "blocked_users" => 'successfully updated'
-                    ]);
+                        echo json_encode([
+                            "status" => "success",
+                            "blocked_users" => 'successfully updated'
+                        ]);
 
-           
-                }
+            
+                    }
 
-        } else {
-            echo json_encode([
-                "status"  => "error",
-                "message" => "Both user_id and blocked_user_id are required"
-            ]);
+            } else {
+                echo json_encode([
+                    "status"  => "error",
+                    "message" => "Both user_id and blocked_user_id are required"
+                ]);
+            }
         }
-    }
 
-}
+
+    if (isset($_POST['action']) && $_POST['action'] == 'report_user') {
+
+            $user_id = $_POST['user_id'] ?? null;
+
+            $reported_user_id = $_POST['reported_user_id'] ?? null;
+
+            $description = $_POST['description'] ?? null;
+
+            $image_path   = null;
+
+            $upload_folder_relative = '../../uploads/attachment/';
+            $upload_folder_for_db   = 'uploads/attachment/';
+
+            if (!is_dir($upload_folder_relative)) {
+                mkdir($upload_folder_relative, 0755, true);
+            }
+
+            if (isset($_FILES["attachment"]) && $_FILES["attachment"]["error"] === 0) {
+
+                    $file_size = $_FILES["attachment"]["size"];
+                    $file_tmp  = $_FILES["attachment"]["tmp_name"];
+                    $filename  = uniqid() . '_' . basename($_FILES["attachment"]["name"]);
+                    $target_file = $upload_folder_relative . $filename;
+
+
+                    if (move_uploaded_file($file_tmp, $target_file)) {
+                        $image_path = $upload_folder_for_db . $filename;
+                    } 
+            }
+
+            if ($user_id && $reported_user_id) {
+        
+                $date = date('Y-m-d H:i:s');
+
+                    $exists = DB::queryFirstField(
+                        "SELECT COUNT(*) FROM user_reports WHERE user_id = %i AND reported_user_id = %i",
+                        $user_id,
+                        $reported_user_id
+                    );
+
+                    if ($exists > 0) {
+
+                        echo json_encode([
+                            "status"  => "error",
+                            "message" => "You already Reported this user"
+                        ]);
+
+                    } else {
+                        DB::insert('user_reports', array(
+                            'user_id'        => $user_id,
+                            'reported_user_id'=> $blocked_user_id,
+                            'description'=>$image_path,
+                            'attachment'=>$attachment,
+                            'created_at'     => $date,
+                            'updated_at'     => $date
+                        ));
+
+                        echo json_encode([
+                            "status" => "success",
+                            "reported_users" => 'successfully updated'
+                        ]);
+
+            
+                    }
+
+            } else {
+                echo json_encode([
+                    "status"  => "error",
+                    "message" => "Both user_id and reported_user_id are required"
+                ]);
+            }
+        }
+
+    }
 
     if (isset($_GET['action']) && $_GET['action'] == 'get_stories') {
 

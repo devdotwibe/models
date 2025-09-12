@@ -2973,7 +2973,7 @@ body .owl-carousel .owl-nav.disabled {
         <div class="modal-overlay" id="user_report_modal">
                 <div class="modal">
                     <div class="modal-header">
-                        <h2 class="modal-title">Report User</h2>
+                        <h2 class="modal-title">Report User <span id="user_report_name"> </span></h2>
                         <button class="close-modal" type="button" onclick="ReportCloseModal()">
                             ✕
                         </button>
@@ -3208,6 +3208,8 @@ body .owl-carousel .owl-nav.disabled {
         $('#reported_user_id').val(reported_user_id);
         $('#profile_name').val(profile_name);
 
+        $('#user_report_name')text(profile_name);
+
         $('#user_report_modal').addClass('active');
     }
 
@@ -3236,9 +3238,12 @@ body .owl-carousel .owl-nav.disabled {
             processData: false,
             success: function (response) {
 
-                showNotification(`Report submitted successfully!`, 'success');
+                 if (response.status === 'success') {
 
-                StoryCloseModal();
+                    showNotification(`Report submitted successfully!`, 'success');
+
+                    StoryCloseModal();
+                 }
 
             },
             error: function (xhr, status, error) {
@@ -3770,7 +3775,7 @@ jQuery('.send_gift_btn').click(function(){
                 preview.src = 'https://img.icons8.com/color/96/document.png'; 
 
                  $('#filePreview_attachment').after(`<button class="remove-btn absolute top-0 right-0" onclick="removePreviewReport(this)">×</button>`);
-                 
+
                 previewDiv.style.display = 'block';
             }
         }
