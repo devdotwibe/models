@@ -115,7 +115,6 @@
                                 <img src="<?php echo $imageUrl ?>" >
                           </td>
                           <td>
-                            <?php echo $f_report_date; ?>
                           </td>
     
                         </tr>
