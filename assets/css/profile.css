@@ -8373,7 +8373,7 @@ button.btn-secondary.add-intrst {
     justify-content: flex-end;
 
     gap: 0.75rem;
-
+  align-items: center;
 }
 
 
@@ -8447,7 +8447,11 @@ button.btn-secondary.add-intrst {
     resize: vertical;
 
 }
-
+.optim-services .modal-footer .btn.btn-secondary {
+  padding: 13px 34px;
+  line-height: 1;
+  margin-top: 15px;
+}
 
 
 /* STAR RATING */
@@ -10195,6 +10199,10 @@ body.profile-advts {
    font-size: 15px;
 }
 
+
+.optim-services .modal-footer .btn.btn-secondary{
+    padding:4px 12px
+}
 
 
 
