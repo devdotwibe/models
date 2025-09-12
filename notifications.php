@@ -731,7 +731,7 @@ else{
 									}else if($status == 'Decline'){  
 										echo 'Declined '.$changed_date;
 									} else{
-										echo $status.$changed_date;
+										echo $status.' '.$changed_date;
 									} ?>
 								</button>
 								
