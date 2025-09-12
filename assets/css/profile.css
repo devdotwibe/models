@@ -6397,7 +6397,7 @@ button.btn-secondary.add-intrst {
     height: 150px;
     border-radius: 50%;
     border: 4px solid rgba(139, 92, 246, 0.6);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); */
     object-fit: cover;
 }
 
@@ -10206,7 +10206,10 @@ body.profile-advts {
     padding:4px 12px
 } */
 
-
+ .profile-header .profile-info .plus-btn{
+    bottom:35px;
+    z-index: 50;
+ }
 
 
 
