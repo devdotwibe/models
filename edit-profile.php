@@ -3157,8 +3157,10 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
             <!-- <div class="mt-6">
               <button class="btn-secondary w-full">Edit Chat Services</button>
-            </div>
-          </div> -->
+            </div> -->
+
+
+          </div>
 
           <!-- Meet Services -->
           <div class="glass-effect p-6 rounded-xl">
