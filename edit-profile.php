@@ -2104,7 +2104,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                                                     } ?>  ">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label class="form-label">Local Meetup Rate (TLM tokens per hour)</label>
+                  <label class="form-label">Local Meetup Rate</label>
                   <input type="number" class="form-input" name="in_per_hour" value="<?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?>" placeholder="e.g., 1000" min="1">
                   <p class="help-text">Rate for local social meetups and events</p>
                 </div>
