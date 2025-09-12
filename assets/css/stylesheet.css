@@ -3019,6 +3019,16 @@ textarea:focus {
     border-radius: 0;
 }
 
+.ad-actions>a:nth-child(1){
+    margin-bottom: 15px;
+}
+
+.ad-actions>button:nth-child(2){
+    margin-bottom: 15px;
+}
+
+
+
 .single-profile .service-icon {
     width: 2.5rem ;
     height: 2.5rem;
@@ -12470,7 +12480,18 @@ overflow-x: auto !important;
 }
 
 
+.profile-wrapp1>div>div:nth-child(2){
 
+  display: flex;
+  flex-wrap: wrap;
+   align-items: stretch !important;;
+}
+
+.profile-wrapp1>div>div:nth-child(2)>*{
+min-height: 58px;
+
+  height: auto
+}
 
 
 @media (max-width: 1540px) {
