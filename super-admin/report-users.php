@@ -116,7 +116,7 @@
                             <?php echo $rowesdw['description']; ?>
                           </td>
                           <td>
-                                <img src="<?php echo $imageUrl ?>" >
+                                <img src="<?php echo $imageUrl; ?>" >
                           </td>
                           <td>
                             <?php echo $f_report_date; ?>
