@@ -61,7 +61,7 @@
                             Attachment
                           </th>
                           <th>
-                            Reported Data
+                            Reported Date
                           </th>
                         </tr>
                       </thead>
