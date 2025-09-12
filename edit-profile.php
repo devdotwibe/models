@@ -750,7 +750,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
 
         <div>
-          <div class="text-3xl font-bold mb-1"><?= number_format($average_rating, 2) ?> ★</div>
+          <div class="text-3xl font-bold mb-1"><?= number_format($rating, 2) ?> ★</div>
           <div class="text-white/80">Rating</div>
         </div>
       </div>
@@ -2990,7 +2990,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
         </div>
         <div class="stat-card">
 
-          <div class="stat-value gradient-text"><?= number_format($average_rating, 2) ?></div>
+          <div class="stat-value gradient-text"><?= number_format($rating, 2) ?></div>
 
           <div class="stat-label">Rating (out of 5)</div>
         </div>
