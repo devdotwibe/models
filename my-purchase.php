@@ -156,7 +156,7 @@ if (isset($_SESSION['log_user_id'])) {
 
               $file_id = $rowesdw['file_unique_id'];
               $file_type = $rowesdw['file_type'];
-              $model_unique_id = $rowesdw['model_unique_id'];
+              $model_unique_id = $rowesdw['user_unique_id'];
               $file_downloads = $rowesdw['file_downloads'];
 
               $purchase_amount = $rowesdw['file_coins'];
