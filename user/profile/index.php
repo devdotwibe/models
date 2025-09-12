@@ -1340,7 +1340,7 @@ if(!empty($userDetails['profile_pic'])){
               $ids_string = implode(',', $suggested_user_ids);
 
                $post_query = mysqli_query($con, "
-                  SELECT live_posts.*, model_user.name, model_user.gender, model_user.profile_pic 
+                  SELECT live_posts.*, model_user.name, model_user.gender, model_user.profile_pic ,model_user.unique_id 
                   FROM live_posts 
                   JOIN model_user ON live_posts.post_author = model_user.id 
                   WHERE model_user.id IN ($ids_string)
@@ -1476,7 +1476,7 @@ if(!empty($userDetails['profile_pic'])){
 
                     $user_requested = !empty($user_requested_row);
 
-                    $rating = GetRating($modelDetails['unique_id']);
+                    $rating = GetRating($post['unique_id']);
               ?>
 
               <button class="btn-primary text-sm md:text-base"  onclick="FollowModel('<?= $modelDetails['id'] ?>', '<?= $modelDetails['username'] ?>','follow_similar-<?= $_SESSION['log_user_id'] ?>')" > <span id="follow_similar-<?= $_SESSION['log_user_id'] ?>"></span> <?php if($user_requested) { ?>Follow Requested <?php } else { ?>Connect <?php }?></span></button>
@@ -1502,9 +1502,9 @@ if(!empty($userDetails['profile_pic'])){
 
 
             <div class="flex justify-between text-xs md:text-sm text-white/60">
-              <span>🎯 95% match</span>
-              <span>📍 3 miles</span>
-              <span>⭐ <?= number_format($rating, 2) ?> rating</span>
+              <!-- <span>🎯 95% match</span>
+              <span>📍 3 miles</span> -->
+              <span>⭐ <?= $rating ?> rating <?php echo $post['unique_id'] ?></span>
             </div>
           </div>
 
