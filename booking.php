@@ -271,10 +271,143 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                     <!-- Contact Details Section -->
 
-<!-- add all code herer ...............................................................-->
+                    <div class="ultra-glass p-10 rounded-3xl shadow-2xl hover-lift">
+
+                        <div class="flex items-center mb-8">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+
+                            <?php if (isset($_GET['type']) && $_GET['type'] == 'collaboration') { ?>
+
+                                <h2 class="text-3xl font-bold premium-text heading-font">Collaboration Details</h2>
+
+                            <?php } else {  ?>
 
 
-                  
+                                <h2 class="text-3xl font-bold premium-text heading-font">Your Contact Details</h2>
+
+                            <?php } ?>
+
+                        </div>
+
+                        <?php
+                        if (isset($_GET['service']) && !empty($_GET['service'])) {
+
+                            $service = $_GET['service'];
+                        } else {
+                            $service = '';
+                        } ?>
+
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <?php /*?><div>
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Booking Type</label>
+                                <select name="booking_type" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                    <option value="" class="bg-gray-900">Select...</option>
+                                    
+									<option value="Group Chat" class="bg-gray-900" <?php if($service == 'Group Chat'){ echo 'selected'; } ?> >Group Chat</option>
+									<option value="Private Chat" class="bg-gray-900" <?php if($service == 'Private Chat'){ echo 'selected'; } ?> >Private Chat</option>
+									<option value="Local Meetup" class="bg-gray-900" <?php if($service == 'Local Meetup'){ echo 'selected'; } ?> >Local Meetup</option>
+									<option value="Extended Social" class="bg-gray-900" <?php if($service == 'Extended Social'){ echo 'selected'; } ?> >Extended Social</option>
+									<option value="Overnight Social" class="bg-gray-900" <?php if($service == 'Overnight Social'){ echo 'selected'; } ?> >Overnight Social</option>
+									
+									
+                                </select>
+                            </div> <?php */ ?>
+
+
+                            <?php if (isset($_GET['type']) && $_GET['type'] == 'collaboration') {
+
+                                $collab_categorys = json_decode($extra_details['collab_category']);
+
+                                $category_labels = [
+                                    'life_style_entertainment' => 'Lifestyle & Entertainment  Includes vlogs, fashion, product features, travel stories, etc.',
+                                    'creative_editorial' => 'Creative & Editorial Projects Conceptual shoots, art-based themes, expressive photography, etc.',
+                                    'fashion' => 'Swimwear / Lingerie / Fitness Modeling Includes stylized or bold fashion looks for commercial or brand use',
+                                    'adult_oriented' => 'Adult-Oriented or 18+ Content (Confidential)  May include provocative or mature themes created for verified age-restricted audiences or private platforms.'
+
+                                ];
+
+                            ?>
+
+                                <div>
+
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">Collaboration Type</label>
+
+                                    <select name="booking_for" id="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+
+                                        <option value="" class="bg-gray-900">Select...</option>
+
+                                        <?php if (!empty($collab_categorys)) { ?>
+
+                                            <?php foreach ($collab_categorys as $item) { ?>
+
+                                                <option value="<?= $item ?>" class="bg-gray-900"> <?php echo $category_labels[$item] ?></option>
+
+                                            <?php } ?>
+
+                                        <?php } ?>
+
+
+                                    </select>
+
+                                </div>
+
+                            <?php } else { ?>
+
+                                <div>
+                                    <label class="block text-white/80 font-semibold mb-3 text-lg">Booking For</label>
+                                    <select name="booking_for" id="booking_for" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+                                        <option value="" class="bg-gray-900">Select...</option>
+                                        <option value="Myself" class="bg-gray-900">👤 Myself</option>
+                                        <option value="Business Partner" class="bg-gray-900">🤝 Business Partner</option>
+                                        <option value="Special Client" class="bg-gray-900">⭐ Special Client</option>
+                                        <option value="Group Booking" class="bg-gray-900">👥 Group Booking</option>
+                                    </select>
+                                </div>
+
+                            <?php } ?>
+
+
+                            <div>
+                                <label class="block text-white/80 font-semibold mb-3 text-lg">Country</label>
+
+                                <select name="country" id="country" class="w-full px-6 py-4 ultra-glass text-white rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-lg transition duration-300" required>
+
+                                    <option value="" class="bg-gray-900">Select...</option>
+
+                                    <!-- <option value="us" class="bg-gray-900">🇺🇸 United States</option>
+                                    <option value="uk" class="bg-gray-900">🇬🇧 United Kingdom</option>
+                                    <option value="ca" class="bg-gray-900">🇨🇦 Canada</option>
+                                    <option value="au" class="bg-gray-900">🇦🇺 Australia</option>
+                                    <option value="de" class="bg-gray-900">🇩🇪 Germany</option>
+                                    <option value="fr" class="bg-gray-900">🇫🇷 France</option>
+                                    <option value="jp" class="bg-gray-900">🇯🇵 Japan</option>
+                                    <option value="ae" class="bg-gray-900">🇦🇪 UAE</option>
+                                    <option value="ch" class="bg-gray-900">🇨🇭 Switzerland</option>
+                                    <option value="sg" class="bg-gray-900">🇸🇬 Singapore</option> -->
+
+                                    <?php foreach ($country_list as $val) { ?>
+
+                                        <option value="<?= $val['id'] ?>" class="bg-gray-900"><?= $val['name'] ?></option>
+
+                                    <?php } ?>
+
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Instructions Section -->
+
+                    <!-- add all code herer ...............................................................-->
+
+
+
                 </form>
             </div>
         </section>
