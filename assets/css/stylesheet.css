@@ -12510,7 +12510,9 @@ min-height: 58px !important;
 }
 
 .booking-new .book-time label {
-
+border-bottom:1px solid rgba(255, 255, 255, 0.06);
+padding-bottom: 5px;
+margin-bottom: 12px;
 }
 
 .booking-new .book-time ul {
@@ -12523,11 +12525,16 @@ gap:10px;
 }
 
 .booking-new .book-time ul li{
-    border:1px solid #e5e7eb;
-    border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.4);
+    border-radius: 8px;
     padding:6px 15px;
     text-align:center;
     background:transparent;
+    transition:all .3s ease;
+}
+.booking-new .book-time ul li:hover{
+    transform:translateY(-2px);
 }
 
 
