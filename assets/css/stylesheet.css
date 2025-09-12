@@ -12452,6 +12452,10 @@ overflow-x: auto !important;
 .user-home-right .model-card {}
 
 
+.star-rating .star{
+    color:#fff;
+}
+
 
 
 @media (max-width: 1540px) {
