@@ -346,7 +346,11 @@ else{
 
                  <?php if($item['status'] ==='Completed') { ?>
 
-				<button class="btn btn-secondary" onclick="openReviewModal('<?=$client_name?>', '<?=$item['service_name'];?>', '$<?php echo $serv_tokens ?>',<?php echo $item['id'] ?>,'<?php echo $client_uid; ?>')" >Write Review</button>
+                    <?php if($userDetails['as_a_model'] !='Yes' ) { ?>
+
+				              <button class="btn btn-secondary" onclick="openReviewModal('<?=$client_name?>', '<?=$item['service_name'];?>', '$<?php echo $serv_tokens ?>',<?php echo $item['id'] ?>,'<?php echo $client_uid; ?>')" >Write Review</button>
+
+                      <?php } ?>
 
                 <?php } else if($item['status'] ==='Accept') { ?>
                  
