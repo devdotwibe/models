@@ -3233,7 +3233,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                 <th class="pb-3 font-medium text-white/70">Client</th>
                 <th class="pb-3 font-medium text-white/70">Status</th>
                 <th class="pb-3 font-medium text-white/70">Earnings</th>
-                <th class="pb-3 font-medium text-white/70">Actions</th>
+                <!-- <th class="pb-3 font-medium text-white/70">Actions</th> -->
               </tr>
             </thead>
 
@@ -4371,7 +4371,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     <td class="py-4">
                                       <div class="flex items-center">
                                         <img src="${booking.user_profile_pic}" alt="Client" class="w-8 h-8 rounded-full mr-2">
-                                        <span>Michael T.</span>
+                                        <span>${booking.model_name}</span>
                                       </div>
                                     </td>
 
@@ -4388,21 +4388,23 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                       <div class="text-sm text-white/60">Estimated</div>
                                     </td>
 
-                                    <td class="py-4">
-
-                                      <div class="flex space-x-2">
-
-                                        <button type="button" onclick="AcceptConform('Accept','${booking.id}')" class="px-3 py-1 bg-green-500/20 hover:bg-green-500/30 text-green-400 rounded-lg text-sm">Accept</button>
-
-                                        <button type="button" onclick="AcceptConform('Decline','${booking.id}')" class="px-3 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg text-sm">Decline</button>
-
-                                      </div>
-
-                                    </td>
 
                                   </tr>
                               `;
               });
+
+
+                // <td class="py-4">
+
+                //   <div class="flex space-x-2">
+
+                //     <button type="button" onclick="AcceptConform('Accept','${booking.id}')" class="px-3 py-1 bg-green-500/20 hover:bg-green-500/30 text-green-400 rounded-lg text-sm">Accept</button>
+
+                //     <button type="button" onclick="AcceptConform('Decline','${booking.id}')" class="px-3 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg text-sm">Decline</button>
+
+                //   </div>
+
+                // </td>
 
             } else {
               booking_list = '<p>No bookings found.</p>';
