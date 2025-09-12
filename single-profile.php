@@ -3242,14 +3242,14 @@ body .owl-carousel .owl-nav.disabled {
 
                     showNotification(`Report submitted successfully!`, 'success');
 
-                    StoryCloseModal();
+                    ReportCloseModal();
                  }
 
                 if (response.status === 'error') {
 
                     showNotification(`${response.message}`, 'error');
 
-                    StoryCloseModal();
+                    ReportCloseModal();
                  }
 
             },
