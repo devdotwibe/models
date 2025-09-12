@@ -12501,7 +12501,13 @@ min-height: 58px !important;
     padding-block: 15px !important;
     padding-inline: 30px !important;
 }
+.relative.booking-new{
+    padding-top:0 !important;
+}
 
+.relative.book-status{
+    padding-bottom: 0 !important;
+}
 
 
 

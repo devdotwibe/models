@@ -91,7 +91,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
         </section>
 
         <!-- Premium Status Section -->
-        <section class="py-8 relative">
+        <section class="py-8 relative book-status">
             <div class="container mx-auto">
                 <div class="ultra-glass p-8 rounded-3xl mb-8">
                     <div class="text-center mb-6">
@@ -170,7 +170,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
         </section>
 
         <!-- Premium Booking Form -->
-        <section class="relative booking-new">
+        <section class="py-12 relative booking-new">
             <div class="container mx-auto">
 
                 <form method="post" id="serviceBookingForm" class="max-w-6xl mx-auto space-y-8" action="act_model_booking.php" enctype="multipart/form-data">
