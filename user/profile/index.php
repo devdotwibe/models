@@ -794,7 +794,11 @@ if(!empty($userDetails['profile_pic'])){
 				$state_list = DB::query('select name from states where id="'.$userDetails['state'].'"');
 				$city_list = DB::query('select name from cities where id="'.$userDetails['city'].'"');
 			if(!empty($country_list) && !empty($country_list[0]['name'])){
-			echo '<p class="text-white/60 text-sm mb-2">'.$city_list[0]['name'].', '.$state_list[0]['name'].', '.$country_list[0]['name'].'</p>';
+				$full_addr_list = '';
+				if(!empty($city_list) && !empty($city_list[0]['name'])) $full_addr_list .= $city_list[0]['name'].', ';
+				if(!empty($state_list) && !empty($state_list[0]['name'])) $full_addr_list .= $state_list[0]['name'].', ';
+				$full_addr_list .= $country_list[0]['name'];
+			echo '<p class="text-white/60 text-sm mb-2">'.$full_addr_list.'</p>';
 			 } 
 			 $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $userDetails['unique_id']);
 			 ?>
@@ -1471,6 +1475,8 @@ if(!empty($userDetails['profile_pic'])){
                     );
 
                     $user_requested = !empty($user_requested_row);
+
+                    $rating = GetRating($modelDetails['unique_id']);
               ?>
 
               <button class="btn-primary text-sm md:text-base"  onclick="FollowModel('<?= $modelDetails['id'] ?>', '<?= $modelDetails['username'] ?>','follow_similar-<?= $_SESSION['log_user_id'] ?>')" > <span id="follow_similar-<?= $_SESSION['log_user_id'] ?>"></span> <?php if($user_requested) { ?>Follow Requested <?php } else { ?>Connect <?php }?></span></button>
@@ -1498,7 +1504,7 @@ if(!empty($userDetails['profile_pic'])){
             <div class="flex justify-between text-xs md:text-sm text-white/60">
               <span>🎯 95% match</span>
               <span>📍 3 miles</span>
-              <span>⭐ 4.9 rating</span>
+              <span>⭐ <?= number_format($rating, 2) ?> rating</span>
             </div>
           </div>
 
