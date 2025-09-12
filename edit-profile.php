@@ -4371,7 +4371,7 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
                                     <td class="py-4">
                                       <div class="flex items-center">
                                         <img src="${booking.user_profile_pic}" alt="Client" class="w-8 h-8 rounded-full mr-2">
-                                        <span>${booking.model_name}</span>
+                                        <span>${booking.booked_name}</span>
                                       </div>
                                     </td>
 

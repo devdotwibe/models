@@ -68,6 +68,8 @@ include('../includes/helper.php');
                     }
 
                     $model_bookings[$key]['user_profile_pic'] = $defaultImage;
+
+                    $model_bookings[$key]['booked_name'] = $bookeduser['name'];
                 
                 }
 
