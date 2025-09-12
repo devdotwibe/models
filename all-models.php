@@ -1010,6 +1010,10 @@ include('includes/helper.php');
 
                             $idList = implode(',', $onlineUserIds);
 
+                            echo $idList;
+
+                            die();
+
                             $sqls_count = "SELECT COUNT(*) AS total FROM model_user mu WHERE mu.id IN ($idList)";
                             $result_count = mysqli_query($con, $sqls_count);
 
