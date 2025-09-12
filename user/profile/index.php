@@ -1321,7 +1321,7 @@ if(!empty($userDetails['profile_pic'])){
           $users_with_post = [];
 
           $sql = "
-              SELECT DISTINCT model_user.id AS user_id  model_user.unique_id
+              SELECT DISTINCT model_user.id AS user_id 
               FROM live_posts 
               JOIN model_user ON live_posts.post_author = model_user.id
           ";
