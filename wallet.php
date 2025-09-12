@@ -315,6 +315,7 @@ $activeTab = 'wallet';
                                     <button class="btn btn-primary w-full" type="submit" name="submit1000" <?php /*onclick="purchase(1000, 'INR', 1000)" */ ?>>
                                         Purchase Now
                                     </button>
+                                </form>
                             </div>
 
                             <div class="purchase-card">
