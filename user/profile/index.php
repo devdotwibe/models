@@ -1507,7 +1507,7 @@ if(!empty($userDetails['profile_pic'])){
             <div class="flex justify-between text-xs md:text-sm text-white/60">
               <!-- <span>🎯 95% match</span>
               <span>📍 3 miles</span> -->
-              <span>⭐ <?= number_format($average_rating, 2) ?> rating </span>
+              <span>⭐ <?= rtrim(rtrim(number_format($rating, 1), '0'), '.') ?> rating </span>
             </div>
           </div>
 
