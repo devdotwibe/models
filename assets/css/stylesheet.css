@@ -12488,7 +12488,7 @@ overflow-x: auto !important;
 }
 
 .profile-wrapp1>div>div:nth-child(2) button{
-min-height: 58px;
+min-height: 58px !important;
   height: auto
 }
 
@@ -13929,8 +13929,9 @@ min-height: 58px;
     }
 
 .profile-wrapp1>div>div:nth-child(2) button{
-min-height: auto;
-  height: auto
+height: 48px !important;
+    min-height: auto !important;
+  /* padding-block: 12px !important; */
 }
 
 
