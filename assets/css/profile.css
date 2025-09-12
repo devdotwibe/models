@@ -10576,6 +10576,11 @@ body.profile-advts {
         width: 14px;
     }
 
+.profile-header .profile-info .plus-btn {
+  bottom: 45px;
+ 
+}
+
 }
 
 @media (max-width:420px) {
