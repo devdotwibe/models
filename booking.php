@@ -200,7 +200,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                             <?php if ($_GET['service'] == 'Meetup') { ?>
 
-                                <div>
+                                <div >
                                     <label class="block text-white/80 font-semibold mb-3 text-lg">Tokens <?php //echo $_GET['token']; 
                                                                                                             ?></label>
 
@@ -216,7 +216,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                 if (!empty($social_availability)) {
                                     $availability_time_slot = json_decode($extra_details['availability_time_slot']);
                                 ?>
-                                    <div>
+                                    <div class="book-time">
                                         <label class="block text-white/80 font-semibold mb-3 text-lg">Available Days</label>
                                         <ul class="avail-list">
                                             <?php foreach ($social_availability as $avail) {
@@ -250,7 +250,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                 <?php $travel_months = json_decode($extra_details['travel_months']);
                                 if (!empty($travel_months)) {
                                 ?>
-                                    <div>
+                                    <div class="book-month">
                                         <label class="block text-white/80 font-semibold mb-3 text-lg">Available Months for Travel</label>
                                         <ul class="avail-list">
                                             <?php foreach ($travel_months as $avail) {

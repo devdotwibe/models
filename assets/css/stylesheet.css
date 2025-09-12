@@ -12509,6 +12509,27 @@ min-height: 58px !important;
     padding-bottom: 0 !important;
 }
 
+.booking-new .book-time label {
+
+}
+
+.booking-new .book-time ul {
+display: flex;
+flex-wrap: wrap;
+padding:0;
+margin:0;
+width:100%;
+gap:10px;
+}
+
+.booking-new .book-time ul li{
+    border:1px solid #e5e7eb;
+    border-radius: 6px;
+    padding:6px 15px;
+    text-align:center;
+    background:transparent;
+}
+
 
 
 
