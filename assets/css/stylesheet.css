@@ -11323,7 +11323,7 @@ overflow-x: auto !important;
   display: flex;
   text-align: left;
   font-size: 15px;
-  font-style: italic;
+  /* font-style: italic; */
 }
 
 
@@ -12671,6 +12671,15 @@ overflow-x: auto !important;
     min-height: auto !important;
     /* padding-block: 12px !important; */
   }
+
+
+.edit-profilepage .conditional-section.show .proff-ips .checkbox-option > span{
+    font-size: 13px;
+}
+
+.edit-profilepage .conditional-section.show .proff-ips .checkbox-option>div label{
+    font-size: 15px;
+}
 }
 
 @media (max-width: 480px) {
@@ -13832,9 +13841,19 @@ overflow-x: auto !important;
     justify-content: center;
   }
 
-  /* .premimum-model1 .profile-grid.profile-list .profile-image-container img{
-    height: 50vw;
-} */
+.proff-ips {
+    display: flex
+;
+    flex-wrap: wrap;
+}
+
+.edit-profilepage .conditional-section.show .proff-ips .checkbox-option {
+
+    width: 100%;
+    max-width: 100%;
+}
+
+
 }
 
 @media (max-width: 380px) {
