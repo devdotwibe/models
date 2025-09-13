@@ -1048,6 +1048,8 @@ let selectedFiles_video = [];
 				else progress = 100;
 			
 		}
+
+        return false;
 		//uploading video files
 
 		if (files_vd.length > 0) {
