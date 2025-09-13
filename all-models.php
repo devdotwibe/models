@@ -937,7 +937,23 @@ include('includes/helper.php');
                             
                         }
 
-                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($allIds)  AND mu.id  IN ($basicList)   $where  $order LIMIT $limit OFFSET $offset";
+                        $onlineUserIds = [];
+
+
+                        $idsQuery = "SELECT id FROM model_user mu WHERE mu.verified = '1' $where";
+
+                        $result = mysqli_query($con, $idsQuery);
+
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            if (isUserOnline($row['id']) === 'Online') {
+                                $onlineUserIds[] = $row['id'];
+                            }
+                        }
+
+                        $idList = implode(',', $onlineUserIds);
+
+                        $sqls = "SELECT * FROM model_user mu WHERE mu.id IN ($allIds)  AND mu.id  IN ($basicList) AND mu.id  IN ($idList)   $where  $order LIMIT $limit OFFSET $offset";
+
                     } else {
 
 
