@@ -11248,7 +11248,7 @@ user-home
 /* home creator page............. */ 
 
 
-.profile-badge.creator-badge {
+.user-home .profile-badge.creator-badge {
   position: relative;
   width: fit-content;
   padding: 0 !important;
@@ -11257,19 +11257,19 @@ user-home
   font-size: 10px !important;
 }
 
-.badge-user.creator {
+.user-home .badge-user.creator {
   width: 30px !important;
   height: 30px !important;
   font-size: 12px !important;
 }
 
-.profile-badge.creator-badge p {
-  position: absolute;
+.user-home .profile-badge.creator-badge p {
+  position: relative;
   top: 110%;
   left: 50%;
-  margin: 0 auto;
-  transform: translateX(-50%);
-  color: #fff !important;
+  margin: 0;
+  transform: none;
+  inset: 0;
 }
 
 
