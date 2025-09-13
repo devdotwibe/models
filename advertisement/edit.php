@@ -984,7 +984,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                  uploadedPhotos.push(photoData);
 
-                selectedFiles_img.push(file); 
+                // selectedFiles_img.push(file); 
 
                 displayPhotoPreview(photoData);
 
