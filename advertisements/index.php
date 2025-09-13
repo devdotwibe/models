@@ -39,7 +39,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 
 	<?php } else { ?>
 
-        <?php include('includes/header.php'); ?>
+        <?php include('../includes/header.php'); ?>
 
     <?php } ?>
    
