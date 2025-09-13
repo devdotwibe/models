@@ -962,7 +962,6 @@ $serviceArr = array('Providing services', 'Looking for services');
 		
         handlePhotoFiles(files);
     }
-
     function handlePhotoFiles(files) {
         if (uploadedPhotos.length + files.length > 10) {
             alert('Maximum 10 photos allowed');
@@ -975,77 +974,40 @@ $serviceArr = array('Providing services', 'Looking for services');
                 return;
             }
 
-            if (selectedFiles_img.some(f => f.name === file.name && f.size === file.size)) {
-                console.log(`Skipping duplicate: ${file.name}`);
-                return;
-            }
-
             const reader = new FileReader();
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 const photoData = {
                     file: file,
                     url: e.target.result,
                     id: Date.now() + Math.random()
                 };
 
-                uploadedPhotos.push(photoData);
-                selectedFiles_img.push(file);
+                 uploadedPhotos.push(photoData);
+
+                selectedFiles_img.push(file); 
 
                 displayPhotoPreview(photoData);
 
+                console.log(uploadedPhotos);
+
                 const dataTransfer = new DataTransfer();
-                selectedFiles_img.forEach(f => dataTransfer.items.add(f));
-                document.getElementById('photoInput').files = dataTransfer.files;
+
+               selectedFiles_img.forEach(f => dataTransfer.items.add(f));
+                
+               document.getElementById('photoInput').files = dataTransfer.files;
+                
+                console.log(dataTransfer.files);
             };
+
             reader.readAsDataURL(file);
         });
+		
+		
+		const dataTransfer = new DataTransfer();
+		selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
+		document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
+		
     }
-    // function handlePhotoFiles(files) {
-    //     if (uploadedPhotos.length + files.length > 10) {
-    //         alert('Maximum 10 photos allowed');
-    //         return;
-    //     }
-
-    //     files.forEach(file => {
-    //         if (file.size > 10 * 1024 * 1024) {
-    //             alert(`File ${file.name} is too large. Maximum size is 10MB.`);
-    //             return;
-    //         }
-
-    //         const reader = new FileReader();
-    //         reader.onload = function(e) {
-    //             const photoData = {
-    //                 file: file,
-    //                 url: e.target.result,
-    //                 id: Date.now() + Math.random()
-    //             };
-
-    //              uploadedPhotos.push(photoData);
-
-    //             selectedFiles_img.push(file); 
-
-    //             displayPhotoPreview(photoData);
-
-    //             console.log(uploadedPhotos);
-
-    //             const dataTransfer = new DataTransfer();
-
-    //            selectedFiles_img.forEach(f => dataTransfer.items.add(f));
-                
-    //            document.getElementById('photoInput').files = dataTransfer.files;
-                
-    //             console.log(dataTransfer.files);
-    //         };
-
-    //         reader.readAsDataURL(file);
-    //     });
-		
-		
-	// 	const dataTransfer = new DataTransfer();
-	// 	selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
-	// 	document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
-		
-    // }
 
     function displayPhotoPreview(photoData) {
         const grid = document.getElementById('photoPreviewGrid');
