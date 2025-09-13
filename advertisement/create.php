@@ -1049,9 +1049,6 @@ let selectedFiles_video = [];
 			
 		}
 
-        return false;
-		//uploading video files
-
 		if (files_vd.length > 0) {
 			// Create a new FormData object
 			var formDataV = new FormData();
