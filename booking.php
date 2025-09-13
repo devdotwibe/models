@@ -693,7 +693,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                         <input type="hidden" name="tokens" id="tokens_used" value="<?php echo $_GET['token']; ?>">
 
 
-                        <?php if ($_GET['service'] == 'Collaboration') { ?>
+                        <?php if ($_GET['service'] == 'Collaboration' || $_GET['service'] == 'Travel' ) { ?>
 
                             <button name="booking_submit" type="button" onclick="serviceBookingSubmission(this)" class="btn-primary px-16 py-5 text-white font-bold rounded-2xl text-xl shadow-2xl relative overflow-hidden">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline">
