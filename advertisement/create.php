@@ -796,7 +796,8 @@ $serviceArr = array('Providing services', 'Looking for services');
 		
         handlePhotoFiles(files);
     }
-    function handlePhotoFiles(files) {
+        function handlePhotoFiles(files) {
+
         if (uploadedPhotos.length + files.length > 10) {
             alert('Maximum 10 photos allowed');
             return;
@@ -809,7 +810,7 @@ $serviceArr = array('Providing services', 'Looking for services');
             }
 
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const photoData = {
                     file: file,
                     url: e.target.result,
@@ -818,25 +819,17 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                 uploadedPhotos.push(photoData);
 
-                selectedFiles_img.push(file); 
+                selectedFiles_img.push(file);
 
                 displayPhotoPreview(photoData);
 
-                console.log(uploadedPhotos);
-
                 const dataTransfer = new DataTransfer();
+                selectedFiles_img.forEach(f => dataTransfer.items.add(f));
 
-               selectedFiles_img.forEach(f => dataTransfer.items.add(f));
-                
-               document.getElementById('photoInput').files = dataTransfer.files;
-                
-                console.log(dataTransfer.files);
+                document.getElementById('photoInput').files = dataTransfer.files;
             };
             reader.readAsDataURL(file);
         });
-		
-	
-		
     }
 
     function displayPhotoPreview(photoData) {
@@ -869,7 +862,7 @@ let selectedFiles_video = [];
         handleVideoFiles(files);
     }
 
-    function handleVideoFiles(files) {
+        function handleVideoFiles(files) {
         if (uploadedVideos.length + files.length > 5) {
             alert('Maximum 5 videos allowed');
             return;
@@ -882,7 +875,7 @@ let selectedFiles_video = [];
             }
 
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const videoData = {
                     file: file,
                     url: e.target.result,
@@ -891,22 +884,17 @@ let selectedFiles_video = [];
 
                 uploadedVideos.push(videoData);
 
-                selectedFiles_video.push(file); 
+                selectedFiles_video.push(file);
 
                 displayVideoPreview(videoData);
 
                 const dataTransfer = new DataTransfer();
-
                 selectedFiles_video.forEach(f => dataTransfer.items.add(f));
 
-                document.getElementById('videoInput').files = dataTransfer.files; //console.log(dataTransfer.files);
-
+                document.getElementById('videoInput').files = dataTransfer.files;
             };
             reader.readAsDataURL(file);
         });
-		
-		
-		
     }
 
     function displayVideoPreview(videoData) {
