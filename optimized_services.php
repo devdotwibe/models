@@ -693,9 +693,11 @@ else{
 
               <p id="serviceheading" style="margin-top: 20px;"></p>
 
-                      <p id="booking_date"  style="margin-top: 10px;"></p>
+              <p id="booking_date"  style="margin-top: 10px;"></p>
 
-                      <p id="booking_time"></p>
+              <p id="booking_date_to"  style="margin-top: 10px;"></p>
+
+              <p id="booking_time"></p>
 
               <p id="booking_destination"></p>
 
@@ -768,6 +770,7 @@ else{
                 $('#booking_country').text('');
                 $('#booking_description').text('');
                 $('#booking_date').html('');
+                $('#booking_date_to').html('');
                 $('#booking_time').html('');
                 $('#booking_destination').html('');
                 $('#booking_no_of_hrs_meet').html('');
@@ -826,8 +829,9 @@ else{
 
                     var meeting_date = data.meeting_date || '';
                     if (meeting_date) {
+
                         var mdate_parts = meeting_date.split('-');
-                        $('#booking_date').html('<b>Collaboration From Date: </b><span>' + mdate_parts[2] + '-' + mdate_parts[1] + '-' + mdate_parts[0] + '</span>');
+                        $('#booking_date_to').html('<b>Collaboration From Date: </b><span>' + mdate_parts[2] + '-' + mdate_parts[1] + '-' + mdate_parts[0] + '</span>');
                     }
 
 
