@@ -570,7 +570,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
             </div>
 
             <div class="mt-16 text-center">
-                <button class="btn-secondary px-12 py-4 text-white rounded-xl hover:bg-white/20 transition duration-300 text-lg font-semibold" onclick="viewAllModels()">
+                <button  class="btn-secondary px-12 py-4 text-white rounded-xl hover:bg-white/20 transition duration-300 text-lg font-semibold" onclick="viewAllModels()">
                     View All Models
                 </button>
             </div>
