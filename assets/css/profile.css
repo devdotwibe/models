@@ -3966,11 +3966,19 @@ body.premimum-model1::before {
     .premimum-model1 .filter-modal {
         width: 100%;
         right: -100%;
+        max-width: 500px;
     }
 
     .premimum-model1 .profile-grid {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     }
+
+.filter-section .progress-container{
+
+    margin-left: 0;
+
+}
+
 }
 
 @media (max-width: 768px) {
