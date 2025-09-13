@@ -1199,7 +1199,9 @@ let selectedFiles_video = [];
         let progress = 0;
 		
 		var photoInput = document.getElementById('photoInput');
-		var files_img = photoInput.files;  // Get all selected images
+		// var files_img = photoInput.files;  // Get all selected images
+
+        const files_img = uploadedPhotos;
 				
 		//uploading Image files
 
