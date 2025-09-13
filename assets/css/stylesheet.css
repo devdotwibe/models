@@ -11024,6 +11024,17 @@ overflow-x: auto !important;
   display: none;
 }
 
+.profile-badge.creator-badge .badge-user.creator {
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-badge.creator-badge {
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
 /* .profile-badge.creator-badge {
   width: 20px;
   height: 20px;
@@ -11037,20 +11048,37 @@ overflow-x: auto !important;
 
 /* premium.............................. */
 
-.profile-badge.creator-badge .badge-user.creator {
-  font-size: 12px;
-  width: 100%;
-  height: 100%;
+/* premium home.page..... */
+.user-home .profile-badge.badge-premium {
+  position: relative;
+
+  width: fit-content;
+  padding: 0 !important;
+  margin-bottom: 16px;
+  margin-left: 15px !important;
+  font-size: 10px !important;
 }
 
-.profile-badge.creator-badge {
-  backdrop-filter: none !important;
-  box-shadow: none !important;
+.user-home .premium-basic-user {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 12px !important;
 }
+
+.user-home .profile-badge.badge-premium p {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  margin: 0 auto;
+  transform: translateX(-50%);
+}
+
+
+/* premium home.page..... */
 
 /* .profile-badge.badge-premium {
   position: relative;
-
+user-home
   width: fit-content;
   padding: 0 !important;
   margin-bottom: 16px;
