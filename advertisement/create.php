@@ -806,7 +806,6 @@ function handlePhotoFiles(files) {
             return;
         }
 
-        // ✅ Avoid duplicates by checking if already selected
         if (selectedFiles_img.some(f => f.name === file.name && f.size === file.size)) {
             console.log(`Skipping duplicate: ${file.name}`);
             return;
@@ -825,7 +824,6 @@ function handlePhotoFiles(files) {
 
             displayPhotoPreview(photoData);
 
-            // ✅ Update input files safely
             const dataTransfer = new DataTransfer();
             selectedFiles_img.forEach(f => dataTransfer.items.add(f));
             document.getElementById('photoInput').files = dataTransfer.files;
@@ -857,14 +855,15 @@ function handlePhotoFiles(files) {
 
         grid.appendChild(previewDiv);
     }
-let selectedFiles_video = [];
+
+    let selectedFiles_video = [];
+
     function handleVideoUpload(event) {
         const files = Array.from(event.target.files);
-		selectedFiles_video = selectedFiles_video.concat(files);
         handleVideoFiles(files);
     }
 
-        function handleVideoFiles(files) {
+    function handleVideoFiles(files) {
         if (uploadedVideos.length + files.length > 5) {
             alert('Maximum 5 videos allowed');
             return;
@@ -873,6 +872,11 @@ let selectedFiles_video = [];
         files.forEach(file => {
             if (file.size > 100 * 1024 * 1024) {
                 alert(`File ${file.name} is too large. Maximum size is 100MB.`);
+                return;
+            }
+
+            if (selectedFiles_video.some(f => f.name === file.name && f.size === file.size)) {
+                console.log(`Skipping duplicate video: ${file.name}`);
                 return;
             }
 
@@ -885,19 +889,19 @@ let selectedFiles_video = [];
                 };
 
                 uploadedVideos.push(videoData);
-
                 selectedFiles_video.push(file);
 
                 displayVideoPreview(videoData);
 
+                // ✅ Update input with unique files only
                 const dataTransfer = new DataTransfer();
                 selectedFiles_video.forEach(f => dataTransfer.items.add(f));
-
                 document.getElementById('videoInput').files = dataTransfer.files;
             };
             reader.readAsDataURL(file);
         });
     }
+
 
     function displayVideoPreview(videoData) {
         const grid = document.getElementById('videoPreviewGrid');
