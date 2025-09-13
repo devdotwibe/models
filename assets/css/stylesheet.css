@@ -11325,7 +11325,12 @@ overflow-x: auto !important;
   font-size: 15px;
   /* font-style: italic; */
 }
-
+.booking-new form .text-center p {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 500px;
+    line-height: 26px;
+}
 
 
 
