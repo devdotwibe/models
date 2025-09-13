@@ -47,9 +47,19 @@ $output['result']= 'ok';
 					$params[] = $category;
 				}
 
-				if (!empty($status) && ($status=='Active' || $status =='expired' ) ) {
-					$where_clause = " and tb.adv_status = %s ";
-					$params[] = $status;
+				if (!empty($status)) {
+
+					if($status =='Inactive')
+					{
+						$where_clause = " AND (tb.adv_status = %s OR tb.adv_status = '')";
+						$params[] = $status;
+					}
+					else
+					{
+						$where_clause = " and tb.adv_status = %s ";
+						$params[] = $status;
+					}
+		
 				}
 
 				$sort_by = ' ORDER BY tb.id desc ';
