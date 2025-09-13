@@ -1245,7 +1245,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
 
-                                    <button class="action-btn like" title="Like" <?php if ($user_liked) { ?> style="transform: scale(1); color: var(--secondary);" <?php } ?> onclick="ActionBtn(this,'like')" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button class="action-btn like" title="Like" onclick="ShowLogin('like')" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-heart"></i>
                                     </button>
 
@@ -1931,7 +1931,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
 
-                                    <button class="action-btn like" title="Like" <?php if ($user_liked) { ?> style="transform: scale(1); color: var(--secondary);" <?php } ?> onclick="ActionBtn(this,'like')" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button class="action-btn like" title="Like" onclick="ShowLogin('like')" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-heart"></i>
                                     </button>
 
@@ -3052,6 +3052,15 @@ include('includes/helper.php');
         function closePremiumModal() {
             $('#premium-modal').removeClass('show');
         }
+
+        function ShowLogin(type)
+        {
+
+            if(type =='like')
+            {
+                 showNotification(`Please log in to like this model !`, 'success');
+            }
+        }   
 
         function ActionBtn(element, action) {
 
