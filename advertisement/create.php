@@ -37,7 +37,7 @@ if (isset($_SESSION['log_user_id'])) {
 
             $error = '';
             
-            if(isset($_POST['save_image_file'])){
+            if(isset($_POST['save_image_file']) && !empty($_POST['save_image_file'])){
                 $additional_img = '';
                 $exp_file_img = explode('|',$_POST['save_image_file']);
                 $joe_id = DB::update('banners', array('image' => $exp_file_img[0]), "id=%s", $created_id);
@@ -48,23 +48,20 @@ if (isset($_SESSION['log_user_id'])) {
                     $joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
                 }
             }
-            // if(isset($_POST['save_video_file'])){
 
-            //     $joe_id = DB::update('banners', array('video' => $_POST['save_video_file']), "id=%s", $created_id);
-            // }
 
-            if(isset($_POST['save_video_file'])){
-
+ 
+            if(isset($_POST['save_video_file']) && !empty($_POST['save_video_file'])){
                 $additional_video = '';
-                $exp_file_video = explode('|',$_POST['save_video_file']);
+                $exp_file_video = explode('|', $_POST['save_video_file']);
 
-                $joe_id = DB::update('banners', array('video' => $exp_file_img[0]), "id=%s", $created_id);
+                DB::update('banners', ['video' => $exp_file_video[0]], "id=%s", $created_id);
 
                 if(count($exp_file_video) > 1){
-                    for ($i = 0; $i < count($exp_file_video); $i++) {
-                        $additional_video .= $exp_file_video[$i].'|';
+                    for ($i = 1; $i < count($exp_file_video); $i++) {
+                        $additional_video .= $exp_file_video[$i] . '|';
                     }
-                    $joe_id = DB::update('banners', array('video' => rtrim($additional_video, "|")), "id=%s", $created_id);
+                    DB::update('banners', ['video' => rtrim($additional_video, "|")], "id=%s", $created_id);
                 }
             }
 
