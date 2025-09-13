@@ -128,8 +128,13 @@ $all_data   = DB::query($finalQuery, ...$params);
 $totalQuery = "SELECT COUNT(*) AS cnt FROM (" . $stringQuery . ") AS t";
 $totalRow   = DB::queryFirstRow($totalQuery, ...$params);
 
-$output['total']          = $totalRow['cnt'] ?? 0;
-$output['total_page_all'] = $stringQuery;
+
+// $output['total']          = $totalRow['cnt'] ?? 0;
+// $output['total_page_all'] = $stringQuery;
+// $output['total_page']     = (int) ceil($output['total'] / $perPage);
+// $output['page']           = $page_number;
+
+$output['total']          = (int) ($totalRow['cnt'] ?? 0);
 $output['total_page']     = (int) ceil($output['total'] / $perPage);
 $output['page']           = $page_number;
 
