@@ -976,132 +976,92 @@ let selectedFiles_video = [];
         alert('💾 Draft saved successfully! You can continue editing later.');
     }
 
-     function submitForm(event) {
-        event.preventDefault();
+  async function submitForm(event) {
+    event.preventDefault();
 
-        // Show upload progress
-        const progressDiv = document.getElementById('uploadProgress');
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
+    const progressDiv = document.getElementById('uploadProgress');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
 
-        progressDiv.classList.remove('hidden');
-		
-		// Simulate upload progress
-        let progress = 0;
-		
-		var photoInput = document.getElementById('photoInput');
-		var files_img = photoInput.files;  // Get all selected images
-		
-		var videoInput = document.getElementById('videoInput');
-		var files_vd = videoInput.files;  // Get all selected videos
-		
-		//uploading Image files
+    progressDiv.classList.remove('hidden');
 
-        // console.log('files_img',files_img);
+    let progress = 0;
 
-		if (files_img.length > 0) {
-			// Create a new FormData object
-			var formData = new FormData();
-			var uploaded_file = [];
-			for (var i = 0; i < files_img.length; i++) {
-				formData.append('uploaded_file[]', files_img[i]);  
-			}
-			
-			progressFill.style.width = '25%';
-            progressText.textContent = '25%';
-			progress = 25;
-			
-			// Send the FormData object using Fetch API
-			fetch('<?php SITEURL.'/ajax/adv_upload.php'?>', {
-				method: 'POST',
-				body: formData
-			})
-			.then(response => response.text())
-			.then(data => { 
-				if(data == 'No files were uploaded.'){
-					alert(data);
-				}else if(data == 'Error'){
-					alert('Sorry, there was an error uploading the images.')
-				}else{
-					jQuery('#save_image_file').val(data);
-				}
-				if (files_vd.length > 0) {
-				progressFill.style.width = '50%';
-				progressText.textContent = '50%';
-				progress = 50;
-				}else{
-				progressFill.style.width = '100%';
-				progressText.textContent = '100%';
-				progress = 100;
-				}
-				
-				if(progress >= 100){
-				setTimeout(() => {
-                    // event.target.submit();
-                }, 1000);
-			} 
-			})
-			.catch(error => {
-				console.error('Upload failed:', error);
-			});
-				if (files_vd.length > 0) progress = 50;
-				else progress = 100;
-			
-		}
+    const photoInput = document.getElementById('photoInput');
+    const files_img = photoInput.files;
 
-		if (files_vd.length > 0) {
-			// Create a new FormData object
-			var formDataV = new FormData();
-			var uploaded_file = [];
-			for (var i = 0; i < files_vd.length; i++) {
-				formDataV.append('uploaded_file[]', files_vd[i]);  
-			}
-			
-			if (files_img.length > 0) {
-			progressFill.style.width = '75%';
-            progressText.textContent = '75%';	
-			progress = 75;
-			}else{
-			progressFill.style.width = '25%';
-            progressText.textContent = '25%';
-			progress = 25;			
-			}
-			// Send the FormData object using Fetch API
-			fetch('<?=SITEURL.'/ajax/adv_upload.php'?>', {
-				method: 'POST',
-				body: formDataV
-			})
-			.then(response => response.text())
-			.then(data => { 
-				if(data == 'No files were uploaded.'){
-					alert(data);
-				}else if(data == 'Error'){
-					alert('Sorry, there was an error uploading the video.')
-				}else{
-					jQuery('#save_video_file').val(data);
-				}
-				progressFill.style.width = '100%';
-				progressText.textContent = '100%';
-				progress = 100;
-				if(progress >= 100){
-				setTimeout(() => {
-                    // event.target.submit();
-                }, 1000);
-			} 
-				
-			})
-			.catch(error => {
-				console.error('Upload failed:', error);
-			});
-			progress = 100;
-			
-		}
-		
-		//uploading complete
-		
-		if (files_vd.length <= 0  && files_img.length <= 0) {
-        // Simulate upload progress
-        
+    const videoInput = document.getElementById('videoInput');
+    const files_vd = videoInput.files;
+
+    // --- Helper to upload files ---
+    const uploadFiles = async (files, saveFieldId, endpoint, startProgress, endProgress, errorMessage) => {
+        if (files.length === 0) return true;
+
+        let formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append('uploaded_file[]', files[i]);
+        }
+
+        // update progress UI
+        progressFill.style.width = startProgress + '%';
+        progressText.textContent = startProgress + '%';
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.text();
+
+            if (data === 'No files were uploaded.') {
+                alert(data);
+                return false;
+            } else if (data === 'Error') {
+                alert(errorMessage);
+                return false;
+            } else {
+                document.getElementById(saveFieldId).value = data;
+            }
+
+            progressFill.style.width = endProgress + '%';
+            progressText.textContent = endProgress + '%';
+            return true;
+
+        } catch (err) {
+            console.error('Upload failed:', err);
+            alert(errorMessage);
+            return false;
+        }
+    };
+
+    // --- Upload images ---
+    if (files_img.length > 0) {
+        const ok = await uploadFiles(
+            files_img,
+            'save_image_file',
+            '<?= SITEURL."/ajax/adv_upload.php" ?>',
+            25,
+            files_vd.length > 0 ? 50 : 100,
+            'Sorry, there was an error uploading the images.'
+        );
+        if (!ok) return;
+    }
+
+    // --- Upload videos ---
+    if (files_vd.length > 0) {
+        const ok = await uploadFiles(
+            files_vd,
+            'save_video_file',
+            '<?= SITEURL."/ajax/adv_upload.php" ?>',
+            files_img.length > 0 ? 75 : 25,
+            100,
+            'Sorry, there was an error uploading the video.'
+        );
+        if (!ok) return;
+    }
+
+    // --- If no files selected, simulate progress ---
+    if (files_vd.length === 0 && files_img.length === 0) {
         const interval = setInterval(() => {
             progress += Math.random() * 15;
             if (progress > 100) progress = 100;
@@ -1111,19 +1071,15 @@ let selectedFiles_video = [];
 
             if (progress >= 100) {
                 clearInterval(interval);
-                setTimeout(() => {
-                    // event.target.submit();
-                }, 500);
+                setTimeout(() => event.target.submit(), 500);
             }
-        }, 200); 
-		}else{ 
-			if(progress >= 100){
-				setTimeout(() => {
-                  //  event.target.submit();
-                }, 1000);
-			} 
-		}
+        }, 200);
+        return;
     }
+
+    // --- Final submit after uploads ---
+    setTimeout(() => event.target.submit(), 800);
+}
 </script>
 	
 
