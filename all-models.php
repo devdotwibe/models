@@ -516,7 +516,7 @@ include('includes/helper.php');
             display: flex;
             justify-content: space-between;
             margin: 10px auto;
-            width: 400px;
+            width: 100%;
             font-weight: bold;
             }
 
