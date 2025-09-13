@@ -209,6 +209,8 @@ include('includes/helper.php');
             animation: premiumAura 4s linear infinite;
         }
 
+     
+
         /* Ultra-luxury Diamond Elite with crystal faceting and prismatic effects */
         .diamond-elite-user {
             background: linear-gradient(135deg, #06b6d4, #0891b2, #0e7490, #155e75);
@@ -234,9 +236,11 @@ include('includes/helper.php');
                     #a5f3fc, #67e8f9, #22d3ee, #06b6d4);
             clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
             z-index: -1;
-            animation: diamondPrisma 2.5s ease-in-out infinite;
+            animation: premiumPrisma 2.5s ease-in-out infinite;
         }
 
+
+         /* premiumPrisma premiumAura   diamondPrisma diamondAura*/
         .diamond-elite-user::after {
             content: '';
             position: absolute;
@@ -244,7 +248,7 @@ include('includes/helper.php');
             background: radial-gradient(circle, rgba(6, 182, 212, 0.8) 0%, rgba(34, 211, 238, 0.4) 40%, transparent 70%);
             border-radius: 50%;
             z-index: -2;
-            animation: diamondAura 3s linear infinite;
+            animation: premiumAura 3s linear infinite;
         }
 
         .diamond-elite-user span {
