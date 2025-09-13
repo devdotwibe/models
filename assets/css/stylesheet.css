@@ -12548,17 +12548,27 @@ overflow-x: auto !important;
     line-height: normal;
 }
 
-.proff-ips .checkbox-option{
-    
+.edit-profilepage .conditional-section.show .proff-ips .checkbox-option{
+    display: flex;
+    height: auto;
+    justify-content: flex-start;
+    flex-direction: column;
+    border: 1px solid red;
 }
 
-.proff-ips .checkbox-option>div{
+.edit-profilepage .conditional-section.show .proff-ips .checkbox-option>div{
     display:flex;
     align-items: center;
     justify-content: flex-start;
 gap:5px;
 }
-.proff-ips .checkbox-option>span{
+.edit-profilepage .conditional-section.show .proff-ips .checkbox-option>div input{
+    width: fit-content;
+}
+
+
+
+.edit-profilepage .conditional-section.show .proff-ips .checkbox-option>span{
     
 display: flex;
 text-align: left;
