@@ -517,7 +517,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                  <!-- onclick="openModelPreview_new('')" -->
 
-                <div class="model-card rounded-2xl overflow-hidden hover-lift"  onclick="window.location.href='<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>'">
+                <div class="model-card rounded-2xl overflow-hidden hover-lift"  >
                     <div class="relative">
                         <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php $rowesdw['name']; ?>" class="w-full h-80 object-cover model-image">
                         <div class="absolute top-4 right-4 status-online w-4 h-4 rounded-full"></div>
@@ -528,7 +528,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             🔴 Live Now
                         </div>
                     </div>
-                    <div class="mod-card-content flex flex-col" >
+                    <div class="mod-card-content flex flex-col" onclick="window.location.href='<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>'" >
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="text-2xl font-bold premium-text"><?php echo $modelname; ?></h4>
 							<?php if(!empty($rowesdw['age'])){ ?>
