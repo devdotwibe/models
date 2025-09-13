@@ -10612,8 +10612,23 @@ margin-top: 18px;
     display: flex;
     flex-direction: column;
   }
+    .premimum-model1 .filter-modal {
+        width: 100%;
+        right: -100%;
+        max-width: 500px;
+    }
+    .filter-section .progress-container {
+        margin-left: 0;
+        width: 100%;
+    }
+.progress-fill{
+    width: 100% !important;
+}
 
-
+.knob.max {
+    right: 0 !important;
+    left: unset !important;
+}
 
 }
 
