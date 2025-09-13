@@ -49,7 +49,7 @@ $output['result']= 'ok';
 
 				if (!empty($status) && ($status=='Active' || $status =='expired' ) ) {
 					$where_clause = " and tb.adv_status = %s ";
-					$params[] = $status;up
+					$params[] = $status;
 				}
 
 				$sort_by = ' ORDER BY tb.id desc ';
