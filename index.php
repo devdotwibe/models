@@ -80,6 +80,11 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
         font-family: sans-serif;
         color: #ffffff;
       }
+
+      .mod-card-content.flex.flex-col .flex-1.mb-6 {
+            position: relative;
+            z-index: 9;
+        }
     </style>
   </head>
   <body class="min-h-screen bg-animated text-white home-page socialwall-page optim-services enhanced5">
