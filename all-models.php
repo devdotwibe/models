@@ -3058,7 +3058,7 @@ include('includes/helper.php');
 
             if(type =='like')
             {
-                 showNotification(`Please log in to like this model !`, 'success');
+                 showNotification(`Please log in to like this model !`, 'info');
             }
         }   
 
