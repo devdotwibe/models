@@ -1138,12 +1138,12 @@ include('includes/helper.php');
 
                                         <?php } ?>
 
-                                        <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
+                                        <?php /* if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
                                             <span class="profile-badge badge-verified">
                                                 <div class="badge-user verified-user">🛡</div>
                                                 <p>Verified</p>
                                             </span>
-                                        <?php } ?>
+                                        <?php } */ ?>
 
                                         <?php if (!empty($rowesdw) &&  $rowesdw['as_a_model'] == 'Yes') { ?>
 
@@ -1820,12 +1820,12 @@ include('includes/helper.php');
 
                                         <?php } ?>
 
-                                        <?php if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
+                                        <?php /* if (!empty($extra_details) && !empty($extra_details) && $extra_details['status'] == 'Published') { ?>
                                             <span class="profile-badge badge-verified">
                                                 <div class="badge-user verified-user">🛡</div>
                                                 <p>Verified</p>
                                             </span>
-                                        <?php } ?>
+                                        <?php }  */?>
 
                                         <?php if (!empty($rowesdw) &&  $rowesdw['as_a_model'] == 'Yes') { ?>
 
