@@ -47,7 +47,7 @@ $output['result']= 'ok';
 					$params[] = $category;
 				}
 
-				if (!empty($status)) {
+				if (!empty($status) && $status=='Inactive' ) {
 					$where_clause = " and tb.adv_status = %s ";
 					$params[] = $status;
 				}
