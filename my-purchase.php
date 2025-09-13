@@ -197,14 +197,16 @@ if (isset($_SESSION['log_user_id'])) {
 
                     $row1 = mysqli_fetch_assoc($result1);
 
+                    $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
+
                     if (!empty($row1['profile_pic']))
+                    {
+                         if (checkImageExists($rows_md['profile_pic'])) {
+                            
+                            $prof_img = SITEURL . $rows_md['profile_pic'];
+                        }
 
-                      $prof_img = SITEURL . $row1['profile_pic'];
-
-                    else
-                      
-                      $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
-
+                    }
 
                     $result = CheckPremiumAccess($row1['id']);
 
