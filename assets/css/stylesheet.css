@@ -12536,7 +12536,7 @@ overflow-x: auto !important;
     text-align: center;
     background: transparent;
     transition: all .3s ease;
-    box-shadow: 0 6px 19px rgba(139, 92, 246, 0.2);  
+    box-shadow: 0px 2px 0px rgba(139, 92, 246, 0.2);  
 }
 
 .booking-new .book-time ul li:hover {
@@ -12548,6 +12548,23 @@ overflow-x: auto !important;
     line-height: normal;
 }
 
+.proff-ips .checkbox-option{
+    
+}
+
+.proff-ips .checkbox-option>div{
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+gap:5px;
+}
+.proff-ips .checkbox-option>span{
+    
+display: flex;
+text-align: left;
+font-size: 15px;
+
+}
 
 
 
