@@ -1218,7 +1218,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
-                                    <button  onclick="window.location.href='<?= SITEURL.'login.php' ?>'" class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button  onclick="ShowLogin('connect')" class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } ?>
@@ -1904,7 +1904,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
-                                    <button  onclick="window.location.href='<?= SITEURL.'login.php' ?>'" class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button  onclick="ShowLogin('connect')" class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } ?>
@@ -3058,7 +3058,12 @@ include('includes/helper.php');
 
             if(type =='like')
             {
-                 showNotification(`Please log in to like this model !`, 'info');
+                 showNotification(`Please log in to like this post`, 'info');
+            }
+
+            if(type =='follow')
+            {
+                 showNotification(`Please log in to follow this user`, 'info');
             }
         }   
 
