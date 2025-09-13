@@ -84,6 +84,10 @@ if (!empty($basic_filed_users)) {
 $params = [];
 $where  = [];
 
+$where[]  = "tb.adv_status = %s";
+
+$params[] = 'Active';
+
 $category = $_GET['category'] ?? '';
 $country  = $_GET['country'] ?? '';
 
