@@ -3642,12 +3642,12 @@ include('includes/helper.php');
         .premiumcheck select,
         .premiumcheck .toggle-switch {
             pointer-events: none;
-            opacity: 0.5;
+            opacity: 0.8;
         }
         .premiumcheck .progress-wrapper,
         .premiumcheck .progress-wrapper * {
             pointer-events: none;
-            opacity: 0.5;
+            opacity: 0.8;
         }
     </style>
 
