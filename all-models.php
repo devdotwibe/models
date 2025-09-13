@@ -3637,6 +3637,8 @@ include('includes/helper.php');
     </script>
     <style>
         .premiumcheck input[type="range"],
+        .premiumcheck input[type="text"],
+         .premiumcheck input[type="hidden"],
         .premiumcheck select,
         .premiumcheck .toggle-switch {
             pointer-events: none;
