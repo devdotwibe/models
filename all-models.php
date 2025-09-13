@@ -1245,7 +1245,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
 
-                                    <button class="action-btn like" title="Like" onclick="ShowLogin('like')" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button class="action-btn " title="Like" onclick="ShowLogin('like')" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-heart"></i>
                                     </button>
 
@@ -1931,7 +1931,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
 
-                                    <button class="action-btn like" title="Like" onclick="ShowLogin('like')" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button class="action-btn " title="Like" onclick="ShowLogin('like')" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-heart"></i>
                                     </button>
 
