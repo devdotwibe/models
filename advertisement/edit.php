@@ -992,7 +992,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                 const dataTransfer = new DataTransfer();
 
-               selectedFiles_img.forEach(f => dataTransfer.items.add(f));
+            //    selectedFiles_img.forEach(f => dataTransfer.items.add(f));
                 
                document.getElementById('photoInput').files = dataTransfer.files;
                 
