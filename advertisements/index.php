@@ -509,15 +509,39 @@ $serviceArr = array('Providing services', 'Looking for services');
                     $('#i-total-page').val(response.total_page);
                     currentPage = response.page;
 
+                    // if(response.total_page == 0)
+                    // {
+                    //     $("#pagination-container").hide();
+                    // }
+                    // else
+                    // {
+                    //     $("#pagination-container").show();
+
+                    //     rebindpagination(response.total);
+                    // }
+
                     if(response.total_page == 0)
                     {
                         $("#pagination-container").hide();
+
                     }
                     else
                     {
                         $("#pagination-container").show();
 
                         rebindpagination(response.total);
+
+                        if ($("#pagination-container").data("pagination-initialized") !== true) {
+                            $("#pagination-container").pagination({
+                                items: '<?php echo $total_adv['total']; ?>',
+                                itemsOnPage: itemsPerPage,
+                                cssStyle: "light-theme",
+                                onPageClick: function (pageNumber) {
+                                    loadData(pageNumber);
+                                }
+                            });
+                            $("#pagination-container").data("pagination-initialized", true);
+                        }
                     }
                 }
             });
