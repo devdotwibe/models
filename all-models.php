@@ -2031,6 +2031,24 @@ include('includes/helper.php');
                         </select>
                     </div>
 
+                    <div class="filter-group">
+                        <label class="filter-label">Online Status</label>
+                        <select class="filter-select" id="onlineStatusFilter" name="onlineStatus">
+                            <option value="now" <?php if (!isset($_POST['onlineStatus']) || (isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'now')) {
+                                                    echo 'selected';
+                                                } ?>>Online Now</option>
+                            <option value="today" <?php if ((isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'today')) {
+                                                        echo 'selected';
+                                                    } ?>>Today</option>
+                            <option value="week" <?php if ((isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'week')) {
+                                                        echo 'selected';
+                                                    } ?>>This Week</option>
+                            <option value="anytime" <?php if ((isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'anytime')) {
+                                                        echo 'selected';
+                                                    } ?>>Anytime</option>
+                        </select>
+                    </div>
+
                   
                 </div>
 
@@ -2079,23 +2097,7 @@ include('includes/helper.php');
 
                     </div>
 
-                    <div class="filter-group">
-                        <label class="filter-label">Online Status</label>
-                        <select class="filter-select" id="onlineStatusFilter" name="onlineStatus">
-                            <option value="now" <?php if (!isset($_POST['onlineStatus']) || (isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'now')) {
-                                                    echo 'selected';
-                                                } ?>>Online Now</option>
-                            <option value="today" <?php if ((isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'today')) {
-                                                        echo 'selected';
-                                                    } ?>>Today</option>
-                            <option value="week" <?php if ((isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'week')) {
-                                                        echo 'selected';
-                                                    } ?>>This Week</option>
-                            <option value="anytime" <?php if ((isset($_POST['onlineStatus']) && $_POST['onlineStatus'] == 'anytime')) {
-                                                        echo 'selected';
-                                                    } ?>>Anytime</option>
-                        </select>
-                    </div>
+                
 
 
                     <div class="filter-group">
