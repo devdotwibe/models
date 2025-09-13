@@ -3628,12 +3628,21 @@ include('includes/helper.php');
     </script>
 
     <script>
-        //Premium checking
+  
+    <?php if (!isset($_SESSION["log_user_id"])) { ?> 
+
         jQuery('.premiumcheck').click(function(e) {
             e.preventDefault();
             e.stopPropagation();
-            $('.premiumcheck_msg').show();
+            // $('.premiumcheck_msg').show();
+
+
+             showNotification(`Please log in first to continue.`, 'error');
         });
+
+    <?php }?>
+
+
     </script>
     <style>
         .premiumcheck input[type="range"],
