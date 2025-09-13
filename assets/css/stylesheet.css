@@ -19,7 +19,7 @@
     --secondary: #ec4899;
     --secondary-light: #f472b6;
     --accent: #10b981;
-    --warning: #f59e0b;
+    --warning: #f59e0b; 
     --danger: #ef4444;
     --success: #10b981;
     --pending: #f97316;
@@ -12505,6 +12505,7 @@ overflow-x: auto !important;
 
 .relative.booking-new {
     padding-top: 0 !important;
+    padding-bottom: 60px !important;
 }
 
 .relative.book-status {
@@ -12535,6 +12536,7 @@ overflow-x: auto !important;
     text-align: center;
     background: transparent;
     transition: all .3s ease;
+    box-shadow: 0 6px 19px rgba(139, 92, 246, 0.2);  
 }
 
 .booking-new .book-time ul li:hover {
