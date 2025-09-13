@@ -3753,6 +3753,7 @@ include('includes/helper.php');
 
             document.body.removeChild(modalOverlay);
 
+            closeFilterModal();
             // $('#premium_modal').addClass('show');
             ShowPremium();
 
