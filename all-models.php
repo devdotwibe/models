@@ -213,7 +213,7 @@ include('includes/helper.php');
 
         /* Ultra-luxury Diamond Elite with crystal faceting and prismatic effects */
         .diamond-elite-user {
-            background: linear-gradient(135deg, #06b6d4, #0891b2, #0e7490, #155e75);
+            /* background: linear-gradient(135deg, #06b6d4, #0891b2, #0e7490, #155e75); */
             width: 68px;
             height: 68px;
             position: relative;
