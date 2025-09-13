@@ -1,11 +1,11 @@
 
 <?php
 $servername = "localhost";
-$username = "models_user";
-$password = "mRin7oxaGJdn";
-$db = "models_data";
-define("SITEURL", 'https://models.staging3.dotwibe.com/');
-define("ADMINURL", 'https://models.staging3.dotwibe.com/super-admin/');
+$username = "u842608707_live_user_25";
+$password = "E5@W>e9qiex";
+$db = "u842608707_live_models_25";
+define("SITEURL", 'https://thelivemodels.com/');
+define("ADMINURL", 'https://thelivemodels.com/super-admin/');
 
 // Create connection
 $con = mysqli_connect($servername, $username, $password, $db);

@@ -2,11 +2,11 @@
 // u910541639_thelivemodel
 $servername = "localhost";
 
-$username = "models_user";
-$password = "mRin7oxaGJdn";
-$db = "models_data";
+$username = "u842608707_live_user_25";
+$password = "E5@W>e9qiex";
+$db = "u842608707_live_models_25";
 
-define("SITEURL", 'https://models.staging3.dotwibe.com/');
+define("SITEURL", 'https://thelivemodels.com/');
 
 //testing 
 //define("SITEURL", 'http://localhost/thelivemodal/demo/');

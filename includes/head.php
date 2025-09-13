@@ -62,6 +62,18 @@ else{
 
 <script src="<?='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'?>"></script> 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GD6CJ961PF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-GD6CJ961PF');
+</script>
 
 <!--<script type='text/javascript' src='<?=SITEURL?>assets/wp-includes/js/jquery/jquery.js' ></script>-->
 <!--<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/rich-reviews/js/rich-reviews.js' id='rich-reviews-js'></script>
