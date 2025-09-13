@@ -3647,6 +3647,9 @@ include('includes/helper.php');
             e.preventDefault();
             e.stopPropagation();
 
+
+            closeFilterModal();
+            
             handleService();
 
         });
@@ -3753,7 +3756,6 @@ include('includes/helper.php');
 
             document.body.removeChild(modalOverlay);
 
-            closeFilterModal();
             // $('#premium_modal').addClass('show');
             ShowPremium();
 
