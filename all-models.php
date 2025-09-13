@@ -1210,7 +1210,7 @@ include('includes/helper.php');
 
                                     <?php if( $_SESSION['log_user_id'] != $rowesdw['id'] ) { ?>
 
-                                        <button type="button" class="action-btn connect connect_btn_<?php echo $rowesdw['id']; ?>" <?php if($user_requested) { ?> style="display: none;" <?php }?> onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>">
+                                        <button type="button" title="Follow" class="action-btn connect connect_btn_<?php echo $rowesdw['id']; ?>" <?php if($user_requested) { ?> style="display: none;" <?php }?> onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>">
                                             <i class="fas fa-user-plus"></i>
                                         </button>
 
@@ -1272,7 +1272,7 @@ include('includes/helper.php');
 
                                 <?php } ?>
 
-                                <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>">
+                                <button class="action-btn pass" title="Hide" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>">
                                     <i class="fas fa-times"></i>
                                 </button>
 
@@ -1895,7 +1895,7 @@ include('includes/helper.php');
                                     <?php if( $_SESSION['log_user_id'] != $rowesdw['id'] ) { ?>
 
 
-                                        <button type="button" class="action-btn connect connect_btn_<?php echo $rowesdw['id']; ?>" <?php if($user_requested) { ?> style="display: none;" <?php } ?> onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" >
+                                        <button type="button" title="Follow" class="action-btn connect connect_btn_<?php echo $rowesdw['id']; ?>" <?php if($user_requested) { ?> style="display: none;" <?php } ?> onclick="ActionBtn(this,'connect')" modelid="<?php echo $rowesdw['id']; ?>" >
                                             <i class="fas fa-user-plus"></i>
                                         </button>
 
@@ -1959,7 +1959,7 @@ include('includes/helper.php');
                                 <?php } ?>
 
 
-                                <button class="action-btn pass" title="Pass" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>">
+                                <button class="action-btn pass" title="Hide" onclick="ActionBtn(this,'pass')" modelid="<?php echo $rowesdw['id']; ?>">
                                     <i class="fas fa-times"></i>
                                 </button>
 
