@@ -217,7 +217,7 @@ include('includes/helper.php');
             width: 68px;
             height: 68px;
             position: relative;
-            clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+            /* clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%); */
             border: none;
             /* box-shadow:
                 0 0 60px rgba(6, 182, 212, 1),
@@ -234,7 +234,7 @@ include('includes/helper.php');
             background: conic-gradient(from 0deg,
                     #06b6d4, #22d3ee, #67e8f9, #a5f3fc, #cffafe,
                     #a5f3fc, #67e8f9, #22d3ee, #06b6d4);
-            /* clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%); */
+            clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
             z-index: -1;
             animation: diamondPrisma 2.5s ease-in-out infinite;
         }
