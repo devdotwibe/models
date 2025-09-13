@@ -8,10 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['uploaded_file'])) {
 	
 				for ($i = 0; $i < $totalFiles_v; $i++) {
 
-					// $target_file1 = $target_dir_profile . basename($_FILES["uploaded_file"]["name"][$i]);
-
-					// $target_profile = basename($_FILES["uploaded_file"]["name"][$i]);
-
 					$ext = pathinfo($_FILES["uploaded_file"]["name"][$i], PATHINFO_EXTENSION);
 
 					$new_filename = uniqid("video_", true) . "." . $ext;

@@ -787,50 +787,52 @@ $serviceArr = array('Providing services', 'Looking for services');
         }
     }
 
-  let selectedFiles_img = [];
-    function handlePhotoUpload(event) {
-        
-        const files = Array.from(event.target.files);
-		
-		selectedFiles_img = selectedFiles_img.concat(files);
-		
-        handlePhotoFiles(files);
-    }
-        function handlePhotoFiles(files) {
+let selectedFiles_img = [];
 
-        if (uploadedPhotos.length + files.length > 10) {
-            alert('Maximum 10 photos allowed');
+function handlePhotoUpload(event) {
+    const files = Array.from(event.target.files);
+    handlePhotoFiles(files);
+}
+
+function handlePhotoFiles(files) {
+    if (uploadedPhotos.length + files.length > 10) {
+        alert('Maximum 10 photos allowed');
+        return;
+    }
+
+    files.forEach(file => {
+        if (file.size > 10 * 1024 * 1024) {
+            alert(`File ${file.name} is too large. Maximum size is 10MB.`);
             return;
         }
 
-        files.forEach(file => {
-            if (file.size > 10 * 1024 * 1024) {
-                alert(`File ${file.name} is too large. Maximum size is 10MB.`);
-                return;
-            }
+        // ✅ Avoid duplicates by checking if already selected
+        if (selectedFiles_img.some(f => f.name === file.name && f.size === file.size)) {
+            console.log(`Skipping duplicate: ${file.name}`);
+            return;
+        }
 
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const photoData = {
-                    file: file,
-                    url: e.target.result,
-                    id: Date.now() + Math.random()
-                };
-
-                uploadedPhotos.push(photoData);
-
-                selectedFiles_img.push(file);
-
-                displayPhotoPreview(photoData);
-
-                const dataTransfer = new DataTransfer();
-                selectedFiles_img.forEach(f => dataTransfer.items.add(f));
-
-                document.getElementById('photoInput').files = dataTransfer.files;
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const photoData = {
+                file: file,
+                url: e.target.result,
+                id: Date.now() + Math.random()
             };
-            reader.readAsDataURL(file);
-        });
-    }
+
+            uploadedPhotos.push(photoData);
+            selectedFiles_img.push(file);
+
+            displayPhotoPreview(photoData);
+
+            // ✅ Update input files safely
+            const dataTransfer = new DataTransfer();
+            selectedFiles_img.forEach(f => dataTransfer.items.add(f));
+            document.getElementById('photoInput').files = dataTransfer.files;
+        };
+        reader.readAsDataURL(file);
+    });
+}
 
     function displayPhotoPreview(photoData) {
         const grid = document.getElementById('photoPreviewGrid');
@@ -975,7 +977,6 @@ let selectedFiles_video = [];
 
         let progress = 0;
 
-        // ✅ Use the arrays you manage (no duplicates)
         const files_img = selectedFiles_img;
         const files_vd = selectedFiles_video;
 
