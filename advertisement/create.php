@@ -27,6 +27,8 @@ if (isset($_SESSION['log_user_id'])) {
             }
         }
 
+            $post_data['adv_status'] = 'Active';
+
             $post_data['user_id'] = $user_id;
             $post_data['created_at'] = date('Y-m-d H:i:s');
 
