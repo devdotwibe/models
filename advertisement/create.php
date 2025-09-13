@@ -964,110 +964,108 @@ let selectedFiles_video = [];
         alert('💾 Draft saved successfully! You can continue editing later.');
     }
 
-  async function submitForm(event) {
-    event.preventDefault();
+    async function submitForm(event) {
+        event.preventDefault();
 
-    const progressDiv = document.getElementById('uploadProgress');
-    const progressFill = document.getElementById('progressFill');
-    const progressText = document.getElementById('progressText');
+        const progressDiv = document.getElementById('uploadProgress');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
 
-    progressDiv.classList.remove('hidden');
+        progressDiv.classList.remove('hidden');
 
-    let progress = 0;
+        let progress = 0;
 
-    const photoInput = document.getElementById('photoInput');
-    const files_img = photoInput.files;
+        // ✅ Use the arrays you manage (no duplicates)
+        const files_img = selectedFiles_img;
+        const files_vd = selectedFiles_video;
 
-    const videoInput = document.getElementById('videoInput');
-    const files_vd = videoInput.files;
+        // --- Helper to upload files ---
+        const uploadFiles = async (files, saveFieldId, endpoint, startProgress, endProgress, errorMessage) => {
+            if (files.length === 0) return true;
 
-    // --- Helper to upload files ---
-    const uploadFiles = async (files, saveFieldId, endpoint, startProgress, endProgress, errorMessage) => {
-        if (files.length === 0) return true;
+            let formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+                formData.append('uploaded_file[]', files[i]);
+            }
 
-        let formData = new FormData();
-        for (let i = 0; i < files.length; i++) {
-            formData.append('uploaded_file[]', files[i]);
-        }
+            // update progress UI
+            progressFill.style.width = startProgress + '%';
+            progressText.textContent = startProgress + '%';
 
-        // update progress UI
-        progressFill.style.width = startProgress + '%';
-        progressText.textContent = startProgress + '%';
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.text();
 
-        try {
-            const response = await fetch(endpoint, {
-                method: 'POST',
-                body: formData
-            });
-            const data = await response.text();
+                if (data === 'No files were uploaded.') {
+                    alert(data);
+                    return false;
+                } else if (data === 'Error') {
+                    alert(errorMessage);
+                    return false;
+                } else {
+                    document.getElementById(saveFieldId).value = data;
+                }
 
-            if (data === 'No files were uploaded.') {
-                alert(data);
-                return false;
-            } else if (data === 'Error') {
+                progressFill.style.width = endProgress + '%';
+                progressText.textContent = endProgress + '%';
+                return true;
+
+            } catch (err) {
+                console.error('Upload failed:', err);
                 alert(errorMessage);
                 return false;
-            } else {
-                document.getElementById(saveFieldId).value = data;
             }
+        };
 
-            progressFill.style.width = endProgress + '%';
-            progressText.textContent = endProgress + '%';
-            return true;
-
-        } catch (err) {
-            console.error('Upload failed:', err);
-            alert(errorMessage);
-            return false;
+        // --- Upload images ---
+        if (files_img.length > 0) {
+            const ok = await uploadFiles(
+                files_img,
+                'save_image_file',
+                '<?= SITEURL."/ajax/adv_upload.php" ?>',
+                25,
+                files_vd.length > 0 ? 50 : 100,
+                'Sorry, there was an error uploading the images.'
+            );
+            if (!ok) return;
         }
-    };
 
-    // --- Upload images ---
-    if (files_img.length > 0) {
-        const ok = await uploadFiles(
-            files_img,
-            'save_image_file',
-            '<?= SITEURL."/ajax/adv_upload.php" ?>',
-            25,
-            files_vd.length > 0 ? 50 : 100,
-            'Sorry, there was an error uploading the images.'
-        );
-        if (!ok) return;
+        // --- Upload videos ---
+        if (files_vd.length > 0) {
+            const ok = await uploadFiles(
+                files_vd,
+                'save_video_file',
+                '<?= SITEURL."/ajax/adv_upload.php" ?>',
+                files_img.length > 0 ? 75 : 25,
+                100,
+                'Sorry, there was an error uploading the video.'
+            );
+            if (!ok) return;
+        }
+
+        // --- If no files selected, simulate progress ---
+        if (files_vd.length === 0 && files_img.length === 0) {
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+
+                progressFill.style.width = progress + '%';
+                progressText.textContent = Math.round(progress) + '%';
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => event.target.submit(), 500);
+                }
+            }, 200);
+            return;
+        }
+
+        // --- Final submit after uploads ---
+        setTimeout(() => event.target.submit(), 800);
     }
-
-    // --- Upload videos ---
-    if (files_vd.length > 0) {
-        const ok = await uploadFiles(
-            files_vd,
-            'save_video_file',
-            '<?= SITEURL."/ajax/adv_upload.php" ?>',
-            files_img.length > 0 ? 75 : 25,
-            100,
-            'Sorry, there was an error uploading the video.'
-        );
-        if (!ok) return;
-    }
-
-    // --- If no files selected, simulate progress ---
-    if (files_vd.length === 0 && files_img.length === 0) {
-        const interval = setInterval(() => {
-            progress += Math.random() * 15;
-            if (progress > 100) progress = 100;
-
-            progressFill.style.width = progress + '%';
-            progressText.textContent = Math.round(progress) + '%';
-
-            if (progress >= 100) {
-                clearInterval(interval);
-                setTimeout(() => event.target.submit(), 500);
-            }
-        }, 200);
-        return;
-    }
-
-    // --- Final submit after uploads ---
-    setTimeout(() => event.target.submit(), 800);
-}
 </script>
 	
 
