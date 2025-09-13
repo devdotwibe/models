@@ -584,7 +584,7 @@ else{
                             View Full Profile
                         </a>
 						
-						<?php if (isset($_SESSION['log_user_unique_id']) && $_SESSION['log_user_unique_id'] == $userDetails['unique_id']) { }else{ ?>
+						<?php /* if (isset($_SESSION['log_user_unique_id']) && $_SESSION['log_user_unique_id'] == $userDetails['unique_id']) { }else{ ?>
 
                             <button class="btn-secondary action-btn" onclick="window.location='<?= SITEURL ?>chat-app.php'"  >
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -593,7 +593,7 @@ else{
                                 Contact Advertiser
                             </button>
 
-						<?php } ?>
+						<?php } */ ?>
 
                         <button class="btn-secondary action-btn" onclick="saveAd()">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
