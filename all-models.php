@@ -1587,10 +1587,6 @@ include('includes/helper.php');
 
                         $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList) " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
 
-                          echo $sqls ;
-
-                        die();
-                        
                     } else if (isset($_GET['sort']) && $_GET['sort'] == 'online') {
 
                         $onlineUserIds = array();
