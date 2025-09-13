@@ -127,7 +127,7 @@ if (isset($_SESSION['log_user_id'])) {
 
                 <select  onchange="FilterAdver()" id="status_filter" class="ultra-glass px-4 py-3 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 border border-white/10">
                     <option value="">All Status</option>
-                    <option value="">Active</option>
+                    <option value="Active">Active</option>
                     <option value="Inactive">In active</option>
                     <option value="expired">Expired</option>
                 </select>
