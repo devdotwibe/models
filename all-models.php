@@ -3643,7 +3643,11 @@ include('includes/helper.php');
         .premiumcheck .toggle-switch {
             pointer-events: none;
             opacity: 0.5;
-            /* Optional: make it look disabled */
+        }
+        .premiumcheck .progress-wrapper,
+        .premiumcheck .progress-wrapper * {
+            pointer-events: none;
+            opacity: 0.5;
         }
     </style>
 
