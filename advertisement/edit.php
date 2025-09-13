@@ -984,7 +984,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                  uploadedPhotos.push(photoData);
 
-                selectedFiles_img.push(file); 
+                // selectedFiles_img.push(file); 
 
                 displayPhotoPreview(photoData);
 
@@ -992,7 +992,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 
                 const dataTransfer = new DataTransfer();
 
-               selectedFiles_img.forEach(f => dataTransfer.items.add(f));
+            //    selectedFiles_img.forEach(f => dataTransfer.items.add(f));
                 
                document.getElementById('photoInput').files = dataTransfer.files;
                 
@@ -1003,9 +1003,9 @@ $serviceArr = array('Providing services', 'Looking for services');
         });
 		
 		
-		const dataTransfer = new DataTransfer();
-		selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
-		document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
+		// const dataTransfer = new DataTransfer();
+		// selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
+		// document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
 		
     }
 
@@ -1201,7 +1201,7 @@ let selectedFiles_video = [];
 		var photoInput = document.getElementById('photoInput');
 		// var files_img = photoInput.files;  // Get all selected images
 
-        const files_img = uploadedPhotos;
+        const files_img = selectedFiles_img;
 				
 		//uploading Image files
 
