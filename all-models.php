@@ -1110,7 +1110,7 @@ include('includes/helper.php');
 
                                     <div class="profile-badges">
 
-                                        <span class="profile-badge badge-live">Live</span>
+                                        <!-- <span class="profile-badge badge-live">Live</span> -->
 
                                         <?php if ($is_user_new) { ?>
 
@@ -1792,7 +1792,7 @@ include('includes/helper.php');
                                  
                                     <div class="profile-badges">
 
-                                        <span class="profile-badge badge-live">Live</span>
+                                        <!-- <span class="profile-badge badge-live">Live</span> -->
 
                                         <?php if ($is_user_new) { ?>
 
