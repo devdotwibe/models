@@ -1201,7 +1201,7 @@ let selectedFiles_video = [];
 		var photoInput = document.getElementById('photoInput');
 		// var files_img = photoInput.files;  // Get all selected images
 
-        const files_img = uploadedPhotos;
+        const files_img = selectedFiles_img;
 				
 		//uploading Image files
 
