@@ -37,7 +37,11 @@ $serviceArr = array('Providing services', 'Looking for services');
 
         <?php  include('../includes/profile_header_index.php'); ?>
 
-	<?php } ?>
+	<?php } else { ?>
+
+        <?php include('includes/header.php'); ?>
+
+    <?php } ?>
    
 
 	<!-- Main Content -->
