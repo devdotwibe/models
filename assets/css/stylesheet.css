@@ -11064,7 +11064,7 @@ overflow-x: auto !important;
   position: relative;
   width: fit-content;
   padding: 0 !important;
-  margin-bottom: 16px;
+  margin-bottom: 0;
   margin-left: 15px !important;
   font-size: 10px !important;
   align-items: center;
@@ -11150,14 +11150,9 @@ user-home
 
 /* premium.............................. */
 
-
-
-
 /* verified...................... */
 
-
-
-/* home verifired page............. */ 
+/* home verifired page............. */
 
 .user-home .profile-badge.badge-verified {
   position: relative;
@@ -11182,8 +11177,7 @@ user-home
   transform: translateX(-50%);
 }
 
-/* home verifired page............. */ 
-
+/* home verifired page............. */
 
 /* .profile-badge.badge-verified {
   position: relative;
@@ -11240,27 +11234,29 @@ user-home
 
 /* verified...................... */
 
-
-
 /* creator...................... */
 
-
-/* home creator page............. */ 
-
+/* home creator page............. */
 
 .user-home .profile-badge.creator-badge {
   position: relative;
   width: fit-content;
   padding: 0 !important;
-  margin-bottom: 16px;
-  margin-left: 15px !important;
+  margin-bottom: 0;
+  margin-left: 0 !important;
   font-size: 10px !important;
+  flex-direction: column;
+  background: transparent !important;
+  align-items: center;
+  gap: 7px;
 }
 
 .user-home .badge-user.creator {
   width: 30px !important;
   height: 30px !important;
   font-size: 12px !important;
+  position: relative;
+  inset: 0;
 }
 
 .user-home .profile-badge.creator-badge p {
@@ -11271,9 +11267,6 @@ user-home
   transform: none;
   inset: 0;
 }
-
-
-
 
 /* 
 .profile-badge.creator-badge {
