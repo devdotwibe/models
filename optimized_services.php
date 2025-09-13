@@ -690,11 +690,16 @@ else{
               <p id="booking_description" style="margin-top: 10px;"></p>
 
               <div class="booking-time-info">
-					<p id="serviceheading" style="margin-top: 20px;"></p>
-                  <p id="booking_date"  style="margin-top: 10px;"></p>
-                  <p id="booking_time"></p>
-				  <p id="booking_destination"></p>
-				  <p id="booking_no_of_hrs_meet"></p>
+
+              <p id="serviceheading" style="margin-top: 20px;"></p>
+
+                      <p id="booking_date"  style="margin-top: 10px;"></p>
+
+                      <p id="booking_time"></p>
+
+              <p id="booking_destination"></p>
+
+              <p id="booking_no_of_hrs_meet"></p>
 <!-- 
                   <p><strong>Meeting duration:</strong><span id="booking_hour"></span></p> -->
                   
@@ -815,6 +820,31 @@ else{
                     $('#booking_time').html('<b>Booking Time: </b><span>' + (data.meeting_time || '') + '</span>');
                     $('#booking_destination').html('<b>Destination: </b><span>' + (data.destination || '') + '</span>');
                     $('#booking_no_of_hrs_meet').html('<b>No of hours need to meet: </b><span>' + (data.no_of_hrs_meet || '') + ' hrs</span>');
+                }
+                else if (data.main_service === 'collaboration') {
+                    $('#serviceheading').html('<b>Collaborate date</b>');
+
+                    var meeting_date = data.meeting_date || '';
+                    if (meeting_date) {
+                        var mdate_parts = meeting_date.split('-');
+                        $('#booking_date').html('<b>Collaboration Date: </b><span>' + mdate_parts[2] + '-' + mdate_parts[1] + '-' + mdate_parts[0] + '</span>');
+                    }
+
+
+                    var meeting_date_to = data.meeting_date_to || '';
+                    if (meeting_date_to) {
+                        var mdate_parts = meeting_date_to.split('-');
+                        $('#booking_date').html('<b>Collaboration To Date: </b><span>' + mdate_parts[2] + '-' + mdate_parts[1] + '-' + mdate_parts[0] + '</span>');
+                    }
+
+                    // $('#booking_time').html('<b>Booking Time: </b><span>' + (data.meeting_time || '') + '</span>');
+                    $('#booking_destination').html('<b>Destination: </b><span>' + (data.destination || '') + '</span>');
+
+                    if(data.no_of_hrs_meet != '')
+                    {
+                        $('#booking_no_of_hrs_meet').html('<b>No of hours need to meet: </b><span>' + (data.no_of_hrs_meet || '') + ' hrs</span>');
+                    }
+
                 }
 
                 $('#details_modal').addClass('active');
