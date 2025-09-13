@@ -11071,6 +11071,7 @@ overflow-x: auto !important;
   background: transparent !important;
   margin-right: 15px;
   flex-direction: column;
+  gap:2px;
 }
 
 .user-home .premium-basic-user {
@@ -11155,26 +11156,33 @@ user-home
 /* home verifired page............. */
 
 .user-home .profile-badge.badge-verified {
-  position: relative;
+    position: relative;
   width: fit-content;
   padding: 0 !important;
-  margin-bottom: 16px;
-  margin-left: 15px !important;
+  margin-bottom: 0;
+  margin-left: 0 !important;
   font-size: 10px !important;
+  flex-direction: column;
+  background: transparent !important;
+  align-items: center;
+  gap: 7px;
 }
 
 .user-home .badge-user.verified-user {
   width: 30px !important;
   height: 30px !important;
   font-size: 12px !important;
+  position: relative;
+  inset: 0;
 }
 
 .user-home .profile-badge.badge-verified p {
-  position: absolute;
+  position: relative;
   top: 110%;
   left: 50%;
-  margin: 0 auto;
-  transform: translateX(-50%);
+  margin: 0;
+  transform: none;
+  inset: 0;
 }
 
 /* home verifired page............. */
