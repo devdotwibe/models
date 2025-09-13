@@ -11035,6 +11035,8 @@ overflow-x: auto !important;
   flex-direction: column;
 } */
 
+/* premium.............................. */
+
 .profile-badge.creator-badge .badge-user.creator {
   font-size: 12px;
   width: 100%;
@@ -11046,9 +11048,9 @@ overflow-x: auto !important;
   box-shadow: none !important;
 }
 
-.profile-badge.badge-premium {
+/* .profile-badge.badge-premium {
   position: relative;
-  /* border: 1px solid blue; */
+
   width: fit-content;
   padding: 0 !important;
   margin-bottom: 16px;
@@ -11068,11 +11070,45 @@ overflow-x: auto !important;
   left: 50%;
   margin: 0 auto;
   transform: translateX(-50%);
+} */
+
+.profile-badge.badge-premium {
+  position: relative;
+  border: 1px solid #26c0b500;
+  width: auto;
+  /* padding: 0 !important; */
+  margin-bottom: 16px;
+  margin-left: 0 !important;
+  font-size: 10px !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: linear-gradient(94deg, #5eb7b154, #26c0b5) !important;
+  padding-left: 34px !important;
 }
 
-.profile-badge.badge-verified {
+.premium-basic-user {
+  width: 12px !important;
+  height: 12px !important;
+  font-size: 14px !important;
+  position: absolute;
+  left: 10px;
+  top: 8px;
+}
+
+.profile-badge.badge-premium p {
   position: relative;
-  border: 1px solid blue;
+  inset: unset;
+  margin: 0 auto;
+  transform: none;
+}
+
+/* premium.............................. */
+
+/* verified...................... */
+
+/* .profile-badge.badge-verified {
+  position: relative;
   width: fit-content;
   padding: 0 !important;
   margin-bottom: 16px;
@@ -11092,11 +11128,45 @@ overflow-x: auto !important;
   left: 50%;
   margin: 0 auto;
   transform: translateX(-50%);
+} */
+
+.badge-user.verified-user {
+  width: 12px !important;
+  height: 12px !important;
+  font-size: 14px !important;
+  position: absolute;
+  left: 10px;
+  top: 8px;
 }
 
+.profile-badge.badge-verified {
+  position: relative;
+  border: 1px solid #26c0b500;
+  width: auto;
+  /* padding: 0 !important; */
+  margin-bottom: 16px;
+  margin-left: 0 !important;
+  font-size: 10px !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: linear-gradient(94deg, #5eb7b154, #26c0b5) !important;
+  padding-left: 34px !important;
+}
+
+.profile-badge.badge-verified p {
+  position: relative;
+  inset: unset;
+  margin: 0 auto;
+  transform: none;
+}
+
+/* verified...................... */
+
+/* creator...................... */
+/* 
 .profile-badge.creator-badge {
   position: relative;
-  /* border: 1px solid blue; */
   width: fit-content;
   padding: 0 !important;
   margin-bottom: 16px;
@@ -11117,7 +11187,40 @@ overflow-x: auto !important;
   margin: 0 auto;
   transform: translateX(-50%);
   color: #fff !important;
+} */
+
+.profile-badge.creator-badge {
+  position: relative;
+  border: 1px solid #26c0b500;
+  width: auto;
+  /* padding: 0 !important; */
+  margin-bottom: 16px;
+  margin-left: 0 !important;
+  font-size: 10px !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: linear-gradient(94deg, #5eb7b154, #26c0b5) !important;
+  padding-left: 34px !important;
 }
+
+.badge-user.creator {
+  width: 12px !important;
+  height: 12px !important;
+  font-size: 14px !important;
+  position: absolute;
+  left: 10px;
+  top: 8px;
+}
+
+.profile-badge.creator-badge p {
+  position: relative;
+  inset: unset;
+  margin: 0 auto;
+  transform: none;
+}
+
+/* creator...................... */
 
 .premimum-model1 .profile-grid.profile-list .profile-badges {
   top: 0;
@@ -11306,7 +11409,6 @@ overflow-x: auto !important;
   padding-left: 25px;
 }
 
-
 .edit-profilepage
   .conditional-section.show
   .proff-ips
@@ -11314,9 +11416,9 @@ overflow-x: auto !important;
   > div
   input {
   width: fit-content !important;
-    position: absolute;
-    left: 0;
-    top: 6px;
+  position: absolute;
+  left: 0;
+  top: 6px;
 }
 
 .edit-profilepage .conditional-section.show .proff-ips .checkbox-option > span {
@@ -11326,14 +11428,12 @@ overflow-x: auto !important;
   /* font-style: italic; */
 }
 .booking-new form .text-center p {
-    width: 100%;
-    margin-inline: auto;
-    max-width: 500px;
-    line-height: 26px;
+  width: 100%;
+  margin-inline: auto;
+  max-width: 500px;
+  line-height: 23px;
+  font-size: 15px;
 }
-
-
-
 
 @media (max-width: 1540px) {
   .home-page .discover-sec .model-card .btn-primary {
@@ -12677,14 +12777,22 @@ overflow-x: auto !important;
     /* padding-block: 12px !important; */
   }
 
-
-.edit-profilepage .conditional-section.show .proff-ips .checkbox-option > span{
+  .edit-profilepage
+    .conditional-section.show
+    .proff-ips
+    .checkbox-option
+    > span {
     font-size: 13px;
-}
+  }
 
-.edit-profilepage .conditional-section.show .proff-ips .checkbox-option>div label{
+  .edit-profilepage
+    .conditional-section.show
+    .proff-ips
+    .checkbox-option
+    > div
+    label {
     font-size: 15px;
-}
+  }
 }
 
 @media (max-width: 480px) {
@@ -13846,18 +13954,15 @@ overflow-x: auto !important;
     justify-content: center;
   }
 
-.edit-profilepage .conditional-section.show .proff-ips {
+  .edit-profilepage .conditional-section.show .proff-ips {
     display: flex;
     flex-wrap: wrap;
-}
+  }
 
-.edit-profilepage .conditional-section.show .proff-ips .checkbox-option {
-
+  .edit-profilepage .conditional-section.show .proff-ips .checkbox-option {
     width: 100%;
     max-width: 100%;
-}
-
-
+  }
 }
 
 @media (max-width: 380px) {
