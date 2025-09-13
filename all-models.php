@@ -899,6 +899,10 @@ include('includes/helper.php');
                             
                         }
 
+                        $where .= " AND mu.register_date >= DATE_SUB(CURDATE(), INTERVAL 15 DAY)";
+                        
+                        $order = " ORDER BY mu.register_date DESC ";
+
                         $sqls = "SELECT * FROM model_user mu WHERE mu.verified = '1'  AND mu.id  IN ($basicList) " . $where . "   " . $order . " LIMIT $limit OFFSET $offset";
 
                     } else if (isset($_GET['sort']) && $_GET['sort'] == 'online') {
