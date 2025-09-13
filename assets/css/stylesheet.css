@@ -11083,7 +11083,7 @@ overflow-x: auto !important;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background: linear-gradient(94deg, #5eb7b154, #26c0b5) !important;
+  background: linear-gradient(94deg, #fbe4636b, #f6a711c7) !important;
   padding-left: 34px !important;
 }
 
@@ -11155,7 +11155,7 @@ overflow-x: auto !important;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background: linear-gradient(94deg, #5eb7b154, #26c0b5) !important;
+  background: linear-gradient(94deg, #5eb7b154, #a4fff8c9) !important;
   padding-left: 34px !important;
 }
 
@@ -11205,7 +11205,7 @@ overflow-x: auto !important;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background: linear-gradient(94deg, #5eb7b154, #26c0b5) !important;
+  background: linear-gradient(94deg, #5eb7b154, rgba(139, 92, 246, 0.3), #c4a9ff) !important;
   padding-left: 34px !important;
 }
 
