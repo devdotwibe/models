@@ -51,7 +51,7 @@ $output['result']= 'ok';
 
 					if($status =='Inactive')
 					{
-						$where_clause = " and (tb.adv_status = %s or tb.adv_status = '')";
+						$where_clause =  " AND (tb.adv_status = %s OR tb.adv_status = '' OR tb.adv_status IS NULL)";
 						$params[] = $status;
 					}
 					else
