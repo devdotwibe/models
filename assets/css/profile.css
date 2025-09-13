@@ -10627,7 +10627,7 @@ margin-top: 18px;
 
 .knob.max {
     right: 0 !important;
-    left: unset !important;
+    /* left: unset !important; */
 }
 
 }

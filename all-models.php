@@ -2772,12 +2772,12 @@ include('includes/helper.php');
                     const minX = (minPercent / 100) * barWidth;
                     const maxX = (maxPercent / 100) * barWidth;
 
-                    $minKnob.css("left", minX + "px");
-                    $maxKnob.css("left", maxX + "px");
+                    $minKnob.css("left", minX + "%");
+                    $maxKnob.css("left", maxX + "%");
 
                     $fill.css({
-                        left: minX + "px",
-                        width: (maxX - minX) + "px"
+                        left: minX + "%",
+                        width: (maxX - minX) + "%"
                     });
 
                     const minVal = Math.round(minAge + (minPercent / 100) * (maxAge - minAge));
