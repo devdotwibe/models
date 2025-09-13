@@ -242,9 +242,9 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                 </div>
 
                                 <div>
-                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Daily Rate: <?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?>/day</div>
-                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Weekly Rate: <?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?>/week</div>
-                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Monthly Rate: <?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?>/mon</div>
+                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Daily Rate: <?php if (!empty($extra_details)) echo $extra_details['daily_rate']; ?>/day</div>
+                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Weekly Rate: <?php if (!empty($extra_details)) echo $extra_details['weekly_rate']; ?>/week</div>
+                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Monthly Rate: <?php if (!empty($extra_details)) echo $extra_details['monthly_rate']; ?>/mon</div>
                                     <div class="block text-white/80 font-semibold mb-3 text-lg">Preferred Travel Destinations: <?php if (!empty($extra_details)) echo $extra_details['travel_destination']; ?></div>
                                 </div>
                                 <?php $travel_months = json_decode($extra_details['travel_months']);
