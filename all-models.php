@@ -2031,35 +2031,34 @@ include('includes/helper.php');
                         </select>
                     </div>
 
-                    <div class="filter-group">
+                  
+                </div>
+
+                <!-- Premium Filters -->
+                <div class="filter-section <?php if (!$user_have_preminum) {
+                                                echo 'premiumcheck';
+                                            } ?>" <?php /*if(!$user_have_preminum) {?>style="opacity:0.5; pointer-events: none; user-select: none;" <?php } */ ?>>
+
+                    <div class="premiumcheck-msg premiumcheck_msg" style="display:none;">
+
+                        <div class="premium-msg-head">
+                            <h3>Access Restricted!</h3>
+                        </div>
+                        <div class="premium-msg-txt">You are not a premium member.</div>
+
+                    </div>
+
+                    <h3 class="filter-section-title">
+                        <i class="fas fa-crown"></i>
+                        Premium Filters
+                        <span class="premium-badge">Premium</span>
+                    </h3>
+
+                      <div class="filter-group">
 
                         <label class="filter-label">Age Range</label>
 
-                        <?php /*
-                        <div class="range-container">
-
-                            <span class="range-value" id="ageMinValue">18</span>
-
-                            <input type="range" class="range-slider" min="18" max="65" value="18" id="ageRange" name="f_age" value="<?php if (isset($_POST['f_age'])) echo $_POST['f_age']; ?>">
-                            <span class="range-value" id="ageMaxValue">65+</span>
-
-                        </div>
-                        */?>
-<!-- 
-                        <div class="progress-container" id="progressBar">
-
-                            <div class="progress-fill" id="progressFill"></div>
-
-                            <div class="knob" id="minKnob"></div>
-                            <div class="knob" id="maxKnob"></div>
-
-                        </div>
-
-                        <div class="values">
-                            <span id="minValue">18</span>
-                            <span id="maxValue">65+</span>
-                        </div> -->
-
+                   
                         <div class="progress-wrapper" data-min="18" data-name="age" data-max="65" >
 
                             <div class="progress-container">
@@ -2098,56 +2097,11 @@ include('includes/helper.php');
                         </select>
                     </div>
 
-                    <?php /*?><div class="filter-group">
-                    <div class="toggle-container">
-                        <span class="filter-label">Verified Photos Only</span>
-                        <div class="toggle-switch active" id="verifiedToggle"></div>
-                    </div>
-                </div><?php */ ?>
 
                     <div class="filter-group">
                         <label class="filter-label">Search by City / Place</label>
                         <input type="text" class="filter-input" placeholder="e.g., New York" id="locationFilter" name="f_location" value="<?php if (isset($_POST['f_location'])) echo $_POST['f_location']; ?>">
                     </div>
-
-                    <?php /*?><div class="filter-group">
-                    <label class="filter-label">Distance</label>
-                    <div class="range-container">
-                        <span class="range-value">1km</span>
-                        <input type="range" class="range-slider" min="1" max="200" value="50" id="distanceRange">
-                        <span class="range-value" id="distanceValue">200km</span>
-                    </div>
-                </div> 
-
-                <div class="filter-group">
-                    <label class="filter-label">Member Type</label>
-                    <div class="filter-buttons">
-                        <button class="filter-btn active" data-type="all">All Members</button>
-                        <button class="filter-btn" data-type="new">New</button>
-                        <button class="filter-btn" data-type="hot">Hot</button>
-                    </div>
-                </div><?php */ ?>
-                </div>
-
-                <!-- Premium Filters -->
-                <div class="filter-section <?php if (!$user_have_preminum) {
-                                                echo 'premiumcheck';
-                                            } ?>" <?php /*if(!$user_have_preminum) {?>style="opacity:0.5; pointer-events: none; user-select: none;" <?php } */ ?>>
-
-                    <div class="premiumcheck-msg premiumcheck_msg" style="display:none;">
-
-                        <div class="premium-msg-head">
-                            <h3>Access Restricted!</h3>
-                        </div>
-                        <div class="premium-msg-txt">You are not a premium member.</div>
-
-                    </div>
-
-                    <h3 class="filter-section-title">
-                        <i class="fas fa-crown"></i>
-                        Premium Filters
-                        <span class="premium-badge">Premium</span>
-                    </h3>
 
                     <?php if ($privacy_setting['verified_photos'] || $privacy_setting['exclude_message_already']) { ?>
 
