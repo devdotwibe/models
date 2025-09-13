@@ -3061,7 +3061,7 @@ include('includes/helper.php');
                  showNotification(`Please log in to like this post`, 'info');
             }
 
-            if(type =='follow')
+            if(type =='connect')
             {
                  showNotification(`Please log in to follow this user`, 'info');
             }
