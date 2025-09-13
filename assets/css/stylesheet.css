@@ -13841,9 +13841,8 @@ overflow-x: auto !important;
     justify-content: center;
   }
 
-.proff-ips {
-    display: flex
-;
+.edit-profilepage .conditional-section.show .proff-ips {
+    display: flex;
     flex-wrap: wrap;
 }
 
