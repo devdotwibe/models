@@ -168,12 +168,12 @@ $serviceArr = array('Providing services', 'Looking for services');
             <div class="pagination" id="pagination-container">
 			
 				
-            <div class="row" style="margin-top:10px">
+            <!-- <div class="row" style="margin-top:10px">
                 <div class="col-md-6"></div>
                 <div class="col-md-6">
                     <ul class="pagination pull-right" style="margin:0" id="list-paginations" id="pagination-container"></ul>
                 </div>
-            </div>
+            </div> -->
 
                 <?php /*?><button class="btn-secondary" disabled>← Previous</button>
 
@@ -475,7 +475,11 @@ $serviceArr = array('Providing services', 'Looking for services');
     <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
     <script>
-        var currentPage = 1;
+
+        let currentPage = 1;
+
+        let itemsPerPage = 10;
+
         $('#gridView').html('<div class="text-center p-3"><h5 class="m-0">Loading..</h5></div>');
 
         function submit_search(pageNum) { 
@@ -505,20 +509,9 @@ $serviceArr = array('Providing services', 'Looking for services');
                     $('#gridView').html(response.html);
 					$('#expandedView').html(response.html);
 					
-                    $('.search-total').html(response.total);
+                    $('.search-total').html(response.total_page);
                     $('#i-total-page').val(response.total_page);
                     currentPage = response.page;
-
-                    // if(response.total_page == 0)
-                    // {
-                    //     $("#pagination-container").hide();
-                    // }
-                    // else
-                    // {
-                    //     $("#pagination-container").show();
-
-                    //     rebindpagination(response.total);
-                    // }
 
                     if(response.total_page == 0)
                     {
@@ -529,11 +522,11 @@ $serviceArr = array('Providing services', 'Looking for services');
                     {
                         $("#pagination-container").show();
 
-                        rebindpagination(response.total);
+                        // rebindpagination(response.total);
 
                         if ($("#pagination-container").data("pagination-initialized") !== true) {
                             $("#pagination-container").pagination({
-                                items: '<?php echo $total_adv['total']; ?>',
+                                items: response.total_page,
                                 itemsOnPage: itemsPerPage,
                                 cssStyle: "light-theme",
                                 onPageClick: function (pageNumber) {
