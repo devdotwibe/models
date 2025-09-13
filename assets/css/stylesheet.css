@@ -11051,26 +11051,26 @@ overflow-x: auto !important;
 /* premium home.page..... */
 
 .user-home .profile-badge.badge-premium .badge-user.diamond-elite-user {
-    width: 35px !important;
-    height: 35px !important;
-    font-size: 14px !important;
-    position: relative;
-    inset: 0;
-    transform: none;
-    margin: 0;
+  width: 35px !important;
+  height: 35px !important;
+  font-size: 14px !important;
+  position: relative;
+  inset: 0;
+  transform: none;
+  margin: 0;
 }
 
 .user-home .profile-badge.badge-premium {
   position: relative;
-
   width: fit-content;
   padding: 0 !important;
   margin-bottom: 16px;
   margin-left: 15px !important;
   font-size: 10px !important;
-    align-items: center;
-    background: transparent !important;
-        margin-right: 15px;
+  align-items: center;
+  background: transparent !important;
+  margin-right: 15px;
+  flex-direction: column;
 }
 
 .user-home .premium-basic-user {
@@ -11080,14 +11080,13 @@ overflow-x: auto !important;
 }
 
 .user-home .profile-badge.badge-premium p {
-    position: relative;
-    top: 110%;
-    left: 50%;
-    margin: 0;
-    transform: none;
-    inset: 0;
+  position: relative;
+  top: 110%;
+  left: 50%;
+  margin: 0;
+  transform: none;
+  inset: 0;
 }
-
 
 /* premium home.page..... */
 
@@ -11119,7 +11118,6 @@ user-home
   position: relative;
   border: 1px solid #26c0b500;
   width: auto;
-  /* padding: 0 !important; */
   margin-bottom: 1px;
   margin-left: 0 !important;
   font-size: 10px !important;
@@ -11146,14 +11144,46 @@ user-home
   transform: none;
 }
 
-
-.profile-badge.badge-premium .badge-user.diamond-elite-user>span{
-    font-size:12px;
+.profile-badge.badge-premium .badge-user.diamond-elite-user > span {
+  font-size: 12px;
 }
 
 /* premium.............................. */
 
+
+
+
 /* verified...................... */
+
+
+
+/* home verifired page............. */ 
+
+.user-home .profile-badge.badge-verified {
+  position: relative;
+  width: fit-content;
+  padding: 0 !important;
+  margin-bottom: 16px;
+  margin-left: 15px !important;
+  font-size: 10px !important;
+}
+
+.user-home .badge-user.verified-user {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 12px !important;
+}
+
+.user-home .profile-badge.badge-verified p {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  margin: 0 auto;
+  transform: translateX(-50%);
+}
+
+/* home verifired page............. */ 
+
 
 /* .profile-badge.badge-verified {
   position: relative;
@@ -11178,7 +11208,7 @@ user-home
   transform: translateX(-50%);
 } */
 
-.badge-user.verified-user {
+.user-home .badge-user.verified-user {
   width: 12px !important;
   height: 12px !important;
   font-size: 14px !important;
@@ -11187,11 +11217,10 @@ user-home
   top: 8px;
 }
 
-.profile-badge.badge-verified {
+.user-home .profile-badge.badge-verified {
   position: relative;
   border: 1px solid #26c0b500;
   width: auto;
-  /* padding: 0 !important; */
   margin-bottom: 1px;
   margin-left: 0 !important;
   font-size: 10px !important;
@@ -11202,7 +11231,7 @@ user-home
   padding-left: 34px !important;
 }
 
-.profile-badge.badge-verified p {
+.user-home .profile-badge.badge-verified p {
   position: relative;
   inset: unset;
   margin: 0 auto;
@@ -11211,7 +11240,41 @@ user-home
 
 /* verified...................... */
 
+
+
 /* creator...................... */
+
+
+/* home creator page............. */ 
+
+
+.profile-badge.creator-badge {
+  position: relative;
+  width: fit-content;
+  padding: 0 !important;
+  margin-bottom: 16px;
+  margin-left: 15px !important;
+  font-size: 10px !important;
+}
+
+.badge-user.creator {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 12px !important;
+}
+
+.profile-badge.creator-badge p {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  margin: 0 auto;
+  transform: translateX(-50%);
+  color: #fff !important;
+}
+
+
+
+
 /* 
 .profile-badge.creator-badge {
   position: relative;
@@ -11248,7 +11311,12 @@ user-home
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background: linear-gradient(94deg, #5eb7b154, rgba(139, 92, 246, 0.3), #c4a9ff) !important;
+  background: linear-gradient(
+    94deg,
+    #5eb7b154,
+    rgba(139, 92, 246, 0.3),
+    #c4a9ff
+  ) !important;
   padding-left: 34px !important;
 }
 
