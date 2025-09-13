@@ -2,7 +2,7 @@
 if ($all_data) {
     foreach ($all_data as $index=> $set_data) {
         if (empty($set_data['adv_status'])) {
-            $status = '<span class="badge bg-primary text-white">Active</span>';
+            $status = '<span class="badge bg-primary text-white">In Active</span>';
         } else {
             $status = '<span class="badge bg-primary text-white">' . $set_data['adv_status'] . '</span>';
         }
