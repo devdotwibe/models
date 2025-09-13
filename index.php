@@ -525,7 +525,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             🔴 Live Now
                         </div>
                     </div>
-                    <div class="mod-card-content flex flex-col">
+                    <div class="mod-card-content flex flex-col"  onclick="window.location.href='<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>'">
                         <div class="flex justify-between items-center mb-3">
                             <h4 class="text-2xl font-bold premium-text"><?php echo $modelname; ?></h4>
 							<?php if(!empty($rowesdw['age'])){ ?>
@@ -547,7 +547,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                         <div class="flex-1 mb-6">
                             <p class="text-white/70 text-base description-text" data-full-text="Let me be your escape from reality. I promise an unforgettable experience that will leave you wanting more and more. Every moment with me is crafted to perfection.">
                                 <span class="description-preview"><?php echo substr($rowesdw['user_bio'], 0, 20).'...'; ?></span>
-                                <button <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?>  class="read-more-btn text-indigo-400 hover:text-indigo-300 ml-2 text-sm font-medium hidden" onclick="event.stopPropagation(); toggleReadMore(this)">Read more</button>
+                                <button  onclick="window.location.href='<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>'"  class="read-more-btn text-indigo-400 hover:text-indigo-300 ml-2 text-sm font-medium hidden" onclick="event.stopPropagation(); toggleReadMore(this)">Read more</button>
                             </p>
                         </div>
 						<?php } ?>
