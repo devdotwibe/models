@@ -558,9 +558,11 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                 <span class="font-semibold">4.9</span>
                             </div>
                         </div>
-                        <button class="w-full btn-primary text-white font-bold py-4 rounded-xl mt-auto text-lg" onclick="event.stopPropagation(); connectWithModel(<?php echo $rowesdw['unique_id']; ?>)">
+
+                        <button <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?>  class="w-full btn-primary text-white font-bold py-4 rounded-xl mt-auto text-lg"  >
                             💕 Connect Now
                         </button>
+
                     </div>
                 </div>
 
