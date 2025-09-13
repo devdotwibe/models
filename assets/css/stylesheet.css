@@ -11340,6 +11340,14 @@ user-home
 
 /* creator...................... */
 
+
+.user-home .user-home-right .model-card h2{
+    margin-right: 15px;
+}
+
+
+
+
 .premimum-model1 .profile-grid.profile-list .profile-badges {
   top: 0;
   padding-top: 12px;
