@@ -1218,7 +1218,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
-                                    <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button  onclick="window.location.href='<?= SITEURL.'login.php' ?>'" class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } ?>
@@ -1904,7 +1904,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
                                     <!-- Button to open modal -->
-                                    <button class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
+                                    <button  onclick="window.location.href='<?= SITEURL.'login.php' ?>'" class="action-btn connect" title="Connect" modelid="<?php echo $rowesdw['id']; ?>">
                                         <i class="fas fa-user-plus"></i>
                                     </button>
                                 <?php } ?>
@@ -3649,7 +3649,7 @@ include('includes/helper.php');
 
 
             closeFilterModal();
-            
+
             handleService();
 
         });
