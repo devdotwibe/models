@@ -408,7 +408,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                 <div class="vip-section ultra-glass vip-enhanced p-12 rounded-3xl">
                     <div class="grid md:grid-cols-3 gap-12">
 
-                        <div onclick="window.location.href='<?= SITEURL.'login.php' ?>'" class="text-center hover-lift">
+                        <div  <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="text-center hover-lift">
                             <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 feature-icon shadow-2xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
                             </div>
@@ -416,7 +416,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             <p class="text-white/70 text-lg">Connect with 100% verified models and members for authentic experiences</p>
                         </div>
 
-                        <div onclick="window.location.href='<?= SITEURL.'login.php' ?>'" class="text-center hover-lift">
+                        <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="text-center hover-lift">
                             <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 feature-icon shadow-2xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                             </div>
@@ -424,7 +424,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             <p class="text-white/70 text-lg">Advanced encryption and privacy controls keep your interactions secure</p>
                         </div>
 
-                        <div onclick="window.location.href='<?= SITEURL.'login.php' ?>'" class="text-center hover-lift">
+                        <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="text-center hover-lift">
                             <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 feature-icon shadow-2xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                             </div>
@@ -445,7 +445,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                 <p class="text-white/70">Access premium tools for enhanced communication, privacy controls, and personalized experiences</p>
                             </div>
                         </div>
-                        <button type="button" class="btn-primary px-12 py-4 text-white rounded-xl font-bold text-lg shadow-2xl" onclick="window.location.href='<?= SITEURL.'login.php' ?>'" >
+                        <button type="button" class="btn-primary px-12 py-4 text-white rounded-xl font-bold text-lg shadow-2xl" <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> >
                             Explore Premium Features
                         </button>
                     </div>
@@ -587,7 +587,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
             <div class="exp-grid">
 
-                <div onclick="window.location.href='<?= SITEURL.'login.php' ?>'" class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                     </div>
@@ -613,7 +613,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                     </ul>
                 </div>
 
-                <div onclick="window.location.href='<?= SITEURL.'login.php' ?>'" class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
                     </div>
@@ -639,7 +639,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                     </ul>
                 </div>
 
-                <div onclick="window.location.href='<?= SITEURL.'login.php' ?>'" class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     </div>
@@ -708,13 +708,13 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                 <div class="ul-premiumdiv flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
 
-                    <button class="px-12 py-5 bg-white text-indigo-600 font-bold rounded-xl hover:bg-gray-100 transition duration-300 shadow-2xl text-xl hover-lift" onclick="window.location.href='<?= SITEURL.'login.php' ?>'" >
+                    <button class="px-12 py-5 bg-white text-indigo-600 font-bold rounded-xl hover:bg-gray-100 transition duration-300 shadow-2xl text-xl hover-lift" <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?>>
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         Become a Model
                     </button>
 
-                    <button class="px-12 py-5 bg-transparent border-3 border-white text-white font-bold rounded-xl hover:bg-white/10 transition duration-300 text-xl hover-lift" onclick="window.location.href='<?= SITEURL.'login.php' ?>'" >
+                    <button class="px-12 py-5 bg-transparent border-3 border-white text-white font-bold rounded-xl hover:bg-white/10 transition duration-300 text-xl hover-lift"<?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                         Join as Member
                     </button>
