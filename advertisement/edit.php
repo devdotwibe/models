@@ -1003,9 +1003,9 @@ $serviceArr = array('Providing services', 'Looking for services');
         });
 		
 		
-		const dataTransfer = new DataTransfer();
-		selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
-		document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
+		// const dataTransfer = new DataTransfer();
+		// selectedFiles_img.forEach(file => dataTransfer.items.add(file)); 
+		// document.getElementById('photoInput').files = dataTransfer.files; console.log(dataTransfer.files);
 		
     }
 
