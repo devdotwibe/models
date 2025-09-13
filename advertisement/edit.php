@@ -57,7 +57,7 @@ if (isset($_SESSION['log_user_id'])) {
 			}
 			$result_array = array_diff($existing_image_array, $removed_image_array);
 		
-		if(isset($_POST['save_image_file']) && !empty($_POST['save_image_file'])){
+		if(isset($_POST['save_image_file'])){
 			$additional_img = '';
 			$exp_file_img = explode('|',$_POST['save_image_file']);
 			$joe_id = DB::update('banners', array('image' => $exp_file_img[0]), "id=%s", $id);
@@ -1199,9 +1199,7 @@ let selectedFiles_video = [];
         let progress = 0;
 		
 		var photoInput = document.getElementById('photoInput');
-		// var files_img = photoInput.files;  // Get all selected images
-
-        const files_img = uploadedPhotos;
+		var files_img = photoInput.files;  // Get all selected images
 				
 		//uploading Image files
 
