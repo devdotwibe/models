@@ -5398,7 +5398,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
     function handleService() {
 
-      message = "Unlock Elite Access Join premium members and dominate the streaming experience.";
+      message = "Upgrade to Premium to unlock this feature.";
 
       showUpgradeModal(message);
     }

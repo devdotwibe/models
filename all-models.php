@@ -3640,7 +3640,128 @@ include('includes/helper.php');
              showNotification(`Please log in first to continue.`, 'error');
         });
 
-    <?php }?>
+    <?php } else {?>
+
+
+        jQuery('.premiumcheck').click(function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            handleService();
+
+        });
+
+          function handleService() {
+
+                message = "Upgrade to Premium to unlock this feature";
+
+            showUpgradeModal(message);
+        }
+
+        function showUpgradeModal(message) {
+
+        const modalOverlay = document.createElement('div');
+        modalOverlay.className = 'upgrade-modal-overlay';
+        modalOverlay.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.9);
+                    backdrop-filter: blur(10px);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1001;
+                    animation: fadeIn 0.3s ease;
+                ">
+                    <div style="
+                        background: rgba(26, 26, 46, 0.95);
+                        backdrop-filter: blur(20px);
+                        border-radius: 20px;
+                        padding: 32px;
+                        max-width: 400px;
+                        width: 90%;
+                        text-align: center;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        animation: slideUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+                    ">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🔒</div>
+                        <h3 style="color: white; font-size: 24px; font-weight: 700; margin-bottom: 16px;">
+                            Upgrade Required
+                        </h3>
+                        <p style="color: rgba(255, 255, 255, 0.8); font-size: 16px; line-height: 1.5; margin-bottom: 24px;">
+                            ${message}
+                        </p>
+                        <div style="display: flex; gap: 12px; flex-direction: column;">
+                            <button id="upgrade-now" style="
+                                width: 100%;
+                                padding: 14px;
+                                background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+                                border: none;
+                                border-radius: 12px;
+                                color: white;
+                                font-size: 16px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                            ">
+                                Upgrade Now
+                            </button>
+                            <button id="maybe-later" style="
+                                width: 100%;
+                                padding: 12px;
+                                background: transparent;
+                                border: 1px solid rgba(255, 255, 255, 0.2);
+                                border-radius: 12px;
+                                color: rgba(255, 255, 255, 0.7);
+                                font-size: 14px;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                            ">
+                                Maybe Later
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideUp {
+                    from { opacity: 0; transform: translateY(30px) scale(0.9); }
+                    to { opacity: 1; transform: translateY(0) scale(1); }
+                }
+            `;
+        document.head.appendChild(style);
+
+        // Append modal
+        document.body.appendChild(modalOverlay);
+
+        modalOverlay.querySelector('#maybe-later').addEventListener('click', () => {
+            document.body.removeChild(modalOverlay);
+        });
+
+        modalOverlay.querySelector('#upgrade-now').addEventListener('click', () => {
+
+            document.body.removeChild(modalOverlay);
+
+            // $('#premium_modal').addClass('show');
+            ShowPremium();
+
+            jQuery('#servicesModalOverlay').removeClass('active');
+
+        });
+        }
+
+    <?php } ?>
 
 
     </script>
