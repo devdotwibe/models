@@ -219,36 +219,36 @@ include('includes/helper.php');
             position: relative;
             clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
             border: none;
-            box-shadow:
+            /* box-shadow:
                 0 0 60px rgba(6, 182, 212, 1),
                 0 0 120px rgba(6, 182, 212, 0.6),
                 0 0 180px rgba(6, 182, 212, 0.3),
                 inset 0 8px 0 rgba(255, 255, 255, 0.7),
-                inset 0 -8px 0 rgba(0, 0, 0, 0.5);
+                inset 0 -8px 0 rgba(0, 0, 0, 0.5); */
         }
 
         .diamond-elite-user::before {
             content: '';
             position: absolute;
-            inset: -12px;
+            inset: -5px;
             background: conic-gradient(from 0deg,
                     #06b6d4, #22d3ee, #67e8f9, #a5f3fc, #cffafe,
                     #a5f3fc, #67e8f9, #22d3ee, #06b6d4);
-            clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+            /* clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%); */
             z-index: -1;
-            animation: premiumPrisma 2.5s ease-in-out infinite;
+            animation: diamondPrisma 2.5s ease-in-out infinite;
         }
 
 
-         /* premiumPrisma premiumAura   diamondPrisma diamondAura*/
+         /* premiumPrisma premiumAura */
         .diamond-elite-user::after {
             content: '';
             position: absolute;
             inset: -30px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.8) 0%, rgba(34, 211, 238, 0.4) 40%, transparent 70%);
+            /* background: radial-gradient(circle, rgba(6, 182, 212, 0.8) 0%, rgba(34, 211, 238, 0.4) 40%, transparent 70%); */
             border-radius: 50%;
             z-index: -2;
-            animation: premiumAura 3s linear infinite;
+            animation: diamondAura 3s linear infinite;
         }
 
         .diamond-elite-user span {
