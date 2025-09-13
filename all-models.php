@@ -567,7 +567,7 @@ include('includes/helper.php');
                     <button class="header-btn active" title="Grid View" id="gridViewBtn" onclick="ChangeView('grid')">
                         <i class="fas fa-th-large"></i>
                     </button>
-                    <button class="header-btn" title="Menu" id="menuBtn" onclick="ChangeView('menu')">
+                    <button class="header-btn" title="List view" id="menuBtn" onclick="ChangeView('menu')">
                         <i class="fas fa-bars"></i>
                     </button>
                     <button class="header-btn" title="Advanced Filters" id="filterBtn">
