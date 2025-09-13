@@ -2057,14 +2057,14 @@ include('includes/helper.php');
                                                 echo 'premiumcheck';
                                             } ?>" <?php /*if(!$user_have_preminum) {?>style="opacity:0.5; pointer-events: none; user-select: none;" <?php } */ ?>>
 
-                    <div class="premiumcheck-msg premiumcheck_msg" style="display:none;">
+                    <!-- <div class="premiumcheck-msg premiumcheck_msg" style="display:none;">
 
                         <div class="premium-msg-head">
                             <h3>Access Restricted!</h3>
                         </div>
                         <div class="premium-msg-txt">You are not a premium member.</div>
 
-                    </div>
+                    </div> -->
 
                     <h3 class="filter-section-title">
                         <i class="fas fa-crown"></i>
