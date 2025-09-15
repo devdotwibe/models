@@ -11823,12 +11823,12 @@ position: relative;
   border:1px solid orange;
 }
 .profile-wrapp1>div>div:first-child {
-  border:1px solid orange;
+
   width: 50%;
 }
 
 .profile-wrapp1>div>div:last-child {
-    border: 1px solid orange;
+
     width: 50%;
     display:flex;
     justify-content: flex-start;
@@ -11844,7 +11844,7 @@ align-items: center;
 justify-content: center;
 }
 .profile-wrapp1>div>div:first-child>div{
-  font-size: 13px;
+  font-size: 13px !important;
 }
 
 
