@@ -11624,18 +11624,7 @@ position: relative;
   }
 }
 
-@media (max-width: 1200px) {
-  .premimum-model1 .profile-grid.profile-list .profile-card {
-    width: 80%;
-  }
 
-.profile-wrapp1 > div > div:nth-child(2) button{
-    padding-inline: 10px !important;
-    font-size: 15px;
-    /* text-transform: none; */
-}
-
-}
 
 @media (max-width: 1240px) {
   .profile-header .container {
@@ -11679,6 +11668,21 @@ position: relative;
     /* font-size: 2.25rem; */
   }
 }
+
+
+@media (max-width: 1200px) {
+  .premimum-model1 .profile-grid.profile-list .profile-card {
+    width: 80%;
+  }
+
+.profile-wrapp1 > div > div:nth-child(2) button{
+    padding-inline: 10px !important;
+    font-size: 15px;
+ 
+}
+
+}
+
 
 @media (max-width: 1024px) {
   body header .container .hidden {
