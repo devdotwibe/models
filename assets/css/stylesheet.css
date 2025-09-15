@@ -11667,6 +11667,15 @@ position: relative;
   .head_pay {
     /* font-size: 2.25rem; */
   }
+
+
+.profile-wrapp1 > div > div:nth-child(2) button{
+    padding-inline: 10px !important;
+    font-size: 15px;
+ 
+}
+
+
 }
 
 
@@ -11675,11 +11684,7 @@ position: relative;
     width: 80%;
   }
 
-.profile-wrapp1 > div > div:nth-child(2) button{
-    padding-inline: 10px !important;
-    font-size: 15px;
- 
-}
+
 
 }
 
