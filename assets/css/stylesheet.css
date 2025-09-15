@@ -11926,7 +11926,7 @@ position: absolute;
 
 
 .single-profile-model>div>div {
-  border:1px solid red;
+  /* border:1px solid red; */
   position:relative;
   padding-left:34px;
   
@@ -11952,7 +11952,7 @@ position: absolute;
 
 .single-profile-model>div>div>:nth-child(3){
 
-word-break: break-all;
+/* word-break: break-all; */
 
 }
 
