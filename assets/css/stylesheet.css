@@ -11469,6 +11469,7 @@ width: 21px !important;
     align-items: center;
     justify-content: center;
     padding-block: 12px !important;
+    text-transform: none;
 }
 
 .profile-wrapp1 > div > div:nth-child(2) button svg {
@@ -11627,6 +11628,13 @@ position: relative;
   .premimum-model1 .profile-grid.profile-list .profile-card {
     width: 80%;
   }
+
+.profile-wrapp1 > div > div:nth-child(2) button{
+    padding-inline: 10px !important;
+    font-size: 15px;
+    /* text-transform: none; */
+}
+
 }
 
 @media (max-width: 1240px) {
