@@ -11470,6 +11470,7 @@ width: 21px !important;
     justify-content: center;
     padding-block: 12px !important;
     text-transform: none;
+            padding-inline: 16px !important;
 }
 
 .profile-wrapp1 > div > div:nth-child(2) button svg {
