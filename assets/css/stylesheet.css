@@ -14306,7 +14306,10 @@ position: absolute;
 
    .enhanced5 .sample .ultra-glass {
     width: 46%;
-    padding-inline: 12px;
+    padding-inline: 8px;
+            display: flex;
+        align-items: center;
+        justify-content: center;
 }
 
 .enhanced5 .sample .ultra-glass:first-child {
@@ -14316,6 +14319,7 @@ position: absolute;
     align-items: center;
     justify-content: center;
 }
+
 
 
 
@@ -14378,4 +14382,16 @@ position: absolute;
     flex-basis: 100%;
     margin-bottom: 8px;
   }
+
+
+  
+
+   .enhanced5 .sample .ultra-glass span{
+    font-size: 10px;
+   }
+
+   .enhanced5 .sample .ultra-glass svg{
+   width:15px;
+    margin-right:0px;
+   }
 }
