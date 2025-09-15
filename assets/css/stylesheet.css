@@ -12028,6 +12028,7 @@ position: absolute;
   .home-page .vip-enhanced .btn-primary {
     padding-block: 15px !important;
     font-size: 14px;
+            margin-inline: auto;
   }
 
   .ul-premiumdiv button {
