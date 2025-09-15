@@ -13640,8 +13640,9 @@ justify-content: center;
     > div
     > div:last-child
     button {
-    width: 100%;
-    margin-bottom: 0px;
+        width: 90%;
+        margin-bottom: 0px;
+        margin-inline: auto;
   }
 
   .enhanced5 .action-dropdown {
