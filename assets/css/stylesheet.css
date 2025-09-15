@@ -11862,7 +11862,9 @@ justify-content: center;
   width: 13px;
   
 }
-
+.single-profile>div>div{
+      padding-top: 40px !important;
+}
 
 
 
