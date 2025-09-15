@@ -12490,6 +12490,13 @@ justify-content: center;
       .profile-wrapp1>div>div:first-child {
         width: auto;
     }
+    .profile-avatar-container {
+        max-width: 140px;
+        max-height: 140px;
+    }
+
+
+
 
 }
 
@@ -13047,6 +13054,14 @@ justify-content: center;
     label {
     font-size: 15px;
   }
+
+.profile-header .profile-flex-wrapp{
+  gap: 0px !important;
+
+}
+
+
+
 }
 
 @media (max-width: 480px) {
