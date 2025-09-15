@@ -12550,8 +12550,39 @@ position: absolute;
         max-height: 140px;
     }
 
+/* .single-profile-model>div {
+  border:1px solid red
+} */
+.single-profile-model>div>div {
+  border:1px solid red;
+  position:relative;
+  padding-left:34px;
+  
+}
+
+.single-profile-model>div>div>:first-child{
+position: absolute;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    object-fit: cover;
+}
+
+.single-profile-model>div>div>:nth-child(2) .font-semibold{
+    font-size: 12px !important;
+}
 
 
+.single-profile-model>div>div>:nth-child(2) .text-xs{
+    font-size: 12px !important;
+    line-height: 17px;
+}
+
+.single-profile-model>div>div>:nth-child(3){
+
+word-break: break-all;
+
+}
 
 }
 
@@ -14384,7 +14415,7 @@ position: absolute;
   }
 
 
-  
+
 
    .enhanced5 .sample .ultra-glass span{
     font-size: 10px;
