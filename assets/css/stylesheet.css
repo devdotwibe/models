@@ -11867,7 +11867,14 @@ justify-content: center;
 }
 
 .single-profile-stausDiv {
-  
+
+}
+.single-profile-staus h2{
+padding-top: 0 !important;
+}
+
+.single-profile-services h2{
+ padding-top: 0 !important; 
 }
 
 
