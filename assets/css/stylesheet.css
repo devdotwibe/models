@@ -12005,6 +12005,7 @@ justify-content: center;
   .profile-wrapp1 > div > div:nth-child(2) {
     justify-content: flex-start;
     margin-inline: 0 !important;
+    width: auto;
   }
 
   footer .container > .grid {
@@ -12484,6 +12485,11 @@ justify-content: center;
   -webkit-text-fill-color: transparent;
 
   }
+
+
+      .profile-wrapp1>div>div:first-child {
+        width: auto;
+    }
 
 }
 
