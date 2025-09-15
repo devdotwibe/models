@@ -14430,4 +14430,10 @@ position: absolute;
    width:15px;
     margin-right:0px;
    }
+
+       .home-page .vip-enhanced .btn-primary {
+        padding-block: 15px !important;
+        font-size: 13px;
+        margin-inline: auto;
+    }
 }
