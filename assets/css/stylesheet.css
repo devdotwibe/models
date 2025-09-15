@@ -13657,7 +13657,7 @@ justify-content: center;
   }
 
   .profile-info .profile-flex-wrapp .profile-wrapp1 > div > div div {
-    margin-bottom: 18px !important;
+    margin-bottom: 13px !important;
   }
 
   .enhanced5 .profile-info {
@@ -14242,6 +14242,11 @@ justify-content: center;
         max-width: 140px;
         max-height: 140px;
     }
+
+   .profile-header .profile-info .profile-wrapp1>div>div:last-child{
+            margin-top: 5px !important;
+   }
+
 
 }
 
