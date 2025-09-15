@@ -39,7 +39,7 @@
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td  align="left" style="color:#fff; font-size:25px">You Are <span style="color: #5caad2;">Successfully Register.</td>
+        <td  align="left" style="color:#fff; font-size:25px">You Are <span style="color: #5caad2;">Password Changed</td>
       </tr>
       <tr>
         <td>&nbsp;</td>
@@ -74,9 +74,9 @@
                 <td align="center" style="padding: 0 25px; font-size:16px; font-family:Arial, Helvetica, sans-serif; font-weight:bold;">
 
                     <div style="line-height: 24px">
-                            <p>Dear {name},</p>
-                            <p>Username: {username}</p>
-                            <p>Password: {password}</p>
+                            <p>Dear {{NAME}},</p>
+                            <p>Username: {{USERNAME}}</p>
+                            <p>Password: {{PASS}}</p>
 
                     </div>
                 </td>

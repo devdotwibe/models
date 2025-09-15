@@ -8,6 +8,14 @@ $db = "u842608707_live_models_25";
 
 define("SITEURL", 'https://thelivemodels.com/');
 
+define('MAIL_HOST', 'smtp.hostinger.com');  
+define('MAIL_USERNAME', 'no-reply@thelivemodels.com');
+define('MAIL_PASSWORD', 'Vibhi@91'); 
+define('MAIL_FROM', 'no-reply@thelivemodels.com');
+define('MAIL_FROM_NAME', 'The Live Models');
+define('MAIL_PORT', 465); 
+define('MAIL_SECURE', 'ssl');
+
 //testing 
 //define("SITEURL", 'http://localhost/thelivemodal/demo/');
 /*$username = "root";
@@ -44,5 +52,6 @@ $timenow=date("h:i A");
 require_once 'db.class.php';
 DB::$user = $username;
 DB::$password = $password;
-DB::$dbName = $db
+DB::$dbName = $db;
+
 ?>

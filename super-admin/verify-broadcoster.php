@@ -90,7 +90,7 @@
                             ?>
                           </td>
                           <td>
-                            <a class="btn btn-primary" href="single-profile.php?model=<?php echo $rowesdw['username']; ?>&m_id=<?php echo $rowesdw['id']; ?>">View Full Profile</a>
+                            <a class="btn btn-primary" href="single-profile.php/<?php echo urlencode( $rowesdw['username']); ?>">View Full Profile</a>
                             <!-- <input type="submit"  name="accept-request" value=""> -->
                           </td>
                         </tr>

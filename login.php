@@ -5,7 +5,8 @@ include('includes/helper.php');
 if($_SESSION["log_user"]){
 	$userDetails = get_data('model_user',array('id'=>$_SESSION['log_user_id']),true);
 	if($userDetails){
-		header("Location: ".SITEURL."single-profile.php?m_unique_id=".$userDetails['unique_id']);
+		header("Location: ".SITEURL."single-profile.php/".urlencode($userDetails['username']));
+
 	}
 }
 
@@ -67,6 +68,13 @@ if($_SESSION["log_user"]){
                                 <h2><span class="text-danger"><?php echo $_SESSION["login_error"]  ?></span></h2>
 
                             <?php } ?>
+
+                            <?php if(isset($_SESSION["pass_success"] )) { ?>
+
+                                <h2><span class="alert alert-success"><?php echo $_SESSION["pass_success"]  ?></span></h2>
+
+                                
+                            <?php unset($_SESSION["pass_success"]); } ?>
 
                             <div>
                                 <label for="username" class="block text-sm font-semibold text-white/80 mb-2">Username or Email <span class="text-red-400">*</span></label>

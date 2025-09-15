@@ -109,7 +109,7 @@
 
                           	<a href="<?php echo SITEURL.'/super-admin/user-bank.php?user_id='.$rowesdw['id']; ?>">View Bank Detail</a>
 
-                          	<a href="<?php echo SITEURL.'/single-profile.php?m_unique_id='.$rowesdw['unique_id']; ?>">View Profile</a>
+                          	<a href="<?php echo SITEURL.'/single-profile.php/'.urlencode($rowesdw['username']); ?>">View Profile</a>
                           </td>
                           <td>
                            

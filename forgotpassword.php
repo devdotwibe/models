@@ -1,6 +1,7 @@
 <?php 
 include('includes/config.php'); 
 include('includes/helper.php'); 
+include('includes/sendMail.php');
 if($_POST){
 	$email = $_POST['email'];
 	if($email){
@@ -24,48 +25,77 @@ if($_POST){
 
 			$email_to = $get_data['email'];
 
-			$subject = "Mail Verification for Model Project";
+			// $subject = "Mail Verification for Model Project";
 
-			$header = "From: Forgot Password <prashant.systos@gmail.com>\r\n";
-			$header .= "MIME-version:1.0\r\n";
-			$header .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+			// $header = "From: Forgot Password <prashant.systos@gmail.com>\r\n";
+			// $header .= "MIME-version:1.0\r\n";
+			// $header .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
 
-			$htmlContent = file_get_contents("mail/email_verfiy.php");
+			// $htmlContent = file_get_contents("mail/email_verfiy.php");
 
-			$htmlContent = file_get_contents("mail/forgotmail.php");
+			// $htmlContent = file_get_contents("mail/forgotmail.php");
 
 			// $imageUrl = 'https://models.staging3.dotwibe.com/assets/images/logo-live.jpg';
 
 			
-			$rootPath = $_SERVER['DOCUMENT_ROOT']; 
-			$imagePath = $rootPath . '/' . ltrim('assets/images/logo-live.jpg', '/');
+			// $rootPath = $_SERVER['DOCUMENT_ROOT']; 
+			// $imagePath = $rootPath . '/' . ltrim('assets/images/logo-live.jpg', '/');
 
-			$base64 = '';
+			// $base64 = '';
 
-			$imageData = @file_get_contents($imagePath);
-			if ($imageData !== false) {
-				$type = pathinfo($imagePath, PATHINFO_EXTENSION);
-				$base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
-			}
+			// $imageData = @file_get_contents($imagePath);
+			// if ($imageData !== false) {
+			// 	$type = pathinfo($imagePath, PATHINFO_EXTENSION);
+			// 	$base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
+			// }
 
-			$message = $htmlContent;
+			// $message = $htmlContent;
 
-			$message = str_replace('{username}', $get_data['username'], $message);
-			$message = str_replace('{name}', $get_data['name'], $message);
-			$message = str_replace('{password}', $code, $message);
+			// $message = str_replace('{username}', $get_data['username'], $message);
+			// $message = str_replace('{name}', $get_data['name'], $message);
+			// $message = str_replace('{password}', $code, $message);
 
-			$message = str_replace("{{IMG_LINK}}", $base64, $message);
-			$message = str_replace("{{VERIFY_LINK}}", $verify_link, $message);
+			// $message = str_replace("{{IMG_LINK}}", $base64, $message);
+			// $message = str_replace("{{VERIFY_LINK}}", $verify_link, $message);
+
+			$result = sendMail(
+            $email_to,
+            "Forgot Password",
+            "mail/forgotmail.php",
+            [
+                "USERNAME" => $get_data['username'],
+				"NAME" => $get_data['name'],
+				"PASS" => $code,
+
+            ],
+            [
+                "IMG_LINK" => __DIR__ . "/assets/images/logo-live.jpg"
+            ]
+        );
+
+
+		if ($result === true) {
+
+			$_SESSION["pass_success"] = "Please Check your Registered Mail for change Password";
+
+            echo '<script>window.location="login.php"</script>';
+
+        } else {
+
+        	echo '<script>window.location="login.php"</script>';
+        }
 			
 
-         if (mail($email_to, $subject, $message, $header)) {
+        //  if (mail($email_to, $subject, $message, $header)) {
 
-                echo '<script>window.location="login.php"</script>';
-         }else{
+        //         echo '<script>window.location="login.php"</script>';
+        //  }else{
              
-                echo '<script>window.location="login.php"</script>';
-         }
+        //         echo '<script>window.location="login.php"</script>';
+        //  }
+
+
 		}
 		else{
 echo "<script>

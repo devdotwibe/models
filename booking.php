@@ -1269,7 +1269,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
         function CloseModal() {
             $('#success_modal').removeClass('active');
             $('#modal_success_message .success-text').remove();
-            window.location = "single-profile.php?m_unique_id=<?php echo $_GET['m_id']; ?>";
+            window.location = "<?php echo SITEURL; ?>single-profile/<?php echo urlencode($model_data['username']); ?>";
         }
     </script>
 </body>

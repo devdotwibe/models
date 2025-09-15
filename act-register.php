@@ -2,6 +2,7 @@
     session_start(); 
 	include('includes/config.php');
 	include('includes/helper.php');
+    include('includes/sendMail.php');
 
 ?>
 <style type="text/css">
@@ -216,54 +217,74 @@ if (isset($_POST['vfb-submit'])) {
       
       	 $email_to = $email;
 
-         $subject = "Mail Verification for Model Project";
+        //  $subject = "Mail Verification for Model Project";
 
-        $header = "From: Model Project <prashant.systos@gmail.com>\r\n";
-        $header .= "MIME-version:1.0\r\n";
-        $header .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        // $header = "From: Model Project <prashant.systos@gmail.com>\r\n";
+        // $header .= "MIME-version:1.0\r\n";
+        // $header .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-        $verify_link = "https://models.staging3.dotwibe.com/verify.php?email=".$email."&token=".$token;
+        $verify_link = "https://thelivemodels.com/verify.php?email=".$email."&token=".$token;
 
 
-         $htmlContent = file_get_contents("mail/email_verfiy.php");
+        // $imageUrl = 'https://thelivemodels.com/assets/images/logo-live.jpg';
 
-        $imageUrl = 'https://models.staging3.dotwibe.com/assets/images/logo-live.jpg';
-        
-        $base64 = '';
 
-        $imageData = @file_get_contents($imageUrl);
-        if ($imageData !== false) {
-            $type = pathinfo($imageUrl, PATHINFO_EXTENSION);
-            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($imageData);
-        }
-
-        $message = str_replace("{{IMG_LINK}}", $base64, $htmlContent);
-        $message = str_replace("{{VERIFY_LINK}}", $verify_link, $message);
+        // $message = str_replace("{{IMG_LINK}}", $base64, $htmlContent);
+        // $message = str_replace("{{VERIFY_LINK}}", $verify_link, $message);
         
         //  $message = $htmlContent;
 
-         if (mail($email_to, $subject, $message, $header)) {
+        $result = sendMail(
+            $email,
+            "Mail Verification for Model Project",
+            "mail/email_verfiy.php",
+            [
+                "VERIFY_LINK" => $verify_link,
+            ],
+            [
+                "IMG_LINK" => __DIR__ . "/assets/images/logo-live.jpg"
+            ]
+        );
 
-            //    echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';
 
-            //  echo  '<script>sessionStorage.setItem('regSuccessShown', '1')</script>';
+        if ($result === true) {
             
-            //     echo '<script>window.location="login.php?reg=success"</script>';
+            echo '<script>
+                sessionStorage.setItem("regSuccessShown", "0");
+                window.location = "login.php?reg=success";
+            </script>';
 
-            // Set sessionStorage and redirect
+        } else {
 
-                echo '<script>
-                    sessionStorage.setItem("regSuccessShown", "0");
-                    window.location = "login.php?reg=success";
-                </script>';
+            // echo $result; 
+             $_SESSION["email_error"] = "Error in Details Sent to Respective Mail id.";
+
+            echo '<script>window.history.back();</script>';
+        }
 
 
-         }else{
+        //  if (mail($email_to, $subject, $message, $header)) {
 
-               $_SESSION["email_error"] = "Error in Details Sent to Respective Mail id.";
+        //     //    echo  '<script>alert("Details Successfully Sent to Respective Mail id.")</script>';
 
-               echo '<script>window.history.back();</script>';
-         }
+        //     //  echo  '<script>sessionStorage.setItem('regSuccessShown', '1')</script>';
+            
+        //     //     echo '<script>window.location="login.php?reg=success"</script>';
+
+        //     // Set sessionStorage and redirect
+
+        //         echo '<script>
+        //             sessionStorage.setItem("regSuccessShown", "0");
+        //             window.location = "login.php?reg=success";
+        //         </script>';
+
+
+        //  }else{
+
+        //        $_SESSION["email_error"] = "Error in Details Sent to Respective Mail id.";
+
+        //        echo '<script>window.history.back();</script>';
+        //  }
 
     }
     else{

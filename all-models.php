@@ -1108,7 +1108,7 @@ include('includes/helper.php');
 
                             <div class="profile-image-container">
 
-                                <a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
+                                <a href="<?php echo SITEURL; ?>single-profile/<?php echo urlencode($rowesdw['username']); ?>">
 
                                     <img src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
@@ -1164,7 +1164,7 @@ include('includes/helper.php');
                             </div>
                             <div class="profile-info">
                                 <h3 class="profile-name">
-                                    <a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
+                                    <a href="<?php echo SITEURL; ?>single-profile/<?php echo urlencode($rowesdw['username']); ?>">
                                         <?php echo ucfirst($modalname);
                                         if (!empty($rowesdw['age'])) {
                                             echo ', ' . $rowesdw['age'];
@@ -1790,7 +1790,7 @@ include('includes/helper.php');
 
                             <div class="profile-image-container">
 
-                                <a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
+                                <a href="<?php echo SITEURL; ?>single-profile/<?php echo urlencode($rowesdw['username']); ?>">
 
                                     <img src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
@@ -1847,7 +1847,7 @@ include('includes/helper.php');
                             </div>
                             <div class="profile-info">
                                 <h3 class="profile-name">
-                                    <a href="<?php echo SITEURL; ?>single-profile.php?m_unique_id=<?php echo $rowesdw['unique_id']; ?>">
+                                    <a href="<?php echo SITEURL; ?>single-profile/?<?php echo urlencode($rowesdw['username']); ?>">  
                                         <?php echo ucfirst($modalname);
                                         if (!empty($rowesdw['age'])) {
                                             echo ', ' . $rowesdw['age'];

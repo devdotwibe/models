@@ -3,6 +3,19 @@
 include('includes/config.php');
 include('includes/helper.php');
 $error = '';
+
+if (!empty($_GET['username'])) {
+
+    $username = $_GET['username'];
+
+    $modelDetails = get_data('model_user', ['username' => $username], true);
+
+    $_GET['m_unique_id'] = $modelDetails['unique_id'] ?? null;
+} else {
+    $username = null;
+    $_GET['m_unique_id'] = null;
+}
+
 if (isset($_SESSION['log_user_unique_id'])) {
   $getUserData = get_data('model_social_link', array('unique_model_id' => $_SESSION['log_user_unique_id']), true);
 
@@ -3375,13 +3388,13 @@ jQuery('.socialpaidbtn').click(function(e){
 						window.location='login.php'
 					}else if(response.msg == 'modelerror'){
 						alert('There is no model!!');
-						window.location='single-profile.php?m_unique_id=<?php echo $_GET['m_unique_id']; ?>';
+						window.location='single-profile.php/<?php echo urlencode($_GET['username']); ?>';
 					}else if(response.msg == 'sufficianterror'){
 						alert('You dont have sufficiant coins in your wallet for buying it.');
-						window.location='single-profile.php?m_unique_id=<?php echo $_GET['m_unique_id']; ?>';
+						window.location='single-profile.php/<?php echo urlencode($_GET['username']); ?>';
 					}else if(response.msg == 'success'){
 						alert('Social link added successfully in your account.');
-						window.location='single-profile.php?m_unique_id=<?php echo $_GET['m_unique_id']; ?>';
+						window.location='single-profile.php/<?php echo urlencode($_GET['username']); ?>';
 					}
 
 				}

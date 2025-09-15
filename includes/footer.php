@@ -1128,7 +1128,7 @@ if(isset($_SESSION['log_user_id'])){
 
     function connectWithModel(modelId) {
        // alert(`💕 Premium Connection - Connecting with ${modelId}...`);
-	   window.location.href = '<?= SITEURL ?>single-profile.php?m_unique_id='+modelId;
+	   window.location.href = '<?= SITEURL ?>single-profile.php/'+modelId;
         closeModelPreview();
     }
 

@@ -234,7 +234,7 @@ body.custom-background { background-image: url("assets/wp-content/themes/theagen
                         <div class="col-md-3" style="border:0px solid blue;">
                             <div id="creator-list">
                               <div class="creator">
-                                    <a href="single-profile.php?m_unique_id=' .$umid .'">
+                                    <a href="single-profile.php/' .urlencode($username) .'">
                                         <figure><img src="' .$dp .'" alt="" /></figure>
                                         <h5 class="model_name">' .$username .'</h5>
                                         <div class="cr_posts">

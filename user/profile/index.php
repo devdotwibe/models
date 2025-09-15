@@ -809,7 +809,7 @@ if(!empty($userDetails['profile_pic'])){
 		<?php } ?>
           <div class="space-y-2 user-profile-side-btns">
             <button class="btn-primary w-full" onclick="navigateTo('edit-profile.php')">Edit Profile</button>
-            <a class="btn-secondary w-full" href="<?= SITEURL ?>single-profile.php?m_unique_id=<?php echo $userDetails['unique_id']; ?>">View Profile</a>
+            <a class="btn-secondary w-full" href="<?= SITEURL ?>single-profile.php/<?php echo urlencode($userDetails['username']); ?>">View Profile</a>
           </div>
         </div>
 
@@ -900,7 +900,7 @@ if(!empty($userDetails['profile_pic'])){
 
                   ?>
 
-                <div class="flex items-center repeat-users" onclick="window.location.href='<?php echo SITEURL.'single-profile.php?m_unique_id='.$user['unique_id'] ?>'">
+                <div class="flex items-center repeat-users" onclick="window.location.href='<?= SITEURL ?>single-profile.php/<?php echo urlencode($user['username']); ?>'">
 
                       <div class="relative">
 
@@ -1545,7 +1545,7 @@ if(!empty($userDetails['profile_pic'])){
       </div>
 
 
-      <div class="mobile-nav-item" onclick="window.location.href='<?= SITEURL ?>single-profile.php?m_unique_id=<?php echo $userDetails['unique_id'] ?>'" >
+      <div class="mobile-nav-item" onclick="window.location.href='<?= SITEURL ?>single-profile.php/<?php echo urlencode($userDetails['username'])?>'" >
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
         </svg>

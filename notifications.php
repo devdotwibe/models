@@ -741,7 +741,7 @@ else{
 							
 							<?php //} ?>
 							
-								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo urlencode($notify_user['username']); ?>')">
 									View Profile
 								</button>
 							</div>
@@ -753,7 +753,7 @@ else{
 									💕 Send Thanks
 								</button>
 							<?php } ?>
-								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo urlencode($notify_user['username']); ?>')">
 									View Profile
 								</button>
 							</div>
@@ -764,7 +764,7 @@ else{
 									💕 Send Thanks
 								</button>
 							<?php } ?>
-								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo urlencode($notify_user['username']); ?>')">
 									View Profile
 								</button>
 							</div>
@@ -776,13 +776,13 @@ else{
 								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="learnMore()">
 									📚 Learn More
 								</button>
-								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo urlencode($notify_user['username']); ?>')">
 									View Profile
 								</button>
 							</div>
 						<?php }else{   ?>
 							<div class="flex space-x-3">
-								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo $unique_id; ?>')">
+								<button class="btn-secondary px-6 py-2 rounded-lg text-white font-semibold" onclick="viewProfile('<?php echo urlencode($notify_user['username']); ?>')">
 									View Profile
 								</button>
 							</div>
@@ -1076,7 +1076,7 @@ offset = offset+limit;
     }
 
     function viewProfile(userId) { 
-        window.location.href = '<?= SITEURL ?>single-profile.php?m_unique_id='+userId;
+        window.location.href = '<?= SITEURL ?>single-profile.php/'+userId;
     }
 	
 	function viewServicePage(servId) { 

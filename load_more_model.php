@@ -41,7 +41,7 @@ $resultd = mysqli_query($con, $sqls);
 					 $extra_details = DB::queryFirstRow("SELECT status FROM model_extra_details WHERE unique_model_id = %s ", $unique_id);
 				$html .= '<div class="profile-card">
                     <div class="profile-image-container">
-					<a href="'.SITEURL.'single-profile.php?m_unique_id='.$rowesdw['unique_id'].'">
+					<a href="'.SITEURL.'single-profile.php/'. urlencode($rowesdw['username']).'">
                         <img src="'.SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic'].'" alt="'.$modalname.', '.$rowesdw['age'].'" class="profile-image">
                         <div class="profile-badges">
                             <span class="profile-badge badge-live">Live</span>';
@@ -52,7 +52,7 @@ $resultd = mysqli_query($con, $sqls);
 					</a>
                     </div>
                     <div class="profile-info">
-                        <h3 class="profile-name"><a href="'.SITEURL.'single-profile.php?m_unique_id='.$rowesdw['unique_id'].'">'.ucfirst($modalname); 
+                        <h3 class="profile-name"><a href="'.SITEURL.'single-profile.php/'. urlencode($rowesdw['username']).'">'.ucfirst($modalname); 
 						if(!empty($rowesdw['age'])){ $html .= ', '.$rowesdw['age']; } 
 						$html .= '</a></h3>';
 						 if(!empty($rowesdw['city']) || !empty($rowesdw['country'])){ 
