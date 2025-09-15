@@ -11584,11 +11584,11 @@ position: relative;
 .profile-wrapp1 h1::after{
     content: "";
     position: absolute;
-    bottom: -10px;
+    bottom: 0px;
     left: 0;
     width: 50px;
     height: 3px;
-    background: linear-gradient(90deg, #ff6b7a, #ff8e53);
+    /* background: linear-gradient(90deg, #ff6b7a, #ff8e53); */
     border-radius: 2px;
 }
 
@@ -11801,6 +11801,54 @@ position: relative;
   .advt-page .ads-expanded .ad-card {
     width: 100%;
   }
+
+    .profile-wrapp1 > div > div:nth-child(2) button {
+        padding-inline: 8px !important;
+        font-size: 13px;
+        padding-block: 10px !important;
+    }
+
+    .profile-wrapp1 > div > div:nth-child(2) button svg {
+        margin-right: .3rem;
+    }
+
+.profile-avatar-container {
+    max-width: 120px;
+    max-height: 120px;
+ 
+}
+
+.profile-wrapp1>div>div:first-child {
+
+  border:1px solid orange;
+}
+.profile-wrapp1>div>div:first-child {
+  border:1px solid orange;
+  width: 50%;
+}
+
+.profile-wrapp1>div>div:last-child {
+    border: 1px solid orange;
+    width: 50%;
+    display:flex;
+    justify-content: flex-start;
+}
+.profile-wrapp1>div>div:first-child span{
+    font-size:13px
+}
+
+.profile-wrapp1>div>div:first-child .status-online{
+  list-style: normal;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.profile-wrapp1>div>div:first-child>div{
+  font-size: 13px;
+}
+
+
+
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
