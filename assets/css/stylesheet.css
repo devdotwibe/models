@@ -11876,7 +11876,52 @@ padding-top: 0 !important;
 .single-profile-services h2{
  padding-top: 0 !important; 
 }
+.single-profile-form h2{
+ padding-top: 0 !important; 
+}
 
+.single-profile-model h2{
+ padding-top: 0 !important; 
+}
+.single-profile-form>div>div{
+  display: flex;
+  flex-wrap: wrap;
+  gap:10px;
+}
+
+.single-profile-form>div>div button{
+  padding-inline: 12px !important;
+  padding-block: 6px !important;
+  font-size: 13px !important;
+}
+
+.single-profile-services ul li{
+
+  position: relative;
+  padding-left:40px
+}
+
+.single-profile-services ul li>div:first-child{
+width:30px;
+height:30px;
+position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.single-profile-services ul li>div:first-child svg{
+  width: 14px;
+  height: 14px;
+}
+.single-profile .service-icon {
+    width: 100%;
+    height: 100%;
+}
+
+
+.single-profile-services ul li>div:last-child{
+  
+}
 
 }
 
