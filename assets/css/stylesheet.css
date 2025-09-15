@@ -11848,6 +11848,24 @@ justify-content: center;
 }
 
 
+.profile-wrapp1>div>div:first-child .image-center-profile{
+  padding-left: 18px;
+  position: relative;
+  border:1px solid red;
+  line-height:20px
+}
+
+.profile-wrapp1>div>div:first-child .image-center-profile svg{
+  position: absolute;
+  left:0;
+  top:3px;
+  width: 13px;
+  
+}
+
+
+
+
 
 }
 
