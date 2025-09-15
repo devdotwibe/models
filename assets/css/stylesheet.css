@@ -12479,7 +12479,10 @@ justify-content: center;
   .profile-wrapp1 h1 {
     font-size: 28px;
     margin-bottom: 10px !important;
+  background: linear-gradient(135deg,#ec4899 0%, #764ba2 100%) !important;
+
   }
+  
 }
 
 @media (max-width: 640px) {
