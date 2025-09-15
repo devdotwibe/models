@@ -7161,6 +7161,15 @@ button.btn-secondary.add-intrst {
     opacity: 0.7;
     pointer-events: none;
 }
+ .login-form #loginForm>div:nth-child(2) .relative input {
+background-color:#292346 !important;
+  border:1px solid red;
+
+}
+
+
+
+
 
 /* Enhanced Mobile Responsiveness */
 @media (max-width: 640px) {
