@@ -1364,7 +1364,7 @@ body .owl-carousel .owl-nav.disabled {
 
                 <div class="md:col-span-1 single-profile-stausDiv">
                     <!-- Stats Card -->
-                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-staus">
                         <h2 class="text-xl font-bold mb-4 premium-text">Status</h2>
 
                         <div class="post-div flex flex-wrap gap-8 text-center">
@@ -1394,7 +1394,7 @@ body .owl-carousel .owl-nav.disabled {
 
             <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] == $_SESSION['log_user_unique_id']) { ?>
 
-                    <form id="createPostForm"  enctype="multipart/form-data" method="post">
+                    <form id="createPostForm" class="single-profile-form"  enctype="multipart/form-data" method="post">
 
                         <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
 
@@ -1484,7 +1484,7 @@ body .owl-carousel .owl-nav.disabled {
             
                 <?php if($modelDetails['as_a_model'] =='Yes') { ?>
                     
-                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-services">
                         <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
                         <ul class="space-y-4">
 
@@ -1597,7 +1597,7 @@ body .owl-carousel .owl-nav.disabled {
 
                 <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] && $is_model) { ?>
 
-                    <div class="ultra-glass rounded-2xl p-4 sm:p-6">
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 single-profile-model">
                         <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
                         <div class="space-y-4">
                         
