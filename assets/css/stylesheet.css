@@ -11820,16 +11820,16 @@ position: relative;
 
 .profile-wrapp1>div>div:first-child {
 
-  border:1px solid orange;
+
 }
 .profile-wrapp1>div>div:first-child {
 
-  width: 50%;
+  width: 444%;
 }
 
 .profile-wrapp1>div>div:last-child {
 
-    width: 50%;
+    width: 56%;
     display:flex;
     justify-content: flex-start;
 }
@@ -11851,7 +11851,7 @@ justify-content: center;
 .profile-wrapp1>div>div:first-child .image-center-profile{
   padding-left: 18px;
   position: relative;
-  border:1px solid red;
+
   line-height:20px
 }
 
