@@ -201,7 +201,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                     </div>
 
                     <!-- Premium Trust Indicators -->
-                    <div class="flex flex-wrap gap-4 items-center">
+                    <div class="sample flex flex-wrap gap-4 items-center">
                         <div class="flex items-center space-x-3 ultra-glass px-6 py-3 rounded-full border border-green-500/30 hover:bg-green-500/10 transition duration-300 hover-lift">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                             <span class="text-sm font-semibold text-white/80">100% Verified</span>

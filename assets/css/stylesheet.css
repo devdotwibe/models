@@ -14303,6 +14303,23 @@ position: absolute;
    }
 
 
+
+   .enhanced5 .sample .ultra-glass {
+    width: 46%;
+    padding-inline: 12px;
+}
+
+.enhanced5 .sample .ultra-glass:first-child {
+    margin-inline: auto;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
 }
 
 @media (max-width: 380px) {
