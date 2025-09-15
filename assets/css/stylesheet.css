@@ -11923,6 +11923,40 @@ position: absolute;
   
 }
 
+
+
+.single-profile-model>div>div {
+  border:1px solid red;
+  position:relative;
+  padding-left:34px;
+  
+}
+
+.single-profile-model>div>div>:first-child{
+position: absolute;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    object-fit: cover;
+}
+
+.single-profile-model>div>div>:nth-child(2) .font-semibold{
+    font-size: 12px !important;
+}
+
+
+.single-profile-model>div>div>:nth-child(2) .text-xs{
+    font-size: 12px !important;
+    line-height: 17px;
+}
+
+.single-profile-model>div>div>:nth-child(3){
+
+word-break: break-all;
+
+}
+
+
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -12553,36 +12587,7 @@ position: absolute;
 /* .single-profile-model>div {
   border:1px solid red
 } */
-.single-profile-model>div>div {
-  border:1px solid red;
-  position:relative;
-  padding-left:34px;
-  
-}
 
-.single-profile-model>div>div>:first-child{
-position: absolute;
-    left: 0;
-    width: 28px;
-    height: 28px;
-    object-fit: cover;
-}
-
-.single-profile-model>div>div>:nth-child(2) .font-semibold{
-    font-size: 12px !important;
-}
-
-
-.single-profile-model>div>div>:nth-child(2) .text-xs{
-    font-size: 12px !important;
-    line-height: 17px;
-}
-
-.single-profile-model>div>div>:nth-child(3){
-
-word-break: break-all;
-
-}
 
 }
 
