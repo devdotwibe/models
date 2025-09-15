@@ -11016,7 +11016,7 @@ overflow-x: auto !important;
 .profile-avatar-container .owl-carousel .owl-item img {
   height: 100%;
   width: 100%;
-  object-fit: contain;
+  /* object-fit: contain; */
 }
 
 .profile-avatar-container .owl-carousel .owl-prev,
