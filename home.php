@@ -188,10 +188,10 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                     <!-- Premium Stats -->
                     <div class="flex premium-status items-center space-x-8">
                         <div class="flex -space-x-4">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces" alt="User 1" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces" alt="User 2" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=faces" alt="User 3" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
-                            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&crop=faces" alt="User 4" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces" alt="User 1" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=faces" alt="User 2" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=faces" alt="User 3" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
+                            <img loading="lazy" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&crop=faces" alt="User 4" class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl object-cover hover:scale-110 transition duration-300 cursor-pointer floating">
                             <div class="w-14 h-14 rounded-full border-3 border-indigo-500 shadow-xl gradient-bg flex items-center justify-center text-white font-bold text-sm hover:scale-110 transition duration-300 cursor-pointer floating">+10K</div>
                         </div>
                         <div>
@@ -524,7 +524,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                 <div class="model-card rounded-2xl overflow-hidden hover-lift"  >
                     <div class="relative">
-                        <img src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php $rowesdw['name']; ?>" class="w-full h-80 object-cover model-image">
+                        <img loading="lazy" src="<?= SITEURL . 'ajax/noimage.php?image=' . $rowesdw['profile_pic']; ?>" alt="<?php $rowesdw['name']; ?>" class="w-full h-80 object-cover model-image">
                         <div class="absolute top-4 right-4 status-online w-4 h-4 rounded-full"></div>
                         <div class="absolute top-4 left-4 verified-badge text-white px-3 py-1 rounded-full text-xs font-semibold">
                             ✓ Verified
@@ -689,7 +689,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
             <div class="max-w-5xl mx-auto">
                 <div class="ultra-glass p-12 rounded-3xl shadow-2xl floating hover-lift">
                     <div class="flex flex-col md:flex-row items-center gap-12">
-                        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=faces" alt="Success Story" class="w-40 h-40 rounded-2xl object-cover shadow-2xl">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=faces" alt="Success Story" class="w-40 h-40 rounded-2xl object-cover shadow-2xl">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-6 opacity-50"><path d="M10 11h-4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6c0 2.667-1.333 4.333-4 5"></path><path d="M19 11h-4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6c0 2.667-1.333 4.333-4 5"></path></svg>
                             <p class="text-2xl italic premium-text mb-8 leading-relaxed">I was skeptical at first, but the connections I've made here are genuine. I've found not just clients, but people who truly appreciate me for who I am. This platform changed my life completely.</p>
