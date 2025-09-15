@@ -13059,7 +13059,10 @@ justify-content: center;
   gap: 0px !important;
 
 }
-
+    .profile-avatar-container {
+        max-width: 170px;
+        max-height: 170px;
+    }
 
 
 }
@@ -14232,6 +14235,13 @@ justify-content: center;
     width: 100%;
     max-width: 100%;
   }
+
+
+    .profile-avatar-container {
+        max-width: 140px;
+        max-height: 140px;
+    }
+
 }
 
 @media (max-width: 380px) {
