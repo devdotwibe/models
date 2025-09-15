@@ -31,12 +31,31 @@ $session_id = $_GET['unique_model_id'];
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
+
 <?php  include('includes/head.php'); ?>
 
-<link rel='stylesheet' href='<?=SITEURL?>assets/css/view.css?v=<?=time()?>' type='text/css' media='all' />
+<link rel="preload" href="<?=SITEURL?>assets/css/profile.css?v=<?=time()?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link rel="preload" href='<?=SITEURL?>assets/css/view.css?v=<?=time()?>'  as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+
+<noscript>
+<link rel="stylesheet" href="<?=SITEURL?>assets/css/profile.css?v=<?=time()?>">
+
+
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/view.css?v=<?=time()?>'/>
+
+</noscript>
+
+
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
+      as="style" 
+      onload="this.onload=null;this.rel='stylesheet'">
+
+<noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</noscript>
+
 
 <?php
 if ($_GET["unique_model_id"] == $_SESSION['log_user_unique_id']) {

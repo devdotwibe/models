@@ -36,9 +36,19 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
     <link rel="stylesheet" href="<?= SITEURL ?>assets/css/dropzone.min.css" />
 
-    <link rel='stylesheet' href='<?= SITEURL ?>assets/css/profile.css?v=<?= time() ?>' type='text/css' media='all' />
+    <link rel="preload" href="<?=SITEURL?>assets/css/profile.css?v=<?=time()?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
-     <link rel='stylesheet' href='<?= SITEURL ?>assets/css/chat-app.css?v=<?= time() ?>' type='text/css' media='all' />
+
+     <link rel='stylesheet' href='<?= SITEURL ?>assets/css/chat-app.css?v=<?= time() ?>' onload="this.onload=null;this.rel='stylesheet'" />
+
+    <noscript>
+    <link rel="stylesheet" href="<?=SITEURL?>assets/css/profile.css?v=<?=time()?>">
+
+
+     <link rel='stylesheet' href='<?= SITEURL ?>assets/css/chat-app.css?v=<?= time() ?>' />
+
+    </noscript>
+
 
 </head>
 <body class="enhanced5 socialwall-page"> 
