@@ -12651,8 +12651,35 @@ position: absolute;
   font-size: 14px;
 }
 
+    .single-profile-services ul li>div:last-child>*:first-child {
+        font-size: 17px !important;
+    }
+
+ .single-profile-services ul li>div:last-child>*:last-child {
+        font-size: 15px !important;
+    }
+
+    .single-profile-services ul li>div:first-child {
+        width: 32px;
+        height: 33px;
+    }
+    .single-profile-services ul li {
+        padding-left: 44px;
+    }
+
+
+        .single-profile-model>div>div>*:nth-child(3) {
+ 
+        line-height: normal;
+        min-height: auto;
+        padding-block: 8px !important;
+        padding-inline: 15px !important;
+    }
 
 }
+
+
+
 
 @media (max-width: 640px) {
   /* .activity-page .models-grid {
