@@ -11693,7 +11693,7 @@ display:flex;
   /* border:1px solid orange; */
         margin-bottom: 20px !important;
         border-bottom: 1px solid #3a3c59;
-        padding-bottom: 12px;
+            padding-bottom: 20px;
 }
 
 .single-profile-model>div>div>*:nth-child(2){
@@ -12633,6 +12633,23 @@ position: absolute;
 /* .single-profile-model>div {
   border:1px solid red
 } */
+
+    .single-profile-model>div>div>:nth-child(2) .font-semibold {
+        font-size: 17px !important;
+    }
+    .single-profile-model>div>div>:nth-child(2) .text-xs {
+        font-size: 15px !important;
+        line-height: 22px;
+    }
+
+
+    .single-profile-model>div>div {
+        padding-left: 43px;
+    
+}
+.single-profile-model>div>div>*:nth-child(3){
+  font-size: 14px;
+}
 
 
 }
