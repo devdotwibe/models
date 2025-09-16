@@ -12619,8 +12619,6 @@ user-home
     max-height: 140px;
   }
 
-
-
   .single-profile-model > div > div > :nth-child(2) .font-semibold {
     font-size: 17px !important;
   }
@@ -12670,6 +12668,9 @@ user-home
     flex-direction: row !important;
     gap: 22px !important;
   }
+
+
+
 }
 
 
