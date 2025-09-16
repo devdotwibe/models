@@ -77,11 +77,71 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title><?php echo $form_data['name']; ?>Advertisements | Live Models</title>
+
     <meta name="description" content="View details about Aria Moonlight, elite fashion model and influencer specializing in luxury brands and high-end campaigns.">
-    <link rel="stylesheet" href="<?php echo SITEURL; ?>assets/css/stylesheet.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="canonical" href="https://thelivemodels.com/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Model Advertisements - Premium Talent Directory  | The Live Models">
+    <meta property="og:description" content="View details about Aria Moonlight, elite fashion model and influencer specializing in luxury brands and high-end campaigns.">
+    <meta property="og:url" content="https://thelivemodels.com/">
+    <meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+    <meta property="og:site_name" content="The Live Models">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Model Advertisements - Premium Talent Directory  | The Live Models">
+    <meta name="twitter:description" content="View details about Aria Moonlight, elite fashion model and influencer specializing in luxury brands and high-end campaigns.">
+    <meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+    <meta name="twitter:site" content="@thelivemodels">
+
+    <!-- Schema -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+        "@type": "Organization",
+        "@id": "https://thelivemodels.com/#organization",
+        "name": "The Live Models",
+        "url": "https://thelivemodels.com/",
+        "logo": "https://thelivemodels.com/assets/images/logo.png",
+        "sameAs": [
+            "https://x.com/thelivemodels",
+            "https://www.instagram.com/the_livemodels",
+            "https://www.tiktok.com/@thelivemodels"
+        ],
+        "description": "View details about Aria Moonlight, elite fashion model and influencer specializing in luxury brands and high-end campaigns.",
+        "foundingDate": "2025",
+        "founder": {
+            "@type": "Person",
+            "name": "Kulwant Singh Jakhar"
+        }
+        },
+        {
+        "@type": "WebSite",
+        "@id": "https://thelivemodels.com/#website",
+        "url": "https://thelivemodels.com/",
+        "name": "The Live Models",
+        "description": "View details about Aria Moonlight, elite fashion model and influencer specializing in luxury brands and high-end campaigns.",
+        "publisher": {
+            "@id": "https://thelivemodels.com/#organization"
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://thelivemodels.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+        }
+    ]
+    }
+    </script>
+
+
 	<?php include('../includes/head.php'); ?>
 	
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">

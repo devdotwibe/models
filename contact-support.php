@@ -2,19 +2,25 @@
 include('includes/config.php');
 include('includes/helper.php');
 
-$userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), true);
+$userDetails = [];
+if (!empty($_SESSION['log_user_id'])) {
+    $userDetails = get_data('model_user', ['id' => $_SESSION['log_user_id']], true);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" itemscope itemtype="https://schema.org/WebPage">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.google-analytics.com">
+
     <!-- Primary SEO Meta Tags -->
     <title>Contact Support - TheLiveModels.com | 24/7 Customer Service & Help Center</title>
-    <meta name="description" content="Get instant support for TheLiveModels.com. Access our comprehensive FAQ, submit support tickets, and connect with our 24/7 customer service team. Expert help for account issues, billing, verification, and technical support.">
-    <meta name="keywords" content="thelivemodels support, live models customer service, contact support, help center, FAQ, technical support, account help, billing support, verification help, 24/7 support, customer care, live chat support, ticket system">
+    <meta name="description" content="Need help with your TheLiveModels.com account, billing, verification, or technical issues? Browse FAQs or contact our support team 24/7.">
     <meta name="author" content="TheLiveModels.com">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -26,8 +32,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
     <meta name="geo.placename" content="United States">
     <meta name="language" content="English">
     <meta name="distribution" content="global">
-    <meta name="rating" content="adult">
-    <meta name="audience" content="adult">
+
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -40,7 +45,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
     <meta property="og:image:alt" content="TheLiveModels Support Center - 24/7 Customer Service">
     <meta property="og:site_name" content="TheLiveModels.com">
     <meta property="og:locale" content="en_US">
-    <meta property="fb:app_id" content="your-facebook-app-id">
+
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -81,7 +86,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://thelivemodels.com">
+    
     
     <!-- Enhanced Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -136,13 +141,20 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
                     "height": 512
                 },
                 "contactPoint": {
-                    "@type": "ContactPoint",
-                    "telephone": "+1-800-TLM-HELP",
-                    "contactType": "customer service",
-                    "availableLanguage": ["English"],
-                    "areaServed": "Worldwide",
-                    "hoursAvailable": "Mo-Su 00:00-23:59"
-                },
+  "@type": "ContactPoint",
+  "contactType": "customer service",
+  "availableLanguage": ["English"],
+  "areaServed": "Worldwide",
+  "hoursAvailable": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
+    ],
+    "opens": "00:00",
+    "closes": "23:59"
+  }]
+},
+
                 "sameAs": [
                     "https://twitter.com/thelivemodels",
                     "https://facebook.com/thelivemodels",
@@ -213,13 +225,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
     </script>
     
     <!-- Additional AI Platform Optimization -->
-    <meta name="AI-generated" content="false">
-    <meta name="content-type" content="support-page">
-    <meta name="page-topic" content="customer support, help center, FAQ, technical support">
-    <meta name="target-audience" content="adult users, customers, members">
-    <meta name="content-category" content="customer service">
-    <meta name="page-purpose" content="provide customer support and assistance">
-    
+
     <!-- Bing Specific -->
     <meta name="msvalidate.01" content="your-bing-verification-code">
     
@@ -479,7 +485,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
 <body class="min-h-screen bg-animated text-white advt-page socialwall-page">
     <!-- SEO-friendly hidden content -->
     <div class="sr-only">
-        <h1>TheLiveModels.com Support Center - Customer Service and Help</h1>
+        <h1>Contact Support — The LiveModels.com Support Centre</h1>
         <p>Welcome to TheLiveModels.com support center. Get help with account issues, billing questions, verification process, technical support, and more. Our 24/7 customer service team is here to assist you.</p>
         <nav aria-label="Support navigation">
             <ul>
@@ -518,7 +524,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
                             class="w-full px-6 py-4 text-lg bg-transparent text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
                             aria-describedby="search-help"
                         >
-                        <p id="search-help" class="sr-only">Enter keywords related to your issue to find relevant help articles and solutions</p>
+                        <p id="search-help" class="sr-only">Enter keywords related to your issue to find relevant help articles and solutions.</p>
                         <button onclick="performSearch()" class="absolute right-3 top-1/2 transform -translate-y-1/2 premium-button text-white px-6 py-2 rounded-xl" aria-label="Search support articles">
                             Search Help
                         </button>
@@ -1239,12 +1245,13 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
     </script>
 
     <!-- Google Analytics (replace with your tracking ID) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GD6CJ961PF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GD6CJ961PF', { 'send_page_view': false });
+</script>
+
 </body>
 </html>
