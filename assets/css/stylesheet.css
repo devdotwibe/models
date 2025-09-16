@@ -12653,6 +12653,7 @@ position: absolute;
 
     .single-profile-services ul li>div:last-child>*:first-child {
         font-size: 17px !important;
+                margin-bottom: 3px;
     }
 
  .single-profile-services ul li>div:last-child>*:last-child {
@@ -12677,7 +12678,7 @@ position: absolute;
     }
 
 .single-profile-model>div>div>:first-child{
-          top: 5px;
+          top: 4px;
 }
 
 }
