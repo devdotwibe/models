@@ -6,8 +6,48 @@ include('includes/helper.php');
 <html lang="en-US" class="no-js">
   <head>
     <title>Privacy Policy | The Live Models</title>
-    <meta name="description" content="">
-	<link rel="canonical" href="https://thelivemodels.com/" />
+    <meta name="description" content="Read the Privacy Policy for The Live Models. Learn how we collect, use, and protect your data when you use our platform.">
+	<link rel="canonical" href="https://thelivemodels.com/privacy-policy" />
+	<meta name="robots" content="noindex,follow">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Privacy Policy",
+  "url": "https://thelivemodels.com/privacy-policy",
+  "description": "Read the Privacy Policy for The Live Models. Learn how we collect, use, and protect your data when you use our platform.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "The Live Models",
+    "url": "https://thelivemodels.com"
+  },
+  "datePublished": "2025-08-20",
+  "dateModified": "2025-08-20",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://thelivemodels.com"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Privacy Policy",
+      "item": "https://thelivemodels.com/privacy-policy"
+    }]
+  }
+}
+</script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Privacy Policy | The Live Models">
+<meta property="og:description" content="Read the Privacy Policy for The Live Models. Learn how we collect, use, and protect your data when you use our platform.">
+<meta property="og:url" content="https://thelivemodels.com/privacy-policy">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Privacy Policy | The Live Models">
+<meta name="twitter:description" content="Read the Privacy Policy for The Live Models. Learn how we collect, use, and protect your data when you use our platform.">
+
 <?php include('includes/head.php'); ?>
 
 </head>
