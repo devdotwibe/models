@@ -11690,15 +11690,15 @@ display:flex;
     width: 80%;
   }
 
-.single-profile-services .single-profile-model h2{
+.single-profile-model h2{
  padding-top:0;
 }
 
-.single-profile-services .single-profile-model>div>div{
+.single-profile-model>div>div{
   display: flex;
   flex-wrap: wrap;
   border:1px solid orange;
- margin-bottom: 25px !important;
+ margin-bottom: 20px !important;
 }
 
 
