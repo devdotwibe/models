@@ -688,7 +688,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
           <?php } else { ?>
 
-            <p class="text-white/80">Manage your tokes</p>
+            <p class="text-white/80">Manage your Tokens</p>
 
           <?php } ?>
 

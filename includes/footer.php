@@ -233,7 +233,7 @@ $currentpage = $_SERVER['REQUEST_URI'];
             <div>
                 <h4 class="font-bold mb-6 text-xl premium-text">Services</h4>
                 <ul class="space-y-4 text-white/60 text-lg">
-                    <li><a href="<?= SITEURL ?>all-models.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*?>onclick="navigateTo('models')" */ ?> >All Models</a></li>
+                    <li><a href="<?= SITEURL ?>all-members.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*?>onclick="navigateTo('models')" */ ?> >All Members</a></li>
                     <li><a href="<?= SITEURL ?>advertisements/" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="navigateTo('ads')" */ ?> >Advertisements</a></li>
                 </ul>
             </div>
@@ -1133,8 +1133,8 @@ if(isset($_SESSION['log_user_id'])){
     }
 
     function viewAllModels() {
-        //alert('👥 Premium Browse - Loading all verified models...');
-		window.location.href = '<?= SITEURL ?>all-models.php';
+        //alert('👥 Premium Browse - Loading all verified members...');
+		window.location.href = '<?= SITEURL ?>all-members.php';
     }
 
     function becomeModel() {
