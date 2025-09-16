@@ -11691,7 +11691,9 @@ display:flex;
   display: flex;
   flex-wrap: wrap;
   /* border:1px solid orange; */
- margin-bottom: 20px !important;
+        margin-bottom: 20px !important;
+        border-bottom: 1px solid #3a3c59;
+        padding-bottom: 12px;
 }
 
 .single-profile-model>div>div>*:nth-child(2){
@@ -11705,6 +11707,7 @@ width:fit-content;
  padding-block:6px !important;
 position: relative;
 left:-7px;
+        min-width: 116px;
 }
 
 }
@@ -11988,8 +11991,18 @@ position: absolute;
 
 }
 
+    .single-profile-model>div>div>*:nth-child(3) {
+        margin-inline: 0;
+        left: 0;
+        min-width: 116px;
+    }
+
+
 
 }
+
+
+
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .container {
