@@ -7,6 +7,24 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
+    
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.google-analytics.com">
+    <!-- Google Analytics (replace with your tracking ID) -->
+    
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GD6CJ961PF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GD6CJ961PF', {
+    page_title: document.title,
+    page_path: window.location.pathname,
+    page_location: window.location.href
+  });
+</script>
+
     <!-- Essential Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +38,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
     <meta name="bingbot" content="index, follow">
+    
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://thelivemodels.com/verification-help">
@@ -56,14 +75,13 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
     <!-- Geo Meta Tags -->
     <meta name="geo.region" content="US">
     <meta name="geo.placename" content="United States">
-    <meta name="ICBM" content="39.8283, -98.5795">
+    
     
     <!-- Language and Content Meta Tags -->
     <meta name="language" content="English">
     <meta name="content-language" content="en-US">
     <meta name="distribution" content="global">
-    <meta name="rating" content="general">
-    <meta name="revisit-after" content="7 days">
+    
     
     <!-- Favicon and Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -201,7 +219,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
                 "name": "Is my personal information secure during verification?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Absolutely. We use military-grade encryption and comply with international privacy standards. Your documents are securely stored, used only for verification, and never shared with third parties."
+                    "text": "Absolutely. We use industry-standard encryption and comply with applicable privacy laws (including GDPR and CCPA where applicable). Your documents are stored securely, used only for verification, and are not shared with third parties except as required by law. We retain verification data only for as long as necessary to fulfill verification and compliance obligations."
                 }
             },
             {
@@ -901,13 +919,8 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
         }
     </script>
 
-    <!-- Google Analytics (replace with your tracking ID) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_TRACKING_ID');
-    </script>
+
+
+
 </body>
 </html>
