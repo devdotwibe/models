@@ -459,7 +459,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
         </div>
     </section>
 
-	<?php $sqls_model = "SELECT * FROM model_user WHERE as_a_model = 'Yes' Order by id DESC LIMIT 4";
+	<?php /*$sqls_model = "SELECT * FROM model_user WHERE as_a_model = 'Yes' Order by id DESC LIMIT 4";
 
               $resultd_model = mysqli_query($con, $sqls_model);
 
@@ -579,13 +579,13 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
             <div class="mt-16 text-center">
                 <button  class="btn-secondary px-12 py-4 text-white rounded-xl hover:bg-white/20 transition duration-300 text-lg font-semibold" onclick="viewAllModels()">
-                    View All Models
+                    View All Members
                 </button>
             </div>
         </div>
     </section>
 
-				<?php } ?>
+				<?php } */ ?>
 
     <!-- Ultra Premium Services Section -->
     <section class="py-24 relative scroll-reveal preminum-sersec">
