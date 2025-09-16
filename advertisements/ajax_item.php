@@ -41,7 +41,7 @@ if($all_data){
 
                     <?php } ?>
 
-                        <img src="<?php echo $adv_img ?>" alt="Social Media Influencer">
+                        <img loading="lazy" src="<?php echo $adv_img ?>" alt="Social Media Influencer">
                     </div>
                     <div class="ad-content">
                         <h3 class="ad-title"><?php echo $set_data['name']; ?></h3>
