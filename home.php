@@ -8,9 +8,67 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 <!doctype html>
 <html lang="en-US" class="no-js">
   <head>
-    <title>Chat, Watch & Meet top Models | The Live Models transparent</title>
-    <meta name="description" content="The live model is one of the world's leading professional networks for models and escorts. Chat watch and meet with your favorite models from the comfort of your home.">
+    <title>Chat, Watch, Meet and Travel Worldwide | The Live Models </title>
+    <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chat, Watch, Meet & Travel | The Live Models">
+<meta property="og:description" content="Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
+<meta property="og:url" content="https://thelivemodels.com/">
+<meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta property="og:site_name" content="The Live Models">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chat, Watch, Meet & Travel | The Live Models">
+<meta name="twitter:description" content="Join The Live Models to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide.">
+<meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta name="twitter:site" content="@thelivemodels">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thelivemodels.com/#organization",
+      "name": "The Live Models",
+      "url": "https://thelivemodels.com/",
+      "logo": "https://thelivemodels.com/assets/images/logo.png",
+      "sameAs": [
+        "https://x.com/thelivemodels",
+        "https://www.instagram.com/the_livemodels",
+        "https://www.tiktok.com/@thelivemodels"
+      ],
+      "description": "The Live Models is a verified global social networking and dating platform offering chat, live streaming, social meetups, and travel connections.",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Kulwant Singh Jakhar"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://thelivemodels.com/#website",
+      "url": "https://thelivemodels.com/",
+      "name": "The Live Models",
+      "description": "Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.",
+      "publisher": {
+        "@id": "https://thelivemodels.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://thelivemodels.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
 
 <?php include('includes/head.php'); ?>
 
@@ -107,17 +165,19 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                 <div class="space-y-10 scroll-reveal-left">
                     <div class="inline-flex items-center px-6 py-3 ultra-glass rounded-full text-indigo-300 font-medium text-sm border border-indigo-500/30 floating">
                         <span class="live-indicator mr-3 w-3 h-3 bg-red-500 rounded-full"></span>
-                        Where Premium Connections Begin
+                        Where Real Connections Begin
                     </div>
 
                     <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold heading-font leading-tight">
                         <span class="gradient-text text-glow">Chat, Watch</span><br>
-                        <span class="premium-text">and Meet</span><br>
+                        <span class="premium-text"> Meet & Travel</span><br>
                         <span class="text-xl md:text-2xl text-white/70 font-normal">Your Perfect Match Awaits</span>
                     </h1>
 
-                    <p class="text-xl md:text-2xl text-white/80 leading-relaxed max-w-2xl">
-                        Discover verified models who offer personalized experiences. From intimate conversations to exclusive content and real meetings - your desires become reality.
+                       <p class="text-xl md:text-2xl text-white/80 leading-relaxed max-w-2xl">
+  Discover <b>verified</b> members worldwide. Share conversations, enjoy live content, meet socially, <b>and</b> connect while you travel.
+</p>
+
                     </p>
 
                     <div class="space-y-6">
@@ -177,9 +237,9 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('trending')">🔥 Trending</button>
 
-                            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('new')">💫 New Models</button>
+                            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('new')">💫 New Creators</button>
 
-                            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('available')">💋 Available Now</button>
+                            <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('available')">🟢 Online Now</button>
 
                             <button class="px-6 py-3 ultra-glass rounded-full text-sm font-medium text-white/80 hover:bg-white/10 transition duration-300 cursor-pointer border border-white/10 hover:border-indigo-500/50 hover-lift" onclick="filterModels('vip')">👑 VIP</button>
                         </div>
@@ -196,7 +256,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                         </div>
                         <div>
                             <div class="font-bold text-3xl stats-counter" data-target="50000">0</div>
-                            <div class="text-sm text-white/70 font-medium">Verified Models & Members</div>
+                            <div class="text-sm text-white/70 font-medium">Verified Members & Creators</div>
                         </div>
                     </div>
 
@@ -418,7 +478,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
                             </div>
                             <h3 class="text-2xl font-bold premium-text mb-4">Verified Profiles</h3>
-                            <p class="text-white/70 text-lg">Connect with 100% verified models and members for authentic experiences</p>
+                            <p class="text-white/70 text-lg">Connect with verified members and creators globally.</p>
                         </div>
 
                         <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="text-center hover-lift">
@@ -472,7 +532,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
         <div class="container mx-auto">
             <div class="text-center mb-20">
                 <h2 class="text-5xl md:text-6xl font-bold heading-font gradient-text mb-6 text-glow">Discover Your Perfect Match</h2>
-                <p class="text-2xl text-white/70 max-w-3xl mx-auto">Explore our selection of verified models ready to connect with you</p>
+                <p class="text-2xl text-white/70 max-w-3xl mx-auto">Explore our selection of verified members and creators ready to connect with you</p>
             </div>
 
             <div class="discover-outerdiv">
@@ -695,7 +755,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             <p class="text-2xl italic premium-text mb-8 leading-relaxed">I was skeptical at first, but the connections I've made here are genuine. I've found not just clients, but people who truly appreciate me for who I am. This platform changed my life completely.</p>
                             <div>
                                 <p class="font-bold text-xl premium-text">Elena V.</p>
-                                <p class="text-indigo-400 text-lg font-medium">Top Model, 2 years</p>
+                                <p class="text-indigo-400 text-lg font-medium">Top Creator, 1 year</p>
                             </div>
                         </div>
                     </div>
@@ -711,7 +771,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
             <div class="text-center text-white">
                 <h2 class="text-5xl md:text-7xl font-bold heading-font mb-8 text-glow">Ready to Find Your Connection?</h2>
                 <div class="ultra-intro">
-                     <p class="text-2xl mb-12 opacity-90 max-w-4xl mx-auto">Join thousands of models and users already experiencing meaningful connections on our premium platform</p>
+                     <p class="text-2xl mb-12 opacity-90 max-w-4xl mx-auto">Join thousands of members and creators already experiencing meaningful connections on our premium platform</p>
                  </div>
 
 
@@ -721,7 +781,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                     <button class="px-12 py-5 bg-white text-indigo-600 font-bold rounded-xl hover:bg-gray-100 transition duration-300 shadow-2xl text-xl hover-lift" <?php //if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" <?php //}?>>
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        Become a Model
+                        Become a Creator
                     </button>
 
                     <button class="px-12 py-5 bg-transparent border-3 border-white text-white font-bold rounded-xl hover:bg-white/10 transition duration-300 text-xl hover-lift"<?php //if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" <?php //}?> >
@@ -733,7 +793,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                 <div class="ultra-glass p-8 rounded-2xl max-w-3xl mx-auto border border-white/20 floating">
                     <p class="text-2xl italic mb-3">"The chemistry of connection cannot be faked. Find your authentic match today."</p>
-                    <p class="text-lg opacity-75">- Live Models Philosophy</p>
+                    <p class="text-lg opacity-75">- The Live Models Philosophy</p>
                 </div>
             </div>
         </div>

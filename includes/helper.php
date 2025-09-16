@@ -1031,6 +1031,45 @@ if (!empty($_SESSION['log_user_id'])) {
 //     return !empty($relativePath) && file_exists($imagePath);
 // }
 
+function BoardUpdate($user_id)
+{
+    try {
+        // ✅ Check if column onboard exists in model_user
+        $colCheck = DB::queryFirstField("SHOW COLUMNS FROM model_user LIKE 'onboard'");
+        if (!$colCheck) {
+            throw new Exception("Column 'onboard' does not exist in model_user table.");
+        }
+
+        // ✅ Fetch onboard value
+        $onboard = DB::queryFirstField(
+            "SELECT onboard FROM model_user WHERE id = %i",
+            $user_id
+        );
+
+        if ($onboard === null) {
+            throw new Exception("User with ID {$user_id} not found in model_user table.");
+        }
+
+        if ((int)$onboard === 1) {
+            // Already onboarded
+            return true;
+        } else {
+            // Update onboard to 1
+            DB::update('model_user', [
+                'onboard' => 1
+            ], "id=%i", $user_id);
+
+            return false; // because it wasn’t 1 before update
+        }
+
+    } catch (Exception $e) {
+        // Display or log error
+        echo "❌ Error in BoardUpdate: " . $e->getMessage();
+        return null;
+    }
+}
+
+
 function resizeImageIfExists($relativePath, $scale = 0.8) {
     if (empty($relativePath)) {
         return false;

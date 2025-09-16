@@ -30,6 +30,7 @@ if(!empty($userDetails['profile_pic'])){
 	$mDefaultImage = SITEURL.$userDetails['profile_pic'];
 }
 
+
 ?>
 
 <html>
@@ -450,6 +451,111 @@ if(!empty($userDetails['profile_pic'])){
                 opacity: 0.7;
             }
         }
+
+             /* Luxury animations */
+        @keyframes luxuryFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-8px) rotate(1deg); }
+            66% { transform: translateY(-4px) rotate(-1deg); }
+        }
+
+        @keyframes premiumGlow {
+            0%, 100% { 
+                box-shadow: 0 0 30px rgba(155, 89, 182, 0.3),
+                            0 0 60px rgba(155, 89, 182, 0.1),
+                            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(155, 89, 182, 0.5),
+                            0 0 80px rgba(155, 89, 182, 0.2),
+                            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        @keyframes slideInLuxury {
+            0% { 
+                opacity: 0; 
+                transform: translateX(100px) scale(0.9); 
+                filter: blur(10px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateX(0) scale(1); 
+                filter: blur(0);
+            }
+        }
+
+        @keyframes progressFill {
+            0% { stroke-dasharray: 0 283; }
+            100% { stroke-dasharray: 254 283; }
+        }
+
+        @keyframes globeRotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.7; }
+            25% { transform: translateY(-20px) translateX(10px); opacity: 1; }
+            50% { transform: translateY(-10px) translateX(-5px); opacity: 0.8; }
+            75% { transform: translateY(-15px) translateX(8px); opacity: 0.9; }
+        }
+
+        .luxury-float { animation: luxuryFloat 4s ease-in-out infinite; }
+        .premium-glow { animation: premiumGlow 3s ease-in-out infinite; }
+        .slide-in-luxury { animation: slideInLuxury 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .progress-fill { animation: progressFill 2s ease-out forwards; }
+        .globe-rotate { animation: globeRotate 20s linear infinite; }
+        .particle-float { animation: particleFloat 6s ease-in-out infinite; }
+
+        /* Glass morphism effects */
+        .glass-luxury {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-button {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.8), rgba(255, 111, 97, 0.8));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .glass-button:hover {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 1), rgba(255, 111, 97, 1));
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(155, 89, 182, 0.4);
+        }
+
+        /* Gradient backgrounds for each slide */
+        .gradient-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .gradient-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .gradient-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .gradient-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+
+        /* Typography */
+        .font-heading { font-family: 'Space Grotesk', sans-serif; }
+        .font-body { font-family: 'DM Sans', sans-serif; }
+
+        /* Particle system */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 60%; left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { top: 40%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(4) { top: 80%; left: 70%; animation-delay: 3s; }
+        .particle:nth-child(5) { top: 30%; left: 90%; animation-delay: 4s; }
+
+
     </style>
 
 </head>
@@ -756,6 +862,10 @@ if(!empty($userDetails['profile_pic'])){
       $stmt->bind_result($total_views);
       $stmt->fetch();
       $stmt->close();
+
+        $profile_id = $_SESSION["log_user_id"];
+
+        $onboard_update = BoardUpdate($profile_id);
 
 ?>
 
@@ -1519,6 +1629,148 @@ if(!empty($userDetails['profile_pic'])){
     </div>
   </main>
 
+<?php if(!$onboard_update)  { ?>
+
+   <div id="onboardingModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <!-- Backdrop with blur -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        
+        <!-- Floating particles -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="particle particle-float"></div>
+            <div class="particle particle-float"></div>
+            <div class="particle particle-float"></div>
+            <div class="particle particle-float"></div>
+            <div class="particle particle-float"></div>
+        </div>
+
+        <!-- Modal Container -->
+        <div class="relative w-full max-w-lg mx-auto">
+            <!-- Slide 1: Welcome -->
+            <div id="slide1" class="slide glass-luxury rounded-3xl p-8 text-center gradient-1 slide-in-luxury">
+                <div class="mb-8">
+                    <!-- Globe Animation -->
+                    <div class="relative mx-auto w-24 h-24 mb-6">
+                        <div class="globe-rotate text-6xl">🌍</div>
+                        <div class="absolute inset-0 rounded-full border-2 border-white/30 luxury-float"></div>
+                        <div class="absolute inset-2 rounded-full border border-white/20 luxury-float" style="animation-delay: 0.5s;"></div>
+                    </div>
+                    
+                    <h1 class="font-heading text-4xl font-bold text-white mb-4 onboarding-title">
+                        ✨ Welcome 
+                    </h1>
+                    <p class="font-body text-xl text-white/90 mb-8 onboarding-subtitle">
+                        "Your passport to connect worldwide."
+                    </p>
+                </div>
+                
+                <button onclick="nextSlide()" class="glass-button px-8 py-4 rounded-2xl text-white font-semibold text-lg premium-glow">
+                    Let's Go
+                </button>
+            </div>
+
+            <!-- Slide 2: Chat & Watch -->
+            <div id="slide2" class="slide glass-luxury rounded-3xl p-8 gradient-2 hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Chat Section -->
+                    <div class="text-center luxury-float">
+                        <div class="text-5xl mb-4">💬</div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-2">Real Conversations</h3>
+                        <p class="font-body text-white/90">Chat, share, and vibe with people who match your energy.</p>
+                    </div>
+                    
+                    <!-- Watch Section -->
+                    <div class="text-center luxury-float" style="animation-delay: 0.3s;">
+                        <div class="text-5xl mb-4">🎥</div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-2">Live Moments</h3>
+                        <p class="font-body text-white/90">Watch streams & shorts from creators worldwide.</p>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                    <button onclick="prevSlide()" class="text-white/70 hover:text-white transition-colors">
+                        ← Back
+                    </button>
+                    <button onclick="nextSlide()" class="glass-button px-6 py-3 rounded-xl text-white font-semibold">
+                        Continue
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 3: Meet & Travel -->
+            <div id="slide3" class="slide glass-luxury rounded-3xl p-8 gradient-3 hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- Meet Section -->
+                    <div class="text-center luxury-float">
+                        <div class="text-5xl mb-4">🤝</div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-2">Meet Safely</h3>
+                        <p class="font-body text-white/90">Plan meetups, hangouts, and events with ease.</p>
+                    </div>
+                    
+                    <!-- Travel Section -->
+                    <div class="text-center luxury-float" style="animation-delay: 0.3s;">
+                        <div class="text-5xl mb-4">✈️</div>
+                        <h3 class="font-heading text-2xl font-bold text-white mb-2">Travel Smarter</h3>
+                        <p class="font-body text-white/90">Discover locals & travelers before you even arrive.</p>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                    <button onclick="prevSlide()" class="text-white/70 hover:text-white transition-colors">
+                        ← Back
+                    </button>
+                    <button onclick="nextSlide()" class="glass-button px-6 py-3 rounded-xl text-white font-semibold">
+                        Continue
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide 4: Boost Discovery -->
+            <div id="slide4" class="slide glass-luxury rounded-3xl p-8 text-center gradient-4 hidden">
+                <div class="mb-8">
+                    <!-- Progress Ring -->
+                    <div class="relative mx-auto w-32 h-32 mb-6">
+                        <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="8" fill="none"/>
+                            <circle cx="50" cy="50" r="45" stroke="white" stroke-width="8" fill="none" 
+                                    stroke-linecap="round" class="progress-fill" 
+                                    style="stroke-dasharray: 0 283; stroke-dashoffset: 0;"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold text-white">90%</span>
+                        </div>
+                    </div>
+                    
+                    <h1 class="font-heading text-3xl font-bold text-white mb-4">
+                        ⭐ Stand Out More
+                    </h1>
+                    <p class="font-body text-lg text-white/90 mb-8">
+                        "Profiles over 90% complete get recommended more often."
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <button onclick="window.location.href='<?= SITEURL . 'edit-profile.php' ?>'" class="w-full glass-button px-8 py-4 rounded-2xl text-white font-semibold text-lg premium-glow">
+                        Complete My Profile
+                    </button>
+                    <button onclick="closeOnboarding()" class="text-white/70 hover:text-white transition-colors text-sm">
+                        Skip for now → Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- Progress Indicators -->
+            <div class="flex justify-center mt-6 space-x-2">
+                <div id="dot1" class="w-3 h-3 rounded-full bg-white transition-all duration-300"></div>
+                <div id="dot2" class="w-3 h-3 rounded-full bg-white/30 transition-all duration-300"></div>
+                <div id="dot3" class="w-3 h-3 rounded-full bg-white/30 transition-all duration-300"></div>
+                <div id="dot4" class="w-3 h-3 rounded-full bg-white/30 transition-all duration-300"></div>
+            </div>
+        </div>
+    </div>
+
+<?php } ?>
+
   <!-- Mobile Navigation -->
   <nav class="mobile-nav md:hidden footer-mobile-menus">
     <div class="flex justify-around">
@@ -1563,6 +1815,109 @@ if(!empty($userDetails['profile_pic'])){
    <script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
   <script>
+
+      let currentSlide = 1;
+        const totalSlides = 4;
+
+        function showSlide(slideNumber) {
+            // Hide all slides
+            for (let i = 1; i <= totalSlides; i++) {
+                document.getElementById(`slide${i}`).classList.add('hidden');
+                document.getElementById(`dot${i}`).classList.remove('bg-white');
+                document.getElementById(`dot${i}`).classList.add('bg-white/30');
+            }
+            
+            // Show current slide with animation
+            const currentSlideEl = document.getElementById(`slide${slideNumber}`);
+            currentSlideEl.classList.remove('hidden');
+            currentSlideEl.classList.add('slide-in-luxury');
+            
+            // Update progress indicator
+            document.getElementById(`dot${slideNumber}`).classList.add('bg-white');
+            document.getElementById(`dot${slideNumber}`).classList.remove('bg-white/30');
+            
+            // Trigger specific animations for slide 4
+            if (slideNumber === 4) {
+                setTimeout(() => {
+                    const progressCircle = document.querySelector('.progress-fill');
+                    progressCircle.style.strokeDasharray = '254 283';
+                }, 500);
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function completeProfile() {
+            
+            closeOnboarding();
+        }
+
+        function skipOnboarding() {
+            // Add your dashboard redirect logic here
+            alert('Redirecting to dashboard...');
+            closeOnboarding();
+        }
+
+        function closeOnboarding() {
+            document.getElementById('onboardingModal').style.display = 'none';
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Escape') {
+                closeOnboarding();
+            }
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    prevSlide();
+                }
+            }
+        }
+
+    showSlide(1);
+
+
 
     $(document).ready(function () {
         var itemsPerPage = <?php echo $itemsPerPage; ?>;
