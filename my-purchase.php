@@ -199,13 +199,20 @@ if (isset($_SESSION['log_user_id'])) {
 
                     $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
 
-                    if (!empty($row1['profile_pic']))
-                    {
-                         if (checkImageExists($rows_md['profile_pic'])) {
+                    // if (!empty($row1['profile_pic']))
+                    // {
+                    //      if (checkImageExists($rows_md['profile_pic'])) {
                             
-                            $prof_img = SITEURL . $rows_md['profile_pic'];
-                        }
+                    //         $prof_img = SITEURL . $rows_md['profile_pic'];
+                    //     }
 
+                    // }
+
+                  if (!empty($rowesdw['profile_pic'])) {
+                        $resizedImage = resizeImageIfExists($rowesdw['profile_pic'], 0.8);
+                        if ($resizedImage) {
+                            $prof_img = $resizedImage;
+                        }
                     }
 
                     $result = CheckPremiumAccess($row1['id']);
