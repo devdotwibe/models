@@ -38,12 +38,70 @@ if(!empty($userDetails['profile_pic'])){
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
 
-<title>Bookging | The Live Model</title>
+
+<title>The Live Models - Social Fee | The Live Models </title>
+<meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
+<link rel="canonical" href="https://thelivemodels.com/" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chat, Watch, Meet & Travel | The Live Models">
+<meta property="og:description" content="Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
+<meta property="og:url" content="https://thelivemodels.com/">
+<meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta property="og:site_name" content="The Live Models">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chat, Watch, Meet & Travel | The Live Models">
+<meta name="twitter:description" content="Join The Live Models to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide.">
+<meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta name="twitter:site" content="@thelivemodels">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thelivemodels.com/#organization",
+      "name": "The Live Models",
+      "url": "https://thelivemodels.com/",
+      "logo": "https://thelivemodels.com/assets/images/logo.png",
+      "sameAs": [
+        "https://x.com/thelivemodels",
+        "https://www.instagram.com/the_livemodels",
+        "https://www.tiktok.com/@thelivemodels"
+      ],
+      "description": "The Live Models is a verified global social networking and dating platform offering chat, live streaming, social meetups, and travel connections.",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Kulwant Singh Jakhar"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://thelivemodels.com/#website",
+      "url": "https://thelivemodels.com/",
+      "name": "The Live Models",
+      "description": "Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.",
+      "publisher": {
+        "@id": "https://thelivemodels.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://thelivemodels.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
 
 <?php  include('../../includes/head.php'); ?>
-
-<link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
-<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
 
    <style>
         #sidebarMenu {
@@ -919,7 +977,7 @@ if(!empty($userDetails['profile_pic'])){
 		<?php } ?>
           <div class="space-y-2 user-profile-side-btns">
             <button class="btn-primary w-full" onclick="navigateTo('edit-profile.php')">Edit Profile</button>
-            <a class="btn-secondary w-full" href="<?= SITEURL ?>single-profile.php/<?php echo urlencode($userDetails['username']); ?>">View Profile</a>
+            <a class="btn-secondary w-full" href="<?= SITEURL ?>single-profile/<?php echo urlencode($userDetails['username']); ?>">View Profile</a>
           </div>
         </div>
 
@@ -1010,7 +1068,7 @@ if(!empty($userDetails['profile_pic'])){
 
                   ?>
 
-                <div class="flex items-center repeat-users" onclick="window.location.href='<?= SITEURL ?>single-profile.php/<?php echo urlencode($user['username']); ?>'">
+                <div class="flex items-center repeat-users" onclick="window.location.href='<?= SITEURL ?>single-profile/<?php echo urlencode($user['username']); ?>'">
 
                       <div class="relative">
 
@@ -1797,7 +1855,7 @@ if(!empty($userDetails['profile_pic'])){
       </div>
 
 
-      <div class="mobile-nav-item" onclick="window.location.href='<?= SITEURL ?>single-profile.php/<?php echo urlencode($userDetails['username'])?>'" >
+      <div class="mobile-nav-item" onclick="window.location.href='<?= SITEURL ?>single-profile/<?php echo urlencode($userDetails['username'])?>'" >
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
         </svg>
