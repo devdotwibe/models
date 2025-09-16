@@ -118,6 +118,68 @@ if (mysqli_num_rows($res_ap) > 0) {
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<title>Model Profile - Million Dollar Page </title>
+    <meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+	<link rel="canonical" href="https://thelivemodels.com/" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Model Profile - Million Dollar Page | The Live Models">
+<meta property="og:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+<meta property="og:url" content="https://thelivemodels.com/">
+<meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta property="og:site_name" content="The Live Models">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Model Profile - Million Dollar Page | The Live Models">
+<meta name="twitter:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+<meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta name="twitter:site" content="@thelivemodels">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thelivemodels.com/#organization",
+      "name": "The Live Models",
+      "url": "https://thelivemodels.com/",
+      "logo": "https://thelivemodels.com/assets/images/logo.png",
+      "sameAs": [
+        "https://x.com/thelivemodels",
+        "https://www.instagram.com/the_livemodels",
+        "https://www.tiktok.com/@thelivemodels"
+      ],
+      "description": "The Live Models is a verified global social networking and dating platform offering chat, live streaming, social meetups, and travel connections.",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Kulwant Singh Jakhar"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://thelivemodels.com/#website",
+      "url": "https://thelivemodels.com/",
+      "name": "The Live Models",
+      "description": "Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.",
+      "publisher": {
+        "@id": "https://thelivemodels.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://thelivemodels.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
 <?php  include('includes/head.php'); ?>
 
@@ -125,8 +187,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 <style>
 

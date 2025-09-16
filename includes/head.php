@@ -5,22 +5,8 @@
 <link rel="icon" href="assets/wp-content/themes/theagency3/favicon5e1f.png?v=2">
 <link href='<?='https://fonts.googleapis.com/css?family=EB+Garamond|Great+Vibes|Petit+Formal+Script'?>' rel='stylesheet' type='text/css'>
 <meta name="msapplication-TileColor" content="#f01d4f">
-<meta name="msapplication-TileImage" content="assets/wp-content/themes/theagency3/favicon5e1f.png?v=2">
 <script src="https://cdn.tailwindcss.com"></script>
-<style type="text/css">
-img.wp-smiley,
-img.emoji {
-display: inline !important;
-border: none !important;
-box-shadow: none !important;
-height: 1em !important;
-width: 1em !important;
-margin: 0 .07em !important;
-vertical-align: -0.1em !important;
-background: none !important;
-padding: 0 !important;
-}
-</style>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />

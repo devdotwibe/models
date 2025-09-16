@@ -12,6 +12,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
     <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Chat, Watch, Meet & Travel | The Live Models">
