@@ -11619,7 +11619,7 @@ display:flex;
     width: 100%;  
 }
 
-.single-pro-token input{
+.single-pro-token input{ 
   width:100%;
    padding-block:12px !important;
  min-height:auto;
