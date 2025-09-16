@@ -11612,7 +11612,8 @@ display:flex;
 
 .single-pro-token {
     width: 100%;
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
+    margin-top: 12px !important;
 }
 
 .single-pro-token>div{
@@ -11633,6 +11634,7 @@ display:flex;
     padding-block: 10px !important;
     min-height: auto;
     line-height: normal;
+    margin-top: 12px !important;
 }
 
 
