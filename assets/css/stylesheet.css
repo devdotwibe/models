@@ -11682,13 +11682,6 @@ display:flex;
 }
 
 
-}
-
-
-@media (max-width: 1200px) {
-  .premimum-model1 .profile-grid.profile-list .profile-card {
-    width: 80%;
-  }
 
 .single-profile-model h2{
  padding-top:0;
@@ -11713,6 +11706,16 @@ width:fit-content;
 position: relative;
 left:-7px;
 }
+
+}
+
+
+@media (max-width: 1200px) {
+  .premimum-model1 .profile-grid.profile-list .profile-card {
+    width: 80%;
+  }
+
+
 
 
 
