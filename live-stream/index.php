@@ -3,6 +3,21 @@
 include('../includes/config.php');
 include('../includes/helper.php');
 $error = '';
+
+
+if (!empty($_GET['username'])) {
+
+    $username = $_GET['username'];
+
+    $modelDetails = get_data('model_user', ['username' => $username], true);
+
+    $_GET['m_unique_id'] = $modelDetails['unique_id'] ?? null;
+} else {
+    $username = null;
+    $_GET['m_unique_id'] = null;
+}
+
+
 if (isset($_SESSION['log_user_id'])) {
   $getUserData = get_data('model_social_link', array('id' => $_SESSION['log_user_id']), true);
 
