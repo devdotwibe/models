@@ -11592,6 +11592,11 @@ position: relative;
     border-radius: 2px;
 }
 
+.login-page .login-container .container {
+display:flex;
+/* background:#232323; */
+}
+
 
 
 @media (max-width: 1540px) {
