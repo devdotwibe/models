@@ -14451,11 +14451,22 @@ position: absolute;
     justify-content: center;
 }
 
+    .single-profile-model>div>div>:nth-child(2) .font-semibold {
+        font-size: 16px !important;
+    }
 
+    .single-profile-model>div>div>:nth-child(2) .text-xs {
+        font-size: 14px !important;
+        line-height: 22px;
+    }
 
+    .single-profile-model>div>div>*:nth-child(3) {
+        padding-block: 7px !important;
+        padding-inline: 15px !important;
+        font-size: 13px;
+    }
 
-
-}
+  }
 
 @media (max-width: 380px) {
   .premium-wallet .transaction-item > div:first-child > div:first-child {
