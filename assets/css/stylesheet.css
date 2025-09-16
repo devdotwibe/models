@@ -12072,8 +12072,6 @@ user-home
   }
 }
 
-
-
 @media (max-width: 767px) {
   .h-banner-btns button {
     padding-block: 18px !important;
@@ -12121,7 +12119,6 @@ user-home
 
   .enhanced5 .profile-info {
     height: auto !important;
-
   }
 
   .enhanced5 .profile-header {
@@ -12668,13 +12665,7 @@ user-home
     flex-direction: row !important;
     gap: 22px !important;
   }
-
-
-
 }
-
-
-
 
 @media (max-width: 640px) {
   /* .activity-page .models-grid {
@@ -14449,6 +14440,44 @@ user-home
     padding-inline: 15px !important;
     font-size: 13px;
   }
+
+  .single-pro-all {
+    width: 100%;
+    gap: 36px !important;
+  }
+
+.single-pro-up-inp .relative img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+}
+
+
+.single-pro-up-inp .relative img button{
+
+}
+
+.single-pro-token input{
+    height: 44px;
+    font-size: 14px;
+}
+
+.single-pro-btn{
+  height: 44px;
+        font-size: 14px !important;
+        min-height: auto !important;
+}
+.single-pro-up-inp .relative img+button {
+    right: -9px;
+    top: -2px;
+}
+
+.single-pro-up-inp .relative img+button:hover{
+    color: #f00c78;
+}
+
+
+
 }
 
 @media (max-width: 380px) {
