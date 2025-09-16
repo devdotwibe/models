@@ -26,11 +26,70 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat - The Live Models</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <title>Chat | The Live Models </title>
+    <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
+	<link rel="canonical" href="https://thelivemodels.com/" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chat, Watch, Meet & Travel | The Live Models">
+<meta property="og:description" content="Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
+<meta property="og:url" content="https://thelivemodels.com/">
+<meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta property="og:site_name" content="The Live Models">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chat, Watch, Meet & Travel | The Live Models">
+<meta name="twitter:description" content="Join The Live Models to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide.">
+<meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta name="twitter:site" content="@thelivemodels">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thelivemodels.com/#organization",
+      "name": "The Live Models",
+      "url": "https://thelivemodels.com/",
+      "logo": "https://thelivemodels.com/assets/images/logo.png",
+      "sameAs": [
+        "https://x.com/thelivemodels",
+        "https://www.instagram.com/the_livemodels",
+        "https://www.tiktok.com/@thelivemodels"
+      ],
+      "description": "The Live Models is a verified global social networking and dating platform offering chat, live streaming, social meetups, and travel connections.",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Kulwant Singh Jakhar"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://thelivemodels.com/#website",
+      "url": "https://thelivemodels.com/",
+      "name": "The Live Models",
+      "description": "Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.",
+      "publisher": {
+        "@id": "https://thelivemodels.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://thelivemodels.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
    
     <?php include('includes/head.php'); ?>
 
@@ -41,17 +100,9 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 
      <link rel='stylesheet' href='<?= SITEURL ?>assets/css/chat-app.css?v=<?= time() ?>' onload="this.onload=null;this.rel='stylesheet'" />
 
-    <noscript>
-    <link rel="stylesheet" href="<?=SITEURL?>assets/css/profile.css?v=<?=time()?>">
-
-
-     <link rel='stylesheet' href='<?= SITEURL ?>assets/css/chat-app.css?v=<?= time() ?>' />
-
-    </noscript>
-
-
 </head>
 <body class="enhanced5 socialwall-page"> 
+
 
   <?php include('includes/side-bar.php'); ?>
   <?php include('includes/profile_header_index.php'); ?>
