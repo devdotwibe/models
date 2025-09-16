@@ -11599,6 +11599,14 @@ display:flex;
 
 
 
+.single-profile-form .ultra-glass>div{
+border:1px solid red;
+}
+
+
+
+
+
 @media (max-width: 1540px) {
   .home-page .discover-sec .model-card .btn-primary {
     font-size: 14px;

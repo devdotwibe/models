@@ -1409,7 +1409,7 @@ body .owl-carousel .owl-nav.disabled {
 
                             <input type="hidden" name="user_id" id="user_id" value="<?php echo $rowesdw['id'] ?>">
 
-                            <div class="flex justify-between items-center post_submit " id="post_submit">
+                            <div class="single-pro-up-inp flex justify-between items-center post_submit " id="post_submit">
 
 
                                 <label for="post_image" id="post_image_label" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
@@ -1428,7 +1428,7 @@ body .owl-carousel .owl-nav.disabled {
 
                             <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
 
-                                <div class="flex flex-col text-white text-sm sm:text-base file_type_sec">
+                                <div class="single-pro-VidImg flex flex-col text-white text-sm sm:text-base file_type_sec">
                                         <label class="mb-2">File Type:</label>
                                         <div class="flex flex-col gap-2">
                                             <label class="flex items-center gap-2 cursor-pointer">
@@ -1442,7 +1442,7 @@ body .owl-carousel .owl-nav.disabled {
                                         </div>
                                     </div>
 
-                                <div class="flex flex-col text-white text-sm sm:text-base <?php if($is_model){ ?>post_type_sec <?php }?>" style="display:none;">
+                                <div class="single-pro-radio flex flex-col text-white text-sm sm:text-base <?php if($is_model){ ?>post_type_sec <?php }?>" style="display:none;">
                                         <label class="mb-2">Post Type:</label>
                                         <div class="flex flex-col gap-2">
                                             <label class="flex items-center gap-2 cursor-pointer">
@@ -1458,7 +1458,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                 </div>
 
-                                <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 token_sec" style="display:none;">
+                                <div class="single-pro-token file-type-section flex flex-col sm:flex-row gap-4 mt-4 token_sec" style="display:none;">
 
                                 <div class="flex flex-col text-white text-sm sm:text-base">
 
@@ -1471,7 +1471,7 @@ body .owl-carousel .owl-nav.disabled {
                                 </div>
 
 
-                                <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
+                                <button type="submit"  class="single-pro-btn btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
                                     Post
                                 </button>
                             </div>
