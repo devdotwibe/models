@@ -17,12 +17,69 @@ $serviceArr = array('Providing services', 'Looking for services');
 <html lang="en-US" class="no-js">
 
 <head>
-    <title>Model Advertisements - Premium Talent Directory | Live Models</title>
-	
-	<meta name="description" content="Browse premium model advertisements with enhanced grid and expanded views. Find verified models, influencers, and creators for your projects.">
-    <meta name="keywords" content="model advertisements, premium models, talent directory, verified models, influencers, creators">
-    <link rel="stylesheet" href="<?php echo SITEURL; ?>assets/css/stylesheet.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <title>Model Advertisements - Premium Talent Directory  | The Live Models </title>
+    <meta name="description" content="Browse premium model advertisements with enhanced grid and expanded views. Find verified models, influencers, and creators for your projects.">
+	<link rel="canonical" href="https://thelivemodels.com/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Model Advertisements - Premium Talent Directory  | The Live Models">
+    <meta property="og:description" content="Browse premium model advertisements with enhanced grid and expanded views. Find verified models, influencers, and creators for your projects.">
+    <meta property="og:url" content="https://thelivemodels.com/">
+    <meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+    <meta property="og:site_name" content="The Live Models">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Model Advertisements - Premium Talent Directory  | The Live Models">
+    <meta name="twitter:description" content="Browse premium model advertisements with enhanced grid and expanded views. Find verified models, influencers, and creators for your projects.">
+    <meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+    <meta name="twitter:site" content="@thelivemodels">
+
+    <!-- Schema -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+        "@type": "Organization",
+        "@id": "https://thelivemodels.com/#organization",
+        "name": "The Live Models",
+        "url": "https://thelivemodels.com/",
+        "logo": "https://thelivemodels.com/assets/images/logo.png",
+        "sameAs": [
+            "https://x.com/thelivemodels",
+            "https://www.instagram.com/the_livemodels",
+            "https://www.tiktok.com/@thelivemodels"
+        ],
+        "description": "Browse premium model advertisements with enhanced grid and expanded views. Find verified models, influencers, and creators for your projects.",
+        "foundingDate": "2025",
+        "founder": {
+            "@type": "Person",
+            "name": "Kulwant Singh Jakhar"
+        }
+        },
+        {
+        "@type": "WebSite",
+        "@id": "https://thelivemodels.com/#website",
+        "url": "https://thelivemodels.com/",
+        "name": "The Live Models",
+        "description": "Browse premium model advertisements with enhanced grid and expanded views. Find verified models, influencers, and creators for your projects.",
+        "publisher": {
+            "@id": "https://thelivemodels.com/#organization"
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://thelivemodels.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+        }
+    ]
+    }
+    </script>
+
     <?php include('../includes/head.php'); ?>
 </head>
 
