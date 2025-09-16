@@ -250,8 +250,8 @@ if (isset($_SESSION['log_user_id'])) {
 
                     <div class="image-premium relative">
 
-                      <img src="<?php echo SITEURL . $url; ?>" alt="<?php echo $image_text; ?>"
-                        class="w-full h-48 sm:h-64 object-cover">
+                      <img loading="lazy" src="<?php echo SITEURL . $url; ?>" alt="<?php echo $image_text; ?>"
+                        class="w-full h-48 sm:h-64 object-cover" />
 
                       <!-- 
                             <div class="absolute top-3 sm:top-4 left-3 sm:left-4 badge-premium">
@@ -279,9 +279,9 @@ if (isset($_SESSION['log_user_id'])) {
 
                       <div class="flex items-center mb-4">
 
-                        <img src="<?php echo $prof_img ?>" alt="<?php echo ucfirst($row1['username']); ?> Profile"
+                        <img loading="lazy" src="<?php echo $prof_img ?>" alt="<?php echo ucfirst($row1['username']); ?> Profile"
 
-                          class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500">
+                          class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500" />
                         <div class="flex-1">
                           <h4 class="text-base sm:text-lg font-bold gradient-text-premium">
 
@@ -420,9 +420,9 @@ if (isset($_SESSION['log_user_id'])) {
 
                       <div class="image-premium relative">
 
-                        <img src="<?php echo SITEURL .'assets/images/advert-no-image.jpg' ?>" alt="Exclusive Video by Phoenix"
+                        <img loading="lazy" src="<?php echo SITEURL .'assets/images/advert-no-image.jpg' ?>" alt="Exclusive Video by Phoenix"
 
-                          class="w-full h-48 sm:h-64 object-cover">
+                          class="w-full h-48 sm:h-64 object-cover" />
 
                         <div class="video-overlay-advanced"  onclick="ShowVideo('<?php echo SITEURL. $url ?>')" >
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"
@@ -466,8 +466,8 @@ if (isset($_SESSION['log_user_id'])) {
 
                         <div class="flex items-center mb-4">
 
-                          <img src="<?php echo $prof_img ?>" alt="<?php echo ucfirst($row1['username']); ?> Profile"
-                            class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500">
+                          <img loading="lazy" src="<?php echo $prof_img ?>" alt="<?php echo ucfirst($row1['username']); ?> Profile"
+                            class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500" />
 
                           <div class="flex-1">
 
