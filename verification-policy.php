@@ -6,14 +6,14 @@ include('includes/helper.php');
 <html lang="en-US" class="no-js">
   <head>
 
-  <title>Privacy Policy | The Live Models </title>
+  <title> Verification Policy | The Live Models </title>
   <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Privacy Policy | The Live Models">
+<meta property="og:title" content=" Verification Policy | The Live Models">
 <meta property="og:description" content="Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
 <meta property="og:url" content="https://thelivemodels.com/">
 <meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
@@ -21,7 +21,7 @@ include('includes/helper.php');
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Privacy Policy | The Live Models">
+<meta name="twitter:title" content=" Verification Policy | The Live Models">
 <meta name="twitter:description" content="Join The Live Models to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide.">
 <meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
 <meta name="twitter:site" content="@thelivemodels">
