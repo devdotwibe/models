@@ -675,16 +675,6 @@ if(isset($footer_hide_script)){
 }
 else{
 ?>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/themes/theagency3/library/js/libs/FitVids.js-master/jquery.fitvids.js' id='fitvids-js'></script>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/themes/theagency3/library/js/fitvid.js' id='fitvids-xtra-js'></script>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-includes/js/imagesloaded.min.js' id='imagesloaded-js'></script>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-includes/js/masonry.min.js' id='masonry-js'></script>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-includes/js/jquery/jquery.masonry.min.js' id='jquery-masonry-js'></script>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/themes/theagency3/library/js/scripts.js' id='bones-js-js'></script>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/themes/theagency3/library/js/libs/bootstrap.min.js' id='bones-bootstrap-js'></script>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-includes/js/wp-embed.min.js' id='wp-embed-js'></script>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/flexslider/jquery.flexslider-min.js' id='wpgt-gallery-flexslider-js'></script>
-<script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/js/imagesloaded.pkgd.min.js' id='wordpresscanvas-imagesloaded-js'></script>
 <script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/js/gallery.js' id='wpgt-gallery-js'></script>
 <script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/owlcarousel/owl.carousel.min.js' id='wpgt-gallery-owlcarousel-js'></script>
 <?php
