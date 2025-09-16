@@ -11697,16 +11697,21 @@ display:flex;
 .single-profile-model>div>div{
   display: flex;
   flex-wrap: wrap;
-  border:1px solid orange;
+  /* border:1px solid orange; */
  margin-bottom: 20px !important;
+}
+
+.single-profile-model>div>div>*:nth-child(2){
+  flex: 1 1 calc(100% - 60px) !important;
 }
 
 
 .single-profile-model>div>div>*:nth-child(3){
-width:100%;
- margin-inline:auto;
+width:fit-content;
+ /* margin-inline:auto; */
  padding-block:6px !important;
- margin-top:5px;
+position: relative;
+left:-7px;
 }
 
 
