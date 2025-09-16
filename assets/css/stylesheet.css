@@ -11592,7 +11592,7 @@ user-home
 }
 
 .single-profile-form .ultra-glass > div {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -14476,7 +14476,13 @@ user-home
     color: #f00c78;
 }
 
-
+.single-profile-staus .post-div > div {
+     
+        border: 1px solid #f377bd;
+        padding: 10px;
+        border-radius: 5px;
+       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 #f377bc5e, 0 0 0 1px rgba(139, 92, 246, 0.1);
+    }
 
 }
 
