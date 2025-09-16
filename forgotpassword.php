@@ -69,9 +69,6 @@ if($_POST){
 				"PASS" => $code,
 
             ],
-            [
-                "IMG_LINK" => __DIR__ . "/assets/images/logo-live.jpg"
-            ]
         );
 
 

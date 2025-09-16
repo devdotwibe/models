@@ -241,9 +241,6 @@ if (isset($_POST['vfb-submit'])) {
             [
                 "VERIFY_LINK" => $verify_link,
             ],
-            [
-                "IMG_LINK" => __DIR__ . "/assets/images/logo-live.jpg"
-            ]
         );
 
 
