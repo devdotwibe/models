@@ -22,17 +22,6 @@ padding: 0 !important;
 }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel='stylesheet' id='wp-block-library-css'  href='<?=SITEURL?>assets/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='spiffycal-styles-css'  href='<?=SITEURL?>assets/wp-content/plugins/spiffy-calendar/styles/default.css' type='text/css' media='all' />
-<link rel='stylesheet' id='dashicons-css'  href='<?=SITEURL?>assets/wp-includes/css/dashicons.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-style-css'  href='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/css/style.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-popup-style-css'  href='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/css/magnific-popup.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-flexslider-style-css'  href='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/flexslider/flexslider.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-owlcarousel-style-css'  href='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/owlcarousel/assets/owl.carousel.css' type='text/css' media='all' />
-<link rel='stylesheet' id='wpgt-gallery-owlcarousel-theme-style-css'  href='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/owlcarousel/assets/owl.theme.default.css' type='text/css' media='all' />
-<link rel='stylesheet' id='options_typography_Rokkitt-css'  href='https://fonts.googleapis.com/css?family=Rokkitt' type='text/css' media='all' />
-<link rel='stylesheet' id='rich-reviews-css'  href='<?=SITEURL?>assets/wp-content/plugins/rich-reviews/css/rich-reviews.css' type='text/css' media='all' />
-<?php /* ?><link rel='stylesheet' id='bones-stylesheet-css'  href='<?=SITEURL?>assets/wp-content/themes/theagency3/library/css/style.css' type='text/css' media='all' /><?php */ ?>
 
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/custom.css?v=<?=time()?>' type='text/css' media='all' />

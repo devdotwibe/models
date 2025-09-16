@@ -794,7 +794,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                         <?php foreach($modal_img_list_array as $item) {  ?>
 
-                                             <img src="<?php echo $item; ?>" alt="Profile Pic" class="profile-avatar">
+                                             <img loading="lazy" src="<?php echo $item; ?>" alt="Profile Pic" class="profile-avatar">
 
                                         <?php } ?>
 
@@ -802,14 +802,14 @@ body .owl-carousel .owl-nav.disabled {
 
                               <?php } else { ?>
 
-                                    <img src="<?php echo $modal_img_list_array[0]; ?>" alt="Profile Pic<?php //echo $rowesdw['name']; ?>" class="profile-avatar">
+                                    <img loading="lazy" src="<?php echo $modal_img_list_array[0]; ?>" alt="Profile Pic<?php //echo $rowesdw['name']; ?>" class="profile-avatar">
 
                               <?php } ?> 
 
 
                             <?php } else{ ?>
 
-                                <img src="<?php echo SITEURL; ?>assets/images/model-gal-no-img.jpg" alt="<?php echo $rowesdw['name']; ?>" class="profile-avatar">
+                                <img loading="lazy" src="<?php echo SITEURL; ?>assets/images/model-gal-no-img.jpg" alt="<?php echo $rowesdw['name']; ?>" class="profile-avatar">
 
                             <?php } ?>
                             
@@ -1047,7 +1047,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                                     <div class="all-link-btn">
 
-                                                        <img src="<?=SITEURL?>assets/images/all-links.svg" />
+                                                        <img loading="lazy" src="<?=SITEURL?>assets/images/all-links.svg" />
                                                         
                                                     </div>
 
@@ -1164,7 +1164,7 @@ body .owl-carousel .owl-nav.disabled {
                     <!-- Media Item Image -->
                     <div class="media-item images_tab all_items_tab <?php if($uplds['post_type'] =='paid') { ?> exclusive_tab <?php } ?> ">
 
-                        <img src="<?php echo $imageUrl ?>" <?php echo $blur_class ?> alt="<?php echo ucfirst($uplds['post_image']); ?>">
+                        <img loading="lazy" src="<?php echo $imageUrl ?>" <?php echo $blur_class ?> alt="<?php echo ucfirst($uplds['post_image']); ?>">
 
 
                             <div class="media-overlay">
@@ -1435,7 +1435,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                 <div class="relative inline-block" style="display:none" id="filePreview_div">
                                     
-                                    <img id="filePreview" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
+                                    <img loading="lazy" id="filePreview" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
 
                                 </div>
 
@@ -1666,7 +1666,7 @@ body .owl-carousel .owl-nav.disabled {
                          $user_unique_id = $rows_md['id'];
                         ?>
                             <div class="flex items-center gap-3">
-                                <img src="<?php echo $defaultImage; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
+                                <img loading="lazy" src="<?php echo $defaultImage; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
                                 <div class="flex-1">
                                     <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
                                     <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
@@ -1940,7 +1940,7 @@ body .owl-carousel .owl-nav.disabled {
             </div>
 
             <div class="header">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
+                <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
                 <h2 class="title">Unlock Elite Access</h2>
                 <p class="subtitle">Join premium members and dominate the streaming experience</p>
             </div>
@@ -2015,7 +2015,7 @@ body .owl-carousel .owl-nav.disabled {
                             </div>
                         <?php } ?>
                         <div class="bonus-tokens">
-                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                            <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
                             <span data-monthly-tokens="500" data-annual-tokens="1000">+ 500 TLM tokens</span>
                         </div>
                     </div>
@@ -2064,7 +2064,7 @@ body .owl-carousel .owl-nav.disabled {
                             </div>
                         <?php } ?>
                         <div class="bonus-tokens">
-                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                            <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
                             <span data-monthly-tokens="2000" data-annual-tokens="5000">+ 2,000 TLM tokens</span>
                         </div>
                     </div>
@@ -2100,7 +2100,7 @@ body .owl-carousel .owl-nav.disabled {
 
             <div class="token-packages-section">
                 <div class="token-packages-title">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                    <img  loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
                     Explore Token Packages
                 </div>
                 <div class="token-packages-subtitle">
@@ -2631,7 +2631,7 @@ body .owl-carousel .owl-nav.disabled {
         
         <div class="modal-body">
             <div class="wishlist-item">
-                <img src="https://images.unsplash.com/photo-1575695342320-d2d2d2f9b73f?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Luxury Handbag" class="wishlist-image">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1575695342320-d2d2d2f9b73f?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Luxury Handbag" class="wishlist-image">
                 <div class="wishlist-info">
                     <div class="wishlist-name">Luxury Designer Handbag</div>
                     <div class="wishlist-price">$1,200</div>
@@ -2647,7 +2647,7 @@ body .owl-carousel .owl-nav.disabled {
             </div>
             
             <div class="wishlist-item">
-                <img src="https://images.unsplash.com/photo-1581338834647-b0fb40704e21?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Vacation" class="wishlist-image">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1581338834647-b0fb40704e21?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Vacation" class="wishlist-image">
                 <div class="wishlist-info">
                     <div class="wishlist-name">Weekend Getaway to Malibu</div>
                     <div class="wishlist-price">$800</div>
@@ -2663,7 +2663,7 @@ body .owl-carousel .owl-nav.disabled {
             </div>
             
             <div class="wishlist-item">
-                <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Camera" class="wishlist-image">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Camera" class="wishlist-image">
                 <div class="wishlist-info">
                     <div class="wishlist-name">Professional Camera Setup</div>
                     <div class="wishlist-price">$2,500</div>
@@ -3020,7 +3020,7 @@ body .owl-carousel .owl-nav.disabled {
                                 <span id="error_attachment" style="display: none;"></span>
 
                                 <div class="relative inline-block" style="display:none" id="filePreview_div_attachment">
-                                    <img id="filePreview_attachment" src="" alt="Preview"
+                                    <img loading="lazy" id="filePreview_attachment" src="" alt="Preview"
                                         class="w-32 h-32 object-cover mt-4 rounded-xl">
                                 </div>
                             </div>
@@ -3079,7 +3079,7 @@ body .owl-carousel .owl-nav.disabled {
 
                             <div class="relative inline-block" style="display:none" id="filePreview_div_story">
                                 
-                                <img id="filePreview_story" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
+                                <img loading="lazy" id="filePreview_story" src="" alt="Preview" class="w-32 h-32 object-cover mt-4 rounded-xl hidden">
 
                             </div>
 
@@ -3639,7 +3639,7 @@ jQuery('.send_gift_btn').click(function(){
                                 var storyHtml = `
                                     <div class="story-item" style="margin-bottom:15px;">
 
-                                        <img src="${story.image_url}" alt="Story Image" class="w-32 h-32 object-cover rounded-xl mb-2">
+                                        <img loading="lazy" src="${story.image_url}" alt="Story Image" class="w-32 h-32 object-cover rounded-xl mb-2">
 
                                         <p class="text-white text-sm">${story.message || ''}</p>
 
@@ -3699,7 +3699,7 @@ jQuery('.send_gift_btn').click(function(){
 
                         $('#message_status').html("");
 
-                        $('#message_status').append('<img style="width:45px;" src="<?php echo SITEURL; ?>assets/images/warning.png" alt="Warning Icon"> Alert');
+                        $('#message_status').append('<img loading="lazy" style="width:45px;" src="<?php echo SITEURL; ?>assets/images/warning.png" alt="Warning Icon"> Alert');
 
                         $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
 

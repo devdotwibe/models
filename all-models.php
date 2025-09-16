@@ -1094,10 +1094,17 @@ include('includes/helper.php');
 
                             $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
 
-                            if (!empty($rowesdw['profile_pic'])) {
-                                if (checkImageExists($rowesdw['profile_pic'])) {
+                            // if (!empty($rowesdw['profile_pic'])) {
+                            //     if (checkImageExists($rowesdw['profile_pic'])) {
 
-                                    $prof_img = SITEURL . $rowesdw['profile_pic'];
+                            //         $prof_img = SITEURL . $rowesdw['profile_pic'];
+                            //     }
+                            // }
+
+                            if (!empty($rowesdw['profile_pic'])) {
+                                $resizedImage = resizeImageIfExists($rowesdw['profile_pic'], 0.8);
+                                if ($resizedImage) {
+                                    $prof_img = $resizedImage;
                                 }
                             }
 
@@ -1110,7 +1117,7 @@ include('includes/helper.php');
 
                                 <a href="<?php echo SITEURL; ?>single-profile/<?php echo urlencode($rowesdw['username']); ?>">
 
-                                    <img src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
+                                    <img loading="lazy" src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
 
                                     <div class="profile-badges">
@@ -1778,9 +1785,9 @@ include('includes/helper.php');
                             $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
 
                             if (!empty($rowesdw['profile_pic'])) {
-                                if (checkImageExists($rowesdw['profile_pic'])) {
-
-                                    $prof_img = SITEURL . $rowesdw['profile_pic'];
+                                $resizedImage = resizeImageIfExists($rowesdw['profile_pic'], 0.8);
+                                if ($resizedImage) {
+                                    $prof_img = $resizedImage;
                                 }
                             }
                 ?>
@@ -1792,7 +1799,7 @@ include('includes/helper.php');
 
                                 <a href="<?php echo SITEURL; ?>single-profile/<?php echo urlencode($rowesdw['username']); ?>">
 
-                                    <img src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
+                                    <img loading="lazy" src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
                                  
                                     <div class="profile-badges">
@@ -2491,7 +2498,7 @@ include('includes/helper.php');
             </div>
 
             <div class="header">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
+                <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
                 <h2 class="title">Unlock Elite Access</h2>
                 <p class="subtitle">Join premium members and dominate the streaming experience</p>
             </div>
@@ -2566,7 +2573,7 @@ include('includes/helper.php');
                             </div>
                         <?php } ?>
                         <div class="bonus-tokens">
-                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                            <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
                             <span data-monthly-tokens="500" data-annual-tokens="1000">+ 500 TLM tokens</span>
                         </div>
                     </div>
@@ -2615,7 +2622,7 @@ include('includes/helper.php');
                             </div>
                         <?php } ?>
                         <div class="bonus-tokens">
-                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                            <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
                             <span data-monthly-tokens="2000" data-annual-tokens="5000">+ 2,000 TLM tokens</span>
                         </div>
                     </div>
@@ -2651,7 +2658,7 @@ include('includes/helper.php');
 
             <div class="token-packages-section">
                 <div class="token-packages-title">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
                     Explore Token Packages
                 </div>
                 <div class="token-packages-subtitle">

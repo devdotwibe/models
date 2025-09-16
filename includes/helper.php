@@ -1031,6 +1031,92 @@ if (!empty($_SESSION['log_user_id'])) {
 //     return !empty($relativePath) && file_exists($imagePath);
 // }
 
+function resizeImageIfExists($relativePath, $scale = 0.8) {
+    if (empty($relativePath)) {
+        return false;
+    }
+
+    $rootPath  = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
+    $imagePath = $rootPath . '/' . ltrim($relativePath, '/');
+
+    if (!file_exists($imagePath)) {
+        error_log("Image not found: " . $imagePath);
+        return false;
+    }
+
+    $imageType = @exif_imagetype($imagePath);
+    if ($imageType === false) {
+        error_log("Not a valid image file: " . $imagePath);
+        return false;
+    }
+
+    // Create image resource based on type
+    switch ($imageType) {
+        case IMAGETYPE_JPEG:
+            $src = @imagecreatefromjpeg($imagePath);
+            break;
+        case IMAGETYPE_PNG:
+            $src = @imagecreatefrompng($imagePath);
+            break;
+        case IMAGETYPE_GIF:
+            $src = @imagecreatefromgif($imagePath);
+            break;
+        default:
+            error_log("Unsupported image type: " . $imagePath);
+            return false;
+    }
+
+    if (!$src) {
+        error_log("Failed to create image resource: " . $imagePath);
+        return false;
+    }
+
+    $width  = imagesx($src);
+    $height = imagesy($src);
+
+    // New dimensions
+    $newWidth  = intval($width * $scale);
+    $newHeight = intval($height * $scale);
+
+    $dst = imagecreatetruecolor($newWidth, $newHeight);
+
+    // Preserve transparency for PNG/GIF
+    if ($imageType == IMAGETYPE_PNG || $imageType == IMAGETYPE_GIF) {
+        imagecolortransparent($dst, imagecolorallocatealpha($dst, 0, 0, 0, 127));
+        imagealphablending($dst, false);
+        imagesavealpha($dst, true);
+    }
+
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+    // Save resized copy in /cache_images/
+    $cacheDir = $rootPath . "/cache_images";
+    if (!is_dir($cacheDir)) {
+        mkdir($cacheDir, 0777, true);
+    }
+
+    $newFileName = md5($relativePath . $newWidth . $newHeight) . image_type_to_extension($imageType);
+    $newFilePath = $cacheDir . '/' . $newFileName;
+
+    switch ($imageType) {
+        case IMAGETYPE_JPEG:
+            imagejpeg($dst, $newFilePath, 85);
+            break;
+        case IMAGETYPE_PNG:
+            imagepng($dst, $newFilePath);
+            break;
+        case IMAGETYPE_GIF:
+            imagegif($dst, $newFilePath);
+            break;
+    }
+
+    imagedestroy($src);
+    imagedestroy($dst);
+
+    // Return new image URL
+    return SITEURL . 'cache_images/' . $newFileName;
+}
+
 	function checkImageExists($relativePath) {
 		if (empty($relativePath)) {
 			return false;

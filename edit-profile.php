@@ -532,7 +532,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           <div class="flex justify-between items-center">
             <span>Current Balance:</span>
             <div class="flex items-center">
-              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
+              <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
               <span class="font-bold text-xl"> <?php echo $userDetails['balance'] ?></span>
             </div>
           </div>
@@ -546,7 +546,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <input type="radio" id="package-100" name="token-package" value="100" onchange="updateTokenPackage(100, 10)">
                 <label for="package-100">
                   <div class="flex items-center">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
+                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
                     100 TLM Tokens - $10.00
                   </div>
                 </label>
@@ -555,7 +555,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <input type="radio" id="package-500" name="token-package" value="500" onchange="updateTokenPackage(500, 45)" checked>
                 <label for="package-500">
                   <div class="flex items-center">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
+                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
                     500 TLM Tokens - $45.00 (10% bonus)
                   </div>
                 </label>
@@ -564,7 +564,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <input type="radio" id="package-1000" name="token-package" value="1000" onchange="updateTokenPackage(1000, 80)">
                 <label for="package-1000">
                   <div class="flex items-center">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
+                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
                     1,000 TLM Tokens - $80.00 (20% bonus)
                   </div>
                 </label>
@@ -573,7 +573,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <input type="radio" id="package-2500" name="token-package" value="2500" onchange="updateTokenPackage(2500, 175)">
                 <label for="package-2500">
                   <div class="flex items-center">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
+                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
                     2,500 TLM Tokens - $175.00 (30% bonus)
                   </div>
                 </label>
@@ -595,7 +595,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             <div class="flex justify-between items-center">
               <span class="font-medium">Total:</span>
               <div class="flex items-center">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
+                <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
                 <span id="selected-tokens" class="font-bold text-lg">500</span>
                 <span class="text-sm text-white/60 ml-2">for</span>
                 <span id="selected-price" class="font-bold text-lg ml-1">$45.00</span>
@@ -629,7 +629,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           <div class="flex justify-between items-center">
             <span>Available Balance:</span>
             <div class="flex items-center">
-              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
+              <img  loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
               <span class="font-bold text-xl"><?= number_format($userDetails['balance'], 2) ?></span>
             </div>
           </div>
@@ -720,7 +720,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 edit-pro-pop">
         <div>
           <div class="flex items-center text-3xl font-bold mb-1">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token-large mr-2">
+            <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token-large mr-2">
             <?php echo $userDetails['balance']; ?>
           </div>
           <div class="text-white/80">Available Tokens</div>
@@ -740,7 +740,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <?php if ($is_model) { ?>
           <div>
             <div class="flex items-center text-3xl font-bold mb-1">
-              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token-large mr-2">
+              <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token-large mr-2">
 
               <?php echo $totalAmount; ?>
 
@@ -847,7 +847,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                     $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
                   } ?>
-                  <img src="<?php echo $prof_img; ?>" id="preview_prof_img" alt="Profile" class="w-32 h-32 rounded-full border-4 border-purple-500">
+                  <img loading="lazy" src="<?php echo $prof_img; ?>" id="preview_prof_img" alt="Profile" class="w-32 h-32 rounded-full border-4 border-purple-500">
                   <div class="profile-picture-overlay">
                     <label for="pic_img">
                       <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -864,7 +864,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                       <a onclick="DeleteImage()">×</a>
 
                       <a onclick="editProfileImage()">
-                        <img src="<?php echo SITEURL . '/assets/images/edt.svg'; ?>" alt="">
+                        <img loading="lazy" src="<?php echo SITEURL . '/assets/images/edt.svg'; ?>" alt="">
 
                       </a>
 
@@ -911,7 +911,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                           <li id="galblock<?php echo $i; ?>" class="w-auto h-auto">
                             <div>
                               <div class="dz-preview dz-file-preview">
-                                <img src="<?php echo SITEURL . 'uploads/profile_pic/' . $imgs['file']; ?>" data-dz-thumbnail />
+                                <img loading="lazy" src="<?php echo SITEURL . 'uploads/profile_pic/' . $imgs['file']; ?>" data-dz-thumbnail />
                                 <input type='hidden' name='hiddenmedia[]' class='hiddenmedia' value="<?php echo $imgs['file']; ?>" id="<?php echo $i; ?>">
                                 <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
                                 <!-- <div class="dz-success-mark"><span>✔</span></div> -->
@@ -938,7 +938,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
 
                         <div class="dz-preview dz-file-preview">
-                          <img data-dz-thumbnail />
+                          <img loading="lazy" data-dz-thumbnail />
                           <div class="dz-details">
                             <!-- your existing details -->
                           </div>
@@ -1951,7 +1951,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           </div>
           <div class="collapsible-content">
             <div class="token-info flex items-center mb-6">
-              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
+              <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
               <span>TLM tokens are our platform's currency. Users purchase tokens and spend them to access your services. You earn 70% of all token revenue.</span>
             </div>
 
@@ -2972,9 +2972,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
                   if (in_array($extension, $allowed_extensions)) {
-                    echo '<img src="' . SITEURL . $extra_details['govt_id_proof'] . '" class="id_proof_img">';
+                    echo '<img loading="lazy" src="' . SITEURL . $extra_details['govt_id_proof'] . '" class="id_proof_img">';
                   } else {
-                    echo '<a href="' . SITEURL . $extra_details['govt_id_proof'] . '" target="_blank"><img src="' . SITEURL . '/uploads/govt-proof.svg" class="id_proof_img"></a>';
+                    echo '<a href="' . SITEURL . $extra_details['govt_id_proof'] . '" target="_blank"><img loading="lazy" src="' . SITEURL . '/uploads/govt-proof.svg" class="id_proof_img"></a>';
                   }
                   echo '</div>';
                 }
@@ -3120,7 +3120,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <h3 class="text-xl font-bold gradient-text mb-6">Active Services</h3>
 
         <div class="token-info flex items-center mb-6">
-          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
+          <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
           <span>You currently have <b> <?php echo $userDetails['balance'] ?> TLM tokens</b> available for withdrawal. <a href="#" class="text-purple-400 underline" onclick="openWithdrawModal()">Withdraw to bank account</a></span>
         </div>
 
@@ -3144,7 +3144,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
 
                   <div class="flex items-center">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
                     <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['private_chat_token']; ?></span>
                     <span class="text-sm text-white/60">min</span>
                   </div>
@@ -3214,7 +3214,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   </div>
 
                   <div class="flex items-center">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
                     <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?></span>
                     <span class="text-sm text-white/60">/hour</span>
                   </div>
@@ -3230,7 +3230,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                     <div class="text-sm text-white/60">4+ hours</div>
                   </div>
                   <div class="flex items-center">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
                     <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?></span>
                     <span class="text-sm text-white/60">flat rate</span>
                   </div>
@@ -3245,7 +3245,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                     <div class="text-sm text-white/60">Multi-day trips</div>
                   </div>
                   <div class="flex items-center">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
                     <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?></span>
                     <span class="text-sm text-white/60">/day</span>
                   </div>
@@ -3893,7 +3893,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       </div>
 
       <div class="header">
-        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
+        <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
         <h2 class="title">Unlock Elite Access</h2>
         <p class="subtitle">Join premium members and dominate the streaming experience</p>
       </div>
@@ -3968,7 +3968,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               </div>
             <?php } ?>
             <div class="bonus-tokens">
-              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+              <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
               <span data-monthly-tokens="500" data-annual-tokens="1000">+ 500 TLM tokens</span>
             </div>
           </div>
@@ -4017,7 +4017,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               </div>
             <?php } ?>
             <div class="bonus-tokens">
-              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+              <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
               <span data-monthly-tokens="2000" data-annual-tokens="5000">+ 2,000 TLM tokens</span>
             </div>
           </div>
@@ -4053,7 +4053,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
       <div class="token-packages-section">
         <div class="token-packages-title">
-          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+          <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
           Explore Token Packages
         </div>
         <div class="token-packages-subtitle">
@@ -4423,7 +4423,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                                     <td class="py-4">
                                       <div class="flex items-center">
-                                        <img src="${booking.user_profile_pic}" alt="Client" class="w-8 h-8 rounded-full mr-2">
+                                        <img loading="lazy" src="${booking.user_profile_pic}" alt="Client" class="w-8 h-8 rounded-full mr-2">
                                         <span>${booking.booked_name}</span>
                                       </div>
                                     </td>
@@ -4435,7 +4435,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                                     <td class="py-4">
                                       <div class="flex items-center font-medium">
-                                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+                                        <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
                                         3000
                                       </div>
                                       <div class="text-sm text-white/60">Estimated</div>
@@ -5851,7 +5851,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           const reader = new FileReader();
 
           reader.onload = function(e) {
-            $('.gallery1').html('<img src="' + e.target.result + '">');
+            $('.gallery1').html('<img loading="lazy" src="' + e.target.result + '">');
           }
 
           reader.readAsDataURL(file);
@@ -5865,7 +5865,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           const reader = new FileReader();
 
           reader.onload = function(e) {
-            $('.gallery2').html('<img src="' + e.target.result + '">');
+            $('.gallery2').html('<img loading="lazy" src="' + e.target.result + '">');
           }
 
           reader.readAsDataURL(file);
