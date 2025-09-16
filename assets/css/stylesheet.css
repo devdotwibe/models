@@ -11963,16 +11963,17 @@ position: absolute;
 .single-profile-model>div>div {
   /* border:1px solid red; */
   position:relative;
-  padding-left:34px;
+  padding-left:40px;
   
 }
 
 .single-profile-model>div>div>:first-child{
 position: absolute;
-    left: 0;
-    width: 28px;
-    height: 28px;
-    object-fit: cover;
+        left: 0;
+        width: 34px;
+        height: 34px;
+        object-fit: cover;
+        top: 6px;
 }
 
 .single-profile-model>div>div>:nth-child(2) .font-semibold{
