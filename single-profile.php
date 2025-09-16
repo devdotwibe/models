@@ -154,7 +154,7 @@ if (mysqli_num_rows($res_ap) > 0) {
         "https://www.instagram.com/the_livemodels",
         "https://www.tiktok.com/@thelivemodels"
       ],
-      "description": "The Live Models is a verified global social networking and dating platform offering chat, live streaming, social meetups, and travel connections.",
+      "description": "Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections..",
       "foundingDate": "2025",
       "founder": {
         "@type": "Person",
@@ -166,7 +166,7 @@ if (mysqli_num_rows($res_ap) > 0) {
       "@id": "https://thelivemodels.com/#website",
       "url": "https://thelivemodels.com/",
       "name": "The Live Models",
-      "description": "Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.",
+      "description": "Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.",
       "publisher": {
         "@id": "https://thelivemodels.com/#organization"
       },
