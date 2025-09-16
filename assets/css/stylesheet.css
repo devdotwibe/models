@@ -11623,6 +11623,7 @@ display:flex;
   width:100%;
    padding-block:12px !important;
  min-height:auto;
+   line-height: normal;
 }
 
 
@@ -11631,6 +11632,7 @@ display:flex;
     width: 100%;
     padding-block: 10px !important;
     min-height: auto;
+    line-height: normal;
 }
 
 
