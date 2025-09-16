@@ -11599,12 +11599,39 @@ display:flex;
 
 
 
-.single-profile-form .ultra-glass>div{
-border:1px solid red;
+.single-profile-form .ultra-glass>div {
+    border: 1px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.single-pro-all {
+    width: calc(100% - 144px);
+}
+
+.single-pro-token {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.single-pro-token>div{
+    width: 100%;  
+}
+
+.single-pro-token input{
+  width:100%;
+   padding-block:12px !important;
+ min-height:auto;
 }
 
 
 
+.single-pro-btn {
+    width: 100%;
+    padding-block: 10px !important;
+    min-height: auto;
+}
 
 
 @media (max-width: 1540px) {

@@ -1426,7 +1426,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                 </div>
 
-                            <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
+                            <div class="single-pro-all file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
 
                                 <div class="single-pro-VidImg flex flex-col text-white text-sm sm:text-base file_type_sec">
                                         <label class="mb-2">File Type:</label>
