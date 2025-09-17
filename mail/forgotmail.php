@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Verify Your Email - The Live Models</title>
+    <title>Forgot Password - The Live Models</title>
     <!--[if mso]>
     <noscript>
         <xml>
@@ -27,7 +27,7 @@
                         <td align="center" style="background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%); padding: 40px 30px; border-radius: 8px 8px 0 0;">
                             <!-- Using full logo at the beginning -->
                             <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-JqH3dNd97SSgTWI6V2ECSyiSKcthpJ.png" alt="The Live Models" style="max-width: 220px; height: auto; display: block; margin: 0 auto 20px auto;" />
-                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 300; letter-spacing: 1px; text-align: center;">Email Verification</h1>
+                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 300; letter-spacing: 1px; text-align: center;">Forgot Password</h1>
                         </td>
                     </tr>
                     

@@ -1,8 +1,15 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="apple-touch-icon" href="assets/wp-content/themes/theagency3/favicon5e1f.png?v=2">
-<link rel="icon" href="assets/wp-content/themes/theagency3/favicon5e1f.png?v=2">
+
+<!-- <link rel="apple-touch-icon" href="assets/wp-content/themes/theagency3/favicon5e1f.png?v=2">
+<link rel="icon" href="assets/wp-content/themes/theagency3/favicon5e1f.png?v=2"> -->
+
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon.png?v=4">
+<link rel="apple-touch-icon" href="/assets/images/favicon.png?v=4">
+
+
+
 <link href='<?='https://fonts.googleapis.com/css?family=EB+Garamond|Great+Vibes|Petit+Formal+Script'?>' rel='stylesheet' type='text/css'>
 <meta name="msapplication-TileColor" content="#f01d4f">
 <script src="https://cdn.tailwindcss.com"></script>

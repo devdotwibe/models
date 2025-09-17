@@ -236,7 +236,7 @@ if (isset($_POST['vfb-submit'])) {
 
         $result = sendMail(
             $email,
-            "Mail Verification for Model Project",
+            " Mail Verification for The Live Models",
             "mail/email_verfiy.php",
             [
                 "VERIFY_LINK" => $verify_link,

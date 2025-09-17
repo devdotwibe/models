@@ -37,10 +37,11 @@
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
                                     <td align="center">
-                                        <h2 style="margin: 0 0 20px 0; color: #ffffff; font-size: 32px; font-weight: 700; text-align: center;">Welcome to The Live Models!</h2>
+                                        <h2 style="margin: 0 0 20px 0; color: #ffffff; font-size: 32px; font-weight: 700; text-align: center;">🎉 Welcome to The Live Models! 🎉</h2>
 
 
-                                        <p style="margin: 0 0 40px 0; color: #b0b0b0; font-size: 18px; font-weight: 300; text-align: center;"> Thanks for registering with us. now you can explore the new models and influencers. Now you can able to add coins in account and then you will free to see all images from model's. </p>
+                                        <p style="margin: 0 0 40px 0; color: #b0b0b0; font-size: 18px; font-weight: 300; text-align: center;">   Thanks for registering with us! ✨ Explore amazing new models and influencers.<br>
+                                                 Add coins to your account and unlock all model images instantly 🔓. </p>
                                         
                                         <!-- Divider -->
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -71,6 +72,32 @@
                                                     <a href="{{VERIFY_LINK}}" style="display: inline-block; background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%); color: #ffffff; text-decoration: none; padding: 18px 40px; border-radius: 50px; font-size: 16px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">Verify Email</a>
                                                 </td>
                                             </tr>
+                                        </table>
+
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 30px 0;">
+                                                <tbody><tr>
+                                                    <td style="background-color: #2a2a2a; border: 2px dashed #6a1b9a; border-radius: 12px; padding: 25px;">
+                                                        <p style="margin: 0 0 15px 0; color: #b0b0b0; font-size: 14px; text-align: center;">
+                                                            <strong>Button being shy? 😅</strong> No worries! Just copy and paste this link:
+                                                        </p>
+                                                        <div style="background-color: #0a0a0a; border: 1px solid #6a1b9a; border-radius: 6px; padding: 10px; word-break: break-all;">
+                                                            <span style="color: #bb86fc; font-size: 12px; font-family: 'Courier New', Courier, monospace;">{{VERIFY_LINK}}</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 30px 0;">
+                                                <tbody><tr>
+                                                    <td style="background: linear-gradient(135deg, #2d1b69 0%, #1a0d3d 100%); border-left: 4px solid #bb86fc; border-radius: 8px; padding: 20px;">
+                                                        <h4 style="margin: 0 0 10px 0; color: #bb86fc; font-size: 16px; font-weight: 600;"> 🛡️ Keep It Safe!</h4>
+                                                        <p style="margin: 0; color: #b0b0b0; font-size: 14px; line-height: 1.6;">
+                                                            This special link and code will self-destruct in 4 hours (Mission Impossible style! 🕵️). If you didn't sign up with us, no biggie - just ignore this email or drop our awesome support team a line!
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
                                         </table>
                                   
                             
