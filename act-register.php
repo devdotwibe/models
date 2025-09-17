@@ -246,10 +246,16 @@ if (isset($_POST['vfb-submit'])) {
 
         if ($result === true) {
             
-            echo '<script>
-                sessionStorage.setItem("regSuccessShown", "0");
-                window.location = "login.php?reg=success";
-            </script>';
+            $_SESSION["reg"] = "Resitration success";
+
+            // echo '<script>
+               
+            //     window.location = "login.php";
+            // </script>';
+
+            header("Location: login.php");
+
+            exit;
 
         } else {
 

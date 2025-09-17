@@ -125,9 +125,9 @@ if($_SESSION["log_user"]){
 
                             <?php if(isset($_SESSION["login_error"] )) { ?>
 
-                                <h2><span class="text-danger"><?php echo $_SESSION["login_error"]  ?></span></h2>
+                                <h2><span class="text-danger" style="color:red"><?php echo $_SESSION["login_error"]  ?></span></h2>
 
-                            <?php } ?>
+                            <?php   unset($_SESSION["login_error"]); } ?>
 
                             <?php if(isset($_SESSION["pass_success"] )) { ?>
 
@@ -247,7 +247,7 @@ if($_SESSION["log_user"]){
             </div>
             <div class="modal-body" id="modal_success_message">
 
-                <p>Your registration was successful! You can now login to your account.</p>
+                <p>Your registration was successful! Please check your email to verify your account.</p>
 
                 <a class="btn btn-primary" onclick="CloseModal('success_modal')" >Ok</a>
 
@@ -280,19 +280,17 @@ if($_SESSION["log_user"]){
 
 <script>
 
+    <?php if (isset($_SESSION['reg']) ) { ?>
 
-    <?php if($_GET['reg'] == 'success') { ?>
-        
-        document.addEventListener('DOMContentLoaded', function() {
-          
-            if (!sessionStorage.getItem('regSuccessShown')) {
-                ShowLogin(); 
-                sessionStorage.setItem('regSuccessShown', '1');
-            }
-        });
+            document.addEventListener('DOMContentLoaded', function() {
+                ShowLogin(); // or ShowModal('success_modal')
+            });
 
-    <?php } ?>
+            console.log('test reg');
 
+    <?php  unset($_SESSION['reg']); } ?>
+
+    
     <?php if($_GET['email'] == 'verified') { ?>
     
         document.addEventListener('DOMContentLoaded', function() {
@@ -301,7 +299,7 @@ if($_SESSION["log_user"]){
                 Verifed(); 
                 sessionStorage.setItem('emailVerifedShown', '1');
             }
-        })
+        });
 
     <?php } ?>
 

@@ -1,78 +1,55 @@
 <?php
-
 session_start(); 
+include('includes/config.php');
 
-  include('includes/config.php');
-  if(isset($_POST['vfb-submit'])){
-    $userid = $_POST['username'];
-    $password = $_POST['password'];
+if (isset($_POST['vfb-submit'])) {
+    $userid   = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-  //  echo '<script>alert("'.$userid.'");</script>';
-    // echo '<script>alert("'.$password.'");</script>';
-      $password_hashed = password_hash($password, PASSWORD_DEFAULT);
-      
-      $count1 =0;
+    $sql1 = "SELECT * FROM model_user WHERE username = ? OR email = ? LIMIT 1";
+    $stmt = $con->prepare($sql1);
+    $stmt->bind_param("ss", $userid, $userid);
+    $stmt->execute();
+    $result1 = $stmt->get_result();
 
-      $sql1 = "SELECT * FROM model_user WHERE username = '".$userid."' OR email = '".$userid."'";
+    if ($result1 && $result1->num_rows > 0) {
+        $row1 = $result1->fetch_assoc();
+        $hashed_password = $row1['password'];
 
-      $result1 = mysqli_query($con,$sql1);
-
-       if ($result1 && $result1->num_rows > 0) {
-
-          $row1 = $result1->fetch_assoc();
-
-          $hashed_password = $row1['password']; 
-
-          if(password_verify($password, $hashed_password)) {
-                
-            $count1 =1;
-
-            $user_id1 = $row1['id'];
+        if (password_verify($password, $hashed_password)) {
+           
+            $user_id1   = $row1['id'];
             $user_name1 = $row1['username'];
-            $unique_id = $row1['unique_id'];
-            $email = $row1['email'];
-            $city = $row1['city'];
-            $user_type = 'User';
-            if($row1['as_a_model'] == 'Yes'){
-              $user_type = 'Model';
-            }
-            
-              
-              $sql = "SELECT * FROM model_dp_banner WHERE unique_model_id = '".$unique_id."'";
-              $result = mysqli_query($con,$sql);
+            $unique_id  = $row1['unique_id'];
+            $email      = $row1['email'];
+            $city       = $row1['city'];
+            $user_type  = ($row1['as_a_model'] == 'Yes') ? 'Model' : 'User';
+            $model_profile_pic = '';
 
-              if (mysqli_num_rows($result) > 0) {
-                $row1 = mysqli_fetch_assoc($result);
-                $model_profile_pic = $row1['model_profile_pic'];
-          }
-        }
 
-      }
+            $_SESSION["log_user_id"]       = $user_id1;
+            $_SESSION["log_user"]          = $user_name1;
+            $_SESSION["log_user_unique_id"] = $unique_id;
+            $_SESSION["log_user_email"]    = $email;
+            $_SESSION["user_type"]         = $user_type;
+            $_SESSION["city"]              = $city;
 
-      if($count1 == 1) {
-
-         $_SESSION["log_user_id"] = $user_id1;
-         $_SESSION["log_user"] = $user_name1;
-         $_SESSION["log_user_unique_id"] = $unique_id;
-         $_SESSION["log_user_email"] = $email;
-         $_SESSION["log_user_pro_pic"] = $model_profile_pic;
-         $_SESSION["user_type"] = $user_type;
-         $_SESSION["city"] = $city;
-
-        if (isset($_SESSION["login_error"])) {
             unset($_SESSION["login_error"]);
+
+            echo "<script>window.location.href = 'user/profile/index.php';</script>";
+
+            exit;
+        } else {
+         
+            $_SESSION["login_error"] = "Incorrect password";
+            echo "<script>window.location='login.php';</script>";
+            exit;
         }
-        
-         echo "<script> window.location.href = 'user/profile/index.php'; </script>";
-      }else{
+    } else {
 
-        $_SESSION["login_error"] = "Incorrect Login Details";
-
-        echo "<script>
-
-                 window.location='login.php'
-
-            </script>";
-      }
-  }
+        $_SESSION["login_error"] = "Invalid username or email";
+        echo "<script>window.location='login.php';</script>";
+        exit;
+    }
+}
 ?>
