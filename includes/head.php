@@ -9,10 +9,10 @@
 <link rel="apple-touch-icon" href="/assets/images/favicon.png?v=4">
 
 
-
 <link href='<?='https://fonts.googleapis.com/css?family=EB+Garamond|Great+Vibes|Petit+Formal+Script'?>' rel='stylesheet' type='text/css'>
 <meta name="msapplication-TileColor" content="#f01d4f">
-<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="<?=SITEURL?>assets/js/tailwind.js?v=<?=time()?>"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -42,7 +42,7 @@ else{
 }
 ?>
 
-<script src="<?='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'?>"></script> 
+<script src="<?=SITEURL?>assets/js/bootstrap.min.js?v=<?=time()?>"></script> 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GD6CJ961PF"></script>
