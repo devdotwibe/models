@@ -13,12 +13,12 @@ if(isset($_SESSION["log_user_id"])){
 	$userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 	if($userDetails){}
 	else{
-		echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
+		echo '<script>window.location.href="'.SITEURL.'login"</script>';
 		die;
 	}
 }
 else{
-	echo '<script>window.location.href="'.SITEURL.'login.php"</script>';
+	echo '<script>window.location.href="'.SITEURL.'login"</script>';
 	die;
 }
 
@@ -976,8 +976,8 @@ if(!empty($userDetails['profile_pic'])){
           </div>
 		<?php } ?>
           <div class="space-y-2 user-profile-side-btns">
-            <button class="btn-primary w-full" onclick="navigateTo('edit-profile.php')">Edit Profile</button>
-            <a class="btn-secondary w-full" href="<?= SITEURL ?>single-profile/<?php echo urlencode($userDetails['username']); ?>">View Profile</a>
+            <button class="btn-primary w-full" onclick="navigateTo('edit-profile')">Edit Profile</button>
+            <a class="btn-secondary w-full" href="<?= SITEURL ?><?php echo urlencode($userDetails['username']); ?>">View Profile</a>
           </div>
         </div>
 
@@ -1068,7 +1068,7 @@ if(!empty($userDetails['profile_pic'])){
 
                   ?>
 
-                <div class="flex items-center repeat-users" onclick="window.location.href='<?= SITEURL ?>single-profile/<?php echo urlencode($user['username']); ?>'">
+                <div class="flex items-center repeat-users" onclick="window.location.href='<?= SITEURL ?><?php echo urlencode($user['username']); ?>'">
 
                       <div class="relative">
 
@@ -1090,7 +1090,7 @@ if(!empty($userDetails['profile_pic'])){
 
                   <?php } ?>
 
-                  <button type="button" class="btn-primary w-full" onclick="window.location.href='<?= SITEURL ?>all-models.php?filter=available'" > View all</button>
+                  <button type="button" class="btn-primary w-full" onclick="window.location.href='<?= SITEURL ?>all-members?filter=available'" > View all</button>
                   
               </div>
 
@@ -1808,7 +1808,7 @@ if(!empty($userDetails['profile_pic'])){
                 </div>
                 
                 <div class="space-y-4">
-                    <button onclick="window.location.href='<?= SITEURL . 'edit-profile.php' ?>'" class="w-full glass-button px-8 py-4 rounded-2xl text-white font-semibold text-lg premium-glow">
+                    <button onclick="window.location.href='<?= SITEURL . 'edit-profile' ?>'" class="w-full glass-button px-8 py-4 rounded-2xl text-white font-semibold text-lg premium-glow">
                         Complete My Profile
                     </button>
                     <button onclick="closeOnboarding()" class="text-white/70 hover:text-white transition-colors text-sm">
@@ -1833,7 +1833,7 @@ if(!empty($userDetails['profile_pic'])){
   <nav class="mobile-nav md:hidden footer-mobile-menus">
     <div class="flex justify-around">
 
-      <div class="mobile-nav-item active" onclick="window.location.href='<?= SITEURL ?>user/profile/index.php'" >
+      <div class="mobile-nav-item active" onclick="window.location.href='<?= SITEURL ?>user/profile'" >
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v3H8V5z"></path>
@@ -1841,13 +1841,13 @@ if(!empty($userDetails['profile_pic'])){
         <span>Feed</span>
       </div>
       
-      <div class="mobile-nav-item" onclick="window.location.href='<?= SITEURL ?>all-models.php'" >
+      <div class="mobile-nav-item" onclick="window.location.href='<?= SITEURL ?>all-members'" >
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
         <span>Search</span>
       </div>
-      <div class="mobile-nav-item"  onclick="window.location.href='<?= SITEURL ?>chat-app.php'" >
+      <div class="mobile-nav-item"  onclick="window.location.href='<?= SITEURL ?>chat-app'" >
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
         </svg>
@@ -1855,7 +1855,7 @@ if(!empty($userDetails['profile_pic'])){
       </div>
 
 
-      <div class="mobile-nav-item" onclick="window.location.href='<?= SITEURL ?>single-profile/<?php echo urlencode($userDetails['username'])?>'" >
+      <div class="mobile-nav-item" onclick="window.location.href='<?= SITEURL ?><?php echo urlencode($userDetails['username'])?>'" >
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
         </svg>
