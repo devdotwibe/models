@@ -584,8 +584,8 @@ include('includes/helper.php');
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="sort-options" id="sortOptions">
-                            <div class="sort-option" data-sort="newest"><a href="<?= SITEURL ?>/all-models.php?sort=newest">Newest First</a></div>
-                            <div class="sort-option" data-sort="online"><a href="<?= SITEURL ?>/all-models.php?sort=online">Online Now</a></div>
+                            <div class="sort-option" data-sort="newest"><a href="<?= SITEURL ?>/all-members?sort=newest">Newest First</a></div>
+                            <div class="sort-option" data-sort="online"><a href="<?= SITEURL ?>/all-members?sort=online">Online Now</a></div>
                             <?php /*?> <div class="sort-option" data-sort="popular">Most Popular</div>
                             <div class="sort-option" data-sort="distance">Distance</div>
                             <div class="sort-option" data-sort="price">Price: Low to High</div><?php */ ?>
@@ -1111,7 +1111,7 @@ include('includes/helper.php');
 
                             <div class="profile-image-container">
 
-                                <a href="<?php echo SITEURL; ?>single-profile/<?php echo urlencode($rowesdw['username']); ?>">
+                                <a href="<?php echo SITEURL; ?>/<?php echo urlencode($rowesdw['username']); ?>">
 
                                     <img loading="lazy" src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
@@ -1167,7 +1167,7 @@ include('includes/helper.php');
                             </div>
                             <div class="profile-info">
                                 <h3 class="profile-name">
-                                    <a href="<?php echo SITEURL; ?>single-profile/<?php echo urlencode($rowesdw['username']); ?>">
+                                    <a href="<?php echo SITEURL; ?>/<?php echo urlencode($rowesdw['username']); ?>">
                                         <?php echo ucfirst($modalname);
                                         if (!empty($rowesdw['age'])) {
                                             echo ', ' . $rowesdw['age'];
@@ -1262,7 +1262,7 @@ include('includes/helper.php');
 
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                    <a href="<?= SITEURL ?>chat-app.php?modelid=<?php echo $rowesdw['id']; ?>"
+                                    <a href="<?= SITEURL ?>chat-app?modelid=<?php echo $rowesdw['id']; ?>"
 
                                         class="action-btn chat" title="Chat">
 
@@ -1271,7 +1271,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
 
-                                    <a href="<?= SITEURL ?>login.php"
+                                    <a href="<?= SITEURL ?>login"
 
                                         class="action-btn chat" title="Chat">
 
@@ -1793,7 +1793,7 @@ include('includes/helper.php');
 
                             <div class="profile-image-container">
 
-                                <a href="<?php echo SITEURL; ?>single-profile/<?php echo urlencode($rowesdw['username']); ?>">
+                                <a href="<?php echo SITEURL; ?>/<?php echo urlencode($rowesdw['username']); ?>">
 
                                     <img loading="lazy" src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
@@ -1850,7 +1850,7 @@ include('includes/helper.php');
                             </div>
                             <div class="profile-info">
                                 <h3 class="profile-name">
-                                    <a href="<?php echo SITEURL; ?>single-profile/?<?php echo urlencode($rowesdw['username']); ?>">  
+                                    <a href="<?php echo SITEURL; ?>/?<?php echo urlencode($rowesdw['username']); ?>">  
                                         <?php echo ucfirst($modalname);
                                         if (!empty($rowesdw['age'])) {
                                             echo ', ' . $rowesdw['age'];
@@ -1948,7 +1948,7 @@ include('includes/helper.php');
 
                                 <?php if (isset($_SESSION['log_user_id'])) { ?>
 
-                                    <a href="<?= SITEURL ?>chat-app.php?modelid=<?php echo $rowesdw['id']; ?>"
+                                    <a href="<?= SITEURL ?>chat-app?modelid=<?php echo $rowesdw['id']; ?>"
 
                                         class="action-btn chat" title="Chat">
 
@@ -1957,7 +1957,7 @@ include('includes/helper.php');
 
                                 <?php } else { ?>
 
-                                    <a href="<?= SITEURL ?>login.php"
+                                    <a href="<?= SITEURL ?>login"
 
                                         class="action-btn chat" title="Chat">
 
@@ -2660,7 +2660,7 @@ include('includes/helper.php');
                 <div class="token-packages-subtitle">
                     Get extra TLM tokens for premium interactions, gifts, and exclusive content access
                 </div>
-                <button class="token-packages-btn" onclick="window.location.href='<?= SITEURL .'wallet.php' ?>'">
+                <button class="token-packages-btn" onclick="window.location.href='<?= SITEURL .'wallet' ?>'">
                     🎁 Browse Token Deals
                 </button>
                 <div class="token-expires">⏰ Special token offers expire soon!</div>
@@ -2680,7 +2680,7 @@ include('includes/helper.php');
                 </div>
 
                 <div class="modal-body">
-                    Please login <a href="<?php echo SITEURL . 'login.php'; ?>">here</a>.
+                    Please login <a href="<?php echo SITEURL . 'login'; ?>">here</a>.
                 </div>
 
 
