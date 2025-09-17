@@ -29,7 +29,7 @@ include('includes/helper.php');
     <meta property="og:title" content="All Live Models - Premium Dating & Connection Platform">
     <meta property="og:description" content="Discover and connect with thousands of verified live models worldwide. Premium dating platform with advanced filters and authentic connections.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thelivemodels.com/all-models">
+    <meta property="og:url" content="https://thelivemodels.com/all-members">
     <meta property="og:site_name" content="TheLiveModels.com">
     <meta property="og:image" content="https://thelivemodels.com/images/og-image.jpg">
 
@@ -40,7 +40,7 @@ include('includes/helper.php');
     <meta name="twitter:image" content="https://thelivemodels.com/images/twitter-image.jpg">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://thelivemodels.com/all-models">
+    <link rel="canonical" href="https://thelivemodels.com/all-members">
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -59,7 +59,7 @@ include('includes/helper.php');
             "@type": "WebPage",
             "name": "All Live Models",
             "description": "Browse and connect with verified live models from around the world",
-            "url": "https://thelivemodels.com/all-models",
+            "url": "https://thelivemodels.com/all-members",
             "mainEntity": {
                 "@type": "ItemList",
                 "name": "Live Models Directory",
@@ -584,8 +584,8 @@ include('includes/helper.php');
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="sort-options" id="sortOptions">
-                            <div class="sort-option" data-sort="newest"><a href="<?= SITEURL ?>/all-members?sort=newest">Newest First</a></div>
-                            <div class="sort-option" data-sort="online"><a href="<?= SITEURL ?>/all-members?sort=online">Online Now</a></div>
+                            <div class="sort-option" data-sort="newest"><a href="<?= SITEURL ?>all-members?sort=newest">Newest First</a></div>
+                            <div class="sort-option" data-sort="online"><a href="<?= SITEURL ?>all-members?sort=online">Online Now</a></div>
                             <?php /*?> <div class="sort-option" data-sort="popular">Most Popular</div>
                             <div class="sort-option" data-sort="distance">Distance</div>
                             <div class="sort-option" data-sort="price">Price: Low to High</div><?php */ ?>
@@ -1111,7 +1111,7 @@ include('includes/helper.php');
 
                             <div class="profile-image-container">
 
-                                <a href="<?php echo SITEURL; ?>/<?php echo urlencode($rowesdw['username']); ?>">
+                                <a href="<?php echo SITEURL; ?><?php echo urlencode($rowesdw['username']); ?>">
 
                                     <img loading="lazy" src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
@@ -1167,7 +1167,7 @@ include('includes/helper.php');
                             </div>
                             <div class="profile-info">
                                 <h3 class="profile-name">
-                                    <a href="<?php echo SITEURL; ?>/<?php echo urlencode($rowesdw['username']); ?>">
+                                    <a href="<?php echo SITEURL; ?><?php echo urlencode($rowesdw['username']); ?>">
                                         <?php echo ucfirst($modalname);
                                         if (!empty($rowesdw['age'])) {
                                             echo ', ' . $rowesdw['age'];
@@ -1793,7 +1793,7 @@ include('includes/helper.php');
 
                             <div class="profile-image-container">
 
-                                <a href="<?php echo SITEURL; ?>/<?php echo urlencode($rowesdw['username']); ?>">
+                                <a href="<?php echo SITEURL; ?><?php echo urlencode($rowesdw['username']); ?>">
 
                                     <img loading="lazy" src="<?= $prof_img ?>" alt="<?php echo $modalname . ', ' . $rowesdw['age']; ?>" class="profile-image">
 
@@ -1850,7 +1850,7 @@ include('includes/helper.php');
                             </div>
                             <div class="profile-info">
                                 <h3 class="profile-name">
-                                    <a href="<?php echo SITEURL; ?>/?<?php echo urlencode($rowesdw['username']); ?>">  
+                                    <a href="<?php echo SITEURL; ?><?php echo urlencode($rowesdw['username']); ?>">  
                                         <?php echo ucfirst($modalname);
                                         if (!empty($rowesdw['age'])) {
                                             echo ', ' . $rowesdw['age'];
