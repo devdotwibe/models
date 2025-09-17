@@ -171,12 +171,12 @@ $(document).ready(function(){
 			
 				<?php if ($_SESSION["log_user"]) { ?>
 			
-                <a class="btn-primary px-8 py-3 rounded-full font-semibold shadow-lg" href="<?= SITEURL ?>logout.php">
+                <a class="btn-primary px-8 py-3 rounded-full font-semibold shadow-lg" href="<?= SITEURL ?>logout">
                 Logout
                 </a>
 
                 <?php } else { ?>
-                <a class="btn-primary px-8 py-3 rounded-full font-semibold shadow-lg" href="<?= SITEURL ?>login.php">
+                <a class="btn-primary px-8 py-3 rounded-full font-semibold shadow-lg" href="<?= SITEURL ?>login">
                 Sign In
                 </a>
               <?php } ?>
