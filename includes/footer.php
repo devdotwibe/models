@@ -233,7 +233,7 @@ $currentpage = $_SERVER['REQUEST_URI'];
             <div>
                 <h4 class="font-bold mb-6 text-xl premium-text">Services</h4>
                 <ul class="space-y-4 text-white/60 text-lg">
-                    <li><a href="<?= SITEURL ?>all-members.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*?>onclick="navigateTo('models')" */ ?> >All Members</a></li>
+                    <li><a href="<?= SITEURL ?>all-members" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*?>onclick="navigateTo('models')" */ ?> >All Members</a></li>
                     <li><a href="<?= SITEURL ?>advertisements/" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="navigateTo('ads')" */ ?> >Advertisements</a></li>
                 </ul>
             </div>
@@ -241,17 +241,17 @@ $currentpage = $_SERVER['REQUEST_URI'];
             <div>
                 <h4 class="font-bold mb-6 text-xl premium-text">Support</h4>
                 <ul class="space-y-4 text-white/60 text-lg">
-                    <li><a href="<?= SITEURL ?>contact-support.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /* onclick="openSupport()" */ ?> >Contact Support</a></li>
-                    <li><a href="<?= SITEURL ?>verification-help.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openVerificationHelp()" */ ?> >Verification Help</a></li>
+                    <li><a href="<?= SITEURL ?>contact-support" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /* onclick="openSupport()" */ ?> >Contact Support</a></li>
+                    <li><a href="<?= SITEURL ?>verification-help" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openVerificationHelp()" */ ?> >Verification Help</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4 class="font-bold mb-6 text-xl premium-text">Legal</h4>
                 <ul class="space-y-4 text-white/60 text-lg">
-                    <li><a href="<?= SITEURL ?>tls-tom.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openTerms()" */ ?> >Terms of Service</a></li>
-                    <li><a href="<?= SITEURL ?>privacy-policy.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openPrivacy()" */ ?> >Privacy Policy</a></li>
-                    <li><a href="<?= SITEURL ?>verification-policy.php" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openVerificationPolicy()" */ ?> >Verification Policy</a></li>
+                    <li><a href="<?= SITEURL ?>tls-tom" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openTerms()" */ ?> >Terms of Service</a></li>
+                    <li><a href="<?= SITEURL ?>privacy-policy" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openPrivacy()" */ ?> >Privacy Policy</a></li>
+                    <li><a href="<?= SITEURL ?>verification-policy" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openVerificationPolicy()" */ ?> >Verification Policy</a></li>
                 </ul>
             </div>
         </div>
@@ -1119,7 +1119,7 @@ if(isset($_SESSION['log_user_id'])){
 
     function connectWithModel(modelId) {
        // alert(`💕 Premium Connection - Connecting with ${modelId}...`);
-	   window.location.href = '<?= SITEURL ?>single-profile.php/'+modelId;
+	   window.location.href = '<?= SITEURL ?>/'+modelId;
         closeModelPreview();
     }
 
@@ -1134,7 +1134,7 @@ if(isset($_SESSION['log_user_id'])){
 
     function viewAllModels() {
         //alert('👥 Premium Browse - Loading all verified members...');
-		window.location.href = '<?= SITEURL ?>all-members.php';
+		window.location.href = '<?= SITEURL ?>all-members';
     }
 
     function becomeModel() {
