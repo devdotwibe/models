@@ -17,7 +17,7 @@ $serviceArr = array('Providing services', 'Looking for services');
 <html lang="en-US" class="no-js">
 
 <head>
-
+    <meta charset="UTF-8">
     <title>Model Advertisements - Premium Talent Directory  | The Live Models </title>
     <meta name="description" content="Browse premium model advertisements with enhanced grid and expanded views. Find verified models, influencers, and creators for your projects.">
 	<link rel="canonical" href="https://thelivemodels.com/" />

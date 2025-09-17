@@ -7,8 +7,9 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
-    
-    <link rel="preconnect" href="https://www.googletagmanager.com">
+<meta charset="UTF-8">
+
+<link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="preconnect" href="https://www.google-analytics.com">
     <!-- Google Analytics (replace with your tracking ID) -->
     
@@ -25,8 +26,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
   });
 </script>
 
-    <!-- Essential Meta Tags -->
-    <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
@@ -914,8 +914,9 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
                     'event_label': 'verification_help'
                 });
             }
-            alert('📧 Premium Support - Opening support ticket system...');
+            //alert('📧 Premium Support - Opening support ticket system...');
             // window.location.href = 'https://thelivemodels.com/support';
+			window.location.href = '<?= SITEURL ?>contact-support.php';
         }
     </script>
 

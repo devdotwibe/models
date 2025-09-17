@@ -5,7 +5,8 @@ include('includes/helper.php');
 <!doctype html>
 <html lang="en-US" class="no-js">
   <head>
-
+  <meta charset="UTF-8">
+  
   <title> Verification Policy | The Live Models </title>
   <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
 	<link rel="canonical" href="https://thelivemodels.com/" />

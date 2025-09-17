@@ -8,8 +8,10 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 <!doctype html>
 <html lang="en-US" class="no-js">
   <head>
+
+    <meta charset="UTF-8">
     <title>Chat, Watch, Meet and Travel Worldwide | The Live Models </title>
-    <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
+    <meta name="description" content="The premier platform for authentic connections. Chat, Watch, Meet and Travel with amazing members and creators. Discover safe and real connections worldwide.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -452,7 +454,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                             <div class="mt-8 text-center">
                                 <p class="text-white/50 text-sm">
-                                    By joining, you agree to our <a href="<?= SITEURL.'tls-tom.php'?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium read-more-btn">Terms</a> and <a href="<?= SITEURL.'privacy-policy.php'?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium read-more-btn">Privacy Policy</a>
+                                    By joining, you agree to our <a href="<?= SITEURL.'tls-tom'?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium read-more-btn">Terms</a> and <a href="<?= SITEURL.'privacy-policy'?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium read-more-btn">Privacy Policy</a>
                                 </p>
                             </div>
                         </div>
@@ -474,7 +476,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                 <div class="vip-section ultra-glass vip-enhanced p-12 rounded-3xl">
                     <div class="grid md:grid-cols-3 gap-12">
 
-                        <div  <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="text-center hover-lift">
+                        <div  <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login' ?>'" <?php }?> class="text-center hover-lift">
                             <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 feature-icon shadow-2xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
                             </div>
@@ -482,7 +484,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             <p class="text-white/70 text-lg">Connect with verified members and creators globally.</p>
                         </div>
 
-                        <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="text-center hover-lift">
+                        <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login' ?>'" <?php }?> class="text-center hover-lift">
                             <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 feature-icon shadow-2xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                             </div>
@@ -490,7 +492,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                             <p class="text-white/70 text-lg">Advanced encryption and privacy controls keep your interactions secure</p>
                         </div>
 
-                        <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="text-center hover-lift">
+                        <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login' ?>'" <?php }?> class="text-center hover-lift">
                             <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 feature-icon shadow-2xl">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                             </div>
@@ -511,7 +513,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                 <p class="text-white/70">Access premium tools for enhanced communication, privacy controls, and personalized experiences</p>
                             </div>
                         </div>
-                        <button type="button" class="btn-primary px-12 py-4 text-white rounded-xl font-bold text-lg shadow-2xl" <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> >
+                        <button type="button" class="btn-primary px-12 py-4 text-white rounded-xl font-bold text-lg shadow-2xl" <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login' ?>'" <?php }?> >
                             Explore Premium Features
                         </button>
                     </div>
@@ -653,25 +655,25 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
         <div class="container mx-auto">
             <div class="text-center mb-20">
                 <h2 class="text-5xl md:text-6xl font-bold heading-font gradient-text mb-6 text-glow">Experience the Connection</h2>
-                <p class="text-2xl text-white/70 max-w-3xl mx-auto">Choose how you want to connect and create unforgettable moments</p>
+                <p class="text-2xl text-white/70 max-w-3xl mx-auto">Choose how you want to connect and create unforgettable moments. Your perfect match awaits.</p>
             </div>
 
             <div class="exp-grid">
 
-                <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login' ?>'" <?php }?> class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                     </div>
                     <h3 class="text-3xl font-bold premium-text mb-6 text-center">Chat</h3>
-                    <p class="text-white/70 leading-relaxed mb-8 text-lg text-center">Engage in intimate conversations that spark connection. Our models are ready to chat about anything that interests you.</p>
+                    <p class="text-white/70 leading-relaxed mb-8 text-lg text-center">Start meaningful conversations and build real connections. Members and creators are always ready to exchange ideas, share stories, and inspire each other.</p>
                     <ul class="text-base text-white/60 space-y-3">
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            <span class="font-medium">Real-time messaging</span>
+                            <span class="font-medium">Instant messaging</span>
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            <span class="font-medium">Photo sharing</span>
+                            <span class="font-medium">Share photos & media</spanShare photos & media
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -679,17 +681,17 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            <span class="font-medium">Private conversations</span>
+                            <span class="font-medium">Secure private chats</span>
                         </li>
                     </ul>
                 </div>
 
-                <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login' ?>'" <?php }?> class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
                     </div>
                     <h3 class="text-3xl font-bold premium-text mb-6 text-center">Watch</h3>
-                    <p class="text-white/70 leading-relaxed mb-8 text-lg text-center">Experience private shows tailored to your desires. HD streaming with interactive features for an immersive experience.</p>
+                    <p class="text-white/70 leading-relaxed mb-8 text-lg text-center">Discover live and on-demand content from creators worldwide. Enjoy immersive video experiences with interactive features that keep you engaged.</p>
                     <ul class="text-base text-white/60 space-y-3">
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -710,12 +712,12 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                     </ul>
                 </div>
 
-                <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login.php' ?>'" <?php }?> class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
+                <div <?php if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.location.href='<?= SITEURL.'login' ?>'" <?php }?> class="exp-content ultra-glass p-10 rounded-2xl hover:scale-105 transition duration-500 shadow-2xl hover-lift">
                     <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-8 feature-icon shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                     </div>
-                    <h3 class="text-3xl font-bold premium-text mb-6 text-center">Meet</h3>
-                    <p class="text-white/70 leading-relaxed mb-8 text-lg text-center">Take your connection to the next level with in-person meetings. All meetings are verified and secure.</p>
+                    <h3 class="text-3xl font-bold premium-text mb-6 text-center">Meet & Travel </h3>
+                    <p class="text-white/70 leading-relaxed mb-8 text-lg text-center">Connect beyond the screen with verified meetups, group activities, and travel adventures, from local events to global tours —  safe, secure, and community-driven.</p>
                     <ul class="text-base text-white/60 space-y-3">
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -723,11 +725,11 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            <span class="font-medium">Secure arrangements</span>
+                            <span class="font-medium">Group Events & Tours </span>
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            <span class="font-medium">Location flexibility</span>
+                            <span class="font-medium">Global Travel</span>
                         </li>
                         <li class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -753,7 +755,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                         <img loading="lazy" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=faces" alt="Success Story" class="w-40 h-40 rounded-2xl object-cover shadow-2xl">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-6 opacity-50"><path d="M10 11h-4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6c0 2.667-1.333 4.333-4 5"></path><path d="M19 11h-4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6c0 2.667-1.333 4.333-4 5"></path></svg>
-                            <p class="text-2xl italic premium-text mb-8 leading-relaxed">I was skeptical at first, but the connections I've made here are genuine. I've found not just clients, but people who truly appreciate me for who I am. This platform changed my life completely.</p>
+                            <p class="text-2xl italic premium-text mb-8 leading-relaxed">I was skeptical at first, but the connections I've made here are genuine. I've found not just friends, but people who truly appreciate me for who I am. This platform has been life changing for me.</p>
                             <div>
                                 <p class="font-bold text-xl premium-text">Elena V.</p>
                                 <p class="text-indigo-400 text-lg font-medium">Top Creator, 1 year</p>
@@ -880,7 +882,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
         function filterModels(link) {
    
-            window.location.href = 'all-models.php?filter=' + encodeURIComponent(link);
+            window.location.href = 'all-member?filter=' + encodeURIComponent(link);
             return false;
         }
 

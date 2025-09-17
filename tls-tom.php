@@ -5,8 +5,12 @@ include('includes/helper.php');
 <!doctype html>
 <html lang="en-US" class="no-js">
   <head>
-    <title>Terms of Service | The Live Models</title>
-    <meta name="description" content="Read the Terms of Service for The Live Models. Learn about user rights, responsibilities, and platform policies.">
+
+  <meta charset="UTF-8">
+
+  <title>Terms of Service | The Live Models</title>
+  
+  <meta name="description" content="Read the Terms of Service for The Live Models. Learn about user rights, responsibilities, and platform policies.">
 	<link rel="canonical" href="https://thelivemodels.com/terms-of-service" />
 	<meta name="robots" content="noindex,follow">
 	<script type="application/ld+json">
