@@ -13,7 +13,7 @@ $stripekey = $_ENV['STRIPE_KEY'];
 
 session_start();
 
-include('../includes/config.php');
+include(__DIR__.'../includes/config.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,7 @@ include('../includes/config.php');
 <head>
     <title>Payment Confirmation Page - Live Models</title>
 
-    <?php include('../includes/head.php'); ?>
+    <?php include(__DIR__.'../includes/head.php'); ?>
 
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">

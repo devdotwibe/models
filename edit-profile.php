@@ -4136,7 +4136,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <div class="token-packages-subtitle">
           Get extra TLM tokens for premium interactions, gifts, and exclusive content access
         </div>
-        <button class="token-packages-btn" onclick="window.location.href='<?= SITEURL . 'wallet.php' ?>'">
+        <button class="token-packages-btn" onclick="window.location.href='<?= SITEURL . 'wallet' ?>'">
           🎁 Browse Token Deals
         </button>
         <div class="token-expires">⏰ Special token offers expire soon!</div>
@@ -4362,7 +4362,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
       const form = document.createElement('form');
       form.method = 'POST';
-      form.action = 'payments/preminum.php';
+      form.action = 'payments/preminum';
 
       const inputPlanType = document.createElement('input');
       inputPlanType.type = 'hidden';
