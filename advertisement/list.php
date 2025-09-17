@@ -1,7 +1,8 @@
 <?php 
 session_start(); 
-include('../includes/config.php');
-include('../includes/helper.php');
+
+include __DIR__ . '/../includes/config.php';
+include __DIR__ . '/../includes/helper.php';
 if (isset($_SESSION['log_user_id'])) {
 	$log_user_id = $_SESSION['log_user_id'];
 	$get_modal_user = DB::query('select as_a_model from model_user where id='.$log_user_id); 
@@ -58,7 +59,7 @@ if (isset($_SESSION['log_user_id'])) {
 
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
 
-<?php  include('../includes/head.php'); ?>
+<?php include __DIR__ . '/../includes/head.php'; ?>
 
 
 <style>
@@ -83,10 +84,10 @@ if (isset($_SESSION['log_user_id'])) {
 
 <body class="min-h-screen text-white profile-advts advt-page  socialwall-page enhanced5">
    
-   <?php  include('../includes/side-bar.php'); ?>
-	<?php  include('../includes/profile_header_index.php'); 
+    <?php   include __DIR__ . '/../includes/side-bar.php';?>
 
-    ?>  
+    <?php include __DIR__ . '/../includes/profile_header_index.php'; ?>
+
 	
 <main class="py-12">
     <div class="container mx-auto">
@@ -324,7 +325,7 @@ if (isset($_SESSION['log_user_id'])) {
 
 
 
- <?php include('../includes/footer.php'); ?>
+ <?php include __DIR__ . '/../includes/footer.php';  ?>
 
 <link href="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
 <script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
