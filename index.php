@@ -8,45 +8,75 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
     exit;
 }
 
-if ($segments[0] === 'single-profile' && !empty($segments[1])) {
-   
-    $_GET['username'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $segments[1]);
 
-    if (file_exists(__DIR__ . '/single-profile.php')) {
-        require __DIR__ . '/single-profile.php';
-    } else {
-        http_response_code(404);
-        require __DIR__ . '/404.php';
+    $excluded = ['advertisements', 'live-stream', 'watch-stream', '404'];
+
+    $routes = [
+        'all-members',
+        'contact-support',
+        'verification-help',
+        'tls-tom',
+        'privacy-policy',
+        'verification-policy',
+        'edit-profile',
+        'my-activity',
+        'wallet',
+        'my-purchase',
+        'optimized_services',
+        'chat-app',
+        'login'
+    ];
+
+    if (!empty($segments[0]) && in_array($segments[0], $routes)) {
+        $file = __DIR__ . '/' . $segments[0] . '.php';
+        if (file_exists($file)) {
+            require $file;
+        } else {
+            http_response_code(404);
+            require __DIR__ . '/404.php';
+        }
+        exit;
     }
-    exit;
-}
 
-if ($segments[0] === 'live-stream' && !empty($segments[1])) {
-    
-    $_GET['username'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $segments[1]);
 
-    if (file_exists(__DIR__ . '/live-stream/index.php')) {
-        require __DIR__ . '/live-stream/index.php';
-    } else {
-        http_response_code(404);
-        require __DIR__ . '/404.php';
+    if (!empty($segments[0]) && !in_array($segments[0], $excluded) && !preg_match('/\.php$/i', $segments[0])) {
+        $_GET['username'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $segments[0]);
+
+        if (file_exists(__DIR__ . '/single-profile.php')) {
+            require __DIR__ . '/single-profile.php';
+        } else {
+            http_response_code(404);
+            require __DIR__ . '/404.php';
+        }
+        exit;
     }
-    exit;
-}
 
-if ($segments[0] === 'watch-stream' && !empty($segments[1])) {
-    
-    $_GET['username'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $segments[1]);
+    if ($segments[0] === 'live-stream' && !empty($segments[1])) {
+        
+        $_GET['username'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $segments[1]);
 
-    if (file_exists(__DIR__ . '/watch-stream/index.php')) {
-        require __DIR__ . '/watch-stream/index.php';
-    } else {
-        http_response_code(404);
-        require __DIR__ . '/404.php';
+        if (file_exists(__DIR__ . '/live-stream/index.php')) {
+            require __DIR__ . '/live-stream/index.php';
+        } else {
+            http_response_code(404);
+            require __DIR__ . '/404.php';
+        }
+        exit;
     }
-    exit;
-}
 
-http_response_code(404);
-require __DIR__ . '/404.php';
-exit;
+    if ($segments[0] === 'watch-stream' && !empty($segments[1])) {
+        
+        $_GET['username'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $segments[1]);
+
+        if (file_exists(__DIR__ . '/watch-stream/index.php')) {
+            require __DIR__ . '/watch-stream/index.php';
+        } else {
+            http_response_code(404);
+            require __DIR__ . '/404.php';
+        }
+        exit;
+    }
+
+    http_response_code(404);
+    require __DIR__ . '/404.php';
+    exit;
