@@ -2271,7 +2271,7 @@ body .owl-carousel .owl-nav.disabled {
 										
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?> href='<?=SITEURL?>booking.php?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Request Meetup</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?> href='<?=SITEURL?>booking?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Request Meetup</a>
 
                     <?php }?>
 					
@@ -2302,7 +2302,7 @@ body .owl-carousel .owl-nav.disabled {
 					
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?=SITEURL?>booking.php?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?=SITEURL?>booking?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
 
                     <?php }?>
 					
@@ -2334,7 +2334,7 @@ body .owl-carousel .owl-nav.disabled {
                         <div class="status-badge status-exclusive">By Quote</div>
                     </div>
 
-                    <a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking.php?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
+                    <a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
 
                 </div>
 		<?php } ?>
@@ -3484,7 +3484,7 @@ jQuery('.socialpaidbtn').click(function(e){
 	}
 	<?php } else{ ?>
 		alert('Please login');
-		window.location='login.php'
+		window.location='login'
 	<?php } ?>
 });
 
@@ -4005,7 +4005,7 @@ jQuery('.send_gift_btn').click(function(){
 
                     $('#buyNowBtn').on('click', function () {
                         
-                            window.location.href = "/wallet.php";
+                            window.location.href = "/wallet";
                     });
                 }
             },
