@@ -37,20 +37,18 @@
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
                                     <td align="center">
-                                        <h2 style="margin: 0 0 20px 0; color: #ffffff; font-size: 32px; font-weight: 700; text-align: center;">🎉 Welcome to The Live Models! 🎉</h2>
+                                        <h2 style="margin: 0 0 20px 0; color: #ffffff; font-size: 32px; font-weight: 700; text-align: center;">🎉 You're about to join something absolutely amazing! 🎉</h2>
 
-
-                                        <p style="margin: 0 0 40px 0; color: #b0b0b0; font-size: 18px; font-weight: 300; text-align: center;">   Thanks for registering with us! ✨ Explore amazing new models and influencers.<br>
-                                                 Add coins to your account and unlock all model images instantly 🔓. </p>
-                                        
                                         <!-- Divider -->
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                             <tr>
                                                 <td style="height: 1px; background: linear-gradient(90deg, transparent 0%, #6a1b9a 50%, transparent 100%); margin: 30px 0;"></td>
                                             </tr>
                                         </table>
-                                        
-                                    
+
+                                        <p style="margin: 0 0 40px 0; color: #cccccc; font-size: 16px; line-height: 1.7; text-align: center;">
+                                            Woohoo! 🚀 You've just taken the first step into our exclusive world of stunning models and incredible content. We're thrilled to have you on board! To unlock your VIP access and keep your account super secure, just use the magic code below or hit that shiny verification button. Let's get this party started! 🎊
+                                        </p>
                                         
                                         <!-- <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 30px 0;">
                                             <tr>
