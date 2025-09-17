@@ -1,22 +1,23 @@
 <?php session_start(); 
 
-include('../includes/config.php');
-include('../includes/helper.php');
+include(__DIR__ . '/../includes/config.php');
+include(__DIR__ . '/../includes/helper.php');
+
 $error = '';
+
 
 
 if (!empty($_GET['username'])) {
 
     $username = $_GET['username'];
 
-    $modelDetails = get_data('model_user', ['username' => $username], true);
+    $modelDetails = get_data('model_user',array('name'=>$username),true);
 
-    $_GET['m_unique_id'] = $modelDetails['unique_id'] ?? null;
+    $_GET['unique_model_id'] = $modelDetails['unique_id'] ?? null;
 } else {
     $username = null;
-    $_GET['m_unique_id'] = null;
+    $_GET['unique_model_id'] = null;
 }
-
 
 if (isset($_SESSION['log_user_id'])) {
   $getUserData = get_data('model_social_link', array('id' => $_SESSION['log_user_id']), true);
@@ -41,23 +42,23 @@ $session_id = $_GET['unique_model_id'];
 <head>
 <meta charset="UTF-8">
 
-    <title>Elite Streaming Platform | The Live Models </title>
+    <title>Elite Streaming | The Live Models </title>
     <meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Elite Streaming Platform | The Live Models">
-<meta property="og:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+<meta property="og:title" content="Elite Streaming | The Live Models">
+<meta property="og:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections..">
 <meta property="og:url" content="https://thelivemodels.com/">
 <meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
 <meta property="og:site_name" content="The Live Models">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Elite Streaming Platform | The Live Models">
-<meta name="twitter:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+<meta name="twitter:title" content="Elite Streaming | The Live Models">
+<meta name="twitter:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections..">
 <meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
 <meta name="twitter:site" content="@thelivemodels">
 
@@ -89,7 +90,7 @@ $session_id = $_GET['unique_model_id'];
       "@id": "https://thelivemodels.com/#website",
       "url": "https://thelivemodels.com/",
       "name": "The Live Models",
-      "description": "Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.",
+      "description": "Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections..",
       "publisher": {
         "@id": "https://thelivemodels.com/#organization"
       },
@@ -103,714 +104,742 @@ $session_id = $_GET['unique_model_id'];
 }
 </script>
 
-
-<?php  include('includes/head.php'); ?>
-
-<link rel="preload" href="<?=SITEURL?>assets/css/profile.css?v=<?=time()?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<?php include(__DIR__ . '/../includes/head.php'); ?>
 
 
-<link rel="preload" href='<?=SITEURL?>assets/css/view.css?v=<?=time()?>'  as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
 
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"   as="style" onload="this.onload=null;this.rel='stylesheet'">
-     
-      
-<?php
-if ($_GET["unique_model_id"] == $_SESSION['log_user_unique_id']) {
-  $user_page = 'model';
-}
-else{
-  $user_page = 'user';
-}
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/stream.css?v=<?=time()?>' type='text/css' media='all' />
 
-?>
-<script>
-var userpage = '<?=$user_page?>';
-</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
 </head>
 
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <div class="header" id="header">
-            <div class="logo-section" onclick="showNotification('Welcome to Elite Streaming Platform! 🎉')">
-                <div class="logo">E</div>
-                <div class="brand-name">Elite</div>
-            </div>
-                        
-            <div class="tabs">
-                <div class="tab active" onclick="switchTab('public')" tabindex="0" role="button" aria-label="Switch to public chat">
-                    <div class="tab-dot"></div>
-                    <span>Public</span>
-                </div>
-                <div class="tab" onclick="switchTab('private')" tabindex="0" role="button" aria-label="Switch to private chat">
-                    <div class="tab-dot"></div>
-                    <span>Private</span>
-                </div>
-            </div>
-                        
-            <div class="user-section">
-                <div class="token-balance" onclick="openModal('tokensModal')" tabindex="0" role="button" aria-label="View token balance and buy more tokens">
-                    🪙 <span id="tokenBalance">2,500</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="main-content">
-
-            <div class="streaming-area" id="streamingArea" role="main" aria-label="Streaming video area">
-        
-                <div class="heart-rain" id="heartRain" aria-hidden="true"></div>
+    <div class="dashboard-container">
+        <!-- Left Sidebar - Stream Preview -->
+        <div class="stream-sidebar" id="streamSidebar">
+            <div class="stream-header">
+                <div class="model-info">
 
                 <input type="hidden" name="user_id" id="user_id_chat" value="<?php echo $userDetails['id'] . $error ?>">
 
                 <input type="hidden" name="model_id" id="model_id_chat" value="<?php echo $_GET['unique_model_id'] ?>">
-                                
-                <video 
-                    class="stream-video"
-                    id="streamVideo"
-                    autoplay 
-                    muted 
-                    loop 
-                    playsinline
-                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23000'/%3E%3C/svg%3E"
-                >
-                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                    <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                                
-                <!-- Loading Animation -->
-                <div class="loading-container" id="loadingContainer" role="status" aria-label="Connecting to stream">
-                    <div class="loading-text">Connecting to Elite Stream...</div>
-                    <div class="loading-dots" aria-hidden="true">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
+
+                <input type="hidden" name="private_id" id="private_id_chat" value=" <?php echo $_GET['private_id'] ?>">
+               
+
+                    <div class="model-avatar">S</div>
+                    <div class="model-details">
+                        <h3>Sarah Elite</h3>
+                        <div class="model-status">
+                            <div class="live-dot public" id="statusDot"></div>
+                            <span id="statusText">Public Show</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Minimal Stats - Top left (viewer count only) -->
-                <div class="stream-stats" role="complementary" aria-label="Stream statistics">
+                <div class="stream-stats">
                     <div class="stat-card">
-                        <div class="live-indicator" aria-hidden="true"></div>
-                        <span id="viewerCount">5.2K</span>
+                        <div class="stat-number">5.2K</div>
+                        <div class="stat-label">Viewers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1.8K</div>
+                        <div class="stat-label">Online</div>
                     </div>
                 </div>
 
-                <!-- Stream Fullscreen Button - Bottom left -->
-                <button class="stream-fullscreen-btn" onclick="toggleStreamFullscreen()" aria-label="Toggle stream fullscreen">
-                    ⛶ Full
+                <div class="stream-controls">
+                    <button class="control-btn primary" onclick="openSettings()">Settings</button>
+                    <button class="control-btn secondary">End Stream</button>
+                </div>
+            </div>
+
+            <div class="stream-preview" id="streamPreview">
+                <video class="preview-video" autoplay muted loop>
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                        type="video/mp4">
+                    <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
+                </video>
+                <div class="preview-placeholder" style="display: none;">
+                    📹<br>
+                    Stream Preview<br>
+                    <small>Your live stream appears here</small>
+                </div>
+                <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Fullscreen">
+                    ⛶
                 </button>
+                <!-- Fullscreen Overlay -->
+                <div class="fullscreen-overlay" id="fullscreenOverlay" style="display: none;">
+                    <div class="overlay-header">
+                        <div class="overlay-title">📊 Stream Overview</div>
+                        <button class="overlay-toggle" onclick="toggleFullscreenOverlay()">✕</button>
+                    </div>
 
-                <!-- Session Buttons - Bottom center -->
-                <div class="session-buttons" role="toolbar" aria-label="Session options">
-                    <button class="session-btn private" onclick="openModal('privateModal')" aria-label="Request private session">
-                        🔒 Private Show
-                    </button>
-                    <button class="session-btn group" onclick="openModal('groupModal')" aria-label="Join or create group session">
-                        👥 Group Show
-                    </button>
+                    <div class="overlay-section">
+                        <div class="overlay-earnings" id="overlayEarnings">4,950 TLM</div>
+                    </div>
+
+                    <div class="overlay-section">
+                        <div class="overlay-stats">
+                            <div class="overlay-stat">
+                                <div class="overlay-stat-number" id="overlayViewers">5.2K</div>
+                                <div class="overlay-stat-label">Viewers</div>
+                            </div>
+                            <div class="overlay-stat">
+                                <div class="overlay-stat-number" id="overlayRequests">3</div>
+                                <div class="overlay-stat-label">Requests</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overlay-section">
+                        <div class="overlay-section-title">Recent Activity</div>
+                        <div class="overlay-recent" id="overlayRecent">
+                            <div class="overlay-message tip">
+                                <div class="overlay-message-time">2:48 PM</div>
+                                <div class="overlay-message-user">Alex_VIP</div>
+                                <div class="overlay-message-content">💰 Tipped 2000 TLM</div>
+                            </div>
+                            <div class="overlay-message new-msg">
+                                <div class="overlay-message-time">2:47 PM</div>
+                                <div class="overlay-message-user">Emma_Gold</div>
+                                <div class="overlay-message-content">Thanks for the show! 💕</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fullscreen Toggle Button (shown when overlay is hidden) -->
+                <button class="overlay-toggle-btn" id="overlayToggleBtn" onclick="toggleFullscreenOverlay()"
+                    style="display: none;">
+                    📊
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Header -->
+            <div class="top-header">
+                <div class="header-title">💬 Private Messages</div>
+                <div class="header-actions">
+                    <div class="notification-badge">5 New</div>
+                    <div class="earnings-display" onclick="toggleEarningsDisplay()">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview%20%281%29-pqXUYJxopemMAuESpbpe5FBDNMVu0u.png"
+                            alt="TLM Token" class="tlm-logo">
+                        <span id="earningsAmount">4,950 TLM</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Chat Area -->
-            <div class="chat-area" id="chatArea" role="complementary" aria-label="Chat area">
-                <!-- Chat Controls -->
-                <div class="chat-controls" role="tablist" aria-label="Chat view controls">
-                    <div class="chat-tab active" onclick="switchChatView('all')" tabindex="0" role="tab" aria-selected="true" aria-label="View all messages">
-                        <span class="chat-tab-icon">💬</span>
-                        <span>All</span>
+            <!-- Messages Area -->
+            <div class="messages-area">
+                <!-- Conversations List -->
+                <div class="conversations-list">
+                    <div class="conversations-header">
+                        <div class="conversations-title">Private Chats</div>
+                        <div class="conversations-count">5</div>
                     </div>
-                    <div class="chat-tab" onclick="switchChatView('private')" tabindex="0" role="tab" aria-selected="false" aria-label="View private messages">
-                        <span class="chat-tab-icon">📩</span>
-                        <span>Private</span>
-                        <div class="notification-badge" aria-label="3 new private messages">3</div>
+
+                    <!-- Show Requests -->
+                    <div class="show-requests" id="showRequests" style="display:none;">
+                        <div class="requests-header">
+                            <div class="requests-title">🎭 Show Requests</div>
+                            <div class="requests-count" id="requestsCount">3</div>
+                        </div>
+                        <div id="requestsList">
+
+                        </div>
                     </div>
-                    <div class="chat-tab" onclick="toggleUsersOverlay()" tabindex="0" role="button" aria-label="View online users">
-                        <span class="chat-tab-icon">👥</span>
-                        <span>Users</span>
+
+                    <div class="conversations-scroll" id="active_chat_users">
+                
+
+            
                     </div>
-                                        
-                    <div class="online-count" aria-label="Online users count">
-                        <div class="live-indicator" aria-hidden="true"></div>
-                        <span id="onlineCount">1.8K</span>
-                    </div>
+
                 </div>
 
-                <div class="chat-messages" id="chatMessages" role="log" aria-label="Chat messages" aria-live="polite">
-                    <!-- Messages populated by JS -->
+
+
+                <div class="chat-area" style="display:none" id="chat_area" style="display:none;">
+
+
                 </div>
 
-                <!-- Users Overlay -->
-                <div class="users-overlay" id="usersOverlay" role="dialog" aria-label="Online users list">
-                    <div class="users-header">
-                        <span>👥 Online Users</span>
-                        <span class="users-count" id="usersCount">1.8K</span>
-                    </div>
-                    <div id="usersList" role="list">
-                        <!-- Users populated by JS -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-content">
+            <div class="settings-header">
+                <div class="settings-title">⚙️ Stream Settings</div>
+                <button class="close-btn" onclick="closeSettings()">✕</button>
+            </div>
+
+            <div class="settings-section">
+                <h4>Stream Status</h4>
+                <div class="setting-item">
+                    <div class="setting-label">Current Show Type</div>
+                    <div class="setting-control">
+                        <select class="setting-input" onchange="updateShowType(this.value)" id="showTypeSelect">
+                            <option value="public">Public Show</option>
+                            <option value="group">Group Show</option>
+                            <option value="private">Private Show</option>
+                        </select>
                     </div>
                 </div>
+                <div class="setting-item">
+                    <div class="setting-label">Stream Quality</div>
+                    <div class="setting-control">
+                        <select class="setting-input" onchange="updateSetting('stream-quality', this.value)">
+                            <option value="1080p">1080p HD</option>
+                            <option value="720p" selected>720p HD</option>
+                            <option value="480p">480p SD</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Bitrate (kbps)</div>
+                    <div class="setting-control">
+                        <input type="number" class="setting-input" value="2500" min="1000" max="6000"
+                            onchange="updateSetting('bitrate', this.value)">
+                    </div>
+                </div>
+            </div>
 
-                <!-- Chat Input -->
-                <div class="chat-input" role="form" aria-label="Send message">
-                    <div class="input-row">
-                        <button class="quick-tip-btn" onclick="openModal('tipModal')" title="Send Tip" aria-label="Send tip tokens">
-                            💰
-                        </button>
-                        <button class="gift-btn" onclick="openModal('giftModal')" title="Send Gift" aria-label="Send virtual gift">
-                            🎁
-                        </button>
-                        <textarea 
-                            class="message-input"
-                            id="messageInput"
-                            placeholder="Type message..."
-                            onkeypress="handleKeyPress(event)"
-                            aria-label="Type your message"
-                            rows="1"
-                        ></textarea>
-                        <button class="input-btn" onclick="sendMessage()" aria-label="Send message">Send</button>
+            <div class="settings-section">
+                <h4>Show Settings</h4>
+                <div class="setting-item">
+                    <div class="setting-label">Auto-accept private shows</div>
+                    <div class="setting-control">
+                        <div class="toggle-switch" onclick="toggleSetting(this)" data-setting="auto-private"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Show viewer count</div>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this)" data-setting="show-viewers">
+                        </div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Enable tip sounds</div>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this)" data-setting="tip-sounds"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Minimum tip amount</div>
+                    <div class="setting-control">
+                        <input type="number" class="setting-input" value="10" min="1" max="1000"
+                            onchange="updateSetting('min-tip', this.value)"> TLM
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h4>Privacy Settings</h4>
+                <div class="setting-item">
+                    <div class="setting-label">Block anonymous users</div>
+                    <div class="setting-control">
+                        <div class="toggle-switch" onclick="toggleSetting(this)" data-setting="block-anon"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Require tokens to PM</div>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this)" data-setting="require-tokens">
+                        </div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Private show rate (TLM/min)</div>
+                    <div class="setting-control">
+                        <input type="number" class="setting-input" value="60" min="10" max="500"
+                            onchange="updateSetting('private-rate', this.value)">
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h4>Notification Settings</h4>
+                <div class="setting-item">
+                    <div class="setting-label">New message notifications</div>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this)"
+                            data-setting="msg-notifications"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Tip notifications</div>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this)"
+                            data-setting="tip-notifications"></div>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Show request notifications</div>
+                    <div class="setting-control">
+                        <div class="toggle-switch active" onclick="toggleSetting(this)"
+                            data-setting="show-notifications"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Tip Modal -->
-    <div class="modal" id="tipModal" role="dialog" aria-labelledby="tipModalTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-title" id="tipModalTitle">💰 Tip Tokens</div>
-            <p style="color: rgba(255,255,255,0.8); margin-bottom: 12px; font-size: 11px; text-align: center;">
-                Show your appreciation with tokens!
-            </p>
-            <div class="tip-grid" role="radiogroup" aria-label="Select tip amount">
-                <div class="tip-item" onclick="selectTip(this, 10)" tabindex="0" role="radio" aria-checked="false" aria-label="Tip 10 tokens">
-                    <div class="tip-amount">10</div>
-                    <div class="tip-tokens">tokens</div>
-                </div>
-                <div class="tip-item" onclick="selectTip(this, 25)" tabindex="0" role="radio" aria-checked="false" aria-label="Tip 25 tokens - Popular choice">
-                    <div class="tip-amount">25</div>
-                    <div class="tip-tokens">tokens</div>
-                    <div class="tip-popular">Popular</div>
-                </div>
-                <div class="tip-item" onclick="selectTip(this, 50)" tabindex="0" role="radio" aria-checked="false" aria-label="Tip 50 tokens">
-                    <div class="tip-amount">50</div>
-                    <div class="tip-tokens">tokens</div>
-                </div>
-                <div class="tip-item" onclick="selectTip(this, 100)" tabindex="0" role="radio" aria-checked="false" aria-label="Tip 100 tokens">
-                    <div class="tip-amount">100</div>
-                    <div class="tip-tokens">tokens</div>
-                </div>
-                <div class="tip-item" onclick="selectTip(this, 250)" tabindex="0" role="radio" aria-checked="false" aria-label="Tip 250 tokens">
-                    <div class="tip-amount">250</div>
-                    <div class="tip-tokens">tokens</div>
-                </div>
-                <div class="tip-item" onclick="selectTip(this, 500)" tabindex="0" role="radio" aria-checked="false" aria-label="Tip 500 tokens">
-                    <div class="tip-amount">500</div>
-                    <div class="tip-tokens">tokens</div>
-                </div>
-                <div class="tip-item" onclick="selectTip(this, 1000)" tabindex="0" role="radio" aria-checked="false" aria-label="Tip 1000 tokens">
-                    <div class="tip-amount">1000</div>
-                    <div class="tip-tokens">tokens</div>
-                </div>
-                <div class="tip-item" onclick="selectTip(this, 2500)" tabindex="0" role="radio" aria-checked="false" aria-label="Tip 2500 tokens">
-                    <div class="tip-amount">2500</div>
-                    <div class="tip-tokens">tokens</div>
-                </div>
+    <!-- Template Modal -->
+    <div class="template-modal" id="templateModal">
+        <div class="template-modal-content">
+            <h3>Add Custom Template</h3>
+            <input type="text" class="template-input" id="templateInput" placeholder="Enter your message template..."
+                maxlength="100">
+            <div class="template-actions">
+                <button class="template-action-btn save" onclick="saveTemplate()">Save</button>
+                <button class="template-action-btn cancel" onclick="closeTemplateModal()">Cancel</button>
             </div>
-            <textarea 
-                id="tipMessage"
-                placeholder="Add a message (optional)..."
-                style="width: 100%; padding: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; margin-bottom: 12px; font-size: 11px; resize: none; height: 60px; font-family: inherit;"
-                aria-label="Optional message with your tip"
-            ></textarea>
-            <button class="btn btn-tip" onclick="sendTip()" id="sendTipBtn" disabled>Send Tip</button>
-            <button class="btn btn-secondary" onclick="closeModal('tipModal')">Cancel</button>
         </div>
     </div>
 
-    <!-- Tokens Purchase Modal -->
-    <div class="modal" id="tokensModal" role="dialog" aria-labelledby="tokensModalTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-title" id="tokensModalTitle">🪙 Buy Tokens</div>
-            <p style="color: rgba(255,255,255,0.8); margin-bottom: 12px; font-size: 11px; text-align: center;">
-                Current Balance: <span style="color: #ffd700; font-weight: 700;" id="currentBalance">2,500</span> tokens
-            </p>
-            <div class="tip-grid" role="radiogroup" aria-label="Select token package">
-                <div class="tip-item" onclick="selectTokenPackage(this, 100, 5)" tabindex="0" role="radio" aria-checked="false" aria-label="Buy 100 tokens for $5">
-                    <div class="tip-amount">100</div>
-                    <div class="tip-tokens">$5</div>
-                </div>
-                <div class="tip-item" onclick="selectTokenPackage(this, 250, 10)" tabindex="0" role="radio" aria-checked="false" aria-label="Buy 250 tokens for $10 with 10% bonus">
-                    <div class="tip-amount">250</div>
-                    <div class="tip-tokens">$10</div>
-                    <div class="tip-popular">+10% Bonus</div>
-                </div>
-                <div class="tip-item" onclick="selectTokenPackage(this, 500, 20)" tabindex="0" role="radio" aria-checked="false" aria-label="Buy 500 tokens for $20">
-                    <div class="tip-amount">500</div>
-                    <div class="tip-tokens">$20</div>
-                </div>
-                <div class="tip-item" onclick="selectTokenPackage(this, 1000, 35)" tabindex="0" role="radio" aria-checked="false" aria-label="Buy 1000 tokens for $35 - Best value">
-                    <div class="tip-amount">1000</div>
-                    <div class="tip-tokens">$35</div>
-                    <div class="tip-popular">Best Value</div>
-                </div>
-                <div class="tip-item" onclick="selectTokenPackage(this, 2500, 75)" tabindex="0" role="radio" aria-checked="false" aria-label="Buy 2500 tokens for $75">
-                    <div class="tip-amount">2500</div>
-                    <div class="tip-tokens">$75</div>
-                </div>
-                <div class="tip-item" onclick="selectTokenPackage(this, 5000, 140)" tabindex="0" role="radio" aria-checked="false" aria-label="Buy 5000 tokens for $140 - VIP package">
-                    <div class="tip-amount">5000</div>
-                    <div class="tip-tokens">$140</div>
-                    <div class="tip-popular">VIP</div>
-                </div>
-            </div>
-            <button class="btn btn-tip" onclick="buyTokens()" id="buyTokensBtn" disabled>Buy Tokens</button>
-            <button class="btn btn-secondary" onclick="closeModal('tokensModal')">Cancel</button>
-        </div>
-    </div>
-
-    <!-- Gift Modal -->
-    <div class="modal" id="giftModal" role="dialog" aria-labelledby="giftModalTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-title" id="giftModalTitle">🎁 Send Gift</div>
-            <div class="gift-grid" role="radiogroup" aria-label="Select gift to send">
-                <div class="gift-item" onclick="selectGift(this, 'rose', 50)" tabindex="0" role="radio" aria-checked="false" aria-label="Send rose for 50 tokens">
-                    <div class="gift-emoji">🌹</div>
-                    <div class="gift-name">Rose</div>
-                    <div class="gift-price">50 tokens</div>
-                </div>
-                <div class="gift-item" onclick="selectGift(this, 'heart', 100)" tabindex="0" role="radio" aria-checked="false" aria-label="Send heart for 100 tokens">
-                    <div class="gift-emoji">💖</div>
-                    <div class="gift-name">Heart</div>
-                    <div class="gift-price">100 tokens</div>
-                </div>
-                <div class="gift-item" onclick="selectGift(this, 'diamond', 500)" tabindex="0" role="radio" aria-checked="false" aria-label="Send diamond for 500 tokens">
-                    <div class="gift-emoji">💎</div>
-                    <div class="gift-name">Diamond</div>
-                    <div class="gift-price">500 tokens</div>
-                </div>
-                <div class="gift-item" onclick="selectGift(this, 'crown', 1000)" tabindex="0" role="radio" aria-checked="false" aria-label="Send crown for 1000 tokens">
-                    <div class="gift-emoji">👑</div>
-                    <div class="gift-name">Crown</div>
-                    <div class="gift-price">1000 tokens</div>
-                </div>
-                <div class="gift-item" onclick="selectGift(this, 'car', 2500)" tabindex="0" role="radio" aria-checked="false" aria-label="Send luxury car for 2500 tokens">
-                    <div class="gift-emoji">🚗</div>
-                    <div class="gift-name">Luxury Car</div>
-                    <div class="gift-price">2500 tokens</div>
-                </div>
-                <div class="gift-item" onclick="selectGift(this, 'yacht', 5000)" tabindex="0" role="radio" aria-checked="false" aria-label="Send yacht for 5000 tokens">
-                    <div class="gift-emoji">🛥️</div>
-                    <div class="gift-name">Yacht</div>
-                    <div class="gift-price">5000 tokens</div>
-                </div>
-            </div>
-            <button class="btn btn-primary" onclick="sendGift()" id="sendGiftBtn" disabled>Send Gift</button>
-            <button class="btn btn-secondary" onclick="closeModal('giftModal')">Cancel</button>
-        </div>
-    </div>
-
-    <!-- Private Modal -->
-    <div class="modal" id="privateModal" role="dialog" aria-labelledby="privateModalTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-title" id="privateModalTitle">🔒 Private Session</div>
-            <p style="color: rgba(255,255,255,0.8); margin: 10px 0; font-size: 11px;">
-                Request a private session with exclusive features.
-            </p>
-            <select name="chat_coin" id="chat_coin" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; margin-bottom: 12px; font-size: 11px; font-family: inherit;" aria-label="Select private session duration">
-
-                <option value="15" >15 minutes - 1,000 tokens</option>
-                <option value="30" >30 minutes - 1,800 tokens</option>
-                <option value="60" >60 minutes - 3,000 tokens</option>
-            </select>
-
-            <button class="btn btn-primary" onclick="sendPrivateRequest()">Send Request</button>
-            <button class="btn btn-secondary" onclick="closeModal('privateModal')">Cancel</button>
-        </div>
-    </div>
-
-    <!-- Group Modal -->
-    <div class="modal" id="groupModal" role="dialog" aria-labelledby="groupModalTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-title" id="groupModalTitle">👥 Group Session</div>
-            <p style="color: rgba(255,255,255,0.8); margin: 10px 0; font-size: 11px;">
-                Join or create a group session with other users.
-            </p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0;" role="radiogroup" aria-label="Select group session type">
-                <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; font-size: 10px; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;" onclick="selectGroupType('join')" tabindex="0" role="radio" aria-checked="false" aria-label="Join existing group for 500 tokens">
-                    <div style="margin-bottom: 6px;">Join Group</div>
-                    <div style="color: #10b981; font-weight: 600;">500 tokens</div>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; font-size: 10px; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease;" onclick="selectGroupType('create')" tabindex="0" role="radio" aria-checked="false" aria-label="Create new group for 800 tokens">
-                    <div style="margin-bottom: 6px;">Create Group</div>
-                    <div style="color: #10b981; font-weight: 600;">800 tokens</div>
-                </div>
-            </div>
-            <button class="btn btn-primary" onclick="sendGroupRequest()">Send Request</button>
-            <button class="btn btn-secondary" onclick="closeModal('groupModal')">Cancel</button>
-        </div>
-    </div>
-
-    <!-- Premium Subscription Modal -->
-    <div class="modal" id="premiumModal" role="dialog" aria-labelledby="premiumModalTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-title" id="premiumModalTitle">⭐ Premium Membership</div>
-            <p style="color: rgba(255,255,255,0.8); margin-bottom: 16px; font-size: 11px; text-align: center;">
-                Unlock exclusive features and private messaging!
-            </p>
-            <div class="tip-grid" role="radiogroup" aria-label="Select premium package">
-                <div class="tip-item" onclick="selectPremiumPackage(this, 'monthly', 19.99)" tabindex="0" role="radio" aria-checked="false" aria-label="Monthly premium for $19.99">
-                    <div class="tip-amount">Monthly</div>
-                    <div class="tip-tokens">$19.99</div>
-                </div>
-                <div class="tip-item" onclick="selectPremiumPackage(this, 'yearly', 199.99)" tabindex="0" role="radio" aria-checked="false" aria-label="Yearly premium for $199.99 - Best value">
-                    <div class="tip-amount">Yearly</div>
-                    <div class="tip-tokens">$199.99</div>
-                    <div class="tip-popular">Best Value</div>
-                </div>
-            </div>
-            <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 12px; margin: 12px 0; font-size: 10px;">
-                <div style="font-weight: 600; margin-bottom: 6px; color: #8b5cf6;">Premium Benefits:</div>
-                <div style="color: rgba(255,255,255,0.8);">
-                    • Private messaging with models<br>
-                    • Priority chat support<br>
-                    • Exclusive content access<br>
-                    • No ads<br>
-                    • Special premium badge
-                </div>
-            </div>
-            <button class="btn btn-primary" onclick="buyPremium()" id="buyPremiumBtn" disabled>Subscribe to Premium</button>
-            <button class="btn btn-secondary" onclick="closeModal('premiumModal')">Cancel</button>
-        </div>
-    </div>
-
-    <!-- Notification -->
-    <div class="notification" id="notification" role="alert" aria-live="assertive"></div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
-        let selectedGift = null;
-        let selectedTip = null;
-        let selectedTokenPackage = null;
-        let selectedPremiumPackage = null;
-        let selectedGroupType = null;
-        let currentChatView = 'all';
-        let usersOverlayVisible = false;
-        let isFullscreen = false;
-        let isStreamFullscreen = false;
-        let tokenBalance = 2500;
-        let totalTips = 1247;
-        let messageCount = 0;
-        let isPremiumUser = false;
-
-        const users = [
-            { name: 'Alex_VIP', type: 'vip', avatar: '👨', status: 'Tipping 💰' },
-            { name: 'Sarah_Premium', type: 'premium', avatar: '👩', status: 'Chatting 💬' },
-            { name: 'Mike_Mod', type: 'mod', avatar: '👨‍💼', status: 'Moderating 🛡️' },
-            { name: 'Emma_Gold', type: 'vip', avatar: '👸', status: 'Sending gifts 🎁' },
-            { name: 'John_User', type: 'regular', avatar: '👤', status: 'Watching 👀' },
-            { name: 'Lisa_Premium', type: 'premium', avatar: '👩‍🦰', status: 'Dancing 💃' },
-            { name: 'David_VIP', type: 'vip', avatar: '🤵', status: 'Enjoying show 😍' }
+        let currentConversation = 'alex';
+        let customTemplates = [];
+        let showRequests = [
+            { user: 'Alex_VIP', type: 'Private Show - 30min', id: 'alex_private' },
+            { user: 'Emma_Gold', type: 'Group Show', id: 'emma_group' },
+            { user: 'David_Premium', type: 'Private Show - 15min', id: 'david_private' }
         ];
+        let showTokens = true; // Toggle between tokens and dollars
+        let totalTokens = 4950;
+        let tokenRate = 0.05; // $0.05 per token
+        let currentShowType = 'public'; // public, group, private
 
-        const privateMessages = [
-            { from: 'Sarah_Premium', message: 'Hey! Want to go private? 😘', time: '2m', type: 'premium' },
-            { from: 'Emma_Gold', message: 'Thanks for the amazing tip! 💕', time: '5m', type: 'vip' },
-            { from: 'Alex_VIP', message: 'You\'re incredible! 🥰', time: '8m', type: 'vip' },
-            { from: 'Lisa_Premium', message: 'Love your energy tonight! ✨', time: '12m', type: 'premium' }
-        ];
-
-        const publicMessages = [
-            { from: 'Sarah_Premium', message: 'Welcome to Elite Stream! 🎉', type: 'premium' },
-            { from: 'Alex_VIP', message: 'Amazing show tonight! 🔥', type: 'vip' },
-            { from: 'Mike_Mod', message: 'Remember to follow the chat rules everyone! 📋', type: 'mod' },
-            { from: 'Emma_Gold', message: 'This music is perfect! 🎵', type: 'vip' }
-        ];
-
-        // Initialize app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            populateUsers();
-            addInitialMessages();
-            updateTokenDisplay();
-            setupKeyboardNavigation();
-            setupTouchGestures();
-                        
-            // Auto-resize textarea
-            const messageInput = document.getElementById('messageInput');
-            messageInput.addEventListener('input', autoResizeTextarea);
-
-            // Video element event listeners
-            const video = document.getElementById('streamVideo');
-            const loadingContainer = document.getElementById('loadingContainer');
-
-            video.addEventListener('canplay', () => {
-                loadingContainer.classList.add('hidden');
-            });
-
-            video.addEventListener('waiting', () => {
-                loadingContainer.classList.remove('hidden');
-            });
-
-            video.addEventListener('playing', () => {
-                loadingContainer.classList.add('hidden');
-            });
-
-            video.addEventListener('pause', () => {
-                loadingContainer.classList.remove('hidden');
-            });
-
-            video.addEventListener('ended', () => {
-                loadingContainer.classList.remove('hidden');
-            });
-        });
-
-        function setupKeyboardNavigation() {
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    document.querySelectorAll('.modal.show').forEach(modal => {
-                        closeModal(modal.id);
-                    });
-                    if (usersOverlayVisible) {
-                        toggleUsersOverlay();
-                    }
-                }
-                                
-                if (e.key === 'Enter' && e.target.classList.contains('tip-item')) {
-                    e.target.click();
-                }
-                if (e.key === 'Enter' && e.target.classList.contains('gift-item')) {
-                    e.target.click();
-                }
-                if (e.key === 'Enter' && e.target.classList.contains('tab')) {
-                    e.target.click();
-                }
-                if (e.key === 'Enter' && e.target.classList.contains('chat-tab')) {
-                    e.target.click();
-                }
-            });
-        }
-
-        function setupTouchGestures() {
-            let touchStartY = 0;
-            let touchEndY = 0;
-                        
-            document.addEventListener('touchstart', function(e) {
-                touchStartY = e.changedTouches[0].screenY;
-            });
-                        
-            document.addEventListener('touchend', function(e) {
-                touchEndY = e.changedTouches[0].screenY;
-                handleSwipeGesture();
-            });
-                        
-            function handleSwipeGesture() {
-                const swipeThreshold = 50;
-                const diff = touchStartY - touchEndY;
-                                
-                if (diff > swipeThreshold && (isFullscreen || isStreamFullscreen)) {
-                    const header = document.getElementById('header');
-                    if (!header.classList.contains('hidden')) {
-                        header.classList.add('hidden');
-                        showNotification('Header hidden. Swipe down to show.');
-                    }
-                }
-                                
-                if (diff < -swipeThreshold && (isFullscreen || isStreamFullscreen)) {
-                    const header = document.getElementById('header');
-                    if (header.classList.contains('hidden')) {
-                        header.classList.remove('hidden');
-                        showNotification('Header shown.');
-                    }
-                }
+        let conversations = {
+            alex: {
+                name: 'Alex_VIP',
+                type: 'vip',
+                avatar: '👨',
+                online: true,
+                favorite: true,
+                tokensToday: 2500,
+                showType: 'public',
+                messages: [
+                    { type: 'received', content: 'Hey beautiful! 😍', time: '2:45 PM' },
+                    { type: 'tip', content: '💰 Alex_VIP tipped 500 TLM! "You\'re amazing!"' },
+                    { type: 'received', content: 'Want to go private? I have some special requests 😘', time: '2:46 PM' },
+                    { type: 'sent', content: 'Thank you so much for the tip! 💕 I\'d love to chat privately with you!', time: '2:47 PM' },
+                    { type: 'received', content: 'Perfect! How much for 30 minutes private?', time: '2:47 PM' },
+                    { type: 'sent', content: '30 minutes private is 2000 TLM. We can have so much fun! 🔥', time: '2:48 PM' },
+                    { type: 'tip', content: '💰 Alex_VIP tipped 2000 TLM! "Let\'s go private now!"' }
+                ]
+            },
+            emma: {
+                name: 'Emma_Gold',
+                type: 'vip',
+                avatar: '👸',
+                online: true,
+                favorite: false,
+                tokensToday: 1250,
+                showType: 'group',
+                messages: [
+                    { type: 'received', content: 'Thanks for the amazing show! 💕', time: '2:40 PM' },
+                    { type: 'tip', content: '💰 Emma_Gold tipped 250 TLM!' },
+                    { type: 'received', content: 'You always make my day better! 🥰', time: '2:41 PM' }
+                ]
+            },
+            david: {
+                name: 'David_Premium',
+                type: 'premium',
+                avatar: '🤵',
+                online: true,
+                favorite: false,
+                tokensToday: 800,
+                showType: 'private',
+                messages: [
+                    { type: 'received', content: 'You\'re incredible tonight! 🔥', time: '2:35 PM' },
+                    { type: 'sent', content: 'Thank you so much! You\'re so sweet! 😘', time: '2:36 PM' }
+                ]
+            },
+            lisa: {
+                name: 'Lisa_Premium',
+                type: 'premium',
+                avatar: '👩‍🦰',
+                online: true,
+                favorite: true,
+                tokensToday: 600,
+                showType: 'public',
+                messages: [
+                    { type: 'received', content: 'Love your energy! ✨', time: '2:30 PM' },
+                    { type: 'sent', content: 'Aww thank you! You always brighten my day! 💕', time: '2:31 PM' }
+                ]
+            },
+            mike: {
+                name: 'Mike_User',
+                type: 'regular',
+                avatar: '👤',
+                online: true,
+                favorite: false,
+                tokensToday: 100,
+                showType: 'public',
+                messages: [
+                    { type: 'received', content: 'Hi there! 👋', time: '2:25 PM' },
+                    { type: 'sent', content: 'Hello! Welcome to my room! 😊', time: '2:26 PM' }
+                ]
             }
-        }
+        };
 
-        function autoResizeTextarea() {
-            const textarea = document.getElementById('messageInput');
-            textarea.style.height = 'auto';
-            textarea.style.height = Math.min(textarea.scrollHeight, 80) + 'px';
-        }
+        // Settings storage
+        let settings = {
+            'stream-quality': '720p',
+            'bitrate': 2500,
+            'auto-private': false,
+            'show-viewers': true,
+            'tip-sounds': true,
+            'min-tip': 10,
+            'block-anon': false,
+            'require-tokens': true,
+            'private-rate': 60,
+            'msg-notifications': true,
+            'tip-notifications': true,
+            'show-notifications': true
+        };
 
-        function updateTokenDisplay() {
-            document.getElementById('tokenBalance').textContent = tokenBalance.toLocaleString();
-            document.getElementById('currentBalance').textContent = tokenBalance.toLocaleString();
-        }
+        // Update show type and status colors
+        function updateShowType(type) {
+            currentShowType = type;
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
 
-        function populateUsers() {
-            const usersList = document.getElementById('usersList');
-            usersList.innerHTML = '';
-                        
-            users.forEach((user, index) => {
-                const userDiv = document.createElement('div');
-                userDiv.className = 'user-item';
-                userDiv.onclick = () => startPrivateChat(user.name);
-                userDiv.setAttribute('role', 'listitem');
-                userDiv.setAttribute('tabindex', '0');
-                userDiv.setAttribute('aria-label', `${user.name}, ${user.type} user, ${user.status}`);
-                                
-                userDiv.innerHTML = `
-                    <div class="user-avatar ${user.type}">
-                        ${user.avatar}
-                        <div class="online-dot"></div>
-                    </div>
-                    <div class="user-info">
-                        <div class="user-name">${user.name}</div>
-                        <div class="user-status-text">${user.status}</div>
-                    </div>
-                `;
-                                
-                userDiv.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        startPrivateChat(user.name);
-                    }
-                });
-                                
-                usersList.appendChild(userDiv);
-            });
-        }
+            // Update main status
+            statusDot.className = `live-dot ${type}`;
 
-        function addInitialMessages() {
-            const messagesContainer = document.getElementById('chatMessages');
-            messagesContainer.innerHTML = '';
-                        
-            if (currentChatView === 'all') {
-                publicMessages.forEach(msg => {
-                    addMessage(msg.message, 'received', msg.from, msg.type);
-                });
-                                
-                setTimeout(() => {
-                    addMessage('Hey everyone! Great to be here!', 'sent');
-                }, 500);
-                                
-                setTimeout(() => {
-                    addTipAlert('Emma_Gold tipped 250 tokens! 💰', false);
-                }, 1000);
-                                
-                setTimeout(() => {
-                    addGiftAlert('Mike_Mod sent a Diamond! 💎');
-                }, 1500);
-                            
-            } else if (currentChatView === 'private') {
-                showPrivateMessages();
+            switch (type) {
+                case 'public':
+                    statusText.textContent = 'Public Show';
+                    break;
+                case 'group':
+                    statusText.textContent = 'Group Show';
+                    break;
+                case 'private':
+                    statusText.textContent = 'Private Show';
+                    break;
             }
+
+            showNotification(`Show type changed to ${type}`);
         }
 
-        function showPrivateMessages() {
-            const messagesContainer = document.getElementById('chatMessages');
-            messagesContainer.innerHTML = '';
+        // Earnings toggle functionality
+        function toggleEarningsDisplay() {
+            showTokens = !showTokens;
+            const earningsElement = document.getElementById('earningsAmount');
 
-            if (!isPremiumUser) {
-                // Show subscription message for non-premium users
-                const subscriptionDiv = document.createElement('div');
-                subscriptionDiv.className = 'subscription-message';
-                subscriptionDiv.innerHTML = `
-                    <div class="subscription-title">🔒 Premium Feature</div>
-                    <div class="subscription-text">
-                        Subscribe to message and become a premium member to unlock private messaging with models and exclusive features!
-                    </div>
-                    <div class="subscription-buttons">
-                        <button class="subscription-btn" onclick="openModal('premiumModal')">
-                            Subscribe Premium
-                        </button>
-                        <button class="subscription-btn" onclick="openModal('tokensModal')">
-                            Buy Tokens
-                        </button>
-                    </div>
-                `;
-                messagesContainer.appendChild(subscriptionDiv);
+            if (showTokens) {
+                earningsElement.textContent = `${totalTokens.toLocaleString()} TLM`;
             } else {
-                // Show private messages for premium users
-                privateMessages.forEach(msg => {
-                    const messageDiv = document.createElement('div');
-                    messageDiv.className = 'message received';
-                    messageDiv.innerHTML = `
-                        <div class="message-info">
-                            <span>${msg.from}</span>
-                            <span class="user-badge badge-${msg.type}">${msg.type.toUpperCase()}</span>
-                            <span style="margin-left: auto;">${msg.time}</span>
-                        </div>
-                        <div>${msg.message}</div>
-                    `;
-                    messagesContainer.appendChild(messageDiv);
-                });
+                const dollarAmount = (totalTokens * tokenRate).toFixed(2);
+                earningsElement.textContent = `$${dollarAmount}`;
             }
-                        
+        }
+
+        // Improved mobile fullscreen handling
+        function toggleFullscreen() {
+            const streamSidebar = document.getElementById('streamSidebar');
+            const streamPreview = document.getElementById('streamPreview');
+            const fullscreenBtn = streamPreview.querySelector('.fullscreen-btn');
+
+            if (streamSidebar.classList.contains('fullscreen')) {
+                streamSidebar.classList.remove('fullscreen');
+                fullscreenBtn.innerHTML = '⛶';
+                fullscreenBtn.title = 'Fullscreen';
+
+                // Hide overlay
+                document.getElementById('fullscreenOverlay').style.display = 'none';
+                document.getElementById('overlayToggleBtn').style.display = 'none';
+
+                // Exit browser fullscreen on mobile
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().catch(() => { });
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            } else {
+                streamSidebar.classList.add('fullscreen');
+                fullscreenBtn.innerHTML = '⛷';
+                fullscreenBtn.title = 'Exit Fullscreen';
+
+                // Show overlay
+                updateFullscreenOverlay();
+
+                // Request browser fullscreen on mobile for better experience
+                if (streamSidebar.requestFullscreen) {
+                    streamSidebar.requestFullscreen().catch(() => { });
+                } else if (streamSidebar.webkitRequestFullscreen) {
+                    streamSidebar.webkitRequestFullscreen();
+                } else if (streamSidebar.msRequestFullscreen) {
+                    streamSidebar.msRequestFullscreen();
+                }
+            }
+        }
+
+        // Settings functionality
+        function openSettings() {
+            document.getElementById('settingsModal').style.display = 'flex';
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsModal').style.display = 'none';
+        }
+
+        function toggleSetting(element) {
+            element.classList.toggle('active');
+            const settingKey = element.getAttribute('data-setting');
+            if (settingKey) {
+                settings[settingKey] = element.classList.contains('active');
+                showNotification(`Setting updated: ${settingKey}`);
+            }
+        }
+
+        function updateSetting(key, value) {
+            settings[key] = value;
+            showNotification(`${key} updated to ${value}`);
+        }
+
+        // Show requests functionality
+        function acceptRequest(userId, type) {
+            const conversation = conversations[userId];
+            const userName = conversation ? conversation.name : userId;
+            showNotification(`✅ ${type} request from ${userName} accepted!`);
+            removeRequest(userId + '_' + type);
+
+            // Update show type if accepting a request
+            if (type === 'private') {
+                updateShowType('private');
+                document.getElementById('showTypeSelect').value = 'private';
+            } else if (type === 'group') {
+                updateShowType('group');
+                document.getElementById('showTypeSelect').value = 'group';
+            }
+        }
+
+        function declineRequest(userId, type) {
+            const conversation = conversations[userId];
+            const userName = conversation ? conversation.name : userId;
+            showNotification(`❌ ${type} request from ${userName} declined.`);
+            removeRequest(userId + '_' + type);
+        }
+
+        function removeRequest(requestId) {
+            showRequests = showRequests.filter(req => req.id !== requestId);
+            updateRequestsDisplay();
+        }
+
+        // function updateRequestsDisplay() {
+        //     const requestsCount = document.getElementById('requestsCount');
+        //     const requestsList = document.getElementById('requestsList');
+
+        //     requestsCount.textContent = showRequests.length;
+
+        //     if (showRequests.length === 0) {
+        //         document.getElementById('showRequests').style.display = 'none';
+        //     } else {
+        //         requestsList.innerHTML = '';
+        //         showRequests.forEach(request => {
+        //             const requestDiv = document.createElement('div');
+        //             requestDiv.className = 'request-item';
+        //             requestDiv.innerHTML = `
+        //                 <div>
+        //                     <div class="request-user">${request.user}</div>
+        //                     <div class="request-type">${request.type}</div>
+        //                 </div>
+        //                 <div class="request-actions">
+        //                     <button class="request-btn accept" onclick="acceptRequest('${request.id.split('_')[0]}', '${request.id.split('_')[1]}')">✓</button>
+        //                     <button class="request-btn decline" onclick="declineRequest('${request.id.split('_')[0]}', '${request.id.split('_')[1]}')">✗</button>
+        //                 </div>
+        //             `;
+        //             requestsList.appendChild(requestDiv);
+        //         });
+        //     }
+        // }
+
+        // Template functionality
+        function openTemplateModal() {
+            document.getElementById('templateModal').style.display = 'flex';
+            document.getElementById('templateInput').focus();
+        }
+
+        function closeTemplateModal() {
+            document.getElementById('templateModal').style.display = 'none';
+            document.getElementById('templateInput').value = '';
+        }
+
+        function saveTemplate() {
+            const input = document.getElementById('templateInput');
+            const template = input.value.trim();
+
+            if (template && template.length > 0) {
+                customTemplates.push(template);
+                updateCustomTemplates();
+                closeTemplateModal();
+                showNotification('✅ Template saved!');
+            }
+        }
+
+        function updateCustomTemplates() {
+            const container = document.getElementById('customTemplatesList');
+            container.innerHTML = '';
+
+            customTemplates.forEach((template, index) => {
+                const templateDiv = document.createElement('div');
+                templateDiv.className = 'custom-template-item';
+                templateDiv.innerHTML = `
+                    <div class="template-text" onclick="insertQuickMessage('${template.replace(/'/g, "\\'")}')">${template}</div>
+                    <button class="delete-template" onclick="deleteTemplate(${index})">✕</button>
+                `;
+                container.appendChild(templateDiv);
+            });
+        }
+
+        function deleteTemplate(index) {
+            customTemplates.splice(index, 1);
+            updateCustomTemplates();
+            showNotification('🗑️ Template deleted');
+        }
+
+        function selectConversation(userId) {
+            currentConversation = userId;
+
+            // Update active conversation in list
+            document.querySelectorAll('.conversation-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            event.currentTarget.classList.remove('unread');
+
+            // Update unread count
+            const unreadBadge = event.currentTarget.querySelector('.unread-count');
+            if (unreadBadge) {
+                unreadBadge.remove();
+            }
+
+            // Load conversation
+            loadConversation(userId);
+        }
+
+        function loadConversation(userId) {
+            const conversation = conversations[userId];
+            if (!conversation) return;
+
+            // Update chat header
+            const chatHeader = document.querySelector('.chat-header');
+            const userInfo = chatHeader.querySelector('.chat-user-info');
+            const userActions = chatHeader.querySelector('.user-actions');
+
+            // Update status indicator based on show type
+            const statusClass = conversation.showType || 'public';
+
+            userInfo.innerHTML = `
+                <div class="user-avatar ${conversation.type}">
+                    ${conversation.avatar}
+                    ${conversation.online ? `<div class="online-indicator ${statusClass}"></div>` : ''}
+                </div>
+                <div class="chat-user-details">
+                    <h4>${conversation.name}</h4>
+                    <div class="chat-user-status">
+                        ${conversation.online ? `<div class="live-dot ${statusClass}"></div>` : ''}
+                        <span>${conversation.online ? 'Online' : 'Offline'} • ${conversation.type.toUpperCase()} Member • Tipped ${conversation.tokensToday} TLM today</span>
+                    </div>
+                </div>
+            `;
+
+            // Update favorite button
+            const favoriteBtn = userActions.querySelector('.favorite');
+            if (conversation.favorite) {
+                favoriteBtn.classList.add('active');
+                favoriteBtn.innerHTML = '⭐ Favorite';
+            } else {
+                favoriteBtn.classList.remove('active');
+                favoriteBtn.innerHTML = '☆ Add Favorite';
+            }
+
+            // Load messages
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.innerHTML = '';
+
+            conversation.messages.forEach(message => {
+                const messageDiv = document.createElement('div');
+
+                if (message.type === 'tip') {
+                    messageDiv.className = 'tip-message';
+                    messageDiv.textContent = message.content;
+                } else {
+                    messageDiv.className = `message ${message.type}`;
+                    messageDiv.innerHTML = `
+                        ${message.content}
+                        <div class="message-time">${message.time}</div>
+                    `;
+                }
+
+                messagesContainer.appendChild(messageDiv);
+            });
+
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
-        function toggleStreamFullscreen() {
-            const streamingArea = document.getElementById('streamingArea');
-            const chatArea = document.getElementById('chatArea');
-                        
-            isStreamFullscreen = !isStreamFullscreen;
-                        
-            if (isStreamFullscreen) {
-                streamingArea.classList.add('fullscreen');
-                chatArea.style.display = 'none';
-                showNotification('Stream fullscreen activated!', 'tip');
+        function toggleFavorite() {
+            const conversation = conversations[currentConversation];
+            conversation.favorite = !conversation.favorite;
+
+            const favoriteBtn = document.querySelector('.action-btn.favorite');
+            if (conversation.favorite) {
+                favoriteBtn.classList.add('active');
+                favoriteBtn.innerHTML = '⭐ Favorite';
+                showNotification(`${conversation.name} added to favorites!`);
             } else {
-                streamingArea.classList.remove('fullscreen');
-                chatArea.style.display = 'flex';
-                showNotification('Exited stream fullscreen.');
+                favoriteBtn.classList.remove('active');
+                favoriteBtn.innerHTML = '☆ Add Favorite';
+                showNotification(`${conversation.name} removed from favorites.`);
             }
         }
 
-        function switchChatView(view) {
-            currentChatView = view;
-                        
-            document.querySelectorAll('.chat-tab').forEach(tab => {
-                tab.classList.remove('active');
-                tab.setAttribute('aria-selected', 'false');
-            });
-            event.target.closest('.chat-tab').classList.add('active');
-            event.target.closest('.chat-tab').setAttribute('aria-selected', 'true');
-                        
-            const messagesContainer = document.getElementById('chatMessages');
-            messagesContainer.innerHTML = '';
-                        
-            if (view === 'all') {
-                addInitialMessages();
-            } else if (view === 'private') {
-                showPrivateMessages();
-            }
-                        
-            showNotification(`Switched to ${view === 'all' ? 'All Chat' : 'Private Messages'}`);
+        function requestTip() {
+            const conversation = conversations[currentConversation];
+            showNotification(`Tip request sent to ${conversation.name}!`);
+
+            // Add message to conversation
+            const newMessage = {
+                type: 'sent',
+                content: 'Hey sweetie! Would you like to send me a tip? 💕',
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
+
+            conversation.messages.push(newMessage);
+            loadConversation(currentConversation);
         }
 
-        function toggleUsersOverlay() {
-            const overlay = document.getElementById('usersOverlay');
-            usersOverlayVisible = !usersOverlayVisible;
-                        
-            if (usersOverlayVisible) {
-                overlay.classList.add('show');
-                const firstUser = overlay.querySelector('.user-item');
-                if (firstUser) firstUser.focus();
-            } else {
-                overlay.classList.remove('show');
+        function banUser() {
+            const conversation = conversations[currentConversation];
+            if (confirm(`Are you sure you want to ban ${conversation.name}? This will remove them from your room permanently.`)) {
+                showNotification(`${conversation.name} has been banned from your room.`);
+                // In a real app, this would remove the user completely
             }
         }
 
-        function startPrivateChat(username) {
-            showNotification(`Starting private chat with ${username}...`);
-            toggleUsersOverlay();
-                        
-            setTimeout(() => {
-                switchChatView('private');
-            }, 500);
-        }
-
-        function switchTab(tab) {
-            document.querySelectorAll('.tab').forEach(t => {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-            });
-            event.target.closest('.tab').classList.add('active');
-            event.target.closest('.tab').setAttribute('aria-selected', 'true');
-            showNotification(`Switched to ${tab} chat`);
+        function insertQuickMessage(message) {
+            const input = document.getElementById('messageInput');
+            input.value = message;
+            input.focus();
         }
 
         function handleKeyPress(event) {
@@ -820,430 +849,489 @@ var userpage = '<?=$user_page?>';
             }
         }
 
-        function sendMessage() {
-            const input = document.getElementById('messageInput');
-            const message = input.value.trim();
-            
-            if (currentChatView === 'private' && !isPremiumUser) {
-                showNotification('Subscribe to Premium to send private messages!');
-                setTimeout(() => {
-                    openModal('premiumModal');
-                }, 1000);
-                return;
-            }
-            
-            if (message) {
-                addMessage(message, 'sent');
-                input.value = '';
-                input.style.height = 'auto';
-                messageCount++;
-                                
-                setTimeout(() => {
-                    if (currentChatView === 'all') {
-                        const responses = [
-                            'Thanks for chatting! 💕',
-                            'Love your energy! ✨',
-                            'You\'re so sweet! 😍',
-                            'Great to have you here! 🎉'
-                        ];
-                        const response = responses[Math.floor(Math.random() * responses.length)];
-                        addMessage(response, 'received', 'Sarah_Premium', 'premium');
-                    }
-                }, 1000 + Math.random() * 2000);
-            }
-        }
+    
+        function showNotification(message) {
+            // Create a simple notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 12px;
+                font-weight: 600;
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+                max-width: 300px;
+                word-wrap: break-word;
+            `;
 
-        function addMessage(content, type, username = '', userType = '') {
-            const messagesContainer = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type}`;
-            messageDiv.setAttribute('role', 'listitem');
-                        
-            if (type === 'received' && username) {
-                const badgeClass = userType ? `badge-${userType}` : '';
-                const badgeText = userType.toUpperCase();
-                                
-                messageDiv.innerHTML = `
-                    <div class="message-info">
-                        <span>${username}</span>
-                        ${userType ? `<span class="user-badge ${badgeClass}">${badgeText}</span>` : ''}
-                    </div>
-                    <div>${content}</div>
-                `;
-            } else {
-                messageDiv.textContent = content;
-            }
-                        
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                        
-            if (type === 'received') {
-                messageDiv.setAttribute('aria-label', `New message from ${username}: ${content}`);
-            }
-        }
+            notification.textContent = message;
+            document.body.appendChild(notification);
 
-        function addTipAlert(content, isMega = false) {
-            const messagesContainer = document.getElementById('chatMessages');
-            const alertDiv = document.createElement('div');
-            alertDiv.className = isMega ? 'tip-alert mega-tip' : 'tip-alert';
-            alertDiv.textContent = content;
-            alertDiv.setAttribute('role', 'alert');
-            alertDiv.setAttribute('aria-live', 'assertive');
-            messagesContainer.appendChild(alertDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                        
-            createTipEffect(content);
-                        
-            if (isMega) {
-                createHeartRain();
-            }
-        }
-
-        function addGiftAlert(content) {
-            const messagesContainer = document.getElementById('chatMessages');
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'gift-alert';
-            alertDiv.textContent = content;
-            alertDiv.setAttribute('role', 'alert');
-            alertDiv.setAttribute('aria-live', 'polite');
-            messagesContainer.appendChild(alertDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function createTipEffect(text) {
-            const streamingArea = document.getElementById('streamingArea');
-            const effect = document.createElement('div');
-            effect.className = 'tip-effect';
-            effect.textContent = text;
-            effect.style.left = Math.random() * 60 + 20 + '%';
-            effect.style.top = Math.random() * 40 + 30 + '%';
-            effect.setAttribute('aria-hidden', 'true');
-            streamingArea.appendChild(effect);
-                        
             setTimeout(() => {
-                effect.remove();
+                notification.style.animation = 'slideOut 0.3s ease-out forwards';
+                setTimeout(() => notification.remove(), 300);
             }, 3000);
         }
 
-        function createHeartRain() {
-            const heartRain = document.getElementById('heartRain');
-            const hearts = ['💖', '💕', '💗', '💝', '❤️', '💜', '💙', '💚'];
-                        
-            for (let i = 0; i < 12; i++) {
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Auto-resize textarea
+        document.getElementById('messageInput').addEventListener('input', function () {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 80) + 'px';
+        });
+
+        // Close modals when clicking outside
+        document.getElementById('settingsModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeSettings();
+            }
+        });
+
+        document.getElementById('templateModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeTemplateModal();
+            }
+        });
+
+        // Handle escape key to close modals
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeSettings();
+                closeTemplateModal();
+            }
+        });
+
+        // Add these new functions after the existing conversation functions
+
+        function moveConversationToFront(userId) {
+            const conversationElement = document.querySelector(`[onclick="selectConversation('${userId}')"]`);
+            const conversationsContainer = document.querySelector('.conversations-scroll');
+
+            if (conversationElement && conversationsContainer) {
+                // Add new message highlighting
+                conversationElement.classList.add('new-message');
+
+                // Move to front
+                conversationsContainer.insertBefore(conversationElement, conversationsContainer.firstChild);
+
+                // Scroll to show the new conversation on mobile
+                if (window.innerWidth <= 768) {
+                    conversationsContainer.scrollLeft = 0;
+                }
+
+                // Remove highlighting after 5 seconds
                 setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart';
-                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                    heart.style.left = Math.random() * 100 + '%';
-                    heart.style.animationDelay = Math.random() * 2 + 's';
-                    heart.setAttribute('aria-hidden', 'true');
-                    heartRain.appendChild(heart);
-                                        
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 4000);
-                }, i * 100);
+                    conversationElement.classList.remove('new-message');
+                }, 5000);
+
+                // Show notification
+                const conversation = conversations[userId];
+                showNotification(`💬 New message from ${conversation.name}!`);
             }
         }
 
-        function selectTip(element, amount) {
-            document.querySelectorAll('.tip-item').forEach(item => {
-                item.classList.remove('selected');
-                item.setAttribute('aria-checked', 'false');
-            });
-                        
-            element.classList.add('selected');
-            element.setAttribute('aria-checked', 'true');
-            selectedTip = amount;
-            updateTipButton();
-                        
-            showNotification(`Selected ${amount} tokens`);
-        }
+        function simulateNewMessage(userId, message) {
+            const conversation = conversations[userId];
+            if (!conversation) return;
 
-        function selectTokenPackage(element, tokens, price) {
-            document.querySelectorAll('.tip-item').forEach(item => {
-                item.classList.remove('selected');
-                item.setAttribute('aria-checked', 'false');
-            });
-                        
-            element.classList.add('selected');
-            element.setAttribute('aria-checked', 'true');
-            selectedTokenPackage = { tokens, price };
-            updateTokensButton();
-                        
-            showNotification(`Selected ${tokens} tokens for $${price}`);
-        }
-
-        function selectPremiumPackage(element, type, price) {
-            document.querySelectorAll('.tip-item').forEach(item => {
-                item.classList.remove('selected');
-                item.setAttribute('aria-checked', 'false');
-            });
-                        
-            element.classList.add('selected');
-            element.setAttribute('aria-checked', 'true');
-            selectedPremiumPackage = { type, price };
-            updatePremiumButton();
-                        
-            showNotification(`Selected ${type} premium for $${price}`);
-        }
-
-        function selectGift(element, giftType, price) {
-            document.querySelectorAll('.gift-item').forEach(item => {
-                item.classList.remove('selected');
-                item.setAttribute('aria-checked', 'false');
-            });
-                        
-            element.classList.add('selected');
-            element.setAttribute('aria-checked', 'true');
-            selectedGift = {
-                type: giftType,
-                price: price,
-                name: element.querySelector('.gift-name').textContent
+            // Add new message to conversation
+            const newMessage = {
+                type: 'received',
+                content: message,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             };
-            updateGiftButton();
-                        
-            showNotification(`Selected ${selectedGift.name} for ${price} tokens`);
+
+            conversation.messages.push(newMessage);
+
+            // Add to recent activity
+            addToRecentActivity('message', conversation.name, message, true);
+
+            // Update conversation preview
+            const conversationElement = document.querySelector(`[onclick="selectConversation('${userId}')"]`);
+            if (conversationElement) {
+                const messagePreview = conversationElement.querySelector('.message-preview');
+                const messageTime = conversationElement.querySelector('.message-time');
+                const unreadCount = conversationElement.querySelector('.unread-count');
+
+                if (messagePreview) messagePreview.textContent = message;
+                if (messageTime) messageTime.textContent = 'now';
+
+                // Add or update unread count
+                if (unreadCount) {
+                    const currentCount = parseInt(unreadCount.textContent) || 0;
+                    unreadCount.textContent = currentCount + 1;
+                } else {
+                    const unreadBadge = document.createElement('div');
+                    unreadBadge.className = 'unread-count';
+                    unreadBadge.textContent = '1';
+                    conversationElement.querySelector('.conversation-meta').appendChild(unreadBadge);
+                }
+
+                // Add unread class
+                conversationElement.classList.add('unread');
+            }
+
+            // Move to front and highlight
+            moveConversationToFront(userId);
+
+            // If this conversation is currently active, update the chat
+            if (currentConversation === userId) {
+                loadConversation(userId);
+            }
         }
 
-        function selectGroupType(type) {
-            selectedGroupType = type;
-                        
-            document.querySelectorAll('[onclick*="selectGroupType"]').forEach(item => {
-                item.style.borderColor = 'rgba(255,255,255,0.1)';
-                item.setAttribute('aria-checked', 'false');
+        // Update the tip simulation to add to recent activity
+        setInterval(() => {
+            if (Math.random() < 0.3) { // 30% chance every 30 seconds
+                const tipAmount = Math.floor(Math.random() * 500) + 50;
+                const users = ['Alex_VIP', 'Emma_Gold', 'David_Premium', 'Lisa_Premium'];
+                const randomUser = users[Math.floor(Math.random() * users.length)];
+
+                totalTokens += tipAmount;
+
+                // Add to recent activity
+                addToRecentActivity('tip', randomUser, `💰 Tipped ${tipAmount} TLM`);
+
+                // Update earnings display
+                const earningsElement = document.getElementById('earningsAmount');
+                if (showTokens) {
+                    earningsElement.textContent = `${totalTokens.toLocaleString()} TLM`;
+                } else {
+                    const dollarAmount = (totalTokens * tokenRate).toFixed(2);
+                    earningsElement.textContent = `$${dollarAmount}`;
+                }
+
+                // Update overlay if visible
+                updateOverlayData();
+
+                showNotification(`💰 New tip received: ${tipAmount} TLM!`);
+            }
+        }, 30000);
+
+        let overlayVisible = true;
+        let recentActivity = [];
+
+        function toggleFullscreenOverlay() {
+            const overlay = document.getElementById('fullscreenOverlay');
+            const toggleBtn = document.getElementById('overlayToggleBtn');
+
+            overlayVisible = !overlayVisible;
+
+            if (overlayVisible) {
+                overlay.classList.remove('hidden');
+                toggleBtn.style.display = 'none';
+            } else {
+                overlay.classList.add('hidden');
+                toggleBtn.style.display = 'block';
+            }
+        }
+
+        function updateFullscreenOverlay() {
+            const overlay = document.getElementById('fullscreenOverlay');
+            const isFullscreen = document.getElementById('streamSidebar').classList.contains('fullscreen');
+
+            if (isFullscreen) {
+                overlay.style.display = 'block';
+                updateOverlayData();
+            } else {
+                overlay.style.display = 'none';
+            }
+        }
+
+        function updateOverlayData() {
+            // Update earnings
+            const overlayEarnings = document.getElementById('overlayEarnings');
+            if (showTokens) {
+                overlayEarnings.textContent = `${totalTokens.toLocaleString()} TLM`;
+            } else {
+                overlayEarnings.textContent = `$${(totalTokens * tokenRate).toFixed(2)}`;
+            }
+
+            // Update stats
+            document.getElementById('overlayViewers').textContent = '5.2K';
+            document.getElementById('overlayRequests').textContent = showRequests.length;
+
+            // Update recent activity
+            updateRecentActivity();
+        }
+
+        function addToRecentActivity(type, user, content, isNew = false) {
+            const activity = {
+                type: type, // 'tip', 'message', 'request'
+                user: user,
+                content: content,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                isNew: isNew
+            };
+
+            recentActivity.unshift(activity);
+
+            // Keep only last 10 activities
+            if (recentActivity.length > 10) {
+                recentActivity = recentActivity.slice(0, 10);
+            }
+
+            updateRecentActivity();
+
+            // Show fullscreen notification if in fullscreen
+            if (document.getElementById('streamSidebar').classList.contains('fullscreen')) {
+                showFullscreenNotification(type, user, content);
+            }
+        }
+
+        function updateRecentActivity() {
+            const container = document.getElementById('overlayRecent');
+            container.innerHTML = '';
+
+            recentActivity.slice(0, 6).forEach(activity => {
+                const activityDiv = document.createElement('div');
+                let className = 'overlay-message';
+
+                if (activity.type === 'tip') {
+                    className += ' tip';
+                } else if (activity.isNew) {
+                    className += ' new-msg';
+                }
+
+                activityDiv.className = className;
+                activityDiv.innerHTML = `
+            <div class="overlay-message-time">${activity.time}</div>
+            <div class="overlay-message-user">${activity.user}</div>
+            <div class="overlay-message-content">${activity.content}</div>
+        `;
+
+                container.appendChild(activityDiv);
             });
-                        
-            event.target.style.borderColor = '#10b981';
-            event.target.setAttribute('aria-checked', 'true');
-                        
-            showNotification(`Selected: ${type} group`);
         }
 
-        function updateTipButton() {
-            const btn = document.getElementById('sendTipBtn');
-            const canAfford = selectedTip && tokenBalance >= selectedTip;
-                        
-            btn.disabled = !canAfford;
-                        
-            if (selectedTip) {
-                if (canAfford) {
-                    btn.textContent = `Send ${selectedTip} Tokens`;
-                } else {
-                    btn.textContent = `Need ${selectedTip - tokenBalance} More Tokens`;
-                }
-            } else {
-                btn.textContent = 'Select Amount First';
+        function showFullscreenNotification(type, user, content) {
+            const notification = document.createElement('div');
+            let className = 'fullscreen-notification';
+            let message = '';
+
+            if (type === 'tip') {
+                className += ' tip';
+                message = `💰 ${user}: ${content}`;
+            } else if (type === 'message') {
+                className += ' message';
+                message = `💬 ${user}: ${content}`;
+            } else if (type === 'request') {
+                className += ' message';
+                message = `🎭 ${user}: ${content}`;
             }
-        }
 
-        function updateTokensButton() {
-            const btn = document.getElementById('buyTokensBtn');
-            btn.disabled = !selectedTokenPackage;
-                        
-            if (selectedTokenPackage) {
-                btn.textContent = `Buy ${selectedTokenPackage.tokens} Tokens - $${selectedTokenPackage.price}`;
-            } else {
-                btn.textContent = 'Select Package First';
-            }
-        }
+            notification.className = className;
+            notification.textContent = message;
 
-        function updatePremiumButton() {
-            const btn = document.getElementById('buyPremiumBtn');
-            btn.disabled = !selectedPremiumPackage;
-                        
-            if (selectedPremiumPackage) {
-                btn.textContent = `Subscribe ${selectedPremiumPackage.type} - $${selectedPremiumPackage.price}`;
-            } else {
-                btn.textContent = 'Select Package First';
-            }
-        }
+            const streamPreview = document.getElementById('streamPreview');
+            streamPreview.appendChild(notification);
 
-        function updateGiftButton() {
-            const btn = document.getElementById('sendGiftBtn');
-            const canAfford = selectedGift && tokenBalance >= selectedGift.price;
-                        
-            btn.disabled = !canAfford;
-                        
-            if (selectedGift) {
-                if (canAfford) {
-                    btn.textContent = `Send ${selectedGift.name} (${selectedGift.price} tokens)`;
-                } else {
-                    btn.textContent = `Need ${selectedGift.price - tokenBalance} More Tokens`;
-                }
-            } else {
-                btn.textContent = 'Select Gift First';
-            }
-        }
-
-        function sendTip() {
-            if (selectedTip && tokenBalance >= selectedTip) {
-                const message = document.getElementById('tipMessage').value.trim();
-                tokenBalance -= selectedTip;
-                totalTips += selectedTip;
-                updateTokenDisplay();
-                                
-                const isMega = selectedTip >= 1000;
-                const tipText = message ?
-                    `You tipped ${selectedTip} tokens! 💰 "${message}"` :
-                    `You tipped ${selectedTip} tokens! 💰`;
-                                
-                addTipAlert(tipText, isMega);
-                closeModal('tipModal');
-                showNotification(`Tip sent! ${selectedTip} tokens`, 'tip');
-                                
+            // Remove notification after 4 seconds
+            setTimeout(() => {
+                notification.style.animation = 'fullscreenNotificationSlide 0.5s ease-out reverse';
                 setTimeout(() => {
-                    const responses = [
-                        'Thank you so much! You\'re amazing! 😍💕',
-                        'Wow! Such a generous tip! 🥰',
-                        'You\'re the best! Thank you! 💖',
-                        'Amazing! You made my day! ✨',
-                        'So sweet of you! Love you! 💕'
-                    ];
-                    const response = responses[Math.floor(Math.random() * responses.length)];
-                    addMessage(response, 'received', 'Sarah_Premium', 'premium');
-                }, 2000);
-            } else {
-                showNotification('Not enough tokens! Buy more tokens to continue.');
-                setTimeout(() => {
-                    closeModal('tipModal');
-                    openModal('tokensModal');
-                }, 1000);
-            }
-        }
-
-        function buyTokens() {
-            if (selectedTokenPackage) {
-                tokenBalance += selectedTokenPackage.tokens;
-                updateTokenDisplay();
-                closeModal('tokensModal');
-                showNotification(`Successfully purchased ${selectedTokenPackage.tokens} tokens!`, 'tip');
-                                
-                setTimeout(() => {
-                    addMessage('Welcome back! Thanks for your support! 💕', 'received', 'Sarah_Premium', 'premium');
-                }, 1500);
-            }
-        }
-
-        function buyPremium() {
-            if (selectedPremiumPackage) {
-                isPremiumUser = true;
-                closeModal('premiumModal');
-                showNotification(`Premium ${selectedPremiumPackage.type} subscription activated!`, 'tip');
-                                
-                // Update private chat view if currently viewing
-                if (currentChatView === 'private') {
-                    showPrivateMessages();
-                }
-                                
-                setTimeout(() => {
-                    addMessage('Welcome to Premium! You now have access to private messaging! 💎', 'received', 'Sarah_Premium', 'premium');
-                }, 1500);
-            }
-        }
-
-        function sendGift() {
-            if (selectedGift && tokenBalance >= selectedGift.price) {
-                tokenBalance -= selectedGift.price;
-                updateTokenDisplay();
-                addGiftAlert(`You sent a ${selectedGift.name}! 🎁 (${selectedGift.price} tokens)`);
-                closeModal('giftModal');
-                showNotification(`Gift sent! ${selectedGift.name}`, 'tip');
-                                
-                setTimeout(() => {
-                    addMessage(`Thank you for the beautiful ${selectedGift.name}! 😍💕`, 'received', 'Sarah_Premium', 'premium');
-                }, 2000);
-            } else {
-                showNotification('Not enough tokens! Buy more tokens to send gifts.');
-                setTimeout(() => {
-                    closeModal('giftModal');
-                    openModal('tokensModal');
-                }, 1000);
-            }
-        }
-
-        function sendPrivateRequest() {
-
-            let user_id = $('#user_id_chat').val();
-            let model_id =  $('#model_id_chat').val();
-            var coin = $('#chat_coin').val();
-            var tlm_data = {
-                action: 'tlm_private_chat_action',
-                key: model_id,
-                user: user_id,
-                coin : coin,
-            }
-
-            if (model_id && model_id != '') {
-                $.ajax({
-                    url: 'ajax.php',
-                    type: 'POST',
-                    data: tlm_data,
-                    beforeSend: function () {
-                    },
-                    complete: function () {
-                    },
-                    success: function (response) {
-                        if(response=='success'){
-                            tlm_private_chat_check();
-                        }
-                        else{
-                            alert(response);
-                        }
-
+                    if (notification.parentNode) {
+                        notification.remove();
                     }
-                });
-            }
-
-            closeModal('privateModal');
-            showNotification('Private session request sent! 🔒');
-                        
-            // setTimeout(() => {
-            //     addMessage('I\'d love to go private with you! 😘', 'received', 'Sarah_Premium', 'premium');
-            // }, 2000);
+                }, 500);
+            }, 4000);
         }
 
+        // Update the existing toggleFullscreen function to show/hide overlay
+        function toggleFullscreen() {
+            const streamSidebar = document.getElementById('streamSidebar');
+            const streamPreview = document.getElementById('streamPreview');
+            const fullscreenBtn = streamPreview.querySelector('.fullscreen-btn');
 
-        function tlm_private_chat_check() {
+            if (streamSidebar.classList.contains('fullscreen')) {
+                streamSidebar.classList.remove('fullscreen');
+                fullscreenBtn.innerHTML = '⛶';
+                fullscreenBtn.title = 'Fullscreen';
 
-            let user_id = $('#user_id_chat').val();
-            let model_id =  $('#model_id_chat').val();
+                // Hide overlay
+                document.getElementById('fullscreenOverlay').style.display = 'none';
+                document.getElementById('overlayToggleBtn').style.display = 'none';
 
-            var coin = $('#chat_coin').val();
+                // Exit browser fullscreen on mobile
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().catch(() => { });
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            } else {
+                streamSidebar.classList.add('fullscreen');
+                fullscreenBtn.innerHTML = '⛷';
+                fullscreenBtn.title = 'Exit Fullscreen';
 
-            var tlm_data = {
-                action: 'tlm_private_chat_url_action',
-                key: model_id,
-                user: user_id,
-                coin      : coin,
-            }
-            if (model_id && model_id != '') {
-                $.ajax({
-                    url: 'ajax.php',
-                    type: 'POST',
-                    data: tlm_data,
-                    beforeSend: function () {
-                    },
-                    complete: function () {
-                    },
-                    success: function (response) {
-                        if (response.trim() == '"success"') {
-                            setTimeout(function () {
-                                // window.location.href = "https://thelivemodels.com/live-chat/index.php?user=viewer&unique_model_id="+model_id+"&pra=private"; 
-                            //  $('#tlm_user_private_vidchat').trigger('click');
-                            }, 15000);
-                        }
-                        setTimeout(function () {
-                            tlm_private_chat_check();
-                        }, 3000);
-                        // var total_coin = $('.tlm_show_coins_private_chat').html();
-                        // $('.tlm_show_coins_private_chat').html(parseInt(total_coin)-parseInt(coin));
-                        // // $('#tlm_close_private_chat_box').trigger('click');
-                        // tlm_private_chat_check();
-                    }
-                });
+                // Show overlay
+                updateFullscreenOverlay();
+
+                // Request browser fullscreen on mobile for better experience
+                if (streamSidebar.requestFullscreen) {
+                    streamSidebar.requestFullscreen().catch(() => { });
+                } else if (streamSidebar.webkitRequestFullscreen) {
+                    streamSidebar.webkitRequestFullscreen();
+                } else if (streamSidebar.msRequestFullscreen) {
+                    streamSidebar.msRequestFullscreen();
+                }
             }
         }
+
+        // Update the existing simulateNewMessage function to add to recent activity
+        function simulateNewMessage(userId, message) {
+            const conversation = conversations[userId];
+            if (!conversation) return;
+
+            // Add new message to conversation
+            const newMessage = {
+                type: 'received',
+                content: message,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
+
+            conversation.messages.push(newMessage);
+
+            // Add to recent activity
+            addToRecentActivity('message', conversation.name, message, true);
+
+            // Update conversation preview
+            const conversationElement = document.querySelector(`[onclick="selectConversation('${userId}')"]`);
+            if (conversationElement) {
+                const messagePreview = conversationElement.querySelector('.message-preview');
+                const messageTime = conversationElement.querySelector('.message-time');
+                const unreadCount = conversationElement.querySelector('.unread-count');
+
+                if (messagePreview) messagePreview.textContent = message;
+                if (messageTime) messageTime.textContent = 'now';
+
+                // Add or update unread count
+                if (unreadCount) {
+                    const currentCount = parseInt(unreadCount.textContent) || 0;
+                    unreadCount.textContent = currentCount + 1;
+                } else {
+                    const unreadBadge = document.createElement('div');
+                    unreadBadge.className = 'unread-count';
+                    unreadBadge.textContent = '1';
+                    conversationElement.querySelector('.conversation-meta').appendChild(unreadBadge);
+                }
+
+                // Add unread class
+                conversationElement.classList.add('unread');
+            }
+
+            // Move to front and highlight
+            moveConversationToFront(userId);
+
+            // If this conversation is currently active, update the chat
+            if (currentConversation === userId) {
+                loadConversation(userId);
+            }
+        }
+
+        // Update the tip simulation to add to recent activity
+        setInterval(() => {
+            if (Math.random() < 0.3) { // 30% chance every 30 seconds
+                const tipAmount = Math.floor(Math.random() * 500) + 50;
+                const users = ['Alex_VIP', 'Emma_Gold', 'David_Premium', 'Lisa_Premium'];
+                const randomUser = users[Math.floor(Math.random() * users.length)];
+
+                totalTokens += tipAmount;
+
+                // Add to recent activity
+                addToRecentActivity('tip', randomUser, `💰 Tipped ${tipAmount} TLM`);
+
+                // Update earnings display
+                const earningsElement = document.getElementById('earningsAmount');
+                if (showTokens) {
+                    earningsElement.textContent = `${totalTokens.toLocaleString()} TLM`;
+                } else {
+                    const dollarAmount = (totalTokens * tokenRate).toFixed(2);
+                    earningsElement.textContent = `$${dollarAmount}`;
+                }
+
+                // Update overlay if visible
+                updateOverlayData();
+
+                showNotification(`💰 New tip received: ${tipAmount} TLM!`);
+            }
+        }, 30000);
+
+        // Update the DOMContentLoaded event listener
+        document.addEventListener('DOMContentLoaded', function () {
+            loadConversation('alex');
+
+            // Handle video error fallback
+            const video = document.querySelector('.preview-video');
+            const placeholder = document.querySelector('.preview-placeholder');
+
+            video.addEventListener('error', function () {
+                video.style.display = 'none';
+                placeholder.style.display = 'block';
+            });
+
+            video.addEventListener('loadeddata', function () {
+                placeholder.style.display = 'none';
+                video.style.display = 'block';
+            });
+
+            // Set initial show type
+            document.getElementById('showTypeSelect').value = currentShowType;
+            updateRequestsDisplay();
+            updateCustomTemplates();
+
+            // Start demo after 10 seconds
+            setTimeout(() => {
+                showNotification('💡 Demo: New messages will appear and move to front automatically');
+            }, 10000);
+        });
+
+        // Simulate periodic tip notifications
+        setInterval(() => {
+            if (Math.random() < 0.3) { // 30% chance every 30 seconds
+                const tipAmount = Math.floor(Math.random() * 500) + 50;
+                totalTokens += tipAmount;
+
+                // Update earnings display
+                const earningsElement = document.getElementById('earningsAmount');
+                if (showTokens) {
+                    earningsElement.textContent = `${totalTokens.toLocaleString()} TLM`;
+                } else {
+                    const dollarAmount = (totalTokens * tokenRate).toFixed(2);
+                    earningsElement.textContent = `$${dollarAmount}`;
+                }
+
+                showNotification(`💰 New tip received: ${tipAmount} TLM!`);
+            }
+        }, 30000);
+    </script>
+
+    <script>
+
+        $(function() {
+        
+            tlm_check_url();
+
+        });
 
         function tlm_check_url() {
 
@@ -1272,18 +1360,47 @@ var userpage = '<?=$user_page?>';
                   
                             if (response.status == 'ok') {
                       
-                                $('#tlm_start_private_popup11 .modal-body').html(response.html);
-                                $('.private-request').html(response.counts);
-                                if(userpage=='user'){
-                                    gotoprivate(response.id);
-                                }
-                            }
-                            else {
+                                $('#requestsCount').text(response.counts);
 
-                                $('.private-request').html('');
+                                if(response.counts > 0)
+                                {
+                                    $('#showRequests').show();
+                                }
+                                else
+                                {
+                                    $('#showRequests').hide();
+                                }
+
+                                response.html.forEach(function (item) {
+                                    if ($('#request-' + item.id).length === 0) {
+                                        var html = `
+                                            <div class="request-item" id="request-${item.id}">
+                                                <div>
+                                                    <div class="request-user">${item.username}</div>
+                                                    <div class="request-type">Private Show - 30min</div>
+                                                </div>
+                                                <div class="request-actions">
+                                                    <button class="request-btn accept"
+                                                        onclick="set_confirm_private_chat(${item.id}, 'accept');">✓</button>
+                                                    <button class="request-btn decline"
+                                                        onclick="set_confirm_private_chat(${item.id}, 'decline');">✗</button>
+                                                </div>
+                                            </div>
+                                        `;
+                                        $('#requestsList').append(html);
+                                    }
+                                });
+
+                                // if(userpage=='user'){
+                                //     gotoprivate(response.id);
+                                // }
                             }
+                        
                             setTimeout(function () {
                                 tlm_check_url();
+
+                                tlm_get_privatemsg();
+
                             }, 3000);
 
                         }
@@ -1291,154 +1408,304 @@ var userpage = '<?=$user_page?>';
                 }
         }
 
-        function sendGroupRequest() {
-            closeModal('groupModal');
-            showNotification(`Group session request sent! ${selectedGroupType || 'join'} 👥`);
-                        
-            setTimeout(() => {
-                addMessage('Group session sounds fun! Let\'s do it! 🎉', 'received', 'Sarah_Premium', 'premium');
-            }, 2000);
-        }
+        let currentPollingUserId = null;
 
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.add('show');
-                        
-            const firstFocusable = modal.querySelector('button, [tabindex="0"], input, textarea, select');
-            if (firstFocusable) {
-                setTimeout(() => firstFocusable.focus(), 100);
+        let pollingTimeout = null;
+
+        let isTyping = false;
+
+        function tlm_get_privatemsg() {
+
+            let user_id = $('#user_id_chat').val();
+            let model_id =  $('#model_id_chat').val();
+
+            let private_id =  $('#private_id_chat').val();
+
+            var tlm_data = {
+                action: 'check_accepted_users',
+                key: model_id,
+                user_id: user_id,
+                private_id:private_id,
             }
-                        
-            modal.addEventListener('keydown', trapFocus);
-        }
+            if (model_id && model_id != '') {
+                $.ajax({
+                    url: 'ajax.php',
+                    type: 'POST',
+                    data: tlm_data,
+                    dataType: 'json', 
+                    success: function (response) {
 
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('show');
-            modal.removeEventListener('keydown', trapFocus);
-                        
-            if (modalId === 'tipModal') {
-                selectedTip = null;
-                document.getElementById('tipMessage').value = '';
-                document.querySelectorAll('.tip-item').forEach(item => {
-                    item.classList.remove('selected');
-                    item.setAttribute('aria-checked', 'false');
-                });
-                updateTipButton();
-            } else if (modalId === 'tokensModal') {
-                selectedTokenPackage = null;
-                document.querySelectorAll('.tip-item').forEach(item => {
-                    item.classList.remove('selected');
-                    item.setAttribute('aria-checked', 'false');
-                });
-                updateTokensButton();
-            } else if (modalId === 'premiumModal') {
-                selectedPremiumPackage = null;
-                document.querySelectorAll('.tip-item').forEach(item => {
-                    item.classList.remove('selected');
-                    item.setAttribute('aria-checked', 'false');
-                });
-                updatePremiumButton();
-            } else if (modalId === 'giftModal') {
-                selectedGift = null;
-                document.querySelectorAll('.gift-item').forEach(item => {
-                    item.classList.remove('selected');
-                    item.setAttribute('aria-checked', 'false');
-                });
-                updateGiftButton();
-            }
-        }
+                    response.data.forEach(function (item) {
 
-        function trapFocus(e) {
-            if (e.key === 'Tab') {
-                const modal = e.currentTarget;
-                const focusableElements = modal.querySelectorAll(
-                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-                );
-                const firstFocusable = focusableElements[0];
-                const lastFocusable = focusableElements[focusableElements.length - 1];
+                        if ($('#active_user-' + item.id).length === 0) {
+                                var html = `
+                                     <div class="conversation-item"  onclick="set_user_chat('${item.id}')"  id="active_user-${item.id}">
+                                        <div class="user-avatar vip">
+                                            <img src="${item.image_url}" alt="user image">
+                                            <div class="online-indicator public" id="alexIndicator"></div>
+                                        </div>
+                                        <div class="conversation-info">
+                                            <div class="conversation-header">
 
-                if (e.shiftKey) {
-                    if (document.activeElement === firstFocusable) {
-                        lastFocusable.focus();
-                        e.preventDefault();
+                                                <div class="user-name">${item.username}</div>
+                                             
+                                            </div>
+                                            <div class="message-preview">${item.last_message??""}</div>
+                                            <div class="conversation-meta">
+                                                <div class="message-time">2m ago</div>
+                                                <div class="unread-count">3</div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                `;
+                                $('#active_chat_users').append(html);
+
+                                var firstChild = $('.conversation-item').first();
+
+                                var firstChild_id = firstChild.attr('id');
+
+                                if (firstChild_id === `active_user-${item.id}`)
+                                {
+                                    set_user_chat(`${item.id}`);
+
+                                    firstChild.addClass('active');
+                                }   
+                            }
+
+                        });
+                    
                     }
-                } else {
-                    if (document.activeElement === lastFocusable) {
-                        firstFocusable.focus();
-                        e.preventDefault();
+                });
+            }
+        }
+
+        function set_user_chat(private_id)
+        {
+            $('.conversation-item').removeClass('active');
+
+             $(`#active_user-${private_id}`).addClass('active');
+
+            clearTimeout(pollingTimeout);
+
+            currentPollingUserId = private_id;
+
+             $.ajax({
+                    url: 'single_user_private_chat.php',
+                    type: 'GET',
+                    data: {
+                    private_id: private_id,
+                },
+                dataType: 'json',
+                
+                success: function(response) {
+
+                    $('#chat_area').html('');
+                    
+                    if(response.status=='ok'){
+
+
+                        var user_data = response.reciever_data;
+
+                        let chat_html = `
+
+                                <div class="chat-header">
+
+                                    <div class="chat-user-info">
+
+                                        <div class="user-avatar vip">
+
+                                             <img src="${user_data.image_url}" alt="user image">
+
+                                            <div class="online-indicator public"></div>
+
+                                        </div>
+
+                                        <div class="chat-user-details">
+
+                                            <h4>${user_data.username}</h4>
+
+                                            <div class="chat-user-status">
+
+                                                <div class="live-dot public"></div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="chat-messages" id="chatMessages">
+                                
+                                </div>
+
+                                <div class="chat-input">
+                            
+                                    <div class="custom-templates">
+                                        <div class="template-header">
+                                            <div class="template-title">My Templates</div>
+                                            <button class="add-template-btn" onclick="openTemplateModal()">+ Add</button>
+                                        </div>
+                                        <div id="customTemplatesList">
+                                
+                                        </div>
+                                    </div>
+
+                                    <div class="quick-actions">
+                                        <div class="quick-action" onclick="insertQuickMessage('Thank you! 💕')">Thank you! 💕</div>
+                                        <div class="quick-action" onclick="insertQuickMessage('You\'re so sweet! 😘')">You're so
+                                            sweet! 😘</div>
+                                        <div class="quick-action" onclick="insertQuickMessage('Let\'s go private! 🔥')">Let's go
+                                            private! 🔥</div>
+                                        <div class="quick-action" onclick="insertQuickMessage('Love you! ❤️')">Love you! ❤️</div>
+                                    </div>
+
+                                    <div class="input-row">
+
+                                        <textarea class="message-input" id="messageInput" placeholder="Type your message..."
+                                            onkeypress="handleKeyPress(event)" rows="1"></textarea>
+
+                                        <button class="send-btn" onclick="sendMessage('${user_data.id}')">Send</button>
+
+                                    </div>
+
+                                </div>
+                        `;
+
+                        $('#chat_area').append(chat_html).show();
+
+                        if(response.message=='list_message')
+                        {
+                            var chart_html_replay = "";
+
+                            var chat_lines = response.lines;
+                            chat_lines.forEach(function (line) {
+                                    chart_html_replay += line;
+                                });
+
+                            $('#chatMessages').append(chart_html_replay).show();
+                        }
                     }
-                }
-            }
-        }
-
-        function showNotification(message, type = 'default') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = 'notification';
+                    else{
                         
-            if (type === 'tip') {
-                notification.classList.add('tip-notification');
-            }
-                        
-            notification.classList.add('show');
-                        
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
+                        alert(response.message);
+                    }
 
-        // Close overlays when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.users-overlay') && !e.target.closest('.chat-tab')) {
-                if (usersOverlayVisible) {
-                    toggleUsersOverlay();
-                }
-            }
-        });
+                    pollingTimeout = setTimeout(function () {
+                        if ($(`#active_user-${currentPollingUserId}`).hasClass('active')) {
+                            set_user_chat(currentPollingUserId);
+                        }
+                    }, 5000);
 
-        // Close modals when clicking outside
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeModal(this.id);
                 }
             });
+            
+        }
+
+
+        function sendMessage(reciever_id) {
+
+            let user_id = $('#model_id_chat').val();
+
+            var msg = $('#messageInput').val();
+
+            var tlm_data = {
+                action: 'model_send_msg',
+                sender_id : user_id,
+                reciever_id : reciever_id,
+                msg:msg
+
+            }
+
+            $.ajax({
+                url: 'ajax.php',
+                type: 'POST',
+                data: tlm_data,
+                dataType: 'json',
+
+                success: function(response) {
+
+                    if(response.status=='ok'){
+                    
+                        console.log(response.message);
+                    }
+
+                    else{
+                        alert(response.message);
+                    }
+                }
+            });
+        }
+
+
+        $('#messageInput').on('input', function () {
+
+            const value = $(this).val().trim();
+
+            if (pollingTimeout) {
+                clearTimeout(pollingTimeout);
+                pollingTimeout = null;
+            }
+
+            if (value !== '') {
+             
+                isTyping = true;
+            } else {
+                
+                isTyping = false;
+                pollingTimeout = setTimeout(function () {
+
+                    const activeId = $('.conversation-item.active').attr('id');
+                    if (activeId) {
+
+                        const private_id = activeId.replace('active_user-', '');
+                        set_user_chat(private_id);
+                    }
+
+                }, 5000);
+            }
         });
 
-        // Initialize button states
-        updateTipButton();
-        updateTokensButton();
-        updatePremiumButton();
-        updateGiftButton();
 
-        // Simulate live activity
-        setInterval(() => {
-            if (Math.random() < 0.3 && currentChatView === 'all') {
-                const randomUser = users[Math.floor(Math.random() * users.length)];
-                const messages = [
-                    'Looking amazing tonight! ✨',
-                    'Love this song! 🎵',
-                    'You\'re incredible! 😍',
-                    'Best stream ever! 🔥',
-                    'So talented! 👏'
-                ];
-                const message = messages[Math.floor(Math.random() * messages.length)];
-                addMessage(message, 'received', randomUser.name, randomUser.type);
-            }
-        }, 15000);
+        // $('#messageInput').on('blur', function () {
+        //     if ($(this).val().trim() === '' && !pollingTimeout) {
+        //         pollingTimeout = setTimeout(function () {
+        //             const activeId = $('.conversation-item.active').attr('id');
+        //             if (activeId) {
+        //                 const private_id = activeId.replace('active_user-', '');
+        //                 set_user_chat(private_id);
+        //             }
+        //         }, 5000);
+        //     }
+        // });
 
-        // Simulate random tips
-        setInterval(() => {
-            if (Math.random() < 0.2) {
-                const randomUser = users[Math.floor(Math.random() * users.length)];
-                const tipAmounts = [25, 50, 100, 250];
-                const amount = tipAmounts[Math.floor(Math.random() * tipAmounts.length)];
-                totalTips += amount;
-                updateTokenDisplay();
-                addTipAlert(`${randomUser.name} tipped ${amount} tokens! 💰`, amount >= 250);
-            }
-        }, 25000);
+        function set_confirm_private_chat(id,type) {
+
+            $.ajax({
+                url: 'ajax_act_private_chat.php',
+                type: 'GET',
+                data: {
+                id: id,
+                type:type
+                },
+                dataType: 'json',
+                success: function(response) {
+                if(response.status=='ok'){
+                    if(type=='accept'){
+                    window.location='<?=SITEURL.'live-stream/stream.php?user=streamer&pra=private&unique_model_id='.$_SESSION['log_user_unique_id'].'&private_id='?>'+id;
+                    }
+                }
+                else{
+                    alert(response.message);
+                }
+                }
+            });
+
+        }
+
     </script>
+
+
 </body>
+
 </html>

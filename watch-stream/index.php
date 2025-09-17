@@ -1,8 +1,24 @@
 <?php session_start(); 
 
-include('../includes/config.php');
-include('../includes/helper.php');
+include(__DIR__ . '/../includes/config.php');
+include(__DIR__ . '/../includes/helper.php');
+
 $error = '';
+
+
+if (!empty($_GET['username'])) {
+
+    $username = $_GET['username'];
+
+    $modelDetails = get_data('model_user',array('name'=>$username),true);
+
+    $_GET['unique_model_id'] = $modelDetails['unique_id'] ?? null;
+} else {
+    $username = null;
+    $_GET['unique_model_id'] = null;
+}
+
+
 if (isset($_SESSION['log_user_id'])) {
   $getUserData = get_data('model_social_link', array('id' => $_SESSION['log_user_id']), true);
 
@@ -26,7 +42,7 @@ $session_id = $_GET['unique_model_id'];
 <head>
 <meta charset="UTF-8">
 
-    <title>Elite Streaming Platform | The Live Models test</title>
+    <title>Elite Streaming Platform | The Live Models </title>
     <meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 
@@ -89,14 +105,14 @@ $session_id = $_GET['unique_model_id'];
 </script>
 
 
-<?php  include('includes/head.php'); ?>
-
-<link rel="preload" href="<?=SITEURL?>assets/css/profile.css?v=<?=time()?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<?php include(__DIR__ . '/../includes/head.php'); ?>
 
 
-<link rel="preload" href='<?=SITEURL?>assets/css/view.css?v=<?=time()?>'  as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
 
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"   as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/view.css?v=<?=time()?>' type='text/css' media='all' />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
      
       
 <?php

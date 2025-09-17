@@ -1009,11 +1009,12 @@ body .owl-carousel .owl-nav.disabled {
                                                     <?php
                                                             $uniqueModelId = isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : '';
                                                             if ($_SESSION["log_user_unique_id"] == $session_id) {
-                                                                $link = SITEURL . 'live-stream/stream.php?user=streamer&unique_model_id=' . $uniqueModelId;
+
+                                                                $link = SITEURL . 'live-stream/'.$_GET['username'];
 
                                                             
                                                             } else {
-                                                                $link = SITEURL . 'live-stream/view.php?user=viewer&unique_model_id=' . $uniqueModelId;
+                                                                $link = SITEURL . 'watch-stream/'.$_GET['username'];
 
                                                             }
                                                             if($modelDetails['as_a_model'] =='Yes')
