@@ -1990,7 +1990,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           <div class="step active" onclick="scrollToSection('chat-services')">Chat Services</div>
           <div class="step" onclick="scrollToSection('meet-services')">Meet Services</div>
           <div class="step" onclick="scrollToSection('travel_experiance_tab')">Travel Experiences</div>
-          <div class="step" onclick="scrollToSection('content-creation')">Content Creation</div>
+          <?php /*?><div class="step" onclick="scrollToSection('content-creation')">Content Creation</div><?php */ ?>
           <div class="step" onclick="scrollToSection('professional-work')">Professional Work</div>
           <div class="step" onclick="scrollToSection('30_days_access')">30 Days Access</div>
 
@@ -2426,7 +2426,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         </div>
 
         <!-- Content Creation -->
-        <div id="content-creation" class="collapsible-section">
+        <div id="content-creation" class="collapsible-section" style="display:none;">
           <div class="collapsible-header" onclick="toggleCollapsible(this)">
             <h2 class="text-xl font-bold">📸 Content Creation</h2>
             <svg class="w-6 h-6 collapsible-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -3266,18 +3266,18 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
             <div class="space-y-4">
 
-              <?php if (!empty($extra_details) && !empty($extra_details['in_overnight'])) { ?>
+              <?php if (!empty($extra_details) && !empty($extra_details['in_per_hour'])) { ?>
 
                 <div class="flex justify-between items-center">
                   <div>
-                    <div class="font-medium">Social Meetup</div>
-                    <div class="text-sm text-white/60">Local companionship</div>
+                    <div class="font-medium">Local Meetup</div>
+                    <div class="text-sm text-white/60">Local social companionship</div>
                   </div>
 
                   <div class="flex items-center">
                     <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?></span>
-                    <span class="text-sm text-white/60">/hour</span>
+                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?></span>
+                    <span class="text-sm text-white/60">flat rate</span>
                   </div>
 
                 </div>
@@ -3288,27 +3288,43 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <div class="flex justify-between items-center">
                   <div>
                     <div class="font-medium">Extended Social</div>
-                    <div class="text-sm text-white/60">4+ hours</div>
+                    <div class="text-sm text-white/60">Social engagements after the first hour</div>
                   </div>
                   <div class="flex items-center">
                     <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
                     <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?></span>
-                    <span class="text-sm text-white/60">flat rate</span>
+                    <span class="text-sm text-white/60">/hour</span>
                   </div>
                 </div>
               <?php } ?>
 
-              <?php if (!empty($extra_details) && !empty($extra_details['in_per_hour'])) { ?>
+              <?php if (!empty($extra_details) && !empty($extra_details['in_overnight'])) { ?>
 
                 <div class="flex justify-between items-center">
                   <div>
-                    <div class="font-medium">Travel Companion</div>
-                    <div class="text-sm text-white/60">Multi-day trips</div>
+                    <div class="font-medium">Evening Extended</div>
+                    <div class="text-sm text-white/60">Evening social or casual meetups (8 hours)</div>
                   </div>
                   <div class="flex items-center">
                     <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?></span>
-                    <span class="text-sm text-white/60">/day</span>
+                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?></span>
+                    <span class="text-sm text-white/60">flat rate</span>
+                  </div>
+                </div>
+
+              <?php } ?>
+			  
+			  <?php if (!empty($extra_details) && !empty($extra_details['fullday_social'])) { ?>
+
+                <div class="flex justify-between items-center">
+                  <div>
+                    <div class="font-medium">Social Full-day</div>
+                    <div class="text-sm text-white/60">Full-day sessions (24 hours)</div>
+                  </div>
+                  <div class="flex items-center">
+                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?></span>
+                    <span class="text-sm text-white/60">flat rate</span>
                   </div>
                 </div>
 

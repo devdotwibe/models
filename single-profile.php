@@ -1579,7 +1579,7 @@ body .owl-carousel .owl-nav.disabled {
                                     } else if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') {
                                     ?>
 
-                                <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
+                                <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'watch-stream/'.$_GET['username'] ?>'">
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
                                         <button type="button" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
@@ -1597,7 +1597,7 @@ body .owl-carousel .owl-nav.disabled {
                             <?php
                                     if ($_SESSION["log_user_unique_id"] == $session_id) {?>
                                 
-                                <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
+                                <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/'.$_GET['username'] ?>'">
 
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -2190,10 +2190,14 @@ body .owl-carousel .owl-nav.disabled {
             </button>
         </div>
 		
+		<?php $service_status = false; ?>
+		
 		<div class="modal-body">
 		<div class="services-grid">
 		<?php if(!empty($extra_details) && !empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes'){ ?>
-            <?php if($extra_details['private_chat_token']){ ?>
+            <?php if($extra_details['private_chat_token']){
+						$service_status = true;
+			?>
 				<!-- Chat Service -->
                 <?php /*?><div class="service-card" >
                     <div class="service-header">
@@ -2235,7 +2239,7 @@ body .owl-carousel .owl-nav.disabled {
 					
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-					<a class="action-button btn btn-primary" href='<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>' >Watch Live</a>
+					<a class="action-button btn btn-primary" href='<?php echo SITEURL .'watch-stream/'.$_GET['username'] ?>' >Watch Live</a>
 
                     <?php }?>
 					
@@ -2247,7 +2251,7 @@ body .owl-carousel .owl-nav.disabled {
 		<?php } ?>
 		
 		<?php if(!empty($extra_details) && !empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ ?>
-			<?php if($extra_details['in_per_hour']){ ?>
+			<?php if($extra_details['in_per_hour']){ $service_status = true; ?>
                 <!-- Meetup Service -->
                 <div class="service-card" onclick="<?php if (!$user_have_preminum) { ?>handleService('meetup')<?php } ?>" >
                     <div class="service-header">
@@ -2278,7 +2282,7 @@ body .owl-carousel .owl-nav.disabled {
 		<?php } ?>
 		
 		<?php if(!empty($extra_details) && !empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ ?>
-			<?php if($extra_details['daily_rate']){ ?>
+			<?php if($extra_details['daily_rate']){ $service_status = true; ?>
 
                 <!-- Travel Service -->
                 <div class="service-card" onclick="<?php if ( !($user_have_preminum && $plan =='diamond') ) { ?>handleService('travel')<?php } ?>">
@@ -2307,6 +2311,11 @@ body .owl-carousel .owl-nav.disabled {
 			<?php } ?>
 			
 		<?php } ?>
+		
+		<?php if(!empty($extra_details) && !empty($extra_details['collab']) && $extra_details['collab'] == 'Yes'){ 
+		
+				$service_status = true;
+		?>
 
                 <!-- Collaboration Service -->
                 <div class="service-card" onclick="<?php if (!($user_have_preminum && $plan =='diamond')) { ?>handleService('collaboration')<?php }  ?>" >
@@ -2328,6 +2337,12 @@ body .owl-carousel .owl-nav.disabled {
                     <a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking.php?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
 
                 </div>
+		<?php } ?>
+		
+		<?php if($service_status == false){
+			echo '<div class="no-service-msg">No services found.</div>';
+		} ?>
+		
             </div>
 
             <div class="disclaimer">
@@ -2778,11 +2793,13 @@ body .owl-carousel .owl-nav.disabled {
 				
 				<?php 
 				
-				if (mysqli_num_rows($res_sc) > 0) { 
+				if (mysqli_num_rows($res_sc) > 0) {  $sc_status = false;
                     
-                        while($rows_sc = mysqli_fetch_assoc($res_sc)) {
+                        while($rows_sc = mysqli_fetch_assoc($res_sc)) { 
 							
 						if(!empty($rows_sc['URL'])){
+							
+							$sc_status = true;
 							
 							if($rows_sc['platform'] == 'Instagram'){
 								$sc_image = '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -2853,8 +2870,10 @@ body .owl-carousel .owl-nav.disabled {
                     </div>
 					
 						<?php } }
-						
-				} else echo 'No social links found.'; ?>
+					
+					if(!$sc_status) echo '<span class="no-social-msg">No social links found.</span>';
+					
+				} else echo '<span class="no-social-msg">No social links found.</span>'; ?>
 					
                 </div>
                
