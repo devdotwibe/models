@@ -24,7 +24,8 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
         'my-purchase',
         'optimized_services',
         'chat-app',
-        'login'
+        'login',
+        'booking'
     ];
 
     if (!empty($segments[0]) && in_array($segments[0], $routes)) {
