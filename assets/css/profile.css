@@ -10639,6 +10639,9 @@ margin-top: 18px;
     /* left: unset !important; */
 }
 
+
+
+
 }
 
 @media (max-width:420px) {
@@ -10803,6 +10806,12 @@ width:auto;
     .optim-services .modal-footer .btn.btn-primary {
         padding-inline: 8px;
     }
+
+    .home-page .stats-counter {
+     
+        text-align: center;
+    }
+
 }
 
 
