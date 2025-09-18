@@ -249,7 +249,7 @@ $currentpage = $_SERVER['REQUEST_URI'];
             <div>
                 <h4 class="font-bold mb-6 text-xl premium-text">Legal</h4>
                 <ul class="space-y-4 text-white/60 text-lg">
-                    <li><a href="<?= SITEURL ?>tls-tom" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openTerms()" */ ?> >Terms of Service</a></li>
+                    <li><a href="<?= SITEURL ?>terms-of-service" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openTerms()" */ ?> >Terms of Service</a></li>
                     <li><a href="<?= SITEURL ?>privacy-policy" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openPrivacy()" */ ?> >Privacy Policy</a></li>
                     <li><a href="<?= SITEURL ?>verification-policy" class="hover:text-indigo-400 transition duration-300 read-more-btn" <?php /*onclick="openVerificationPolicy()" */ ?> >Verification Policy</a></li>
                 </ul>

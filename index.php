@@ -15,7 +15,7 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
         'all-members',
         'contact-support',
         'verification-help',
-        'tls-tom',
+        'terms-of-service',
         'privacy-policy',
         'verification-policy',
         'edit-profile',
@@ -25,7 +25,8 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
         'optimized_services',
         'chat-app',
         'login',
-        'booking'
+        'booking',
+        'notifications'
     ];
 
     if (!empty($segments[0]) && in_array($segments[0], $routes)) {
