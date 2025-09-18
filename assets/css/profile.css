@@ -523,10 +523,12 @@ body {
 
 /* Premium Typography */
 .home-page .premium-text {
-    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+    /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%); */
+      /* background: #fff;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background-clip: text; */
+        color: #fff
 }
 
 /* Advanced Scroll Animations */
@@ -1017,10 +1019,11 @@ textarea:focus {
 }
 
 .advt-page .premium-text {
-    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+    /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background-clip: text; */
+        color: #fff
 }
 
 .advt-page .btn-primary {
@@ -1748,10 +1751,11 @@ textarea:focus {
 }
 
 .advpage-3 .premium-text {
-    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+    /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background-clip: text; */
+        color: #fff
 }
 
 .advpage-3 .btn-primary {
@@ -6375,11 +6379,12 @@ button.btn-secondary.add-intrst {
 
 /* Premium Typography */
 .enhanced5 .premium-text {
-    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+    /* background: #fff;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    padding-top: 20px;
+    padding-top: 20px; */
+    color:#fff;
 }
 
 /* Profile specific styles */
@@ -6698,8 +6703,18 @@ button.btn-secondary.add-intrst {
 
 /*-------------- login-page */
 
-.login-page header .container {
+/* .login-page header .container {
     padding-block: 1rem;
+} */
+
+
+.login-page .login-a .mob-case{
+     margin: 0;
+    margin-left: auto !important;
+}
+
+.login-page header .container {
+    padding-block: .8rem !important;
 }
 
 .login-page body {
@@ -6948,10 +6963,13 @@ button.btn-secondary.add-intrst {
 
 /* Premium Typography */
 .login-page .premium-text {
-    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+    /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%); */
+      /* background: #fff;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background-clip: text; */
+        color: #fff;
+        /* background-color: #fff; */
 }
 
 /* Premium Stats Counter */
@@ -9057,14 +9075,14 @@ body.profile-advts {
 
 .profile-advts .premium-text {
 
-    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
-
+    /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%); */
+  /* background: #fff;
     -webkit-background-clip: text;
 
     -webkit-text-fill-color: transparent;
 
-    background-clip: text;
-
+    background-clip: text; */
+color:#fff
 }
 
 
@@ -9750,14 +9768,15 @@ body.profile-advts {
 
 .creare-ad .premium-text {
 
-    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+    /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%); */
+      /* background: #fff;
 
     -webkit-background-clip: text;
 
     -webkit-text-fill-color: transparent;
 
-    background-clip: text;
-
+    background-clip: text; */
+color:#fff;
 }
 
 
@@ -10638,7 +10657,10 @@ margin-top: 18px;
     right: 0 !important;
     /* left: unset !important; */
 }
-
+    .home-page .stats-counter { text-align: center; }
+     
+       
+ 
 
 
 
@@ -10807,10 +10829,7 @@ width:auto;
         padding-inline: 8px;
     }
 
-    .home-page .stats-counter {
-     
-        text-align: center;
-    }
+
 
 }
 

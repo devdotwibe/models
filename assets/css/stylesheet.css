@@ -136,11 +136,12 @@ body {
 }
 
 body footer .premium-text {
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+  /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background-clip: text; */
   font-weight: 700;
+  color:#fff;
 }
 
 body footer .read-more-btn {
@@ -746,10 +747,11 @@ header .btn-primary:active {
 
 /* Premium Typography */
 .home-page .premium-text {
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+  /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-text-fill-color: transparent; */
+  /* background-clip: text; */
+    color:#fff;
 }
 
 /* Advanced Scroll Animations */
@@ -1253,10 +1255,11 @@ textarea:focus {
 }
 
 .advt-page .premium-text {
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+  /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-text-fill-color: transparent; */
+  /* background-clip: text; */
+    color:#fff;
 }
 
 .advt-page .btn-primary {
@@ -1969,10 +1972,11 @@ textarea:focus {
 }
 
 .advpage-3 .premium-text {
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+  /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background-clip: text; */
+  color:#fff;
 }
 
 .advpage-3 .btn-primary {
@@ -6726,10 +6730,11 @@ body.edit-profilepage {
 
 /* Premium Typography */
 .login-page .premium-text {
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+  /* background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background-clip: text; */
+  color:#fff;
 }
 
 /* Premium Stats Counter */
@@ -11626,6 +11631,15 @@ user-home
   line-height: normal;
   margin-top: 12px !important;
 }
+
+header.glass-effect>div{
+  padding-block: 1.20rem !important;
+}
+
+header.ultra-glass.login-header {
+    padding-block: 0;
+}
+
 
 @media (max-width: 1540px) {
   .home-page .discover-sec .model-card .btn-primary {
