@@ -19,13 +19,16 @@ $response = ['status' => 'error', 'message' => 'Sorry, there was an error upload
             $old_pic = $row_old['profile_pic'];
         }
 
-        $ext = pathinfo($_FILES["pic_img"]["name"], PATHINFO_EXTENSION);
-        $new_filename = uniqid("profile_", true) . "." . $ext;
+        // $ext = pathinfo($_FILES["pic_img"]["name"], PATHINFO_EXTENSION);
+        // $new_filename = uniqid("profile_", true) . "." . $ext;
 
-        $target_file1 = $target_dir_profile . $new_filename;
-        $target_profile = "uploads/profile_pic/" . $new_filename; 
+        // $target_file1 = $target_dir_profile . $new_filename;
+        // $target_profile = "uploads/profile_pic/" . $new_filename; 
 
-        if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)) {
+        
+         $target_profile = uploadImageWebP('pic_img', 'profile_pic');
+
+        if ($target_profile) {
 
             if (!empty($old_pic) && file_exists("../" . $old_pic)) {
                 unlink("../" . $old_pic);

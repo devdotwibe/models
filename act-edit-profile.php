@@ -147,33 +147,34 @@ if ($_POST['submit_name']){
 	//Profile upload
 		$use_id = $_SESSION["log_user_id"];
 
-      $target_dir_profile = "uploads/profile_pic/"; 
-	  if (isset($_FILES["pic_img"]) && !empty($_FILES["pic_img"]['name'])) {
-      $target_file1 = $target_dir_profile . basename($_FILES["pic_img"]["name"]);
-      $target_profile = "uploads/profile_pic/" . basename($_FILES["pic_img"]["name"]);
+		$target_dir_profile = "uploads/profile_pic/"; 
 
-      if (move_uploaded_file($_FILES["pic_img"]["tmp_name"], $target_file1)){
+		if (isset($_FILES["pic_img"]) && !empty($_FILES["pic_img"]['name'])) {
 
-         // echo '<script>alert("Your Profile Picture Successfully Uploaded");</script>';
+			// $target_file1 = $target_dir_profile . basename($_FILES["pic_img"]["name"]);
 
-          $sql = "UPDATE model_user SET profile_pic = '".$target_profile."' WHERE id = '".$use_id."'";
-        
-          if(mysqli_query($con, $sql)){
-           // echo '<script>alert("Your Profile Picture Successfully Updated");
-            // window.location="edit-profile.php"</script>';
-          }else{
-           /* echo '<script>alert("Profile Picture Not Updated.\nPlease try again later.");
-             window.location="edit-profile.php"</script>'; */
-			 echo json_encode(['status' => 'Profile Picture Not Updated.\nPlease try again later.']);
-          }  
+			$target_profile =  uploadImageWebP('pic_img', 'profile_pic');
 
-      }else{
-          /*echo '<script>alert("Error in Image uploading");
-             window.location="edit-profile.php"
-            </script>'; */
-			echo json_encode(['status' => 'Error in Image uploading']);
-      }
-	  }
+			if ($target_profile){
+
+				$sql = "UPDATE model_user SET profile_pic = '".$target_profile."' WHERE id = '".$use_id."'";
+				
+				if(mysqli_query($con, $sql)){
+				
+				}else{
+			
+					echo json_encode(['status' => 'Profile Picture Not Updated.\nPlease try again later.']);
+				}  
+
+			}else{
+			
+					echo json_encode(['status' => 'Error in Image uploading']);
+			}
+	  	}
+
+	  $profile_pic_path = uploadImageWebP('pic_img', 'profile_pic');
+
+
 	  
 	  //Image gallery upload
 		if(isset($_POST['hiddenmedia'])){

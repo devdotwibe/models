@@ -1321,6 +1321,60 @@ function get_count($table,$array,$id='id'){
 	return $output;
 }
 
+	function uploadImageWebP($file_input_name, $subfolder, $quality = 80) {
+
+		if (!isset($_FILES[$file_input_name]) || empty($_FILES[$file_input_name]['name'])) {
+			return false;
+		}
+
+		$file_tmp  = $_FILES[$file_input_name]['tmp_name'];
+		$file_mime_type = mime_content_type($file_tmp);
+
+		if (strpos($file_mime_type, 'image/') !== 0) {
+			return false;
+		}
+
+		$target_dir_path = 'uploads/' . $subfolder . '/';
+
+    	$target_dir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $subfolder . '/';
+
+		if (!is_dir($target_dir)) {
+
+			mkdir($target_dir, 0755, true);
+		}
+
+		$filename = uniqid() . '.webp';
+
+    	$target_file = $target_dir . $filename;
+
+		switch ($file_mime_type) {
+			case 'image/jpeg':
+			case 'image/jpg':
+				$image = imagecreatefromjpeg($file_tmp);
+				break;
+			case 'image/png':
+				$image = imagecreatefrompng($file_tmp);
+				imagepalettetotruecolor($image);
+				imagealphablending($image, true);
+				imagesavealpha($image, true);
+				break;
+			case 'image/gif':
+				$image = imagecreatefromgif($file_tmp);
+				break;
+			default:
+				return false;
+		}
+
+		if (!imagewebp($image, $target_file, $quality)) {
+			imagedestroy($image);
+			return false;
+		}
+
+		imagedestroy($image);
+
+		  return $target_dir_path . $filename;
+	}
+
 function get_data($table,$array,$single=false){
 	$output = array();
 	$where_clause = '';

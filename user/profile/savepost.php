@@ -37,16 +37,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mkdir($upload_folder_relative, 0755, true);
         }
 
+        // if (isset($_FILES["post_image"]) && $_FILES["post_image"]["error"] === 0) {
+
+        //         $file_size = $_FILES["post_image"]["size"];
+        //         $file_tmp  = $_FILES["post_image"]["tmp_name"];
+        //         $filename  = uniqid() . '_' . basename($_FILES["post_image"]["name"]);
+        //         $target_file = $upload_folder_relative . $filename;
+
+        //         $file_mime_type = mime_content_type($file_tmp);
+
+        //         if ($post_mime_type === 'Image') {
+        //             if (strpos($file_mime_type, 'image/') !== 0) {
+        //                 echo "Uploaded file must be an image.";
+        //                 exit;
+        //             }
+
+        //             if ($file_size > 5 * 1024 * 1024) {
+        //                 echo "Image size must not exceed 5MB.";
+        //                 exit;
+        //             }
+        //         }
+
+        //         if ($post_mime_type === 'Video') {
+        //             if (strpos($file_mime_type, 'video/') !== 0) {
+        //                 echo "Uploaded file must be a video.";
+        //                 exit;
+        //             }
+
+        //             if ($file_size > 20 * 1024 * 1024) {
+        //                 echo "Video size must not exceed 20MB.";
+        //                 exit;
+        //             }
+        //         }
+
+        //         if (move_uploaded_file($file_tmp, $target_file)) {
+        //             $image_path = $upload_folder_for_db . $filename;
+        //         } else {
+        //             echo "Image/Video upload failed.";
+        //             exit;
+        //         }
+        // }
+
         if (isset($_FILES["post_image"]) && $_FILES["post_image"]["error"] === 0) {
 
                 $file_size = $_FILES["post_image"]["size"];
                 $file_tmp  = $_FILES["post_image"]["tmp_name"];
-                $filename  = uniqid() . '_' . basename($_FILES["post_image"]["name"]);
-                $target_file = $upload_folder_relative . $filename;
+                $original_name = pathinfo($_FILES["post_image"]["name"], PATHINFO_FILENAME);
+                $target_file = $upload_folder_relative . uniqid() . '.webp';
 
                 $file_mime_type = mime_content_type($file_tmp);
 
                 if ($post_mime_type === 'Image') {
+               
                     if (strpos($file_mime_type, 'image/') !== 0) {
                         echo "Uploaded file must be an image.";
                         exit;
@@ -56,9 +98,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo "Image size must not exceed 5MB.";
                         exit;
                     }
+
+                    switch ($file_mime_type) {
+                        case 'image/jpeg':
+                        case 'image/jpg':
+                            $image = imagecreatefromjpeg($file_tmp);
+                            break;
+                        case 'image/png':
+                            $image = imagecreatefrompng($file_tmp);
+                        
+                            imagepalettetotruecolor($image);
+                            imagealphablending($image, true);
+                            imagesavealpha($image, true);
+                            break;
+                        case 'image/gif':
+                            $image = imagecreatefromgif($file_tmp);
+                            break;
+                        default:
+                            echo "Unsupported image type.";
+                            exit;
+                    }
+
+                    if (!imagewebp($image, $target_file, 80)) { // 80 = quality
+                        echo "Failed to convert image to WebP.";
+                        exit;
+                    }
+
+                    imagedestroy($image);
+
+                    $image_path = $upload_folder_for_db . basename($target_file);
+
                 }
 
                 if ($post_mime_type === 'Video') {
+                 
                     if (strpos($file_mime_type, 'video/') !== 0) {
                         echo "Uploaded file must be a video.";
                         exit;
@@ -68,13 +141,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo "Video size must not exceed 20MB.";
                         exit;
                     }
-                }
 
-                if (move_uploaded_file($file_tmp, $target_file)) {
+                    // Move video without conversion
+                    $filename  = uniqid() . '_' . basename($_FILES["post_image"]["name"]);
+                    $target_file = $upload_folder_relative . $filename;
+
+                    if (!move_uploaded_file($file_tmp, $target_file)) {
+                        echo "Video upload failed.";
+                        exit;
+                    }
+
                     $image_path = $upload_folder_for_db . $filename;
-                } else {
-                    echo "Image/Video upload failed.";
-                    exit;
                 }
             }
 
@@ -104,21 +181,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mkdir($upload_folder_relative, 0755, true);
         }
 
+        // if (isset($_FILES["story_image"]) && $_FILES["story_image"]["error"] === 0) {
+
+        //         $file_size = $_FILES["story_image"]["size"];
+        //         $file_tmp  = $_FILES["story_image"]["tmp_name"];
+        //         $filename  = uniqid() . '_' . basename($_FILES["story_image"]["name"]);
+        //         $target_file = $upload_folder_relative . $filename;
+
+
+        //         if (move_uploaded_file($file_tmp, $target_file)) {
+        //             $image_path = $upload_folder_for_db . $filename;
+        //         } else {
+        //             echo "Image/Video upload failed.";
+        //             exit;
+        //         }
+        // }
+
         if (isset($_FILES["story_image"]) && $_FILES["story_image"]["error"] === 0) {
 
                 $file_size = $_FILES["story_image"]["size"];
                 $file_tmp  = $_FILES["story_image"]["tmp_name"];
-                $filename  = uniqid() . '_' . basename($_FILES["story_image"]["name"]);
-                $target_file = $upload_folder_relative . $filename;
+                $original_name = pathinfo($_FILES["story_image"]["name"], PATHINFO_FILENAME);
+                $target_file = $upload_folder_relative . uniqid() . '.webp'; 
 
+                $file_mime_type = mime_content_type($file_tmp);
 
-                if (move_uploaded_file($file_tmp, $target_file)) {
-                    $image_path = $upload_folder_for_db . $filename;
-                } else {
-                    echo "Image/Video upload failed.";
+                if (strpos($file_mime_type, 'image/') !== 0) {
+                    echo "Uploaded file must be an image.";
                     exit;
                 }
-        }
+
+                switch ($file_mime_type) {
+                    case 'image/jpeg':
+                    case 'image/jpg':
+                        $image = imagecreatefromjpeg($file_tmp);
+                        break;
+                    case 'image/png':
+                        $image = imagecreatefrompng($file_tmp);
+                
+                        imagepalettetotruecolor($image);
+                        imagealphablending($image, true);
+                        imagesavealpha($image, true);
+                        break;
+                    case 'image/gif':
+                        $image = imagecreatefromgif($file_tmp);
+                        break;
+                    default:
+                        echo "Unsupported image type.";
+                        exit;
+                }
+
+                if (!imagewebp($image, $target_file, 80)) {
+                    echo "Failed to convert image to WebP.";
+                    exit;
+                }
+
+                imagedestroy($image);
+
+                $image_path = $upload_folder_for_db . basename($target_file);
+            }
+
 
         $stmt = $con->prepare("INSERT INTO model_user_story (user_id,files,message,created_date) VALUES (?, ?, ?, NOW())");
 
@@ -312,17 +434,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mkdir($upload_folder_relative, 0755, true);
             }
 
-            if (isset($_FILES["attachment"]) && $_FILES["attachment"]["error"] === 0) {
+         if (isset($_FILES["attachment"]) && $_FILES["attachment"]["error"] === 0) {
 
-                    $file_size = $_FILES["attachment"]["size"];
-                    $file_tmp  = $_FILES["attachment"]["tmp_name"];
-                    $filename  = uniqid() . '_' . basename($_FILES["attachment"]["name"]);
+                $file_tmp  = $_FILES["attachment"]["tmp_name"];
+                $file_mime_type = mime_content_type($file_tmp);
+
+                if (strpos($file_mime_type, 'image/') === 0) {
+           
+                    $target_file = $upload_folder_relative . uniqid() . '.webp';
+
+                    switch ($file_mime_type) {
+                        case 'image/jpeg':
+                        case 'image/jpg':
+                            $image = imagecreatefromjpeg($file_tmp);
+                            break;
+                        case 'image/png':
+                            $image = imagecreatefrompng($file_tmp);
+                            imagepalettetotruecolor($image);
+                            imagealphablending($image, true);
+                            imagesavealpha($image, true);
+                            break;
+                        case 'image/gif':
+                            $image = imagecreatefromgif($file_tmp);
+                            break;
+                        default:
+                            echo "Unsupported image type.";
+                            exit;
+                    }
+
+                    if (!imagewebp($image, $target_file, 80)) {
+                        echo "Failed to convert image to WebP.";
+                        exit;
+                    }
+
+                    imagedestroy($image);
+
+                } else {
+            
+                    $filename = uniqid() . '_' . basename($_FILES["attachment"]["name"]);
                     $target_file = $upload_folder_relative . $filename;
 
+                    if (!move_uploaded_file($file_tmp, $target_file)) {
+                        echo "File upload failed.";
+                        exit;
+                    }
+                }
 
-                    if (move_uploaded_file($file_tmp, $target_file)) {
-                        $image_path = $upload_folder_for_db . $filename;
-                    } 
+                $image_path = $upload_folder_for_db . basename($target_file);
             }
 
             if ($user_id && $reported_user_id) {
