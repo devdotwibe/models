@@ -8,7 +8,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
 if ($userDetails) {
 } else {
-  echo '<script>window.location.href="login.php"</script>';
+  echo '<script>window.location.href="login"</script>';
 }
 
 
@@ -27,11 +27,11 @@ $extra_details = DB::queryFirstRow("SELECT * FROM model_extra_details WHERE uniq
 <html lang="en">
 <head>
     
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <title>Chat | The Live Models </title>
-    <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
-	<link rel="canonical" href="https://thelivemodels.com/" />
+<title>Chat | The Live Models </title>
+<meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
+<link rel="canonical" href="https://thelivemodels.com/" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Open Graph -->
