@@ -5,7 +5,11 @@ include('includes/helper.php');
 <!doctype html>
 <html lang="en-US" class="no-js">
   <head>
+
+  <meta charset="UTF-8">
     <title>Privacy Policy | The Live Models</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="Read the Privacy Policy for The Live Models. Learn how we collect, use, and protect your data when you use our platform.">
 	<link rel="canonical" href="https://thelivemodels.com/privacy-policy" />
 	<meta name="robots" content="noindex,follow">

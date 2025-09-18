@@ -8,6 +8,7 @@ include('includes/helper.php');
   <meta charset="UTF-8">
   
   <title> Verification Policy | The Live Models </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 

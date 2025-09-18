@@ -1438,9 +1438,9 @@ body .owl-carousel .owl-nav.disabled {
             ?>
 
 
-                <div class="md:col-span-1">
+                 <div class="md:col-span-1 single-profile-stausDiv">
                     <!-- Stats Card -->
-                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-staus">
                         <h2 class="text-xl font-bold mb-4 premium-text">Status</h2>
 
                         <div class="post-div flex flex-wrap gap-8 text-center">
@@ -1470,7 +1470,7 @@ body .owl-carousel .owl-nav.disabled {
 
             <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] == $_SESSION['log_user_unique_id']) { ?>
 
-                    <form id="createPostForm"  enctype="multipart/form-data" method="post">
+                      <form id="createPostForm" class="single-profile-form"  enctype="multipart/form-data" method="post">
 
                         <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
 
@@ -1485,7 +1485,7 @@ body .owl-carousel .owl-nav.disabled {
 
                             <input type="hidden" name="user_id" id="user_id" value="<?php echo $rowesdw['id'] ?>">
 
-                            <div class="flex justify-between items-center post_submit " id="post_submit">
+                           <div class="single-pro-up-inp flex justify-between items-center post_submit " id="post_submit">
 
 
                                 <label for="post_image" id="post_image_label" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
@@ -1502,9 +1502,9 @@ body .owl-carousel .owl-nav.disabled {
 
                                 </div>
 
-                            <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
+                            <div class="single-pro-all file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
 
-                                <div class="flex flex-col text-white text-sm sm:text-base file_type_sec">
+                                <div class="single-pro-VidImg flex flex-col text-white text-sm sm:text-base file_type_sec">
                                         <label class="mb-2">File Type:</label>
                                         <div class="flex flex-col gap-2">
                                             <label class="flex items-center gap-2 cursor-pointer">
@@ -1518,7 +1518,7 @@ body .owl-carousel .owl-nav.disabled {
                                         </div>
                                     </div>
 
-                                <div class="flex flex-col text-white text-sm sm:text-base <?php if($is_model){ ?>post_type_sec <?php }?>" style="display:none;">
+                            <div class="single-pro-radio flex flex-col text-white text-sm sm:text-base <?php if($is_model){ ?>post_type_sec <?php }?>" style="display:none;">
                                         <label class="mb-2">Post Type:</label>
                                         <div class="flex flex-col gap-2">
                                             <label class="flex items-center gap-2 cursor-pointer">
@@ -1534,7 +1534,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                 </div>
 
-                                <div class="file-type-section flex flex-col sm:flex-row gap-4 mt-4 token_sec" style="display:none;">
+                          <div class="single-pro-token file-type-section flex flex-col sm:flex-row gap-4 mt-4 token_sec" style="display:none;">
 
                                 <div class="flex flex-col text-white text-sm sm:text-base">
 
@@ -1547,7 +1547,7 @@ body .owl-carousel .owl-nav.disabled {
                                 </div>
 
 
-                                <button type="submit"  class="btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
+                                 <button type="submit" id="post_btn"  class="single-pro-btn btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
                                     Post
                                 </button>
                             </div>
@@ -1560,7 +1560,7 @@ body .owl-carousel .owl-nav.disabled {
             
                 <?php if($modelDetails['as_a_model'] =='Yes') { ?>
                     
-                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+               <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-services">
                         <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
                         <ul class="space-y-4">
 
@@ -1579,7 +1579,7 @@ body .owl-carousel .owl-nav.disabled {
                                     } else if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') {
                                     ?>
 
-                                <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'watch-stream/'.$_GET['username'] ?>'">
+                          <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
                                         <button type="button" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
@@ -1597,7 +1597,7 @@ body .owl-carousel .owl-nav.disabled {
                             <?php
                                     if ($_SESSION["log_user_unique_id"] == $session_id) {?>
                                 
-                                <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/'.$_GET['username'] ?>'">
+                     <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
 
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -1673,7 +1673,7 @@ body .owl-carousel .owl-nav.disabled {
 
                 <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] && $is_model) { ?>
 
-                    <div class="ultra-glass rounded-2xl p-4 sm:p-6">
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-similar">
                         <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
                         <div class="space-y-4">
                         
@@ -3940,6 +3940,7 @@ jQuery('.send_gift_btn').click(function(){
             $('#filePreview_div_story').show();
 
             $('#story_image').hide();
+
         }
 
 
@@ -4099,6 +4100,8 @@ jQuery('.send_gift_btn').click(function(){
             $('#post_image_label').hide();
 
             $('#post_submit').addClass('image_posted');
+
+            $('#post_btn').addClass('post_image');
             
         }
 
@@ -4155,6 +4158,8 @@ jQuery('.send_gift_btn').click(function(){
             $('#post_image').val('');
 
             $('#post_submit').removeClass('image_posted');
+
+             $('#post_btn').removeClass('post_image');
             
         }
 
