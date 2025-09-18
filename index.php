@@ -51,6 +51,17 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
         exit;
     }
 
+    if ($segments[0] === 'advertisements' && !empty($segments[1])) {
+        $file = __DIR__ . '/advertisements/' . basename($segments[1]) . '.php';
+        if (file_exists($file)) {
+            require $file;
+        } else {
+            http_response_code(404);
+            require __DIR__ . '/404.php';
+        }
+        exit;
+    }
+
     if ($segments[0] === 'payments' && !empty($segments[1])) {
         $file = __DIR__ . '/payments/' . basename($segments[1]) . '.php';
         if (file_exists($file)) {

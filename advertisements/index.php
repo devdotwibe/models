@@ -419,7 +419,7 @@ $serviceArr = array('Providing services', 'Looking for services');
         // Model interaction functions
         function viewProfile(modelId) {
             //alert(`Opening profile for model: ${modelId}`);
-			window.location.href = '<?=SITEURL?>advertisements/view.php?id='+modelId;
+			window.location.href = '<?=SITEURL?>advertisements/view?id='+modelId;
         }
 
         function contactModel(modelId) {

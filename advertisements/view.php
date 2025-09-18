@@ -1,7 +1,9 @@
 <?php 
   session_start(); 
-  include('../includes/config.php');
-  include('../includes/helper.php');
+
+  include(__DIR__ . '/../includes/config.php');
+
+  include(__DIR__.'/../includes/helper.php');
 $f_country_list = DB::query('select id,name,sortname from countries order by name asc');
 	$id= 0;
 	//create post data
@@ -15,7 +17,7 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
             {
                 $adver_id =  $id;
 
-                $model_id = $form_data['user_id'];
+                $model_id = $form_data['user_id']; 
 
                 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 
@@ -68,9 +70,12 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
                                     "SELECT * FROM avertisement_view WHERE adver_id =$id "
                                 );
 
-            $add_like_count = DB::numRows(
+            /*$add_like_count = DB::numRows(
                                             "SELECT * FROM avertisement_like WHERE adver_id =$id AND liked ='Yes' "
-                                        );
+                                        );*/
+										
+			$add_like_count = AdverLikedCount($form_data['id']);
+			$rating = GetRating($userDetails['unique_id']);
 ?>
 
 <!DOCTYPE html>
@@ -142,7 +147,7 @@ $f_country_list = DB::query('select id,name,sortname from countries order by nam
     </script>
 
 
-	<?php include('../includes/head.php'); ?>
+	<?php include(__DIR__.'/../includes/head.php'); ?>
 	
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" rel="stylesheet" type="text/css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -307,9 +312,21 @@ body .owl-carousel .owl-nav.disabled {
 	
 
 </head>
-<body class="advpage-3">
-    
-	<?php include('include/adv_header.php'); ?>
+<body class="advpage-3 socialwall-page">
+
+
+    <?php if (isset($_SESSION["log_user_id"])) { ?>
+
+            <?php  include(__DIR__.'/../includes/side-bar.php'); ?>
+
+
+            <?php  include(__DIR__.'/../includes/profile_header_index.php'); ?>
+
+            <?php } else{ ?>
+
+            <?php include(__DIR__.'/../includes/header.php'); ?>
+
+	<?php } ?>
 
     <?php /*?><div class="container">
         <!-- <h2 class="page_heading">All Models</h2> -->
@@ -400,7 +417,45 @@ else{
                 <div class="ad-gallery">
 
                     <div class="main-image">
-                        <div class="badge badge-premium">👑 Premium</div>
+					
+					
+					<?php 
+					
+					$is_user_preminum = CheckPremiumAccess($model_id);
+					
+					if($is_user_preminum) { 
+					
+						if($is_user_preminum['active']){
+							
+							$preminum_plan = $is_user_preminum['plan_status'];
+							
+						}else $preminum_plan = '';
+						
+					?>
+						<div class="badge badge-premium">
+						
+											<?php if ($preminum_plan == 'basic') { ?>
+
+                                                <span class="profile-badge badge-premium">
+                                                    <div class="badge-user premium-basic-user">⭐</div>
+                                                    <p>Premium</p>
+                                                </span>
+
+                                            <?php } else { ?>
+
+                                                <span class="profile-badge badge-premium">
+                                                    <div class="badge-user diamond-elite-user"><span>💎</span></div>
+                                                    <p>Premium</p>
+                                                </span>
+
+                                            <?php } ?>
+											
+							</div>
+
+                    <?php }
+					?>
+					
+                       
 						
 						<?php /*
 						if(!empty($form_data['video'])){
@@ -583,13 +638,13 @@ else{
                                 <span class="stat-label">Likes</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-value">4.9</span>
+                                <span class="stat-value"><?= rtrim(rtrim(number_format($rating, 1), '0'), '.') ?></span>
                                 <span class="stat-label">Rating</span>
                             </div>
-                            <div class="stat">
+                            <?php /*?><div class="stat">
                                 <span class="stat-value">50+</span>
                                 <span class="stat-label">Projects</span>
-                            </div>
+                            </div> <?php */ ?>
                         </div>
                     </div>
 
@@ -636,7 +691,7 @@ else{
 					<?php } ?>
 
                     <div class="ad-actions">
-                        <a href="<?= SITEURL ?>single-profile.php/<?php echo urlencode($userDetails['username']); ?>" class="btn-primary action-btn">
+                        <a href="<?= SITEURL ?><?php echo urlencode($userDetails['username']); ?>" class="btn-primary action-btn">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
@@ -933,7 +988,7 @@ else{
     </main>	  
 	  
 	  
-   <?php include('include/adv_footer.php'); ?>
+   <?php include(__DIR__.'/../includes/footer.php'); ?>
    
    <script>
         // Image Gallery Functionality

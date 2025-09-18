@@ -30,11 +30,35 @@ if($all_data){
                     
                     <div class="ad-image">
 
-                    <?php if($is_user_preminum) { ?>
+                    <?php if($is_user_preminum) { 
+					
+						if($is_user_preminum['active']){
+							
+							$preminum_plan = $is_user_preminum['plan_status'];
+							
+						}else $preminum_plan = '';
+						
+					?>
 
 
-                        <div class="ad-badge badge-premium">👑 Premium</div>
+                        <div class="ad-badge badge-premium"><?php /*👑 Premium*/ ?>
+						
+											<?php if ($preminum_plan == 'basic') { ?>
 
+                                                <span class="profile-badge badge-premium">
+                                                    <div class="badge-user premium-basic-user">⭐</div>
+                                                    <p>Premium</p>
+                                                </span>
+
+                                            <?php } else { ?>
+
+                                                <span class="profile-badge badge-premium">
+                                                    <div class="badge-user diamond-elite-user"><span>💎</span></div>
+                                                    <p>Premium</p>
+                                                </span>
+
+                                            <?php } ?>
+							</div> 
                     <?php } else { ?>
 
                         <div class="ad-badge badge-featured">🌟 Featured</div>
@@ -58,10 +82,16 @@ if($all_data){
                                     
                                     <span>  <span id="like_adver_count_<?php echo $set_data['id'] ?>"><?php echo $adver_liked ?></span> likes</span>
                             </div>
-
+							
+							<?php 
+							
+							$userDetails = get_data('model_user', array('id' => $set_data['user_id']), true);
+							
+							$rating = GetRating($userDetails['unique_id']); ?>
+							
                             <div class="stat-item">
                                 <span>⭐</span>
-                                <span>4.8 rating</span>
+                                <span><?= rtrim(rtrim(number_format($rating, 1), '0'), '.') ?> rating</span>
                             </div>
                         </div>
                         <button class="btn-primary" onclick="viewProfile(<?php echo $set_data['id']; ?>)">

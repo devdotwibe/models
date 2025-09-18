@@ -781,7 +781,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                 <div class="ul-premiumdiv flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
 
-                    <button class="px-12 py-5 bg-white text-indigo-600 font-bold rounded-xl hover:bg-gray-100 transition duration-300 shadow-2xl text-xl hover-lift" <?php //if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" <?php //}?>>
+                    <button class="px-12 py-5 bg-white-n text-indigo-600 font-bold rounded-xl hover:bg-gray-100 transition duration-300 shadow-2xl text-xl hover-lift" <?php //if (!isset($_SESSION["log_user_id"])) { ?>   onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" <?php //}?>>
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 inline"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         Become a Creator
