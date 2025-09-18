@@ -1547,7 +1547,7 @@ body .owl-carousel .owl-nav.disabled {
                                 </div>
 
 
-                                 <button type="submit"  class="single-pro-btn btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
+                                 <button type="submit" id="post_btn"  class="single-pro-btn btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
                                     Post
                                 </button>
                             </div>
@@ -3940,6 +3940,7 @@ jQuery('.send_gift_btn').click(function(){
             $('#filePreview_div_story').show();
 
             $('#story_image').hide();
+
         }
 
 
@@ -4099,6 +4100,8 @@ jQuery('.send_gift_btn').click(function(){
             $('#post_image_label').hide();
 
             $('#post_submit').addClass('image_posted');
+
+            $('#post_btn').addClass('post_image');
             
         }
 
@@ -4155,6 +4158,8 @@ jQuery('.send_gift_btn').click(function(){
             $('#post_image').val('');
 
             $('#post_submit').removeClass('image_posted');
+
+             $('#post_btn').removeClass('post_image');
             
         }
 
