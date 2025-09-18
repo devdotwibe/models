@@ -118,6 +118,68 @@ if (mysqli_num_rows($res_ap) > 0) {
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<title>Model Profile - Million Dollar Page </title>
+    <meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+	<link rel="canonical" href="https://thelivemodels.com/" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Model Profile - Million Dollar Page | The Live Models">
+<meta property="og:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+<meta property="og:url" content="https://thelivemodels.com/">
+<meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta property="og:site_name" content="The Live Models">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Model Profile - Million Dollar Page | The Live Models">
+<meta name="twitter:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
+<meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta name="twitter:site" content="@thelivemodels">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thelivemodels.com/#organization",
+      "name": "The Live Models",
+      "url": "https://thelivemodels.com/",
+      "logo": "https://thelivemodels.com/assets/images/logo.png",
+      "sameAs": [
+        "https://x.com/thelivemodels",
+        "https://www.instagram.com/the_livemodels",
+        "https://www.tiktok.com/@thelivemodels"
+      ],
+      "description": "Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections..",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Kulwant Singh Jakhar"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://thelivemodels.com/#website",
+      "url": "https://thelivemodels.com/",
+      "name": "The Live Models",
+      "description": "Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.",
+      "publisher": {
+        "@id": "https://thelivemodels.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://thelivemodels.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
 <?php  include('includes/head.php'); ?>
 
@@ -947,11 +1009,12 @@ body .owl-carousel .owl-nav.disabled {
                                                     <?php
                                                             $uniqueModelId = isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : '';
                                                             if ($_SESSION["log_user_unique_id"] == $session_id) {
-                                                                $link = SITEURL . 'live-stream/stream.php?user=streamer&unique_model_id=' . $uniqueModelId;
+
+                                                                $link = SITEURL . 'live-stream/'.$_GET['username'];
 
                                                             
                                                             } else {
-                                                                $link = SITEURL . 'live-stream/view.php?user=viewer&unique_model_id=' . $uniqueModelId;
+                                                                $link = SITEURL . 'watch-stream/'.$_GET['username'];
 
                                                             }
                                                             if($modelDetails['as_a_model'] =='Yes')
@@ -1375,7 +1438,7 @@ body .owl-carousel .owl-nav.disabled {
             ?>
 
 
-                <div class="md:col-span-1 single-profile-stausDiv">
+                 <div class="md:col-span-1 single-profile-stausDiv">
                     <!-- Stats Card -->
                     <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-staus">
                         <h2 class="text-xl font-bold mb-4 premium-text">Status</h2>
@@ -1407,7 +1470,7 @@ body .owl-carousel .owl-nav.disabled {
 
             <?php if (isset($_SESSION['log_user_unique_id']) && $_GET['m_unique_id'] == $_SESSION['log_user_unique_id']) { ?>
 
-                    <form id="createPostForm" class="single-profile-form"  enctype="multipart/form-data" method="post">
+                      <form id="createPostForm" class="single-profile-form"  enctype="multipart/form-data" method="post">
 
                         <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
 
@@ -1422,7 +1485,7 @@ body .owl-carousel .owl-nav.disabled {
 
                             <input type="hidden" name="user_id" id="user_id" value="<?php echo $rowesdw['id'] ?>">
 
-                            <div class="single-pro-up-inp flex justify-between items-center post_submit " id="post_submit">
+                           <div class="single-pro-up-inp flex justify-between items-center post_submit " id="post_submit">
 
 
                                 <label for="post_image" id="post_image_label" class="cursor-pointer flex items-center text-white/70 hover:text-white transition duration-300 text-sm sm:text-base">
@@ -1439,9 +1502,9 @@ body .owl-carousel .owl-nav.disabled {
 
                                 </div>
 
-                             <div class="single-pro-all file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
+                            <div class="single-pro-all file-type-section flex flex-col sm:flex-row gap-4 mt-4 file_type_sec" style="display:none;">
 
-                                 <div class="single-pro-VidImg flex flex-col text-white text-sm sm:text-base file_type_sec">
+                                <div class="single-pro-VidImg flex flex-col text-white text-sm sm:text-base file_type_sec">
                                         <label class="mb-2">File Type:</label>
                                         <div class="flex flex-col gap-2">
                                             <label class="flex items-center gap-2 cursor-pointer">
@@ -1455,7 +1518,7 @@ body .owl-carousel .owl-nav.disabled {
                                         </div>
                                     </div>
 
-                                <div class="single-pro-radio flex flex-col text-white text-sm sm:text-base <?php if($is_model){ ?>post_type_sec <?php }?>" style="display:none;">
+                            <div class="single-pro-radio flex flex-col text-white text-sm sm:text-base <?php if($is_model){ ?>post_type_sec <?php }?>" style="display:none;">
                                         <label class="mb-2">Post Type:</label>
                                         <div class="flex flex-col gap-2">
                                             <label class="flex items-center gap-2 cursor-pointer">
@@ -1471,7 +1534,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                 </div>
 
-  <div class="single-pro-token file-type-section flex flex-col sm:flex-row gap-4 mt-4 token_sec" style="display:none;">
+                          <div class="single-pro-token file-type-section flex flex-col sm:flex-row gap-4 mt-4 token_sec" style="display:none;">
 
                                 <div class="flex flex-col text-white text-sm sm:text-base">
 
@@ -1484,7 +1547,7 @@ body .owl-carousel .owl-nav.disabled {
                                 </div>
 
 
-                                <button type="submit"  class="single-pro-btn btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
+                                 <button type="submit"  class="single-pro-btn btn-primary px-4 sm:px-6 py-2 rounded-xl text-white font-semibold text-sm sm:text-base">
                                     Post
                                 </button>
                             </div>
@@ -1497,7 +1560,7 @@ body .owl-carousel .owl-nav.disabled {
             
                 <?php if($modelDetails['as_a_model'] =='Yes') { ?>
                     
-                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-services">
+               <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-services">
                         <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
                         <ul class="space-y-4">
 
@@ -1516,7 +1579,7 @@ body .owl-carousel .owl-nav.disabled {
                                     } else if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') {
                                     ?>
 
-                                <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
+                          <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
                                         <button type="button" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
@@ -1534,7 +1597,7 @@ body .owl-carousel .owl-nav.disabled {
                             <?php
                                     if ($_SESSION["log_user_unique_id"] == $session_id) {?>
                                 
-                                <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
+                     <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
 
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -2127,10 +2190,14 @@ body .owl-carousel .owl-nav.disabled {
             </button>
         </div>
 		
+		<?php $service_status = false; ?>
+		
 		<div class="modal-body">
 		<div class="services-grid">
 		<?php if(!empty($extra_details) && !empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes'){ ?>
-            <?php if($extra_details['private_chat_token']){ ?>
+            <?php //if($extra_details['private_chat_token']){
+						$service_status = true;
+			?>
 				<!-- Chat Service -->
                 <?php /*?><div class="service-card" >
                     <div class="service-header">
@@ -2172,19 +2239,24 @@ body .owl-carousel .owl-nav.disabled {
 					
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-					<a class="action-button btn btn-primary" href='<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>' >Watch Live</a>
+					<a class="action-button btn btn-primary" href='<?php echo SITEURL .'watch-stream/'.$_GET['username'] ?>' >Watch Live</a>
 
                     <?php }?>
 					
 					
                 </div>
 				
-			<?php } ?>
+			<?php //} ?>
 				
 		<?php } ?>
 		
 		<?php if(!empty($extra_details) && !empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ ?>
-			<?php if($extra_details['in_per_hour']){ ?>
+			
+			<?php if($extra_details['in_per_hour'] || $extra_details['extended_rate'] || $extra_details['in_overnight'] || $extra_details['fullday_social']){ 
+			
+			$service_status = true; 
+			
+			?>
                 <!-- Meetup Service -->
                 <div class="service-card" onclick="<?php if (!$user_have_preminum) { ?>handleService('meetup')<?php } ?>" >
                     <div class="service-header">
@@ -2215,7 +2287,7 @@ body .owl-carousel .owl-nav.disabled {
 		<?php } ?>
 		
 		<?php if(!empty($extra_details) && !empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ ?>
-			<?php if($extra_details['daily_rate']){ ?>
+			<?php if($extra_details['daily_rate'] || $extra_details['weekly_rate'] || $extra_details['monthly_rate']){ $service_status = true; ?>
 
                 <!-- Travel Service -->
                 <div class="service-card" onclick="<?php if ( !($user_have_preminum && $plan =='diamond') ) { ?>handleService('travel')<?php } ?>">
@@ -2244,6 +2316,11 @@ body .owl-carousel .owl-nav.disabled {
 			<?php } ?>
 			
 		<?php } ?>
+		
+		<?php if(!empty($extra_details) && !empty($extra_details['collab']) && $extra_details['collab'] == 'Yes'){ 
+		
+				$service_status = true;
+		?>
 
                 <!-- Collaboration Service -->
                 <div class="service-card" onclick="<?php if (!($user_have_preminum && $plan =='diamond')) { ?>handleService('collaboration')<?php }  ?>" >
@@ -2262,9 +2339,19 @@ body .owl-carousel .owl-nav.disabled {
                         <div class="status-badge status-exclusive">By Quote</div>
                     </div>
 
-                    <a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking.php?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
-
+					<?php if($userDetails['as_a_model'] !='Yes') { ?>
+                    
+					<a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking.php?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
+					
+					<?php } ?>
+					
                 </div>
+		<?php } ?>
+		
+		<?php if($service_status == false){
+			echo '<div class="no-service-msg">No services found.</div>';
+		} ?>
+		
             </div>
 
             <div class="disclaimer">
@@ -2715,11 +2802,13 @@ body .owl-carousel .owl-nav.disabled {
 				
 				<?php 
 				
-				if (mysqli_num_rows($res_sc) > 0) { 
+				if (mysqli_num_rows($res_sc) > 0) {  $sc_status = false;
                     
-                        while($rows_sc = mysqli_fetch_assoc($res_sc)) {
+                        while($rows_sc = mysqli_fetch_assoc($res_sc)) { 
 							
 						if(!empty($rows_sc['URL'])){
+							
+							$sc_status = true;
 							
 							if($rows_sc['platform'] == 'Instagram'){
 								$sc_image = '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -2790,8 +2879,10 @@ body .owl-carousel .owl-nav.disabled {
                     </div>
 					
 						<?php } }
-						
-				} else echo 'No social links found.'; ?>
+					
+					if(!$sc_status) echo '<span class="no-social-msg">No social links found.</span>';
+					
+				} else echo '<span class="no-social-msg">No social links found.</span>'; ?>
 					
                 </div>
                
@@ -3198,7 +3289,12 @@ body .owl-carousel .owl-nav.disabled {
 	
   <?php
   } else {
-    echo "No Record Found";
+    // echo "No Record Found";
+
+      echo "<script>window.location.href = '" .SITEURL. "404.php';</script>";
+    exit;
+
+
   }
   ?>
   
