@@ -16,7 +16,9 @@ include('includes/helper.php');
 
 <?php include('includes/head.php'); ?>
 
-<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
     :root {
@@ -352,7 +354,7 @@ include('includes/helper.php');
     }
 </style>
 </head>
-<body class="min-h-screen bg-animated text-white">
+<body class="min-h-screen bg-animated text-white socialwall-page">
 <!-- Premium Particle System -->
 <div class="particles" id="particles"></div>
 

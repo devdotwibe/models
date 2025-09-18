@@ -2195,7 +2195,7 @@ body .owl-carousel .owl-nav.disabled {
 		<div class="modal-body">
 		<div class="services-grid">
 		<?php if(!empty($extra_details) && !empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes'){ ?>
-            <?php if($extra_details['private_chat_token']){
+            <?php //if($extra_details['private_chat_token']){
 						$service_status = true;
 			?>
 				<!-- Chat Service -->
@@ -2246,12 +2246,17 @@ body .owl-carousel .owl-nav.disabled {
 					
                 </div>
 				
-			<?php } ?>
+			<?php //} ?>
 				
 		<?php } ?>
 		
 		<?php if(!empty($extra_details) && !empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes'){ ?>
-			<?php if($extra_details['in_per_hour']){ $service_status = true; ?>
+			
+			<?php if($extra_details['in_per_hour'] || $extra_details['extended_rate'] || $extra_details['in_overnight'] || $extra_details['fullday_social']){ 
+			
+			$service_status = true; 
+			
+			?>
                 <!-- Meetup Service -->
                 <div class="service-card" onclick="<?php if (!$user_have_preminum) { ?>handleService('meetup')<?php } ?>" >
                     <div class="service-header">
@@ -2271,7 +2276,7 @@ body .owl-carousel .owl-nav.disabled {
 										
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?> href='<?=SITEURL?>booking?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Request Meetup</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?> href='<?=SITEURL?>booking.php?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Request Meetup</a>
 
                     <?php }?>
 					
@@ -2282,7 +2287,7 @@ body .owl-carousel .owl-nav.disabled {
 		<?php } ?>
 		
 		<?php if(!empty($extra_details) && !empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ ?>
-			<?php if($extra_details['daily_rate']){ $service_status = true; ?>
+			<?php if($extra_details['daily_rate'] || $extra_details['weekly_rate'] || $extra_details['monthly_rate']){ $service_status = true; ?>
 
                 <!-- Travel Service -->
                 <div class="service-card" onclick="<?php if ( !($user_have_preminum && $plan =='diamond') ) { ?>handleService('travel')<?php } ?>">
@@ -2302,7 +2307,7 @@ body .owl-carousel .owl-nav.disabled {
 					
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?=SITEURL?>booking?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?=SITEURL?>booking.php?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
 
                     <?php }?>
 					
@@ -2334,8 +2339,12 @@ body .owl-carousel .owl-nav.disabled {
                         <div class="status-badge status-exclusive">By Quote</div>
                     </div>
 
-                    <a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
-
+					<?php if($userDetails['as_a_model'] !='Yes') { ?>
+                    
+					<a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking.php?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
+					
+					<?php } ?>
+					
                 </div>
 		<?php } ?>
 		
@@ -3280,7 +3289,12 @@ body .owl-carousel .owl-nav.disabled {
 	
   <?php
   } else {
-    echo "No Record Found";
+    // echo "No Record Found";
+
+      echo "<script>window.location.href = '" .SITEURL. "404.php';</script>";
+    exit;
+
+
   }
   ?>
   
@@ -3484,7 +3498,7 @@ jQuery('.socialpaidbtn').click(function(e){
 	}
 	<?php } else{ ?>
 		alert('Please login');
-		window.location='login'
+		window.location='login.php'
 	<?php } ?>
 });
 
@@ -4005,7 +4019,7 @@ jQuery('.send_gift_btn').click(function(){
 
                     $('#buyNowBtn').on('click', function () {
                         
-                            window.location.href = "/wallet";
+                            window.location.href = "/wallet.php";
                     });
                 }
             },
