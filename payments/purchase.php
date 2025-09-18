@@ -1,7 +1,5 @@
 <?php
 
-
-
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
@@ -12,18 +10,24 @@ $stripeSecret = $_ENV['STRIPE_SECRET_KEY'];
 $stripekey = $_ENV['STRIPE_KEY'];
 
 session_start();
-include(__DIR__.'../includes/config.php');
+include(__DIR__.'/../includes/config.php');
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>Payment Confirmation Page - Live Models</title>
 
-	<?php include(__DIR__.'../includes/head.php'); ?>
+   <meta charset="UTF-8">
+  <title>Payment Confirmation Page - Live Models</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<?php include(__DIR__.'/../includes/head.php'); ?>
 
 </head>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 

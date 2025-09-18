@@ -43,7 +43,6 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
     <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Edit Profile | The Live Models">
@@ -699,7 +698,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <div class="space-y-4">
           <div>
             <label class="form-label">Withdraw Amount (TLM Tokens)</label>
-            <input type="number" id="withdraw-amount" class="form-input" placeholder="Enter amount" name="coins" value="100" data-max="<?= $userDetails['balance'] ?>" data-min="100" oninput="updateWithdrawUSD(this)">
+            <input type="text" id="withdraw-amount" class="form-input" placeholder="Enter amount" name="coins" value="100" data-max="<?= $userDetails['balance'] ?>" data-min="100" oninput="updateWithdrawUSD(this)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" >
             <p class="help-text">Minimum withdrawal: 100 TLM tokens</p>
 
             <span id="amount_error" class="text-danger" style="display: none;"> </span>
@@ -1632,7 +1631,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
           <?php
           $social_list = DB::query('select * from model_social_link where unique_model_id="' . $userDetails['unique_id'] . '"  Order by id ASC');
-          ?>
+          
+		  ?>
 
           <!-- Social Links - Enhanced -->
           <div class="form-section lg:col-span-2" <?php if ($userDetails['as_a_model'] != 'Yes') echo 'style="display:none;"'; ?>>
