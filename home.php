@@ -334,25 +334,25 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
                                 <?php if(isset($_SESSION["user_name_exist"] )) { ?>
 
-                                <h2><span class="text-danger"><?php echo $_SESSION["user_name_exist"]  ?></span></h2>
+                                <h2><span class="text-danger" style="color:red;"><?php echo $_SESSION["user_name_exist"]  ?></span></h2>
 
                                 <?php } ?>
 
                                 <?php if(isset($_SESSION["email_exist"] )) { ?>
 
-                                    <h2><span class="text-danger"><?php echo $_SESSION["email_exist"]  ?></span></h2>
+                                    <h2><span class="text-danger" style="color:red;"><?php echo $_SESSION["email_exist"]  ?></span></h2>
 
                                 <?php } ?>
 
                                 <?php if(isset($_SESSION["email_error"] )) { ?>
 
-                                    <h2><span class="text-danger"><?php echo $_SESSION["email_error"]  ?></span></h2>
+                                    <h2><span class="text-danger" style="color:red;"><?php echo $_SESSION["email_error"]  ?></span></h2>
 
                                 <?php } ?>
 
                                 <?php if(isset($_SESSION["not_registred"] )) { ?>
 
-                                    <h2><span class="text-danger"><?php echo $_SESSION["not_registred"]  ?></span></h2>
+                                    <h2><span class="text-danger" style="color:red;"><?php echo $_SESSION["not_registred"]  ?></span></h2>
 
                                 <?php } ?>
 
@@ -882,7 +882,7 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
 
         function filterModels(link) {
    
-            window.location.href = 'all-member?filter=' + encodeURIComponent(link);
+            window.location.href = 'all-members?filter=' + encodeURIComponent(link);
             return false;
         }
 

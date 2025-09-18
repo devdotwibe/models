@@ -174,13 +174,13 @@ if (isset($_POST['vfb-submit'])) {
     $res_e = mysqli_query($con, $sql_e); 
    if (mysqli_num_rows($res_u) > 0) { 
 
-        $_SESSION["user_name_exist"] = "Sorry... username already taken";
+        $_SESSION["user_name_exist"] = "This username is linked to an existing account.<br> Log in Or Reset Password";
         
         echo '<script>window.history.back();</script>';
                 
     }else if(mysqli_num_rows($res_e) > 0){
 
-      $_SESSION["email_exist"] = "Sorry... email already taken";
+      $_SESSION["email_exist"] = "This email is linked to an existing account.<br> Log in Or Reset Password";
 
                 echo '<script>window.history.back();</script>';
     }else{
@@ -254,7 +254,7 @@ if (isset($_POST['vfb-submit'])) {
             // </script>';
 
             header("Location: login.php");
-
+            
             exit;
 
         } else {

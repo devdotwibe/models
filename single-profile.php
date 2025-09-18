@@ -113,19 +113,15 @@ if (mysqli_num_rows($res_ap) > 0) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Model Profile - Million Dollar Page</title>
-<meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<title>Model Profile - Million Dollar Page </title>
+<title>Model Profile | The Live Models</title>
     <meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Model Profile - Million Dollar Page | The Live Models">
+<meta property="og:title" content="Model Profile | The Live Models">
 <meta property="og:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
 <meta property="og:url" content="https://thelivemodels.com/">
 <meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
@@ -133,7 +129,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Model Profile - Million Dollar Page | The Live Models">
+<meta name="twitter:title" content="Model Profile | The Live Models">
 <meta name="twitter:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
 <meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
 <meta name="twitter:site" content="@thelivemodels">
