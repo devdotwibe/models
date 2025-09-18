@@ -1,14 +1,14 @@
 <?php session_start(); 
 
-include('../includes/config.php');
-include('../includes/helper.php');
+include(__DIR__.'/../includes/config.php');
+include(__DIR__.'/../includes/helper.php');
 
 if($_SESSION["log_user"]){
 	$userDetails = get_data('model_user',array('id'=>$_SESSION['log_user_id']),true);
 
 	if(!$userDetails){
 		echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
-		echo "<script>window.location='".SITEURL."/login.php';</script>";
+		echo "<script>window.location='".SITEURL."/login';</script>";
 		die;
 	}
     elseif($_GET['id'] != '' && isset($_GET['id']) )
@@ -18,19 +18,19 @@ if($_SESSION["log_user"]){
         if(!$adDetails){
 
             echo '<script>alert("Advertisement not found. Going to advertisement list....")</script>';
-            echo "<script>window.location='".SITEURL."advertisement/list.php';</script>";
+            echo "<script>window.location='".SITEURL."advertisement/list';</script>";
             die;
         }
     }
     else
     {
-        echo "<script>window.location='".SITEURL."advertisement/list.php';</script>";
+        echo "<script>window.location='".SITEURL."advertisement/list';</script>";
         die;
     }
 }
 else{
 	echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
-	echo "<script>window.location='".SITEURL."login.php';</script>";
+	echo "<script>window.location='".SITEURL."login';</script>";
 	die;
 }
 
@@ -45,14 +45,72 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Live Models - Services Dashboard</title>
     <meta name="description" content="Book your exclusive international tour experience with verified models">
-    <script src="https://cdn.tailwindcss.com"></script>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-	<link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
+    <link rel="canonical" href="https://thelivemodels.com/" />
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Live Models - Services Dashboard">
+<meta property="og:description" content="Book your exclusive international tour experience with verified models">
+<meta property="og:url" content="https://thelivemodels.com/">
+<meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta property="og:site_name" content="The Live Models">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Live Models - Services Dashboard">
+<meta name="twitter:description" content="Book your exclusive international tour experience with verified models">
+<meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta name="twitter:site" content="@thelivemodels">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thelivemodels.com/#organization",
+      "name": "The Live Models",
+      "url": "https://thelivemodels.com/",
+      "logo": "https://thelivemodels.com/assets/images/logo.png",
+      "sameAs": [
+        "https://x.com/thelivemodels",
+        "https://www.instagram.com/the_livemodels",
+        "https://www.tiktok.com/@thelivemodels"
+      ],
+      "description": "Book your exclusive international tour experience with verified models",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Kulwant Singh Jakhar"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://thelivemodels.com/#website",
+      "url": "https://thelivemodels.com/",
+      "name": "The Live Models",
+      "description": "Book your exclusive international tour experience with verified models",
+      "publisher": {
+        "@id": "https://thelivemodels.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://thelivemodels.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
 	<?php  include('../includes/head.php'); ?>
 
-	<link rel='stylesheet' href='<?=SITEURL?>assets/css/all.min.css?v=<?=time()?>' type='text/css' media='all' />
-	<link rel='stylesheet' href='<?=SITEURL?>assets/css/themes.css?v=<?=time()?>' type='text/css' media='all' />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css">
+    </noscript>
+
 
     <style>
     :root {

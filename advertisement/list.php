@@ -14,7 +14,7 @@ if (isset($_SESSION['log_user_id'])) {
 
 	$as_a_model = '';
 
-    header("Location: login.php");
+    header("Location: login");
 }
 // if($as_a_model != 'Yes'){
 // 	header("Location: login.php");
@@ -52,10 +52,67 @@ if (isset($_SESSION['log_user_id'])) {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advertisement Management - The Live Models</title>
+<title>Advertisement Management - The Live Models </title>
 <meta name="description" content="Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences.">
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="canonical" href="https://thelivemodels.com/" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Advertisement Management - The Live Models & Travel | The Live Models">
+<meta property="og:description" content="Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences..">
+<meta property="og:url" content="https://thelivemodels.com/">
+<meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta property="og:site_name" content="The Live Models">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Advertisement Management - The Live Models & Travel | The Live Models">
+<meta name="twitter:description" content="Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences..">
+<meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta name="twitter:site" content="@thelivemodels">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thelivemodels.com/#organization",
+      "name": "The Live Models",
+      "url": "https://thelivemodels.com/",
+      "logo": "https://thelivemodels.com/assets/images/logo.png",
+      "sameAs": [
+        "https://x.com/thelivemodels",
+        "https://www.instagram.com/the_livemodels",
+        "https://www.tiktok.com/@thelivemodels"
+      ],
+      "description": "Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences..",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Kulwant Singh Jakhar"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://thelivemodels.com/#website",
+      "url": "https://thelivemodels.com/",
+      "name": "The Live Models",
+      "description": "Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences..",
+      "publisher": {
+        "@id": "https://thelivemodels.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://thelivemodels.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
 
 <link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
 
@@ -100,7 +157,7 @@ if (isset($_SESSION['log_user_id'])) {
         <!-- Action Bar -->
         <div class="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
             <div class="flex space-x-4">
-                <button class="btn-primary px-8 py-3 rounded-xl font-semibold shadow-lg" onclick="window.location='<?=SITEURL.'advertisement/create.php'?>'">
+                <button class="btn-primary px-8 py-3 rounded-xl font-semibold shadow-lg" onclick="window.location='<?=SITEURL.'advertisement/create'?>'">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline">
                         <line x1="12" y1="5" x2="12" y2="19"></line>
                         <line x1="5" y1="12" x2="19" y2="12"></line>

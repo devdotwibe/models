@@ -83,7 +83,7 @@ if($userDetails){
 
 						$_SESSION["payment_done"] = "Payment Successfully Completed";
 
-						echo "<script>window.location='" . SITEURL . "all-models.php';</script>";
+						echo "<script>window.location='" . SITEURL . "all-members';</script>";
 
 					// } else {
 					// 	echo "Error in wallet update: " . mysqli_error($con);
@@ -102,12 +102,12 @@ if($userDetails){
 	}
 	else{
 		echo "<script>alert('Please login');</script>";
-		echo "<script>window.location='login.php'</script>";
+		echo "<script>window.location='login'</script>";
 	}
 }
 else{
 	echo "<script>alert('Please login');</script>";
-	echo "<script>window.location='login.php'</script>";
+	echo "<script>window.location='login'</script>";
 }
  // you can write your database insertation code here
 

@@ -38,9 +38,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Edit Profile - The Live Models | The Live Models </title>
-    <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
+  <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 
 <!-- Open Graph -->

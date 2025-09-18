@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../includes/config.php');
-include('../includes/helper.php');
+include(__DIR__.'/../includes/config.php');
+include(__DIR__.'/../includes/helper.php');
 
 if (isset($_SESSION['log_user_id'])) {
 	//create post data
@@ -69,7 +69,7 @@ if (isset($_SESSION['log_user_id'])) {
                 echo '<script>alert("' . $error . '");</script>';
             }
             
-            echo '<script>window.location="' . SITEURL . 'advertisement/list.php"</script>';
+            echo '<script>window.location="' . SITEURL . 'advertisement/list"</script>';
         
 		
 	}
@@ -77,17 +77,79 @@ if (isset($_SESSION['log_user_id'])) {
 	$f_country_list = DB::query('select id,name,sortname from countries order by name asc');
 	$category_list = adv_category_list();
 } else {
-	header("Location: login.php");
+	header("Location: login");
 }
 $serviceArr = array('Providing services', 'Looking for services');
 ?>
 
 <html>
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-
 <head>
-	<title>Create Advertisement - The Live Models</title>
-	<?php include('../includes/head.php'); ?>
+
+<meta charset="UTF-8">
+
+<title> Create Advertisement  - The Live Models </title>
+<meta name="description" content="Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences.">
+<link rel="canonical" href="https://thelivemodels.com/" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Create Advertisement - The Live Models & Travel | The Live Models">
+<meta property="og:description" content="Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences..">
+<meta property="og:url" content="https://thelivemodels.com/">
+<meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta property="og:site_name" content="The Live Models">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Create Advertisement - The Live Models & Travel | The Live Models">
+<meta name="twitter:description" content="Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences..">
+<meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+<meta name="twitter:site" content="@thelivemodels">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thelivemodels.com/#organization",
+      "name": "The Live Models",
+      "url": "https://thelivemodels.com/",
+      "logo": "https://thelivemodels.com/assets/images/logo.png",
+      "sameAs": [
+        "https://x.com/thelivemodels",
+        "https://www.instagram.com/the_livemodels",
+        "https://www.tiktok.com/@thelivemodels"
+      ],
+      "description": "Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences..",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Kulwant Singh Jakhar"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://thelivemodels.com/#website",
+      "url": "https://thelivemodels.com/",
+      "name": "The Live Models",
+      "description": "Manage your advertisements and promotions on The Live Models platform. Create, edit, and promote your content to reach more audiences..",
+      "publisher": {
+        "@id": "https://thelivemodels.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://thelivemodels.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
+	<?php include(__DIR__.'/../includes/head.php'); ?>
 
     <link rel='stylesheet' href='<?= SITEURL ?>assets/css/profile.css?v=<?= time() ?>' type='text/css' media='all' />
 
@@ -108,8 +170,8 @@ $serviceArr = array('Providing services', 'Looking for services');
 <div class="particles" id="particles"></div>
 
 	<?php //include('../includes/header.php'); ?>
-	<?php  include('../includes/side-bar.php'); ?>
-	<?php  include('../includes/profile_header_index.php'); ?>
+	<?php  include(__DIR__.'/../includes/side-bar.php'); ?>
+	<?php  include(__DIR__.'/../includes/profile_header_index.php'); ?>
 	
 	<main class="py-12">
     <div class="container mx-auto">
@@ -379,7 +441,7 @@ $serviceArr = array('Providing services', 'Looking for services');
     </div>
 </main>
 
-	<?php include('../includes/footer.php'); ?>
+	<?php include(__DIR__.'/../includes/footer.php'); ?>
 	<style>
         #imageInput_addt img {
             max-width: 150px;

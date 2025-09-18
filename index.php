@@ -27,7 +27,8 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
         'login',
         'booking',
         'notifications',
-        '404'
+        '404',
+        'boost-advertisement'
     ];
 
     if (!empty($segments[0]) && in_array($segments[0], $routes)) {
