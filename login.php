@@ -5,7 +5,7 @@ include('includes/helper.php');
 if($_SESSION["log_user"]){
 	$userDetails = get_data('model_user',array('id'=>$_SESSION['log_user_id']),true);
 	if($userDetails){
-		header("Location: ".SITEURL."single-profile.php/".urlencode($userDetails['username']));
+		header("Location: ".SITEURL.urlencode($userDetails['username']));
 
 	}
 }
@@ -179,7 +179,7 @@ if($_SESSION["log_user"]){
                             </p>
 
                             <p class="text-white/50 text-xs">
-                                By signing in, you agree to our <a href="<?= SITEURL.'tls-tom.php'?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium premium-link">Terms</a> and <a href="<?= SITEURL.'privacy-policy.php'?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium premium-link" >Privacy Policy</a>
+                                By signing in, you agree to our <a href="<?= SITEURL.'terms-of-service'?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium premium-link">Terms</a> and <a href="<?= SITEURL.'privacy-policy'?>" class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium premium-link" >Privacy Policy</a>
                             </p>
                         </div>
 

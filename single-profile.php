@@ -898,7 +898,12 @@ body .owl-carousel .owl-nav.disabled {
                                 <div class="flex items-center gap-2 text-white/70 mb-2 sm:mb-3 text-sm sm:text-base image-center-profile">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                     
-									<?php echo $city_list[0]['name'].', '.$state_list[0]['name'].', '.$country_list[0]['name']; ?>
+									<?php 
+									$full_addr_list = '';
+									if(!empty($city_list) && !empty($city_list[0]['name'])) $full_addr_list .= $city_list[0]['name'].', ';
+									if(!empty($state_list) && !empty($state_list[0]['name'])) $full_addr_list .= $state_list[0]['name'].', ';
+									$full_addr_list .= $country_list[0]['name'];
+									echo $full_addr_list;  ?>
 									
                                 </div>
 								<?php } ?>
@@ -1023,6 +1028,8 @@ body .owl-carousel .owl-nav.disabled {
                                                             }
                                                         ?>
 
+														<?php if($modelDetails['as_a_model'] =='Yes') { ?>
+														
                                                         <div class="action-item" id="liveBtn" bis_skin_checked="1" onclick="window.location.href='<?php echo $link; ?>' ">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                                 <circle cx="12" cy="12" r="10"></circle>
@@ -1030,6 +1037,8 @@ body .owl-carousel .owl-nav.disabled {
                                                             </svg>
                                                             <?= $label ?>
                                                         </div>
+														
+														<?php } ?>
 
                                                 <?php if($modelDetails['as_a_model'] =='Yes') { ?>
                                                     
@@ -1101,6 +1110,8 @@ body .owl-carousel .owl-nav.disabled {
                                                     </div>
 
                                                 <?php } ?>
+												
+												<?php if($modelDetails['as_a_model'] =='Yes') { ?>
 
                                                 <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
 
@@ -1113,6 +1124,8 @@ body .owl-carousel .owl-nav.disabled {
                                                     All my links
 
                                                 </div>
+												
+												<?php } ?>
 
                                           
                                         </div>
@@ -1669,7 +1682,7 @@ body .owl-carousel .owl-nav.disabled {
 
                 <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] && $is_model) { ?>
 
-                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-similar">
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-model">
                         <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
                         <div class="space-y-4">
                         
