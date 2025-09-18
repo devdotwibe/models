@@ -206,7 +206,7 @@ if($_SESSION["log_user"]){
 </main>
 
 
-<div class="modal-overlay" id="forgor_modal">
+<div class="modal-overlay <?php if (isset($_GET['reset']) && $_GET['reset'] == 1) { ?> active <?php }?>" id="forgor_modal">
     <div class="modal">
         <div class="modal-header">
         <h2 class="modal-title">forgotPassword </h2>
@@ -302,6 +302,12 @@ if($_SESSION["log_user"]){
         });
 
     <?php } ?>
+
+   <?php if (isset($_GET['reset']) && $_GET['reset'] == 1) { ?>
+
+        forgotPassword();
+
+    <?php }?>
 
     function forgotPassword()
     {

@@ -174,13 +174,17 @@ if (isset($_POST['vfb-submit'])) {
     $res_e = mysqli_query($con, $sql_e); 
    if (mysqli_num_rows($res_u) > 0) { 
 
-        $_SESSION["user_name_exist"] = "This username is linked to an existing account.<br> Log in Or Reset Password";
+       $_SESSION["user_name_exist"] = 'This username is linked to an existing account.<br>
+                <a class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium text-sm premium-link" href="/login">Log in</a> or <a class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium text-sm premium-link" href="/login?reset=1">Reset Password</a>';
+
         
         echo '<script>window.history.back();</script>';
                 
     }else if(mysqli_num_rows($res_e) > 0){
 
-      $_SESSION["email_exist"] = "This email is linked to an existing account.<br> Log in Or Reset Password";
+      $_SESSION["email_exist"] = 'This email is linked to an existing account.<br>
+      
+                <a class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium text-sm premium-link" href="/login">Log in</a> or <a class="text-indigo-400 hover:text-indigo-300 transition duration-300 font-medium text-sm premium-link" href="/login?reset=1">Reset Password</a>';
 
                 echo '<script>window.history.back();</script>';
     }else{
