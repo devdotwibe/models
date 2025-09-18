@@ -12,7 +12,7 @@ if (!empty($_SESSION['log_user_id'])) {
 
 
 session_destroy();
-$home_url = 'login.php';
+$home_url = 'login';
 header('Location: ' . $home_url);
 
 

@@ -36,19 +36,19 @@ if (isset($_POST['vfb-submit'])) {
 
             unset($_SESSION["login_error"]);
 
-            echo "<script>window.location.href = 'user/profile/index.php';</script>";
+            echo "<script>window.location.href = 'user/profile';</script>";
 
             exit;
         } else {
          
             $_SESSION["login_error"] = "Incorrect password";
-            echo "<script>window.location='login.php';</script>";
+            echo "<script>window.location='login';</script>";
             exit;
         }
     } else {
 
         $_SESSION["login_error"] = "Invalid username or email";
-        echo "<script>window.location='login.php';</script>";
+        echo "<script>window.location='login';</script>";
         exit;
     }
 }
