@@ -63,7 +63,11 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
 
 
     if (!empty($segments[0]) && !in_array($segments[0], $excluded) && !preg_match('/\.php$/i', $segments[0])) {
-        $_GET['username'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $segments[0]);
+
+        // $_GET['username'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $segments[0]);
+        $username = urldecode($segments[0]);
+        
+        $_GET['username'] = preg_replace('/[^a-zA-Z0-9@._-]/', '', $username);
 
         if (file_exists(__DIR__ . '/single-profile.php')) {
             require __DIR__ . '/single-profile.php';
