@@ -11640,6 +11640,22 @@ header.ultra-glass.login-header {
     padding-block: 0;
 }
 
+.single-pro-btn.post_image{
+width:fit-content;
+
+}
+
+.single-pro-btn{
+width:fit-content;
+}
+.single-pro-btn.post_image{
+
+width:100%;
+}
+
+
+
+
 
 @media (max-width: 1540px) {
   .home-page .discover-sec .model-card .btn-primary {
@@ -11750,8 +11766,9 @@ header.ultra-glass.login-header {
     /* margin-inline:auto; */
     padding-block: 6px !important;
     position: relative;
-    left: -7px;
-    min-width: 116px;
+        left: -9px;
+        min-width: 116px;
+        margin-inline: auto;
   }
 }
 
