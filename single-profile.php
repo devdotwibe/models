@@ -57,7 +57,7 @@ if (isset($_SESSION['log_user_unique_id'])) {
 
     if($is_user_blocked)
     {
-          echo "<script>window.location.href='" . ($_SERVER['HTTP_REFERER'] ?? '/index.php') . "';</script>";
+          echo "<script>window.location.href='" . ($_SERVER['HTTP_REFERER']) . "';</script>";
         exit;
     }
 
@@ -117,8 +117,6 @@ if (mysqli_num_rows($res_ap) > 0) {
 <title>Model Profile | The Live Models</title>
     <meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Model Profile | The Live Models">
@@ -935,7 +933,7 @@ body .owl-carousel .owl-nav.disabled {
 
                             <div class="flex flex-wrap gap-2 sm:gap-3 mt-2 md:mt-0">
 
-                                    <button type="button" class="btn-primary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base" id="openServicesBtn" onclick="window.location.href='<?php echo SITEURL . 'chat-app.php'; ?>'">
+                                    <button type="button" class="btn-primary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base" id="openServicesBtn" onclick="window.location.href='<?php echo SITEURL . 'chat-app'; ?>'">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                                         Message
@@ -1573,7 +1571,7 @@ body .owl-carousel .owl-nav.disabled {
                         <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
                         <ul class="space-y-4">
 
-                        <li class="flex items-center gap-3" onclick="window.location='<?= SITEURL ?>chat-app.php'" >
+                        <li class="flex items-center gap-3" onclick="window.location='<?= SITEURL ?>chat-app'" >
                             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                             </div>
@@ -1588,7 +1586,7 @@ body .owl-carousel .owl-nav.disabled {
                                     } else if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') {
                                     ?>
 
-                          <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
+                          <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'watch-stream/'.$_GET['username'] ?>'">
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
                                         <button type="button" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
@@ -1606,7 +1604,7 @@ body .owl-carousel .owl-nav.disabled {
                             <?php
                                     if ($_SESSION["log_user_unique_id"] == $session_id) {?>
                                 
-                     <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
+                     <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/'.$_GET['username'] ?>'">
 
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -1621,7 +1619,10 @@ body .owl-carousel .owl-nav.disabled {
                                 </li>
 
                             <?php } ?>
-                                    
+                               
+                            
+                        <?php if(isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') { ?>
+
                             <li class="flex items-center gap-3">
                                 <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -1632,12 +1633,27 @@ body .owl-carousel .owl-nav.disabled {
                                 </div>
                             </li>
 
+                        <?php } else { ?>
+
+                            <li class="flex items-center gap-3" onclick="window.location='<?= SITEURL ?>login'" >
+                                
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-sm sm:text-base">Meet</div>
+                                    <div class="text-xs sm:text-sm text-white/60">In-person experiences</div>
+                                </div>
+                            </li>
+
+                        <?php }  ?>
+
 
                          <?php if(!empty($extra_details) && !empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ ?>
 
 			                <?php if($extra_details['daily_rate']){ ?>
 
-                                <li class="flex items-center gap-3"  <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking.php?type=travel&service=Travel&token=<?= $extra_details['daily_rate'] ?>&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else { ?> onclick="handleService('travel')" <?php } ?> >
+                                <li class="flex items-center gap-3"  <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking?type=travel&service=Travel&token=<?= $extra_details['daily_rate'] ?>&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else { ?> onclick="handleService('travel')" <?php } ?> >
         
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -1653,7 +1669,7 @@ body .owl-carousel .owl-nav.disabled {
                         <?php } } ?>
        
 
-                            <li class="flex items-center gap-3" <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking.php?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else { ?> onclick="handleService('collaboration')" <?php } ?> >
+                            <li class="flex items-center gap-3" <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else { ?> onclick="handleService('collaboration')" <?php } ?> >
         
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -1774,7 +1790,7 @@ body .owl-carousel .owl-nav.disabled {
                             
                             
                         </div>
-                        <button onclick="navigateTo('all-models.php')" class="w-full btn-secondary text-white font-semibold py-2 rounded-xl mt-4 text-sm sm:text-base">
+                        <button onclick="navigateTo('all-members')" class="w-full btn-secondary text-white font-semibold py-2 rounded-xl mt-4 text-sm sm:text-base">
                             View More
                         </button>
                     </div>
@@ -2178,7 +2194,7 @@ body .owl-carousel .owl-nav.disabled {
                 <div class="token-packages-subtitle">
                     Get extra TLM tokens for premium interactions, gifts, and exclusive content access
                 </div>
-                <button class="token-packages-btn"  onclick="window.location.href='<?= SITEURL .'wallet.php' ?>'">
+                <button class="token-packages-btn"  onclick="window.location.href='<?= SITEURL .'wallet' ?>'">
                     🎁 Browse Token Deals
                 </button>
                 <div class="token-expires">⏰ Special token offers expire soon!</div>
@@ -2285,7 +2301,7 @@ body .owl-carousel .owl-nav.disabled {
 										
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?> href='<?=SITEURL?>booking.php?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Request Meetup</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?> href='<?=SITEURL?>booking?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Request Meetup</a>
 
                     <?php }?>
 					
@@ -2316,7 +2332,7 @@ body .owl-carousel .owl-nav.disabled {
 					
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?=SITEURL?>booking.php?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?=SITEURL?>booking?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
 
                     <?php }?>
 					
@@ -2350,7 +2366,7 @@ body .owl-carousel .owl-nav.disabled {
 
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
                     
-					<a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking.php?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
+					<a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
 					
 					<?php } ?>
 					
