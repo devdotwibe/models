@@ -6,9 +6,17 @@ include('../../includes/helper.php');
 include('../includes/auth.php');
 
 $m_link= ADMINURL.'withdrawal/';
-include('../includes/head.php');
+
 ?>
-  </head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+ <?php include('../includes/head.php'); ?>
+
+</head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
@@ -69,8 +77,8 @@ include('../includes/head.php');
   </div>
 
 <?php include('../includes/script.php'); ?>
-<link href="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
-<script type="text/javascript" src="<?=SITEURL?>assets/plugins/ajax-pagination/simplePagination.js"></script>
+<link href="<?=SITEURL?>super-admin/assets/plugins/ajax-pagination/simplePagination.css" rel="stylesheet">
+<script type="text/javascript" src="<?=SITEURL?>super-admin/assets/plugins/ajax-pagination/simplePagination.js"></script>
 
 <script>
 var currentPage = 1;

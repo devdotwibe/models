@@ -1,11 +1,13 @@
 <?php
 require_once 'constant.php';
+
+  $adimin_url = SITEURL.'super-admin/'
 ?>
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.php">
+            <a class="nav-link" href="<?= $adimin_url ?>index.php">
               <i class="ti-shield menu-icon"></i>
               <span class="menu-title">Control panel</span>
             </a>
@@ -17,7 +19,7 @@ require_once 'constant.php';
             <hr>
           </div>
           <li class="nav-item">
-            <a class="nav-link" href="all-users.php">
+            <a class="nav-link" href="<?= $adimin_url ?>all-users.php">
               <i class="ti-view-list-alt menu-icon"></i>
               <span class="menu-title">All users</span>
             </a>
@@ -35,7 +37,7 @@ require_once 'constant.php';
             </a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="new_broadcasters.php">
+            <a class="nav-link" href="<?= $adimin_url ?>new_broadcasters.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">New Broadcaster's</span>
             </a>
@@ -50,13 +52,13 @@ require_once 'constant.php';
             <p>Contact us query</p>
           <hr>
           <li class="nav-item">
-            <a class="nav-link" href="general-contact-query.php">
+            <a class="nav-link" href="<?= $adimin_url ?>general-contact-query.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">General query</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="users-contact-query.php">
+            <a class="nav-link" href="<?= $adimin_url ?>users-contact-query.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">User's query</span>
             </a>
@@ -65,32 +67,32 @@ require_once 'constant.php';
             <p>Service section</p>
             <hr>
           <li class="nav-item">
-            <a class="nav-link" href="group-show-service.php">
+            <a class="nav-link" href="<?= $adimin_url ?>group-show-service.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Group show</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="international-tour-service.php">
+            <a class="nav-link" href="<?= $adimin_url ?>international-tour-service.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">International call</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="dating-assignment-services.php">
+            <a class="nav-link" href="<?= $adimin_url ?>dating-assignment-services.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Dating Assignment</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="movie-modeling-service.php">
+            <a class="nav-link" href="<?= $adimin_url ?>movie-modeling-service.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Movie & modeling</span>
             </a>
           </li>
           <hr><p>Sale/Purchase details</p><hr>
           <li class="nav-item">
-            <a class="nav-link" href="purchase-details.php">
+            <a class="nav-link" href="<?= $adimin_url ?>purchase-details.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Purchase Details</span>
             </a>
@@ -98,7 +100,7 @@ require_once 'constant.php';
 
           <hr><p>Report Users</p><hr>
           <li class="nav-item">
-            <a class="nav-link" href="report-users.php">
+            <a class="nav-link" href="<?= $adimin_url ?>report-users.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Reported Users List</span>
             </a>
@@ -107,13 +109,13 @@ require_once 'constant.php';
 
           <hr><p>Refund Coins</p><hr>
           <li class="nav-item">
-            <a class="nav-link" href="refund-coins.php">
+            <a class="nav-link" href="<?= $adimin_url ?>refund-coins.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Refund Coins</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="all-refunded-coins.php">
+            <a class="nav-link" href="<?= $adimin_url ?>all-refunded-coins.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">All Refunded Coins</span>
             </a>
@@ -122,7 +124,7 @@ require_once 'constant.php';
           <hr><p>Admin Settings</p><hr>
 
           <li class="nav-item">
-            <a class="nav-link" href="admin_setting.php">
+            <a class="nav-link" href="<?= $adimin_url ?>admin_setting.php">
               <i class="ti-layout-list-post menu-icon"></i>
               <span class="menu-title">Settings</span>
             </a>
