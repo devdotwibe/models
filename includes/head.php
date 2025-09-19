@@ -14,28 +14,38 @@
 <link rel="icon" type="image/png" sizes="384x384" href="/assets/favicons/thelivemodels_icon_384x384.png">
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicons/thelivemodels_icon_512x512.png">
 
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/thelivemodels_icon_180x180.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/thelivemodels_icon_192x192.png">
 
 <link rel="manifest" href="/assets/favicons/site.webmanifest">
 
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_dark_16x16.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_light_16x16.png" media="(prefers-color-scheme: light)">
+<!-- Dark / Light Mode Favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/thelivemodels_dark_16x16.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/thelivemodels_light_16x16.png" media="(prefers-color-scheme: light)">
+
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_dark_32x32.png" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_light_32x32.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_dark_48x48.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_light_48x48.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_dark_64x64.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_light_64x64.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_dark_128x128.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_light_128x128.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_dark_192x192.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_light_192x192.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_dark_256x256.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_light_256x256.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_dark_384x384.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_light_384x384.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_dark_512x512.png" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/thelivemodels_light_512x512.png" media="(prefers-color-scheme: light)">
+
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicons/thelivemodels_dark_48x48.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicons/thelivemodels_light_48x48.png" media="(prefers-color-scheme: light)">
+
+<link rel="icon" type="image/png" sizes="64x64" href="/assets/favicons/thelivemodels_dark_64x64.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="64x64" href="/assets/favicons/thelivemodels_light_64x64.png" media="(prefers-color-scheme: light)">
+
+<link rel="icon" type="image/png" sizes="128x128" href="/assets/favicons/thelivemodels_dark_128x128.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="128x128" href="/assets/favicons/thelivemodels_light_128x128.png" media="(prefers-color-scheme: light)">
+
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicons/thelivemodels_dark_192x192.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicons/thelivemodels_light_192x192.png" media="(prefers-color-scheme: light)">
+
+<link rel="icon" type="image/png" sizes="256x256" href="/assets/favicons/thelivemodels_dark_256x256.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="256x256" href="/assets/favicons/thelivemodels_light_256x256.png" media="(prefers-color-scheme: light)">
+
+<link rel="icon" type="image/png" sizes="384x384" href="/assets/favicons/thelivemodels_dark_384x384.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="384x384" href="/assets/favicons/thelivemodels_light_384x384.png" media="(prefers-color-scheme: light)">
+
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/favicons/thelivemodels_dark_512x512.png" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/favicons/thelivemodels_light_512x512.png" media="(prefers-color-scheme: light)">
+
 
 <link href='<?='https://fonts.googleapis.com/css?family=EB+Garamond|Great+Vibes|Petit+Formal+Script'?>' rel='stylesheet' type='text/css'>
 <meta name="msapplication-TileColor" content="#f01d4f">

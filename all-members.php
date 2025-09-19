@@ -2457,8 +2457,10 @@ include('includes/helper.php');
     $updatedAt = $settings['updated_at'];
 
     if ($updatedAt) {
+
         $timeDiff = time() - strtotime($updatedAt);
-        if ($timeDiff > 86400 && $settings['status'] == 'No') {
+
+        if ($timeDiff > 86400 || $settings['discount_price_show'] == 'No') {
 
             $discountPriceShow = false;
         }
@@ -2495,7 +2497,7 @@ include('includes/helper.php');
 
             <div class="header">
                 <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
-                <h2 class="title">Unlock Elite Access</h2>
+                <h2 class="title">Unlock Elite Access </h2>
                 <p class="subtitle">Join premium members and dominate the streaming experience</p>
             </div>
 

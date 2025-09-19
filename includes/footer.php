@@ -675,8 +675,12 @@ if(isset($footer_hide_script)){
 }
 else{
 ?>
+
+<?php /*
 <script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/js/gallery.js' id='wpgt-gallery-js'></script>
 <script type='text/javascript' src='<?=SITEURL?>assets/wp-content/plugins/wpgt-gallery/includes/vendors/owlcarousel/owl.carousel.min.js' id='wpgt-gallery-owlcarousel-js'></script>
+*/?>
+
 <?php
 }
 ?>

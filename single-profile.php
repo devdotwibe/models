@@ -883,10 +883,16 @@ body .owl-carousel .owl-nav.disabled {
                                 <h1 class="text-3xl sm:text-4xl font-bold heading-font gradient-text mb-1"><?php echo ucfirst($rowesdw['name']); ?></h1>
                                 <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                                     <span class="text-white/70">@<?php echo $rowesdw['username']; ?></span>
-                                    <span class="status-badge status-online">
-                                        <span class="w-2 h-2 bg-white rounded-full mr-2"></span>
-                                        Online 
-                                    </span>
+
+                                    <?php if (isUserOnline($rowesdw['id']) === 'Online') { ?>
+
+                                        <span class="status-badge status-online">
+                                            <span class="w-2 h-2 bg-white rounded-full mr-2"></span>
+                                            Online 
+                                        </span>
+
+                                    <?php } ?>
+                                    
                                 </div>
 								<?php 
 									$country_list = DB::query('select name from countries where id="'.$rowesdw['country'].'"');
@@ -948,21 +954,31 @@ body .owl-carousel .owl-nav.disabled {
                                         $user_follow_status = checkUserFollow($model_unique_id, $user_unique_id);
                                     ?>
 
-                                <?php if ($user_follow_status) { ?>
+                                        <?php if ($user_follow_status) { ?>
 
-                                    <button   class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                                        <span id="follow_status">Following</span>
-                                    </button>
+                                            <button   class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                                <span id="follow_status">Following</span>
+                                            </button>
 
-                                <?php } else { ?>
+                                        <?php } else { ?>
 
-                                    <button onclick="FollowModel('<?= $model_unique_id ?>', '<?= $user_unique_id ?>','follow_status')"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                                        <span id="follow_status">Follow</span>
-                                    </button>
+                                            <button onclick="FollowModel('<?= $model_unique_id ?>', '<?= $user_unique_id ?>','follow_status')"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                                <span id="follow_status">Follow</span>
+                                            </button>
 
-                                <?php } } ?>
+                                        <?php } ?>
+                            
+                                    <?php } else { ?>
+
+                                         <button onclick="window.location='<?= SITEURL ?>login'"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                            <span id="follow_status">Follow</span>
+                                        </button>
+
+                                    <?php } ?>
 
                                     <div class="action-dropdown" id="moreActions">
 
@@ -1016,7 +1032,7 @@ body .owl-carousel .owl-nav.disabled {
                                                                 $link = SITEURL . 'watch-stream/'.$_GET['username'];
 
                                                             }
-                                                            if($modelDetails['as_a_model'] =='Yes')
+                                                            if($_SESSION["log_user_unique_id"] == $session_id && $modelDetails['as_a_model'] =='Yes')
                                                             {
                                                                 $label = "Go Live";
                                                             }
@@ -1038,7 +1054,7 @@ body .owl-carousel .owl-nav.disabled {
 														
 														<?php } ?>
 
-                                                <?php if($modelDetails['as_a_model'] =='Yes') { ?>
+                                                <?php if(!empty($_SESSION["log_user_unique_id"]) && $_SESSION["log_user_unique_id"] != $session_id && $modelDetails['as_a_model'] =='Yes') { ?>
                                                     
                                                         <div class="action-item" id="tipBtn" bis_skin_checked="1">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1146,43 +1162,56 @@ body .owl-carousel .owl-nav.disabled {
     <div class="container mx-auto py-6 sm:py-8 px-4 md:px-0">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 single-profile">
             <div class="md:col-span-2">
+
 			<?php if(!empty($rowesdw['user_bio']) || !empty($rowesdw['hobbies'])){ ?>
+
                 <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
-				<?php if(!empty($rowesdw['user_bio'])){ ?>
-                    <h2 class="text-xl font-bold mb-4 premium-text">About Me</h2>
-                    <p class="text-white/80 mb-4"><?php echo $rowesdw['user_bio']; ?></p>
-				<?php } ?>
-				<?php if( (!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null' ) ||  (!empty($rowesdw['additional_hobbies']) && $rowesdw['additional_hobbies'] != 'null') ){ 
 
-                  $hobbies = [];
+                    <?php if(!empty($rowesdw['user_bio'])){ ?>
 
-                    if (!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null') {
-                        $decodedHobbies = json_decode($rowesdw['hobbies'], true);
-                        if (is_array($decodedHobbies)) {
-                            $hobbies = array_merge($hobbies, $decodedHobbies);
+                        <h2 class="text-xl font-bold mb-4 premium-text">About Me</h2>
+
+                        <p class="text-white/80 mb-4"><?php echo $rowesdw['user_bio']; ?></p>
+
+                    <?php } else { ?>
+
+                        <h2 class="text-xl font-bold mb-4 premium-text">About Me</h2>
+
+                        <p class="text-white/80 mb-4"> Hello world 🌍 Just joined The Live Models — let’s meet and share stories</p>
+
+                    <?php } ?>
+                    
+                    <?php if( (!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null' ) ||  (!empty($rowesdw['additional_hobbies']) && $rowesdw['additional_hobbies'] != 'null') ){ 
+
+                    $hobbies = [];
+
+                        if (!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null') {
+                            $decodedHobbies = json_decode($rowesdw['hobbies'], true);
+                            if (is_array($decodedHobbies)) {
+                                $hobbies = array_merge($hobbies, $decodedHobbies);
+                            }
                         }
-                    }
 
-                    if (!empty($rowesdw['additional_hobbies']) && $rowesdw['additional_hobbies'] != 'null') {
-                        $decodedAdditional = json_decode($rowesdw['additional_hobbies'], true);
-                        if (is_array($decodedAdditional)) {
-                            $hobbies = array_merge($hobbies, $decodedAdditional);
+                        if (!empty($rowesdw['additional_hobbies']) && $rowesdw['additional_hobbies'] != 'null') {
+                            $decodedAdditional = json_decode($rowesdw['additional_hobbies'], true);
+                            if (is_array($decodedAdditional)) {
+                                $hobbies = array_merge($hobbies, $decodedAdditional);
+                            }
                         }
-                    }
 
-                    if (!empty($hobbies)) {
-				?>
-                    <div class="flex flex-wrap gap-2 hobbies-sec">
+                        if (!empty($hobbies)) {
+                    ?>
+                        <div class="flex flex-wrap gap-2 hobbies-sec">
 
-					<?php foreach($hobbies as $hb){ ?>
-					
-                        <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm"><?php echo $hb; ?></span>
+                        <?php foreach($hobbies as $hb){ ?>
                         
-					<?php } ?>
-					
-                    </div>
+                            <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm"><?php echo $hb; ?></span>
+                            
+                        <?php } ?>
+                        
+                        </div>
 
-				<?php } } ?>
+                    <?php } } ?>
 
                 </div>
 
@@ -1376,7 +1405,16 @@ body .owl-carousel .owl-nav.disabled {
 
                     </div>
         
-			  <?php } ?>
+			  <?php } else { ?>
+
+                 <div class="media-grid no-user-post">
+
+
+                    <p> 🚀 Empty today… but the story begins soon.</p>
+
+                 </div>
+
+              <?php } ?>
 				
             </div>
 			
@@ -1623,7 +1661,7 @@ body .owl-carousel .owl-nav.disabled {
                             
                         <?php if(isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') { ?>
 
-                            <li class="flex items-center gap-3">
+                            <li class="flex items-center gap-3" <?php if ($user_have_preminum) { ?> onclick="window.location='<?=SITEURL?>booking?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>&m_id=<?php echo $_GET['m_unique_id']; ?>'" <?php } ?> >
                                 <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                                 </div>
@@ -1651,9 +1689,9 @@ body .owl-carousel .owl-nav.disabled {
 
                          <?php if(!empty($extra_details) && !empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ ?>
 
-			                <?php if($extra_details['daily_rate']){ ?>
+			                <?php if($extra_details['daily_rate'] || $extra_details['weekly_rate'] || $extra_details['monthly_rate']){ ?>
 
-                                <li class="flex items-center gap-3"  <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking?type=travel&service=Travel&token=<?= $extra_details['daily_rate'] ?>&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else { ?> onclick="handleService('travel')" <?php } ?> >
+                                <li class="flex items-center gap-3"  <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking?type=travel&service=Travel&token=<?= $extra_details['daily_rate'] ?>&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else if(!isset($_SESSION['log_user_id'])){ ?> onclick="window.location='<?= SITEURL ?>login'" <?php } ?> >
         
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -1668,8 +1706,9 @@ body .owl-carousel .owl-nav.disabled {
 
                         <?php } } ?>
        
-
-                            <li class="flex items-center gap-3" <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else { ?> onclick="handleService('collaboration')" <?php } ?> >
+						<?php if(!empty($extra_details) && !empty($extra_details['collab']) && $extra_details['collab'] == 'Yes'){ ?>
+							
+                            <li class="flex items-center gap-3" <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else if(!isset($_SESSION['log_user_id'])){ ?> onclick="window.location='<?= SITEURL ?>login'" <?php } ?> >
         
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -1681,6 +1720,8 @@ body .owl-carousel .owl-nav.disabled {
                                         <div class="text-xs sm:text-sm text-white/60">Professional work partnerships</div>
                                     </div>
                                 </li>
+								
+						<?php } ?>
 
                             </ul>
 
