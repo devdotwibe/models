@@ -8,10 +8,10 @@ $data = json_decode(file_get_contents("php://input"), true);
 $fileName = $data['fileName'];
 
 // Define the path to your upload directory
-$uploadDir = "uploads/profile_pic/";  // Adjust the path as needed
+// $uploadDir = "uploads/profile_pic/";  // Adjust the path as needed
 
 // Build the full file path
-$filePath = $uploadDir . $fileName;
+$filePath = $fileName;
 
 // Check if the file exists and delete it
 if (file_exists($filePath)) {

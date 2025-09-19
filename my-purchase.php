@@ -5,7 +5,7 @@ include('includes/helper.php');
 $usern = $_SESSION["log_user"];
 
 if (!$usern) {
-  echo '<script>window.location.href="login.php"</script>';
+  echo '<script>window.location.href="login"</script>';
 }
 if (isset($_SESSION['log_user_id'])) {
   $log_user_id = $_SESSION['log_user_id'];
@@ -24,15 +24,10 @@ if (isset($_SESSION['log_user_id'])) {
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>My Purchases - Photos & Videos | Live Models</title>
   <meta name="description" content="Your premium content collection with advanced viewing and management features">
-
-      <title>My Purchases - Photos & Videos | Live Models</title>
-    <meta name="description" content="Your premium content collection with advanced viewing and management features">
 	<link rel="canonical" href="https://thelivemodels.com/" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="My Purchases - Photos & Videos | The Live Models">
@@ -332,7 +327,7 @@ if (isset($_SESSION['log_user_id'])) {
                             </div> -->
 
 
-                      <button
+                      <?php /*?><button
                         class="absolute bottom-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300"
                         onclick="toggleFavorite(this)" aria-label="Add to favorites">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -341,7 +336,7 @@ if (isset($_SESSION['log_user_id'])) {
                             d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                           </path>
                         </svg>
-                      </button>
+                      </button><?php */ ?>
 
                     </div>
 
@@ -353,9 +348,9 @@ if (isset($_SESSION['log_user_id'])) {
 
                           class="w-10 sm:w-12 h-10 sm:h-12 rounded-full mr-3 sm:mr-4 border-2 border-purple-500" />
                         <div class="flex-1">
-                          <h4 class="text-base sm:text-lg font-bold gradient-text-premium">
+                          <h4 class="text-base sm:text-lg font-bold gradient-text-premium" onclick="window.location='<?php echo SITEURL. $row1['username'] ?>'">
 
-                            <?php echo ucfirst($row1['username']); ?>.
+                                  <?php echo ucfirst($row1['username']); ?>
                           </h4>
                           <div class="flex items-center gap-2">
 
@@ -382,8 +377,8 @@ if (isset($_SESSION['log_user_id'])) {
                                   points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                                 </polygon>
                               </svg>
-                              <span class="text-xs text-white/60"> <?= rtrim(rtrim(number_format($average_rating, 1), '0'), '.') ?>
-</span>
+                              <span class="text-xs text-white/60"> <?= rtrim(rtrim(number_format($average_rating, 1), '0'), '.') ?> </span>
+
                             </div>
                           </div>
                         </div>
@@ -519,7 +514,7 @@ if (isset($_SESSION['log_user_id'])) {
 
                         */?>
 
-                        <button
+                        <?php /*?><button
                           class="absolute bottom-3 right-3 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300"
                           onclick="ShowVideo('<?php echo SITEURL. $url ?>')" aria-label="Add to favorites">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -528,7 +523,7 @@ if (isset($_SESSION['log_user_id'])) {
                               d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                             </path>
                           </svg>
-                        </button>
+                        </button> <?php */ ?>
                         
                       </div>
 
@@ -541,8 +536,10 @@ if (isset($_SESSION['log_user_id'])) {
 
                           <div class="flex-1">
 
-                            <h4 class="text-base sm:text-lg font-bold gradient-text-premium">
-                            <?php echo ucfirst($row1['username']); ?>.
+                            <h4 class="text-base sm:text-lg font-bold gradient-text-premium" onclick="window.location='<?php echo SITEURL. $row1['username'] ?>'" >
+
+                                  <?php echo ucfirst($row1['username']); ?>
+
                             </h4>
                             <div class="flex items-center gap-2">
                               <span class="status-premium status-online-premium w-2 h-2 rounded-full"></span>

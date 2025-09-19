@@ -50,7 +50,7 @@
 <link href='<?='https://fonts.googleapis.com/css?family=EB+Garamond|Great+Vibes|Petit+Formal+Script'?>' rel='stylesheet' type='text/css'>
 <meta name="msapplication-TileColor" content="#f01d4f">
 
-<script src="<?=SITEURL?>assets/js/tailwind.js?v=<?=time()?>"></script>
+<script src="<?=SITEURL?>assets/js/tailwind.min.js?v=<?=time()?>"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 

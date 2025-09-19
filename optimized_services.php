@@ -8,13 +8,13 @@ if($_SESSION["log_user"]){
 
 	if(!$userDetails){
 		echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
-		echo "<script>window.location='".SITEURL."/login.php';</script>";
+		echo "<script>window.location='".SITEURL."/login';</script>";
 		die;
 	}
 }
 else{
 	echo '<script>alert("Oops!! You need to register or Login first. Going to login page....")</script>';
-	echo "<script>window.location='".SITEURL."/login.php';</script>";
+	echo "<script>window.location='".SITEURL."/login';</script>";
 	die;
 }
 
@@ -101,17 +101,9 @@ else{
 
         if (isset($_SESSION["log_user_id"])) {
             
-            if ($currentUrl === "/optimized_services") {
+            include('includes/side-bar.php');
 
-                include('includes/side-bar.php');
-                
-                include('includes/service_header.php');
-
-            } else {
-
-                include('includes/side-bar.php');
-                include('includes/profile_header_index.php');
-            }
+            include('includes/profile_header_index.php');
 
         } else {
 

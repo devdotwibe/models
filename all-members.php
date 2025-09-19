@@ -1131,7 +1131,8 @@ include('includes/helper.php');
                                             <?php if ($preminum_plan == 'basic') { ?>
 
                                                 <span class="profile-badge badge-premium">
-                                                    <div class="badge-user premium-basic-user">⭐</div>
+                                                    
+                                                    <div class="badge-user diamond-elite-user basic-preminum">⭐</div>
                                                     <p>Premium</p>
                                                 </span>
 
@@ -1813,7 +1814,7 @@ include('includes/helper.php');
                                             <?php if ($preminum_plan == 'basic') { ?>
 
                                                 <span class="profile-badge badge-premium">
-                                                    <div class="badge-user premium-basic-user">⭐</div>
+                                                    <div class="badge-user diamond-elite-user basic-preminum">⭐</div>
                                                     <p>Premium</p>
                                                 </span>
 

@@ -279,13 +279,24 @@ if ($_POST['submit_name']){
 		$model_extra_list = DB::query('select id from model_extra_details where unique_model_id="'.$model_unique_id.'"');
 		
 		//Proof file
-		$target_dir_doc = "uploads/casting/document/";
-		  if (isset($_FILES["govt_id_proof"]) && !empty($_FILES["govt_id_proof"]['name'])) {
-		  $target_file_doc = $target_dir_doc . basename($_FILES["govt_id_proof"]["name"]);
-			  if (move_uploaded_file($_FILES["govt_id_proof"]["tmp_name"], $target_file_doc)){
-				$post_data_extra['govt_id_proof'] = "uploads/casting/document/" . basename($_FILES["govt_id_proof"]["name"]);
-			  }
-		  }
+		// $target_dir_doc = "uploads/casting/document/";
+		
+		if (isset($_FILES["govt_id_proof"]) && !empty($_FILES["govt_id_proof"]['name'])) {
+
+			// $target_file_doc = $target_dir_doc . basename($_FILES["govt_id_proof"]["name"]);
+
+			// if (move_uploaded_file($_FILES["govt_id_proof"]["tmp_name"], $target_file_doc)){
+			// 	$post_data_extra['govt_id_proof'] = "uploads/casting/document/" . basename($_FILES["govt_id_proof"]["name"]);
+			// }
+			
+			$target_file_doc = uploadImageWebP('govt_id_proof', 'casting/document');
+			
+			if ($target_file_doc){
+
+				$post_data_extra['govt_id_proof'] = $target_file_doc;
+			}
+		}
+
 		if(empty($model_extra_list)){
 			
 			DB::insert('model_extra_details', $post_data_extra); 

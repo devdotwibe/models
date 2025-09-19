@@ -74,6 +74,32 @@ if($userDetails){
 							'created_at' => $date,
 						]);
 
+						$token_get = 0;
+
+						if($plan_status =='basic')
+						{
+							$token_get = 500;
+						}
+						else
+						{
+							$token_get = 2000;
+						}
+
+
+						DB::query(
+							"UPDATE model_user SET balance = ROUND(balance + %d) WHERE id = %s",
+							$token_get,
+							$userDetails['id']
+						);
+
+						DB::insert('model_user_transaction_history', [
+							'user_id'    => $userDetails['id'],
+							'other_id'   => $insertedPremiumUserId,
+							'amount'     => $token_get,
+							'type'       => 'premium-purchase-token',
+							'created_at' => $date,
+						]);
+
                         unset($_SESSION["pay_amount"], $_SESSION["plan_status"], $_SESSION["plan_type"]);
 
 						if (isset($_SESSION["payment_done"])) {

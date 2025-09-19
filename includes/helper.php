@@ -158,6 +158,21 @@ function getModelFollowersCount($model_id) {
 		return DB::insertId();
 	}
 
+	function GetCityName($city_id)
+	{
+		$city = DB::queryFirstRow(
+			"SELECT name FROM cities WHERE id=%i",
+			$city_id
+		);
+
+		if ($city) {
+			return $city['name'];
+		}
+
+		return null;
+	}
+
+
 function getModelFolloweringCount($model_id) {
 	
     $query = "SELECT COUNT(*) 

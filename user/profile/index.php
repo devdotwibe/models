@@ -956,7 +956,7 @@ if(!empty($userDetails['profile_pic'])){
             <div class="online-dot"></div>
           </div>
           <h3 class="font-bold text-lg gradient-text">
-			<?php echo $userDetails['name']; if(!empty($userDetails['age'])){ echo ', '.$userDetails['age']; } ?>
+			<?php echo $userDetails['name']; if(!empty($userDetails['age'])) { echo ', '.$userDetails['age']; } ?>
 		  </h3>
 		  <?php $country_list = DB::query('select name from countries where id="'.$userDetails['country'].'"');
 				$state_list = DB::query('select name from states where id="'.$userDetails['state'].'"');
@@ -1082,7 +1082,7 @@ if(!empty($userDetails['profile_pic'])){
 
                         <p class="font-medium"><?php echo $user['name']?></p>
 
-                        <p class="text-xs text-white/60"> <?php echo $user['city']?></p>
+                        <p class="text-xs text-white/60"> <?php echo GetCityName($user['city']) ?></p>
 
                       </div>
 

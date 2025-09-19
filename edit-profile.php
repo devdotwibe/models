@@ -113,6 +113,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
     .dropzone .dz-preview .dz-remove {
       color: #000;
     }
+    .dz-remove{
+      display: none;
+    }
 
     .overlay {
       position: fixed;
@@ -970,7 +973,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                           <li id="galblock<?php echo $i; ?>" class="w-auto h-auto">
                             <div>
                               <div class="dz-preview dz-file-preview">
-                                <img loading="lazy" src="<?php echo SITEURL . 'uploads/profile_pic/' . $imgs['file']; ?>" data-dz-thumbnail />
+                                <img loading="lazy" src="<?php echo SITEURL . $imgs['file']; ?>" data-dz-thumbnail />
                                 <input type='hidden' name='hiddenmedia[]' class='hiddenmedia' value="<?php echo $imgs['file']; ?>" id="<?php echo $i; ?>">
                                 <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
                                 <!-- <div class="dz-success-mark"><span>✔</span></div> -->
@@ -3932,7 +3935,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
   if ($updatedAt) {
     $timeDiff = time() - strtotime($updatedAt);
-    if ($timeDiff > 86400 && $settings['status'] == 'No') {
+    if ($timeDiff > 86400 || $settings['discount_price_show'] == 'No') {
 
       $discountPriceShow = false;
     }
@@ -5580,6 +5583,33 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
       });
     }
+
+
+      const updatedAt = new Date("<?php echo $updatedAt; ?>").getTime();
+
+      const countdownTarget = updatedAt + (24 * 60 * 60 * 1000);
+
+      function updateCountdown() {
+          const now = new Date().getTime();
+          const timeLeft = countdownTarget - now;
+
+          if (timeLeft <= 0) {
+              document.getElementById('countdown').textContent = "00:00:00";
+              return;
+          }
+
+          const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+          const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+          document.getElementById('countdown').textContent =
+              `${hours.toString().padStart(2, '0')}:` +
+              `${minutes.toString().padStart(2, '0')}:` +
+              `${seconds.toString().padStart(2, '0')}`;
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
 
 
     function ClosePremiumModal() {

@@ -1797,7 +1797,13 @@ body .owl-carousel .owl-nav.disabled {
                             <div class="flex items-center gap-3">
                                 <img loading="lazy" src="<?php echo $defaultImage; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
                                 <div class="flex-1">
-                                    <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
+
+                                    <div class="font-semibold text-sm sm:text-base" onclick="window.location='<?php echo SITEURL . $rows_md['username'] ?>'">
+
+                                        <?php echo ucfirst($modalname); ?>
+
+                                    </div>
+
                                     <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
                                 </div>
 
