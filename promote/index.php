@@ -1,10 +1,5 @@
 <?php session_start(); 
 
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 include(__DIR__.'/../includes/config.php');
 include(__DIR__.'/../includes/helper.php');
 
@@ -111,11 +106,10 @@ else{
 
 	<?php  include(__DIR__.'/../includes/head.php'); ?>
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css">
-    </noscript>
+    <link rel='stylesheet' href='<?=SITEURL?>assets/css/profile.css?v=<?=time()?>' type='text/css' media='all' />
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css">
+ 
 
     <style>
     :root {
@@ -679,7 +673,7 @@ else{
                             <div>
                                 <label class="block text-white font-semibold mb-3">Reach</label>
                                 <div class="space-y-3">
-                                    <div class="audience-chip p-4 rounded-xl  <?if ($location =='local') {?> selected <?php } ?>" onclick="selectLocation(this, 'local')" >
+                                    <div class="audience-chip p-4 rounded-xl  <?php if ($location =='local') {?> selected <?php } ?>" onclick="selectLocation(this, 'local')" >
                                         <div class="flex items-center">
                                             <div class="text-2xl mr-3">🏙️</div>
                                             <div>
@@ -688,7 +682,7 @@ else{
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="audience-chip p-4 rounded-xl  <?if ($location =='national') {?> selected <?php } ?> " onclick="selectLocation(this, 'national')">
+                                    <div class="audience-chip p-4 rounded-xl  <?php if ($location =='national') {?> selected <?php } ?> " onclick="selectLocation(this, 'national')">
                                         <div class="flex items-center">
                                             <div class="text-2xl mr-3">🇺🇸</div>
                                             <div>
@@ -697,7 +691,7 @@ else{
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="audience-chip p-4 rounded-xl <?if ($location =='international') {?> selected <?php } ?>" onclick="selectLocation(this, 'international')"  >
+                                    <div class="audience-chip p-4 rounded-xl <?php if ($location =='international') {?> selected <?php } ?>" onclick="selectLocation(this, 'international')"  >
                                         <div class="flex items-center">
                                             <div class="text-2xl mr-3">🌍</div>
                                             <div>
@@ -764,25 +758,25 @@ else{
 
                             <div class="grid grid-cols-2 gap-3">
 
-                                <div class="audience-chip p-4 rounded-xl text-center <?if($duration ==1 ) {?> selected <?php }?>" onclick="selectDuration(this, 1)">
+                                <div class="audience-chip p-4 rounded-xl text-center <?php if($duration ==1 ) {?> selected <?php }?>" onclick="selectDuration(this, 1)">
                                     <div class="text-2xl font-bold text-indigo-400">1</div>
                                     <div class="text-sm text-white/70">Day</div>
                                     <div class="text-xs text-green-400 mt-1">Quick boost</div>
                                 </div>
 
-                                <div class="audience-chip p-4 rounded-xl text-center  <?if($duration ==3 ) {?> selected <?php }?>" onclick="selectDuration(this, 3)">
+                                <div class="audience-chip p-4 rounded-xl text-center  <?php if($duration ==3 ) {?> selected <?php }?>" onclick="selectDuration(this, 3)">
                                     <div class="text-2xl font-bold text-indigo-400">3</div>
                                     <div class="text-sm text-white/70">Days</div>
                                     <div class="text-xs text-green-400 mt-1">Most popular</div>
                                 </div>
 
-                                <div class="audience-chip p-4 rounded-xl text-center  <?if($duration ==7 ) {?> selected <?php }?>" onclick="selectDuration(this, 7)">
+                                <div class="audience-chip p-4 rounded-xl text-center  <?php if($duration ==7 ) {?> selected <?php }?>" onclick="selectDuration(this, 7)">
                                     <div class="text-2xl font-bold text-indigo-400">7</div>
                                     <div class="text-sm text-white/70">Days</div>
                                     <div class="text-xs text-green-400 mt-1">Extended reach</div>
                                 </div>
 
-                                <div class="audience-chip p-4 rounded-xl text-center  <?if($duration ==14 ) {?> selected <?php }?>" onclick="selectDuration(this, 14)">
+                                <div class="audience-chip p-4 rounded-xl text-center  <?php if($duration ==14 ) {?> selected <?php }?>" onclick="selectDuration(this, 14)">
                                     <div class="text-2xl font-bold text-indigo-400">14</div>
                                     <div class="text-sm text-white/70">Days</div>
                                     <div class="text-xs text-green-400 mt-1">Maximum impact</div>

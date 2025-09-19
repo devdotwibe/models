@@ -9,7 +9,7 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
 }
 
 
-    $excluded = ['advertisements', 'live-stream', 'watch-stream', '404'];
+    $excluded = ['advertisements','promote', 'live-stream', 'watch-stream', '404'];
 
     $routes = [
         'all-members',
@@ -28,7 +28,6 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
         'booking',
         'notifications',
         '404',
-        'boost-advertisement'
     ];
 
     if (!empty($segments[0]) && in_array($segments[0], $routes)) {
@@ -63,7 +62,6 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
         }
         exit;
     }
-
 
     if ($segments[0] === 'payments' && !empty($segments[1])) {
         $file = __DIR__ . '/payments/' . basename($segments[1]) . '.php';
@@ -118,6 +116,24 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
         }
         exit;
     }
+
+    if ($segments[0] === 'promote' && !empty($segments[1])) {
+        
+        if (file_exists(__DIR__ . '/promote/index.php')) {
+
+            $_GET['id'] = preg_replace('/[^a-zA-Z0-9_\-]/', '', $segments[1]); 
+
+            require __DIR__ . '/promote/index.php';
+        } else {
+            http_response_code(404);
+            require __DIR__ . '/404.php';
+        }
+        
+        exit;
+    }
+
+
+
 
     http_response_code(404);
     require __DIR__ . '/404.php';
