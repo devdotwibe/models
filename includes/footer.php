@@ -734,6 +734,17 @@ if(isset($_SESSION['log_user_id'])){
 }
 ?>
 <script>
+
+
+    let tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    fetch("set_timezone.php", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "tz=" + encodeURIComponent(tz)
+    });
+
+
     // Ultra Premium JavaScript with Full Functionality
     document.addEventListener('DOMContentLoaded', function() {
         initializePremiumFeatures();

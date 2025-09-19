@@ -6,6 +6,17 @@ include('../includes/helper.php');
 if(isset($_SESSION["log_user_id"])){
 $userDetails = get_data('model_user',array('id'=>$_SESSION["log_user_id"]),true);
 if($userDetails){
+
+
+	if (isset($_SESSION['user_timezone'.$userDetails['id']]) && in_array($_SESSION['user_timezone'.$userDetails['id']], timezone_identifiers_list())) {
+
+            date_default_timezone_set($_SESSION['user_timezone'.$userDetails['id']]);
+
+	} else {
+	
+		date_default_timezone_set('Asia/Kolkata');
+	}
+
 	$date = date('Y-m-d H:i:s');
 	
 	$payment_status = $_POST['payment_status'];
