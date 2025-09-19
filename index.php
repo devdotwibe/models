@@ -64,6 +64,7 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
         exit;
     }
 
+
     if ($segments[0] === 'payments' && !empty($segments[1])) {
         $file = __DIR__ . '/payments/' . basename($segments[1]) . '.php';
         if (file_exists($file)) {

@@ -1,5 +1,10 @@
 <?php session_start(); 
 
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include(__DIR__.'/../includes/config.php');
 include(__DIR__.'/../includes/helper.php');
 
@@ -104,7 +109,7 @@ else{
 }
 </script>
 
-	<?php  include('../includes/head.php'); ?>
+	<?php  include(__DIR__.'/../includes/head.php'); ?>
 
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
@@ -482,9 +487,9 @@ else{
 
 <?php 
 
-  include('../includes/side-bar.php');
+  include(__DIR__.'/../includes/side-bar.php');
 
-  include('../includes/profile_header_index.php');
+  include(__DIR__.'/../includes/profile_header_index.php');
 
 ?>
 <!-- Premium Particle System -->
@@ -962,7 +967,7 @@ else{
     </div>
 
 
-<?php include('../includes/footer.php'); ?>
+<?php include(__DIR__.'/../includes/footer.php'); ?>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>`
