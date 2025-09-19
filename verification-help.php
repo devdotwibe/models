@@ -691,7 +691,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
 				
 				<?php 
 				if(isset($_SESSION["log_user_id"]) && !empty($userDetails)){
-					$redirect_link = SITEURL.'edit-profile.php';
+					$redirect_link = SITEURL.'edit-profile';
 				}else{
 					$redirect_link = SITEURL;
 				}
@@ -916,7 +916,7 @@ $userDetails = get_data('model_user', array('id' => $_SESSION["log_user_id"]), t
             }
             //alert('📧 Premium Support - Opening support ticket system...');
             // window.location.href = 'https://thelivemodels.com/support';
-			window.location.href = '<?= SITEURL ?>contact-support.php';
+			window.location.href = '<?= SITEURL ?>contact-support';
         }
     </script>
 

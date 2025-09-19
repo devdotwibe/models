@@ -2949,7 +2949,7 @@ include('includes/helper.php');
 
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'payments/preminum.php';
+            form.action = 'payments/preminum';
 
             const inputPlanType = document.createElement('input');
             inputPlanType.type = 'hidden';
