@@ -135,7 +135,7 @@ if (isset($_SESSION['log_user_id'])) {
         </div>
 
         <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12 advert-static">
             <div class="ultra-glass p-6 rounded-2xl hover-lift">
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center">

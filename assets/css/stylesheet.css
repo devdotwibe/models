@@ -2974,13 +2974,13 @@ textarea:focus {
   top: 0;
   left: -300px;
   width: 300px;
-  height: 100vh;
+  max-height: 100vh;
   background: var(--menu-bg);
   z-index: 100;
   transition: left 0.3s ease;
   overflow-y: auto;
   color: var(--menu-text);
-  padding-bottom: 70px;
+  padding-bottom: 30px;
 }
 
 .socialwall-page .sidebar-menu.open {
@@ -11350,6 +11350,109 @@ user-home
 
 /* creator...................... */
 
+
+
+
+
+/* premium member........................... */
+
+/* .user-home .profile-badge.badge-premium {
+  position: relative;
+  width: fit-content;
+  padding: 0 !important;
+  margin-bottom: 0;
+  margin-left: 0 !important;
+  font-size: 10px !important;
+  flex-direction: column;
+  background: transparent !important;
+  align-items: center;
+  gap: 7px;
+}
+
+.user-home .badge-user.creator {
+  width: 21px !important;
+  height: 21px !important;
+  font-size: 12px !important;
+  position: relative;
+  inset: 0;
+}
+
+.user-home .profile-badge.badge-premium p {
+  position: relative;
+  top: 110%;
+  left: 50%;
+  margin: 0;
+  transform: none;
+  inset: 0;
+} */
+
+/* 
+.profile-badge.creator-badge {
+  position: relative;
+  width: fit-content;
+  padding: 0 !important;
+  margin-bottom: 16px;
+  margin-left: 15px !important;
+  font-size: 10px !important;
+}
+
+.badge-user.creator {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 12px !important;
+}
+
+.profile-badge.creator-badge p {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  margin: 0 auto;
+  transform: translateX(-50%);
+  color: #fff !important;
+} */
+
+/* .profile-badge.badge-premium {
+  position: relative;
+  border: 1px solid #26c0b500;
+  width: auto;
+
+  margin-bottom: 1px;
+  margin-left: 0 !important;
+  font-size: 10px !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: linear-gradient(
+    94deg,
+    #5eb7b154,
+    rgba(139, 92, 246, 0.3),
+    #c4a9ff
+  ) !important;
+  padding-left: 34px !important;
+}
+
+.badge-user.creator {
+  width: 12px !important;
+  height: 12px !important;
+  font-size: 14px !important;
+  position: absolute;
+  left: 10px;
+  top: 8px;
+}
+
+.profile-badge.badge-premium p {
+  position: relative;
+  inset: unset;
+  margin: 0 auto;
+  transform: none;
+  color: #fff;
+} */
+
+
+
+/* premium member........................... */
+
+
 .user-home .user-home-right .model-card h2 {
   margin-right: 15px;
 }
@@ -11358,6 +11461,14 @@ user-home
   top: 0;
   padding-top: 12px;
 }
+
+
+
+
+
+
+
+
 
 /* table responsive ..... */
 
@@ -11652,6 +11763,44 @@ width:fit-content;
 
 width:100%;
 }
+
+.home-page .ultra-premiumsec .ul-premiumdiv button.bg-white-n{
+/* background:#fff !important;
+background-color:#fff !important;
+color-scheme:light !important;
+forced-color-adjust:none !important; */
+
+ background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+
+.media-grid.no-user-post {
+
+background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(139, 92, 246, 0.1);
+    position: relative;
+    grid-template-columns: 1fr;
+    padding: 40px 25px;
+    border-radius: 15px;
+}
+
+ .premimum-model1 .premiumcheck .filter-section-title{
+color:#00f400;
+}
+.premimum-model1 .premiumcheck .filter-section-title i{
+color:#de811a;
+}
+
+.edit-profilepage.advt-page .form-input::-webkit-calendar-picker-indicator {
+    filter: invert(1); 
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 
 
 
@@ -14555,6 +14704,11 @@ width:100%;
         padding: 10px;
         border-radius: 5px;
        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 #f377bc5e, 0 0 0 1px rgba(139, 92, 246, 0.1);
+    }
+
+.enhanced5 .profile-avatar {
+        width: 100%;
+        height: 100%;
     }
 
 }

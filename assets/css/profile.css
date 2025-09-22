@@ -4389,8 +4389,14 @@ body.edit-profilepage {
 
 .edit-profilepage .conditional-section.show .checkbox-option>div input {
     width: 48% !important;
+        padding-inline: 8px;
+    font-size: 14px;
 }
-
+.edit-profilepage .conditional-section.show .checkbox-option>div input::-webkit-calendar-picker-indicator{
+ filter: invert(1); 
+    cursor: pointer;
+    
+}
 
 
 .edit-profilepage .checkbox-option:hover {
@@ -10246,6 +10252,12 @@ color:#fff;
     bottom:35px;
     z-index: 50;
  }
+ .profile-advts.advt-page .advert-static.md\:grid-cols-4 {
+
+grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    }
+
 
 
 
