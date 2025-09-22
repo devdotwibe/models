@@ -777,7 +777,7 @@ body .owl-carousel .owl-nav.disabled {
 		foreach($modal_img_list as $uplds){ 
 					
 			if(!empty($uplds['file']) && $uplds['file_type'] == 'Image'){
-				$modal_img_list_array[] = SITEURL.'uploads/profile_pic/'.$uplds['file'];		
+				$modal_img_list_array[] = SITEURL.$uplds['file'];		
 				
 			}
 					
