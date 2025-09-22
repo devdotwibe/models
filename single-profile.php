@@ -3118,11 +3118,13 @@ body .owl-carousel .owl-nav.disabled {
                 </div>
 
                 <div class="modal-body">
-                <p>Do you want to unlock this <span id="file_type_content">Image</span> for <strong><span id="token_amount"> 0</span> tokens</strong>?</p>
-                <div style="margin-top: 20px;">
-                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="puchare_submit" >Yes, Unlock</button>
-                    <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
-                </div>
+                    <p>Do you want to unlock this <span id="file_type_content">Image</span> for <strong><span id="token_amount"> 0</span> tokens</strong>?</p>
+
+                    <div style="margin-top: 20px;">
+                        <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="puchare_submit" >Yes, Unlock</button>
+                        <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -4049,6 +4051,14 @@ jQuery('.send_gift_btn').click(function(){
         function SubmitPurchase(form_id)
         {
 
+             const btn = $('#purchase_submit');
+
+            if (btn.prop('disabled')) {
+                return;
+            }
+
+            btn.prop('disabled', true).text('Processing...');
+
             const form = $(`#${form_id}`)[0];
 
             const formData = new FormData(form);
@@ -4099,9 +4109,16 @@ jQuery('.send_gift_btn').click(function(){
 
             error: function (xhr, status, error) {
            
+            },
+
+            complete: function () {
+              
+                btn.prop('disabled', false).text('Yes, Unlock');
             }
+
+
             });
-    }
+        }
 
         function TabChange(el,type)
         {

@@ -1005,26 +1005,31 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                     if (!empty($modal_img_list)) {
                       $i = 1;
                       foreach ($modal_img_list as $imgs) {
-                        if (!empty($imgs['file'])) {
-                          ?>
-                          <li id="galblock<?php echo $i; ?>" class="w-auto h-auto">
-                            <div>
-                              <div class="dz-preview dz-file-preview">
-                                <img loading="lazy" src="<?php echo SITEURL . $imgs['file']; ?>" data-dz-thumbnail />
-                                <input type='hidden' name='hiddenmedia[]' class='hiddenmedia'
-                                  value="<?php echo $imgs['file']; ?>" id="<?php echo $i; ?>">
-                                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-                                <!-- <div class="dz-success-mark"><span>✔</span></div> -->
-                                <!-- <div class="dz-error-mark"><span>✘</span></div> -->
-                                <div class="dz-error-mark"><a data-id="<?php echo $i; ?>"
-                                    img_name="<?php echo $imgs['file']; ?>" class="removeinserted">×</a></div>
-                                <div class="dz-error-message"><span data-dz-errormessage></span></div>
+
+                          if (checkImageExists($imgs['file']) ) {
+
+                            ?>
+                            <li id="galblock<?php echo $i; ?>" class="w-auto h-auto">
+                              <div>
+                                <div class="dz-preview dz-file-preview">
+                                  <img loading="lazy" src="<?php echo SITEURL . $imgs['file']; ?>" data-dz-thumbnail />
+                                  <input type='hidden' name='hiddenmedia[]' class='hiddenmedia'
+                                    value="<?php echo $imgs['file']; ?>" id="<?php echo $i; ?>">
+                                  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                                  <!-- <div class="dz-success-mark"><span>✔</span></div> -->
+                                  <!-- <div class="dz-error-mark"><span>✘</span></div> -->
+                                  <div class="dz-error-mark"><a data-id="<?php echo $i; ?>"
+                                      img_name="<?php echo $imgs['file']; ?>" class="removeinserted">×</a></div>
+                                  <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                                </div>
                               </div>
-                            </div>
-                          </li>
-                        <?php }
-                        $i++;
-                      }
+                            </li>
+
+
+                          <?php }
+                          $i++;
+                        }
+
                     }
 
                     ?>

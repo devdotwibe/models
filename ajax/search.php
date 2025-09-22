@@ -28,7 +28,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
             }
 
                 echo '
-                <a href="single-profile.php/' . urlencode($user['username']) . '" class="block p-3 hover:bg-gray-100">
+                <a href="'.SITEURL. urlencode($user['username']) . '" class="block p-3 hover:bg-gray-100">
                     <div class="flex items-center space-x-4">
                         <img src="'. $defaultImage . '" alt="' . htmlspecialchars($user['name']) . '" class="w-10 h-10 rounded-full object-cover">
                         <div>
