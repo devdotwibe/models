@@ -1069,13 +1069,16 @@ else{
             success: function (response) {
                 if (response.status === 'success') {
 
-                    $('#conform_modal').removeClass('active');
+                    // $('#conform_modal').removeClass('active');
 
-                    $('#success_modal').addClass('active');
+                    // $('#success_modal').addClass('active');
 
-                    $('#modal_success_message').html("");
+                    // $('#modal_success_message').html("");
 
-                    $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
+                    // $('#modal_success_message').prepend(`<p class="success-text">${response.message}</p>`);
+
+
+                    window.location.href = '<?= SITEURL ?>advertisement/list';
            
                 } else {
                     alert('Something went wrong: ' + response.message);

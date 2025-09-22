@@ -517,9 +517,9 @@ $activeTab = 'wallet';
 
                         <form action="" method="post" class="space-y-6  edit-form" role="form" enctype="multipart/form-data" <?php /*onsubmit="handleWithdraw(event)" */ ?>>
                             <div class="form-group">
-                                <label class="form-label">Withdrawal Amount</label>
+                                <label class="form-label">Withdrawal Token</label>
 
-                                <input type="number" oninput="validateInput(this)" class="form-input" id="withdrawal_amount" placeholder="Enter amount" name="coins" value="1000" data-min="1000" data-max="<?= $userDetails['balance'] ?>" >
+                                <input type="text" oninput="validateInput(this)" class="form-input" id="withdrawal_amount" placeholder="Enter amount" name="coins" value="1000" data-min="1000" data-max="<?= $userDetails['balance'] ?>" >
 
                                 <span id="amount_error" class="text-danger" style="display: none;"> </span>
 
@@ -799,6 +799,10 @@ $activeTab = 'wallet';
         }
 
         function validateInput(el) { 
+
+
+             el.value = el.value.replace(/[^0-9]/g, '');
+             
             const min = parseInt(el.dataset.min, 10);
             const max = parseInt(el.dataset.max, 10);
             const value = parseInt(el.value, 10);
