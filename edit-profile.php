@@ -39,26 +39,29 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Profile - The Live Models | The Live Models </title>
-  <meta name="description" content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
-	<link rel="canonical" href="https://thelivemodels.com/" />
+  <meta name="description"
+    content="Join The Live Models premium platform to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
+  <link rel="canonical" href="https://thelivemodels.com/" />
 
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Edit Profile | The Live Models">
-<meta property="og:description" content="Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
-<meta property="og:url" content="https://thelivemodels.com/">
-<meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
-<meta property="og:site_name" content="The Live Models">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Edit Profile | The Live Models">
+  <meta property="og:description"
+    content="Chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide in a trusted community.">
+  <meta property="og:url" content="https://thelivemodels.com/">
+  <meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+  <meta property="og:site_name" content="The Live Models">
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Edit Profile | The Live Models">
-<meta name="twitter:description" content="Join The Live Models to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide.">
-<meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
-<meta name="twitter:site" content="@thelivemodels">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Edit Profile | The Live Models">
+  <meta name="twitter:description"
+    content="Join The Live Models to chat, watch live streams, meet safely, and connect while you travel. Verified members worldwide.">
+  <meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
+  <meta name="twitter:site" content="@thelivemodels">
 
-<!-- Schema -->
-<script type="application/ld+json">
+  <!-- Schema -->
+  <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -113,7 +116,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
     .dropzone .dz-preview .dz-remove {
       color: #000;
     }
-    .dz-remove{
+
+    .dz-remove {
       display: none;
     }
 
@@ -594,7 +598,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           <div class="flex justify-between items-center">
             <span>Current Balance:</span>
             <div class="flex items-center">
-              <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
+              <img loading="lazy"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                alt="TLM Token" class="tlm-token">
               <span class="font-bold text-xl"> <?php echo $userDetails['balance'] ?></span>
             </div>
           </div>
@@ -605,37 +611,49 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             <label class="form-label">Select Token Package</label>
             <div class="grid grid-cols-1 gap-3">
               <div class="radio-option">
-                <input type="radio" id="package-100" name="token-package" value="100" onchange="updateTokenPackage(100, 10)">
+                <input type="radio" id="package-100" name="token-package" value="100"
+                  onchange="updateTokenPackage(100, 10)">
                 <label for="package-100">
                   <div class="flex items-center">
-                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
+                    <img loading="lazy"
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                      alt="TLM Token" class="tlm-token mr-2">
                     100 TLM Tokens - $10.00
                   </div>
                 </label>
               </div>
               <div class="radio-option">
-                <input type="radio" id="package-500" name="token-package" value="500" onchange="updateTokenPackage(500, 45)" checked>
+                <input type="radio" id="package-500" name="token-package" value="500"
+                  onchange="updateTokenPackage(500, 45)" checked>
                 <label for="package-500">
                   <div class="flex items-center">
-                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
+                    <img loading="lazy"
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                      alt="TLM Token" class="tlm-token mr-2">
                     500 TLM Tokens - $45.00 (10% bonus)
                   </div>
                 </label>
               </div>
               <div class="radio-option">
-                <input type="radio" id="package-1000" name="token-package" value="1000" onchange="updateTokenPackage(1000, 80)">
+                <input type="radio" id="package-1000" name="token-package" value="1000"
+                  onchange="updateTokenPackage(1000, 80)">
                 <label for="package-1000">
                   <div class="flex items-center">
-                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
+                    <img loading="lazy"
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                      alt="TLM Token" class="tlm-token mr-2">
                     1,000 TLM Tokens - $80.00 (20% bonus)
                   </div>
                 </label>
               </div>
               <div class="radio-option">
-                <input type="radio" id="package-2500" name="token-package" value="2500" onchange="updateTokenPackage(2500, 175)">
+                <input type="radio" id="package-2500" name="token-package" value="2500"
+                  onchange="updateTokenPackage(2500, 175)">
                 <label for="package-2500">
                   <div class="flex items-center">
-                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
+                    <img loading="lazy"
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                      alt="TLM Token" class="tlm-token mr-2">
                     2,500 TLM Tokens - $175.00 (30% bonus)
                   </div>
                 </label>
@@ -657,7 +675,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             <div class="flex justify-between items-center">
               <span class="font-medium">Total:</span>
               <div class="flex items-center">
-                <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-2">
+                <img loading="lazy"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                  alt="TLM Token" class="tlm-token mr-2">
                 <span id="selected-tokens" class="font-bold text-lg">500</span>
                 <span class="text-sm text-white/60 ml-2">for</span>
                 <span id="selected-price" class="font-bold text-lg ml-1">$45.00</span>
@@ -691,7 +711,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           <div class="flex justify-between items-center">
             <span>Available Balance:</span>
             <div class="flex items-center">
-              <img  loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
+              <img loading="lazy"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                alt="TLM Token" class="tlm-token">
               <span class="font-bold text-xl"><?= number_format($userDetails['balance'], 2) ?></span>
             </div>
           </div>
@@ -700,7 +722,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <div class="space-y-4">
           <div>
             <label class="form-label">Withdraw Amount (TLM Tokens)</label>
-            <input type="text" id="withdraw-amount" class="form-input" placeholder="Enter amount" name="coins" value="100" data-max="<?= $userDetails['balance'] ?>" data-min="100" oninput="updateWithdrawUSD(this)" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" >
+            <input type="text" id="withdraw-amount" class="form-input" placeholder="Enter amount" name="coins"
+              value="100" data-max="<?= $userDetails['balance'] ?>" data-min="100" oninput="updateWithdrawUSD(this)"
+              onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
             <p class="help-text">Minimum withdrawal: 100 TLM tokens</p>
 
             <span id="amount_error" class="text-danger" style="display: none;"> </span>
@@ -709,18 +733,19 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
           <div>
             <label class="form-label">USD Equivalent</label>
-            <input type="text" id="withdraw-usd" class="form-input" readonly placeholder="$0.00" value="$<?php echo number_format((100 * 0.1), 2, '.', ''); ?>">
+            <input type="text" id="withdraw-usd" class="form-input" readonly placeholder="$0.00"
+              value="$<?php echo number_format((100 * 0.1), 2, '.', ''); ?>">
           </div>
 
           <?php /*?><div>
-            <label class="form-label">Withdrawal Method</label>
-            <select class="form-select">
-              <option value="">Select method</option>
-              <option value="bank">Bank Transfer</option>
-              <option value="paypal">PayPal</option>
-              <option value="crypto">Cryptocurrency</option>
-            </select>
-          </div><?php */ ?>
+       <label class="form-label">Withdrawal Method</label>
+       <select class="form-select">
+         <option value="">Select method</option>
+         <option value="bank">Bank Transfer</option>
+         <option value="paypal">PayPal</option>
+         <option value="crypto">Cryptocurrency</option>
+       </select>
+     </div><?php */ ?>
         </div>
       </div>
 
@@ -730,7 +755,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       } ?>
       <div class="flex space-x-4">
         <button class="btn-secondary flex-1" onclick="closeWithdrawModal()">Cancel</button>
-        <button class="btn-withdraw flex-1" id="withdraw_btn" <?php if ($check_request) { ?> onclick="rejectWithdraw()" disabled <?php } else { ?> onclick="processWithdrawal()" <?php } ?>>Withdraw</button>
+        <button class="btn-withdraw flex-1" id="withdraw_btn" <?php if ($check_request) { ?> onclick="rejectWithdraw()"
+            disabled <?php } else { ?> onclick="processWithdrawal()" <?php } ?>>Withdraw</button>
 
       </div>
     </div>
@@ -782,7 +808,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 edit-pro-pop">
         <div>
           <div class="flex items-center text-3xl font-bold mb-1">
-            <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token-large mr-2">
+            <img loading="lazy"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+              alt="TLM Token" class="tlm-token-large mr-2">
             <?php echo $userDetails['balance']; ?>
           </div>
           <div class="text-white/80">Available Tokens</div>
@@ -802,7 +830,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <?php if ($is_model) { ?>
           <div>
             <div class="flex items-center text-3xl font-bold mb-1">
-              <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token-large mr-2">
+              <img loading="lazy"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                alt="TLM Token" class="tlm-token-large mr-2">
 
               <?php echo $totalAmount; ?>
 
@@ -837,10 +867,10 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <?php
 
         // $is_user_have_extra = isUserHaveExtraDetail($userDetails['unique_id'], $con);
+        
 
 
-
-        if ($is_model) {  ?>
+        if ($is_model) { ?>
 
           <button class="tab-button" onclick="switchTab('creator')" id="creator-tab">
             Creator Settings
@@ -854,7 +884,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
         <?php } ?>
 
-        <?php if ($userDetails['as_a_model'] == 'Yes') {  ?>
+        <?php if ($userDetails['as_a_model'] == 'Yes') { ?>
 
           <button class="tab-button" onclick="switchTab('services')" id="services-tab">
             Creator Services
@@ -909,12 +939,16 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                     $prof_img = SITEURL . 'assets/images/model-gal-no-img.jpg';
                   } ?>
-                  <img loading="lazy" src="<?php echo $prof_img; ?>" id="preview_prof_img" alt="Profile" class="w-32 h-32 rounded-full border-4 border-purple-500">
+                  <img loading="lazy" src="<?php echo $prof_img; ?>" id="preview_prof_img" alt="Profile"
+                    class="w-32 h-32 rounded-full border-4 border-purple-500">
                   <div class="profile-picture-overlay">
                     <label for="pic_img">
                       <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2-2H5a2 2 0 01-2-2V9z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2-2H5a2 2 0 01-2-2V9z">
+                        </path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                       </svg>
                     </label>
                   </div>
@@ -934,15 +968,18 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                   </div>
 
-                  <button type="button" id="pic_img_btn" class="change-photo-btn" <?php if ($have_pic) { ?> style="display:none" <?php } ?>>
+                  <button type="button" id="pic_img_btn" class="change-photo-btn" <?php if ($have_pic) { ?>
+                      style="display:none" <?php } ?>>
 
-                    <input type="file" name="pic_img" style="display:none" id="pic_img" class="vfb-text vfb-medium" accept=".jpg,.jpeg,.png" />
+                    <input type="file" name="pic_img" style="display:none" id="pic_img" class="vfb-text vfb-medium"
+                      accept=".jpg,.jpeg,.png" />
 
 
                     <label for="pic_img">
 
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                       </svg>
 
                     </label>
@@ -969,21 +1006,23 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                       $i = 1;
                       foreach ($modal_img_list as $imgs) {
                         if (!empty($imgs['file'])) {
-                    ?>
+                          ?>
                           <li id="galblock<?php echo $i; ?>" class="w-auto h-auto">
                             <div>
                               <div class="dz-preview dz-file-preview">
                                 <img loading="lazy" src="<?php echo SITEURL . $imgs['file']; ?>" data-dz-thumbnail />
-                                <input type='hidden' name='hiddenmedia[]' class='hiddenmedia' value="<?php echo $imgs['file']; ?>" id="<?php echo $i; ?>">
+                                <input type='hidden' name='hiddenmedia[]' class='hiddenmedia'
+                                  value="<?php echo $imgs['file']; ?>" id="<?php echo $i; ?>">
                                 <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
                                 <!-- <div class="dz-success-mark"><span>✔</span></div> -->
                                 <!-- <div class="dz-error-mark"><span>✘</span></div> -->
-                                <div class="dz-error-mark"><a data-id="<?php echo $i; ?>" img_name="<?php echo $imgs['file']; ?>" class="removeinserted">×</a></div>
+                                <div class="dz-error-mark"><a data-id="<?php echo $i; ?>"
+                                    img_name="<?php echo $imgs['file']; ?>" class="removeinserted">×</a></div>
                                 <div class="dz-error-message"><span data-dz-errormessage></span></div>
                               </div>
                             </div>
                           </li>
-                    <?php }
+                        <?php }
                         $i++;
                       }
                     }
@@ -1022,23 +1061,24 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               </div>
 
               <?php /*?><div class="text-center">
-            <div class="gallery2 w-32 h-32 mx-auto border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center cursor-pointer hover:border-purple-500 transition-colors">
-              <?php if(!empty($userDetails['gallery_photo_2'])){ ?>
-			  <img src="<?php echo SITEURL.$userDetails['gallery_photo_2']; ?>" id="" alt="Profile" class="w-32 h-32 square-full border-4 border-purple-500">
-			  <?php }else{ ?>
-			  <div class="text-center">
-                <svg class="w-8 h-8 mx-auto text-white/50 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                </svg>
-                <p class="text-xs text-white/60">Add Photo</p>
-              </div>
-			  <?php } ?>
+       <div class="gallery2 w-32 h-32 mx-auto border-2 border-dashed border-white/30 rounded-lg flex items-center justify-center cursor-pointer hover:border-purple-500 transition-colors">
+         <?php if(!empty($userDetails['gallery_photo_2'])){ ?>
+   <img src="<?php echo SITEURL.$userDetails['gallery_photo_2']; ?>" id="" alt="Profile" class="w-32 h-32 square-full border-4 border-purple-500">
+   <?php }else{ ?>
+   <div class="text-center">
+           <svg class="w-8 h-8 mx-auto text-white/50 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+           </svg>
+           <p class="text-xs text-white/60">Add Photo</p>
+         </div>
+   <?php } ?>
+       </div>
+ <input type="file" name="gallery_photo_2" id="gallery_photo_2" class="gallery_photo"  accept=".jpg,.jpeg,.png" />
+       <p class="text-white/80 text-sm mt-2 font-medium">Gallery Photo 2</p>
+     </div><?php */ ?>
             </div>
-			<input type="file" name="gallery_photo_2" id="gallery_photo_2" class="gallery_photo"  accept=".jpg,.jpeg,.png" />
-            <p class="text-white/80 text-sm mt-2 font-medium">Gallery Photo 2</p>
-          </div><?php */ ?>
-            </div>
-            <p class="text-white/60 text-sm mt-4 text-center">Upload high-quality photos to showcase your personality and style</p>
+            <p class="text-white/60 text-sm mt-4 text-center">Upload high-quality photos to showcase your personality
+              and style</p>
           </div>
 
           <!-- Personal Information - Enhanced -->
@@ -1047,13 +1087,16 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             <div class="space-y-4">
               <div>
                 <label class="form-label">Display Name *</label>
-                <input type="text" class="form-input uname" name="name" id="uname" placeholder="Enter your display name" value="<?php echo $userDetails['name']; ?>" required>
+                <input type="text" class="form-input uname" name="name" id="uname" placeholder="Enter your display name"
+                  value="<?php echo $userDetails['name']; ?>" required>
                 <p class="help-text">This is how others will see you on the platform</p>
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div>
                   <label class="form-label">Date of Birth *</label>
-                  <input type="date" id="dob-input" class="form-input dob" name="dob" value="<?= $userDetails['dob'] ?>" max="<?php echo date('Y-m-d') ?>" onchange="calculateAge()" data-date-format="dd-mm-yyyy" autocomplete="off" required>
+                  <input type="date" id="dob-input" class="form-input dob" name="dob" value="<?= $userDetails['dob'] ?>"
+                    max="<?php echo date('Y-m-d') ?>" onchange="calculateAge()" data-date-format="dd-mm-yyyy"
+                    autocomplete="off" required>
 
                   <span id="dob_error" class="text-danger" style="color:red;"></span>
 
@@ -1062,7 +1105,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                 <div>
                   <label class="form-label">Age *</label>
-                  <input type="number" id="age-display" class="form-input age" name="age" value="<?php echo $userDetails['age']; ?>" readonly required>
+                  <input type="number" id="age-display" class="form-input age" name="age"
+                    value="<?php echo $userDetails['age']; ?>" readonly required>
                   <p class="help-text">Auto-calculated</p>
 
                   <span id="age_error" class="text-danger" style="color:red;"></span>
@@ -1073,15 +1117,18 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <label class="form-label">Gender *</label>
                 <div class="radio-group">
                   <div class="radio-option">
-                    <input type="radio" name="gender" id="m" value="Male" <?php if ($userDetails['gender'] == 'Male' || $userDetails['gender'] == 'male' || empty($userDetails['gender'])) echo 'checked';  ?>>
+                    <input type="radio" name="gender" id="m" value="Male" <?php if ($userDetails['gender'] == 'Male' || $userDetails['gender'] == 'male' || empty($userDetails['gender']))
+                      echo 'checked'; ?>>
                     <label for="m">Male</label>
                   </div>
                   <div class="radio-option">
-                    <input type="radio" name="gender" id="f" value="Female" <?php if ($userDetails['gender'] == 'Female' || $userDetails['gender'] == 'female') echo 'checked';  ?>>
+                    <input type="radio" name="gender" id="f" value="Female" <?php if ($userDetails['gender'] == 'Female' || $userDetails['gender'] == 'female')
+                      echo 'checked'; ?>>
                     <label for="f">Female</label>
                   </div>
                   <div class="radio-option">
-                    <input type="radio" name="gender" id="t" value="Transgender" <?php if ($userDetails['gender'] == 'Transgender' || $userDetails['gender'] == 'other') echo 'checked';  ?>>
+                    <input type="radio" name="gender" id="t" value="Transgender" <?php if ($userDetails['gender'] == 'Transgender' || $userDetails['gender'] == 'other')
+                      echo 'checked'; ?>>
                     <label for="t">Transgender</label>
                   </div>
                 </div>
@@ -1090,12 +1137,20 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <label class="form-label">Relationship Status</label>
                 <select class="form-select relationship" name="relationship">
                   <option value="">Select status</option>
-                  <option value="Single" <?php if ($userDetails['relationship'] == 'Single' || empty($userDetails['relationship'])) echo 'selected';  ?>>Single</option>
-                  <option value="Dating" <?php if ($userDetails['relationship'] == 'Dating') echo 'selected';  ?>>Dating</option>
-                  <option value="In a Relationship" <?php if ($userDetails['relationship'] == 'In a Relationship') echo 'selected';  ?>>In a Relationship</option>
-                  <option value="Married" <?php if ($userDetails['relationship'] == 'Married') echo 'selected';  ?>>Married</option>
-                  <option value="It's Complicated" <?php if ($userDetails['relationship'] == "It's Complicated") echo 'selected';  ?>>It's Complicated</option>
-                  <option value="Prefer not to say" <?php if ($userDetails['relationship'] == 'Prefer not to say') echo 'selected';  ?>>Prefer not to say</option>
+                  <option value="Single" <?php if ($userDetails['relationship'] == 'Single' || empty($userDetails['relationship']))
+                    echo 'selected'; ?>>Single</option>
+                  <option value="Dating" <?php if ($userDetails['relationship'] == 'Dating')
+                    echo 'selected'; ?>>Dating
+                  </option>
+                  <option value="In a Relationship" <?php if ($userDetails['relationship'] == 'In a Relationship')
+                    echo 'selected'; ?>>In a Relationship</option>
+                  <option value="Married" <?php if ($userDetails['relationship'] == 'Married')
+                    echo 'selected'; ?>>Married
+                  </option>
+                  <option value="It's Complicated" <?php if ($userDetails['relationship'] == "It's Complicated")
+                    echo 'selected'; ?>>It's Complicated</option>
+                  <option value="Prefer not to say" <?php if ($userDetails['relationship'] == 'Prefer not to say')
+                    echo 'selected'; ?>>Prefer not to say</option>
                 </select>
               </div>
 
@@ -1105,9 +1160,12 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   <label class="form-label">Children Preference</label>
                   <select class="form-select" name="children_preference">
                     <option value="">Select Children Preference</option>
-                    <option value="no-children" <?php if ($userDetails['children_preference'] == 'no-children') { ?> selected <?php } ?>>No Children</option>
-                    <option value="wants-children" <?php if ($userDetails['children_preference'] == 'wants-children') { ?> selected <?php } ?>>Wants Children</option>
-                    <option value="has-children" <?php if ($userDetails['children_preference'] == 'has-children') { ?> selected <?php } ?>>Has Children</option>
+                    <option value="no-children" <?php if ($userDetails['children_preference'] == 'no-children') { ?>
+                        selected <?php } ?>>No Children</option>
+                    <option value="wants-children" <?php if ($userDetails['children_preference'] == 'wants-children') { ?>
+                        selected <?php } ?>>Wants Children</option>
+                    <option value="has-children" <?php if ($userDetails['children_preference'] == 'has-children') { ?>
+                        selected <?php } ?>>Has Children</option>
                   </select>
                 </div>
 
@@ -1117,12 +1175,15 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                   <select class="form-select" name="education_level">
                     <option value="">Select Education Level</option>
-                    <option value="high-school" <?php if ($userDetails['education_level'] == 'high-school') { ?> selected <?php } ?>>High School</option>
+                    <option value="high-school" <?php if ($userDetails['education_level'] == 'high-school') { ?> selected
+                      <?php } ?>>High School</option>
                     <option value="college" <?php if ($userDetails['education_level'] == 'college') { ?> selected <?php } ?>> College</option>
-                    <option value="university" <?php if ($userDetails['education_level'] == 'university') { ?> selected <?php } ?>>University</option>
+                    <option value="university" <?php if ($userDetails['education_level'] == 'university') { ?> selected
+                      <?php } ?>>University</option>
                     <option value="graduate" <?php if ($userDetails['education_level'] == 'graduate') { ?> selected <?php } ?>>Graduate Degree</option>
                     <option value="masters" <?php if ($userDetails['education_level'] == 'masters') { ?> selected <?php } ?>>Masters</option>
-                    <option value="phd" <?php if ($userDetails['education_level'] == 'phd') { ?> selected <?php } ?>>PhD</option>
+                    <option value="phd" <?php if ($userDetails['education_level'] == 'phd') { ?> selected <?php } ?>>PhD
+                    </option>
                   </select>
 
                 </div>
@@ -1131,17 +1192,24 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
               <div>
                 <label class="form-label">Bio</label>
-                <textarea name="user_bio" class="form-input user_bio" rows="4" placeholder="Tell us about yourself, your interests, and what makes you unique..."><?php echo $userDetails['user_bio']; ?></textarea>
+                <textarea name="user_bio" class="form-input user_bio" rows="4"
+                  placeholder="Tell us about yourself, your interests, and what makes you unique..."><?php echo $userDetails['user_bio']; ?></textarea>
                 <p class="help-text">A compelling bio increases your profile views by 60%</p>
               </div>
               <div>
                 <label class="form-label">Services</label>
                 <select name="services" class="form-control select2">
                   <option value="" class="bg-gray-900">Select Your Services</option>
-                  <option value="Chat Only" <?php if ($userDetails['services'] == 'Chat Only') echo 'selected'; ?> class="bg-gray-900">💬 Chat Only</option>
-                  <option value="Chat & Watch" <?php if ($userDetails['services'] == 'Chat & Watch') echo 'selected'; ?> class="bg-gray-900">💬📹 Chat & Watch</option>
-                  <option value="Chat, Watch & Meet" <?php if ($userDetails['services'] == 'Chat, Watch & Meet') echo 'selected'; ?> class="bg-gray-900">💬📹🤝 Chat, Watch & Meet</option>
-                  <option value="Premium Experience" <?php if ($userDetails['services'] == 'Premium Experience') echo 'selected'; ?> class="bg-gray-900">👑 Premium Experience</option>
+                  <option value="Chat Only" <?php if ($userDetails['services'] == 'Chat Only')
+                    echo 'selected'; ?>
+                    class="bg-gray-900">💬 Chat Only</option>
+                  <option value="Chat & Watch" <?php if ($userDetails['services'] == 'Chat & Watch')
+                    echo 'selected'; ?>
+                    class="bg-gray-900">💬📹 Chat & Watch</option>
+                  <option value="Chat, Watch & Meet" <?php if ($userDetails['services'] == 'Chat, Watch & Meet')
+                    echo 'selected'; ?> class="bg-gray-900">💬📹🤝 Chat, Watch & Meet</option>
+                  <option value="Premium Experience" <?php if ($userDetails['services'] == 'Premium Experience')
+                    echo 'selected'; ?> class="bg-gray-900">👑 Premium Experience</option>
                 </select>
 
               </div>
@@ -1158,9 +1226,10 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   <option value="">Select your country</option>
                   <?php
                   foreach ($country_list as $val) {
-                  ?>
-                    <option value="<?= $val['id'] ?>" <?= $userDetails['country'] == $val['id'] ? 'selected' : '' ?>><?= $val['name'] ?></option>
-                  <?php
+                    ?>
+                    <option value="<?= $val['id'] ?>" <?= $userDetails['country'] == $val['id'] ? 'selected' : '' ?>>
+                      <?= $val['name'] ?></option>
+                    <?php
                   }
                   ?>
                 </select>
@@ -1168,7 +1237,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               </div>
               <div>
                 <label class="form-label">State/Province *</label>
-                <select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-select" required></select>
+                <select name="state" id="i-hs-state" onChange="select_hs_state('')" class="form-select"
+                  required></select>
               </div>
               <div>
                 <label class="form-label">City *</label>
@@ -1178,15 +1248,19 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <label class="form-label">Willing to Travel</label>
                 <div class="radio-group">
                   <div class="radio-option">
-                    <input type="radio" id="travel-local" name="travel_preference" value="Local only" <?php if ($userDetails['travel_preference'] == 'Local only' || empty($userDetails['travel_preference'])) echo 'checked';  ?>>
+                    <input type="radio" id="travel-local" name="travel_preference" value="Local only" <?php if ($userDetails['travel_preference'] == 'Local only' || empty($userDetails['travel_preference']))
+                      echo 'checked'; ?>>
                     <label for="travel-local">Local only</label>
                   </div>
                   <div class="radio-option">
-                    <input type="radio" id="travel-domestic" name="travel_preference" value="Domestic travel" <?php if ($userDetails['travel_preference'] == 'Domestic travel') echo 'checked';  ?>>
+                    <input type="radio" id="travel-domestic" name="travel_preference" value="Domestic travel" <?php if ($userDetails['travel_preference'] == 'Domestic travel')
+                      echo 'checked'; ?>>
                     <label for="travel-domestic">Domestic travel</label>
                   </div>
                   <div class="radio-option">
-                    <input type="radio" id="travel-international" name="travel_preference" value="International travel" <?php if ($userDetails['travel_preference'] == 'International travel') echo 'checked';  ?>>
+                    <input type="radio" id="travel-international" name="travel_preference" value="International travel"
+                      <?php if ($userDetails['travel_preference'] == 'International travel')
+                        echo 'checked'; ?>>
                     <label for="travel-international">International travel</label>
                   </div>
                 </div>
@@ -1200,143 +1274,186 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             <h3 class="text-xl font-bold text-purple-400 mb-4">👤 Physical Attributes</h3>
             <div class="private-section mb-6">
               <p class="text-white/70 text-sm mb-4">🔒 Private Matching Information</p>
-              <p class="text-white/70 text-sm mb-4">This information is kept private and used only for matching preferences. It will not be displayed publicly.</p>
+              <p class="text-white/70 text-sm mb-4">This information is kept private and used only for matching
+                preferences. It will not be displayed publicly.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
               <div>
+
                 <label class="form-label">Height</label>
+
                 <div class="unit-toggle unit-toggleh" id="unit-toggleh">
-                  <div class="unit-option <?php if (!empty($extra_details) && $extra_details['height_type'] == 'ft') {
-                                            echo 'active';
-                                          } else if (empty($extra_details['height_type'])) {
-                                            echo 'active';
-                                          } ?> ft-option" onclick="toggleHeightUnit('ft',this)">ft/in</div>
-                  <div class="unit-option <?php if (!empty($extra_details) && $extra_details['height_type'] == 'cm') {
-                                            echo 'active';
-                                          } ?> cm-option" onclick="toggleHeightUnit('cm',this)">cm</div>
+
+                    <div class="unit-option
+                    
+                    <?php if (!empty($extra_details) && $extra_details['height_type'] == 'ft') {
+                      echo 'active';
+                    } else if (empty($extra_details['height_type'])) {
+
+                      echo 'active';
+                    } ?> ft-option" onclick="toggleHeightUnit('ft',this)">ft/in</div>
+
+                    <div class="unit-option <?php if (!empty($extra_details) && $extra_details['height_type'] == 'cm') {
+                      echo 'active';
+                    } ?> cm-option" onclick="toggleHeightUnit('cm',this)">cm</div>
+
                 </div>
-                <div id="height-ft" class="grid grid-cols-2 gap-2 <?php if ($extra_details['height_type'] == 'cm') echo 'hidden'; ?>">
+
+                <div id="height-ft"
+                  class="grid grid-cols-2 gap-2 <?php if ($extra_details['height_type'] == 'cm')
+                    echo 'hidden'; ?>">
+
                   <?php
                   $feet = '';
                   $inches = '';
+
                   if ($extra_details['height_type'] == 'ft' || empty($extra_details['height_type'])) {
                     $exp_hght = explode('.', $extra_details['height']);
                     $feet = $exp_hght[0];
                     $inches = $exp_hght[1];
                   } ?>
-                  <select class="form-select" name="feet">
-                    <option value="">Feet</option>
-                    <option value="4" <?php if ($feet == 4) {
-                                        echo 'selected';
-                                      } ?>>4'</option>
-                    <option value="5" <?php if ($feet == 5) {
-                                        echo 'selected';
-                                      } else if (empty($feet)) {
-                                        echo 'selected';
-                                      } ?>>5'</option>
-                    <option value="6" <?php if ($feet == 6) {
-                                        echo 'selected';
-                                      } ?>>6'</option>
+
+                  <select class="form-select" name="feet" onchange="updateHeightCm()" id="feet-select" >
+
+                      <option value="">Feet</option>
+                      <option value="4" <?php if ($feet == 4) {
+                        echo 'selected';
+                      } ?>>4'</option>
+                      <option value="5" <?php if ($feet == 5) {
+                        echo 'selected';
+                      } else if (empty($feet)) {
+                        echo 'selected';
+                      } ?>>5'</option>
+                      <option value="6" <?php if ($feet == 6) {
+                        echo 'selected';
+                      } ?>>6'</option>
+
                   </select>
-                  <select class="form-select" name="inches">
-                    <option value="">Inches</option>
-                    <option value="0" <?php if ($inches == 0) {
-                                        echo 'selected';
-                                      } ?>>0"</option>
-                    <option value="1" <?php if ($inches == 1) {
-                                        echo 'selected';
-                                      } ?>>1"</option>
-                    <option value="2" <?php if ($inches == 2) {
-                                        echo 'selected';
-                                      } ?>>2"</option>
-                    <option value="3" <?php if ($inches == 3) {
-                                        echo 'selected';
-                                      } ?>>3"</option>
-                    <option value="4" <?php if ($inches == 4) {
-                                        echo 'selected';
-                                      } ?>>4"</option>
-                    <option value="5" <?php if ($inches == 5) {
-                                        echo 'selected';
-                                      } ?>>5"</option>
-                    <option value="6" <?php if ($inches == 6) {
-                                        echo 'selected';
-                                      } else if (empty($inches)) {
-                                        echo 'selected';
-                                      } ?>>6"</option>
-                    <option value="7" <?php if ($inches == 7) {
-                                        echo 'selected';
-                                      } ?>>7"</option>
-                    <option value="8" <?php if ($inches == 8) {
-                                        echo 'selected';
-                                      } ?>>8"</option>
-                    <option value="9" <?php if ($inches == 9) {
-                                        echo 'selected';
-                                      } ?>>9"</option>
-                    <option value="10" <?php if ($inches == 10) {
-                                          echo 'selected';
-                                        } ?>>10"</option>
-                    <option value="11" <?php if ($inches == 11) {
-                                          echo 'selected';
-                                        } ?>>11"</option>
+
+                  <select class="form-select" name="inches" onchange="updateHeightCm()" id="inches-select" >
+
+                      <option value="">Inches</option>
+                      <option value="0" <?php if ($inches == 0) {
+                        echo 'selected';
+                      } ?>>0"</option>
+                      <option value="1" <?php if ($inches == 1) {
+                        echo 'selected';
+                      } ?>>1"</option>
+                      <option value="2" <?php if ($inches == 2) {
+                        echo 'selected';
+                      } ?>>2"</option>
+                      <option value="3" <?php if ($inches == 3) {
+                        echo 'selected';
+                      } ?>>3"</option>
+                      <option value="4" <?php if ($inches == 4) {
+                        echo 'selected';
+                      } ?>>4"</option>
+                      <option value="5" <?php if ($inches == 5) {
+                        echo 'selected';
+                      } ?>>5"</option>
+                      <option value="6" <?php if ($inches == 6) {
+                        echo 'selected';
+                      } else if (empty($inches)) {
+                        echo 'selected';
+                      } ?>>6"</option>
+                      <option value="7" <?php if ($inches == 7) {
+                        echo 'selected';
+                      } ?>>7"</option>
+                      <option value="8" <?php if ($inches == 8) {
+                        echo 'selected';
+                      } ?>>8"</option>
+                      <option value="9" <?php if ($inches == 9) {
+                        echo 'selected';
+                      } ?>>9"</option>
+                      <option value="10" <?php if ($inches == 10) {
+                        echo 'selected';
+                      } ?>>10"</option>
+                      <option value="11" <?php if ($inches == 11) {
+                        echo 'selected';
+                      } ?>>11"</option>
                   </select>
                 </div>
-                <div id="height-cm" class="<?php if ($extra_details['height_type'] == 'ft' || empty($extra_details['height_type'])) echo 'hidden'; ?>">
-                  <input type="number" name="height_cm" class="form-input" placeholder="Height in cm" min="140" max="200" value="<?php if ($extra_details['height_type'] == 'cm') {
-                                                                                                                                    echo $extra_details['height'];
-                                                                                                                                  } ?>">
+
+                <div id="height-cm"
+                  class="<?php if ($extra_details['height_type'] == 'ft' || empty($extra_details['height_type']))
+                    echo 'hidden'; ?>">
+                  <input id="height_in_cm" onchange="updateFeetInches()" type="number" name="height_cm" class="form-input" placeholder="Height in cm" min="140"
+                    max="200"
+                    value="<?php if ($extra_details['height_type'] == 'cm') {
+                      echo $extra_details['height'];
+                    } ?>">
                 </div>
                 <input type="hidden" name="height_type" id="height_type" value="<?php if (empty($extra_details['height_type'])) {
-                                                                                  echo 'ft';
-                                                                                } else {
-                                                                                  echo $extra_details['height_type'];
-                                                                                } ?>">
+                  echo 'ft';
+                } else {
+                  echo $extra_details['height_type'];
+                } ?>">
               </div>
+
+
               <div>
                 <label class="form-label">Weight</label>
+
                 <div class="unit-toggle unit-togglew" id="unit-togglew">
+
                   <div class="unit-option <?php if (!empty($extra_details) && $extra_details['weight_type'] == 'lbs') {
-                                            echo 'active';
-                                          } else if (empty($extra_details['weight_type'])) {
-                                            echo 'active';
-                                          } ?> lbs-option" onclick="toggleWeightUnit('lbs')">lbs</div>
+                    echo 'active';
+                  } else if (empty($extra_details['weight_type'])) {
+                    echo 'active';
+                  } ?> lbs-option" onclick="toggleWeightUnit('lbs')">lbs</div>
+
                   <div class="unit-option <?php if (!empty($extra_details) && $extra_details['weight_type'] == 'kg') {
-                                            echo 'active';
-                                          } ?> kg-option" onclick="toggleWeightUnit('kg')">kg</div>
+                    echo 'active';
+                  } ?> kg-option" onclick="toggleWeightUnit('kg')">kg</div>
                 </div>
-                <input type="number" id="weight-input" name="weight" class="form-input" placeholder="Weight" min="80" max="300" value="<?php echo $extra_details['weight']; ?>">
+
+                <input type="number" id="weight-input" name="weight" class="form-input" placeholder="Weight" min="80"
+                  max="300" value="<?php echo $extra_details['weight']; ?>">
+
                 <p class="help-text">Optional - helps with matching</p>
+
                 <input type="hidden" name="weight_type" id="weight_type" value="<?php if (empty($extra_details['weight_type'])) {
-                                                                                  echo 'lbs';
-                                                                                } else {
-                                                                                  echo $extra_details['weight_type'];
-                                                                                } ?>">
+                  echo 'lbs';
+                } else {
+                  echo $extra_details['weight_type'];
+                } ?>">
+
               </div>
+
               <div>
                 <label class="form-label">Hair Color</label>
                 <select class="form-select" name="hair_color">
                   <option value="">Select hair color</option>
                   <option value="Blonde" <?php if ($extra_details['hair_color'] == 'Blonde') {
-                                            echo 'selected';
-                                          } ?>>Blonde</option>
+                    echo 'selected';
+                  } ?>>
+                    Blonde</option>
                   <option value="Brunette" <?php if ($extra_details['hair_color'] == 'Brunette') {
-                                              echo 'selected';
-                                            } ?>>Brunette</option>
+                    echo 'selected';
+                  } ?>>
+                    Brunette</option>
                   <option value="Black" <?php if ($extra_details['hair_color'] == 'Black') {
-                                          echo 'selected';
-                                        } ?>>Black</option>
+                    echo 'selected';
+                  } ?>>Black
+                  </option>
                   <option value="Red" <?php if ($extra_details['hair_color'] == 'Red') {
-                                        echo 'selected';
-                                      } ?>>Red</option>
+                    echo 'selected';
+                  } ?>>Red
+                  </option>
                   <option value="Auburn" <?php if ($extra_details['hair_color'] == 'Auburn') {
-                                            echo 'selected';
-                                          } ?>>Auburn</option>
+                    echo 'selected';
+                  } ?>>
+                    Auburn</option>
                   <option value="Gray" <?php if ($extra_details['hair_color'] == 'Gray') {
-                                          echo 'selected';
-                                        } ?>>Gray</option>
+                    echo 'selected';
+                  } ?>>Gray
+                  </option>
                   <option value="Other" <?php if ($extra_details['hair_color'] == 'Other') {
-                                          echo 'selected';
-                                        } ?>>Other</option>
+                    echo 'selected';
+                  } ?>>Other
+                  </option>
                 </select>
               </div>
               <div>
@@ -1344,23 +1461,29 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <select class="form-select" name="eye_color">
                   <option value="">Select eye color</option>
                   <option value="Brown" <?php if ($extra_details['eye_color'] == 'Brown') {
-                                          echo 'selected';
-                                        } ?>>Brown</option>
+                    echo 'selected';
+                  } ?>>Brown
+                  </option>
                   <option value="Blue" <?php if ($extra_details['eye_color'] == 'Blue') {
-                                          echo 'selected';
-                                        } ?>>Blue</option>
+                    echo 'selected';
+                  } ?>>Blue
+                  </option>
                   <option value="Green" <?php if ($extra_details['eye_color'] == 'Green') {
-                                          echo 'selected';
-                                        } ?>>Green</option>
+                    echo 'selected';
+                  } ?>>Green
+                  </option>
                   <option value="Hazel" <?php if ($extra_details['eye_color'] == 'Hazel') {
-                                          echo 'selected';
-                                        } ?>>Hazel</option>
+                    echo 'selected';
+                  } ?>>Hazel
+                  </option>
                   <option value="Gray" <?php if ($extra_details['eye_color'] == 'Gray') {
-                                          echo 'selected';
-                                        } ?>>Gray</option>
+                    echo 'selected';
+                  } ?>>Gray
+                  </option>
                   <option value="Amber" <?php if ($extra_details['eye_color'] == 'Amber') {
-                                          echo 'selected';
-                                        } ?>>Amber</option>
+                    echo 'selected';
+                  } ?>>Amber
+                  </option>
                 </select>
               </div>
 
@@ -1372,12 +1495,18 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                   <option value="">Select Ethnicity</option>
 
-                  <option value="asian" <?php if ($extra_details['ethnicity'] == 'asian') { ?> selected <?php } ?>>Asian</option>
-                  <option value="black" <?php if ($extra_details['ethnicity'] == 'black') { ?> selected <?php } ?>>Black</option>
-                  <option value="hispanic" <?php if ($extra_details['ethnicity'] == 'hispanic') { ?> selected <?php } ?>>Hispanic</option>
-                  <option value="white" <?php if ($extra_details['ethnicity'] == 'white') { ?> selected <?php } ?>>White</option>
-                  <option value="mixed" <?php if ($extra_details['ethnicity'] == 'mixed') { ?> selected <?php } ?>>Mixed</option>
-                  <option value="other" <?php if ($extra_details['ethnicity'] == 'other') { ?> selected <?php } ?>>Other</option>
+                  <option value="asian" <?php if ($extra_details['ethnicity'] == 'asian') { ?> selected <?php } ?>>Asian
+                  </option>
+                  <option value="black" <?php if ($extra_details['ethnicity'] == 'black') { ?> selected <?php } ?>>Black
+                  </option>
+                  <option value="hispanic" <?php if ($extra_details['ethnicity'] == 'hispanic') { ?> selected <?php } ?>>
+                    Hispanic</option>
+                  <option value="white" <?php if ($extra_details['ethnicity'] == 'white') { ?> selected <?php } ?>>White
+                  </option>
+                  <option value="mixed" <?php if ($extra_details['ethnicity'] == 'mixed') { ?> selected <?php } ?>>Mixed
+                  </option>
+                  <option value="other" <?php if ($extra_details['ethnicity'] == 'other') { ?> selected <?php } ?>>Other
+                  </option>
 
                 </select>
 
@@ -1387,23 +1516,28 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <select class="form-select" name="body_type">
                   <option value="">Select body type</option>
                   <option value="Petite" <?php if ($extra_details['body_type'] == 'Petite') {
-                                            echo 'selected';
-                                          } ?>>Petite</option>
+                    echo 'selected';
+                  } ?>>Petite
+                  </option>
                   <option value="Slim" <?php if ($extra_details['body_type'] == 'Slim') {
-                                          echo 'selected';
-                                        } ?>>Slim</option>
+                    echo 'selected';
+                  } ?>>Slim
+                  </option>
                   <option value="Athletic" <?php if ($extra_details['body_type'] == 'Athletic') {
-                                              echo 'selected';
-                                            } ?>>Athletic</option>
+                    echo 'selected';
+                  } ?>>
+                    Athletic</option>
                   <option value="Average" <?php if ($extra_details['body_type'] == 'Average') {
-                                            echo 'selected';
-                                          } ?>>Average</option>
+                    echo 'selected';
+                  } ?>>
+                    Average</option>
                   <option value="Curvy" <?php if ($extra_details['body_type'] == 'Curvy') {
-                                          echo 'selected';
-                                        } ?>>Curvy</option>
+                    echo 'selected';
+                  } ?>>Curvy
+                  </option>
                   <option value="Full Figured" <?php if ($extra_details['body_type'] == 'Full Figured') {
-                                                  echo 'selected';
-                                                } ?>>Full Figured</option>
+                    echo 'selected';
+                  } ?>>Full Figured</option>
                 </select>
               </div>
               <div>
@@ -1411,23 +1545,26 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <select class="form-select" name="dress_size">
                   <option value="">Select dress size</option>
                   <option value="XS (0-2)" <?php if ($extra_details['dress_size'] == 'XS (0-2)') {
-                                              echo 'selected';
-                                            } ?>>XS (0-2)</option>
+                    echo 'selected';
+                  } ?>>
+                    XS (0-2)</option>
                   <option value="S (4-6)" <?php if ($extra_details['dress_size'] == 'S (4-6)') {
-                                            echo 'selected';
-                                          } ?>>S (4-6)</option>
+                    echo 'selected';
+                  } ?>>S
+                    (4-6)</option>
                   <option value="M (8-10)" <?php if ($extra_details['dress_size'] == 'M (8-10)') {
-                                              echo 'selected';
-                                            } ?>>M (8-10)</option>
+                    echo 'selected';
+                  } ?>>M
+                    (8-10)</option>
                   <option value="L (12-14)" <?php if ($extra_details['dress_size'] == 'L (12-14)') {
-                                              echo 'selected';
-                                            } ?>>L (12-14)</option>
+                    echo 'selected';
+                  } ?>>L (12-14)</option>
                   <option value="XL (16-18)" <?php if ($extra_details['dress_size'] == 'XL (16-18)') {
-                                                echo 'selected';
-                                              } ?>>XL (16-18)</option>
+                    echo 'selected';
+                  } ?>>XL (16-18)</option>
                   <option value="XXL (20+)" <?php if ($extra_details['dress_size'] == 'XXL (20+)') {
-                                              echo 'selected';
-                                            } ?>>XXL (20+)</option>
+                    echo 'selected';
+                  } ?>>XXL (20+)</option>
                 </select>
               </div>
             </div>
@@ -1435,47 +1572,51 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             <!-- Private measurements section -->
             <div class="mt-6 p-4 bg-black/20 rounded-lg">
               <h4 class="font-bold mb-4 text-yellow-400">🔐 Confidential Measurements</h4>
-              <p class="text-sm text-white/60 mb-4">These measurements are encrypted and only used for professional matching. They are never displayed publicly.</p>
+              <p class="text-sm text-white/60 mb-4">These measurements are encrypted and only used for professional
+                matching. They are never displayed publicly.</p>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <label class="form-label text-sm">Bust (inches)</label>
-                  <input type="number" class="form-input" name="bust_size" placeholder="e.g., 34" min="28" max="50" value="<?php echo $extra_details['bust_size']; ?>">
+                  <input type="number" class="form-input" name="bust_size" placeholder="e.g., 34" min="28" max="50"
+                    value="<?php echo $extra_details['bust_size']; ?>">
                 </div>
                 <div>
                   <label class="form-label text-sm">Waist (inches)</label>
-                  <input type="number" class="form-input" name="waist_size" placeholder="e.g., 26" min="20" max="40" value="<?php echo $extra_details['waist_size']; ?>">
+                  <input type="number" class="form-input" name="waist_size" placeholder="e.g., 26" min="20" max="40"
+                    value="<?php echo $extra_details['waist_size']; ?>">
                 </div>
                 <div>
                   <label class="form-label text-sm">Cup Size</label>
                   <select class="form-select" name="cup_size">
                     <option value="">Select</option>
                     <option value="AA" <?php if ($extra_details['cup_size'] == 'AA') {
-                                          echo 'selected';
-                                        } ?>>AA</option>
+                      echo 'selected';
+                    } ?>>AA</option>
                     <option value="A" <?php if ($extra_details['cup_size'] == 'A') {
-                                        echo 'selected';
-                                      } ?>>A</option>
+                      echo 'selected';
+                    } ?>>A</option>
                     <option value="B" <?php if ($extra_details['cup_size'] == 'B') {
-                                        echo 'selected';
-                                      } ?>>B</option>
+                      echo 'selected';
+                    } ?>>B</option>
                     <option value="C" <?php if ($extra_details['cup_size'] == 'C') {
-                                        echo 'selected';
-                                      } ?>>C</option>
+                      echo 'selected';
+                    } ?>>C</option>
                     <option value="D" <?php if ($extra_details['cup_size'] == 'D') {
-                                        echo 'selected';
-                                      } ?>>D</option>
+                      echo 'selected';
+                    } ?>>D</option>
                     <option value="DD" <?php if ($extra_details['cup_size'] == 'DD') {
-                                          echo 'selected';
-                                        } ?>>DD</option>
+                      echo 'selected';
+                    } ?>>DD</option>
                     <option value="DDD" <?php if ($extra_details['cup_size'] == 'DDD') {
-                                          echo 'selected';
-                                        } ?>>DDD</option>
+                      echo 'selected';
+                    } ?>>DDD
+                    </option>
                     <option value="F" <?php if ($extra_details['cup_size'] == 'F') {
-                                        echo 'selected';
-                                      } ?>>F</option>
+                      echo 'selected';
+                    } ?>>F</option>
                     <option value="G" <?php if ($extra_details['cup_size'] == 'G') {
-                                        echo 'selected';
-                                      } ?>>G</option>
+                      echo 'selected';
+                    } ?>>G</option>
                   </select>
                 </div>
               </div>
@@ -1485,74 +1626,157 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
 
           <?php $hobbies = $userDetails['hobbies'];
-          $hobbies = json_decode($hobbies);  ?>
+          $hobbies = json_decode($hobbies); ?>
           <!-- Interests & Hobbies -->
           <div class="interests-section lg:col-span-2">
             <h3 class="text-xl font-bold text-purple-400 mb-4">Interests & Hobbies</h3>
-            <p class="text-white/70 text-sm mb-4">Select your interests to help clients find you based on shared hobbies</p>
+            <p class="text-white/70 text-sm mb-4">Select your interests to help clients find you based on shared hobbies
+            </p>
             <div class="flex flex-wrap gap-2">
-              <span class="interest-tag <?php if ((!empty($hobbies) && in_array('Travel', $hobbies))) echo 'selected';  ?>" onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Travel" <?php if ((!empty($hobbies) && in_array('Travel', $hobbies)) || empty($hobbies)) echo 'checked';  ?>>Travel
+              <span
+                class="interest-tag <?php if ((!empty($hobbies) && in_array('Travel', $hobbies)))
+                  echo 'selected'; ?>"
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Travel" <?php if ((!empty($hobbies) && in_array('Travel', $hobbies)) || empty($hobbies))
+                  echo 'checked'; ?>>Travel
               </span>
-              <span class="interest-tag <?php if ((!empty($hobbies) && in_array('Dancing', $hobbies))) echo 'selected';  ?>" onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Dancing" <?php if ((!empty($hobbies) && in_array('Dancing', $hobbies)) || empty($hobbies)) echo 'checked';  ?>>Dancing
+              <span
+                class="interest-tag <?php if ((!empty($hobbies) && in_array('Dancing', $hobbies)))
+                  echo 'selected'; ?>"
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Dancing" <?php if ((!empty($hobbies) && in_array('Dancing', $hobbies)) || empty($hobbies))
+                  echo 'checked'; ?>>Dancing
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Photography', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Photography" <?php if (!empty($hobbies) && in_array('Photography', $hobbies)) echo 'checked';  ?>>Photography
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Photography', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Photography" <?php if (!empty($hobbies) && in_array('Photography', $hobbies))
+                  echo 'checked'; ?>>Photography
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Yoga', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Yoga" <?php if (!empty($hobbies) && in_array('Yoga', $hobbies)) echo 'checked';  ?>>Yoga
+              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Yoga', $hobbies))
+                echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Yoga" <?php if (!empty($hobbies) && in_array('Yoga', $hobbies))
+                  echo 'checked'; ?>>Yoga
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Cooking', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Cooking" <?php if (!empty($hobbies) && in_array('Cooking', $hobbies)) echo 'checked';  ?>>Cooking
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Cooking', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Cooking" <?php if (!empty($hobbies) && in_array('Cooking', $hobbies))
+                  echo 'checked'; ?>>Cooking
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Music', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Music" <?php if (!empty($hobbies) && in_array('Music', $hobbies)) echo 'checked';  ?>>Music
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Music', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Music" <?php if (!empty($hobbies) && in_array('Music', $hobbies))
+                  echo 'checked'; ?>>Music
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Art', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Art" <?php if (!empty($hobbies) && in_array('Art', $hobbies)) echo 'checked';  ?>>Art
+              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Art', $hobbies))
+                echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Art" <?php if (!empty($hobbies) && in_array('Art', $hobbies))
+                  echo 'checked'; ?>>Art
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Fitness', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Fitness" <?php if (!empty($hobbies) && in_array('Fitness', $hobbies)) echo 'checked';  ?>>Fitness
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Fitness', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Fitness" <?php if (!empty($hobbies) && in_array('Fitness', $hobbies))
+                  echo 'checked'; ?>>Fitness
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Reading', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Reading" <?php if (!empty($hobbies) && in_array('Reading', $hobbies)) echo 'checked';  ?>>Reading
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Reading', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Reading" <?php if (!empty($hobbies) && in_array('Reading', $hobbies))
+                  echo 'checked'; ?>>Reading
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Movies', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Movies" <?php if (!empty($hobbies) && in_array('Movies', $hobbies)) echo 'checked';  ?>>Movies
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Movies', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Movies" <?php if (!empty($hobbies) && in_array('Movies', $hobbies))
+                  echo 'checked'; ?>>Movies
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Gaming', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Gaming" <?php if (!empty($hobbies) && in_array('Gaming', $hobbies)) echo 'checked';  ?>>Gaming
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Gaming', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Gaming" <?php if (!empty($hobbies) && in_array('Gaming', $hobbies))
+                  echo 'checked'; ?>>Gaming
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Fashion', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Fashion" <?php if (!empty($hobbies) && in_array('Fashion', $hobbies)) echo 'checked';  ?>>Fashion
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Fashion', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Fashion" <?php if (!empty($hobbies) && in_array('Fashion', $hobbies))
+                  echo 'checked'; ?>>Fashion
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Wine Tasting', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Wine Tasting" <?php if (!empty($hobbies) && in_array('Wine Tasting', $hobbies)) echo 'checked';  ?>>Wine Tasting
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Wine Tasting', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Wine Tasting" <?php if (!empty($hobbies) && in_array('Wine Tasting', $hobbies))
+                  echo 'checked'; ?>>Wine Tasting
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Hiking', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Hiking" <?php if (!empty($hobbies) && in_array('Hiking', $hobbies)) echo 'checked';  ?>>Hiking
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Hiking', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Hiking" <?php if (!empty($hobbies) && in_array('Hiking', $hobbies))
+                  echo 'checked'; ?>>Hiking
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Beach', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Beach" <?php if (!empty($hobbies) && in_array('Beach', $hobbies)) echo 'checked';  ?>>Beach
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Beach', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Beach" <?php if (!empty($hobbies) && in_array('Beach', $hobbies))
+                  echo 'checked'; ?>>Beach
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Nightlife', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Nightlife" <?php if (!empty($hobbies) && in_array('Nightlife', $hobbies)) echo 'checked';  ?>>Nightlife
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Nightlife', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Nightlife" <?php if (!empty($hobbies) && in_array('Nightlife', $hobbies))
+                  echo 'checked'; ?>>Nightlife
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Sports', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Sports" <?php if (!empty($hobbies) && in_array('Sports', $hobbies)) echo 'checked';  ?>>Sports
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Sports', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Sports" <?php if (!empty($hobbies) && in_array('Sports', $hobbies))
+                  echo 'checked'; ?>>Sports
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Adventure', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Adventure" <?php if (!empty($hobbies) && in_array('Adventure', $hobbies)) echo 'checked';  ?>>Adventure
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Adventure', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Adventure" <?php if (!empty($hobbies) && in_array('Adventure', $hobbies))
+                  echo 'checked'; ?>>Adventure
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Meditation', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Meditation" <?php if (!empty($hobbies) && in_array('Meditation', $hobbies)) echo 'checked';  ?>>Meditation
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Meditation', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Meditation" <?php if (!empty($hobbies) && in_array('Meditation', $hobbies))
+                  echo 'checked'; ?>>Meditation
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Theater', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Theater" <?php if (!empty($hobbies) && in_array('Theater', $hobbies)) echo 'checked';  ?>>Theater
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Theater', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Theater" <?php if (!empty($hobbies) && in_array('Theater', $hobbies))
+                  echo 'checked'; ?>>Theater
               </span>
-              <span class="interest-tag <?php if (!empty($hobbies) && in_array('Shopping', $hobbies)) echo 'selected';  ?> " onclick="toggleInterest(this)">
-                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Shopping" <?php if (!empty($hobbies) && in_array('Shopping', $hobbies)) echo 'checked';  ?>>Shopping
+              <span
+                class="interest-tag <?php if (!empty($hobbies) && in_array('Shopping', $hobbies))
+                  echo 'selected'; ?> "
+                onclick="toggleInterest(this)">
+                <input type="checkbox" name="hobbies[]" class="hobbies_interest" value="Shopping" <?php if (!empty($hobbies) && in_array('Shopping', $hobbies))
+                  echo 'checked'; ?>>Shopping
               </span>
             </div>
 
@@ -1563,20 +1787,22 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 $additional_hobbies = json_decode($additional_hobbies);
                 foreach ($additional_hobbies as $hbb) { ?>
                   <div class="hobbies-item">
-                    <input type="text" name="additional_hobbies[]" class="add-hobbies-input social-url-input" value="<?php echo $hbb; ?>">
+                    <input type="text" name="additional_hobbies[]" class="add-hobbies-input social-url-input"
+                      value="<?php echo $hbb; ?>">
                     <button class="btn-remove-hb btn-remove-social" onclick="removeHobbies(this)">×</button>
                   </div>
-              <?php
+                  <?php
                 }
               }
               ?>
 
 
             </div>
-            <button type="button" class="btn-secondary mt-3 add-intrst" onclick="addHobbies()">+ Add Interests & Hobbies</button>
+            <button type="button" class="btn-secondary mt-3 add-intrst" onclick="addHobbies()">+ Add Interests &
+              Hobbies</button>
 
           </div>
-          <?php $languages = $userDetails['languages'];  ?>
+          <?php $languages = $userDetails['languages']; ?>
           <!-- Languages -->
           <div class="languages-section lg:col-span-2">
             <h3 class="text-xl font-bold text-green-400 mb-4">Languages</h3>
@@ -1601,10 +1827,10 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   </select>
                   <button class="btn-remove-social" onclick="removeLanguage(this)">×</button>
                 </div>
-                <?php } else {
+              <?php } else {
                 $languages = json_decode($languages);
                 foreach ($languages as $lang) {
-                ?>
+                  ?>
                   <div class="language-item">
                     <select class="language-select" name="modal_lang[]">
                       <option value="">Select language</option>
@@ -1617,13 +1843,14 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                       <option value="">Proficiency</option>
                       <option value="Native" <?= $lang->prof == 'Native' ? 'selected' : '' ?>>Native</option>
                       <option value="Fluent" <?= $lang->prof == 'Fluent' ? 'selected' : '' ?>>Fluent</option>
-                      <option value="Conversational" <?= $lang->prof == 'Conversational' ? 'selected' : '' ?>>Conversational</option>
+                      <option value="Conversational" <?= $lang->prof == 'Conversational' ? 'selected' : '' ?>>Conversational
+                      </option>
                       <option value="Basic" <?= $lang->prof == 'Basic' ? 'selected' : '' ?>>Basic</option>
                     </select>
                     <button class="btn-remove-social" onclick="removeLanguage(this)">×</button>
                   </div>
 
-              <?php }
+                <?php }
                 $lang_count = count($languages);
               } ?>
             </div>
@@ -1633,13 +1860,15 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
           <?php
           $social_list = DB::query('select * from model_social_link where unique_model_id="' . $userDetails['unique_id'] . '"  Order by id ASC');
-          
-		  ?>
+
+          ?>
 
           <!-- Social Links - Enhanced -->
-          <div class="form-section lg:col-span-2" <?php if ($userDetails['as_a_model'] != 'Yes') echo 'style="display:none;"'; ?>>
+          <div class="form-section lg:col-span-2" <?php if ($userDetails['as_a_model'] != 'Yes')
+            echo 'style="display:none;"'; ?>>
             <h3 class="text-xl font-bold gradient-text mb-6">Social Links & Platforms</h3>
-            <p class="text-white/70 text-sm mb-4">Connect your social media accounts and specify if they're free to view or paid content</p>
+            <p class="text-white/70 text-sm mb-4">Connect your social media accounts and specify if they're free to view
+              or paid content</p>
             <div id="social-links-container">
 
               <?php if (empty($social_list)) { ?>
@@ -1648,12 +1877,14 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <div class="social-link-item  instagram">
                   <div class="social-icon">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                      <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                   </div>
                   <div class="social-content">
                     <input type="text" name="platform[]" class="social-platform-input" value="Instagram" readonly>
-                    <input type="url" name="URL[]" class="social-url-input" placeholder="https://instagram.com/username" value="">
+                    <input type="url" name="URL[]" class="social-url-input" placeholder="https://instagram.com/username"
+                      value="">
                     <input type="hidden" name="socialid[]" value="">
                   </div>
                   <div class="social-controls">
@@ -1661,7 +1892,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                       <div class="access-option free active" onclick="toggleAccess(this, 'free','insta')">Free</div>
                       <div class="access-option paid" onclick="toggleAccess(this, 'paid','insta')">Paid</div>
                       <input type="hidden" name="status[]" class="insta" value="free">
-                      <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+                      <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]"
+                        placeholder="Enter token amount">
                     </div>
                     <label class="toggle-switch">
                       <input type="checkbox" name="public[]" value="yes" checked>
@@ -1675,12 +1907,14 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <div class="social-link-item twitter">
                   <div class="social-icon">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                      <path
+                        d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                     </svg>
                   </div>
                   <div class="social-content">
                     <input type="text" name="platform[]" class="social-platform-input" value="Twitter" readonly>
-                    <input type="url" name="URL[]" class="social-url-input" placeholder="https://twitter.com/username" value="">
+                    <input type="url" name="URL[]" class="social-url-input" placeholder="https://twitter.com/username"
+                      value="">
                     <input type="hidden" name="socialid[]" value="">
                   </div>
                   <div class="social-controls">
@@ -1688,7 +1922,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                       <div class="access-option free active" onclick="toggleAccess(this, 'free','tw')">Free</div>
                       <div class="access-option paid" onclick="toggleAccess(this, 'paid','tw')">Paid</div>
                       <input type="hidden" name="status[]" class="tw" value="free">
-                      <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+                      <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]"
+                        placeholder="Enter token amount">
                     </div>
                     <label class="toggle-switch">
                       <input type="checkbox" name="public[]" value="yes" checked>
@@ -1702,12 +1937,14 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <div class="social-link-item tiktok">
                   <div class="social-icon">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-.88-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+                      <path
+                        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-.88-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
                     </svg>
                   </div>
                   <div class="social-content">
                     <input type="text" name="platform[]" class="social-platform-input" value="TikTok" readonly>
-                    <input type="url" name="URL[]" class="social-url-input" placeholder="https://tiktok.com/@username" value="">
+                    <input type="url" name="URL[]" class="social-url-input" placeholder="https://tiktok.com/@username"
+                      value="">
                     <input type="hidden" name="socialid[]" value="">
                   </div>
                   <div class="social-controls">
@@ -1715,7 +1952,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                       <div class="access-option free active" onclick="toggleAccess(this, 'free','tiktk')">Free</div>
                       <div class="access-option paid" onclick="toggleAccess(this, 'paid','tiktk')">Paid</div>
                       <input type="hidden" name="status[]" class="tiktk" value="free">
-                      <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+                      <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]"
+                        placeholder="Enter token amount">
                     </div>
                     <label class="toggle-switch">
                       <input type="checkbox" name="public[]" value="yes" checked>
@@ -1729,12 +1967,14 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <div class="social-link-item fans">
                   <div class="social-icon">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                     </svg>
                   </div>
                   <div class="social-content">
                     <input type="text" name="platform[]" class="social-platform-input" value="OnlyFans" readonly>
-                    <input type="url" name="URL[]" class="social-url-input" placeholder="https://onlyfans.com/username" value="">
+                    <input type="url" name="URL[]" class="social-url-input" placeholder="https://onlyfans.com/username"
+                      value="">
                     <input type="hidden" name="socialid[]" value="">
                   </div>
                   <div class="social-controls">
@@ -1742,7 +1982,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                       <div class="access-option free" onclick="toggleAccess(this, 'free','onf')">Free</div>
                       <div class="access-option paid active" onclick="toggleAccess(this, 'paid','onf')">Paid</div>
                       <input type="hidden" name="status[]" class="onf" value="paid">
-                      <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+                      <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]"
+                        placeholder="Enter token amount">
                     </div>
                     <label class="toggle-switch">
                       <input type="checkbox" name="public[]" value="yes">
@@ -1756,12 +1997,14 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <div class="social-link-item snapchat">
                   <div class="social-icon">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.748-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-12C24.007 5.367 18.641.001 12.017.001z" />
+                      <path
+                        d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.748-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-12C24.007 5.367 18.641.001 12.017.001z" />
                     </svg>
                   </div>
                   <div class="social-content">
                     <input type="text" name="platform[]" class="social-platform-input" value="Snapchat" readonly>
-                    <input type="text" name="URL[]" class="social-url-input" placeholder="https://www.snapchat.com/username" value="">
+                    <input type="text" name="URL[]" class="social-url-input"
+                      placeholder="https://www.snapchat.com/username" value="">
                     <input type="hidden" name="socialid[]" value="">
                   </div>
                   <div class="social-controls">
@@ -1769,7 +2012,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                       <div class="access-option free active" onclick="toggleAccess(this, 'free','snap')">Free</div>
                       <div class="access-option paid" onclick="toggleAccess(this, 'paid','snap')">Paid</div>
                       <input type="hidden" name="status[]" class="snap" value="free">
-                      <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+                      <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]"
+                        placeholder="Enter token amount">
                     </div>
                     <label class="toggle-switch">
                       <input type="checkbox" name="public[]" value="yes">
@@ -1779,184 +2023,257 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   </div>
                 </div>
 
-                <?php } else {
+              <?php } else {
                 $cnt = 1;
                 foreach ($social_list as $sc) {
                   if ($sc['platform'] == 'Instagram') {
-                ?>
+                    ?>
                     <!-- Instagram -->
                     <div class="social-link-item  instagram">
                       <div class="social-icon">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                          <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                         </svg>
                       </div>
                       <div class="social-content">
                         <input type="text" name="platform[]" class="social-platform-input" value="Instagram" readonly>
-                        <input type="url" name="URL[]" class="social-url-input" placeholder="https://instagram.com/username" value="<?php echo $sc['URL']; ?>">
+                        <input type="url" name="URL[]" class="social-url-input" placeholder="https://instagram.com/username"
+                          value="<?php echo $sc['URL']; ?>">
                         <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
                       </div>
                       <div class="social-controls">
                         <div class="access-toggle">
-                          <div class="access-option free <?php if ($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','insta')">Free</div>
-                          <div class="access-option paid <?php if ($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','insta')">Paid</div>
+                          <div
+                            class="access-option free <?php if ($sc['status'] == 'free' || empty($sc['status']))
+                              echo 'active'; ?> "
+                            onclick="toggleAccess(this, 'free','insta')">Free</div>
+                          <div class="access-option paid <?php if ($sc['status'] == 'paid')
+                            echo 'active'; ?> "
+                            onclick="toggleAccess(this, 'paid','insta')">Paid</div>
                           <input type="hidden" name="status[]" class="insta" value="<?php echo $sc['status']; ?>">
-                          <input type="text" class="paid_token social-platform-input <?php if ($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]" placeholder="Enter token amount">
+                          <input type="text"
+                            class="paid_token social-platform-input <?php if ($sc['status'] != 'paid')
+                              echo 'hidden'; ?>"
+                            value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]"
+                            placeholder="Enter token amount">
                         </div>
                         <label class="toggle-switch">
-                          <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes') echo 'checked';  ?>>
+                          <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes')
+                            echo 'checked'; ?>>
                           <span class="toggle-slider"></span>
                         </label>
                         <span class="text-xs text-white/60">Public</span>
                       </div>
                     </div>
                   <?php } else if ($sc['platform'] == 'Twitter') { ?>
-                    <!-- Twitter -->
-                    <div class="social-link-item twitter">
-                      <div class="social-icon">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                        </svg>
-                      </div>
-                      <div class="social-content">
-                        <input type="text" name="platform[]" class="social-platform-input" value="Twitter" readonly>
-                        <input type="url" name="URL[]" class="social-url-input" placeholder="https://twitter.com/username" value="<?php echo $sc['URL']; ?>">
-                        <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
-                      </div>
-                      <div class="social-controls">
-                        <div class="access-toggle">
-                          <div class="access-option free  <?php if ($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','tw')">Free</div>
-                          <div class="access-option paid <?php if ($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','tw')">Paid</div>
-                          <input type="hidden" name="status[]" class="tw" value="<?php echo $sc['status']; ?>">
-                          <input type="text" class="paid_token social-platform-input <?php if ($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]" placeholder="Enter token amount">
+                      <!-- Twitter -->
+                      <div class="social-link-item twitter">
+                        <div class="social-icon">
+                          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                              d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                          </svg>
                         </div>
-                        <label class="toggle-switch">
-                          <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes') echo 'checked';  ?>>
-                          <span class="toggle-slider"></span>
-                        </label>
-                        <span class="text-xs text-white/60">Public</span>
+                        <div class="social-content">
+                          <input type="text" name="platform[]" class="social-platform-input" value="Twitter" readonly>
+                          <input type="url" name="URL[]" class="social-url-input" placeholder="https://twitter.com/username"
+                            value="<?php echo $sc['URL']; ?>">
+                          <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
+                        </div>
+                        <div class="social-controls">
+                          <div class="access-toggle">
+                            <div
+                              class="access-option free  <?php if ($sc['status'] == 'free' || empty($sc['status']))
+                                echo 'active'; ?> "
+                              onclick="toggleAccess(this, 'free','tw')">Free</div>
+                            <div class="access-option paid <?php if ($sc['status'] == 'paid')
+                              echo 'active'; ?> "
+                              onclick="toggleAccess(this, 'paid','tw')">Paid</div>
+                            <input type="hidden" name="status[]" class="tw" value="<?php echo $sc['status']; ?>">
+                            <input type="text"
+                              class="paid_token social-platform-input <?php if ($sc['status'] != 'paid')
+                                echo 'hidden'; ?>"
+                              value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]"
+                              placeholder="Enter token amount">
+                          </div>
+                          <label class="toggle-switch">
+                            <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes')
+                              echo 'checked'; ?>>
+                            <span class="toggle-slider"></span>
+                          </label>
+                          <span class="text-xs text-white/60">Public</span>
+                        </div>
                       </div>
-                    </div>
 
                   <?php } else if ($sc['platform'] == 'TikTok') { ?>
 
-                    <!-- TikTok -->
-                    <div class="social-link-item tiktok">
-                      <div class="social-icon">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-.88-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
-                        </svg>
-                      </div>
-                      <div class="social-content">
-                        <input type="text" name="platform[]" class="social-platform-input" value="TikTok" readonly>
-                        <input type="url" name="URL[]" class="social-url-input" placeholder="https://tiktok.com/@username" value="<?php echo $sc['URL']; ?>">
-                        <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
-                      </div>
-                      <div class="social-controls">
-                        <div class="access-toggle">
-                          <div class="access-option free  <?php if ($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','tiktk')">Free</div>
-                          <div class="access-option paid <?php if ($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','tiktk')">Paid</div>
-                          <input type="hidden" name="status[]" class="tiktk" value="<?php echo $sc['status']; ?>">
-                          <input type="text" class="paid_token social-platform-input <?php if ($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]" placeholder="Enter token amount">
+                        <!-- TikTok -->
+                        <div class="social-link-item tiktok">
+                          <div class="social-icon">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                              <path
+                                d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-.88-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+                            </svg>
+                          </div>
+                          <div class="social-content">
+                            <input type="text" name="platform[]" class="social-platform-input" value="TikTok" readonly>
+                            <input type="url" name="URL[]" class="social-url-input" placeholder="https://tiktok.com/@username"
+                              value="<?php echo $sc['URL']; ?>">
+                            <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
+                          </div>
+                          <div class="social-controls">
+                            <div class="access-toggle">
+                              <div
+                                class="access-option free  <?php if ($sc['status'] == 'free' || empty($sc['status']))
+                                  echo 'active'; ?> "
+                                onclick="toggleAccess(this, 'free','tiktk')">Free</div>
+                              <div class="access-option paid <?php if ($sc['status'] == 'paid')
+                                echo 'active'; ?> "
+                                onclick="toggleAccess(this, 'paid','tiktk')">Paid</div>
+                              <input type="hidden" name="status[]" class="tiktk" value="<?php echo $sc['status']; ?>">
+                              <input type="text"
+                                class="paid_token social-platform-input <?php if ($sc['status'] != 'paid')
+                                  echo 'hidden'; ?>"
+                                value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]"
+                                placeholder="Enter token amount">
+                            </div>
+                            <label class="toggle-switch">
+                              <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes')
+                                echo 'checked'; ?>>
+                              <span class="toggle-slider"></span>
+                            </label>
+                            <span class="text-xs text-white/60">Public</span>
+                          </div>
                         </div>
-                        <label class="toggle-switch">
-                          <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes') echo 'checked';  ?>>
-                          <span class="toggle-slider"></span>
-                        </label>
-                        <span class="text-xs text-white/60">Public</span>
-                      </div>
-                    </div>
 
                   <?php } else if ($sc['platform'] == 'OnlyFans') { ?>
 
-                    <!-- OnlyFans -->
-                    <div class="social-link-item fans">
-                      <div class="social-icon">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                        </svg>
-                      </div>
-                      <div class="social-content">
-                        <input type="text" name="platform[]" class="social-platform-input" value="OnlyFans" readonly>
-                        <input type="url" name="URL[]" class="social-url-input" placeholder="https://onlyfans.com/username" value="<?php echo $sc['URL']; ?>">
-                        <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
-                      </div>
-                      <div class="social-controls">
-                        <div class="access-toggle">
-                          <div class="access-option free <?php if ($sc['status'] == 'free') echo 'active'; ?> " onclick="toggleAccess(this, 'free','onf')">Free</div>
-                          <div class="access-option paid  <?php if ($sc['status'] == 'paid' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'paid','onf')">Paid</div>
-                          <input type="hidden" name="status[]" class="onf" value="<?php echo $sc['status']; ?>">
-                          <input type="text" class="paid_token social-platform-input <?php if ($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]" placeholder="Enter token amount">
-                        </div>
-                        <label class="toggle-switch">
-                          <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes') echo 'checked';  ?>>
-                          <span class="toggle-slider"></span>
-                        </label>
-                        <span class="text-xs text-white/60">Public</span>
-                      </div>
-                    </div>
+                          <!-- OnlyFans -->
+                          <div class="social-link-item fans">
+                            <div class="social-icon">
+                              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                              </svg>
+                            </div>
+                            <div class="social-content">
+                              <input type="text" name="platform[]" class="social-platform-input" value="OnlyFans" readonly>
+                              <input type="url" name="URL[]" class="social-url-input" placeholder="https://onlyfans.com/username"
+                                value="<?php echo $sc['URL']; ?>">
+                              <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
+                            </div>
+                            <div class="social-controls">
+                              <div class="access-toggle">
+                                <div class="access-option free <?php if ($sc['status'] == 'free')
+                                  echo 'active'; ?> "
+                                  onclick="toggleAccess(this, 'free','onf')">Free</div>
+                                <div
+                                  class="access-option paid  <?php if ($sc['status'] == 'paid' || empty($sc['status']))
+                                    echo 'active'; ?> "
+                                  onclick="toggleAccess(this, 'paid','onf')">Paid</div>
+                                <input type="hidden" name="status[]" class="onf" value="<?php echo $sc['status']; ?>">
+                                <input type="text"
+                                  class="paid_token social-platform-input <?php if ($sc['status'] != 'paid')
+                                    echo 'hidden'; ?>"
+                                  value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]"
+                                  placeholder="Enter token amount">
+                              </div>
+                              <label class="toggle-switch">
+                                <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes')
+                                  echo 'checked'; ?>>
+                                <span class="toggle-slider"></span>
+                              </label>
+                              <span class="text-xs text-white/60">Public</span>
+                            </div>
+                          </div>
 
                   <?php } else if ($sc['platform'] == 'Snapchat') { ?>
 
-                    <!-- Snapchat -->
-                    <div class="social-link-item snapchat">
-                      <div class="social-icon">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.748-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-12C24.007 5.367 18.641.001 12.017.001z" />
-                        </svg>
-                      </div>
-                      <div class="social-content">
-                        <input type="text" name="platform[]" class="social-platform-input" value="Snapchat" readonly>
-                        <input type="text" name="URL[]" class="social-url-input" placeholder="https://www.snapchat.com/username" value="<?php echo $sc['URL']; ?>">
-                        <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
-                      </div>
-                      <div class="social-controls">
-                        <div class="access-toggle">
-                          <div class="access-option free  <?php if ($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','snap')">Free</div>
-                          <div class="access-option paid <?php if ($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','snap')">Paid</div>
-                          <input type="hidden" name="status[]" class="snap" value="<?php echo $sc['status']; ?>">
-                          <input type="text" class="paid_token social-platform-input <?php if ($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]" placeholder="Enter token amount">
-                        </div>
-                        <label class="toggle-switch">
-                          <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes') echo 'checked';  ?>>
-                          <span class="toggle-slider"></span>
-                        </label>
-                        <span class="text-xs text-white/60">Public</span>
-                      </div>
-                    </div>
+                            <!-- Snapchat -->
+                            <div class="social-link-item snapchat">
+                              <div class="social-icon">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                  <path
+                                    d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.748-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-12C24.007 5.367 18.641.001 12.017.001z" />
+                                </svg>
+                              </div>
+                              <div class="social-content">
+                                <input type="text" name="platform[]" class="social-platform-input" value="Snapchat" readonly>
+                                <input type="text" name="URL[]" class="social-url-input"
+                                  placeholder="https://www.snapchat.com/username" value="<?php echo $sc['URL']; ?>">
+                                <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
+                              </div>
+                              <div class="social-controls">
+                                <div class="access-toggle">
+                                  <div
+                                    class="access-option free  <?php if ($sc['status'] == 'free' || empty($sc['status']))
+                                      echo 'active'; ?> "
+                                    onclick="toggleAccess(this, 'free','snap')">Free</div>
+                                  <div class="access-option paid <?php if ($sc['status'] == 'paid')
+                                    echo 'active'; ?> "
+                                    onclick="toggleAccess(this, 'paid','snap')">Paid</div>
+                                  <input type="hidden" name="status[]" class="snap" value="<?php echo $sc['status']; ?>">
+                                  <input type="text"
+                                    class="paid_token social-platform-input <?php if ($sc['status'] != 'paid')
+                                      echo 'hidden'; ?>"
+                                    value="<?php echo $sc['tokens']; ?>" value="" name="paid_token[]"
+                                    placeholder="Enter token amount">
+                                </div>
+                                <label class="toggle-switch">
+                                  <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes')
+                                    echo 'checked'; ?>>
+                                  <span class="toggle-slider"></span>
+                                </label>
+                                <span class="text-xs text-white/60">Public</span>
+                              </div>
+                            </div>
 
                   <?php } else { ?>
 
-                    <!-- Others -->
-                    <div class="social-link-item snapchat">
-                      <div class="social-icon" style="background: #6b7280;">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
-                      </div>
-                      <div class="social-content">
-                        <input type="text" name="platform[]" class="social-platform-input" placeholder="Platform name (e.g., YouTube, LinkedIn)" value="<?php echo $sc['platform']; ?>">
-                        <input type="url" name="URL[]" class="social-url-input" placeholder="Profile URL" value="<?php echo $sc['URL']; ?>">
-                        <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
-                      </div>
-                      <div class="social-controls">
-                        <div class="access-toggle">
-                          <div class="access-option free  <?php if ($sc['status'] == 'free' || empty($sc['status'])) echo 'active'; ?> " onclick="toggleAccess(this, 'free','sc<?php echo $cnt; ?>')">Free</div>
-                          <div class="access-option paid <?php if ($sc['status'] == 'paid') echo 'active'; ?> " onclick="toggleAccess(this, 'paid','sc<?php echo $cnt; ?>')">Paid</div>
-                          <input type="hidden" name="status[]" class="sc<?php echo $cnt; ?>" value="<?php echo $sc['status']; ?>">
-                          <input type="text" class="paid_token social-platform-input <?php if ($sc['status'] != 'paid') echo 'hidden'; ?>" value="<?php echo $sc['tokens']; ?>" name="paid_token[]" placeholder="Enter token amount">
-                        </div>
-                        <label class="toggle-switch">
-                          <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes') echo 'checked';  ?>>
-                          <span class="toggle-slider"></span>
-                        </label>
-                        <span class="text-xs text-white/60">Public</span>
-                        <button class="btn-remove-social" onclick="removeSocialLink(this)">×</button>
-                      </div>
-                    </div>
+                            <!-- Others -->
+                            <div class="social-link-item snapchat">
+                              <div class="social-icon" style="background: #6b7280;">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                              </div>
+                              <div class="social-content">
+                                <input type="text" name="platform[]" class="social-platform-input"
+                                  placeholder="Platform name (e.g., YouTube, LinkedIn)" value="<?php echo $sc['platform']; ?>">
+                                <input type="url" name="URL[]" class="social-url-input" placeholder="Profile URL"
+                                  value="<?php echo $sc['URL']; ?>">
+                                <input type="hidden" name="socialid[]" value="<?php echo $sc['id']; ?>">
+                              </div>
+                              <div class="social-controls">
+                                <div class="access-toggle">
+                                  <div
+                                    class="access-option free  <?php if ($sc['status'] == 'free' || empty($sc['status']))
+                                      echo 'active'; ?> "
+                                    onclick="toggleAccess(this, 'free','sc<?php echo $cnt; ?>')">Free</div>
+                                  <div class="access-option paid <?php if ($sc['status'] == 'paid')
+                                    echo 'active'; ?> "
+                                    onclick="toggleAccess(this, 'paid','sc<?php echo $cnt; ?>')">Paid</div>
+                                  <input type="hidden" name="status[]" class="sc<?php echo $cnt; ?>"
+                                    value="<?php echo $sc['status']; ?>">
+                                  <input type="text"
+                                    class="paid_token social-platform-input <?php if ($sc['status'] != 'paid')
+                                      echo 'hidden'; ?>"
+                                    value="<?php echo $sc['tokens']; ?>" name="paid_token[]" placeholder="Enter token amount">
+                                </div>
+                                <label class="toggle-switch">
+                                  <input type="checkbox" name="public[]" value="yes" <?php if ($sc['public'] == 'yes')
+                                    echo 'checked'; ?>>
+                                  <span class="toggle-slider"></span>
+                                </label>
+                                <span class="text-xs text-white/60">Public</span>
+                                <button class="btn-remove-social" onclick="removeSocialLink(this)">×</button>
+                              </div>
+                            </div>
 
                   <?php } ?>
-              <?php $cnt++;
+                  <?php $cnt++;
                 }
               } ?>
 
@@ -1964,7 +2281,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
             <div class="btn-add-social" onclick="addSocialLink()">
               <svg class="w-6 h-6 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                </path>
               </svg>
               Add More Social Links
             </div>
@@ -1974,13 +2292,14 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <div class="flex justify-end mt-8">
           <input type="hidden" name="username" value="<?php echo $userDetails['username']; ?>" required />
           <input type="hidden" value="<?php echo $userDetails['email']; ?>" name="email" required />
-          <button type="button" class="btn-primary" name="submit_name" onclick="updateProfileCompletionNew(this)" value="Save Changes">Save Changes</button>
+          <button type="button" class="btn-primary" name="submit_name" onclick="updateProfileCompletionNew(this)"
+            value="Save Changes">Save Changes</button>
         </div>
       </form>
     </div>
 
     <!-- Creator Settings Tab -->
-    <div id="creator-content" class="tab-content" <?php if ($userDetails['as_a_model'] != 'Yes' && !$is_user_have_extra) {  ?> style="display: none;" <?php } ?>>
+    <div id="creator-content" class="tab-content" <?php if ($userDetails['as_a_model'] != 'Yes' && !$is_user_have_extra) { ?> style="display: none;" <?php } ?>>
       <form method="post" id="creatorSettingsForm" action="act-edit-profile.php" enctype="multipart/form-data">
         <div class="text-center mb-8">
           <h2 class="text-2xl font-bold gradient-text mb-4">Creator Settings</h2>
@@ -2014,8 +2333,11 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           </div>
           <div class="collapsible-content">
             <div class="token-info flex items-center mb-6">
-              <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
-              <span>TLM tokens are our platform's currency. Users purchase tokens and spend them to access your services. You earn 70% of all token revenue.</span>
+              <img loading="lazy"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                alt="TLM Token" class="tlm-token">
+              <span>TLM tokens are our platform's currency. Users purchase tokens and spend them to access your
+                services. You earn 70% of all token revenue.</span>
             </div>
 
 
@@ -2029,64 +2351,69 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               <div class="radio-group mt-3">
                 <div class="radio-option">
                   <input type="radio" id="stream-yes" name="live_cam" value="Yes" <?php if (!empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes') {
-                                                                                    echo 'checked';
-                                                                                  } ?> onchange="toggleConditionalSection('streaming-options', true)">
+                    echo 'checked';
+                  } ?>
+                    onchange="toggleConditionalSection('streaming-options', true)">
                   <label for="stream-yes">Yes, I'm interested</label>
                 </div>
                 <div class="radio-option">
                   <input type="radio" id="stream-no" name="live_cam" value="No" <?php if ((!empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'No') || empty($extra_details['live_cam'])) {
-                                                                                  echo 'checked';
-                                                                                } ?> onchange="toggleConditionalSection('streaming-options', false)">
+                    echo 'checked';
+                  } ?>
+                    onchange="toggleConditionalSection('streaming-options', false)">
                   <label for="stream-no">Not right now</label>
                 </div>
               </div>
             </div>
 
             <div id="streaming-options" class="conditional-section <?php if (!empty($extra_details['live_cam']) && $extra_details['live_cam'] == 'Yes') {
-                                                                      echo 'show';
-                                                                    } ?> ">
+              echo 'show';
+            } ?> ">
               <?php /*?><div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <div class="flex justify-between items-center mb-2">
-                <label class="form-label mb-0">Instagram Profile URL</label>
-                <div class="flex items-center">
-                  <span class="text-sm mr-2">Use for video calls</span>
-                  <label class="toggle-switch">
-                    <input type="checkbox" checked>
-                    <span class="toggle-slider"></span>
-                  </label>
-                </div>
-              </div>
-              <input type="url" class="form-input" name="insta_p_url" value="<?php if(!empty($extra_details)) echo $extra_details['insta_p_url']; ?>"  placeholder="https://instagram.com/username">
-              <p class="help-text">We'll use this to set up video calls through Instagram</p>
-            </div>
-            <div>
-              <div class="flex justify-between items-center mb-2">
-                <label class="form-label mb-0">Snapchat Username</label>
-                <div class="flex items-center">
-                  <span class="text-sm mr-2">Use for video calls</span>
-                  <label class="toggle-switch">
-                    <input type="checkbox">
-                    <span class="toggle-slider"></span>
-                  </label>
-                </div>
-              </div>
-              <input type="text" class="form-input" name="snap_p_url" value="<?php if(!empty($extra_details)) echo $serv_chats['snap_p_url']; ?>" placeholder="Your Snapchat username">
-              <p class="help-text">We'll use this to set up video calls through Snapchat</p>
-            </div>
-          </div><?php */ ?>
+       <div>
+         <div class="flex justify-between items-center mb-2">
+           <label class="form-label mb-0">Instagram Profile URL</label>
+           <div class="flex items-center">
+             <span class="text-sm mr-2">Use for video calls</span>
+             <label class="toggle-switch">
+               <input type="checkbox" checked>
+               <span class="toggle-slider"></span>
+             </label>
+           </div>
+         </div>
+         <input type="url" class="form-input" name="insta_p_url" value="<?php if(!empty($extra_details)) echo $extra_details['insta_p_url']; ?>"  placeholder="https://instagram.com/username">
+         <p class="help-text">We'll use this to set up video calls through Instagram</p>
+       </div>
+       <div>
+         <div class="flex justify-between items-center mb-2">
+           <label class="form-label mb-0">Snapchat Username</label>
+           <div class="flex items-center">
+             <span class="text-sm mr-2">Use for video calls</span>
+             <label class="toggle-switch">
+               <input type="checkbox">
+               <span class="toggle-slider"></span>
+             </label>
+           </div>
+         </div>
+         <input type="text" class="form-input" name="snap_p_url" value="<?php if(!empty($extra_details)) echo $serv_chats['snap_p_url']; ?>" placeholder="Your Snapchat username">
+         <p class="help-text">We'll use this to set up video calls through Snapchat</p>
+       </div>
+     </div><?php */ ?>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 <?php /*mt-4 */ ?>">
                 <div>
                   <label class="form-label">TLM Tokens per Minute (Private Stream)</label>
-                  <input type="number" class="form-input" name="private_chat_token" value="<?php if (!empty($extra_details)) echo $extra_details['private_chat_token']; ?>" placeholder="e.g., 50" min="1">
+                  <input type="number" class="form-input" name="private_chat_token"
+                    value="<?php if (!empty($extra_details))
+                      echo $extra_details['private_chat_token']; ?>"
+                    placeholder="e.g., 50" min="1">
                   <p class="help-text">Set your rate for private 1-on-1 video chats</p>
                 </div>
                 <?php /*?><div>
-                  <label class="form-label">TLM Tokens per Minute (Group Chat)</label>
-                  <input type="number" class="form-input" name="group_chat_tocken" value="<?php if (!empty($extra_details)) echo $extra_details['group_chat_tocken']; ?>" placeholder="e.g., 20" min="1">
-                  <p class="help-text">Set your rate for group video sessions</p>
-                </div> <?php */ ?>
+             <label class="form-label">TLM Tokens per Minute (Group Chat)</label>
+             <input type="number" class="form-input" name="group_chat_tocken" value="<?php if (!empty($extra_details)) echo $extra_details['group_chat_tocken']; ?>" placeholder="e.g., 20" min="1">
+             <p class="help-text">Set your rate for group video sessions</p>
+           </div> <?php */ ?>
               </div>
             </div>
 
@@ -2097,31 +2424,35 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               <div class="radio-group mt-3">
                 <div class="radio-option">
                   <input type="radio" id="group-yes" name="group_show" value="Yes" <?php if (!empty($extra_details['group_show']) && $extra_details['group_show'] == 'Yes') {
-                                                                                      echo 'checked';
-                                                                                    } ?> onchange="toggleConditionalSection('group-options', true)">
+                    echo 'checked';
+                  } ?>
+                    onchange="toggleConditionalSection('group-options', true)">
                   <label for="group-yes">Yes, sounds fun!</label>
                 </div>
                 <div class="radio-option">
                   <input type="radio" id="group-no" name="group_show" value="No" <?php if ((!empty($extra_details['group_show']) && $extra_details['group_show'] == 'No') || empty($extra_details['group_show'])) {
-                                                                                    echo 'checked';
-                                                                                  } ?> onchange="toggleConditionalSection('group-options', false)">
+                    echo 'checked';
+                  } ?>
+                    onchange="toggleConditionalSection('group-options', false)">
                   <label for="group-no">Not interested</label>
                 </div>
               </div>
             </div>
 
             <div id="group-options" class="conditional-section <?php if (!empty($extra_details['group_show']) && $extra_details['group_show'] == 'Yes') {
-                                                                  echo 'show';
-                                                                } ?> ">
+              echo 'show';
+            } ?> ">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label class="form-label">Minimum Group Size</label>
-                  <input type="number" class="form-input" name="gs_min_member" value="<?php echo $extra_details['gs_min_member']; ?>" placeholder="e.g., 3" min="2" max="20">
+                  <input type="number" class="form-input" name="gs_min_member"
+                    value="<?php echo $extra_details['gs_min_member']; ?>" placeholder="e.g., 3" min="2" max="20">
                   <p class="help-text">Minimum number of participants to start a session</p>
                 </div>
                 <div>
                   <label class="form-label">TLM Tokens per Person per Minute</label>
-                  <input type="number" class="form-input" name="gs_token_price" value="<?php echo $extra_details['gs_token_price']; ?>" placeholder="e.g., 15" min="1">
+                  <input type="number" class="form-input" name="gs_token_price"
+                    value="<?php echo $extra_details['gs_token_price']; ?>" placeholder="e.g., 15" min="1">
                   <p class="help-text">Rate per participant in group sessions</p>
                 </div>
               </div>
@@ -2148,14 +2479,15 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               <div class="radio-group mt-3">
                 <div class="radio-option">
                   <input type="radio" id="companion-yes" name="work_escort" value="Yes" <?php if (!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes') {
-                                                                                          echo 'checked';
-                                                                                        } ?> onchange="toggleConditionalSection('companion-options', true)">
+                    echo 'checked';
+                  } ?> onchange="toggleConditionalSection('companion-options', true)">
                   <label for="companion-yes">Yes, I'd love to meet people</label>
                 </div>
                 <div class="radio-option">
                   <input type="radio" id="companion-no" name="work_escort" value="No" <?php if ((!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'No') || empty($extra_details['work_escort'])) {
-                                                                                        echo 'checked';
-                                                                                      } ?> onchange="toggleConditionalSection('companion-options', false)">
+                    echo 'checked';
+                  } ?>
+                    onchange="toggleConditionalSection('companion-options', false)">
                   <label for="companion-no">Not interested</label>
                 </div>
               </div>
@@ -2165,17 +2497,23 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             </div>
 
             <div id="companion-options" class="conditional-section <?php if (!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes') {
-                                                                      echo 'show';
-                                                                    } ?>  ">
+              echo 'show';
+            } ?>  ">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label class="form-label">Local Meetup Rate</label>
-                  <input type="number" class="form-input" name="in_per_hour" value="<?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?>" placeholder="e.g., 1000" min="1">
+                  <input type="number" class="form-input" name="in_per_hour"
+                    value="<?php if (!empty($extra_details))
+                      echo $extra_details['in_per_hour']; ?>"
+                    placeholder="e.g., 1000" min="1">
                   <p class="help-text">Rate for local social meetups and events</p>
                 </div>
                 <div>
                   <label class="form-label">Extended Social Rate (TLM tokens per hour)</label>
-                  <input type="number" class="form-input" name="extended_rate" value="<?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?>" placeholder="e.g., 1500" min="1">
+                  <input type="number" class="form-input" name="extended_rate"
+                    value="<?php if (!empty($extra_details))
+                      echo $extra_details['extended_rate']; ?>"
+                    placeholder="e.g., 1500" min="1">
                   <p class="help-text">Rate for longer social engagements after the first hour</p>
                 </div>
               </div>
@@ -2183,19 +2521,28 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div>
                   <label class="form-label">Extended Evening Rate (TLM tokens)</label>
-                  <input type="number" class="form-input" name="in_overnight" value="<?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?>" placeholder="e.g., 8000" min="1">
+                  <input type="number" class="form-input" name="in_overnight"
+                    value="<?php if (!empty($extra_details))
+                      echo $extra_details['in_overnight']; ?>"
+                    placeholder="e.g., 8000" min="1">
                   <p class="help-text">Rate for evening social or casual meetups (8 hours)</p>
                 </div>
 
                 <div>
                   <label class="form-label">Full-day Social Rate (TLM tokens)</label>
-                  <input type="number" class="form-input" name="fullday_social" value="<?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?>" placeholder="e.g., 8000" min="1">
+                  <input type="number" class="form-input" name="fullday_social"
+                    value="<?php if (!empty($extra_details))
+                      echo $extra_details['fullday_social']; ?>"
+                    placeholder="e.g., 8000" min="1">
                   <p class="help-text">Rate for full-day sessions (24 hours) (8 hours)</p>
                 </div>
 
                 <div>
                   <label class="form-label">Preferred Meeting Location</label>
-                  <input type="text" class="form-input" name="d_a_address" value="<?php if (!empty($extra_details)) echo $extra_details['d_a_address']; ?>" placeholder="e.g., Coffee shops, restaurants, events">
+                  <input type="text" class="form-input" name="d_a_address"
+                    value="<?php if (!empty($extra_details))
+                      echo $extra_details['d_a_address']; ?>"
+                    placeholder="e.g., Coffee shops, restaurants, events">
                   <p class="help-text">Where you prefer to meet for social activities</p>
                 </div>
               </div>
@@ -2210,92 +2557,113 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <p class="help-text">Select the days you're available for social meetups</p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3 edit-allldays">
                   <div class="checkbox-option">
-                    <input type="checkbox" id="mon" name="social_availability[]" value="Monday" <?php if (!empty($social_availability) && in_array('Monday', $social_availability)) echo 'checked'; ?>>
+                    <input type="checkbox" id="mon" name="social_availability[]" value="Monday" <?php if (!empty($social_availability) && in_array('Monday', $social_availability))
+                      echo 'checked'; ?>>
                     <label for="mon">Monday</label>
 
                     <div class="mon_time_section" <?php if (!empty($social_availability) && in_array('Monday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
 
-                      <input type="time" class="form-input time_pick" name="Mondayfrom" value="<?php echo $availability_time_slot->Monday[0]; ?>">
+                      <input type="time" class="form-input time_pick" name="Mondayfrom"
+                        value="<?php echo $availability_time_slot->Monday[0]; ?>">
 
-                      <input type="time" class="form-input time_pick" name="Mondayto" value="<?php echo $availability_time_slot->Monday[1]; ?>">
+                      <input type="time" class="form-input time_pick" name="Mondayto"
+                        value="<?php echo $availability_time_slot->Monday[1]; ?>">
 
                     </div>
 
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="tue" name="social_availability[]" value="Tuesday" <?php if (!empty($social_availability) && in_array('Tuesday', $social_availability)) echo 'checked'; ?>>
+                    <input type="checkbox" id="tue" name="social_availability[]" value="Tuesday" <?php if (!empty($social_availability) && in_array('Tuesday', $social_availability))
+                      echo 'checked'; ?>>
                     <label for="tue">Tuesday</label>
 
                     <div class="tue_time_section" <?php if (!empty($social_availability) && in_array('Tuesday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
 
-                      <input type="time" class="form-input time_pick" name="Tuesdayfrom" value="<?php echo $availability_time_slot->Tuesday[0]; ?>">
+                      <input type="time" class="form-input time_pick" name="Tuesdayfrom"
+                        value="<?php echo $availability_time_slot->Tuesday[0]; ?>">
 
-                      <input type="time" class="form-input time_pick" name="Tuesdayto" value="<?php echo $availability_time_slot->Tuesday[1]; ?>">
+                      <input type="time" class="form-input time_pick" name="Tuesdayto"
+                        value="<?php echo $availability_time_slot->Tuesday[1]; ?>">
 
                     </div>
 
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="wed" name="social_availability[]" value="Wednesday" <?php if (!empty($social_availability) && in_array('Wednesday', $social_availability)) echo 'checked'; ?>>
+                    <input type="checkbox" id="wed" name="social_availability[]" value="Wednesday" <?php if (!empty($social_availability) && in_array('Wednesday', $social_availability))
+                      echo 'checked'; ?>>
                     <label for="wed">Wednesday</label>
 
                     <div class="wed_time_section" <?php if (!empty($social_availability) && in_array('Wednesday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
 
-                      <input type="time" class="form-input time_pick" name="Wednesdayfrom" value="<?php echo $availability_time_slot->Wednesday[0]; ?>">
+                      <input type="time" class="form-input time_pick" name="Wednesdayfrom"
+                        value="<?php echo $availability_time_slot->Wednesday[0]; ?>">
 
-                      <input type="time" class="form-input time_pick" name="Wednesdayto" value="<?php echo $availability_time_slot->Wednesday[1]; ?>">
+                      <input type="time" class="form-input time_pick" name="Wednesdayto"
+                        value="<?php echo $availability_time_slot->Wednesday[1]; ?>">
 
                     </div>
 
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="thu" name="social_availability[]" value="Thursday" <?php if (!empty($social_availability) && in_array('Thursday', $social_availability)) echo 'checked'; ?>>
+                    <input type="checkbox" id="thu" name="social_availability[]" value="Thursday" <?php if (!empty($social_availability) && in_array('Thursday', $social_availability))
+                      echo 'checked'; ?>>
                     <label for="thu">Thursday</label>
 
                     <div class="thu_time_section" <?php if (!empty($social_availability) && in_array('Thursday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
 
-                      <input type="time" class="form-input time_pick" name="Thursdayfrom" value="<?php echo $availability_time_slot->Thursday[0]; ?>">
+                      <input type="time" class="form-input time_pick" name="Thursdayfrom"
+                        value="<?php echo $availability_time_slot->Thursday[0]; ?>">
 
-                      <input type="time" class="form-input time_pick" name="Thursdayto" value="<?php echo $availability_time_slot->Thursday[1]; ?>">
+                      <input type="time" class="form-input time_pick" name="Thursdayto"
+                        value="<?php echo $availability_time_slot->Thursday[1]; ?>">
 
                     </div>
 
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="fri" name="social_availability[]" value="Friday" <?php if (!empty($social_availability) && in_array('Friday', $social_availability)) echo 'checked'; ?>>
+                    <input type="checkbox" id="fri" name="social_availability[]" value="Friday" <?php if (!empty($social_availability) && in_array('Friday', $social_availability))
+                      echo 'checked'; ?>>
                     <label for="fri">Friday</label>
 
                     <div class="fri_time_section" <?php if (!empty($social_availability) && in_array('Friday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
 
-                      <input type="time" class="form-input time_pick" name="Fridayfrom" value="<?php echo $availability_time_slot->Friday[0]; ?>">
+                      <input type="time" class="form-input time_pick" name="Fridayfrom"
+                        value="<?php echo $availability_time_slot->Friday[0]; ?>">
 
-                      <input type="time" class="form-input time_pick" name="Fridayto" value="<?php echo $availability_time_slot->Friday[1]; ?>">
+                      <input type="time" class="form-input time_pick" name="Fridayto"
+                        value="<?php echo $availability_time_slot->Friday[1]; ?>">
 
                     </div>
 
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="sat" name="social_availability[]" value="Saturday" <?php if (!empty($social_availability) && in_array('Saturday', $social_availability)) echo 'checked'; ?>>
+                    <input type="checkbox" id="sat" name="social_availability[]" value="Saturday" <?php if (!empty($social_availability) && in_array('Saturday', $social_availability))
+                      echo 'checked'; ?>>
                     <label for="sat">Saturday</label>
 
                     <div class="sat_time_section" <?php if (!empty($social_availability) && in_array('Saturday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
 
-                      <input type="time" class="form-input time_pick" name="Saturdayfrom" value="<?php echo $availability_time_slot->Saturday[0]; ?>">
+                      <input type="time" class="form-input time_pick" name="Saturdayfrom"
+                        value="<?php echo $availability_time_slot->Saturday[0]; ?>">
 
-                      <input type="time" class="form-input time_pick" name="Saturdayto" value="<?php echo $availability_time_slot->Saturday[1]; ?>">
+                      <input type="time" class="form-input time_pick" name="Saturdayto"
+                        value="<?php echo $availability_time_slot->Saturday[1]; ?>">
 
                     </div>
 
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="sun" name="social_availability[]" value="Sunday" <?php if (!empty($social_availability) && in_array('Sunday', $social_availability)) echo 'checked'; ?>>
+                    <input type="checkbox" id="sun" name="social_availability[]" value="Sunday" <?php if (!empty($social_availability) && in_array('Sunday', $social_availability))
+                      echo 'checked'; ?>>
                     <label for="sun">Sunday</label>
 
                     <div class="sun_time_section" <?php if (!empty($social_availability) && in_array('Sunday', $social_availability)) { ?> style="display:block;" <?php } else { ?> style="display:none;" <?php } ?>>
 
-                      <input type="time" class="form-input time_pick" name="Sundayfrom" value="<?php echo $availability_time_slot->Sunday[0]; ?>">
+                      <input type="time" class="form-input time_pick" name="Sundayfrom"
+                        value="<?php echo $availability_time_slot->Sunday[0]; ?>">
 
-                      <input type="time" class="form-input time_pick" name="Sundayto" value="<?php echo $availability_time_slot->Sunday[1]; ?>">
+                      <input type="time" class="form-input time_pick" name="Sundayto"
+                        value="<?php echo $availability_time_slot->Sunday[1]; ?>">
 
                     </div>
 
@@ -2328,73 +2696,86 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               <div class="radio-group mt-3">
                 <div class="radio-option">
                   <input type="radio" id="travel-yes" name="International_tours" value="Yes" <?php if (!empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes') {
-                                                                                                echo 'checked';
-                                                                                              } ?> onchange="toggleConditionalSection('travel-options', true)">
+                    echo 'checked';
+                  } ?> onchange="toggleConditionalSection('travel-options', true)">
                   <label for="travel-yes">Yes, I love to travel!</label>
                 </div>
                 <div class="radio-option">
                   <input type="radio" id="travel-no" name="International_tours" value="No" <?php if ((!empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'No') || empty($extra_details['International_tours'])) {
-                                                                                              echo 'checked';
-                                                                                            } ?> onchange="toggleConditionalSection('travel-options', false)">
+                    echo 'checked';
+                  } ?>
+                    onchange="toggleConditionalSection('travel-options', false)">
                   <label for="travel-no">Not interested</label>
                 </div>
               </div>
             </div>
 
             <div id="travel-options" class="conditional-section <?php if (!empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes') {
-                                                                  echo 'show';
-                                                                } ?> ">
+              echo 'show';
+            } ?> ">
               <?php $travel_months = json_decode($extra_details['travel_months']); ?>
               <div>
                 <label class="form-label">Available Months for Travel</label>
                 <p class="help-text">Select months when you're available for travel experiences</p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-3">
                   <div class="checkbox-option">
-                    <input type="checkbox" id="jan" name="travel_months[]" value="January" <?php if (!empty($travel_months) && in_array('January', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="jan" name="travel_months[]" value="January" <?php if (!empty($travel_months) && in_array('January', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="jan">January</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="feb" name="travel_months[]" value="February" <?php if (!empty($travel_months) && in_array('February', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="feb" name="travel_months[]" value="February" <?php if (!empty($travel_months) && in_array('February', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="feb">February</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="mar" name="travel_months[]" value="March" <?php if (!empty($travel_months) && in_array('March', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="mar" name="travel_months[]" value="March" <?php if (!empty($travel_months) && in_array('March', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="mar">March</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="apr" name="travel_months[]" value="April" <?php if (!empty($travel_months) && in_array('April', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="apr" name="travel_months[]" value="April" <?php if (!empty($travel_months) && in_array('April', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="apr">April</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="may" name="travel_months[]" value="May" <?php if (!empty($travel_months) && in_array('May', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="may" name="travel_months[]" value="May" <?php if (!empty($travel_months) && in_array('May', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="may">May</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="jun" name="travel_months[]" value="June" <?php if (!empty($travel_months) && in_array('June', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="jun" name="travel_months[]" value="June" <?php if (!empty($travel_months) && in_array('June', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="jun">June</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="jul" name="travel_months[]" value="July" <?php if (!empty($travel_months) && in_array('July', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="jul" name="travel_months[]" value="July" <?php if (!empty($travel_months) && in_array('July', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="jul">July</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="aug" name="travel_months[]" value="August" <?php if (!empty($travel_months) && in_array('August', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="aug" name="travel_months[]" value="August" <?php if (!empty($travel_months) && in_array('August', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="aug">August</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="sep" name="travel_months[]" value="September" <?php if (!empty($travel_months) && in_array('September', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="sep" name="travel_months[]" value="September" <?php if (!empty($travel_months) && in_array('September', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="sep">September</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="oct" name="travel_months[]" value="October" <?php if (!empty($travel_months) && in_array('October', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="oct" name="travel_months[]" value="October" <?php if (!empty($travel_months) && in_array('October', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="oct">October</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="nov" name="travel_months[]" value="November" <?php if (!empty($travel_months) && in_array('November', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="nov" name="travel_months[]" value="November" <?php if (!empty($travel_months) && in_array('November', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="nov">November</label>
                   </div>
                   <div class="checkbox-option">
-                    <input type="checkbox" id="dec" name="travel_months[]" value="December" <?php if (!empty($travel_months) && in_array('December', $travel_months)) echo 'checked'; ?>>
+                    <input type="checkbox" id="dec" name="travel_months[]" value="December" <?php if (!empty($travel_months) && in_array('December', $travel_months))
+                      echo 'checked'; ?>>
                     <label for="dec">December</label>
                   </div>
                 </div>
@@ -2403,24 +2784,36 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                 <div>
                   <label class="form-label">Daily Rate (TLM tokens)</label>
-                  <input type="number" class="form-input" name="daily_rate" value="<?php if (!empty($extra_details)) echo $extra_details['daily_rate']; ?>" placeholder="e.g., 5000" min="1">
+                  <input type="number" class="form-input" name="daily_rate"
+                    value="<?php if (!empty($extra_details))
+                      echo $extra_details['daily_rate']; ?>"
+                    placeholder="e.g., 5000" min="1">
                   <p class="help-text">Rate per day for travel experiences</p>
                 </div>
                 <div>
                   <label class="form-label">Weekly Rate (TLM tokens)</label>
-                  <input type="number" class="form-input" name="weekly_rate" value="<?php if (!empty($extra_details)) echo $extra_details['weekly_rate']; ?>" placeholder="e.g., 30000" min="1">
+                  <input type="number" class="form-input" name="weekly_rate"
+                    value="<?php if (!empty($extra_details))
+                      echo $extra_details['weekly_rate']; ?>"
+                    placeholder="e.g., 30000" min="1">
                   <p class="help-text">Rate per week for extended travel</p>
                 </div>
                 <div>
                   <label class="form-label">Monthly Rate (TLM tokens)</label>
-                  <input type="number" class="form-input" name="monthly_rate" value="<?php if (!empty($extra_details)) echo $extra_details['monthly_rate']; ?>" placeholder="e.g., 100000" min="1">
+                  <input type="number" class="form-input" name="monthly_rate"
+                    value="<?php if (!empty($extra_details))
+                      echo $extra_details['monthly_rate']; ?>"
+                    placeholder="e.g., 100000" min="1">
                   <p class="help-text">Rate per month for long-term travel</p>
                 </div>
               </div>
 
               <div class="mt-4">
                 <label class="form-label">Preferred Travel Destinations</label>
-                <input type="text" class="form-input" name="travel_destination" value="<?php if (!empty($extra_details)) echo $extra_details['travel_destination']; ?>" placeholder="e.g., Europe, Asia, Caribbean, Domestic US">
+                <input type="text" class="form-input" name="travel_destination"
+                  value="<?php if (!empty($extra_details))
+                    echo $extra_details['travel_destination']; ?>"
+                  placeholder="e.g., Europe, Asia, Caribbean, Domestic US">
                 <p class="help-text">List countries or regions you'd like to visit</p>
               </div>
             </div>
@@ -2442,33 +2835,34 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               <div class="radio-group mt-3">
                 <div class="radio-option">
                   <input type="radio" id="content-yes" name="video_pictures" value="Yes" <?php if (!empty($extra_details['video_pictures']) && $extra_details['video_pictures'] == 'Yes') {
-                                                                                            echo 'checked';
-                                                                                          } ?> onchange="toggleConditionalSection('content-options', true)">
+                    echo 'checked';
+                  } ?> onchange="toggleConditionalSection('content-options', true)">
                   <label for="content-yes">Yes, I'm creative!</label>
                 </div>
                 <div class="radio-option">
                   <input type="radio" id="content-no" name="video_pictures" value="No" <?php if ((!empty($extra_details['video_pictures']) && $extra_details['video_pictures'] == 'No') || empty($extra_details['video_pictures'])) {
-                                                                                          echo 'checked';
-                                                                                        } ?> onchange="toggleConditionalSection('content-options', false)">
+                    echo 'checked';
+                  } ?>
+                    onchange="toggleConditionalSection('content-options', false)">
                   <label for="content-no">Not interested</label>
                 </div>
               </div>
             </div>
 
             <?php /*?><div id="content-options" class="conditional-section">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="form-label">Photo Set Price (TLM tokens)</label>
-              <input type="number" class="form-input" placeholder="e.g., 500" min="1">
-              <p class="help-text">Price for a set of 5-10 photos</p>
-            </div>
-            <div>
-              <label class="form-label">Custom Video Price (TLM tokens/minute)</label>
-              <input type="number" class="form-input" placeholder="e.g., 200" min="1">
-              <p class="help-text">Price per minute for custom videos</p>
-            </div>
-          </div>
-        </div><?php */ ?>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div>
+         <label class="form-label">Photo Set Price (TLM tokens)</label>
+         <input type="number" class="form-input" placeholder="e.g., 500" min="1">
+         <p class="help-text">Price for a set of 5-10 photos</p>
+       </div>
+       <div>
+         <label class="form-label">Custom Video Price (TLM tokens/minute)</label>
+         <input type="number" class="form-input" placeholder="e.g., 200" min="1">
+         <p class="help-text">Price per minute for custom videos</p>
+       </div>
+     </div>
+   </div><?php */ ?>
           </div>
         </div>
 
@@ -2496,8 +2890,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           </div>
 
           <div class="collapsible-content <?php if (empty($followers_array)) {
-                                            echo 'access_restricted';
-                                          } ?>">
+            echo 'access_restricted';
+          } ?>">
 
 
             <!-- <div class="private-section mb-6">
@@ -2513,63 +2907,62 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
               <div class="private-badge"> 🔐 Important Legal Disclaimer </div>
 
-              <p class="text-sm">This setting refers to content creation only and does not imply or allow promotion of any physical services.
-                You must be 18+ to opt-in. You are free to opt out or update this setting at any time in your profile preferences. </p>
+              <p class="text-sm">This setting refers to content creation only and does not imply or allow promotion of
+                any physical services.
+                You must be 18+ to opt-in. You are free to opt out or update this setting at any time in your profile
+                preferences. </p>
 
             </div>
 
 
             <?php /*
-            <div class="mb-6">
+       <div class="mb-6">
 
-              <div class="question-text">Are you interested in professional modeling opportunities?</div>
-              
-              <div class="radio-group mt-3">
-                <div class="radio-option">
-                  <input type="radio" id="modeling-yes" name="modeling" value="Yes" <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
-                                                                                      echo 'checked';
-                                                                                    } ?>
-                    <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('modeling-options', true)" <?php } ?>>
-                  <label for="modeling-yes">Yes</label>
-                </div>
-                <div class="radio-option">
-                  <input type="radio" id="modeling-no" name="modeling" value="No" <?php if ((!empty($extra_details['modeling']) && $extra_details['modeling'] == 'No') || empty($extra_details['modeling'])) {
-                                                                                    echo 'checked';
-                                                                                  } ?>
-                    <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('modeling-options', false)" <?php } ?>>
-                  <label for="modeling-no">No</label>
-                </div>
-              </div>
-            </div>
-            */ ?>
+         <div class="question-text">Are you interested in professional modeling opportunities?</div>
+
+         <div class="radio-group mt-3">
+           <div class="radio-option">
+             <input type="radio" id="modeling-yes" name="modeling" value="Yes" <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
+                                                                                 echo 'checked';
+                                                                               } ?>
+               <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('modeling-options', true)" <?php } ?>>
+             <label for="modeling-yes">Yes</label>
+           </div>
+           <div class="radio-option">
+             <input type="radio" id="modeling-no" name="modeling" value="No" <?php if ((!empty($extra_details['modeling']) && $extra_details['modeling'] == 'No') || empty($extra_details['modeling'])) {
+                                                                               echo 'checked';
+                                                                             } ?>
+               <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('modeling-options', false)" <?php } ?>>
+             <label for="modeling-no">No</label>
+           </div>
+         </div>
+       </div>
+       */ ?>
 
 
             <div class="mb-6">
 
               <div class="question-text">Are you open to brand partnerships and professional collaborations?</div>
 
-              <p class="text-sm text-white/80 mb-4">Let us know if you'd like to be considered for modeling, content creation, or event-based opportunities.
-                Your preferences remain confidential and are only visible to verified campaign partners and team coordinators.</p>
+              <p class="text-sm text-white/80 mb-4">Let us know if you'd like to be considered for modeling, content
+                creation, or event-based opportunities.
+                Your preferences remain confidential and are only visible to verified campaign partners and team
+                coordinators.</p>
 
               <div class="radio-group mt-3">
 
                 <div class="radio-option">
 
                   <input type="radio" id="collab-yes" name="collab" value="Yes" <?php if (!empty($extra_details['collab']) && $extra_details['collab'] == 'Yes') {
-                                                                                  echo 'checked';
-                                                                                } ?>
-
-
-                    <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('collab-options', true)" <?php } ?>>
+                    echo 'checked';
+                  } ?> <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('collab-options', true)" <?php } ?>>
                   <label for="collab-yes">Yes</label>
                 </div>
                 <div class="radio-option">
                   <input type="radio" id="collab-no" name="collab" value="No" <?php if ((!empty($extra_details['collab']) && $extra_details['collab'] == 'No') || empty($extra_details['collab'])) {
-                                                                                echo 'checked';
-                                                                              } ?>
-
-
-                    <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('collab-options', false)" <?php } ?>>
+                    echo 'checked';
+                  } ?> <?php if (!empty($followers_array)) { ?>
+                      onchange="toggleConditionalSection('collab-options', false)" <?php } ?>>
 
                   <label for="collab-no">No</label>
                 </div>
@@ -2580,8 +2973,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
 
             <div id="collab-options" class="conditional-section <?php if (!empty($extra_details['collab']) && $extra_details['collab'] == 'Yes') {
-                                                                  echo 'show';
-                                                                } ?> ">
+              echo 'show';
+            } ?> ">
 
 
               <?php $collab_category = json_decode($extra_details['collab_category']); ?>
@@ -2596,7 +2989,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   <div class="checkbox-option">
 
                     <div>
-                      <input type="checkbox" id="life_style_entertainment" name="collab_category[]" value="life_style_entertainment" <?php if (!empty($collab_category) && in_array('life_style_entertainment', $collab_category)) echo 'checked'; ?>>
+                      <input type="checkbox" id="life_style_entertainment" name="collab_category[]"
+                        value="life_style_entertainment" <?php if (!empty($collab_category) && in_array('life_style_entertainment', $collab_category))
+                          echo 'checked'; ?>>
 
                       <label for="life_style_entertainment">Lifestyle & Entertainment
 
@@ -2610,7 +3005,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                   <div class="checkbox-option">
                     <div>
-                      <input type="checkbox" id="creative_editorial" name="collab_category[]" value="creative_editorial" <?php if (!empty($collab_category) && in_array('creative_editorial', $collab_category)) echo 'checked'; ?>>
+                      <input type="checkbox" id="creative_editorial" name="collab_category[]" value="creative_editorial"
+                        <?php if (!empty($collab_category) && in_array('creative_editorial', $collab_category))
+                          echo 'checked'; ?>>
                       <label for="creative_editorial">Creative & Editorial Projects
 
                       </label>
@@ -2624,7 +3021,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                   <div class="checkbox-option">
                     <div>
-                      <input type="checkbox" id="fashion" name="collab_category[]" value="fashion" <?php if (!empty($collab_category) && in_array('fashion', $collab_category)) echo 'checked'; ?>>
+                      <input type="checkbox" id="fashion" name="collab_category[]" value="fashion" <?php if (!empty($collab_category) && in_array('fashion', $collab_category))
+                        echo 'checked'; ?>>
                       <label for="fashion">Swimwear / Lingerie / Fitness Modeling
                         and use
                       </label>
@@ -2638,12 +3036,13 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   <div class="checkbox-option">
 
                     <div>
-                      <input type="checkbox" id="adult_oriented" name="collab_category[]" value="adult_oriented" <?php if (!empty($collab_category) && in_array('adult_oriented', $collab_category)) echo 'checked'; ?>>
-                      <label for="adult_oriented">Adult-Oriented or 18+ Content (Confidential)  </label>
+                      <input type="checkbox" id="adult_oriented" name="collab_category[]" value="adult_oriented" <?php if (!empty($collab_category) && in_array('adult_oriented', $collab_category))
+                        echo 'checked'; ?>>
+                      <label for="adult_oriented">Adult-Oriented or 18+ Content (Confidential) </label>
                     </div>
                     <span>
-                       May include provocative or mature themes created for verified age-restricted 
-                       audiences or private platforms.
+                      May include provocative or mature themes created for verified age-restricted
+                      audiences or private platforms.
                     </span>
 
                   </div>
@@ -2661,7 +3060,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                   <label class="form-label">Per Hour Rate</label>
 
-                  <input type="number" class="form-input" name="collab_hour" value="<?php echo $extra_details['collab_hour']; ?>" placeholder="e.g., 3" min="2" max="20">
+                  <input type="number" class="form-input" name="collab_hour"
+                    value="<?php echo $extra_details['collab_hour']; ?>" placeholder="e.g., 3" min="2" max="20">
 
                   <p class="help-text">Set the hourly collaboration rate </p>
 
@@ -2671,7 +3071,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                   <label class="form-label">Per Day Rate</label>
 
-                  <input type="number" class="form-input" name="collab_day" value="<?php echo $extra_details['collab_day']; ?>" placeholder="e.g., 15" min="1">
+                  <input type="number" class="form-input" name="collab_day"
+                    value="<?php echo $extra_details['collab_day']; ?>" placeholder="e.g., 15" min="1">
 
                   <p class="help-text">Set per day collaboration rate </p>
 
@@ -2681,7 +3082,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                   <label class="form-label">Weekend Rate</label>
 
-                  <input type="number" class="form-input" name="collab_week" value="<?php echo $extra_details['collab_week']; ?>" placeholder="e.g., 15" min="1">
+                  <input type="number" class="form-input" name="collab_week"
+                    value="<?php echo $extra_details['collab_week']; ?>" placeholder="e.g., 15" min="1">
 
                   <p class="help-text">Set collaboration weekend rate</p>
 
@@ -2696,252 +3098,252 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
             <?php /* 
 
-            <div id="modeling-options" class="conditional-section <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
-                                                                    echo 'show';
-                                                                  } ?> ">
-              <div class="adult-section mb-6">
-                <div class="adult-badge">🔞 Adult Content</div>
-                <div class="mb-4">
-                  <div class="question-text">Are you comfortable with adult content creation?</div>
-                  <p class="help-text">This includes lingerie, swimwear, artistic nude, and adult-oriented content</p>
-                  <div class="radio-group mt-3">
-                    <div class="radio-option">
-                      <input type="radio" id="adult-yes" name="adult_content" value="Yes" <?php if (!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes') {
-                                                                                            echo 'checked';
-                                                                                          } ?>
-                        <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('adult-services', true)" <?php } ?>>
-                      <label for="adult-yes">Yes, I'm comfortable</label>
-                    </div>
-                    <div class="radio-option">
-                      <input type="radio" id="adult-no" name="adult_content" value="No" <?php if ((!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'No') || empty($extra_details['adult_content'])) {
-                                                                                          echo 'checked';
-                                                                                        } ?>
-                        <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('adult-services', false)" <?php } ?>>
-                      <label for="adult-no">No, only non-adult content</label>
-                    </div>
-                  </div>
-                </div>
+       <div id="modeling-options" class="conditional-section <?php if (!empty($extra_details['modeling']) && $extra_details['modeling'] == 'Yes') {
+                                                               echo 'show';
+                                                             } ?> ">
+         <div class="adult-section mb-6">
+           <div class="adult-badge">🔞 Adult Content</div>
+           <div class="mb-4">
+             <div class="question-text">Are you comfortable with adult content creation?</div>
+             <p class="help-text">This includes lingerie, swimwear, artistic nude, and adult-oriented content</p>
+             <div class="radio-group mt-3">
+               <div class="radio-option">
+                 <input type="radio" id="adult-yes" name="adult_content" value="Yes" <?php if (!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes') {
+                                                                                       echo 'checked';
+                                                                                     } ?>
+                   <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('adult-services', true)" <?php } ?>>
+                 <label for="adult-yes">Yes, I'm comfortable</label>
+               </div>
+               <div class="radio-option">
+                 <input type="radio" id="adult-no" name="adult_content" value="No" <?php if ((!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'No') || empty($extra_details['adult_content'])) {
+                                                                                     echo 'checked';
+                                                                                   } ?>
+                   <?php if (!empty($followers_array)) { ?> onchange="toggleConditionalSection('adult-services', false)" <?php } ?>>
+                 <label for="adult-no">No, only non-adult content</label>
+               </div>
+             </div>
+           </div>
 
-                <div id="adult-services" class="conditional-section  <?php if (!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes' && $extra_details['status'] == 'Published') {
-                                                                        echo 'show';
-                                                                      } ?> ">
-                  <div class="confidential-section">
-                    <div class="confidential-badge">🔐 STRICTLY CONFIDENTIAL - APPROVED MODELS ONLY</div>
-                    <p class="text-sm text-white/80 mb-4">The following services are only visible to verified and approved models. This information is encrypted and never shared publicly.</p>
-                    <?php $escort_services = json_decode($extra_details['escort_services']); ?>
-                    <div class="mb-6">
-                      <label class="form-label">Escort & Companionship Services</label>
-                      <p class="help-text">Select the professional companionship services you're comfortable providing</p>
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="dinner-companion" name="escort_services[]" value="Dinner Companion" <?php if (!empty($escort_services) && in_array('Dinner Companion', $escort_services)) echo 'checked'; ?>>
-                          <label for="dinner-companion">Dinner Companion</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="social-events" name="escort_services[]" value="Social Events Companion" <?php if (!empty($escort_services) && in_array('Social Events Companion', $escort_services)) echo 'checked'; ?>>
-                          <label for="social-events">Social Events Companion</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="business-companion" name="escort_services[]" value="Business Events Companion" <?php if (!empty($escort_services) && in_array('Business Events Companion', $escort_services)) echo 'checked'; ?>>
-                          <label for="business-companion">Business Events Companion</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="travel-escort" name="escort-services[]" value="Travel Companion" <?php if (!empty($escort_services) && in_array('Travel Companion', $escort_services)) echo 'checked'; ?>>
-                          <label for="travel-escort">Travel Companion</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="overnight-companion" name="escort_services[]" value="Overnight Companionship" <?php if (!empty($escort_services) && in_array('Overnight Companionship', $escort_services)) echo 'checked'; ?>>
-                          <label for="overnight-companion">Overnight Companionship</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="weekend-companion" name="escort_services[]" value="Weekend Companion" <?php if (!empty($escort_services) && in_array('Weekend Companion', $escort_services)) echo 'checked'; ?>>
-                          <label for="weekend-companion">Weekend Companion</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="party-companion" name="escort-services[]" value="Party & Club Companion" <?php if (!empty($escort_services) && in_array('Party & Club Companion', $escort_services)) echo 'checked'; ?>>
-                          <label for="party-companion">Party & Club Companion</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="cultural-companion" name="escort_services[]" value="Cultural Events Companion" <?php if (!empty($escort_services) && in_array('Cultural Events Companion', $escort_services)) echo 'checked'; ?>>
-                          <label for="cultural-companion">Cultural Events Companion</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="arm-candy" name="escort_services[]" value="Arm Candy / Plus One" <?php if (!empty($escort_services) && in_array('Arm Candy / Plus One', $escort_services)) echo 'checked'; ?>>
-                          <label for="arm-candy">Arm Candy / Plus One</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="massage-companion" name="escort_services[]" value="Massage Services" <?php if (!empty($escort_services) && in_array('Massage Services', $escort_services)) echo 'checked'; ?>>
-                          <label for="massage-companion">Massage Services</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="gfe" name="escort_services[]" value="Girlfriend Experience (GFE)" <?php if (!empty($escort_services) && in_array('Girlfriend Experience (GFE)', $escort_services)) echo 'checked'; ?>>
-                          <label for="gfe">Girlfriend Experience (GFE)</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="pse" name="escort_services[]" value="Pornstar Experience (PSE)" <?php if (!empty($escort_services) && in_array('Pornstar Experience (PSE)', $escort_services)) echo 'checked'; ?>>
-                          <label for="pse">Pornstar Experience (PSE)</label>
-                        </div>
-                      </div>
-                    </div>
-                    <?php $intimate_services = json_decode($extra_details['intimate_services']); ?>
-                    <div class="mb-6">
-                      <label class="form-label">Intimate Services</label>
-                      <p class="help-text">Select intimate services you're comfortable providing (18+ only)</p>
-                      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="intimate-companionship" name="intimate_services[]" value="Intimate Companionship" <?php if (!empty($intimate_services) && in_array('Intimate Companionship', $intimate_services)) echo 'checked'; ?>>
-                          <label for="intimate-companionship">Intimate Companionship</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="sensual-massage" name="intimate_services[]" value="Sensual Massage" <?php if (!empty($intimate_services) && in_array('Sensual Massage', $intimate_services)) echo 'checked'; ?>>
-                          <label for="sensual-massage">Sensual Massage</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="body-to-body" name="intimate_services[]" value="Body to Body Massage" <?php if (!empty($intimate_services) && in_array('Body to Body Massage', $intimate_services)) echo 'checked'; ?>>
-                          <label for="body-to-body">Body to Body Massage</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="tantric-massage" name="intimate_services[]" value="Tantric Massage" <?php if (!empty($intimate_services) && in_array('Tantric Massage', $intimate_services)) echo 'checked'; ?>>
-                          <label for="tantric-massage">Tantric Massage</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="fetish-friendly" name="intimate_services[]" value="Fetish Friendly" <?php if (!empty($intimate_services) && in_array('Fetish Friendly', $intimate_services)) echo 'checked'; ?>>
-                          <label for="fetish-friendly">Fetish Friendly</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="role-play" name="intimate_services[]" value="Role Play" <?php if (!empty($intimate_services) && in_array('Role Play', $intimate_services)) echo 'checked'; ?>>
-                          <label for="role-play">Role Play</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="domination" name="intimate_services[]" value="Domination Services" <?php if (!empty($intimate_services) && in_array('Domination Services', $intimate_services)) echo 'checked'; ?>>
-                          <label for="domination">Domination Services</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="submission" name="intimate_services[]" value="Submission Services" <?php if (!empty($intimate_services) && in_array('Submission Services', $intimate_services)) echo 'checked'; ?>>
-                          <label for="submission">Submission Services</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="couples-services" name="intimate_services[]" value="Couples Services" <?php if (!empty($intimate_services) && in_array('Couples Services', $intimate_services)) echo 'checked'; ?>>
-                          <label for="couples-services">Couples Services</label>
-                        </div>
-                        <div class="checkbox-option">
-                          <input type="checkbox" id="threesome" name="intimate_services[]" value="Threesome Services" <?php if (!empty($intimate_services) && in_array('Threesome Services', $intimate_services)) echo 'checked'; ?>>
-                          <label for="threesome">Threesome Services</label>
-                        </div>
-                      </div>
-                    </div>
+           <div id="adult-services" class="conditional-section  <?php if (!empty($extra_details['adult_content']) && $extra_details['adult_content'] == 'Yes' && $extra_details['status'] == 'Published') {
+                                                                   echo 'show';
+                                                                 } ?> ">
+             <div class="confidential-section">
+               <div class="confidential-badge">🔐 STRICTLY CONFIDENTIAL - APPROVED MODELS ONLY</div>
+               <p class="text-sm text-white/80 mb-4">The following services are only visible to verified and approved models. This information is encrypted and never shared publicly.</p>
+               <?php $escort_services = json_decode($extra_details['escort_services']); ?>
+               <div class="mb-6">
+                 <label class="form-label">Escort & Companionship Services</label>
+                 <p class="help-text">Select the professional companionship services you're comfortable providing</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="dinner-companion" name="escort_services[]" value="Dinner Companion" <?php if (!empty($escort_services) && in_array('Dinner Companion', $escort_services)) echo 'checked'; ?>>
+                     <label for="dinner-companion">Dinner Companion</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="social-events" name="escort_services[]" value="Social Events Companion" <?php if (!empty($escort_services) && in_array('Social Events Companion', $escort_services)) echo 'checked'; ?>>
+                     <label for="social-events">Social Events Companion</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="business-companion" name="escort_services[]" value="Business Events Companion" <?php if (!empty($escort_services) && in_array('Business Events Companion', $escort_services)) echo 'checked'; ?>>
+                     <label for="business-companion">Business Events Companion</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="travel-escort" name="escort-services[]" value="Travel Companion" <?php if (!empty($escort_services) && in_array('Travel Companion', $escort_services)) echo 'checked'; ?>>
+                     <label for="travel-escort">Travel Companion</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="overnight-companion" name="escort_services[]" value="Overnight Companionship" <?php if (!empty($escort_services) && in_array('Overnight Companionship', $escort_services)) echo 'checked'; ?>>
+                     <label for="overnight-companion">Overnight Companionship</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="weekend-companion" name="escort_services[]" value="Weekend Companion" <?php if (!empty($escort_services) && in_array('Weekend Companion', $escort_services)) echo 'checked'; ?>>
+                     <label for="weekend-companion">Weekend Companion</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="party-companion" name="escort-services[]" value="Party & Club Companion" <?php if (!empty($escort_services) && in_array('Party & Club Companion', $escort_services)) echo 'checked'; ?>>
+                     <label for="party-companion">Party & Club Companion</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="cultural-companion" name="escort_services[]" value="Cultural Events Companion" <?php if (!empty($escort_services) && in_array('Cultural Events Companion', $escort_services)) echo 'checked'; ?>>
+                     <label for="cultural-companion">Cultural Events Companion</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="arm-candy" name="escort_services[]" value="Arm Candy / Plus One" <?php if (!empty($escort_services) && in_array('Arm Candy / Plus One', $escort_services)) echo 'checked'; ?>>
+                     <label for="arm-candy">Arm Candy / Plus One</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="massage-companion" name="escort_services[]" value="Massage Services" <?php if (!empty($escort_services) && in_array('Massage Services', $escort_services)) echo 'checked'; ?>>
+                     <label for="massage-companion">Massage Services</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="gfe" name="escort_services[]" value="Girlfriend Experience (GFE)" <?php if (!empty($escort_services) && in_array('Girlfriend Experience (GFE)', $escort_services)) echo 'checked'; ?>>
+                     <label for="gfe">Girlfriend Experience (GFE)</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="pse" name="escort_services[]" value="Pornstar Experience (PSE)" <?php if (!empty($escort_services) && in_array('Pornstar Experience (PSE)', $escort_services)) echo 'checked'; ?>>
+                     <label for="pse">Pornstar Experience (PSE)</label>
+                   </div>
+                 </div>
+               </div>
+               <?php $intimate_services = json_decode($extra_details['intimate_services']); ?>
+               <div class="mb-6">
+                 <label class="form-label">Intimate Services</label>
+                 <p class="help-text">Select intimate services you're comfortable providing (18+ only)</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="intimate-companionship" name="intimate_services[]" value="Intimate Companionship" <?php if (!empty($intimate_services) && in_array('Intimate Companionship', $intimate_services)) echo 'checked'; ?>>
+                     <label for="intimate-companionship">Intimate Companionship</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="sensual-massage" name="intimate_services[]" value="Sensual Massage" <?php if (!empty($intimate_services) && in_array('Sensual Massage', $intimate_services)) echo 'checked'; ?>>
+                     <label for="sensual-massage">Sensual Massage</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="body-to-body" name="intimate_services[]" value="Body to Body Massage" <?php if (!empty($intimate_services) && in_array('Body to Body Massage', $intimate_services)) echo 'checked'; ?>>
+                     <label for="body-to-body">Body to Body Massage</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="tantric-massage" name="intimate_services[]" value="Tantric Massage" <?php if (!empty($intimate_services) && in_array('Tantric Massage', $intimate_services)) echo 'checked'; ?>>
+                     <label for="tantric-massage">Tantric Massage</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="fetish-friendly" name="intimate_services[]" value="Fetish Friendly" <?php if (!empty($intimate_services) && in_array('Fetish Friendly', $intimate_services)) echo 'checked'; ?>>
+                     <label for="fetish-friendly">Fetish Friendly</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="role-play" name="intimate_services[]" value="Role Play" <?php if (!empty($intimate_services) && in_array('Role Play', $intimate_services)) echo 'checked'; ?>>
+                     <label for="role-play">Role Play</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="domination" name="intimate_services[]" value="Domination Services" <?php if (!empty($intimate_services) && in_array('Domination Services', $intimate_services)) echo 'checked'; ?>>
+                     <label for="domination">Domination Services</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="submission" name="intimate_services[]" value="Submission Services" <?php if (!empty($intimate_services) && in_array('Submission Services', $intimate_services)) echo 'checked'; ?>>
+                     <label for="submission">Submission Services</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="couples-services" name="intimate_services[]" value="Couples Services" <?php if (!empty($intimate_services) && in_array('Couples Services', $intimate_services)) echo 'checked'; ?>>
+                     <label for="couples-services">Couples Services</label>
+                   </div>
+                   <div class="checkbox-option">
+                     <input type="checkbox" id="threesome" name="intimate_services[]" value="Threesome Services" <?php if (!empty($intimate_services) && in_array('Threesome Services', $intimate_services)) echo 'checked'; ?>>
+                     <label for="threesome">Threesome Services</label>
+                   </div>
+                 </div>
+               </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div>
-                        <label class="form-label">Hourly Rate (TLM tokens)</label>
-                        <input type="number" class="form-input" name="hourly_rate" value="<?php if (!empty($extra_details)) echo $extra_details['hourly_rate']; ?>" placeholder="e.g., 5000" min="1">
-                        <p class="help-text">Rate per hour for escort services</p>
-                      </div>
-                      <div>
-                        <label class="form-label">Overnight Rate (TLM tokens)</label>
-                        <input type="number" class="form-input" name="overnight_rate" value="<?php if (!empty($extra_details)) echo $extra_details['overnight_rate']; ?>" placeholder="e.g., 25000" min="1">
-                        <p class="help-text">Rate for overnight services</p>
-                      </div>
-                      <div>
-                        <label class="form-label">Weekend Rate (TLM tokens)</label>
-                        <input type="number" class="form-input" name="weekend_rate" value="<?php if (!empty($extra_details)) echo $extra_details['weekend_rate']; ?>" placeholder="e.g., 50000" min="1">
-                        <p class="help-text">Rate for weekend packages</p>
-                      </div>
-                    </div>
-                  </div>
-                  <?php $adult_content_types = json_decode($extra_details['adult_content_types']); ?>
-                  <div class="mb-4">
-                    <label class="form-label">Adult Content Types</label>
-                    <p class="help-text">Select the types of adult content you're comfortable creating</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-                      <div class="checkbox-option">
-                        <input type="checkbox" id="lingerie-modeling" name="adult_content_types[]" value="Lingerie Modeling" <?php if (!empty($adult_content_types) && in_array('Lingerie Modeling', $adult_content_types)) echo 'checked'; ?>>
-                        <label for="lingerie-modeling">Lingerie Modeling</label>
-                      </div>
-                      <div class="checkbox-option">
-                        <input type="checkbox" id="swimwear-modeling" name="adult_content_types[]" value="Swimwear Modeling" <?php if (!empty($adult_content_types) && in_array('Swimwear Modeling', $adult_content_types)) echo 'checked'; ?>>
-                        <label for="swimwear-modeling">Swimwear Modeling</label>
-                      </div>
-                      <div class="checkbox-option">
-                        <input type="checkbox" id="artistic-nude" name="adult_content_types[]" value="Artistic Nude Photography" <?php if (!empty($adult_content_types) && in_array('Artistic Nude Photography', $adult_content_types)) echo 'checked'; ?>>
-                        <label for="artistic-nude">Artistic Nude Photography</label>
-                      </div>
-                      <div class="checkbox-option">
-                        <input type="checkbox" id="boudoir" name="adult_content_types[]" value="Boudoir Photography" <?php if (!empty($adult_content_types) && in_array('Boudoir Photography', $adult_content_types)) echo 'checked'; ?>>
-                        <label for="boudoir">Boudoir Photography</label>
-                      </div>
-                      <div class="checkbox-option">
-                        <input type="checkbox" id="adult-videos" name="adult_content_types[]" value="Adult Video Content" <?php if (!empty($adult_content_types) && in_array('Adult Video Content', $adult_content_types)) echo 'checked'; ?>>
-                        <label for="adult-videos">Adult Video Content</label>
-                      </div>
-                      <div class="checkbox-option">
-                        <input type="checkbox" id="cam-shows" name="adult_content_types[]" value="Live Cam Shows" <?php if (!empty($adult_content_types) && in_array('Live Cam Shows', $adult_content_types)) echo 'checked'; ?>>
-                        <label for="cam-shows">Live Cam Shows</label>
-                      </div>
-                    </div>
-                  </div>
+               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                 <div>
+                   <label class="form-label">Hourly Rate (TLM tokens)</label>
+                   <input type="number" class="form-input" name="hourly_rate" value="<?php if (!empty($extra_details)) echo $extra_details['hourly_rate']; ?>" placeholder="e.g., 5000" min="1">
+                   <p class="help-text">Rate per hour for escort services</p>
+                 </div>
+                 <div>
+                   <label class="form-label">Overnight Rate (TLM tokens)</label>
+                   <input type="number" class="form-input" name="overnight_rate" value="<?php if (!empty($extra_details)) echo $extra_details['overnight_rate']; ?>" placeholder="e.g., 25000" min="1">
+                   <p class="help-text">Rate for overnight services</p>
+                 </div>
+                 <div>
+                   <label class="form-label">Weekend Rate (TLM tokens)</label>
+                   <input type="number" class="form-input" name="weekend_rate" value="<?php if (!empty($extra_details)) echo $extra_details['weekend_rate']; ?>" placeholder="e.g., 50000" min="1">
+                   <p class="help-text">Rate for weekend packages</p>
+                 </div>
+               </div>
+             </div>
+             <?php $adult_content_types = json_decode($extra_details['adult_content_types']); ?>
+             <div class="mb-4">
+               <label class="form-label">Adult Content Types</label>
+               <p class="help-text">Select the types of adult content you're comfortable creating</p>
+               <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                 <div class="checkbox-option">
+                   <input type="checkbox" id="lingerie-modeling" name="adult_content_types[]" value="Lingerie Modeling" <?php if (!empty($adult_content_types) && in_array('Lingerie Modeling', $adult_content_types)) echo 'checked'; ?>>
+                   <label for="lingerie-modeling">Lingerie Modeling</label>
+                 </div>
+                 <div class="checkbox-option">
+                   <input type="checkbox" id="swimwear-modeling" name="adult_content_types[]" value="Swimwear Modeling" <?php if (!empty($adult_content_types) && in_array('Swimwear Modeling', $adult_content_types)) echo 'checked'; ?>>
+                   <label for="swimwear-modeling">Swimwear Modeling</label>
+                 </div>
+                 <div class="checkbox-option">
+                   <input type="checkbox" id="artistic-nude" name="adult_content_types[]" value="Artistic Nude Photography" <?php if (!empty($adult_content_types) && in_array('Artistic Nude Photography', $adult_content_types)) echo 'checked'; ?>>
+                   <label for="artistic-nude">Artistic Nude Photography</label>
+                 </div>
+                 <div class="checkbox-option">
+                   <input type="checkbox" id="boudoir" name="adult_content_types[]" value="Boudoir Photography" <?php if (!empty($adult_content_types) && in_array('Boudoir Photography', $adult_content_types)) echo 'checked'; ?>>
+                   <label for="boudoir">Boudoir Photography</label>
+                 </div>
+                 <div class="checkbox-option">
+                   <input type="checkbox" id="adult-videos" name="adult_content_types[]" value="Adult Video Content" <?php if (!empty($adult_content_types) && in_array('Adult Video Content', $adult_content_types)) echo 'checked'; ?>>
+                   <label for="adult-videos">Adult Video Content</label>
+                 </div>
+                 <div class="checkbox-option">
+                   <input type="checkbox" id="cam-shows" name="adult_content_types[]" value="Live Cam Shows" <?php if (!empty($adult_content_types) && in_array('Live Cam Shows', $adult_content_types)) echo 'checked'; ?>>
+                   <label for="cam-shows">Live Cam Shows</label>
+                 </div>
+               </div>
+             </div>
 
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label class="form-label">Adult Content Rate (TLM tokens per session)</label>
-                      <input type="number" class="form-input" name="adult_content_rate" value="<?php if (!empty($extra_details)) echo $extra_details['adult_content_rate']; ?>" placeholder="e.g., 2000" min="1">
-                      <p class="help-text">Rate for adult content creation sessions</p>
-                    </div>
-                    <div>
-                      <label class="form-label">Live Show Rate (TLM tokens per minute)</label>
-                      <input type="number" class="form-input" name="live_show_rate" value="<?php if (!empty($extra_details)) echo $extra_details['live_show_rate']; ?>" placeholder="e.g., 100" min="1">
-                      <p class="help-text">Rate for live adult shows</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <?php $work_availability = json_decode($extra_details['work_availability']); ?>
-              <div class="mb-4">
-                <label class="form-label">Availability for Professional Work</label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
-                  <div class="checkbox-option">
-                    <input type="checkbox" id="local-work" name="work_availability[]" value="Local assignments in my city" <?php if (!empty($work_availability) && in_array('Local assignments in my city', $work_availability)) echo 'checked'; ?>>
-                    <label for="local-work">Local assignments in my city</label>
-                  </div>
-                  <div class="checkbox-option">
-                    <input type="checkbox" id="travel-work" name="work_availability[]" value="Willing to travel for assignments" <?php if (!empty($work_availability) && in_array('Willing to travel for assignments', $work_availability)) echo 'checked'; ?>>
-                    <label for="travel-work">Willing to travel for assignments</label>
-                  </div>
-                </div>
-              </div>
-              <?php $content_types = json_decode($extra_details['content_types']); ?>
-              <div class="mb-4">
-                <label class="form-label">Professional Content Types</label>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
-                  <div class="checkbox-option">
-                    <input type="checkbox" id="fashion" name="content_types[]" value="Fashion & Lifestyle" <?php if (!empty($content_types) && in_array('Fashion & Lifestyle', $content_types)) echo 'checked'; ?>>
-                    <label for="fashion">Fashion & Lifestyle</label>
-                  </div>
-                  <div class="checkbox-option">
-                    <input type="checkbox" id="commercial" name="content_types[]" value="Commercial Photography" <?php if (!empty($content_types) && in_array('Commercial Photography', $content_types)) echo 'checked'; ?>>
-                    <label for="commercial">Commercial Photography</label>
-                  </div>
-                  <div class="checkbox-option">
-                    <input type="checkbox" id="artistic" name="content_types[]" value="Artistic & Creative" <?php if (!empty($content_types) && in_array('Artistic & Creative', $content_types)) echo 'checked'; ?>>
-                    <label for="artistic">Artistic & Creative</label>
-                  </div>
-                </div>
-              </div>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+               <div>
+                 <label class="form-label">Adult Content Rate (TLM tokens per session)</label>
+                 <input type="number" class="form-input" name="adult_content_rate" value="<?php if (!empty($extra_details)) echo $extra_details['adult_content_rate']; ?>" placeholder="e.g., 2000" min="1">
+                 <p class="help-text">Rate for adult content creation sessions</p>
+               </div>
+               <div>
+                 <label class="form-label">Live Show Rate (TLM tokens per minute)</label>
+                 <input type="number" class="form-input" name="live_show_rate" value="<?php if (!empty($extra_details)) echo $extra_details['live_show_rate']; ?>" placeholder="e.g., 100" min="1">
+                 <p class="help-text">Rate for live adult shows</p>
+               </div>
+             </div>
+           </div>
+         </div>
+         <?php $work_availability = json_decode($extra_details['work_availability']); ?>
+         <div class="mb-4">
+           <label class="form-label">Availability for Professional Work</label>
+           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+             <div class="checkbox-option">
+               <input type="checkbox" id="local-work" name="work_availability[]" value="Local assignments in my city" <?php if (!empty($work_availability) && in_array('Local assignments in my city', $work_availability)) echo 'checked'; ?>>
+               <label for="local-work">Local assignments in my city</label>
+             </div>
+             <div class="checkbox-option">
+               <input type="checkbox" id="travel-work" name="work_availability[]" value="Willing to travel for assignments" <?php if (!empty($work_availability) && in_array('Willing to travel for assignments', $work_availability)) echo 'checked'; ?>>
+               <label for="travel-work">Willing to travel for assignments</label>
+             </div>
+           </div>
+         </div>
+         <?php $content_types = json_decode($extra_details['content_types']); ?>
+         <div class="mb-4">
+           <label class="form-label">Professional Content Types</label>
+           <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+             <div class="checkbox-option">
+               <input type="checkbox" id="fashion" name="content_types[]" value="Fashion & Lifestyle" <?php if (!empty($content_types) && in_array('Fashion & Lifestyle', $content_types)) echo 'checked'; ?>>
+               <label for="fashion">Fashion & Lifestyle</label>
+             </div>
+             <div class="checkbox-option">
+               <input type="checkbox" id="commercial" name="content_types[]" value="Commercial Photography" <?php if (!empty($content_types) && in_array('Commercial Photography', $content_types)) echo 'checked'; ?>>
+               <label for="commercial">Commercial Photography</label>
+             </div>
+             <div class="checkbox-option">
+               <input type="checkbox" id="artistic" name="content_types[]" value="Artistic & Creative" <?php if (!empty($content_types) && in_array('Artistic & Creative', $content_types)) echo 'checked'; ?>>
+               <label for="artistic">Artistic & Creative</label>
+             </div>
+           </div>
+         </div>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="form-label">Expected Rate per Professional Session (TLM tokens)</label>
-                  <input type="number" class="form-input" name="professional_rate" value="<?php if (!empty($extra_details)) echo $extra_details['professional_rate']; ?>" placeholder="e.g., 5000" min="1">
-                  <p class="help-text">Your expected rate for professional modeling sessions</p>
-                </div>
-                <div>
-                  <label class="form-label">Additional Professional Services</label>
-                  <textarea class="form-input" rows="3" name="professional_service" placeholder="Describe any additional professional services you offer..."><?php if (!empty($extra_details)) echo $extra_details['professional_service']; ?></textarea>
-                </div>
-              </div>
-            </div>
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div>
+             <label class="form-label">Expected Rate per Professional Session (TLM tokens)</label>
+             <input type="number" class="form-input" name="professional_rate" value="<?php if (!empty($extra_details)) echo $extra_details['professional_rate']; ?>" placeholder="e.g., 5000" min="1">
+             <p class="help-text">Your expected rate for professional modeling sessions</p>
+           </div>
+           <div>
+             <label class="form-label">Additional Professional Services</label>
+             <textarea class="form-input" rows="3" name="professional_service" placeholder="Describe any additional professional services you offer..."><?php if (!empty($extra_details)) echo $extra_details['professional_service']; ?></textarea>
+           </div>
+         </div>
+       </div>
 
-          */ ?>
+     */ ?>
 
 
 
@@ -2967,7 +3369,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <div class="question-text">Do you want to provide 30 days exclusive access to all content?</div>
                 <div class="radio-group mt-3">
                   <div class="radio-option">
-                    <input type="radio" id="access-yes" onchange="AccessChange(this)" checked="" name="all_30day_access" value="Yes">
+                    <input type="radio" id="access-yes" onchange="AccessChange(this)" checked="" name="all_30day_access"
+                      value="Yes">
                     <label for="access-yes">Yes</label>
                   </div>
                   <div class="radio-option">
@@ -2982,7 +3385,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
                   <label class="form-label">All 30 Days access coins?</label>
 
-                  <input type="number" class="form-input" name="all_30day_access_price" value="100" placeholder="e.g., 5000" min="1">
+                  <input type="number" class="form-input" name="all_30day_access_price" value="100"
+                    placeholder="e.g., 5000" min="1">
 
                 </div>
               </div>
@@ -3008,20 +3412,21 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <select name="choose_document" id="vfb-43" class="vfb-select  vfb-medium form-select  required ">
                   <option value="" selected='selected'>Choose Document</option>
                   <option value="Passport" <?php if (isset($extra_details['choose_document']) && $extra_details['choose_document'] == 'Passport') {
-                                              echo 'selected';
-                                            } ?>>Passport</option>
+                    echo 'selected';
+                  } ?>>Passport</option>
                   <option value="Driving License" <?php if (isset($extra_details['choose_document']) && $extra_details['choose_document'] == 'Driving License') {
-                                                    echo 'selected';
-                                                  } ?>>Driving License</option>
+                    echo 'selected';
+                  } ?>>Driving License
+                  </option>
                   <option value="National ID" <?php if (isset($extra_details['choose_document']) && $extra_details['choose_document'] == 'National ID') {
-                                                echo 'selected';
-                                              } ?>>National ID</option>
+                    echo 'selected';
+                  } ?>>National ID</option>
                   <option value="Pan Card" <?php if (isset($extra_details['choose_document']) && $extra_details['choose_document'] == 'Pan Card') {
-                                              echo 'selected';
-                                            } ?>>Pan Card</option>
+                    echo 'selected';
+                  } ?>>Pan Card</option>
                   <option value="Aadhar" <?php if (isset($extra_details['choose_document']) && $extra_details['choose_document'] == 'Aadhar') {
-                                            echo 'selected';
-                                          } ?>>Aadhar</option>
+                    echo 'selected';
+                  } ?>>Aadhar</option>
                 </select>
               </div>
               <div>
@@ -3057,7 +3462,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <div class="flex justify-center mt-8">
           <input type="hidden" name="use_id" value="<?php echo $_SESSION["log_user_id"]; ?>">
           <input type="hidden" name="model_unique_id" value="<?php echo $userDetails['unique_id']; ?>">
-          <button class="btn-primary text-lg px-8 py-2" type="button" name="service_submit" onclick="saveCreatorSettings(this)">Save Creator Settings</button>
+          <button class="btn-primary text-lg px-8 py-2" type="button" name="service_submit"
+            onclick="saveCreatorSettings(this)">Save Creator Settings</button>
         </div>
       </form>
     </div>
@@ -3095,7 +3501,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
           <h3 class="text-xl font-bold gradient-text">Earnings Overview</h3>
 
-          <select class="form-select w-auto" name="earnings_period" id="earnings_period" onchange="updateEarningsChart()">
+          <select class="form-select w-auto" name="earnings_period" id="earnings_period"
+            onchange="updateEarningsChart()">
 
             <option value="week">This Week</option>
             <option value="month" selected>This Month</option>
@@ -3131,50 +3538,50 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
         <?php /*
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="glass-effect p-4 rounded-lg">
-              <div class="flex justify-between items-center mb-2">
-                <h4 class="font-semibold">Top Earning Service</h4>
-                <span class="text-green-400">+<?php echo $percentageThisMonth ?>% ↑</span>
-              </div>
-              <div class="flex items-center">
-                <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mr-4">
-                  <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                  </svg>
-                </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div class="glass-effect p-4 rounded-lg">
+         <div class="flex justify-between items-center mb-2">
+           <h4 class="font-semibold">Top Earning Service</h4>
+           <span class="text-green-400">+<?php echo $percentageThisMonth ?>% ↑</span>
+         </div>
+         <div class="flex items-center">
+           <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mr-4">
+             <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+             </svg>
+           </div>
 
-                <div>
-                  <div class="font-bold">Private Video Chat</div>
-                  <div class="text-sm text-white/60">$<?php echo $totalAmount_month ?> this month</div>
-                </div>
-              </div>
-            </div>
-            <div class="glass-effect p-4 rounded-lg">
-              <div class="flex justify-between items-center mb-2">
-                <h4 class="font-semibold">Most Popular Time</h4>
-                <span class="text-blue-400">Consistent ↔</span>
-              </div>
-              <div class="flex items-center">
-                <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mr-4">
-                  <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                  </svg>
-                </div>
+           <div>
+             <div class="font-bold">Private Video Chat</div>
+             <div class="text-sm text-white/60">$<?php echo $totalAmount_month ?> this month</div>
+           </div>
+         </div>
+       </div>
+       <div class="glass-effect p-4 rounded-lg">
+         <div class="flex justify-between items-center mb-2">
+           <h4 class="font-semibold">Most Popular Time</h4>
+           <span class="text-blue-400">Consistent ↔</span>
+         </div>
+         <div class="flex items-center">
+           <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mr-4">
+             <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+             </svg>
+           </div>
 
-                <?php
-                $timeRange = getTopEarningTimeSlot($con, $user_id);
-                $topDays = getTopEarningDays($con, $user_id);
-                ?>
-                <div>
-                  <div class="font-bold"><strong><?php echo $timeRange ?></strong></div>
-                  <div class="text-sm text-white/60"> <?php echo implode(" & ", $topDays); ?></div>
-                </div>
-              </div>
-            </div>
-          </div>
+           <?php
+           $timeRange = getTopEarningTimeSlot($con, $user_id);
+           $topDays = getTopEarningDays($con, $user_id);
+           ?>
+           <div>
+             <div class="font-bold"><strong><?php echo $timeRange ?></strong></div>
+             <div class="text-sm text-white/60"> <?php echo implode(" & ", $topDays); ?></div>
+           </div>
+         </div>
+       </div>
+     </div>
 
-        */ ?>
+   */ ?>
 
 
       </div>
@@ -3183,8 +3590,12 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <h3 class="text-xl font-bold gradient-text mb-6">Active Services</h3>
 
         <div class="token-info flex items-center mb-6">
-          <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token">
-          <span>You currently have <b> <?php echo $userDetails['balance'] ?> TLM tokens</b> available for withdrawal. <a href="#" class="text-purple-400 underline" onclick="openWithdrawModal()">Withdraw to bank account</a></span>
+          <img loading="lazy"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+            alt="TLM Token" class="tlm-token">
+          <span>You currently have <b> <?php echo $userDetails['balance'] ?> TLM tokens</b> available for withdrawal. <a
+              href="#" class="text-purple-400 underline" onclick="openWithdrawModal()">Withdraw to bank
+              account</a></span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 service-last-form-boxes">
@@ -3207,8 +3618,12 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
 
                   <div class="flex items-center">
-                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['private_chat_token']; ?></span>
+                    <img loading="lazy"
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                      alt="TLM Token" class="tlm-token mr-1">
+                    <span
+                      class="font-bold mr-2"><?php if (!empty($extra_details))
+                        echo $extra_details['private_chat_token']; ?></span>
                     <span class="text-sm text-white/60">min</span>
                   </div>
                 </div>
@@ -3219,22 +3634,22 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
               <?php /* if (!empty($extra_details) && !empty($extra_details['group_chat_tocken'])) { ?>
 
-                <div class="flex justify-between items-center">
-                  <div>
-                    <div class="font-medium">Group Chat</div>
-                    <div class="text-sm text-white/60">3+ viewers</div>
-                  </div>
+           <div class="flex justify-between items-center">
+             <div>
+               <div class="font-medium">Group Chat</div>
+               <div class="text-sm text-white/60">3+ viewers</div>
+             </div>
 
 
-                  <div class="flex items-center">
-                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['group_chat_tocken']; ?></span>
-                    <span class="text-sm text-white/60">/hour/person</span>
-                  </div>
+             <div class="flex items-center">
+               <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
+               <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['group_chat_tocken']; ?></span>
+               <span class="text-sm text-white/60">/hour/person</span>
+             </div>
 
-                </div>
+           </div>
 
-              <?php }  */ ?>
+         <?php }  */ ?>
 
               <!-- <div class="flex justify-between items-center">
                 <div>
@@ -3263,7 +3678,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           <div class="glass-effect p-6 rounded-xl">
             <div class="flex justify-between items-center mb-4">
               <h4 class="text-lg font-bold">👥 Meet Services</h4>
-              <div class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm"><?php if (!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes') { ?> Active <?php } else { ?> Inactive <?php } ?> </div>
+              <div class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">
+                <?php if (!empty($extra_details['work_escort']) && $extra_details['work_escort'] == 'Yes') { ?> Active
+                <?php } else { ?> Inactive <?php } ?> </div>
             </div>
 
             <div class="space-y-4">
@@ -3277,8 +3694,12 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   </div>
 
                   <div class="flex items-center">
-                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?></span>
+                    <img loading="lazy"
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                      alt="TLM Token" class="tlm-token mr-1">
+                    <span
+                      class="font-bold mr-2"><?php if (!empty($extra_details))
+                        echo $extra_details['in_per_hour']; ?></span>
                     <span class="text-sm text-white/60">flat rate</span>
                   </div>
 
@@ -3293,8 +3714,12 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                     <div class="text-sm text-white/60">Social engagements after the first hour</div>
                   </div>
                   <div class="flex items-center">
-                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?></span>
+                    <img loading="lazy"
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                      alt="TLM Token" class="tlm-token mr-1">
+                    <span
+                      class="font-bold mr-2"><?php if (!empty($extra_details))
+                        echo $extra_details['extended_rate']; ?></span>
                     <span class="text-sm text-white/60">/hour</span>
                   </div>
                 </div>
@@ -3308,15 +3733,19 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                     <div class="text-sm text-white/60">Evening social or casual meetups (8 hours)</div>
                   </div>
                   <div class="flex items-center">
-                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?></span>
+                    <img loading="lazy"
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                      alt="TLM Token" class="tlm-token mr-1">
+                    <span
+                      class="font-bold mr-2"><?php if (!empty($extra_details))
+                        echo $extra_details['in_overnight']; ?></span>
                     <span class="text-sm text-white/60">flat rate</span>
                   </div>
                 </div>
 
               <?php } ?>
-			  
-			  <?php if (!empty($extra_details) && !empty($extra_details['fullday_social'])) { ?>
+
+              <?php if (!empty($extra_details) && !empty($extra_details['fullday_social'])) { ?>
 
                 <div class="flex justify-between items-center">
                   <div>
@@ -3324,8 +3753,12 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                     <div class="text-sm text-white/60">Full-day sessions (24 hours)</div>
                   </div>
                   <div class="flex items-center">
-                    <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png" alt="TLM Token" class="tlm-token mr-1">
-                    <span class="font-bold mr-2"><?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?></span>
+                    <img loading="lazy"
+                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-dPT8gwLMmuwlVIxJWaMYzDTERZWhZB.png"
+                      alt="TLM Token" class="tlm-token mr-1">
+                    <span
+                      class="font-bold mr-2"><?php if (!empty($extra_details))
+                        echo $extra_details['fullday_social']; ?></span>
                     <span class="text-sm text-white/60">flat rate</span>
                   </div>
                 </div>
@@ -3387,7 +3820,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
         <?php
 
-        $privacy_setting =  getModelPrivacySettings($userDetails['unique_id']);
+        $privacy_setting = getModelPrivacySettings($userDetails['unique_id']);
 
         $premium_check = CheckPremiumAccess($userDetails['id']);
         ?>
@@ -3395,27 +3828,31 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           <!-- Search Control -->
           <div>
             <h4 class="text-lg font-semibold mb-4">Search Control</h4>
-            <p class="text-white/70 text-sm mb-4">The following groups of people are able to see your profile in search and send you messages:</p>
+            <p class="text-white/70 text-sm mb-4">The following groups of people are able to see your profile in search
+              and send you messages:</p>
 
             <div class="space-y-4">
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Males looking for Females</label>
                 <label class="toggle-switch">
-                  <input type="checkbox" value="Y" <?php if ($privacy_setting['male_to_female']) { ?> checked <?php } ?> onchange="updateSettings(this,'male_to_female')">
+                  <input type="checkbox" value="Y" <?php if ($privacy_setting['male_to_female']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'male_to_female')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Males looking for Males</label>
                 <label class="toggle-switch">
-                  <input type="checkbox" value="Y" <?php if ($privacy_setting['male_to_male']) { ?> checked <?php } ?> onchange="updateSettings(this,'male_to_male')">
+                  <input type="checkbox" value="Y" <?php if ($privacy_setting['male_to_male']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'male_to_male')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Females looking for Males</label>
                 <label class="toggle-switch">
-                  <input type="checkbox" value="Y" <?php if ($privacy_setting['female_to_male']) { ?> checked <?php } ?> onchange="updateSettings(this,'female_to_male')">
+                  <input type="checkbox" value="Y" <?php if ($privacy_setting['female_to_male']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'female_to_male')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3429,7 +3866,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Transgender</label>
                 <label class="toggle-switch">
-                  <input type="checkbox" value="Y" <?php if ($privacy_setting['transgender']) { ?> checked <?php } ?> onchange="updateSettings(this,'transgender')">
+                  <input type="checkbox" value="Y" <?php if ($privacy_setting['transgender']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'transgender')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3443,8 +3881,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
       <!-- Premium Features -->
       <div class="form-section <?php if ($premium_check == false) {
-                                  echo 'premiumcheck';
-                                } ?>">
+        echo 'premiumcheck';
+      } ?>">
         <h3 class="text-xl font-bold gradient-text mb-6">👑 Premium Features</h3>
 
         <div class="space-y-6">
@@ -3455,10 +3893,12 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               <div class="flex justify-between items-center">
                 <div>
                   <label class="form-label mb-0"> <?php echo $country_name['name'] ?> Users Only</label>
-                  <p class="text-sm text-white/60">Hide your profile from people who aren't in <?php echo $country_name['name'] ?> right now.</p>
+                  <p class="text-sm text-white/60">Hide your profile from people who aren't in
+                    <?php echo $country_name['name'] ?> right now.</p>
                 </div>
                 <label class="toggle-switch">
-                  <input type="checkbox" value="Y" <?php if ($privacy_setting['country_enable']) { ?> checked <?php } ?> onchange="updateSettings(this,'country_enable')">
+                  <input type="checkbox" value="Y" <?php if ($privacy_setting['country_enable']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'country_enable')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3467,8 +3907,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
           <!-- Profile Visibility -->
           <div class="<?php if ($premium_check == false) {
-                        echo 'premiumcheck';
-                      } ?>">
+            echo 'premiumcheck';
+          } ?>">
             <h4 class="text-lg font-semibold mb-4">Profile Visibility</h4>
             <div class="space-y-4 profit-vis">
               <div class="flex justify-between items-center">
@@ -3477,7 +3917,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   <p class="text-sm text-white/60">Include your profile in the search results.</p>
                 </div>
                 <label class="toggle-switch">
-                  <input type="checkbox" <?php if ($privacy_setting['profile_visibility']) { ?> checked <?php } ?> onchange="updateSettings(this,'profile_visibility')">
+                  <input type="checkbox" <?php if ($privacy_setting['profile_visibility']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'profile_visibility')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3487,7 +3928,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   <p class="text-sm text-white/60">Only show my profile to people who match my age range</p>
                 </div>
                 <label class="toggle-switch">
-                  <input type="checkbox" <?php if ($privacy_setting['apply_age_range']) { ?> checked <?php } ?> onchange="updateSettings(this,'apply_age_range')">
+                  <input type="checkbox" <?php if ($privacy_setting['apply_age_range']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'apply_age_range')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3501,21 +3943,21 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
 
                 <?php /* 
-                    <span class="text-sm">18</span>
+               <span class="text-sm">18</span>
 
-                    <?php
+               <?php
 
-                    $age_range = $privacy_setting['age_range'] ?? 18;
+               $age_range = $privacy_setting['age_range'] ?? 18;
 
-                    if ($age_range == 65) {
-                      $age_range = $age_range . '+';
-                    }
+               if ($age_range == 65) {
+                 $age_range = $age_range . '+';
+               }
 
-                    ?>
-                    <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range'] ?? 18  ?>" class="flex-1 accent-purple-500" oninput="updateAgeDisplay(this)" onchange="updateSettings(this,'age_range')">
-                    <span class="text-sm" id="age_value_display"> <?php echo $age_range ?></span>
+               ?>
+               <input type="range" min="18" max="65" value="<?php echo $privacy_setting['age_range'] ?? 18  ?>" class="flex-1 accent-purple-500" oninput="updateAgeDisplay(this)" onchange="updateSettings(this,'age_range')">
+               <span class="text-sm" id="age_value_display"> <?php echo $age_range ?></span>
 
-                    */ ?>
+               */ ?>
 
                 <div class="progress-wrapper" data-min="18" data-name="age" data-max="65">
 
@@ -3531,9 +3973,11 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                     <span class="maxValue range-value">65</span>
                   </div>
 
-                  <input type="hidden" name="age_max" id="age_max" onchange="updateSettings(this,'age_max')" value="<?php echo $privacy_setting['age_max'] ?? 65;  ?>">
+                  <input type="hidden" name="age_max" id="age_max" onchange="updateSettings(this,'age_max')"
+                    value="<?php echo $privacy_setting['age_max'] ?? 65; ?>">
 
-                  <input type="hidden" name="age_min" id="age_min" onchange="updateSettings(this,'age_min')" value="<?php echo $privacy_setting['age_min'] ?? 18;  ?>">
+                  <input type="hidden" name="age_min" id="age_min" onchange="updateSettings(this,'age_min')"
+                    value="<?php echo $privacy_setting['age_min'] ?? 18; ?>">
 
                 </div>
 
@@ -3543,8 +3987,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
           <!-- Message Privacy -->
           <div class="<?php if ($premium_check == false) {
-                        echo 'premiumcheck';
-                      } ?>">
+            echo 'premiumcheck';
+          } ?>">
 
             <h4 class="text-lg font-semibold mb-4">Message Privacy</h4>
             <div class="space-y-4 mmsge-priva">
@@ -3554,17 +3998,20 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   <p class="text-sm text-white/60">Choose if others can know you read the message or not</p>
                 </div>
                 <label class="toggle-switch">
-                  <input type="checkbox" <?php if ($privacy_setting['read_receipt']) { ?> checked <?php } ?> onchange="updateSettings(this,'read_receipt')">
+                  <input type="checkbox" <?php if ($privacy_setting['read_receipt']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'read_receipt')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
               <div class="flex justify-between items-center">
                 <div>
                   <label class="form-label mb-0">👀 Show My Visits</label>
-                  <p class="text-sm text-white/60">When you visit someone's profile they will see that you are looking if this is enabled.</p>
+                  <p class="text-sm text-white/60">When you visit someone's profile they will see that you are looking
+                    if this is enabled.</p>
                 </div>
                 <label class="toggle-switch">
-                  <input type="checkbox" <?php if ($privacy_setting['show_visit']) { ?> checked <?php } ?> onchange="updateSettings(this,'show_visit')">
+                  <input type="checkbox" <?php if ($privacy_setting['show_visit']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'show_visit')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3574,7 +4021,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   <p class="text-sm text-white/60">When you appear offline your last active time will stop updating.</p>
                 </div>
                 <label class="toggle-switch">
-                  <input type="checkbox" <?php if ($privacy_setting['appear_offline']) { ?> checked <?php } ?> onchange="updateSettings(this,'appear_offline')">
+                  <input type="checkbox" <?php if ($privacy_setting['appear_offline']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'appear_offline')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3584,7 +4032,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                   <p class="text-sm text-white/60">Control if other users can see when you joined.</p>
                 </div>
                 <label class="toggle-switch">
-                  <input type="checkbox" <?php if ($privacy_setting['show_join_date']) { ?> checked <?php } ?> onchange="updateSettings(this,'show_join_date')">
+                  <input type="checkbox" <?php if ($privacy_setting['show_join_date']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'show_join_date')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3593,17 +4042,19 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
           <!-- Message Priority -->
           <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 <?php if ($premium_check == false) {
-                                                                                    echo 'premiumcheck';
-                                                                                  } ?>">
+            echo 'premiumcheck';
+          } ?>">
             <div class="flex justify-between items-center mb-4 msg-priority">
               <div>
                 <h4 class="text-lg font-semibold text-purple-400">📬 Message Priority</h4>
-                <p class="text-sm text-white/70">Your messages will appear at the top of recipients inboxes - ahead of free members messages. This greatly increases your chance of a reply.</p>
+                <p class="text-sm text-white/70">Your messages will appear at the top of recipients inboxes - ahead of
+                  free members messages. This greatly increases your chance of a reply.</p>
               </div>
 
               <label class="toggle-switch advance-tog-page">
 
-                <input type="checkbox" <?php if ($privacy_setting['priority_message']) { ?> checked <?php } ?> onchange="updateSettings(this,'priority_message')">
+                <input type="checkbox" <?php if ($privacy_setting['priority_message']) { ?> checked <?php } ?>
+                  onchange="updateSettings(this,'priority_message')">
 
                 <span class="toggle-slider"></span>
 
@@ -3615,8 +4066,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
           <!-- Advanced Search Filters -->
           <div class="<?php if ($premium_check == false) {
-                        echo 'premiumcheck';
-                      } ?>">
+            echo 'premiumcheck';
+          } ?>">
 
             <h4 class="text-lg font-semibold mb-4">🔍 Advanced Search Filters</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 advans-fit">
@@ -3625,10 +4076,10 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <div class="flex items-center space-x-4">
 
                   <?php /*
-                  <span class="text-sm">120cm</span>
-                  <input type="range" min="120" max="200" value="<?php echo $privacy_setting['height_range'] ?? 170  ?>" class="flex-1 accent-purple-500" oninput="updateHeightDisplay(this)" onchange="updateSettings(this,'height_range')">
-                  <span class="text-sm"><span id="height_value_display"><?php echo $privacy_setting['height_range'] ?? 120  ?></span>cm</span>
-                */ ?>
+             <span class="text-sm">120cm</span>
+             <input type="range" min="120" max="200" value="<?php echo $privacy_setting['height_range'] ?? 170  ?>" class="flex-1 accent-purple-500" oninput="updateHeightDisplay(this)" onchange="updateSettings(this,'height_range')">
+             <span class="text-sm"><span id="height_value_display"><?php echo $privacy_setting['height_range'] ?? 120  ?></span>cm</span>
+           */ ?>
 
                   <div class="progress-wrapper" data-min="120" data-name="height" data-max="200">
 
@@ -3644,9 +4095,11 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                       <span class="maxValue range-value">200</span>
                     </div>
 
-                    <input type="hidden" name="height_max" id="height_max" onchange="updateSettings(this,'height_max')" value="<?php echo $privacy_setting['height_max'] ?? 200;  ?>">
+                    <input type="hidden" name="height_max" id="height_max" onchange="updateSettings(this,'height_max')"
+                      value="<?php echo $privacy_setting['height_max'] ?? 200; ?>">
 
-                    <input type="hidden" name="height_min" id="height_min" onchange="updateSettings(this,'height_min')" value="<?php echo $privacy_setting['height_min'] ?? 120;  ?>">
+                    <input type="hidden" name="height_min" id="height_min" onchange="updateSettings(this,'height_min')"
+                      value="<?php echo $privacy_setting['height_min'] ?? 120; ?>">
 
                   </div>
 
@@ -3658,10 +4111,10 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 <div class="flex items-center space-x-4">
 
                   <?php /*
-                  <span class="text-sm">30kg</span>
-                  <input type="range" min="30" max="150" value="<?php echo $privacy_setting['weight_range'] ?? 60  ?>" class="flex-1 accent-purple-500" oninput="updateWeightDisplay(this)" onchange="updateSettings(this,'weight_range')">
-                  <span class="text-sm"><span id="weight_value_display"><?php echo $privacy_setting['weight_range'] ?? 60  ?></span>kg</span>
-                */ ?>
+             <span class="text-sm">30kg</span>
+             <input type="range" min="30" max="150" value="<?php echo $privacy_setting['weight_range'] ?? 60  ?>" class="flex-1 accent-purple-500" oninput="updateWeightDisplay(this)" onchange="updateSettings(this,'weight_range')">
+             <span class="text-sm"><span id="weight_value_display"><?php echo $privacy_setting['weight_range'] ?? 60  ?></span>kg</span>
+           */ ?>
 
                   <div class="progress-wrapper" data-min="30" data-name="weight" data-max="150">
 
@@ -3677,9 +4130,11 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                       <span class="maxValue range-value">150</span>
                     </div>
 
-                    <input type="hidden" name="weight_max" id="weight_max" onchange="updateSettings(this,'weight_max')" value="<?php echo $privacy_setting['weight_max'] ?? 150;  ?>">
+                    <input type="hidden" name="weight_max" id="weight_max" onchange="updateSettings(this,'weight_max')"
+                      value="<?php echo $privacy_setting['weight_max'] ?? 150; ?>">
 
-                    <input type="hidden" name="weight_min" id="weight_min" onchange="updateSettings(this,'weight_min')" value="<?php echo $privacy_setting['weight_min'] ?? 30;  ?>">
+                    <input type="hidden" name="weight_min" id="weight_min" onchange="updateSettings(this,'weight_min')"
+                      value="<?php echo $privacy_setting['weight_min'] ?? 30; ?>">
 
                   </div>
 
@@ -3692,23 +4147,30 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
                 <label class="form-label">Children Preference</label>
-                <select class="form-select" name="children_preference" onchange="updateSettings(this,'children_preference')">
+                <select class="form-select" name="children_preference"
+                  onchange="updateSettings(this,'children_preference')">
                   <option value="">Any</option>
-                  <option value="no-children" <?php if ($privacy_setting['children_preference'] == 'no-children') { ?> selected <?php } ?>>No Children</option>
+                  <option value="no-children" <?php if ($privacy_setting['children_preference'] == 'no-children') { ?>
+                      selected <?php } ?>>No Children</option>
                   <option value="wants-children" <?php if ($privacy_setting['children_preference'] == 'wants-children') { ?> selected <?php } ?>>Wants Children</option>
-                  <option value="has-children" <?php if ($privacy_setting['children_preference'] == 'has-children') { ?> selected <?php } ?>>Has Children</option>
+                  <option value="has-children" <?php if ($privacy_setting['children_preference'] == 'has-children') { ?>
+                      selected <?php } ?>>Has Children</option>
                 </select>
               </div>
               <div>
                 <label class="form-label">Education Level</label>
                 <select class="form-select" name="education_level" onchange="updateSettings(this,'education_level')">
                   <option value="">Any</option>
-                  <option value="high-school" <?php if ($privacy_setting['education_level'] == 'high-school') { ?> selected <?php } ?>>High School</option>
+                  <option value="high-school" <?php if ($privacy_setting['education_level'] == 'high-school') { ?>
+                      selected <?php } ?>>High School</option>
                   <option value="college" <?php if ($privacy_setting['education_level'] == 'college') { ?> selected <?php } ?>> College</option>
-                  <option value="university" <?php if ($privacy_setting['education_level'] == 'university') { ?> selected <?php } ?>>University</option>
-                  <option value="graduate" <?php if ($privacy_setting['education_level'] == 'graduate') { ?> selected <?php } ?>>Graduate Degree</option>
+                  <option value="university" <?php if ($privacy_setting['education_level'] == 'university') { ?> selected
+                    <?php } ?>>University</option>
+                  <option value="graduate" <?php if ($privacy_setting['education_level'] == 'graduate') { ?> selected
+                    <?php } ?>>Graduate Degree</option>
                   <option value="masters" <?php if ($privacy_setting['education_level'] == 'masters') { ?> selected <?php } ?>>Masters</option>
-                  <option value="phd" <?php if ($privacy_setting['education_level'] == 'phd') { ?> selected <?php } ?>>PhD</option>
+                  <option value="phd" <?php if ($privacy_setting['education_level'] == 'phd') { ?> selected <?php } ?>>PhD
+                  </option>
                 </select>
               </div>
             </div>
@@ -3732,7 +4194,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
               <div class="mt-4">
                 <label class="form-label">Auto Message Template</label>
-                <textarea class="form-input" rows="3" onchange="updateSettings(this,'message_template')" name="message_template" placeholder="The following message will be sent when you like someone from browse..."><?php echo $privacy_setting['message_template'] ?></textarea>
+                <textarea class="form-input" rows="3" onchange="updateSettings(this,'message_template')"
+                  name="message_template"
+                  placeholder="The following message will be sent when you like someone from browse..."><?php echo $privacy_setting['message_template'] ?></textarea>
                 <p class="help-text">If username appears in the message it will be replaced with their username</p>
               </div>
             </div>
@@ -3745,14 +4209,16 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Verified Photos Only</label>
                 <label class="toggle-switch">
-                  <input type="checkbox" name="verified_photos" <?php if ($privacy_setting['verified_photos']) { ?> checked <?php } ?> onchange="updateSettings(this,'verified_photos')">
+                  <input type="checkbox" name="verified_photos" <?php if ($privacy_setting['verified_photos']) { ?>
+                      checked <?php } ?> onchange="updateSettings(this,'verified_photos')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
               <div class="flex justify-between items-center">
                 <label class="form-label mb-0">Exclude messaged already</label>
                 <label class="toggle-switch">
-                  <input type="checkbox" name="exclude_message_already" <?php if ($privacy_setting['exclude_message_already']) { ?> checked <?php } ?> onchange="updateSettings(this,'exclude_message_already')">
+                  <input type="checkbox" name="exclude_message_already" <?php if ($privacy_setting['exclude_message_already']) { ?> checked <?php } ?>
+                    onchange="updateSettings(this,'exclude_message_already')">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3783,7 +4249,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       <div class="modal-header">
         <h2 class="modal-title">Success</h2>
         <button class="close-modal" id="closeTipModal" type="button" onclick="CloseModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -3831,26 +4298,46 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       <div class="modal-scr">
         <div class="modal-glow"></div>
         <div class="floating-particles">
-          <div class="particle" style="left: 18.2547%; top: 97.2752%; animation-delay: 0.758057s; animation-duration: 3.44526s;"></div>
-          <div class="particle" style="left: 91.6393%; top: 83.4679%; animation-delay: 1.28966s; animation-duration: 3.4241s;"></div>
-          <div class="particle" style="left: 35.5306%; top: 14.1456%; animation-delay: 1.85406s; animation-duration: 3.74743s;"></div>
-          <div class="particle" style="left: 23.8738%; top: 15.3707%; animation-delay: 0.519636s; animation-duration: 5.54065s;"></div>
-          <div class="particle" style="left: 39.8741%; top: 30.5484%; animation-delay: 3.81024s; animation-duration: 3.06694s;"></div>
-          <div class="particle" style="left: 42.1726%; top: 80.4956%; animation-delay: 4.80411s; animation-duration: 5.78949s;"></div>
-          <div class="particle" style="left: 22.2514%; top: 64.663%; animation-delay: 2.75652s; animation-duration: 5.11737s;"></div>
-          <div class="particle" style="left: 31.7404%; top: 25.8371%; animation-delay: 3.89204s; animation-duration: 5.42569s;"></div>
-          <div class="particle" style="left: 44.2852%; top: 93.2209%; animation-delay: 4.37857s; animation-duration: 3.6246s;"></div>
-          <div class="particle" style="left: 93.6433%; top: 9.80162%; animation-delay: 4.62046s; animation-duration: 3.23969s;"></div>
-          <div class="particle" style="left: 22.5348%; top: 68.3247%; animation-delay: 4.82203s; animation-duration: 4.54965s;"></div>
-          <div class="particle" style="left: 39.099%; top: 34.0638%; animation-delay: 5.32289s; animation-duration: 4.81376s;"></div>
-          <div class="particle" style="left: 56.2962%; top: 44.955%; animation-delay: 5.94527s; animation-duration: 5.43335s;"></div>
-          <div class="particle" style="left: 15.9162%; top: 64.8279%; animation-delay: 5.03373s; animation-duration: 3.7528s;"></div>
-          <div class="particle" style="left: 87.3145%; top: 13.1004%; animation-delay: 1.2866s; animation-duration: 3.49423s;"></div>
-          <div class="particle" style="left: 8.69738%; top: 34.3764%; animation-delay: 0.716626s; animation-duration: 5.06387s;"></div>
-          <div class="particle" style="left: 78.0713%; top: 53.6845%; animation-delay: 5.15081s; animation-duration: 3.76071s;"></div>
-          <div class="particle" style="left: 48.7227%; top: 7.12273%; animation-delay: 5.24971s; animation-duration: 5.56117s;"></div>
-          <div class="particle" style="left: 70.0328%; top: 35.1872%; animation-delay: 5.79461s; animation-duration: 5.15832s;"></div>
-          <div class="particle" style="left: 62.4816%; top: 7.0639%; animation-delay: 5.22198s; animation-duration: 4.75093s;"></div>
+          <div class="particle"
+            style="left: 18.2547%; top: 97.2752%; animation-delay: 0.758057s; animation-duration: 3.44526s;"></div>
+          <div class="particle"
+            style="left: 91.6393%; top: 83.4679%; animation-delay: 1.28966s; animation-duration: 3.4241s;"></div>
+          <div class="particle"
+            style="left: 35.5306%; top: 14.1456%; animation-delay: 1.85406s; animation-duration: 3.74743s;"></div>
+          <div class="particle"
+            style="left: 23.8738%; top: 15.3707%; animation-delay: 0.519636s; animation-duration: 5.54065s;"></div>
+          <div class="particle"
+            style="left: 39.8741%; top: 30.5484%; animation-delay: 3.81024s; animation-duration: 3.06694s;"></div>
+          <div class="particle"
+            style="left: 42.1726%; top: 80.4956%; animation-delay: 4.80411s; animation-duration: 5.78949s;"></div>
+          <div class="particle"
+            style="left: 22.2514%; top: 64.663%; animation-delay: 2.75652s; animation-duration: 5.11737s;"></div>
+          <div class="particle"
+            style="left: 31.7404%; top: 25.8371%; animation-delay: 3.89204s; animation-duration: 5.42569s;"></div>
+          <div class="particle"
+            style="left: 44.2852%; top: 93.2209%; animation-delay: 4.37857s; animation-duration: 3.6246s;"></div>
+          <div class="particle"
+            style="left: 93.6433%; top: 9.80162%; animation-delay: 4.62046s; animation-duration: 3.23969s;"></div>
+          <div class="particle"
+            style="left: 22.5348%; top: 68.3247%; animation-delay: 4.82203s; animation-duration: 4.54965s;"></div>
+          <div class="particle"
+            style="left: 39.099%; top: 34.0638%; animation-delay: 5.32289s; animation-duration: 4.81376s;"></div>
+          <div class="particle"
+            style="left: 56.2962%; top: 44.955%; animation-delay: 5.94527s; animation-duration: 5.43335s;"></div>
+          <div class="particle"
+            style="left: 15.9162%; top: 64.8279%; animation-delay: 5.03373s; animation-duration: 3.7528s;"></div>
+          <div class="particle"
+            style="left: 87.3145%; top: 13.1004%; animation-delay: 1.2866s; animation-duration: 3.49423s;"></div>
+          <div class="particle"
+            style="left: 8.69738%; top: 34.3764%; animation-delay: 0.716626s; animation-duration: 5.06387s;"></div>
+          <div class="particle"
+            style="left: 78.0713%; top: 53.6845%; animation-delay: 5.15081s; animation-duration: 3.76071s;"></div>
+          <div class="particle"
+            style="left: 48.7227%; top: 7.12273%; animation-delay: 5.24971s; animation-duration: 5.56117s;"></div>
+          <div class="particle"
+            style="left: 70.0328%; top: 35.1872%; animation-delay: 5.79461s; animation-duration: 5.15832s;"></div>
+          <div class="particle"
+            style="left: 62.4816%; top: 7.0639%; animation-delay: 5.22198s; animation-duration: 4.75093s;"></div>
         </div>
 
 
@@ -3863,7 +4350,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         </div>
 
         <h1 class="main-headline">Transform Your Life Into Your Business</h1>
-        <p class="sub-headline">Join an elite community of creators who've discovered the secret to unlimited freedom and success</p>
+        <p class="sub-headline">Join an elite community of creators who've discovered the secret to unlimited freedom
+          and success</p>
 
         <div class="benefits-grid">
           <div class="benefit-item">
@@ -3972,13 +4460,16 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       </div>
 
       <div class="header">
-        <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="tlm-logo">
+        <img loading="lazy"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png"
+          alt="TLM Token" class="tlm-logo">
         <h2 class="title">Unlock Elite Access</h2>
         <p class="subtitle">Join premium members and dominate the streaming experience</p>
       </div>
 
       <div class="first-time-alert">
-        <span class="fire-emoji">🔥</span> FIRST-TIME USER EXCLUSIVE: $39 & $149 Limited Time Deal - Expires in 24 Hours of Joining! <span class="fire-emoji">🔥</span>
+        <span class="fire-emoji">🔥</span> FIRST-TIME USER EXCLUSIVE: $39 & $149 Limited Time Deal - Expires in 24 Hours
+        of Joining! <span class="fire-emoji">🔥</span>
       </div>
 
       <div class="promo-banner">
@@ -4013,41 +4504,35 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           <div class="plan-name">Basic Premium</div>
           <div class="price-container">
             <?php if ($discountPriceShow) { ?>
-              <div class="original-price"
-                data-monthly-orig="<?php echo $premium_amounts['basic_without_discount']; ?>"
+              <div class="original-price" data-monthly-orig="<?php echo $premium_amounts['basic_without_discount']; ?>"
                 data-annual-orig="<?php echo $premium_amounts['basic_without_discount_yearly']; ?>">
                 $<?php echo $premium_amounts['basic_without_discount']; ?>
               </div>
-              <div class="price"
-                data-monthly="<?php echo $premium_amounts['basic_with_discount']; ?>"
+              <div class="price" data-monthly="<?php echo $premium_amounts['basic_with_discount']; ?>"
                 data-annual="<?php echo $premium_amounts['basic_with_discount_yearly']; ?>">
                 $<?php echo $premium_amounts['basic_with_discount']; ?>
               </div>
-              <div class="price-period"
-                data-monthly-period="per month"
-                data-annual-period="per year">
+              <div class="price-period" data-monthly-period="per month" data-annual-period="per year">
                 per month
               </div>
-              <div class="savings-text show"
-                data-monthly-save="Save $<?php echo $basic_monthly_savings; ?>/month!"
+              <div class="savings-text show" data-monthly-save="Save $<?php echo $basic_monthly_savings; ?>/month!"
                 data-annual-save="Save $<?php echo $basic_annual_savings; ?>/year!">
                 Save $<?php echo $basic_monthly_savings; ?>/month!
               </div>
             <?php } else { ?>
 
-              <div class="price"
-                data-monthly="<?php echo $premium_amounts['basic_without_discount']; ?>"
+              <div class="price" data-monthly="<?php echo $premium_amounts['basic_without_discount']; ?>"
                 data-annual="<?php echo $premium_amounts['basic_without_discount_yearly']; ?>">
                 $<?php echo $premium_amounts['basic_without_discount']; ?>
               </div>
-              <div class="price-period"
-                data-monthly-period="per month"
-                data-annual-period="per year">
+              <div class="price-period" data-monthly-period="per month" data-annual-period="per year">
                 per month
               </div>
             <?php } ?>
             <div class="bonus-tokens">
-              <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+              <img loading="lazy"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png"
+                alt="TLM Token" class="token-icon">
               <span data-monthly-tokens="500" data-annual-tokens="1000">+ 500 TLM tokens</span>
             </div>
           </div>
@@ -4062,45 +4547,40 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           <div class="plan-name">Diamond Elite</div>
           <div class="price-container">
             <?php if ($discountPriceShow) { ?>
-              <div class="original-price"
-                data-monthly-orig="<?php echo $premium_amounts['diamond_without_discount']; ?>"
+              <div class="original-price" data-monthly-orig="<?php echo $premium_amounts['diamond_without_discount']; ?>"
                 data-annual-orig="<?php echo $premium_amounts['diamond_without_discount_yearly']; ?>">
                 $<?php echo $premium_amounts['diamond_without_discount']; ?>
               </div>
-              <div class="price"
-                data-monthly="<?php echo $premium_amounts['diamond_with_discount']; ?>"
+              <div class="price" data-monthly="<?php echo $premium_amounts['diamond_with_discount']; ?>"
                 data-annual="<?php echo $premium_amounts['diamond_with_discount_yearly']; ?>">
                 $<?php echo $premium_amounts['diamond_with_discount']; ?>
               </div>
-              <div class="price-period"
-                data-monthly-period="per month"
-                data-annual-period="per year">
+              <div class="price-period" data-monthly-period="per month" data-annual-period="per year">
                 per month
               </div>
-              <div class="savings-text show"
-                data-monthly-save="Save $<?php echo $diamond_monthly_savings; ?>/month!"
+              <div class="savings-text show" data-monthly-save="Save $<?php echo $diamond_monthly_savings; ?>/month!"
                 data-annual-save="Save $<?php echo $diamond_annual_savings; ?>/year!">
                 Save $<?php echo $diamond_monthly_savings; ?>/month!
               </div>
             <?php } else { ?>
 
-              <div class="price"
-                data-monthly="<?php echo $premium_amounts['diamond_without_discount']; ?>"
+              <div class="price" data-monthly="<?php echo $premium_amounts['diamond_without_discount']; ?>"
                 data-annual="<?php echo $premium_amounts['diamond_without_discount_yearly']; ?>">
                 $<?php echo $premium_amounts['diamond_without_discount']; ?>
               </div>
-              <div class="price-period"
-                data-monthly-period="per month"
-                data-annual-period="per year">
+              <div class="price-period" data-monthly-period="per month" data-annual-period="per year">
                 per month
               </div>
             <?php } ?>
             <div class="bonus-tokens">
-              <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+              <img loading="lazy"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png"
+                alt="TLM Token" class="token-icon">
               <span data-monthly-tokens="2000" data-annual-tokens="5000">+ 2,000 TLM tokens</span>
             </div>
           </div>
-          <button class="cta-button cta-elite" onclick="upgradeAccount('monthly', 'diamond')">Claim Diamond Status!</button>
+          <button class="cta-button cta-elite" onclick="upgradeAccount('monthly', 'diamond')">Claim Diamond
+            Status!</button>
         </div>
       </div>
 
@@ -4132,7 +4612,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
       <div class="token-packages-section">
         <div class="token-packages-title">
-          <img loading="lazy" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png" alt="TLM Token" class="token-icon">
+          <img loading="lazy"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TLM-Tokens-KRvoJD0tEUEu7oeJkcKoGXiUSdzQUo.png"
+            alt="TLM Token" class="token-icon">
           Explore Token Packages
         </div>
         <div class="token-packages-subtitle">
@@ -4153,7 +4635,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       <div class="modal-header">
         <h2 class="modal-title">Access Restricted!</h2>
         <button class="close-modal" id="closeTipModal" type="button" onclick="ClosefollowModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -4174,9 +4657,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       <div class="modal-header">
         <h2 class="modal-title">Confirm Profile Image Removal</h2>
         <button class="close-modal" id="closeRemoveProfilePicModal" type="button" onclick="ConformCloseModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -4186,7 +4668,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         <p>Are you sure you want to delete your profile image?</p>
 
         <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
-          <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button" onclick="confirmRemoveProfilePic()">Yes, Remove</button>
+          <button class="btn-primary px-7 sm:px-3 py-6 text-white" type="button"
+            onclick="confirmRemoveProfilePic()">Yes, Remove</button>
 
           <button class="btn btn-secondary" type="button" onclick="ConformCloseModal()">Cancel</button>
         </div>
@@ -4202,7 +4685,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
   <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
 
       let updateCooldown = false;
@@ -4257,10 +4740,10 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
         function makeDraggable($knob, isMin) {
 
-          $knob.on("mousedown touchstart", function(e) {
+          $knob.on("mousedown touchstart", function (e) {
             e.preventDefault();
 
-            $(document).on("mousemove touchmove", function(e2) {
+            $(document).on("mousemove touchmove", function (e2) {
               const clientX = e2.type.includes("touch") ? e2.touches[0].clientX : e2.clientX;
               const rect = $bar[0].getBoundingClientRect();
               let percent = ((clientX - rect.left) / rect.width) * 100;
@@ -4280,7 +4763,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             // $(document).off("mousemove touchmove mouseup touchend");
             // });
 
-            $(document).on("mouseup touchend", function() {
+            $(document).on("mouseup touchend", function () {
               $(document).off("mousemove touchmove mouseup touchend");
 
               updateSettings(document.getElementById(`${filedName}_min`), `${filedName}_min`);
@@ -4295,7 +4778,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         updateUI();
       }
 
-      $(".progress-wrapper").each(function() {
+      $(".progress-wrapper").each(function () {
         initProgressBar($(this));
       });
 
@@ -4303,16 +4786,16 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-      $('.toggle-option').on('click', function() {
+      $('.toggle-option').on('click', function () {
 
         $('.toggle-option').removeClass('active');
         $(this).addClass('active');
 
         const billingType = $(this).data('billing');
 
-        $('.pricing-card').each(function() {
+        $('.pricing-card').each(function () {
           const $card = $(this);
 
           const $originalPriceEl = $card.find('.original-price');
@@ -4403,7 +4886,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           option: ''
         },
         dataType: 'json',
-        success: function(res) {
+        success: function (res) {
           $("#i-hs-state").html('<option value="">Select</option>' + res.list);
           select_hs_state('<?= $userDetails['city'] ?>');
         }
@@ -4422,7 +4905,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           option: ''
         },
         dataType: 'json',
-        success: function(res) {
+        success: function (res) {
           $("#i-hs-city").html('<option value="">Select</option>' + res.list);
         }
       })
@@ -4442,7 +4925,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         cssStyle: 'light-theme',
         hrefTextPrefix: 'javascript:;',
         currentPage: currentPage,
-        onPageClick: function(pageNum, e) {
+        onPageClick: function (pageNum, e) {
           submit_search(pageNum);
           currentPage = pageNum;
         }
@@ -4450,7 +4933,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       });
     }
 
-    $(function() {
+    $(function () {
 
       loadData(1);
     });
@@ -4473,7 +4956,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           action: 'fetch_booking_list',
         },
         dataType: "json",
-        success: function(response) {
+        success: function (response) {
 
           var booking_list = '';
 
@@ -4481,7 +4964,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
             if (response.data.length > 0) {
 
-              $.each(response.data, function(index, booking) {
+              $.each(response.data, function (index, booking) {
 
                 booking_list += `
 
@@ -4508,7 +4991,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                                     </td>
 
                                     <td class="py-4">
-                                      <div class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm inline-block"> ${booking.status??"Pending"}</div>
+                                      <div class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm inline-block"> ${booking.status ?? "Pending"}</div>
                                     </td>
 
 
@@ -4553,7 +5036,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               items: '<?php echo $total_booking ?>',
               itemsOnPage: itemsPerPage,
               cssStyle: "light-theme",
-              onPageClick: function(pageNumber) {
+              onPageClick: function (pageNumber) {
                 loadData(pageNumber);
               }
             });
@@ -4575,7 +5058,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           status: status,
         },
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
 
           if (response.status === 'success') {
 
@@ -4583,7 +5066,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           }
         },
 
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
 
         }
       });
@@ -4608,7 +5091,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         },
         dataType: 'json',
 
-        success: function(res) {
+        success: function (res) {
 
           if (res.status == 'success') {
             $('#preview_prof_img').attr('src', '<?= SITEURL ?>assets/images/user.png');
@@ -4627,7 +5110,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       $('#pic_img_btn').fadeToggle();
     }
 
-    let currentWeightUnit = 'lbs';
+    // let currentWeightUnit = 'lbs';
     let currentHeightUnit = 'ft';
     let socialLinkCounter = 5;
 
@@ -4648,6 +5131,41 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       'no': ['Oslo', 'Bergen', 'Stavanger', 'Trondheim', 'Drammen', 'Fredrikstad', 'Kristiansand', 'Sandnes'],
       'dk': ['Copenhagen', 'Aarhus', 'Odense', 'Aalborg', 'Esbjerg', 'Randers', 'Kolding', 'Horsens']
     };
+
+   $(document).ready(function() {
+
+        updateHeightCm();
+
+    });
+
+    function updateHeightCm()
+    {
+        const feet = parseInt(document.getElementById('feet-select').value) || 0;
+        const inches = parseInt(document.getElementById('inches-select').value) || 0;
+
+        const cm = Math.round((feet * 30.48) + (inches * 2.54));
+
+        if (cm > 0) {
+            document.getElementById('height_in_cm').value = cm;
+        }
+    }
+
+    function updateFeetInches()
+    {
+       const cm = parseInt(document.getElementById('height_in_cm').value) || 0;
+
+        if (cm > 0) {
+
+              let totalInches = Math.round(cm / 2.54);
+              let feet = Math.floor(totalInches / 12);
+              let inches = totalInches % 12;
+
+              document.getElementById('feet-select').value = feet > 0 ? feet : '';
+              document.getElementById('inches-select').value = inches;
+          }
+    }
+
+
 
     function switchTab(tabName) {
       // Hide all tab contents
@@ -4775,31 +5293,91 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       switchTab('services');
     }
 
+    let currentWeightUnit = document.getElementById('weight_type').value || 'lbs';
+
+    // function toggleWeightUnit(unit, event) {
+
+    //   // currentWeightUnit = unit;
+
+    //   const weightInput = document.getElementById('weight-input');
+    //   const unitToggle = document.getElementById('unit-togglew');
+
+    //    const previousUnit = currentWeightUnit;
+
+    //   if (unitToggle) {
+    //     unitToggle.querySelectorAll('.unit-option').forEach(option => {
+    //       option.classList.remove('active');
+    //     });
+    //     //event.target.classList.add('active');
+    //   }
+    //   jQuery('.' + currentWeightUnit + '-option').addClass('active');
+    //   jQuery('#weight_type').val(currentWeightUnit);
+
+    //   // if (weightInput) {
+    //   //   const currentValue = parseFloat(weightInput.value) || 0;
+    //   //   if (unit === 'kg' && currentWeightUnit !== 'kg') {
+    //   //     weightInput.value = Math.round(currentValue * 0.453592);
+    //   //     weightInput.placeholder = 'Weight in kg';
+    //   //   } else if (unit === 'lbs' && currentWeightUnit !== 'lbs') {
+    //   //     weightInput.value = Math.round(currentValue * 2.20462);
+    //   //     weightInput.placeholder = 'Weight in lbs';
+    //   //   }
+    //   // }
+
+    //      if (weightInput) {
+
+    //           const currentValue = parseFloat(weightInput.value) || 0;
+
+    //           if (unit === 'kg' && previousUnit === 'lbs') {
+              
+    //             weightInput.value = Math.round(currentValue * 0.453592);
+    //             weightInput.placeholder = 'Weight in kg';
+    //           } else if (unit === 'lbs' && previousUnit === 'kg') {
+           
+    //             weightInput.value = Math.round(currentValue * 2.20462);
+    //             weightInput.placeholder = 'Weight in lbs';
+    //           } else {
+
+    //             weightInput.placeholder = 'Weight in ' + unit;
+    //           }
+    //       }
+
+    //   currentWeightUnit = unit;
+    // }
+
     function toggleWeightUnit(unit, event) {
-      currentWeightUnit = unit;
+
       const weightInput = document.getElementById('weight-input');
       const unitToggle = document.getElementById('unit-togglew');
+      const previousUnit = currentWeightUnit;
 
       if (unitToggle) {
         unitToggle.querySelectorAll('.unit-option').forEach(option => {
           option.classList.remove('active');
         });
-        //event.target.classList.add('active');
       }
-      jQuery('.' + currentWeightUnit + '-option').addClass('active');
-      jQuery('#weight_type').val(currentWeightUnit);
+
+      jQuery('.' + unit + '-option').addClass('active');
+      jQuery('#weight_type').val(unit);
 
       if (weightInput) {
         const currentValue = parseFloat(weightInput.value) || 0;
-        if (unit === 'kg' && currentWeightUnit !== 'kg') {
+
+        if (unit === 'kg' && previousUnit === 'lbs') {
+
           weightInput.value = Math.round(currentValue * 0.453592);
           weightInput.placeholder = 'Weight in kg';
-        } else if (unit === 'lbs' && currentWeightUnit !== 'lbs') {
+        } else if (unit === 'lbs' && previousUnit === 'kg') {
+   
           weightInput.value = Math.round(currentValue * 2.20462);
           weightInput.placeholder = 'Weight in lbs';
+        } else {
+
+          weightInput.placeholder = 'Weight in ' + unit;
         }
       }
-      currentWeightUnit = unit; // Update after conversion
+
+      currentWeightUnit = unit; // update AFTER conversion
     }
 
     function toggleHeightUnit(unit, event) {
@@ -4961,14 +5539,14 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             <div class="social-content">
             <input type="text" name="platform[]" class="social-platform-input" placeholder="Platform name (e.g., YouTube, LinkedIn)">
             <input type="url" name="URL[]"  class="social-url-input" placeholder="Profile URL">
-			<input type="hidden" name="socialid[]" value="" >
+      <input type="hidden" name="socialid[]" value="" >
             </div>
             <div class="social-controls">
             <div class="access-toggle">
                 <div class="access-option free active" onclick="toggleAccess(this, 'free','ext` + socialLinkCounter + `')">Free</div>
                 <div class="access-option paid" onclick="toggleAccess(this, 'paid','ext` + socialLinkCounter + `')">Paid</div>
-				<input type="hidden" name="status[]" class="ext` + socialLinkCounter + `" value="free">
-				<input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
+        <input type="hidden" name="status[]" class="ext` + socialLinkCounter + `" value="free">
+        <input type="text" class="paid_token social-platform-input hidden" value="" name="paid_token[]" placeholder="Enter token amount">
             </div>
             <label class="toggle-switch">
                 <input type="checkbox" name="public[]" value="yes">
@@ -5001,9 +5579,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         newLanguage.innerHTML = `
             <select class="language-select" name="modal_lang[]">
             <option value="">Select language</option>
-			<?php foreach ($lang_list as $val) { ?>
-					<option value="<?= $val ?>"><?= $val ?></option>
-			  <?php } ?>
+      <?php foreach ($lang_list as $val) { ?>
+          <option value="<?= $val ?>"><?= $val ?></option>
+        <?php } ?>
             </select>
             <select class="proficiency-select" name="proficiency[]">
             <option value="">Proficiency</option>
@@ -5031,7 +5609,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         newHobbies.className = 'hobbies-item';
         newHobbies.innerHTML = `
             <input type="text" name="additional_hobbies[]" class="add-hobbies-input social-url-input" value="">	
-			<button class="btn-remove-hb btn-remove-social" onclick="removeHobbies(this)">×</button>
+      <button class="btn-remove-hb btn-remove-social" onclick="removeHobbies(this)">×</button>
         `;
         container.appendChild(newHobbies);
 
@@ -5114,17 +5692,17 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       let missingFields = [];
 
       const basicFields = [{
-          selector: '#uname',
-          label: 'Username'
-        },
-        {
-          selector: '#dob-input',
-          label: 'Date of Birth'
-        },
-        {
-          selector: '#age-display',
-          label: 'Age'
-        }
+        selector: '#uname',
+        label: 'Username'
+      },
+      {
+        selector: '#dob-input',
+        label: 'Date of Birth'
+      },
+      {
+        selector: '#age-display',
+        label: 'Age'
+      }
       ];
 
       basicFields.forEach(fieldData => {
@@ -5138,17 +5716,17 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       });
 
       const extraFields = [{
-          id: 'i-hs-country',
-          label: 'Country'
-        },
-        {
-          id: 'i-hs-state',
-          label: 'State'
-        },
-        {
-          id: 'i-hs-city',
-          label: 'City'
-        }
+        id: 'i-hs-country',
+        label: 'Country'
+      },
+      {
+        id: 'i-hs-state',
+        label: 'State'
+      },
+      {
+        id: 'i-hs-city',
+        label: 'City'
+      }
       ];
 
 
@@ -5183,7 +5761,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           contentType: false,
           processData: false,
           dataType: 'json',
-          success: function(response) {
+          success: function (response) {
 
             console.log(response);
 
@@ -5203,7 +5781,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             }
           },
 
-          error: function(xhr, status, error) {
+          error: function (xhr, status, error) {
             $button.text(originalText);
             $button.prop('disabled', false);
           }
@@ -5349,13 +5927,13 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             action: 'submit_withdrawal',
           },
           dataType: 'json',
-          success: function(response) {
+          success: function (response) {
 
             if (response.status === 'success') {
 
 
 
-              setTimeout(function() {
+              setTimeout(function () {
                 showNotification(response.message, 'success');
                 //alert('✅ Withdrawal request submitted successfully! You will receive your funds within 2-3 business days.');
                 closeWithdrawModal();
@@ -5435,7 +6013,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         contentType: false,
         processData: false,
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
 
           console.log(response);
 
@@ -5455,7 +6033,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           }
         },
 
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           $button.text(originalText);
           $button.prop('disabled', false);
         }
@@ -5585,31 +6163,31 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
     }
 
 
-      const updatedAt = new Date("<?php echo $updatedAt; ?>").getTime();
+    const updatedAt = new Date("<?php echo $updatedAt; ?>").getTime();
 
-      const countdownTarget = updatedAt + (24 * 60 * 60 * 1000);
+    const countdownTarget = updatedAt + (24 * 60 * 60 * 1000);
 
-      function updateCountdown() {
-          const now = new Date().getTime();
-          const timeLeft = countdownTarget - now;
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = countdownTarget - now;
 
-          if (timeLeft <= 0) {
-              document.getElementById('countdown').textContent = "00:00:00";
-              return;
-          }
-
-          const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-          const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-          document.getElementById('countdown').textContent =
-              `${hours.toString().padStart(2, '0')}:` +
-              `${minutes.toString().padStart(2, '0')}:` +
-              `${seconds.toString().padStart(2, '0')}`;
+      if (timeLeft <= 0) {
+        document.getElementById('countdown').textContent = "00:00:00";
+        return;
       }
 
-      setInterval(updateCountdown, 1000);
-      updateCountdown();
+      const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      document.getElementById('countdown').textContent =
+        `${hours.toString().padStart(2, '0')}:` +
+        `${minutes.toString().padStart(2, '0')}:` +
+        `${seconds.toString().padStart(2, '0')}`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
 
     function ClosePremiumModal() {
@@ -5636,7 +6214,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       // }, 1500);
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       calculateAge();
       updateProfileCompletion();
 
@@ -5659,7 +6237,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         el.addEventListener('input', updateProgress); // For text inputs
       });
 
-      document.addEventListener('click', function(event) {
+      document.addEventListener('click', function (event) {
         const messagesDropdown = document.getElementById('messages-dropdown');
         const withdrawModal = document.getElementById('withdraw-modal');
         const buyTokensModal = document.getElementById('buy-tokens-modal');
@@ -5683,7 +6261,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
   </script>
 
   <script>
-    $(function() {
+    $(function () {
 
       updateEarningsChart();
 
@@ -5764,12 +6342,12 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           action: 'get_earnings_data',
         },
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
 
           renderChart(data.data);
 
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           console.error('AJAX error:', status, error);
         }
       });
@@ -5841,7 +6419,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           action: 'setting_data',
         },
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
 
           if (field_name == 'age_range') {
 
@@ -5851,7 +6429,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           showNotification('Privacy Settings Updated');
 
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
           console.error('AJAX error:', status, error);
         }
       });
@@ -5893,17 +6471,17 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       }, 3000);
     }
 
-    jQuery(document).ready(function($) {
+    jQuery(document).ready(function ($) {
 
 
-      $('#pic_img').on('change', function() {
+      $('#pic_img').on('change', function () {
 
         const file = this.files[0];
 
         if (file) {
           const reader = new FileReader();
 
-          reader.onload = function(e) {
+          reader.onload = function (e) {
             $('#preview_prof_img').attr('src', e.target.result).show();
           }
 
@@ -5922,7 +6500,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
             data: formData,
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
 
               let res = JSON.parse(response);
 
@@ -5939,7 +6517,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
             },
 
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
 
             }
 
@@ -5950,13 +6528,13 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       });
 
 
-      $('#gallery_photo_1').on('change', function() {
+      $('#gallery_photo_1').on('change', function () {
         const file = this.files[0];
 
         if (file) {
           const reader = new FileReader();
 
-          reader.onload = function(e) {
+          reader.onload = function (e) {
             $('.gallery1').html('<img loading="lazy" src="' + e.target.result + '">');
           }
 
@@ -5964,13 +6542,13 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         }
       });
 
-      $('#gallery_photo_2').on('change', function() {
+      $('#gallery_photo_2').on('change', function () {
         const file = this.files[0];
 
         if (file) {
           const reader = new FileReader();
 
-          reader.onload = function(e) {
+          reader.onload = function (e) {
             $('.gallery2').html('<img loading="lazy" src="' + e.target.result + '">');
           }
 
@@ -5982,14 +6560,15 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
   </script>
 
   <link href="<?= SITEURL ?>assets/plugins/bootstrap-datepicker/css/datepicker.css" rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript"
+    src="<?= SITEURL ?>assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('.i-date').datepicker({
         dateFormat: 'mm-dd-yy',
         altField: '#input-date_alt',
         altFormat: 'yy-mm-dd'
-      }).on('changeDate', function(e) {
+      }).on('changeDate', function (e) {
         $(this).datepicker('hide');
       });
 
@@ -6036,14 +6615,14 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
         // Optional: Delete from server
         fetch('dropzone_delete.php', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              fileName
-            })
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fileName
           })
+        })
           .then(res => res.json())
           .then(data => {
             if (data.status === 'success') {
@@ -6072,8 +6651,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       previewsContainer: "#temporary-preview-container",
       previewTemplate: jQuery('.preview').html(),
       dictDefaultMessage: '<svg class="w-7 h-7 mx-auto text-white/50 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg><p class="text-xs text-white/60">Add Photo</p>',
-      init: function() {
-        this.on("success", function(file, response) {
+      init: function () {
+        this.on("success", function (file, response) {
           if (typeof response === 'string') {
             response = JSON.parse(response);
           }
@@ -6103,7 +6682,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           const deleteBtn = preview.querySelector('.custom-delete-btn');
 
           if (deleteBtn) {
-            deleteBtn.addEventListener('click', function() {
+            deleteBtn.addEventListener('click', function () {
               // Remove the preview
               preview.remove();
 
@@ -6113,14 +6692,14 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               // Optional: delete from server if uploaded
               if (response.file) {
                 fetch('dropzone_delete.php', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                      fileName: response.file
-                    })
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    fileName: response.file
                   })
+                })
                   .then(res => res.json())
                   .then(data => {
                     if (data.status === 'success') {
@@ -6142,19 +6721,19 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
     });
 
 
-    jQuery('.removeinserted').click(function() {
+    jQuery('.removeinserted').click(function () {
       var selectedid = jQuery(this).attr('data-id');
       var img_name = jQuery(this).attr('img_name');
       jQuery('#galblock' + selectedid).remove();
       fetch('dropzone_delete.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            fileName: img_name // Send the file name to the server to delete
-          })
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fileName: img_name // Send the file name to the server to delete
         })
+      })
         .then(response => response.json())
         .then(data => {
           if (data.status === 'success') {
@@ -6169,7 +6748,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
                 unique_id: '<?php echo $userDetails['unique_id']; ?>',
               },
               dataType: 'json',
-              success: function(res) {
+              success: function (res) {
 
               }
             });
@@ -6187,7 +6766,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
   </script>
   <script>
     //Premium checking
-    jQuery('.premiumcheck').click(function(e) {
+    jQuery('.premiumcheck').click(function (e) {
 
       e.preventDefault();
 
@@ -6199,7 +6778,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
     });
 
-    jQuery('.access_restricted').click(function(e) {
+    jQuery('.access_restricted').click(function (e) {
       e.preventDefault();
       e.stopPropagation();
       $('#follow_modal').addClass('active');
@@ -6227,9 +6806,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
   <script>
     // jQuery code
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
       // Select all checkboxes with name 'social_availability[]'
-      jQuery('input[name="social_availability[]"]').on('change', function() {
+      jQuery('input[name="social_availability[]"]').on('change', function () {
         if (jQuery(this).is(':checked')) {
           //console.log(jQuery(this).val() + ' is checked');
           jQuery('.' + jQuery(this).attr('id') + '_time_section').show();
