@@ -201,7 +201,7 @@ $currentpage = $_SERVER['REQUEST_URI'];
             <div>
                 <h3 class="text-3xl font-bold gradient-text heading-font mb-6">The Live Models</h3>
                 <p class="text-white/60 mb-6 text-lg leading-relaxed">The premier platform for authentic connections. Chat, Watch, and Meet with amazing verified models in a safe, secure environment.</p>
-                <div class="flex space-x-4">
+                <div class="flex space-x-4 four-footer">
                     <!-- Social Media Icons -->
                     <!-- <a href="#" class="w-12 h-12 ultra-glass rounded-xl flex items-center justify-center hover:bg-indigo-600 transition duration-300 group hover-lift" onclick="openSocial('facebook')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/70 group-hover:text-white">

@@ -15,11 +15,42 @@ if (isset($_SESSION["log_user_id"])) {
         if ($userDetails['as_a_model'] == 'Yes') $user_type = 'model';
         else $user_type = 'user';
     } else {
-        echo '<script>window.location.href="login.php"</script>';
+        echo '<script>window.location.href="login"</script>';
     }
+
     $checkbankdetail = get_data('users_bankdetail', array('user_id' => $userDetails["id"]), true);
 
-    $check_request = get_data($table_name, array('user_id' => $userDetails["id"], 'status' => '0'), true);
+    $userId = $userDetails["id"];
+
+    $checkbankdetail_user = false;
+
+    $query = mysqli_query($con, "SELECT account_name, account_number, bank_name, ifsc_code FROM users_bankdetail WHERE user_id = '$userId' ORDER BY id ASC LIMIT 1");
+
+    if ($query && mysqli_num_rows($query) > 0) {
+        $row = mysqli_fetch_assoc($query);
+
+        if (!empty($row['account_name']) && !empty($row['account_number']) && !empty($row['bank_name']) && !empty($row['ifsc_code'])) {
+
+            $checkbankdetail_user = true;
+        }
+    }
+
+    // $check_request = get_data($table_name, array('user_id' => $userDetails["id"], 'status' => '0'), true);
+
+
+    $check_request = false;
+
+    $get_requests = mysqli_query($con, "SELECT * FROM $table_name WHERE user_id = '$userId' AND status = '0'");
+
+    if ($get_requests && mysqli_num_rows($get_requests) > 0) {
+
+        $check_request = true; 
+
+    } else {
+        
+        $check_request = false; 
+    }
+
 
     $taxdetail = get_data('model_tax_info', array('user_id' => $userDetails["id"]), true);
 
@@ -49,7 +80,7 @@ if (isset($_SESSION["log_user_id"])) {
         $created_id = DB::insertId();
         $withdraw_msg = 'Withdrawal request submitted.';
         //echo '<script>window.location="'.$m_link.'"</script>';
-        header('Location: wallet.php');
+        header('Location: wallet');
         exit();
     }
 
@@ -73,11 +104,11 @@ if (isset($_SESSION["log_user_id"])) {
 
             $created_id = DB::insertId();
 
-            echo '<script>alert("Bank details added successfully.");</script>';
+            echo '<script>showNotification("Bank details added successfully.");</script>';
         } else {
 
             DB::update('users_bankdetail', $post_data_bnk, "user_id=%s", $userDetails["id"]);
-            echo '<script>alert("Bank details updated successfully.");</script>';
+            echo '<script>showNotification("Bank details updated successfully.");</script>';
         }
     }
 
@@ -91,14 +122,14 @@ if (isset($_SESSION["log_user_id"])) {
 
             DB::insert('model_tax_info', $post_data_tax);
             $created_id = DB::insertId();
-            echo '<script>alert("Tax Information added successfully.");</script>';
+            echo '<script>showNotification("Tax Information added successfully.");</script>';
         } else {
             DB::update('model_tax_info', $post_data_tax, "user_id=%s", $userDetails["id"]);
-            echo '<script>alert("Tax Information updated successfully.");</script>';
+            echo '<script>showNotification("Tax Information updated successfully.");</script>';
         }
     }
 } else {
-    echo '<script>window.location.href="login.php"</script>';
+    echo '<script>window.location.href="login"</script>';
 }
 $activeTab = 'wallet';
 
@@ -752,6 +783,29 @@ $activeTab = 'wallet';
 
     </div>
 
+
+
+    <div class="modal-overlay" id="error_modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">bank details </h2>
+                <button class="close-modal" id="closeErrorModal" type="button" onclick="CloseModal('error_modal')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modal_error_message">
+
+                <p id="error_text">Please add your bank details before requesting a withdrawal</p>
+
+                <button class="btn btn-primary" type="button" onclick="CloseModal('error_modal')">Close</button>
+
+            </div>
+        </div>
+    </div>
+
     <?php include('includes/footer.php'); ?>
 
 
@@ -760,9 +814,21 @@ $activeTab = 'wallet';
 
     <script>
 
+        function CloseModal(el)
+        {
+            $('#'+el).removeClass('active');
+        }
 
         function RequestWithdraw()
         {
+
+             var hasBankDetail = <?php echo $checkbankdetail_user ? 'true' : 'false'; ?>;
+
+            if (!hasBankDetail) {
+
+                 $('#error_modal').addClass('active');
+                return;
+            }
 
             var withdrawal_amount = $('#withdrawal_amount').val();
 
@@ -785,7 +851,7 @@ $activeTab = 'wallet';
                         {
                             location.reload();
                             
-                        },3000);
+                        },1000);
                         
 
                     } else {
@@ -1068,20 +1134,20 @@ $activeTab = 'wallet';
     }
 
     // // Notification system
-    // function showNotification(message, type = 'info') {
-    //     const notification = document.createElement('div');
-    //     notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${
-    //             type === 'success' ? 'bg-green-500' : 
-    //             type === 'error' ? 'bg-red-500' : 'bg-blue-500'
-    //         }`;
-    //     notification.textContent = message;
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${
+                type === 'success' ? 'bg-green-500' : 
+                type === 'error' ? 'bg-red-500' : 'bg-blue-500'
+            }`;
+        notification.textContent = message;
 
-    //     document.body.appendChild(notification);
+        document.body.appendChild(notification);
 
-    //     setTimeout(() => {
-    //         notification.remove();
-    //     }, 3000);
-    // }
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
 
     // Performance optimizations
     const debounce = (func, wait) => {
