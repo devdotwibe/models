@@ -93,7 +93,11 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
 
             $plan_type =  $_POST['plan_type'];
 
+            $token_amount =  $_POST['token_amount'];
+
             $plan_text = $plan_status == 'basic' ? 'Basic Premium' : 'Diamond Elite';
+
+
             ?>
             <div class="purchase-payment-h3">
                 <h3 class="head_pay">Payment Confirmation Page</h3>
@@ -160,6 +164,8 @@ $stripe = new \Stripe\StripeClient($stripeSecret);
                     $_SESSION["pay_amount"] = $amount;
                     $_SESSION["plan_status"] = $plan_status;
                     $_SESSION["plan_type"] = $plan_type;
+
+                    $_SESSION["token_amount"] =  $token_amount;
                     
                 ?>
             </form>

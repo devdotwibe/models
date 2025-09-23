@@ -2455,15 +2455,30 @@ include('includes/helper.php');
 
     $discountPriceShow = true;
 
+    $new_user_discount = true;
+
     $updatedAt = $settings['updated_at'];
 
-    if ($updatedAt) {
+    $register_date = $userDetails['register_date'];
+
+    if ($updatedAt || $register_date) {
 
         $timeDiff = time() - strtotime($updatedAt);
 
         if ($timeDiff > 86400 || $settings['discount_price_show'] == 'No') {
 
             $discountPriceShow = false;
+
+            $new_user_discount = false;
+        }
+
+         $registerDiff = time() - strtotime($register_date);
+
+        if ($registerDiff < 86400) {
+
+            $discountPriceShow = true;
+
+            $new_user_discount = true;
         }
     }
 
@@ -2476,6 +2491,12 @@ include('includes/helper.php');
         'basic_without_discount_yearly' => 588,
         'diamond_with_discount_yearly' => 1999,
         'diamond_without_discount_yearly' => 2388,
+
+        'get_token_basic_monthly' => 500,
+        'get_token_basic_yearly' => 2000,
+
+        'get_token_diamond_monthly' => 1000,
+        'get_token_diamond_yearly' => 5000,
     ];
 
     $basic_monthly_savings = $premium_amounts['basic_without_discount'] - $premium_amounts['basic_with_discount'];
@@ -2502,15 +2523,19 @@ include('includes/helper.php');
                 <p class="subtitle">Join premium members and dominate the streaming experience</p>
             </div>
 
-            <div class="first-time-alert">
-                <span class="fire-emoji">🔥</span> FIRST-TIME USER EXCLUSIVE: $39 & $149 Limited Time Deal - Expires in 24 Hours of Joining! <span class="fire-emoji">🔥</span>
-            </div>
+             <?php if ($discountPriceShow) { ?>
 
-            <div class="promo-banner">
-                <span class="fire-emoji">🔥</span> MASSIVE SAVINGS INSIDE - DON'T MISS OUT! <span class="fire-emoji">🔥</span>
-            </div>
+                <div class="first-time-alert">
+                    <span class="fire-emoji">🔥</span> FIRST-TIME USER EXCLUSIVE: $39 & $149 Limited Time Deal - Expires in 24 Hours of Joining! <span class="fire-emoji">🔥</span>
+                </div>
 
-            <?php if ($discountPriceShow) { ?>
+                <div class="promo-banner">
+                    <span class="fire-emoji">🔥</span> MASSIVE SAVINGS INSIDE - DON'T MISS OUT! <span class="fire-emoji">🔥</span>
+                </div>
+
+            <?php } ?>
+
+            <?php if ($discountPriceShow && !$new_user_discount) { ?>
 
                 <div class="countdown-timer">
                     ⏰ LIMITED TIME: <span id="countdown">23:59:45</span> REMAINING!
@@ -2936,17 +2961,37 @@ include('includes/helper.php');
 
 
             let key = '';
+
+             let token_key = '';
+
             if (plan_status === 'basic') {
+                
                 key = 'basic_with_discount';
+
+                token_key = 'get_token_basic_monthly';
+
                 if (plan_type === 'annual') {
+
                     key = 'basic_with_discount_yearly';
+
+                    token_key = 'get_token_basic_yearly';
                 }
+
             } else if (plan_status === 'diamond') {
+
                 key = 'diamond_with_discount';
+
+                token_key = 'get_token_diamond_monthly';
+
                 if (plan_type === 'annual') {
+
+                     token_key = 'get_token_basic_yearly';
+
                     key = 'diamond_with_discount_yearly';
                 }
             }
+
+            const tokenAmont = premiumAmounts[token_key];
 
             const amount = premiumAmounts[key];
 
@@ -2972,12 +3017,15 @@ include('includes/helper.php');
             inputAmount.value = amount;
             form.appendChild(inputAmount);
 
+            const InputtokenAmont = document.createElement('input');
+            InputtokenAmont.type = 'hidden';
+            InputtokenAmont.name = 'token_amount';
+            InputtokenAmont.value = tokenAmont;
+            form.appendChild(InputtokenAmont);
+
             document.body.appendChild(form);
             form.submit();
         }
-
-
-
 
         $(document).ready(function() {
 

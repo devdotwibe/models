@@ -63,6 +63,8 @@ if($userDetails){
                         $plan_status = $_SESSION["plan_status"];
                         $plan_type = $_SESSION["plan_type"];
 
+						$token_amount =  $_SESSION["token_amount"]; 
+
                         // DB::insert("INSERT INTO premium_users (user_id, plan_type, amount, plan_status, created_at, updated_at) VALUES (%i, %s, %i, %s, %s, %s)",
                         // $userDetails['id'], $plan_type, $amount, $plan_status, $date, $date);
 
@@ -85,28 +87,16 @@ if($userDetails){
 							'created_at' => $date,
 						]);
 
-						$token_get = 0;
-
-						if($plan_status =='basic')
-						{
-							$token_get = 500;
-						}
-						else
-						{
-							$token_get = 2000;
-						}
-
-
 						DB::query(
 							"UPDATE model_user SET balance = ROUND(balance + %d) WHERE id = %s",
-							$token_get,
+							$token_amount,
 							$userDetails['id']
 						);
 
 						DB::insert('model_user_transaction_history', [
 							'user_id'    => $userDetails['id'],
 							'other_id'   => $insertedPremiumUserId,
-							'amount'     => $token_get,
+							'amount'     => $token_amount,
 							'type'       => 'premium-purchase-token',
 							'created_at' => $date,
 						]);
