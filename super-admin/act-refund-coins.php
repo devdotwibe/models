@@ -8,6 +8,8 @@
 	  $r_message = $_POST['message'];
 	  $email = $_POST['email'];
 
+	  $userId = $_POST['user_id'];
+
       $sql = "SELECT * FROM model_user_wallet WHERE user_unique_id = '".$unique_id."'";
       $result = mysqli_query($con,$sql);
 
@@ -22,8 +24,11 @@
 	  $que = "INSERT INTO `refund_coins`(`unique_user_id`, `refund_coins`, `message`) VALUES ('".$unique_id."', '".$refund_coin."', '".$r_message."')";
 
 	  $que1 = "UPDATE `model_user_wallet` SET `wallet_coins` = ".$new_coins." WHERE `user_unique_id` = '".$unique_id."'";
-	 
+
 	  if(mysqli_query($con, $que) && mysqli_query($con, $que1)){
+
+		$update_request = mysqli_query($con, "UPDATE users_withdrow_request SET status = '1' WHERE user_id = '$userId' AND status = '0'");
+
 	  	echo 'succsess';
      	 $email_to = $email;
 		 $subject = "Reply from The Live Model || ".$r_subject."";

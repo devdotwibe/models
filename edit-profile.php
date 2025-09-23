@@ -723,9 +723,9 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
           <div>
             <label class="form-label">Withdraw Amount (TLM Tokens)</label>
             <input type="text" id="withdraw-amount" class="form-input" placeholder="Enter amount" name="coins"
-              value="100" data-max="<?= $userDetails['balance'] ?>" data-min="100" oninput="updateWithdrawUSD(this)"
+              value="1000" data-max="<?= $userDetails['balance'] ?>" data-min="1000" oninput="updateWithdrawUSD(this)"
               onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
-            <p class="help-text">Minimum withdrawal: 100 TLM tokens</p>
+            <p class="help-text">Minimum withdrawal: 1000 TLM tokens</p>
 
             <span id="amount_error" class="text-danger" style="display: none;"> </span>
 
@@ -750,11 +750,47 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       </div>
 
       <?php $check_request = get_data('users_withdrow_request', array('user_id' => $userDetails["id"], 'status' => '0'), true); ?>
+
+
+        <?php
+
+                $check_request = false;
+
+                $userId = $userDetails["id"];
+
+                $get_requests = mysqli_query( $con, "SELECT * FROM users_withdrow_request WHERE user_id = '$userId' AND status = '0'");
+                                            
+                if ($get_requests && mysqli_num_rows($get_requests) > 0) {
+
+                    $check_request = true;
+                } else {
+                    $check_request = false;
+                }
+          ?>
       <?php if ($check_request) {
         echo '<div class="rejectmsg" style="color:red;">You already sent request. Please wait for pending request</div>';
       } ?>
+
+      <?php 
+
+          $checkbankdetail_user = false;
+
+          $query = mysqli_query($con, "SELECT account_name, account_number, bank_name, ifsc_code FROM users_bankdetail WHERE user_id = '$userId' ORDER BY id ASC LIMIT 1");
+
+          if ($query && mysqli_num_rows($query) > 0) {
+              $row = mysqli_fetch_assoc($query);
+
+              if (!empty($row['account_name']) && !empty($row['account_number']) && !empty($row['bank_name']) && !empty($row['ifsc_code'])) {
+
+                  $checkbankdetail_user = true;
+              }
+          }
+
+      ?>
+      
       <div class="flex space-x-4">
         <button class="btn-secondary flex-1" onclick="closeWithdrawModal()">Cancel</button>
+
         <button class="btn-withdraw flex-1" id="withdraw_btn" <?php if ($check_request) { ?> onclick="rejectWithdraw()"
             disabled <?php } else { ?> onclick="processWithdrawal()" <?php } ?>>Withdraw</button>
 
@@ -4683,6 +4719,27 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
   </div>
 
 
+    <div class="modal-overlay" id="error_modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">bank details </h2>
+                <button class="close-modal" id="closeErrorModal" type="button" onclick="CloseModalError('error_modal')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modal_error_message">
+
+                <p id="error_text">Please add your bank details before requesting a withdrawal</p>
+
+                <button class="btn btn-primary" type="button" onclick="CloseModalError('error_modal')">Close</button>
+
+            </div>
+        </div>
+    </div>
+
 
   <?php include('includes/footer.php'); ?>
 
@@ -5891,6 +5948,16 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
     }
 
     function processWithdrawal(event) {
+
+
+      var hasBankDetail = <?php echo $checkbankdetail_user ? 'true' : 'false'; ?>;
+
+      if (!hasBankDetail) {
+
+            $('#error_modal').addClass('active');
+          return;
+      }
+
       const amountInput = document.getElementById('withdraw-amount');
       var status = true;
       if (!amountInput) {
@@ -5936,17 +6003,13 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
             if (response.status === 'success') {
 
-
+               showNotification(response.message, 'success');
 
               setTimeout(function () {
-                showNotification(response.message, 'success');
-                //alert('✅ Withdrawal request submitted successfully! You will receive your funds within 2-3 business days.');
-                closeWithdrawModal();
-                button.textContent = 'Withdraw';
-                button.disabled = false;
 
-              }, 3000);
+                location.reload();
 
+              }, 2000);
 
             } else {
 
@@ -6052,8 +6115,15 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
 
     function CloseModal() {
+
       $('#success_modal').removeClass('active');
       $('#modal_success_message .success-text').remove();
+
+    }
+
+    function CloseModalError(el)
+    {
+        $('#'+el).removeClass('active');
     }
 
 

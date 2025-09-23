@@ -1737,7 +1737,7 @@ body .owl-carousel .owl-nav.disabled {
 
                     <!-- Similar Models Card -->
 
-                <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] && $is_model) { ?>
+                <?php /*if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] && $is_model) {  */?>
 
                     <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-model">
                         <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
@@ -1815,19 +1815,21 @@ body .owl-carousel .owl-nav.disabled {
                                             WHERE sender_id = %s 
                                             AND receiver_id = %s 
                                             AND notification_type = 'follow' 
+                                            AND notification_status='pending'
                                             LIMIT 1",
                                             $_SESSION['log_user_id'],
                                             $rows_md['id']
                                         );
 
-                                        $user_requested = !empty($user_requested_row);
+                                        // $user_requested = !empty($user_requested_row);
+
+                                       $user_requested = ($user_requested_row !== null && !empty($user_requested_row['notification_id']));
                                         
-                                    
                                 ?>
 
                                 <button type="button" onclick="FollowModel('<?= $rows_md['id'] ?>', '<?= $rows_md['username'] ?>','follow_similar-<?= $user_unique_id ?>')" class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
 
-                                     <span id="follow_similar-<?= $user_unique_id ?>"><?php if(!$user_requested) {  ?>  Follow requested <?php } else { ?>Follow <?php }?></span>
+                                     <span id="follow_similar-<?= $user_unique_id ?>"><?php if($user_requested) {  ?>  Follow requested <?php } else { ?>Follow <?php }?></span>
                                      
                                 </button>
 
@@ -1842,7 +1844,7 @@ body .owl-carousel .owl-nav.disabled {
                         </button>
                     </div>
 
-                <?php } ?>
+                <?php /* } */ ?>
 
                 </div>
 
@@ -4047,15 +4049,19 @@ jQuery('.send_gift_btn').click(function(){
             window.location.reload();
         }
 
-    
+    let purchaseInProgress = false; 
+
         function SubmitPurchase(form_id)
         {
 
-             const btn = $('#purchase_submit');
+            const btn = $('#purchase_submit');
 
-            if (btn.prop('disabled')) {
+            if (purchaseInProgress) {
+
                 return;
             }
+
+            purchaseInProgress = true;
 
             btn.prop('disabled', true).text('Processing...');
 
@@ -4113,6 +4119,8 @@ jQuery('.send_gift_btn').click(function(){
 
             complete: function () {
               
+                purchaseInProgress = false;
+
                 btn.prop('disabled', false).text('Yes, Unlock');
             }
 

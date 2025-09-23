@@ -104,6 +104,8 @@
         			                      <form method="post" action="act-refund-coins.php">
         			                        <input type="hidden" name="unique_id" value="<?php echo $rowesdw['unique_id']; ?>">
                                       <input type="hidden" name="email" value="<?php echo $rowesdw['email']; ?>">
+
+                                      <input type="hidden" name="user_id" value="<?php echo $rowesdw['id']; ?>">
         			                       <div class="form-group">
         			                         <label for="refund"><b>Refund Coins:</b></label>
         			                          <input type="text" name="refund_coin" class="form-control" placeholder="Enter Coins" id="refund">

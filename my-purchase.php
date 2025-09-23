@@ -234,15 +234,13 @@ if (isset($_SESSION['log_user_id'])) {
 
                       $post_id = $row['id'];
 
-                      $url = 'assets/images/model-gal-no-img.jpg';
+                      $url = 'assets/images/advert-no-image.jpg';
 
                       if (checkImageExists($url_ext)) {
 
                         $url = $url_ext;
 
                       }
-
-                      $url = $url_ext;
 
                       $image_text = $row['image_text'];
                   }

@@ -22,6 +22,14 @@ if (isset($_SESSION["log_user_id"])) {
 
     $userId = $userDetails["id"];
 
+    // $update_request = mysqli_query($con, "UPDATE $table_name SET status = '1' WHERE user_id = '$userId' AND status = '0'");
+
+    // if ($update_request) {
+    //     echo "Status updated successfully.";
+    // } else {
+    //     echo "Error updating status: " . mysqli_error($con);
+    // }
+
     $checkbankdetail_user = false;
 
     $query = mysqli_query($con, "SELECT account_name, account_number, bank_name, ifsc_code FROM users_bankdetail WHERE user_id = '$userId' ORDER BY id ASC LIMIT 1");
@@ -86,29 +94,91 @@ if (isset($_SESSION["log_user_id"])) {
 
     //Bank data
 
+    $errors = [];
+    $old = [
+        'account_name'   => '',
+        'bank_name'      => '',
+        'account_number' => '',
+        'ifsc_code'      => '',
+    ];
+
+    $activeTab = "wallet";
+
     if ($_POST && isset($_POST['bankdata_sub'])) {
 
-        $arr_bnk = array('account_name', 'bank_name', 'account_number', 'ifsc_code');
+        $old['account_name']   = trim($_POST['account_name'] ?? '');
+        $old['bank_name']      = trim($_POST['bank_name'] ?? '');
+        $old['account_number'] = trim($_POST['account_number'] ?? '');
+        $old['ifsc_code']      = trim($_POST['ifsc_code'] ?? '');
 
-        $post_data_bnk = array_from_post($arr_bnk);
+        if ($old['account_name'] === '') {
 
-        $get_bankdata = DB::query('select * from users_bankdetail where user_id = ' . $userDetails["id"]);
+            $errors['account_name'] = "Account holder name is required.";
 
-        if (empty($get_bankdata)) {
+            $activeTab = "bank";
 
-            $post_data_bnk['user_id'] = $userDetails["id"];
-            $post_data_bnk['status'] = 1;
-            $post_data_bnk['created_date'] = date('Y-m-d H:i:s');
+        } elseif (!preg_match('/^[\p{L} ]+$/u', $old['account_name'])) {
+            $errors['account_name'] = "Name must contain only letters and spaces.";
 
-            DB::insert('users_bankdetail', $post_data_bnk);
+            $activeTab = "bank";
+        }
 
-            $created_id = DB::insertId();
+        if ($old['bank_name'] === '') {
+            $errors['bank_name'] = "Bank name is required.";
 
-            echo '<script>showNotification("Bank details added successfully.");</script>';
-        } else {
+            $activeTab = "bank";
+        }
 
-            DB::update('users_bankdetail', $post_data_bnk, "user_id=%s", $userDetails["id"]);
-            echo '<script>showNotification("Bank details updated successfully.");</script>';
+        if ($old['account_number'] === '') {
+            $errors['account_number'] = "Account number is required.";
+
+              $activeTab = "bank";
+
+        } elseif (!preg_match('/^\d{9,18}$/', $old['account_number'])) {
+            $errors['account_number'] = "Account number must be numeric and 9 to 18 digits long.";
+
+            $activeTab = "bank";
+        }
+
+        if ($old['ifsc_code'] === '') {
+
+            $errors['ifsc_code'] = "IFSC code is required.";
+
+              $activeTab = "bank";
+        }
+
+
+        if (empty($errors)) {
+
+            $arr_bnk = array('account_name', 'bank_name', 'account_number', 'ifsc_code');
+
+            $post_data_bnk = array_from_post($arr_bnk);
+
+            $get_bankdata = DB::query('select * from users_bankdetail where user_id = ' . $userDetails["id"]);
+
+            if (empty($get_bankdata)) {
+
+                $post_data_bnk['user_id'] = $userDetails["id"];
+                $post_data_bnk['status'] = 1;
+                $post_data_bnk['created_date'] = date('Y-m-d H:i:s');
+
+                DB::insert('users_bankdetail', $post_data_bnk);
+
+                $created_id = DB::insertId();
+
+                $_SESSION['notification'] = [
+                    'message' => 'Bank details added successfully.',
+                    'type'    => 'success'
+                ];
+            } else {
+
+                DB::update('users_bankdetail', $post_data_bnk, "user_id=%s", $userDetails["id"]);
+
+                $_SESSION['notification'] = [
+                    'message' => 'Bank details added successfully.',
+                    'type'    => 'success'
+                ];
+            }
         }
     }
 
@@ -122,16 +192,23 @@ if (isset($_SESSION["log_user_id"])) {
 
             DB::insert('model_tax_info', $post_data_tax);
             $created_id = DB::insertId();
-            echo '<script>showNotification("Tax Information added successfully.");</script>';
+          
+            $_SESSION['notification'] = [
+                'message' => 'Tax Information added successfully.',
+                'type'    => 'success'
+            ];
+
         } else {
             DB::update('model_tax_info', $post_data_tax, "user_id=%s", $userDetails["id"]);
-            echo '<script>showNotification("Tax Information updated successfully.");</script>';
+               $_SESSION['notification'] = [
+                    'message' => 'Tax Information updated successfully.',
+                    'type'    => 'success'
+                ];
         }
     }
 } else {
     echo '<script>window.location.href="login"</script>';
 }
-$activeTab = 'wallet';
 
 
     $user_token = $userDetails['balance'];
@@ -276,7 +353,7 @@ $activeTab = 'wallet';
             <!-- Tab Navigation -->
             <div class="glass-card p-6 wallet-tabs-outer">
                 <div class="tab-nav">
-                    <button class="tab-btn <?php /*if ($user_type == 'user') { ?> active <?php }*/ ?> active " onclick="switchTab('buy')" data-tab="buy">
+                    <button class="tab-btn <?php /*if ($user_type == 'user') { ?> active <?php }*/ ?>  <?php echo ($activeTab !='bank') ? 'active' : '' ?> " onclick="switchTab('buy')" data-tab="buy">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="8" cy="21" r="1"></circle>
                             <circle cx="19" cy="21" r="1"></circle>
@@ -302,7 +379,7 @@ $activeTab = 'wallet';
                         History
                     </button>
 
-                    <button class="tab-btn <?php if ($user_type == 'user') { ?> model-only <?php } ?>" onclick="switchTab('bank')" data-tab="bank">
+                    <button class="tab-btn <?php if ($user_type == 'user') { ?> model-only <?php } ?> <?php echo ($activeTab=='bank') ? 'active' : '' ?>" onclick="switchTab('bank')" data-tab="bank">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M3 21h18"></path>
                             <path d="M5 21V7l8-4v18"></path>
@@ -323,7 +400,7 @@ $activeTab = 'wallet';
                 </div>
 
                 <!-- Buy Tokens Tab -->
-                <div id="buy" class="tab-content <?php /* if ($user_type == 'user') { ?> active <?php } */ ?> active ">
+                <div id="buy" class="tab-content <?php /* if ($user_type == 'user') { ?> active <?php } */ ?> <?php echo ($activeTab !='bank') ? 'active' : '' ?> ">
                     <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                         Purchase Token Packages
                     </h3>
@@ -628,7 +705,7 @@ $activeTab = 'wallet';
                 </div>
 
                 <!-- Bank Details Tab -->
-                <div id="bank" class="tab-content">
+                <div id="bank" class="tab-content <?php echo ($activeTab=='bank') ? 'active' : '' ?>">
                     <h3 class="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                         Bank Account Details
                     </h3>
@@ -640,13 +717,22 @@ $activeTab = 'wallet';
                                     <label class="form-label">Account Holder Name</label>
                                     <input type="text" class="form-input" placeholder="Full name" name="account_name" value="<?php if (isset($_POST['account_name'])) {
                                                                                                                                     echo $_POST['account_name'];
-                                                                                                                                } else echo $checkbankdetail['account_name'] ?>" required>
+                                                                                                                          } else echo $checkbankdetail['account_name'] ?>" required>
+
+                                <?php if (!empty($errors['account_name'])): ?>
+                                    <div class="text-danger small"  style="color:red"><?php echo htmlspecialchars($errors['account_name']); ?></div>
+                                <?php endif; ?>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Bank Name</label>
                                     <input type="text" class="form-input" placeholder="Bank name" name="bank_name" value="<?php if (isset($_POST['bank_name'])) {
                                                                                                                                 echo $_POST['bank_name'];
-                                                                                                                            } else echo $checkbankdetail['bank_name'] ?>" required>
+                                     } else echo $checkbankdetail['bank_name'] ?>" required>
+
+                                <?php if (!empty($errors['bank_name'])): ?>
+                                    <div class="text-danger small"  style="color:red"><?php echo htmlspecialchars($errors['bank_name']); ?></div>
+                                <?php endif; ?>
+
                                 </div>
                             </div>
 
@@ -656,12 +742,21 @@ $activeTab = 'wallet';
                                     <input type="text" class="form-input" placeholder="Account number" name="account_number" value="<?php if (isset($_POST['account_number'])) {
                                                                                                                                         echo $_POST['account_number'];
                                                                                                                                     } else echo $checkbankdetail['account_number'] ?>" required>
+                                <?php if (!empty($errors['account_number'])): ?>
+                                    <div class="text-danger small"  style="color:red"><?php echo htmlspecialchars($errors['account_number']); ?></div>
+                                <?php endif; ?>
+
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">IFSC Code</label>
                                     <input type="text" class="form-input" placeholder="IFSC code" name="ifsc_code" value="<?php if (isset($_POST['ifsc_code'])) {
                                                                                                                                 echo $_POST['ifsc_code'];
                                                                                                                             } else echo $checkbankdetail['ifsc_code'] ?>" required>
+
+                                <?php if (!empty($errors['ifsc_code'])): ?>
+                                    <div class="text-danger small" style="color:red"><?php echo htmlspecialchars($errors['ifsc_code']); ?></div>
+                                <?php endif; ?>
+
                                 </div>
                             </div>
 
@@ -813,6 +908,20 @@ $activeTab = 'wallet';
     <script type="text/javascript" src="<?= SITEURL ?>assets/plugins/ajax-pagination/simplePagination.js"></script>
 
     <script>
+
+
+    <?php if (isset($_SESSION['notification'])){ ?>
+
+            document.addEventListener("DOMContentLoaded", function() {
+
+                showNotification("<?= $_SESSION['notification']['message'] ?>", "<?= $_SESSION['notification']['type'] ?>");
+
+            });
+
+        <?php unset($_SESSION['notification']); ?>
+
+    <?php } ?>
+
 
         function CloseModal(el)
         {
