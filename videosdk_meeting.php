@@ -1,239 +1,98 @@
 <?php
-// videosdk_meeting.php
-include 'config.php'; // This file defines VIDEOSDK_TOKEN
+// index.php
+// Replace with your actual VideoSDK Auth Token
+$VIDEOSDK_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJkOWUwNWQ2Ny04ZjE2LTRjMDItYmJjNC05MzNmNzYwM2JmN2QiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTc1ODY5MDQ5NywiZXhwIjoxOTE2NDc4NDk3fQ.G431dK7iF2s_O93l5qd-PqBE5Vu31srL7-lsR_M1mKM";
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>VideoSDK Meeting</title>
+  <script src="https://sdk.videosdk.live/js-sdk/0.0.87/videosdk.js"></script>
   <style>
-    #join-screen, #grid-screen {
-      padding: 10px;
-      margin-bottom: 15px;
-    }
-    .video-frame {
-      width: 300px;
-      border: 1px solid #ccc;
-      margin-right: 10px;
-      display: inline-block;
-    }
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    button { margin: 10px; padding: 10px 20px; cursor: pointer; }
+    #meeting-container { width: 100%; height: 80vh; border: 1px solid #ccc; margin-top: 20px; }
   </style>
-  <script src="https://sdk.videosdk.live/js-sdk/0.1.6/videosdk.js"></script>
 </head>
 <body>
+  <h2>VideoSDK Meeting Demo</h2>
+  
+  <!-- Buttons -->
+  <button id="create-btn">Create Meeting</button>
+  <button id="join-btn">Join Meeting</button>
 
-<div id="join-screen">
-  <button id="createMeetingBtn">New Meeting</button>
-  <br><br>
-  <input type="text" id="meetingIdTxt" placeholder="Enter Meeting id" />
-  <button id="joinBtn">Join Meeting</button>
-</div>
+  <!-- Input for Meeting ID -->
+  <div>
+    <input type="text" id="meetingId" placeholder="Enter Meeting ID" style="padding:5px;"/>
+  </div>
 
-<div id="textDiv"></div>
+  <!-- Meeting Container -->
+  <div id="meeting-container"></div>
 
-<div id="grid-screen" style="display:none;">
-  <h3 id="meetingIdHeading"></h3>
-  <button id="leaveBtn">Leave</button>
-  <button id="toggleMicBtn">Toggle Mic</button>
-  <button id="toggleWebCamBtn">Toggle WebCam</button>
-  <div id="videoContainer"></div>
-</div>
+  <script>
+    console.log("JS Loaded ✅");
 
-<script>
-  console.log("Script loaded ✅");
+    const TOKEN = "<?php echo $VIDEOSDK_TOKEN; ?>";
+    console.log("Token from PHP:", TOKEN);
 
-  const TOKEN = '<?php echo VIDEOSDK_TOKEN; ?>';
-
-  const joinButton = document.getElementById("joinBtn");
-  const leaveButton = document.getElementById("leaveBtn");
-  const toggleMicButton = document.getElementById("toggleMicBtn");
-  const toggleWebCamButton = document.getElementById("toggleWebCamBtn");
-  const createButton = document.getElementById("createMeetingBtn");
-  const videoContainer = document.getElementById("videoContainer");
-  const textDiv = document.getElementById("textDiv");
-
-  let meeting = null;
-  let meetingId = "";
-  let isMicOn = true;
-  let isWebCamOn = true;
-
-  function createVideoElement(pId, name) {
-    let videoFrame = document.createElement("div");
-    videoFrame.setAttribute("id", `f-${pId}`);
-
-    let videoElement = document.createElement("video");
-    videoElement.classList.add("video-frame");
-    videoElement.setAttribute("id", `v-${pId}`);
-    videoElement.setAttribute("playsinline", true);
-    videoElement.autoplay = true;
-    videoFrame.appendChild(videoElement);
-
-    let displayName = document.createElement("div");
-    displayName.innerHTML = `Name: ${name}`;
-    videoFrame.appendChild(displayName);
-
-    return videoFrame;
-  }
-
-  function createAudioElement(pId) {
-    let audioElement = document.createElement("audio");
-    audioElement.setAttribute("autoPlay", "false");
-    audioElement.setAttribute("playsInline", "true");
-    audioElement.setAttribute("controls", "false");
-    audioElement.setAttribute("id", `a-${pId}`);
-    audioElement.style.display = "none";
-    return audioElement;
-  }
-
-  function setTrack(stream, audioElement, participant, isLocal) {
-    if (stream.kind === "video") {
-      const mediaStream = new MediaStream();
-      mediaStream.addTrack(stream.track);
-      let videoElm = document.getElementById(`v-${participant.id}`);
-      videoElm.srcObject = mediaStream;
-      videoElm.play().catch(error => console.error("video play error", error));
-      const videoFrame = document.getElementById(`f-${participant.id}`);
-      videoFrame.style.display = "inline-block";
-    } else if (stream.kind === "audio") {
-      const mediaStream = new MediaStream();
-      mediaStream.addTrack(stream.track);
-      audioElement.srcObject = mediaStream;
-      audioElement.play().catch(error => console.error("audio play error", error));
-    }
-  }
-
-  function initializeMeeting() {
-    if (!TOKEN) {
-      alert("Token is not set!");
-      return;
-    }
-
-    window.VideoSDK.config(TOKEN);
-
-    meeting = window.VideoSDK.initMeeting({
-      meetingId: meetingId,
-      name: "Participant-" + Math.floor(Math.random() * 1000),
-      micEnabled: true,
-      webcamEnabled: true,
+    // Create Meeting Button
+    document.getElementById("create-btn").addEventListener("click", () => {
+      console.log("Create button clicked!");
+      createMeeting();
     });
 
-    meeting.join();
-
-    createLocalParticipant();
-
-    meeting.localParticipant.on("stream-enabled", (stream) => {
-      setTrack(stream, null, meeting.localParticipant, true);
-    });
-
-    meeting.on("meeting-joined", () => {
-      textDiv.style.display = "none";
-      document.getElementById("grid-screen").style.display = "block";
-      document.getElementById("meetingIdHeading").textContent = `Meeting Id: ${meetingId}`;
-    });
-
-    meeting.on("meeting-left", () => {
-      videoContainer.innerHTML = "";
-      document.getElementById("grid-screen").style.display = "none";
-      document.getElementById("join-screen").style.display = "block";
-    });
-
-    meeting.on("participant-joined", (participant) => {
-      let videoElement = createVideoElement(participant.id, participant.displayName);
-      let audioElement = createAudioElement(participant.id);
-
-      participant.on("stream-enabled", (stream) => {
-        setTrack(stream, audioElement, participant, false);
-      });
-
-      videoContainer.appendChild(videoElement);
-      videoContainer.appendChild(audioElement);
-    });
-
-    meeting.on("participant-left", (participant) => {
-      let vElement = document.getElementById(`f-${participant.id}`);
-      if (vElement) vElement.remove();
-
-      let aElement = document.getElementById(`a-${participant.id}`);
-      if (aElement) aElement.remove();
-    });
-  }
-
-  function createLocalParticipant() {
-    let localParticipantElem = createVideoElement(meeting.localParticipant.id, meeting.localParticipant.displayName);
-    videoContainer.appendChild(localParticipantElem);
-  }
-
-  // Join Meeting
-  joinButton.addEventListener("click", async () => {
-    meetingId = document.getElementById("meetingIdTxt").value.trim();
-    if (!meetingId) {
-      alert("Please enter a meeting ID to join.");
-      return;
-    }
-    document.getElementById("join-screen").style.display = "none";
-    textDiv.textContent = "Joining the meeting...";
-    initializeMeeting();
-  });
-
-  // Create New Meeting
-  createButton.addEventListener("click", async () => {
-    console.log("Create meeting clicked");
-    document.getElementById("join-screen").style.display = "none";
-    textDiv.textContent = "Creating a new meeting... Please wait.";
-
-    try {
-      const response = await fetch("https://api.videosdk.live/v2/rooms", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${TOKEN}`,   // ✅ FIXED
-          "Content-Type": "application/json"
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+    // Join Meeting Button
+    document.getElementById("join-btn").addEventListener("click", () => {
+      console.log("Join button clicked!");
+      const meetingId = document.getElementById("meetingId").value;
+      if (!meetingId) {
+        alert("Please enter a Meeting ID");
+        return;
       }
+      joinMeeting(meetingId);
+    });
 
-      const data = await response.json();
-      console.log("Meeting created:", data);
-      meetingId = data.roomId;
-      initializeMeeting();
-    } catch (error) {
-      alert("Error creating meeting: " + error.message);
-      document.getElementById("join-screen").style.display = "block";
-      textDiv.textContent = "";
+    // Create a new meeting
+    async function createMeeting() {
+      try {
+        console.log("Creating meeting...");
+        const response = await fetch("https://api.videosdk.live/v2/rooms", {
+          method: "POST",
+          headers: {
+            Authorization: TOKEN,
+            "Content-Type": "application/json"
+          }
+        });
+        const data = await response.json();
+        console.log("Meeting created:", data);
+
+        if (data.roomId) {
+          document.getElementById("meetingId").value = data.roomId;
+          alert("New Meeting Created! ID: " + data.roomId);
+        } else {
+          console.error("Failed to create meeting:", data);
+        }
+      } catch (err) {
+        console.error("Error creating meeting:", err);
+      }
     }
-  });
 
-  // Leave Meeting
-  leaveButton.addEventListener("click", () => {
-    meeting?.leave();
-  });
+    // Join an existing meeting
+    function joinMeeting(meetingId) {
+      console.log("Joining meeting:", meetingId);
 
-  // Toggle Mic
-  toggleMicButton.addEventListener("click", () => {
-    if (isMicOn) {
-      meeting?.muteMic();
-    } else {
-      meeting?.unmuteMic();
+      const meeting = VideoSDK.initMeeting({
+        meetingId: meetingId,
+        name: "Guest User",
+        apiKey: TOKEN,
+        containerId: "meeting-container",
+        micEnabled: true,
+        webcamEnabled: true,
+      });
+
+      meeting.join();
     }
-    isMicOn = !isMicOn;
-  });
-
-  // Toggle Webcam
-  toggleWebCamButton.addEventListener("click", () => {
-    if (isWebCamOn) {
-      meeting?.disableWebcam();
-      const localVideoFrame = document.getElementById(`f-${meeting.localParticipant.id}`);
-      if(localVideoFrame) localVideoFrame.style.display = "none";
-    } else {
-      meeting?.enableWebcam();
-      const localVideoFrame = document.getElementById(`f-${meeting.localParticipant.id}`);
-      if(localVideoFrame) localVideoFrame.style.display = "inline-block";
-    }
-    isWebCamOn = !isWebCamOn;
-  });
-</script>
-
+  </script>
 </body>
 </html>
