@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>VideoSDK Meeting (No JWT)</title>
+<title>VideoSDK Meeting (No JWT)1</title>
 <script src="https://sdk.videosdk.live/js-sdk/0.0.87/videosdk.js"></script>
 <style>
 body { font-family: Arial, sans-serif; padding: 20px; }
