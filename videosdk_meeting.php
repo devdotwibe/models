@@ -85,7 +85,7 @@ $VIDEOSDK_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJkOWUwNWQ2
       const meeting = VideoSDK.initMeeting({
         meetingId: meetingId,
         name: "Guest User",
-        apiKey: TOKEN,
+        token: TOKEN,  // ✅ FIX: use token instead of apiKey
         containerId: "meeting-container",
         micEnabled: true,
         webcamEnabled: true,
