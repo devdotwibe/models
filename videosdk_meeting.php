@@ -1,24 +1,17 @@
 <?php
-
-if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
-    die("autoload.php not found! Check path.");
-}
-
-
-
 require __DIR__ . '/vendor/autoload.php';
 use Firebase\JWT\JWT;
 
 // VideoSDK credentials
-$API_KEY = "d9e05d67-8f16-4c02-bbc4-933f7603bf7d"; // Public API key
+$API_KEY = "d9e05d67-8f16-4c02-bbc4-933f7603bf7d";       // Public API key
 $API_SECRET = "8c812d371cdd9313dcb62738ad900ead2933f1f91f3cb30bef71e6e90567b438"; // Secret
 
 // Generate token server-side
 $payload = [
     "apikey" => $API_KEY,
-    "permissions" => ["allow_join", "allow_mod"],
+    "permissions" => ["allow_join", "allow_mod"], // Required permissions
     "iat" => time(),
-    "exp" => time() + 60*60*24  // 24 hours
+    "exp" => time() + 60*60 // 1 hour token
 ];
 
 $VIDEOSDK_TOKEN = JWT::encode($payload, $API_SECRET, 'HS256');
@@ -49,34 +42,35 @@ button { margin: 10px; padding: 10px 20px; cursor: pointer; }
 
 <script>
 const TOKEN = "<?php echo $VIDEOSDK_TOKEN; ?>";
-console.log("Token from PHP:", TOKEN);
+console.log("Server-side token:", TOKEN);
 
-// Create Meeting
+// Create a new meeting (server-side token)
 document.getElementById("create-btn").addEventListener("click", async () => {
     try {
-        const response = await fetch("https://api.videosdk.live/v2/rooms", {
+        const res = await fetch("https://api.videosdk.live/v2/rooms", {
             method: "POST",
             headers: {
                 Authorization: TOKEN,
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({}) // you can add optional room config here
         });
-        const data = await response.json();
+        const data = await res.json();
         console.log("Meeting created:", data);
 
         if (data.roomId) {
             document.getElementById("meetingId").value = data.roomId;
-            joinMeeting(data.roomId);
+            alert("Meeting Created! ID: " + data.roomId);
         } else {
             alert("Failed to create meeting. Check console.");
         }
     } catch (err) {
-        console.error(err);
-        alert("Error creating meeting.");
+        console.error("Error creating meeting:", err);
+        alert("Error creating meeting. Check console.");
     }
 });
 
-// Join Meeting
+// Join a meeting (use server-side token)
 document.getElementById("join-btn").addEventListener("click", () => {
     const meetingId = document.getElementById("meetingId").value.trim();
     if (!meetingId) {
@@ -86,7 +80,6 @@ document.getElementById("join-btn").addEventListener("click", () => {
     joinMeeting(meetingId);
 });
 
-// Join Meeting Function
 function joinMeeting(meetingId) {
     console.log("Joining meeting:", meetingId);
     const meeting = VideoSDK.initMeeting({
