@@ -1,8 +1,3 @@
-<?php
-// index.php
-// Replace with your actual VideoSDK Auth Token
-$VIDEOSDK_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJkOWUwNWQ2Ny04ZjE2LTRjMDItYmJjNC05MzNmNzYwM2JmN2QiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTc1ODY5MDQ5NywiZXhwIjoxOTE2NDc4NDk3fQ.G431dK7iF2s_O93l5qd-PqBE5Vu31srL7-lsR_M1mKM";
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,30 +28,25 @@ $VIDEOSDK_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJkOWUwNWQ2
   <script>
     console.log("JS Loaded ✅");
 
-    const TOKEN = "<?php echo $VIDEOSDK_TOKEN; ?>";
-    console.log("Token from PHP:", TOKEN);
+    // Fetch token dynamically from server
+    async function getToken() {
+      try {
+        const res = await fetch("/get-token.php");
+        const data = await res.json();
+        return data.token;
+      } catch (err) {
+        console.error("Failed to get token:", err);
+        alert("Could not get token. Check server.");
+      }
+    }
 
     // Create Meeting Button
-    document.getElementById("create-btn").addEventListener("click", () => {
+    document.getElementById("create-btn").addEventListener("click", async () => {
       console.log("Create button clicked!");
-      createMeeting();
-    });
+      const TOKEN = await getToken();
+      if (!TOKEN) return;
 
-    // Join Meeting Button
-    document.getElementById("join-btn").addEventListener("click", () => {
-      console.log("Join button clicked!");
-      const meetingId = document.getElementById("meetingId").value;
-      if (!meetingId) {
-        alert("Please enter a Meeting ID");
-        return;
-      }
-      joinMeeting(meetingId);
-    });
-
-    // Create a new meeting
-    async function createMeeting() {
       try {
-        console.log("Creating meeting...");
         const response = await fetch("https://api.videosdk.live/v2/rooms", {
           method: "POST",
           headers: {
@@ -70,16 +60,30 @@ $VIDEOSDK_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJkOWUwNWQ2
         if (data.roomId) {
           document.getElementById("meetingId").value = data.roomId;
           alert("New Meeting Created! ID: " + data.roomId);
+          joinMeeting(data.roomId);
         } else {
           console.error("Failed to create meeting:", data);
         }
       } catch (err) {
         console.error("Error creating meeting:", err);
       }
-    }
+    });
+
+    // Join Meeting Button
+    document.getElementById("join-btn").addEventListener("click", async () => {
+      const meetingId = document.getElementById("meetingId").value;
+      if (!meetingId) {
+        alert("Please enter a Meeting ID");
+        return;
+      }
+      joinMeeting(meetingId);
+    });
 
     // Join an existing meeting
-    function joinMeeting(meetingId) {
+    async function joinMeeting(meetingId) {
+      const TOKEN = await getToken();
+      if (!TOKEN) return;
+
       console.log("Joining meeting:", meetingId);
 
       const meeting = VideoSDK.initMeeting({
