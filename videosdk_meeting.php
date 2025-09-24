@@ -26,7 +26,7 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
   <button id="createMeetingBtn">New Meeting</button>
   <br><br>
   <input type="text" id="meetingIdTxt" placeholder="Enter Meeting id" />
-  <button id="joinBtn">Join Meeting1</button>
+  <button id="joinBtn">Join Meeting</button>
 </div>
 
 <div id="textDiv"></div>
@@ -163,6 +163,7 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
     videoContainer.appendChild(localParticipantElem);
   }
 
+  // Join Meeting
   joinButton.addEventListener("click", async () => {
     meetingId = document.getElementById("meetingIdTxt").value.trim();
     if (!meetingId) {
@@ -174,6 +175,7 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
     initializeMeeting();
   });
 
+  // Create New Meeting
   createButton.addEventListener("click", async () => {
     console.log("Create meeting clicked");
     document.getElementById("join-screen").style.display = "none";
@@ -183,11 +185,17 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
       const response = await fetch("https://api.videosdk.live/v2/rooms", {
         method: "POST",
         headers: {
-          Authorization: TOKEN,
+          Authorization: `Bearer ${TOKEN}`,   // ✅ FIXED
           "Content-Type": "application/json"
         },
       });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
       const data = await response.json();
+      console.log("Meeting created:", data);
       meetingId = data.roomId;
       initializeMeeting();
     } catch (error) {
@@ -197,10 +205,12 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
     }
   });
 
+  // Leave Meeting
   leaveButton.addEventListener("click", () => {
     meeting?.leave();
   });
 
+  // Toggle Mic
   toggleMicButton.addEventListener("click", () => {
     if (isMicOn) {
       meeting?.muteMic();
@@ -210,6 +220,7 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
     isMicOn = !isMicOn;
   });
 
+  // Toggle Webcam
   toggleWebCamButton.addEventListener("click", () => {
     if (isWebCamOn) {
       meeting?.disableWebcam();
