@@ -1,4 +1,11 @@
 <?php
+
+if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+    die("autoload.php not found! Check path.");
+}
+
+
+
 require __DIR__ . '/vendor/autoload.php';
 use Firebase\JWT\JWT;
 
