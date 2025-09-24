@@ -26,7 +26,7 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
   <button id="createMeetingBtn">New Meeting</button>
   <br><br>
   <input type="text" id="meetingIdTxt" placeholder="Enter Meeting id" />
-  <button id="joinBtn">Join Meeting</button>
+  <button id="joinBtn">Join Meeting1</button>
 </div>
 
 <div id="textDiv"></div>
