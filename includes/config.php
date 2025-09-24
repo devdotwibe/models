@@ -1,4 +1,7 @@
 <?php
+
+
+define('VIDEOSDK_TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJkOWUwNWQ2Ny04ZjE2LTRjMDItYmJjNC05MzNmNzYwM2JmN2QiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTc1ODY5MDQ5NywiZXhwIjoxOTE2NDc4NDk3fQ.G431dK7iF2s_O93l5qd-PqBE5Vu31srL7-lsR_M1mKM');
 // u910541639_thelivemodel
 $servername = "localhost";
 
