@@ -40,6 +40,9 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+  console.log("DOM fully loaded");
+
   const TOKEN = '<?php echo VIDEOSDK_TOKEN; ?>';
 
   const joinButton = document.getElementById("joinBtn");
@@ -110,7 +113,7 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
 
     meeting = window.VideoSDK.initMeeting({
       meetingId: meetingId,
-      name: "Participant-" + Math.floor(Math.random() * 1000), // replace with username as needed
+      name: "Participant-" + Math.floor(Math.random() * 1000),
       micEnabled: true,
       webcamEnabled: true,
     });
@@ -173,7 +176,7 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
   });
 
   createButton.addEventListener("click", async () => {
-     console.log("Create meeting clicked");
+    console.log("Create meeting clicked");
     document.getElementById("join-screen").style.display = "none";
     textDiv.textContent = "Creating a new meeting... Please wait.";
 
@@ -220,6 +223,7 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
     }
     isWebCamOn = !isWebCamOn;
   });
+});
 </script>
 
 </body>
