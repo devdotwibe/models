@@ -1,26 +1,8 @@
-<?php
-require __DIR__ . '/vendor/autoload.php';
-use Firebase\JWT\JWT;
-
-// VideoSDK credentials
-$API_KEY = "d9e05d67-8f16-4c02-bbc4-933f7603bf7d";       // Public API key
-$API_SECRET = "8c812d371cdd9313dcb62738ad900ead2933f1f91f3cb30bef71e6e90567b438"; // Secret
-
-// Generate token server-side
-$payload = [
-    "apikey" => $API_KEY,
-    "permissions" => ["allow_join", "allow_mod"], // Required permissions
-    "iat" => time(),
-    "exp" => time() + 60*60 // 1 hour token
-];
-
-$VIDEOSDK_TOKEN = JWT::encode($payload, $API_SECRET, 'HS256');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>VideoSDK Meeting</title>
+<title>VideoSDK Meeting Demo</title>
 <script src="https://sdk.videosdk.live/js-sdk/0.0.87/videosdk.js"></script>
 <style>
 body { font-family: Arial, sans-serif; padding: 20px; }
@@ -41,37 +23,51 @@ button { margin: 10px; padding: 10px 20px; cursor: pointer; }
 <div id="meeting-container"></div>
 
 <script>
-const TOKEN = "<?php echo $VIDEOSDK_TOKEN; ?>";
-console.log("Server-side token:", TOKEN);
+console.log("JS Loaded ✅");
 
-// Create a new meeting (server-side token)
-document.getElementById("create-btn").addEventListener("click", async () => {
+// Fetch fresh token from server
+async function getToken() {
     try {
-        const res = await fetch("https://api.videosdk.live/v2/rooms", {
+        const res = await fetch("get-token.php");
+        const data = await res.json();
+        return data.token;
+    } catch (err) {
+        console.error("Failed to get token:", err);
+        alert("Could not fetch token from server.");
+    }
+}
+
+// Create a new meeting
+document.getElementById("create-btn").addEventListener("click", async () => {
+    const TOKEN = await getToken();
+    if (!TOKEN) return;
+
+    try {
+        const response = await fetch("https://api.videosdk.live/v2/rooms", {
             method: "POST",
             headers: {
                 Authorization: TOKEN,
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({}) // you can add optional room config here
+            }
         });
-        const data = await res.json();
+        const data = await response.json();
         console.log("Meeting created:", data);
 
         if (data.roomId) {
             document.getElementById("meetingId").value = data.roomId;
-            alert("Meeting Created! ID: " + data.roomId);
+            alert("Meeting created! ID: " + data.roomId);
+            joinMeeting(data.roomId);
         } else {
             alert("Failed to create meeting. Check console.");
         }
     } catch (err) {
         console.error("Error creating meeting:", err);
-        alert("Error creating meeting. Check console.");
+        alert("Error creating meeting.");
     }
 });
 
-// Join a meeting (use server-side token)
-document.getElementById("join-btn").addEventListener("click", () => {
+// Join a meeting
+document.getElementById("join-btn").addEventListener("click", async () => {
     const meetingId = document.getElementById("meetingId").value.trim();
     if (!meetingId) {
         alert("Please enter a Meeting ID");
@@ -80,8 +76,13 @@ document.getElementById("join-btn").addEventListener("click", () => {
     joinMeeting(meetingId);
 });
 
-function joinMeeting(meetingId) {
+// Function to join a meeting
+async function joinMeeting(meetingId) {
+    const TOKEN = await getToken(); // get fresh token
+    if (!TOKEN) return;
+
     console.log("Joining meeting:", meetingId);
+
     const meeting = VideoSDK.initMeeting({
         meetingId: meetingId,
         name: "Guest User",
@@ -90,6 +91,7 @@ function joinMeeting(meetingId) {
         micEnabled: true,
         webcamEnabled: true
     });
+
     meeting.join();
 
     meeting.on("error", err => {
