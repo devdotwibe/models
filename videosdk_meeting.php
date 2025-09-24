@@ -6,7 +6,7 @@ $VIDEOSDK_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJkOWUwNWQ2
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>VideoSDK Meeting</title>
   <script src="https://sdk.videosdk.live/js-sdk/0.0.87/videosdk.js"></script>
   <style>
@@ -24,7 +24,7 @@ $VIDEOSDK_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJkOWUwNWQ2
 
   <!-- Input for Meeting ID -->
   <div>
-    <input type="text" id="meetingId" placeholder="Enter Meeting ID" style="padding:5px;"/>
+    <input type="text" id="meetingId" placeholder="Enter Meeting ID" style="padding:5px;" />
   </div>
 
   <!-- Meeting Container -->
@@ -85,7 +85,7 @@ $VIDEOSDK_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJkOWUwNWQ2
       const meeting = VideoSDK.initMeeting({
         meetingId: meetingId,
         name: "Guest User",
-        token: TOKEN,  // ✅ FIX: use token instead of apiKey
+        token: TOKEN,
         containerId: "meeting-container",
         micEnabled: true,
         webcamEnabled: true,
