@@ -173,6 +173,7 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
   });
 
   createButton.addEventListener("click", async () => {
+     console.log("Create meeting clicked");
     document.getElementById("join-screen").style.display = "none";
     textDiv.textContent = "Creating a new meeting... Please wait.";
 
