@@ -40,8 +40,7 @@ include 'config.php'; // This file defines VIDEOSDK_TOKEN
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  console.log("DOM fully loaded");
+  console.log("Script loaded ✅");
 
   const TOKEN = '<?php echo VIDEOSDK_TOKEN; ?>';
 
@@ -223,7 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     isWebCamOn = !isWebCamOn;
   });
-});
 </script>
 
 </body>
