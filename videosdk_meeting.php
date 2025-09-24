@@ -32,17 +32,18 @@
     async function getToken() {
       try {
         const res = await fetch("/get-token.php");
+        if (!res.ok) throw new Error("HTTP error " + res.status);
         const data = await res.json();
         return data.token;
       } catch (err) {
         console.error("Failed to get token:", err);
         alert("Could not get token. Check server.");
+        return null;
       }
     }
 
     // Create Meeting Button
     document.getElementById("create-btn").addEventListener("click", async () => {
-      console.log("Create button clicked!");
       const TOKEN = await getToken();
       if (!TOKEN) return;
 
@@ -60,30 +61,33 @@
         if (data.roomId) {
           document.getElementById("meetingId").value = data.roomId;
           alert("New Meeting Created! ID: " + data.roomId);
-          joinMeeting(data.roomId);
+          joinMeeting(data.roomId, TOKEN);
         } else {
           console.error("Failed to create meeting:", data);
+          alert("Failed to create meeting. Check console.");
         }
       } catch (err) {
         console.error("Error creating meeting:", err);
+        alert("Error creating meeting. Check console.");
       }
     });
 
     // Join Meeting Button
     document.getElementById("join-btn").addEventListener("click", async () => {
-      const meetingId = document.getElementById("meetingId").value;
+      const meetingId = document.getElementById("meetingId").value.trim();
       if (!meetingId) {
         alert("Please enter a Meeting ID");
         return;
       }
-      joinMeeting(meetingId);
-    });
 
-    // Join an existing meeting
-    async function joinMeeting(meetingId) {
       const TOKEN = await getToken();
       if (!TOKEN) return;
 
+      joinMeeting(meetingId, TOKEN);
+    });
+
+    // Join an existing meeting
+    function joinMeeting(meetingId, TOKEN) {
       console.log("Joining meeting:", meetingId);
 
       const meeting = VideoSDK.initMeeting({
@@ -96,6 +100,11 @@
       });
 
       meeting.join();
+
+      meeting.on("error", (err) => {
+        console.error("Meeting error:", err);
+        alert("Error joining meeting. Check console.");
+      });
     }
   </script>
 </body>
