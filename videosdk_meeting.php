@@ -15,7 +15,7 @@ input { padding: 5px; }
 
 <h2>VideoSDK Meeting Demo (No JWT1)</h2>
 
-<button id="create-btn">Create Meeting</button>
+<button id="create-btn">Create Meeting1</button>
 <button id="join-btn">Join Meeting</button>
 
 <div>
