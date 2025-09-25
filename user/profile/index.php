@@ -1154,31 +1154,15 @@ if(!empty($userDetails['profile_pic'])){
             <div class="model-card">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
-                <div class="relative">
 
               <?php
-                $profile_pic = $post['profile_pic'] ?? '';
 
-                  if (checkImageExists($profile_pic)) {
-                        $imageUrl = SITEURL . $profile_pic;
-                ?>
-                        <img src="<?= $imageUrl ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
-                <?php
-                    }
-              ?>
-
-
-                    <div class="online-dot"></div>
-                </div>
-
-                <?php
-                
                   $post_upload_id = $post['ID'];
 
                   $psot_user_status =  getPostUploadTime($post_upload_id);
 
                 
-                   $post_user_id = $post['user_id'];
+                $post_user_id = $post['user_id'];
 
                   $modelDetails = get_data('model_user',array('id'=>$post_user_id),true);
 
@@ -1197,7 +1181,23 @@ if(!empty($userDetails['profile_pic'])){
                       $preminum_plan = $result['plan_status'];
                   }
 
+                $profile_pic = $post['profile_pic'] ?? '';
+
+              ?>
+
+               <div class="relative" onclick="window.location.href='<?= SITEURL . $modelDetails['username'] ?>'">
+
+              <?php if (checkImageExists($profile_pic)) {
+
+                        $imageUrl = SITEURL . $profile_pic;
                 ?>
+                        <img src="<?= $imageUrl ?>" alt="User" class="w-12 md:w-14 h-12 md:h-14 rounded-full">
+
+                <?php } ?>
+
+                    <div class="online-dot"></div>
+                </div>
+
 
                 <div class="ml-3 md:ml-4">
                     <div class="flex items-center flex-wrap">
@@ -1257,6 +1257,8 @@ if(!empty($userDetails['profile_pic'])){
                 <?php } ?>
 
             </div>
+
+             <h2>  <?php echo $post['post_title']; ?></h2>
 
               <p>  <?php echo $post['post_content']; ?></p>
 

@@ -9,7 +9,7 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
 }
 
 
-    $excluded = ['advertisements','promote', 'live-stream', 'watch-stream', '404'];
+    $excluded = ['advertisements','promote', 'live-stream', 'watch-stream', '404','videosdk'];
 
     $routes = [
         'all-members',
@@ -116,6 +116,21 @@ if ($segments[0] === '' || $segments[0] === 'index.php') {
         }
         exit;
     }
+
+    if ($segments[0] === 'videosdk' && !empty($segments[1])) {
+        
+        $_GET['username'] = preg_replace('/[^a-zA-Z0-9_-]/', '', $segments[1]);
+
+        if (file_exists(__DIR__ . '/videosdk/index.php')) {
+            require __DIR__ . '/videosdk/index.php';
+        } else {
+            http_response_code(404);
+            require __DIR__ . '/404.php';
+        }
+        exit;
+    }
+
+    
 
     if ($segments[0] === 'promote' && !empty($segments[1])) {
         
