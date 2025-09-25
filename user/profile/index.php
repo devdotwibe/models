@@ -1481,14 +1481,9 @@ if(!empty($userDetails['profile_pic'])){
 
         <!-- Suggested Users -->
 
-      <?php   if($followers_count > 0 )  { ?>
-      
-
-        <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">People You May Like</h2>
-
-        <?php 
+      <?php   if($followers_count > 0 )  { 
         
-          $users_with_post = [];
+        $users_with_post = [];
 
           $sql = "
               SELECT DISTINCT model_user.id AS user_id 
@@ -1500,12 +1495,10 @@ if(!empty($userDetails['profile_pic'])){
           while ($row = mysqli_fetch_assoc($result)) {
               $users_with_post[] = (int)$row['user_id'];
           }
-        
-          if (!empty($users_with_post)) {
 
-               $suggested_user_ids = array_diff($users_with_post, $followed_user_ids);
+         $suggested_user_ids = array_diff($users_with_post, $followed_user_ids);
 
-            if (!empty($suggested_user_ids)) {
+          if (!empty($suggested_user_ids)) {
 
               $ids_string = implode(',', $suggested_user_ids);
 
@@ -1513,27 +1506,24 @@ if(!empty($userDetails['profile_pic'])){
                   SELECT live_posts.*, model_user.name, model_user.gender, model_user.profile_pic ,model_user.unique_id 
                   FROM live_posts 
                   JOIN model_user ON live_posts.post_author = model_user.id 
-                  WHERE model_user.id IN ($ids_string)
+                  WHERE model_user.id IN ($ids_string) AND  WHERE model_user.id != ".$userDetails['id'].")
                   ORDER BY RAND()
                   LIMIT 2
               ");
 
-              $posts = mysqli_fetch_all($post_query, MYSQLI_ASSOC);
+              $posts_user = mysqli_fetch_all($post_query, MYSQLI_ASSOC);
 
-
-              // print_r($posts);
-
-              // die();
-            }
           }
-        
-        ?>
+         
+         ?>
+      
+    <?php if (!empty($posts_user)) { ?>
+
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 gradient-text heading-font">People You May Like <?php echo print_r($followed_user_ids) ?></h2>
 
        <?php
        
-       if(!empty($posts) && count($posts) > 0) {
-       
-          foreach ($posts as $post) { 
+          foreach ($posts_user as $post) { 
 
             
                   $defaultImage =SITEURL."/assets/images/girl.png";
@@ -1554,6 +1544,10 @@ if(!empty($userDetails['profile_pic'])){
                   $modelDetails = get_data('model_user',array('id'=>$post['user_id']),true);
 
                   $result = CheckPremiumAccess($modelDetails['id']);
+
+                $post_upload_id = $post['ID'];
+
+                $psot_user_status =  getPostUploadTime($post_upload_id);
 
                   $preminum_plan = "";
 
@@ -1628,7 +1622,7 @@ if(!empty($userDetails['profile_pic'])){
 
                   </div>
 
-                  <p class="text-xs md:text-sm text-white/60">Active now •</p>
+                  <p class="text-xs md:text-sm text-white/60 active_user_demo"><?php echo $psot_user_status ?> •</p>
 
                 </div>
 
@@ -1681,7 +1675,7 @@ if(!empty($userDetails['profile_pic'])){
             </div>
           </div>
 
-        <?php }  } }?>
+        <?php } }  } ?>
 
      
 

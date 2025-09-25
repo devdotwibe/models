@@ -963,7 +963,7 @@ body .owl-carousel .owl-nav.disabled {
 
                                         <?php } else { ?>
 
-                                            <button onclick="FollowModel('<?= $modelDetails['id'] ?>', '<?= $_SESSION['log_user_id'] ?>','follow_status')"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+                                            <button onclick="FollowModel('<?= $modelDetails['unique_id'] ?>', '<?= $_SESSION['log_user_unique_id'] ?>','follow_status')"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                                                 <span id="follow_status">Follow</span>
                                             </button>
@@ -1792,7 +1792,7 @@ body .owl-carousel .owl-nav.disabled {
                             $modalname = $rows_md['name'];
                         }
                         
-                         $user_unique_id = $rows_md['id'];
+                         $user_unique_id = $rows_md['unique_id'];
                         ?>
                             <div class="flex items-center gap-3">
                                 <img loading="lazy" src="<?php echo $defaultImage; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
@@ -1827,7 +1827,7 @@ body .owl-carousel .owl-nav.disabled {
                                         
                                 ?>
 
-                                <button type="button" onclick="FollowModel('<?= $rows_md['id'] ?>', '<?= $rows_md['username'] ?>','follow_similar-<?= $user_unique_id ?>')" class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                <button type="button" onclick="FollowModel('<?= $rows_md['unique_id'] ?>', '<?= $_SESSION['log_user_unique_id'] ?>','follow_status')"  class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
 
                                      <span id="follow_similar-<?= $user_unique_id ?>"><?php if($user_requested) {  ?>  Follow requested <?php } else { ?>Follow <?php }?></span>
                                      
