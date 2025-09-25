@@ -10,10 +10,30 @@ else{
 }
 
 if ($_POST['submit_name']){ 
+
 	$arr = array('name','country','state','city','gender','age','user_bio','services','relationship','children_preference','education_level','travel_preference'); //,'user_current_status'
 	$post_data = array_from_post($arr);
 	
 	$post_data['dob'] = h_dateFormat($_POST['dob'],'Y-m-d');
+
+
+	   
+    if(isset($_POST['city']) && $_POST['city'] =='other' && isset($_POST['add_city']) && $_POST['add_city'] != '' && isset($_POST['state']) && $_POST['state'] != '')
+	{
+		$add_city = $_POST['add_city'];
+
+		$state = $_POST['state'];
+
+		$city_id = GetCityId($add_city,$state);
+
+		if($city_id != 'exist')
+		{
+			$post_data['city'] = $city_id;
+
+		}
+	}
+    
+
 	//$post_data['age'] = h_get_age($dob);
 	
 	$unique_id = $_POST['unique_id'];

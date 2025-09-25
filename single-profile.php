@@ -970,7 +970,9 @@ body .owl-carousel .owl-nav.disabled {
 
                                         <?php } ?>
                             
-                                    <?php } else { ?>
+                                    <?php } ?>
+
+                                    <?php /* ?>
 
                                          <button onclick="window.location='<?= SITEURL ?>login'"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
 
@@ -978,7 +980,7 @@ body .owl-carousel .owl-nav.disabled {
                                             <span id="follow_status">Follow</span>
                                         </button>
 
-                                    <?php } ?>
+                                    <?php } */ ?>
 
                                     <div class="action-dropdown" id="moreActions">
 

@@ -38,21 +38,13 @@ if (isset($_SESSION['log_user_id'])) {
             $error = '';
             
             if(isset($_POST['save_image_file']) && !empty($_POST['save_image_file'])){
-
                 $additional_img = '';
-
                 $exp_file_img = explode('|',$_POST['save_image_file']);
-
                 $joe_id = DB::update('banners', array('image' => $exp_file_img[0]), "id=%s", $created_id);
-
                 if(count($exp_file_img) > 1){
-
                     for ($i = 1; $i < count($exp_file_img); $i++) {
-
                         $additional_img .= $exp_file_img[$i].'|';
-
                     }
-                    
                     $joe_id = DB::update('banners', array('additionalimages' => rtrim($additional_img, "|")), "id=%s", $created_id);
                 }
             }

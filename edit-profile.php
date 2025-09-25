@@ -1283,8 +1283,20 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
               </div>
               <div>
                 <label class="form-label">City *</label>
-                <select name="city" id="i-hs-city" class="form-select" required></select>
+                <select name="city" id="i-hs-city" class="form-select adv_city" required onchange="AddCity(this)" ></select>
+                 <span class="err_adv_city" style="color:red;"></span>
               </div>
+
+              <div style="display:none"   id="add_city_div">
+
+                  <label class="block text-white font-semibold mb-3">Add City *</label>
+
+                  <input type="text" name="add_city" id="add_city" class="form-input w-full px-6 py-4 rounded-xl" placeholder="Enter your city name" >
+
+                  <span class="err_add_city" id="err_add_city" style="color:red; display:none;" >The city name is already exist in the state</span>
+
+              </div>
+
               <div>
                 <label class="form-label">Willing to Travel</label>
                 <div class="radio-group">
@@ -4933,6 +4945,24 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
       form.submit();
     }
 
+      function AddCity(el)
+      {
+          var value = $(el).val();
+
+          console.log(value);
+
+          if(value =='other')
+          {
+                $('#add_city_div').show();
+          }
+          else
+          {
+              $('#add_city_div').hide();
+
+              $('#add_city').val("");
+          }
+      }
+
 
     function select_hs_country(state) {
       $("#i-hs-city").html('<option value="">Select</option>');
@@ -4949,7 +4979,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         },
         dataType: 'json',
         success: function (res) {
-          $("#i-hs-state").html('<option value="">Select</option>' + res.list);
+          $("#i-hs-state").html('<option value="">Select</option>' + res.list );
           select_hs_state('<?= $userDetails['city'] ?>');
         }
       })
@@ -4968,7 +4998,7 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         },
         dataType: 'json',
         success: function (res) {
-          $("#i-hs-city").html('<option value="">Select</option>' + res.list);
+          $("#i-hs-city").html('<option value="">Select</option>' + res.list+ '<option value="other">Other</option>');
         }
       })
     }
@@ -5753,6 +5783,8 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
 
       let missingFields = [];
 
+      let city_check = true;
+
       const basicFields = [{
         selector: '#uname',
         label: 'Username'
@@ -5803,56 +5835,156 @@ $is_model = $userDetails['as_a_model'] == 'Yes' ? true : false;
         }
       });
 
-      if (totalFields == completedFields) {
-        const $button = $(button);
-        const originalText = $button.text();
 
-        $button.text('Saving...');
-        $button.prop('disabled', true);
+      var city = $('#i-hs-city').val();
 
-        const form = $('#basicProfileForm')[0];
+      var add_city = $('#add_city').val();
 
-        const formData = new FormData(form);
+      var state = $('#i-hs-state').val();
+          
+      if(city == "other" && add_city != '' && state != '')
+      {   
+            $.ajax({
+                  url: '<?= SITEURL . 'ajax/check_city.php' ?>',
+                  type: "POST",
+                  data: { city: add_city, state: state },
+                  dataType: 'json',
+                  success: function(response) {
 
-        formData.append('submit_name', 'submit_name');
+                        allow_next = false;
 
-        $.ajax({
-          url: 'act-edit-profile.php',
-          type: 'POST',
-          data: formData,
-          contentType: false,
-          processData: false,
-          dataType: 'json',
-          success: function (response) {
+                        console.log(response);
 
-            console.log(response);
+                      if (response.message === "exist") {
 
-            if (response.status === 'success') {
-              $('.progress-fill-input').css('width', '100%');
-              $('.step').addClass('completed').removeClass('active');
+                          $('#err_add_city').show();
 
-              setTimeout(() => {
-                $button.text(originalText);
-                $button.prop('disabled', false);
+                          $('#err_add_city').text('The city name is already exist in the state');
 
-                $('#modal_success_message').prepend('<p class="success-text">Your settings have been saved successfully!</p>');
+                          showNotification('The city name is already exist in the state', 'error');
 
-                $('#success_modal').addClass('active');
+                          city_check = false;
+                      } 
 
-              }, 1000);
+                      proceedAfterCityCheck(city_check, completedFields, totalFields, missingFields, button);
+                  },
+                  error: function() {
+                  
+                    proceedAfterCityCheck(city_check, completedFields, totalFields, missingFields, button);
+
+                  }
+          });
+
+      }
+      else
+      {
+          proceedAfterCityCheck(city_check, completedFields, totalFields, missingFields, button);
+      }
+
+
+
+        // if(city_check)
+        // {
+        //     if (totalFields == completedFields) {
+        //       const $button = $(button);
+        //       const originalText = $button.text();
+
+        //       $button.text('Saving...');
+        //       $button.prop('disabled', true);
+
+        //       const form = $('#basicProfileForm')[0];
+
+        //       const formData = new FormData(form);
+
+        //       formData.append('submit_name', 'submit_name');
+
+        //       $.ajax({
+        //         url: 'act-edit-profile.php',
+        //         type: 'POST',
+        //         data: formData,
+        //         contentType: false,
+        //         processData: false,
+        //         dataType: 'json',
+        //         success: function (response) {
+
+        //           console.log(response);
+
+        //           if (response.status === 'success') {
+        //             $('.progress-fill-input').css('width', '100%');
+        //             $('.step').addClass('completed').removeClass('active');
+
+        //             setTimeout(() => {
+        //               $button.text(originalText);
+        //               $button.prop('disabled', false);
+
+        //               $('#modal_success_message').prepend('<p class="success-text">Your settings have been saved successfully!</p>');
+
+        //               $('#success_modal').addClass('active');
+
+        //             }, 1000);
+        //           }
+        //         },
+
+        //         error: function (xhr, status, error) {
+        //           $button.text(originalText);
+        //           $button.prop('disabled', false);
+        //         }
+        //       });
+
+        //     } else {
+
+        //       showNotification('Please fill required fields: ' + missingFields.join(', '), 'error');
+
+        //     }
+        // }
+    }
+
+    function proceedAfterCityCheck(city_check, completedFields, totalFields, missingFields, button) {
+
+      if (city_check) {
+        if (totalFields === completedFields) {
+          const $button = $(button);
+          const originalText = $button.text();
+
+          $button.text('Saving...');
+          $button.prop('disabled', true);
+
+          const form = $('#basicProfileForm')[0];
+          const formData = new FormData(form);
+          formData.append('submit_name', 'submit_name');
+
+          $.ajax({
+            url: 'act-edit-profile.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function(response) {
+              console.log(response);
+
+              if (response.status === 'success') {
+                $('.progress-fill-input').css('width', '100%');
+                $('.step').addClass('completed').removeClass('active');
+
+                setTimeout(() => {
+                  $button.text(originalText);
+                  $button.prop('disabled', false);
+
+                  $('#modal_success_message').prepend('<p class="success-text">Your settings have been saved successfully!</p>');
+                  $('#success_modal').addClass('active');
+                }, 1000);
+              }
+            },
+            error: function(xhr, status, error) {
+              $button.text(originalText);
+              $button.prop('disabled', false);
             }
-          },
+          });
 
-          error: function (xhr, status, error) {
-            $button.text(originalText);
-            $button.prop('disabled', false);
-          }
-        });
-
-      } else {
-
-        showNotification('Please fill required fields: ' + missingFields.join(', '), 'error');
-
+        } else {
+          showNotification('Please fill required fields: ' + missingFields.join(', '), 'error');
+        }
       }
     }
 
