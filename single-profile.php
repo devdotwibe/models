@@ -4268,6 +4268,10 @@ jQuery('.send_gift_btn').click(function(){
             $('#createPostForm').on('submit', function (e) {
                 e.preventDefault();
 
+                var $submitBtn = $(this).find('button[type="submit"]');
+
+                $submitBtn.prop('disabled', true).text('Uploading...'); 
+
                 var formData = new FormData(this);
                 
                 formData.append('action','post_submit');
@@ -4313,7 +4317,8 @@ jQuery('.send_gift_btn').click(function(){
                         }
                         else
                         {
-                            alert(response);
+                            // alert(response);
+                            showNotification(`${response}`, 'error');
                         }
                     },
                     error: function (xhr) {

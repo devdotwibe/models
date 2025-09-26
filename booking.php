@@ -204,9 +204,9 @@ $country_list = DB::query('select id,name,sortname from countries order by name 
                                 </div>
 
                                 <div>
-                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Local Meetup Rate: <?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?>/hr</div>
+                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Local Meetup Rate: <?php if (!empty($extra_details)) echo $extra_details['in_per_hour']; ?></div>
                                     <div class="block text-white/80 font-semibold mb-3 text-lg">Extended Social Rate: <?php if (!empty($extra_details)) echo $extra_details['extended_rate']; ?>/hr</div>
-                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Extended Evening Rate: <?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?>/8hrs</div>
+                                    <div class="block text-white/80 font-semibold mb-3 text-lg">Extended Evening Rate: <?php if (!empty($extra_details)) echo $extra_details['in_overnight']; ?> (8 hours)</div>
                                     <div class="block text-white/80 font-semibold mb-3 text-lg">Full-day Social Rate: <?php if (!empty($extra_details)) echo $extra_details['fullday_social']; ?>/day</div>
                                 </div>
                                 <?php $social_availability = json_decode($extra_details['social_availability']);
