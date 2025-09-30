@@ -778,8 +778,11 @@ body .owl-carousel .owl-nav.disabled {
 		foreach($modal_img_list as $uplds){ 
 					
 			if(!empty($uplds['file']) && $uplds['file_type'] == 'Image'){
-				$modal_img_list_array[] = SITEURL.$uplds['file'];		
-				
+
+                if( checkImageExists($uplds['file']) )
+                {
+                  $modal_img_list_array[] = SITEURL.$uplds['file'];		
+                }
 			}
 					
 		}
@@ -834,10 +837,13 @@ body .owl-carousel .owl-nav.disabled {
                             <?php
                                $profile_pic = $rowesdw['profile_pic'] ?? '';
 
-                                if (checkImageExists($profile_pic) || !empty($modal_img_list_array)) {
+                                if (!empty($modal_img_list_array)) {
 
-                                  $modal_img_list_array[] = SITEURL . $profile_pic; 
-								  
+                                    if( checkImageExists($profile_pic) )
+                                    {
+                                        $modal_img_list_array[] = SITEURL . $profile_pic; 
+                                    }
+                                 
 								//   $randomKey = array_rand($modal_img_list_array);
 								//   $randomImage = $modal_img_list_array[$randomKey];
 
