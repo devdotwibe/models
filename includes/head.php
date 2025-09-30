@@ -1,6 +1,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="robots" content="noindex,nofollow">
 <link rel="apple-touch-icon" href="assets/wp-content/themes/theagency3/favicon5e1f.png?v=2">
 <link rel="icon" href="assets/wp-content/themes/theagency3/favicon5e1f.png?v=2">
 <link href='<?='https://fonts.googleapis.com/css?family=EB+Garamond|Great+Vibes|Petit+Formal+Script'?>' rel='stylesheet' type='text/css'>
