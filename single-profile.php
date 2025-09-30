@@ -57,7 +57,7 @@ if (isset($_SESSION['log_user_unique_id'])) {
 
     if($is_user_blocked)
     {
-          echo "<script>window.location.href='" . ($_SERVER['HTTP_REFERER'] ?? '/index.php') . "';</script>";
+          echo "<script>window.location.href='" . ($_SERVER['HTTP_REFERER']) . "';</script>";
         exit;
     }
 
@@ -113,19 +113,13 @@ if (mysqli_num_rows($res_ap) > 0) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Model Profile - Million Dollar Page</title>
-<meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<title>Model Profile - Million Dollar Page </title>
+<title>Model Profile | The Live Models</title>
     <meta name="description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
 	<link rel="canonical" href="https://thelivemodels.com/" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Model Profile - Million Dollar Page | The Live Models">
+<meta property="og:title" content="Model Profile | The Live Models">
 <meta property="og:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
 <meta property="og:url" content="https://thelivemodels.com/">
 <meta property="og:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
@@ -133,7 +127,7 @@ if (mysqli_num_rows($res_ap) > 0) {
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Model Profile - Million Dollar Page | The Live Models">
+<meta name="twitter:title" content="Model Profile | The Live Models">
 <meta name="twitter:description" content="Connect with amazing models for chat, watch and meet experiences. The premier social dating platform for authentic connections.">
 <meta name="twitter:image" content="https://thelivemodels.com/assets/images/og-image.jpg">
 <meta name="twitter:site" content="@thelivemodels">
@@ -783,7 +777,7 @@ body .owl-carousel .owl-nav.disabled {
 		foreach($modal_img_list as $uplds){ 
 					
 			if(!empty($uplds['file']) && $uplds['file_type'] == 'Image'){
-				$modal_img_list_array[] = SITEURL.'uploads/profile_pic/'.$uplds['file'];		
+				$modal_img_list_array[] = SITEURL.$uplds['file'];		
 				
 			}
 					
@@ -889,10 +883,16 @@ body .owl-carousel .owl-nav.disabled {
                                 <h1 class="text-3xl sm:text-4xl font-bold heading-font gradient-text mb-1"><?php echo ucfirst($rowesdw['name']); ?></h1>
                                 <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                                     <span class="text-white/70">@<?php echo $rowesdw['username']; ?></span>
-                                    <span class="status-badge status-online">
-                                        <span class="w-2 h-2 bg-white rounded-full mr-2"></span>
-                                        Online 
-                                    </span>
+
+                                    <?php if (isUserOnline($rowesdw['id']) === 'Online') { ?>
+
+                                        <span class="status-badge status-online">
+                                            <span class="w-2 h-2 bg-white rounded-full mr-2"></span>
+                                            Online 
+                                        </span>
+
+                                    <?php } ?>
+                                    
                                 </div>
 								<?php 
 									$country_list = DB::query('select name from countries where id="'.$rowesdw['country'].'"');
@@ -902,7 +902,12 @@ body .owl-carousel .owl-nav.disabled {
                                 <div class="flex items-center gap-2 text-white/70 mb-2 sm:mb-3 text-sm sm:text-base image-center-profile">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                     
-									<?php echo $city_list[0]['name'].', '.$state_list[0]['name'].', '.$country_list[0]['name']; ?>
+									<?php 
+									$full_addr_list = '';
+									if(!empty($city_list) && !empty($city_list[0]['name'])) $full_addr_list .= $city_list[0]['name'].', ';
+									if(!empty($state_list) && !empty($state_list[0]['name'])) $full_addr_list .= $state_list[0]['name'].', ';
+									$full_addr_list .= $country_list[0]['name'];
+									echo $full_addr_list;  ?>
 									
                                 </div>
 								<?php } ?>
@@ -934,7 +939,7 @@ body .owl-carousel .owl-nav.disabled {
 
                             <div class="flex flex-wrap gap-2 sm:gap-3 mt-2 md:mt-0">
 
-                                    <button type="button" class="btn-primary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base" id="openServicesBtn" onclick="window.location.href='<?php echo SITEURL . 'chat-app.php'; ?>'">
+                                    <button type="button" class="btn-primary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base" id="openServicesBtn" onclick="window.location.href='<?php echo SITEURL . 'chat-app'; ?>'">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                                         Message
@@ -949,21 +954,33 @@ body .owl-carousel .owl-nav.disabled {
                                         $user_follow_status = checkUserFollow($model_unique_id, $user_unique_id);
                                     ?>
 
-                                <?php if ($user_follow_status) { ?>
+                                        <?php if ($user_follow_status) { ?>
 
-                                    <button   class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                                        <span id="follow_status">Following</span>
-                                    </button>
+                                            <button   class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                                <span id="follow_status">Following</span>
+                                            </button>
 
-                                <?php } else { ?>
+                                        <?php } else { ?>
 
-                                    <button onclick="FollowModel('<?= $model_unique_id ?>', '<?= $user_unique_id ?>','follow_status')"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                                        <span id="follow_status">Follow</span>
-                                    </button>
+                                            <button onclick="FollowModel('<?= $modelDetails['unique_id'] ?>', '<?= $_SESSION['log_user_unique_id'] ?>','follow_status')"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                                <span id="follow_status">Follow</span>
+                                            </button>
 
-                                <?php } } ?>
+                                        <?php } ?>
+                            
+                                    <?php } ?>
+
+                                    <?php /* ?>
+
+                                         <button onclick="window.location='<?= SITEURL ?>login'"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                            <span id="follow_status">Follow</span>
+                                        </button>
+
+                                    <?php } */ ?>
 
                                     <div class="action-dropdown" id="moreActions">
 
@@ -1017,7 +1034,7 @@ body .owl-carousel .owl-nav.disabled {
                                                                 $link = SITEURL . 'watch-stream/'.$_GET['username'];
 
                                                             }
-                                                            if($modelDetails['as_a_model'] =='Yes')
+                                                            if($_SESSION["log_user_unique_id"] == $session_id && $modelDetails['as_a_model'] =='Yes')
                                                             {
                                                                 $label = "Go Live";
                                                             }
@@ -1027,6 +1044,8 @@ body .owl-carousel .owl-nav.disabled {
                                                             }
                                                         ?>
 
+														<?php if($modelDetails['as_a_model'] =='Yes') { ?>
+														
                                                         <div class="action-item" id="liveBtn" bis_skin_checked="1" onclick="window.location.href='<?php echo $link; ?>' ">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                                 <circle cx="12" cy="12" r="10"></circle>
@@ -1034,8 +1053,10 @@ body .owl-carousel .owl-nav.disabled {
                                                             </svg>
                                                             <?= $label ?>
                                                         </div>
+														
+														<?php } ?>
 
-                                                <?php if($modelDetails['as_a_model'] =='Yes') { ?>
+                                                <?php if(!empty($_SESSION["log_user_unique_id"]) && $_SESSION["log_user_unique_id"] != $session_id && $modelDetails['as_a_model'] =='Yes') { ?>
                                                     
                                                         <div class="action-item" id="tipBtn" bis_skin_checked="1">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1105,6 +1126,8 @@ body .owl-carousel .owl-nav.disabled {
                                                     </div>
 
                                                 <?php } ?>
+												
+												<?php if($modelDetails['as_a_model'] =='Yes') { ?>
 
                                                 <div class="action-item" id="allLinkBtn" bis_skin_checked="1">
 
@@ -1117,6 +1140,8 @@ body .owl-carousel .owl-nav.disabled {
                                                     All my links
 
                                                 </div>
+												
+												<?php } ?>
 
                                           
                                         </div>
@@ -1139,43 +1164,56 @@ body .owl-carousel .owl-nav.disabled {
     <div class="container mx-auto py-6 sm:py-8 px-4 md:px-0">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 single-profile">
             <div class="md:col-span-2">
+
 			<?php if(!empty($rowesdw['user_bio']) || !empty($rowesdw['hobbies'])){ ?>
+
                 <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
-				<?php if(!empty($rowesdw['user_bio'])){ ?>
-                    <h2 class="text-xl font-bold mb-4 premium-text">About Me</h2>
-                    <p class="text-white/80 mb-4"><?php echo $rowesdw['user_bio']; ?></p>
-				<?php } ?>
-				<?php if( (!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null' ) ||  (!empty($rowesdw['additional_hobbies']) && $rowesdw['additional_hobbies'] != 'null') ){ 
 
-                  $hobbies = [];
+                    <?php if(!empty($rowesdw['user_bio'])){ ?>
 
-                    if (!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null') {
-                        $decodedHobbies = json_decode($rowesdw['hobbies'], true);
-                        if (is_array($decodedHobbies)) {
-                            $hobbies = array_merge($hobbies, $decodedHobbies);
+                        <h2 class="text-xl font-bold mb-4 premium-text">About Me</h2>
+
+                        <p class="text-white/80 mb-4"><?php echo $rowesdw['user_bio']; ?></p>
+
+                    <?php } else { ?>
+
+                        <h2 class="text-xl font-bold mb-4 premium-text">About Me</h2>
+
+                        <p class="text-white/80 mb-4"> Hello world 🌍 Just joined The Live Models — let’s meet and share stories</p>
+
+                    <?php } ?>
+                    
+                    <?php if( (!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null' ) ||  (!empty($rowesdw['additional_hobbies']) && $rowesdw['additional_hobbies'] != 'null') ){ 
+
+                    $hobbies = [];
+
+                        if (!empty($rowesdw['hobbies']) && $rowesdw['hobbies'] != 'null') {
+                            $decodedHobbies = json_decode($rowesdw['hobbies'], true);
+                            if (is_array($decodedHobbies)) {
+                                $hobbies = array_merge($hobbies, $decodedHobbies);
+                            }
                         }
-                    }
 
-                    if (!empty($rowesdw['additional_hobbies']) && $rowesdw['additional_hobbies'] != 'null') {
-                        $decodedAdditional = json_decode($rowesdw['additional_hobbies'], true);
-                        if (is_array($decodedAdditional)) {
-                            $hobbies = array_merge($hobbies, $decodedAdditional);
+                        if (!empty($rowesdw['additional_hobbies']) && $rowesdw['additional_hobbies'] != 'null') {
+                            $decodedAdditional = json_decode($rowesdw['additional_hobbies'], true);
+                            if (is_array($decodedAdditional)) {
+                                $hobbies = array_merge($hobbies, $decodedAdditional);
+                            }
                         }
-                    }
 
-                    if (!empty($hobbies)) {
-				?>
-                    <div class="flex flex-wrap gap-2 hobbies-sec">
+                        if (!empty($hobbies)) {
+                    ?>
+                        <div class="flex flex-wrap gap-2 hobbies-sec">
 
-					<?php foreach($hobbies as $hb){ ?>
-					
-                        <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm"><?php echo $hb; ?></span>
+                        <?php foreach($hobbies as $hb){ ?>
                         
-					<?php } ?>
-					
-                    </div>
+                            <span class="bg-indigo-600/20 text-indigo-300 px-3 py-1 rounded-full text-xs sm:text-sm"><?php echo $hb; ?></span>
+                            
+                        <?php } ?>
+                        
+                        </div>
 
-				<?php } } ?>
+                    <?php } } ?>
 
                 </div>
 
@@ -1369,7 +1407,16 @@ body .owl-carousel .owl-nav.disabled {
 
                     </div>
         
-			  <?php } ?>
+			  <?php } else { ?>
+
+                 <div class="media-grid no-user-post">
+
+
+                    <p> 🚀 Empty today… but the story begins soon.</p>
+
+                 </div>
+
+              <?php } ?>
 				
             </div>
 			
@@ -1564,7 +1611,7 @@ body .owl-carousel .owl-nav.disabled {
                         <h2 class="text-xl font-bold mb-4 premium-text">My Services</h2>
                         <ul class="space-y-4">
 
-                        <li class="flex items-center gap-3" onclick="window.location='<?= SITEURL ?>chat-app.php'" >
+                        <li class="flex items-center gap-3" onclick="window.location='<?= SITEURL ?>chat-app'" >
                             <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                             </div>
@@ -1579,7 +1626,7 @@ body .owl-carousel .owl-nav.disabled {
                                     } else if (isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') {
                                     ?>
 
-                          <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/view.php?user=viewer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
+                          <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'watch-stream/'.$_GET['username'] ?>'">
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
                                         <button type="button" class="fancy_button" style="padding: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>
@@ -1597,7 +1644,7 @@ body .owl-carousel .owl-nav.disabled {
                             <?php
                                     if ($_SESSION["log_user_unique_id"] == $session_id) {?>
                                 
-                     <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/stream.php?user=streamer&unique_model_id='?><?php echo isset($_GET['m_unique_id']) ? $_GET['m_unique_id'] : ''; ?>'">
+                     <li class="flex items-center gap-3" onclick="window.location='<?php echo SITEURL .'live-stream/'.$_GET['username'] ?>'">
 
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -1612,8 +1659,11 @@ body .owl-carousel .owl-nav.disabled {
                                 </li>
 
                             <?php } ?>
-                                    
-                            <li class="flex items-center gap-3">
+                               
+                            
+                        <?php if(isset($_SESSION['log_user_id']) && $_SESSION['log_user_id'] != '') { ?>
+
+                            <li class="flex items-center gap-3" <?php if ($user_have_preminum) { ?> onclick="window.location='<?=SITEURL?>booking?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>&m_id=<?php echo $_GET['m_unique_id']; ?>'" <?php } ?> >
                                 <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                                 </div>
@@ -1623,12 +1673,27 @@ body .owl-carousel .owl-nav.disabled {
                                 </div>
                             </li>
 
+                        <?php } else { ?>
+
+                            <li class="flex items-center gap-3" onclick="window.location='<?= SITEURL ?>login'" >
+                                
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-sm sm:text-base">Meet</div>
+                                    <div class="text-xs sm:text-sm text-white/60">In-person experiences</div>
+                                </div>
+                            </li>
+
+                        <?php }  ?>
+
 
                          <?php if(!empty($extra_details) && !empty($extra_details['International_tours']) && $extra_details['International_tours'] == 'Yes'){ ?>
 
-			                <?php if($extra_details['daily_rate']){ ?>
+			                <?php if($extra_details['daily_rate'] || $extra_details['weekly_rate'] || $extra_details['monthly_rate']){ ?>
 
-                                <li class="flex items-center gap-3"  <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking.php?type=travel&service=Travel&token=<?= $extra_details['daily_rate'] ?>&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else { ?> onclick="handleService('travel')" <?php } ?> >
+                                <li class="flex items-center gap-3"  <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking?type=travel&service=Travel&token=<?= $extra_details['daily_rate'] ?>&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else if(!isset($_SESSION['log_user_id'])){ ?> onclick="window.location='<?= SITEURL ?>login'" <?php } ?> >
         
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -1643,8 +1708,9 @@ body .owl-carousel .owl-nav.disabled {
 
                         <?php } } ?>
        
-
-                            <li class="flex items-center gap-3" <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking.php?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else { ?> onclick="handleService('collaboration')" <?php } ?> >
+						<?php if(!empty($extra_details) && !empty($extra_details['collab']) && $extra_details['collab'] == 'Yes'){ ?>
+							
+                            <li class="flex items-center gap-3" <?php if ($user_have_preminum && $plan == 'diamond') { ?> onclick="window.location='<?= SITEURL ?>booking?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>'" <?php } else if(!isset($_SESSION['log_user_id'])){ ?> onclick="window.location='<?= SITEURL ?>login'" <?php } ?> >
         
                                     <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-bg flex items-center justify-center">
 
@@ -1656,6 +1722,8 @@ body .owl-carousel .owl-nav.disabled {
                                         <div class="text-xs sm:text-sm text-white/60">Professional work partnerships</div>
                                     </div>
                                 </li>
+								
+						<?php } ?>
 
                             </ul>
 
@@ -1671,9 +1739,9 @@ body .owl-carousel .owl-nav.disabled {
 
                     <!-- Similar Models Card -->
 
-                <?php if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] && $is_model) { ?>
+                <?php /*if($_GET['m_unique_id'] == $_SESSION['log_user_unique_id'] && $is_model) {  */?>
 
-                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-similar">
+                    <div class="ultra-glass rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 single-profile-model">
                         <h2 class="text-xl font-bold mb-4 premium-text">Similar Models</h2>
                         <div class="space-y-4">
                         
@@ -1726,12 +1794,18 @@ body .owl-carousel .owl-nav.disabled {
                             $modalname = $rows_md['name'];
                         }
                         
-                         $user_unique_id = $rows_md['id'];
+                         $user_unique_id = $rows_md['unique_id'];
                         ?>
                             <div class="flex items-center gap-3">
                                 <img loading="lazy" src="<?php echo $defaultImage; ?>" alt="<?php echo ucfirst($modalname); ?>" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover">
                                 <div class="flex-1">
-                                    <div class="font-semibold text-sm sm:text-base"><?php echo ucfirst($modalname); ?>.</div>
+
+                                    <div class="font-semibold text-sm sm:text-base" onclick="window.location='<?php echo SITEURL . $rows_md['username'] ?>'">
+
+                                        <?php echo ucfirst($modalname); ?>
+
+                                    </div>
+
                                     <div class="text-xs sm:text-sm text-white/60">Fashion Model</div>
                                 </div>
 
@@ -1743,19 +1817,21 @@ body .owl-carousel .owl-nav.disabled {
                                             WHERE sender_id = %s 
                                             AND receiver_id = %s 
                                             AND notification_type = 'follow' 
+                                            AND notification_status='pending'
                                             LIMIT 1",
                                             $_SESSION['log_user_id'],
                                             $rows_md['id']
                                         );
 
-                                        $user_requested = !empty($user_requested_row);
+                                        // $user_requested = !empty($user_requested_row);
+
+                                       $user_requested = ($user_requested_row !== null && !empty($user_requested_row['notification_id']));
                                         
-                                    
                                 ?>
 
-                                <button type="button" onclick="FollowModel('<?= $rows_md['id'] ?>', '<?= $rows_md['username'] ?>','follow_similar-<?= $user_unique_id ?>')" class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
+                                <button type="button" onclick="FollowModel('<?= $rows_md['unique_id'] ?>', '<?= $_SESSION['log_user_unique_id'] ?>','follow_status')"  class="btn-secondary px-2 sm:px-3 py-1 rounded-full text-xs text-white font-semibold">
 
-                                     <span id="follow_similar-<?= $user_unique_id ?>"><?php if(!$user_requested) {  ?>  Follow requested <?php } else { ?>Follow <?php }?></span>
+                                     <span id="follow_similar-<?= $user_unique_id ?>"><?php if($user_requested) {  ?>  Follow requested <?php } else { ?>Follow <?php }?></span>
                                      
                                 </button>
 
@@ -1765,12 +1841,12 @@ body .owl-carousel .owl-nav.disabled {
                             
                             
                         </div>
-                        <button onclick="navigateTo('all-models.php')" class="w-full btn-secondary text-white font-semibold py-2 rounded-xl mt-4 text-sm sm:text-base">
+                        <button onclick="navigateTo('all-members')" class="w-full btn-secondary text-white font-semibold py-2 rounded-xl mt-4 text-sm sm:text-base">
                             View More
                         </button>
                     </div>
 
-                <?php } ?>
+                <?php /* } */ ?>
 
                 </div>
 
@@ -2169,7 +2245,7 @@ body .owl-carousel .owl-nav.disabled {
                 <div class="token-packages-subtitle">
                     Get extra TLM tokens for premium interactions, gifts, and exclusive content access
                 </div>
-                <button class="token-packages-btn"  onclick="window.location.href='<?= SITEURL .'wallet.php' ?>'">
+                <button class="token-packages-btn"  onclick="window.location.href='<?= SITEURL .'wallet' ?>'">
                     🎁 Browse Token Deals
                 </button>
                 <div class="token-expires">⏰ Special token offers expire soon!</div>
@@ -2276,7 +2352,7 @@ body .owl-carousel .owl-nav.disabled {
 										
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?> href='<?=SITEURL?>booking.php?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Request Meetup</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum) { ?> href='<?=SITEURL?>booking?type=meet&service=Meetup&token=<?php echo $extra_details['in_per_hour']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Request Meetup</a>
 
                     <?php }?>
 					
@@ -2307,7 +2383,7 @@ body .owl-carousel .owl-nav.disabled {
 					
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
 
-                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?=SITEURL?>booking.php?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
+                    <a class="action-button btn btn-primary" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?=SITEURL?>booking?type=travel&service=Travel&token=<?php echo $extra_details['daily_rate']; ?>&m_id=<?php echo $_GET["m_unique_id"]; ?>' <?php } ?> >Plan Adventure</a>
 
                     <?php }?>
 					
@@ -2341,7 +2417,7 @@ body .owl-carousel .owl-nav.disabled {
 
 					<?php if($userDetails['as_a_model'] !='Yes') { ?>
                     
-					<a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking.php?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
+					<a class="action-button" <?php if ($user_have_preminum && $plan =='diamond') { ?>  href='<?= SITEURL ?>booking?type=collaboration&service=Collaboration&m_id=<?= $_GET['m_unique_id'] ?>' <?php } ?> >Get Quote</a>
 					
 					<?php } ?>
 					
@@ -3046,11 +3122,13 @@ body .owl-carousel .owl-nav.disabled {
                 </div>
 
                 <div class="modal-body">
-                <p>Do you want to unlock this <span id="file_type_content">Image</span> for <strong><span id="token_amount"> 0</span> tokens</strong>?</p>
-                <div style="margin-top: 20px;">
-                    <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="puchare_submit" >Yes, Unlock</button>
-                    <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
-                </div>
+                    <p>Do you want to unlock this <span id="file_type_content">Image</span> for <strong><span id="token_amount"> 0</span> tokens</strong>?</p>
+
+                    <div style="margin-top: 20px;">
+                        <button class="btn-primary px-7 sm:px-3 py-6  text-white" type="button" id="puchare_submit" >Yes, Unlock</button>
+                        <button class="btn btn-secondary" type="button" onclick="CloseModal()">Cancel</button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -3973,9 +4051,21 @@ jQuery('.send_gift_btn').click(function(){
             window.location.reload();
         }
 
-    
+    let purchaseInProgress = false; 
+
         function SubmitPurchase(form_id)
         {
+
+            const btn = $('#purchase_submit');
+
+            if (purchaseInProgress) {
+
+                return;
+            }
+
+            purchaseInProgress = true;
+
+            btn.prop('disabled', true).text('Processing...');
 
             const form = $(`#${form_id}`)[0];
 
@@ -4027,9 +4117,18 @@ jQuery('.send_gift_btn').click(function(){
 
             error: function (xhr, status, error) {
            
+            },
+
+            complete: function () {
+              
+                purchaseInProgress = false;
+
+                btn.prop('disabled', false).text('Yes, Unlock');
             }
+
+
             });
-    }
+        }
 
         function TabChange(el,type)
         {
@@ -4169,6 +4268,10 @@ jQuery('.send_gift_btn').click(function(){
             $('#createPostForm').on('submit', function (e) {
                 e.preventDefault();
 
+                var $submitBtn = $(this).find('button[type="submit"]');
+
+                $submitBtn.prop('disabled', true).text('Uploading...'); 
+
                 var formData = new FormData(this);
                 
                 formData.append('action','post_submit');
@@ -4214,7 +4317,8 @@ jQuery('.send_gift_btn').click(function(){
                         }
                         else
                         {
-                            alert(response);
+                            // alert(response);
+                            showNotification(`${response}`, 'error');
                         }
                     },
                     error: function (xhr) {
