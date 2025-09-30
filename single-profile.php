@@ -109,7 +109,8 @@ if (mysqli_num_rows($res_ap) > 0) {
 }
 
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -970,6 +971,14 @@ body .owl-carousel .owl-nav.disabled {
 
                                         <?php } ?>
                             
+                                    <?php } else { ?>
+
+                                        <button onclick="window.location='<?= SITEURL ?>login'"  class="btn-secondary px-4 sm:px-6 py-2 rounded-full text-white font-semibold text-sm sm:text-base">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 inline"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                            <span id="follow_status">Follow</span>
+                                        </button>
+
                                     <?php } ?>
 
                                     <?php /* ?>
